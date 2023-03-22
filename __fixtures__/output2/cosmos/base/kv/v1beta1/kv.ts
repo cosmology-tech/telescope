@@ -74,6 +74,12 @@ export const Pairs = {
     const message = createBasePairs();
     message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): PairsSDKType {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -143,6 +149,13 @@ export const Pair = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): PairSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   }
 
 };

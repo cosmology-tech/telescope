@@ -117,6 +117,13 @@ export const MsgSetWithdrawAddress = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSetWithdrawAddressSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
   }
 
 };
@@ -160,6 +167,10 @@ export const MsgSetWithdrawAddressResponse = {
   fromPartial(_: DeepPartial<MsgSetWithdrawAddressResponse>): MsgSetWithdrawAddressResponse {
     const message = createBaseMsgSetWithdrawAddressResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSetWithdrawAddressResponseSDKType {
+    return {};
   }
 
 };
@@ -229,6 +240,13 @@ export const MsgWithdrawDelegatorReward = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawDelegatorRewardSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
   }
 
 };
@@ -272,6 +290,10 @@ export const MsgWithdrawDelegatorRewardResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawDelegatorRewardResponse>): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawDelegatorRewardResponseSDKType {
+    return {};
   }
 
 };
@@ -329,6 +351,12 @@ export const MsgWithdrawValidatorCommission = {
     const message = createBaseMsgWithdrawValidatorCommission();
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawValidatorCommissionSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
   }
 
 };
@@ -372,6 +400,10 @@ export const MsgWithdrawValidatorCommissionResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawValidatorCommissionResponse>): MsgWithdrawValidatorCommissionResponse {
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawValidatorCommissionResponseSDKType {
+    return {};
   }
 
 };
@@ -447,6 +479,13 @@ export const MsgFundCommunityPool = {
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     message.depositor = object.depositor ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgFundCommunityPoolSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -490,6 +529,10 @@ export const MsgFundCommunityPoolResponse = {
   fromPartial(_: DeepPartial<MsgFundCommunityPoolResponse>): MsgFundCommunityPoolResponse {
     const message = createBaseMsgFundCommunityPoolResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgFundCommunityPoolResponseSDKType {
+    return {};
   }
 
 };

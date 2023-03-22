@@ -86,6 +86,13 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };

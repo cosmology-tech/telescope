@@ -378,6 +378,24 @@ export const TxResponse = {
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): TxResponseSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      txhash: isSet(object.txhash) ? String(object.txhash) : "",
+      codespace: isSet(object.codespace) ? String(object.codespace) : "",
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? String(object.data) : "",
+      raw_log: isSet(object.raw_log) ? String(object.raw_log) : "",
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromSDKJSON(e)) : [],
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
+      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      tx: isSet(object.tx) ? Any.fromSDKJSON(object.tx) : undefined,
+      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -465,6 +483,14 @@ export const ABCIMessageLog = {
     message.log = object.log ?? "";
     message.events = object.events?.map(e => StringEvent.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ABCIMessageLogSDKType {
+    return {
+      msg_index: isSet(object.msg_index) ? Number(object.msg_index) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -540,6 +566,13 @@ export const StringEvent = {
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): StringEventSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -609,6 +642,13 @@ export const Attribute = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AttributeSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -678,6 +718,13 @@ export const GasInfo = {
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): GasInfoSDKType {
+    return {
+      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.UZERO,
+      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.UZERO
+    };
   }
 
 };
@@ -765,6 +812,14 @@ export const Result = {
     message.log = object.log ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ResultSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -834,6 +889,13 @@ export const SimulationResponse = {
     message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): SimulationResponseSDKType {
+    return {
+      gas_info: isSet(object.gas_info) ? GasInfo.fromSDKJSON(object.gas_info) : undefined,
+      result: isSet(object.result) ? Result.fromSDKJSON(object.result) : undefined
+    };
   }
 
 };
@@ -903,6 +965,13 @@ export const MsgData = {
     message.msgType = object.msgType ?? "";
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgDataSDKType {
+    return {
+      msg_type: isSet(object.msg_type) ? String(object.msg_type) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -966,6 +1035,12 @@ export const TxMsgData = {
     const message = createBaseTxMsgData();
     message.data = object.data?.map(e => MsgData.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): TxMsgDataSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => MsgData.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1089,6 +1164,17 @@ export const SearchTxsResult = {
     message.limit = object.limit !== undefined && object.limit !== null ? Long.fromValue(object.limit) : Long.UZERO;
     message.txs = object.txs?.map(e => TxResponse.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): SearchTxsResultSDKType {
+    return {
+      total_count: isSet(object.total_count) ? Long.fromValue(object.total_count) : Long.UZERO,
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.UZERO,
+      page_number: isSet(object.page_number) ? Long.fromValue(object.page_number) : Long.UZERO,
+      page_total: isSet(object.page_total) ? Long.fromValue(object.page_total) : Long.UZERO,
+      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromSDKJSON(e)) : []
+    };
   }
 
 };

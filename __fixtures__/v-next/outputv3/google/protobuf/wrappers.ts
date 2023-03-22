@@ -398,6 +398,12 @@ export const DoubleValue = {
     };
   },
 
+  fromSDKJSON(object: any): DoubleValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   toSDK(message: DoubleValue): DoubleValueSDKType {
     const obj: any = {};
     obj.value = message.value;
@@ -497,6 +503,12 @@ export const FloatValue = {
   fromSDK(object: FloatValueSDKType): FloatValue {
     return {
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): FloatValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
@@ -602,6 +614,12 @@ export const Int64Value = {
     };
   },
 
+  fromSDKJSON(object: any): Int64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
+  },
+
   toSDK(message: Int64Value): Int64ValueSDKType {
     const obj: any = {};
     obj.value = message.value;
@@ -701,6 +719,12 @@ export const UInt64Value = {
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
     return {
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): UInt64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
     };
   },
 
@@ -806,6 +830,12 @@ export const Int32Value = {
     };
   },
 
+  fromSDKJSON(object: any): Int32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   toSDK(message: Int32Value): Int32ValueSDKType {
     const obj: any = {};
     obj.value = message.value;
@@ -905,6 +935,12 @@ export const UInt32Value = {
   fromSDK(object: UInt32ValueSDKType): UInt32Value {
     return {
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): UInt32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
     };
   },
 
@@ -1010,6 +1046,12 @@ export const BoolValue = {
     };
   },
 
+  fromSDKJSON(object: any): BoolValueSDKType {
+    return {
+      value: isSet(object.value) ? Boolean(object.value) : false
+    };
+  },
+
   toSDK(message: BoolValue): BoolValueSDKType {
     const obj: any = {};
     obj.value = message.value;
@@ -1112,6 +1154,12 @@ export const StringValue = {
     };
   },
 
+  fromSDKJSON(object: any): StringValueSDKType {
+    return {
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   toSDK(message: StringValue): StringValueSDKType {
     const obj: any = {};
     obj.value = message.value;
@@ -1211,6 +1259,12 @@ export const BytesValue = {
   fromSDK(object: BytesValueSDKType): BytesValue {
     return {
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): BytesValueSDKType {
+    return {
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
 

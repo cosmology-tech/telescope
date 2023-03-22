@@ -22,31 +22,31 @@ export class LCDQueryClient {
   /* ModuleAccountBalance */
   async moduleAccountBalance(_params: QueryModuleAccountBalanceRequest = {}): Promise<QueryModuleAccountBalanceResponseSDKType> {
     const endpoint = `osmosis/claim/v1beta1/module_account_balance`;
-    return await this.req.get<QueryModuleAccountBalanceResponseSDKType>(endpoint);
+    return QueryModuleAccountBalanceResponse.fromSDKJSON(await this.req.get<QueryModuleAccountBalanceResponseSDKType>(endpoint));
   }
 
   /* Params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/claim/v1beta1/params`;
-    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
+    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
   }
 
   /* ClaimRecord */
   async claimRecord(params: QueryClaimRecordRequest): Promise<QueryClaimRecordResponseSDKType> {
     const endpoint = `osmosis/claim/v1beta1/claim_record/${params.address}`;
-    return await this.req.get<QueryClaimRecordResponseSDKType>(endpoint);
+    return QueryClaimRecordResponse.fromSDKJSON(await this.req.get<QueryClaimRecordResponseSDKType>(endpoint));
   }
 
   /* ClaimableForAction */
   async claimableForAction(params: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponseSDKType> {
     const endpoint = `osmosis/claim/v1beta1/claimable_for_action/${params.address}/${params.action}`;
-    return await this.req.get<QueryClaimableForActionResponseSDKType>(endpoint);
+    return QueryClaimableForActionResponse.fromSDKJSON(await this.req.get<QueryClaimableForActionResponseSDKType>(endpoint));
   }
 
   /* TotalClaimable */
   async totalClaimable(params: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponseSDKType> {
     const endpoint = `osmosis/claim/v1beta1/total_claimable/${params.address}`;
-    return await this.req.get<QueryTotalClaimableResponseSDKType>(endpoint);
+    return QueryTotalClaimableResponse.fromSDKJSON(await this.req.get<QueryTotalClaimableResponseSDKType>(endpoint));
   }
 
 }

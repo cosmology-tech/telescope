@@ -186,6 +186,12 @@ export const MsgCloseGroup = {
     };
   },
 
+  fromSDKJSON(object: any): MsgCloseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   toSDK(message: MsgCloseGroup): MsgCloseGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -269,6 +275,10 @@ export const MsgCloseGroupResponse = {
   },
 
   fromSDK(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
     return {};
   },
 
@@ -370,6 +380,12 @@ export const MsgPauseGroup = {
     };
   },
 
+  fromSDKJSON(object: any): MsgPauseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   toSDK(message: MsgPauseGroup): MsgPauseGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -453,6 +469,10 @@ export const MsgPauseGroupResponse = {
   },
 
   fromSDK(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
     return {};
   },
 
@@ -554,6 +574,12 @@ export const MsgStartGroup = {
     };
   },
 
+  fromSDKJSON(object: any): MsgStartGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   toSDK(message: MsgStartGroup): MsgStartGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -637,6 +663,10 @@ export const MsgStartGroupResponse = {
   },
 
   fromSDK(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
     return {};
   },
 

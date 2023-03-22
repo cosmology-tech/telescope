@@ -92,6 +92,13 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      minter: isSet(object.minter) ? Minter.fromSDKJSON(object.minter) : undefined,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);

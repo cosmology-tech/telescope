@@ -193,6 +193,12 @@ export const QueryEvidenceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryEvidenceRequestSDKType {
+    return {
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
     const obj: any = {};
     obj.evidence_hash = message.evidenceHash;
@@ -303,6 +309,12 @@ export const QueryEvidenceResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryEvidenceResponseSDKType {
+    return {
+      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
+    };
+  },
+
   toSDK(message: QueryEvidenceResponse): QueryEvidenceResponseSDKType {
     const obj: any = {};
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
@@ -410,6 +422,12 @@ export const QueryAllEvidenceRequest = {
   fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllEvidenceRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -539,6 +557,13 @@ export const QueryAllEvidenceResponse = {
     return {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllEvidenceResponseSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

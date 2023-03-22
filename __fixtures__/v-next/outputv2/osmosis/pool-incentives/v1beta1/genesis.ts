@@ -147,6 +147,15 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
+      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined,
+      pool_to_gauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromSDKJSON(object.pool_to_gauges) : undefined
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);

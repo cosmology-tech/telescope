@@ -75,6 +75,10 @@ export const QueryFeeTokensRequest = {
   fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryFeeTokensRequestSDKType {
+    return {};
   }
 
 };
@@ -138,6 +142,12 @@ export const QueryFeeTokensResponse = {
     const message = createBaseQueryFeeTokensResponse();
     message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryFeeTokensResponseSDKType {
+    return {
+      fee_tokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -195,6 +205,12 @@ export const QueryDenomSpotPriceRequest = {
     const message = createBaseQueryDenomSpotPriceRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomSpotPriceRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -264,6 +280,13 @@ export const QueryDenomSpotPriceResponse = {
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     message.spotPrice = object.spotPrice ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomSpotPriceResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO,
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
   }
 
 };
@@ -321,6 +344,12 @@ export const QueryDenomPoolIdRequest = {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomPoolIdRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -378,6 +407,12 @@ export const QueryDenomPoolIdResponse = {
     const message = createBaseQueryDenomPoolIdResponse();
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomPoolIdResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
   }
 
 };
@@ -421,6 +456,10 @@ export const QueryBaseDenomRequest = {
   fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryBaseDenomRequestSDKType {
+    return {};
   }
 
 };
@@ -478,6 +517,12 @@ export const QueryBaseDenomResponse = {
     const message = createBaseQueryBaseDenomResponse();
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryBaseDenomResponseSDKType {
+    return {
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
   }
 
 };

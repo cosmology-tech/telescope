@@ -225,6 +225,12 @@ export const ProjectProperties = {
     };
   },
 
+  fromSDKJSON(object: any): ProjectPropertiesSDKType {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ProjectProperties): ProjectPropertiesSDKType {
     const obj: any = {};
 
@@ -323,6 +329,14 @@ export const Property = {
       name: object?.name,
       type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
       description: object?.description
+    };
+  },
+
+  fromSDKJSON(object: any): PropertySDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
+      description: isSet(object.description) ? String(object.description) : ""
     };
   },
 

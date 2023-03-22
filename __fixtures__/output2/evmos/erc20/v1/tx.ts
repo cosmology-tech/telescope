@@ -121,6 +121,14 @@ export const MsgConvertCoin = {
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgConvertCoinSDKType {
+    return {
+      coin: isSet(object.coin) ? Coin.fromSDKJSON(object.coin) : undefined,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   }
 
 };
@@ -164,6 +172,10 @@ export const MsgConvertCoinResponse = {
   fromPartial(_: DeepPartial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
     const message = createBaseMsgConvertCoinResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgConvertCoinResponseSDKType {
+    return {};
   }
 
 };
@@ -257,6 +269,15 @@ export const MsgConvertERC20 = {
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgConvertERC20SDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   }
 
 };
@@ -300,6 +321,10 @@ export const MsgConvertERC20Response = {
   fromPartial(_: DeepPartial<MsgConvertERC20Response>): MsgConvertERC20Response {
     const message = createBaseMsgConvertERC20Response();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgConvertERC20ResponseSDKType {
+    return {};
   }
 
 };

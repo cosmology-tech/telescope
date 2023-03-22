@@ -82,6 +82,12 @@ export const Capability = {
     const message = createBaseCapability();
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): CapabilitySDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
+    };
   }
 
 };
@@ -151,6 +157,13 @@ export const Owner = {
     message.module = object.module ?? "";
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): OwnerSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : "",
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -214,6 +227,12 @@ export const CapabilityOwners = {
     const message = createBaseCapabilityOwners();
     message.owners = object.owners?.map(e => Owner.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): CapabilityOwnersSDKType {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDKJSON(e)) : []
+    };
   }
 
 };

@@ -65,6 +65,12 @@ export const MsgUnjail = {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUnjailSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
   }
 
 };
@@ -108,6 +114,10 @@ export const MsgUnjailResponse = {
   fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgUnjailResponseSDKType {
+    return {};
   }
 
 };

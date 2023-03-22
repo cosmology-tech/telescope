@@ -139,6 +139,12 @@ export const Params = {
     };
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      pool_creation_fee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
 
@@ -290,6 +296,14 @@ export const GenesisState = {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
       nextPoolNumber: object?.next_pool_number,
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      next_pool_number: isSet(object.next_pool_number) ? Long.fromValue(object.next_pool_number) : Long.UZERO,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

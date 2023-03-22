@@ -100,6 +100,12 @@ export const QueryBalancesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryBalancesRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -208,6 +214,14 @@ export const QueryBalancesResponse = {
       locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDK(e)) : [],
       unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDK(e)) : [],
       vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryBalancesResponseSDKType {
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 

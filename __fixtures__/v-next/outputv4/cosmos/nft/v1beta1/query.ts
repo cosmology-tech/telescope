@@ -233,6 +233,13 @@ export const QueryBalanceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryBalanceRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   toSDK(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -300,6 +307,12 @@ export const QueryBalanceResponse = {
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
     return {
       amount: object?.amount
+    };
+  },
+
+  fromSDKJSON(object: any): QueryBalanceResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
 
@@ -385,6 +398,13 @@ export const QueryOwnerRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryOwnerRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : ""
+    };
+  },
+
   toSDK(message: QueryOwnerRequest): QueryOwnerRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -452,6 +472,12 @@ export const QueryOwnerResponse = {
   fromSDK(object: QueryOwnerResponseSDKType): QueryOwnerResponse {
     return {
       owner: object?.owner
+    };
+  },
+
+  fromSDKJSON(object: any): QueryOwnerResponseSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
 
@@ -524,6 +550,12 @@ export const QuerySupplyRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QuerySupplyRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : ""
+    };
+  },
+
   toSDK(message: QuerySupplyRequest): QuerySupplyRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -590,6 +622,12 @@ export const QuerySupplyResponse = {
   fromSDK(object: QuerySupplyResponseSDKType): QuerySupplyResponse {
     return {
       amount: object?.amount
+    };
+  },
+
+  fromSDKJSON(object: any): QuerySupplyResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
 
@@ -688,6 +726,14 @@ export const QueryNFTsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryNFTsRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryNFTsRequest): QueryNFTsRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -775,6 +821,13 @@ export const QueryNFTsResponse = {
     return {
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryNFTsResponseSDKType {
+    return {
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -867,6 +920,13 @@ export const QueryNFTRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryNFTRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : ""
+    };
+  },
+
   toSDK(message: QueryNFTRequest): QueryNFTRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -934,6 +994,12 @@ export const QueryNFTResponse = {
   fromSDK(object: QueryNFTResponseSDKType): QueryNFTResponse {
     return {
       nft: object.nft ? NFT.fromSDK(object.nft) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryNFTResponseSDKType {
+    return {
+      nft: isSet(object.nft) ? NFT.fromSDKJSON(object.nft) : undefined
     };
   },
 
@@ -1006,6 +1072,12 @@ export const QueryClassRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryClassRequestSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : ""
+    };
+  },
+
   toSDK(message: QueryClassRequest): QueryClassRequestSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -1075,6 +1147,12 @@ export const QueryClassResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryClassResponseSDKType {
+    return {
+      class: isSet(object.class) ? Class.fromSDKJSON(object.class) : undefined
+    };
+  },
+
   toSDK(message: QueryClassResponse): QueryClassResponseSDKType {
     const obj: any = {};
     message.class !== undefined && (obj.class = message.class ? Class.toSDK(message.class) : undefined);
@@ -1141,6 +1219,12 @@ export const QueryClassesRequest = {
   fromSDK(object: QueryClassesRequestSDKType): QueryClassesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryClassesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1229,6 +1313,13 @@ export const QueryClassesResponse = {
     return {
       classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryClassesResponseSDKType {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

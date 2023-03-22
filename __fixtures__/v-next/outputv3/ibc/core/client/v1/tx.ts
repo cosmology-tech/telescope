@@ -386,6 +386,14 @@ export const MsgCreateClient = {
     };
   },
 
+  fromSDKJSON(object: any): MsgCreateClientSDKType {
+    return {
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
+  },
+
   toSDK(message: MsgCreateClient): MsgCreateClientSDKType {
     const obj: any = {};
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
@@ -483,6 +491,10 @@ export const MsgCreateClientResponse = {
   },
 
   fromSDK(_: MsgCreateClientResponseSDKType): MsgCreateClientResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgCreateClientResponseSDKType {
     return {};
   },
 
@@ -618,6 +630,14 @@ export const MsgUpdateClient = {
     };
   },
 
+  fromSDKJSON(object: any): MsgUpdateClientSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      header: isSet(object.header) ? Any.fromSDKJSON(object.header) : undefined,
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
+  },
+
   toSDK(message: MsgUpdateClient): MsgUpdateClientSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -715,6 +735,10 @@ export const MsgUpdateClientResponse = {
   },
 
   fromSDK(_: MsgUpdateClientResponseSDKType): MsgUpdateClientResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgUpdateClientResponseSDKType {
     return {};
   },
 
@@ -889,6 +913,17 @@ export const MsgUpgradeClient = {
     };
   },
 
+  fromSDKJSON(object: any): MsgUpgradeClientSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      proof_upgrade_client: isSet(object.proof_upgrade_client) ? bytesFromBase64(object.proof_upgrade_client) : new Uint8Array(),
+      proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state) ? bytesFromBase64(object.proof_upgrade_consensus_state) : new Uint8Array(),
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
+  },
+
   toSDK(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -995,6 +1030,10 @@ export const MsgUpgradeClientResponse = {
   },
 
   fromSDK(_: MsgUpgradeClientResponseSDKType): MsgUpgradeClientResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgUpgradeClientResponseSDKType {
     return {};
   },
 
@@ -1130,6 +1169,14 @@ export const MsgSubmitMisbehaviour = {
     };
   },
 
+  fromSDKJSON(object: any): MsgSubmitMisbehaviourSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDKJSON(object.misbehaviour) : undefined,
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
+  },
+
   toSDK(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1227,6 +1274,10 @@ export const MsgSubmitMisbehaviourResponse = {
   },
 
   fromSDK(_: MsgSubmitMisbehaviourResponseSDKType): MsgSubmitMisbehaviourResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgSubmitMisbehaviourResponseSDKType {
     return {};
   },
 

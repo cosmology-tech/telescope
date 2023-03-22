@@ -226,6 +226,13 @@ export const AccountID = {
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountIDSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : ""
+    };
   }
 
 };
@@ -343,6 +350,17 @@ export const Account = {
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountSDKType {
+    return {
+      id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
+      transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
+      settled_at: isSet(object.settled_at) ? Long.fromValue(object.settled_at) : Long.ZERO
+    };
   }
 
 };
@@ -472,6 +490,18 @@ export const Payment = {
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): PaymentSDKType {
+    return {
+      account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
+      payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      rate: isSet(object.rate) ? Coin.fromSDKJSON(object.rate) : undefined,
+      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
+      withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined
+    };
   }
 
 };

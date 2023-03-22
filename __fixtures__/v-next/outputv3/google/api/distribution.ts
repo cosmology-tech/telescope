@@ -1,6 +1,6 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
 
@@ -764,6 +764,18 @@ export const Distribution = {
     };
   },
 
+  fromSDKJSON(object: any): DistributionSDKType {
+    return {
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      mean: isSet(object.mean) ? Number(object.mean) : 0,
+      sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
+      range: isSet(object.range) ? Distribution_Range.fromSDKJSON(object.range) : undefined,
+      bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Distribution): DistributionSDKType {
     const obj: any = {};
     obj.count = message.count;
@@ -919,6 +931,13 @@ export const Distribution_Range = {
     };
   },
 
+  fromSDKJSON(object: any): Distribution_RangeSDKType {
+    return {
+      min: isSet(object.min) ? Number(object.min) : 0,
+      max: isSet(object.max) ? Number(object.max) : 0
+    };
+  },
+
   toSDK(message: Distribution_Range): Distribution_RangeSDKType {
     const obj: any = {};
     obj.min = message.min;
@@ -1047,6 +1066,14 @@ export const Distribution_BucketOptions = {
       linearBuckets: object.linear_buckets ? Distribution_BucketOptions_Linear.fromSDK(object.linear_buckets) : undefined,
       exponentialBuckets: object.exponential_buckets ? Distribution_BucketOptions_Exponential.fromSDK(object.exponential_buckets) : undefined,
       explicitBuckets: object.explicit_buckets ? Distribution_BucketOptions_Explicit.fromSDK(object.explicit_buckets) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): Distribution_BucketOptionsSDKType {
+    return {
+      linear_buckets: isSet(object.linear_buckets) ? Distribution_BucketOptions_Linear.fromSDKJSON(object.linear_buckets) : undefined,
+      exponential_buckets: isSet(object.exponential_buckets) ? Distribution_BucketOptions_Exponential.fromSDKJSON(object.exponential_buckets) : undefined,
+      explicit_buckets: isSet(object.explicit_buckets) ? Distribution_BucketOptions_Explicit.fromSDKJSON(object.explicit_buckets) : undefined
     };
   },
 
@@ -1184,6 +1211,14 @@ export const Distribution_BucketOptions_Linear = {
     };
   },
 
+  fromSDKJSON(object: any): Distribution_BucketOptions_LinearSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      width: isSet(object.width) ? Number(object.width) : 0,
+      offset: isSet(object.offset) ? Number(object.offset) : 0
+    };
+  },
+
   toSDK(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -1318,6 +1353,14 @@ export const Distribution_BucketOptions_Exponential = {
     };
   },
 
+  fromSDKJSON(object: any): Distribution_BucketOptions_ExponentialSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      growth_factor: isSet(object.growth_factor) ? Number(object.growth_factor) : 0,
+      scale: isSet(object.scale) ? Number(object.scale) : 0
+    };
+  },
+
   toSDK(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -1444,6 +1487,12 @@ export const Distribution_BucketOptions_Explicit = {
     };
   },
 
+  fromSDKJSON(object: any): Distribution_BucketOptions_ExplicitSDKType {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
+    };
+  },
+
   toSDK(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitSDKType {
     const obj: any = {};
 
@@ -1555,7 +1604,7 @@ export const Distribution_Exemplar = {
   fromJSON(object: any): Distribution_Exemplar {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -1585,15 +1634,23 @@ export const Distribution_Exemplar = {
   fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
     return {
       value: object?.value,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ?? undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): Distribution_ExemplarSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
 
   toSDK(message: Distribution_Exemplar): Distribution_ExemplarSDKType {
     const obj: any = {};
     obj.value = message.value;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
 
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toSDK(e) : undefined);

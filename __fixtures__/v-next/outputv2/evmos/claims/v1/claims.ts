@@ -290,6 +290,14 @@ export const Claim = {
     };
   },
 
+  fromSDKJSON(object: any): ClaimSDKType {
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      completed: isSet(object.completed) ? Boolean(object.completed) : false,
+      claimable_amount: isSet(object.claimable_amount) ? String(object.claimable_amount) : ""
+    };
+  },
+
   toSDK(message: Claim): ClaimSDKType {
     const obj: any = {};
     message.action !== undefined && (obj.action = actionToJSON(message.action));
@@ -442,6 +450,14 @@ export const ClaimsRecordAddress = {
     };
   },
 
+  fromSDKJSON(object: any): ClaimsRecordAddressSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
+    };
+  },
+
   toSDK(message: ClaimsRecordAddress): ClaimsRecordAddressSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -590,6 +606,13 @@ export const ClaimsRecord = {
     return {
       initialClaimableAmount: object?.initial_claimable_amount,
       actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ClaimsRecordSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
     };
   },
 

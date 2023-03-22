@@ -170,6 +170,13 @@ export const Timestamp = {
     message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
     message.nanos = object.nanos ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): TimestampSDKType {
+    return {
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   }
 
 };

@@ -561,6 +561,12 @@ export const QueryProposalRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryProposalRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
+  },
+
   toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -668,6 +674,12 @@ export const QueryProposalResponse = {
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
     return {
       proposal: object.proposal ? Proposal.fromSDK(object.proposal) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryProposalResponseSDKType {
+    return {
+      proposal: isSet(object.proposal) ? Proposal.fromSDKJSON(object.proposal) : undefined
     };
   },
 
@@ -820,6 +832,15 @@ export const QueryProposalsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryProposalsRequestSDKType {
+    return {
+      proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryProposalsRequest): QueryProposalsRequestSDKType {
     const obj: any = {};
     message.proposalStatus !== undefined && (obj.proposal_status = proposalStatusToJSON(message.proposalStatus));
@@ -955,6 +976,13 @@ export const QueryProposalsResponse = {
     return {
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryProposalsResponseSDKType {
+    return {
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1096,6 +1124,13 @@ export const QueryVoteRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryVoteRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : ""
+    };
+  },
+
   toSDK(message: QueryVoteRequest): QueryVoteRequestSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -1206,6 +1241,12 @@ export const QueryVoteResponse = {
   fromSDK(object: QueryVoteResponseSDKType): QueryVoteResponse {
     return {
       vote: object.vote ? Vote.fromSDK(object.vote) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryVoteResponseSDKType {
+    return {
+      vote: isSet(object.vote) ? Vote.fromSDKJSON(object.vote) : undefined
     };
   },
 
@@ -1329,6 +1370,13 @@ export const QueryVotesRequest = {
     return {
       proposalId: object?.proposal_id,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryVotesRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1464,6 +1512,13 @@ export const QueryVotesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryVotesResponseSDKType {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryVotesResponse): QueryVotesResponseSDKType {
     const obj: any = {};
 
@@ -1586,6 +1641,12 @@ export const QueryParamsRequest = {
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
     return {
       paramsType: object?.params_type
+    };
+  },
+
+  fromSDKJSON(object: any): QueryParamsRequestSDKType {
+    return {
+      params_type: isSet(object.params_type) ? String(object.params_type) : ""
     };
   },
 
@@ -1725,6 +1786,14 @@ export const QueryParamsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      voting_params: isSet(object.voting_params) ? VotingParams.fromSDKJSON(object.voting_params) : undefined,
+      deposit_params: isSet(object.deposit_params) ? DepositParams.fromSDKJSON(object.deposit_params) : undefined,
+      tally_params: isSet(object.tally_params) ? TallyParams.fromSDKJSON(object.tally_params) : undefined
+    };
+  },
+
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.votingParams !== undefined && (obj.voting_params = message.votingParams ? VotingParams.toSDK(message.votingParams) : undefined);
@@ -1854,6 +1923,13 @@ export const QueryDepositRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDepositRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
+  },
+
   toSDK(message: QueryDepositRequest): QueryDepositRequestSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -1964,6 +2040,12 @@ export const QueryDepositResponse = {
   fromSDK(object: QueryDepositResponseSDKType): QueryDepositResponse {
     return {
       deposit: object.deposit ? Deposit.fromSDK(object.deposit) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryDepositResponseSDKType {
+    return {
+      deposit: isSet(object.deposit) ? Deposit.fromSDKJSON(object.deposit) : undefined
     };
   },
 
@@ -2087,6 +2169,13 @@ export const QueryDepositsRequest = {
     return {
       proposalId: object?.proposal_id,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryDepositsRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -2222,6 +2311,13 @@ export const QueryDepositsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDepositsResponseSDKType {
+    return {
+      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryDepositsResponse): QueryDepositsResponseSDKType {
     const obj: any = {};
 
@@ -2347,6 +2443,12 @@ export const QueryTallyResultRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
+  },
+
   toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -2454,6 +2556,12 @@ export const QueryTallyResultResponse = {
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
     return {
       tally: object.tally ? TallyResult.fromSDK(object.tally) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryTallyResultResponseSDKType {
+    return {
+      tally: isSet(object.tally) ? TallyResult.fromSDKJSON(object.tally) : undefined
     };
   },
 

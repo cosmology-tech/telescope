@@ -108,6 +108,13 @@ export const QueryDeploymentsRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -183,6 +190,13 @@ export const QueryDeploymentsResponse = {
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentsResponseSDKType {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -240,6 +254,12 @@ export const QueryDeploymentRequest = {
     const message = createBaseQueryDeploymentRequest();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentRequestSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -327,6 +347,14 @@ export const QueryDeploymentResponse = {
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentResponseSDKType {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : [],
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
   }
 
 };
@@ -384,6 +412,12 @@ export const QueryGroupRequest = {
     const message = createBaseQueryGroupRequest();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGroupRequestSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -441,6 +475,12 @@ export const QueryGroupResponse = {
     const message = createBaseQueryGroupResponse();
     message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGroupResponseSDKType {
+    return {
+      group: isSet(object.group) ? Group.fromSDKJSON(object.group) : undefined
+    };
   }
 
 };

@@ -386,6 +386,15 @@ export const ClientState = {
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : undefined;
     message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      frozen_sequence: isSet(object.frozen_sequence) ? Long.fromValue(object.frozen_sequence) : Long.UZERO,
+      consensus_state: isSet(object.consensus_state) ? ConsensusState.fromSDKJSON(object.consensus_state) : undefined,
+      allow_update_after_proposal: isSet(object.allow_update_after_proposal) ? Boolean(object.allow_update_after_proposal) : false
+    };
   }
 
 };
@@ -467,6 +476,14 @@ export const ConsensusState = {
     message.diversifier = object.diversifier ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConsensusStateSDKType {
+    return {
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
+    };
   }
 
 };
@@ -572,6 +589,16 @@ export const Header = {
     message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): HeaderSDKType {
+    return {
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+      new_public_key: isSet(object.new_public_key) ? Any.fromSDKJSON(object.new_public_key) : undefined,
+      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : ""
+    };
   }
 
 };
@@ -665,6 +692,15 @@ export const Misbehaviour = {
     message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : undefined;
     message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MisbehaviourSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      signature_one: isSet(object.signature_one) ? SignatureAndData.fromSDKJSON(object.signature_one) : undefined,
+      signature_two: isSet(object.signature_two) ? SignatureAndData.fromSDKJSON(object.signature_two) : undefined
+    };
   }
 
 };
@@ -758,6 +794,15 @@ export const SignatureAndData = {
     message.data = object.data ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): SignatureAndDataSDKType {
+    return {
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
+    };
   }
 
 };
@@ -827,6 +872,13 @@ export const TimestampedSignatureData = {
     message.signatureData = object.signatureData ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): TimestampedSignatureDataSDKType {
+    return {
+      signature_data: isSet(object.signature_data) ? bytesFromBase64(object.signature_data) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
+    };
   }
 
 };
@@ -932,6 +984,16 @@ export const SignBytes = {
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): SignBytesSDKType {
+    return {
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
+      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -1001,6 +1063,13 @@ export const HeaderData = {
     message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): HeaderDataSDKType {
+    return {
+      new_pub_key: isSet(object.new_pub_key) ? Any.fromSDKJSON(object.new_pub_key) : undefined,
+      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : ""
+    };
   }
 
 };
@@ -1070,6 +1139,13 @@ export const ClientStateData = {
     message.path = object.path ?? new Uint8Array();
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ClientStateDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
+    };
   }
 
 };
@@ -1139,6 +1215,13 @@ export const ConsensusStateData = {
     message.path = object.path ?? new Uint8Array();
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConsensusStateDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined
+    };
   }
 
 };
@@ -1208,6 +1291,13 @@ export const ConnectionStateData = {
     message.path = object.path ?? new Uint8Array();
     message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConnectionStateDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      connection: isSet(object.connection) ? ConnectionEnd.fromSDKJSON(object.connection) : undefined
+    };
   }
 
 };
@@ -1277,6 +1367,13 @@ export const ChannelStateData = {
     message.path = object.path ?? new Uint8Array();
     message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ChannelStateDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      channel: isSet(object.channel) ? Channel.fromSDKJSON(object.channel) : undefined
+    };
   }
 
 };
@@ -1346,6 +1443,13 @@ export const PacketCommitmentData = {
     message.path = object.path ?? new Uint8Array();
     message.commitment = object.commitment ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): PacketCommitmentDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      commitment: isSet(object.commitment) ? bytesFromBase64(object.commitment) : new Uint8Array()
+    };
   }
 
 };
@@ -1415,6 +1519,13 @@ export const PacketAcknowledgementData = {
     message.path = object.path ?? new Uint8Array();
     message.acknowledgement = object.acknowledgement ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): PacketAcknowledgementDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array()
+    };
   }
 
 };
@@ -1472,6 +1583,12 @@ export const PacketReceiptAbsenceData = {
     const message = createBasePacketReceiptAbsenceData();
     message.path = object.path ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): PacketReceiptAbsenceDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array()
+    };
   }
 
 };
@@ -1541,6 +1658,13 @@ export const NextSequenceRecvData = {
     message.path = object.path ?? new Uint8Array();
     message.nextSeqRecv = object.nextSeqRecv !== undefined && object.nextSeqRecv !== null ? Long.fromValue(object.nextSeqRecv) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): NextSequenceRecvDataSDKType {
+    return {
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      next_seq_recv: isSet(object.next_seq_recv) ? Long.fromValue(object.next_seq_recv) : Long.UZERO
+    };
   }
 
 };

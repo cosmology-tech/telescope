@@ -33,6 +33,7 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            fromSDKJSON?: boolean;
             toAmino?: boolean;
             fromAmino?: boolean;
             toProto?: boolean;
@@ -148,7 +149,7 @@ interface TelescopeOpts {
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
-export declare type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
-export declare type TelescopeOption = keyof TelescopeOpts;
+export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
+export type TelescopeOption = keyof TelescopeOpts;
 export declare const defaultTelescopeOptions: TelescopeOptions;
 export {};

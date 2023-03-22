@@ -140,6 +140,14 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      module_account_balance: isSet(object.module_account_balance) ? Coin.fromSDKJSON(object.module_account_balance) : undefined,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      claim_records: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.moduleAccountBalance !== undefined && (obj.module_account_balance = message.moduleAccountBalance ? Coin.toSDK(message.moduleAccountBalance) : undefined);

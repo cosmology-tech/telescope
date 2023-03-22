@@ -175,6 +175,14 @@ export const Status = {
     };
   },
 
+  fromSDKJSON(object: any): StatusSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
+      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Status): StatusSDKType {
     const obj: any = {};
     obj.code = message.code;

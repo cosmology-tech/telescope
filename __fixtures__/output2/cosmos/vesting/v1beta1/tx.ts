@@ -127,6 +127,16 @@ export const MsgCreateVestingAccount = {
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     message.delayed = object.delayed ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateVestingAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO,
+      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
+    };
   }
 
 };
@@ -170,6 +180,10 @@ export const MsgCreateVestingAccountResponse = {
   fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgCreateVestingAccountResponseSDKType {
+    return {};
   }
 
 };

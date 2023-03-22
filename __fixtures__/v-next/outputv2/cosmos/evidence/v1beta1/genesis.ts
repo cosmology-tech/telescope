@@ -98,6 +98,12 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
 

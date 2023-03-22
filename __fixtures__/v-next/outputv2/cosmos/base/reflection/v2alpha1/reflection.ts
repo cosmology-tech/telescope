@@ -939,6 +939,17 @@ export const AppDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): AppDescriptorSDKType {
+    return {
+      authn: isSet(object.authn) ? AuthnDescriptor.fromSDKJSON(object.authn) : undefined,
+      chain: isSet(object.chain) ? ChainDescriptor.fromSDKJSON(object.chain) : undefined,
+      codec: isSet(object.codec) ? CodecDescriptor.fromSDKJSON(object.codec) : undefined,
+      configuration: isSet(object.configuration) ? ConfigurationDescriptor.fromSDKJSON(object.configuration) : undefined,
+      query_services: isSet(object.query_services) ? QueryServicesDescriptor.fromSDKJSON(object.query_services) : undefined,
+      tx: isSet(object.tx) ? TxDescriptor.fromSDKJSON(object.tx) : undefined
+    };
+  },
+
   toSDK(message: AppDescriptor): AppDescriptorSDKType {
     const obj: any = {};
     message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toSDK(message.authn) : undefined);
@@ -1083,6 +1094,13 @@ export const TxDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): TxDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: TxDescriptor): TxDescriptorSDKType {
     const obj: any = {};
     obj.fullname = message.fullname;
@@ -1211,6 +1229,12 @@ export const AuthnDescriptor = {
   fromSDK(object: AuthnDescriptorSDKType): AuthnDescriptor {
     return {
       signModes: Array.isArray(object?.sign_modes) ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): AuthnDescriptorSDKType {
+    return {
+      sign_modes: Array.isArray(object?.sign_modes) ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromSDKJSON(e)) : []
     };
   },
 
@@ -1362,6 +1386,14 @@ export const SigningModeDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): SigningModeDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      authn_info_provider_method_fullname: isSet(object.authn_info_provider_method_fullname) ? String(object.authn_info_provider_method_fullname) : ""
+    };
+  },
+
   toSDK(message: SigningModeDescriptor): SigningModeDescriptorSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1478,6 +1510,12 @@ export const ChainDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): ChainDescriptorSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : ""
+    };
+  },
+
   toSDK(message: ChainDescriptor): ChainDescriptorSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -1591,6 +1629,12 @@ export const CodecDescriptor = {
   fromSDK(object: CodecDescriptorSDKType): CodecDescriptor {
     return {
       interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): CodecDescriptorSDKType {
+    return {
+      interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromSDKJSON(e)) : []
     };
   },
 
@@ -1753,6 +1797,14 @@ export const InterfaceDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): InterfaceDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      interface_accepting_messages: Array.isArray(object?.interface_accepting_messages) ? object.interface_accepting_messages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromSDKJSON(e)) : [],
+      interface_implementers: Array.isArray(object?.interface_implementers) ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: InterfaceDescriptor): InterfaceDescriptorSDKType {
     const obj: any = {};
     obj.fullname = message.fullname;
@@ -1904,6 +1956,13 @@ export const InterfaceImplementerDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): InterfaceImplementerDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      type_url: isSet(object.type_url) ? String(object.type_url) : ""
+    };
+  },
+
   toSDK(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorSDKType {
     const obj: any = {};
     obj.fullname = message.fullname;
@@ -2036,6 +2095,13 @@ export const InterfaceAcceptingMessageDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): InterfaceAcceptingMessageDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      field_descriptor_names: Array.isArray(object?.field_descriptor_names) ? object.field_descriptor_names.map((e: any) => String(e)) : []
+    };
+  },
+
   toSDK(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorSDKType {
     const obj: any = {};
     obj.fullname = message.fullname;
@@ -2161,6 +2227,12 @@ export const ConfigurationDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): ConfigurationDescriptorSDKType {
+    return {
+      bech32_account_address_prefix: isSet(object.bech32_account_address_prefix) ? String(object.bech32_account_address_prefix) : ""
+    };
+  },
+
   toSDK(message: ConfigurationDescriptor): ConfigurationDescriptorSDKType {
     const obj: any = {};
     obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
@@ -2271,6 +2343,12 @@ export const MsgDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): MsgDescriptorSDKType {
+    return {
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
+  },
+
   toSDK(message: MsgDescriptor): MsgDescriptorSDKType {
     const obj: any = {};
     obj.msg_type_url = message.msgTypeUrl;
@@ -2362,6 +2440,10 @@ export const GetAuthnDescriptorRequest = {
   },
 
   fromSDK(_: GetAuthnDescriptorRequestSDKType): GetAuthnDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetAuthnDescriptorRequestSDKType {
     return {};
   },
 
@@ -2471,6 +2553,12 @@ export const GetAuthnDescriptorResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetAuthnDescriptorResponseSDKType {
+    return {
+      authn: isSet(object.authn) ? AuthnDescriptor.fromSDKJSON(object.authn) : undefined
+    };
+  },
+
   toSDK(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseSDKType {
     const obj: any = {};
     message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toSDK(message.authn) : undefined);
@@ -2562,6 +2650,10 @@ export const GetChainDescriptorRequest = {
   },
 
   fromSDK(_: GetChainDescriptorRequestSDKType): GetChainDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetChainDescriptorRequestSDKType {
     return {};
   },
 
@@ -2671,6 +2763,12 @@ export const GetChainDescriptorResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetChainDescriptorResponseSDKType {
+    return {
+      chain: isSet(object.chain) ? ChainDescriptor.fromSDKJSON(object.chain) : undefined
+    };
+  },
+
   toSDK(message: GetChainDescriptorResponse): GetChainDescriptorResponseSDKType {
     const obj: any = {};
     message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toSDK(message.chain) : undefined);
@@ -2762,6 +2860,10 @@ export const GetCodecDescriptorRequest = {
   },
 
   fromSDK(_: GetCodecDescriptorRequestSDKType): GetCodecDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetCodecDescriptorRequestSDKType {
     return {};
   },
 
@@ -2871,6 +2973,12 @@ export const GetCodecDescriptorResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetCodecDescriptorResponseSDKType {
+    return {
+      codec: isSet(object.codec) ? CodecDescriptor.fromSDKJSON(object.codec) : undefined
+    };
+  },
+
   toSDK(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseSDKType {
     const obj: any = {};
     message.codec !== undefined && (obj.codec = message.codec ? CodecDescriptor.toSDK(message.codec) : undefined);
@@ -2962,6 +3070,10 @@ export const GetConfigurationDescriptorRequest = {
   },
 
   fromSDK(_: GetConfigurationDescriptorRequestSDKType): GetConfigurationDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetConfigurationDescriptorRequestSDKType {
     return {};
   },
 
@@ -3071,6 +3183,12 @@ export const GetConfigurationDescriptorResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetConfigurationDescriptorResponseSDKType {
+    return {
+      config: isSet(object.config) ? ConfigurationDescriptor.fromSDKJSON(object.config) : undefined
+    };
+  },
+
   toSDK(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseSDKType {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? ConfigurationDescriptor.toSDK(message.config) : undefined);
@@ -3162,6 +3280,10 @@ export const GetQueryServicesDescriptorRequest = {
   },
 
   fromSDK(_: GetQueryServicesDescriptorRequestSDKType): GetQueryServicesDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetQueryServicesDescriptorRequestSDKType {
     return {};
   },
 
@@ -3271,6 +3393,12 @@ export const GetQueryServicesDescriptorResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetQueryServicesDescriptorResponseSDKType {
+    return {
+      queries: isSet(object.queries) ? QueryServicesDescriptor.fromSDKJSON(object.queries) : undefined
+    };
+  },
+
   toSDK(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseSDKType {
     const obj: any = {};
     message.queries !== undefined && (obj.queries = message.queries ? QueryServicesDescriptor.toSDK(message.queries) : undefined);
@@ -3362,6 +3490,10 @@ export const GetTxDescriptorRequest = {
   },
 
   fromSDK(_: GetTxDescriptorRequestSDKType): GetTxDescriptorRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetTxDescriptorRequestSDKType {
     return {};
   },
 
@@ -3468,6 +3600,12 @@ export const GetTxDescriptorResponse = {
   fromSDK(object: GetTxDescriptorResponseSDKType): GetTxDescriptorResponse {
     return {
       tx: object.tx ? TxDescriptor.fromSDK(object.tx) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GetTxDescriptorResponseSDKType {
+    return {
+      tx: isSet(object.tx) ? TxDescriptor.fromSDKJSON(object.tx) : undefined
     };
   },
 
@@ -3584,6 +3722,12 @@ export const QueryServicesDescriptor = {
   fromSDK(object: QueryServicesDescriptorSDKType): QueryServicesDescriptor {
     return {
       queryServices: Array.isArray(object?.query_services) ? object.query_services.map((e: any) => QueryServiceDescriptor.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryServicesDescriptorSDKType {
+    return {
+      query_services: Array.isArray(object?.query_services) ? object.query_services.map((e: any) => QueryServiceDescriptor.fromSDKJSON(e)) : []
     };
   },
 
@@ -3741,6 +3885,14 @@ export const QueryServiceDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): QueryServiceDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      is_module: isSet(object.is_module) ? Boolean(object.is_module) : false,
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: QueryServiceDescriptor): QueryServiceDescriptorSDKType {
     const obj: any = {};
     obj.fullname = message.fullname;
@@ -3879,6 +4031,13 @@ export const QueryMethodDescriptor = {
     return {
       name: object?.name,
       fullQueryPath: object?.full_query_path
+    };
+  },
+
+  fromSDKJSON(object: any): QueryMethodDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      full_query_path: isSet(object.full_query_path) ? String(object.full_query_path) : ""
     };
   },
 

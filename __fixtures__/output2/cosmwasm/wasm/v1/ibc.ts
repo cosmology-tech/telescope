@@ -122,6 +122,15 @@ export const MsgIBCSend = {
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgIBCSendSDKType {
+    return {
+      channel: isSet(object.channel) ? String(object.channel) : "",
+      timeout_height: isSet(object.timeout_height) ? Long.fromValue(object.timeout_height) : Long.UZERO,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -179,6 +188,12 @@ export const MsgIBCCloseChannel = {
     const message = createBaseMsgIBCCloseChannel();
     message.channel = object.channel ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgIBCCloseChannelSDKType {
+    return {
+      channel: isSet(object.channel) ? String(object.channel) : ""
+    };
   }
 
 };

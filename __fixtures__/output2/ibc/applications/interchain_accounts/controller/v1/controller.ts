@@ -66,6 +66,12 @@ export const Params = {
     const message = createBaseParams();
     message.controllerEnabled = object.controllerEnabled ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      controller_enabled: isSet(object.controller_enabled) ? Boolean(object.controller_enabled) : false
+    };
   }
 
 };

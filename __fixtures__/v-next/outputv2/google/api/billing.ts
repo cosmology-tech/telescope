@@ -258,6 +258,12 @@ export const Billing = {
     };
   },
 
+  fromSDKJSON(object: any): BillingSDKType {
+    return {
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Billing): BillingSDKType {
     const obj: any = {};
 
@@ -388,6 +394,13 @@ export const Billing_BillingDestination = {
     return {
       monitoredResource: object?.monitored_resource,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): Billing_BillingDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
     };
   },
 

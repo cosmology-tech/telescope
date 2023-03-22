@@ -324,6 +324,14 @@ export const ModuleDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): ModuleDescriptorSDKType {
+    return {
+      go_import: isSet(object.go_import) ? String(object.go_import) : "",
+      use_package: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDKJSON(e)) : [],
+      can_migrate_from: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ModuleDescriptor): ModuleDescriptorSDKType {
     const obj: any = {};
     obj.go_import = message.goImport;
@@ -475,6 +483,13 @@ export const PackageReference = {
     };
   },
 
+  fromSDKJSON(object: any): PackageReferenceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      revision: isSet(object.revision) ? Number(object.revision) : 0
+    };
+  },
+
   toSDK(message: PackageReference): PackageReferenceSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -585,6 +600,12 @@ export const MigrateFromInfo = {
   fromSDK(object: MigrateFromInfoSDKType): MigrateFromInfo {
     return {
       module: object?.module
+    };
+  },
+
+  fromSDKJSON(object: any): MigrateFromInfoSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : ""
     };
   },
 

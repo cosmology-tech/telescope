@@ -1,5 +1,5 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 
@@ -92,7 +92,7 @@ export const Equivocation = {
   fromJSON(object: any): Equivocation {
     return {
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
@@ -119,16 +119,25 @@ export const Equivocation = {
   fromSDK(object: EquivocationSDKType): Equivocation {
     return {
       height: object?.height,
-      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ?? undefined,
       power: object?.power,
       consensusAddress: object?.consensus_address
+    };
+  },
+
+  fromSDKJSON(object: any): EquivocationSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
     };
   },
 
   toSDK(message: Equivocation): EquivocationSDKType {
     const obj: any = {};
     obj.height = message.height;
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.time !== undefined && (obj.time = message.time ?? undefined);
     obj.power = message.power;
     obj.consensus_address = message.consensusAddress;
     return obj;

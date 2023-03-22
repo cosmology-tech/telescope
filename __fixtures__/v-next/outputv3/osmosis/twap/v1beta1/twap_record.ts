@@ -1,5 +1,5 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 
@@ -248,12 +248,12 @@ export const TwapRecord = {
       asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
       asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
       p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
       p0ArithmeticTwapAccumulator: isSet(object.p0ArithmeticTwapAccumulator) ? String(object.p0ArithmeticTwapAccumulator) : "",
       p1ArithmeticTwapAccumulator: isSet(object.p1ArithmeticTwapAccumulator) ? String(object.p1ArithmeticTwapAccumulator) : "",
-      lastErrorTime: isSet(object.lastErrorTime) ? fromJsonTimestamp(object.lastErrorTime) : undefined
+      lastErrorTime: isSet(object.lastErrorTime) ? new Date(object.lastErrorTime) : undefined
     };
   },
 
@@ -293,12 +293,27 @@ export const TwapRecord = {
       asset0Denom: object?.asset0_denom,
       asset1Denom: object?.asset1_denom,
       height: object?.height,
-      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ?? undefined,
       p0LastSpotPrice: object?.p0_last_spot_price,
       p1LastSpotPrice: object?.p1_last_spot_price,
       p0ArithmeticTwapAccumulator: object?.p0_arithmetic_twap_accumulator,
       p1ArithmeticTwapAccumulator: object?.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object.last_error_time ? Timestamp.fromSDK(object.last_error_time) : undefined
+      lastErrorTime: object.last_error_time ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): TwapRecordSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      asset0_denom: isSet(object.asset0_denom) ? String(object.asset0_denom) : "",
+      asset1_denom: isSet(object.asset1_denom) ? String(object.asset1_denom) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      p0_last_spot_price: isSet(object.p0_last_spot_price) ? String(object.p0_last_spot_price) : "",
+      p1_last_spot_price: isSet(object.p1_last_spot_price) ? String(object.p1_last_spot_price) : "",
+      p0_arithmetic_twap_accumulator: isSet(object.p0_arithmetic_twap_accumulator) ? String(object.p0_arithmetic_twap_accumulator) : "",
+      p1_arithmetic_twap_accumulator: isSet(object.p1_arithmetic_twap_accumulator) ? String(object.p1_arithmetic_twap_accumulator) : "",
+      last_error_time: isSet(object.last_error_time) ? new Date(object.last_error_time) : undefined
     };
   },
 
@@ -308,12 +323,12 @@ export const TwapRecord = {
     obj.asset0_denom = message.asset0Denom;
     obj.asset1_denom = message.asset1Denom;
     obj.height = message.height;
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.time !== undefined && (obj.time = message.time ?? undefined);
     obj.p0_last_spot_price = message.p0LastSpotPrice;
     obj.p1_last_spot_price = message.p1LastSpotPrice;
     obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator;
     obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
-    message.lastErrorTime !== undefined && (obj.last_error_time = message.lastErrorTime ? Timestamp.toSDK(message.lastErrorTime) : undefined);
+    message.lastErrorTime !== undefined && (obj.last_error_time = message.lastErrorTime ?? undefined);
     return obj;
   },
 

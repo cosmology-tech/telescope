@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 
@@ -214,7 +214,7 @@ export const Plan = {
   fromJSON(object: any): Plan {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       info: isSet(object.info) ? String(object.info) : "",
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
@@ -244,17 +244,27 @@ export const Plan = {
   fromSDK(object: PlanSDKType): Plan {
     return {
       name: object?.name,
-      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ?? undefined,
       height: object?.height,
       info: object?.info,
       upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
   },
 
+  fromSDKJSON(object: any): PlanSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      info: isSet(object.info) ? String(object.info) : "",
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+
   toSDK(message: Plan): PlanSDKType {
     const obj: any = {};
     obj.name = message.name;
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.time !== undefined && (obj.time = message.time ?? undefined);
     obj.height = message.height;
     obj.info = message.info;
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
@@ -350,6 +360,14 @@ export const SoftwareUpgradeProposal = {
     };
   },
 
+  fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
+  },
+
   toSDK(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -434,6 +452,13 @@ export const CancelSoftwareUpgradeProposal = {
     };
   },
 
+  fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
+  },
+
   toSDK(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -514,6 +539,13 @@ export const ModuleVersion = {
     return {
       name: object?.name,
       version: object?.version
+    };
+  },
+
+  fromSDKJSON(object: any): ModuleVersionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
     };
   },
 

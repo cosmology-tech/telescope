@@ -305,6 +305,16 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDKJSON(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDKJSON(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDKJSON(e)) : [],
+      gen_msgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -495,6 +505,14 @@ export const GenesisState_GenMsgs = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisState_GenMsgsSDKType {
+    return {
+      store_code: isSet(object.store_code) ? MsgStoreCode.fromSDKJSON(object.store_code) : undefined,
+      instantiate_contract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromSDKJSON(object.instantiate_contract) : undefined,
+      execute_contract: isSet(object.execute_contract) ? MsgExecuteContract.fromSDKJSON(object.execute_contract) : undefined
+    };
+  },
+
   toSDK(message: GenesisState_GenMsgs): GenesisState_GenMsgsSDKType {
     const obj: any = {};
     message.storeCode !== undefined && (obj.store_code = message.storeCode ? MsgStoreCode.toSDK(message.storeCode) : undefined);
@@ -650,6 +668,15 @@ export const Code = {
     };
   },
 
+  fromSDKJSON(object: any): CodeSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
+      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
+      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
+    };
+  },
+
   toSDK(message: Code): CodeSDKType {
     const obj: any = {};
     obj.code_id = message.codeId;
@@ -801,6 +828,14 @@ export const Contract = {
     };
   },
 
+  fromSDKJSON(object: any): ContractSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined,
+      contract_state: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Contract): ContractSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
@@ -939,6 +974,13 @@ export const Sequence = {
     return {
       idKey: object?.id_key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): SequenceSDKType {
+    return {
+      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
     };
   },
 

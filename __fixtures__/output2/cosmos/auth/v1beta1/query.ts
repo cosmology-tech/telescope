@@ -104,6 +104,12 @@ export const QueryAccountsRequest = {
     const message = createBaseQueryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAccountsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -179,6 +185,13 @@ export const QueryAccountsResponse = {
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -236,6 +249,12 @@ export const QueryAccountRequest = {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAccountRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -293,6 +312,12 @@ export const QueryAccountResponse = {
     const message = createBaseQueryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? Any.fromPartial(object.account) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAccountResponseSDKType {
+    return {
+      account: isSet(object.account) ? Any.fromSDKJSON(object.account) : undefined
+    };
   }
 
 };
@@ -336,6 +361,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -393,6 +422,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

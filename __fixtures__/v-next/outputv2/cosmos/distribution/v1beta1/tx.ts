@@ -297,6 +297,13 @@ export const MsgSetWithdrawAddress = {
     };
   },
 
+  fromSDKJSON(object: any): MsgSetWithdrawAddressSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
+  },
+
   toSDK(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressSDKType {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
@@ -391,6 +398,10 @@ export const MsgSetWithdrawAddressResponse = {
   },
 
   fromSDK(_: MsgSetWithdrawAddressResponseSDKType): MsgSetWithdrawAddressResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgSetWithdrawAddressResponseSDKType {
     return {};
   },
 
@@ -513,6 +524,13 @@ export const MsgWithdrawDelegatorReward = {
     };
   },
 
+  fromSDKJSON(object: any): MsgWithdrawDelegatorRewardSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
+  },
+
   toSDK(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardSDKType {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
@@ -629,6 +647,12 @@ export const MsgWithdrawDelegatorRewardResponse = {
   fromSDK(object: MsgWithdrawDelegatorRewardResponseSDKType): MsgWithdrawDelegatorRewardResponse {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawDelegatorRewardResponseSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 
@@ -754,6 +778,12 @@ export const MsgWithdrawValidatorCommission = {
     };
   },
 
+  fromSDKJSON(object: any): MsgWithdrawValidatorCommissionSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
+  },
+
   toSDK(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionSDKType {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
@@ -867,6 +897,12 @@ export const MsgWithdrawValidatorCommissionResponse = {
   fromSDK(object: MsgWithdrawValidatorCommissionResponseSDKType): MsgWithdrawValidatorCommissionResponse {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawValidatorCommissionResponseSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 
@@ -1011,6 +1047,13 @@ export const MsgFundCommunityPool = {
     };
   },
 
+  fromSDKJSON(object: any): MsgFundCommunityPoolSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
+  },
+
   toSDK(message: MsgFundCommunityPool): MsgFundCommunityPoolSDKType {
     const obj: any = {};
 
@@ -1117,6 +1160,10 @@ export const MsgFundCommunityPoolResponse = {
   },
 
   fromSDK(_: MsgFundCommunityPoolResponseSDKType): MsgFundCommunityPoolResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgFundCommunityPoolResponseSDKType {
     return {};
   },
 

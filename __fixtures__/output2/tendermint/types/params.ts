@@ -178,6 +178,15 @@ export const ConsensusParams = {
     message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : undefined;
     message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConsensusParamsSDKType {
+    return {
+      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
+    };
   }
 
 };
@@ -259,6 +268,14 @@ export const BlockParams = {
     message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? Long.fromValue(object.maxGas) : Long.ZERO;
     message.timeIotaMs = object.timeIotaMs !== undefined && object.timeIotaMs !== null ? Long.fromValue(object.timeIotaMs) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): BlockParamsSDKType {
+    return {
+      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
+      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO,
+      time_iota_ms: isSet(object.time_iota_ms) ? Long.fromValue(object.time_iota_ms) : Long.ZERO
+    };
   }
 
 };
@@ -340,6 +357,14 @@ export const EvidenceParams = {
     message.maxAgeDuration = object.maxAgeDuration !== undefined && object.maxAgeDuration !== null ? Duration.fromPartial(object.maxAgeDuration) : undefined;
     message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): EvidenceParamsSDKType {
+    return {
+      max_age_num_blocks: isSet(object.max_age_num_blocks) ? Long.fromValue(object.max_age_num_blocks) : Long.ZERO,
+      max_age_duration: isSet(object.max_age_duration) ? Duration.fromSDKJSON(object.max_age_duration) : undefined,
+      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO
+    };
   }
 
 };
@@ -403,6 +428,12 @@ export const ValidatorParams = {
     const message = createBaseValidatorParams();
     message.pubKeyTypes = object.pubKeyTypes?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorParamsSDKType {
+    return {
+      pub_key_types: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -460,6 +491,12 @@ export const VersionParams = {
     const message = createBaseVersionParams();
     message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? Long.fromValue(object.appVersion) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): VersionParamsSDKType {
+    return {
+      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO
+    };
   }
 
 };
@@ -529,6 +566,13 @@ export const HashedParams = {
     message.blockMaxBytes = object.blockMaxBytes !== undefined && object.blockMaxBytes !== null ? Long.fromValue(object.blockMaxBytes) : Long.ZERO;
     message.blockMaxGas = object.blockMaxGas !== undefined && object.blockMaxGas !== null ? Long.fromValue(object.blockMaxGas) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): HashedParamsSDKType {
+    return {
+      block_max_bytes: isSet(object.block_max_bytes) ? Long.fromValue(object.block_max_bytes) : Long.ZERO,
+      block_max_gas: isSet(object.block_max_gas) ? Long.fromValue(object.block_max_gas) : Long.ZERO
+    };
   }
 
 };

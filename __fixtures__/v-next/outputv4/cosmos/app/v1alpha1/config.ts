@@ -126,6 +126,12 @@ export const Config = {
     };
   },
 
+  fromSDKJSON(object: any): ConfigSDKType {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Config): ConfigSDKType {
     const obj: any = {};
 
@@ -211,6 +217,13 @@ export const ModuleConfig = {
     return {
       name: object?.name,
       config: object.config ? Any.fromSDK(object.config) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ModuleConfigSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      config: isSet(object.config) ? Any.fromSDKJSON(object.config) : undefined
     };
   },
 

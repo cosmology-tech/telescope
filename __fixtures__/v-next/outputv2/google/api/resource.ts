@@ -730,6 +730,18 @@ export const ResourceDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): ResourceDescriptorSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
+      name_field: isSet(object.name_field) ? String(object.name_field) : "",
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
+      plural: isSet(object.plural) ? String(object.plural) : "",
+      singular: isSet(object.singular) ? String(object.singular) : "",
+      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: ResourceDescriptor): ResourceDescriptorSDKType {
     const obj: any = {};
     obj.type = message.type;
@@ -884,6 +896,13 @@ export const ResourceReference = {
     return {
       type: object?.type,
       childType: object?.child_type
+    };
+  },
+
+  fromSDKJSON(object: any): ResourceReferenceSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      child_type: isSet(object.child_type) ? String(object.child_type) : ""
     };
   },
 

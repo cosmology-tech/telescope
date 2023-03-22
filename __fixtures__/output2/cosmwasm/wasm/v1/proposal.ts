@@ -302,6 +302,16 @@ export const StoreCodeProposal = {
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): StoreCodeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
   }
 
 };
@@ -449,6 +459,19 @@ export const InstantiateContractProposal = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): InstantiateContractProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      label: isSet(object.label) ? String(object.label) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -554,6 +577,16 @@ export const MigrateContractProposal = {
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.msg = object.msg ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MigrateContractProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   }
 
 };
@@ -647,6 +680,15 @@ export const SudoContractProposal = {
     message.contract = object.contract ?? "";
     message.msg = object.msg ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): SudoContractProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   }
 
 };
@@ -770,6 +812,17 @@ export const ExecuteContractProposal = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ExecuteContractProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -863,6 +916,15 @@ export const UpdateAdminProposal = {
     message.newAdmin = object.newAdmin ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateAdminProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -944,6 +1006,14 @@ export const ClearAdminProposal = {
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ClearAdminProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -1043,6 +1113,14 @@ export const PinCodesProposal = {
     message.description = object.description ?? "";
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): PinCodesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -1142,6 +1220,14 @@ export const UnpinCodesProposal = {
     message.description = object.description ?? "";
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UnpinCodesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -1211,6 +1297,13 @@ export const AccessConfigUpdate = {
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccessConfigUpdateSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
   }
 
 };
@@ -1298,6 +1391,14 @@ export const UpdateInstantiateConfigProposal = {
     message.description = object.description ?? "";
     message.accessConfigUpdates = object.accessConfigUpdates?.map(e => AccessConfigUpdate.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateInstantiateConfigProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      access_config_updates: Array.isArray(object?.access_config_updates) ? object.access_config_updates.map((e: any) => AccessConfigUpdate.fromSDKJSON(e)) : []
+    };
   }
 
 };

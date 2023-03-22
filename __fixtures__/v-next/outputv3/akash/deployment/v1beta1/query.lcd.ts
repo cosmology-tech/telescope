@@ -34,7 +34,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/deployments/list`;
-    return await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options);
+    return QueryDeploymentsResponse.fromSDKJSON(await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options));
   }
 
   /* Deployment queries deployment details */
@@ -48,7 +48,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/deployments/info`;
-    return await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options);
+    return QueryDeploymentResponse.fromSDKJSON(await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options));
   }
 
   /* Group queries group details */
@@ -62,7 +62,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/groups/info`;
-    return await this.req.get<QueryGroupResponseSDKType>(endpoint, options);
+    return QueryGroupResponse.fromSDKJSON(await this.req.get<QueryGroupResponseSDKType>(endpoint, options));
   }
 
 }

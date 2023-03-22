@@ -177,6 +177,14 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      signing_infos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDKJSON(e)) : [],
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -272,6 +280,13 @@ export const SigningInfo = {
     };
   },
 
+  fromSDKJSON(object: any): SigningInfoSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      validator_signing_info: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.validator_signing_info) : undefined
+    };
+  },
+
   toSDK(message: SigningInfo): SigningInfoSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -361,6 +376,13 @@ export const ValidatorMissedBlocks = {
     };
   },
 
+  fromSDKJSON(object: any): ValidatorMissedBlocksSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -447,6 +469,13 @@ export const MissedBlock = {
     return {
       index: object?.index,
       missed: object?.missed
+    };
+  },
+
+  fromSDKJSON(object: any): MissedBlockSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },
 

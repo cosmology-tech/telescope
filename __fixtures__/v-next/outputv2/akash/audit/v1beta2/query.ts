@@ -239,6 +239,13 @@ export const QueryProvidersResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
     const obj: any = {};
 
@@ -369,6 +376,13 @@ export const QueryProviderRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryProviderRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
     const obj: any = {};
     obj.auditor = message.auditor;
@@ -471,6 +485,12 @@ export const QueryAllProvidersAttributesRequest = {
   fromSDK(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllProvidersAttributesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -586,6 +606,13 @@ export const QueryProviderAttributesRequest = {
     return {
       owner: object?.owner,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryProviderAttributesRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -707,6 +734,13 @@ export const QueryProviderAuditorRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryProviderAuditorRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   toSDK(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
     const obj: any = {};
     obj.auditor = message.auditor;
@@ -822,6 +856,13 @@ export const QueryAuditorAttributesRequest = {
     return {
       auditor: object?.auditor,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAuditorAttributesRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 

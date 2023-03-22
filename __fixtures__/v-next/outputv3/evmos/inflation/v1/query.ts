@@ -375,6 +375,10 @@ export const QueryPeriodRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryPeriodRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryPeriodRequest): QueryPeriodRequestSDKType {
     const obj: any = {};
     return obj;
@@ -473,6 +477,12 @@ export const QueryPeriodResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryPeriodResponseSDKType {
+    return {
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+    };
+  },
+
   toSDK(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
     const obj: any = {};
     obj.period = message.period;
@@ -556,6 +566,10 @@ export const QueryEpochMintProvisionRequest = {
   },
 
   fromSDK(_: QueryEpochMintProvisionRequestSDKType): QueryEpochMintProvisionRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryEpochMintProvisionRequestSDKType {
     return {};
   },
 
@@ -657,6 +671,12 @@ export const QueryEpochMintProvisionResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryEpochMintProvisionResponseSDKType {
+    return {
+      epoch_mint_provision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDKJSON(object.epoch_mint_provision) : undefined
+    };
+  },
+
   toSDK(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseSDKType {
     const obj: any = {};
     message.epochMintProvision !== undefined && (obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toSDK(message.epochMintProvision) : undefined);
@@ -740,6 +760,10 @@ export const QuerySkippedEpochsRequest = {
   },
 
   fromSDK(_: QuerySkippedEpochsRequestSDKType): QuerySkippedEpochsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QuerySkippedEpochsRequestSDKType {
     return {};
   },
 
@@ -841,6 +865,12 @@ export const QuerySkippedEpochsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
+    return {
+      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
+    };
+  },
+
   toSDK(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
     const obj: any = {};
     obj.skipped_epochs = message.skippedEpochs;
@@ -924,6 +954,10 @@ export const QueryCirculatingSupplyRequest = {
   },
 
   fromSDK(_: QueryCirculatingSupplyRequestSDKType): QueryCirculatingSupplyRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryCirculatingSupplyRequestSDKType {
     return {};
   },
 
@@ -1025,6 +1059,12 @@ export const QueryCirculatingSupplyResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryCirculatingSupplyResponseSDKType {
+    return {
+      circulating_supply: isSet(object.circulating_supply) ? DecCoin.fromSDKJSON(object.circulating_supply) : undefined
+    };
+  },
+
   toSDK(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseSDKType {
     const obj: any = {};
     message.circulatingSupply !== undefined && (obj.circulating_supply = message.circulatingSupply ? DecCoin.toSDK(message.circulatingSupply) : undefined);
@@ -1108,6 +1148,10 @@ export const QueryInflationRateRequest = {
   },
 
   fromSDK(_: QueryInflationRateRequestSDKType): QueryInflationRateRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryInflationRateRequestSDKType {
     return {};
   },
 
@@ -1209,6 +1253,12 @@ export const QueryInflationRateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryInflationRateResponseSDKType {
+    return {
+      inflation_rate: isSet(object.inflation_rate) ? String(object.inflation_rate) : ""
+    };
+  },
+
   toSDK(message: QueryInflationRateResponse): QueryInflationRateResponseSDKType {
     const obj: any = {};
     obj.inflation_rate = message.inflationRate;
@@ -1292,6 +1342,10 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -1390,6 +1444,12 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

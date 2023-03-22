@@ -91,6 +91,13 @@ export const GenesisOwners = {
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
     message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisOwnersSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
+      index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
+    };
   }
 
 };
@@ -166,6 +173,13 @@ export const GenesisState = {
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
     message.owners = object.owners?.map(e => GenesisOwners.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
+    };
   }
 
 };

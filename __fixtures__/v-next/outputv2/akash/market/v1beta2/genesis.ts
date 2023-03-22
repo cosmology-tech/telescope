@@ -134,6 +134,14 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromSDKJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
 

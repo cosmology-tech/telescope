@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -252,6 +252,13 @@ export const MetricValue_LabelsEntry = {
     };
   },
 
+  fromSDKJSON(object: any): MetricValue_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -405,8 +412,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
       int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
@@ -464,13 +471,31 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
       distributionValue: object.distribution_value ? Distribution.fromSDK(object.distribution_value) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): MetricValueSDKType {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined
     };
   },
 
@@ -484,8 +509,8 @@ export const MetricValue = {
       });
     }
 
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value;
     obj.double_value = message.doubleValue;
@@ -632,6 +657,13 @@ export const MetricValueSet = {
     return {
       metricName: object?.metric_name,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MetricValueSetSDKType {
+    return {
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
+      metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
     };
   },
 

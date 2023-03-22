@@ -402,6 +402,12 @@ export const EnableServiceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -468,6 +474,12 @@ export const EnableServiceResponse = {
   fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
     return {
       service: object.service ? Service.fromSDK(object.service) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): EnableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
     };
   },
 
@@ -566,6 +578,14 @@ export const DisableServiceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+    };
+  },
+
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -637,6 +657,12 @@ export const DisableServiceResponse = {
     };
   },
 
+  fromSDKJSON(object: any): DisableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
+    };
+  },
+
   toSDK(message: DisableServiceResponse): DisableServiceResponseSDKType {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
@@ -703,6 +729,12 @@ export const GetServiceRequest = {
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
       name: object?.name
+    };
+  },
+
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -814,6 +846,15 @@ export const ListServicesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -902,6 +943,13 @@ export const ListServicesResponse = {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
       nextPageToken: object?.next_page_token
+    };
+  },
+
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
 
@@ -997,6 +1045,13 @@ export const BatchEnableServicesRequest = {
     return {
       parent: object?.parent,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
     };
   },
 
@@ -1100,6 +1155,13 @@ export const BatchEnableServicesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): BatchEnableServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: BatchEnableServicesResponse): BatchEnableServicesResponseSDKType {
     const obj: any = {};
 
@@ -1194,6 +1256,13 @@ export const BatchEnableServicesResponse_EnableFailure = {
     };
   },
 
+  fromSDKJSON(object: any): BatchEnableServicesResponse_EnableFailureSDKType {
+    return {
+      service_id: isSet(object.service_id) ? String(object.service_id) : "",
+      error_message: isSet(object.error_message) ? String(object.error_message) : ""
+    };
+  },
+
   toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
     const obj: any = {};
     obj.service_id = message.serviceId;
@@ -1283,6 +1352,13 @@ export const BatchGetServicesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): BatchGetServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
+    };
+  },
+
   toSDK(message: BatchGetServicesRequest): BatchGetServicesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -1362,6 +1438,12 @@ export const BatchGetServicesResponse = {
   fromSDK(object: BatchGetServicesResponseSDKType): BatchGetServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): BatchGetServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : []
     };
   },
 

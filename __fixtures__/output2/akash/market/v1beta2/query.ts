@@ -142,6 +142,13 @@ export const QueryOrdersRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryOrdersRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? OrderFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -217,6 +224,13 @@ export const QueryOrdersResponse = {
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryOrdersResponseSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -274,6 +288,12 @@ export const QueryOrderRequest = {
     const message = createBaseQueryOrderRequest();
     message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryOrderRequestSDKType {
+    return {
+      id: isSet(object.id) ? OrderID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -331,6 +351,12 @@ export const QueryOrderResponse = {
     const message = createBaseQueryOrderResponse();
     message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryOrderResponseSDKType {
+    return {
+      order: isSet(object.order) ? Order.fromSDKJSON(object.order) : undefined
+    };
   }
 
 };
@@ -400,6 +426,13 @@ export const QueryBidsRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryBidsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? BidFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -475,6 +508,13 @@ export const QueryBidsResponse = {
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryBidsResponseSDKType {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -532,6 +572,12 @@ export const QueryBidRequest = {
     const message = createBaseQueryBidRequest();
     message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryBidRequestSDKType {
+    return {
+      id: isSet(object.id) ? BidID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -601,6 +647,13 @@ export const QueryBidResponse = {
     message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryBidResponseSDKType {
+    return {
+      bid: isSet(object.bid) ? Bid.fromSDKJSON(object.bid) : undefined,
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
   }
 
 };
@@ -670,6 +723,13 @@ export const QueryLeasesRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLeasesRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? LeaseFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -745,6 +805,13 @@ export const QueryLeasesResponse = {
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLeasesResponseSDKType {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -802,6 +869,12 @@ export const QueryLeaseRequest = {
     const message = createBaseQueryLeaseRequest();
     message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLeaseRequestSDKType {
+    return {
+      id: isSet(object.id) ? LeaseID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -871,6 +944,13 @@ export const QueryLeaseResponse = {
     message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
     message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLeaseResponseSDKType {
+    return {
+      lease: isSet(object.lease) ? Lease.fromSDKJSON(object.lease) : undefined,
+      escrow_payment: isSet(object.escrow_payment) ? FractionalPayment.fromSDKJSON(object.escrow_payment) : undefined
+    };
   }
 
 };

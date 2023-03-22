@@ -128,6 +128,13 @@ export const Attribute = {
     };
   },
 
+  fromSDKJSON(object: any): AttributeSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   toSDK(message: Attribute): AttributeSDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -219,6 +226,13 @@ export const SignedBy = {
     return {
       allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
       anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): SignedBySDKType {
+    return {
+      all_of: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => String(e)) : [],
+      any_of: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => String(e)) : []
     };
   },
 
@@ -319,6 +333,13 @@ export const PlacementRequirements = {
     return {
       signedBy: object.signed_by ? SignedBy.fromSDK(object.signed_by) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): PlacementRequirementsSDKType {
+    return {
+      signed_by: isSet(object.signed_by) ? SignedBy.fromSDKJSON(object.signed_by) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
   },
 

@@ -262,6 +262,13 @@ export const QueryAllowanceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryAllowanceRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
+    };
+  },
+
   toSDK(message: QueryAllowanceRequest): QueryAllowanceRequestSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -372,6 +379,12 @@ export const QueryAllowanceResponse = {
   fromSDK(object: QueryAllowanceResponseSDKType): QueryAllowanceResponse {
     return {
       allowance: object.allowance ? Grant.fromSDK(object.allowance) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllowanceResponseSDKType {
+    return {
+      allowance: isSet(object.allowance) ? Grant.fromSDKJSON(object.allowance) : undefined
     };
   },
 
@@ -495,6 +508,13 @@ export const QueryAllowancesRequest = {
     return {
       grantee: object?.grantee,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesRequestSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -627,6 +647,13 @@ export const QueryAllowancesResponse = {
     return {
       allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesResponseSDKType {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -768,6 +795,13 @@ export const QueryAllowancesByGranterRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryAllowancesByGranterRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryAllowancesByGranterRequest): QueryAllowancesByGranterRequestSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -897,6 +931,13 @@ export const QueryAllowancesByGranterResponse = {
     return {
       allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesByGranterResponseSDKType {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

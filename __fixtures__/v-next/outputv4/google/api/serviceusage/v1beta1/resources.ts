@@ -798,6 +798,15 @@ export const Service = {
     };
   },
 
+  fromSDKJSON(object: any): ServiceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+    };
+  },
+
   toSDK(message: Service): ServiceSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1004,6 +1013,21 @@ export const ServiceConfig = {
     };
   },
 
+  fromSDKJSON(object: any): ServiceConfigSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
+      quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromSDKJSON(object.authentication) : undefined,
+      usage: isSet(object.usage) ? Usage.fromSDKJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : [],
+      monitored_resources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
+      monitoring: isSet(object.monitoring) ? Monitoring.fromSDKJSON(object.monitoring) : undefined
+    };
+  },
+
   toSDK(message: ServiceConfig): ServiceConfigSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1102,6 +1126,12 @@ export const OperationMetadata = {
   fromSDK(object: OperationMetadataSDKType): OperationMetadata {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): OperationMetadataSDKType {
+    return {
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
     };
   },
 
@@ -1253,6 +1283,17 @@ export const ConsumerQuotaMetric = {
       consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
       descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
       unit: object?.unit
+    };
+  },
+
+  fromSDKJSON(object: any): ConsumerQuotaMetricSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      consumer_quota_limits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
+      descendant_consumer_quota_limits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
+      unit: isSet(object.unit) ? String(object.unit) : ""
     };
   },
 
@@ -1412,6 +1453,17 @@ export const ConsumerQuotaLimit = {
     };
   },
 
+  fromSDKJSON(object: any): ConsumerQuotaLimitSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      is_precise: isSet(object.is_precise) ? Boolean(object.is_precise) : false,
+      allows_admin_overrides: isSet(object.allows_admin_overrides) ? Boolean(object.allows_admin_overrides) : false,
+      quota_buckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ConsumerQuotaLimit): ConsumerQuotaLimitSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1502,6 +1554,13 @@ export const QuotaBucket_DimensionsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): QuotaBucket_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -1672,6 +1731,22 @@ export const QuotaBucket = {
     };
   },
 
+  fromSDKJSON(object: any): QuotaBucketSDKType {
+    return {
+      effective_limit: isSet(object.effective_limit) ? Long.fromValue(object.effective_limit) : Long.ZERO,
+      default_limit: isSet(object.default_limit) ? Long.fromValue(object.default_limit) : Long.ZERO,
+      producer_override: isSet(object.producer_override) ? QuotaOverride.fromSDKJSON(object.producer_override) : undefined,
+      consumer_override: isSet(object.consumer_override) ? QuotaOverride.fromSDKJSON(object.consumer_override) : undefined,
+      admin_override: isSet(object.admin_override) ? QuotaOverride.fromSDKJSON(object.admin_override) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   toSDK(message: QuotaBucket): QuotaBucketSDKType {
     const obj: any = {};
     obj.effective_limit = message.effectiveLimit;
@@ -1763,6 +1838,13 @@ export const QuotaOverride_DimensionsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): QuotaOverride_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -1934,6 +2016,22 @@ export const QuotaOverride = {
     };
   },
 
+  fromSDKJSON(object: any): QuotaOverrideSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override_value: isSet(object.override_value) ? Long.fromValue(object.override_value) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      admin_override_ancestor: isSet(object.admin_override_ancestor) ? String(object.admin_override_ancestor) : ""
+    };
+  },
+
   toSDK(message: QuotaOverride): QuotaOverrideSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -2018,6 +2116,12 @@ export const OverrideInlineSource = {
   fromSDK(object: OverrideInlineSourceSDKType): OverrideInlineSource {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): OverrideInlineSourceSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
     };
   },
 
@@ -2106,6 +2210,13 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): AdminQuotaPolicy_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -2277,6 +2388,22 @@ export const AdminQuotaPolicy = {
     };
   },
 
+  fromSDKJSON(object: any): AdminQuotaPolicySDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      policy_value: isSet(object.policy_value) ? Long.fromValue(object.policy_value) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      container: isSet(object.container) ? String(object.container) : ""
+    };
+  },
+
   toSDK(message: AdminQuotaPolicy): AdminQuotaPolicySDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -2368,6 +2495,13 @@ export const ServiceIdentity = {
     return {
       email: object?.email,
       uniqueId: object?.unique_id
+    };
+  },
+
+  fromSDKJSON(object: any): ServiceIdentitySDKType {
+    return {
+      email: isSet(object.email) ? String(object.email) : "",
+      unique_id: isSet(object.unique_id) ? String(object.unique_id) : ""
     };
   },
 

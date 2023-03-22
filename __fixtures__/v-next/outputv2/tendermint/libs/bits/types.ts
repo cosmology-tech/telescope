@@ -116,6 +116,13 @@ export const BitArray = {
     };
   },
 
+  fromSDKJSON(object: any): BitArraySDKType {
+    return {
+      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   toSDK(message: BitArray): BitArraySDKType {
     const obj: any = {};
     obj.bits = message.bits;

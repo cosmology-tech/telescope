@@ -96,6 +96,12 @@ export const QueryGaugeIdsRequest = {
     const message = createBaseQueryGaugeIdsRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGaugeIdsRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   }
 
 };
@@ -159,6 +165,12 @@ export const QueryGaugeIdsResponse = {
     const message = createBaseQueryGaugeIdsResponse();
     message.gaugeIdsWithDuration = object.gaugeIdsWithDuration?.map(e => QueryGaugeIdsResponse_GaugeIdWithDuration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGaugeIdsResponseSDKType {
+    return {
+      gauge_ids_with_duration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -240,6 +252,14 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
+    return {
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      gauge_incentive_percentage: isSet(object.gauge_incentive_percentage) ? String(object.gauge_incentive_percentage) : ""
+    };
   }
 
 };
@@ -283,6 +303,10 @@ export const QueryDistrInfoRequest = {
   fromPartial(_: DeepPartial<QueryDistrInfoRequest>): QueryDistrInfoRequest {
     const message = createBaseQueryDistrInfoRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryDistrInfoRequestSDKType {
+    return {};
   }
 
 };
@@ -340,6 +364,12 @@ export const QueryDistrInfoResponse = {
     const message = createBaseQueryDistrInfoResponse();
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDistrInfoResponseSDKType {
+    return {
+      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined
+    };
   }
 
 };
@@ -383,6 +413,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -440,6 +474,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -483,6 +523,10 @@ export const QueryLockableDurationsRequest = {
   fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
+    return {};
   }
 
 };
@@ -546,6 +590,12 @@ export const QueryLockableDurationsResponse = {
     const message = createBaseQueryLockableDurationsResponse();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -589,6 +639,10 @@ export const QueryIncentivizedPoolsRequest = {
   fromPartial(_: DeepPartial<QueryIncentivizedPoolsRequest>): QueryIncentivizedPoolsRequest {
     const message = createBaseQueryIncentivizedPoolsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryIncentivizedPoolsRequestSDKType {
+    return {};
   }
 
 };
@@ -670,6 +724,14 @@ export const IncentivizedPool = {
     message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): IncentivizedPoolSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      lockable_duration: isSet(object.lockable_duration) ? Duration.fromSDKJSON(object.lockable_duration) : undefined,
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
+    };
   }
 
 };
@@ -733,6 +795,12 @@ export const QueryIncentivizedPoolsResponse = {
     const message = createBaseQueryIncentivizedPoolsResponse();
     message.incentivizedPools = object.incentivizedPools?.map(e => IncentivizedPool.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryIncentivizedPoolsResponseSDKType {
+    return {
+      incentivized_pools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -776,6 +844,10 @@ export const QueryExternalIncentiveGaugesRequest = {
   fromPartial(_: DeepPartial<QueryExternalIncentiveGaugesRequest>): QueryExternalIncentiveGaugesRequest {
     const message = createBaseQueryExternalIncentiveGaugesRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryExternalIncentiveGaugesRequestSDKType {
+    return {};
   }
 
 };
@@ -839,6 +911,12 @@ export const QueryExternalIncentiveGaugesResponse = {
     const message = createBaseQueryExternalIncentiveGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryExternalIncentiveGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : []
+    };
   }
 
 };

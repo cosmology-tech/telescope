@@ -383,6 +383,13 @@ export const QueryOrdersRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryOrdersRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? OrderFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryOrdersRequest): QueryOrdersRequestSDKType {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toSDK(message.filters) : undefined);
@@ -507,6 +514,13 @@ export const QueryOrdersResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryOrdersResponseSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryOrdersResponse): QueryOrdersResponseSDKType {
     const obj: any = {};
 
@@ -624,6 +638,12 @@ export const QueryOrderRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryOrderRequestSDKType {
+    return {
+      id: isSet(object.id) ? OrderID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   toSDK(message: QueryOrderRequest): QueryOrderRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? OrderID.toSDK(message.id) : undefined);
@@ -723,6 +743,12 @@ export const QueryOrderResponse = {
   fromSDK(object: QueryOrderResponseSDKType): QueryOrderResponse {
     return {
       order: object.order ? Order.fromSDK(object.order) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryOrderResponseSDKType {
+    return {
+      order: isSet(object.order) ? Order.fromSDKJSON(object.order) : undefined
     };
   },
 
@@ -838,6 +864,13 @@ export const QueryBidsRequest = {
     return {
       filters: object.filters ? BidFilters.fromSDK(object.filters) : undefined,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryBidsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? BidFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -965,6 +998,13 @@ export const QueryBidsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryBidsResponseSDKType {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryBidsResponse): QueryBidsResponseSDKType {
     const obj: any = {};
 
@@ -1079,6 +1119,12 @@ export const QueryBidRequest = {
   fromSDK(object: QueryBidRequestSDKType): QueryBidRequest {
     return {
       id: object.id ? BidID.fromSDK(object.id) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryBidRequestSDKType {
+    return {
+      id: isSet(object.id) ? BidID.fromSDKJSON(object.id) : undefined
     };
   },
 
@@ -1197,6 +1243,13 @@ export const QueryBidResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryBidResponseSDKType {
+    return {
+      bid: isSet(object.bid) ? Bid.fromSDKJSON(object.bid) : undefined,
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
+  },
+
   toSDK(message: QueryBidResponse): QueryBidResponseSDKType {
     const obj: any = {};
     message.bid !== undefined && (obj.bid = message.bid ? Bid.toSDK(message.bid) : undefined);
@@ -1312,6 +1365,13 @@ export const QueryLeasesRequest = {
     return {
       filters: object.filters ? LeaseFilters.fromSDK(object.filters) : undefined,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryLeasesRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? LeaseFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1439,6 +1499,13 @@ export const QueryLeasesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryLeasesResponseSDKType {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryLeasesResponse): QueryLeasesResponseSDKType {
     const obj: any = {};
 
@@ -1556,6 +1623,12 @@ export const QueryLeaseRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryLeaseRequestSDKType {
+    return {
+      id: isSet(object.id) ? LeaseID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   toSDK(message: QueryLeaseRequest): QueryLeaseRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? LeaseID.toSDK(message.id) : undefined);
@@ -1668,6 +1741,13 @@ export const QueryLeaseResponse = {
     return {
       lease: object.lease ? Lease.fromSDK(object.lease) : undefined,
       escrowPayment: object.escrow_payment ? FractionalPayment.fromSDK(object.escrow_payment) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryLeaseResponseSDKType {
+    return {
+      lease: isSet(object.lease) ? Lease.fromSDKJSON(object.lease) : undefined,
+      escrow_payment: isSet(object.escrow_payment) ? FractionalPayment.fromSDKJSON(object.escrow_payment) : undefined
     };
   },
 

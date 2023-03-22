@@ -169,6 +169,17 @@ export const MsgCreateStableswapPool = {
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.scalingFactorController = object.scalingFactorController ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateStableswapPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      initial_pool_liquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
+    };
   }
 
 };
@@ -226,6 +237,12 @@ export const MsgCreateStableswapPoolResponse = {
     const message = createBaseMsgCreateStableswapPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateStableswapPoolResponseSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   }
 
 };
@@ -325,6 +342,14 @@ export const MsgStableSwapAdjustScalingFactors = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgStableSwapAdjustScalingFactorsSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -368,6 +393,10 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   fromPartial(_: DeepPartial<MsgStableSwapAdjustScalingFactorsResponse>): MsgStableSwapAdjustScalingFactorsResponse {
     const message = createBaseMsgStableSwapAdjustScalingFactorsResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgStableSwapAdjustScalingFactorsResponseSDKType {
+    return {};
   }
 
 };

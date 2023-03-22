@@ -6,7 +6,7 @@ import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/co
 import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
 
 /**
@@ -531,6 +531,22 @@ export const ClientState = {
     };
   },
 
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      trust_level: isSet(object.trust_level) ? Fraction.fromSDKJSON(object.trust_level) : undefined,
+      trusting_period: isSet(object.trusting_period) ? Duration.fromSDKJSON(object.trusting_period) : undefined,
+      unbonding_period: isSet(object.unbonding_period) ? Duration.fromSDKJSON(object.unbonding_period) : undefined,
+      max_clock_drift: isSet(object.max_clock_drift) ? Duration.fromSDKJSON(object.max_clock_drift) : undefined,
+      frozen_height: isSet(object.frozen_height) ? Height.fromSDKJSON(object.frozen_height) : undefined,
+      latest_height: isSet(object.latest_height) ? Height.fromSDKJSON(object.latest_height) : undefined,
+      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDKJSON(e)) : [],
+      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : false,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : false
+    };
+  },
+
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;
@@ -689,7 +705,7 @@ export const ConsensusState = {
 
   fromJSON(object: any): ConsensusState {
     return {
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       root: isSet(object.root) ? MerkleRoot.fromJSON(object.root) : undefined,
       nextValidatorsHash: isSet(object.nextValidatorsHash) ? bytesFromBase64(object.nextValidatorsHash) : new Uint8Array()
     };
@@ -713,15 +729,23 @@ export const ConsensusState = {
 
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
     return {
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ?? undefined,
       root: object.root ? MerkleRoot.fromSDK(object.root) : undefined,
       nextValidatorsHash: object?.next_validators_hash
     };
   },
 
+  fromSDKJSON(object: any): ConsensusStateSDKType {
+    return {
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      root: isSet(object.root) ? MerkleRoot.fromSDKJSON(object.root) : undefined,
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array()
+    };
+  },
+
   toSDK(message: ConsensusState): ConsensusStateSDKType {
     const obj: any = {};
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     message.root !== undefined && (obj.root = message.root ? MerkleRoot.toSDK(message.root) : undefined);
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
@@ -858,6 +882,14 @@ export const Misbehaviour = {
       clientId: object?.client_id,
       header_1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
       header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): MisbehaviourSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      header_1: isSet(object.header_1) ? Header.fromSDKJSON(object.header_1) : undefined,
+      header_2: isSet(object.header_2) ? Header.fromSDKJSON(object.header_2) : undefined
     };
   },
 
@@ -1016,6 +1048,15 @@ export const Header = {
     };
   },
 
+  fromSDKJSON(object: any): HeaderSDKType {
+    return {
+      signed_header: isSet(object.signed_header) ? SignedHeader.fromSDKJSON(object.signed_header) : undefined,
+      validator_set: isSet(object.validator_set) ? ValidatorSet.fromSDKJSON(object.validator_set) : undefined,
+      trusted_height: isSet(object.trusted_height) ? Height.fromSDKJSON(object.trusted_height) : undefined,
+      trusted_validators: isSet(object.trusted_validators) ? ValidatorSet.fromSDKJSON(object.trusted_validators) : undefined
+    };
+  },
+
   toSDK(message: Header): HeaderSDKType {
     const obj: any = {};
     message.signedHeader !== undefined && (obj.signed_header = message.signedHeader ? SignedHeader.toSDK(message.signedHeader) : undefined);
@@ -1145,6 +1186,13 @@ export const Fraction = {
     return {
       numerator: object?.numerator,
       denominator: object?.denominator
+    };
+  },
+
+  fromSDKJSON(object: any): FractionSDKType {
+    return {
+      numerator: isSet(object.numerator) ? Long.fromValue(object.numerator) : Long.UZERO,
+      denominator: isSet(object.denominator) ? Long.fromValue(object.denominator) : Long.UZERO
     };
   },
 

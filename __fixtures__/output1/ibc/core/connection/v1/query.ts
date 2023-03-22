@@ -286,6 +286,12 @@ export const QueryConnectionRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryConnectionRequestSDKType {
+    return {
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
+    };
+  },
+
   toSDK(message: QueryConnectionRequest): QueryConnectionRequestSDKType {
     const obj: any = {};
     obj.connection_id = message.connectionId;
@@ -381,6 +387,14 @@ export const QueryConnectionResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryConnectionResponseSDKType {
+    return {
+      connection: isSet(object.connection) ? ConnectionEnd.fromSDKJSON(object.connection) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   toSDK(message: QueryConnectionResponse): QueryConnectionResponseSDKType {
     const obj: any = {};
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
@@ -449,6 +463,12 @@ export const QueryConnectionsRequest = {
   fromSDK(object: QueryConnectionsRequestSDKType): QueryConnectionsRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryConnectionsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -553,6 +573,14 @@ export const QueryConnectionsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryConnectionsResponseSDKType {
+    return {
+      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   toSDK(message: QueryConnectionsResponse): QueryConnectionsResponseSDKType {
     const obj: any = {};
 
@@ -627,6 +655,12 @@ export const QueryClientConnectionsRequest = {
   fromSDK(object: QueryClientConnectionsRequestSDKType): QueryClientConnectionsRequest {
     return {
       clientId: object?.client_id
+    };
+  },
+
+  fromSDKJSON(object: any): QueryClientConnectionsRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
     };
   },
 
@@ -731,6 +765,14 @@ export const QueryClientConnectionsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryClientConnectionsResponseSDKType {
+    return {
+      connection_paths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => String(e)) : [],
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   toSDK(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseSDKType {
     const obj: any = {};
 
@@ -805,6 +847,12 @@ export const QueryConnectionClientStateRequest = {
   fromSDK(object: QueryConnectionClientStateRequestSDKType): QueryConnectionClientStateRequest {
     return {
       connectionId: object?.connection_id
+    };
+  },
+
+  fromSDKJSON(object: any): QueryConnectionClientStateRequestSDKType {
+    return {
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
     };
   },
 
@@ -903,6 +951,14 @@ export const QueryConnectionClientStateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryConnectionClientStateResponseSDKType {
+    return {
+      identified_client_state: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDKJSON(object.identified_client_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   toSDK(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseSDKType {
     const obj: any = {};
     message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toSDK(message.identifiedClientState) : undefined);
@@ -997,6 +1053,14 @@ export const QueryConnectionConsensusStateRequest = {
       connectionId: object?.connection_id,
       revisionNumber: object?.revision_number,
       revisionHeight: object?.revision_height
+    };
+  },
+
+  fromSDKJSON(object: any): QueryConnectionConsensusStateRequestSDKType {
+    return {
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
     };
   },
 
@@ -1107,6 +1171,15 @@ export const QueryConnectionConsensusStateResponse = {
       clientId: object?.client_id,
       proof: object?.proof,
       proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryConnectionConsensusStateResponseSDKType {
+    return {
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
     };
   },
 

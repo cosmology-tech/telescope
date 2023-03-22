@@ -88,6 +88,14 @@ export const GroupID = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): GroupIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
+    };
   }
 
 };

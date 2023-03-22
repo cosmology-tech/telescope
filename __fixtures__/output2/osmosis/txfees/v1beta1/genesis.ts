@@ -82,6 +82,13 @@ export const GenesisState = {
     message.basedenom = object.basedenom ?? "";
     message.feetokens = object.feetokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
   }
 
 };

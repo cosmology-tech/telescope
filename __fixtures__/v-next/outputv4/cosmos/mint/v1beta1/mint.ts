@@ -122,6 +122,13 @@ export const Minter = {
     };
   },
 
+  fromSDKJSON(object: any): MinterSDKType {
+    return {
+      inflation: isSet(object.inflation) ? String(object.inflation) : "",
+      annual_provisions: isSet(object.annual_provisions) ? String(object.annual_provisions) : ""
+    };
+  },
+
   toSDK(message: Minter): MinterSDKType {
     const obj: any = {};
     obj.inflation = message.inflation;
@@ -254,6 +261,17 @@ export const Params = {
       inflationMin: object?.inflation_min,
       goalBonded: object?.goal_bonded,
       blocksPerYear: object?.blocks_per_year
+    };
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      inflation_rate_change: isSet(object.inflation_rate_change) ? String(object.inflation_rate_change) : "",
+      inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
+      inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
+      goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
+      blocks_per_year: isSet(object.blocks_per_year) ? Long.fromValue(object.blocks_per_year) : Long.UZERO
     };
   },
 

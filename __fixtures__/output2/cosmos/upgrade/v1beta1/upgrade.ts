@@ -183,6 +183,16 @@ export const Plan = {
     message.info = object.info ?? "";
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): PlanSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      info: isSet(object.info) ? String(object.info) : "",
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
   }
 
 };
@@ -264,6 +274,14 @@ export const SoftwareUpgradeProposal = {
     message.description = object.description ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -333,6 +351,13 @@ export const CancelSoftwareUpgradeProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -402,6 +427,13 @@ export const ModuleVersion = {
     message.name = object.name ?? "";
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ModuleVersionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
+    };
   }
 
 };

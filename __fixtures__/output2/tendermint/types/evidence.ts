@@ -97,6 +97,13 @@ export const Evidence = {
     message.duplicateVoteEvidence = object.duplicateVoteEvidence !== undefined && object.duplicateVoteEvidence !== null ? DuplicateVoteEvidence.fromPartial(object.duplicateVoteEvidence) : undefined;
     message.lightClientAttackEvidence = object.lightClientAttackEvidence !== undefined && object.lightClientAttackEvidence !== null ? LightClientAttackEvidence.fromPartial(object.lightClientAttackEvidence) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): EvidenceSDKType {
+    return {
+      duplicate_vote_evidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromSDKJSON(object.duplicate_vote_evidence) : undefined,
+      light_client_attack_evidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromSDKJSON(object.light_client_attack_evidence) : undefined
+    };
   }
 
 };
@@ -202,6 +209,16 @@ export const DuplicateVoteEvidence = {
     message.validatorPower = object.validatorPower !== undefined && object.validatorPower !== null ? Long.fromValue(object.validatorPower) : Long.ZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DuplicateVoteEvidenceSDKType {
+    return {
+      vote_a: isSet(object.vote_a) ? Vote.fromSDKJSON(object.vote_a) : undefined,
+      vote_b: isSet(object.vote_b) ? Vote.fromSDKJSON(object.vote_b) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      validator_power: isSet(object.validator_power) ? Long.fromValue(object.validator_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+    };
   }
 
 };
@@ -313,6 +330,16 @@ export const LightClientAttackEvidence = {
     message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LightClientAttackEvidenceSDKType {
+    return {
+      conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromSDKJSON(object.conflicting_block) : undefined,
+      common_height: isSet(object.common_height) ? Long.fromValue(object.common_height) : Long.ZERO,
+      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+    };
   }
 
 };
@@ -376,6 +403,12 @@ export const EvidenceList = {
     const message = createBaseEvidenceList();
     message.evidence = object.evidence?.map(e => Evidence.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): EvidenceListSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDKJSON(e)) : []
+    };
   }
 
 };

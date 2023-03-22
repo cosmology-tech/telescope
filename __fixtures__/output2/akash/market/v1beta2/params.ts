@@ -76,6 +76,13 @@ export const Params = {
     message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : undefined;
     message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      bid_min_deposit: isSet(object.bid_min_deposit) ? Coin.fromSDKJSON(object.bid_min_deposit) : undefined,
+      order_max_bids: isSet(object.order_max_bids) ? Number(object.order_max_bids) : 0
+    };
   }
 
 };

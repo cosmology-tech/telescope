@@ -83,6 +83,12 @@ export const MultiSignature = {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MultiSignatureSDKType {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -152,6 +158,13 @@ export const CompactBitArray = {
     message.extraBitsStored = object.extraBitsStored ?? 0;
     message.elems = object.elems ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): CompactBitArraySDKType {
+    return {
+      extra_bits_stored: isSet(object.extra_bits_stored) ? Number(object.extra_bits_stored) : 0,
+      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array()
+    };
   }
 
 };

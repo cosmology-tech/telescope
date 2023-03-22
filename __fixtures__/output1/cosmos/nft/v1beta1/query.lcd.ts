@@ -24,19 +24,19 @@ export class LCDQueryClient {
   /* Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721 */
   async balance(params: QueryBalanceRequest): Promise<QueryBalanceResponseSDKType> {
     const endpoint = `cosmos/nft/v1beta1/balance/${params.owner}/${params.classId}`;
-    return await this.req.get<QueryBalanceResponseSDKType>(endpoint);
+    return QueryBalanceResponse.fromSDKJSON(await this.req.get<QueryBalanceResponseSDKType>(endpoint));
   }
 
   /* Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721 */
   async owner(params: QueryOwnerRequest): Promise<QueryOwnerResponseSDKType> {
     const endpoint = `cosmos/nft/v1beta1/owner/${params.classId}/${params.id}`;
-    return await this.req.get<QueryOwnerResponseSDKType>(endpoint);
+    return QueryOwnerResponse.fromSDKJSON(await this.req.get<QueryOwnerResponseSDKType>(endpoint));
   }
 
   /* Supply queries the number of NFTs from the given class, same as totalSupply of ERC721. */
   async supply(params: QuerySupplyRequest): Promise<QuerySupplyResponseSDKType> {
     const endpoint = `cosmos/nft/v1beta1/supply/${params.classId}`;
-    return await this.req.get<QuerySupplyResponseSDKType>(endpoint);
+    return QuerySupplyResponse.fromSDKJSON(await this.req.get<QuerySupplyResponseSDKType>(endpoint));
   }
 
   /* NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
@@ -59,19 +59,19 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/nfts`;
-    return await this.req.get<QueryNFTsResponseSDKType>(endpoint, options);
+    return QueryNFTsResponse.fromSDKJSON(await this.req.get<QueryNFTsResponseSDKType>(endpoint, options));
   }
 
   /* NFT queries an NFT based on its class and id. */
   async nFT(params: QueryNFTRequest): Promise<QueryNFTResponseSDKType> {
     const endpoint = `cosmos/nft/v1beta1/nfts/${params.classId}/${params.id}`;
-    return await this.req.get<QueryNFTResponseSDKType>(endpoint);
+    return QueryNFTResponse.fromSDKJSON(await this.req.get<QueryNFTResponseSDKType>(endpoint));
   }
 
   /* Class queries an NFT class based on its id */
   async class(params: QueryClassRequest): Promise<QueryClassResponseSDKType> {
     const endpoint = `cosmos/nft/v1beta1/classes/${params.classId}`;
-    return await this.req.get<QueryClassResponseSDKType>(endpoint);
+    return QueryClassResponse.fromSDKJSON(await this.req.get<QueryClassResponseSDKType>(endpoint));
   }
 
   /* Classes queries all NFT classes */
@@ -87,7 +87,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/classes`;
-    return await this.req.get<QueryClassesResponseSDKType>(endpoint, options);
+    return QueryClassesResponse.fromSDKJSON(await this.req.get<QueryClassesResponseSDKType>(endpoint, options));
   }
 
 }

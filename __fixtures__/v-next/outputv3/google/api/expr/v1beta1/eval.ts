@@ -399,6 +399,13 @@ export const EvalState = {
     };
   },
 
+  fromSDKJSON(object: any): EvalStateSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: EvalState): EvalStateSDKType {
     const obj: any = {};
 
@@ -539,6 +546,13 @@ export const EvalState_Result = {
     };
   },
 
+  fromSDKJSON(object: any): EvalState_ResultSDKType {
+    return {
+      expr: isSet(object.expr) ? IdRef.fromSDKJSON(object.expr) : undefined,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? IdRef.toSDK(message.expr) : undefined);
@@ -670,6 +684,14 @@ export const ExprValue = {
     };
   },
 
+  fromSDKJSON(object: any): ExprValueSDKType {
+    return {
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
+    };
+  },
+
   toSDK(message: ExprValue): ExprValueSDKType {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
@@ -781,6 +803,12 @@ export const ErrorSet = {
   fromSDK(object: ErrorSetSDKType): ErrorSet {
     return {
       errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ErrorSetSDKType {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
     };
   },
 
@@ -904,6 +932,12 @@ export const UnknownSet = {
     };
   },
 
+  fromSDKJSON(object: any): UnknownSetSDKType {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: UnknownSet): UnknownSetSDKType {
     const obj: any = {};
 
@@ -1015,6 +1049,12 @@ export const IdRef = {
   fromSDK(object: IdRefSDKType): IdRef {
     return {
       id: object?.id
+    };
+  },
+
+  fromSDKJSON(object: any): IdRefSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0
     };
   },
 

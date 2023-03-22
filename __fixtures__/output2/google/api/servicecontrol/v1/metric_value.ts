@@ -132,6 +132,13 @@ export const MetricValue_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MetricValue_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -301,6 +308,24 @@ export const MetricValue = {
     message.stringValue = object.stringValue ?? undefined;
     message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MetricValueSDKType {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? fromJsonTimestamp(object.end_time) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined
+    };
   }
 
 };
@@ -376,6 +401,13 @@ export const MetricValueSet = {
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MetricValueSetSDKType {
+    return {
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
+      metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
+    };
   }
 
 };

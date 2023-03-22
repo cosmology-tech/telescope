@@ -1827,6 +1827,12 @@ export const EnableServiceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1929,6 +1935,12 @@ export const DisableServiceRequest = {
     };
   },
 
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -2028,6 +2040,12 @@ export const GetServiceRequest = {
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
       name: object?.name
+    };
+  },
+
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -2172,6 +2190,15 @@ export const ListServicesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -2299,6 +2326,13 @@ export const ListServicesResponse = {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
       nextPageToken: object?.next_page_token
+    };
+  },
+
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
 
@@ -2435,6 +2469,13 @@ export const BatchEnableServicesRequest = {
     return {
       parent: object?.parent,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
     };
   },
 
@@ -2594,6 +2635,15 @@ export const ListConsumerQuotaMetricsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -2721,6 +2771,13 @@ export const ListConsumerQuotaMetricsResponse = {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDK(e)) : [],
       nextPageToken: object?.next_page_token
+    };
+  },
+
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsResponseSDKType {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
 
@@ -2854,6 +2911,13 @@ export const GetConsumerQuotaMetricRequest = {
     };
   },
 
+  fromSDKJSON(object: any): GetConsumerQuotaMetricRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -2968,6 +3032,13 @@ export const GetConsumerQuotaLimitRequest = {
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
       name: object?.name,
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
+  fromSDKJSON(object: any): GetConsumerQuotaLimitRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
@@ -3131,6 +3202,15 @@ export const CreateAdminOverrideRequest = {
       override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): CreateAdminOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
@@ -3327,6 +3407,16 @@ export const UpdateAdminOverrideRequest = {
     };
   },
 
+  fromSDKJSON(object: any): UpdateAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -3497,6 +3587,14 @@ export const DeleteAdminOverrideRequest = {
     };
   },
 
+  fromSDKJSON(object: any): DeleteAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -3643,6 +3741,14 @@ export const ListAdminOverridesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ListAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+
   toSDK(message: ListAdminOverridesRequest): ListAdminOverridesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -3770,6 +3876,13 @@ export const ListAdminOverridesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ListAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   toSDK(message: ListAdminOverridesResponse): ListAdminOverridesResponseSDKType {
     const obj: any = {};
 
@@ -3890,6 +4003,12 @@ export const BatchCreateAdminOverridesResponse = {
   fromSDK(object: BatchCreateAdminOverridesResponseSDKType): BatchCreateAdminOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): BatchCreateAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
     };
   },
 
@@ -4064,6 +4183,15 @@ export const ImportAdminOverridesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ImportAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -4193,6 +4321,12 @@ export const ImportAdminOverridesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ImportAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseSDKType {
     const obj: any = {};
 
@@ -4288,6 +4422,10 @@ export const ImportAdminOverridesMetadata = {
   },
 
   fromSDK(_: ImportAdminOverridesMetadataSDKType): ImportAdminOverridesMetadata {
+    return {};
+  },
+
+  fromSDKJSON(_: any): ImportAdminOverridesMetadataSDKType {
     return {};
   },
 
@@ -4443,6 +4581,15 @@ export const CreateConsumerOverrideRequest = {
       override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): CreateConsumerOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
@@ -4639,6 +4786,16 @@ export const UpdateConsumerOverrideRequest = {
     };
   },
 
+  fromSDKJSON(object: any): UpdateConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -4809,6 +4966,14 @@ export const DeleteConsumerOverrideRequest = {
     };
   },
 
+  fromSDKJSON(object: any): DeleteConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -4955,6 +5120,14 @@ export const ListConsumerOverridesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ListConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+
   toSDK(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -5082,6 +5255,13 @@ export const ListConsumerOverridesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ListConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   toSDK(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseSDKType {
     const obj: any = {};
 
@@ -5202,6 +5382,12 @@ export const BatchCreateConsumerOverridesResponse = {
   fromSDK(object: BatchCreateConsumerOverridesResponseSDKType): BatchCreateConsumerOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): BatchCreateConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
     };
   },
 
@@ -5376,6 +5562,15 @@ export const ImportConsumerOverridesRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ImportConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
   toSDK(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -5505,6 +5700,12 @@ export const ImportConsumerOverridesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ImportConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseSDKType {
     const obj: any = {};
 
@@ -5600,6 +5801,10 @@ export const ImportConsumerOverridesMetadata = {
   },
 
   fromSDK(_: ImportConsumerOverridesMetadataSDKType): ImportConsumerOverridesMetadata {
+    return {};
+  },
+
+  fromSDKJSON(_: any): ImportConsumerOverridesMetadataSDKType {
     return {};
   },
 
@@ -5707,6 +5912,12 @@ export const ImportAdminQuotaPoliciesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ImportAdminQuotaPoliciesResponseSDKType {
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseSDKType {
     const obj: any = {};
 
@@ -5805,6 +6016,10 @@ export const ImportAdminQuotaPoliciesMetadata = {
     return {};
   },
 
+  fromSDKJSON(_: any): ImportAdminQuotaPoliciesMetadataSDKType {
+    return {};
+  },
+
   toSDK(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
     const obj: any = {};
     return obj;
@@ -5884,6 +6099,10 @@ export const CreateAdminQuotaPolicyMetadata = {
   },
 
   fromSDK(_: CreateAdminQuotaPolicyMetadataSDKType): CreateAdminQuotaPolicyMetadata {
+    return {};
+  },
+
+  fromSDKJSON(_: any): CreateAdminQuotaPolicyMetadataSDKType {
     return {};
   },
 
@@ -5969,6 +6188,10 @@ export const UpdateAdminQuotaPolicyMetadata = {
     return {};
   },
 
+  fromSDKJSON(_: any): UpdateAdminQuotaPolicyMetadataSDKType {
+    return {};
+  },
+
   toSDK(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
@@ -6048,6 +6271,10 @@ export const DeleteAdminQuotaPolicyMetadata = {
   },
 
   fromSDK(_: DeleteAdminQuotaPolicyMetadataSDKType): DeleteAdminQuotaPolicyMetadata {
+    return {};
+  },
+
+  fromSDKJSON(_: any): DeleteAdminQuotaPolicyMetadataSDKType {
     return {};
   },
 
@@ -6146,6 +6373,12 @@ export const GenerateServiceIdentityRequest = {
   fromSDK(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
     return {
       parent: object?.parent
+    };
+  },
+
+  fromSDKJSON(object: any): GenerateServiceIdentityRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : ""
     };
   },
 
@@ -6264,6 +6497,13 @@ export const GetServiceIdentityResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetServiceIdentityResponseSDKType {
+    return {
+      identity: isSet(object.identity) ? ServiceIdentity.fromSDKJSON(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+    };
+  },
+
   toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
     const obj: any = {};
     message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toSDK(message.identity) : undefined);
@@ -6350,6 +6590,10 @@ export const GetServiceIdentityMetadata = {
   },
 
   fromSDK(_: GetServiceIdentityMetadataSDKType): GetServiceIdentityMetadata {
+    return {};
+  },
+
+  fromSDKJSON(_: any): GetServiceIdentityMetadataSDKType {
     return {};
   },
 

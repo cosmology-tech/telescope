@@ -2,7 +2,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 
 /** VoteOption enumerates the valid vote options for a given proposal. */
@@ -992,7 +992,7 @@ export const Member = {
       address: isSet(object.address) ? String(object.address) : "",
       weight: isSet(object.weight) ? String(object.weight) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      addedAt: isSet(object.addedAt) ? fromJsonTimestamp(object.addedAt) : undefined
+      addedAt: isSet(object.addedAt) ? new Date(object.addedAt) : undefined
     };
   },
 
@@ -1019,7 +1019,16 @@ export const Member = {
       address: object?.address,
       weight: object?.weight,
       metadata: object?.metadata,
-      addedAt: object.added_at ? Timestamp.fromSDK(object.added_at) : undefined
+      addedAt: object.added_at ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): MemberSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      weight: isSet(object.weight) ? String(object.weight) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      added_at: isSet(object.added_at) ? new Date(object.added_at) : undefined
     };
   },
 
@@ -1028,7 +1037,7 @@ export const Member = {
     obj.address = message.address;
     obj.weight = message.weight;
     obj.metadata = message.metadata;
-    message.addedAt !== undefined && (obj.added_at = message.addedAt ? Timestamp.toSDK(message.addedAt) : undefined);
+    message.addedAt !== undefined && (obj.added_at = message.addedAt ?? undefined);
     return obj;
   },
 
@@ -1145,6 +1154,12 @@ export const Members = {
   fromSDK(object: MembersSDKType): Members {
     return {
       members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MembersSDKType {
+    return {
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : []
     };
   },
 
@@ -1283,6 +1298,13 @@ export const ThresholdDecisionPolicy = {
     };
   },
 
+  fromSDKJSON(object: any): ThresholdDecisionPolicySDKType {
+    return {
+      threshold: isSet(object.threshold) ? String(object.threshold) : "",
+      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDKJSON(object.windows) : undefined
+    };
+  },
+
   toSDK(message: ThresholdDecisionPolicy): ThresholdDecisionPolicySDKType {
     const obj: any = {};
     obj.threshold = message.threshold;
@@ -1409,6 +1431,13 @@ export const PercentageDecisionPolicy = {
     };
   },
 
+  fromSDKJSON(object: any): PercentageDecisionPolicySDKType {
+    return {
+      percentage: isSet(object.percentage) ? String(object.percentage) : "",
+      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDKJSON(object.windows) : undefined
+    };
+  },
+
   toSDK(message: PercentageDecisionPolicy): PercentageDecisionPolicySDKType {
     const obj: any = {};
     obj.percentage = message.percentage;
@@ -1532,6 +1561,13 @@ export const DecisionPolicyWindows = {
     return {
       votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined,
       minExecutionPeriod: object.min_execution_period ? Duration.fromSDK(object.min_execution_period) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): DecisionPolicyWindowsSDKType {
+    return {
+      voting_period: isSet(object.voting_period) ? Duration.fromSDKJSON(object.voting_period) : undefined,
+      min_execution_period: isSet(object.min_execution_period) ? Duration.fromSDKJSON(object.min_execution_period) : undefined
     };
   },
 
@@ -1676,7 +1712,7 @@ export const GroupInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
   },
 
@@ -1709,7 +1745,18 @@ export const GroupInfo = {
       metadata: object?.metadata,
       version: object?.version,
       totalWeight: object?.total_weight,
-      createdAt: object.created_at ? Timestamp.fromSDK(object.created_at) : undefined
+      createdAt: object.created_at ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GroupInfoSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
+      created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
   },
 
@@ -1720,7 +1767,7 @@ export const GroupInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version;
     obj.total_weight = message.totalWeight;
-    message.createdAt !== undefined && (obj.created_at = message.createdAt ? Timestamp.toSDK(message.createdAt) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt ?? undefined);
     return obj;
   },
 
@@ -1848,6 +1895,13 @@ export const GroupMember = {
     return {
       groupId: object?.group_id,
       member: object.member ? Member.fromSDK(object.member) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GroupMemberSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      member: isSet(object.member) ? Member.fromSDKJSON(object.member) : undefined
     };
   },
 
@@ -2002,7 +2056,7 @@ export const GroupPolicyInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
   },
 
@@ -2038,7 +2092,19 @@ export const GroupPolicyInfo = {
       metadata: object?.metadata,
       version: object?.version,
       decisionPolicy: object.decision_policy ? Any.fromSDK(object.decision_policy) : undefined,
-      createdAt: object.created_at ? Timestamp.fromSDK(object.created_at) : undefined
+      createdAt: object.created_at ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GroupPolicyInfoSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined,
+      created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
   },
 
@@ -2050,7 +2116,7 @@ export const GroupPolicyInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version;
     message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt ? Timestamp.toSDK(message.createdAt) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt ?? undefined);
     return obj;
   },
 
@@ -2260,13 +2326,13 @@ export const Proposal = {
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined,
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
       groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      votingPeriodEnd: isSet(object.votingPeriodEnd) ? fromJsonTimestamp(object.votingPeriodEnd) : undefined,
+      votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
       executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : 0,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
     };
@@ -2326,15 +2392,33 @@ export const Proposal = {
       address: object?.address,
       metadata: object?.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined,
+      submitTime: object.submit_time ?? undefined,
       groupVersion: object?.group_version,
       groupPolicyVersion: object?.group_policy_version,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
-      votingPeriodEnd: object.voting_period_end ? Timestamp.fromSDK(object.voting_period_end) : undefined,
+      votingPeriodEnd: object.voting_period_end ?? undefined,
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ProposalSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
+      group_version: isSet(object.group_version) ? Long.fromValue(object.group_version) : Long.UZERO,
+      group_policy_version: isSet(object.group_policy_version) ? Long.fromValue(object.group_policy_version) : Long.UZERO,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
+      voting_period_end: isSet(object.voting_period_end) ? new Date(object.voting_period_end) : undefined,
+      executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
 
@@ -2350,13 +2434,13 @@ export const Proposal = {
       obj.proposers = [];
     }
 
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ? Timestamp.toSDK(message.submitTime) : undefined);
+    message.submitTime !== undefined && (obj.submit_time = message.submitTime ?? undefined);
     obj.group_version = message.groupVersion;
     obj.group_policy_version = message.groupPolicyVersion;
     message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
     message.result !== undefined && (obj.result = proposalResultToJSON(message.result));
     message.finalTallyResult !== undefined && (obj.final_tally_result = message.finalTallyResult ? TallyResult.toSDK(message.finalTallyResult) : undefined);
-    message.votingPeriodEnd !== undefined && (obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toSDK(message.votingPeriodEnd) : undefined);
+    message.votingPeriodEnd !== undefined && (obj.voting_period_end = message.votingPeriodEnd ?? undefined);
     message.executorResult !== undefined && (obj.executor_result = proposalExecutorResultToJSON(message.executorResult));
 
     if (message.messages) {
@@ -2547,6 +2631,15 @@ export const TallyResult = {
     };
   },
 
+  fromSDKJSON(object: any): TallyResultSDKType {
+    return {
+      yes_count: isSet(object.yes_count) ? String(object.yes_count) : "",
+      abstain_count: isSet(object.abstain_count) ? String(object.abstain_count) : "",
+      no_count: isSet(object.no_count) ? String(object.no_count) : "",
+      no_with_veto_count: isSet(object.no_with_veto_count) ? String(object.no_with_veto_count) : ""
+    };
+  },
+
   toSDK(message: TallyResult): TallyResultSDKType {
     const obj: any = {};
     obj.yes_count = message.yesCount;
@@ -2684,7 +2777,7 @@ export const Vote = {
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
     };
   },
 
@@ -2714,7 +2807,17 @@ export const Vote = {
       voter: object?.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: object?.metadata,
-      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined
+      submitTime: object.submit_time ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): VoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined
     };
   },
 
@@ -2724,7 +2827,7 @@ export const Vote = {
     obj.voter = message.voter;
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     obj.metadata = message.metadata;
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ? Timestamp.toSDK(message.submitTime) : undefined);
+    message.submitTime !== undefined && (obj.submit_time = message.submitTime ?? undefined);
     return obj;
   },
 

@@ -142,6 +142,14 @@ export const LabelDescriptor = {
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): LabelDescriptorSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };

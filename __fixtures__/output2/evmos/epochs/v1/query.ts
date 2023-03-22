@@ -72,6 +72,12 @@ export const QueryEpochsInfoRequest = {
     const message = createBaseQueryEpochsInfoRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryEpochsInfoRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -147,6 +153,13 @@ export const QueryEpochsInfoResponse = {
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryEpochsInfoResponseSDKType {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -204,6 +217,12 @@ export const QueryCurrentEpochRequest = {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentEpochRequestSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
+    };
   }
 
 };
@@ -261,6 +280,12 @@ export const QueryCurrentEpochResponse = {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
+    return {
+      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO
+    };
   }
 
 };

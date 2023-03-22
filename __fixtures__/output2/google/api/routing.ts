@@ -500,6 +500,12 @@ export const RoutingRule = {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): RoutingRuleSDKType {
+    return {
+      routing_parameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -569,6 +575,13 @@ export const RoutingParameter = {
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RoutingParameterSDKType {
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      path_template: isSet(object.path_template) ? String(object.path_template) : ""
+    };
   }
 
 };

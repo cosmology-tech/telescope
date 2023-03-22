@@ -93,6 +93,10 @@ export const QueryConfigRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryConfigRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryConfigRequest): QueryConfigRequestSDKType {
     const obj: any = {};
     return obj;
@@ -196,6 +200,12 @@ export const QueryConfigResponse = {
   fromSDK(object: QueryConfigResponseSDKType): QueryConfigResponse {
     return {
       config: object.config ? Config.fromSDK(object.config) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryConfigResponseSDKType {
+    return {
+      config: isSet(object.config) ? Config.fromSDKJSON(object.config) : undefined
     };
   },
 

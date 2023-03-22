@@ -90,6 +90,12 @@ export const GenericAuthorization = {
     const message = createBaseGenericAuthorization();
     message.msg = object.msg ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GenericAuthorizationSDKType {
+    return {
+      msg: isSet(object.msg) ? String(object.msg) : ""
+    };
   }
 
 };
@@ -159,6 +165,13 @@ export const Grant = {
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+    };
   }
 
 };
@@ -252,6 +265,15 @@ export const GrantAuthorization = {
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GrantAuthorizationSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+    };
   }
 
 };

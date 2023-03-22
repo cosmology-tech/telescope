@@ -73,6 +73,12 @@ export const Node = {
     const message = createBaseNode();
     message.children = object.children?.map(e => Child.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): NodeSDKType {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -142,6 +148,13 @@ export const Child = {
     message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ChildSDKType {
+    return {
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
+      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
+    };
   }
 
 };
@@ -199,6 +212,12 @@ export const Leaf = {
     const message = createBaseLeaf();
     message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LeafSDKType {
+    return {
+      leaf: isSet(object.leaf) ? Child.fromSDKJSON(object.leaf) : undefined
+    };
   }
 
 };

@@ -2,7 +2,7 @@ import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -129,6 +129,13 @@ export const Evidence = {
     };
   },
 
+  fromSDKJSON(object: any): EvidenceSDKType {
+    return {
+      duplicate_vote_evidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromSDKJSON(object.duplicate_vote_evidence) : undefined,
+      light_client_attack_evidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromSDKJSON(object.light_client_attack_evidence) : undefined
+    };
+  },
+
   toSDK(message: Evidence): EvidenceSDKType {
     const obj: any = {};
     message.duplicateVoteEvidence !== undefined && (obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toSDK(message.duplicateVoteEvidence) : undefined);
@@ -217,7 +224,7 @@ export const DuplicateVoteEvidence = {
       voteB: isSet(object.voteB) ? Vote.fromJSON(object.voteB) : undefined,
       totalVotingPower: isSet(object.totalVotingPower) ? Long.fromValue(object.totalVotingPower) : Long.ZERO,
       validatorPower: isSet(object.validatorPower) ? Long.fromValue(object.validatorPower) : Long.ZERO,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -247,7 +254,17 @@ export const DuplicateVoteEvidence = {
       voteB: object.vote_b ? Vote.fromSDK(object.vote_b) : undefined,
       totalVotingPower: object?.total_voting_power,
       validatorPower: object?.validator_power,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): DuplicateVoteEvidenceSDKType {
+    return {
+      vote_a: isSet(object.vote_a) ? Vote.fromSDKJSON(object.vote_a) : undefined,
+      vote_b: isSet(object.vote_b) ? Vote.fromSDKJSON(object.vote_b) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      validator_power: isSet(object.validator_power) ? Long.fromValue(object.validator_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -257,7 +274,7 @@ export const DuplicateVoteEvidence = {
     message.voteB !== undefined && (obj.vote_b = message.voteB ? Vote.toSDK(message.voteB) : undefined);
     obj.total_voting_power = message.totalVotingPower;
     obj.validator_power = message.validatorPower;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
   }
 
@@ -342,7 +359,7 @@ export const LightClientAttackEvidence = {
       commonHeight: isSet(object.commonHeight) ? Long.fromValue(object.commonHeight) : Long.ZERO,
       byzantineValidators: Array.isArray(object?.byzantineValidators) ? object.byzantineValidators.map((e: any) => Validator.fromJSON(e)) : [],
       totalVotingPower: isSet(object.totalVotingPower) ? Long.fromValue(object.totalVotingPower) : Long.ZERO,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -378,7 +395,17 @@ export const LightClientAttackEvidence = {
       commonHeight: object?.common_height,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDK(e)) : [],
       totalVotingPower: object?.total_voting_power,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): LightClientAttackEvidenceSDKType {
+    return {
+      conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromSDKJSON(object.conflicting_block) : undefined,
+      common_height: isSet(object.common_height) ? Long.fromValue(object.common_height) : Long.ZERO,
+      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -394,7 +421,7 @@ export const LightClientAttackEvidence = {
     }
 
     obj.total_voting_power = message.totalVotingPower;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
   }
 
@@ -464,6 +491,12 @@ export const EvidenceList = {
   fromSDK(object: EvidenceListSDKType): EvidenceList {
     return {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): EvidenceListSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDKJSON(e)) : []
     };
   },
 

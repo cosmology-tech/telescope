@@ -86,6 +86,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -143,6 +147,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -200,6 +210,12 @@ export const QueryDenomAuthorityMetadataRequest = {
     const message = createBaseQueryDenomAuthorityMetadataRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -257,6 +273,12 @@ export const QueryDenomAuthorityMetadataResponse = {
     const message = createBaseQueryDenomAuthorityMetadataResponse();
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataResponseSDKType {
+    return {
+      authority_metadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDKJSON(object.authority_metadata) : undefined
+    };
   }
 
 };
@@ -314,6 +336,12 @@ export const QueryDenomsFromCreatorRequest = {
     const message = createBaseQueryDenomsFromCreatorRequest();
     message.creator = object.creator ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorRequestSDKType {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : ""
+    };
   }
 
 };
@@ -377,6 +405,12 @@ export const QueryDenomsFromCreatorResponse = {
     const message = createBaseQueryDenomsFromCreatorResponse();
     message.denoms = object.denoms?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorResponseSDKType {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
+    };
   }
 
 };

@@ -90,6 +90,14 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ResourceSDKType {
+    return {
+      resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
+      count: isSet(object.count) ? Number(object.count) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined
+    };
   }
 
 };

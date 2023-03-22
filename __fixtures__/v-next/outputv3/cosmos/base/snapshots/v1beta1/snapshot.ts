@@ -377,6 +377,16 @@ export const Snapshot = {
     };
   },
 
+  fromSDKJSON(object: any): SnapshotSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
+  },
+
   toSDK(message: Snapshot): SnapshotSDKType {
     const obj: any = {};
     obj.height = message.height;
@@ -502,6 +512,12 @@ export const Metadata = {
   fromSDK(object: MetadataSDKType): Metadata {
     return {
       chunkHashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MetadataSDKType {
+    return {
+      chunk_hashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => bytesFromBase64(e)) : []
     };
   },
 
@@ -692,6 +708,17 @@ export const SnapshotItem = {
     };
   },
 
+  fromSDKJSON(object: any): SnapshotItemSDKType {
+    return {
+      store: isSet(object.store) ? SnapshotStoreItem.fromSDKJSON(object.store) : undefined,
+      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromSDKJSON(object.iavl) : undefined,
+      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromSDKJSON(object.extension) : undefined,
+      extension_payload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromSDKJSON(object.extension_payload) : undefined,
+      kv: isSet(object.kv) ? SnapshotKVItem.fromSDKJSON(object.kv) : undefined,
+      schema: isSet(object.schema) ? SnapshotSchema.fromSDKJSON(object.schema) : undefined
+    };
+  },
+
   toSDK(message: SnapshotItem): SnapshotItemSDKType {
     const obj: any = {};
     message.store !== undefined && (obj.store = message.store ? SnapshotStoreItem.toSDK(message.store) : undefined);
@@ -814,6 +841,12 @@ export const SnapshotStoreItem = {
   fromSDK(object: SnapshotStoreItemSDKType): SnapshotStoreItem {
     return {
       name: object?.name
+    };
+  },
+
+  fromSDKJSON(object: any): SnapshotStoreItemSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -966,6 +999,15 @@ export const SnapshotIAVLItem = {
     };
   },
 
+  fromSDKJSON(object: any): SnapshotIAVLItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      height: isSet(object.height) ? Number(object.height) : 0
+    };
+  },
+
   toSDK(message: SnapshotIAVLItem): SnapshotIAVLItemSDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -1098,6 +1140,13 @@ export const SnapshotExtensionMeta = {
     };
   },
 
+  fromSDKJSON(object: any): SnapshotExtensionMetaSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      format: isSet(object.format) ? Number(object.format) : 0
+    };
+  },
+
   toSDK(message: SnapshotExtensionMeta): SnapshotExtensionMetaSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1208,6 +1257,12 @@ export const SnapshotExtensionPayload = {
   fromSDK(object: SnapshotExtensionPayloadSDKType): SnapshotExtensionPayload {
     return {
       payload: object?.payload
+    };
+  },
+
+  fromSDKJSON(object: any): SnapshotExtensionPayloadSDKType {
+    return {
+      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
     };
   },
 
@@ -1334,6 +1389,13 @@ export const SnapshotKVItem = {
     };
   },
 
+  fromSDKJSON(object: any): SnapshotKVItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+
   toSDK(message: SnapshotKVItem): SnapshotKVItemSDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -1450,6 +1512,12 @@ export const SnapshotSchema = {
   fromSDK(object: SnapshotSchemaSDKType): SnapshotSchema {
     return {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): SnapshotSchemaSDKType {
+    return {
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
     };
   },
 

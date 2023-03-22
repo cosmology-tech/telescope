@@ -439,6 +439,14 @@ export const GetTxsEventRequest = {
     };
   },
 
+  fromSDKJSON(object: any): GetTxsEventRequestSDKType {
+    return {
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => String(e)) : [],
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
+      order_by: isSet(object.order_by) ? orderByFromJSON(object.order_by) : 0
+    };
+  },
+
   toSDK(message: GetTxsEventRequest): GetTxsEventRequestSDKType {
     const obj: any = {};
 
@@ -553,6 +561,14 @@ export const GetTxsEventResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetTxsEventResponseSDKType {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDKJSON(e)) : [],
+      tx_responses: Array.isArray(object?.tx_responses) ? object.tx_responses.map((e: any) => TxResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: GetTxsEventResponse): GetTxsEventResponseSDKType {
     const obj: any = {};
 
@@ -648,6 +664,13 @@ export const BroadcastTxRequest = {
     };
   },
 
+  fromSDKJSON(object: any): BroadcastTxRequestSDKType {
+    return {
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array(),
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
+    };
+  },
+
   toSDK(message: BroadcastTxRequest): BroadcastTxRequestSDKType {
     const obj: any = {};
     obj.tx_bytes = message.txBytes;
@@ -715,6 +738,12 @@ export const BroadcastTxResponse = {
   fromSDK(object: BroadcastTxResponseSDKType): BroadcastTxResponse {
     return {
       txResponse: object.tx_response ? TxResponse.fromSDK(object.tx_response) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): BroadcastTxResponseSDKType {
+    return {
+      tx_response: isSet(object.tx_response) ? TxResponse.fromSDKJSON(object.tx_response) : undefined
     };
   },
 
@@ -797,6 +826,13 @@ export const SimulateRequest = {
     return {
       tx: object.tx ? Tx.fromSDK(object.tx) : undefined,
       txBytes: object?.tx_bytes
+    };
+  },
+
+  fromSDKJSON(object: any): SimulateRequestSDKType {
+    return {
+      tx: isSet(object.tx) ? Tx.fromSDKJSON(object.tx) : undefined,
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array()
     };
   },
 
@@ -883,6 +919,13 @@ export const SimulateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): SimulateResponseSDKType {
+    return {
+      gas_info: isSet(object.gas_info) ? GasInfo.fromSDKJSON(object.gas_info) : undefined,
+      result: isSet(object.result) ? Result.fromSDKJSON(object.result) : undefined
+    };
+  },
+
   toSDK(message: SimulateResponse): SimulateResponseSDKType {
     const obj: any = {};
     message.gasInfo !== undefined && (obj.gas_info = message.gasInfo ? GasInfo.toSDK(message.gasInfo) : undefined);
@@ -950,6 +993,12 @@ export const GetTxRequest = {
   fromSDK(object: GetTxRequestSDKType): GetTxRequest {
     return {
       hash: object?.hash
+    };
+  },
+
+  fromSDKJSON(object: any): GetTxRequestSDKType {
+    return {
+      hash: isSet(object.hash) ? String(object.hash) : ""
     };
   },
 
@@ -1035,6 +1084,13 @@ export const GetTxResponse = {
     };
   },
 
+  fromSDKJSON(object: any): GetTxResponseSDKType {
+    return {
+      tx: isSet(object.tx) ? Tx.fromSDKJSON(object.tx) : undefined,
+      tx_response: isSet(object.tx_response) ? TxResponse.fromSDKJSON(object.tx_response) : undefined
+    };
+  },
+
   toSDK(message: GetTxResponse): GetTxResponseSDKType {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toSDK(message.tx) : undefined);
@@ -1115,6 +1171,13 @@ export const GetBlockWithTxsRequest = {
     return {
       height: object?.height,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GetBlockWithTxsRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1230,6 +1293,15 @@ export const GetBlockWithTxsResponse = {
       blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
       block: object.block ? Block.fromSDK(object.block) : undefined,
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GetBlockWithTxsResponseSDKType {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDKJSON(e)) : [],
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

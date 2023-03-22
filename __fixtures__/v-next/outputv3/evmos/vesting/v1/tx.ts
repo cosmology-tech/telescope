@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
@@ -269,7 +269,7 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : [],
       merge: isSet(object.merge) ? Boolean(object.merge) : false
@@ -313,10 +313,21 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: object?.from_address,
       toAddress: object?.to_address,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : [],
       merge: object?.merge
+    };
+  },
+
+  fromSDKJSON(object: any): MsgCreateClawbackVestingAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
+      merge: isSet(object.merge) ? Boolean(object.merge) : false
     };
   },
 
@@ -324,7 +335,7 @@ export const MsgCreateClawbackVestingAccount = {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
 
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);
@@ -440,6 +451,10 @@ export const MsgCreateClawbackVestingAccountResponse = {
   },
 
   fromSDK(_: MsgCreateClawbackVestingAccountResponseSDKType): MsgCreateClawbackVestingAccountResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgCreateClawbackVestingAccountResponseSDKType {
     return {};
   },
 
@@ -567,6 +582,14 @@ export const MsgClawback = {
     };
   },
 
+  fromSDKJSON(object: any): MsgClawbackSDKType {
+    return {
+      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
+      account_address: isSet(object.account_address) ? String(object.account_address) : "",
+      dest_address: isSet(object.dest_address) ? String(object.dest_address) : ""
+    };
+  },
+
   toSDK(message: MsgClawback): MsgClawbackSDKType {
     const obj: any = {};
     obj.funder_address = message.funderAddress;
@@ -656,6 +679,10 @@ export const MsgClawbackResponse = {
   },
 
   fromSDK(_: MsgClawbackResponseSDKType): MsgClawbackResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgClawbackResponseSDKType {
     return {};
   },
 

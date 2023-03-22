@@ -138,6 +138,12 @@ export const QueryEpochsInfoRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryEpochsInfoRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
@@ -259,6 +265,13 @@ export const QueryEpochsInfoResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryEpochsInfoResponseSDKType {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseSDKType {
     const obj: any = {};
 
@@ -376,6 +389,12 @@ export const QueryCurrentEpochRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryCurrentEpochRequestSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
+    };
+  },
+
   toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
     const obj: any = {};
     obj.identifier = message.identifier;
@@ -475,6 +494,12 @@ export const QueryCurrentEpochResponse = {
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
     return {
       currentEpoch: object?.current_epoch
+    };
+  },
+
+  fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
+    return {
+      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO
     };
   },
 

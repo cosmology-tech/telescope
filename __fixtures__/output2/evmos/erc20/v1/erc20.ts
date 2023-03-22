@@ -209,6 +209,15 @@ export const TokenPair = {
     message.enabled = object.enabled ?? false;
     message.contractOwner = object.contractOwner ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): TokenPairSDKType {
+    return {
+      erc20_address: isSet(object.erc20_address) ? String(object.erc20_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      contract_owner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+    };
   }
 
 };
@@ -290,6 +299,14 @@ export const RegisterCoinProposal = {
     message.description = object.description ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): RegisterCoinProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
   }
 
 };
@@ -371,6 +388,14 @@ export const RegisterERC20Proposal = {
     message.description = object.description ?? "";
     message.erc20address = object.erc20address ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RegisterERC20ProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
+    };
   }
 
 };
@@ -452,6 +477,14 @@ export const ToggleTokenConversionProposal = {
     message.description = object.description ?? "";
     message.token = object.token ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ToggleTokenConversionProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      token: isSet(object.token) ? String(object.token) : ""
+    };
   }
 
 };

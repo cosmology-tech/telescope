@@ -107,6 +107,13 @@ export const GenesisState = {
     message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : undefined;
     message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      controller_genesis_state: isSet(object.controller_genesis_state) ? ControllerGenesisState.fromSDKJSON(object.controller_genesis_state) : undefined,
+      host_genesis_state: isSet(object.host_genesis_state) ? HostGenesisState.fromSDKJSON(object.host_genesis_state) : undefined
+    };
   }
 
 };
@@ -216,6 +223,15 @@ export const ControllerGenesisState = {
     message.ports = object.ports?.map(e => e) || [];
     message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ControllerGenesisStateSDKType {
+    return {
+      active_channels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromSDKJSON(e)) : [],
+      interchain_accounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromSDKJSON(e)) : [],
+      ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => String(e)) : [],
+      params: isSet(object.params) ? Params1.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -320,6 +336,15 @@ export const HostGenesisState = {
     message.port = object.port ?? "";
     message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): HostGenesisStateSDKType {
+    return {
+      active_channels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromSDKJSON(e)) : [],
+      interchain_accounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromSDKJSON(e)) : [],
+      port: isSet(object.port) ? String(object.port) : "",
+      params: isSet(object.params) ? Params2.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -401,6 +426,14 @@ export const ActiveChannel = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ActiveChannelSDKType {
+    return {
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
   }
 
 };
@@ -482,6 +515,14 @@ export const RegisteredInterchainAccount = {
     message.portId = object.portId ?? "";
     message.accountAddress = object.accountAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RegisteredInterchainAccountSDKType {
+    return {
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      account_address: isSet(object.account_address) ? String(object.account_address) : ""
+    };
   }
 
 };

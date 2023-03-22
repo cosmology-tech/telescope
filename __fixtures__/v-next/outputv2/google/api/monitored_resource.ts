@@ -490,6 +490,17 @@ export const MonitoredResourceDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): MonitoredResourceDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
+      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
+    };
+  },
+
   toSDK(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -627,6 +638,13 @@ export const MonitoredResource_LabelsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): MonitoredResource_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -773,6 +791,18 @@ export const MonitoredResource = {
     };
   },
 
+  fromSDKJSON(object: any): MonitoredResourceSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   toSDK(message: MonitoredResource): MonitoredResourceSDKType {
     const obj: any = {};
     obj.type = message.type;
@@ -905,6 +935,13 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): MonitoredResourceMetadata_UserLabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -1043,6 +1080,18 @@ export const MonitoredResourceMetadata = {
     return {
       systemLabels: object.system_labels ? Struct.fromSDK(object.system_labels) : undefined,
       userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  fromSDKJSON(object: any): MonitoredResourceMetadataSDKType {
+    return {
+      system_labels: isSet(object.system_labels) ? Struct.fromSDKJSON(object.system_labels) : undefined,
+      user_labels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);

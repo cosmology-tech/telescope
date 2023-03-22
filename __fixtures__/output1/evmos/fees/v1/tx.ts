@@ -220,6 +220,15 @@ export const MsgRegisterDevFeeInfo = {
     };
   },
 
+  fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
@@ -279,6 +288,10 @@ export const MsgRegisterDevFeeInfoResponse = {
   },
 
   fromSDK(_: MsgRegisterDevFeeInfoResponseSDKType): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgRegisterDevFeeInfoResponseSDKType {
     return {};
   },
 
@@ -363,6 +376,13 @@ export const MsgCancelDevFeeInfo = {
     };
   },
 
+  fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
+    };
+  },
+
   toSDK(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
@@ -414,6 +434,10 @@ export const MsgCancelDevFeeInfoResponse = {
   },
 
   fromSDK(_: MsgCancelDevFeeInfoResponseSDKType): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgCancelDevFeeInfoResponseSDKType {
     return {};
   },
 
@@ -511,6 +535,14 @@ export const MsgUpdateDevFeeInfo = {
     };
   },
 
+  fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
+  },
+
   toSDK(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
@@ -563,6 +595,10 @@ export const MsgUpdateDevFeeInfoResponse = {
   },
 
   fromSDK(_: MsgUpdateDevFeeInfoResponseSDKType): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDevFeeInfoResponseSDKType {
     return {};
   },
 

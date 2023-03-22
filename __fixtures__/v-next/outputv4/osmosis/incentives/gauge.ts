@@ -2,7 +2,7 @@ import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
 
@@ -184,7 +184,7 @@ export const Gauge = {
       isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO,
       filledEpochs: isSet(object.filledEpochs) ? Long.fromValue(object.filledEpochs) : Long.UZERO,
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
@@ -235,10 +235,23 @@ export const Gauge = {
       isPerpetual: object?.is_perpetual,
       distributeTo: object.distribute_to ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       numEpochsPaidOver: object?.num_epochs_paid_over,
       filledEpochs: object?.filled_epochs,
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): GaugeSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
+      distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? Long.fromValue(object.num_epochs_paid_over) : Long.UZERO,
+      filled_epochs: isSet(object.filled_epochs) ? Long.fromValue(object.filled_epochs) : Long.UZERO,
+      distributed_coins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 
@@ -254,7 +267,7 @@ export const Gauge = {
       obj.coins = [];
     }
 
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     obj.num_epochs_paid_over = message.numEpochsPaidOver;
     obj.filled_epochs = message.filledEpochs;
 
@@ -333,6 +346,12 @@ export const LockableDurationsInfo = {
   fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
     return {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
     };
   },
 

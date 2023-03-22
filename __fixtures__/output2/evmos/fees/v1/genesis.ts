@@ -112,6 +112,13 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      dev_fee_infos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -217,6 +224,16 @@ export const Params = {
     message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO;
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
+      developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
+      validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? Long.fromValue(object.addr_derivation_cost_create) : Long.UZERO,
+      min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
+    };
   }
 
 };

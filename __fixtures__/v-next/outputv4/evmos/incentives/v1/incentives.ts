@@ -1,6 +1,6 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
 
@@ -180,7 +180,7 @@ export const Incentive = {
       contract: isSet(object.contract) ? String(object.contract) : "",
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
     };
   },
@@ -216,8 +216,18 @@ export const Incentive = {
       contract: object?.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
       epochs: object?.epochs,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       totalGas: object?.total_gas
+    };
+  },
+
+  fromSDKJSON(object: any): IncentiveSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      total_gas: isSet(object.total_gas) ? Long.fromValue(object.total_gas) : Long.UZERO
     };
   },
 
@@ -232,7 +242,7 @@ export const Incentive = {
     }
 
     obj.epochs = message.epochs;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     obj.total_gas = message.totalGas;
     return obj;
   }
@@ -323,6 +333,14 @@ export const GasMeter = {
       contract: object?.contract,
       participant: object?.participant,
       cumulativeGas: object?.cumulative_gas
+    };
+  },
+
+  fromSDKJSON(object: any): GasMeterSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : "",
+      cumulative_gas: isSet(object.cumulative_gas) ? Long.fromValue(object.cumulative_gas) : Long.UZERO
     };
   },
 
@@ -455,6 +473,16 @@ export const RegisterIncentiveProposal = {
     };
   },
 
+  fromSDKJSON(object: any): RegisterIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0
+    };
+  },
+
   toSDK(message: RegisterIncentiveProposal): RegisterIncentiveProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -557,6 +585,14 @@ export const CancelIncentiveProposal = {
       title: object?.title,
       description: object?.description,
       contract: object?.contract
+    };
+  },
+
+  fromSDKJSON(object: any): CancelIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
 

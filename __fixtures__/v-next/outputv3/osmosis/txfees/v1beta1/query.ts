@@ -208,6 +208,10 @@ export const QueryFeeTokensRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryFeeTokensRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
     const obj: any = {};
     return obj;
@@ -317,6 +321,12 @@ export const QueryFeeTokensResponse = {
   fromSDK(object: QueryFeeTokensResponseSDKType): QueryFeeTokensResponse {
     return {
       feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryFeeTokensResponseSDKType {
+    return {
+      fee_tokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
     };
   },
 
@@ -439,6 +449,12 @@ export const QueryDenomSpotPriceRequest = {
   fromSDK(object: QueryDenomSpotPriceRequestSDKType): QueryDenomSpotPriceRequest {
     return {
       denom: object?.denom
+    };
+  },
+
+  fromSDKJSON(object: any): QueryDenomSpotPriceRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
 
@@ -565,6 +581,13 @@ export const QueryDenomSpotPriceResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDenomSpotPriceResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO,
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
+  },
+
   toSDK(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseSDKType {
     const obj: any = {};
     obj.poolID = message.poolID;
@@ -678,6 +701,12 @@ export const QueryDenomPoolIdRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDenomPoolIdRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   toSDK(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -788,6 +817,12 @@ export const QueryDenomPoolIdResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDenomPoolIdResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
+  },
+
   toSDK(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseSDKType {
     const obj: any = {};
     obj.poolID = message.poolID;
@@ -879,6 +914,10 @@ export const QueryBaseDenomRequest = {
   },
 
   fromSDK(_: QueryBaseDenomRequestSDKType): QueryBaseDenomRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryBaseDenomRequestSDKType {
     return {};
   },
 
@@ -985,6 +1024,12 @@ export const QueryBaseDenomResponse = {
   fromSDK(object: QueryBaseDenomResponseSDKType): QueryBaseDenomResponse {
     return {
       baseDenom: object?.base_denom
+    };
+  },
+
+  fromSDKJSON(object: any): QueryBaseDenomResponseSDKType {
+    return {
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
     };
   },
 

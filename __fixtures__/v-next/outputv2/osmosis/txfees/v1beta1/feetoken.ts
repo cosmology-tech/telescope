@@ -120,6 +120,13 @@ export const FeeToken = {
     };
   },
 
+  fromSDKJSON(object: any): FeeTokenSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
+  },
+
   toSDK(message: FeeToken): FeeTokenSDKType {
     const obj: any = {};
     obj.denom = message.denom;

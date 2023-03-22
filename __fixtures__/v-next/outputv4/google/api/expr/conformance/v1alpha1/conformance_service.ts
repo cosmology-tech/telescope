@@ -341,6 +341,15 @@ export const ParseRequest = {
     };
   },
 
+  fromSDKJSON(object: any): ParseRequestSDKType {
+    return {
+      cel_source: isSet(object.cel_source) ? String(object.cel_source) : "",
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      source_location: isSet(object.source_location) ? String(object.source_location) : "",
+      disable_macros: isSet(object.disable_macros) ? Boolean(object.disable_macros) : false
+    };
+  },
+
   toSDK(message: ParseRequest): ParseRequestSDKType {
     const obj: any = {};
     obj.cel_source = message.celSource;
@@ -429,6 +438,13 @@ export const ParseResponse = {
     return {
       parsedExpr: object.parsed_expr ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ParseResponseSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
     };
   },
 
@@ -553,6 +569,15 @@ export const CheckRequest = {
     };
   },
 
+  fromSDKJSON(object: any): CheckRequestSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      type_env: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDKJSON(e)) : [],
+      container: isSet(object.container) ? String(object.container) : "",
+      no_std_env: isSet(object.no_std_env) ? Boolean(object.no_std_env) : false
+    };
+  },
+
   toSDK(message: CheckRequest): CheckRequestSDKType {
     const obj: any = {};
     message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
@@ -650,6 +675,13 @@ export const CheckResponse = {
     };
   },
 
+  fromSDKJSON(object: any): CheckResponseSDKType {
+    return {
+      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: CheckResponse): CheckResponseSDKType {
     const obj: any = {};
     message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toSDK(message.checkedExpr) : undefined);
@@ -736,6 +768,13 @@ export const EvalRequest_BindingsEntry = {
     return {
       key: object?.key,
       value: object.value ? google.api.expr.v1alpha1.ExprValue.fromSDK(object.value) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): EvalRequest_BindingsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromSDKJSON(object.value) : undefined
     };
   },
 
@@ -881,6 +920,20 @@ export const EvalRequest = {
     };
   },
 
+  fromSDKJSON(object: any): EvalRequestSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromSDKJSON(value);
+        return acc;
+      }, {}) : {},
+      container: isSet(object.container) ? String(object.container) : ""
+    };
+  },
+
   toSDK(message: EvalRequest): EvalRequestSDKType {
     const obj: any = {};
     message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
@@ -976,6 +1029,13 @@ export const EvalResponse = {
     return {
       result: object.result ? ExprValue.fromSDK(object.result) : undefined,
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): EvalResponseSDKType {
+    return {
+      result: isSet(object.result) ? ExprValue.fromSDKJSON(object.result) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
     };
   },
 
@@ -1078,6 +1138,14 @@ export const IssueDetails = {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
       id: object?.id
+    };
+  },
+
+  fromSDKJSON(object: any): IssueDetailsSDKType {
+    return {
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
     };
   },
 

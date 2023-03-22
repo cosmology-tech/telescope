@@ -1,7 +1,7 @@
 import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 
 /**
@@ -121,7 +121,7 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined,
       funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
@@ -162,9 +162,19 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
       funderAddress: object?.funder_address,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ClawbackVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
     };
   },
 
@@ -172,7 +182,7 @@ export const ClawbackVestingAccount = {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     obj.funder_address = message.funderAddress;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
 
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);

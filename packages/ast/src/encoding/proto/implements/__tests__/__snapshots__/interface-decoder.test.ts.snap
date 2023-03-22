@@ -110,6 +110,13 @@ exports[`PoolI objects 1`] = `
     };
   },
 
+  fromSDKJSON(object: any): QueryPoolsResponseSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryPoolsResponse): QueryPoolsResponseSDKType {
     const obj: any = {};
 

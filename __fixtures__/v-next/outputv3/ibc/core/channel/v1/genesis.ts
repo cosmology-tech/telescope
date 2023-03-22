@@ -280,6 +280,19 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDKJSON(e)) : [],
+      acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromSDKJSON(e)) : [],
+      commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromSDKJSON(e)) : [],
+      receipts: Array.isArray(object?.receipts) ? object.receipts.map((e: any) => PacketState.fromSDKJSON(e)) : [],
+      send_sequences: Array.isArray(object?.send_sequences) ? object.send_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
+      recv_sequences: Array.isArray(object?.recv_sequences) ? object.recv_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
+      ack_sequences: Array.isArray(object?.ack_sequences) ? object.ack_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
+      next_channel_sequence: isSet(object.next_channel_sequence) ? Long.fromValue(object.next_channel_sequence) : Long.UZERO
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
 
@@ -506,6 +519,14 @@ export const PacketSequence = {
       portId: object?.port_id,
       channelId: object?.channel_id,
       sequence: object?.sequence
+    };
+  },
+
+  fromSDKJSON(object: any): PacketSequenceSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 

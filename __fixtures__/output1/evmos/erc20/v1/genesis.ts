@@ -117,6 +117,13 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      token_pairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -203,6 +210,13 @@ export const Params = {
     return {
       enableErc20: object?.enable_erc20,
       enableEvmHook: object?.enable_evm_hook
+    };
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_erc20: isSet(object.enable_erc20) ? Boolean(object.enable_erc20) : false,
+      enable_evm_hook: isSet(object.enable_evm_hook) ? Boolean(object.enable_evm_hook) : false
     };
   },
 

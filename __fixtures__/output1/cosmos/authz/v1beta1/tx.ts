@@ -179,6 +179,14 @@ export const MsgGrant = {
     };
   },
 
+  fromSDKJSON(object: any): MsgGrantSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromSDKJSON(object.grant) : undefined
+    };
+  },
+
   toSDK(message: MsgGrant): MsgGrantSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -253,6 +261,12 @@ export const MsgExecResponse = {
   fromSDK(object: MsgExecResponseSDKType): MsgExecResponse {
     return {
       results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): MsgExecResponseSDKType {
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
     };
   },
 
@@ -350,6 +364,13 @@ export const MsgExec = {
     };
   },
 
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: MsgExec): MsgExecSDKType {
     const obj: any = {};
     obj.grantee = message.grantee;
@@ -407,6 +428,10 @@ export const MsgGrantResponse = {
   },
 
   fromSDK(_: MsgGrantResponseSDKType): MsgGrantResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgGrantResponseSDKType {
     return {};
   },
 
@@ -504,6 +529,14 @@ export const MsgRevoke = {
     };
   },
 
+  fromSDKJSON(object: any): MsgRevokeSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
+  },
+
   toSDK(message: MsgRevoke): MsgRevokeSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -556,6 +589,10 @@ export const MsgRevokeResponse = {
   },
 
   fromSDK(_: MsgRevokeResponseSDKType): MsgRevokeResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgRevokeResponseSDKType {
     return {};
   },
 

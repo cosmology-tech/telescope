@@ -180,6 +180,14 @@ export const ModuleDescriptor = {
     message.usePackage = object.usePackage?.map(e => PackageReference.fromPartial(e)) || [];
     message.canMigrateFrom = object.canMigrateFrom?.map(e => MigrateFromInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ModuleDescriptorSDKType {
+    return {
+      go_import: isSet(object.go_import) ? String(object.go_import) : "",
+      use_package: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDKJSON(e)) : [],
+      can_migrate_from: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -249,6 +257,13 @@ export const PackageReference = {
     message.name = object.name ?? "";
     message.revision = object.revision ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): PackageReferenceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      revision: isSet(object.revision) ? Number(object.revision) : 0
+    };
   }
 
 };
@@ -306,6 +321,12 @@ export const MigrateFromInfo = {
     const message = createBaseMigrateFromInfo();
     message.module = object.module ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MigrateFromInfoSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : ""
+    };
   }
 
 };

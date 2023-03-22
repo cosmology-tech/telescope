@@ -140,6 +140,14 @@ export const GenesisState = {
     };
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      client_genesis: isSet(object.client_genesis) ? GenesisState1.fromSDKJSON(object.client_genesis) : undefined,
+      connection_genesis: isSet(object.connection_genesis) ? GenesisState2.fromSDKJSON(object.connection_genesis) : undefined,
+      channel_genesis: isSet(object.channel_genesis) ? GenesisState3.fromSDKJSON(object.channel_genesis) : undefined
+    };
+  },
+
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.client_genesis = message.clientGenesis ? GenesisState1.toSDK(message.clientGenesis) : undefined);

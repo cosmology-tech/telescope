@@ -215,6 +215,15 @@ export const Params = {
     message.bonusProposerReward = object.bonusProposerReward ?? "";
     message.withdrawAddrEnabled = object.withdrawAddrEnabled ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      community_tax: isSet(object.community_tax) ? String(object.community_tax) : "",
+      base_proposer_reward: isSet(object.base_proposer_reward) ? String(object.base_proposer_reward) : "",
+      bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? String(object.bonus_proposer_reward) : "",
+      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : false
+    };
   }
 
 };
@@ -290,6 +299,13 @@ export const ValidatorHistoricalRewards = {
     message.cumulativeRewardRatio = object.cumulativeRewardRatio?.map(e => DecCoin.fromPartial(e)) || [];
     message.referenceCount = object.referenceCount ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorHistoricalRewardsSDKType {
+    return {
+      cumulative_reward_ratio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : 0
+    };
   }
 
 };
@@ -365,6 +381,13 @@ export const ValidatorCurrentRewards = {
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+    };
   }
 
 };
@@ -428,6 +451,12 @@ export const ValidatorAccumulatedCommission = {
     const message = createBaseValidatorAccumulatedCommission();
     message.commission = object.commission?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorAccumulatedCommissionSDKType {
+    return {
+      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -491,6 +520,12 @@ export const ValidatorOutstandingRewards = {
     const message = createBaseValidatorOutstandingRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorOutstandingRewardsSDKType {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -560,6 +595,13 @@ export const ValidatorSlashEvent = {
     message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? Long.fromValue(object.validatorPeriod) : Long.UZERO;
     message.fraction = object.fraction ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorSlashEventSDKType {
+    return {
+      validator_period: isSet(object.validator_period) ? Long.fromValue(object.validator_period) : Long.UZERO,
+      fraction: isSet(object.fraction) ? String(object.fraction) : ""
+    };
   }
 
 };
@@ -623,6 +665,12 @@ export const ValidatorSlashEvents = {
     const message = createBaseValidatorSlashEvents();
     message.validatorSlashEvents = object.validatorSlashEvents?.map(e => ValidatorSlashEvent.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorSlashEventsSDKType {
+    return {
+      validator_slash_events: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -686,6 +734,12 @@ export const FeePool = {
     const message = createBaseFeePool();
     message.communityPool = object.communityPool?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): FeePoolSDKType {
+    return {
+      community_pool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -785,6 +839,15 @@ export const CommunityPoolSpendProposal = {
     message.recipient = object.recipient ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): CommunityPoolSpendProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -866,6 +929,14 @@ export const DelegatorStartingInfo = {
     message.stake = object.stake ?? "";
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
+    return {
+      previous_period: isSet(object.previous_period) ? Long.fromValue(object.previous_period) : Long.UZERO,
+      stake: isSet(object.stake) ? String(object.stake) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO
+    };
   }
 
 };
@@ -941,6 +1012,13 @@ export const DelegationDelegatorReward = {
     message.validatorAddress = object.validatorAddress ?? "";
     message.reward = object.reward?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): DelegationDelegatorRewardSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1046,6 +1124,16 @@ export const CommunityPoolSpendProposalWithDeposit = {
     message.amount = object.amount ?? "";
     message.deposit = object.deposit ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CommunityPoolSpendProposalWithDepositSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      deposit: isSet(object.deposit) ? String(object.deposit) : ""
+    };
   }
 
 };

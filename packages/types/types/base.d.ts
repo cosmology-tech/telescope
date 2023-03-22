@@ -130,11 +130,11 @@ export interface TraverseLocalSymbol {
     source: string;
     implementsType?: string;
 }
-export declare type TraverseImportNames = Record<string, Record<string, string>>;
-export declare type TraverseImport = Record<string, string[]>;
-export declare type TraverseAccept = Record<string, string[]>;
-export declare type TraverseImplement = Record<string, string[]>;
-export declare type TraverseExport = Record<string, boolean>;
+export type TraverseImportNames = Record<string, Record<string, string>>;
+export type TraverseImport = Record<string, string[]>;
+export type TraverseAccept = Record<string, string[]>;
+export type TraverseImplement = Record<string, string[]>;
+export type TraverseExport = Record<string, boolean>;
 export interface TypeUrlRef {
     typeUrl: string;
     aminoType: string;
@@ -146,7 +146,7 @@ export interface TraverseTypeUrlRef {
     pkg: string;
     types: TypeUrlRef[];
 }
-export declare type TraversedProtoRoot = ProtoRoot & {
+export type TraversedProtoRoot = ProtoRoot & {
     parsedImports: TraverseImport;
     parsedExports: TraverseExport;
     acceptsInterface: TraverseAccept;
@@ -154,7 +154,7 @@ export declare type TraversedProtoRoot = ProtoRoot & {
     importNames: TraverseImportNames | null;
     symbols: TraverseLocalSymbol | null;
 };
-export declare type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>;
-export declare type TraversalSymbol = TraverseLocalSymbol & {
+export type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>;
+export type TraversalSymbol = TraverseLocalSymbol & {
     ref: string;
 };

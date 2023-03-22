@@ -146,6 +146,10 @@ export const ModuleToDistributeCoinsRequest = {
   fromPartial(_: DeepPartial<ModuleToDistributeCoinsRequest>): ModuleToDistributeCoinsRequest {
     const message = createBaseModuleToDistributeCoinsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): ModuleToDistributeCoinsRequestSDKType {
+    return {};
   }
 
 };
@@ -209,6 +213,12 @@ export const ModuleToDistributeCoinsResponse = {
     const message = createBaseModuleToDistributeCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ModuleToDistributeCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -266,6 +276,12 @@ export const GaugeByIDRequest = {
     const message = createBaseGaugeByIDRequest();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): GaugeByIDRequestSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+    };
   }
 
 };
@@ -323,6 +339,12 @@ export const GaugeByIDResponse = {
     const message = createBaseGaugeByIDResponse();
     message.gauge = object.gauge !== undefined && object.gauge !== null ? Gauge.fromPartial(object.gauge) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GaugeByIDResponseSDKType {
+    return {
+      gauge: isSet(object.gauge) ? Gauge.fromSDKJSON(object.gauge) : undefined
+    };
   }
 
 };
@@ -380,6 +402,12 @@ export const GaugesRequest = {
     const message = createBaseGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -455,6 +483,13 @@ export const GaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -512,6 +547,12 @@ export const ActiveGaugesRequest = {
     const message = createBaseActiveGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -587,6 +628,13 @@ export const ActiveGaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -656,6 +704,13 @@ export const ActiveGaugesPerDenomRequest = {
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -731,6 +786,13 @@ export const ActiveGaugesPerDenomResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesPerDenomResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -788,6 +850,12 @@ export const UpcomingGaugesRequest = {
     const message = createBaseUpcomingGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -863,6 +931,13 @@ export const UpcomingGaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -932,6 +1007,13 @@ export const UpcomingGaugesPerDenomRequest = {
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1007,6 +1089,13 @@ export const UpcomingGaugesPerDenomResponse = {
     message.upcomingGauges = object.upcomingGauges?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomResponseSDKType {
+    return {
+      upcoming_gauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1107,6 +1196,14 @@ export const RewardsEstRequest = {
     message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
     message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? Long.fromValue(object.endEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): RewardsEstRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => Long.fromValue(e)) : [],
+      end_epoch: isSet(object.end_epoch) ? Long.fromValue(object.end_epoch) : Long.ZERO
+    };
   }
 
 };
@@ -1170,6 +1267,12 @@ export const RewardsEstResponse = {
     const message = createBaseRewardsEstResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): RewardsEstResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1213,6 +1316,10 @@ export const QueryLockableDurationsRequest = {
   fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
+    return {};
   }
 
 };
@@ -1276,6 +1383,12 @@ export const QueryLockableDurationsResponse = {
     const message = createBaseQueryLockableDurationsResponse();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   }
 
 };

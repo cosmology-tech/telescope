@@ -409,6 +409,13 @@ export const HistoricalInfo = {
     message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
     message.valset = object.valset?.map(e => Validator.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): HistoricalInfoSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -490,6 +497,14 @@ export const CommissionRates = {
     message.maxRate = object.maxRate ?? "";
     message.maxChangeRate = object.maxChangeRate ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CommissionRatesSDKType {
+    return {
+      rate: isSet(object.rate) ? String(object.rate) : "",
+      max_rate: isSet(object.max_rate) ? String(object.max_rate) : "",
+      max_change_rate: isSet(object.max_change_rate) ? String(object.max_change_rate) : ""
+    };
   }
 
 };
@@ -559,6 +574,13 @@ export const Commission = {
     message.commissionRates = object.commissionRates !== undefined && object.commissionRates !== null ? CommissionRates.fromPartial(object.commissionRates) : undefined;
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CommissionSDKType {
+    return {
+      commission_rates: isSet(object.commission_rates) ? CommissionRates.fromSDKJSON(object.commission_rates) : undefined,
+      update_time: isSet(object.update_time) ? fromJsonTimestamp(object.update_time) : undefined
+    };
   }
 
 };
@@ -664,6 +686,16 @@ export const Description = {
     message.securityContact = object.securityContact ?? "";
     message.details = object.details ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DescriptionSDKType {
+    return {
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      identity: isSet(object.identity) ? String(object.identity) : "",
+      website: isSet(object.website) ? String(object.website) : "",
+      security_contact: isSet(object.security_contact) ? String(object.security_contact) : "",
+      details: isSet(object.details) ? String(object.details) : ""
+    };
   }
 
 };
@@ -841,6 +873,22 @@ export const Validator = {
     message.commission = object.commission !== undefined && object.commission !== null ? Commission.fromPartial(object.commission) : undefined;
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      operator_address: isSet(object.operator_address) ? String(object.operator_address) : "",
+      consensus_pubkey: isSet(object.consensus_pubkey) ? Any.fromSDKJSON(object.consensus_pubkey) : undefined,
+      jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
+      tokens: isSet(object.tokens) ? String(object.tokens) : "",
+      delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
+      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
+      unbonding_height: isSet(object.unbonding_height) ? Long.fromValue(object.unbonding_height) : Long.ZERO,
+      unbonding_time: isSet(object.unbonding_time) ? fromJsonTimestamp(object.unbonding_time) : undefined,
+      commission: isSet(object.commission) ? Commission.fromSDKJSON(object.commission) : undefined,
+      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
+    };
   }
 
 };
@@ -904,6 +952,12 @@ export const ValAddresses = {
     const message = createBaseValAddresses();
     message.addresses = object.addresses?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ValAddressesSDKType {
+    return {
+      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -973,6 +1027,13 @@ export const DVPair = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DVPairSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
   }
 
 };
@@ -1036,6 +1097,12 @@ export const DVPairs = {
     const message = createBaseDVPairs();
     message.pairs = object.pairs?.map(e => DVPair.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): DVPairsSDKType {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1117,6 +1184,14 @@ export const DVVTriplet = {
     message.validatorSrcAddress = object.validatorSrcAddress ?? "";
     message.validatorDstAddress = object.validatorDstAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DVVTripletSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : ""
+    };
   }
 
 };
@@ -1180,6 +1255,12 @@ export const DVVTriplets = {
     const message = createBaseDVVTriplets();
     message.triplets = object.triplets?.map(e => DVVTriplet.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): DVVTripletsSDKType {
+    return {
+      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1261,6 +1342,14 @@ export const Delegation = {
     message.validatorAddress = object.validatorAddress ?? "";
     message.shares = object.shares ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DelegationSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      shares: isSet(object.shares) ? String(object.shares) : ""
+    };
   }
 
 };
@@ -1348,6 +1437,14 @@ export const UnbondingDelegation = {
     message.validatorAddress = object.validatorAddress ?? "";
     message.entries = object.entries?.map(e => UnbondingDelegationEntry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UnbondingDelegationSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1441,6 +1538,15 @@ export const UnbondingDelegationEntry = {
     message.initialBalance = object.initialBalance ?? "";
     message.balance = object.balance ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): UnbondingDelegationEntrySDKType {
+    return {
+      creation_height: isSet(object.creation_height) ? Long.fromValue(object.creation_height) : Long.ZERO,
+      completion_time: isSet(object.completion_time) ? fromJsonTimestamp(object.completion_time) : undefined,
+      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
+      balance: isSet(object.balance) ? String(object.balance) : ""
+    };
   }
 
 };
@@ -1534,6 +1640,15 @@ export const RedelegationEntry = {
     message.initialBalance = object.initialBalance ?? "";
     message.sharesDst = object.sharesDst ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RedelegationEntrySDKType {
+    return {
+      creation_height: isSet(object.creation_height) ? Long.fromValue(object.creation_height) : Long.ZERO,
+      completion_time: isSet(object.completion_time) ? fromJsonTimestamp(object.completion_time) : undefined,
+      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
+      shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : ""
+    };
   }
 
 };
@@ -1633,6 +1748,15 @@ export const Redelegation = {
     message.validatorDstAddress = object.validatorDstAddress ?? "";
     message.entries = object.entries?.map(e => RedelegationEntry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): RedelegationSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1738,6 +1862,16 @@ export const Params = {
     message.historicalEntries = object.historicalEntries ?? 0;
     message.bondDenom = object.bondDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      unbonding_time: isSet(object.unbonding_time) ? Duration.fromSDKJSON(object.unbonding_time) : undefined,
+      max_validators: isSet(object.max_validators) ? Number(object.max_validators) : 0,
+      max_entries: isSet(object.max_entries) ? Number(object.max_entries) : 0,
+      historical_entries: isSet(object.historical_entries) ? Number(object.historical_entries) : 0,
+      bond_denom: isSet(object.bond_denom) ? String(object.bond_denom) : ""
+    };
   }
 
 };
@@ -1807,6 +1941,13 @@ export const DelegationResponse = {
     message.delegation = object.delegation !== undefined && object.delegation !== null ? Delegation.fromPartial(object.delegation) : undefined;
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DelegationResponseSDKType {
+    return {
+      delegation: isSet(object.delegation) ? Delegation.fromSDKJSON(object.delegation) : undefined,
+      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined
+    };
   }
 
 };
@@ -1876,6 +2017,13 @@ export const RedelegationEntryResponse = {
     message.redelegationEntry = object.redelegationEntry !== undefined && object.redelegationEntry !== null ? RedelegationEntry.fromPartial(object.redelegationEntry) : undefined;
     message.balance = object.balance ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RedelegationEntryResponseSDKType {
+    return {
+      redelegation_entry: isSet(object.redelegation_entry) ? RedelegationEntry.fromSDKJSON(object.redelegation_entry) : undefined,
+      balance: isSet(object.balance) ? String(object.balance) : ""
+    };
   }
 
 };
@@ -1951,6 +2099,13 @@ export const RedelegationResponse = {
     message.redelegation = object.redelegation !== undefined && object.redelegation !== null ? Redelegation.fromPartial(object.redelegation) : undefined;
     message.entries = object.entries?.map(e => RedelegationEntryResponse.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): RedelegationResponseSDKType {
+    return {
+      redelegation: isSet(object.redelegation) ? Redelegation.fromSDKJSON(object.redelegation) : undefined,
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2020,6 +2175,13 @@ export const Pool = {
     message.notBondedTokens = object.notBondedTokens ?? "";
     message.bondedTokens = object.bondedTokens ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): PoolSDKType {
+    return {
+      not_bonded_tokens: isSet(object.not_bonded_tokens) ? String(object.not_bonded_tokens) : "",
+      bonded_tokens: isSet(object.bonded_tokens) ? String(object.bonded_tokens) : ""
+    };
   }
 
 };

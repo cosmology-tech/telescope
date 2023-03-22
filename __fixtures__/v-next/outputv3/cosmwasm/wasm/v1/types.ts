@@ -510,6 +510,12 @@ export const AccessTypeParam = {
     };
   },
 
+  fromSDKJSON(object: any): AccessTypeParamSDKType {
+    return {
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+    };
+  },
+
   toSDK(message: AccessTypeParam): AccessTypeParamSDKType {
     const obj: any = {};
     message.value !== undefined && (obj.value = accessTypeToJSON(message.value));
@@ -630,6 +636,13 @@ export const AccessConfig = {
     return {
       permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
       address: object?.address
+    };
+  },
+
+  fromSDKJSON(object: any): AccessConfigSDKType {
+    return {
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      address: isSet(object.address) ? String(object.address) : ""
     };
   },
 
@@ -772,6 +785,14 @@ export const Params = {
     };
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      code_upload_access: isSet(object.code_upload_access) ? AccessConfig.fromSDKJSON(object.code_upload_access) : undefined,
+      instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      max_wasm_code_size: isSet(object.max_wasm_code_size) ? Long.fromValue(object.max_wasm_code_size) : Long.UZERO
+    };
+  },
+
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     message.codeUploadAccess !== undefined && (obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toSDK(message.codeUploadAccess) : undefined);
@@ -911,6 +932,14 @@ export const CodeInfo = {
       codeHash: object?.code_hash,
       creator: object?.creator,
       instantiateConfig: object.instantiate_config ? AccessConfig.fromSDK(object.instantiate_config) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): CodeInfoSDKType {
+    return {
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(),
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      instantiate_config: isSet(object.instantiate_config) ? AccessConfig.fromSDKJSON(object.instantiate_config) : undefined
     };
   },
 
@@ -1108,6 +1137,18 @@ export const ContractInfo = {
     };
   },
 
+  fromSDKJSON(object: any): ContractInfoSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      label: isSet(object.label) ? String(object.label) : "",
+      created: isSet(object.created) ? AbsoluteTxPosition.fromSDKJSON(object.created) : undefined,
+      ibc_port_id: isSet(object.ibc_port_id) ? String(object.ibc_port_id) : "",
+      extension: isSet(object.extension) ? Any.fromSDKJSON(object.extension) : undefined
+    };
+  },
+
   toSDK(message: ContractInfo): ContractInfoSDKType {
     const obj: any = {};
     obj.code_id = message.codeId;
@@ -1275,6 +1316,15 @@ export const ContractCodeHistoryEntry = {
     };
   },
 
+  fromSDKJSON(object: any): ContractCodeHistoryEntrySDKType {
+    return {
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDKJSON(object.updated) : undefined,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
+  },
+
   toSDK(message: ContractCodeHistoryEntry): ContractCodeHistoryEntrySDKType {
     const obj: any = {};
     message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
@@ -1407,6 +1457,13 @@ export const AbsoluteTxPosition = {
     };
   },
 
+  fromSDKJSON(object: any): AbsoluteTxPositionSDKType {
+    return {
+      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.UZERO,
+      tx_index: isSet(object.tx_index) ? Long.fromValue(object.tx_index) : Long.UZERO
+    };
+  },
+
   toSDK(message: AbsoluteTxPosition): AbsoluteTxPositionSDKType {
     const obj: any = {};
     obj.block_height = message.blockHeight;
@@ -1530,6 +1587,13 @@ export const Model = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): ModelSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
 

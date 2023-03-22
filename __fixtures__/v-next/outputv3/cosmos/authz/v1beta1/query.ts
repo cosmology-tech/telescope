@@ -303,6 +303,15 @@ export const QueryGrantsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryGrantsRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryGrantsRequest): QueryGrantsRequestSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -438,6 +447,13 @@ export const QueryGrantsResponse = {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryGrantsResponseSDKType {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -579,6 +595,13 @@ export const QueryGranterGrantsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryGranterGrantsRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -708,6 +731,13 @@ export const QueryGranterGrantsResponse = {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryGranterGrantsResponseSDKType {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -849,6 +879,13 @@ export const QueryGranteeGrantsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryGranteeGrantsRequestSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestSDKType {
     const obj: any = {};
     obj.grantee = message.grantee;
@@ -978,6 +1015,13 @@ export const QueryGranteeGrantsResponse = {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryGranteeGrantsResponseSDKType {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

@@ -91,6 +91,14 @@ export const MsgVerifyInvariant = {
     message.invariantModuleName = object.invariantModuleName ?? "";
     message.invariantRoute = object.invariantRoute ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgVerifyInvariantSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      invariant_module_name: isSet(object.invariant_module_name) ? String(object.invariant_module_name) : "",
+      invariant_route: isSet(object.invariant_route) ? String(object.invariant_route) : ""
+    };
   }
 
 };
@@ -134,6 +142,10 @@ export const MsgVerifyInvariantResponse = {
   fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgVerifyInvariantResponseSDKType {
+    return {};
   }
 
 };

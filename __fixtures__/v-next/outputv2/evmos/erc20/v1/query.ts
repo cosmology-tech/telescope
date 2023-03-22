@@ -253,6 +253,12 @@ export const QueryTokenPairsRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTokenPairsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryTokenPairsRequest): QueryTokenPairsRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
@@ -374,6 +380,13 @@ export const QueryTokenPairsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTokenPairsResponseSDKType {
+    return {
+      token_pairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryTokenPairsResponse): QueryTokenPairsResponseSDKType {
     const obj: any = {};
 
@@ -491,6 +504,12 @@ export const QueryTokenPairRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTokenPairRequestSDKType {
+    return {
+      token: isSet(object.token) ? String(object.token) : ""
+    };
+  },
+
   toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
     const obj: any = {};
     obj.token = message.token;
@@ -593,6 +612,12 @@ export const QueryTokenPairResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTokenPairResponseSDKType {
+    return {
+      token_pair: isSet(object.token_pair) ? TokenPair.fromSDKJSON(object.token_pair) : undefined
+    };
+  },
+
   toSDK(message: QueryTokenPairResponse): QueryTokenPairResponseSDKType {
     const obj: any = {};
     message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toSDK(message.tokenPair) : undefined);
@@ -676,6 +701,10 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -774,6 +803,12 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

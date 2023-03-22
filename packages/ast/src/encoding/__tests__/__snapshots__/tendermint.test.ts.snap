@@ -242,6 +242,22 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     };
   },
 
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      trust_level: isSet(object.trust_level) ? Fraction.fromSDKJSON(object.trust_level) : undefined,
+      trusting_period: isSet(object.trusting_period) ? Duration.fromSDKJSON(object.trusting_period) : undefined,
+      unbonding_period: isSet(object.unbonding_period) ? Duration.fromSDKJSON(object.unbonding_period) : undefined,
+      max_clock_drift: isSet(object.max_clock_drift) ? Duration.fromSDKJSON(object.max_clock_drift) : undefined,
+      frozen_height: isSet(object.frozen_height) ? Height.fromSDKJSON(object.frozen_height) : undefined,
+      latest_height: isSet(object.latest_height) ? Height.fromSDKJSON(object.latest_height) : undefined,
+      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDKJSON(e)) : [],
+      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : false,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : false
+    };
+  },
+
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;
@@ -685,6 +701,22 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
       allowUpdateAfterExpiry: object?.allow_update_after_expiry,
       allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
+    };
+  },
+
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      trust_level: isSet(object.trust_level) ? Fraction.fromSDKJSON(object.trust_level) : undefined,
+      trusting_period: isSet(object.trusting_period) ? String(object.trusting_period) : undefined,
+      unbonding_period: isSet(object.unbonding_period) ? String(object.unbonding_period) : undefined,
+      max_clock_drift: isSet(object.max_clock_drift) ? String(object.max_clock_drift) : undefined,
+      frozen_height: isSet(object.frozen_height) ? Height.fromSDKJSON(object.frozen_height) : undefined,
+      latest_height: isSet(object.latest_height) ? Height.fromSDKJSON(object.latest_height) : undefined,
+      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDKJSON(e)) : [],
+      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : false,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : false
     };
   },
 

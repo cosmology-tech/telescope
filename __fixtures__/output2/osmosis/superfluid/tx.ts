@@ -130,6 +130,14 @@ export const MsgSuperfluidDelegate = {
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.valAddr = object.valAddr ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
   }
 
 };
@@ -173,6 +181,10 @@ export const MsgSuperfluidDelegateResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidDelegateResponse>): MsgSuperfluidDelegateResponse {
     const message = createBaseMsgSuperfluidDelegateResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidDelegateResponseSDKType {
+    return {};
   }
 
 };
@@ -242,6 +254,13 @@ export const MsgSuperfluidUndelegate = {
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidUndelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -285,6 +304,10 @@ export const MsgSuperfluidUndelegateResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidUndelegateResponse>): MsgSuperfluidUndelegateResponse {
     const message = createBaseMsgSuperfluidUndelegateResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUndelegateResponseSDKType {
+    return {};
   }
 
 };
@@ -354,6 +377,13 @@ export const MsgSuperfluidUnbondLock = {
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidUnbondLockSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -397,6 +427,10 @@ export const MsgSuperfluidUnbondLockResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidUnbondLockResponse>): MsgSuperfluidUnbondLockResponse {
     const message = createBaseMsgSuperfluidUnbondLockResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUnbondLockResponseSDKType {
+    return {};
   }
 
 };
@@ -484,6 +518,14 @@ export const MsgLockAndSuperfluidDelegate = {
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.valAddr = object.valAddr ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
   }
 
 };
@@ -541,6 +583,12 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateResponseSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+    };
   }
 
 };
@@ -610,6 +658,13 @@ export const MsgUnPoolWhitelistedPool = {
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   }
 
 };
@@ -685,6 +740,12 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
     message.exitedLockIds = object.exitedLockIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolResponseSDKType {
+    return {
+      exited_lock_ids: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };

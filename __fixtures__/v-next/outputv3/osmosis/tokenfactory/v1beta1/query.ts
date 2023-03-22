@@ -222,6 +222,10 @@ export const QueryParamsRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -325,6 +329,12 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
@@ -438,6 +448,12 @@ export const QueryDenomAuthorityMetadataRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   toSDK(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -548,6 +564,12 @@ export const QueryDenomAuthorityMetadataResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataResponseSDKType {
+    return {
+      authority_metadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDKJSON(object.authority_metadata) : undefined
+    };
+  },
+
   toSDK(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseSDKType {
     const obj: any = {};
     message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toSDK(message.authorityMetadata) : undefined);
@@ -655,6 +677,12 @@ export const QueryDenomsFromCreatorRequest = {
   fromSDK(object: QueryDenomsFromCreatorRequestSDKType): QueryDenomsFromCreatorRequest {
     return {
       creator: object?.creator
+    };
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorRequestSDKType {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : ""
     };
   },
 
@@ -771,6 +799,12 @@ export const QueryDenomsFromCreatorResponse = {
   fromSDK(object: QueryDenomsFromCreatorResponseSDKType): QueryDenomsFromCreatorResponse {
     return {
       denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorResponseSDKType {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
     };
   },
 

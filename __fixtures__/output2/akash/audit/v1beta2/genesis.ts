@@ -69,6 +69,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDKJSON(e)) : []
+    };
   }
 
 };

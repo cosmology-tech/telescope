@@ -451,6 +451,13 @@ export const DelegatorWithdrawInfo = {
     };
   },
 
+  fromSDKJSON(object: any): DelegatorWithdrawInfoSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
+  },
+
   toSDK(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoSDKType {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
@@ -580,6 +587,13 @@ export const ValidatorOutstandingRewardsRecord = {
     return {
       validatorAddress: object?.validator_address,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ValidatorOutstandingRewardsRecordSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      outstanding_rewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
     };
   },
 
@@ -718,6 +732,13 @@ export const ValidatorAccumulatedCommissionRecord = {
     return {
       validatorAddress: object?.validator_address,
       accumulated: object.accumulated ? ValidatorAccumulatedCommission.fromSDK(object.accumulated) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ValidatorAccumulatedCommissionRecordSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromSDKJSON(object.accumulated) : undefined
     };
   },
 
@@ -860,6 +881,14 @@ export const ValidatorHistoricalRewardsRecord = {
     };
   },
 
+  fromSDKJSON(object: any): ValidatorHistoricalRewardsRecordSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
+      rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDKJSON(object.rewards) : undefined
+    };
+  },
+
   toSDK(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordSDKType {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
@@ -986,6 +1015,13 @@ export const ValidatorCurrentRewardsRecord = {
     return {
       validatorAddress: object?.validator_address,
       rewards: object.rewards ? ValidatorCurrentRewards.fromSDK(object.rewards) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ValidatorCurrentRewardsRecordSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromSDKJSON(object.rewards) : undefined
     };
   },
 
@@ -1125,6 +1161,14 @@ export const DelegatorStartingInfoRecord = {
       delegatorAddress: object?.delegator_address,
       validatorAddress: object?.validator_address,
       startingInfo: object.starting_info ? DelegatorStartingInfo.fromSDK(object.starting_info) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): DelegatorStartingInfoRecordSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      starting_info: isSet(object.starting_info) ? DelegatorStartingInfo.fromSDKJSON(object.starting_info) : undefined
     };
   },
 
@@ -1280,6 +1324,15 @@ export const ValidatorSlashEventRecord = {
       height: object?.height,
       period: object?.period,
       validatorSlashEvent: object.validator_slash_event ? ValidatorSlashEvent.fromSDK(object.validator_slash_event) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ValidatorSlashEventRecordSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
+      validator_slash_event: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDKJSON(object.validator_slash_event) : undefined
     };
   },
 
@@ -1553,6 +1606,21 @@ export const GenesisState = {
       validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromSDK(e)) : [],
       delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromSDK(e)) : [],
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      fee_pool: isSet(object.fee_pool) ? FeePool.fromSDKJSON(object.fee_pool) : undefined,
+      delegator_withdraw_infos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromSDKJSON(e)) : [],
+      previous_proposer: isSet(object.previous_proposer) ? String(object.previous_proposer) : "",
+      outstanding_rewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromSDKJSON(e)) : [],
+      validator_accumulated_commissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromSDKJSON(e)) : [],
+      validator_historical_rewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromSDKJSON(e)) : [],
+      validator_current_rewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromSDKJSON(e)) : [],
+      delegator_starting_infos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromSDKJSON(e)) : [],
+      validator_slash_events: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromSDKJSON(e)) : []
     };
   },
 

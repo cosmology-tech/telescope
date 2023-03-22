@@ -81,6 +81,12 @@ export const SourceInfo = {
     };
   },
 
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      source_files: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: SourceInfo): SourceInfoSDKType {
     const obj: any = {};
 

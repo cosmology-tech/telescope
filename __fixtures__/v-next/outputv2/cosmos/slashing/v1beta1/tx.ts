@@ -106,6 +106,12 @@ export const MsgUnjail = {
     };
   },
 
+  fromSDKJSON(object: any): MsgUnjailSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+
   toSDK(message: MsgUnjail): MsgUnjailSDKType {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
@@ -197,6 +203,10 @@ export const MsgUnjailResponse = {
   },
 
   fromSDK(_: MsgUnjailResponseSDKType): MsgUnjailResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgUnjailResponseSDKType {
     return {};
   },
 

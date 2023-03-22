@@ -952,6 +952,14 @@ export const Tx = {
     };
   },
 
+  fromSDKJSON(object: any): TxSDKType {
+    return {
+      body: isSet(object.body) ? TxBody.fromSDKJSON(object.body) : undefined,
+      auth_info: isSet(object.auth_info) ? AuthInfo.fromSDKJSON(object.auth_info) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
+    };
+  },
+
   toSDK(message: Tx): TxSDKType {
     const obj: any = {};
     message.body !== undefined && (obj.body = message.body ? TxBody.toSDK(message.body) : undefined);
@@ -1109,6 +1117,14 @@ export const TxRaw = {
       bodyBytes: object?.body_bytes,
       authInfoBytes: object?.auth_info_bytes,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): TxRawSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
 
@@ -1276,6 +1292,15 @@ export const SignDoc = {
       authInfoBytes: object?.auth_info_bytes,
       chainId: object?.chain_id,
       accountNumber: object?.account_number
+    };
+  },
+
+  fromSDKJSON(object: any): SignDocSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO
     };
   },
 
@@ -1460,6 +1485,17 @@ export const SignDocDirectAux = {
       accountNumber: object?.account_number,
       sequence: object?.sequence,
       tip: object.tip ? Tip.fromSDK(object.tip) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): SignDocDirectAuxSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      tip: isSet(object.tip) ? Tip.fromSDKJSON(object.tip) : undefined
     };
   },
 
@@ -1657,6 +1693,16 @@ export const TxBody = {
     };
   },
 
+  fromSDKJSON(object: any): TxBodySDKType {
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
+      memo: isSet(object.memo) ? String(object.memo) : "",
+      timeout_height: isSet(object.timeout_height) ? Long.fromValue(object.timeout_height) : Long.UZERO,
+      extension_options: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromSDKJSON(e)) : [],
+      non_critical_extension_options: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: TxBody): TxBodySDKType {
     const obj: any = {};
 
@@ -1845,6 +1891,14 @@ export const AuthInfo = {
     };
   },
 
+  fromSDKJSON(object: any): AuthInfoSDKType {
+    return {
+      signer_infos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromSDKJSON(e)) : [],
+      fee: isSet(object.fee) ? Fee.fromSDKJSON(object.fee) : undefined,
+      tip: isSet(object.tip) ? Tip.fromSDKJSON(object.tip) : undefined
+    };
+  },
+
   toSDK(message: AuthInfo): AuthInfoSDKType {
     const obj: any = {};
 
@@ -1999,6 +2053,14 @@ export const SignerInfo = {
     };
   },
 
+  fromSDKJSON(object: any): SignerInfoSDKType {
+    return {
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      mode_info: isSet(object.mode_info) ? ModeInfo.fromSDKJSON(object.mode_info) : undefined,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
+  },
+
   toSDK(message: SignerInfo): SignerInfoSDKType {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
@@ -2128,6 +2190,13 @@ export const ModeInfo = {
     };
   },
 
+  fromSDKJSON(object: any): ModeInfoSDKType {
+    return {
+      single: isSet(object.single) ? ModeInfo_Single.fromSDKJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDKJSON(object.multi) : undefined
+    };
+  },
+
   toSDK(message: ModeInfo): ModeInfoSDKType {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toSDK(message.single) : undefined);
@@ -2236,6 +2305,12 @@ export const ModeInfo_Single = {
   },
 
   fromSDK(object: ModeInfo_SingleSDKType): ModeInfo_Single {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+    };
+  },
+
+  fromSDKJSON(object: any): ModeInfo_SingleSDKType {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
     };
@@ -2367,6 +2442,13 @@ export const ModeInfo_Multi = {
     return {
       bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
       modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ModeInfo_MultiSDKType {
+    return {
+      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDKJSON(object.bitarray) : undefined,
+      mode_infos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDKJSON(e)) : []
     };
   },
 
@@ -2540,6 +2622,15 @@ export const Fee = {
     };
   },
 
+  fromSDKJSON(object: any): FeeSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      gas_limit: isSet(object.gas_limit) ? Long.fromValue(object.gas_limit) : Long.UZERO,
+      payer: isSet(object.payer) ? String(object.payer) : "",
+      granter: isSet(object.granter) ? String(object.granter) : ""
+    };
+  },
+
   toSDK(message: Fee): FeeSDKType {
     const obj: any = {};
 
@@ -2687,6 +2778,13 @@ export const Tip = {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
       tipper: object?.tipper
+    };
+  },
+
+  fromSDKJSON(object: any): TipSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      tipper: isSet(object.tipper) ? String(object.tipper) : ""
     };
   },
 
@@ -2851,6 +2949,15 @@ export const AuxSignerData = {
       signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: object?.sig
+    };
+  },
+
+  fromSDKJSON(object: any): AuxSignerDataSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      sign_doc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDKJSON(object.sign_doc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
 

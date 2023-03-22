@@ -73,6 +73,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -142,6 +148,13 @@ export const Params = {
     message.enableRecovery = object.enableRecovery ?? false;
     message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : false,
+      packet_timeout_duration: isSet(object.packet_timeout_duration) ? Duration.fromSDKJSON(object.packet_timeout_duration) : undefined
+    };
   }
 
 };

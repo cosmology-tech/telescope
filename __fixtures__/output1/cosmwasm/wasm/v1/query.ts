@@ -399,6 +399,12 @@ export const QueryContractInfoRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryContractInfoRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   toSDK(message: QueryContractInfoRequest): QueryContractInfoRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -478,6 +484,13 @@ export const QueryContractInfoResponse = {
     return {
       address: object?.address,
       contractInfo: object.contract_info ? ContractInfo.fromSDK(object.contract_info) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryContractInfoResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined
     };
   },
 
@@ -561,6 +574,13 @@ export const QueryContractHistoryRequest = {
     return {
       address: object?.address,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryContractHistoryRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -653,6 +673,13 @@ export const QueryContractHistoryResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryContractHistoryResponseSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryContractHistoryResponse): QueryContractHistoryResponseSDKType {
     const obj: any = {};
 
@@ -739,6 +766,13 @@ export const QueryContractsByCodeRequest = {
     return {
       codeId: object?.code_id,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryContractsByCodeRequestSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -831,6 +865,13 @@ export const QueryContractsByCodeResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryContractsByCodeResponseSDKType {
+    return {
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => String(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseSDKType {
     const obj: any = {};
 
@@ -917,6 +958,13 @@ export const QueryAllContractStateRequest = {
     return {
       address: object?.address,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAllContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1009,6 +1057,13 @@ export const QueryAllContractStateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryAllContractStateResponseSDKType {
+    return {
+      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryAllContractStateResponse): QueryAllContractStateResponseSDKType {
     const obj: any = {};
 
@@ -1098,6 +1153,13 @@ export const QueryRawContractStateRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryRawContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QueryRawContractStateRequest): QueryRawContractStateRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -1165,6 +1227,12 @@ export const QueryRawContractStateResponse = {
   fromSDK(object: QueryRawContractStateResponseSDKType): QueryRawContractStateResponse {
     return {
       data: object?.data
+    };
+  },
+
+  fromSDKJSON(object: any): QueryRawContractStateResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
 
@@ -1250,6 +1318,13 @@ export const QuerySmartContractStateRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QuerySmartContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -1320,6 +1395,12 @@ export const QuerySmartContractStateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QuerySmartContractStateResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseSDKType {
     const obj: any = {};
     obj.data = message.data;
@@ -1386,6 +1467,12 @@ export const QueryCodeRequest = {
   fromSDK(object: QueryCodeRequestSDKType): QueryCodeRequest {
     return {
       codeId: object?.code_id
+    };
+  },
+
+  fromSDKJSON(object: any): QueryCodeRequestSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO
     };
   },
 
@@ -1484,6 +1571,14 @@ export const CodeInfoResponse = {
     };
   },
 
+  fromSDKJSON(object: any): CodeInfoResponseSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array()
+    };
+  },
+
   toSDK(message: CodeInfoResponse): CodeInfoResponseSDKType {
     const obj: any = {};
     obj.code_id = message.codeId;
@@ -1568,6 +1663,13 @@ export const QueryCodeResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryCodeResponseSDKType {
+    return {
+      code_info: isSet(object.code_info) ? CodeInfoResponse.fromSDKJSON(object.code_info) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QueryCodeResponse): QueryCodeResponseSDKType {
     const obj: any = {};
     message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfoResponse.toSDK(message.codeInfo) : undefined);
@@ -1635,6 +1737,12 @@ export const QueryCodesRequest = {
   fromSDK(object: QueryCodesRequestSDKType): QueryCodesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryCodesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1726,6 +1834,13 @@ export const QueryCodesResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryCodesResponseSDKType {
+    return {
+      code_infos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   toSDK(message: QueryCodesResponse): QueryCodesResponseSDKType {
     const obj: any = {};
 
@@ -1799,6 +1914,12 @@ export const QueryPinnedCodesRequest = {
   fromSDK(object: QueryPinnedCodesRequestSDKType): QueryPinnedCodesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryPinnedCodesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1900,6 +2021,13 @@ export const QueryPinnedCodesResponse = {
     return {
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryPinnedCodesResponseSDKType {
+    return {
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

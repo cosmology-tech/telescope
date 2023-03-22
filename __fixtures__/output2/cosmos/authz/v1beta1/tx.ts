@@ -130,6 +130,14 @@ export const MsgGrant = {
     message.grantee = object.grantee ?? "";
     message.grant = object.grant !== undefined && object.grant !== null ? Grant.fromPartial(object.grant) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgGrantSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromSDKJSON(object.grant) : undefined
+    };
   }
 
 };
@@ -193,6 +201,12 @@ export const MsgExecResponse = {
     const message = createBaseMsgExecResponse();
     message.results = object.results?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgExecResponseSDKType {
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -268,6 +282,13 @@ export const MsgExec = {
     message.grantee = object.grantee ?? "";
     message.msgs = object.msgs?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -311,6 +332,10 @@ export const MsgGrantResponse = {
   fromPartial(_: DeepPartial<MsgGrantResponse>): MsgGrantResponse {
     const message = createBaseMsgGrantResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgGrantResponseSDKType {
+    return {};
   }
 
 };
@@ -392,6 +417,14 @@ export const MsgRevoke = {
     message.grantee = object.grantee ?? "";
     message.msgTypeUrl = object.msgTypeUrl ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgRevokeSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
   }
 
 };
@@ -435,6 +468,10 @@ export const MsgRevokeResponse = {
   fromPartial(_: DeepPartial<MsgRevokeResponse>): MsgRevokeResponse {
     const message = createBaseMsgRevokeResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeResponseSDKType {
+    return {};
   }
 
 };
