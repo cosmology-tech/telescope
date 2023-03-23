@@ -258,13 +258,6 @@ export const LogEntry_LabelsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntry_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
   toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -511,28 +504,6 @@ export const LogEntry = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntrySDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
-      trace: isSet(object.trace) ? String(object.trace) : "",
-      insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      proto_payload: isSet(object.proto_payload) ? Any.fromSDKJSON(object.proto_payload) : undefined,
-      text_payload: isSet(object.text_payload) ? String(object.text_payload) : undefined,
-      struct_payload: isSet(object.struct_payload) ? Struct.fromSDKJSON(object.struct_payload) : undefined,
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDKJSON(object.operation) : undefined,
-      source_location: isSet(object.source_location) ? LogEntrySourceLocation.fromSDKJSON(object.source_location) : undefined
-    };
-  },
-
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -659,15 +630,6 @@ export const LogEntryOperation = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntryOperationSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      producer: isSet(object.producer) ? String(object.producer) : "",
-      first: isSet(object.first) ? Boolean(object.first) : false,
-      last: isSet(object.last) ? Boolean(object.last) : false
-    };
-  },
-
   toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -763,14 +725,6 @@ export const LogEntrySourceLocation = {
       file: object?.file,
       line: object?.line,
       function: object?.function
-    };
-  },
-
-  fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
-      function: isSet(object.function) ? String(object.function) : ""
     };
   },
 

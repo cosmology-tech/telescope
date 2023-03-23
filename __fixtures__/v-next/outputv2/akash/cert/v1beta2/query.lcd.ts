@@ -30,7 +30,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;
-    return QueryCertificatesResponse.fromSDKJSON(await this.req.get<QueryCertificatesResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryCertificatesResponseSDKType>(endpoint, options);
   }
 
 }

@@ -583,15 +583,6 @@ export const Member = {
     message.metadata = object.metadata ?? "";
     message.addedAt = object.addedAt !== undefined && object.addedAt !== null ? Timestamp.fromPartial(object.addedAt) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MemberSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      weight: isSet(object.weight) ? String(object.weight) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      added_at: isSet(object.added_at) ? fromJsonTimestamp(object.added_at) : undefined
-    };
   }
 
 };
@@ -655,12 +646,6 @@ export const Members = {
     const message = createBaseMembers();
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MembersSDKType {
-    return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -730,13 +715,6 @@ export const ThresholdDecisionPolicy = {
     message.threshold = object.threshold ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ThresholdDecisionPolicySDKType {
-    return {
-      threshold: isSet(object.threshold) ? String(object.threshold) : "",
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDKJSON(object.windows) : undefined
-    };
   }
 
 };
@@ -806,13 +784,6 @@ export const PercentageDecisionPolicy = {
     message.percentage = object.percentage ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): PercentageDecisionPolicySDKType {
-    return {
-      percentage: isSet(object.percentage) ? String(object.percentage) : "",
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDKJSON(object.windows) : undefined
-    };
   }
 
 };
@@ -882,13 +853,6 @@ export const DecisionPolicyWindows = {
     message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
     message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): DecisionPolicyWindowsSDKType {
-    return {
-      voting_period: isSet(object.voting_period) ? Duration.fromSDKJSON(object.voting_period) : undefined,
-      min_execution_period: isSet(object.min_execution_period) ? Duration.fromSDKJSON(object.min_execution_period) : undefined
-    };
   }
 
 };
@@ -1006,17 +970,6 @@ export const GroupInfo = {
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupInfoSDKType {
-    return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
-      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
-      created_at: isSet(object.created_at) ? fromJsonTimestamp(object.created_at) : undefined
-    };
   }
 
 };
@@ -1086,13 +1039,6 @@ export const GroupMember = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupMemberSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
-      member: isSet(object.member) ? Member.fromSDKJSON(object.member) : undefined
-    };
   }
 
 };
@@ -1222,18 +1168,6 @@ export const GroupPolicyInfo = {
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupPolicyInfoSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
-      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined,
-      created_at: isSet(object.created_at) ? fromJsonTimestamp(object.created_at) : undefined
-    };
   }
 
 };
@@ -1447,24 +1381,6 @@ export const Proposal = {
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ProposalSDKType {
-    return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
-      address: isSet(object.address) ? String(object.address) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined,
-      group_version: isSet(object.group_version) ? Long.fromValue(object.group_version) : Long.UZERO,
-      group_policy_version: isSet(object.group_policy_version) ? Long.fromValue(object.group_policy_version) : Long.UZERO,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
-      final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
-      voting_period_end: isSet(object.voting_period_end) ? fromJsonTimestamp(object.voting_period_end) : undefined,
-      executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1558,15 +1474,6 @@ export const TallyResult = {
     message.noCount = object.noCount ?? "";
     message.noWithVetoCount = object.noWithVetoCount ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): TallyResultSDKType {
-    return {
-      yes_count: isSet(object.yes_count) ? String(object.yes_count) : "",
-      abstain_count: isSet(object.abstain_count) ? String(object.abstain_count) : "",
-      no_count: isSet(object.no_count) ? String(object.no_count) : "",
-      no_with_veto_count: isSet(object.no_with_veto_count) ? String(object.no_with_veto_count) : ""
-    };
   }
 
 };
@@ -1672,16 +1579,6 @@ export const Vote = {
     message.metadata = object.metadata ?? "";
     message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): VoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined
-    };
   }
 
 };

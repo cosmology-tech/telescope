@@ -439,13 +439,6 @@ export const WeightedVoteOption = {
     };
   },
 
-  fromSDKJSON(object: any): WeightedVoteOptionSDKType {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
-  },
-
   toSDK(message: WeightedVoteOption): WeightedVoteOptionSDKType {
     const obj: any = {};
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
@@ -526,13 +519,6 @@ export const TextProposal = {
     return {
       title: object?.title,
       description: object?.description
-    };
-  },
-
-  fromSDKJSON(object: any): TextProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : ""
     };
   },
 
@@ -635,14 +621,6 @@ export const Deposit = {
       proposalId: object?.proposal_id,
       depositor: object?.depositor,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): DepositSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 
@@ -833,20 +811,6 @@ export const Proposal = {
     };
   },
 
-  fromSDKJSON(object: any): ProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
-      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
-      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
-      deposit_end_time: isSet(object.deposit_end_time) ? new Date(object.deposit_end_time) : undefined,
-      total_deposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      voting_start_time: isSet(object.voting_start_time) ? new Date(object.voting_start_time) : undefined,
-      voting_end_time: isSet(object.voting_end_time) ? new Date(object.voting_end_time) : undefined
-    };
-  },
-
   toSDK(message: Proposal): ProposalSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -969,15 +933,6 @@ export const TallyResult = {
     };
   },
 
-  fromSDKJSON(object: any): TallyResultSDKType {
-    return {
-      yes: isSet(object.yes) ? String(object.yes) : "",
-      abstain: isSet(object.abstain) ? String(object.abstain) : "",
-      no: isSet(object.no) ? String(object.no) : "",
-      no_with_veto: isSet(object.no_with_veto) ? String(object.no_with_veto) : ""
-    };
-  },
-
   toSDK(message: TallyResult): TallyResultSDKType {
     const obj: any = {};
     obj.yes = message.yes;
@@ -1095,15 +1050,6 @@ export const Vote = {
     };
   },
 
-  fromSDKJSON(object: any): VoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Vote): VoteSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -1201,13 +1147,6 @@ export const DepositParams = {
     };
   },
 
-  fromSDKJSON(object: any): DepositParamsSDKType {
-    return {
-      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      max_deposit_period: isSet(object.max_deposit_period) ? Duration.fromSDKJSON(object.max_deposit_period) : undefined
-    };
-  },
-
   toSDK(message: DepositParams): DepositParamsSDKType {
     const obj: any = {};
 
@@ -1281,12 +1220,6 @@ export const VotingParams = {
   fromSDK(object: VotingParamsSDKType): VotingParams {
     return {
       votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): VotingParamsSDKType {
-    return {
-      voting_period: isSet(object.voting_period) ? Duration.fromSDKJSON(object.voting_period) : undefined
     };
   },
 
@@ -1382,14 +1315,6 @@ export const TallyParams = {
       quorum: object?.quorum,
       threshold: object?.threshold,
       vetoThreshold: object?.veto_threshold
-    };
-  },
-
-  fromSDKJSON(object: any): TallyParamsSDKType {
-    return {
-      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
-      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
-      veto_threshold: isSet(object.veto_threshold) ? bytesFromBase64(object.veto_threshold) : new Uint8Array()
     };
   },
 

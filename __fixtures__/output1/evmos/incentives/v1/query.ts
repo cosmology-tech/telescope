@@ -299,12 +299,6 @@ export const QueryIncentivesRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryIncentivesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryIncentivesRequest): QueryIncentivesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
@@ -393,13 +387,6 @@ export const QueryIncentivesResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryIncentivesResponseSDKType {
-    return {
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryIncentivesResponse): QueryIncentivesResponseSDKType {
     const obj: any = {};
 
@@ -476,12 +463,6 @@ export const QueryIncentiveRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryIncentiveRequestSDKType {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : ""
-    };
-  },
-
   toSDK(message: QueryIncentiveRequest): QueryIncentiveRequestSDKType {
     const obj: any = {};
     obj.contract = message.contract;
@@ -548,12 +529,6 @@ export const QueryIncentiveResponse = {
   fromSDK(object: QueryIncentiveResponseSDKType): QueryIncentiveResponse {
     return {
       incentive: object.incentive ? Incentive.fromSDK(object.incentive) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryIncentiveResponseSDKType {
-    return {
-      incentive: isSet(object.incentive) ? Incentive.fromSDKJSON(object.incentive) : undefined
     };
   },
 
@@ -636,13 +611,6 @@ export const QueryGasMetersRequest = {
     return {
       contract: object?.contract,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryGasMetersRequestSDKType {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -735,13 +703,6 @@ export const QueryGasMetersResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGasMetersResponseSDKType {
-    return {
-      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryGasMetersResponse): QueryGasMetersResponseSDKType {
     const obj: any = {};
 
@@ -831,13 +792,6 @@ export const QueryGasMeterRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGasMeterRequestSDKType {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      participant: isSet(object.participant) ? String(object.participant) : ""
-    };
-  },
-
   toSDK(message: QueryGasMeterRequest): QueryGasMeterRequestSDKType {
     const obj: any = {};
     obj.contract = message.contract;
@@ -908,12 +862,6 @@ export const QueryGasMeterResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
-    return {
-      gas_meter: isSet(object.gas_meter) ? Long.fromValue(object.gas_meter) : Long.UZERO
-    };
-  },
-
   toSDK(message: QueryGasMeterResponse): QueryGasMeterResponseSDKType {
     const obj: any = {};
     obj.gas_meter = message.gasMeter;
@@ -980,12 +928,6 @@ export const QueryAllocationMetersRequest = {
   fromSDK(object: QueryAllocationMetersRequestSDKType): QueryAllocationMetersRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryAllocationMetersRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1077,13 +1019,6 @@ export const QueryAllocationMetersResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAllocationMetersResponseSDKType {
-    return {
-      allocation_meters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseSDKType {
     const obj: any = {};
 
@@ -1160,12 +1095,6 @@ export const QueryAllocationMeterRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAllocationMeterRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-
   toSDK(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -1235,12 +1164,6 @@ export const QueryAllocationMeterResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAllocationMeterResponseSDKType {
-    return {
-      allocation_meter: isSet(object.allocation_meter) ? DecCoin.fromSDKJSON(object.allocation_meter) : undefined
-    };
-  },
-
   toSDK(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseSDKType {
     const obj: any = {};
     message.allocationMeter !== undefined && (obj.allocation_meter = message.allocationMeter ? DecCoin.toSDK(message.allocationMeter) : undefined);
@@ -1291,10 +1214,6 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -1363,12 +1282,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

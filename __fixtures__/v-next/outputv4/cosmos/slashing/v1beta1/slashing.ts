@@ -194,17 +194,6 @@ export const ValidatorSigningInfo = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorSigningInfoSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      start_height: isSet(object.start_height) ? Long.fromValue(object.start_height) : Long.ZERO,
-      index_offset: isSet(object.index_offset) ? Long.fromValue(object.index_offset) : Long.ZERO,
-      jailed_until: isSet(object.jailed_until) ? new Date(object.jailed_until) : undefined,
-      tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missed_blocks_counter: isSet(object.missed_blocks_counter) ? Long.fromValue(object.missed_blocks_counter) : Long.ZERO
-    };
-  },
-
   toSDK(message: ValidatorSigningInfo): ValidatorSigningInfoSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -328,16 +317,6 @@ export const Params = {
       downtimeJailDuration: object.downtime_jail_duration ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
       slashFractionDoubleSign: object?.slash_fraction_double_sign,
       slashFractionDowntime: object?.slash_fraction_downtime
-    };
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      signed_blocks_window: isSet(object.signed_blocks_window) ? Long.fromValue(object.signed_blocks_window) : Long.ZERO,
-      min_signed_per_window: isSet(object.min_signed_per_window) ? bytesFromBase64(object.min_signed_per_window) : new Uint8Array(),
-      downtime_jail_duration: isSet(object.downtime_jail_duration) ? Duration.fromSDKJSON(object.downtime_jail_duration) : undefined,
-      slash_fraction_double_sign: isSet(object.slash_fraction_double_sign) ? bytesFromBase64(object.slash_fraction_double_sign) : new Uint8Array(),
-      slash_fraction_downtime: isSet(object.slash_fraction_downtime) ? bytesFromBase64(object.slash_fraction_downtime) : new Uint8Array()
     };
   },
 

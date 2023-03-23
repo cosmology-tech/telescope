@@ -413,12 +413,6 @@ export const Backend = {
     };
   },
 
-  fromSDKJSON(object: any): BackendSDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Backend): BackendSDKType {
     const obj: any = {};
 
@@ -634,20 +628,6 @@ export const BackendRule = {
       jwtAudience: object?.jwt_audience,
       disableAuth: object?.disable_auth,
       protocol: object?.protocol
-    };
-  },
-
-  fromSDKJSON(object: any): BackendRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      address: isSet(object.address) ? String(object.address) : "",
-      deadline: isSet(object.deadline) ? Number(object.deadline) : 0,
-      min_deadline: isSet(object.min_deadline) ? Number(object.min_deadline) : 0,
-      operation_deadline: isSet(object.operation_deadline) ? Number(object.operation_deadline) : 0,
-      path_translation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
-      jwt_audience: isSet(object.jwt_audience) ? String(object.jwt_audience) : undefined,
-      disable_auth: isSet(object.disable_auth) ? Boolean(object.disable_auth) : undefined,
-      protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
 

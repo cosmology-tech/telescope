@@ -147,12 +147,6 @@ export const DoubleValue = {
     const message = createBaseDoubleValue();
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): DoubleValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
   }
 
 };
@@ -210,12 +204,6 @@ export const FloatValue = {
     const message = createBaseFloatValue();
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): FloatValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
   }
 
 };
@@ -273,12 +261,6 @@ export const Int64Value = {
     const message = createBaseInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): Int64ValueSDKType {
-    return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
-    };
   }
 
 };
@@ -336,12 +318,6 @@ export const UInt64Value = {
     const message = createBaseUInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): UInt64ValueSDKType {
-    return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
-    };
   }
 
 };
@@ -399,12 +375,6 @@ export const Int32Value = {
     const message = createBaseInt32Value();
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): Int32ValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
   }
 
 };
@@ -462,12 +432,6 @@ export const UInt32Value = {
     const message = createBaseUInt32Value();
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): UInt32ValueSDKType {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
   }
 
 };
@@ -525,12 +489,6 @@ export const BoolValue = {
     const message = createBaseBoolValue();
     message.value = object.value ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): BoolValueSDKType {
-    return {
-      value: isSet(object.value) ? Boolean(object.value) : false
-    };
   }
 
 };
@@ -588,12 +546,6 @@ export const StringValue = {
     const message = createBaseStringValue();
     message.value = object.value ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): StringValueSDKType {
-    return {
-      value: isSet(object.value) ? String(object.value) : ""
-    };
   }
 
 };
@@ -651,12 +603,6 @@ export const BytesValue = {
     const message = createBaseBytesValue();
     message.value = object.value ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): BytesValueSDKType {
-    return {
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
   }
 
 };

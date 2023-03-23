@@ -213,7 +213,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             fromPartial: true,
             toSDK: false,
             fromSDK: false,
-            fromSDKJSON: true,
+            fromSDKJSON: false,
             toAmino: false,
             fromAmino: false,
             toProto: false,

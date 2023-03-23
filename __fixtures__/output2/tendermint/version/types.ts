@@ -89,13 +89,6 @@ export const App = {
     message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
     message.software = object.software ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): AppSDKType {
-    return {
-      protocol: isSet(object.protocol) ? Long.fromValue(object.protocol) : Long.UZERO,
-      software: isSet(object.software) ? String(object.software) : ""
-    };
   }
 
 };
@@ -165,13 +158,6 @@ export const Consensus = {
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
     message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): ConsensusSDKType {
-    return {
-      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
-      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
-    };
   }
 
 };

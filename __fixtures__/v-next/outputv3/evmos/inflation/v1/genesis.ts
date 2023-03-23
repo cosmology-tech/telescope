@@ -217,16 +217,6 @@ export const GenesisState = {
     };
   },
 
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
-      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      epochs_per_period: isSet(object.epochs_per_period) ? Long.fromValue(object.epochs_per_period) : Long.ZERO,
-      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
-    };
-  },
-
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -377,15 +367,6 @@ export const Params = {
       exponentialCalculation: object.exponential_calculation ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
       inflationDistribution: object.inflation_distribution ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
       enableInflation: object?.enable_inflation
-    };
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
-      exponential_calculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDKJSON(object.exponential_calculation) : undefined,
-      inflation_distribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDKJSON(object.inflation_distribution) : undefined,
-      enable_inflation: isSet(object.enable_inflation) ? Boolean(object.enable_inflation) : false
     };
   },
 

@@ -188,17 +188,6 @@ export const MsgCreateClawbackVestingAccount = {
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     message.merge = object.merge ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateClawbackVestingAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
-      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      merge: isSet(object.merge) ? Boolean(object.merge) : false
-    };
   }
 
 };
@@ -242,10 +231,6 @@ export const MsgCreateClawbackVestingAccountResponse = {
   fromPartial(_: DeepPartial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateClawbackVestingAccountResponseSDKType {
-    return {};
   }
 
 };
@@ -327,14 +312,6 @@ export const MsgClawback = {
     message.accountAddress = object.accountAddress ?? "";
     message.destAddress = object.destAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgClawbackSDKType {
-    return {
-      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
-      account_address: isSet(object.account_address) ? String(object.account_address) : "",
-      dest_address: isSet(object.dest_address) ? String(object.dest_address) : ""
-    };
   }
 
 };
@@ -378,10 +355,6 @@ export const MsgClawbackResponse = {
   fromPartial(_: DeepPartial<MsgClawbackResponse>): MsgClawbackResponse {
     const message = createBaseMsgClawbackResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgClawbackResponseSDKType {
-    return {};
   }
 
 };

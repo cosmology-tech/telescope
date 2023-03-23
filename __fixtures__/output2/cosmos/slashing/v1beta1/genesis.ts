@@ -141,14 +141,6 @@ export const GenesisState = {
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      signing_infos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDKJSON(e)) : [],
-      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -218,13 +210,6 @@ export const SigningInfo = {
     message.address = object.address ?? "";
     message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): SigningInfoSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      validator_signing_info: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.validator_signing_info) : undefined
-    };
   }
 
 };
@@ -300,13 +285,6 @@ export const ValidatorMissedBlocks = {
     message.address = object.address ?? "";
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ValidatorMissedBlocksSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -376,13 +354,6 @@ export const MissedBlock = {
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
     message.missed = object.missed ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MissedBlockSDKType {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
-      missed: isSet(object.missed) ? Boolean(object.missed) : false
-    };
   }
 
 };

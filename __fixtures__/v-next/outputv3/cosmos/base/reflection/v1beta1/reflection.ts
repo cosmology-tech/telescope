@@ -158,10 +158,6 @@ export const ListAllInterfacesRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): ListAllInterfacesRequestSDKType {
-    return {};
-  },
-
   toSDK(_: ListAllInterfacesRequest): ListAllInterfacesRequestSDKType {
     const obj: any = {};
     return obj;
@@ -271,12 +267,6 @@ export const ListAllInterfacesResponse = {
   fromSDK(object: ListAllInterfacesResponseSDKType): ListAllInterfacesResponse {
     return {
       interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ListAllInterfacesResponseSDKType {
-    return {
-      interface_names: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => String(e)) : []
     };
   },
 
@@ -402,12 +392,6 @@ export const ListImplementationsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListImplementationsRequestSDKType {
-    return {
-      interface_name: isSet(object.interface_name) ? String(object.interface_name) : ""
-    };
-  },
-
   toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
     const obj: any = {};
     obj.interface_name = message.interfaceName;
@@ -521,12 +505,6 @@ export const ListImplementationsResponse = {
   fromSDK(object: ListImplementationsResponseSDKType): ListImplementationsResponse {
     return {
       implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ListImplementationsResponseSDKType {
-    return {
-      implementation_message_names: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => String(e)) : []
     };
   },
 

@@ -139,12 +139,6 @@ export const GenericAuthorization = {
     };
   },
 
-  fromSDKJSON(object: any): GenericAuthorizationSDKType {
-    return {
-      msg: isSet(object.msg) ? String(object.msg) : ""
-    };
-  },
-
   toSDK(message: GenericAuthorization): GenericAuthorizationSDKType {
     const obj: any = {};
     obj.msg = message.msg;
@@ -224,13 +218,6 @@ export const Grant = {
     return {
       authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
       expiration: object.expiration ?? undefined
-    };
-  },
-
-  fromSDKJSON(object: any): GrantSDKType {
-    return {
-      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -343,15 +330,6 @@ export const GrantAuthorization = {
     };
   },
 
-  fromSDKJSON(object: any): GrantAuthorizationSDKType {
-    return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
-      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
-    };
-  },
-
   toSDK(message: GrantAuthorization): GrantAuthorizationSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -427,12 +405,6 @@ export const GrantQueueItem = {
   fromSDK(object: GrantQueueItemSDKType): GrantQueueItem {
     return {
       msgTypeUrls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): GrantQueueItemSDKType {
-    return {
-      msg_type_urls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => String(e)) : []
     };
   },
 

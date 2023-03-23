@@ -96,10 +96,6 @@ export const Empty = {
     return {};
   },
 
-  fromSDKJSON(_: any): EmptySDKType {
-    return {};
-  },
-
   toSDK(_: Empty): EmptySDKType {
     const obj: any = {};
     return obj;

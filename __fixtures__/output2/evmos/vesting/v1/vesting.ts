@@ -144,16 +144,6 @@ export const ClawbackVestingAccount = {
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ClawbackVestingAccountSDKType {
-    return {
-      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
-      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
-      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
-      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
-    };
   }
 
 };

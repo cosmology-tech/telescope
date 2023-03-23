@@ -89,12 +89,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;

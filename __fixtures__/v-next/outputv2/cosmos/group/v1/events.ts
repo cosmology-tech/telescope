@@ -306,12 +306,6 @@ export const EventCreateGroup = {
     };
   },
 
-  fromSDKJSON(object: any): EventCreateGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: EventCreateGroup): EventCreateGroupSDKType {
     const obj: any = {};
     obj.group_id = message.groupId;
@@ -419,12 +413,6 @@ export const EventUpdateGroup = {
   fromSDK(object: EventUpdateGroupSDKType): EventUpdateGroup {
     return {
       groupId: object?.group_id
-    };
-  },
-
-  fromSDKJSON(object: any): EventUpdateGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
     };
   },
 
@@ -538,12 +526,6 @@ export const EventCreateGroupPolicy = {
     };
   },
 
-  fromSDKJSON(object: any): EventCreateGroupPolicySDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
-  },
-
   toSDK(message: EventCreateGroupPolicy): EventCreateGroupPolicySDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -651,12 +633,6 @@ export const EventUpdateGroupPolicy = {
   fromSDK(object: EventUpdateGroupPolicySDKType): EventUpdateGroupPolicy {
     return {
       address: object?.address
-    };
-  },
-
-  fromSDKJSON(object: any): EventUpdateGroupPolicySDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
     };
   },
 
@@ -770,12 +746,6 @@ export const EventSubmitProposal = {
     };
   },
 
-  fromSDKJSON(object: any): EventSubmitProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: EventSubmitProposal): EventSubmitProposalSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -886,12 +856,6 @@ export const EventWithdrawProposal = {
     };
   },
 
-  fromSDKJSON(object: any): EventWithdrawProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: EventWithdrawProposal): EventWithdrawProposalSDKType {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
@@ -999,12 +963,6 @@ export const EventVote = {
   fromSDK(object: EventVoteSDKType): EventVote {
     return {
       proposalId: object?.proposal_id
-    };
-  },
-
-  fromSDKJSON(object: any): EventVoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
     };
   },
 
@@ -1127,13 +1085,6 @@ export const EventExec = {
   fromSDK(object: EventExecSDKType): EventExec {
     return {
       proposalId: object?.proposal_id,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
-    };
-  },
-
-  fromSDKJSON(object: any): EventExecSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
     };
   },
@@ -1261,13 +1212,6 @@ export const EventLeaveGroup = {
     return {
       groupId: object?.group_id,
       address: object?.address
-    };
-  },
-
-  fromSDKJSON(object: any): EventLeaveGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
-      address: isSet(object.address) ? String(object.address) : ""
     };
   },
 

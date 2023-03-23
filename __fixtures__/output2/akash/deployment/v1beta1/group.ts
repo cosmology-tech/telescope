@@ -182,12 +182,6 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCloseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -231,10 +225,6 @@ export const MsgCloseGroupResponse = {
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
-    return {};
   }
 
 };
@@ -292,12 +282,6 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgPauseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -341,10 +325,6 @@ export const MsgPauseGroupResponse = {
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
-    return {};
   }
 
 };
@@ -402,12 +382,6 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgStartGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -451,10 +425,6 @@ export const MsgStartGroupResponse = {
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
-    return {};
   }
 
 };
@@ -536,14 +506,6 @@ export const GroupID = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
-    };
   }
 
 };
@@ -631,14 +593,6 @@ export const GroupSpec = {
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupSpecSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDKJSON(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -732,15 +686,6 @@ export const Group = {
     message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): GroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
-    };
   }
 
 };
@@ -822,14 +767,6 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ResourceSDKType {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
-      price: isSet(object.price) ? Coin.fromSDKJSON(object.price) : undefined
-    };
   }
 
 };

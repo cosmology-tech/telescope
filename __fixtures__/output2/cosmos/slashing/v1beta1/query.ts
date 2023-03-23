@@ -89,10 +89,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -150,12 +146,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -213,12 +203,6 @@ export const QuerySigningInfoRequest = {
     const message = createBaseQuerySigningInfoRequest();
     message.consAddress = object.consAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
-    return {
-      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
-    };
   }
 
 };
@@ -276,12 +260,6 @@ export const QuerySigningInfoResponse = {
     const message = createBaseQuerySigningInfoResponse();
     message.valSigningInfo = object.valSigningInfo !== undefined && object.valSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.valSigningInfo) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfoResponseSDKType {
-    return {
-      val_signing_info: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.val_signing_info) : undefined
-    };
   }
 
 };
@@ -339,12 +317,6 @@ export const QuerySigningInfosRequest = {
     const message = createBaseQuerySigningInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfosRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -420,13 +392,6 @@ export const QuerySigningInfosResponse = {
     message.info = object.info?.map(e => ValidatorSigningInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfosResponseSDKType {
-    return {
-      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };

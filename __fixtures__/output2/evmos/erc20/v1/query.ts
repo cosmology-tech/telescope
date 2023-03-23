@@ -108,12 +108,6 @@ export const QueryTokenPairsRequest = {
     const message = createBaseQueryTokenPairsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTokenPairsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -189,13 +183,6 @@ export const QueryTokenPairsResponse = {
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTokenPairsResponseSDKType {
-    return {
-      token_pairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -253,12 +240,6 @@ export const QueryTokenPairRequest = {
     const message = createBaseQueryTokenPairRequest();
     message.token = object.token ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTokenPairRequestSDKType {
-    return {
-      token: isSet(object.token) ? String(object.token) : ""
-    };
   }
 
 };
@@ -316,12 +297,6 @@ export const QueryTokenPairResponse = {
     const message = createBaseQueryTokenPairResponse();
     message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTokenPairResponseSDKType {
-    return {
-      token_pair: isSet(object.token_pair) ? TokenPair.fromSDKJSON(object.token_pair) : undefined
-    };
   }
 
 };
@@ -365,10 +340,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -426,12 +397,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };

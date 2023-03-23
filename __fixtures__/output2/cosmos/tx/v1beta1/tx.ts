@@ -313,14 +313,6 @@ export const Tx = {
     message.authInfo = object.authInfo !== undefined && object.authInfo !== null ? AuthInfo.fromPartial(object.authInfo) : undefined;
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): TxSDKType {
-    return {
-      body: isSet(object.body) ? TxBody.fromSDKJSON(object.body) : undefined,
-      auth_info: isSet(object.auth_info) ? AuthInfo.fromSDKJSON(object.auth_info) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
   }
 
 };
@@ -408,14 +400,6 @@ export const TxRaw = {
     message.authInfoBytes = object.authInfoBytes ?? new Uint8Array();
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): TxRawSDKType {
-    return {
-      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
-      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
   }
 
 };
@@ -509,15 +493,6 @@ export const SignDoc = {
     message.chainId = object.chainId ?? "";
     message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): SignDocSDKType {
-    return {
-      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
-      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO
-    };
   }
 
 };
@@ -640,16 +615,6 @@ export const TxBody = {
     message.extensionOptions = object.extensionOptions?.map(e => Any.fromPartial(e)) || [];
     message.nonCriticalExtensionOptions = object.nonCriticalExtensionOptions?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): TxBodySDKType {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
-      memo: isSet(object.memo) ? String(object.memo) : "",
-      timeout_height: isSet(object.timeout_height) ? Long.fromValue(object.timeout_height) : Long.UZERO,
-      extension_options: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromSDKJSON(e)) : [],
-      non_critical_extension_options: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -725,13 +690,6 @@ export const AuthInfo = {
     message.signerInfos = object.signerInfos?.map(e => SignerInfo.fromPartial(e)) || [];
     message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): AuthInfoSDKType {
-    return {
-      signer_infos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromSDKJSON(e)) : [],
-      fee: isSet(object.fee) ? Fee.fromSDKJSON(object.fee) : undefined
-    };
   }
 
 };
@@ -813,14 +771,6 @@ export const SignerInfo = {
     message.modeInfo = object.modeInfo !== undefined && object.modeInfo !== null ? ModeInfo.fromPartial(object.modeInfo) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): SignerInfoSDKType {
-    return {
-      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
-      mode_info: isSet(object.mode_info) ? ModeInfo.fromSDKJSON(object.mode_info) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
-    };
   }
 
 };
@@ -890,13 +840,6 @@ export const ModeInfo = {
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ModeInfoSDKType {
-    return {
-      single: isSet(object.single) ? ModeInfo_Single.fromSDKJSON(object.single) : undefined,
-      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDKJSON(object.multi) : undefined
-    };
   }
 
 };
@@ -954,12 +897,6 @@ export const ModeInfo_Single = {
     const message = createBaseModeInfo_Single();
     message.mode = object.mode ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): ModeInfo_SingleSDKType {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
-    };
   }
 
 };
@@ -1035,13 +972,6 @@ export const ModeInfo_Multi = {
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
     message.modeInfos = object.modeInfos?.map(e => ModeInfo.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ModeInfo_MultiSDKType {
-    return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDKJSON(object.bitarray) : undefined,
-      mode_infos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1141,15 +1071,6 @@ export const Fee = {
     message.payer = object.payer ?? "";
     message.granter = object.granter ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): FeeSDKType {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      gas_limit: isSet(object.gas_limit) ? Long.fromValue(object.gas_limit) : Long.UZERO,
-      payer: isSet(object.payer) ? String(object.payer) : "",
-      granter: isSet(object.granter) ? String(object.granter) : ""
-    };
   }
 
 };

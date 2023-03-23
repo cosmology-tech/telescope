@@ -209,15 +209,6 @@ export const Group = {
     };
   },
 
-  fromSDKJSON(object: any): GroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
-    };
-  },
-
   toSDK(message: Group): GroupSDKType {
     const obj: any = {};
     message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toSDK(message.groupId) : undefined);

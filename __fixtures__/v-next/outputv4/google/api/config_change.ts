@@ -273,16 +273,6 @@ export const ConfigChange = {
     };
   },
 
-  fromSDKJSON(object: any): ConfigChangeSDKType {
-    return {
-      element: isSet(object.element) ? String(object.element) : "",
-      old_value: isSet(object.old_value) ? String(object.old_value) : "",
-      new_value: isSet(object.new_value) ? String(object.new_value) : "",
-      change_type: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ConfigChange): ConfigChangeSDKType {
     const obj: any = {};
     obj.element = message.element;
@@ -359,12 +349,6 @@ export const Advice = {
   fromSDK(object: AdviceSDKType): Advice {
     return {
       description: object?.description
-    };
-  },
-
-  fromSDKJSON(object: any): AdviceSDKType {
-    return {
-      description: isSet(object.description) ? String(object.description) : ""
     };
   },
 

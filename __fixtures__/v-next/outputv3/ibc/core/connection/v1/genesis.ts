@@ -153,15 +153,6 @@ export const GenesisState = {
     };
   },
 
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
-      client_connection_paths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromSDKJSON(e)) : [],
-      next_connection_sequence: isSet(object.next_connection_sequence) ? Long.fromValue(object.next_connection_sequence) : Long.UZERO,
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
 

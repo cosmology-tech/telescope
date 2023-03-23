@@ -207,13 +207,6 @@ export const ModuleSchemaDescriptor = {
     message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): ModuleSchemaDescriptorSDKType {
-    return {
-      schema_file: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromSDKJSON(e)) : [],
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
-    };
   }
 
 };
@@ -295,14 +288,6 @@ export const ModuleSchemaDescriptor_FileEntry = {
     message.protoFileName = object.protoFileName ?? "";
     message.storageType = object.storageType ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): ModuleSchemaDescriptor_FileEntrySDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      proto_file_name: isSet(object.proto_file_name) ? String(object.proto_file_name) : "",
-      storage_type: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
-    };
   }
 
 };

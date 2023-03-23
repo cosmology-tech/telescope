@@ -117,15 +117,6 @@ export const ResourceUnits = {
     message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ResourceUnitsSDKType {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromSDKJSON(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromSDKJSON(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDKJSON(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : []
-    };
   }
 
 };

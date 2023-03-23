@@ -82,12 +82,6 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCloseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -131,10 +125,6 @@ export const MsgCloseGroupResponse = {
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
-    return {};
   }
 
 };
@@ -192,12 +182,6 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgPauseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -241,10 +225,6 @@ export const MsgPauseGroupResponse = {
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
-    return {};
   }
 
 };
@@ -302,12 +282,6 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgStartGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -351,10 +325,6 @@ export const MsgStartGroupResponse = {
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
-    return {};
   }
 
 };

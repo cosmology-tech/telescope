@@ -172,18 +172,6 @@ export const Class = {
     message.uriHash = object.uriHash ?? "";
     message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ClassSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
-      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
-    };
   }
 
 };
@@ -289,16 +277,6 @@ export const NFT = {
     message.uriHash = object.uriHash ?? "";
     message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): NFTSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
-      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
-    };
   }
 
 };

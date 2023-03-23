@@ -369,15 +369,6 @@ export const ConsensusParams = {
     };
   },
 
-  fromSDKJSON(object: any): ConsensusParamsSDKType {
-    return {
-      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
-    };
-  },
-
   toSDK(message: ConsensusParams): ConsensusParamsSDKType {
     const obj: any = {};
     message.block !== undefined && (obj.block = message.block ? BlockParams.toSDK(message.block) : undefined);
@@ -515,14 +506,6 @@ export const BlockParams = {
     };
   },
 
-  fromSDKJSON(object: any): BlockParamsSDKType {
-    return {
-      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
-      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO,
-      time_iota_ms: isSet(object.time_iota_ms) ? Long.fromValue(object.time_iota_ms) : Long.ZERO
-    };
-  },
-
   toSDK(message: BlockParams): BlockParamsSDKType {
     const obj: any = {};
     obj.max_bytes = message.maxBytes;
@@ -657,14 +640,6 @@ export const EvidenceParams = {
     };
   },
 
-  fromSDKJSON(object: any): EvidenceParamsSDKType {
-    return {
-      max_age_num_blocks: isSet(object.max_age_num_blocks) ? Long.fromValue(object.max_age_num_blocks) : Long.ZERO,
-      max_age_duration: isSet(object.max_age_duration) ? Duration.fromSDKJSON(object.max_age_duration) : undefined,
-      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO
-    };
-  },
-
   toSDK(message: EvidenceParams): EvidenceParamsSDKType {
     const obj: any = {};
     obj.max_age_num_blocks = message.maxAgeNumBlocks;
@@ -776,12 +751,6 @@ export const ValidatorParams = {
   fromSDK(object: ValidatorParamsSDKType): ValidatorParams {
     return {
       pubKeyTypes: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ValidatorParamsSDKType {
-    return {
-      pub_key_types: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => String(e)) : []
     };
   },
 
@@ -899,12 +868,6 @@ export const VersionParams = {
     };
   },
 
-  fromSDKJSON(object: any): VersionParamsSDKType {
-    return {
-      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO
-    };
-  },
-
   toSDK(message: VersionParams): VersionParamsSDKType {
     const obj: any = {};
     obj.app_version = message.appVersion;
@@ -1017,13 +980,6 @@ export const HashedParams = {
     return {
       blockMaxBytes: object?.block_max_bytes,
       blockMaxGas: object?.block_max_gas
-    };
-  },
-
-  fromSDKJSON(object: any): HashedParamsSDKType {
-    return {
-      block_max_bytes: isSet(object.block_max_bytes) ? Long.fromValue(object.block_max_bytes) : Long.ZERO,
-      block_max_gas: isSet(object.block_max_gas) ? Long.fromValue(object.block_max_gas) : Long.ZERO
     };
   },
 

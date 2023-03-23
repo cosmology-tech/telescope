@@ -30,13 +30,13 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/params/v1beta1/params`;
-    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint, options);
   }
 
   /* Subspaces queries for all registered subspaces and all keys for a subspace. */
   async subspaces(_params: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponseSDKType> {
     const endpoint = `cosmos/params/v1beta1/subspaces`;
-    return QuerySubspacesResponse.fromSDKJSON(await this.req.get<QuerySubspacesResponseSDKType>(endpoint));
+    return await this.req.get<QuerySubspacesResponseSDKType>(endpoint);
   }
 
 }

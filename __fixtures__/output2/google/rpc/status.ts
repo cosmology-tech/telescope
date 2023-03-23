@@ -115,14 +115,6 @@ export const Status = {
     message.message = object.message ?? "";
     message.details = object.details?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): StatusSDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      message: isSet(object.message) ? String(object.message) : "",
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
   }
 
 };

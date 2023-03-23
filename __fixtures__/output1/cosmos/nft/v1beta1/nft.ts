@@ -204,18 +204,6 @@ export const Class = {
     };
   },
 
-  fromSDKJSON(object: any): ClassSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
-      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
-    };
-  },
-
   toSDK(message: Class): ClassSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -340,16 +328,6 @@ export const NFT = {
       uri: object?.uri,
       uriHash: object?.uri_hash,
       data: object.data ? Any.fromSDK(object.data) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): NFTSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
-      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
     };
   },
 

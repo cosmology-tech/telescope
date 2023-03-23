@@ -216,14 +216,6 @@ export const TableDescriptor = {
     };
   },
 
-  fromSDKJSON(object: any): TableDescriptorSDKType {
-    return {
-      primary_key: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromSDKJSON(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromSDKJSON(e)) : [],
-      id: isSet(object.id) ? Number(object.id) : 0
-    };
-  },
-
   toSDK(message: TableDescriptor): TableDescriptorSDKType {
     const obj: any = {};
     message.primaryKey !== undefined && (obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toSDK(message.primaryKey) : undefined);
@@ -311,13 +303,6 @@ export const PrimaryKeyDescriptor = {
     return {
       fields: object?.fields,
       autoIncrement: object?.auto_increment
-    };
-  },
-
-  fromSDKJSON(object: any): PrimaryKeyDescriptorSDKType {
-    return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      auto_increment: isSet(object.auto_increment) ? Boolean(object.auto_increment) : false
     };
   },
 
@@ -417,14 +402,6 @@ export const SecondaryIndexDescriptor = {
     };
   },
 
-  fromSDKJSON(object: any): SecondaryIndexDescriptorSDKType {
-    return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      id: isSet(object.id) ? Number(object.id) : 0,
-      unique: isSet(object.unique) ? Boolean(object.unique) : false
-    };
-  },
-
   toSDK(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorSDKType {
     const obj: any = {};
     obj.fields = message.fields;
@@ -493,12 +470,6 @@ export const SingletonDescriptor = {
   fromSDK(object: SingletonDescriptorSDKType): SingletonDescriptor {
     return {
       id: object?.id
-    };
-  },
-
-  fromSDKJSON(object: any): SingletonDescriptorSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0
     };
   },
 

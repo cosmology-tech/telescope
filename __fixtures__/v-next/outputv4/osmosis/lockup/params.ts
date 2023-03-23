@@ -75,12 +75,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      force_unlock_allowed_addresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => String(e)) : []
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
 

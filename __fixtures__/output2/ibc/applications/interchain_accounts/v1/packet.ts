@@ -136,14 +136,6 @@ export const InterchainAccountPacketData = {
     message.data = object.data ?? new Uint8Array();
     message.memo = object.memo ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): InterchainAccountPacketDataSDKType {
-    return {
-      type: isSet(object.type) ? typeFromJSON(object.type) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      memo: isSet(object.memo) ? String(object.memo) : ""
-    };
   }
 
 };
@@ -207,12 +199,6 @@ export const CosmosTx = {
     const message = createBaseCosmosTx();
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): CosmosTxSDKType {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
   }
 
 };

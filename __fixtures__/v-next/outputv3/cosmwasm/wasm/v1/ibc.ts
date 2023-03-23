@@ -192,15 +192,6 @@ export const MsgIBCSend = {
     };
   },
 
-  fromSDKJSON(object: any): MsgIBCSendSDKType {
-    return {
-      channel: isSet(object.channel) ? String(object.channel) : "",
-      timeout_height: isSet(object.timeout_height) ? Long.fromValue(object.timeout_height) : Long.UZERO,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
-  },
-
   toSDK(message: MsgIBCSend): MsgIBCSendSDKType {
     const obj: any = {};
     obj.channel = message.channel;
@@ -317,12 +308,6 @@ export const MsgIBCCloseChannel = {
   fromSDK(object: MsgIBCCloseChannelSDKType): MsgIBCCloseChannel {
     return {
       channel: object?.channel
-    };
-  },
-
-  fromSDKJSON(object: any): MsgIBCCloseChannelSDKType {
-    return {
-      channel: isSet(object.channel) ? String(object.channel) : ""
     };
   },
 

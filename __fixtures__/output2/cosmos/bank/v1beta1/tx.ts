@@ -108,14 +108,6 @@ export const MsgSend = {
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgSendSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -159,10 +151,6 @@ export const MsgSendResponse = {
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgSendResponseSDKType {
-    return {};
   }
 
 };
@@ -243,13 +231,6 @@ export const MsgMultiSend = {
     message.inputs = object.inputs?.map(e => Input.fromPartial(e)) || [];
     message.outputs = object.outputs?.map(e => Output.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgMultiSendSDKType {
-    return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromSDKJSON(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -293,10 +274,6 @@ export const MsgMultiSendResponse = {
   fromPartial(_: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {
     const message = createBaseMsgMultiSendResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgMultiSendResponseSDKType {
-    return {};
   }
 
 };

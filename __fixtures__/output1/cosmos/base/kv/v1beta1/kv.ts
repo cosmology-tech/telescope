@@ -91,12 +91,6 @@ export const Pairs = {
     };
   },
 
-  fromSDKJSON(object: any): PairsSDKType {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Pairs): PairsSDKType {
     const obj: any = {};
 
@@ -182,13 +176,6 @@ export const Pair = {
     return {
       key: object?.key,
       value: object?.value
-    };
-  },
-
-  fromSDKJSON(object: any): PairSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
 

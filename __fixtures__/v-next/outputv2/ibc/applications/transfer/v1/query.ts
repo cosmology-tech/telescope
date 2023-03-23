@@ -253,12 +253,6 @@ export const QueryDenomTraceRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomTraceRequestSDKType {
-    return {
-      hash: isSet(object.hash) ? String(object.hash) : ""
-    };
-  },
-
   toSDK(message: QueryDenomTraceRequest): QueryDenomTraceRequestSDKType {
     const obj: any = {};
     obj.hash = message.hash;
@@ -369,12 +363,6 @@ export const QueryDenomTraceResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomTraceResponseSDKType {
-    return {
-      denom_trace: isSet(object.denom_trace) ? DenomTrace.fromSDKJSON(object.denom_trace) : undefined
-    };
-  },
-
   toSDK(message: QueryDenomTraceResponse): QueryDenomTraceResponseSDKType {
     const obj: any = {};
     message.denomTrace !== undefined && (obj.denom_trace = message.denomTrace ? DenomTrace.toSDK(message.denomTrace) : undefined);
@@ -482,12 +470,6 @@ export const QueryDenomTracesRequest = {
   fromSDK(object: QueryDenomTracesRequestSDKType): QueryDenomTracesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryDenomTracesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -620,13 +602,6 @@ export const QueryDenomTracesResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomTracesResponseSDKType {
-    return {
-      denom_traces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryDenomTracesResponse): QueryDenomTracesResponseSDKType {
     const obj: any = {};
 
@@ -736,10 +711,6 @@ export const QueryParamsRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -843,12 +814,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

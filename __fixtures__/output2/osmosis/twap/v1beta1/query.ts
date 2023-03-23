@@ -130,16 +130,6 @@ export const ArithmeticTwapRequest = {
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ArithmeticTwapRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
-      quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
-      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
-      end_time: isSet(object.end_time) ? fromJsonTimestamp(object.end_time) : undefined
-    };
   }
 
 };
@@ -197,12 +187,6 @@ export const ArithmeticTwapResponse = {
     const message = createBaseArithmeticTwapResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ArithmeticTwapResponseSDKType {
-    return {
-      arithmetic_twap: isSet(object.arithmetic_twap) ? String(object.arithmetic_twap) : ""
-    };
   }
 
 };
@@ -296,15 +280,6 @@ export const ArithmeticTwapToNowRequest = {
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ArithmeticTwapToNowRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
-      quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
-      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined
-    };
   }
 
 };
@@ -362,12 +337,6 @@ export const ArithmeticTwapToNowResponse = {
     const message = createBaseArithmeticTwapToNowResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ArithmeticTwapToNowResponseSDKType {
-    return {
-      arithmetic_twap: isSet(object.arithmetic_twap) ? String(object.arithmetic_twap) : ""
-    };
   }
 
 };
@@ -411,10 +380,6 @@ export const ParamsRequest = {
   fromPartial(_: DeepPartial<ParamsRequest>): ParamsRequest {
     const message = createBaseParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): ParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -472,12 +437,6 @@ export const ParamsResponse = {
     const message = createBaseParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };

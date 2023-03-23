@@ -134,10 +134,6 @@ export const QueryParamsRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -203,12 +199,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
@@ -281,12 +271,6 @@ export const QuerySigningInfoRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
-    return {
-      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
-    };
-  },
-
   toSDK(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
     const obj: any = {};
     obj.cons_address = message.consAddress;
@@ -356,12 +340,6 @@ export const QuerySigningInfoResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QuerySigningInfoResponseSDKType {
-    return {
-      val_signing_info: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.val_signing_info) : undefined
-    };
-  },
-
   toSDK(message: QuerySigningInfoResponse): QuerySigningInfoResponseSDKType {
     const obj: any = {};
     message.valSigningInfo !== undefined && (obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toSDK(message.valSigningInfo) : undefined);
@@ -428,12 +406,6 @@ export const QuerySigningInfosRequest = {
   fromSDK(object: QuerySigningInfosRequestSDKType): QuerySigningInfosRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfosRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -522,13 +494,6 @@ export const QuerySigningInfosResponse = {
     return {
       info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QuerySigningInfosResponseSDKType {
-    return {
-      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

@@ -66,12 +66,6 @@ export const Params = {
     const message = createBaseParams();
     message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : ""
-    };
   }
 
 };

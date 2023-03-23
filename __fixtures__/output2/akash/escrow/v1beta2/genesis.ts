@@ -87,13 +87,6 @@ export const GenesisState = {
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDKJSON(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromSDKJSON(e)) : []
-    };
   }
 
 };

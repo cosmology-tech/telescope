@@ -80,12 +80,6 @@ export const QueryProvidersRequest = {
     const message = createBaseQueryProvidersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProvidersRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -161,13 +155,6 @@ export const QueryProvidersResponse = {
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -225,12 +212,6 @@ export const QueryProviderRequest = {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProviderRequestSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -288,12 +269,6 @@ export const QueryProviderResponse = {
     const message = createBaseQueryProviderResponse();
     message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProviderResponseSDKType {
-    return {
-      provider: isSet(object.provider) ? Provider.fromSDKJSON(object.provider) : undefined
-    };
   }
 
 };

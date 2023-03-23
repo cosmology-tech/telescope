@@ -323,13 +323,6 @@ export const Authentication = {
     message.rules = object.rules?.map(e => AuthenticationRule.fromPartial(e)) || [];
     message.providers = object.providers?.map(e => AuthProvider.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AuthenticationSDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromSDKJSON(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -429,15 +422,6 @@ export const AuthenticationRule = {
     message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AuthenticationRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDKJSON(object.oauth) : undefined,
-      allow_without_credential: isSet(object.allow_without_credential) ? Boolean(object.allow_without_credential) : false,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -519,14 +503,6 @@ export const JwtLocation = {
     message.query = object.query ?? undefined;
     message.valuePrefix = object.valuePrefix ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): JwtLocationSDKType {
-    return {
-      header: isSet(object.header) ? String(object.header) : undefined,
-      query: isSet(object.query) ? String(object.query) : undefined,
-      value_prefix: isSet(object.value_prefix) ? String(object.value_prefix) : ""
-    };
   }
 
 };
@@ -650,17 +626,6 @@ export const AuthProvider = {
     message.authorizationUrl = object.authorizationUrl ?? "";
     message.jwtLocations = object.jwtLocations?.map(e => JwtLocation.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AuthProviderSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      issuer: isSet(object.issuer) ? String(object.issuer) : "",
-      jwks_uri: isSet(object.jwks_uri) ? String(object.jwks_uri) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : "",
-      authorization_url: isSet(object.authorization_url) ? String(object.authorization_url) : "",
-      jwt_locations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -718,12 +683,6 @@ export const OAuthRequirements = {
     const message = createBaseOAuthRequirements();
     message.canonicalScopes = object.canonicalScopes ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): OAuthRequirementsSDKType {
-    return {
-      canonical_scopes: isSet(object.canonical_scopes) ? String(object.canonical_scopes) : ""
-    };
   }
 
 };
@@ -793,13 +752,6 @@ export const AuthRequirement = {
     message.providerId = object.providerId ?? "";
     message.audiences = object.audiences ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): AuthRequirementSDKType {
-    return {
-      provider_id: isSet(object.provider_id) ? String(object.provider_id) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : ""
-    };
   }
 
 };

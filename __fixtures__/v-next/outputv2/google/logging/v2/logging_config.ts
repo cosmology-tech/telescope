@@ -3516,20 +3516,6 @@ export const LogBucket = {
     };
   },
 
-  fromSDKJSON(object: any): LogBucketSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      retention_days: isSet(object.retention_days) ? Number(object.retention_days) : 0,
-      locked: isSet(object.locked) ? Boolean(object.locked) : false,
-      lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
-      restricted_fields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => String(e)) : [],
-      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined
-    };
-  },
-
   toSDK(message: LogBucket): LogBucketSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -3717,16 +3703,6 @@ export const LogView = {
       createTime: object.create_time ?? undefined,
       updateTime: object.update_time ?? undefined,
       filter: object?.filter
-    };
-  },
-
-  fromSDKJSON(object: any): LogViewSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
 
@@ -3993,23 +3969,6 @@ export const LogSink = {
     };
   },
 
-  fromSDKJSON(object: any): LogSinkSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      destination: isSet(object.destination) ? String(object.destination) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
-      output_version_format: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
-      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : "",
-      include_children: isSet(object.include_children) ? Boolean(object.include_children) : false,
-      bigquery_options: isSet(object.bigquery_options) ? BigQueryOptions.fromSDKJSON(object.bigquery_options) : undefined,
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
-    };
-  },
-
   toSDK(message: LogSink): LogSinkSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -4170,13 +4129,6 @@ export const BigQueryOptions = {
     };
   },
 
-  fromSDKJSON(object: any): BigQueryOptionsSDKType {
-    return {
-      use_partitioned_tables: isSet(object.use_partitioned_tables) ? Boolean(object.use_partitioned_tables) : false,
-      uses_timestamp_column_partitioning: isSet(object.uses_timestamp_column_partitioning) ? Boolean(object.uses_timestamp_column_partitioning) : false
-    };
-  },
-
   toSDK(message: BigQueryOptions): BigQueryOptionsSDKType {
     const obj: any = {};
     obj.use_partitioned_tables = message.usePartitionedTables;
@@ -4308,14 +4260,6 @@ export const ListBucketsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListBucketsRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-
   toSDK(message: ListBucketsRequest): ListBucketsRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -4440,13 +4384,6 @@ export const ListBucketsResponse = {
     return {
       buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDK(e)) : [],
       nextPageToken: object?.next_page_token
-    };
-  },
-
-  fromSDKJSON(object: any): ListBucketsResponseSDKType {
-    return {
-      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
 
@@ -4593,14 +4530,6 @@ export const CreateBucketRequest = {
     };
   },
 
-  fromSDKJSON(object: any): CreateBucketRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      bucket_id: isSet(object.bucket_id) ? String(object.bucket_id) : "",
-      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined
-    };
-  },
-
   toSDK(message: CreateBucketRequest): CreateBucketRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -4735,14 +4664,6 @@ export const UpdateBucketRequest = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateBucketRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
-    };
-  },
-
   toSDK(message: UpdateBucketRequest): UpdateBucketRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -4851,12 +4772,6 @@ export const GetBucketRequest = {
     };
   },
 
-  fromSDKJSON(object: any): GetBucketRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: GetBucketRequest): GetBucketRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -4959,12 +4874,6 @@ export const DeleteBucketRequest = {
     };
   },
 
-  fromSDKJSON(object: any): DeleteBucketRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: DeleteBucketRequest): DeleteBucketRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -5064,12 +4973,6 @@ export const UndeleteBucketRequest = {
   fromSDK(object: UndeleteBucketRequestSDKType): UndeleteBucketRequest {
     return {
       name: object?.name
-    };
-  },
-
-  fromSDKJSON(object: any): UndeleteBucketRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -5201,14 +5104,6 @@ export const ListViewsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListViewsRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-
   toSDK(message: ListViewsRequest): ListViewsRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -5333,13 +5228,6 @@ export const ListViewsResponse = {
     return {
       views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDK(e)) : [],
       nextPageToken: object?.next_page_token
-    };
-  },
-
-  fromSDKJSON(object: any): ListViewsResponseSDKType {
-    return {
-      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
     };
   },
 
@@ -5486,14 +5374,6 @@ export const CreateViewRequest = {
     };
   },
 
-  fromSDKJSON(object: any): CreateViewRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      view_id: isSet(object.view_id) ? String(object.view_id) : "",
-      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined
-    };
-  },
-
   toSDK(message: CreateViewRequest): CreateViewRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -5628,14 +5508,6 @@ export const UpdateViewRequest = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateViewRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
-    };
-  },
-
   toSDK(message: UpdateViewRequest): UpdateViewRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -5744,12 +5616,6 @@ export const GetViewRequest = {
     };
   },
 
-  fromSDKJSON(object: any): GetViewRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: GetViewRequest): GetViewRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -5849,12 +5715,6 @@ export const DeleteViewRequest = {
   fromSDK(object: DeleteViewRequestSDKType): DeleteViewRequest {
     return {
       name: object?.name
-    };
-  },
-
-  fromSDKJSON(object: any): DeleteViewRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -5986,14 +5846,6 @@ export const ListSinksRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListSinksRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-
   toSDK(message: ListSinksRequest): ListSinksRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -6121,13 +5973,6 @@ export const ListSinksResponse = {
     };
   },
 
-  fromSDKJSON(object: any): ListSinksResponseSDKType {
-    return {
-      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-
   toSDK(message: ListSinksResponse): ListSinksResponseSDKType {
     const obj: any = {};
 
@@ -6242,12 +6087,6 @@ export const GetSinkRequest = {
   fromSDK(object: GetSinkRequestSDKType): GetSinkRequest {
     return {
       sinkName: object?.sink_name
-    };
-  },
-
-  fromSDKJSON(object: any): GetSinkRequestSDKType {
-    return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
     };
   },
 
@@ -6376,14 +6215,6 @@ export const CreateSinkRequest = {
       parent: object?.parent,
       sink: object.sink ? LogSink.fromSDK(object.sink) : undefined,
       uniqueWriterIdentity: object?.unique_writer_identity
-    };
-  },
-
-  fromSDKJSON(object: any): CreateSinkRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
-      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false
     };
   },
 
@@ -6534,15 +6365,6 @@ export const UpdateSinkRequest = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateSinkRequestSDKType {
-    return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : "",
-      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
-      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
-    };
-  },
-
   toSDK(message: UpdateSinkRequest): UpdateSinkRequestSDKType {
     const obj: any = {};
     obj.sink_name = message.sinkName;
@@ -6651,12 +6473,6 @@ export const DeleteSinkRequest = {
   fromSDK(object: DeleteSinkRequestSDKType): DeleteSinkRequest {
     return {
       sinkName: object?.sink_name
-    };
-  },
-
-  fromSDKJSON(object: any): DeleteSinkRequestSDKType {
-    return {
-      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
     };
   },
 
@@ -6827,17 +6643,6 @@ export const LogExclusion = {
     };
   },
 
-  fromSDKJSON(object: any): LogExclusionSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
-    };
-  },
-
   toSDK(message: LogExclusion): LogExclusionSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -6981,14 +6786,6 @@ export const ListExclusionsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListExclusionsRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-
   toSDK(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -7116,13 +6913,6 @@ export const ListExclusionsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): ListExclusionsResponseSDKType {
-    return {
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-
   toSDK(message: ListExclusionsResponse): ListExclusionsResponseSDKType {
     const obj: any = {};
 
@@ -7240,12 +7030,6 @@ export const GetExclusionRequest = {
     };
   },
 
-  fromSDKJSON(object: any): GetExclusionRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: GetExclusionRequest): GetExclusionRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -7358,13 +7142,6 @@ export const CreateExclusionRequest = {
     return {
       parent: object?.parent,
       exclusion: object.exclusion ? LogExclusion.fromSDK(object.exclusion) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): CreateExclusionRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined
     };
   },
 
@@ -7499,14 +7276,6 @@ export const UpdateExclusionRequest = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateExclusionRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
-    };
-  },
-
   toSDK(message: UpdateExclusionRequest): UpdateExclusionRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -7615,12 +7384,6 @@ export const DeleteExclusionRequest = {
     };
   },
 
-  fromSDKJSON(object: any): DeleteExclusionRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: DeleteExclusionRequest): DeleteExclusionRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -7720,12 +7483,6 @@ export const GetCmekSettingsRequest = {
   fromSDK(object: GetCmekSettingsRequestSDKType): GetCmekSettingsRequest {
     return {
       name: object?.name
-    };
-  },
-
-  fromSDKJSON(object: any): GetCmekSettingsRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -7854,14 +7611,6 @@ export const UpdateCmekSettingsRequest = {
       name: object?.name,
       cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
       updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): UpdateCmekSettingsRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
   },
 
@@ -7999,14 +7748,6 @@ export const CmekSettings = {
     };
   },
 
-  fromSDKJSON(object: any): CmekSettingsSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
-      service_account_id: isSet(object.service_account_id) ? String(object.service_account_id) : ""
-    };
-  },
-
   toSDK(message: CmekSettings): CmekSettingsSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -8112,12 +7853,6 @@ export const GetSettingsRequest = {
   fromSDK(object: GetSettingsRequestSDKType): GetSettingsRequest {
     return {
       name: object?.name
-    };
-  },
-
-  fromSDKJSON(object: any): GetSettingsRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
     };
   },
 
@@ -8246,14 +7981,6 @@ export const UpdateSettingsRequest = {
       name: object?.name,
       settings: object.settings ? Settings.fromSDK(object.settings) : undefined,
       updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): UpdateSettingsRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      settings: isSet(object.settings) ? Settings.fromSDKJSON(object.settings) : undefined,
-      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
     };
   },
 
@@ -8417,16 +8144,6 @@ export const Settings = {
     };
   },
 
-  fromSDKJSON(object: any): SettingsSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
-      kms_service_account_id: isSet(object.kms_service_account_id) ? String(object.kms_service_account_id) : "",
-      storage_location: isSet(object.storage_location) ? String(object.storage_location) : "",
-      disable_default_sink: isSet(object.disable_default_sink) ? Boolean(object.disable_default_sink) : false
-    };
-  },
-
   toSDK(message: Settings): SettingsSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -8564,14 +8281,6 @@ export const CopyLogEntriesRequest = {
       name: object?.name,
       filter: object?.filter,
       destination: object?.destination
-    };
-  },
-
-  fromSDKJSON(object: any): CopyLogEntriesRequestSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      destination: isSet(object.destination) ? String(object.destination) : ""
     };
   },
 
@@ -8761,18 +8470,6 @@ export const CopyLogEntriesMetadata = {
     };
   },
 
-  fromSDKJSON(object: any): CopyLogEntriesMetadataSDKType {
-    return {
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
-      cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : false,
-      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDKJSON(object.request) : undefined,
-      progress: isSet(object.progress) ? Number(object.progress) : 0,
-      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : ""
-    };
-  },
-
   toSDK(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataSDKType {
     const obj: any = {};
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
@@ -8890,12 +8587,6 @@ export const CopyLogEntriesResponse = {
   fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {
     return {
       logEntriesCopiedCount: object?.log_entries_copied_count
-    };
-  },
-
-  fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
-    return {
-      log_entries_copied_count: isSet(object.log_entries_copied_count) ? Long.fromValue(object.log_entries_copied_count) : Long.ZERO
     };
   },
 

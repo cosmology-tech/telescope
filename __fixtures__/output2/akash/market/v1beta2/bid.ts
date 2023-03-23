@@ -213,15 +213,6 @@ export const MsgCreateBid = {
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateBidSDKType {
-    return {
-      order: isSet(object.order) ? OrderID.fromSDKJSON(object.order) : undefined,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
-    };
   }
 
 };
@@ -265,10 +256,6 @@ export const MsgCreateBidResponse = {
   fromPartial(_: DeepPartial<MsgCreateBidResponse>): MsgCreateBidResponse {
     const message = createBaseMsgCreateBidResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateBidResponseSDKType {
-    return {};
   }
 
 };
@@ -326,12 +313,6 @@ export const MsgCloseBid = {
     const message = createBaseMsgCloseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCloseBidSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
-    };
   }
 
 };
@@ -375,10 +356,6 @@ export const MsgCloseBidResponse = {
   fromPartial(_: DeepPartial<MsgCloseBidResponse>): MsgCloseBidResponse {
     const message = createBaseMsgCloseBidResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCloseBidResponseSDKType {
-    return {};
   }
 
 };
@@ -484,16 +461,6 @@ export const BidID = {
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): BidIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
   }
 
 };
@@ -587,15 +554,6 @@ export const Bid = {
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): BidSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
-    };
   }
 
 };
@@ -713,17 +671,6 @@ export const BidFilters = {
     message.provider = object.provider ?? "";
     message.state = object.state ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): BidFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
   }
 
 };

@@ -178,14 +178,6 @@ export const Usage = {
     message.rules = object.rules?.map(e => UsageRule.fromPartial(e)) || [];
     message.producerNotificationChannel = object.producerNotificationChannel ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): UsageSDKType {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDKJSON(e)) : [],
-      producer_notification_channel: isSet(object.producer_notification_channel) ? String(object.producer_notification_channel) : ""
-    };
   }
 
 };
@@ -267,14 +259,6 @@ export const UsageRule = {
     message.allowUnregisteredCalls = object.allowUnregisteredCalls ?? false;
     message.skipServiceControl = object.skipServiceControl ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): UsageRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      allow_unregistered_calls: isSet(object.allow_unregistered_calls) ? Boolean(object.allow_unregistered_calls) : false,
-      skip_service_control: isSet(object.skip_service_control) ? Boolean(object.skip_service_control) : false
-    };
   }
 
 };

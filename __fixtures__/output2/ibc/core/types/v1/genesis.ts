@@ -96,14 +96,6 @@ export const GenesisState = {
     message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : undefined;
     message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      client_genesis: isSet(object.client_genesis) ? GenesisState1.fromSDKJSON(object.client_genesis) : undefined,
-      connection_genesis: isSet(object.connection_genesis) ? GenesisState2.fromSDKJSON(object.connection_genesis) : undefined,
-      channel_genesis: isSet(object.channel_genesis) ? GenesisState3.fromSDKJSON(object.channel_genesis) : undefined
-    };
   }
 
 };

@@ -696,14 +696,6 @@ export const MsgChannelOpenInit = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelOpenInitSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel: isSet(object.channel) ? Channel.fromSDKJSON(object.channel) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelOpenInit): MsgChannelOpenInitSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -801,10 +793,6 @@ export const MsgChannelOpenInitResponse = {
   },
 
   fromSDK(_: MsgChannelOpenInitResponseSDKType): MsgChannelOpenInitResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelOpenInitResponseSDKType {
     return {};
   },
 
@@ -992,18 +980,6 @@ export const MsgChannelOpenTry = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelOpenTrySDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      previous_channel_id: isSet(object.previous_channel_id) ? String(object.previous_channel_id) : "",
-      channel: isSet(object.channel) ? Channel.fromSDKJSON(object.channel) : undefined,
-      counterparty_version: isSet(object.counterparty_version) ? String(object.counterparty_version) : "",
-      proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelOpenTry): MsgChannelOpenTrySDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1113,10 +1089,6 @@ export const MsgChannelOpenTryResponse = {
   },
 
   fromSDK(_: MsgChannelOpenTryResponseSDKType): MsgChannelOpenTryResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelOpenTryResponseSDKType {
     return {};
   },
 
@@ -1304,18 +1276,6 @@ export const MsgChannelOpenAck = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelOpenAckSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      counterparty_channel_id: isSet(object.counterparty_channel_id) ? String(object.counterparty_channel_id) : "",
-      counterparty_version: isSet(object.counterparty_version) ? String(object.counterparty_version) : "",
-      proof_try: isSet(object.proof_try) ? bytesFromBase64(object.proof_try) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelOpenAck): MsgChannelOpenAckSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1425,10 +1385,6 @@ export const MsgChannelOpenAckResponse = {
   },
 
   fromSDK(_: MsgChannelOpenAckResponseSDKType): MsgChannelOpenAckResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelOpenAckResponseSDKType {
     return {};
   },
 
@@ -1590,16 +1546,6 @@ export const MsgChannelOpenConfirm = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelOpenConfirmSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      proof_ack: isSet(object.proof_ack) ? bytesFromBase64(object.proof_ack) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1703,10 +1649,6 @@ export const MsgChannelOpenConfirmResponse = {
   },
 
   fromSDK(_: MsgChannelOpenConfirmResponseSDKType): MsgChannelOpenConfirmResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelOpenConfirmResponseSDKType {
     return {};
   },
 
@@ -1842,14 +1784,6 @@ export const MsgChannelCloseInit = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelCloseInitSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelCloseInit): MsgChannelCloseInitSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1947,10 +1881,6 @@ export const MsgChannelCloseInitResponse = {
   },
 
   fromSDK(_: MsgChannelCloseInitResponseSDKType): MsgChannelCloseInitResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelCloseInitResponseSDKType {
     return {};
   },
 
@@ -2112,16 +2042,6 @@ export const MsgChannelCloseConfirm = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChannelCloseConfirmSDKType {
-    return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -2225,10 +2145,6 @@ export const MsgChannelCloseConfirmResponse = {
   },
 
   fromSDK(_: MsgChannelCloseConfirmResponseSDKType): MsgChannelCloseConfirmResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChannelCloseConfirmResponseSDKType {
     return {};
   },
 
@@ -2377,15 +2293,6 @@ export const MsgRecvPacket = {
     };
   },
 
-  fromSDKJSON(object: any): MsgRecvPacketSDKType {
-    return {
-      packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
-      proof_commitment: isSet(object.proof_commitment) ? bytesFromBase64(object.proof_commitment) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgRecvPacket): MsgRecvPacketSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -2486,10 +2393,6 @@ export const MsgRecvPacketResponse = {
   },
 
   fromSDK(_: MsgRecvPacketResponseSDKType): MsgRecvPacketResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgRecvPacketResponseSDKType {
     return {};
   },
 
@@ -2651,16 +2554,6 @@ export const MsgTimeout = {
     };
   },
 
-  fromSDKJSON(object: any): MsgTimeoutSDKType {
-    return {
-      packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
-      proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? Long.fromValue(object.next_sequence_recv) : Long.UZERO,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgTimeout): MsgTimeoutSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -2764,10 +2657,6 @@ export const MsgTimeoutResponse = {
   },
 
   fromSDK(_: MsgTimeoutResponseSDKType): MsgTimeoutResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgTimeoutResponseSDKType {
     return {};
   },
 
@@ -2942,17 +2831,6 @@ export const MsgTimeoutOnClose = {
     };
   },
 
-  fromSDKJSON(object: any): MsgTimeoutOnCloseSDKType {
-    return {
-      packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
-      proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
-      proof_close: isSet(object.proof_close) ? bytesFromBase64(object.proof_close) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? Long.fromValue(object.next_sequence_recv) : Long.UZERO,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgTimeoutOnClose): MsgTimeoutOnCloseSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -3059,10 +2937,6 @@ export const MsgTimeoutOnCloseResponse = {
   },
 
   fromSDK(_: MsgTimeoutOnCloseResponseSDKType): MsgTimeoutOnCloseResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgTimeoutOnCloseResponseSDKType {
     return {};
   },
 
@@ -3224,16 +3098,6 @@ export const MsgAcknowledgement = {
     };
   },
 
-  fromSDKJSON(object: any): MsgAcknowledgementSDKType {
-    return {
-      packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
-      acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array(),
-      proof_acked: isSet(object.proof_acked) ? bytesFromBase64(object.proof_acked) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
-  },
-
   toSDK(message: MsgAcknowledgement): MsgAcknowledgementSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -3337,10 +3201,6 @@ export const MsgAcknowledgementResponse = {
   },
 
   fromSDK(_: MsgAcknowledgementResponseSDKType): MsgAcknowledgementResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgAcknowledgementResponseSDKType {
     return {};
   },
 

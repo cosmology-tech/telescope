@@ -87,13 +87,6 @@ export const Params = {
     message.hostEnabled = object.hostEnabled ?? false;
     message.allowMessages = object.allowMessages?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      host_enabled: isSet(object.host_enabled) ? Boolean(object.host_enabled) : false,
-      allow_messages: Array.isArray(object?.allow_messages) ? object.allow_messages.map((e: any) => String(e)) : []
-    };
   }
 
 };

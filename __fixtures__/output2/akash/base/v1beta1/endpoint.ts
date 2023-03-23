@@ -101,12 +101,6 @@ export const Endpoint = {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): EndpointSDKType {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
-    };
   }
 
 };

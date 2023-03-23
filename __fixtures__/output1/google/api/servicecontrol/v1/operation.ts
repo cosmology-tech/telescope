@@ -243,13 +243,6 @@ export const Operation_LabelsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): Operation_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
   toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -483,26 +476,6 @@ export const Operation = {
       logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
       importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): OperationSDKType {
-    return {
-      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
-      operation_name: isSet(object.operation_name) ? String(object.operation_name) : "",
-      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metric_value_sets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
-      log_entries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
 

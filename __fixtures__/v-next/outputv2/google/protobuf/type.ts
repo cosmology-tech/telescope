@@ -774,17 +774,6 @@ export const Type = {
     };
   },
 
-  fromSDKJSON(object: any): TypeSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDKJSON(e)) : [],
-      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
-      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
-    };
-  },
-
   toSDK(message: Type): TypeSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1057,21 +1046,6 @@ export const Field = {
     };
   },
 
-  fromSDKJSON(object: any): FieldSDKType {
-    return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
-      number: isSet(object.number) ? Number(object.number) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      type_url: isSet(object.type_url) ? String(object.type_url) : "",
-      oneof_index: isSet(object.oneof_index) ? Number(object.oneof_index) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
-      json_name: isSet(object.json_name) ? String(object.json_name) : "",
-      default_value: isSet(object.default_value) ? String(object.default_value) : ""
-    };
-  },
-
   toSDK(message: Field): FieldSDKType {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
@@ -1276,16 +1250,6 @@ export const Enum = {
     };
   },
 
-  fromSDKJSON(object: any): EnumSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDKJSON(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
-      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
-    };
-  },
-
   toSDK(message: Enum): EnumSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1454,14 +1418,6 @@ export const EnumValue = {
     };
   },
 
-  fromSDKJSON(object: any): EnumValueSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: EnumValue): EnumValueSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1592,13 +1548,6 @@ export const Option = {
     return {
       name: object?.name,
       value: object.value ? Any.fromSDK(object.value) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): OptionSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      value: isSet(object.value) ? Any.fromSDKJSON(object.value) : undefined
     };
   },
 

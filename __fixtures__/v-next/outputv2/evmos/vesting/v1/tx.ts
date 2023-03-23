@@ -320,17 +320,6 @@ export const MsgCreateClawbackVestingAccount = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateClawbackVestingAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
-      merge: isSet(object.merge) ? Boolean(object.merge) : false
-    };
-  },
-
   toSDK(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountSDKType {
     const obj: any = {};
     obj.from_address = message.fromAddress;
@@ -451,10 +440,6 @@ export const MsgCreateClawbackVestingAccountResponse = {
   },
 
   fromSDK(_: MsgCreateClawbackVestingAccountResponseSDKType): MsgCreateClawbackVestingAccountResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreateClawbackVestingAccountResponseSDKType {
     return {};
   },
 
@@ -582,14 +567,6 @@ export const MsgClawback = {
     };
   },
 
-  fromSDKJSON(object: any): MsgClawbackSDKType {
-    return {
-      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
-      account_address: isSet(object.account_address) ? String(object.account_address) : "",
-      dest_address: isSet(object.dest_address) ? String(object.dest_address) : ""
-    };
-  },
-
   toSDK(message: MsgClawback): MsgClawbackSDKType {
     const obj: any = {};
     obj.funder_address = message.funderAddress;
@@ -679,10 +656,6 @@ export const MsgClawbackResponse = {
   },
 
   fromSDK(_: MsgClawbackResponseSDKType): MsgClawbackResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgClawbackResponseSDKType {
     return {};
   },
 

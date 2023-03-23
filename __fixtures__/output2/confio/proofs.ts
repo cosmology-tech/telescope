@@ -472,15 +472,6 @@ export const ExistenceProof = {
     message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : undefined;
     message.path = object.path?.map(e => InnerOp.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ExistenceProofSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      leaf: isSet(object.leaf) ? LeafOp.fromSDKJSON(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -562,14 +553,6 @@ export const NonExistenceProof = {
     message.left = object.left !== undefined && object.left !== null ? ExistenceProof.fromPartial(object.left) : undefined;
     message.right = object.right !== undefined && object.right !== null ? ExistenceProof.fromPartial(object.right) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): NonExistenceProofSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      left: isSet(object.left) ? ExistenceProof.fromSDKJSON(object.left) : undefined,
-      right: isSet(object.right) ? ExistenceProof.fromSDKJSON(object.right) : undefined
-    };
   }
 
 };
@@ -663,15 +646,6 @@ export const CommitmentProof = {
     message.batch = object.batch !== undefined && object.batch !== null ? BatchProof.fromPartial(object.batch) : undefined;
     message.compressed = object.compressed !== undefined && object.compressed !== null ? CompressedBatchProof.fromPartial(object.compressed) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CommitmentProofSDKType {
-    return {
-      exist: isSet(object.exist) ? ExistenceProof.fromSDKJSON(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromSDKJSON(object.nonexist) : undefined,
-      batch: isSet(object.batch) ? BatchProof.fromSDKJSON(object.batch) : undefined,
-      compressed: isSet(object.compressed) ? CompressedBatchProof.fromSDKJSON(object.compressed) : undefined
-    };
   }
 
 };
@@ -777,16 +751,6 @@ export const LeafOp = {
     message.length = object.length ?? 0;
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): LeafOpSDKType {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
-    };
   }
 
 };
@@ -868,14 +832,6 @@ export const InnerOp = {
     message.prefix = object.prefix ?? new Uint8Array();
     message.suffix = object.suffix ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): InnerOpSDKType {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(),
-      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array()
-    };
   }
 
 };
@@ -969,15 +925,6 @@ export const ProofSpec = {
     message.maxDepth = object.maxDepth ?? 0;
     message.minDepth = object.minDepth ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): ProofSpecSDKType {
-    return {
-      leaf_spec: isSet(object.leaf_spec) ? LeafOp.fromSDKJSON(object.leaf_spec) : undefined,
-      inner_spec: isSet(object.inner_spec) ? InnerSpec.fromSDKJSON(object.inner_spec) : undefined,
-      max_depth: isSet(object.max_depth) ? Number(object.max_depth) : 0,
-      min_depth: isSet(object.min_depth) ? Number(object.min_depth) : 0
-    };
   }
 
 };
@@ -1114,17 +1061,6 @@ export const InnerSpec = {
     message.emptyChild = object.emptyChild ?? new Uint8Array();
     message.hash = object.hash ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): InnerSpecSDKType {
-    return {
-      child_order: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => Number(e)) : [],
-      child_size: isSet(object.child_size) ? Number(object.child_size) : 0,
-      min_prefix_length: isSet(object.min_prefix_length) ? Number(object.min_prefix_length) : 0,
-      max_prefix_length: isSet(object.max_prefix_length) ? Number(object.max_prefix_length) : 0,
-      empty_child: isSet(object.empty_child) ? bytesFromBase64(object.empty_child) : new Uint8Array(),
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
-    };
   }
 
 };
@@ -1188,12 +1124,6 @@ export const BatchProof = {
     const message = createBaseBatchProof();
     message.entries = object.entries?.map(e => BatchEntry.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): BatchProofSDKType {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => BatchEntry.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1263,13 +1193,6 @@ export const BatchEntry = {
     message.exist = object.exist !== undefined && object.exist !== null ? ExistenceProof.fromPartial(object.exist) : undefined;
     message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? NonExistenceProof.fromPartial(object.nonexist) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): BatchEntrySDKType {
-    return {
-      exist: isSet(object.exist) ? ExistenceProof.fromSDKJSON(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromSDKJSON(object.nonexist) : undefined
-    };
   }
 
 };
@@ -1350,13 +1273,6 @@ export const CompressedBatchProof = {
     message.entries = object.entries?.map(e => CompressedBatchEntry.fromPartial(e)) || [];
     message.lookupInners = object.lookupInners?.map(e => InnerOp.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): CompressedBatchProofSDKType {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CompressedBatchEntry.fromSDKJSON(e)) : [],
-      lookup_inners: Array.isArray(object?.lookup_inners) ? object.lookup_inners.map((e: any) => InnerOp.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1426,13 +1342,6 @@ export const CompressedBatchEntry = {
     message.exist = object.exist !== undefined && object.exist !== null ? CompressedExistenceProof.fromPartial(object.exist) : undefined;
     message.nonexist = object.nonexist !== undefined && object.nonexist !== null ? CompressedNonExistenceProof.fromPartial(object.nonexist) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CompressedBatchEntrySDKType {
-    return {
-      exist: isSet(object.exist) ? CompressedExistenceProof.fromSDKJSON(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? CompressedNonExistenceProof.fromSDKJSON(object.nonexist) : undefined
-    };
   }
 
 };
@@ -1544,15 +1453,6 @@ export const CompressedExistenceProof = {
     message.leaf = object.leaf !== undefined && object.leaf !== null ? LeafOp.fromPartial(object.leaf) : undefined;
     message.path = object.path?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): CompressedExistenceProofSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      leaf: isSet(object.leaf) ? LeafOp.fromSDKJSON(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : []
-    };
   }
 
 };
@@ -1634,14 +1534,6 @@ export const CompressedNonExistenceProof = {
     message.left = object.left !== undefined && object.left !== null ? CompressedExistenceProof.fromPartial(object.left) : undefined;
     message.right = object.right !== undefined && object.right !== null ? CompressedExistenceProof.fromPartial(object.right) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CompressedNonExistenceProofSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      left: isSet(object.left) ? CompressedExistenceProof.fromSDKJSON(object.left) : undefined,
-      right: isSet(object.right) ? CompressedExistenceProof.fromSDKJSON(object.right) : undefined
-    };
   }
 
 };

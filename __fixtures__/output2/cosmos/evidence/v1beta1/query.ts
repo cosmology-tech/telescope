@@ -92,12 +92,6 @@ export const QueryEvidenceRequest = {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryEvidenceRequestSDKType {
-    return {
-      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
-    };
   }
 
 };
@@ -155,12 +149,6 @@ export const QueryEvidenceResponse = {
     const message = createBaseQueryEvidenceResponse();
     message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryEvidenceResponseSDKType {
-    return {
-      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
-    };
   }
 
 };
@@ -218,12 +206,6 @@ export const QueryAllEvidenceRequest = {
     const message = createBaseQueryAllEvidenceRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryAllEvidenceRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -299,13 +281,6 @@ export const QueryAllEvidenceResponse = {
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryAllEvidenceResponseSDKType {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };

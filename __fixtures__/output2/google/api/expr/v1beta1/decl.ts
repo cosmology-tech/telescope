@@ -165,16 +165,6 @@ export const Decl = {
     message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
     message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): DeclSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      doc: isSet(object.doc) ? String(object.doc) : "",
-      ident: isSet(object.ident) ? IdentDecl.fromSDKJSON(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromSDKJSON(object.function) : undefined
-    };
   }
 
 };
@@ -262,14 +252,6 @@ export const DeclType = {
     message.type = object.type ?? "";
     message.typeParams = object.typeParams?.map(e => DeclType.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): DeclTypeSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      type: isSet(object.type) ? String(object.type) : "",
-      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -339,13 +321,6 @@ export const IdentDecl = {
     message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): IdentDeclSDKType {
-    return {
-      type: isSet(object.type) ? DeclType.fromSDKJSON(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
-    };
   }
 
 };
@@ -433,14 +408,6 @@ export const FunctionDecl = {
     message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : undefined;
     message.receiverFunction = object.receiverFunction ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): FunctionDeclSDKType {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDKJSON(e)) : [],
-      return_type: isSet(object.return_type) ? DeclType.fromSDKJSON(object.return_type) : undefined,
-      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : false
-    };
   }
 
 };

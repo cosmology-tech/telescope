@@ -114,14 +114,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      inflation_decay_factor: isSet(object.inflation_decay_factor) ? String(object.inflation_decay_factor) : "",
-      initial_inflation: isSet(object.initial_inflation) ? String(object.initial_inflation) : "",
-      variance: isSet(object.variance) ? String(object.variance) : ""
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.inflation_decay_factor = message.inflationDecayFactor;

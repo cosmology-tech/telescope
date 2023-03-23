@@ -122,15 +122,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      airdrop_start_time: isSet(object.airdrop_start_time) ? new Date(object.airdrop_start_time) : undefined,
-      duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
-      duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
-      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : ""
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ?? undefined);

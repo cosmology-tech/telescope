@@ -370,16 +370,6 @@ export const Plan = {
     };
   },
 
-  fromSDKJSON(object: any): PlanSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      info: isSet(object.info) ? String(object.info) : "",
-      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
-    };
-  },
-
   toSDK(message: Plan): PlanSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -528,14 +518,6 @@ export const SoftwareUpgradeProposal = {
     };
   },
 
-  fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
-    };
-  },
-
   toSDK(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -665,13 +647,6 @@ export const CancelSoftwareUpgradeProposal = {
     };
   },
 
-  fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
-  },
-
   toSDK(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -795,13 +770,6 @@ export const ModuleVersion = {
     return {
       name: object?.name,
       version: object?.version
-    };
-  },
-
-  fromSDKJSON(object: any): ModuleVersionSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
     };
   },
 

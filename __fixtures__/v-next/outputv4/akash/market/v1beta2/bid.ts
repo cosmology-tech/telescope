@@ -272,15 +272,6 @@ export const MsgCreateBid = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateBidSDKType {
-    return {
-      order: isSet(object.order) ? OrderID.fromSDKJSON(object.order) : undefined,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
-    };
-  },
-
   toSDK(message: MsgCreateBid): MsgCreateBidSDKType {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? OrderID.toSDK(message.order) : undefined);
@@ -334,10 +325,6 @@ export const MsgCreateBidResponse = {
   },
 
   fromSDK(_: MsgCreateBidResponseSDKType): MsgCreateBidResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreateBidResponseSDKType {
     return {};
   },
 
@@ -409,12 +396,6 @@ export const MsgCloseBid = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCloseBidSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
-    };
-  },
-
   toSDK(message: MsgCloseBid): MsgCloseBidSDKType {
     const obj: any = {};
     message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
@@ -465,10 +446,6 @@ export const MsgCloseBidResponse = {
   },
 
   fromSDK(_: MsgCloseBidResponseSDKType): MsgCloseBidResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCloseBidResponseSDKType {
     return {};
   },
 
@@ -592,16 +569,6 @@ export const BidID = {
     };
   },
 
-  fromSDKJSON(object: any): BidIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
-  },
-
   toSDK(message: BidID): BidIDSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -711,15 +678,6 @@ export const Bid = {
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at
-    };
-  },
-
-  fromSDKJSON(object: any): BidSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
     };
   },
 
@@ -857,17 +815,6 @@ export const BidFilters = {
       oseq: object?.oseq,
       provider: object?.provider,
       state: object?.state
-    };
-  },
-
-  fromSDKJSON(object: any): BidFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
     };
   },
 

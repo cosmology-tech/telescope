@@ -317,14 +317,6 @@ export const MsgSuperfluidDelegate = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSuperfluidDelegateSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
-      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
-    };
-  },
-
   toSDK(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -422,10 +414,6 @@ export const MsgSuperfluidDelegateResponse = {
   },
 
   fromSDK(_: MsgSuperfluidDelegateResponseSDKType): MsgSuperfluidDelegateResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgSuperfluidDelegateResponseSDKType {
     return {};
   },
 
@@ -548,13 +536,6 @@ export const MsgSuperfluidUndelegate = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSuperfluidUndelegateSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -649,10 +630,6 @@ export const MsgSuperfluidUndelegateResponse = {
   },
 
   fromSDK(_: MsgSuperfluidUndelegateResponseSDKType): MsgSuperfluidUndelegateResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgSuperfluidUndelegateResponseSDKType {
     return {};
   },
 
@@ -775,13 +752,6 @@ export const MsgSuperfluidUnbondLock = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSuperfluidUnbondLockSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -876,10 +846,6 @@ export const MsgSuperfluidUnbondLockResponse = {
   },
 
   fromSDK(_: MsgSuperfluidUnbondLockResponseSDKType): MsgSuperfluidUnbondLockResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgSuperfluidUnbondLockResponseSDKType {
     return {};
   },
 
@@ -1021,14 +987,6 @@ export const MsgLockAndSuperfluidDelegate = {
     };
   },
 
-  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
-    };
-  },
-
   toSDK(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -1157,12 +1115,6 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     };
   },
 
-  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateResponseSDKType {
-    return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
-    };
-  },
-
   toSDK(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
     const obj: any = {};
     obj.ID = message.ID;
@@ -1283,13 +1235,6 @@ export const MsgUnPoolWhitelistedPool = {
     return {
       sender: object?.sender,
       poolId: object?.pool_id
-    };
-  },
-
-  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
     };
   },
 
@@ -1421,12 +1366,6 @@ export const MsgUnPoolWhitelistedPoolResponse = {
   fromSDK(object: MsgUnPoolWhitelistedPoolResponseSDKType): MsgUnPoolWhitelistedPoolResponse {
     return {
       exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolResponseSDKType {
-    return {
-      exited_lock_ids: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

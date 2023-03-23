@@ -93,10 +93,6 @@ export const QueryParamsRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -200,12 +196,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 

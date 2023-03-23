@@ -117,14 +117,6 @@ export const DevFeeInfo = {
     };
   },
 
-  fromSDKJSON(object: any): DevFeeInfoSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
-    };
-  },
-
   toSDK(message: DevFeeInfo): DevFeeInfoSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;

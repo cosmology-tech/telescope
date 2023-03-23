@@ -131,12 +131,6 @@ export const QueryDevFeeInfosRequest = {
     const message = createBaseQueryDevFeeInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfosRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -212,13 +206,6 @@ export const QueryDevFeeInfosResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfosResponseSDKType {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -276,12 +263,6 @@ export const QueryDevFeeInfoRequest = {
     const message = createBaseQueryDevFeeInfoRequest();
     message.contractAddress = object.contractAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfoRequestSDKType {
-    return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
-    };
   }
 
 };
@@ -339,12 +320,6 @@ export const QueryDevFeeInfoResponse = {
     const message = createBaseQueryDevFeeInfoResponse();
     message.fee = object.fee !== undefined && object.fee !== null ? DevFeeInfo.fromPartial(object.fee) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfoResponseSDKType {
-    return {
-      fee: isSet(object.fee) ? DevFeeInfo.fromSDKJSON(object.fee) : undefined
-    };
   }
 
 };
@@ -388,10 +363,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -449,12 +420,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -524,13 +489,6 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerRequestSDKType {
-    return {
-      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -606,13 +564,6 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerResponseSDKType {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };

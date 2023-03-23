@@ -186,12 +186,6 @@ export const QueryConnectionRequest = {
     const message = createBaseQueryConnectionRequest();
     message.connectionId = object.connectionId ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
-    };
   }
 
 };
@@ -273,14 +267,6 @@ export const QueryConnectionResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionResponseSDKType {
-    return {
-      connection: isSet(object.connection) ? ConnectionEnd.fromSDKJSON(object.connection) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
   }
 
 };
@@ -338,12 +324,6 @@ export const QueryConnectionsRequest = {
     const message = createBaseQueryConnectionsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -431,14 +411,6 @@ export const QueryConnectionsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionsResponseSDKType {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
-    };
   }
 
 };
@@ -496,12 +468,6 @@ export const QueryClientConnectionsRequest = {
     const message = createBaseQueryClientConnectionsRequest();
     message.clientId = object.clientId ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClientConnectionsRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : ""
-    };
   }
 
 };
@@ -589,14 +555,6 @@ export const QueryClientConnectionsResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClientConnectionsResponseSDKType {
-    return {
-      connection_paths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => String(e)) : [],
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
   }
 
 };
@@ -654,12 +612,6 @@ export const QueryConnectionClientStateRequest = {
     const message = createBaseQueryConnectionClientStateRequest();
     message.connectionId = object.connectionId ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionClientStateRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : ""
-    };
   }
 
 };
@@ -741,14 +693,6 @@ export const QueryConnectionClientStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionClientStateResponseSDKType {
-    return {
-      identified_client_state: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDKJSON(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
   }
 
 };
@@ -830,14 +774,6 @@ export const QueryConnectionConsensusStateRequest = {
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionConsensusStateRequestSDKType {
-    return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
-      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
-    };
   }
 
 };
@@ -931,15 +867,6 @@ export const QueryConnectionConsensusStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryConnectionConsensusStateResponseSDKType {
-    return {
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
   }
 
 };

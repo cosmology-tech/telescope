@@ -345,15 +345,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      community_tax: isSet(object.community_tax) ? String(object.community_tax) : "",
-      base_proposer_reward: isSet(object.base_proposer_reward) ? String(object.base_proposer_reward) : "",
-      bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? String(object.bonus_proposer_reward) : "",
-      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : false
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.community_tax = message.communityTax;
@@ -442,13 +433,6 @@ export const ValidatorHistoricalRewards = {
     return {
       cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDK(e)) : [],
       referenceCount: object?.reference_count
-    };
-  },
-
-  fromSDKJSON(object: any): ValidatorHistoricalRewardsSDKType {
-    return {
-      cumulative_reward_ratio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : 0
     };
   },
 
@@ -547,13 +531,6 @@ export const ValidatorCurrentRewards = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
-    };
-  },
-
   toSDK(message: ValidatorCurrentRewards): ValidatorCurrentRewardsSDKType {
     const obj: any = {};
 
@@ -636,12 +613,6 @@ export const ValidatorAccumulatedCommission = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorAccumulatedCommissionSDKType {
-    return {
-      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionSDKType {
     const obj: any = {};
 
@@ -720,12 +691,6 @@ export const ValidatorOutstandingRewards = {
   fromSDK(object: ValidatorOutstandingRewardsSDKType): ValidatorOutstandingRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ValidatorOutstandingRewardsSDKType {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
     };
   },
 
@@ -817,13 +782,6 @@ export const ValidatorSlashEvent = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorSlashEventSDKType {
-    return {
-      validator_period: isSet(object.validator_period) ? Long.fromValue(object.validator_period) : Long.UZERO,
-      fraction: isSet(object.fraction) ? String(object.fraction) : ""
-    };
-  },
-
   toSDK(message: ValidatorSlashEvent): ValidatorSlashEventSDKType {
     const obj: any = {};
     obj.validator_period = message.validatorPeriod;
@@ -897,12 +855,6 @@ export const ValidatorSlashEvents = {
   fromSDK(object: ValidatorSlashEventsSDKType): ValidatorSlashEvents {
     return {
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ValidatorSlashEventsSDKType {
-    return {
-      validator_slash_events: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromSDKJSON(e)) : []
     };
   },
 
@@ -984,12 +936,6 @@ export const FeePool = {
   fromSDK(object: FeePoolSDKType): FeePool {
     return {
       communityPool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): FeePoolSDKType {
-    return {
-      community_pool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromSDKJSON(e)) : []
     };
   },
 
@@ -1113,15 +1059,6 @@ export const CommunityPoolSpendProposal = {
     };
   },
 
-  fromSDKJSON(object: any): CommunityPoolSpendProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -1226,14 +1163,6 @@ export const DelegatorStartingInfo = {
     };
   },
 
-  fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
-    return {
-      previous_period: isSet(object.previous_period) ? Long.fromValue(object.previous_period) : Long.UZERO,
-      stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO
-    };
-  },
-
   toSDK(message: DelegatorStartingInfo): DelegatorStartingInfoSDKType {
     const obj: any = {};
     obj.previous_period = message.previousPeriod;
@@ -1321,13 +1250,6 @@ export const DelegationDelegatorReward = {
     return {
       validatorAddress: object?.validator_address,
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): DelegationDelegatorRewardSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDKJSON(e)) : []
     };
   },
 
@@ -1456,16 +1378,6 @@ export const CommunityPoolSpendProposalWithDeposit = {
       recipient: object?.recipient,
       amount: object?.amount,
       deposit: object?.deposit
-    };
-  },
-
-  fromSDKJSON(object: any): CommunityPoolSpendProposalWithDepositSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      deposit: isSet(object.deposit) ? String(object.deposit) : ""
     };
   },
 

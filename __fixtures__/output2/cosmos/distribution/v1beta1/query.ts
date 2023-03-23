@@ -213,10 +213,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -274,12 +270,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -337,12 +327,6 @@ export const QueryValidatorOutstandingRewardsRequest = {
     const message = createBaseQueryValidatorOutstandingRewardsRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorOutstandingRewardsRequestSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
-    };
   }
 
 };
@@ -400,12 +384,6 @@ export const QueryValidatorOutstandingRewardsResponse = {
     const message = createBaseQueryValidatorOutstandingRewardsResponse();
     message.rewards = object.rewards !== undefined && object.rewards !== null ? ValidatorOutstandingRewards.fromPartial(object.rewards) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorOutstandingRewardsResponseSDKType {
-    return {
-      rewards: isSet(object.rewards) ? ValidatorOutstandingRewards.fromSDKJSON(object.rewards) : undefined
-    };
   }
 
 };
@@ -463,12 +441,6 @@ export const QueryValidatorCommissionRequest = {
     const message = createBaseQueryValidatorCommissionRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorCommissionRequestSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
-    };
   }
 
 };
@@ -526,12 +498,6 @@ export const QueryValidatorCommissionResponse = {
     const message = createBaseQueryValidatorCommissionResponse();
     message.commission = object.commission !== undefined && object.commission !== null ? ValidatorAccumulatedCommission.fromPartial(object.commission) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorCommissionResponseSDKType {
-    return {
-      commission: isSet(object.commission) ? ValidatorAccumulatedCommission.fromSDKJSON(object.commission) : undefined
-    };
   }
 
 };
@@ -625,15 +591,6 @@ export const QueryValidatorSlashesRequest = {
     message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? Long.fromValue(object.endingHeight) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorSlashesRequestSDKType {
-    return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      starting_height: isSet(object.starting_height) ? Long.fromValue(object.starting_height) : Long.UZERO,
-      ending_height: isSet(object.ending_height) ? Long.fromValue(object.ending_height) : Long.UZERO,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -709,13 +666,6 @@ export const QueryValidatorSlashesResponse = {
     message.slashes = object.slashes?.map(e => ValidatorSlashEvent.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryValidatorSlashesResponseSDKType {
-    return {
-      slashes: Array.isArray(object?.slashes) ? object.slashes.map((e: any) => ValidatorSlashEvent.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -785,13 +735,6 @@ export const QueryDelegationRewardsRequest = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegationRewardsRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
-    };
   }
 
 };
@@ -855,12 +798,6 @@ export const QueryDelegationRewardsResponse = {
     const message = createBaseQueryDelegationRewardsResponse();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegationRewardsResponseSDKType {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -918,12 +855,6 @@ export const QueryDelegationTotalRewardsRequest = {
     const message = createBaseQueryDelegationTotalRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegationTotalRewardsRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
-    };
   }
 
 };
@@ -1004,13 +935,6 @@ export const QueryDelegationTotalRewardsResponse = {
     message.rewards = object.rewards?.map(e => DelegationDelegatorReward.fromPartial(e)) || [];
     message.total = object.total?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegationTotalRewardsResponseSDKType {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DelegationDelegatorReward.fromSDKJSON(e)) : [],
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => DecCoin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1068,12 +992,6 @@ export const QueryDelegatorValidatorsRequest = {
     const message = createBaseQueryDelegatorValidatorsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegatorValidatorsRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
-    };
   }
 
 };
@@ -1137,12 +1055,6 @@ export const QueryDelegatorValidatorsResponse = {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators = object.validators?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegatorValidatorsResponseSDKType {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -1200,12 +1112,6 @@ export const QueryDelegatorWithdrawAddressRequest = {
     const message = createBaseQueryDelegatorWithdrawAddressRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegatorWithdrawAddressRequestSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
-    };
   }
 
 };
@@ -1263,12 +1169,6 @@ export const QueryDelegatorWithdrawAddressResponse = {
     const message = createBaseQueryDelegatorWithdrawAddressResponse();
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDelegatorWithdrawAddressResponseSDKType {
-    return {
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
-    };
   }
 
 };
@@ -1312,10 +1212,6 @@ export const QueryCommunityPoolRequest = {
   fromPartial(_: DeepPartial<QueryCommunityPoolRequest>): QueryCommunityPoolRequest {
     const message = createBaseQueryCommunityPoolRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryCommunityPoolRequestSDKType {
-    return {};
   }
 
 };
@@ -1379,12 +1275,6 @@ export const QueryCommunityPoolResponse = {
     const message = createBaseQueryCommunityPoolResponse();
     message.pool = object.pool?.map(e => DecCoin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCommunityPoolResponseSDKType {
-    return {
-      pool: Array.isArray(object?.pool) ? object.pool.map((e: any) => DecCoin.fromSDKJSON(e)) : []
-    };
   }
 
 };

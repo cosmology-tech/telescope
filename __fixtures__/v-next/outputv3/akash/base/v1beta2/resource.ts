@@ -167,13 +167,6 @@ export const CPU = {
     };
   },
 
-  fromSDKJSON(object: any): CPUSDKType {
-    return {
-      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: CPU): CPUSDKType {
     const obj: any = {};
     message.units !== undefined && (obj.units = message.units ? ResourceValue.toSDK(message.units) : undefined);
@@ -307,13 +300,6 @@ export const Memory = {
     return {
       quantity: object.quantity ? ResourceValue.fromSDK(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): MemorySDKType {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
   },
 
@@ -463,14 +449,6 @@ export const Storage = {
       name: object?.name,
       quantity: object.quantity ? ResourceValue.fromSDK(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): StorageSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
   },
 

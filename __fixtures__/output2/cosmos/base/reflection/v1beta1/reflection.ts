@@ -69,10 +69,6 @@ export const ListAllInterfacesRequest = {
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): ListAllInterfacesRequestSDKType {
-    return {};
   }
 
 };
@@ -136,12 +132,6 @@ export const ListAllInterfacesResponse = {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ListAllInterfacesResponseSDKType {
-    return {
-      interface_names: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -199,12 +189,6 @@ export const ListImplementationsRequest = {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ListImplementationsRequestSDKType {
-    return {
-      interface_name: isSet(object.interface_name) ? String(object.interface_name) : ""
-    };
   }
 
 };
@@ -268,12 +252,6 @@ export const ListImplementationsResponse = {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ListImplementationsResponseSDKType {
-    return {
-      implementation_message_names: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => String(e)) : []
-    };
   }
 
 };

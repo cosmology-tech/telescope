@@ -305,10 +305,6 @@ export const QueryTotalUnclaimedRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryTotalUnclaimedRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
     const obj: any = {};
     return obj;
@@ -413,12 +409,6 @@ export const QueryTotalUnclaimedResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryTotalUnclaimedResponseSDKType {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseSDKType {
     const obj: any = {};
 
@@ -517,10 +507,6 @@ export const QueryParamsRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -616,12 +602,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
@@ -724,12 +704,6 @@ export const QueryClaimsRecordsRequest = {
   fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryClaimsRecordsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -854,13 +828,6 @@ export const QueryClaimsRecordsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClaimsRecordsResponseSDKType {
-    return {
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseSDKType {
     const obj: any = {};
 
@@ -975,12 +942,6 @@ export const QueryClaimsRecordRequest = {
   fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
     return {
       address: object?.address
-    };
-  },
-
-  fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
     };
   },
 
@@ -1102,13 +1063,6 @@ export const QueryClaimsRecordResponse = {
     return {
       initialClaimableAmount: object?.initial_claimable_amount,
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): QueryClaimsRecordResponseSDKType {
-    return {
-      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDKJSON(e)) : []
     };
   },
 

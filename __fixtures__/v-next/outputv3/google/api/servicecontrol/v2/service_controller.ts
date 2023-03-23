@@ -446,16 +446,6 @@ export const CheckRequest = {
     };
   },
 
-  fromSDKJSON(object: any): CheckRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      attributes: isSet(object.attributes) ? AttributeContext.fromSDKJSON(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDKJSON(e)) : [],
-      flags: isSet(object.flags) ? String(object.flags) : ""
-    };
-  },
-
   toSDK(message: CheckRequest): CheckRequestSDKType {
     const obj: any = {};
     obj.service_name = message.serviceName;
@@ -634,16 +624,6 @@ export const ResourceInfo = {
     };
   },
 
-  fromSDKJSON(object: any): ResourceInfoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      permission: isSet(object.permission) ? String(object.permission) : "",
-      container: isSet(object.container) ? String(object.container) : "",
-      location: isSet(object.location) ? String(object.location) : ""
-    };
-  },
-
   toSDK(message: ResourceInfo): ResourceInfoSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -766,13 +746,6 @@ export const CheckResponse_HeadersEntry = {
     return {
       key: object?.key,
       value: object?.value
-    };
-  },
-
-  fromSDKJSON(object: any): CheckResponse_HeadersEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -910,18 +883,6 @@ export const CheckResponse = {
   fromSDK(object: CheckResponseSDKType): CheckResponse {
     return {
       status: object.status ? Status.fromSDK(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  fromSDKJSON(object: any): CheckResponseSDKType {
-    return {
-      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1087,14 +1048,6 @@ export const ReportRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ReportRequestSDKType {
-    return {
-      service_name: isSet(object.service_name) ? String(object.service_name) : "",
-      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ReportRequest): ReportRequestSDKType {
     const obj: any = {};
     obj.service_name = message.serviceName;
@@ -1196,10 +1149,6 @@ export const ReportResponse = {
   },
 
   fromSDK(_: ReportResponseSDKType): ReportResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): ReportResponseSDKType {
     return {};
   },
 

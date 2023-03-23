@@ -321,18 +321,6 @@ export const EpochInfo = {
     };
   },
 
-  fromSDKJSON(object: any): EpochInfoSDKType {
-    return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO,
-      current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
-      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? Long.fromValue(object.current_epoch_start_height) : Long.ZERO
-    };
-  },
-
   toSDK(message: EpochInfo): EpochInfoSDKType {
     const obj: any = {};
     obj.identifier = message.identifier;
@@ -464,12 +452,6 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : []
     };
   },
 

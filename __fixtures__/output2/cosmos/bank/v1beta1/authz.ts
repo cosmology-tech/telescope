@@ -74,12 +74,6 @@ export const SendAuthorization = {
     const message = createBaseSendAuthorization();
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): SendAuthorizationSDKType {
-    return {
-      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };

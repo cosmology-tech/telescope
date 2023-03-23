@@ -158,15 +158,6 @@ export const ResourceUnits = {
     };
   },
 
-  fromSDKJSON(object: any): ResourceUnitsSDKType {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromSDKJSON(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromSDKJSON(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDKJSON(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ResourceUnits): ResourceUnitsSDKType {
     const obj: any = {};
     message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toSDK(message.cpu) : undefined);

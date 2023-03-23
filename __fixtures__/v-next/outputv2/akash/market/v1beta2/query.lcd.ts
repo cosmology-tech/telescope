@@ -38,7 +38,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/list`;
-    return QueryOrdersResponse.fromSDKJSON(await this.req.get<QueryOrdersResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryOrdersResponseSDKType>(endpoint, options);
   }
 
   /* Order queries order details */
@@ -52,7 +52,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/info`;
-    return QueryOrderResponse.fromSDKJSON(await this.req.get<QueryOrderResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryOrderResponseSDKType>(endpoint, options);
   }
 
   /* Bids queries bids with filters */
@@ -70,7 +70,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/list`;
-    return QueryBidsResponse.fromSDKJSON(await this.req.get<QueryBidsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryBidsResponseSDKType>(endpoint, options);
   }
 
   /* Bid queries bid details */
@@ -84,7 +84,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/info`;
-    return QueryBidResponse.fromSDKJSON(await this.req.get<QueryBidResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryBidResponseSDKType>(endpoint, options);
   }
 
   /* Leases queries leases with filters */
@@ -102,7 +102,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/list`;
-    return QueryLeasesResponse.fromSDKJSON(await this.req.get<QueryLeasesResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryLeasesResponseSDKType>(endpoint, options);
   }
 
   /* Lease queries lease details */
@@ -116,7 +116,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/info`;
-    return QueryLeaseResponse.fromSDKJSON(await this.req.get<QueryLeaseResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryLeaseResponseSDKType>(endpoint, options);
   }
 
 }

@@ -144,17 +144,6 @@ export const Metadata = {
     message.encoding = object.encoding ?? "";
     message.txType = object.txType ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MetadataSDKType {
-    return {
-      version: isSet(object.version) ? String(object.version) : "",
-      controller_connection_id: isSet(object.controller_connection_id) ? String(object.controller_connection_id) : "",
-      host_connection_id: isSet(object.host_connection_id) ? String(object.host_connection_id) : "",
-      address: isSet(object.address) ? String(object.address) : "",
-      encoding: isSet(object.encoding) ? String(object.encoding) : "",
-      tx_type: isSet(object.tx_type) ? String(object.tx_type) : ""
-    };
   }
 
 };

@@ -80,10 +80,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -141,12 +137,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -190,10 +180,6 @@ export const QueryInflationRequest = {
   fromPartial(_: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryInflationRequestSDKType {
-    return {};
   }
 
 };
@@ -251,12 +237,6 @@ export const QueryInflationResponse = {
     const message = createBaseQueryInflationResponse();
     message.inflation = object.inflation ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryInflationResponseSDKType {
-    return {
-      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
-    };
   }
 
 };
@@ -300,10 +280,6 @@ export const QueryAnnualProvisionsRequest = {
   fromPartial(_: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryAnnualProvisionsRequestSDKType {
-    return {};
   }
 
 };
@@ -361,12 +337,6 @@ export const QueryAnnualProvisionsResponse = {
     const message = createBaseQueryAnnualProvisionsResponse();
     message.annualProvisions = object.annualProvisions ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryAnnualProvisionsResponseSDKType {
-    return {
-      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
-    };
   }
 
 };

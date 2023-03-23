@@ -68,13 +68,6 @@ exports[`Duration 1`] = `
     };
   },
 
-  fromSDKJSON(object: any): DurationSDKType {
-    return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
-  },
-
   toSDK(message: Duration): DurationSDKType {
     const obj: any = {};
     obj.seconds = message.seconds;
@@ -181,13 +174,6 @@ exports[`Height 1`] = `
     return {
       revisionNumber: object?.revision_number,
       revisionHeight: object?.revision_height
-    };
-  },
-
-  fromSDKJSON(object: any): HeightSDKType {
-    return {
-      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
-      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
     };
   },
 
@@ -369,18 +355,6 @@ exports[`MsgCreateValidator 1`] = `
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateValidatorSDKType {
-    return {
-      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
-      commission: isSet(object.commission) ? CommissionRates.fromSDKJSON(object.commission) : undefined,
-      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      pubkey: isSet(object.pubkey) ? Any.fromSDKJSON(object.pubkey) : undefined,
-      value: isSet(object.value) ? Coin.fromSDKJSON(object.value) : undefined
-    };
-  },
-
   toSDK(message: MsgCreateValidator): MsgCreateValidatorSDKType {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
@@ -532,14 +506,6 @@ exports[`MsgStoreCode 1`] = `
     };
   },
 
-  fromSDKJSON(object: any): MsgStoreCodeSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
-      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
-    };
-  },
-
   toSDK(message: MsgStoreCode): MsgStoreCodeSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -676,14 +642,6 @@ exports[`MsgSubmitProposal 1`] = `
       content: object.content ? Any.fromSDK(object.content) : undefined,
       initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
       proposer: object?.proposer
-    };
-  },
-
-  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
-    return {
-      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      proposer: isSet(object.proposer) ? String(object.proposer) : ""
     };
   },
 
@@ -877,18 +835,6 @@ exports[`MsgTransfer 1`] = `
       receiver: object?.receiver,
       timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
       timeoutTimestamp: object?.timeout_timestamp
-    };
-  },
-
-  fromSDKJSON(object: any): MsgTransferSDKType {
-    return {
-      source_port: isSet(object.source_port) ? String(object.source_port) : "",
-      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
-      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
     };
   },
 

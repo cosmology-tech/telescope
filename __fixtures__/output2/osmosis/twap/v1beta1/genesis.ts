@@ -86,13 +86,6 @@ export const Params = {
     message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? "";
     message.recordHistoryKeepPeriod = object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null ? Duration.fromPartial(object.recordHistoryKeepPeriod) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      prune_epoch_identifier: isSet(object.prune_epoch_identifier) ? String(object.prune_epoch_identifier) : "",
-      record_history_keep_period: isSet(object.record_history_keep_period) ? Duration.fromSDKJSON(object.record_history_keep_period) : undefined
-    };
   }
 
 };
@@ -168,13 +161,6 @@ export const GenesisState = {
     message.twaps = object.twaps?.map(e => TwapRecord.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromSDKJSON(e)) : [],
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };

@@ -20,13 +20,13 @@ export class LCDQueryClient {
   /* CurrentPlan queries the current upgrade plan. */
   async currentPlan(_params: QueryCurrentPlanRequest = {}): Promise<QueryCurrentPlanResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/current_plan`;
-    return QueryCurrentPlanResponse.fromSDKJSON(await this.req.get<QueryCurrentPlanResponseSDKType>(endpoint));
+    return await this.req.get<QueryCurrentPlanResponseSDKType>(endpoint);
   }
 
   /* AppliedPlan queries a previously applied upgrade plan by its name. */
   async appliedPlan(params: QueryAppliedPlanRequest): Promise<QueryAppliedPlanResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/applied_plan/${params.name}`;
-    return QueryAppliedPlanResponse.fromSDKJSON(await this.req.get<QueryAppliedPlanResponseSDKType>(endpoint));
+    return await this.req.get<QueryAppliedPlanResponseSDKType>(endpoint);
   }
 
   /* UpgradedConsensusState queries the consensus state that will serve
@@ -37,7 +37,7 @@ export class LCDQueryClient {
    (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54) */
   async upgradedConsensusState(params: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/upgraded_consensus_state/${params.lastHeight}`;
-    return QueryUpgradedConsensusStateResponse.fromSDKJSON(await this.req.get<QueryUpgradedConsensusStateResponseSDKType>(endpoint));
+    return await this.req.get<QueryUpgradedConsensusStateResponseSDKType>(endpoint);
   }
 
   /* ModuleVersions queries the list of module versions from state.
@@ -53,13 +53,13 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/upgrade/v1beta1/module_versions`;
-    return QueryModuleVersionsResponse.fromSDKJSON(await this.req.get<QueryModuleVersionsResponseSDKType>(endpoint, options));
+    return await this.req.get<QueryModuleVersionsResponseSDKType>(endpoint, options);
   }
 
   /* Returns the account with authority to conduct upgrades */
   async authority(_params: QueryAuthorityRequest = {}): Promise<QueryAuthorityResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/authority`;
-    return QueryAuthorityResponse.fromSDKJSON(await this.req.get<QueryAuthorityResponseSDKType>(endpoint));
+    return await this.req.get<QueryAuthorityResponseSDKType>(endpoint);
   }
 
 }

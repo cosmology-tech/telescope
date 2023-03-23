@@ -125,12 +125,6 @@ export const QueryDenomTraceRequest = {
     const message = createBaseQueryDenomTraceRequest();
     message.hash = object.hash ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomTraceRequestSDKType {
-    return {
-      hash: isSet(object.hash) ? String(object.hash) : ""
-    };
   }
 
 };
@@ -188,12 +182,6 @@ export const QueryDenomTraceResponse = {
     const message = createBaseQueryDenomTraceResponse();
     message.denomTrace = object.denomTrace !== undefined && object.denomTrace !== null ? DenomTrace.fromPartial(object.denomTrace) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomTraceResponseSDKType {
-    return {
-      denom_trace: isSet(object.denom_trace) ? DenomTrace.fromSDKJSON(object.denom_trace) : undefined
-    };
   }
 
 };
@@ -251,12 +239,6 @@ export const QueryDenomTracesRequest = {
     const message = createBaseQueryDenomTracesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomTracesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -332,13 +314,6 @@ export const QueryDenomTracesResponse = {
     message.denomTraces = object.denomTraces?.map(e => DenomTrace.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomTracesResponseSDKType {
-    return {
-      denom_traces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -382,10 +357,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -443,12 +414,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -506,12 +471,6 @@ export const QueryDenomHashRequest = {
     const message = createBaseQueryDenomHashRequest();
     message.trace = object.trace ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomHashRequestSDKType {
-    return {
-      trace: isSet(object.trace) ? String(object.trace) : ""
-    };
   }
 
 };
@@ -569,12 +528,6 @@ export const QueryDenomHashResponse = {
     const message = createBaseQueryDenomHashResponse();
     message.hash = object.hash ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryDenomHashResponseSDKType {
-    return {
-      hash: isSet(object.hash) ? String(object.hash) : ""
-    };
   }
 
 };

@@ -70,12 +70,6 @@ export const SourceInfo = {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): SourceInfoSDKType {
-    return {
-      source_files: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
   }
 
 };

@@ -138,12 +138,6 @@ export const QueryGaugeIdsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGaugeIdsRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestSDKType {
     const obj: any = {};
     obj.pool_id = message.poolId;
@@ -216,12 +210,6 @@ export const QueryGaugeIdsResponse = {
   fromSDK(object: QueryGaugeIdsResponseSDKType): QueryGaugeIdsResponse {
     return {
       gaugeIdsWithDuration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): QueryGaugeIdsResponseSDKType {
-    return {
-      gauge_ids_with_duration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromSDKJSON(e)) : []
     };
   },
 
@@ -326,14 +314,6 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
-    return {
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      gauge_incentive_percentage: isSet(object.gauge_incentive_percentage) ? String(object.gauge_incentive_percentage) : ""
-    };
-  },
-
   toSDK(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
     const obj: any = {};
     obj.gauge_id = message.gaugeId;
@@ -386,10 +366,6 @@ export const QueryDistrInfoRequest = {
   },
 
   fromSDK(_: QueryDistrInfoRequestSDKType): QueryDistrInfoRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryDistrInfoRequestSDKType {
     return {};
   },
 
@@ -461,12 +437,6 @@ export const QueryDistrInfoResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDistrInfoResponseSDKType {
-    return {
-      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined
-    };
-  },
-
   toSDK(message: QueryDistrInfoResponse): QueryDistrInfoResponseSDKType {
     const obj: any = {};
     message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
@@ -517,10 +487,6 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -592,12 +558,6 @@ export const QueryParamsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -648,10 +608,6 @@ export const QueryLockableDurationsRequest = {
   },
 
   fromSDK(_: QueryLockableDurationsRequestSDKType): QueryLockableDurationsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
     return {};
   },
 
@@ -729,12 +685,6 @@ export const QueryLockableDurationsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
-    return {
-      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseSDKType {
     const obj: any = {};
 
@@ -791,10 +741,6 @@ export const QueryIncentivizedPoolsRequest = {
   },
 
   fromSDK(_: QueryIncentivizedPoolsRequestSDKType): QueryIncentivizedPoolsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryIncentivizedPoolsRequestSDKType {
     return {};
   },
 
@@ -892,14 +838,6 @@ export const IncentivizedPool = {
     };
   },
 
-  fromSDKJSON(object: any): IncentivizedPoolSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      lockable_duration: isSet(object.lockable_duration) ? Duration.fromSDKJSON(object.lockable_duration) : undefined,
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
-    };
-  },
-
   toSDK(message: IncentivizedPool): IncentivizedPoolSDKType {
     const obj: any = {};
     obj.pool_id = message.poolId;
@@ -977,12 +915,6 @@ export const QueryIncentivizedPoolsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryIncentivizedPoolsResponseSDKType {
-    return {
-      incentivized_pools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseSDKType {
     const obj: any = {};
 
@@ -1039,10 +971,6 @@ export const QueryExternalIncentiveGaugesRequest = {
   },
 
   fromSDK(_: QueryExternalIncentiveGaugesRequestSDKType): QueryExternalIncentiveGaugesRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryExternalIncentiveGaugesRequestSDKType {
     return {};
   },
 
@@ -1117,12 +1045,6 @@ export const QueryExternalIncentiveGaugesResponse = {
   fromSDK(object: QueryExternalIncentiveGaugesResponseSDKType): QueryExternalIncentiveGaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): QueryExternalIncentiveGaugesResponseSDKType {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : []
     };
   },
 

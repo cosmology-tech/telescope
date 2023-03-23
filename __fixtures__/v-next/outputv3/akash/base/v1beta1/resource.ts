@@ -206,13 +206,6 @@ export const CPU = {
     };
   },
 
-  fromSDKJSON(object: any): CPUSDKType {
-    return {
-      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: CPU): CPUSDKType {
     const obj: any = {};
     message.units !== undefined && (obj.units = message.units ? ResourceValue.toSDK(message.units) : undefined);
@@ -349,13 +342,6 @@ export const Memory = {
     };
   },
 
-  fromSDKJSON(object: any): MemorySDKType {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Memory): MemorySDKType {
     const obj: any = {};
     message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
@@ -489,13 +475,6 @@ export const Storage = {
     return {
       quantity: object.quantity ? ResourceValue.fromSDK(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): StorageSDKType {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
     };
   },
 
@@ -658,15 +637,6 @@ export const ResourceUnits = {
       memory: object.memory ? Memory.fromSDK(object.memory) : undefined,
       storage: object.storage ? Storage.fromSDK(object.storage) : undefined,
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ResourceUnitsSDKType {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromSDKJSON(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromSDKJSON(object.memory) : undefined,
-      storage: isSet(object.storage) ? Storage.fromSDKJSON(object.storage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : []
     };
   },
 

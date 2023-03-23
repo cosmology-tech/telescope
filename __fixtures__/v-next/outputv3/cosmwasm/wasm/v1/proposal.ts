@@ -615,16 +615,6 @@ export const StoreCodeProposal = {
     };
   },
 
-  fromSDKJSON(object: any): StoreCodeProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
-      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
-    };
-  },
-
   toSDK(message: StoreCodeProposal): StoreCodeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -844,19 +834,6 @@ export const InstantiateContractProposal = {
     };
   },
 
-  fromSDKJSON(object: any): InstantiateContractProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
-      label: isSet(object.label) ? String(object.label) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: InstantiateContractProposal): InstantiateContractProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -1052,16 +1029,6 @@ export const MigrateContractProposal = {
     };
   },
 
-  fromSDKJSON(object: any): MigrateContractProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
-    };
-  },
-
   toSDK(message: MigrateContractProposal): MigrateContractProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -1220,15 +1187,6 @@ export const SudoContractProposal = {
       description: object?.description,
       contract: object?.contract,
       msg: object?.msg
-    };
-  },
-
-  fromSDKJSON(object: any): SudoContractProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
 
@@ -1422,17 +1380,6 @@ export const ExecuteContractProposal = {
     };
   },
 
-  fromSDKJSON(object: any): ExecuteContractProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ExecuteContractProposal): ExecuteContractProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -1609,15 +1556,6 @@ export const UpdateAdminProposal = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateAdminProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
-      contract: isSet(object.contract) ? String(object.contract) : ""
-    };
-  },
-
   toSDK(message: UpdateAdminProposal): UpdateAdminProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -1760,14 +1698,6 @@ export const ClearAdminProposal = {
       title: object?.title,
       description: object?.description,
       contract: object?.contract
-    };
-  },
-
-  fromSDKJSON(object: any): ClearAdminProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
 
@@ -1928,14 +1858,6 @@ export const PinCodesProposal = {
       title: object?.title,
       description: object?.description,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): PinCodesProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
 
@@ -2108,14 +2030,6 @@ export const UnpinCodesProposal = {
       title: object?.title,
       description: object?.description,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): UnpinCodesProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

@@ -167,14 +167,6 @@ export const ValidatorSet = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorSetSDKType {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      proposer: isSet(object.proposer) ? Validator.fromSDKJSON(object.proposer) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
-    };
-  },
-
   toSDK(message: ValidatorSet): ValidatorSetSDKType {
     const obj: any = {};
 
@@ -334,15 +326,6 @@ export const Validator = {
     };
   },
 
-  fromSDKJSON(object: any): ValidatorSDKType {
-    return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO,
-      proposer_priority: isSet(object.proposer_priority) ? Long.fromValue(object.proposer_priority) : Long.ZERO
-    };
-  },
-
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -464,13 +447,6 @@ export const SimpleValidator = {
     return {
       pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
       votingPower: object?.voting_power
-    };
-  },
-
-  fromSDKJSON(object: any): SimpleValidatorSDKType {
-    return {
-      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO
     };
   },
 

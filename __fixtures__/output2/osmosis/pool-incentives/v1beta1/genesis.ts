@@ -110,15 +110,6 @@ export const GenesisState = {
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
     message.poolToGauges = object.poolToGauges !== undefined && object.poolToGauges !== null ? PoolToGauges.fromPartial(object.poolToGauges) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
-      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined,
-      pool_to_gauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromSDKJSON(object.pool_to_gauges) : undefined
-    };
   }
 
 };

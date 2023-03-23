@@ -285,17 +285,6 @@ export const MsgCreateGauge = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateGaugeSDKType {
-    return {
-      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? Long.fromValue(object.num_epochs_paid_over) : Long.UZERO
-    };
-  },
-
   toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
     const obj: any = {};
     obj.is_perpetual = message.isPerpetual;
@@ -414,10 +403,6 @@ export const MsgCreateGaugeResponse = {
   },
 
   fromSDK(_: MsgCreateGaugeResponseSDKType): MsgCreateGaugeResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreateGaugeResponseSDKType {
     return {};
   },
 
@@ -559,14 +544,6 @@ export const MsgAddToGauge = {
     };
   },
 
-  fromSDKJSON(object: any): MsgAddToGaugeSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgAddToGauge): MsgAddToGaugeSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -676,10 +653,6 @@ export const MsgAddToGaugeResponse = {
   },
 
   fromSDK(_: MsgAddToGaugeResponseSDKType): MsgAddToGaugeResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgAddToGaugeResponseSDKType {
     return {};
   },
 
