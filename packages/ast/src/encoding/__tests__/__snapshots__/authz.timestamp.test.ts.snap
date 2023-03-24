@@ -60,7 +60,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   fromJSON(object: any): Grant {
     return {
       authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -81,14 +81,21 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   fromSDK(object: GrantSDKType): Grant {
     return {
       authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
-      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
+      expiration: object.expiration ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
   toSDK(message: Grant): GrantSDKType {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
   }
 
@@ -225,6 +232,13 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     return {
       authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
       expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   },
 
