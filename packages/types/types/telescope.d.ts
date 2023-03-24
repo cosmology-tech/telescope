@@ -8,6 +8,7 @@ export declare enum TelescopeLogLevel {
     Debug = 4
 }
 interface TelescopeOpts {
+    env?: 'default' | 'v-next';
     experimentalGlobalProtoNamespace?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;

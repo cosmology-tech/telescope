@@ -12,6 +12,7 @@ export enum TelescopeLogLevel {
 }
 interface TelescopeOpts {
 
+    env?: 'default' | 'v-next';
     experimentalGlobalProtoNamespace?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
@@ -186,6 +187,7 @@ export type TelescopeOption = keyof TelescopeOpts;
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
 
+    env: 'default',
     experimentalGlobalProtoNamespace: false,
     removeUnusedImports: true,
     classesUseArrowFunctions: false,

@@ -150,9 +150,15 @@ export const toSDK = {
     },
 
     timestamp(args: ToSDKMethod) {
-      const timestampFormat = args.context.pluginValue(
+      let timestampFormat = args.context.pluginValue(
         'prototypes.typingsFormat.timestamp'
       );
+      const env = args.context.pluginValue(
+        'env'
+      );
+      if(env == 'default'){
+        timestampFormat = 'timestamp';
+      }
       switch (timestampFormat) {
         case 'timestamp':
           return toSDK.type(args);
