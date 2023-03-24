@@ -177,13 +177,6 @@ export const GetValidatorSetByHeightRequest = {
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetValidatorSetByHeightRequestSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -271,14 +264,6 @@ export const GetValidatorSetByHeightResponse = {
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetValidatorSetByHeightResponseSDKType {
-    return {
-      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.ZERO,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -336,12 +321,6 @@ export const GetLatestValidatorSetRequest = {
     const message = createBaseGetLatestValidatorSetRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetLatestValidatorSetRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -429,14 +408,6 @@ export const GetLatestValidatorSetResponse = {
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetLatestValidatorSetResponseSDKType {
-    return {
-      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.ZERO,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -530,15 +501,6 @@ export const Validator = {
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
     message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? Long.fromValue(object.proposerPriority) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): ValidatorSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO,
-      proposer_priority: isSet(object.proposer_priority) ? Long.fromValue(object.proposer_priority) : Long.ZERO
-    };
   }
 
 };
@@ -596,12 +558,6 @@ export const GetBlockByHeightRequest = {
     const message = createBaseGetBlockByHeightRequest();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetBlockByHeightRequestSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
-    };
   }
 
 };
@@ -671,13 +627,6 @@ export const GetBlockByHeightResponse = {
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetBlockByHeightResponseSDKType {
-    return {
-      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined
-    };
   }
 
 };
@@ -721,10 +670,6 @@ export const GetLatestBlockRequest = {
   fromPartial(_: DeepPartial<GetLatestBlockRequest>): GetLatestBlockRequest {
     const message = createBaseGetLatestBlockRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): GetLatestBlockRequestSDKType {
-    return {};
   }
 
 };
@@ -794,13 +739,6 @@ export const GetLatestBlockResponse = {
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.block = object.block !== undefined && object.block !== null ? Block.fromPartial(object.block) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetLatestBlockResponseSDKType {
-    return {
-      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined
-    };
   }
 
 };
@@ -844,10 +782,6 @@ export const GetSyncingRequest = {
   fromPartial(_: DeepPartial<GetSyncingRequest>): GetSyncingRequest {
     const message = createBaseGetSyncingRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): GetSyncingRequestSDKType {
-    return {};
   }
 
 };
@@ -905,12 +839,6 @@ export const GetSyncingResponse = {
     const message = createBaseGetSyncingResponse();
     message.syncing = object.syncing ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetSyncingResponseSDKType {
-    return {
-      syncing: isSet(object.syncing) ? Boolean(object.syncing) : false
-    };
   }
 
 };
@@ -954,10 +882,6 @@ export const GetNodeInfoRequest = {
   fromPartial(_: DeepPartial<GetNodeInfoRequest>): GetNodeInfoRequest {
     const message = createBaseGetNodeInfoRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): GetNodeInfoRequestSDKType {
-    return {};
   }
 
 };
@@ -1027,13 +951,6 @@ export const GetNodeInfoResponse = {
     message.defaultNodeInfo = object.defaultNodeInfo !== undefined && object.defaultNodeInfo !== null ? DefaultNodeInfo.fromPartial(object.defaultNodeInfo) : undefined;
     message.applicationVersion = object.applicationVersion !== undefined && object.applicationVersion !== null ? VersionInfo.fromPartial(object.applicationVersion) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): GetNodeInfoResponseSDKType {
-    return {
-      default_node_info: isSet(object.default_node_info) ? DefaultNodeInfo.fromSDKJSON(object.default_node_info) : undefined,
-      application_version: isSet(object.application_version) ? VersionInfo.fromSDKJSON(object.application_version) : undefined
-    };
   }
 
 };
@@ -1181,19 +1098,6 @@ export const VersionInfo = {
     message.buildDeps = object.buildDeps?.map(e => Module.fromPartial(e)) || [];
     message.cosmosSdkVersion = object.cosmosSdkVersion ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): VersionInfoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      app_name: isSet(object.app_name) ? String(object.app_name) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      git_commit: isSet(object.git_commit) ? String(object.git_commit) : "",
-      build_tags: isSet(object.build_tags) ? String(object.build_tags) : "",
-      go_version: isSet(object.go_version) ? String(object.go_version) : "",
-      build_deps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromSDKJSON(e)) : [],
-      cosmos_sdk_version: isSet(object.cosmos_sdk_version) ? String(object.cosmos_sdk_version) : ""
-    };
   }
 
 };
@@ -1275,14 +1179,6 @@ export const Module = {
     message.version = object.version ?? "";
     message.sum = object.sum ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ModuleSDKType {
-    return {
-      path: isSet(object.path) ? String(object.path) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      sum: isSet(object.sum) ? String(object.sum) : ""
-    };
   }
 
 };

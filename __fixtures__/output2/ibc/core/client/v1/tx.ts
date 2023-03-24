@@ -169,14 +169,6 @@ export const MsgCreateClient = {
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateClientSDKType {
-    return {
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
   }
 
 };
@@ -220,10 +212,6 @@ export const MsgCreateClientResponse = {
   fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateClientResponseSDKType {
-    return {};
   }
 
 };
@@ -305,14 +293,6 @@ export const MsgUpdateClient = {
     message.header = object.header !== undefined && object.header !== null ? Any.fromPartial(object.header) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgUpdateClientSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      header: isSet(object.header) ? Any.fromSDKJSON(object.header) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
   }
 
 };
@@ -356,10 +336,6 @@ export const MsgUpdateClientResponse = {
   fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgUpdateClientResponseSDKType {
-    return {};
   }
 
 };
@@ -477,17 +453,6 @@ export const MsgUpgradeClient = {
     message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgUpgradeClientSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      proof_upgrade_client: isSet(object.proof_upgrade_client) ? bytesFromBase64(object.proof_upgrade_client) : new Uint8Array(),
-      proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state) ? bytesFromBase64(object.proof_upgrade_consensus_state) : new Uint8Array(),
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
   }
 
 };
@@ -531,10 +496,6 @@ export const MsgUpgradeClientResponse = {
   fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgUpgradeClientResponseSDKType {
-    return {};
   }
 
 };
@@ -616,14 +577,6 @@ export const MsgSubmitMisbehaviour = {
     message.misbehaviour = object.misbehaviour !== undefined && object.misbehaviour !== null ? Any.fromPartial(object.misbehaviour) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgSubmitMisbehaviourSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDKJSON(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
   }
 
 };
@@ -667,10 +620,6 @@ export const MsgSubmitMisbehaviourResponse = {
   fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgSubmitMisbehaviourResponseSDKType {
-    return {};
   }
 
 };

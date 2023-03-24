@@ -101,12 +101,6 @@ export const Config = {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ConfigSDKType {
-    return {
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -176,13 +170,6 @@ export const ModuleConfig = {
     message.name = object.name ?? "";
     message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ModuleConfigSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      config: isSet(object.config) ? Any.fromSDKJSON(object.config) : undefined
-    };
   }
 
 };

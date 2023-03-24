@@ -135,14 +135,6 @@ export const MsgSend = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSendSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgSend): MsgSendSDKType {
     const obj: any = {};
     obj.from_address = message.fromAddress;
@@ -201,10 +193,6 @@ export const MsgSendResponse = {
   },
 
   fromSDK(_: MsgSendResponseSDKType): MsgSendResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgSendResponseSDKType {
     return {};
   },
 
@@ -300,13 +288,6 @@ export const MsgMultiSend = {
     };
   },
 
-  fromSDKJSON(object: any): MsgMultiSendSDKType {
-    return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromSDKJSON(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgMultiSend): MsgMultiSendSDKType {
     const obj: any = {};
 
@@ -369,10 +350,6 @@ export const MsgMultiSendResponse = {
   },
 
   fromSDK(_: MsgMultiSendResponseSDKType): MsgMultiSendResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgMultiSendResponseSDKType {
     return {};
   },
 

@@ -133,14 +133,6 @@ export const Provider = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -228,14 +220,6 @@ export const AuditedAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AuditedAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -299,12 +283,6 @@ export const AttributesResponse = {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AttributesResponseSDKType {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -385,13 +363,6 @@ export const AttributesFilters = {
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): AttributesFiltersSDKType {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => String(e)) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -479,14 +450,6 @@ export const MsgSignProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgSignProviderAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -530,10 +493,6 @@ export const MsgSignProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgSignProviderAttributesResponseSDKType {
-    return {};
   }
 
 };
@@ -621,14 +580,6 @@ export const MsgDeleteProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.keys = object.keys?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgDeleteProviderAttributesSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -672,10 +623,6 @@ export const MsgDeleteProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgDeleteProviderAttributesResponseSDKType {
-    return {};
   }
 
 };

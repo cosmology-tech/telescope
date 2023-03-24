@@ -198,18 +198,6 @@ export const MsgTransfer = {
     };
   },
 
-  fromSDKJSON(object: any): MsgTransferSDKType {
-    return {
-      source_port: isSet(object.source_port) ? String(object.source_port) : "",
-      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
-      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
-    };
-  },
-
   toSDK(message: MsgTransfer): MsgTransferSDKType {
     const obj: any = {};
     obj.source_port = message.sourcePort;
@@ -266,10 +254,6 @@ export const MsgTransferResponse = {
   },
 
   fromSDK(_: MsgTransferResponseSDKType): MsgTransferResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgTransferResponseSDKType {
     return {};
   },
 

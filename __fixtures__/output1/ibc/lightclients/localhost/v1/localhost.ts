@@ -98,13 +98,6 @@ export const ClientState = {
     };
   },
 
-  fromSDKJSON(object: any): ClientStateSDKType {
-    return {
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
-    };
-  },
-
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;

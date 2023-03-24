@@ -62,12 +62,6 @@ export const ResourceValue = {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): ResourceValueSDKType {
-    return {
-      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
-    };
   }
 
 };

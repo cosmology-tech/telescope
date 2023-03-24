@@ -114,13 +114,6 @@ export const ProviderInfo = {
     message.email = object.email ?? "";
     message.website = object.website ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ProviderInfoSDKType {
-    return {
-      email: isSet(object.email) ? String(object.email) : "",
-      website: isSet(object.website) ? String(object.website) : ""
-    };
   }
 
 };
@@ -220,15 +213,6 @@ export const MsgCreateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
   }
 
 };
@@ -272,10 +256,6 @@ export const MsgCreateProviderResponse = {
   fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateProviderResponseSDKType {
-    return {};
   }
 
 };
@@ -375,15 +355,6 @@ export const MsgUpdateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgUpdateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
   }
 
 };
@@ -427,10 +398,6 @@ export const MsgUpdateProviderResponse = {
   fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgUpdateProviderResponseSDKType {
-    return {};
   }
 
 };
@@ -488,12 +455,6 @@ export const MsgDeleteProvider = {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgDeleteProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -537,10 +498,6 @@ export const MsgDeleteProviderResponse = {
   fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgDeleteProviderResponseSDKType {
-    return {};
   }
 
 };
@@ -640,15 +597,6 @@ export const Provider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
   }
 
 };

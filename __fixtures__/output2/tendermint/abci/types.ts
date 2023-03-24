@@ -785,26 +785,6 @@ export const Request = {
     message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : undefined;
     message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestSDKType {
-    return {
-      echo: isSet(object.echo) ? RequestEcho.fromSDKJSON(object.echo) : undefined,
-      flush: isSet(object.flush) ? RequestFlush.fromSDKJSON(object.flush) : undefined,
-      info: isSet(object.info) ? RequestInfo.fromSDKJSON(object.info) : undefined,
-      set_option: isSet(object.set_option) ? RequestSetOption.fromSDKJSON(object.set_option) : undefined,
-      init_chain: isSet(object.init_chain) ? RequestInitChain.fromSDKJSON(object.init_chain) : undefined,
-      query: isSet(object.query) ? RequestQuery.fromSDKJSON(object.query) : undefined,
-      begin_block: isSet(object.begin_block) ? RequestBeginBlock.fromSDKJSON(object.begin_block) : undefined,
-      check_tx: isSet(object.check_tx) ? RequestCheckTx.fromSDKJSON(object.check_tx) : undefined,
-      deliver_tx: isSet(object.deliver_tx) ? RequestDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
-      end_block: isSet(object.end_block) ? RequestEndBlock.fromSDKJSON(object.end_block) : undefined,
-      commit: isSet(object.commit) ? RequestCommit.fromSDKJSON(object.commit) : undefined,
-      list_snapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
-      offer_snapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
-      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
-      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
-    };
   }
 
 };
@@ -862,12 +842,6 @@ export const RequestEcho = {
     const message = createBaseRequestEcho();
     message.message = object.message ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestEchoSDKType {
-    return {
-      message: isSet(object.message) ? String(object.message) : ""
-    };
   }
 
 };
@@ -911,10 +885,6 @@ export const RequestFlush = {
   fromPartial(_: DeepPartial<RequestFlush>): RequestFlush {
     const message = createBaseRequestFlush();
     return message;
-  },
-
-  fromSDKJSON(_: any): RequestFlushSDKType {
-    return {};
   }
 
 };
@@ -996,14 +966,6 @@ export const RequestInfo = {
     message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? Long.fromValue(object.blockVersion) : Long.UZERO;
     message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? Long.fromValue(object.p2pVersion) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestInfoSDKType {
-    return {
-      version: isSet(object.version) ? String(object.version) : "",
-      block_version: isSet(object.block_version) ? Long.fromValue(object.block_version) : Long.UZERO,
-      p2p_version: isSet(object.p2p_version) ? Long.fromValue(object.p2p_version) : Long.UZERO
-    };
   }
 
 };
@@ -1073,13 +1035,6 @@ export const RequestSetOption = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestSetOptionSDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
   }
 
 };
@@ -1203,17 +1158,6 @@ export const RequestInitChain = {
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
     message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? Long.fromValue(object.initialHeight) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestInitChainSDKType {
-    return {
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
-      app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
-      initial_height: isSet(object.initial_height) ? Long.fromValue(object.initial_height) : Long.ZERO
-    };
   }
 
 };
@@ -1307,15 +1251,6 @@ export const RequestQuery = {
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.prove = object.prove ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestQuerySDKType {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      prove: isSet(object.prove) ? Boolean(object.prove) : false
-    };
   }
 
 };
@@ -1415,15 +1350,6 @@ export const RequestBeginBlock = {
     message.lastCommitInfo = object.lastCommitInfo !== undefined && object.lastCommitInfo !== null ? LastCommitInfo.fromPartial(object.lastCommitInfo) : undefined;
     message.byzantineValidators = object.byzantineValidators?.map(e => Evidence.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestBeginBlockSDKType {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
-      last_commit_info: isSet(object.last_commit_info) ? LastCommitInfo.fromSDKJSON(object.last_commit_info) : undefined,
-      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1493,13 +1419,6 @@ export const RequestCheckTx = {
     message.tx = object.tx ?? new Uint8Array();
     message.type = object.type ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestCheckTxSDKType {
-    return {
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
-    };
   }
 
 };
@@ -1557,12 +1476,6 @@ export const RequestDeliverTx = {
     const message = createBaseRequestDeliverTx();
     message.tx = object.tx ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestDeliverTxSDKType {
-    return {
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array()
-    };
   }
 
 };
@@ -1620,12 +1533,6 @@ export const RequestEndBlock = {
     const message = createBaseRequestEndBlock();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestEndBlockSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
-    };
   }
 
 };
@@ -1669,10 +1576,6 @@ export const RequestCommit = {
   fromPartial(_: DeepPartial<RequestCommit>): RequestCommit {
     const message = createBaseRequestCommit();
     return message;
-  },
-
-  fromSDKJSON(_: any): RequestCommitSDKType {
-    return {};
   }
 
 };
@@ -1716,10 +1619,6 @@ export const RequestListSnapshots = {
   fromPartial(_: DeepPartial<RequestListSnapshots>): RequestListSnapshots {
     const message = createBaseRequestListSnapshots();
     return message;
-  },
-
-  fromSDKJSON(_: any): RequestListSnapshotsSDKType {
-    return {};
   }
 
 };
@@ -1789,13 +1688,6 @@ export const RequestOfferSnapshot = {
     message.snapshot = object.snapshot !== undefined && object.snapshot !== null ? Snapshot.fromPartial(object.snapshot) : undefined;
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestOfferSnapshotSDKType {
-    return {
-      snapshot: isSet(object.snapshot) ? Snapshot.fromSDKJSON(object.snapshot) : undefined,
-      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
-    };
   }
 
 };
@@ -1877,14 +1769,6 @@ export const RequestLoadSnapshotChunk = {
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunk: isSet(object.chunk) ? Number(object.chunk) : 0
-    };
   }
 
 };
@@ -1966,14 +1850,6 @@ export const RequestApplySnapshotChunk = {
     message.chunk = object.chunk ?? new Uint8Array();
     message.sender = object.sender ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): RequestApplySnapshotChunkSDKType {
-    return {
-      index: isSet(object.index) ? Number(object.index) : 0,
-      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array(),
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
   }
 
 };
@@ -2211,27 +2087,6 @@ export const Response = {
     message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : undefined;
     message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseSDKType {
-    return {
-      exception: isSet(object.exception) ? ResponseException.fromSDKJSON(object.exception) : undefined,
-      echo: isSet(object.echo) ? ResponseEcho.fromSDKJSON(object.echo) : undefined,
-      flush: isSet(object.flush) ? ResponseFlush.fromSDKJSON(object.flush) : undefined,
-      info: isSet(object.info) ? ResponseInfo.fromSDKJSON(object.info) : undefined,
-      set_option: isSet(object.set_option) ? ResponseSetOption.fromSDKJSON(object.set_option) : undefined,
-      init_chain: isSet(object.init_chain) ? ResponseInitChain.fromSDKJSON(object.init_chain) : undefined,
-      query: isSet(object.query) ? ResponseQuery.fromSDKJSON(object.query) : undefined,
-      begin_block: isSet(object.begin_block) ? ResponseBeginBlock.fromSDKJSON(object.begin_block) : undefined,
-      check_tx: isSet(object.check_tx) ? ResponseCheckTx.fromSDKJSON(object.check_tx) : undefined,
-      deliver_tx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
-      end_block: isSet(object.end_block) ? ResponseEndBlock.fromSDKJSON(object.end_block) : undefined,
-      commit: isSet(object.commit) ? ResponseCommit.fromSDKJSON(object.commit) : undefined,
-      list_snapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
-      offer_snapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
-      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
-      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
-    };
   }
 
 };
@@ -2289,12 +2144,6 @@ export const ResponseException = {
     const message = createBaseResponseException();
     message.error = object.error ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseExceptionSDKType {
-    return {
-      error: isSet(object.error) ? String(object.error) : ""
-    };
   }
 
 };
@@ -2352,12 +2201,6 @@ export const ResponseEcho = {
     const message = createBaseResponseEcho();
     message.message = object.message ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseEchoSDKType {
-    return {
-      message: isSet(object.message) ? String(object.message) : ""
-    };
   }
 
 };
@@ -2401,10 +2244,6 @@ export const ResponseFlush = {
   fromPartial(_: DeepPartial<ResponseFlush>): ResponseFlush {
     const message = createBaseResponseFlush();
     return message;
-  },
-
-  fromSDKJSON(_: any): ResponseFlushSDKType {
-    return {};
   }
 
 };
@@ -2510,16 +2349,6 @@ export const ResponseInfo = {
     message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? Long.fromValue(object.lastBlockHeight) : Long.ZERO;
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseInfoSDKType {
-    return {
-      data: isSet(object.data) ? String(object.data) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO,
-      last_block_height: isSet(object.last_block_height) ? Long.fromValue(object.last_block_height) : Long.ZERO,
-      last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
-    };
   }
 
 };
@@ -2601,14 +2430,6 @@ export const ResponseSetOption = {
     message.log = object.log ?? "";
     message.info = object.info ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseSetOptionSDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : ""
-    };
   }
 
 };
@@ -2696,14 +2517,6 @@ export const ResponseInitChain = {
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseInitChainSDKType {
-    return {
-      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
-      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
-    };
   }
 
 };
@@ -2857,20 +2670,6 @@ export const ResponseQuery = {
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.codespace = object.codespace ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseQuerySDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
   }
 
 };
@@ -2934,12 +2733,6 @@ export const ResponseBeginBlock = {
     const message = createBaseResponseBeginBlock();
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseBeginBlockSDKType {
-    return {
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3087,19 +2880,6 @@ export const ResponseCheckTx = {
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseCheckTxSDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
   }
 
 };
@@ -3247,19 +3027,6 @@ export const ResponseDeliverTx = {
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseDeliverTxSDKType {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
-      codespace: isSet(object.codespace) ? String(object.codespace) : ""
-    };
   }
 
 };
@@ -3353,14 +3120,6 @@ export const ResponseEndBlock = {
     message.consensusParamUpdates = object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null ? ConsensusParams.fromPartial(object.consensusParamUpdates) : undefined;
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseEndBlockSDKType {
-    return {
-      validator_updates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
-      consensus_param_updates: isSet(object.consensus_param_updates) ? ConsensusParams.fromSDKJSON(object.consensus_param_updates) : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3430,13 +3189,6 @@ export const ResponseCommit = {
     message.data = object.data ?? new Uint8Array();
     message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? Long.fromValue(object.retainHeight) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseCommitSDKType {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retain_height: isSet(object.retain_height) ? Long.fromValue(object.retain_height) : Long.ZERO
-    };
   }
 
 };
@@ -3500,12 +3252,6 @@ export const ResponseListSnapshots = {
     const message = createBaseResponseListSnapshots();
     message.snapshots = object.snapshots?.map(e => Snapshot.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseListSnapshotsSDKType {
-    return {
-      snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3563,12 +3309,6 @@ export const ResponseOfferSnapshot = {
     const message = createBaseResponseOfferSnapshot();
     message.result = object.result ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseOfferSnapshotSDKType {
-    return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
-    };
   }
 
 };
@@ -3626,12 +3366,6 @@ export const ResponseLoadSnapshotChunk = {
     const message = createBaseResponseLoadSnapshotChunk();
     message.chunk = object.chunk ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseLoadSnapshotChunkSDKType {
-    return {
-      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array()
-    };
   }
 
 };
@@ -3737,14 +3471,6 @@ export const ResponseApplySnapshotChunk = {
     message.refetchChunks = object.refetchChunks?.map(e => e) || [];
     message.rejectSenders = object.rejectSenders?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ResponseApplySnapshotChunkSDKType {
-    return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
-      refetch_chunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => Number(e)) : [],
-      reject_senders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -3838,15 +3564,6 @@ export const ConsensusParams = {
     message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : undefined;
     message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ConsensusParamsSDKType {
-    return {
-      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
-    };
   }
 
 };
@@ -3916,13 +3633,6 @@ export const BlockParams = {
     message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
     message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? Long.fromValue(object.maxGas) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): BlockParamsSDKType {
-    return {
-      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
-      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO
-    };
   }
 
 };
@@ -3998,13 +3708,6 @@ export const LastCommitInfo = {
     message.round = object.round ?? 0;
     message.votes = object.votes?.map(e => VoteInfo.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): LastCommitInfoSDKType {
-    return {
-      round: isSet(object.round) ? Number(object.round) : 0,
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -4080,13 +3783,6 @@ export const Event = {
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => EventAttribute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): EventSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -4168,14 +3864,6 @@ export const EventAttribute = {
     message.value = object.value ?? new Uint8Array();
     message.index = object.index ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventAttributeSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      index: isSet(object.index) ? Boolean(object.index) : false
-    };
   }
 
 };
@@ -4269,15 +3957,6 @@ export const TxResult = {
     message.tx = object.tx ?? new Uint8Array();
     message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): TxResultSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      index: isSet(object.index) ? Number(object.index) : 0,
-      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
-    };
   }
 
 };
@@ -4347,13 +4026,6 @@ export const Validator = {
     message.address = object.address ?? new Uint8Array();
     message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): ValidatorSDKType {
-    return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
-    };
   }
 
 };
@@ -4423,13 +4095,6 @@ export const ValidatorUpdate = {
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
     message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): ValidatorUpdateSDKType {
-    return {
-      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
-    };
   }
 
 };
@@ -4499,13 +4164,6 @@ export const VoteInfo = {
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
     message.signedLastBlock = object.signedLastBlock ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): VoteInfoSDKType {
-    return {
-      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      signed_last_block: isSet(object.signed_last_block) ? Boolean(object.signed_last_block) : false
-    };
   }
 
 };
@@ -4611,16 +4269,6 @@ export const Evidence = {
     message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : undefined;
     message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EvidenceSDKType {
-    return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
-      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
-    };
   }
 
 };
@@ -4726,16 +4374,6 @@ export const Snapshot = {
     message.hash = object.hash ?? new Uint8Array();
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): SnapshotSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array()
-    };
   }
 
 };

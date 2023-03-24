@@ -125,15 +125,6 @@ export const Equivocation = {
     };
   },
 
-  fromSDKJSON(object: any): EquivocationSDKType {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
-      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
-    };
-  },
-
   toSDK(message: Equivocation): EquivocationSDKType {
     const obj: any = {};
     obj.height = message.height;

@@ -68,12 +68,6 @@ export const Params = {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      minimum_risk_factor: isSet(object.minimum_risk_factor) ? String(object.minimum_risk_factor) : ""
-    };
   }
 
 };

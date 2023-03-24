@@ -83,10 +83,6 @@ export const QueryModuleAccountBalanceRequest = {
   fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryModuleAccountBalanceRequestSDKType {
-    return {};
   }
 
 };
@@ -150,12 +146,6 @@ export const QueryModuleAccountBalanceResponse = {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryModuleAccountBalanceResponseSDKType {
-    return {
-      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -199,10 +189,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -260,12 +246,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -323,12 +303,6 @@ export const QueryClaimRecordRequest = {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClaimRecordRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };
@@ -386,12 +360,6 @@ export const QueryClaimRecordResponse = {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClaimRecordResponseSDKType {
-    return {
-      claim_record: isSet(object.claim_record) ? ClaimRecord.fromSDKJSON(object.claim_record) : undefined
-    };
   }
 
 };
@@ -461,13 +429,6 @@ export const QueryClaimableForActionRequest = {
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
-    };
   }
 
 };
@@ -531,12 +492,6 @@ export const QueryClaimableForActionResponse = {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClaimableForActionResponseSDKType {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -594,12 +549,6 @@ export const QueryTotalClaimableRequest = {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalClaimableRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };
@@ -663,12 +612,6 @@ export const QueryTotalClaimableResponse = {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalClaimableResponseSDKType {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };

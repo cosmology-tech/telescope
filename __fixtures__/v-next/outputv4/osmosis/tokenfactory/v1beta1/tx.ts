@@ -230,13 +230,6 @@ export const MsgCreateDenom = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateDenomSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      subdenom: isSet(object.subdenom) ? String(object.subdenom) : ""
-    };
-  },
-
   toSDK(message: MsgCreateDenom): MsgCreateDenomSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -304,12 +297,6 @@ export const MsgCreateDenomResponse = {
   fromSDK(object: MsgCreateDenomResponseSDKType): MsgCreateDenomResponse {
     return {
       newTokenDenom: object?.new_token_denom
-    };
-  },
-
-  fromSDKJSON(object: any): MsgCreateDenomResponseSDKType {
-    return {
-      new_token_denom: isSet(object.new_token_denom) ? String(object.new_token_denom) : ""
     };
   },
 
@@ -395,13 +382,6 @@ export const MsgMint = {
     };
   },
 
-  fromSDKJSON(object: any): MsgMintSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
-    };
-  },
-
   toSDK(message: MsgMint): MsgMintSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -453,10 +433,6 @@ export const MsgMintResponse = {
   },
 
   fromSDK(_: MsgMintResponseSDKType): MsgMintResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgMintResponseSDKType {
     return {};
   },
 
@@ -541,13 +517,6 @@ export const MsgBurn = {
     };
   },
 
-  fromSDKJSON(object: any): MsgBurnSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
-    };
-  },
-
   toSDK(message: MsgBurn): MsgBurnSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -599,10 +568,6 @@ export const MsgBurnResponse = {
   },
 
   fromSDK(_: MsgBurnResponseSDKType): MsgBurnResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgBurnResponseSDKType {
     return {};
   },
 
@@ -700,14 +665,6 @@ export const MsgChangeAdmin = {
     };
   },
 
-  fromSDKJSON(object: any): MsgChangeAdminSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
-    };
-  },
-
   toSDK(message: MsgChangeAdmin): MsgChangeAdminSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -760,10 +717,6 @@ export const MsgChangeAdminResponse = {
   },
 
   fromSDK(_: MsgChangeAdminResponseSDKType): MsgChangeAdminResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgChangeAdminResponseSDKType {
     return {};
   },
 
@@ -848,13 +801,6 @@ export const MsgSetDenomMetadata = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSetDenomMetadataSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
-    };
-  },
-
   toSDK(message: MsgSetDenomMetadata): MsgSetDenomMetadataSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -906,10 +852,6 @@ export const MsgSetDenomMetadataResponse = {
   },
 
   fromSDK(_: MsgSetDenomMetadataResponseSDKType): MsgSetDenomMetadataResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgSetDenomMetadataResponseSDKType {
     return {};
   },
 

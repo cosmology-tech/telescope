@@ -176,16 +176,6 @@ export const Incentive = {
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): IncentiveSDKType {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
-      total_gas: isSet(object.total_gas) ? Long.fromValue(object.total_gas) : Long.UZERO
-    };
   }
 
 };
@@ -267,14 +257,6 @@ export const GasMeter = {
     message.participant = object.participant ?? "";
     message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? Long.fromValue(object.cumulativeGas) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): GasMeterSDKType {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulative_gas: isSet(object.cumulative_gas) ? Long.fromValue(object.cumulative_gas) : Long.UZERO
-    };
   }
 
 };
@@ -386,16 +368,6 @@ export const RegisterIncentiveProposal = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): RegisterIncentiveProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      epochs: isSet(object.epochs) ? Number(object.epochs) : 0
-    };
   }
 
 };
@@ -477,14 +449,6 @@ export const CancelIncentiveProposal = {
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): CancelIncentiveProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : ""
-    };
   }
 
 };

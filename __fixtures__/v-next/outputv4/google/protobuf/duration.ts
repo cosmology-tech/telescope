@@ -220,13 +220,6 @@ export const Duration = {
     };
   },
 
-  fromSDKJSON(object: any): DurationSDKType {
-    return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
-  },
-
   toSDK(message: Duration): DurationSDKType {
     const obj: any = {};
     obj.seconds = message.seconds;

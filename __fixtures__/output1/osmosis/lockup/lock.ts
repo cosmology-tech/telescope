@@ -301,16 +301,6 @@ export const PeriodLock = {
     };
   },
 
-  fromSDKJSON(object: any): PeriodLockSDKType {
-    return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: PeriodLock): PeriodLockSDKType {
     const obj: any = {};
     obj.ID = message.ID;
@@ -429,15 +419,6 @@ export const QueryCondition = {
     };
   },
 
-  fromSDKJSON(object: any): QueryConditionSDKType {
-    return {
-      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
-    };
-  },
-
   toSDK(message: QueryCondition): QueryConditionSDKType {
     const obj: any = {};
     message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
@@ -546,15 +527,6 @@ export const SyntheticLock = {
       synthDenom: object?.synth_denom,
       endTime: object.end_time ?? undefined,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): SyntheticLockSDKType {
-    return {
-      underlying_lock_id: isSet(object.underlying_lock_id) ? Long.fromValue(object.underlying_lock_id) : Long.UZERO,
-      synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },
 

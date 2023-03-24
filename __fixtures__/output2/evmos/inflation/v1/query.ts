@@ -123,10 +123,6 @@ export const QueryPeriodRequest = {
   fromPartial(_: DeepPartial<QueryPeriodRequest>): QueryPeriodRequest {
     const message = createBaseQueryPeriodRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryPeriodRequestSDKType {
-    return {};
   }
 
 };
@@ -184,12 +180,6 @@ export const QueryPeriodResponse = {
     const message = createBaseQueryPeriodResponse();
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPeriodResponseSDKType {
-    return {
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
-    };
   }
 
 };
@@ -233,10 +223,6 @@ export const QueryEpochMintProvisionRequest = {
   fromPartial(_: DeepPartial<QueryEpochMintProvisionRequest>): QueryEpochMintProvisionRequest {
     const message = createBaseQueryEpochMintProvisionRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryEpochMintProvisionRequestSDKType {
-    return {};
   }
 
 };
@@ -294,12 +280,6 @@ export const QueryEpochMintProvisionResponse = {
     const message = createBaseQueryEpochMintProvisionResponse();
     message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryEpochMintProvisionResponseSDKType {
-    return {
-      epoch_mint_provision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDKJSON(object.epoch_mint_provision) : undefined
-    };
   }
 
 };
@@ -343,10 +323,6 @@ export const QuerySkippedEpochsRequest = {
   fromPartial(_: DeepPartial<QuerySkippedEpochsRequest>): QuerySkippedEpochsRequest {
     const message = createBaseQuerySkippedEpochsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QuerySkippedEpochsRequestSDKType {
-    return {};
   }
 
 };
@@ -404,12 +380,6 @@ export const QuerySkippedEpochsResponse = {
     const message = createBaseQuerySkippedEpochsResponse();
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
-    return {
-      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
-    };
   }
 
 };
@@ -453,10 +423,6 @@ export const QueryCirculatingSupplyRequest = {
   fromPartial(_: DeepPartial<QueryCirculatingSupplyRequest>): QueryCirculatingSupplyRequest {
     const message = createBaseQueryCirculatingSupplyRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryCirculatingSupplyRequestSDKType {
-    return {};
   }
 
 };
@@ -514,12 +480,6 @@ export const QueryCirculatingSupplyResponse = {
     const message = createBaseQueryCirculatingSupplyResponse();
     message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCirculatingSupplyResponseSDKType {
-    return {
-      circulating_supply: isSet(object.circulating_supply) ? DecCoin.fromSDKJSON(object.circulating_supply) : undefined
-    };
   }
 
 };
@@ -563,10 +523,6 @@ export const QueryInflationRateRequest = {
   fromPartial(_: DeepPartial<QueryInflationRateRequest>): QueryInflationRateRequest {
     const message = createBaseQueryInflationRateRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryInflationRateRequestSDKType {
-    return {};
   }
 
 };
@@ -624,12 +580,6 @@ export const QueryInflationRateResponse = {
     const message = createBaseQueryInflationRateResponse();
     message.inflationRate = object.inflationRate ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryInflationRateResponseSDKType {
-    return {
-      inflation_rate: isSet(object.inflation_rate) ? String(object.inflation_rate) : ""
-    };
   }
 
 };
@@ -673,10 +623,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
   }
 
 };
@@ -734,12 +680,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };

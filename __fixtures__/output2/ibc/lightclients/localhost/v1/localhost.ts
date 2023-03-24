@@ -82,13 +82,6 @@ export const ClientState = {
     message.chainId = object.chainId ?? "";
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ClientStateSDKType {
-    return {
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
-    };
   }
 
 };

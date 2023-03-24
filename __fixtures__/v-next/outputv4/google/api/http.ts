@@ -748,13 +748,6 @@ export const Http = {
     };
   },
 
-  fromSDKJSON(object: any): HttpSDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromSDKJSON(e)) : [],
-      fully_decode_reserved_expansion: isSet(object.fully_decode_reserved_expansion) ? Boolean(object.fully_decode_reserved_expansion) : false
-    };
-  },
-
   toSDK(message: Http): HttpSDKType {
     const obj: any = {};
 
@@ -954,21 +947,6 @@ export const HttpRule = {
     };
   },
 
-  fromSDKJSON(object: any): HttpRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      get: isSet(object.get) ? String(object.get) : undefined,
-      put: isSet(object.put) ? String(object.put) : undefined,
-      post: isSet(object.post) ? String(object.post) : undefined,
-      delete: isSet(object.delete) ? String(object.delete) : undefined,
-      patch: isSet(object.patch) ? String(object.patch) : undefined,
-      custom: isSet(object.custom) ? CustomHttpPattern.fromSDKJSON(object.custom) : undefined,
-      body: isSet(object.body) ? String(object.body) : "",
-      response_body: isSet(object.response_body) ? String(object.response_body) : "",
-      additional_bindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: HttpRule): HttpRuleSDKType {
     const obj: any = {};
     obj.selector = message.selector;
@@ -1063,13 +1041,6 @@ export const CustomHttpPattern = {
     return {
       kind: object?.kind,
       path: object?.path
-    };
-  },
-
-  fromSDKJSON(object: any): CustomHttpPatternSDKType {
-    return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
-      path: isSet(object.path) ? String(object.path) : ""
     };
   },
 

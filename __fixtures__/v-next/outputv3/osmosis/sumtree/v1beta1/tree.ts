@@ -126,12 +126,6 @@ export const Node = {
     };
   },
 
-  fromSDKJSON(object: any): NodeSDKType {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Node): NodeSDKType {
     const obj: any = {};
 
@@ -267,13 +261,6 @@ export const Child = {
     };
   },
 
-  fromSDKJSON(object: any): ChildSDKType {
-    return {
-      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
-      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
-    };
-  },
-
   toSDK(message: Child): ChildSDKType {
     const obj: any = {};
     obj.index = message.index;
@@ -384,12 +371,6 @@ export const Leaf = {
   fromSDK(object: LeafSDKType): Leaf {
     return {
       leaf: object.leaf ? Child.fromSDK(object.leaf) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): LeafSDKType {
-    return {
-      leaf: isSet(object.leaf) ? Child.fromSDKJSON(object.leaf) : undefined
     };
   },
 

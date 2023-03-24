@@ -112,13 +112,6 @@ export const QueryProvidersResponse = {
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -188,13 +181,6 @@ export const QueryProviderRequest = {
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProviderRequestSDKType {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -252,12 +238,6 @@ export const QueryAllProvidersAttributesRequest = {
     const message = createBaseQueryAllProvidersAttributesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryAllProvidersAttributesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -327,13 +307,6 @@ export const QueryProviderAttributesRequest = {
     message.owner = object.owner ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProviderAttributesRequestSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -403,13 +376,6 @@ export const QueryProviderAuditorRequest = {
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryProviderAuditorRequestSDKType {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -479,13 +445,6 @@ export const QueryAuditorAttributesRequest = {
     message.auditor = object.auditor ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryAuditorAttributesRequestSDKType {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };

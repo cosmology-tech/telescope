@@ -219,12 +219,6 @@ export const QueryAccountsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAccountsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
@@ -313,13 +307,6 @@ export const QueryAccountsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAccountsResponseSDKType {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
     const obj: any = {};
 
@@ -396,12 +383,6 @@ export const QueryAccountRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAccountRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
-  },
-
   toSDK(message: QueryAccountRequest): QueryAccountRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -452,10 +433,6 @@ export const QueryModuleAccountsRequest = {
   },
 
   fromSDK(_: QueryModuleAccountsRequestSDKType): QueryModuleAccountsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryModuleAccountsRequestSDKType {
     return {};
   },
 
@@ -524,12 +501,6 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
@@ -602,12 +573,6 @@ export const QueryAccountResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAccountResponseSDKType {
-    return {
-      account: isSet(object.account) ? Any.fromSDKJSON(object.account) : undefined
-    };
-  },
-
   toSDK(message: QueryAccountResponse): QueryAccountResponseSDKType {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toSDK(message.account) : undefined);
@@ -658,10 +623,6 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -739,12 +700,6 @@ export const QueryModuleAccountsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryModuleAccountsResponseSDKType {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseSDKType {
     const obj: any = {};
 
@@ -801,10 +756,6 @@ export const Bech32PrefixRequest = {
   },
 
   fromSDK(_: Bech32PrefixRequestSDKType): Bech32PrefixRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): Bech32PrefixRequestSDKType {
     return {};
   },
 
@@ -873,12 +824,6 @@ export const Bech32PrefixResponse = {
   fromSDK(object: Bech32PrefixResponseSDKType): Bech32PrefixResponse {
     return {
       bech32Prefix: object?.bech32_prefix
-    };
-  },
-
-  fromSDKJSON(object: any): Bech32PrefixResponseSDKType {
-    return {
-      bech32_prefix: isSet(object.bech32_prefix) ? String(object.bech32_prefix) : ""
     };
   },
 
@@ -951,12 +896,6 @@ export const AddressBytesToStringRequest = {
     };
   },
 
-  fromSDKJSON(object: any): AddressBytesToStringRequestSDKType {
-    return {
-      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
-    };
-  },
-
   toSDK(message: AddressBytesToStringRequest): AddressBytesToStringRequestSDKType {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
@@ -1023,12 +962,6 @@ export const AddressBytesToStringResponse = {
   fromSDK(object: AddressBytesToStringResponseSDKType): AddressBytesToStringResponse {
     return {
       addressString: object?.address_string
-    };
-  },
-
-  fromSDKJSON(object: any): AddressBytesToStringResponseSDKType {
-    return {
-      address_string: isSet(object.address_string) ? String(object.address_string) : ""
     };
   },
 
@@ -1101,12 +1034,6 @@ export const AddressStringToBytesRequest = {
     };
   },
 
-  fromSDKJSON(object: any): AddressStringToBytesRequestSDKType {
-    return {
-      address_string: isSet(object.address_string) ? String(object.address_string) : ""
-    };
-  },
-
   toSDK(message: AddressStringToBytesRequest): AddressStringToBytesRequestSDKType {
     const obj: any = {};
     obj.address_string = message.addressString;
@@ -1173,12 +1100,6 @@ export const AddressStringToBytesResponse = {
   fromSDK(object: AddressStringToBytesResponseSDKType): AddressStringToBytesResponse {
     return {
       addressBytes: object?.address_bytes
-    };
-  },
-
-  fromSDKJSON(object: any): AddressStringToBytesResponseSDKType {
-    return {
-      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
     };
   },
 

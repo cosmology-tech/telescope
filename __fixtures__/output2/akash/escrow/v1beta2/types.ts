@@ -239,13 +239,6 @@ export const AccountID = {
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): AccountIDSDKType {
-    return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : ""
-    };
   }
 
 };
@@ -387,19 +380,6 @@ export const Account = {
     message.depositor = object.depositor ?? "";
     message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): AccountSDKType {
-    return {
-      id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? DecCoin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? Long.fromValue(object.settled_at) : Long.ZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      funds: isSet(object.funds) ? DecCoin.fromSDKJSON(object.funds) : undefined
-    };
   }
 
 };
@@ -529,18 +509,6 @@ export const FractionalPayment = {
     message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
     message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): FractionalPaymentSDKType {
-    return {
-      account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
-      payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? DecCoin.fromSDKJSON(object.rate) : undefined,
-      balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined
-    };
   }
 
 };

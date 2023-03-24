@@ -185,13 +185,6 @@ export const DenomTrace = {
     };
   },
 
-  fromSDKJSON(object: any): DenomTraceSDKType {
-    return {
-      path: isSet(object.path) ? String(object.path) : "",
-      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
-    };
-  },
-
   toSDK(message: DenomTrace): DenomTraceSDKType {
     const obj: any = {};
     obj.path = message.path;
@@ -315,13 +308,6 @@ export const Params = {
     return {
       sendEnabled: object?.send_enabled,
       receiveEnabled: object?.receive_enabled
-    };
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
-      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false
     };
   },
 

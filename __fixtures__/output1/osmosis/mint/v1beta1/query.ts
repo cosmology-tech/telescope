@@ -94,10 +94,6 @@ export const QueryParamsRequest = {
     return {};
   },
 
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
-    return {};
-  },
-
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -166,12 +162,6 @@ export const QueryParamsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -222,10 +212,6 @@ export const QueryEpochProvisionsRequest = {
   },
 
   fromSDK(_: QueryEpochProvisionsRequestSDKType): QueryEpochProvisionsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryEpochProvisionsRequestSDKType {
     return {};
   },
 
@@ -294,12 +280,6 @@ export const QueryEpochProvisionsResponse = {
   fromSDK(object: QueryEpochProvisionsResponseSDKType): QueryEpochProvisionsResponse {
     return {
       epochProvisions: object?.epoch_provisions
-    };
-  },
-
-  fromSDKJSON(object: any): QueryEpochProvisionsResponseSDKType {
-    return {
-      epoch_provisions: isSet(object.epoch_provisions) ? bytesFromBase64(object.epoch_provisions) : new Uint8Array()
     };
   },
 

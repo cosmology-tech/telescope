@@ -160,17 +160,6 @@ export const Record = {
     message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : undefined;
     message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): RecordSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      local: isSet(object.local) ? Record_Local.fromSDKJSON(object.local) : undefined,
-      ledger: isSet(object.ledger) ? Record_Ledger.fromSDKJSON(object.ledger) : undefined,
-      multi: isSet(object.multi) ? Record_Multi.fromSDKJSON(object.multi) : undefined,
-      offline: isSet(object.offline) ? Record_Offline.fromSDKJSON(object.offline) : undefined
-    };
   }
 
 };
@@ -240,13 +229,6 @@ export const Record_Local = {
     message.privKey = object.privKey !== undefined && object.privKey !== null ? Any.fromPartial(object.privKey) : undefined;
     message.privKeyType = object.privKeyType ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): Record_LocalSDKType {
-    return {
-      priv_key: isSet(object.priv_key) ? Any.fromSDKJSON(object.priv_key) : undefined,
-      priv_key_type: isSet(object.priv_key_type) ? String(object.priv_key_type) : ""
-    };
   }
 
 };
@@ -304,12 +286,6 @@ export const Record_Ledger = {
     const message = createBaseRecord_Ledger();
     message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): Record_LedgerSDKType {
-    return {
-      path: isSet(object.path) ? BIP44Params.fromSDKJSON(object.path) : undefined
-    };
   }
 
 };
@@ -353,10 +329,6 @@ export const Record_Multi = {
   fromPartial(_: DeepPartial<Record_Multi>): Record_Multi {
     const message = createBaseRecord_Multi();
     return message;
-  },
-
-  fromSDKJSON(_: any): Record_MultiSDKType {
-    return {};
   }
 
 };
@@ -400,10 +372,6 @@ export const Record_Offline = {
   fromPartial(_: DeepPartial<Record_Offline>): Record_Offline {
     const message = createBaseRecord_Offline();
     return message;
-  },
-
-  fromSDKJSON(_: any): Record_OfflineSDKType {
-    return {};
   }
 
 };

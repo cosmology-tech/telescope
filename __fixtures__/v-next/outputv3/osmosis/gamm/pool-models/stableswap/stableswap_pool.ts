@@ -203,13 +203,6 @@ export const PoolParams = {
     };
   },
 
-  fromSDKJSON(object: any): PoolParamsSDKType {
-    return {
-      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
-      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : ""
-    };
-  },
-
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
@@ -435,19 +428,6 @@ export const Pool = {
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
       scalingFactorController: object?.scaling_factor_controller
-    };
-  },
-
-  fromSDKJSON(object: any): PoolSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
-      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
-      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
-      pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
-      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
     };
   },
 

@@ -387,13 +387,6 @@ export const QueryBalanceRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryBalanceRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-
   toSDK(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -461,12 +454,6 @@ export const QueryBalanceResponse = {
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
     return {
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryBalanceResponseSDKType {
-    return {
-      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined
     };
   },
 
@@ -549,13 +536,6 @@ export const QueryAllBalancesRequest = {
     return {
       address: object?.address,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryAllBalancesRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -648,13 +628,6 @@ export const QueryAllBalancesResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryAllBalancesResponseSDKType {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryAllBalancesResponse): QueryAllBalancesResponseSDKType {
     const obj: any = {};
 
@@ -741,13 +714,6 @@ export const QuerySpendableBalancesRequest = {
     return {
       address: object?.address,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QuerySpendableBalancesRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -840,13 +806,6 @@ export const QuerySpendableBalancesResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QuerySpendableBalancesResponseSDKType {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseSDKType {
     const obj: any = {};
 
@@ -920,12 +879,6 @@ export const QueryTotalSupplyRequest = {
   fromSDK(object: QueryTotalSupplyRequestSDKType): QueryTotalSupplyRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryTotalSupplyRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1017,13 +970,6 @@ export const QueryTotalSupplyResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryTotalSupplyResponseSDKType {
-    return {
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseSDKType {
     const obj: any = {};
 
@@ -1100,12 +1046,6 @@ export const QuerySupplyOfRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QuerySupplyOfRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-
   toSDK(message: QuerySupplyOfRequest): QuerySupplyOfRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -1175,12 +1115,6 @@ export const QuerySupplyOfResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QuerySupplyOfResponseSDKType {
-    return {
-      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
-    };
-  },
-
   toSDK(message: QuerySupplyOfResponse): QuerySupplyOfResponseSDKType {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
@@ -1231,10 +1165,6 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -1306,12 +1236,6 @@ export const QueryParamsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -1378,12 +1302,6 @@ export const QueryDenomsMetadataRequest = {
   fromSDK(object: QueryDenomsMetadataRequestSDKType): QueryDenomsMetadataRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryDenomsMetadataRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1475,13 +1393,6 @@ export const QueryDenomsMetadataResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomsMetadataResponseSDKType {
-    return {
-      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseSDKType {
     const obj: any = {};
 
@@ -1558,12 +1469,6 @@ export const QueryDenomMetadataRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomMetadataRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
-  },
-
   toSDK(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -1630,12 +1535,6 @@ export const QueryDenomMetadataResponse = {
   fromSDK(object: QueryDenomMetadataResponseSDKType): QueryDenomMetadataResponse {
     return {
       metadata: object.metadata ? Metadata.fromSDK(object.metadata) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryDenomMetadataResponseSDKType {
-    return {
-      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
     };
   },
 
@@ -1721,13 +1620,6 @@ export const QueryDenomOwnersRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDenomOwnersRequestSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -1808,13 +1700,6 @@ export const DenomOwner = {
     return {
       address: object?.address,
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): DenomOwnerSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined
     };
   },
 
@@ -1904,13 +1789,6 @@ export const QueryDenomOwnersResponse = {
     return {
       denomOwners: Array.isArray(object?.denom_owners) ? object.denom_owners.map((e: any) => DenomOwner.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryDenomOwnersResponseSDKType {
-    return {
-      denom_owners: Array.isArray(object?.denom_owners) ? object.denom_owners.map((e: any) => DenomOwner.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 

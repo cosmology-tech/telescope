@@ -95,12 +95,6 @@ export const MerkleRoot = {
     const message = createBaseMerkleRoot();
     message.hash = object.hash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): MerkleRootSDKType {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
   }
 
 };
@@ -158,12 +152,6 @@ export const MerklePrefix = {
     const message = createBaseMerklePrefix();
     message.keyPrefix = object.keyPrefix ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): MerklePrefixSDKType {
-    return {
-      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
-    };
   }
 
 };
@@ -227,12 +215,6 @@ export const MerklePath = {
     const message = createBaseMerklePath();
     message.keyPath = object.keyPath?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MerklePathSDKType {
-    return {
-      key_path: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -296,12 +278,6 @@ export const MerkleProof = {
     const message = createBaseMerkleProof();
     message.proofs = object.proofs?.map(e => CommitmentProof.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MerkleProofSDKType {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromSDKJSON(e)) : []
-    };
   }
 
 };

@@ -162,12 +162,6 @@ export const QueryProvidersRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryProvidersRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryProvidersRequest): QueryProvidersRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
@@ -289,13 +283,6 @@ export const QueryProvidersResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
     const obj: any = {};
 
@@ -413,12 +400,6 @@ export const QueryProviderRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryProviderRequestSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
-  },
-
   toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -518,12 +499,6 @@ export const QueryProviderResponse = {
   fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {
     return {
       provider: object.provider ? Provider.fromSDK(object.provider) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryProviderResponseSDKType {
-    return {
-      provider: isSet(object.provider) ? Provider.fromSDKJSON(object.provider) : undefined
     };
   },
 

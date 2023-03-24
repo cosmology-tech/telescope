@@ -213,16 +213,6 @@ export const MsgCreateVestingAccount = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateVestingAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO,
-      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
-    };
-  },
-
   toSDK(message: MsgCreateVestingAccount): MsgCreateVestingAccountSDKType {
     const obj: any = {};
     obj.from_address = message.fromAddress;
@@ -283,10 +273,6 @@ export const MsgCreateVestingAccountResponse = {
   },
 
   fromSDK(_: MsgCreateVestingAccountResponseSDKType): MsgCreateVestingAccountResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreateVestingAccountResponseSDKType {
     return {};
   },
 
@@ -390,14 +376,6 @@ export const MsgCreatePermanentLockedAccount = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreatePermanentLockedAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgCreatePermanentLockedAccount): MsgCreatePermanentLockedAccountSDKType {
     const obj: any = {};
     obj.from_address = message.fromAddress;
@@ -456,10 +434,6 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
 
   fromSDK(_: MsgCreatePermanentLockedAccountResponseSDKType): MsgCreatePermanentLockedAccountResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreatePermanentLockedAccountResponseSDKType {
     return {};
   },
 
@@ -576,15 +550,6 @@ export const MsgCreatePeriodicVestingAccount = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreatePeriodicVestingAccountSDKType {
-    return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
-      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgCreatePeriodicVestingAccount): MsgCreatePeriodicVestingAccountSDKType {
     const obj: any = {};
     obj.from_address = message.fromAddress;
@@ -644,10 +609,6 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   },
 
   fromSDK(_: MsgCreatePeriodicVestingAccountResponseSDKType): MsgCreatePeriodicVestingAccountResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreatePeriodicVestingAccountResponseSDKType {
     return {};
   },
 

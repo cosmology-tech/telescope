@@ -669,12 +669,6 @@ export const QueryClientStateRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClientStateRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : ""
-    };
-  },
-
   toSDK(message: QueryClientStateRequest): QueryClientStateRequestSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -811,14 +805,6 @@ export const QueryClientStateResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClientStateResponseSDKType {
-    return {
-      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-
   toSDK(message: QueryClientStateResponse): QueryClientStateResponseSDKType {
     const obj: any = {};
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
@@ -932,12 +918,6 @@ export const QueryClientStatesRequest = {
   fromSDK(object: QueryClientStatesRequestSDKType): QueryClientStatesRequest {
     return {
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryClientStatesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1067,13 +1047,6 @@ export const QueryClientStatesResponse = {
     return {
       clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryClientStatesResponseSDKType {
-    return {
-      client_states: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1241,15 +1214,6 @@ export const QueryConsensusStateRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
-      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO,
-      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
-    };
-  },
-
   toSDK(message: QueryConsensusStateRequest): QueryConsensusStateRequestSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1395,14 +1359,6 @@ export const QueryConsensusStateResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryConsensusStateResponseSDKType {
-    return {
-      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
-    };
-  },
-
   toSDK(message: QueryConsensusStateResponse): QueryConsensusStateResponseSDKType {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
@@ -1529,13 +1485,6 @@ export const QueryConsensusStatesRequest = {
     return {
       clientId: object?.client_id,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryConsensusStatesRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
 
@@ -1671,13 +1620,6 @@ export const QueryConsensusStatesResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryConsensusStatesResponseSDKType {
-    return {
-      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseSDKType {
     const obj: any = {};
 
@@ -1803,12 +1745,6 @@ export const QueryClientStatusRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClientStatusRequestSDKType {
-    return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : ""
-    };
-  },
-
   toSDK(message: QueryClientStatusRequest): QueryClientStatusRequestSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1919,12 +1855,6 @@ export const QueryClientStatusResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClientStatusResponseSDKType {
-    return {
-      status: isSet(object.status) ? String(object.status) : ""
-    };
-  },
-
   toSDK(message: QueryClientStatusResponse): QueryClientStatusResponseSDKType {
     const obj: any = {};
     obj.status = message.status;
@@ -2016,10 +1946,6 @@ export const QueryClientParamsRequest = {
   },
 
   fromSDK(_: QueryClientParamsRequestSDKType): QueryClientParamsRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryClientParamsRequestSDKType {
     return {};
   },
 
@@ -2129,12 +2055,6 @@ export const QueryClientParamsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryClientParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: QueryClientParamsResponse): QueryClientParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -2226,10 +2146,6 @@ export const QueryUpgradedClientStateRequest = {
   },
 
   fromSDK(_: QueryUpgradedClientStateRequestSDKType): QueryUpgradedClientStateRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryUpgradedClientStateRequestSDKType {
     return {};
   },
 
@@ -2339,12 +2255,6 @@ export const QueryUpgradedClientStateResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryUpgradedClientStateResponseSDKType {
-    return {
-      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
-    };
-  },
-
   toSDK(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseSDKType {
     const obj: any = {};
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
@@ -2436,10 +2346,6 @@ export const QueryUpgradedConsensusStateRequest = {
   },
 
   fromSDK(_: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
-    return {};
-  },
-
-  fromSDKJSON(_: any): QueryUpgradedConsensusStateRequestSDKType {
     return {};
   },
 
@@ -2546,12 +2452,6 @@ export const QueryUpgradedConsensusStateResponse = {
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
     return {
       upgradedConsensusState: object.upgraded_consensus_state ? Any.fromSDK(object.upgraded_consensus_state) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
-    return {
-      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? Any.fromSDKJSON(object.upgraded_consensus_state) : undefined
     };
   },
 

@@ -1260,12 +1260,6 @@ export const FileDescriptorSet = {
     const message = createBaseFileDescriptorSet();
     message.file = object.file?.map(e => FileDescriptorProto.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): FileDescriptorSetSDKType {
-    return {
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1516,23 +1510,6 @@ export const FileDescriptorProto = {
     message.sourceCodeInfo = object.sourceCodeInfo !== undefined && object.sourceCodeInfo !== null ? SourceCodeInfo.fromPartial(object.sourceCodeInfo) : undefined;
     message.syntax = object.syntax ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): FileDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      package: isSet(object.package) ? String(object.package) : "",
-      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => String(e)) : [],
-      public_dependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => Number(e)) : [],
-      weak_dependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => Number(e)) : [],
-      message_type: Array.isArray(object?.message_type) ? object.message_type.map((e: any) => DescriptorProto.fromSDKJSON(e)) : [],
-      enum_type: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDKJSON(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromSDKJSON(e)) : [],
-      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
-      options: isSet(object.options) ? FileOptions.fromSDKJSON(object.options) : undefined,
-      source_code_info: isSet(object.source_code_info) ? SourceCodeInfo.fromSDKJSON(object.source_code_info) : undefined,
-      syntax: isSet(object.syntax) ? String(object.syntax) : ""
-    };
   }
 
 };
@@ -1740,21 +1717,6 @@ export const DescriptorProto = {
     message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): DescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
-      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
-      nested_type: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromSDKJSON(e)) : [],
-      enum_type: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDKJSON(e)) : [],
-      extension_range: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromSDKJSON(e)) : [],
-      oneof_decl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromSDKJSON(e)) : [],
-      options: isSet(object.options) ? MessageOptions.fromSDKJSON(object.options) : undefined,
-      reserved_range: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromSDKJSON(e)) : [],
-      reserved_name: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -1836,14 +1798,6 @@ export const DescriptorProto_ExtensionRange = {
     message.end = object.end ?? 0;
     message.options = object.options !== undefined && object.options !== null ? ExtensionRangeOptions.fromPartial(object.options) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): DescriptorProto_ExtensionRangeSDKType {
-    return {
-      start: isSet(object.start) ? Number(object.start) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0,
-      options: isSet(object.options) ? ExtensionRangeOptions.fromSDKJSON(object.options) : undefined
-    };
   }
 
 };
@@ -1913,13 +1867,6 @@ export const DescriptorProto_ReservedRange = {
     message.start = object.start ?? 0;
     message.end = object.end ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): DescriptorProto_ReservedRangeSDKType {
-    return {
-      start: isSet(object.start) ? Number(object.start) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0
-    };
   }
 
 };
@@ -1983,12 +1930,6 @@ export const ExtensionRangeOptions = {
     const message = createBaseExtensionRangeOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ExtensionRangeOptionsSDKType {
-    return {
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -2154,21 +2095,6 @@ export const FieldDescriptorProto = {
     message.jsonName = object.jsonName ?? "";
     message.options = object.options !== undefined && object.options !== null ? FieldOptions.fromPartial(object.options) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): FieldDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
-      type_name: isSet(object.type_name) ? String(object.type_name) : "",
-      extendee: isSet(object.extendee) ? String(object.extendee) : "",
-      default_value: isSet(object.default_value) ? String(object.default_value) : "",
-      oneof_index: isSet(object.oneof_index) ? Number(object.oneof_index) : 0,
-      json_name: isSet(object.json_name) ? String(object.json_name) : "",
-      options: isSet(object.options) ? FieldOptions.fromSDKJSON(object.options) : undefined
-    };
   }
 
 };
@@ -2238,13 +2164,6 @@ export const OneofDescriptorProto = {
     message.name = object.name ?? "";
     message.options = object.options !== undefined && object.options !== null ? OneofOptions.fromPartial(object.options) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): OneofDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      options: isSet(object.options) ? OneofOptions.fromSDKJSON(object.options) : undefined
-    };
   }
 
 };
@@ -2367,16 +2286,6 @@ export const EnumDescriptorProto = {
     message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.fromPartial(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): EnumDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromSDKJSON(e)) : [],
-      options: isSet(object.options) ? EnumOptions.fromSDKJSON(object.options) : undefined,
-      reserved_range: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromSDKJSON(e)) : [],
-      reserved_name: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -2446,13 +2355,6 @@ export const EnumDescriptorProto_EnumReservedRange = {
     message.start = object.start ?? 0;
     message.end = object.end ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): EnumDescriptorProto_EnumReservedRangeSDKType {
-    return {
-      start: isSet(object.start) ? Number(object.start) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0
-    };
   }
 
 };
@@ -2534,14 +2436,6 @@ export const EnumValueDescriptorProto = {
     message.number = object.number ?? 0;
     message.options = object.options !== undefined && object.options !== null ? EnumValueOptions.fromPartial(object.options) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): EnumValueDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
-      options: isSet(object.options) ? EnumValueOptions.fromSDKJSON(object.options) : undefined
-    };
   }
 
 };
@@ -2629,14 +2523,6 @@ export const ServiceDescriptorProto = {
     message.method = object.method?.map(e => MethodDescriptorProto.fromPartial(e)) || [];
     message.options = object.options !== undefined && object.options !== null ? ServiceOptions.fromPartial(object.options) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ServiceDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromSDKJSON(e)) : [],
-      options: isSet(object.options) ? ServiceOptions.fromSDKJSON(object.options) : undefined
-    };
   }
 
 };
@@ -2754,17 +2640,6 @@ export const MethodDescriptorProto = {
     message.clientStreaming = object.clientStreaming ?? false;
     message.serverStreaming = object.serverStreaming ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MethodDescriptorProtoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      input_type: isSet(object.input_type) ? String(object.input_type) : "",
-      output_type: isSet(object.output_type) ? String(object.output_type) : "",
-      options: isSet(object.options) ? MethodOptions.fromSDKJSON(object.options) : undefined,
-      client_streaming: isSet(object.client_streaming) ? Boolean(object.client_streaming) : false,
-      server_streaming: isSet(object.server_streaming) ? Boolean(object.server_streaming) : false
-    };
   }
 
 };
@@ -3068,32 +2943,6 @@ export const FileOptions = {
     message.rubyPackage = object.rubyPackage ?? "";
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): FileOptionsSDKType {
-    return {
-      java_package: isSet(object.java_package) ? String(object.java_package) : "",
-      java_outer_classname: isSet(object.java_outer_classname) ? String(object.java_outer_classname) : "",
-      java_multiple_files: isSet(object.java_multiple_files) ? Boolean(object.java_multiple_files) : false,
-      java_generate_equals_and_hash: isSet(object.java_generate_equals_and_hash) ? Boolean(object.java_generate_equals_and_hash) : false,
-      java_string_check_utf8: isSet(object.java_string_check_utf8) ? Boolean(object.java_string_check_utf8) : false,
-      optimize_for: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
-      go_package: isSet(object.go_package) ? String(object.go_package) : "",
-      cc_generic_services: isSet(object.cc_generic_services) ? Boolean(object.cc_generic_services) : false,
-      java_generic_services: isSet(object.java_generic_services) ? Boolean(object.java_generic_services) : false,
-      py_generic_services: isSet(object.py_generic_services) ? Boolean(object.py_generic_services) : false,
-      php_generic_services: isSet(object.php_generic_services) ? Boolean(object.php_generic_services) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      cc_enable_arenas: isSet(object.cc_enable_arenas) ? Boolean(object.cc_enable_arenas) : false,
-      objc_class_prefix: isSet(object.objc_class_prefix) ? String(object.objc_class_prefix) : "",
-      csharp_namespace: isSet(object.csharp_namespace) ? String(object.csharp_namespace) : "",
-      swift_prefix: isSet(object.swift_prefix) ? String(object.swift_prefix) : "",
-      php_class_prefix: isSet(object.php_class_prefix) ? String(object.php_class_prefix) : "",
-      php_namespace: isSet(object.php_namespace) ? String(object.php_namespace) : "",
-      php_metadata_namespace: isSet(object.php_metadata_namespace) ? String(object.php_metadata_namespace) : "",
-      ruby_package: isSet(object.ruby_package) ? String(object.ruby_package) : "",
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3205,16 +3054,6 @@ export const MessageOptions = {
     message.mapEntry = object.mapEntry ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MessageOptionsSDKType {
-    return {
-      message_set_wire_format: isSet(object.message_set_wire_format) ? Boolean(object.message_set_wire_format) : false,
-      no_standard_descriptor_accessor: isSet(object.no_standard_descriptor_accessor) ? Boolean(object.no_standard_descriptor_accessor) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      map_entry: isSet(object.map_entry) ? Boolean(object.map_entry) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3350,18 +3189,6 @@ export const FieldOptions = {
     message.weak = object.weak ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): FieldOptionsSDKType {
-    return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
-      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      weak: isSet(object.weak) ? Boolean(object.weak) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3425,12 +3252,6 @@ export const OneofOptions = {
     const message = createBaseOneofOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): OneofOptionsSDKType {
-    return {
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3518,14 +3339,6 @@ export const EnumOptions = {
     message.deprecated = object.deprecated ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): EnumOptionsSDKType {
-    return {
-      allow_alias: isSet(object.allow_alias) ? Boolean(object.allow_alias) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3601,13 +3414,6 @@ export const EnumValueOptions = {
     message.deprecated = object.deprecated ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): EnumValueOptionsSDKType {
-    return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3683,13 +3489,6 @@ export const ServiceOptions = {
     message.deprecated = object.deprecated ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): ServiceOptionsSDKType {
-    return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3777,14 +3576,6 @@ export const MethodOptions = {
     message.idempotencyLevel = object.idempotencyLevel ?? 1;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MethodOptionsSDKType {
-    return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      idempotency_level: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -3920,18 +3711,6 @@ export const UninterpretedOption = {
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): UninterpretedOptionSDKType {
-    return {
-      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDKJSON(e)) : [],
-      identifier_value: isSet(object.identifier_value) ? String(object.identifier_value) : "",
-      positive_int_value: isSet(object.positive_int_value) ? Long.fromValue(object.positive_int_value) : Long.UZERO,
-      negative_int_value: isSet(object.negative_int_value) ? Long.fromValue(object.negative_int_value) : Long.ZERO,
-      double_value: isSet(object.double_value) ? Number(object.double_value) : 0,
-      string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(),
-      aggregate_value: isSet(object.aggregate_value) ? String(object.aggregate_value) : ""
-    };
   }
 
 };
@@ -4001,13 +3780,6 @@ export const UninterpretedOption_NamePart = {
     message.namePart = object.namePart ?? "";
     message.isExtension = object.isExtension ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): UninterpretedOption_NamePartSDKType {
-    return {
-      name_part: isSet(object.name_part) ? String(object.name_part) : "",
-      is_extension: isSet(object.is_extension) ? Boolean(object.is_extension) : false
-    };
   }
 
 };
@@ -4071,12 +3843,6 @@ export const SourceCodeInfo = {
     const message = createBaseSourceCodeInfo();
     message.location = object.location?.map(e => SourceCodeInfo_Location.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): SourceCodeInfoSDKType {
-    return {
-      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -4224,16 +3990,6 @@ export const SourceCodeInfo_Location = {
     message.trailingComments = object.trailingComments ?? "";
     message.leadingDetachedComments = object.leadingDetachedComments?.map(e => e) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): SourceCodeInfo_LocationSDKType {
-    return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
-      span: Array.isArray(object?.span) ? object.span.map((e: any) => Number(e)) : [],
-      leading_comments: isSet(object.leading_comments) ? String(object.leading_comments) : "",
-      trailing_comments: isSet(object.trailing_comments) ? String(object.trailing_comments) : "",
-      leading_detached_comments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => String(e)) : []
-    };
   }
 
 };
@@ -4297,12 +4053,6 @@ export const GeneratedCodeInfo = {
     const message = createBaseGeneratedCodeInfo();
     message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): GeneratedCodeInfoSDKType {
-    return {
-      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -4415,15 +4165,6 @@ export const GeneratedCodeInfo_Annotation = {
     message.begin = object.begin ?? 0;
     message.end = object.end ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): GeneratedCodeInfo_AnnotationSDKType {
-    return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
-      source_file: isSet(object.source_file) ? String(object.source_file) : "",
-      begin: isSet(object.begin) ? Number(object.begin) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0
-    };
   }
 
 };

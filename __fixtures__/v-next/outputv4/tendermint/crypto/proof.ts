@@ -173,15 +173,6 @@ export const Proof = {
     };
   },
 
-  fromSDKJSON(object: any): ProofSDKType {
-    return {
-      total: isSet(object.total) ? Long.fromValue(object.total) : Long.ZERO,
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
-      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
-    };
-  },
-
   toSDK(message: Proof): ProofSDKType {
     const obj: any = {};
     obj.total = message.total;
@@ -270,13 +261,6 @@ export const ValueOp = {
     return {
       key: object?.key,
       proof: object.proof ? Proof.fromSDK(object.proof) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): ValueOpSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
     };
   },
 
@@ -373,14 +357,6 @@ export const DominoOp = {
       key: object?.key,
       input: object?.input,
       output: object?.output
-    };
-  },
-
-  fromSDKJSON(object: any): DominoOpSDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      input: isSet(object.input) ? String(object.input) : "",
-      output: isSet(object.output) ? String(object.output) : ""
     };
   },
 
@@ -481,14 +457,6 @@ export const ProofOp = {
     };
   },
 
-  fromSDKJSON(object: any): ProofOpSDKType {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
-  },
-
   toSDK(message: ProofOp): ProofOpSDKType {
     const obj: any = {};
     obj.type = message.type;
@@ -563,12 +531,6 @@ export const ProofOps = {
   fromSDK(object: ProofOpsSDKType): ProofOps {
     return {
       ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ProofOpsSDKType {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDKJSON(e)) : []
     };
   },
 

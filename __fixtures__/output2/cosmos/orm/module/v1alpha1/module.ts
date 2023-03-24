@@ -50,10 +50,6 @@ export const Module = {
   fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;
-  },
-
-  fromSDKJSON(_: any): ModuleSDKType {
-    return {};
   }
 
 };

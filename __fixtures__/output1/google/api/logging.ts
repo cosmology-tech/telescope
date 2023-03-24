@@ -201,13 +201,6 @@ export const Logging = {
     };
   },
 
-  fromSDKJSON(object: any): LoggingSDKType {
-    return {
-      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : [],
-      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Logging): LoggingSDKType {
     const obj: any = {};
 
@@ -305,13 +298,6 @@ export const Logging_LoggingDestination = {
     return {
       monitoredResource: object?.monitored_resource,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): Logging_LoggingDestinationSDKType {
-    return {
-      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
     };
   },
 

@@ -128,12 +128,6 @@ export const Visibility = {
     const message = createBaseVisibility();
     message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): VisibilitySDKType {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -203,13 +197,6 @@ export const VisibilityRule = {
     message.selector = object.selector ?? "";
     message.restriction = object.restriction ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): VisibilityRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      restriction: isSet(object.restriction) ? String(object.restriction) : ""
-    };
   }
 
 };

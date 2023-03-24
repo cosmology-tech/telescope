@@ -129,14 +129,6 @@ export const ParameterChangeProposal = {
     };
   },
 
-  fromSDKJSON(object: any): ParameterChangeProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: ParameterChangeProposal): ParameterChangeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -237,14 +229,6 @@ export const ParamChange = {
       subspace: object?.subspace,
       key: object?.key,
       value: object?.value
-    };
-  },
-
-  fromSDKJSON(object: any): ParamChangeSDKType {
-    return {
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 

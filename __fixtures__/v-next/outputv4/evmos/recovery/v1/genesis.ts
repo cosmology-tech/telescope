@@ -90,12 +90,6 @@ export const GenesisState = {
     };
   },
 
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
-    };
-  },
-
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -175,13 +169,6 @@ export const Params = {
     return {
       enableRecovery: object?.enable_recovery,
       packetTimeoutDuration: object.packet_timeout_duration ? Duration.fromSDK(object.packet_timeout_duration) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : false,
-      packet_timeout_duration: isSet(object.packet_timeout_duration) ? Duration.fromSDKJSON(object.packet_timeout_duration) : undefined
     };
   },
 

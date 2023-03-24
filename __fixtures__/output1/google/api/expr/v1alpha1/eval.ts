@@ -231,13 +231,6 @@ export const EvalState = {
     };
   },
 
-  fromSDKJSON(object: any): EvalStateSDKType {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: EvalState): EvalStateSDKType {
     const obj: any = {};
 
@@ -329,13 +322,6 @@ export const EvalState_Result = {
     return {
       expr: object?.expr,
       value: object?.value
-    };
-  },
-
-  fromSDKJSON(object: any): EvalState_ResultSDKType {
-    return {
-      expr: isSet(object.expr) ? Long.fromValue(object.expr) : Long.ZERO,
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
 
@@ -435,14 +421,6 @@ export const ExprValue = {
     };
   },
 
-  fromSDKJSON(object: any): ExprValueSDKType {
-    return {
-      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
-    };
-  },
-
   toSDK(message: ExprValue): ExprValueSDKType {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
@@ -517,12 +495,6 @@ export const ErrorSet = {
   fromSDK(object: ErrorSetSDKType): ErrorSet {
     return {
       errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ErrorSetSDKType {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
     };
   },
 
@@ -616,12 +588,6 @@ export const UnknownSet = {
   fromSDK(object: UnknownSetSDKType): UnknownSet {
     return {
       exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): UnknownSetSDKType {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

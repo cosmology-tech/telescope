@@ -308,13 +308,6 @@ export const Struct_FieldsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): Struct_FieldsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined
-    };
-  },
-
   toSDK(message: Struct_FieldsEntry): Struct_FieldsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -440,17 +433,6 @@ export const Struct = {
         [key: string]: Value;
       }>((acc, [key, value]) => {
         acc[key] = Value.fromSDK(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  fromSDKJSON(object: any): StructSDKType {
-    return {
-      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
-        [key: string]: Value;
-      }>((acc, [key, value]) => {
-        acc[key] = Value.fromSDKJSON(value);
         return acc;
       }, {}) : {}
     };
@@ -642,17 +624,6 @@ export const Value = {
     };
   },
 
-  fromSDKJSON(object: any): ValueSDKType {
-    return {
-      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      number_value: isSet(object.number_value) ? Number(object.number_value) : undefined,
-      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
-      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      struct_value: isSet(object.struct_value) ? Struct.fromSDKJSON(object.struct_value) : undefined,
-      list_value: isSet(object.list_value) ? ListValue.fromSDKJSON(object.list_value) : undefined
-    };
-  },
-
   toSDK(message: Value): ValueSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
@@ -773,12 +744,6 @@ export const ListValue = {
   fromSDK(object: ListValueSDKType): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): ListValueSDKType {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : []
     };
   },
 

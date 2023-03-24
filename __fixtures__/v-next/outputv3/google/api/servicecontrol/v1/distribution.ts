@@ -552,21 +552,6 @@ export const Distribution = {
     };
   },
 
-  fromSDKJSON(object: any): DistributionSDKType {
-    return {
-      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
-      mean: isSet(object.mean) ? Number(object.mean) : 0,
-      minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
-      maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
-      sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
-      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
-      linear_buckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDKJSON(object.linear_buckets) : undefined,
-      exponential_buckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDKJSON(object.exponential_buckets) : undefined,
-      explicit_buckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDKJSON(object.explicit_buckets) : undefined,
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Distribution): DistributionSDKType {
     const obj: any = {};
     obj.count = message.count;
@@ -746,14 +731,6 @@ export const Distribution_LinearBuckets = {
     };
   },
 
-  fromSDKJSON(object: any): Distribution_LinearBucketsSDKType {
-    return {
-      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
-      width: isSet(object.width) ? Number(object.width) : 0,
-      offset: isSet(object.offset) ? Number(object.offset) : 0
-    };
-  },
-
   toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -888,14 +865,6 @@ export const Distribution_ExponentialBuckets = {
     };
   },
 
-  fromSDKJSON(object: any): Distribution_ExponentialBucketsSDKType {
-    return {
-      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
-      growth_factor: isSet(object.growth_factor) ? Number(object.growth_factor) : 0,
-      scale: isSet(object.scale) ? Number(object.scale) : 0
-    };
-  },
-
   toSDK(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -1019,12 +988,6 @@ export const Distribution_ExplicitBuckets = {
   fromSDK(object: Distribution_ExplicitBucketsSDKType): Distribution_ExplicitBuckets {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): Distribution_ExplicitBucketsSDKType {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
 

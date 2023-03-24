@@ -239,13 +239,6 @@ export const SuperfluidAsset = {
     };
   },
 
-  fromSDKJSON(object: any): SuperfluidAssetSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
-    };
-  },
-
   toSDK(message: SuperfluidAsset): SuperfluidAssetSDKType {
     const obj: any = {};
     obj.denom = message.denom;
@@ -339,14 +332,6 @@ export const SuperfluidIntermediaryAccount = {
       denom: object?.denom,
       valAddr: object?.val_addr,
       gaugeId: object?.gauge_id
-    };
-  },
-
-  fromSDKJSON(object: any): SuperfluidIntermediaryAccountSDKType {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
     };
   },
 
@@ -444,14 +429,6 @@ export const OsmoEquivalentMultiplierRecord = {
       epochNumber: object?.epoch_number,
       denom: object?.denom,
       multiplier: object?.multiplier
-    };
-  },
-
-  fromSDKJSON(object: any): OsmoEquivalentMultiplierRecordSDKType {
-    return {
-      epoch_number: isSet(object.epoch_number) ? Long.fromValue(object.epoch_number) : Long.ZERO,
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
   },
 
@@ -565,15 +542,6 @@ export const SuperfluidDelegationRecord = {
     };
   },
 
-  fromSDKJSON(object: any): SuperfluidDelegationRecordSDKType {
-    return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      delegation_amount: isSet(object.delegation_amount) ? Coin.fromSDKJSON(object.delegation_amount) : undefined,
-      equivalent_staked_amount: isSet(object.equivalent_staked_amount) ? Coin.fromSDKJSON(object.equivalent_staked_amount) : undefined
-    };
-  },
-
   toSDK(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordSDKType {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
@@ -656,13 +624,6 @@ export const LockIdIntermediaryAccountConnection = {
     return {
       lockId: object?.lock_id,
       intermediaryAccount: object?.intermediary_account
-    };
-  },
-
-  fromSDKJSON(object: any): LockIdIntermediaryAccountConnectionSDKType {
-    return {
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
-      intermediary_account: isSet(object.intermediary_account) ? String(object.intermediary_account) : ""
     };
   },
 
@@ -751,12 +712,6 @@ export const UnpoolWhitelistedPools = {
   fromSDK(object: UnpoolWhitelistedPoolsSDKType): UnpoolWhitelistedPools {
     return {
       ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => e) : []
-    };
-  },
-
-  fromSDKJSON(object: any): UnpoolWhitelistedPoolsSDKType {
-    return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

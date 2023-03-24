@@ -106,12 +106,6 @@ export const DepositDeploymentAuthorization = {
     };
   },
 
-  fromSDKJSON(object: any): DepositDeploymentAuthorizationSDKType {
-    return {
-      spend_limit: isSet(object.spend_limit) ? Coin.fromSDKJSON(object.spend_limit) : undefined
-    };
-  },
-
   toSDK(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationSDKType {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);

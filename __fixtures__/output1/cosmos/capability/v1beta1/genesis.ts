@@ -110,13 +110,6 @@ export const GenesisOwners = {
     };
   },
 
-  fromSDKJSON(object: any): GenesisOwnersSDKType {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
-      index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
-    };
-  },
-
   toSDK(message: GenesisOwners): GenesisOwnersSDKType {
     const obj: any = {};
     obj.index = message.index;
@@ -203,13 +196,6 @@ export const GenesisState = {
     return {
       index: object?.index,
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): GenesisStateSDKType {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
     };
   },
 

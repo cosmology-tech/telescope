@@ -110,15 +110,6 @@ export const StoreKVPair = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): StoreKVPairSDKType {
-    return {
-      store_key: isSet(object.store_key) ? String(object.store_key) : "",
-      delete: isSet(object.delete) ? Boolean(object.delete) : false,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
   }
 
 };

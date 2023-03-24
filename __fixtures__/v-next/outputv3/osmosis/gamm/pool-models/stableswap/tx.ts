@@ -267,17 +267,6 @@ export const MsgCreateStableswapPool = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateStableswapPoolSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
-      initial_pool_liquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
-      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
-      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
-    };
-  },
-
   toSDK(message: MsgCreateStableswapPool): MsgCreateStableswapPoolSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -422,12 +411,6 @@ export const MsgCreateStableswapPoolResponse = {
   fromSDK(object: MsgCreateStableswapPoolResponseSDKType): MsgCreateStableswapPoolResponse {
     return {
       poolId: object?.pool_id
-    };
-  },
-
-  fromSDKJSON(object: any): MsgCreateStableswapPoolResponseSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
     };
   },
 
@@ -585,14 +568,6 @@ export const MsgStableSwapAdjustScalingFactors = {
     };
   },
 
-  fromSDKJSON(object: any): MsgStableSwapAdjustScalingFactorsSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : []
-    };
-  },
-
   toSDK(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -702,10 +677,6 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   },
 
   fromSDK(_: MsgStableSwapAdjustScalingFactorsResponseSDKType): MsgStableSwapAdjustScalingFactorsResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgStableSwapAdjustScalingFactorsResponseSDKType {
     return {};
   },
 

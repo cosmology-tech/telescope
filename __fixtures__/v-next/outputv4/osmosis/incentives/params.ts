@@ -77,12 +77,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : ""
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.distr_epoch_identifier = message.distrEpochIdentifier;

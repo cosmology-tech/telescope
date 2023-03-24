@@ -740,13 +740,6 @@ export const LogMetric_LabelExtractorsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): LogMetric_LabelExtractorsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
   toSDK(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -1008,27 +1001,6 @@ export const LogMetric = {
     };
   },
 
-  fromSDKJSON(object: any): LogMetricSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      metric_descriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDKJSON(object.metric_descriptor) : undefined,
-      value_extractor: isSet(object.value_extractor) ? String(object.value_extractor) : "",
-      label_extractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
-      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
-      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
-    };
-  },
-
   toSDK(message: LogMetric): LogMetricSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1206,14 +1178,6 @@ export const ListLogMetricsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): ListLogMetricsRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
-    };
-  },
-
   toSDK(message: ListLogMetricsRequest): ListLogMetricsRequestSDKType {
     const obj: any = {};
     obj.parent = message.parent;
@@ -1341,13 +1305,6 @@ export const ListLogMetricsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): ListLogMetricsResponseSDKType {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDKJSON(e)) : [],
-      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
-    };
-  },
-
   toSDK(message: ListLogMetricsResponse): ListLogMetricsResponseSDKType {
     const obj: any = {};
 
@@ -1465,12 +1422,6 @@ export const GetLogMetricRequest = {
     };
   },
 
-  fromSDKJSON(object: any): GetLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
-    };
-  },
-
   toSDK(message: GetLogMetricRequest): GetLogMetricRequestSDKType {
     const obj: any = {};
     obj.metric_name = message.metricName;
@@ -1583,13 +1534,6 @@ export const CreateLogMetricRequest = {
     return {
       parent: object?.parent,
       metric: object.metric ? LogMetric.fromSDK(object.metric) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): CreateLogMetricRequestSDKType {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
     };
   },
 
@@ -1711,13 +1655,6 @@ export const UpdateLogMetricRequest = {
     };
   },
 
-  fromSDKJSON(object: any): UpdateLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
-      metric: isSet(object.metric) ? LogMetric.fromSDKJSON(object.metric) : undefined
-    };
-  },
-
   toSDK(message: UpdateLogMetricRequest): UpdateLogMetricRequestSDKType {
     const obj: any = {};
     obj.metric_name = message.metricName;
@@ -1820,12 +1757,6 @@ export const DeleteLogMetricRequest = {
   fromSDK(object: DeleteLogMetricRequestSDKType): DeleteLogMetricRequest {
     return {
       metricName: object?.metric_name
-    };
-  },
-
-  fromSDKJSON(object: any): DeleteLogMetricRequestSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : ""
     };
   },
 

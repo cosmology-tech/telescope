@@ -165,12 +165,6 @@ export const Capability = {
     };
   },
 
-  fromSDKJSON(object: any): CapabilitySDKType {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
-    };
-  },
-
   toSDK(message: Capability): CapabilitySDKType {
     const obj: any = {};
     obj.index = message.index;
@@ -294,13 +288,6 @@ export const Owner = {
     };
   },
 
-  fromSDKJSON(object: any): OwnerSDKType {
-    return {
-      module: isSet(object.module) ? String(object.module) : "",
-      name: isSet(object.name) ? String(object.name) : ""
-    };
-  },
-
   toSDK(message: Owner): OwnerSDKType {
     const obj: any = {};
     obj.module = message.module;
@@ -417,12 +404,6 @@ export const CapabilityOwners = {
   fromSDK(object: CapabilityOwnersSDKType): CapabilityOwners {
     return {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): CapabilityOwnersSDKType {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDKJSON(e)) : []
     };
   },
 

@@ -70,12 +70,6 @@ export const Control = {
     const message = createBaseControl();
     message.environment = object.environment ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): ControlSDKType {
-    return {
-      environment: isSet(object.environment) ? String(object.environment) : ""
-    };
   }
 
 };

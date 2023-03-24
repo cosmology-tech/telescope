@@ -106,13 +106,6 @@ export const MsgSubmitEvidence = {
     };
   },
 
-  fromSDKJSON(object: any): MsgSubmitEvidenceSDKType {
-    return {
-      submitter: isSet(object.submitter) ? String(object.submitter) : "",
-      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
-    };
-  },
-
   toSDK(message: MsgSubmitEvidence): MsgSubmitEvidenceSDKType {
     const obj: any = {};
     obj.submitter = message.submitter;
@@ -180,12 +173,6 @@ export const MsgSubmitEvidenceResponse = {
   fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
     return {
       hash: object?.hash
-    };
-  },
-
-  fromSDKJSON(object: any): MsgSubmitEvidenceResponseSDKType {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
 

@@ -167,13 +167,6 @@ export const MetricValue_LabelsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): MetricValue_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
   toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -368,24 +361,6 @@ export const MetricValue = {
     };
   },
 
-  fromSDKJSON(object: any): MetricValueSDKType {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
-      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
-      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
-      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
-      distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined
-    };
-  },
-
   toSDK(message: MetricValue): MetricValueSDKType {
     const obj: any = {};
     obj.labels = {};
@@ -485,13 +460,6 @@ export const MetricValueSet = {
     return {
       metricName: object?.metric_name,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): MetricValueSetSDKType {
-    return {
-      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
-      metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
     };
   },
 

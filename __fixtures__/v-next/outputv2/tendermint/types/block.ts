@@ -132,15 +132,6 @@ export const Block = {
     };
   },
 
-  fromSDKJSON(object: any): BlockSDKType {
-    return {
-      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
-      data: isSet(object.data) ? Data.fromSDKJSON(object.data) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceList.fromSDKJSON(object.evidence) : undefined,
-      last_commit: isSet(object.last_commit) ? Commit.fromSDKJSON(object.last_commit) : undefined
-    };
-  },
-
   toSDK(message: Block): BlockSDKType {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);

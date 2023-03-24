@@ -570,17 +570,6 @@ export const Documentation = {
     };
   },
 
-  fromSDKJSON(object: any): DocumentationSDKType {
-    return {
-      summary: isSet(object.summary) ? String(object.summary) : "",
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDKJSON(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDKJSON(e)) : [],
-      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : "",
-      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : "",
-      overview: isSet(object.overview) ? String(object.overview) : ""
-    };
-  },
-
   toSDK(message: Documentation): DocumentationSDKType {
     const obj: any = {};
     obj.summary = message.summary;
@@ -746,14 +735,6 @@ export const DocumentationRule = {
     };
   },
 
-  fromSDKJSON(object: any): DocumentationRuleSDKType {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : ""
-    };
-  },
-
   toSDK(message: DocumentationRule): DocumentationRuleSDKType {
     const obj: any = {};
     obj.selector = message.selector;
@@ -891,14 +872,6 @@ export const Page = {
       name: object?.name,
       content: object?.content,
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): PageSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      content: isSet(object.content) ? String(object.content) : "",
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDKJSON(e)) : []
     };
   },
 

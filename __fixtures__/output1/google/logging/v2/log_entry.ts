@@ -387,13 +387,6 @@ export const LogEntry_LabelsEntry = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntry_LabelsEntrySDKType {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
-  },
-
   toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -705,33 +698,6 @@ export const LogEntry = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntrySDKType {
-    return {
-      log_name: isSet(object.log_name) ? String(object.log_name) : "",
-      resource: isSet(object.resource) ? MonitoredResource.fromSDKJSON(object.resource) : undefined,
-      proto_payload: isSet(object.proto_payload) ? Any.fromSDKJSON(object.proto_payload) : undefined,
-      text_payload: isSet(object.text_payload) ? String(object.text_payload) : undefined,
-      json_payload: isSet(object.json_payload) ? Struct.fromSDKJSON(object.json_payload) : undefined,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      receive_timestamp: isSet(object.receive_timestamp) ? new Date(object.receive_timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
-      http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDKJSON(object.operation) : undefined,
-      trace: isSet(object.trace) ? String(object.trace) : "",
-      span_id: isSet(object.span_id) ? String(object.span_id) : "",
-      trace_sampled: isSet(object.trace_sampled) ? Boolean(object.trace_sampled) : false,
-      source_location: isSet(object.source_location) ? LogEntrySourceLocation.fromSDKJSON(object.source_location) : undefined,
-      split: isSet(object.split) ? LogSplit.fromSDKJSON(object.split) : undefined
-    };
-  },
-
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
     obj.log_name = message.logName;
@@ -863,15 +829,6 @@ export const LogEntryOperation = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntryOperationSDKType {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      producer: isSet(object.producer) ? String(object.producer) : "",
-      first: isSet(object.first) ? Boolean(object.first) : false,
-      last: isSet(object.last) ? Boolean(object.last) : false
-    };
-  },
-
   toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -970,14 +927,6 @@ export const LogEntrySourceLocation = {
     };
   },
 
-  fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
-      function: isSet(object.function) ? String(object.function) : ""
-    };
-  },
-
   toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
     const obj: any = {};
     obj.file = message.file;
@@ -1072,14 +1021,6 @@ export const LogSplit = {
       uid: object?.uid,
       index: object?.index,
       totalSplits: object?.total_splits
-    };
-  },
-
-  fromSDKJSON(object: any): LogSplitSDKType {
-    return {
-      uid: isSet(object.uid) ? String(object.uid) : "",
-      index: isSet(object.index) ? Number(object.index) : 0,
-      total_splits: isSet(object.total_splits) ? Number(object.total_splits) : 0
     };
   },
 

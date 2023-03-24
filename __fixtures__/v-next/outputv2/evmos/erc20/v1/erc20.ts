@@ -361,15 +361,6 @@ export const TokenPair = {
     };
   },
 
-  fromSDKJSON(object: any): TokenPairSDKType {
-    return {
-      erc20_address: isSet(object.erc20_address) ? String(object.erc20_address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      contract_owner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
-    };
-  },
-
   toSDK(message: TokenPair): TokenPairSDKType {
     const obj: any = {};
     obj.erc20_address = message.erc20Address;
@@ -507,14 +498,6 @@ export const RegisterCoinProposal = {
     };
   },
 
-  fromSDKJSON(object: any): RegisterCoinProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
-    };
-  },
-
   toSDK(message: RegisterCoinProposal): RegisterCoinProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -649,14 +632,6 @@ export const RegisterERC20Proposal = {
     };
   },
 
-  fromSDKJSON(object: any): RegisterERC20ProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
-    };
-  },
-
   toSDK(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -788,14 +763,6 @@ export const ToggleTokenConversionProposal = {
       title: object?.title,
       description: object?.description,
       token: object?.token
-    };
-  },
-
-  fromSDKJSON(object: any): ToggleTokenConversionProposalSDKType {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      token: isSet(object.token) ? String(object.token) : ""
     };
   },
 

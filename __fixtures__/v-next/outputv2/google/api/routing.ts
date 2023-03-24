@@ -1332,12 +1332,6 @@ export const RoutingRule = {
     };
   },
 
-  fromSDKJSON(object: any): RoutingRuleSDKType {
-    return {
-      routing_parameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: RoutingRule): RoutingRuleSDKType {
     const obj: any = {};
 
@@ -1462,13 +1456,6 @@ export const RoutingParameter = {
     return {
       field: object?.field,
       pathTemplate: object?.path_template
-    };
-  },
-
-  fromSDKJSON(object: any): RoutingParameterSDKType {
-    return {
-      field: isSet(object.field) ? String(object.field) : "",
-      path_template: isSet(object.path_template) ? String(object.path_template) : ""
     };
   },
 

@@ -147,14 +147,6 @@ export const MsgLockTokens = {
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgLockTokensSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -212,12 +204,6 @@ export const MsgLockTokensResponse = {
     const message = createBaseMsgLockTokensResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgLockTokensResponseSDKType {
-    return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
-    };
   }
 
 };
@@ -275,12 +261,6 @@ export const MsgBeginUnlockingAll = {
     const message = createBaseMsgBeginUnlockingAll();
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgBeginUnlockingAllSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -344,12 +324,6 @@ export const MsgBeginUnlockingAllResponse = {
     const message = createBaseMsgBeginUnlockingAllResponse();
     message.unlocks = object.unlocks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgBeginUnlockingAllResponseSDKType {
-    return {
-      unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -437,14 +411,6 @@ export const MsgBeginUnlocking = {
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgBeginUnlockingSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -502,12 +468,6 @@ export const MsgBeginUnlockingResponse = {
     const message = createBaseMsgBeginUnlockingResponse();
     message.success = object.success ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgBeginUnlockingResponseSDKType {
-    return {
-      success: isSet(object.success) ? Boolean(object.success) : false
-    };
   }
 
 };
@@ -589,14 +549,6 @@ export const MsgExtendLockup = {
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgExtendLockupSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
-    };
   }
 
 };
@@ -654,12 +606,6 @@ export const MsgExtendLockupResponse = {
     const message = createBaseMsgExtendLockupResponse();
     message.success = object.success ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgExtendLockupResponseSDKType {
-    return {
-      success: isSet(object.success) ? Boolean(object.success) : false
-    };
   }
 
 };
@@ -747,14 +693,6 @@ export const MsgForceUnlock = {
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgForceUnlockSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -812,12 +750,6 @@ export const MsgForceUnlockResponse = {
     const message = createBaseMsgForceUnlockResponse();
     message.success = object.success ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgForceUnlockResponseSDKType {
-    return {
-      success: isSet(object.success) ? Boolean(object.success) : false
-    };
   }
 
 };

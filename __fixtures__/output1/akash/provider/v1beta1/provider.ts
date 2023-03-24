@@ -165,13 +165,6 @@ export const ProviderInfo = {
     };
   },
 
-  fromSDKJSON(object: any): ProviderInfoSDKType {
-    return {
-      email: isSet(object.email) ? String(object.email) : "",
-      website: isSet(object.website) ? String(object.website) : ""
-    };
-  },
-
   toSDK(message: ProviderInfo): ProviderInfoSDKType {
     const obj: any = {};
     obj.email = message.email;
@@ -287,15 +280,6 @@ export const MsgCreateProvider = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCreateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
-  },
-
   toSDK(message: MsgCreateProvider): MsgCreateProviderSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -355,10 +339,6 @@ export const MsgCreateProviderResponse = {
   },
 
   fromSDK(_: MsgCreateProviderResponseSDKType): MsgCreateProviderResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCreateProviderResponseSDKType {
     return {};
   },
 
@@ -475,15 +455,6 @@ export const MsgUpdateProvider = {
     };
   },
 
-  fromSDKJSON(object: any): MsgUpdateProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
-    };
-  },
-
   toSDK(message: MsgUpdateProvider): MsgUpdateProviderSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -543,10 +514,6 @@ export const MsgUpdateProviderResponse = {
   },
 
   fromSDK(_: MsgUpdateProviderResponseSDKType): MsgUpdateProviderResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgUpdateProviderResponseSDKType {
     return {};
   },
 
@@ -618,12 +585,6 @@ export const MsgDeleteProvider = {
     };
   },
 
-  fromSDKJSON(object: any): MsgDeleteProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
-  },
-
   toSDK(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
     const obj: any = {};
     obj.owner = message.owner;
@@ -674,10 +635,6 @@ export const MsgDeleteProviderResponse = {
   },
 
   fromSDK(_: MsgDeleteProviderResponseSDKType): MsgDeleteProviderResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgDeleteProviderResponseSDKType {
     return {};
   },
 
@@ -791,15 +748,6 @@ export const Provider = {
       hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
       info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): ProviderSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      host_uri: isSet(object.host_uri) ? String(object.host_uri) : "",
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDKJSON(object.info) : undefined
     };
   },
 

@@ -210,12 +210,6 @@ export const QueryPoolRequest = {
     const message = createBaseQueryPoolRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
   }
 
 };
@@ -273,12 +267,6 @@ export const QueryPoolResponse = {
     const message = createBaseQueryPoolResponse();
     message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolResponseSDKType {
-    return {
-      pool: isSet(object.pool) ? Any.fromSDKJSON(object.pool) : undefined
-    };
   }
 
 };
@@ -336,12 +324,6 @@ export const QueryPoolsRequest = {
     const message = createBaseQueryPoolsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolsRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -417,13 +399,6 @@ export const QueryPoolsResponse = {
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolsResponseSDKType {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -467,10 +442,6 @@ export const QueryNumPoolsRequest = {
   fromPartial(_: DeepPartial<QueryNumPoolsRequest>): QueryNumPoolsRequest {
     const message = createBaseQueryNumPoolsRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryNumPoolsRequestSDKType {
-    return {};
   }
 
 };
@@ -528,12 +499,6 @@ export const QueryNumPoolsResponse = {
     const message = createBaseQueryNumPoolsResponse();
     message.numPools = object.numPools !== undefined && object.numPools !== null ? Long.fromValue(object.numPools) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryNumPoolsResponseSDKType {
-    return {
-      num_pools: isSet(object.num_pools) ? Long.fromValue(object.num_pools) : Long.UZERO
-    };
   }
 
 };
@@ -591,12 +556,6 @@ export const QueryPoolTypeRequest = {
     const message = createBaseQueryPoolTypeRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolTypeRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
   }
 
 };
@@ -654,12 +613,6 @@ export const QueryPoolTypeResponse = {
     const message = createBaseQueryPoolTypeResponse();
     message.poolType = object.poolType ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolTypeResponseSDKType {
-    return {
-      pool_type: isSet(object.pool_type) ? String(object.pool_type) : ""
-    };
   }
 
 };
@@ -735,13 +688,6 @@ export const QueryCalcJoinPoolSharesRequest = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcJoinPoolSharesRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -817,13 +763,6 @@ export const QueryCalcJoinPoolSharesResponse = {
     message.shareOutAmount = object.shareOutAmount ?? "";
     message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcJoinPoolSharesResponseSDKType {
-    return {
-      share_out_amount: isSet(object.share_out_amount) ? String(object.share_out_amount) : "",
-      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -893,13 +832,6 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.shareInAmount = object.shareInAmount ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      share_in_amount: isSet(object.share_in_amount) ? String(object.share_in_amount) : ""
-    };
   }
 
 };
@@ -963,12 +895,6 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
     const message = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
     message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesResponseSDKType {
-    return {
-      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1026,12 +952,6 @@ export const QueryPoolParamsRequest = {
     const message = createBaseQueryPoolParamsRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolParamsRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
   }
 
 };
@@ -1089,12 +1009,6 @@ export const QueryPoolParamsResponse = {
     const message = createBaseQueryPoolParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Any.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolParamsResponseSDKType {
-    return {
-      params: isSet(object.params) ? Any.fromSDKJSON(object.params) : undefined
-    };
   }
 
 };
@@ -1152,12 +1066,6 @@ export const QueryTotalPoolLiquidityRequest = {
     const message = createBaseQueryTotalPoolLiquidityRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalPoolLiquidityRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
   }
 
 };
@@ -1221,12 +1129,6 @@ export const QueryTotalPoolLiquidityResponse = {
     const message = createBaseQueryTotalPoolLiquidityResponse();
     message.liquidity = object.liquidity?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalPoolLiquidityResponseSDKType {
-    return {
-      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1284,12 +1186,6 @@ export const QueryTotalSharesRequest = {
     const message = createBaseQueryTotalSharesRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalSharesRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
-    };
   }
 
 };
@@ -1347,12 +1243,6 @@ export const QueryTotalSharesResponse = {
     const message = createBaseQueryTotalSharesResponse();
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalSharesResponseSDKType {
-    return {
-      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined
-    };
   }
 
 };
@@ -1428,13 +1318,6 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1510,13 +1393,6 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
     message.sharesOut = object.sharesOut ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesResponseSDKType {
-    return {
-      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      shares_out: isSet(object.shares_out) ? String(object.shares_out) : ""
-    };
   }
 
 };
@@ -1598,14 +1474,6 @@ export const QuerySpotPriceRequest = {
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
-      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
-    };
   }
 
 };
@@ -1693,14 +1561,6 @@ export const QueryPoolsWithFilterRequest = {
     message.poolType = object.poolType ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolsWithFilterRequestSDKType {
-    return {
-      min_liquidity: Array.isArray(object?.min_liquidity) ? object.min_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      pool_type: isSet(object.pool_type) ? String(object.pool_type) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -1776,13 +1636,6 @@ export const QueryPoolsWithFilterResponse = {
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryPoolsWithFilterResponseSDKType {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -1840,12 +1693,6 @@ export const QuerySpotPriceResponse = {
     const message = createBaseQuerySpotPriceResponse();
     message.spotPrice = object.spotPrice ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySpotPriceResponseSDKType {
-    return {
-      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
-    };
   }
 
 };
@@ -1945,15 +1792,6 @@ export const QuerySwapExactAmountInRequest = {
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySwapExactAmountInRequestSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      token_in: isSet(object.token_in) ? String(object.token_in) : "",
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -2011,12 +1849,6 @@ export const QuerySwapExactAmountInResponse = {
     const message = createBaseQuerySwapExactAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySwapExactAmountInResponseSDKType {
-    return {
-      token_out_amount: isSet(object.token_out_amount) ? String(object.token_out_amount) : ""
-    };
   }
 
 };
@@ -2116,15 +1948,6 @@ export const QuerySwapExactAmountOutRequest = {
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySwapExactAmountOutRequestSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
-      token_out: isSet(object.token_out) ? String(object.token_out) : ""
-    };
   }
 
 };
@@ -2182,12 +2005,6 @@ export const QuerySwapExactAmountOutResponse = {
     const message = createBaseQuerySwapExactAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySwapExactAmountOutResponseSDKType {
-    return {
-      token_in_amount: isSet(object.token_in_amount) ? String(object.token_in_amount) : ""
-    };
   }
 
 };
@@ -2231,10 +2048,6 @@ export const QueryTotalLiquidityRequest = {
   fromPartial(_: DeepPartial<QueryTotalLiquidityRequest>): QueryTotalLiquidityRequest {
     const message = createBaseQueryTotalLiquidityRequest();
     return message;
-  },
-
-  fromSDKJSON(_: any): QueryTotalLiquidityRequestSDKType {
-    return {};
   }
 
 };
@@ -2298,12 +2111,6 @@ export const QueryTotalLiquidityResponse = {
     const message = createBaseQueryTotalLiquidityResponse();
     message.liquidity = object.liquidity?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryTotalLiquidityResponseSDKType {
-    return {
-      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };

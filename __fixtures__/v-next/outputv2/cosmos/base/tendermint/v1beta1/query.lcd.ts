@@ -26,25 +26,25 @@ export class LCDQueryClient {
   /* GetNodeInfo queries the current node info. */
   async getNodeInfo(_params: GetNodeInfoRequest = {}): Promise<GetNodeInfoResponseSDKType> {
     const endpoint = `cosmos/base/tendermint/v1beta1/node_info`;
-    return GetNodeInfoResponse.fromSDKJSON(await this.req.get<GetNodeInfoResponseSDKType>(endpoint));
+    return await this.req.get<GetNodeInfoResponseSDKType>(endpoint);
   }
 
   /* GetSyncing queries node syncing. */
   async getSyncing(_params: GetSyncingRequest = {}): Promise<GetSyncingResponseSDKType> {
     const endpoint = `cosmos/base/tendermint/v1beta1/syncing`;
-    return GetSyncingResponse.fromSDKJSON(await this.req.get<GetSyncingResponseSDKType>(endpoint));
+    return await this.req.get<GetSyncingResponseSDKType>(endpoint);
   }
 
   /* GetLatestBlock returns the latest block. */
   async getLatestBlock(_params: GetLatestBlockRequest = {}): Promise<GetLatestBlockResponseSDKType> {
     const endpoint = `cosmos/base/tendermint/v1beta1/blocks/latest`;
-    return GetLatestBlockResponse.fromSDKJSON(await this.req.get<GetLatestBlockResponseSDKType>(endpoint));
+    return await this.req.get<GetLatestBlockResponseSDKType>(endpoint);
   }
 
   /* GetBlockByHeight queries block for given height. */
   async getBlockByHeight(params: GetBlockByHeightRequest): Promise<GetBlockByHeightResponseSDKType> {
     const endpoint = `cosmos/base/tendermint/v1beta1/blocks/${params.height}`;
-    return GetBlockByHeightResponse.fromSDKJSON(await this.req.get<GetBlockByHeightResponseSDKType>(endpoint));
+    return await this.req.get<GetBlockByHeightResponseSDKType>(endpoint);
   }
 
   /* GetLatestValidatorSet queries latest validator-set. */
@@ -60,7 +60,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/base/tendermint/v1beta1/validatorsets/latest`;
-    return GetLatestValidatorSetResponse.fromSDKJSON(await this.req.get<GetLatestValidatorSetResponseSDKType>(endpoint, options));
+    return await this.req.get<GetLatestValidatorSetResponseSDKType>(endpoint, options);
   }
 
   /* GetValidatorSetByHeight queries validator-set at a given height. */
@@ -74,7 +74,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `cosmos/base/tendermint/v1beta1/validatorsets/${params.height}`;
-    return GetValidatorSetByHeightResponse.fromSDKJSON(await this.req.get<GetValidatorSetByHeightResponseSDKType>(endpoint, options));
+    return await this.req.get<GetValidatorSetByHeightResponseSDKType>(endpoint, options);
   }
 
 }

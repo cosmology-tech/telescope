@@ -102,13 +102,6 @@ export const CommitInfo = {
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): CommitInfoSDKType {
-    return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
-      store_infos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -178,13 +171,6 @@ export const StoreInfo = {
     message.name = object.name ?? "";
     message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): StoreInfoSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      commit_id: isSet(object.commit_id) ? CommitID.fromSDKJSON(object.commit_id) : undefined
-    };
   }
 
 };
@@ -254,13 +240,6 @@ export const CommitID = {
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): CommitIDSDKType {
-    return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
   }
 
 };

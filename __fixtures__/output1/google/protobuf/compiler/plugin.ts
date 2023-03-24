@@ -257,15 +257,6 @@ export const Version = {
     };
   },
 
-  fromSDKJSON(object: any): VersionSDKType {
-    return {
-      major: isSet(object.major) ? Number(object.major) : 0,
-      minor: isSet(object.minor) ? Number(object.minor) : 0,
-      patch: isSet(object.patch) ? Number(object.patch) : 0,
-      suffix: isSet(object.suffix) ? String(object.suffix) : ""
-    };
-  },
-
   toSDK(message: Version): VersionSDKType {
     const obj: any = {};
     obj.major = message.major;
@@ -389,15 +380,6 @@ export const CodeGeneratorRequest = {
     };
   },
 
-  fromSDKJSON(object: any): CodeGeneratorRequestSDKType {
-    return {
-      file_to_generate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => String(e)) : [],
-      parameter: isSet(object.parameter) ? String(object.parameter) : "",
-      proto_file: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDKJSON(e)) : [],
-      compiler_version: isSet(object.compiler_version) ? Version.fromSDKJSON(object.compiler_version) : undefined
-    };
-  },
-
   toSDK(message: CodeGeneratorRequest): CodeGeneratorRequestSDKType {
     const obj: any = {};
 
@@ -501,13 +483,6 @@ export const CodeGeneratorResponse = {
     };
   },
 
-  fromSDKJSON(object: any): CodeGeneratorResponseSDKType {
-    return {
-      error: isSet(object.error) ? String(object.error) : "",
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: CodeGeneratorResponse): CodeGeneratorResponseSDKType {
     const obj: any = {};
     obj.error = message.error;
@@ -607,14 +582,6 @@ export const CodeGeneratorResponse_File = {
       name: object?.name,
       insertionPoint: object?.insertion_point,
       content: object?.content
-    };
-  },
-
-  fromSDKJSON(object: any): CodeGeneratorResponse_FileSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      insertion_point: isSet(object.insertion_point) ? String(object.insertion_point) : "",
-      content: isSet(object.content) ? String(object.content) : ""
     };
   },
 

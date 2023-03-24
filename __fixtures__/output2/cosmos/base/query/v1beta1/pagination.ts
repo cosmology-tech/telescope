@@ -174,16 +174,6 @@ export const PageRequest = {
     message.countTotal = object.countTotal ?? false;
     message.reverse = object.reverse ?? false;
     return message;
-  },
-
-  fromSDKJSON(object: any): PageRequestSDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
-      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
-      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
-      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
-    };
   }
 
 };
@@ -253,13 +243,6 @@ export const PageResponse = {
     message.nextKey = object.nextKey ?? new Uint8Array();
     message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): PageResponseSDKType {
-    return {
-      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
-      total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
-    };
   }
 
 };

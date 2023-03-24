@@ -138,14 +138,6 @@ export const MsgVerifyInvariant = {
     };
   },
 
-  fromSDKJSON(object: any): MsgVerifyInvariantSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      invariant_module_name: isSet(object.invariant_module_name) ? String(object.invariant_module_name) : "",
-      invariant_route: isSet(object.invariant_route) ? String(object.invariant_route) : ""
-    };
-  },
-
   toSDK(message: MsgVerifyInvariant): MsgVerifyInvariantSDKType {
     const obj: any = {};
     obj.sender = message.sender;
@@ -243,10 +235,6 @@ export const MsgVerifyInvariantResponse = {
   },
 
   fromSDK(_: MsgVerifyInvariantResponseSDKType): MsgVerifyInvariantResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgVerifyInvariantResponseSDKType {
     return {};
   },
 

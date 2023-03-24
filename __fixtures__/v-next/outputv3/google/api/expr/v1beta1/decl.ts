@@ -302,16 +302,6 @@ export const Decl = {
     };
   },
 
-  fromSDKJSON(object: any): DeclSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      doc: isSet(object.doc) ? String(object.doc) : "",
-      ident: isSet(object.ident) ? IdentDecl.fromSDKJSON(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromSDKJSON(object.function) : undefined
-    };
-  },
-
   toSDK(message: Decl): DeclSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -458,14 +448,6 @@ export const DeclType = {
     };
   },
 
-  fromSDKJSON(object: any): DeclTypeSDKType {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      type: isSet(object.type) ? String(object.type) : "",
-      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: DeclType): DeclTypeSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -596,13 +578,6 @@ export const IdentDecl = {
     return {
       type: object.type ? DeclType.fromSDK(object.type) : undefined,
       value: object.value ? Expr.fromSDK(object.value) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): IdentDeclSDKType {
-    return {
-      type: isSet(object.type) ? DeclType.fromSDKJSON(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
     };
   },
 
@@ -740,14 +715,6 @@ export const FunctionDecl = {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDK(e)) : [],
       returnType: object.return_type ? DeclType.fromSDK(object.return_type) : undefined,
       receiverFunction: object?.receiver_function
-    };
-  },
-
-  fromSDKJSON(object: any): FunctionDeclSDKType {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDKJSON(e)) : [],
-      return_type: isSet(object.return_type) ? DeclType.fromSDKJSON(object.return_type) : undefined,
-      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : false
     };
   },
 

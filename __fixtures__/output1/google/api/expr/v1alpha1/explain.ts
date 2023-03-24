@@ -139,13 +139,6 @@ export const Explain = {
     };
   },
 
-  fromSDKJSON(object: any): ExplainSDKType {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : [],
-      expr_steps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: Explain): ExplainSDKType {
     const obj: any = {};
 
@@ -237,13 +230,6 @@ export const Explain_ExprStep = {
     return {
       id: object?.id,
       valueIndex: object?.value_index
-    };
-  },
-
-  fromSDKJSON(object: any): Explain_ExprStepSDKType {
-    return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
-      value_index: isSet(object.value_index) ? Number(object.value_index) : 0
     };
   },
 

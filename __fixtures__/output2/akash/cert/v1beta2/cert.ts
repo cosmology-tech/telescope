@@ -156,13 +156,6 @@ export const CertificateID = {
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): CertificateIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      serial: isSet(object.serial) ? String(object.serial) : ""
-    };
   }
 
 };
@@ -244,14 +237,6 @@ export const Certificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): CertificateSDKType {
-    return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
-    };
   }
 
 };
@@ -333,14 +318,6 @@ export const CertificateFilter = {
     message.serial = object.serial ?? "";
     message.state = object.state ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): CertificateFilterSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      serial: isSet(object.serial) ? String(object.serial) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
   }
 
 };
@@ -422,14 +399,6 @@ export const MsgCreateCertificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateCertificateSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
-    };
   }
 
 };
@@ -473,10 +442,6 @@ export const MsgCreateCertificateResponse = {
   fromPartial(_: DeepPartial<MsgCreateCertificateResponse>): MsgCreateCertificateResponse {
     const message = createBaseMsgCreateCertificateResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateCertificateResponseSDKType {
-    return {};
   }
 
 };
@@ -534,12 +499,6 @@ export const MsgRevokeCertificate = {
     const message = createBaseMsgRevokeCertificate();
     message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgRevokeCertificateSDKType {
-    return {
-      id: isSet(object.id) ? CertificateID.fromSDKJSON(object.id) : undefined
-    };
   }
 
 };
@@ -583,10 +542,6 @@ export const MsgRevokeCertificateResponse = {
   fromPartial(_: DeepPartial<MsgRevokeCertificateResponse>): MsgRevokeCertificateResponse {
     const message = createBaseMsgRevokeCertificateResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgRevokeCertificateResponseSDKType {
-    return {};
   }
 
 };

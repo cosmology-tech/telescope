@@ -218,16 +218,6 @@ export const LeaseID = {
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): LeaseIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
   }
 
 };
@@ -333,16 +323,6 @@ export const Lease = {
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): LeaseSDKType {
-    return {
-      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO,
-      closed_on: isSet(object.closed_on) ? Long.fromValue(object.closed_on) : Long.ZERO
-    };
   }
 
 };
@@ -460,17 +440,6 @@ export const LeaseFilters = {
     message.provider = object.provider ?? "";
     message.state = object.state ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): LeaseFiltersSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
   }
 
 };
@@ -528,12 +497,6 @@ export const MsgCreateLease = {
     const message = createBaseMsgCreateLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCreateLeaseSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
-    };
   }
 
 };
@@ -577,10 +540,6 @@ export const MsgCreateLeaseResponse = {
   fromPartial(_: DeepPartial<MsgCreateLeaseResponse>): MsgCreateLeaseResponse {
     const message = createBaseMsgCreateLeaseResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCreateLeaseResponseSDKType {
-    return {};
   }
 
 };
@@ -638,12 +597,6 @@ export const MsgWithdrawLease = {
     const message = createBaseMsgWithdrawLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgWithdrawLeaseSDKType {
-    return {
-      bid_id: isSet(object.bid_id) ? LeaseID.fromSDKJSON(object.bid_id) : undefined
-    };
   }
 
 };
@@ -687,10 +640,6 @@ export const MsgWithdrawLeaseResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawLeaseResponse>): MsgWithdrawLeaseResponse {
     const message = createBaseMsgWithdrawLeaseResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgWithdrawLeaseResponseSDKType {
-    return {};
   }
 
 };
@@ -748,12 +697,6 @@ export const MsgCloseLease = {
     const message = createBaseMsgCloseLease();
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): MsgCloseLeaseSDKType {
-    return {
-      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined
-    };
   }
 
 };
@@ -797,10 +740,6 @@ export const MsgCloseLeaseResponse = {
   fromPartial(_: DeepPartial<MsgCloseLeaseResponse>): MsgCloseLeaseResponse {
     const message = createBaseMsgCloseLeaseResponse();
     return message;
-  },
-
-  fromSDKJSON(_: any): MsgCloseLeaseResponseSDKType {
-    return {};
   }
 
 };

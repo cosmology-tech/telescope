@@ -118,12 +118,6 @@ export const EventCreateGroup = {
     const message = createBaseEventCreateGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventCreateGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
-    };
   }
 
 };
@@ -181,12 +175,6 @@ export const EventUpdateGroup = {
     const message = createBaseEventUpdateGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventUpdateGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
-    };
   }
 
 };
@@ -244,12 +232,6 @@ export const EventCreateGroupPolicy = {
     const message = createBaseEventCreateGroupPolicy();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): EventCreateGroupPolicySDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };
@@ -307,12 +289,6 @@ export const EventUpdateGroupPolicy = {
     const message = createBaseEventUpdateGroupPolicy();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): EventUpdateGroupPolicySDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };
@@ -370,12 +346,6 @@ export const EventSubmitProposal = {
     const message = createBaseEventSubmitProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventSubmitProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
-    };
   }
 
 };
@@ -433,12 +403,6 @@ export const EventWithdrawProposal = {
     const message = createBaseEventWithdrawProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventWithdrawProposalSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
-    };
   }
 
 };
@@ -496,12 +460,6 @@ export const EventVote = {
     const message = createBaseEventVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventVoteSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
-    };
   }
 
 };
@@ -571,13 +529,6 @@ export const EventExec = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.result = object.result ?? 0;
     return message;
-  },
-
-  fromSDKJSON(object: any): EventExecSDKType {
-    return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
-    };
   }
 
 };
@@ -647,13 +598,6 @@ export const EventLeaveGroup = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): EventLeaveGroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };

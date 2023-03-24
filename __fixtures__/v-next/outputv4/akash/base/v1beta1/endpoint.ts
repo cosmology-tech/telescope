@@ -113,12 +113,6 @@ export const Endpoint = {
     };
   },
 
-  fromSDKJSON(object: any): EndpointSDKType {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
-    };
-  },
-
   toSDK(message: Endpoint): EndpointSDKType {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));

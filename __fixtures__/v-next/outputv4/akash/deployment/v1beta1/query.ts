@@ -149,13 +149,6 @@ export const QueryDeploymentsRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDeploymentsRequestSDKType {
-    return {
-      filters: isSet(object.filters) ? DeploymentFilters.fromSDKJSON(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryDeploymentsRequest): QueryDeploymentsRequestSDKType {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
@@ -245,13 +238,6 @@ export const QueryDeploymentsResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDeploymentsResponseSDKType {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
-  },
-
   toSDK(message: QueryDeploymentsResponse): QueryDeploymentsResponseSDKType {
     const obj: any = {};
 
@@ -325,12 +311,6 @@ export const QueryDeploymentRequest = {
   fromSDK(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
     return {
       id: object.id ? DeploymentID.fromSDK(object.id) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryDeploymentRequestSDKType {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
     };
   },
 
@@ -435,14 +415,6 @@ export const QueryDeploymentResponse = {
     };
   },
 
-  fromSDKJSON(object: any): QueryDeploymentResponseSDKType {
-    return {
-      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : [],
-      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
-    };
-  },
-
   toSDK(message: QueryDeploymentResponse): QueryDeploymentResponseSDKType {
     const obj: any = {};
     message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
@@ -520,12 +492,6 @@ export const QueryGroupRequest = {
     };
   },
 
-  fromSDKJSON(object: any): QueryGroupRequestSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
-  },
-
   toSDK(message: QueryGroupRequest): QueryGroupRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -592,12 +558,6 @@ export const QueryGroupResponse = {
   fromSDK(object: QueryGroupResponseSDKType): QueryGroupResponse {
     return {
       group: object.group ? Group.fromSDK(object.group) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): QueryGroupResponseSDKType {
-    return {
-      group: isSet(object.group) ? Group.fromSDKJSON(object.group) : undefined
     };
   },
 

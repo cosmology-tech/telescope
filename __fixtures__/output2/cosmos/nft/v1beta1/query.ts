@@ -149,13 +149,6 @@ export const QueryBalanceRequest = {
     message.classId = object.classId ?? "";
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryBalanceRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -213,12 +206,6 @@ export const QueryBalanceResponse = {
     const message = createBaseQueryBalanceResponse();
     message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryBalanceResponseSDKType {
-    return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
-    };
   }
 
 };
@@ -288,13 +275,6 @@ export const QueryOwnerRequest = {
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryOwnerRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : ""
-    };
   }
 
 };
@@ -352,12 +332,6 @@ export const QueryOwnerResponse = {
     const message = createBaseQueryOwnerResponse();
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryOwnerResponseSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
   }
 
 };
@@ -415,12 +389,6 @@ export const QuerySupplyRequest = {
     const message = createBaseQuerySupplyRequest();
     message.classId = object.classId ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySupplyRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : ""
-    };
   }
 
 };
@@ -478,12 +446,6 @@ export const QuerySupplyResponse = {
     const message = createBaseQuerySupplyResponse();
     message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
     return message;
-  },
-
-  fromSDKJSON(object: any): QuerySupplyResponseSDKType {
-    return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
-    };
   }
 
 };
@@ -565,14 +527,6 @@ export const QueryNFTsRequest = {
     message.owner = object.owner ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryNFTsRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -648,13 +602,6 @@ export const QueryNFTsResponse = {
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryNFTsResponseSDKType {
-    return {
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -724,13 +671,6 @@ export const QueryNFTRequest = {
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryNFTRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : ""
-    };
   }
 
 };
@@ -788,12 +728,6 @@ export const QueryNFTResponse = {
     const message = createBaseQueryNFTResponse();
     message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryNFTResponseSDKType {
-    return {
-      nft: isSet(object.nft) ? NFT.fromSDKJSON(object.nft) : undefined
-    };
   }
 
 };
@@ -851,12 +785,6 @@ export const QueryClassRequest = {
     const message = createBaseQueryClassRequest();
     message.classId = object.classId ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClassRequestSDKType {
-    return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : ""
-    };
   }
 
 };
@@ -914,12 +842,6 @@ export const QueryClassResponse = {
     const message = createBaseQueryClassResponse();
     message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClassResponseSDKType {
-    return {
-      class: isSet(object.class) ? Class.fromSDKJSON(object.class) : undefined
-    };
   }
 
 };
@@ -977,12 +899,6 @@ export const QueryClassesRequest = {
     const message = createBaseQueryClassesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClassesRequestSDKType {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };
@@ -1058,13 +974,6 @@ export const QueryClassesResponse = {
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryClassesResponseSDKType {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDKJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
-    };
   }
 
 };

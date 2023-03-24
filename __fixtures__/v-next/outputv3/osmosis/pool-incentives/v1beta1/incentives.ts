@@ -193,12 +193,6 @@ export const Params = {
     };
   },
 
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
-    };
-  },
-
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.minted_denom = message.mintedDenom;
@@ -312,12 +306,6 @@ export const LockableDurationsInfo = {
   fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
     return {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
-    return {
-      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
     };
   },
 
@@ -462,13 +450,6 @@ export const DistrInfo = {
     };
   },
 
-  fromSDKJSON(object: any): DistrInfoSDKType {
-    return {
-      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: DistrInfo): DistrInfoSDKType {
     const obj: any = {};
     obj.total_weight = message.totalWeight;
@@ -604,13 +585,6 @@ export const DistrRecord = {
     return {
       gaugeId: object?.gauge_id,
       weight: object?.weight
-    };
-  },
-
-  fromSDKJSON(object: any): DistrRecordSDKType {
-    return {
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
-      weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
 
@@ -753,14 +727,6 @@ export const PoolToGauge = {
     };
   },
 
-  fromSDKJSON(object: any): PoolToGaugeSDKType {
-    return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
-      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
-    };
-  },
-
   toSDK(message: PoolToGauge): PoolToGaugeSDKType {
     const obj: any = {};
     obj.pool_id = message.poolId;
@@ -880,12 +846,6 @@ export const PoolToGauges = {
   fromSDK(object: PoolToGaugesSDKType): PoolToGauges {
     return {
       poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): PoolToGaugesSDKType {
-    return {
-      pool_to_gauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDKJSON(e)) : []
     };
   },
 

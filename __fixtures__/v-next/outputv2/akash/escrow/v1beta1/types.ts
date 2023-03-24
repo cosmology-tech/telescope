@@ -328,13 +328,6 @@ export const AccountID = {
     };
   },
 
-  fromSDKJSON(object: any): AccountIDSDKType {
-    return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : ""
-    };
-  },
-
   toSDK(message: AccountID): AccountIDSDKType {
     const obj: any = {};
     obj.scope = message.scope;
@@ -502,17 +495,6 @@ export const Account = {
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? Coin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at
-    };
-  },
-
-  fromSDKJSON(object: any): AccountSDKType {
-    return {
-      id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? Long.fromValue(object.settled_at) : Long.ZERO
     };
   },
 
@@ -708,18 +690,6 @@ export const Payment = {
       rate: object.rate ? Coin.fromSDK(object.rate) : undefined,
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): PaymentSDKType {
-    return {
-      account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
-      payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? Coin.fromSDKJSON(object.rate) : undefined,
-      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined
     };
   },
 

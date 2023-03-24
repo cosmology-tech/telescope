@@ -63,12 +63,6 @@ export const Params = {
     const message = createBaseParams();
     message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ParamsSDKType {
-    return {
-      deployment_min_deposit: isSet(object.deployment_min_deposit) ? Coin.fromSDKJSON(object.deployment_min_deposit) : undefined
-    };
   }
 
 };

@@ -242,12 +242,6 @@ export const MsgCloseGroup = {
     };
   },
 
-  fromSDKJSON(object: any): MsgCloseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
-  },
-
   toSDK(message: MsgCloseGroup): MsgCloseGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -298,10 +292,6 @@ export const MsgCloseGroupResponse = {
   },
 
   fromSDK(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
     return {};
   },
 
@@ -373,12 +363,6 @@ export const MsgPauseGroup = {
     };
   },
 
-  fromSDKJSON(object: any): MsgPauseGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
-  },
-
   toSDK(message: MsgPauseGroup): MsgPauseGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -429,10 +413,6 @@ export const MsgPauseGroupResponse = {
   },
 
   fromSDK(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
     return {};
   },
 
@@ -504,12 +484,6 @@ export const MsgStartGroup = {
     };
   },
 
-  fromSDKJSON(object: any): MsgStartGroupSDKType {
-    return {
-      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
-    };
-  },
-
   toSDK(message: MsgStartGroup): MsgStartGroupSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
@@ -560,10 +534,6 @@ export const MsgStartGroupResponse = {
   },
 
   fromSDK(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
-    return {};
-  },
-
-  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
     return {};
   },
 
@@ -658,14 +628,6 @@ export const GroupID = {
       owner: object?.owner,
       dseq: object?.dseq,
       gseq: object?.gseq
-    };
-  },
-
-  fromSDKJSON(object: any): GroupIDSDKType {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
 
@@ -769,14 +731,6 @@ export const GroupSpec = {
       name: object?.name,
       requirements: object.requirements ? PlacementRequirements.fromSDK(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): GroupSpecSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDKJSON(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
     };
   },
 
@@ -896,15 +850,6 @@ export const Group = {
     };
   },
 
-  fromSDKJSON(object: any): GroupSDKType {
-    return {
-      group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
-    };
-  },
-
   toSDK(message: Group): GroupSDKType {
     const obj: any = {};
     message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toSDK(message.groupId) : undefined);
@@ -1000,14 +945,6 @@ export const Resource = {
       resources: object.resources ? ResourceUnits.fromSDK(object.resources) : undefined,
       count: object?.count,
       price: object.price ? Coin.fromSDK(object.price) : undefined
-    };
-  },
-
-  fromSDKJSON(object: any): ResourceSDKType {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
-      price: isSet(object.price) ? Coin.fromSDKJSON(object.price) : undefined
     };
   },
 

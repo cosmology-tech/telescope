@@ -362,13 +362,6 @@ export const Timestamp = {
     };
   },
 
-  fromSDKJSON(object: any): TimestampSDKType {
-    return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
-    };
-  },
-
   toSDK(message: Timestamp): TimestampSDKType {
     const obj: any = {};
     obj.seconds = message.seconds;

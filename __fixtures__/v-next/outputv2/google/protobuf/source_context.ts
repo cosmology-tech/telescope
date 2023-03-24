@@ -105,12 +105,6 @@ export const SourceContext = {
     };
   },
 
-  fromSDKJSON(object: any): SourceContextSDKType {
-    return {
-      file_name: isSet(object.file_name) ? String(object.file_name) : ""
-    };
-  },
-
   toSDK(message: SourceContext): SourceContextSDKType {
     const obj: any = {};
     obj.file_name = message.fileName;

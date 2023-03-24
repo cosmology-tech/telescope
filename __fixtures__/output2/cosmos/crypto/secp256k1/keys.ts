@@ -73,12 +73,6 @@ export const PubKey = {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): PubKeySDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
-    };
   }
 
 };
@@ -136,12 +130,6 @@ export const PrivKey = {
     const message = createBasePrivKey();
     message.key = object.key ?? new Uint8Array();
     return message;
-  },
-
-  fromSDKJSON(object: any): PrivKeySDKType {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
-    };
   }
 
 };

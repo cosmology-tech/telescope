@@ -79,12 +79,6 @@ export const QueryBalancesRequest = {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryBalancesRequestSDKType {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
   }
 
 };
@@ -182,14 +176,6 @@ export const QueryBalancesResponse = {
     message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];
     message.vested = object.vested?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): QueryBalancesResponseSDKType {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
   }
 
 };

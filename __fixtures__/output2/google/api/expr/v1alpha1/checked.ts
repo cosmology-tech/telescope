@@ -548,13 +548,6 @@ export const CheckedExpr_ReferenceMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
-    return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
-      value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
-    };
   }
 
 };
@@ -624,13 +617,6 @@ export const CheckedExpr_TypeMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
-    return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
-      value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
-    };
   }
 
 };
@@ -791,26 +777,6 @@ export const CheckedExpr = {
     message.exprVersion = object.exprVersion ?? "";
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): CheckedExprSDKType {
-    return {
-      reference_map: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: Long]: Reference;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Reference.fromSDKJSON(value);
-        return acc;
-      }, {}) : {},
-      type_map: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: Long]: Type;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Type.fromSDKJSON(value);
-        return acc;
-      }, {}) : {},
-      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
-      expr_version: isSet(object.expr_version) ? String(object.expr_version) : "",
-      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined
-    };
   }
 
 };
@@ -1012,24 +978,6 @@ export const Type = {
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): TypeSDKType {
-    return {
-      dyn: isSet(object.dyn) ? Empty.fromSDKJSON(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
-      well_known: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      list_type: isSet(object.list_type) ? Type_ListType.fromSDKJSON(object.list_type) : undefined,
-      map_type: isSet(object.map_type) ? Type_MapType.fromSDKJSON(object.map_type) : undefined,
-      function: isSet(object.function) ? Type_FunctionType.fromSDKJSON(object.function) : undefined,
-      message_type: isSet(object.message_type) ? String(object.message_type) : undefined,
-      type_param: isSet(object.type_param) ? String(object.type_param) : undefined,
-      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
-      error: isSet(object.error) ? Empty.fromSDKJSON(object.error) : undefined,
-      abstract_type: isSet(object.abstract_type) ? Type_AbstractType.fromSDKJSON(object.abstract_type) : undefined
-    };
   }
 
 };
@@ -1087,12 +1035,6 @@ export const Type_ListType = {
     const message = createBaseType_ListType();
     message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): Type_ListTypeSDKType {
-    return {
-      elem_type: isSet(object.elem_type) ? Type.fromSDKJSON(object.elem_type) : undefined
-    };
   }
 
 };
@@ -1162,13 +1104,6 @@ export const Type_MapType = {
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): Type_MapTypeSDKType {
-    return {
-      key_type: isSet(object.key_type) ? Type.fromSDKJSON(object.key_type) : undefined,
-      value_type: isSet(object.value_type) ? Type.fromSDKJSON(object.value_type) : undefined
-    };
   }
 
 };
@@ -1244,13 +1179,6 @@ export const Type_FunctionType = {
     message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): Type_FunctionTypeSDKType {
-    return {
-      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
-      arg_types: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1326,13 +1254,6 @@ export const Type_AbstractType = {
     message.name = object.name ?? "";
     message.parameterTypes = object.parameterTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): Type_AbstractTypeSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parameter_types: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1414,14 +1335,6 @@ export const Decl = {
     message.ident = object.ident !== undefined && object.ident !== null ? Decl_IdentDecl.fromPartial(object.ident) : undefined;
     message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): DeclSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      ident: isSet(object.ident) ? Decl_IdentDecl.fromSDKJSON(object.ident) : undefined,
-      function: isSet(object.function) ? Decl_FunctionDecl.fromSDKJSON(object.function) : undefined
-    };
   }
 
 };
@@ -1503,14 +1416,6 @@ export const Decl_IdentDecl = {
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     message.doc = object.doc ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): Decl_IdentDeclSDKType {
-    return {
-      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
-      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined,
-      doc: isSet(object.doc) ? String(object.doc) : ""
-    };
   }
 
 };
@@ -1574,12 +1479,6 @@ export const Decl_FunctionDecl = {
     const message = createBaseDecl_FunctionDecl();
     message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromPartial(e)) || [];
     return message;
-  },
-
-  fromSDKJSON(object: any): Decl_FunctionDeclSDKType {
-    return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDKJSON(e)) : []
-    };
   }
 
 };
@@ -1708,17 +1607,6 @@ export const Decl_FunctionDecl_Overload = {
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): Decl_FunctionDecl_OverloadSDKType {
-    return {
-      overload_id: isSet(object.overload_id) ? String(object.overload_id) : "",
-      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDKJSON(e)) : [],
-      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => String(e)) : [],
-      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
-      is_instance_function: isSet(object.is_instance_function) ? Boolean(object.is_instance_function) : false,
-      doc: isSet(object.doc) ? String(object.doc) : ""
-    };
   }
 
 };
@@ -1806,14 +1694,6 @@ export const Reference = {
     message.overloadId = object.overloadId?.map(e => e) || [];
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     return message;
-  },
-
-  fromSDKJSON(object: any): ReferenceSDKType {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      overload_id: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => String(e)) : [],
-      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined
-    };
   }
 
 };

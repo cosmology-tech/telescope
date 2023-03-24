@@ -76,13 +76,6 @@ export const InterchainAccount = {
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.accountOwner = object.accountOwner ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): InterchainAccountSDKType {
-    return {
-      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
-      account_owner: isSet(object.account_owner) ? String(object.account_owner) : ""
-    };
   }
 
 };

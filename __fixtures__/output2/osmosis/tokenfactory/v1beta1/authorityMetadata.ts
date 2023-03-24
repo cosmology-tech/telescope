@@ -67,12 +67,6 @@ export const DenomAuthorityMetadata = {
     const message = createBaseDenomAuthorityMetadata();
     message.admin = object.admin ?? "";
     return message;
-  },
-
-  fromSDKJSON(object: any): DenomAuthorityMetadataSDKType {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : ""
-    };
   }
 
 };

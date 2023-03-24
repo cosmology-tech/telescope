@@ -188,13 +188,6 @@ export const Evidence = {
     };
   },
 
-  fromSDKJSON(object: any): EvidenceSDKType {
-    return {
-      duplicate_vote_evidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromSDKJSON(object.duplicate_vote_evidence) : undefined,
-      light_client_attack_evidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromSDKJSON(object.light_client_attack_evidence) : undefined
-    };
-  },
-
   toSDK(message: Evidence): EvidenceSDKType {
     const obj: any = {};
     message.duplicateVoteEvidence !== undefined && (obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toSDK(message.duplicateVoteEvidence) : undefined);
@@ -349,16 +342,6 @@ export const DuplicateVoteEvidence = {
       totalVotingPower: object?.total_voting_power,
       validatorPower: object?.validator_power,
       timestamp: object.timestamp ?? undefined
-    };
-  },
-
-  fromSDKJSON(object: any): DuplicateVoteEvidenceSDKType {
-    return {
-      vote_a: isSet(object.vote_a) ? Vote.fromSDKJSON(object.vote_a) : undefined,
-      vote_b: isSet(object.vote_b) ? Vote.fromSDKJSON(object.vote_b) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
-      validator_power: isSet(object.validator_power) ? Long.fromValue(object.validator_power) : Long.ZERO,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -534,16 +517,6 @@ export const LightClientAttackEvidence = {
     };
   },
 
-  fromSDKJSON(object: any): LightClientAttackEvidenceSDKType {
-    return {
-      conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromSDKJSON(object.conflicting_block) : undefined,
-      common_height: isSet(object.common_height) ? Long.fromValue(object.common_height) : Long.ZERO,
-      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
-      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
-    };
-  },
-
   toSDK(message: LightClientAttackEvidence): LightClientAttackEvidenceSDKType {
     const obj: any = {};
     message.conflictingBlock !== undefined && (obj.conflicting_block = message.conflictingBlock ? LightBlock.toSDK(message.conflictingBlock) : undefined);
@@ -673,12 +646,6 @@ export const EvidenceList = {
   fromSDK(object: EvidenceListSDKType): EvidenceList {
     return {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDK(e)) : []
-    };
-  },
-
-  fromSDKJSON(object: any): EvidenceListSDKType {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDKJSON(e)) : []
     };
   },
 
