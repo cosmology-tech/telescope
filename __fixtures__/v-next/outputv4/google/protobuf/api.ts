@@ -452,6 +452,18 @@ export const Api = {
     };
   },
 
+  fromSDKJSON(object: any): ApiSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDKJSON(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDKJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
   toSDK(message: Api): ApiSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -628,6 +640,18 @@ export const Method = {
     };
   },
 
+  fromSDKJSON(object: any): MethodSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      request_type_url: isSet(object.request_type_url) ? String(object.request_type_url) : "",
+      request_streaming: isSet(object.request_streaming) ? Boolean(object.request_streaming) : false,
+      response_type_url: isSet(object.response_type_url) ? String(object.response_type_url) : "",
+      response_streaming: isSet(object.response_streaming) ? Boolean(object.response_streaming) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
   toSDK(message: Method): MethodSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -719,6 +743,13 @@ export const Mixin = {
     return {
       name: object?.name,
       root: object?.root
+    };
+  },
+
+  fromSDKJSON(object: any): MixinSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      root: isSet(object.root) ? String(object.root) : ""
     };
   },
 

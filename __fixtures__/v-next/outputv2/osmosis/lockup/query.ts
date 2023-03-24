@@ -4,7 +4,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "../../helpers";
+import { DeepPartial, isSet, toTimestamp, fromTimestamp, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceRequestProtoMsg {
@@ -1802,7 +1802,7 @@ export const AccountLockedPastTimeRequest = {
   fromJSON(object: any): AccountLockedPastTimeRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -1823,14 +1823,14 @@ export const AccountLockedPastTimeRequest = {
   fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
     return {
       owner: object?.owner,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ?? undefined
     };
   },
 
   toSDK(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestSDKType {
     const obj: any = {};
     obj.owner = message.owner;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
   },
 
@@ -2056,7 +2056,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -2077,14 +2077,14 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object?.owner,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ?? undefined
     };
   },
 
   toSDK(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
     const obj: any = {};
     obj.owner = message.owner;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
   },
 
@@ -2310,7 +2310,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromJSON(object: any): AccountUnlockedBeforeTimeRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -2331,14 +2331,14 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object?.owner,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ?? undefined
     };
   },
 
   toSDK(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestSDKType {
     const obj: any = {};
     obj.owner = message.owner;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
   },
 
@@ -2573,7 +2573,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromJSON(object: any): AccountLockedPastTimeDenomRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
@@ -2597,7 +2597,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
     return {
       owner: object?.owner,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ?? undefined,
       denom: object?.denom
     };
   },
@@ -2605,7 +2605,7 @@ export const AccountLockedPastTimeDenomRequest = {
   toSDK(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestSDKType {
     const obj: any = {};
     obj.owner = message.owner;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     obj.denom = message.denom;
     return obj;
   },

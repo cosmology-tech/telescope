@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -405,8 +405,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
       int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
@@ -464,8 +464,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value,
       doubleValue: object?.double_value,
@@ -484,8 +484,8 @@ export const MetricValue = {
       });
     }
 
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value;
     obj.double_value = message.doubleValue;

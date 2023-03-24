@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /**
@@ -157,7 +157,7 @@ export const BasicAllowance = {
   fromJSON(object: any): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : [],
-      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -184,7 +184,14 @@ export const BasicAllowance = {
   fromSDK(object: BasicAllowanceSDKType): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
-      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
+      expiration: object.expiration ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): BasicAllowanceSDKType {
+    return {
+      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -197,7 +204,7 @@ export const BasicAllowance = {
       obj.spend_limit = [];
     }
 
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
   }
 
@@ -282,7 +289,7 @@ export const PeriodicAllowance = {
       period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.periodSpendLimit) ? object.periodSpendLimit.map((e: any) => Coin.fromJSON(e)) : [],
       periodCanSpend: Array.isArray(object?.periodCanSpend) ? object.periodCanSpend.map((e: any) => Coin.fromJSON(e)) : [],
-      periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
+      periodReset: isSet(object.periodReset) ? new Date(object.periodReset) : undefined
     };
   },
 
@@ -323,7 +330,17 @@ export const PeriodicAllowance = {
       period: object.period ? Duration.fromSDK(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromSDK(e)) : [],
-      periodReset: object.period_reset ? Timestamp.fromSDK(object.period_reset) : undefined
+      periodReset: object.period_reset ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): PeriodicAllowanceSDKType {
+    return {
+      basic: isSet(object.basic) ? BasicAllowance.fromSDKJSON(object.basic) : undefined,
+      period: isSet(object.period) ? Duration.fromSDKJSON(object.period) : undefined,
+      period_spend_limit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      period_can_spend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      period_reset: isSet(object.period_reset) ? new Date(object.period_reset) : undefined
     };
   },
 
@@ -344,7 +361,7 @@ export const PeriodicAllowance = {
       obj.period_can_spend = [];
     }
 
-    message.periodReset !== undefined && (obj.period_reset = message.periodReset ? Timestamp.toSDK(message.periodReset) : undefined);
+    message.periodReset !== undefined && (obj.period_reset = message.periodReset ?? undefined);
     return obj;
   }
 
@@ -427,6 +444,13 @@ export const AllowedMsgAllowance = {
     return {
       allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined,
       allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): AllowedMsgAllowanceSDKType {
+    return {
+      allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined,
+      allowed_messages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => String(e)) : []
     };
   },
 
@@ -529,6 +553,14 @@ export const Grant = {
       granter: object?.granter,
       grantee: object?.grantee,
       allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined
     };
   },
 

@@ -3,7 +3,7 @@ import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
 import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Defines the importance of the data contained in the operation. */
@@ -243,6 +243,13 @@ export const Operation_LabelsEntry = {
     };
   },
 
+  fromSDKJSON(object: any): Operation_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -383,8 +390,8 @@ export const Operation = {
       operationId: isSet(object.operationId) ? String(object.operationId) : "",
       operationName: isSet(object.operationName) ? String(object.operationName) : "",
       consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -464,8 +471,8 @@ export const Operation = {
       operationId: object?.operation_id,
       operationName: object?.operation_name,
       consumerId: object?.consumer_id,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -479,13 +486,33 @@ export const Operation = {
     };
   },
 
+  fromSDKJSON(object: any): OperationSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      operation_name: isSet(object.operation_name) ? String(object.operation_name) : "",
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric_value_sets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
+      log_entries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: Operation): OperationSDKType {
     const obj: any = {};
     obj.operation_id = message.operationId;
     obj.operation_name = message.operationName;
     obj.consumer_id = message.consumerId;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     obj.labels = {};
 
     if (message.labels) {

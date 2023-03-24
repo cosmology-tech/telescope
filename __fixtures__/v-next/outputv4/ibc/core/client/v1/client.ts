@@ -256,6 +256,13 @@ export const IdentifiedClientState = {
     };
   },
 
+  fromSDKJSON(object: any): IdentifiedClientStateSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
+    };
+  },
+
   toSDK(message: IdentifiedClientState): IdentifiedClientStateSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -336,6 +343,13 @@ export const ConsensusStateWithHeight = {
     return {
       height: object.height ? Height.fromSDK(object.height) : undefined,
       consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ConsensusStateWithHeightSDKType {
+    return {
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined
     };
   },
 
@@ -425,6 +439,13 @@ export const ClientConsensusStates = {
     return {
       clientId: object?.client_id,
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ClientConsensusStatesSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : []
     };
   },
 
@@ -543,6 +564,15 @@ export const ClientUpdateProposal = {
     };
   },
 
+  fromSDKJSON(object: any): ClientUpdateProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
+      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : ""
+    };
+  },
+
   toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -654,6 +684,15 @@ export const UpgradeProposal = {
     };
   },
 
+  fromSDKJSON(object: any): UpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+
   toSDK(message: UpgradeProposal): UpgradeProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -739,6 +778,13 @@ export const Height = {
     };
   },
 
+  fromSDKJSON(object: any): HeightSDKType {
+    return {
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
+    };
+  },
+
   toSDK(message: Height): HeightSDKType {
     const obj: any = {};
     obj.revision_number = message.revisionNumber;
@@ -812,6 +858,12 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      allowed_clients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => String(e)) : []
     };
   },
 

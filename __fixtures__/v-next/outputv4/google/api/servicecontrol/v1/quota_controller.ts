@@ -475,6 +475,14 @@ export const AllocateQuotaRequest = {
     };
   },
 
+  fromSDKJSON(object: any): AllocateQuotaRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      allocate_operation: isSet(object.allocate_operation) ? QuotaOperation.fromSDKJSON(object.allocate_operation) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
+  },
+
   toSDK(message: AllocateQuotaRequest): AllocateQuotaRequestSDKType {
     const obj: any = {};
     obj.service_name = message.serviceName;
@@ -556,6 +564,13 @@ export const QuotaOperation_LabelsEntry = {
     return {
       key: object?.key,
       value: object?.value
+    };
+  },
+
+  fromSDKJSON(object: any): QuotaOperation_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
     };
   },
 
@@ -732,6 +747,22 @@ export const QuotaOperation = {
     };
   },
 
+  fromSDKJSON(object: any): QuotaOperationSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      method_name: isSet(object.method_name) ? String(object.method_name) : "",
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      quota_metrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
+      quota_mode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+    };
+  },
+
   toSDK(message: QuotaOperation): QuotaOperationSDKType {
     const obj: any = {};
     obj.operation_id = message.operationId;
@@ -868,6 +899,15 @@ export const AllocateQuotaResponse = {
     };
   },
 
+  fromSDKJSON(object: any): AllocateQuotaResponseSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      allocate_errors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDKJSON(e)) : [],
+      quota_metrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
+  },
+
   toSDK(message: AllocateQuotaResponse): AllocateQuotaResponseSDKType {
     const obj: any = {};
     obj.operation_id = message.operationId;
@@ -987,6 +1027,15 @@ export const QuotaError = {
       subject: object?.subject,
       description: object?.description,
       status: object.status ? Status.fromSDK(object.status) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QuotaErrorSDKType {
+    return {
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
     };
   },
 

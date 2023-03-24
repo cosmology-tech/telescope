@@ -142,6 +142,14 @@ export const MsgGrantAllowance = {
     };
   },
 
+  fromSDKJSON(object: any): MsgGrantAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined
+    };
+  },
+
   toSDK(message: MsgGrantAllowance): MsgGrantAllowanceSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -194,6 +202,10 @@ export const MsgGrantAllowanceResponse = {
   },
 
   fromSDK(_: MsgGrantAllowanceResponseSDKType): MsgGrantAllowanceResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgGrantAllowanceResponseSDKType {
     return {};
   },
 
@@ -278,6 +290,13 @@ export const MsgRevokeAllowance = {
     };
   },
 
+  fromSDKJSON(object: any): MsgRevokeAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
+    };
+  },
+
   toSDK(message: MsgRevokeAllowance): MsgRevokeAllowanceSDKType {
     const obj: any = {};
     obj.granter = message.granter;
@@ -329,6 +348,10 @@ export const MsgRevokeAllowanceResponse = {
   },
 
   fromSDK(_: MsgRevokeAllowanceResponseSDKType): MsgRevokeAllowanceResponse {
+    return {};
+  },
+
+  fromSDKJSON(_: any): MsgRevokeAllowanceResponseSDKType {
     return {};
   },
 

@@ -234,6 +234,10 @@ export const QueryCurrentPlanRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryCurrentPlanRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
     const obj: any = {};
     return obj;
@@ -299,6 +303,12 @@ export const QueryCurrentPlanResponse = {
   fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
     return {
       plan: object.plan ? Plan.fromSDK(object.plan) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryCurrentPlanResponseSDKType {
+    return {
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
     };
   },
 
@@ -371,6 +381,12 @@ export const QueryAppliedPlanRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryAppliedPlanRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   toSDK(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -437,6 +453,12 @@ export const QueryAppliedPlanResponse = {
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
     return {
       height: object?.height
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
     };
   },
 
@@ -509,6 +531,12 @@ export const QueryUpgradedConsensusStateRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {
+      last_height: isSet(object.last_height) ? Long.fromValue(object.last_height) : Long.ZERO
+    };
+  },
+
   toSDK(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
     const obj: any = {};
     obj.last_height = message.lastHeight;
@@ -578,6 +606,12 @@ export const QueryUpgradedConsensusStateResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? bytesFromBase64(object.upgraded_consensus_state) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState;
@@ -644,6 +678,12 @@ export const QueryModuleVersionsRequest = {
   fromSDK(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
     return {
       moduleName: object?.module_name
+    };
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsRequestSDKType {
+    return {
+      module_name: isSet(object.module_name) ? String(object.module_name) : ""
     };
   },
 
@@ -722,6 +762,12 @@ export const QueryModuleVersionsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryModuleVersionsResponseSDKType {
+    return {
+      module_versions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: QueryModuleVersionsResponse): QueryModuleVersionsResponseSDKType {
     const obj: any = {};
 
@@ -778,6 +824,10 @@ export const QueryAuthorityRequest = {
   },
 
   fromSDK(_: QueryAuthorityRequestSDKType): QueryAuthorityRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryAuthorityRequestSDKType {
     return {};
   },
 
@@ -846,6 +896,12 @@ export const QueryAuthorityResponse = {
   fromSDK(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
     return {
       address: object?.address
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAuthorityResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
     };
   },
 

@@ -28,7 +28,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/gamm/v2/pools/${params.poolId}/prices`;
-    return await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options);
+    return QuerySpotPriceResponse.fromSDKJSON(await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options));
   }
 
 }

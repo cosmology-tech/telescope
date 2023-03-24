@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsSDKType } from "./genesis";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -128,8 +128,8 @@ export const ArithmeticTwapRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined
     };
   },
 
@@ -158,8 +158,18 @@ export const ArithmeticTwapRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ArithmeticTwapRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
+      quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined
     };
   },
 
@@ -168,8 +178,8 @@ export const ArithmeticTwapRequest = {
     obj.pool_id = message.poolId;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     return obj;
   }
 
@@ -233,6 +243,12 @@ export const ArithmeticTwapResponse = {
   fromSDK(object: ArithmeticTwapResponseSDKType): ArithmeticTwapResponse {
     return {
       arithmeticTwap: object?.arithmetic_twap
+    };
+  },
+
+  fromSDKJSON(object: any): ArithmeticTwapResponseSDKType {
+    return {
+      arithmetic_twap: isSet(object.arithmetic_twap) ? String(object.arithmetic_twap) : ""
     };
   },
 
@@ -313,7 +329,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
     };
   },
 
@@ -340,7 +356,16 @@ export const ArithmeticTwapToNowRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined
+      startTime: object.start_time ?? undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ArithmeticTwapToNowRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
+      quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined
     };
   },
 
@@ -349,7 +374,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.pool_id = message.poolId;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     return obj;
   }
 
@@ -416,6 +441,12 @@ export const ArithmeticTwapToNowResponse = {
     };
   },
 
+  fromSDKJSON(object: any): ArithmeticTwapToNowResponseSDKType {
+    return {
+      arithmetic_twap: isSet(object.arithmetic_twap) ? String(object.arithmetic_twap) : ""
+    };
+  },
+
   toSDK(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseSDKType {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
@@ -466,6 +497,10 @@ export const ParamsRequest = {
   },
 
   fromSDK(_: ParamsRequestSDKType): ParamsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): ParamsRequestSDKType {
     return {};
   },
 
@@ -534,6 +569,12 @@ export const ParamsResponse = {
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
