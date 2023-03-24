@@ -115,15 +115,6 @@ exports[`MsgExecuteContract interface 2`] = `
     };
   },
 
-  fromSDKJSON(object: any): MsgExecuteContractSDKType {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
-    };
-  },
-
   toSDK(message: MsgExecuteContract): MsgExecuteContractSDKType {
     const obj: any = {};
     obj.sender = message.sender;
