@@ -70,25 +70,41 @@ const returnAwaitRequest = (
         args.push(t.identifier('options'));
     }
 
-    return t.returnStatement(
-        t.awaitExpression(
-            callExpression(
-                t.memberExpression(
-                    t.memberExpression(
-                        t.thisExpression(),
-                        t.identifier('req')
-                    ),
-                    t.identifier('get')
-                ),
-                args,
-                t.tsTypeParameterInstantiation([
-                    t.tsTypeReference(
-                        t.identifier(getResponseTypeName(context, responseType))
-                    )
-                ])
-            )
-        )
+    let returned: t.Expression = t.awaitExpression(
+      callExpression(
+        t.memberExpression(
+          t.memberExpression(t.thisExpression(), t.identifier('req')),
+          t.identifier('get')
+        ),
+        args,
+        t.tsTypeParameterInstantiation([
+          t.tsTypeReference(
+            t.identifier(getResponseTypeName(context, responseType))
+          )
+        ])
+      )
     );
+
+    if (context.pluginValue('useSDKTypes') &&
+      context.pluginValue('prototypes.methods.fromSDKJSON')) {
+      //useSDKTypes && prototypes.methods.fromSDKJSON
+      returned = t.callExpression(
+        t.memberExpression(
+          t.identifier(responseType),
+          t.identifier('fromSDKJSON')
+        ),
+        [returned]
+      );
+    } else if (!context.pluginValue('useSDKTypes') &&
+      context.pluginValue('prototypes.methods.fromJSON')) {
+      //!useSDKTypes && prototypes.methods.fromJSON
+      returned = t.callExpression(
+        t.memberExpression(t.identifier(responseType), t.identifier('fromJSON')),
+        [returned]
+      );
+    }
+
+    return t.returnStatement(returned);
 
 };
 
@@ -399,7 +415,7 @@ const buildRequestMethod = (
             ]
         ),
 
-        // return 
+        // return
         returnAwaitRequest(
             context,
             serviceMethod.responseType,
