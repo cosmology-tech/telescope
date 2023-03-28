@@ -146,6 +146,15 @@ export const EventSend = {
     };
   },
 
+  fromSDKJSON(object: any): EventSendSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
+  },
+
   toSDK(message: EventSend): EventSendSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -244,6 +253,14 @@ export const EventMint = {
     };
   },
 
+  fromSDKJSON(object: any): EventMintSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   toSDK(message: EventMint): EventMintSDKType {
     const obj: any = {};
     obj.class_id = message.classId;
@@ -338,6 +355,14 @@ export const EventBurn = {
       classId: object?.class_id,
       id: object?.id,
       owner: object?.owner
+    };
+  },
+
+  fromSDKJSON(object: any): EventBurnSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
 

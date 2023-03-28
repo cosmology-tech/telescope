@@ -216,6 +216,16 @@ export const PageRequest = {
     };
   },
 
+  fromSDKJSON(object: any): PageRequestSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
+      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
+      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
+      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
+    };
+  },
+
   toSDK(message: PageRequest): PageRequestSDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -299,6 +309,13 @@ export const PageResponse = {
     return {
       nextKey: object?.next_key,
       total: object?.total
+    };
+  },
+
+  fromSDKJSON(object: any): PageResponseSDKType {
+    return {
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
+      total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
     };
   },
 

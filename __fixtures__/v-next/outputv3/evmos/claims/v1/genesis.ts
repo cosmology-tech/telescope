@@ -2,7 +2,7 @@ import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKTy
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 
 /** GenesisState define the claims module's genesis state. */
@@ -342,7 +342,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
-      airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
+      airdropStartTime: isSet(object.airdropStartTime) ? new Date(object.airdropStartTime) : undefined,
       durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
       durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",
@@ -389,7 +389,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       enableClaims: object?.enable_claims,
-      airdropStartTime: object.airdrop_start_time ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      airdropStartTime: object.airdrop_start_time ?? undefined,
       durationUntilDecay: object.duration_until_decay ? Duration.fromSDK(object.duration_until_decay) : undefined,
       durationOfDecay: object.duration_of_decay ? Duration.fromSDK(object.duration_of_decay) : undefined,
       claimsDenom: object?.claims_denom,
@@ -401,7 +401,7 @@ export const Params = {
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     obj.enable_claims = message.enableClaims;
-    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ?? undefined);
     message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
     message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
     obj.claims_denom = message.claimsDenom;

@@ -359,6 +359,16 @@ export const ConnectionEnd = {
     };
   },
 
+  fromSDKJSON(object: any): ConnectionEndSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
+  },
+
   toSDK(message: ConnectionEnd): ConnectionEndSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -509,6 +519,17 @@ export const IdentifiedConnection = {
     };
   },
 
+  fromSDKJSON(object: any): IdentifiedConnectionSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
+  },
+
   toSDK(message: IdentifiedConnection): IdentifiedConnectionSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -615,6 +636,14 @@ export const Counterparty = {
     };
   },
 
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      prefix: isSet(object.prefix) ? MerklePrefix.fromSDKJSON(object.prefix) : undefined
+    };
+  },
+
   toSDK(message: Counterparty): CounterpartySDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -689,6 +718,12 @@ export const ClientPaths = {
   fromSDK(object: ClientPathsSDKType): ClientPaths {
     return {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ClientPathsSDKType {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
     };
   },
 
@@ -783,6 +818,13 @@ export const ConnectionPaths = {
     return {
       clientId: object?.client_id,
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  fromSDKJSON(object: any): ConnectionPathsSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
     };
   },
 
@@ -881,6 +923,13 @@ export const Version = {
     };
   },
 
+  fromSDKJSON(object: any): VersionSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : []
+    };
+  },
+
   toSDK(message: Version): VersionSDKType {
     const obj: any = {};
     obj.identifier = message.identifier;
@@ -954,6 +1003,12 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       maxExpectedTimePerBlock: object?.max_expected_time_per_block
+    };
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? Long.fromValue(object.max_expected_time_per_block) : Long.UZERO
     };
   },
 

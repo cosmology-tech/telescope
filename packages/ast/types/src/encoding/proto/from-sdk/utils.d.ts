@@ -23,6 +23,7 @@ export declare const fromSDK: {
     bytes(args: FromSDKMethod): t.ObjectProperty;
     duration(args: FromSDKMethod): t.ObjectProperty;
     timestamp(args: FromSDKMethod): t.ObjectProperty;
+    timestampDate(args: FromSDKMethod): t.ObjectProperty;
     keyHash(args: FromSDKMethod): t.ObjectProperty;
     array(args: FromSDKMethod, expr: t.Expression): t.ObjectProperty;
 };

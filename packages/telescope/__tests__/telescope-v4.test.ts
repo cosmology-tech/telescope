@@ -16,6 +16,8 @@ const store = getTestProtoStore();
 store.traverseAll();
 
 const options: TelescopeOptions = {
+
+  env: 'v-next',
   removeUnusedImports: false,
   classesUseArrowFunctions: false,
 
@@ -48,6 +50,7 @@ const options: TelescopeOptions = {
       toJSON: true,
       fromPartial: true,
       toSDK: true,
+      fromSDKJSON: true,
       fromSDK: true
     },
     includePackageVar: true,

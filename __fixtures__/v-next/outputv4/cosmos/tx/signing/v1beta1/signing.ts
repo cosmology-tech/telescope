@@ -257,6 +257,12 @@ export const SignatureDescriptors = {
     };
   },
 
+  fromSDKJSON(object: any): SignatureDescriptorsSDKType {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: SignatureDescriptors): SignatureDescriptorsSDKType {
     const obj: any = {};
 
@@ -358,6 +364,14 @@ export const SignatureDescriptor = {
     };
   },
 
+  fromSDKJSON(object: any): SignatureDescriptorSDKType {
+    return {
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDKJSON(object.data) : undefined,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
+  },
+
   toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
@@ -442,6 +456,13 @@ export const SignatureDescriptor_Data = {
     };
   },
 
+  fromSDKJSON(object: any): SignatureDescriptor_DataSDKType {
+    return {
+      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromSDKJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromSDKJSON(object.multi) : undefined
+    };
+  },
+
   toSDK(message: SignatureDescriptor_Data): SignatureDescriptor_DataSDKType {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toSDK(message.single) : undefined);
@@ -522,6 +543,13 @@ export const SignatureDescriptor_Data_Single = {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       signature: object?.signature
+    };
+  },
+
+  fromSDKJSON(object: any): SignatureDescriptor_Data_SingleSDKType {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
 
@@ -611,6 +639,13 @@ export const SignatureDescriptor_Data_Multi = {
     return {
       bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): SignatureDescriptor_Data_MultiSDKType {
+    return {
+      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDKJSON(object.bitarray) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDKJSON(e)) : []
     };
   },
 

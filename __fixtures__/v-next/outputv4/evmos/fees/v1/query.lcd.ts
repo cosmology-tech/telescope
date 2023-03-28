@@ -32,19 +32,19 @@ export class LCDQueryClient {
     }
 
     const endpoint = `evmos/fees/v1/fees`;
-    return await this.req.get<QueryDevFeeInfosResponseSDKType>(endpoint, options);
+    return QueryDevFeeInfosResponse.fromSDKJSON(await this.req.get<QueryDevFeeInfosResponseSDKType>(endpoint, options));
   }
 
   /* DevFeeInfo retrieves a registered contract for fee distribution */
   async devFeeInfo(params: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType> {
     const endpoint = `evmos/fees/v1/fees/${params.contractAddress}`;
-    return await this.req.get<QueryDevFeeInfoResponseSDKType>(endpoint);
+    return QueryDevFeeInfoResponse.fromSDKJSON(await this.req.get<QueryDevFeeInfoResponseSDKType>(endpoint));
   }
 
   /* Params retrieves the fees module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/fees/v1/params`;
-    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
+    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
   }
 
   /* DevFeeInfosPerDeployer retrieves all contracts that a deployer has
@@ -59,7 +59,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `evmos/fees/v1/fees/${params.deployerAddress}`;
-    return await this.req.get<QueryDevFeeInfosPerDeployerResponseSDKType>(endpoint, options);
+    return QueryDevFeeInfosPerDeployerResponse.fromSDKJSON(await this.req.get<QueryDevFeeInfosPerDeployerResponseSDKType>(endpoint, options));
   }
 
 }

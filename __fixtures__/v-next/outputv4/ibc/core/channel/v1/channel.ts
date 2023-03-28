@@ -455,6 +455,16 @@ export const Channel = {
     };
   },
 
+  fromSDKJSON(object: any): ChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : ""
+    };
+  },
+
   toSDK(message: Channel): ChannelSDKType {
     const obj: any = {};
     message.state !== undefined && (obj.state = stateToJSON(message.state));
@@ -618,6 +628,18 @@ export const IdentifiedChannel = {
     };
   },
 
+  fromSDKJSON(object: any): IdentifiedChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
+  },
+
   toSDK(message: IdentifiedChannel): IdentifiedChannelSDKType {
     const obj: any = {};
     message.state !== undefined && (obj.state = stateToJSON(message.state));
@@ -709,6 +731,13 @@ export const Counterparty = {
     return {
       portId: object?.port_id,
       channelId: object?.channel_id
+    };
+  },
+
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
     };
   },
 
@@ -873,6 +902,19 @@ export const Packet = {
     };
   },
 
+  fromSDKJSON(object: any): PacketSDKType {
+    return {
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
+      destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
+    };
+  },
+
   toSDK(message: Packet): PacketSDKType {
     const obj: any = {};
     obj.sequence = message.sequence;
@@ -988,6 +1030,15 @@ export const PacketState = {
     };
   },
 
+  fromSDKJSON(object: any): PacketStateSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
+  },
+
   toSDK(message: PacketState): PacketStateSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1070,6 +1121,13 @@ export const Acknowledgement = {
     return {
       result: object?.result,
       error: object?.error
+    };
+  },
+
+  fromSDKJSON(object: any): AcknowledgementSDKType {
+    return {
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
+      error: isSet(object.error) ? String(object.error) : undefined
     };
   },
 

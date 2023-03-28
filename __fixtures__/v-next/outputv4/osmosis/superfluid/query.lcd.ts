@@ -35,7 +35,7 @@ export class LCDQueryClient {
   /* Params returns the total set of superfluid parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/params`;
-    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
+    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
   }
 
   /* Returns superfluid asset type, whether if it's a native asset or an lp
@@ -50,13 +50,13 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/asset_type`;
-    return await this.req.get<AssetTypeResponseSDKType>(endpoint, options);
+    return AssetTypeResponse.fromSDKJSON(await this.req.get<AssetTypeResponseSDKType>(endpoint, options));
   }
 
   /* Returns all registered superfluid assets. */
   async allAssets(_params: AllAssetsRequest = {}): Promise<AllAssetsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_assets`;
-    return await this.req.get<AllAssetsResponseSDKType>(endpoint);
+    return AllAssetsResponse.fromSDKJSON(await this.req.get<AllAssetsResponseSDKType>(endpoint));
   }
 
   /* Returns the osmo equivalent multiplier used in the most recent epoch. */
@@ -70,7 +70,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/asset_multiplier`;
-    return await this.req.get<AssetMultiplierResponseSDKType>(endpoint, options);
+    return AssetMultiplierResponse.fromSDKJSON(await this.req.get<AssetMultiplierResponseSDKType>(endpoint, options));
   }
 
   /* Returns all superfluid intermediary accounts. */
@@ -86,20 +86,20 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/all_intermediary_accounts`;
-    return await this.req.get<AllIntermediaryAccountsResponseSDKType>(endpoint, options);
+    return AllIntermediaryAccountsResponse.fromSDKJSON(await this.req.get<AllIntermediaryAccountsResponseSDKType>(endpoint, options));
   }
 
   /* Returns intermediary account connected to a superfluid staked lock by id */
   async connectedIntermediaryAccount(params: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/connected_intermediary_account/${params.lockId}`;
-    return await this.req.get<ConnectedIntermediaryAccountResponseSDKType>(endpoint);
+    return ConnectedIntermediaryAccountResponse.fromSDKJSON(await this.req.get<ConnectedIntermediaryAccountResponseSDKType>(endpoint));
   }
 
   /* Returns the total amount of osmo superfluidly staked.
    Response is denominated in uosmo. */
   async totalSuperfluidDelegations(_params: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
-    return await this.req.get<TotalSuperfluidDelegationsResponseSDKType>(endpoint);
+    return TotalSuperfluidDelegationsResponse.fromSDKJSON(await this.req.get<TotalSuperfluidDelegationsResponseSDKType>(endpoint));
   }
 
   /* Returns the coins superfluid delegated for the delegator, validator, denom
@@ -122,13 +122,13 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegation_amount`;
-    return await this.req.get<SuperfluidDelegationAmountResponseSDKType>(endpoint, options);
+    return SuperfluidDelegationAmountResponse.fromSDKJSON(await this.req.get<SuperfluidDelegationAmountResponseSDKType>(endpoint, options));
   }
 
   /* Returns all the delegated superfluid poistions for a specific delegator. */
   async superfluidDelegationsByDelegator(params: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations/${params.delegatorAddress}`;
-    return await this.req.get<SuperfluidDelegationsByDelegatorResponseSDKType>(endpoint);
+    return SuperfluidDelegationsByDelegatorResponse.fromSDKJSON(await this.req.get<SuperfluidDelegationsByDelegatorResponseSDKType>(endpoint));
   }
 
   /* Returns all the undelegating superfluid poistions for a specific delegator. */
@@ -142,7 +142,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_undelegations_by_delegator/${params.delegatorAddress}`;
-    return await this.req.get<SuperfluidUndelegationsByDelegatorResponseSDKType>(endpoint, options);
+    return SuperfluidUndelegationsByDelegatorResponse.fromSDKJSON(await this.req.get<SuperfluidUndelegationsByDelegatorResponseSDKType>(endpoint, options));
   }
 
   /* Returns all the superfluid positions of a specific denom delegated to one
@@ -161,7 +161,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom`;
-    return await this.req.get<SuperfluidDelegationsByValidatorDenomResponseSDKType>(endpoint, options);
+    return SuperfluidDelegationsByValidatorDenomResponse.fromSDKJSON(await this.req.get<SuperfluidDelegationsByValidatorDenomResponseSDKType>(endpoint, options));
   }
 
   /* Returns the amount of a specific denom delegated to a specific validator
@@ -181,19 +181,19 @@ export class LCDQueryClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom`;
-    return await this.req.get<EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType>(endpoint, options);
+    return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.fromSDKJSON(await this.req.get<EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType>(endpoint, options));
   }
 
   /* Returns the specified delegations for a specific delegator */
   async totalDelegationByDelegator(params: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/total_delegation_by_delegator/${params.delegatorAddress}`;
-    return await this.req.get<QueryTotalDelegationByDelegatorResponseSDKType>(endpoint);
+    return QueryTotalDelegationByDelegatorResponse.fromSDKJSON(await this.req.get<QueryTotalDelegationByDelegatorResponseSDKType>(endpoint));
   }
 
   /* Returns a list of whitelisted pool ids to unpool. */
   async unpoolWhitelist(_params: QueryUnpoolWhitelistRequest = {}): Promise<QueryUnpoolWhitelistResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/unpool_whitelist`;
-    return await this.req.get<QueryUnpoolWhitelistResponseSDKType>(endpoint);
+    return QueryUnpoolWhitelistResponse.fromSDKJSON(await this.req.get<QueryUnpoolWhitelistResponseSDKType>(endpoint));
   }
 
 }

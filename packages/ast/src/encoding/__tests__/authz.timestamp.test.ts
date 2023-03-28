@@ -12,7 +12,9 @@ cases('cosmos/authz/v1beta1/authz', opts => {
     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.env = 'v-next';
     context.options.prototypes.typingsFormat.timestamp = opts.name;
+    aminoCtx.options.env = 'v-next';
     aminoCtx.options.prototypes.typingsFormat.timestamp = opts.name;
     expectCode(createProtoType(context, 'Grant',
         getNestedProto(ref.traversed).Grant

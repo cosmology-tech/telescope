@@ -122,6 +122,10 @@ export const QueryModuleAccountBalanceRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryModuleAccountBalanceRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestSDKType {
     const obj: any = {};
     return obj;
@@ -196,6 +200,12 @@ export const QueryModuleAccountBalanceResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryModuleAccountBalanceResponseSDKType {
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   toSDK(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseSDKType {
     const obj: any = {};
 
@@ -252,6 +262,10 @@ export const QueryParamsRequest = {
   },
 
   fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
     return {};
   },
 
@@ -320,6 +334,12 @@ export const QueryParamsResponse = {
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
       params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
 
@@ -392,6 +412,12 @@ export const QueryClaimRecordRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryClaimRecordRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   toSDK(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -458,6 +484,12 @@ export const QueryClaimRecordResponse = {
   fromSDK(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
     return {
       claimRecord: object.claim_record ? ClaimRecord.fromSDK(object.claim_record) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): QueryClaimRecordResponseSDKType {
+    return {
+      claim_record: isSet(object.claim_record) ? ClaimRecord.fromSDKJSON(object.claim_record) : undefined
     };
   },
 
@@ -543,6 +575,13 @@ export const QueryClaimableForActionRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+    };
+  },
+
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -616,6 +655,12 @@ export const QueryClaimableForActionResponse = {
   fromSDK(object: QueryClaimableForActionResponseSDKType): QueryClaimableForActionResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryClaimableForActionResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 
@@ -694,6 +739,12 @@ export const QueryTotalClaimableRequest = {
     };
   },
 
+  fromSDKJSON(object: any): QueryTotalClaimableRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   toSDK(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -766,6 +817,12 @@ export const QueryTotalClaimableResponse = {
   fromSDK(object: QueryTotalClaimableResponseSDKType): QueryTotalClaimableResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): QueryTotalClaimableResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
 

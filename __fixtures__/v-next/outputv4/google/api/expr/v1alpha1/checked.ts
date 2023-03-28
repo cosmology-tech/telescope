@@ -683,6 +683,13 @@ export const CheckedExpr_ReferenceMapEntry = {
     };
   },
 
+  fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
+    };
+  },
+
   toSDK(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -763,6 +770,13 @@ export const CheckedExpr_TypeMapEntry = {
     return {
       key: object?.key,
       value: object.value ? Type.fromSDK(object.value) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
     };
   },
 
@@ -950,6 +964,26 @@ export const CheckedExpr = {
       sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
       exprVersion: object?.expr_version,
       expr: object.expr ? Expr.fromSDK(object.expr) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): CheckedExprSDKType {
+    return {
+      reference_map: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
+        [key: Long]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromSDKJSON(value);
+        return acc;
+      }, {}) : {},
+      type_map: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
+        [key: Long]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromSDKJSON(value);
+        return acc;
+      }, {}) : {},
+      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
+      expr_version: isSet(object.expr_version) ? String(object.expr_version) : "",
+      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined
     };
   },
 
@@ -1196,6 +1230,24 @@ export const Type = {
     };
   },
 
+  fromSDKJSON(object: any): TypeSDKType {
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromSDKJSON(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      well_known: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
+      list_type: isSet(object.list_type) ? Type_ListType.fromSDKJSON(object.list_type) : undefined,
+      map_type: isSet(object.map_type) ? Type_MapType.fromSDKJSON(object.map_type) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromSDKJSON(object.function) : undefined,
+      message_type: isSet(object.message_type) ? String(object.message_type) : undefined,
+      type_param: isSet(object.type_param) ? String(object.type_param) : undefined,
+      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromSDKJSON(object.error) : undefined,
+      abstract_type: isSet(object.abstract_type) ? Type_AbstractType.fromSDKJSON(object.abstract_type) : undefined
+    };
+  },
+
   toSDK(message: Type): TypeSDKType {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
@@ -1274,6 +1326,12 @@ export const Type_ListType = {
   fromSDK(object: Type_ListTypeSDKType): Type_ListType {
     return {
       elemType: object.elem_type ? Type.fromSDK(object.elem_type) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): Type_ListTypeSDKType {
+    return {
+      elem_type: isSet(object.elem_type) ? Type.fromSDKJSON(object.elem_type) : undefined
     };
   },
 
@@ -1356,6 +1414,13 @@ export const Type_MapType = {
     return {
       keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
       valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): Type_MapTypeSDKType {
+    return {
+      key_type: isSet(object.key_type) ? Type.fromSDKJSON(object.key_type) : undefined,
+      value_type: isSet(object.value_type) ? Type.fromSDKJSON(object.value_type) : undefined
     };
   },
 
@@ -1445,6 +1510,13 @@ export const Type_FunctionType = {
     return {
       resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
       argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): Type_FunctionTypeSDKType {
+    return {
+      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
+      arg_types: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDKJSON(e)) : []
     };
   },
 
@@ -1540,6 +1612,13 @@ export const Type_AbstractType = {
     return {
       name: object?.name,
       parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): Type_AbstractTypeSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      parameter_types: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDKJSON(e)) : []
     };
   },
 
@@ -1645,6 +1724,14 @@ export const Decl = {
     };
   },
 
+  fromSDKJSON(object: any): DeclSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      ident: isSet(object.ident) ? Decl_IdentDecl.fromSDKJSON(object.ident) : undefined,
+      function: isSet(object.function) ? Decl_FunctionDecl.fromSDKJSON(object.function) : undefined
+    };
+  },
+
   toSDK(message: Decl): DeclSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1742,6 +1829,14 @@ export const Decl_IdentDecl = {
     };
   },
 
+  fromSDKJSON(object: any): Decl_IdentDeclSDKType {
+    return {
+      type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
+      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined,
+      doc: isSet(object.doc) ? String(object.doc) : ""
+    };
+  },
+
   toSDK(message: Decl_IdentDecl): Decl_IdentDeclSDKType {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
@@ -1816,6 +1911,12 @@ export const Decl_FunctionDecl = {
   fromSDK(object: Decl_FunctionDeclSDKType): Decl_FunctionDecl {
     return {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDK(e)) : []
+    };
+  },
+
+  fromSDKJSON(object: any): Decl_FunctionDeclSDKType {
+    return {
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDKJSON(e)) : []
     };
   },
 
@@ -1970,6 +2071,17 @@ export const Decl_FunctionDecl_Overload = {
     };
   },
 
+  fromSDKJSON(object: any): Decl_FunctionDecl_OverloadSDKType {
+    return {
+      overload_id: isSet(object.overload_id) ? String(object.overload_id) : "",
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDKJSON(e)) : [],
+      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => String(e)) : [],
+      result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
+      is_instance_function: isSet(object.is_instance_function) ? Boolean(object.is_instance_function) : false,
+      doc: isSet(object.doc) ? String(object.doc) : ""
+    };
+  },
+
   toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
     const obj: any = {};
     obj.overload_id = message.overloadId;
@@ -2084,6 +2196,14 @@ export const Reference = {
       name: object?.name,
       overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
       value: object.value ? Constant.fromSDK(object.value) : undefined
+    };
+  },
+
+  fromSDKJSON(object: any): ReferenceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      overload_id: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => String(e)) : [],
+      value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined
     };
   },
 

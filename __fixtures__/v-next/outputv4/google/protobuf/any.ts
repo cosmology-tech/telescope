@@ -279,6 +279,13 @@ export const Any = {
     };
   },
 
+  fromSDKJSON(object: any): AnySDKType {
+    return {
+      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+
   toSDK(message: Any): AnySDKType {
     const obj: any = {};
     obj.type_url = message.typeUrl;

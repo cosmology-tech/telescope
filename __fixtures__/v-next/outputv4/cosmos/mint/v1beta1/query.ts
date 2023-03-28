@@ -117,6 +117,10 @@ export const QueryParamsRequest = {
     return {};
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
@@ -185,6 +189,12 @@ export const QueryParamsResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
@@ -235,6 +245,10 @@ export const QueryInflationRequest = {
   },
 
   fromSDK(_: QueryInflationRequestSDKType): QueryInflationRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryInflationRequestSDKType {
     return {};
   },
 
@@ -306,6 +320,12 @@ export const QueryInflationResponse = {
     };
   },
 
+  fromSDKJSON(object: any): QueryInflationResponseSDKType {
+    return {
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
+    };
+  },
+
   toSDK(message: QueryInflationResponse): QueryInflationResponseSDKType {
     const obj: any = {};
     obj.inflation = message.inflation;
@@ -356,6 +376,10 @@ export const QueryAnnualProvisionsRequest = {
   },
 
   fromSDK(_: QueryAnnualProvisionsRequestSDKType): QueryAnnualProvisionsRequest {
+    return {};
+  },
+
+  fromSDKJSON(_: any): QueryAnnualProvisionsRequestSDKType {
     return {};
   },
 
@@ -424,6 +448,12 @@ export const QueryAnnualProvisionsResponse = {
   fromSDK(object: QueryAnnualProvisionsResponseSDKType): QueryAnnualProvisionsResponse {
     return {
       annualProvisions: object?.annual_provisions
+    };
+  },
+
+  fromSDKJSON(object: any): QueryAnnualProvisionsResponseSDKType {
+    return {
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
     };
   },
 

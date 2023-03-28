@@ -95,6 +95,12 @@ export const PubKey = {
     };
   },
 
+  fromSDKJSON(object: any): PubKeySDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
+  },
+
   toSDK(message: PubKey): PubKeySDKType {
     const obj: any = {};
     obj.key = message.key;
@@ -161,6 +167,12 @@ export const PrivKey = {
   fromSDK(object: PrivKeySDKType): PrivKey {
     return {
       key: object?.key
+    };
+  },
+
+  fromSDKJSON(object: any): PrivKeySDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
 
