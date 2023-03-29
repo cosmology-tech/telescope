@@ -65,6 +65,9 @@ const options: TelescopeOptions = {
       protos: ['cosmos/authz/v1beta1/event.proto']
     },
     typingsFormat: {
+      customTypes: {
+        useCosmosSDKDec: true
+      },
       useDeepPartial: true,
       useExact: false,
       timestamp: 'date',

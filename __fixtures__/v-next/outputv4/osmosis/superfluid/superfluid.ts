@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 
 /**
@@ -379,7 +380,7 @@ export const OsmoEquivalentMultiplierRecord = {
     }
 
     if (message.multiplier !== "") {
-      writer.uint32(26).string(message.multiplier);
+      writer.uint32(26).string(Decimal.fromUserInput(message.multiplier, 18).atomics);
     }
 
     return writer;
@@ -403,7 +404,7 @@ export const OsmoEquivalentMultiplierRecord = {
           break;
 
         case 3:
-          message.multiplier = reader.string();
+          message.multiplier = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
@@ -743,7 +744,7 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
 export const QueryInflationRateResponse = {
   encode(message: QueryInflationRateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationRate !== "") {
-      writer.uint32(10).string(message.inflationRate);
+      writer.uint32(10).string(Decimal.fromUserInput(message.inflationRate, 18).atomics);
     }
 
     return writer;
@@ -759,7 +760,7 @@ export const QueryInflationRateResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.inflationRate = reader.string();
+          message.inflationRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

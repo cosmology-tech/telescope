@@ -4,6 +4,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "cosmos.staking.v1beta1";
 
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
@@ -392,7 +393,7 @@ export const MsgEditValidator = {
     }
 
     if (message.commissionRate !== "") {
-      writer.uint32(26).string(message.commissionRate);
+      writer.uint32(26).string(Decimal.fromUserInput(message.commissionRate, 18).atomics);
     }
 
     if (message.minSelfDelegation !== "") {
@@ -420,7 +421,7 @@ export const MsgEditValidator = {
           break;
 
         case 3:
-          message.commissionRate = reader.string();
+          message.commissionRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 4:

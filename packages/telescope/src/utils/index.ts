@@ -19,6 +19,7 @@ export const UTILS = {
   base64FromBytes: '__helpers__',
   bytesFromBase64: '__helpers__',
   BrowserHeaders: 'browser-headers',
+  Decimal: '@cosmjs/math',
   createProtobufRpcClient: '@cosmjs/stargate',
   decodeBech32Pubkey: '@cosmjs/amino',
   DeepPartial: '__helpers__',

@@ -64,6 +64,9 @@ interface TelescopeOpts {
             protos?: string[];
         };
         typingsFormat?: {
+            customTypes?:{
+              useCosmosSDKDec?: boolean;
+            },
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
@@ -234,6 +237,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         optionalPageRequests: false,
 
         typingsFormat: {
+            customTypes: {
+              useCosmosSDKDec: false
+            },
             useDeepPartial: true,
             useExact: false,
             timestamp: 'date',

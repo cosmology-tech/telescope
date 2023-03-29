@@ -28,7 +28,7 @@ export declare const encode: {
     keyHash(args: EncodeMethod): t.ExpressionStatement;
 };
 export declare const types: {
-    string(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    string(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     double(num: number, prop: string, isOptional: boolean): t.IfStatement;
     float(num: number, prop: string, isOptional: boolean): t.IfStatement;
     int32(num: number, prop: string, isOptional: boolean): t.IfStatement;

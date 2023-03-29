@@ -120,12 +120,57 @@ const scalarType = (num: number, prop: string, type: string) => {
     ]);
 };
 
+const customType = (num: number, prop: string, type: string, customType: string, args: EncodeMethod) => {
+  switch (customType) {
+    case "github.com/cosmos/cosmos-sdk/types.Dec":
+    default:
+      args.context.addUtil("Decimal");
+
+      return t.blockStatement([
+          t.expressionStatement(
+              t.callExpression(
+                  t.memberExpression(
+                      t.callExpression(
+                          t.memberExpression(
+                              t.identifier('writer'),
+                              t.identifier('uint32')
+                          ),
+                          [
+                              t.numericLiteral(num)
+                          ]
+                      ),
+                      t.identifier(type)
+                  ),
+                  [
+                    t.memberExpression(
+                      t.callExpression(
+                        t.memberExpression(
+                          t.identifier('Decimal'),
+                          t.identifier('fromUserInput'),
+                        ),
+                        [
+                          t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(prop)
+                          ),
+                          t.numericLiteral(18)
+                        ]
+                      ),
+                      t.identifier('atomics'),
+                    )
+                  ]
+              )
+          )
+      ]);
+  }
+};
+
 export const encode = {
 
     string(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.string(num, prop, args.isOptional);
+        return types.string(num, prop, args.isOptional, args);
     },
 
     double(args: EncodeMethod) {
@@ -310,12 +355,20 @@ export const types = {
             writer.uint32(10).string(message.sender);
         }
     */
-    string(num: number, prop: string, isOptional: boolean) {
+    string(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
+      const useCosmosSDKDec = args.context.pluginValue(
+        'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
+      );
+      const isCosmosSDKDec =
+        args.field.options?.['(gogoproto.customtype)'] ==
+        'github.com/cosmos/cosmos-sdk/types.Dec';
 
-        return t.ifStatement(
-            wrapOptional(prop, notEmptyString(prop), isOptional),
-            scalarType(num, prop, 'string')
-        )
+      return t.ifStatement(
+        wrapOptional(prop, notEmptyString(prop), isOptional),
+        useCosmosSDKDec && isCosmosSDKDec
+          ? customType(num, prop, 'string', args.field.options?.['(gogoproto.customtype)'], args)
+          : scalarType(num, prop, 'string')
+      );
     },
 
     /*
@@ -544,7 +597,7 @@ export const types = {
 
     // if (message.periodReset !== undefined) {
     //     Timestamp.encode(toTimestamp(message.periodReset), writer.uint32(18).fork()).ldelim();
-    //   }  
+    //   }
 
     timestamp(num: number, prop: string) {
         return ifNotUndefined(
@@ -1094,7 +1147,33 @@ export const arrayTypes = {
         );
     },
     string(args: EncodeMethod) {
+        const useCosmosSDKDec = args.context.pluginValue(
+          'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
+        );
+        const isCosmosSDKDec =
+          args.field.options?.['(gogoproto.customtype)'] ==
+          'github.com/cosmos/cosmos-sdk/types.Dec';
+
         const num = getTagNumber(args.field);
+
+        let valueExpression: t.Expression = t.tsNonNullExpression(t.identifier('v'));
+
+        if(useCosmosSDKDec && isCosmosSDKDec){
+          args.context.addUtil("Decimal");
+
+          valueExpression = t.memberExpression( t.callExpression(
+              t.memberExpression(
+                t.identifier('Decimal'),
+                t.identifier('fromUserInput'),
+              ),
+              [
+                valueExpression,
+                t.numericLiteral(18)
+              ]
+            ),
+            t.identifier('atomics'),
+          )
+        }
 
         return t.expressionStatement(
             t.callExpression(
@@ -1111,7 +1190,7 @@ export const arrayTypes = {
                     t.identifier('string')
                 ),
                 [
-                    t.tsNonNullExpression(t.identifier('v'))
+                  valueExpression
                 ]
             )
         );

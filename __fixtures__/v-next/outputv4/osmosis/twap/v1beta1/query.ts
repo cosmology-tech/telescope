@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Params, ParamsSDKType } from "./genesis";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
   poolId: Long;
@@ -194,7 +195,7 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
 export const ArithmeticTwapResponse = {
   encode(message: ArithmeticTwapResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(message.arithmeticTwap);
+      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
 
     return writer;
@@ -210,7 +211,7 @@ export const ArithmeticTwapResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = reader.string();
+          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
@@ -389,7 +390,7 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
 export const ArithmeticTwapToNowResponse = {
   encode(message: ArithmeticTwapToNowResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(message.arithmeticTwap);
+      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
 
     return writer;
@@ -405,7 +406,7 @@ export const ArithmeticTwapToNowResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = reader.string();
+          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
