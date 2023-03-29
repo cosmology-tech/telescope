@@ -5,6 +5,7 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "cosmos.staking.v1beta1";
 
 /** BondStatus is the status of a validator. */
@@ -646,15 +647,15 @@ function createBaseCommissionRates(): CommissionRates {
 export const CommissionRates = {
   encode(message: CommissionRates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rate !== "") {
-      writer.uint32(10).string(message.rate);
+      writer.uint32(10).string(Decimal.fromUserInput(message.rate, 18).atomics);
     }
 
     if (message.maxRate !== "") {
-      writer.uint32(18).string(message.maxRate);
+      writer.uint32(18).string(Decimal.fromUserInput(message.maxRate, 18).atomics);
     }
 
     if (message.maxChangeRate !== "") {
-      writer.uint32(26).string(message.maxChangeRate);
+      writer.uint32(26).string(Decimal.fromUserInput(message.maxChangeRate, 18).atomics);
     }
 
     return writer;
@@ -670,15 +671,15 @@ export const CommissionRates = {
 
       switch (tag >>> 3) {
         case 1:
-          message.rate = reader.string();
+          message.rate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 2:
-          message.maxRate = reader.string();
+          message.maxRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 3:
-          message.maxChangeRate = reader.string();
+          message.maxChangeRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
@@ -1004,7 +1005,7 @@ export const Validator = {
     }
 
     if (message.delegatorShares !== "") {
-      writer.uint32(50).string(message.delegatorShares);
+      writer.uint32(50).string(Decimal.fromUserInput(message.delegatorShares, 18).atomics);
     }
 
     if (message.description !== undefined) {
@@ -1060,7 +1061,7 @@ export const Validator = {
           break;
 
         case 6:
-          message.delegatorShares = reader.string();
+          message.delegatorShares = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 7:
@@ -1665,7 +1666,7 @@ export const Delegation = {
     }
 
     if (message.shares !== "") {
-      writer.uint32(26).string(message.shares);
+      writer.uint32(26).string(Decimal.fromUserInput(message.shares, 18).atomics);
     }
 
     return writer;
@@ -1689,7 +1690,7 @@ export const Delegation = {
           break;
 
         case 3:
-          message.shares = reader.string();
+          message.shares = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
@@ -2012,7 +2013,7 @@ export const RedelegationEntry = {
     }
 
     if (message.sharesDst !== "") {
-      writer.uint32(34).string(message.sharesDst);
+      writer.uint32(34).string(Decimal.fromUserInput(message.sharesDst, 18).atomics);
     }
 
     return writer;
@@ -2040,7 +2041,7 @@ export const RedelegationEntry = {
           break;
 
         case 4:
-          message.sharesDst = reader.string();
+          message.sharesDst = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
@@ -2274,7 +2275,7 @@ export const Params = {
     }
 
     if (message.minCommissionRate !== "") {
-      writer.uint32(50).string(message.minCommissionRate);
+      writer.uint32(50).string(Decimal.fromUserInput(message.minCommissionRate, 18).atomics);
     }
 
     return writer;
@@ -2310,7 +2311,7 @@ export const Params = {
           break;
 
         case 6:
-          message.minCommissionRate = reader.string();
+          message.minCommissionRate = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

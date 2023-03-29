@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 
@@ -96,15 +97,15 @@ function createBaseInflationDistribution(): InflationDistribution {
 export const InflationDistribution = {
   encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.stakingRewards !== "") {
-      writer.uint32(10).string(message.stakingRewards);
+      writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
     }
 
     if (message.usageIncentives !== "") {
-      writer.uint32(18).string(message.usageIncentives);
+      writer.uint32(18).string(Decimal.fromUserInput(message.usageIncentives, 18).atomics);
     }
 
     if (message.communityPool !== "") {
-      writer.uint32(26).string(message.communityPool);
+      writer.uint32(26).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
 
     return writer;
@@ -120,15 +121,15 @@ export const InflationDistribution = {
 
       switch (tag >>> 3) {
         case 1:
-          message.stakingRewards = reader.string();
+          message.stakingRewards = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 2:
-          message.usageIncentives = reader.string();
+          message.usageIncentives = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 3:
-          message.communityPool = reader.string();
+          message.communityPool = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
@@ -203,23 +204,23 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 export const ExponentialCalculation = {
   encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.a !== "") {
-      writer.uint32(10).string(message.a);
+      writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
     }
 
     if (message.r !== "") {
-      writer.uint32(18).string(message.r);
+      writer.uint32(18).string(Decimal.fromUserInput(message.r, 18).atomics);
     }
 
     if (message.c !== "") {
-      writer.uint32(26).string(message.c);
+      writer.uint32(26).string(Decimal.fromUserInput(message.c, 18).atomics);
     }
 
     if (message.bondingTarget !== "") {
-      writer.uint32(34).string(message.bondingTarget);
+      writer.uint32(34).string(Decimal.fromUserInput(message.bondingTarget, 18).atomics);
     }
 
     if (message.maxVariance !== "") {
-      writer.uint32(42).string(message.maxVariance);
+      writer.uint32(42).string(Decimal.fromUserInput(message.maxVariance, 18).atomics);
     }
 
     return writer;
@@ -235,23 +236,23 @@ export const ExponentialCalculation = {
 
       switch (tag >>> 3) {
         case 1:
-          message.a = reader.string();
+          message.a = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 2:
-          message.r = reader.string();
+          message.r = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 3:
-          message.c = reader.string();
+          message.c = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 4:
-          message.bondingTarget = reader.string();
+          message.bondingTarget = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 5:
-          message.maxVariance = reader.string();
+          message.maxVariance = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

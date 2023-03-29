@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 
@@ -38,15 +39,15 @@ function createBaseParams(): Params {
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationDecayFactor !== "") {
-      writer.uint32(10).string(message.inflationDecayFactor);
+      writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
     }
 
     if (message.initialInflation !== "") {
-      writer.uint32(18).string(message.initialInflation);
+      writer.uint32(18).string(Decimal.fromUserInput(message.initialInflation, 18).atomics);
     }
 
     if (message.variance !== "") {
-      writer.uint32(26).string(message.variance);
+      writer.uint32(26).string(Decimal.fromUserInput(message.variance, 18).atomics);
     }
 
     return writer;
@@ -62,15 +63,15 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.inflationDecayFactor = reader.string();
+          message.inflationDecayFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 2:
-          message.initialInflation = reader.string();
+          message.initialInflation = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 3:
-          message.variance = reader.string();
+          message.variance = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

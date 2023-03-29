@@ -54,6 +54,9 @@ interface TelescopeOpts {
             protos?: string[];
         };
         typingsFormat?: {
+            customTypes?: {
+                useCosmosSDKDec?: boolean;
+            };
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';

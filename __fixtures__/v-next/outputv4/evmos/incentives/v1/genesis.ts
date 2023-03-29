@@ -1,6 +1,7 @@
 import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 
 /** GenesisState defines the module's genesis state. */
@@ -188,7 +189,7 @@ export const Params = {
     }
 
     if (message.allocationLimit !== "") {
-      writer.uint32(18).string(message.allocationLimit);
+      writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
 
     if (message.incentivesEpochIdentifier !== "") {
@@ -196,7 +197,7 @@ export const Params = {
     }
 
     if (message.rewardScaler !== "") {
-      writer.uint32(34).string(message.rewardScaler);
+      writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
     }
 
     return writer;
@@ -216,7 +217,7 @@ export const Params = {
           break;
 
         case 2:
-          message.allocationLimit = reader.string();
+          message.allocationLimit = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         case 3:
@@ -224,7 +225,7 @@ export const Params = {
           break;
 
         case 4:
-          message.rewardScaler = reader.string();
+          message.rewardScaler = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:

@@ -168,13 +168,43 @@ export const baseTypes = {
 
     // reader.string();
     string(args: DecodeMethod) {
-        return t.callExpression(
+        const useCosmosSDKDec = args.context.pluginValue(
+          'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
+        );
+        const isCosmosSDKDec =
+          args.field.options?.['(gogoproto.customtype)'] ==
+          'github.com/cosmos/cosmos-sdk/types.Dec';
+
+        let valueExpression = t.callExpression(
             t.memberExpression(
                 t.identifier('reader'),
                 t.identifier('string')
             ),
             []
         );
+
+        if(useCosmosSDKDec && isCosmosSDKDec){
+          args.context.addUtil("Decimal");
+
+          valueExpression = t.callExpression(
+            t.memberExpression(
+              t.callExpression(
+                t.memberExpression(
+                  t.identifier('Decimal'),
+                  t.identifier('fromAtomics'),
+                ),
+                [
+                  valueExpression,
+                  t.numericLiteral(18)
+                ]
+              ),
+              t.identifier('toString'),
+            ),
+            []
+          )
+        }
+
+        return valueExpression;
     },
 
     // reader.bool();

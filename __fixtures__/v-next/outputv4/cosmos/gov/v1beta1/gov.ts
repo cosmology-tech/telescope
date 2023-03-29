@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
 
@@ -379,7 +380,7 @@ export const WeightedVoteOption = {
     }
 
     if (message.weight !== "") {
-      writer.uint32(18).string(message.weight);
+      writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
     }
 
     return writer;
@@ -399,7 +400,7 @@ export const WeightedVoteOption = {
           break;
 
         case 2:
-          message.weight = reader.string();
+          message.weight = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
 
         default:
