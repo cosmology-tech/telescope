@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/ast",
-  "version": "0.76.3",
+  "version": "0.77.0",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
@@ -89,8 +89,8 @@
     "@babel/parser": "^7.19.3",
     "@babel/runtime": "^7.19.0",
     "@babel/types": "7.19.3",
-    "@osmonauts/proto-parser": "^0.38.0",
-    "@osmonauts/types": "^0.30.0",
+    "@osmonauts/proto-parser": "^0.39.0",
+    "@osmonauts/types": "^0.31.0",
     "@osmonauts/utils": "^0.10.0",
     "case": "1.6.3",
     "dotty": "0.1.2"
