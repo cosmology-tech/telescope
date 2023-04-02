@@ -2,12 +2,14 @@ import * as t from '@babel/types';
 import {
     BILLION,
     memberExpressionOrIdentifierAminoCaseField,
-    shorthandProperty
+    shorthandProperty,
+    TypeLong
 } from '../../../utils';
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
 import { ProtoField } from '@osmonauts/types';
+import { GenericParseContext } from '../../context';
 
 export const fromAmino = {
     defaultType(args: FromAminoParseField) {
@@ -66,14 +68,11 @@ export const fromAmino = {
     },
 
     long(args: FromAminoParseField) {
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
 
         return t.objectProperty(t.identifier(args.field.name),
             t.callExpression(
-                t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier('fromString')
-                ),
+                TypeLong.getFromString(args.context),
                 [
                     memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
                 ]
@@ -92,12 +91,12 @@ export const fromAmino = {
     },
 
     durationString(args: FromAminoParseField) {
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
 
         const value = t.objectExpression(
             [
                 t.objectProperty(t.identifier('seconds'), t.callExpression(
-                    t.memberExpression(t.identifier('Long'), t.identifier('fromNumber')), [
+                    TypeLong.getFromNumber(args.context), [
                     t.callExpression(
                         t.memberExpression(
                             t.identifier('Math'),
@@ -135,7 +134,7 @@ export const fromAmino = {
     },
 
     height(args: FromAminoParseField) {
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
 
         return t.objectProperty(
             t.identifier(args.field.name),
@@ -144,7 +143,7 @@ export const fromAmino = {
                 t.objectExpression([
                     t.objectProperty(t.identifier('revisionHeight'),
                         t.callExpression(
-                            t.memberExpression(t.identifier('Long'), t.identifier('fromString')),
+                            TypeLong.getFromNumber(args.context),
                             [
                                 t.logicalExpression(
                                     '||',
@@ -160,7 +159,7 @@ export const fromAmino = {
                     //
                     t.objectProperty(t.identifier('revisionNumber'),
                         t.callExpression(
-                            t.memberExpression(t.identifier('Long'), t.identifier('fromString')),
+                            TypeLong.getFromNumber(args.context),
                             [
                                 t.logicalExpression(
                                     '||',
@@ -320,7 +319,7 @@ export const fromAmino = {
                     [
                         t.identifier(variable)
                     ],
-                    arrayTypeAstFunc(variable)
+                    arrayTypeAstFunc(variable, context)
                 )
             ]
         );
@@ -370,9 +369,11 @@ export const fromAmino = {
 
 
 export const arrayTypes = {
-    long(varname: string) {
+    long(varname: string, ctx: GenericParseContext) {
+        TypeLong.addUtil(ctx);
+
         return t.callExpression(
-            t.memberExpression(t.identifier('Long'), t.identifier('fromString')),
+            TypeLong.getFromNumber(ctx),
             [
                 t.identifier(varname)
             ]

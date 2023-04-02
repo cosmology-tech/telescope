@@ -1,5 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoField } from '@osmonauts/types';
+import { TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
 
@@ -102,7 +103,7 @@ export const toJSON = {
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
         const { messageProp, objProp } = getPropNames(args.field);
         return notUndefinedSetValue(
             messageProp,

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
-import { BILLION, callExpression, identifier } from '../../../utils';
+import { BILLION, callExpression, identifier, TypeLong } from '../../../utils';
 import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
@@ -94,13 +94,10 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
 
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
 
         const callExpr = t.callExpression(
-            t.memberExpression(
-                t.identifier('Long'),
-                t.identifier('fromString')
-            ),
+            TypeLong.getFromString(args.context),
             [
                 t.memberExpression(
                     t.identifier('object'),
@@ -396,19 +393,20 @@ export const fromAminoJSON = {
                 break;
             case 'int64':
             case 'uint64':
-                valueTypeType = 'Long';
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
+                TypeLong.addUtil(args.context);
+                valueTypeType = TypeLong.getType(args.context);
                 fromAminoJSON = t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromValue')
-                    ),
+                    TypeLong.getFromValue(args.context),
                     [
                         t.tsAsExpression(
                             t.identifier('value'),
                             t.tsUnionType(
                                 [
                                     t.tsTypeReference(
-                                        t.identifier('Long')
+                                        TypeLong.getIdentifier(args.context)
                                     ),
                                     t.tsStringKeyword()
                                 ]
@@ -438,13 +436,15 @@ export const fromAminoJSON = {
                 break;
             case 'int64':
             case 'uint64':
+                TypeLong.addUtil(args.context);
+
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
                         a
                     ]
                 );
-                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
                 break;
             case 'uint32':
             case 'int32':
@@ -717,10 +717,7 @@ export const fromAminoMessages = {
             t.objectProperty(
                 t.identifier(casing(fieldName)),
                 t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromString')
-                    ),
+                    TypeLong.getFromString(context),
                     [
                         t.logicalExpression(
                             '||',
@@ -768,10 +765,7 @@ export const fromAminoMessages = {
                     t.objectProperty(
                         t.identifier('seconds'),
                         t.callExpression(
-                            t.memberExpression(
-                                t.identifier('Long'),
-                                t.identifier('fromNumber')
-                            ),
+                            TypeLong.getFromNumber(context),
                             [
                                 t.callExpression(
                                     t.memberExpression(

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
-import { getProtoFieldTypeName } from '../utils';
+import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
 
@@ -301,7 +301,8 @@ export const getTSType = (context: GenericParseContext, type: string) => {
         case 'sint64':
         case 'fixed64':
         case 'sfixed64':
-            return t.tsTypeReference(t.identifier('Long'))
+            TypeLong.addUtil(context);
+            return t.tsTypeReference(TypeLong.getIdentifier(context))
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
@@ -432,20 +433,14 @@ export const getDefaultTSTypeFromProtoType = (
         case 'sfixed32':
             return t.numericLiteral(0);
         case 'uint64':
-            context.addUtil('Long');
-            return t.memberExpression(
-                t.identifier('Long'),
-                t.identifier('UZERO')
-            );
+            TypeLong.addUtil(context);
+            return TypeLong.getUZero(context);
         case 'int64':
         case 'sint64':
         case 'fixed64':
         case 'sfixed64':
-            context.addUtil('Long');
-            return t.memberExpression(
-                t.identifier('Long'),
-                t.identifier('ZERO')
-            );
+            TypeLong.addUtil(context);
+            return TypeLong.getZero(context);
         case 'bytes':
             return t.newExpression(
                 t.identifier('Uint8Array'),

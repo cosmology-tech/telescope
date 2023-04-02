@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { FromPartialMethod } from './index';
-import { identifier, callExpression } from '../../../utils';
+import { identifier, callExpression, TypeLong } from '../../../utils';
 import { getFieldsTypeName } from '..';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 
@@ -125,13 +125,13 @@ export const fromPartial = {
     // message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
     long(args: FromPartialMethod) {
         const prop = args.field.name;
+
+        TypeLong.addUtil(args.context);
+
         return setNotUndefinedAndNotNull(
             prop,
             t.callExpression(
-                t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier('fromValue')
-                ),
+                TypeLong.getFromValue(args.context),
                 [
                     t.memberExpression(
                         t.identifier('object'),
@@ -282,11 +282,13 @@ export const fromPartial = {
                 break;
             case 'int64':
             case 'uint64':
-                valueTypeType = 'Long';
-                fromPartial = t.memberExpression(
-                    t.identifier('Long'),
-                    t.identifier('fromValue')
-                );
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
+                TypeLong.addUtil(args.context);
+
+                valueTypeType = TypeLong.getType(args.context);
+                fromPartial = TypeLong.getFromValue(args.context);
                 break;
             default:
                 fromPartial = t.memberExpression(
@@ -304,13 +306,19 @@ export const fromPartial = {
                 break;
             case 'int64':
             case 'uint64':
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
                         a
                     ]
                 );
-                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+
+                TypeLong.addUtil(args.context);
+
+                keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
                 break;
             case 'int32':
             case 'uint32':
@@ -502,31 +510,30 @@ export const arrayTypes = {
     },
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
-    long() {
+    long(args: FromPartialMethod) {
+        TypeLong.addUtil(args.context);
+
         return t.callExpression(
-            t.memberExpression(
-                t.identifier('Long'),
-                t.identifier('fromValue')
-            ),
+            TypeLong.getFromValue(args.context),
             [
                 t.identifier('e')
             ]
         );
     },
-    int64() {
-        return arrayTypes.long();
+    int64(args: FromPartialMethod) {
+        return arrayTypes.long(args);
     },
-    uint64() {
-        return arrayTypes.long();
+    uint64(args: FromPartialMethod) {
+        return arrayTypes.long(args);
     },
-    sint64() {
-        return arrayTypes.long();
+    sint64(args: FromPartialMethod) {
+        return arrayTypes.long(args);
     },
-    fixed64() {
-        return arrayTypes.long();
+    fixed64(args: FromPartialMethod) {
+        return arrayTypes.long(args);
     },
-    sfixed64() {
-        return arrayTypes.long();
+    sfixed64(args: FromPartialMethod) {
+        return arrayTypes.long(args);
     },
 
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];

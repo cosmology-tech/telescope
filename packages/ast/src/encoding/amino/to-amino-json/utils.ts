@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../../utils";
+import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } from "../../../utils";
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getOneOfs, getFieldOptionality } from '../../proto';
@@ -189,8 +189,38 @@ export const toAmino = {
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), cond);
     },
 
+    coinAmount(args: ToAminoParseField) {
+      const longType = TypeLong.getType(args.context);
+
+      switch (longType) {
+        case 'BigInt':
+          return t.memberExpression(
+            memberExpressionOrIdentifier(args.scope),
+            t.identifier('amount')
+          )
+        case 'Long':
+        default:
+          TypeLong.addUtil(args.context);
+
+          return t.callExpression(
+            t.memberExpression(
+                t.callExpression(
+                    TypeLong.getFromValue(args.context),
+                    [
+                        t.memberExpression(
+                            memberExpressionOrIdentifier(args.scope),
+                            t.identifier('amount')
+                        )
+                    ]
+                ),
+                t.identifier('toString')
+            ),
+            []
+          )
+      }
+    },
+
     coin(args: ToAminoParseField) {
-        args.context.addUtil('Long');
         const value = t.objectExpression([
             t.objectProperty(t.identifier('denom'), t.memberExpression(
                 memberExpressionOrIdentifier(args.scope),
@@ -198,24 +228,7 @@ export const toAmino = {
             )),
             t.objectProperty(
                 t.identifier('amount'),
-                t.callExpression(
-                    t.memberExpression(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.identifier('Long'),
-                                t.identifier('fromValue')
-                            ),
-                            [
-                                t.memberExpression(
-                                    memberExpressionOrIdentifier(args.scope),
-                                    t.identifier('amount')
-                                )
-                            ]
-                        ),
-                        t.identifier('toString')
-                    ),
-                    []
-                )
+                toAmino.coinAmount(args)
             )
         ]);
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), value);
@@ -242,7 +255,7 @@ export const toAmino = {
                 isOptional // TODO how to handle nested optionality
             })
         });
-        /// END 
+        /// END
         return t.objectProperty(t.identifier(context.aminoCaseField(field)),
             t.objectExpression(
                 properties

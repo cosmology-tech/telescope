@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { DecodeMethod } from './index';
 import { getInterfaceDecoderName, getKeyTypeEntryName } from '..';
+import { TypeLong } from '../../../utils';
 
 export const decode = {
     string(args: DecodeMethod) {
@@ -295,94 +296,67 @@ export const baseTypes = {
         );
     },
 
+    long(type: string, args: DecodeMethod) {
+      TypeLong.addUtil(args.context);
+
+      switch (TypeLong.getType(args.context)) {
+        case 'BigInt':
+          return t.callExpression(t.identifier('BigInt'), [
+            t.callExpression(
+              t.memberExpression(
+                t.callExpression(
+                  t.memberExpression(
+                    t.identifier('reader'),
+                    t.identifier(type),
+                  ),
+                  []
+                ),
+                t.identifier('toString'),
+              ),
+              []
+            )
+          ]);
+
+        case 'Long':
+        default:
+          return t.tsAsExpression(
+              t.callExpression(
+                  t.memberExpression(
+                      t.identifier('reader'),
+                      t.identifier(type)
+                  ),
+                  []
+              ),
+              t.tsTypeReference(
+                  TypeLong.getIdentifier(args.context)
+              )
+          );
+      }
+    },
+
     // (reader.int64() as Long);
     int64(args: DecodeMethod) {
-        args.context.addUtil('Long');
-
-        return t.tsAsExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier('int64')
-                ),
-                []
-            ),
-            t.tsTypeReference(
-                t.identifier('Long')
-            )
-        );
+      return baseTypes.long('int64', args)
     },
 
     // (reader.sint64() as Long);
     sint64(args: DecodeMethod) {
-        args.context.addUtil('Long');
-
-        return t.tsAsExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier('sint64')
-                ),
-                []
-            ),
-            t.tsTypeReference(
-                t.identifier('Long')
-            )
-        );
+      return baseTypes.long('sint64', args)
     },
 
     // (reader.uint64() as Long);
     uint64(args: DecodeMethod) {
-        args.context.addUtil('Long');
-
-        return t.tsAsExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier('uint64')
-                ),
-                []
-            ),
-            t.tsTypeReference(
-                t.identifier('Long')
-            )
-        );
+      return baseTypes.long('uint64', args)
     },
 
     // (reader.fixed64() as Long);
     fixed64(args: DecodeMethod) {
-        args.context.addUtil('Long');
-
-        return t.tsAsExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier('fixed64')
-                ),
-                []
-            ),
-            t.tsTypeReference(
-                t.identifier('Long')
-            )
-        );
+      return baseTypes.long('fixed64', args)
     },
 
     // (reader.sfixed64() as Long);
     sfixed64(args: DecodeMethod) {
-        args.context.addUtil('Long');
-
-        return t.tsAsExpression(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier('sfixed64')
-                ),
-                []
-            ),
-            t.tsTypeReference(
-                t.identifier('Long')
-            )
-        );
+      return baseTypes.long('sfixed64', args)
     },
 
     // SignDocDirectAux.decode(reader, reader.uint32());
