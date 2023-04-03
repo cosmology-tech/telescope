@@ -143,7 +143,7 @@ export const fromAmino = {
                 t.objectExpression([
                     t.objectProperty(t.identifier('revisionHeight'),
                         t.callExpression(
-                            TypeLong.getFromNumber(args.context),
+                            TypeLong.getFromString(args.context),
                             [
                                 t.logicalExpression(
                                     '||',
@@ -159,7 +159,7 @@ export const fromAmino = {
                     //
                     t.objectProperty(t.identifier('revisionNumber'),
                         t.callExpression(
-                            TypeLong.getFromNumber(args.context),
+                            TypeLong.getFromString(args.context),
                             [
                                 t.logicalExpression(
                                     '||',
@@ -373,7 +373,7 @@ export const arrayTypes = {
         TypeLong.addUtil(ctx);
 
         return t.callExpression(
-            TypeLong.getFromNumber(ctx),
+            TypeLong.getFromString(ctx),
             [
                 t.identifier(varname)
             ]
