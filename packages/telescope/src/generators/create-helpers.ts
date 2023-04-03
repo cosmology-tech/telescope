@@ -3,7 +3,7 @@ import { sync as mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia } from '../helpers';
+import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -26,7 +26,7 @@ const write = (
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
-  write(builder, 'helpers.ts', internal);
+  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.longLibrary === 'bigint' ? internalForBigInt :internal);
 
   // should be exported
   if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {

@@ -1,6 +1,14 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 export declare const TypeLong: {
+    propTypes: {
+        bigint: string;
+        long: string;
+    };
+    propIdentifiers: {
+        bigint: t.Identifier;
+        long: t.Identifier;
+    };
     types: {
         bigint: string;
         long: string;
@@ -30,7 +38,9 @@ export declare const TypeLong: {
         long: t.MemberExpression;
     };
     addUtil: (ctx?: GenericParseContext) => void;
+    getPropType: (ctx: GenericParseContext) => string;
     getType: (ctx: GenericParseContext) => string;
+    getPropIdentifier: (ctx: GenericParseContext) => t.Identifier;
     getIdentifier: (ctx: GenericParseContext) => t.Identifier;
     getUZero: (ctx: GenericParseContext) => t.Expression;
     getZero: (ctx: GenericParseContext) => t.Expression;
