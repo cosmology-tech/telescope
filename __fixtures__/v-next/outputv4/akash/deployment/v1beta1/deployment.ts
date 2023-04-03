@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, Long, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** State is an enum which refers to state of deployment */
@@ -135,13 +135,13 @@ export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
 }
 
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
 }
 
 /** Deployment stores deploymentID, state and version details */
@@ -149,7 +149,7 @@ export interface Deployment {
   deploymentId?: DeploymentID | undefined;
   state: Deployment_State;
   version: Uint8Array;
-  createdAt: Long;
+  createdAt: bigint;
 }
 
 /** Deployment stores deploymentID, state and version details */
@@ -157,20 +157,20 @@ export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType | undefined;
   state: Deployment_State;
   version: Uint8Array;
-  created_at: Long;
+  created_at: bigint;
 }
 
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   state: string;
 }
 
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   state: string;
 }
 
@@ -815,7 +815,7 @@ export const MsgCloseDeploymentResponse = {
 function createBaseDeploymentID(): DeploymentID {
   return {
     owner: "",
-    dseq: Long.UZERO
+    dseq: BigInt("0")
   };
 }
 
@@ -825,8 +825,8 @@ export const DeploymentID = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (!message.dseq.isZero()) {
-      writer.uint32(16).uint64(message.dseq);
+    if (message.dseq !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
     }
 
     return writer;
@@ -846,7 +846,7 @@ export const DeploymentID = {
           break;
 
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -861,21 +861,21 @@ export const DeploymentID = {
   fromJSON(object: any): DeploymentID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
+      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0")
     };
   },
 
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
     return message;
   },
 
@@ -889,7 +889,7 @@ export const DeploymentID = {
   fromSDKJSON(object: any): DeploymentIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
+      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0")
     };
   },
 
@@ -907,7 +907,7 @@ function createBaseDeployment(): Deployment {
     deploymentId: undefined,
     state: 0,
     version: new Uint8Array(),
-    createdAt: Long.ZERO
+    createdAt: BigInt("0")
   };
 }
 
@@ -925,8 +925,8 @@ export const Deployment = {
       writer.uint32(26).bytes(message.version);
     }
 
-    if (!message.createdAt.isZero()) {
-      writer.uint32(32).int64(message.createdAt);
+    if (message.createdAt !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
     }
 
     return writer;
@@ -954,7 +954,7 @@ export const Deployment = {
           break;
 
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -971,7 +971,7 @@ export const Deployment = {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0")
     };
   },
 
@@ -980,7 +980,7 @@ export const Deployment = {
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
     message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt("0")).toString());
     return obj;
   },
 
@@ -989,7 +989,7 @@ export const Deployment = {
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
     return message;
   },
 
@@ -1007,7 +1007,7 @@ export const Deployment = {
       deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0")
     };
   },
 
@@ -1025,7 +1025,7 @@ export const Deployment = {
 function createBaseDeploymentFilters(): DeploymentFilters {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt("0"),
     state: ""
   };
 }
@@ -1036,8 +1036,8 @@ export const DeploymentFilters = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (!message.dseq.isZero()) {
-      writer.uint32(16).uint64(message.dseq);
+    if (message.dseq !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
     }
 
     if (message.state !== "") {
@@ -1061,7 +1061,7 @@ export const DeploymentFilters = {
           break;
 
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -1080,7 +1080,7 @@ export const DeploymentFilters = {
   fromJSON(object: any): DeploymentFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
@@ -1088,7 +1088,7 @@ export const DeploymentFilters = {
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
     message.state !== undefined && (obj.state = message.state);
     return obj;
   },
@@ -1096,7 +1096,7 @@ export const DeploymentFilters = {
   fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
     message.state = object.state ?? "";
     return message;
   },
@@ -1112,7 +1112,7 @@ export const DeploymentFilters = {
   fromSDKJSON(object: any): DeploymentFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
       state: isSet(object.state) ? String(object.state) : ""
     };
   },

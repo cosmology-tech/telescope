@@ -68,7 +68,7 @@ export interface Duration {
    * to +315,576,000,000 inclusive. Note: these bounds are computed from:
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
-  seconds: Long;
+  seconds: bigint;
 
   /**
    * Signed fractions of a second at nanosecond resolution of the span
@@ -142,21 +142,21 @@ export interface Duration {
  * microsecond should be expressed in JSON format as "3.000001s".
  */
 export interface DurationSDKType {
-  seconds: Long;
+  seconds: bigint;
   nanos: number;
 }
 
 function createBaseDuration(): Duration {
   return {
-    seconds: Long.ZERO,
+    seconds: BigInt("0"),
     nanos: 0
   };
 }
 
 export const Duration = {
   encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.seconds.isZero()) {
-      writer.uint32(8).int64(message.seconds);
+    if (message.seconds !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.seconds.toString()));
     }
 
     if (message.nanos !== 0) {
@@ -176,7 +176,7 @@ export const Duration = {
 
       switch (tag >>> 3) {
         case 1:
-          message.seconds = (reader.int64() as Long);
+          message.seconds = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -194,21 +194,21 @@ export const Duration = {
 
   fromJSON(object: any): Duration {
     return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      seconds: isSet(object.seconds) ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
 
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt("0")).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
 
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0");
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -222,7 +222,7 @@ export const Duration = {
 
   fromSDKJSON(object: any): DurationSDKType {
     return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      seconds: isSet(object.seconds) ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },

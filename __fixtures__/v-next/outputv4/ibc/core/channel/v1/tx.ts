@@ -1,7 +1,7 @@
 import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 
 /**
@@ -228,7 +228,7 @@ export interface MsgTimeout {
   packet?: Packet;
   proofUnreceived: Uint8Array;
   proofHeight?: Height;
-  nextSequenceRecv: Long;
+  nextSequenceRecv: bigint;
   signer: string;
 }
 
@@ -237,7 +237,7 @@ export interface MsgTimeoutSDKType {
   packet?: PacketSDKType;
   proof_unreceived: Uint8Array;
   proof_height?: HeightSDKType;
-  next_sequence_recv: Long;
+  next_sequence_recv: bigint;
   signer: string;
 }
 
@@ -253,7 +253,7 @@ export interface MsgTimeoutOnClose {
   proofUnreceived: Uint8Array;
   proofClose: Uint8Array;
   proofHeight?: Height;
-  nextSequenceRecv: Long;
+  nextSequenceRecv: bigint;
   signer: string;
 }
 
@@ -263,7 +263,7 @@ export interface MsgTimeoutOnCloseSDKType {
   proof_unreceived: Uint8Array;
   proof_close: Uint8Array;
   proof_height?: HeightSDKType;
-  next_sequence_recv: Long;
+  next_sequence_recv: bigint;
   signer: string;
 }
 
@@ -1624,7 +1624,7 @@ function createBaseMsgTimeout(): MsgTimeout {
     packet: undefined,
     proofUnreceived: new Uint8Array(),
     proofHeight: undefined,
-    nextSequenceRecv: Long.UZERO,
+    nextSequenceRecv: BigInt("0"),
     signer: ""
   };
 }
@@ -1643,8 +1643,8 @@ export const MsgTimeout = {
       Height.encode(message.proofHeight, writer.uint32(26).fork()).ldelim();
     }
 
-    if (!message.nextSequenceRecv.isZero()) {
-      writer.uint32(32).uint64(message.nextSequenceRecv);
+    if (message.nextSequenceRecv !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.nextSequenceRecv.toString()));
     }
 
     if (message.signer !== "") {
@@ -1676,7 +1676,7 @@ export const MsgTimeout = {
           break;
 
         case 4:
-          message.nextSequenceRecv = (reader.uint64() as Long);
+          message.nextSequenceRecv = BigInt(reader.uint64().toString());
           break;
 
         case 5:
@@ -1697,7 +1697,7 @@ export const MsgTimeout = {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
       proofUnreceived: isSet(object.proofUnreceived) ? bytesFromBase64(object.proofUnreceived) : new Uint8Array(),
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
-      nextSequenceRecv: isSet(object.nextSequenceRecv) ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO,
+      nextSequenceRecv: isSet(object.nextSequenceRecv) ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1707,7 +1707,7 @@ export const MsgTimeout = {
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
     message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || Long.UZERO).toString());
+    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || BigInt("0")).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -1717,7 +1717,7 @@ export const MsgTimeout = {
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
-    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO;
+    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0");
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1737,7 +1737,7 @@ export const MsgTimeout = {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? Long.fromValue(object.next_sequence_recv) : Long.UZERO,
+      next_sequence_recv: isSet(object.next_sequence_recv) ? (prop => BigInt(prop.toString!!()))(object.next_sequence_recv) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1816,7 +1816,7 @@ function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
     proofUnreceived: new Uint8Array(),
     proofClose: new Uint8Array(),
     proofHeight: undefined,
-    nextSequenceRecv: Long.UZERO,
+    nextSequenceRecv: BigInt("0"),
     signer: ""
   };
 }
@@ -1839,8 +1839,8 @@ export const MsgTimeoutOnClose = {
       Height.encode(message.proofHeight, writer.uint32(34).fork()).ldelim();
     }
 
-    if (!message.nextSequenceRecv.isZero()) {
-      writer.uint32(40).uint64(message.nextSequenceRecv);
+    if (message.nextSequenceRecv !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.nextSequenceRecv.toString()));
     }
 
     if (message.signer !== "") {
@@ -1876,7 +1876,7 @@ export const MsgTimeoutOnClose = {
           break;
 
         case 5:
-          message.nextSequenceRecv = (reader.uint64() as Long);
+          message.nextSequenceRecv = BigInt(reader.uint64().toString());
           break;
 
         case 6:
@@ -1898,7 +1898,7 @@ export const MsgTimeoutOnClose = {
       proofUnreceived: isSet(object.proofUnreceived) ? bytesFromBase64(object.proofUnreceived) : new Uint8Array(),
       proofClose: isSet(object.proofClose) ? bytesFromBase64(object.proofClose) : new Uint8Array(),
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
-      nextSequenceRecv: isSet(object.nextSequenceRecv) ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO,
+      nextSequenceRecv: isSet(object.nextSequenceRecv) ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1909,7 +1909,7 @@ export const MsgTimeoutOnClose = {
     message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
     message.proofClose !== undefined && (obj.proofClose = base64FromBytes(message.proofClose !== undefined ? message.proofClose : new Uint8Array()));
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || Long.UZERO).toString());
+    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || BigInt("0")).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -1920,7 +1920,7 @@ export const MsgTimeoutOnClose = {
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
     message.proofClose = object.proofClose ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
-    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? Long.fromValue(object.nextSequenceRecv) : Long.UZERO;
+    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0");
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1942,7 +1942,7 @@ export const MsgTimeoutOnClose = {
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
       proof_close: isSet(object.proof_close) ? bytesFromBase64(object.proof_close) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? Long.fromValue(object.next_sequence_recv) : Long.UZERO,
+      next_sequence_recv: isSet(object.next_sequence_recv) ? (prop => BigInt(prop.toString!!()))(object.next_sequence_recv) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },

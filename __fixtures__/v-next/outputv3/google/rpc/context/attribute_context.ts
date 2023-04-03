@@ -2,8 +2,8 @@ import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Long, isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 
 /**

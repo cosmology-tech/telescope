@@ -1,6 +1,6 @@
 import { EpochInfo, EpochInfoAmino, EpochInfoSDKType } from "./genesis";
+import { Long, DeepPartial, isSet } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoRequestProtoMsg {

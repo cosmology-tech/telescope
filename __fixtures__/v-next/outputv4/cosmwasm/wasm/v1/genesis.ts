@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 
 /** GenesisState - genesis state of x/wasm */
@@ -44,7 +44,7 @@ export interface GenesisState_GenMsgsSDKType {
 
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
-  codeId: Long;
+  codeId: bigint;
   codeInfo?: CodeInfo;
   codeBytes: Uint8Array;
 
@@ -54,7 +54,7 @@ export interface Code {
 
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
-  code_id: Long;
+  code_id: bigint;
   code_info?: CodeInfoSDKType;
   code_bytes: Uint8Array;
   pinned: boolean;
@@ -77,13 +77,13 @@ export interface ContractSDKType {
 /** Sequence key and value of an id generation counter */
 export interface Sequence {
   idKey: Uint8Array;
-  value: Long;
+  value: bigint;
 }
 
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
   id_key: Uint8Array;
-  value: Long;
+  value: bigint;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -370,7 +370,7 @@ export const GenesisState_GenMsgs = {
 
 function createBaseCode(): Code {
   return {
-    codeId: Long.UZERO,
+    codeId: BigInt("0"),
     codeInfo: undefined,
     codeBytes: new Uint8Array(),
     pinned: false
@@ -379,8 +379,8 @@ function createBaseCode(): Code {
 
 export const Code = {
   encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.codeId.isZero()) {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.codeId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.codeId.toString()));
     }
 
     if (message.codeInfo !== undefined) {
@@ -408,7 +408,7 @@ export const Code = {
 
       switch (tag >>> 3) {
         case 1:
-          message.codeId = (reader.uint64() as Long);
+          message.codeId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -434,7 +434,7 @@ export const Code = {
 
   fromJSON(object: any): Code {
     return {
-      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
       codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
       codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -443,7 +443,7 @@ export const Code = {
 
   toJSON(message: Code): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
     message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
     message.codeBytes !== undefined && (obj.codeBytes = base64FromBytes(message.codeBytes !== undefined ? message.codeBytes : new Uint8Array()));
     message.pinned !== undefined && (obj.pinned = message.pinned);
@@ -452,7 +452,7 @@ export const Code = {
 
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
     message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
@@ -470,7 +470,7 @@ export const Code = {
 
   fromSDKJSON(object: any): CodeSDKType {
     return {
-      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
       code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
       code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -608,7 +608,7 @@ export const Contract = {
 function createBaseSequence(): Sequence {
   return {
     idKey: new Uint8Array(),
-    value: Long.UZERO
+    value: BigInt("0")
   };
 }
 
@@ -618,8 +618,8 @@ export const Sequence = {
       writer.uint32(10).bytes(message.idKey);
     }
 
-    if (!message.value.isZero()) {
-      writer.uint32(16).uint64(message.value);
+    if (message.value !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.value.toString()));
     }
 
     return writer;
@@ -639,7 +639,7 @@ export const Sequence = {
           break;
 
         case 2:
-          message.value = (reader.uint64() as Long);
+          message.value = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -654,21 +654,21 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     return {
       idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 
   toJSON(message: Sequence): unknown {
     const obj: any = {};
     message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
-    message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
+    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
     return message;
   },
 
@@ -682,7 +682,7 @@ export const Sequence = {
   fromSDKJSON(object: any): SequenceSDKType {
     return {
       id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 

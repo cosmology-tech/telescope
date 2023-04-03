@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -29,21 +29,21 @@ export interface DistrInfoSDKType {
   records: DistrRecordSDKType[];
 }
 export interface DistrRecord {
-  gaugeId: Long;
+  gaugeId: bigint;
   weight: string;
 }
 export interface DistrRecordSDKType {
-  gauge_id: Long;
+  gauge_id: bigint;
   weight: string;
 }
 export interface PoolToGauge {
-  poolId: Long;
-  gaugeId: Long;
+  poolId: bigint;
+  gaugeId: bigint;
   duration?: Duration;
 }
 export interface PoolToGaugeSDKType {
-  pool_id: Long;
-  gauge_id: Long;
+  pool_id: bigint;
+  gauge_id: bigint;
   duration?: DurationSDKType;
 }
 export interface PoolToGauges {
@@ -319,15 +319,15 @@ export const DistrInfo = {
 
 function createBaseDistrRecord(): DistrRecord {
   return {
-    gaugeId: Long.UZERO,
+    gaugeId: BigInt("0"),
     weight: ""
   };
 }
 
 export const DistrRecord = {
   encode(message: DistrRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(8).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     if (message.weight !== "") {
@@ -347,7 +347,7 @@ export const DistrRecord = {
 
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -365,21 +365,21 @@ export const DistrRecord = {
 
   fromJSON(object: any): DistrRecord {
     return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0"),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
 
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
 
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
     message.weight = object.weight ?? "";
     return message;
   },
@@ -393,7 +393,7 @@ export const DistrRecord = {
 
   fromSDKJSON(object: any): DistrRecordSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0"),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -409,20 +409,20 @@ export const DistrRecord = {
 
 function createBasePoolToGauge(): PoolToGauge {
   return {
-    poolId: Long.UZERO,
-    gaugeId: Long.UZERO,
+    poolId: BigInt("0"),
+    gaugeId: BigInt("0"),
     duration: undefined
   };
 }
 
 export const PoolToGauge = {
   encode(message: PoolToGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
-      writer.uint32(8).uint64(message.poolId);
+    if (message.poolId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
     }
 
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(16).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     if (message.duration !== undefined) {
@@ -442,11 +442,11 @@ export const PoolToGauge = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -464,24 +464,24 @@ export const PoolToGauge = {
 
   fromJSON(object: any): PoolToGauge {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
   },
@@ -496,8 +496,8 @@ export const PoolToGauge = {
 
   fromSDKJSON(object: any): PoolToGaugeSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },

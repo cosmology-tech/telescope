@@ -1,6 +1,6 @@
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** Minter represents the minting state. */
@@ -92,7 +92,7 @@ export interface Params {
    * reduction_period_in_epochs the number of epochs it takes
    * to reduce the rewards.
    */
-  reductionPeriodInEpochs: Long;
+  reductionPeriodInEpochs: bigint;
 
   /**
    * reduction_factor is the reduction multiplier to execute
@@ -119,7 +119,7 @@ export interface Params {
    * minting_rewards_distribution_start_epoch start epoch to distribute minting
    * rewards
    */
-  mintingRewardsDistributionStartEpoch: Long;
+  mintingRewardsDistributionStartEpoch: bigint;
 }
 
 /** Params holds parameters for the x/mint module. */
@@ -127,11 +127,11 @@ export interface ParamsSDKType {
   mint_denom: string;
   genesis_epoch_provisions: string;
   epoch_identifier: string;
-  reduction_period_in_epochs: Long;
+  reduction_period_in_epochs: bigint;
   reduction_factor: string;
   distribution_proportions?: DistributionProportionsSDKType;
   weighted_developer_rewards_receivers: WeightedAddressSDKType[];
-  minting_rewards_distribution_start_epoch: Long;
+  minting_rewards_distribution_start_epoch: bigint;
 }
 
 function createBaseMinter(): Minter {
@@ -424,11 +424,11 @@ function createBaseParams(): Params {
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
-    reductionPeriodInEpochs: Long.ZERO,
+    reductionPeriodInEpochs: BigInt("0"),
     reductionFactor: "",
     distributionProportions: undefined,
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: Long.ZERO
+    mintingRewardsDistributionStartEpoch: BigInt("0")
   };
 }
 
@@ -446,8 +446,8 @@ export const Params = {
       writer.uint32(26).string(message.epochIdentifier);
     }
 
-    if (!message.reductionPeriodInEpochs.isZero()) {
-      writer.uint32(32).int64(message.reductionPeriodInEpochs);
+    if (message.reductionPeriodInEpochs !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.reductionPeriodInEpochs.toString()));
     }
 
     if (message.reductionFactor !== "") {
@@ -462,8 +462,8 @@ export const Params = {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
 
-    if (!message.mintingRewardsDistributionStartEpoch.isZero()) {
-      writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
+    if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
+      writer.uint32(64).int64(Long.fromString(message.mintingRewardsDistributionStartEpoch.toString()));
     }
 
     return writer;
@@ -491,7 +491,7 @@ export const Params = {
           break;
 
         case 4:
-          message.reductionPeriodInEpochs = (reader.int64() as Long);
+          message.reductionPeriodInEpochs = BigInt(reader.int64().toString());
           break;
 
         case 5:
@@ -507,7 +507,7 @@ export const Params = {
           break;
 
         case 8:
-          message.mintingRewardsDistributionStartEpoch = (reader.int64() as Long);
+          message.mintingRewardsDistributionStartEpoch = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -524,11 +524,11 @@ export const Params = {
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO,
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? (prop => BigInt(prop.toString!!()))(object.reductionPeriodInEpochs) : BigInt("0"),
       reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
       distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? (prop => BigInt(prop.toString!!()))(object.mintingRewardsDistributionStartEpoch) : BigInt("0")
     };
   },
 
@@ -537,7 +537,7 @@ export const Params = {
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || Long.ZERO).toString());
+    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt("0")).toString());
     message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
     message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
 
@@ -547,7 +547,7 @@ export const Params = {
       obj.weightedDeveloperRewardsReceivers = [];
     }
 
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || Long.ZERO).toString());
+    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt("0")).toString());
     return obj;
   },
 
@@ -556,11 +556,11 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO;
+    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? (prop => BigInt(prop.toString!!()))(object.reductionPeriodInEpochs) : BigInt("0");
     message.reductionFactor = object.reductionFactor ?? "";
     message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : undefined;
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO;
+    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.mintingRewardsDistributionStartEpoch) : BigInt("0");
     return message;
   },
 
@@ -582,11 +582,11 @@ export const Params = {
       mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
       genesis_epoch_provisions: isSet(object.genesis_epoch_provisions) ? String(object.genesis_epoch_provisions) : "",
       epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? Long.fromValue(object.reduction_period_in_epochs) : Long.ZERO,
+      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? (prop => BigInt(prop.toString!!()))(object.reduction_period_in_epochs) : BigInt("0"),
       reduction_factor: isSet(object.reduction_factor) ? String(object.reduction_factor) : "",
       distribution_proportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDKJSON(object.distribution_proportions) : undefined,
       weighted_developer_rewards_receivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDKJSON(e)) : [],
-      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? Long.fromValue(object.minting_rewards_distribution_start_epoch) : Long.ZERO
+      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? (prop => BigInt(prop.toString!!()))(object.minting_rewards_distribution_start_epoch) : BigInt("0")
     };
   },
 

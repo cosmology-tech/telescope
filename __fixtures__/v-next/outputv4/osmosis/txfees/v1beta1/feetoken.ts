@@ -10,7 +10,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  */
 export interface FeeToken {
   denom: string;
-  poolID: Long;
+  poolID: bigint;
 }
 
 /**
@@ -21,13 +21,13 @@ export interface FeeToken {
  */
 export interface FeeTokenSDKType {
   denom: string;
-  poolID: Long;
+  poolID: bigint;
 }
 
 function createBaseFeeToken(): FeeToken {
   return {
     denom: "",
-    poolID: Long.UZERO
+    poolID: BigInt("0")
   };
 }
 
@@ -37,8 +37,8 @@ export const FeeToken = {
       writer.uint32(10).string(message.denom);
     }
 
-    if (!message.poolID.isZero()) {
-      writer.uint32(16).uint64(message.poolID);
+    if (message.poolID !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.poolID.toString()));
     }
 
     return writer;
@@ -58,7 +58,7 @@ export const FeeToken = {
           break;
 
         case 2:
-          message.poolID = (reader.uint64() as Long);
+          message.poolID = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -73,21 +73,21 @@ export const FeeToken = {
   fromJSON(object: any): FeeToken {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
     };
   },
 
   toJSON(message: FeeToken): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0");
     return message;
   },
 
@@ -101,7 +101,7 @@ export const FeeToken = {
   fromSDKJSON(object: any): FeeTokenSDKType {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
     };
   },
 

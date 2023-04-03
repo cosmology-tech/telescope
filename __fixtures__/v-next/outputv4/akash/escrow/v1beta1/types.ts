@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 
 /** State stores state for an escrow account */
@@ -153,7 +153,7 @@ export interface Account {
   transferred?: Coin;
 
   /** block height at which this account was last settled */
-  settledAt: Long;
+  settledAt: bigint;
 }
 
 /** Account stores state for an escrow account */
@@ -163,7 +163,7 @@ export interface AccountSDKType {
   state: Account_State;
   balance?: CoinSDKType;
   transferred?: CoinSDKType;
-  settled_at: Long;
+  settled_at: bigint;
 }
 
 /** Payment stores state for a payment */
@@ -285,7 +285,7 @@ function createBaseAccount(): Account {
     state: 0,
     balance: undefined,
     transferred: undefined,
-    settledAt: Long.ZERO
+    settledAt: BigInt("0")
   };
 }
 
@@ -311,8 +311,8 @@ export const Account = {
       Coin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
 
-    if (!message.settledAt.isZero()) {
-      writer.uint32(48).int64(message.settledAt);
+    if (message.settledAt !== BigInt(0)) {
+      writer.uint32(48).int64(Long.fromString(message.settledAt.toString()));
     }
 
     return writer;
@@ -348,7 +348,7 @@ export const Account = {
           break;
 
         case 6:
-          message.settledAt = (reader.int64() as Long);
+          message.settledAt = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -367,7 +367,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO
+      settledAt: isSet(object.settledAt) ? (prop => BigInt(prop.toString!!()))(object.settledAt) : BigInt("0")
     };
   },
 
@@ -378,7 +378,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt("0")).toString());
     return obj;
   },
 
@@ -389,7 +389,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? (prop => BigInt(prop.toString!!()))(object.settledAt) : BigInt("0");
     return message;
   },
 
@@ -411,7 +411,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? Long.fromValue(object.settled_at) : Long.ZERO
+      settled_at: isSet(object.settled_at) ? (prop => BigInt(prop.toString!!()))(object.settled_at) : BigInt("0")
     };
   },
 

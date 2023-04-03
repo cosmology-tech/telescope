@@ -130,7 +130,7 @@ export const AminoConverter = {
           identifier: version.identifier,
           features: version.features
         },
-        delayPeriod: Long.fromString(delay_period),
+        delayPeriod: BigInt(delay_period),
         signer
       };
     }
@@ -212,21 +212,21 @@ export const AminoConverter = {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        delayPeriod: Long.fromString(delay_period),
+        delayPeriod: BigInt(delay_period),
         counterpartyVersions: counterparty_versions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features
         })),
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         proofInit: proof_init,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
         consensusHeight: consensus_height ? {
-          revisionHeight: Long.fromString(consensus_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(consensus_height.revision_number || "0", true)
+          revisionHeight: BigInt(consensus_height.revision_height || "0", true),
+          revisionNumber: BigInt(consensus_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -295,15 +295,15 @@ export const AminoConverter = {
           value: client_state.value
         },
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         proofTry: proof_try,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
         consensusHeight: consensus_height ? {
-          revisionHeight: Long.fromString(consensus_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(consensus_height.revision_number || "0", true)
+          revisionHeight: BigInt(consensus_height.revision_height || "0", true),
+          revisionNumber: BigInt(consensus_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -337,8 +337,8 @@ export const AminoConverter = {
         connectionId: connection_id,
         proofAck: proof_ack,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };

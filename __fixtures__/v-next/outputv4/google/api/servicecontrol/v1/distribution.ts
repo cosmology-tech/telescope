@@ -15,7 +15,7 @@ export const protobufPackage = "google.api.servicecontrol.v1";
  */
 export interface Distribution {
   /** The total number of samples in the distribution. Must be >= 0. */
-  count: Long;
+  count: bigint;
 
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
@@ -50,7 +50,7 @@ export interface Distribution {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-  bucketCounts: Long[];
+  bucketCounts: bigint[];
 
   /** Buckets with constant width. */
   linearBuckets?: Distribution_LinearBuckets;
@@ -76,12 +76,12 @@ export interface Distribution {
  * * a histogram of the values of the sample points
  */
 export interface DistributionSDKType {
-  count: Long;
+  count: bigint;
   mean: number;
   minimum: number;
   maximum: number;
   sum_of_squared_deviation: number;
-  bucket_counts: Long[];
+  bucket_counts: bigint[];
   linear_buckets?: Distribution_LinearBucketsSDKType;
   exponential_buckets?: Distribution_ExponentialBucketsSDKType;
   explicit_buckets?: Distribution_ExplicitBucketsSDKType;
@@ -182,7 +182,7 @@ export interface Distribution_ExplicitBucketsSDKType {
 
 function createBaseDistribution(): Distribution {
   return {
-    count: Long.ZERO,
+    count: BigInt("0"),
     mean: 0,
     minimum: 0,
     maximum: 0,
@@ -197,8 +197,8 @@ function createBaseDistribution(): Distribution {
 
 export const Distribution = {
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.count.isZero()) {
-      writer.uint32(8).int64(message.count);
+    if (message.count !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.count.toString()));
     }
 
     if (message.mean !== 0) {
@@ -220,7 +220,7 @@ export const Distribution = {
     writer.uint32(50).fork();
 
     for (const v of message.bucketCounts) {
-      writer.int64(v);
+      writer.int64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -254,7 +254,7 @@ export const Distribution = {
 
       switch (tag >>> 3) {
         case 1:
-          message.count = (reader.int64() as Long);
+          message.count = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -278,10 +278,10 @@ export const Distribution = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.bucketCounts.push((reader.int64() as Long));
+              message.bucketCounts.push(BigInt(reader.int64().toString()));
             }
           } else {
-            message.bucketCounts.push((reader.int64() as Long));
+            message.bucketCounts.push(BigInt(reader.int64().toString()));
           }
 
           break;
@@ -313,12 +313,12 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
-      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      count: isSet(object.count) ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromValue(e)) : [],
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
       linearBuckets: isSet(object.linearBuckets) ? Distribution_LinearBuckets.fromJSON(object.linearBuckets) : undefined,
       exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets) : undefined,
       explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined,
@@ -328,14 +328,14 @@ export const Distribution = {
 
   toJSON(message: Distribution): unknown {
     const obj: any = {};
-    message.count !== undefined && (obj.count = (message.count || Long.ZERO).toString());
+    message.count !== undefined && (obj.count = (message.count || BigInt("0")).toString());
     message.mean !== undefined && (obj.mean = message.mean);
     message.minimum !== undefined && (obj.minimum = message.minimum);
     message.maximum !== undefined && (obj.maximum = message.maximum);
     message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
 
     if (message.bucketCounts) {
-      obj.bucketCounts = message.bucketCounts.map(e => (e || Long.ZERO).toString());
+      obj.bucketCounts = message.bucketCounts.map(e => (e || BigInt("0")).toString());
     } else {
       obj.bucketCounts = [];
     }
@@ -355,12 +355,12 @@ export const Distribution = {
 
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
+    message.count = object.count !== undefined && object.count !== null ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0");
     message.mean = object.mean ?? 0;
     message.minimum = object.minimum ?? 0;
     message.maximum = object.maximum ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-    message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
+    message.bucketCounts = object.bucketCounts?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
     message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : undefined;
     message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : undefined;
     message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
@@ -385,12 +385,12 @@ export const Distribution = {
 
   fromSDKJSON(object: any): DistributionSDKType {
     return {
-      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      count: isSet(object.count) ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
       sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
-      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
       linear_buckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDKJSON(object.linear_buckets) : undefined,
       exponential_buckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDKJSON(object.exponential_buckets) : undefined,
       explicit_buckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDKJSON(object.explicit_buckets) : undefined,

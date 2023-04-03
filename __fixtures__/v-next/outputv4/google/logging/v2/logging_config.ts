@@ -1,7 +1,7 @@
 import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */
@@ -1772,12 +1772,12 @@ export interface CopyLogEntriesMetadataSDKType {
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
-  logEntriesCopiedCount: Long;
+  logEntriesCopiedCount: bigint;
 }
 
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {
-  log_entries_copied_count: Long;
+  log_entries_copied_count: bigint;
 }
 
 function createBaseLogBucket(): LogBucket {
@@ -5829,14 +5829,14 @@ export const CopyLogEntriesMetadata = {
 
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
-    logEntriesCopiedCount: Long.ZERO
+    logEntriesCopiedCount: BigInt("0")
   };
 }
 
 export const CopyLogEntriesResponse = {
   encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.logEntriesCopiedCount.isZero()) {
-      writer.uint32(8).int64(message.logEntriesCopiedCount);
+    if (message.logEntriesCopiedCount !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.logEntriesCopiedCount.toString()));
     }
 
     return writer;
@@ -5852,7 +5852,7 @@ export const CopyLogEntriesResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.logEntriesCopiedCount = (reader.int64() as Long);
+          message.logEntriesCopiedCount = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -5866,19 +5866,19 @@ export const CopyLogEntriesResponse = {
 
   fromJSON(object: any): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO
+      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? (prop => BigInt(prop.toString!!()))(object.logEntriesCopiedCount) : BigInt("0")
     };
   },
 
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
+    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
+    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? (prop => BigInt(prop.toString!!()))(object.logEntriesCopiedCount) : BigInt("0");
     return message;
   },
 
@@ -5890,7 +5890,7 @@ export const CopyLogEntriesResponse = {
 
   fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
     return {
-      log_entries_copied_count: isSet(object.log_entries_copied_count) ? Long.fromValue(object.log_entries_copied_count) : Long.ZERO
+      log_entries_copied_count: isSet(object.log_entries_copied_count) ? (prop => BigInt(prop.toString!!()))(object.log_entries_copied_count) : BigInt("0")
     };
   },
 

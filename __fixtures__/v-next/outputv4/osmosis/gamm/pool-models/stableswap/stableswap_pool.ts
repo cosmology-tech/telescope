@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 
 /**
@@ -29,7 +29,7 @@ export interface PoolParamsSDKType {
 /** Pool is the stableswap Pool struct */
 export interface Pool {
   address: string;
-  id: Long;
+  id: bigint;
   poolParams?: PoolParams;
 
   /**
@@ -51,7 +51,7 @@ export interface Pool {
   poolLiquidity: Coin[];
 
   /** for calculation amognst assets with different precisions */
-  scalingFactors: Long[];
+  scalingFactors: bigint[];
 
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
@@ -60,12 +60,12 @@ export interface Pool {
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {
   address: string;
-  id: Long;
+  id: bigint;
   pool_params?: PoolParamsSDKType;
   future_pool_governor: string;
   total_shares?: CoinSDKType;
   pool_liquidity: CoinSDKType[];
-  scaling_factors: Long[];
+  scaling_factors: bigint[];
   scaling_factor_controller: string;
 }
 
@@ -162,7 +162,7 @@ export const PoolParams = {
 function createBasePool(): Pool {
   return {
     address: "",
-    id: Long.UZERO,
+    id: BigInt("0"),
     poolParams: undefined,
     futurePoolGovernor: "",
     totalShares: undefined,
@@ -178,8 +178,8 @@ export const Pool = {
       writer.uint32(10).string(message.address);
     }
 
-    if (!message.id.isZero()) {
-      writer.uint32(16).uint64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.id.toString()));
     }
 
     if (message.poolParams !== undefined) {
@@ -201,7 +201,7 @@ export const Pool = {
     writer.uint32(58).fork();
 
     for (const v of message.scalingFactors) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -227,7 +227,7 @@ export const Pool = {
           break;
 
         case 2:
-          message.id = (reader.uint64() as Long);
+          message.id = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -251,10 +251,10 @@ export const Pool = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.scalingFactors.push((reader.uint64() as Long));
+              message.scalingFactors.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.scalingFactors.push((reader.uint64() as Long));
+            message.scalingFactors.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -275,12 +275,12 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
       poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : [],
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
       scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
   },
@@ -288,7 +288,7 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -300,7 +300,7 @@ export const Pool = {
     }
 
     if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || Long.UZERO).toString());
+      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt("0")).toString());
     } else {
       obj.scalingFactors = [];
     }
@@ -312,12 +312,12 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
-    message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
+    message.scalingFactors = object.scalingFactors?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
     message.scalingFactorController = object.scalingFactorController ?? "";
     return message;
   },
@@ -338,12 +338,12 @@ export const Pool = {
   fromSDKJSON(object: any): PoolSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
       pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
       scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
     };
   },

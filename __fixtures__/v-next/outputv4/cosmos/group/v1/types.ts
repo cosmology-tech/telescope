@@ -1,8 +1,8 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 
 /** VoteOption enumerates the valid vote options for a given proposal. */
@@ -371,7 +371,7 @@ export interface DecisionPolicyWindowsSDKType {
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfo {
   /** id is the unique ID of the group. */
-  id: Long;
+  id: bigint;
 
   /** admin is the account address of the group's admin. */
   admin: string;
@@ -385,7 +385,7 @@ export interface GroupInfo {
    * or any member is added or removed this version is incremented and will
    * cause proposals based on older versions of this group to fail
    */
-  version: Long;
+  version: bigint;
 
   /** total_weight is the sum of the group members' weights. */
   totalWeight: string;
@@ -396,10 +396,10 @@ export interface GroupInfo {
 
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoSDKType {
-  id: Long;
+  id: bigint;
   admin: string;
   metadata: string;
-  version: Long;
+  version: bigint;
   total_weight: string;
   created_at?: Date;
 }
@@ -407,7 +407,7 @@ export interface GroupInfoSDKType {
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMember {
   /** group_id is the unique ID of the group. */
-  groupId: Long;
+  groupId: bigint;
 
   /** member is the member data. */
   member?: Member;
@@ -415,7 +415,7 @@ export interface GroupMember {
 
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberSDKType {
-  group_id: Long;
+  group_id: bigint;
   member?: MemberSDKType;
 }
 
@@ -425,7 +425,7 @@ export interface GroupPolicyInfo {
   address: string;
 
   /** group_id is the unique ID of the group. */
-  groupId: Long;
+  groupId: bigint;
 
   /** admin is the account address of the group admin. */
   admin: string;
@@ -437,7 +437,7 @@ export interface GroupPolicyInfo {
    * version is used to track changes to a group's GroupPolicyInfo structure that
    * would create a different result on a running proposal.
    */
-  version: Long;
+  version: bigint;
 
   /** decision_policy specifies the group policy's decision policy. */
   decisionPolicy?: Any;
@@ -449,10 +449,10 @@ export interface GroupPolicyInfo {
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfoSDKType {
   address: string;
-  group_id: Long;
+  group_id: bigint;
   admin: string;
   metadata: string;
-  version: Long;
+  version: bigint;
   decision_policy?: AnySDKType;
   created_at?: Date;
 }
@@ -465,7 +465,7 @@ export interface GroupPolicyInfoSDKType {
  */
 export interface Proposal {
   /** id is the unique id of the proposal. */
-  id: Long;
+  id: bigint;
 
   /** address is the account address of group policy. */
   address: string;
@@ -483,13 +483,13 @@ export interface Proposal {
    * group_version tracks the version of the group that this proposal corresponds to.
    * When group membership is changed, existing proposals from previous group versions will become invalid.
    */
-  groupVersion: Long;
+  groupVersion: bigint;
 
   /**
    * group_policy_version tracks the version of the group policy that this proposal corresponds to.
    * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
    */
-  groupPolicyVersion: Long;
+  groupPolicyVersion: bigint;
 
   /** status represents the high level position in the life cycle of the proposal. Initial value is Submitted. */
   status: ProposalStatus;
@@ -531,13 +531,13 @@ export interface Proposal {
  * passes as well as some optional metadata associated with the proposal.
  */
 export interface ProposalSDKType {
-  id: Long;
+  id: bigint;
   address: string;
   metadata: string;
   proposers: string[];
   submit_time?: Date;
-  group_version: Long;
-  group_policy_version: Long;
+  group_version: bigint;
+  group_policy_version: bigint;
   status: ProposalStatus;
   result: ProposalResult;
   final_tally_result?: TallyResultSDKType;
@@ -572,7 +572,7 @@ export interface TallyResultSDKType {
 /** Vote represents a vote for a proposal. */
 export interface Vote {
   /** proposal is the unique ID of the proposal. */
-  proposalId: Long;
+  proposalId: bigint;
 
   /** voter is the account address of the voter. */
   voter: string;
@@ -589,7 +589,7 @@ export interface Vote {
 
 /** Vote represents a vote for a proposal. */
 export interface VoteSDKType {
-  proposal_id: Long;
+  proposal_id: bigint;
   voter: string;
   option: VoteOption;
   metadata: string;
@@ -1075,10 +1075,10 @@ export const DecisionPolicyWindows = {
 
 function createBaseGroupInfo(): GroupInfo {
   return {
-    id: Long.UZERO,
+    id: BigInt("0"),
     admin: "",
     metadata: "",
-    version: Long.UZERO,
+    version: BigInt("0"),
     totalWeight: "",
     createdAt: undefined
   };
@@ -1086,8 +1086,8 @@ function createBaseGroupInfo(): GroupInfo {
 
 export const GroupInfo = {
   encode(message: GroupInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
-      writer.uint32(8).uint64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.id.toString()));
     }
 
     if (message.admin !== "") {
@@ -1098,8 +1098,8 @@ export const GroupInfo = {
       writer.uint32(26).string(message.metadata);
     }
 
-    if (!message.version.isZero()) {
-      writer.uint32(32).uint64(message.version);
+    if (message.version !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.version.toString()));
     }
 
     if (message.totalWeight !== "") {
@@ -1123,7 +1123,7 @@ export const GroupInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1135,7 +1135,7 @@ export const GroupInfo = {
           break;
 
         case 4:
-          message.version = (reader.uint64() as Long);
+          message.version = BigInt(reader.uint64().toString());
           break;
 
         case 5:
@@ -1157,10 +1157,10 @@ export const GroupInfo = {
 
   fromJSON(object: any): GroupInfo {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
       createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
@@ -1168,10 +1168,10 @@ export const GroupInfo = {
 
   toJSON(message: GroupInfo): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     message.admin !== undefined && (obj.admin = message.admin);
     message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
+    message.version !== undefined && (obj.version = (message.version || BigInt("0")).toString());
     message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     message.createdAt !== undefined && (obj.createdAt = message.createdAt.toISOString());
     return obj;
@@ -1179,10 +1179,10 @@ export const GroupInfo = {
 
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1201,10 +1201,10 @@ export const GroupInfo = {
 
   fromSDKJSON(object: any): GroupInfoSDKType {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
       total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
       created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
@@ -1225,15 +1225,15 @@ export const GroupInfo = {
 
 function createBaseGroupMember(): GroupMember {
   return {
-    groupId: Long.UZERO,
+    groupId: BigInt("0"),
     member: undefined
   };
 }
 
 export const GroupMember = {
   encode(message: GroupMember, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.groupId.isZero()) {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.groupId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.groupId.toString()));
     }
 
     if (message.member !== undefined) {
@@ -1253,7 +1253,7 @@ export const GroupMember = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = (reader.uint64() as Long);
+          message.groupId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1271,21 +1271,21 @@ export const GroupMember = {
 
   fromJSON(object: any): GroupMember {
     return {
-      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
       member: isSet(object.member) ? Member.fromJSON(object.member) : undefined
     };
   },
 
   toJSON(message: GroupMember): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt("0")).toString());
     message.member !== undefined && (obj.member = message.member ? Member.toJSON(message.member) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
   },
@@ -1299,7 +1299,7 @@ export const GroupMember = {
 
   fromSDKJSON(object: any): GroupMemberSDKType {
     return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
       member: isSet(object.member) ? Member.fromSDKJSON(object.member) : undefined
     };
   },
@@ -1316,10 +1316,10 @@ export const GroupMember = {
 function createBaseGroupPolicyInfo(): GroupPolicyInfo {
   return {
     address: "",
-    groupId: Long.UZERO,
+    groupId: BigInt("0"),
     admin: "",
     metadata: "",
-    version: Long.UZERO,
+    version: BigInt("0"),
     decisionPolicy: undefined,
     createdAt: undefined
   };
@@ -1331,8 +1331,8 @@ export const GroupPolicyInfo = {
       writer.uint32(10).string(message.address);
     }
 
-    if (!message.groupId.isZero()) {
-      writer.uint32(16).uint64(message.groupId);
+    if (message.groupId !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.groupId.toString()));
     }
 
     if (message.admin !== "") {
@@ -1343,8 +1343,8 @@ export const GroupPolicyInfo = {
       writer.uint32(34).string(message.metadata);
     }
 
-    if (!message.version.isZero()) {
-      writer.uint32(40).uint64(message.version);
+    if (message.version !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.version.toString()));
     }
 
     if (message.decisionPolicy !== undefined) {
@@ -1372,7 +1372,7 @@ export const GroupPolicyInfo = {
           break;
 
         case 2:
-          message.groupId = (reader.uint64() as Long);
+          message.groupId = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -1384,7 +1384,7 @@ export const GroupPolicyInfo = {
           break;
 
         case 5:
-          message.version = (reader.uint64() as Long);
+          message.version = BigInt(reader.uint64().toString());
           break;
 
         case 6:
@@ -1407,10 +1407,10 @@ export const GroupPolicyInfo = {
   fromJSON(object: any): GroupPolicyInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
       createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
@@ -1419,10 +1419,10 @@ export const GroupPolicyInfo = {
   toJSON(message: GroupPolicyInfo): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt("0")).toString());
     message.admin !== undefined && (obj.admin = message.admin);
     message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
+    message.version !== undefined && (obj.version = (message.version || BigInt("0")).toString());
     message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     message.createdAt !== undefined && (obj.createdAt = message.createdAt.toISOString());
     return obj;
@@ -1431,10 +1431,10 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1455,10 +1455,10 @@ export const GroupPolicyInfo = {
   fromSDKJSON(object: any): GroupPolicyInfoSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
       decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined,
       created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
@@ -1480,13 +1480,13 @@ export const GroupPolicyInfo = {
 
 function createBaseProposal(): Proposal {
   return {
-    id: Long.UZERO,
+    id: BigInt("0"),
     address: "",
     metadata: "",
     proposers: [],
     submitTime: undefined,
-    groupVersion: Long.UZERO,
-    groupPolicyVersion: Long.UZERO,
+    groupVersion: BigInt("0"),
+    groupPolicyVersion: BigInt("0"),
     status: 0,
     result: 0,
     finalTallyResult: undefined,
@@ -1498,8 +1498,8 @@ function createBaseProposal(): Proposal {
 
 export const Proposal = {
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
-      writer.uint32(8).uint64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.id.toString()));
     }
 
     if (message.address !== "") {
@@ -1518,12 +1518,12 @@ export const Proposal = {
       Timestamp.encode(toTimestamp(message.submitTime), writer.uint32(42).fork()).ldelim();
     }
 
-    if (!message.groupVersion.isZero()) {
-      writer.uint32(48).uint64(message.groupVersion);
+    if (message.groupVersion !== BigInt(0)) {
+      writer.uint32(48).uint64(Long.fromString(message.groupVersion.toString()));
     }
 
-    if (!message.groupPolicyVersion.isZero()) {
-      writer.uint32(56).uint64(message.groupPolicyVersion);
+    if (message.groupPolicyVersion !== BigInt(0)) {
+      writer.uint32(56).uint64(Long.fromString(message.groupPolicyVersion.toString()));
     }
 
     if (message.status !== 0) {
@@ -1563,7 +1563,7 @@ export const Proposal = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1583,11 +1583,11 @@ export const Proposal = {
           break;
 
         case 6:
-          message.groupVersion = (reader.uint64() as Long);
+          message.groupVersion = BigInt(reader.uint64().toString());
           break;
 
         case 7:
-          message.groupPolicyVersion = (reader.uint64() as Long);
+          message.groupPolicyVersion = BigInt(reader.uint64().toString());
           break;
 
         case 8:
@@ -1625,13 +1625,13 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
-      groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
-      groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
+      groupVersion: isSet(object.groupVersion) ? (prop => BigInt(prop.toString!!()))(object.groupVersion) : BigInt("0"),
+      groupPolicyVersion: isSet(object.groupPolicyVersion) ? (prop => BigInt(prop.toString!!()))(object.groupPolicyVersion) : BigInt("0"),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
@@ -1643,7 +1643,7 @@ export const Proposal = {
 
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     message.address !== undefined && (obj.address = message.address);
     message.metadata !== undefined && (obj.metadata = message.metadata);
 
@@ -1654,8 +1654,8 @@ export const Proposal = {
     }
 
     message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
-    message.groupVersion !== undefined && (obj.groupVersion = (message.groupVersion || Long.UZERO).toString());
-    message.groupPolicyVersion !== undefined && (obj.groupPolicyVersion = (message.groupPolicyVersion || Long.UZERO).toString());
+    message.groupVersion !== undefined && (obj.groupVersion = (message.groupVersion || BigInt("0")).toString());
+    message.groupPolicyVersion !== undefined && (obj.groupPolicyVersion = (message.groupPolicyVersion || BigInt("0")).toString());
     message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
     message.result !== undefined && (obj.result = proposalResultToJSON(message.result));
     message.finalTallyResult !== undefined && (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
@@ -1673,13 +1673,13 @@ export const Proposal = {
 
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
     message.submitTime = object.submitTime ?? undefined;
-    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? Long.fromValue(object.groupVersion) : Long.UZERO;
-    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO;
+    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? (prop => BigInt(prop.toString!!()))(object.groupVersion) : BigInt("0");
+    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? (prop => BigInt(prop.toString!!()))(object.groupPolicyVersion) : BigInt("0");
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
@@ -1709,13 +1709,13 @@ export const Proposal = {
 
   fromSDKJSON(object: any): ProposalSDKType {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
-      group_version: isSet(object.group_version) ? Long.fromValue(object.group_version) : Long.UZERO,
-      group_policy_version: isSet(object.group_policy_version) ? Long.fromValue(object.group_policy_version) : Long.UZERO,
+      group_version: isSet(object.group_version) ? (prop => BigInt(prop.toString!!()))(object.group_version) : BigInt("0"),
+      group_policy_version: isSet(object.group_policy_version) ? (prop => BigInt(prop.toString!!()))(object.group_policy_version) : BigInt("0"),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
@@ -1879,7 +1879,7 @@ export const TallyResult = {
 
 function createBaseVote(): Vote {
   return {
-    proposalId: Long.UZERO,
+    proposalId: BigInt("0"),
     voter: "",
     option: 0,
     metadata: "",
@@ -1889,8 +1889,8 @@ function createBaseVote(): Vote {
 
 export const Vote = {
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.proposalId.isZero()) {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
     }
 
     if (message.voter !== "") {
@@ -1922,7 +1922,7 @@ export const Vote = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = (reader.uint64() as Long);
+          message.proposalId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1952,7 +1952,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1962,7 +1962,7 @@ export const Vote = {
 
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.metadata !== undefined && (obj.metadata = message.metadata);
@@ -1972,7 +1972,7 @@ export const Vote = {
 
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -1992,7 +1992,7 @@ export const Vote = {
 
   fromSDKJSON(object: any): VoteSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",

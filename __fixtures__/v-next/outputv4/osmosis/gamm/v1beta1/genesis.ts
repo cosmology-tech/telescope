@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Long, DeepPartial, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /** Params holds parameters for the incentives module */
@@ -19,14 +19,14 @@ export interface GenesisState {
   pools: Any[];
 
   /** will be renamed to next_pool_id in an upcoming version */
-  nextPoolNumber: Long;
+  nextPoolNumber: bigint;
   params?: Params;
 }
 
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
   pools: AnySDKType[];
-  next_pool_number: Long;
+  next_pool_number: bigint;
   params?: ParamsSDKType;
 }
 
@@ -120,7 +120,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     pools: [],
-    nextPoolNumber: Long.UZERO,
+    nextPoolNumber: BigInt("0"),
     params: undefined
   };
 }
@@ -131,8 +131,8 @@ export const GenesisState = {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (!message.nextPoolNumber.isZero()) {
-      writer.uint32(16).uint64(message.nextPoolNumber);
+    if (message.nextPoolNumber !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.nextPoolNumber.toString()));
     }
 
     if (message.params !== undefined) {
@@ -156,7 +156,7 @@ export const GenesisState = {
           break;
 
         case 2:
-          message.nextPoolNumber = (reader.uint64() as Long);
+          message.nextPoolNumber = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -175,7 +175,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? Long.fromValue(object.nextPoolNumber) : Long.UZERO,
+      nextPoolNumber: isSet(object.nextPoolNumber) ? (prop => BigInt(prop.toString!!()))(object.nextPoolNumber) : BigInt("0"),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -189,7 +189,7 @@ export const GenesisState = {
       obj.pools = [];
     }
 
-    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || Long.UZERO).toString());
+    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || BigInt("0")).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -197,7 +197,7 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? Long.fromValue(object.nextPoolNumber) : Long.UZERO;
+    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? (prop => BigInt(prop.toString!!()))(object.nextPoolNumber) : BigInt("0");
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
@@ -213,7 +213,7 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      next_pool_number: isSet(object.next_pool_number) ? Long.fromValue(object.next_pool_number) : Long.UZERO,
+      next_pool_number: isSet(object.next_pool_number) ? (prop => BigInt(prop.toString!!()))(object.next_pool_number) : BigInt("0"),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },

@@ -14,7 +14,7 @@ export const protobufPackage = "osmosis.twap.v1beta1";
  * now.
  */
 export interface TwapRecord {
-  poolId: Long;
+  poolId: bigint;
 
   /** Lexicographically smaller denom of the pair */
   asset0Denom: string;
@@ -23,7 +23,7 @@ export interface TwapRecord {
   asset1Denom: string;
 
   /** height this record corresponds to, for debugging purposes */
-  height: Long;
+  height: bigint;
 
   /**
    * This field should only exist until we have a global registry in the state
@@ -58,10 +58,10 @@ export interface TwapRecord {
  * now.
  */
 export interface TwapRecordSDKType {
-  pool_id: Long;
+  pool_id: bigint;
   asset0_denom: string;
   asset1_denom: string;
-  height: Long;
+  height: bigint;
   time?: Date;
   p0_last_spot_price: string;
   p1_last_spot_price: string;
@@ -72,10 +72,10 @@ export interface TwapRecordSDKType {
 
 function createBaseTwapRecord(): TwapRecord {
   return {
-    poolId: Long.UZERO,
+    poolId: BigInt("0"),
     asset0Denom: "",
     asset1Denom: "",
-    height: Long.ZERO,
+    height: BigInt("0"),
     time: undefined,
     p0LastSpotPrice: "",
     p1LastSpotPrice: "",
@@ -87,8 +87,8 @@ function createBaseTwapRecord(): TwapRecord {
 
 export const TwapRecord = {
   encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
-      writer.uint32(8).uint64(message.poolId);
+    if (message.poolId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
     }
 
     if (message.asset0Denom !== "") {
@@ -99,8 +99,8 @@ export const TwapRecord = {
       writer.uint32(26).string(message.asset1Denom);
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(32).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.time !== undefined) {
@@ -140,7 +140,7 @@ export const TwapRecord = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -152,7 +152,7 @@ export const TwapRecord = {
           break;
 
         case 4:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 5:
@@ -190,10 +190,10 @@ export const TwapRecord = {
 
   fromJSON(object: any): TwapRecord {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
       asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
       asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
       p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
@@ -205,10 +205,10 @@ export const TwapRecord = {
 
   toJSON(message: TwapRecord): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
     message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);
     message.asset1Denom !== undefined && (obj.asset1Denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
     message.p0LastSpotPrice !== undefined && (obj.p0LastSpotPrice = message.p0LastSpotPrice);
     message.p1LastSpotPrice !== undefined && (obj.p1LastSpotPrice = message.p1LastSpotPrice);
@@ -220,10 +220,10 @@ export const TwapRecord = {
 
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";
@@ -250,10 +250,10 @@ export const TwapRecord = {
 
   fromSDKJSON(object: any): TwapRecordSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
       asset0_denom: isSet(object.asset0_denom) ? String(object.asset0_denom) : "",
       asset1_denom: isSet(object.asset1_denom) ? String(object.asset1_denom) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       p0_last_spot_price: isSet(object.p0_last_spot_price) ? String(object.p0_last_spot_price) : "",
       p1_last_spot_price: isSet(object.p1_last_spot_price) ? String(object.p1_last_spot_price) : "",

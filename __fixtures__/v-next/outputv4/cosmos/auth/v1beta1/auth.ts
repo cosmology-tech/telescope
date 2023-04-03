@@ -11,8 +11,8 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 export interface BaseAccount {
   address: string;
   pubKey?: Any;
-  accountNumber: Long;
-  sequence: Long;
+  accountNumber: bigint;
+  sequence: bigint;
 }
 
 /**
@@ -23,8 +23,8 @@ export interface BaseAccount {
 export interface BaseAccountSDKType {
   address: string;
   pub_key?: AnySDKType;
-  account_number: Long;
-  sequence: Long;
+  account_number: bigint;
+  sequence: bigint;
 }
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
@@ -43,28 +43,28 @@ export interface ModuleAccountSDKType {
 
 /** Params defines the parameters for the auth module. */
 export interface Params {
-  maxMemoCharacters: Long;
-  txSigLimit: Long;
-  txSizeCostPerByte: Long;
-  sigVerifyCostEd25519: Long;
-  sigVerifyCostSecp256k1: Long;
+  maxMemoCharacters: bigint;
+  txSigLimit: bigint;
+  txSizeCostPerByte: bigint;
+  sigVerifyCostEd25519: bigint;
+  sigVerifyCostSecp256k1: bigint;
 }
 
 /** Params defines the parameters for the auth module. */
 export interface ParamsSDKType {
-  max_memo_characters: Long;
-  tx_sig_limit: Long;
-  tx_size_cost_per_byte: Long;
-  sig_verify_cost_ed25519: Long;
-  sig_verify_cost_secp256k1: Long;
+  max_memo_characters: bigint;
+  tx_sig_limit: bigint;
+  tx_size_cost_per_byte: bigint;
+  sig_verify_cost_ed25519: bigint;
+  sig_verify_cost_secp256k1: bigint;
 }
 
 function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
     pubKey: undefined,
-    accountNumber: Long.UZERO,
-    sequence: Long.UZERO
+    accountNumber: BigInt("0"),
+    sequence: BigInt("0")
   };
 }
 
@@ -78,12 +78,12 @@ export const BaseAccount = {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.accountNumber.isZero()) {
-      writer.uint32(24).uint64(message.accountNumber);
+    if (message.accountNumber !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.accountNumber.toString()));
     }
 
-    if (!message.sequence.isZero()) {
-      writer.uint32(32).uint64(message.sequence);
+    if (message.sequence !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.sequence.toString()));
     }
 
     return writer;
@@ -107,11 +107,11 @@ export const BaseAccount = {
           break;
 
         case 3:
-          message.accountNumber = (reader.uint64() as Long);
+          message.accountNumber = BigInt(reader.uint64().toString());
           break;
 
         case 4:
-          message.sequence = (reader.uint64() as Long);
+          message.sequence = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -127,8 +127,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+      accountNumber: isSet(object.accountNumber) ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0"),
+      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
     };
   },
 
@@ -136,8 +136,8 @@ export const BaseAccount = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || Long.UZERO).toString());
-    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
+    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || BigInt("0")).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt("0")).toString());
     return obj;
   },
 
@@ -145,8 +145,8 @@ export const BaseAccount = {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
     return message;
   },
 
@@ -163,8 +163,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+      account_number: isSet(object.account_number) ? (prop => BigInt(prop.toString!!()))(object.account_number) : BigInt("0"),
+      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
     };
   },
 
@@ -298,34 +298,34 @@ export const ModuleAccount = {
 
 function createBaseParams(): Params {
   return {
-    maxMemoCharacters: Long.UZERO,
-    txSigLimit: Long.UZERO,
-    txSizeCostPerByte: Long.UZERO,
-    sigVerifyCostEd25519: Long.UZERO,
-    sigVerifyCostSecp256k1: Long.UZERO
+    maxMemoCharacters: BigInt("0"),
+    txSigLimit: BigInt("0"),
+    txSizeCostPerByte: BigInt("0"),
+    sigVerifyCostEd25519: BigInt("0"),
+    sigVerifyCostSecp256k1: BigInt("0")
   };
 }
 
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.maxMemoCharacters.isZero()) {
-      writer.uint32(8).uint64(message.maxMemoCharacters);
+    if (message.maxMemoCharacters !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.maxMemoCharacters.toString()));
     }
 
-    if (!message.txSigLimit.isZero()) {
-      writer.uint32(16).uint64(message.txSigLimit);
+    if (message.txSigLimit !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.txSigLimit.toString()));
     }
 
-    if (!message.txSizeCostPerByte.isZero()) {
-      writer.uint32(24).uint64(message.txSizeCostPerByte);
+    if (message.txSizeCostPerByte !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.txSizeCostPerByte.toString()));
     }
 
-    if (!message.sigVerifyCostEd25519.isZero()) {
-      writer.uint32(32).uint64(message.sigVerifyCostEd25519);
+    if (message.sigVerifyCostEd25519 !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.sigVerifyCostEd25519.toString()));
     }
 
-    if (!message.sigVerifyCostSecp256k1.isZero()) {
-      writer.uint32(40).uint64(message.sigVerifyCostSecp256k1);
+    if (message.sigVerifyCostSecp256k1 !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.sigVerifyCostSecp256k1.toString()));
     }
 
     return writer;
@@ -341,23 +341,23 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.maxMemoCharacters = (reader.uint64() as Long);
+          message.maxMemoCharacters = BigInt(reader.uint64().toString());
           break;
 
         case 2:
-          message.txSigLimit = (reader.uint64() as Long);
+          message.txSigLimit = BigInt(reader.uint64().toString());
           break;
 
         case 3:
-          message.txSizeCostPerByte = (reader.uint64() as Long);
+          message.txSizeCostPerByte = BigInt(reader.uint64().toString());
           break;
 
         case 4:
-          message.sigVerifyCostEd25519 = (reader.uint64() as Long);
+          message.sigVerifyCostEd25519 = BigInt(reader.uint64().toString());
           break;
 
         case 5:
-          message.sigVerifyCostSecp256k1 = (reader.uint64() as Long);
+          message.sigVerifyCostSecp256k1 = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -371,31 +371,31 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxMemoCharacters: isSet(object.maxMemoCharacters) ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO,
-      txSigLimit: isSet(object.txSigLimit) ? Long.fromValue(object.txSigLimit) : Long.UZERO,
-      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? Long.fromValue(object.txSizeCostPerByte) : Long.UZERO,
-      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO,
-      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO
+      maxMemoCharacters: isSet(object.maxMemoCharacters) ? (prop => BigInt(prop.toString!!()))(object.maxMemoCharacters) : BigInt("0"),
+      txSigLimit: isSet(object.txSigLimit) ? (prop => BigInt(prop.toString!!()))(object.txSigLimit) : BigInt("0"),
+      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? (prop => BigInt(prop.toString!!()))(object.txSizeCostPerByte) : BigInt("0"),
+      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostEd25519) : BigInt("0"),
+      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostSecp256k1) : BigInt("0")
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || Long.UZERO).toString());
-    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || Long.UZERO).toString());
-    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || Long.UZERO).toString());
-    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || Long.UZERO).toString());
-    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || Long.UZERO).toString());
+    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || BigInt("0")).toString());
+    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || BigInt("0")).toString());
+    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || BigInt("0")).toString());
+    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || BigInt("0")).toString());
+    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO;
-    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? Long.fromValue(object.txSigLimit) : Long.UZERO;
-    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? Long.fromValue(object.txSizeCostPerByte) : Long.UZERO;
-    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO;
-    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO;
+    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? (prop => BigInt(prop.toString!!()))(object.maxMemoCharacters) : BigInt("0");
+    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? (prop => BigInt(prop.toString!!()))(object.txSigLimit) : BigInt("0");
+    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? (prop => BigInt(prop.toString!!()))(object.txSizeCostPerByte) : BigInt("0");
+    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostEd25519) : BigInt("0");
+    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostSecp256k1) : BigInt("0");
     return message;
   },
 
@@ -411,11 +411,11 @@ export const Params = {
 
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_memo_characters: isSet(object.max_memo_characters) ? Long.fromValue(object.max_memo_characters) : Long.UZERO,
-      tx_sig_limit: isSet(object.tx_sig_limit) ? Long.fromValue(object.tx_sig_limit) : Long.UZERO,
-      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? Long.fromValue(object.tx_size_cost_per_byte) : Long.UZERO,
-      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? Long.fromValue(object.sig_verify_cost_ed25519) : Long.UZERO,
-      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? Long.fromValue(object.sig_verify_cost_secp256k1) : Long.UZERO
+      max_memo_characters: isSet(object.max_memo_characters) ? (prop => BigInt(prop.toString!!()))(object.max_memo_characters) : BigInt("0"),
+      tx_sig_limit: isSet(object.tx_sig_limit) ? (prop => BigInt(prop.toString!!()))(object.tx_sig_limit) : BigInt("0"),
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? (prop => BigInt(prop.toString!!()))(object.tx_size_cost_per_byte) : BigInt("0"),
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? (prop => BigInt(prop.toString!!()))(object.sig_verify_cost_ed25519) : BigInt("0"),
+      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? (prop => BigInt(prop.toString!!()))(object.sig_verify_cost_secp256k1) : BigInt("0")
     };
   },
 

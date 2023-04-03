@@ -2,8 +2,8 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { Long, DeepPartial, isSet } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsRequestSDKType {}
@@ -16,10 +16,10 @@ export interface ModuleToDistributeCoinsResponseSDKType {
 }
 export interface GaugeByIDRequest {
   /** Gague ID being queried */
-  id: Long;
+  id: bigint;
 }
 export interface GaugeByIDRequestSDKType {
-  id: Long;
+  id: bigint;
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
@@ -131,18 +131,18 @@ export interface RewardsEstRequest {
   owner: string;
 
   /** Lock IDs included in future reward estimation */
-  lockIds: Long[];
+  lockIds: bigint[];
 
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
-  endEpoch: Long;
+  endEpoch: bigint;
 }
 export interface RewardsEstRequestSDKType {
   owner: string;
-  lock_ids: Long[];
-  end_epoch: Long;
+  lock_ids: bigint[];
+  end_epoch: bigint;
 }
 export interface RewardsEstResponse {
   /**
@@ -309,14 +309,14 @@ export const ModuleToDistributeCoinsResponse = {
 
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
   return {
-    id: Long.UZERO
+    id: BigInt("0")
   };
 }
 
 export const GaugeByIDRequest = {
   encode(message: GaugeByIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
-      writer.uint32(8).uint64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.id.toString()));
     }
 
     return writer;
@@ -332,7 +332,7 @@ export const GaugeByIDRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -346,19 +346,19 @@ export const GaugeByIDRequest = {
 
   fromJSON(object: any): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
     };
   },
 
   toJSON(message: GaugeByIDRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
     return message;
   },
 
@@ -370,7 +370,7 @@ export const GaugeByIDRequest = {
 
   fromSDKJSON(object: any): GaugeByIDRequestSDKType {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
     };
   },
 
@@ -1376,7 +1376,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
     owner: "",
     lockIds: [],
-    endEpoch: Long.ZERO
+    endEpoch: BigInt("0")
   };
 }
 
@@ -1389,13 +1389,13 @@ export const RewardsEstRequest = {
     writer.uint32(18).fork();
 
     for (const v of message.lockIds) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
 
-    if (!message.endEpoch.isZero()) {
-      writer.uint32(24).int64(message.endEpoch);
+    if (message.endEpoch !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.endEpoch.toString()));
     }
 
     return writer;
@@ -1419,16 +1419,16 @@ export const RewardsEstRequest = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.lockIds.push((reader.uint64() as Long));
+              message.lockIds.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.lockIds.push((reader.uint64() as Long));
+            message.lockIds.push(BigInt(reader.uint64().toString()));
           }
 
           break;
 
         case 3:
-          message.endEpoch = (reader.int64() as Long);
+          message.endEpoch = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -1443,8 +1443,8 @@ export const RewardsEstRequest = {
   fromJSON(object: any): RewardsEstRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => Long.fromValue(e)) : [],
-      endEpoch: isSet(object.endEpoch) ? Long.fromValue(object.endEpoch) : Long.ZERO
+      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      endEpoch: isSet(object.endEpoch) ? (prop => BigInt(prop.toString!!()))(object.endEpoch) : BigInt("0")
     };
   },
 
@@ -1453,20 +1453,20 @@ export const RewardsEstRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
 
     if (message.lockIds) {
-      obj.lockIds = message.lockIds.map(e => (e || Long.UZERO).toString());
+      obj.lockIds = message.lockIds.map(e => (e || BigInt("0")).toString());
     } else {
       obj.lockIds = [];
     }
 
-    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || Long.ZERO).toString());
+    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
-    message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
-    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? Long.fromValue(object.endEpoch) : Long.ZERO;
+    message.lockIds = object.lockIds?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.endEpoch) : BigInt("0");
     return message;
   },
 
@@ -1481,8 +1481,8 @@ export const RewardsEstRequest = {
   fromSDKJSON(object: any): RewardsEstRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => Long.fromValue(e)) : [],
-      end_epoch: isSet(object.end_epoch) ? Long.fromValue(object.end_epoch) : Long.ZERO
+      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      end_epoch: isSet(object.end_epoch) ? (prop => BigInt(prop.toString!!()))(object.end_epoch) : BigInt("0")
     };
   },
 

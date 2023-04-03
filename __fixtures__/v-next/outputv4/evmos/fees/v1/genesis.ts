@@ -1,6 +1,6 @@
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 
@@ -40,7 +40,7 @@ export interface Params {
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addrDerivationCostCreate: Long;
+  addrDerivationCostCreate: bigint;
 
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
@@ -51,7 +51,7 @@ export interface ParamsSDKType {
   enable_fees: boolean;
   developer_shares: string;
   validator_shares: string;
-  addr_derivation_cost_create: Long;
+  addr_derivation_cost_create: bigint;
   min_gas_price: string;
 }
 
@@ -162,7 +162,7 @@ function createBaseParams(): Params {
     enableFees: false,
     developerShares: "",
     validatorShares: "",
-    addrDerivationCostCreate: Long.UZERO,
+    addrDerivationCostCreate: BigInt("0"),
     minGasPrice: ""
   };
 }
@@ -181,8 +181,8 @@ export const Params = {
       writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
     }
 
-    if (!message.addrDerivationCostCreate.isZero()) {
-      writer.uint32(32).uint64(message.addrDerivationCostCreate);
+    if (message.addrDerivationCostCreate !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.addrDerivationCostCreate.toString()));
     }
 
     if (message.minGasPrice !== "") {
@@ -214,7 +214,7 @@ export const Params = {
           break;
 
         case 4:
-          message.addrDerivationCostCreate = (reader.uint64() as Long);
+          message.addrDerivationCostCreate = BigInt(reader.uint64().toString());
           break;
 
         case 5:
@@ -235,7 +235,7 @@ export const Params = {
       enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
       developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
       validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO,
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? (prop => BigInt(prop.toString!!()))(object.addrDerivationCostCreate) : BigInt("0"),
       minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
     };
   },
@@ -245,7 +245,7 @@ export const Params = {
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);
     message.validatorShares !== undefined && (obj.validatorShares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || Long.UZERO).toString());
+    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt("0")).toString());
     message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
@@ -255,7 +255,7 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO;
+    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? (prop => BigInt(prop.toString!!()))(object.addrDerivationCostCreate) : BigInt("0");
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },
@@ -275,7 +275,7 @@ export const Params = {
       enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
       developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
       validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
-      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? Long.fromValue(object.addr_derivation_cost_create) : Long.UZERO,
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? (prop => BigInt(prop.toString!!()))(object.addr_derivation_cost_create) : BigInt("0"),
       min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
     };
   },

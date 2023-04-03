@@ -1,5 +1,5 @@
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -47,7 +47,7 @@ export interface FloatValueSDKType {
  */
 export interface Int64Value {
   /** The int64 value. */
-  value: Long;
+  value: bigint;
 }
 
 /**
@@ -56,7 +56,7 @@ export interface Int64Value {
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64ValueSDKType {
-  value: Long;
+  value: bigint;
 }
 
 /**
@@ -66,7 +66,7 @@ export interface Int64ValueSDKType {
  */
 export interface UInt64Value {
   /** The uint64 value. */
-  value: Long;
+  value: bigint;
 }
 
 /**
@@ -75,7 +75,7 @@ export interface UInt64Value {
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64ValueSDKType {
-  value: Long;
+  value: bigint;
 }
 
 /**
@@ -325,14 +325,14 @@ export const FloatValue = {
 
 function createBaseInt64Value(): Int64Value {
   return {
-    value: Long.ZERO
+    value: BigInt("0")
   };
 }
 
 export const Int64Value = {
   encode(message: Int64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.value.isZero()) {
-      writer.uint32(8).int64(message.value);
+    if (message.value !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.value.toString()));
     }
 
     return writer;
@@ -348,7 +348,7 @@ export const Int64Value = {
 
       switch (tag >>> 3) {
         case 1:
-          message.value = (reader.int64() as Long);
+          message.value = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -362,19 +362,19 @@ export const Int64Value = {
 
   fromJSON(object: any): Int64Value {
     return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
+    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
     return message;
   },
 
@@ -386,7 +386,7 @@ export const Int64Value = {
 
   fromSDKJSON(object: any): Int64ValueSDKType {
     return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 
@@ -400,14 +400,14 @@ export const Int64Value = {
 
 function createBaseUInt64Value(): UInt64Value {
   return {
-    value: Long.UZERO
+    value: BigInt("0")
   };
 }
 
 export const UInt64Value = {
   encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.value.isZero()) {
-      writer.uint32(8).uint64(message.value);
+    if (message.value !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.value.toString()));
     }
 
     return writer;
@@ -423,7 +423,7 @@ export const UInt64Value = {
 
       switch (tag >>> 3) {
         case 1:
-          message.value = (reader.uint64() as Long);
+          message.value = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -437,19 +437,19 @@ export const UInt64Value = {
 
   fromJSON(object: any): UInt64Value {
     return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
+    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
     return message;
   },
 
@@ -461,7 +461,7 @@ export const UInt64Value = {
 
   fromSDKJSON(object: any): UInt64ValueSDKType {
     return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
     };
   },
 

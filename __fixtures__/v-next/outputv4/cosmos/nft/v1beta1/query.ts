@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { NFT, NFTSDKType, Class, ClassSDKType } from "./nft";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
@@ -18,12 +18,12 @@ export interface QueryBalanceRequestSDKType {
 
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponse {
-  amount: Long;
+  amount: bigint;
 }
 
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponseSDKType {
-  amount: Long;
+  amount: bigint;
 }
 
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
@@ -60,12 +60,12 @@ export interface QuerySupplyRequestSDKType {
 
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponse {
-  amount: Long;
+  amount: bigint;
 }
 
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponseSDKType {
-  amount: Long;
+  amount: bigint;
 }
 
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
@@ -251,14 +251,14 @@ export const QueryBalanceRequest = {
 
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return {
-    amount: Long.UZERO
+    amount: BigInt("0")
   };
 }
 
 export const QueryBalanceResponse = {
   encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.amount.isZero()) {
-      writer.uint32(8).uint64(message.amount);
+    if (message.amount !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.amount.toString()));
     }
 
     return writer;
@@ -274,7 +274,7 @@ export const QueryBalanceResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.amount = (reader.uint64() as Long);
+          message.amount = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -288,19 +288,19 @@ export const QueryBalanceResponse = {
 
   fromJSON(object: any): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
     };
   },
 
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
+    message.amount = object.amount !== undefined && object.amount !== null ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0");
     return message;
   },
 
@@ -312,7 +312,7 @@ export const QueryBalanceResponse = {
 
   fromSDKJSON(object: any): QueryBalanceResponseSDKType {
     return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
     };
   },
 
@@ -566,14 +566,14 @@ export const QuerySupplyRequest = {
 
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
-    amount: Long.UZERO
+    amount: BigInt("0")
   };
 }
 
 export const QuerySupplyResponse = {
   encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.amount.isZero()) {
-      writer.uint32(8).uint64(message.amount);
+    if (message.amount !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.amount.toString()));
     }
 
     return writer;
@@ -589,7 +589,7 @@ export const QuerySupplyResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.amount = (reader.uint64() as Long);
+          message.amount = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -603,19 +603,19 @@ export const QuerySupplyResponse = {
 
   fromJSON(object: any): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
     };
   },
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? Long.fromValue(object.amount) : Long.UZERO;
+    message.amount = object.amount !== undefined && object.amount !== null ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0");
     return message;
   },
 
@@ -627,7 +627,7 @@ export const QuerySupplyResponse = {
 
   fromSDKJSON(object: any): QuerySupplyResponseSDKType {
     return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
     };
   },
 

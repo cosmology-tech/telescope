@@ -3,8 +3,8 @@ import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;

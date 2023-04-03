@@ -79,7 +79,7 @@ export interface Group {
   groupId?: GroupID;
   state: Group_State;
   groupSpec?: GroupSpec;
-  createdAt: Long;
+  createdAt: bigint;
 }
 
 /** Group stores group id, state and specifications of group */
@@ -87,7 +87,7 @@ export interface GroupSDKType {
   group_id?: GroupIDSDKType;
   state: Group_State;
   group_spec?: GroupSpecSDKType;
-  created_at: Long;
+  created_at: bigint;
 }
 
 function createBaseGroup(): Group {
@@ -95,7 +95,7 @@ function createBaseGroup(): Group {
     groupId: undefined,
     state: 0,
     groupSpec: undefined,
-    createdAt: Long.ZERO
+    createdAt: BigInt("0")
   };
 }
 
@@ -113,8 +113,8 @@ export const Group = {
       GroupSpec.encode(message.groupSpec, writer.uint32(26).fork()).ldelim();
     }
 
-    if (!message.createdAt.isZero()) {
-      writer.uint32(32).int64(message.createdAt);
+    if (message.createdAt !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
     }
 
     return writer;
@@ -142,7 +142,7 @@ export const Group = {
           break;
 
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -159,7 +159,7 @@ export const Group = {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0")
     };
   },
 
@@ -168,7 +168,7 @@ export const Group = {
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
     message.groupSpec !== undefined && (obj.groupSpec = message.groupSpec ? GroupSpec.toJSON(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt("0")).toString());
     return obj;
   },
 
@@ -177,7 +177,7 @@ export const Group = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
     message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
     return message;
   },
 
@@ -195,7 +195,7 @@ export const Group = {
       group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0")
     };
   },
 

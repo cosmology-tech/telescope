@@ -3,8 +3,8 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsSDKType } from "./params";
+import { Long, DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, toTimestamp, fromTimestamp, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceRequestSDKType {}
@@ -131,10 +131,10 @@ export interface LockedDenomResponseSDKType {
   amount: string;
 }
 export interface LockedRequest {
-  lockId: Long;
+  lockId: bigint;
 }
 export interface LockedRequestSDKType {
-  lock_id: Long;
+  lock_id: bigint;
 }
 export interface LockedResponse {
   lock?: PeriodLock;
@@ -143,10 +143,10 @@ export interface LockedResponseSDKType {
   lock?: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
-  lockId: Long;
+  lockId: bigint;
 }
 export interface SyntheticLockupsByLockupIDRequestSDKType {
-  lock_id: Long;
+  lock_id: bigint;
 }
 export interface SyntheticLockupsByLockupIDResponse {
   syntheticLocks: SyntheticLock[];
@@ -1883,14 +1883,14 @@ export const LockedDenomResponse = {
 
 function createBaseLockedRequest(): LockedRequest {
   return {
-    lockId: Long.UZERO
+    lockId: BigInt("0")
   };
 }
 
 export const LockedRequest = {
   encode(message: LockedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.lockId.isZero()) {
-      writer.uint32(8).uint64(message.lockId);
+    if (message.lockId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.lockId.toString()));
     }
 
     return writer;
@@ -1906,7 +1906,7 @@ export const LockedRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = (reader.uint64() as Long);
+          message.lockId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1920,19 +1920,19 @@ export const LockedRequest = {
 
   fromJSON(object: any): LockedRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0")
     };
   },
 
   toJSON(message: LockedRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
     return message;
   },
 
@@ -1944,7 +1944,7 @@ export const LockedRequest = {
 
   fromSDKJSON(object: any): LockedRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0")
     };
   },
 
@@ -2033,14 +2033,14 @@ export const LockedResponse = {
 
 function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockupIDRequest {
   return {
-    lockId: Long.UZERO
+    lockId: BigInt("0")
   };
 }
 
 export const SyntheticLockupsByLockupIDRequest = {
   encode(message: SyntheticLockupsByLockupIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.lockId.isZero()) {
-      writer.uint32(8).uint64(message.lockId);
+    if (message.lockId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.lockId.toString()));
     }
 
     return writer;
@@ -2056,7 +2056,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = (reader.uint64() as Long);
+          message.lockId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -2070,19 +2070,19 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0")
     };
   },
 
   toJSON(message: SyntheticLockupsByLockupIDRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
     return message;
   },
 
@@ -2094,7 +2094,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0")
     };
   },
 

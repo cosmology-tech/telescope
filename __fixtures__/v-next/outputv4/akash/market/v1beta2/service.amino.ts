@@ -96,7 +96,7 @@ export const AminoConverter = {
         },
         deposit: {
           denom: deposit.denom,
-          amount: Long.fromValue(deposit.amount).toString()
+          amount: deposit.amount
         }
       };
     },
@@ -109,7 +109,7 @@ export const AminoConverter = {
       return {
         order: {
           owner: order.owner,
-          dseq: Long.fromString(order.dseq),
+          dseq: BigInt(order.dseq),
           gseq: order.gseq,
           oseq: order.oseq
         },
@@ -146,7 +146,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -175,7 +175,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -204,7 +204,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -233,7 +233,7 @@ export const AminoConverter = {
       return {
         leaseId: {
           owner: lease_id.owner,
-          dseq: Long.fromString(lease_id.dseq),
+          dseq: BigInt(lease_id.dseq),
           gseq: lease_id.gseq,
           oseq: lease_id.oseq,
           provider: lease_id.provider

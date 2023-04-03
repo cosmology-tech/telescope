@@ -173,19 +173,19 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
   }
 }
 export interface CheckedExpr_ReferenceMapEntry {
-  key: Long;
+  key: bigint;
   value?: Reference;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
-  key: Long;
+  key: bigint;
   value?: ReferenceSDKType;
 }
 export interface CheckedExpr_TypeMapEntry {
-  key: Long;
+  key: bigint;
   value?: Type;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
-  key: Long;
+  key: bigint;
   value?: TypeSDKType;
 }
 
@@ -209,7 +209,7 @@ export interface CheckedExpr {
    *   the message.
    */
   referenceMap?: {
-    [key: Long]: Reference;
+    [key: bigint]: Reference;
   };
 
   /**
@@ -220,7 +220,7 @@ export interface CheckedExpr {
    * space.
    */
   typeMap?: {
-    [key: Long]: Type;
+    [key: bigint]: Type;
   };
 
   /**
@@ -250,10 +250,10 @@ export interface CheckedExpr {
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
   reference_map?: {
-    [key: Long]: ReferenceSDKType;
+    [key: bigint]: ReferenceSDKType;
   };
   type_map?: {
-    [key: Long]: TypeSDKType;
+    [key: bigint]: TypeSDKType;
   };
   source_info?: SourceInfoSDKType;
   expr_version: string;
@@ -611,15 +611,15 @@ export interface ReferenceSDKType {
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
-    key: Long.ZERO,
+    key: BigInt("0"),
     value: undefined
   };
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
   encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.key.isZero()) {
-      writer.uint32(8).int64(message.key);
+    if (message.key !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.key.toString()));
     }
 
     if (message.value !== undefined) {
@@ -639,7 +639,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = (reader.int64() as Long);
+          message.key = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -657,21 +657,21 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
 
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
+    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   },
@@ -685,7 +685,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
     };
   },
@@ -701,15 +701,15 @@ export const CheckedExpr_ReferenceMapEntry = {
 
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
-    key: Long.ZERO,
+    key: BigInt("0"),
     value: undefined
   };
 }
 
 export const CheckedExpr_TypeMapEntry = {
   encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.key.isZero()) {
-      writer.uint32(8).int64(message.key);
+    if (message.key !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.key.toString()));
     }
 
     if (message.value !== undefined) {
@@ -729,7 +729,7 @@ export const CheckedExpr_TypeMapEntry = {
 
       switch (tag >>> 3) {
         case 1:
-          message.key = (reader.int64() as Long);
+          message.key = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -747,21 +747,21 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
 
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
+    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
   },
@@ -775,7 +775,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
       value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
     };
   },
@@ -880,13 +880,13 @@ export const CheckedExpr = {
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
-        [key: Long]: Reference;
+        [key: bigint]: Reference;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Reference.fromJSON(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
-        [key: Long]: Type;
+        [key: bigint]: Type;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Type.fromJSON(value);
         return acc;
@@ -924,7 +924,7 @@ export const CheckedExpr = {
   fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
-      [key: Long]: Reference;
+      [key: bigint]: Reference;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[Number(key)] = Reference.fromPartial(value);
@@ -933,7 +933,7 @@ export const CheckedExpr = {
       return acc;
     }, {});
     message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
-      [key: Long]: Type;
+      [key: bigint]: Type;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[Number(key)] = Type.fromPartial(value);
@@ -950,13 +950,13 @@ export const CheckedExpr = {
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
     return {
       referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: Long]: Reference;
+        [key: bigint]: Reference;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Reference.fromSDK(value);
         return acc;
       }, {}) : {},
       typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: Long]: Type;
+        [key: bigint]: Type;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Type.fromSDK(value);
         return acc;
@@ -970,13 +970,13 @@ export const CheckedExpr = {
   fromSDKJSON(object: any): CheckedExprSDKType {
     return {
       reference_map: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: Long]: Reference;
+        [key: bigint]: Reference;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Reference.fromSDKJSON(value);
         return acc;
       }, {}) : {},
       type_map: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: Long]: Type;
+        [key: bigint]: Type;
       }>((acc, [key, value]) => {
         acc[Number(key)] = Type.fromSDKJSON(value);
         return acc;

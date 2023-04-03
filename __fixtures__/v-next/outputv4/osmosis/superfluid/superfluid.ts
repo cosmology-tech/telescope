@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 
@@ -72,7 +72,7 @@ export interface SuperfluidIntermediaryAccount {
   valAddr: string;
 
   /** perpetual gauge for rewards distribution */
-  gaugeId: Long;
+  gaugeId: bigint;
 }
 
 /**
@@ -83,7 +83,7 @@ export interface SuperfluidIntermediaryAccount {
 export interface SuperfluidIntermediaryAccountSDKType {
   denom: string;
   val_addr: string;
-  gauge_id: Long;
+  gauge_id: bigint;
 }
 
 /**
@@ -96,7 +96,7 @@ export interface SuperfluidIntermediaryAccountSDKType {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecord {
-  epochNumber: Long;
+  epochNumber: bigint;
 
   /** superfluid asset denom, can be LP token or native token */
   denom: string;
@@ -113,7 +113,7 @@ export interface OsmoEquivalentMultiplierRecord {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecordSDKType {
-  epoch_number: Long;
+  epoch_number: bigint;
   denom: string;
   multiplier: string;
 }
@@ -146,7 +146,7 @@ export interface SuperfluidDelegationRecordSDKType {
  * via lp shares.
  */
 export interface LockIdIntermediaryAccountConnection {
-  lockId: Long;
+  lockId: bigint;
   intermediaryAccount: string;
 }
 
@@ -156,14 +156,14 @@ export interface LockIdIntermediaryAccountConnection {
  * via lp shares.
  */
 export interface LockIdIntermediaryAccountConnectionSDKType {
-  lock_id: Long;
+  lock_id: bigint;
   intermediary_account: string;
 }
 export interface UnpoolWhitelistedPools {
-  ids: Long[];
+  ids: bigint[];
 }
 export interface UnpoolWhitelistedPoolsSDKType {
-  ids: Long[];
+  ids: bigint[];
 }
 
 function createBaseSuperfluidAsset(): SuperfluidAsset {
@@ -260,7 +260,7 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
   return {
     denom: "",
     valAddr: "",
-    gaugeId: Long.UZERO
+    gaugeId: BigInt("0")
   };
 }
 
@@ -274,8 +274,8 @@ export const SuperfluidIntermediaryAccount = {
       writer.uint32(18).string(message.valAddr);
     }
 
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(24).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     return writer;
@@ -299,7 +299,7 @@ export const SuperfluidIntermediaryAccount = {
           break;
 
         case 3:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -315,7 +315,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
+      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0")
     };
   },
 
@@ -323,7 +323,7 @@ export const SuperfluidIntermediaryAccount = {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     return obj;
   },
 
@@ -331,7 +331,7 @@ export const SuperfluidIntermediaryAccount = {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
     return message;
   },
 
@@ -347,7 +347,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
+      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0")
     };
   },
 
@@ -363,7 +363,7 @@ export const SuperfluidIntermediaryAccount = {
 
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
   return {
-    epochNumber: Long.ZERO,
+    epochNumber: BigInt("0"),
     denom: "",
     multiplier: ""
   };
@@ -371,8 +371,8 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 
 export const OsmoEquivalentMultiplierRecord = {
   encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.epochNumber.isZero()) {
-      writer.uint32(8).int64(message.epochNumber);
+    if (message.epochNumber !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.epochNumber.toString()));
     }
 
     if (message.denom !== "") {
@@ -396,7 +396,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
       switch (tag >>> 3) {
         case 1:
-          message.epochNumber = (reader.int64() as Long);
+          message.epochNumber = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -418,7 +418,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epochNumber) ? Long.fromValue(object.epochNumber) : Long.ZERO,
+      epochNumber: isSet(object.epochNumber) ? (prop => BigInt(prop.toString!!()))(object.epochNumber) : BigInt("0"),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -426,7 +426,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
     const obj: any = {};
-    message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || Long.ZERO).toString());
+    message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || BigInt("0")).toString());
     message.denom !== undefined && (obj.denom = message.denom);
     message.multiplier !== undefined && (obj.multiplier = message.multiplier);
     return obj;
@@ -434,7 +434,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? Long.fromValue(object.epochNumber) : Long.ZERO;
+    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? (prop => BigInt(prop.toString!!()))(object.epochNumber) : BigInt("0");
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -450,7 +450,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromSDKJSON(object: any): OsmoEquivalentMultiplierRecordSDKType {
     return {
-      epoch_number: isSet(object.epoch_number) ? Long.fromValue(object.epoch_number) : Long.ZERO,
+      epoch_number: isSet(object.epoch_number) ? (prop => BigInt(prop.toString!!()))(object.epoch_number) : BigInt("0"),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -588,15 +588,15 @@ export const SuperfluidDelegationRecord = {
 
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {
   return {
-    lockId: Long.UZERO,
+    lockId: BigInt("0"),
     intermediaryAccount: ""
   };
 }
 
 export const LockIdIntermediaryAccountConnection = {
   encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.lockId.isZero()) {
-      writer.uint32(8).uint64(message.lockId);
+    if (message.lockId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.lockId.toString()));
     }
 
     if (message.intermediaryAccount !== "") {
@@ -616,7 +616,7 @@ export const LockIdIntermediaryAccountConnection = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = (reader.uint64() as Long);
+          message.lockId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -634,21 +634,21 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO,
+      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0"),
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
 
   toJSON(message: LockIdIntermediaryAccountConnection): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
     message.intermediaryAccount !== undefined && (obj.intermediaryAccount = message.intermediaryAccount);
     return obj;
   },
 
   fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   },
@@ -662,7 +662,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromSDKJSON(object: any): LockIdIntermediaryAccountConnectionSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
+      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0"),
       intermediary_account: isSet(object.intermediary_account) ? String(object.intermediary_account) : ""
     };
   },
@@ -687,7 +687,7 @@ export const UnpoolWhitelistedPools = {
     writer.uint32(10).fork();
 
     for (const v of message.ids) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -708,10 +708,10 @@ export const UnpoolWhitelistedPools = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.ids.push((reader.uint64() as Long));
+              message.ids.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.ids.push((reader.uint64() as Long));
+            message.ids.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -727,7 +727,7 @@ export const UnpoolWhitelistedPools = {
 
   fromJSON(object: any): UnpoolWhitelistedPools {
     return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
     };
   },
 
@@ -735,7 +735,7 @@ export const UnpoolWhitelistedPools = {
     const obj: any = {};
 
     if (message.ids) {
-      obj.ids = message.ids.map(e => (e || Long.UZERO).toString());
+      obj.ids = message.ids.map(e => (e || BigInt("0")).toString());
     } else {
       obj.ids = [];
     }
@@ -745,7 +745,7 @@ export const UnpoolWhitelistedPools = {
 
   fromPartial(object: DeepPartial<UnpoolWhitelistedPools>): UnpoolWhitelistedPools {
     const message = createBaseUnpoolWhitelistedPools();
-    message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
+    message.ids = object.ids?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
     return message;
   },
 
@@ -757,7 +757,7 @@ export const UnpoolWhitelistedPools = {
 
   fromSDKJSON(object: any): UnpoolWhitelistedPoolsSDKType {
     return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
     };
   },
 

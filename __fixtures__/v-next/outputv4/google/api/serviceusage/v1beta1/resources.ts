@@ -6,8 +6,8 @@ import { Usage, UsageSDKType } from "../../usage";
 import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
+import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 
 /** Whether or not a service has been enabled for use by a consumer. */
@@ -433,13 +433,13 @@ export interface QuotaBucket {
    * The effective limit of this quota bucket. Equal to default_limit if there
    * are no overrides.
    */
-  effectiveLimit: Long;
+  effectiveLimit: bigint;
 
   /**
    * The default limit of this quota bucket, as specified by the service
    * configuration.
    */
-  defaultLimit: Long;
+  defaultLimit: bigint;
 
   /** Producer override on this quota bucket. */
   producerOverride?: QuotaOverride;
@@ -470,8 +470,8 @@ export interface QuotaBucket {
 
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
-  effective_limit: Long;
-  default_limit: Long;
+  effective_limit: bigint;
+  default_limit: bigint;
   producer_override?: QuotaOverrideSDKType;
   consumer_override?: QuotaOverrideSDKType;
   admin_override?: QuotaOverrideSDKType;
@@ -507,7 +507,7 @@ export interface QuotaOverride {
    * The overriding quota limit value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  overrideValue: Long;
+  overrideValue: bigint;
 
   /**
    * If this map is nonempty, then this override applies only to specific values
@@ -566,7 +566,7 @@ export interface QuotaOverride {
 /** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
-  override_value: Long;
+  override_value: bigint;
   dimensions: {
     [key: string]: string;
   };
@@ -614,7 +614,7 @@ export interface AdminQuotaPolicy {
    * The quota policy value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  policyValue: Long;
+  policyValue: bigint;
 
   /**
    * If this map is nonempty, then this policy applies only to specific values
@@ -662,7 +662,7 @@ export interface AdminQuotaPolicy {
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
   name: string;
-  policy_value: Long;
+  policy_value: bigint;
   dimensions: {
     [key: string]: string;
   };
@@ -1575,8 +1575,8 @@ export const QuotaBucket_DimensionsEntry = {
 
 function createBaseQuotaBucket(): QuotaBucket {
   return {
-    effectiveLimit: Long.ZERO,
-    defaultLimit: Long.ZERO,
+    effectiveLimit: BigInt("0"),
+    defaultLimit: BigInt("0"),
     producerOverride: undefined,
     consumerOverride: undefined,
     adminOverride: undefined,
@@ -1586,12 +1586,12 @@ function createBaseQuotaBucket(): QuotaBucket {
 
 export const QuotaBucket = {
   encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.effectiveLimit.isZero()) {
-      writer.uint32(8).int64(message.effectiveLimit);
+    if (message.effectiveLimit !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.effectiveLimit.toString()));
     }
 
-    if (!message.defaultLimit.isZero()) {
-      writer.uint32(16).int64(message.defaultLimit);
+    if (message.defaultLimit !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.defaultLimit.toString()));
     }
 
     if (message.producerOverride !== undefined) {
@@ -1625,11 +1625,11 @@ export const QuotaBucket = {
 
       switch (tag >>> 3) {
         case 1:
-          message.effectiveLimit = (reader.int64() as Long);
+          message.effectiveLimit = BigInt(reader.int64().toString());
           break;
 
         case 2:
-          message.defaultLimit = (reader.int64() as Long);
+          message.defaultLimit = BigInt(reader.int64().toString());
           break;
 
         case 3:
@@ -1664,8 +1664,8 @@ export const QuotaBucket = {
 
   fromJSON(object: any): QuotaBucket {
     return {
-      effectiveLimit: isSet(object.effectiveLimit) ? Long.fromValue(object.effectiveLimit) : Long.ZERO,
-      defaultLimit: isSet(object.defaultLimit) ? Long.fromValue(object.defaultLimit) : Long.ZERO,
+      effectiveLimit: isSet(object.effectiveLimit) ? (prop => BigInt(prop.toString!!()))(object.effectiveLimit) : BigInt("0"),
+      defaultLimit: isSet(object.defaultLimit) ? (prop => BigInt(prop.toString!!()))(object.defaultLimit) : BigInt("0"),
       producerOverride: isSet(object.producerOverride) ? QuotaOverride.fromJSON(object.producerOverride) : undefined,
       consumerOverride: isSet(object.consumerOverride) ? QuotaOverride.fromJSON(object.consumerOverride) : undefined,
       adminOverride: isSet(object.adminOverride) ? QuotaOverride.fromJSON(object.adminOverride) : undefined,
@@ -1680,8 +1680,8 @@ export const QuotaBucket = {
 
   toJSON(message: QuotaBucket): unknown {
     const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || Long.ZERO).toString());
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || Long.ZERO).toString());
+    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt("0")).toString());
+    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt("0")).toString());
     message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
     message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
     message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
@@ -1698,8 +1698,8 @@ export const QuotaBucket = {
 
   fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
     const message = createBaseQuotaBucket();
-    message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? Long.fromValue(object.effectiveLimit) : Long.ZERO;
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
+    message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? (prop => BigInt(prop.toString!!()))(object.effectiveLimit) : BigInt("0");
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? (prop => BigInt(prop.toString!!()))(object.defaultLimit) : BigInt("0");
     message.producerOverride = object.producerOverride !== undefined && object.producerOverride !== null ? QuotaOverride.fromPartial(object.producerOverride) : undefined;
     message.consumerOverride = object.consumerOverride !== undefined && object.consumerOverride !== null ? QuotaOverride.fromPartial(object.consumerOverride) : undefined;
     message.adminOverride = object.adminOverride !== undefined && object.adminOverride !== null ? QuotaOverride.fromPartial(object.adminOverride) : undefined;
@@ -1733,8 +1733,8 @@ export const QuotaBucket = {
 
   fromSDKJSON(object: any): QuotaBucketSDKType {
     return {
-      effective_limit: isSet(object.effective_limit) ? Long.fromValue(object.effective_limit) : Long.ZERO,
-      default_limit: isSet(object.default_limit) ? Long.fromValue(object.default_limit) : Long.ZERO,
+      effective_limit: isSet(object.effective_limit) ? (prop => BigInt(prop.toString!!()))(object.effective_limit) : BigInt("0"),
+      default_limit: isSet(object.default_limit) ? (prop => BigInt(prop.toString!!()))(object.default_limit) : BigInt("0"),
       producer_override: isSet(object.producer_override) ? QuotaOverride.fromSDKJSON(object.producer_override) : undefined,
       consumer_override: isSet(object.consumer_override) ? QuotaOverride.fromSDKJSON(object.consumer_override) : undefined,
       admin_override: isSet(object.admin_override) ? QuotaOverride.fromSDKJSON(object.admin_override) : undefined,
@@ -1860,7 +1860,7 @@ export const QuotaOverride_DimensionsEntry = {
 function createBaseQuotaOverride(): QuotaOverride {
   return {
     name: "",
-    overrideValue: Long.ZERO,
+    overrideValue: BigInt("0"),
     dimensions: {},
     metric: "",
     unit: "",
@@ -1874,8 +1874,8 @@ export const QuotaOverride = {
       writer.uint32(10).string(message.name);
     }
 
-    if (!message.overrideValue.isZero()) {
-      writer.uint32(16).int64(message.overrideValue);
+    if (message.overrideValue !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.overrideValue.toString()));
     }
 
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -1914,7 +1914,7 @@ export const QuotaOverride = {
           break;
 
         case 2:
-          message.overrideValue = (reader.int64() as Long);
+          message.overrideValue = BigInt(reader.int64().toString());
           break;
 
         case 3:
@@ -1950,7 +1950,7 @@ export const QuotaOverride = {
   fromJSON(object: any): QuotaOverride {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      overrideValue: isSet(object.overrideValue) ? Long.fromValue(object.overrideValue) : Long.ZERO,
+      overrideValue: isSet(object.overrideValue) ? (prop => BigInt(prop.toString!!()))(object.overrideValue) : BigInt("0"),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1966,7 +1966,7 @@ export const QuotaOverride = {
   toJSON(message: QuotaOverride): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || Long.ZERO).toString());
+    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt("0")).toString());
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -1984,7 +1984,7 @@ export const QuotaOverride = {
   fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
     const message = createBaseQuotaOverride();
     message.name = object.name ?? "";
-    message.overrideValue = object.overrideValue !== undefined && object.overrideValue !== null ? Long.fromValue(object.overrideValue) : Long.ZERO;
+    message.overrideValue = object.overrideValue !== undefined && object.overrideValue !== null ? (prop => BigInt(prop.toString!!()))(object.overrideValue) : BigInt("0");
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -2019,7 +2019,7 @@ export const QuotaOverride = {
   fromSDKJSON(object: any): QuotaOverrideSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      override_value: isSet(object.override_value) ? Long.fromValue(object.override_value) : Long.ZERO,
+      override_value: isSet(object.override_value) ? (prop => BigInt(prop.toString!!()))(object.override_value) : BigInt("0"),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2232,7 +2232,7 @@ export const AdminQuotaPolicy_DimensionsEntry = {
 function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   return {
     name: "",
-    policyValue: Long.ZERO,
+    policyValue: BigInt("0"),
     dimensions: {},
     metric: "",
     unit: "",
@@ -2246,8 +2246,8 @@ export const AdminQuotaPolicy = {
       writer.uint32(10).string(message.name);
     }
 
-    if (!message.policyValue.isZero()) {
-      writer.uint32(16).int64(message.policyValue);
+    if (message.policyValue !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.policyValue.toString()));
     }
 
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -2286,7 +2286,7 @@ export const AdminQuotaPolicy = {
           break;
 
         case 2:
-          message.policyValue = (reader.int64() as Long);
+          message.policyValue = BigInt(reader.int64().toString());
           break;
 
         case 3:
@@ -2322,7 +2322,7 @@ export const AdminQuotaPolicy = {
   fromJSON(object: any): AdminQuotaPolicy {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      policyValue: isSet(object.policyValue) ? Long.fromValue(object.policyValue) : Long.ZERO,
+      policyValue: isSet(object.policyValue) ? (prop => BigInt(prop.toString!!()))(object.policyValue) : BigInt("0"),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2338,7 +2338,7 @@ export const AdminQuotaPolicy = {
   toJSON(message: AdminQuotaPolicy): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || Long.ZERO).toString());
+    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt("0")).toString());
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -2356,7 +2356,7 @@ export const AdminQuotaPolicy = {
   fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
     const message = createBaseAdminQuotaPolicy();
     message.name = object.name ?? "";
-    message.policyValue = object.policyValue !== undefined && object.policyValue !== null ? Long.fromValue(object.policyValue) : Long.ZERO;
+    message.policyValue = object.policyValue !== undefined && object.policyValue !== null ? (prop => BigInt(prop.toString!!()))(object.policyValue) : BigInt("0");
     message.dimensions = Object.entries(object.dimensions ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -2391,7 +2391,7 @@ export const AdminQuotaPolicy = {
   fromSDKJSON(object: any): AdminQuotaPolicySDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      policy_value: isSet(object.policy_value) ? Long.fromValue(object.policy_value) : Long.ZERO,
+      policy_value: isSet(object.policy_value) ? (prop => BigInt(prop.toString!!()))(object.policy_value) : BigInt("0"),
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

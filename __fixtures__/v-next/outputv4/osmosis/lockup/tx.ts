@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
@@ -15,10 +15,10 @@ export interface MsgLockTokensSDKType {
   coins: CoinSDKType[];
 }
 export interface MsgLockTokensResponse {
-  ID: Long;
+  ID: bigint;
 }
 export interface MsgLockTokensResponseSDKType {
-  ID: Long;
+  ID: bigint;
 }
 export interface MsgBeginUnlockingAll {
   owner: string;
@@ -34,14 +34,14 @@ export interface MsgBeginUnlockingAllResponseSDKType {
 }
 export interface MsgBeginUnlocking {
   owner: string;
-  ID: Long;
+  ID: bigint;
 
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
 export interface MsgBeginUnlockingSDKType {
   owner: string;
-  ID: Long;
+  ID: bigint;
   coins: CoinSDKType[];
 }
 export interface MsgBeginUnlockingResponse {
@@ -57,7 +57,7 @@ export interface MsgBeginUnlockingResponseSDKType {
  */
 export interface MsgExtendLockup {
   owner: string;
-  ID: Long;
+  ID: bigint;
 
   /**
    * duration to be set. fails if lower than the current duration, or is
@@ -72,7 +72,7 @@ export interface MsgExtendLockup {
  */
 export interface MsgExtendLockupSDKType {
   owner: string;
-  ID: Long;
+  ID: bigint;
   duration?: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
@@ -88,7 +88,7 @@ export interface MsgExtendLockupResponseSDKType {
  */
 export interface MsgForceUnlock {
   owner: string;
-  ID: Long;
+  ID: bigint;
 
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
@@ -100,7 +100,7 @@ export interface MsgForceUnlock {
  */
 export interface MsgForceUnlockSDKType {
   owner: string;
-  ID: Long;
+  ID: bigint;
   coins: CoinSDKType[];
 }
 export interface MsgForceUnlockResponse {
@@ -229,14 +229,14 @@ export const MsgLockTokens = {
 
 function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
   return {
-    ID: Long.UZERO
+    ID: BigInt("0")
   };
 }
 
 export const MsgLockTokensResponse = {
   encode(message: MsgLockTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.ID.isZero()) {
-      writer.uint32(8).uint64(message.ID);
+    if (message.ID !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.ID.toString()));
     }
 
     return writer;
@@ -252,7 +252,7 @@ export const MsgLockTokensResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.ID = (reader.uint64() as Long);
+          message.ID = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -266,19 +266,19 @@ export const MsgLockTokensResponse = {
 
   fromJSON(object: any): MsgLockTokensResponse {
     return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0")
     };
   },
 
   toJSON(message: MsgLockTokensResponse): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.ID = object.ID !== undefined && object.ID !== null ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0");
     return message;
   },
 
@@ -290,7 +290,7 @@ export const MsgLockTokensResponse = {
 
   fromSDKJSON(object: any): MsgLockTokensResponseSDKType {
     return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0")
     };
   },
 
@@ -467,7 +467,7 @@ export const MsgBeginUnlockingAllResponse = {
 function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
   return {
     owner: "",
-    ID: Long.UZERO,
+    ID: BigInt("0"),
     coins: []
   };
 }
@@ -478,8 +478,8 @@ export const MsgBeginUnlocking = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (!message.ID.isZero()) {
-      writer.uint32(16).uint64(message.ID);
+    if (message.ID !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
     }
 
     for (const v of message.coins) {
@@ -503,7 +503,7 @@ export const MsgBeginUnlocking = {
           break;
 
         case 2:
-          message.ID = (reader.uint64() as Long);
+          message.ID = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -522,7 +522,7 @@ export const MsgBeginUnlocking = {
   fromJSON(object: any): MsgBeginUnlocking {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -530,7 +530,7 @@ export const MsgBeginUnlocking = {
   toJSON(message: MsgBeginUnlocking): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -544,7 +544,7 @@ export const MsgBeginUnlocking = {
   fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.ID = object.ID !== undefined && object.ID !== null ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0");
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -560,7 +560,7 @@ export const MsgBeginUnlocking = {
   fromSDKJSON(object: any): MsgBeginUnlockingSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -659,7 +659,7 @@ export const MsgBeginUnlockingResponse = {
 function createBaseMsgExtendLockup(): MsgExtendLockup {
   return {
     owner: "",
-    ID: Long.UZERO,
+    ID: BigInt("0"),
     duration: undefined
   };
 }
@@ -670,8 +670,8 @@ export const MsgExtendLockup = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (!message.ID.isZero()) {
-      writer.uint32(16).uint64(message.ID);
+    if (message.ID !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
     }
 
     if (message.duration !== undefined) {
@@ -695,7 +695,7 @@ export const MsgExtendLockup = {
           break;
 
         case 2:
-          message.ID = (reader.uint64() as Long);
+          message.ID = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -714,7 +714,7 @@ export const MsgExtendLockup = {
   fromJSON(object: any): MsgExtendLockup {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
@@ -722,7 +722,7 @@ export const MsgExtendLockup = {
   toJSON(message: MsgExtendLockup): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
@@ -730,7 +730,7 @@ export const MsgExtendLockup = {
   fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
     const message = createBaseMsgExtendLockup();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.ID = object.ID !== undefined && object.ID !== null ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0");
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
   },
@@ -746,7 +746,7 @@ export const MsgExtendLockup = {
   fromSDKJSON(object: any): MsgExtendLockupSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },
@@ -839,7 +839,7 @@ export const MsgExtendLockupResponse = {
 function createBaseMsgForceUnlock(): MsgForceUnlock {
   return {
     owner: "",
-    ID: Long.UZERO,
+    ID: BigInt("0"),
     coins: []
   };
 }
@@ -850,8 +850,8 @@ export const MsgForceUnlock = {
       writer.uint32(10).string(message.owner);
     }
 
-    if (!message.ID.isZero()) {
-      writer.uint32(16).uint64(message.ID);
+    if (message.ID !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
     }
 
     for (const v of message.coins) {
@@ -875,7 +875,7 @@ export const MsgForceUnlock = {
           break;
 
         case 2:
-          message.ID = (reader.uint64() as Long);
+          message.ID = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -894,7 +894,7 @@ export const MsgForceUnlock = {
   fromJSON(object: any): MsgForceUnlock {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -902,7 +902,7 @@ export const MsgForceUnlock = {
   toJSON(message: MsgForceUnlock): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -916,7 +916,7 @@ export const MsgForceUnlock = {
   fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
     const message = createBaseMsgForceUnlock();
     message.owner = object.owner ?? "";
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.ID = object.ID !== undefined && object.ID !== null ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0");
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -932,7 +932,7 @@ export const MsgForceUnlock = {
   fromSDKJSON(object: any): MsgForceUnlockSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },

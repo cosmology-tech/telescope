@@ -217,7 +217,7 @@ export const AminoConverter = {
         version,
         deposit: {
           denom: deposit.denom,
-          amount: Long.fromValue(deposit.amount).toString()
+          amount: deposit.amount
         },
         depositor
       };
@@ -232,7 +232,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         groups: groups.map(el0 => ({
           name: el0.name,
@@ -311,7 +311,7 @@ export const AminoConverter = {
         },
         amount: {
           denom: amount.denom,
-          amount: Long.fromValue(amount.amount).toString()
+          amount: amount.amount
         },
         depositor
       };
@@ -324,7 +324,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         amount: {
           denom: amount.denom,
@@ -355,7 +355,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         version
       };
@@ -379,7 +379,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         }
       };
     }
@@ -403,7 +403,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -428,7 +428,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -453,7 +453,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };

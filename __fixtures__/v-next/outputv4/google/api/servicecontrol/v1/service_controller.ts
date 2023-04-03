@@ -1,8 +1,8 @@
 import { Operation, OperationSDKType } from "./operation";
 import { CheckError, CheckErrorSDKType } from "./check_error";
 import { Status, StatusSDKType } from "../../../rpc/status";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
@@ -179,7 +179,7 @@ export interface CheckResponse_ConsumerInfo {
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
-  projectNumber: Long;
+  projectNumber: bigint;
 
   /**
    * The type of the consumer which should have been defined in
@@ -192,14 +192,14 @@ export interface CheckResponse_ConsumerInfo {
    * number or organization number e.g. 1234567890. A value of 0 indicates no
    * consumer number is found.
    */
-  consumerNumber: Long;
+  consumerNumber: bigint;
 }
 
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
-  project_number: Long;
+  project_number: bigint;
   type: CheckResponse_ConsumerInfo_ConsumerType;
-  consumer_number: Long;
+  consumer_number: bigint;
 }
 
 /** Request message for the Report method. */
@@ -664,24 +664,24 @@ export const CheckResponse_CheckInfo = {
 
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
-    projectNumber: Long.ZERO,
+    projectNumber: BigInt("0"),
     type: 0,
-    consumerNumber: Long.ZERO
+    consumerNumber: BigInt("0")
   };
 }
 
 export const CheckResponse_ConsumerInfo = {
   encode(message: CheckResponse_ConsumerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.projectNumber.isZero()) {
-      writer.uint32(8).int64(message.projectNumber);
+    if (message.projectNumber !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.projectNumber.toString()));
     }
 
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
 
-    if (!message.consumerNumber.isZero()) {
-      writer.uint32(24).int64(message.consumerNumber);
+    if (message.consumerNumber !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.consumerNumber.toString()));
     }
 
     return writer;
@@ -697,7 +697,7 @@ export const CheckResponse_ConsumerInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.projectNumber = (reader.int64() as Long);
+          message.projectNumber = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -705,7 +705,7 @@ export const CheckResponse_ConsumerInfo = {
           break;
 
         case 3:
-          message.consumerNumber = (reader.int64() as Long);
+          message.consumerNumber = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -719,25 +719,25 @@ export const CheckResponse_ConsumerInfo = {
 
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.projectNumber) ? Long.fromValue(object.projectNumber) : Long.ZERO,
+      projectNumber: isSet(object.projectNumber) ? (prop => BigInt(prop.toString!!()))(object.projectNumber) : BigInt("0"),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumerNumber) ? Long.fromValue(object.consumerNumber) : Long.ZERO
+      consumerNumber: isSet(object.consumerNumber) ? (prop => BigInt(prop.toString!!()))(object.consumerNumber) : BigInt("0")
     };
   },
 
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
-    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || Long.ZERO).toString());
+    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt("0")).toString());
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || Long.ZERO).toString());
+    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
+    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? (prop => BigInt(prop.toString!!()))(object.projectNumber) : BigInt("0");
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
+    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? (prop => BigInt(prop.toString!!()))(object.consumerNumber) : BigInt("0");
     return message;
   },
 
@@ -751,9 +751,9 @@ export const CheckResponse_ConsumerInfo = {
 
   fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
     return {
-      project_number: isSet(object.project_number) ? Long.fromValue(object.project_number) : Long.ZERO,
+      project_number: isSet(object.project_number) ? (prop => BigInt(prop.toString!!()))(object.project_number) : BigInt("0"),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumer_number: isSet(object.consumer_number) ? Long.fromValue(object.consumer_number) : Long.ZERO
+      consumer_number: isSet(object.consumer_number) ? (prop => BigInt(prop.toString!!()))(object.consumer_number) : BigInt("0")
     };
   },
 

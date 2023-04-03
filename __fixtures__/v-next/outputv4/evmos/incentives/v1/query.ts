@@ -2,8 +2,8 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 
 /**
@@ -135,7 +135,7 @@ export interface QueryGasMeterResponse {
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
    * method.
    */
-  gasMeter: Long;
+  gasMeter: bigint;
 }
 
 /**
@@ -143,7 +143,7 @@ export interface QueryGasMeterResponse {
  * method.
  */
 export interface QueryGasMeterResponseSDKType {
-  gas_meter: Long;
+  gas_meter: bigint;
 }
 
 /**
@@ -849,14 +849,14 @@ export const QueryGasMeterRequest = {
 
 function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
   return {
-    gasMeter: Long.UZERO
+    gasMeter: BigInt("0")
   };
 }
 
 export const QueryGasMeterResponse = {
   encode(message: QueryGasMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.gasMeter.isZero()) {
-      writer.uint32(8).uint64(message.gasMeter);
+    if (message.gasMeter !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.gasMeter.toString()));
     }
 
     return writer;
@@ -872,7 +872,7 @@ export const QueryGasMeterResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.gasMeter = (reader.uint64() as Long);
+          message.gasMeter = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -886,19 +886,19 @@ export const QueryGasMeterResponse = {
 
   fromJSON(object: any): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gasMeter) ? Long.fromValue(object.gasMeter) : Long.UZERO
+      gasMeter: isSet(object.gasMeter) ? (prop => BigInt(prop.toString!!()))(object.gasMeter) : BigInt("0")
     };
   },
 
   toJSON(message: QueryGasMeterResponse): unknown {
     const obj: any = {};
-    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || Long.UZERO).toString());
+    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? Long.fromValue(object.gasMeter) : Long.UZERO;
+    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? (prop => BigInt(prop.toString!!()))(object.gasMeter) : BigInt("0");
     return message;
   },
 
@@ -910,7 +910,7 @@ export const QueryGasMeterResponse = {
 
   fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
     return {
-      gas_meter: isSet(object.gas_meter) ? Long.fromValue(object.gas_meter) : Long.UZERO
+      gas_meter: isSet(object.gas_meter) ? (prop => BigInt(prop.toString!!()))(object.gas_meter) : BigInt("0")
     };
   },
 

@@ -35,7 +35,7 @@ export interface MsgTransfer {
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-  timeoutTimestamp: Long;
+  timeoutTimestamp: bigint;
 }
 
 /**
@@ -50,7 +50,7 @@ export interface MsgTransferSDKType {
   sender: string;
   receiver: string;
   timeout_height?: HeightSDKType;
-  timeout_timestamp: Long;
+  timeout_timestamp: bigint;
 }
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
@@ -67,7 +67,7 @@ function createBaseMsgTransfer(): MsgTransfer {
     sender: "",
     receiver: "",
     timeoutHeight: undefined,
-    timeoutTimestamp: Long.UZERO
+    timeoutTimestamp: BigInt("0")
   };
 }
 
@@ -97,8 +97,8 @@ export const MsgTransfer = {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
 
-    if (!message.timeoutTimestamp.isZero()) {
-      writer.uint32(56).uint64(message.timeoutTimestamp);
+    if (message.timeoutTimestamp !== BigInt(0)) {
+      writer.uint32(56).uint64(Long.fromString(message.timeoutTimestamp.toString()));
     }
 
     return writer;
@@ -138,7 +138,7 @@ export const MsgTransfer = {
           break;
 
         case 7:
-          message.timeoutTimestamp = (reader.uint64() as Long);
+          message.timeoutTimestamp = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -158,7 +158,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0")
     };
   },
 
@@ -170,7 +170,7 @@ export const MsgTransfer = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt("0")).toString());
     return obj;
   },
 
@@ -182,7 +182,7 @@ export const MsgTransfer = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0");
     return message;
   },
 
@@ -206,7 +206,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
+      timeout_timestamp: isSet(object.timeout_timestamp) ? (prop => BigInt(prop.toString!!()))(object.timeout_timestamp) : BigInt("0")
     };
   },
 

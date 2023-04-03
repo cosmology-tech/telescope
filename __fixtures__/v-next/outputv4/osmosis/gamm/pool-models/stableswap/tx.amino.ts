@@ -73,7 +73,7 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        scalingFactors: scaling_factors.map(el0 => Long.fromString(el0)),
+        scalingFactors: scaling_factors.map(el0 => BigInt(el0)),
         futurePoolGovernor: future_pool_governor,
         scalingFactorController: scaling_factor_controller
       };
@@ -99,8 +99,8 @@ export const AminoConverter = {
     }: MsgStableSwapAdjustScalingFactorsAminoType["value"]): MsgStableSwapAdjustScalingFactors => {
       return {
         sender,
-        poolId: Long.fromString(pool_id),
-        scalingFactors: scaling_factors.map(el0 => Long.fromString(el0))
+        poolId: BigInt(pool_id),
+        scalingFactors: scaling_factors.map(el0 => BigInt(el0))
       };
     }
   }

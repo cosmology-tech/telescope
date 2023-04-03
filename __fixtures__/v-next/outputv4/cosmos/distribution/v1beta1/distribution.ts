@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /** Params defines the set of params for the distribution module. */
@@ -65,7 +65,7 @@ export interface ValidatorHistoricalRewardsSDKType {
  */
 export interface ValidatorCurrentRewards {
   rewards: DecCoin[];
-  period: Long;
+  period: bigint;
 }
 
 /**
@@ -75,7 +75,7 @@ export interface ValidatorCurrentRewards {
  */
 export interface ValidatorCurrentRewardsSDKType {
   rewards: DecCoinSDKType[];
-  period: Long;
+  period: bigint;
 }
 
 /**
@@ -117,7 +117,7 @@ export interface ValidatorOutstandingRewardsSDKType {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEvent {
-  validatorPeriod: Long;
+  validatorPeriod: bigint;
   fraction: string;
 }
 
@@ -128,7 +128,7 @@ export interface ValidatorSlashEvent {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEventSDKType {
-  validator_period: Long;
+  validator_period: bigint;
   fraction: string;
 }
 
@@ -185,9 +185,9 @@ export interface CommunityPoolSpendProposalSDKType {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfo {
-  previousPeriod: Long;
+  previousPeriod: bigint;
   stake: string;
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -199,9 +199,9 @@ export interface DelegatorStartingInfo {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfoSDKType {
-  previous_period: Long;
+  previous_period: bigint;
   stake: string;
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -471,7 +471,7 @@ export const ValidatorHistoricalRewards = {
 function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
   return {
     rewards: [],
-    period: Long.UZERO
+    period: BigInt("0")
   };
 }
 
@@ -481,8 +481,8 @@ export const ValidatorCurrentRewards = {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
 
-    if (!message.period.isZero()) {
-      writer.uint32(16).uint64(message.period);
+    if (message.period !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.period.toString()));
     }
 
     return writer;
@@ -502,7 +502,7 @@ export const ValidatorCurrentRewards = {
           break;
 
         case 2:
-          message.period = (reader.uint64() as Long);
+          message.period = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -517,7 +517,7 @@ export const ValidatorCurrentRewards = {
   fromJSON(object: any): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
     };
   },
 
@@ -530,14 +530,14 @@ export const ValidatorCurrentRewards = {
       obj.rewards = [];
     }
 
-    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
+    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
     return message;
   },
 
@@ -551,7 +551,7 @@ export const ValidatorCurrentRewards = {
   fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
     };
   },
 
@@ -746,15 +746,15 @@ export const ValidatorOutstandingRewards = {
 
 function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
   return {
-    validatorPeriod: Long.UZERO,
+    validatorPeriod: BigInt("0"),
     fraction: ""
   };
 }
 
 export const ValidatorSlashEvent = {
   encode(message: ValidatorSlashEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.validatorPeriod.isZero()) {
-      writer.uint32(8).uint64(message.validatorPeriod);
+    if (message.validatorPeriod !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.validatorPeriod.toString()));
     }
 
     if (message.fraction !== "") {
@@ -774,7 +774,7 @@ export const ValidatorSlashEvent = {
 
       switch (tag >>> 3) {
         case 1:
-          message.validatorPeriod = (reader.uint64() as Long);
+          message.validatorPeriod = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -792,21 +792,21 @@ export const ValidatorSlashEvent = {
 
   fromJSON(object: any): ValidatorSlashEvent {
     return {
-      validatorPeriod: isSet(object.validatorPeriod) ? Long.fromValue(object.validatorPeriod) : Long.UZERO,
+      validatorPeriod: isSet(object.validatorPeriod) ? (prop => BigInt(prop.toString!!()))(object.validatorPeriod) : BigInt("0"),
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
 
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
-    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || Long.UZERO).toString());
+    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || BigInt("0")).toString());
     message.fraction !== undefined && (obj.fraction = message.fraction);
     return obj;
   },
 
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? Long.fromValue(object.validatorPeriod) : Long.UZERO;
+    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.validatorPeriod) : BigInt("0");
     message.fraction = object.fraction ?? "";
     return message;
   },
@@ -820,7 +820,7 @@ export const ValidatorSlashEvent = {
 
   fromSDKJSON(object: any): ValidatorSlashEventSDKType {
     return {
-      validator_period: isSet(object.validator_period) ? Long.fromValue(object.validator_period) : Long.UZERO,
+      validator_period: isSet(object.validator_period) ? (prop => BigInt(prop.toString!!()))(object.validator_period) : BigInt("0"),
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
@@ -1142,24 +1142,24 @@ export const CommunityPoolSpendProposal = {
 
 function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
   return {
-    previousPeriod: Long.UZERO,
+    previousPeriod: BigInt("0"),
     stake: "",
-    height: Long.UZERO
+    height: BigInt("0")
   };
 }
 
 export const DelegatorStartingInfo = {
   encode(message: DelegatorStartingInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.previousPeriod.isZero()) {
-      writer.uint32(8).uint64(message.previousPeriod);
+    if (message.previousPeriod !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.previousPeriod.toString()));
     }
 
     if (message.stake !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.stake, 18).atomics);
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(24).uint64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.height.toString()));
     }
 
     return writer;
@@ -1175,7 +1175,7 @@ export const DelegatorStartingInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.previousPeriod = (reader.uint64() as Long);
+          message.previousPeriod = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1183,7 +1183,7 @@ export const DelegatorStartingInfo = {
           break;
 
         case 3:
-          message.height = (reader.uint64() as Long);
+          message.height = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1197,25 +1197,25 @@ export const DelegatorStartingInfo = {
 
   fromJSON(object: any): DelegatorStartingInfo {
     return {
-      previousPeriod: isSet(object.previousPeriod) ? Long.fromValue(object.previousPeriod) : Long.UZERO,
+      previousPeriod: isSet(object.previousPeriod) ? (prop => BigInt(prop.toString!!()))(object.previousPeriod) : BigInt("0"),
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
     };
   },
 
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
-    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || Long.UZERO).toString());
+    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || BigInt("0")).toString());
     message.stake !== undefined && (obj.stake = message.stake);
-    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? Long.fromValue(object.previousPeriod) : Long.UZERO;
+    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.previousPeriod) : BigInt("0");
     message.stake = object.stake ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
     return message;
   },
 
@@ -1229,9 +1229,9 @@ export const DelegatorStartingInfo = {
 
   fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
     return {
-      previous_period: isSet(object.previous_period) ? Long.fromValue(object.previous_period) : Long.UZERO,
+      previous_period: isSet(object.previous_period) ? (prop => BigInt(prop.toString!!()))(object.previous_period) : BigInt("0"),
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
     };
   },
 

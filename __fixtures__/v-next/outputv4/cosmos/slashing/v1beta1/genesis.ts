@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /** GenesisState defines the slashing module's genesis state. */
@@ -67,7 +67,7 @@ export interface ValidatorMissedBlocksSDKType {
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
   /** index is the height at which the block was missed. */
-  index: Long;
+  index: bigint;
 
   /** missed is the missed status. */
   missed: boolean;
@@ -75,7 +75,7 @@ export interface MissedBlock {
 
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {
-  index: Long;
+  index: bigint;
   missed: boolean;
 }
 
@@ -400,15 +400,15 @@ export const ValidatorMissedBlocks = {
 
 function createBaseMissedBlock(): MissedBlock {
   return {
-    index: Long.ZERO,
+    index: BigInt("0"),
     missed: false
   };
 }
 
 export const MissedBlock = {
   encode(message: MissedBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.index.isZero()) {
-      writer.uint32(8).int64(message.index);
+    if (message.index !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.index.toString()));
     }
 
     if (message.missed === true) {
@@ -428,7 +428,7 @@ export const MissedBlock = {
 
       switch (tag >>> 3) {
         case 1:
-          message.index = (reader.int64() as Long);
+          message.index = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -446,21 +446,21 @@ export const MissedBlock = {
 
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },
 
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
 
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    message.index = object.index !== undefined && object.index !== null ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0");
     message.missed = object.missed ?? false;
     return message;
   },
@@ -474,7 +474,7 @@ export const MissedBlock = {
 
   fromSDKJSON(object: any): MissedBlockSDKType {
     return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },

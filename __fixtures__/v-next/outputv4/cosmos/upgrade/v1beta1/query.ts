@@ -1,6 +1,6 @@
 import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
+import { Long, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /**
@@ -55,7 +55,7 @@ export interface QueryAppliedPlanRequestSDKType {
  */
 export interface QueryAppliedPlanResponse {
   /** height is the block height at which the plan was applied. */
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -63,7 +63,7 @@ export interface QueryAppliedPlanResponse {
  * method.
  */
 export interface QueryAppliedPlanResponseSDKType {
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface QueryUpgradedConsensusStateRequest {
    * last height of the current chain must be sent in request
    * as this is the height under which next consensus state is stored
    */
-  lastHeight: Long;
+  lastHeight: bigint;
 }
 
 /**
@@ -87,7 +87,7 @@ export interface QueryUpgradedConsensusStateRequest {
 
 /** @deprecated */
 export interface QueryUpgradedConsensusStateRequestSDKType {
-  last_height: Long;
+  last_height: bigint;
 }
 
 /**
@@ -397,14 +397,14 @@ export const QueryAppliedPlanRequest = {
 
 function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
   return {
-    height: Long.ZERO
+    height: BigInt("0")
   };
 }
 
 export const QueryAppliedPlanResponse = {
   encode(message: QueryAppliedPlanResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.height.toString()));
     }
 
     return writer;
@@ -420,7 +420,7 @@ export const QueryAppliedPlanResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -434,19 +434,19 @@ export const QueryAppliedPlanResponse = {
 
   fromJSON(object: any): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
     };
   },
 
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
     return message;
   },
 
@@ -458,7 +458,7 @@ export const QueryAppliedPlanResponse = {
 
   fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
     };
   },
 
@@ -472,14 +472,14 @@ export const QueryAppliedPlanResponse = {
 
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {
-    lastHeight: Long.ZERO
+    lastHeight: BigInt("0")
   };
 }
 
 export const QueryUpgradedConsensusStateRequest = {
   encode(message: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.lastHeight.isZero()) {
-      writer.uint32(8).int64(message.lastHeight);
+    if (message.lastHeight !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.lastHeight.toString()));
     }
 
     return writer;
@@ -495,7 +495,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lastHeight = (reader.int64() as Long);
+          message.lastHeight = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -509,19 +509,19 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.lastHeight) ? Long.fromValue(object.lastHeight) : Long.ZERO
+      lastHeight: isSet(object.lastHeight) ? (prop => BigInt(prop.toString!!()))(object.lastHeight) : BigInt("0")
     };
   },
 
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
-    message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || Long.ZERO).toString());
+    message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
+    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? (prop => BigInt(prop.toString!!()))(object.lastHeight) : BigInt("0");
     return message;
   },
 
@@ -533,7 +533,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
     return {
-      last_height: isSet(object.last_height) ? Long.fromValue(object.last_height) : Long.ZERO
+      last_height: isSet(object.last_height) ? (prop => BigInt(prop.toString!!()))(object.last_height) : BigInt("0")
     };
   },
 

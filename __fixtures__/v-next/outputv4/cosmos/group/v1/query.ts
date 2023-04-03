@@ -7,12 +7,12 @@ export const protobufPackage = "cosmos.group.v1";
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
   /** group_id is the unique ID of the group. */
-  groupId: Long;
+  groupId: bigint;
 }
 
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequestSDKType {
-  group_id: Long;
+  group_id: bigint;
 }
 
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
@@ -51,7 +51,7 @@ export interface QueryGroupPolicyInfoResponseSDKType {
 /** QueryGroupMembersRequest is the Query/GroupMembers request type. */
 export interface QueryGroupMembersRequest {
   /** group_id is the unique ID of the group. */
-  groupId: Long;
+  groupId: bigint;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -59,7 +59,7 @@ export interface QueryGroupMembersRequest {
 
 /** QueryGroupMembersRequest is the Query/GroupMembers request type. */
 export interface QueryGroupMembersRequestSDKType {
-  group_id: Long;
+  group_id: bigint;
   pagination?: PageRequestSDKType;
 }
 
@@ -111,7 +111,7 @@ export interface QueryGroupsByAdminResponseSDKType {
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
 export interface QueryGroupPoliciesByGroupRequest {
   /** group_id is the unique ID of the group policy's group. */
-  groupId: Long;
+  groupId: bigint;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -119,7 +119,7 @@ export interface QueryGroupPoliciesByGroupRequest {
 
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
 export interface QueryGroupPoliciesByGroupRequestSDKType {
-  group_id: Long;
+  group_id: bigint;
   pagination?: PageRequestSDKType;
 }
 
@@ -171,12 +171,12 @@ export interface QueryGroupPoliciesByAdminResponseSDKType {
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: Long;
+  proposalId: bigint;
 }
 
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequestSDKType {
-  proposal_id: Long;
+  proposal_id: bigint;
 }
 
 /** QueryProposalResponse is the Query/Proposal response type. */
@@ -223,7 +223,7 @@ export interface QueryProposalsByGroupPolicyResponseSDKType {
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
 export interface QueryVoteByProposalVoterRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: Long;
+  proposalId: bigint;
 
   /** voter is a proposal voter account address. */
   voter: string;
@@ -231,7 +231,7 @@ export interface QueryVoteByProposalVoterRequest {
 
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
 export interface QueryVoteByProposalVoterRequestSDKType {
-  proposal_id: Long;
+  proposal_id: bigint;
   voter: string;
 }
 
@@ -249,7 +249,7 @@ export interface QueryVoteByProposalVoterResponseSDKType {
 /** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
 export interface QueryVotesByProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: Long;
+  proposalId: bigint;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -257,7 +257,7 @@ export interface QueryVotesByProposalRequest {
 
 /** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
 export interface QueryVotesByProposalRequestSDKType {
-  proposal_id: Long;
+  proposal_id: bigint;
   pagination?: PageRequestSDKType;
 }
 
@@ -339,12 +339,12 @@ export interface QueryGroupsByMemberResponseSDKType {
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequest {
   /** proposal_id is the unique id of a proposal. */
-  proposalId: Long;
+  proposalId: bigint;
 }
 
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequestSDKType {
-  proposal_id: Long;
+  proposal_id: bigint;
 }
 
 /** QueryTallyResultResponse is the Query/TallyResult response type. */
@@ -360,14 +360,14 @@ export interface QueryTallyResultResponseSDKType {
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
   return {
-    groupId: Long.UZERO
+    groupId: BigInt("0")
   };
 }
 
 export const QueryGroupInfoRequest = {
   encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.groupId.isZero()) {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.groupId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.groupId.toString()));
     }
 
     return writer;
@@ -383,7 +383,7 @@ export const QueryGroupInfoRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = (reader.uint64() as Long);
+          message.groupId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -397,19 +397,19 @@ export const QueryGroupInfoRequest = {
 
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0")
     };
   },
 
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
     return message;
   },
 
@@ -421,7 +421,7 @@ export const QueryGroupInfoRequest = {
 
   fromSDKJSON(object: any): QueryGroupInfoRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0")
     };
   },
 
@@ -660,15 +660,15 @@ export const QueryGroupPolicyInfoResponse = {
 
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
   return {
-    groupId: Long.UZERO,
+    groupId: BigInt("0"),
     pagination: undefined
   };
 }
 
 export const QueryGroupMembersRequest = {
   encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.groupId.isZero()) {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.groupId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.groupId.toString()));
     }
 
     if (message.pagination !== undefined) {
@@ -688,7 +688,7 @@ export const QueryGroupMembersRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = (reader.uint64() as Long);
+          message.groupId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -706,21 +706,21 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt("0")).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -734,7 +734,7 @@ export const QueryGroupMembersRequest = {
 
   fromSDKJSON(object: any): QueryGroupMembersRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1044,15 +1044,15 @@ export const QueryGroupsByAdminResponse = {
 
 function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
   return {
-    groupId: Long.UZERO,
+    groupId: BigInt("0"),
     pagination: undefined
   };
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
   encode(message: QueryGroupPoliciesByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.groupId.isZero()) {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.groupId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.groupId.toString()));
     }
 
     if (message.pagination !== undefined) {
@@ -1072,7 +1072,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.groupId = (reader.uint64() as Long);
+          message.groupId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1090,21 +1090,21 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt("0")).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -1118,7 +1118,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromSDKJSON(object: any): QueryGroupPoliciesByGroupRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1428,14 +1428,14 @@ export const QueryGroupPoliciesByAdminResponse = {
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return {
-    proposalId: Long.UZERO
+    proposalId: BigInt("0")
   };
 }
 
 export const QueryProposalRequest = {
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.proposalId.isZero()) {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
     }
 
     return writer;
@@ -1451,7 +1451,7 @@ export const QueryProposalRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = (reader.uint64() as Long);
+          message.proposalId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1465,19 +1465,19 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
     };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
     return message;
   },
 
@@ -1489,7 +1489,7 @@ export const QueryProposalRequest = {
 
   fromSDKJSON(object: any): QueryProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
     };
   },
 
@@ -1770,15 +1770,15 @@ export const QueryProposalsByGroupPolicyResponse = {
 
 function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
   return {
-    proposalId: Long.UZERO,
+    proposalId: BigInt("0"),
     voter: ""
   };
 }
 
 export const QueryVoteByProposalVoterRequest = {
   encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.proposalId.isZero()) {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
     }
 
     if (message.voter !== "") {
@@ -1798,7 +1798,7 @@ export const QueryVoteByProposalVoterRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = (reader.uint64() as Long);
+          message.proposalId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1816,21 +1816,21 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
 
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
     message.voter = object.voter ?? "";
     return message;
   },
@@ -1844,7 +1844,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromSDKJSON(object: any): QueryVoteByProposalVoterRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -1935,15 +1935,15 @@ export const QueryVoteByProposalVoterResponse = {
 
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
   return {
-    proposalId: Long.UZERO,
+    proposalId: BigInt("0"),
     pagination: undefined
   };
 }
 
 export const QueryVotesByProposalRequest = {
   encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.proposalId.isZero()) {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
     }
 
     if (message.pagination !== undefined) {
@@ -1963,7 +1963,7 @@ export const QueryVotesByProposalRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = (reader.uint64() as Long);
+          message.proposalId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -1981,21 +1981,21 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
 
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -2009,7 +2009,7 @@ export const QueryVotesByProposalRequest = {
 
   fromSDKJSON(object: any): QueryVotesByProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -2511,14 +2511,14 @@ export const QueryGroupsByMemberResponse = {
 
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return {
-    proposalId: Long.UZERO
+    proposalId: BigInt("0")
   };
 }
 
 export const QueryTallyResultRequest = {
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.proposalId.isZero()) {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
     }
 
     return writer;
@@ -2534,7 +2534,7 @@ export const QueryTallyResultRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = (reader.uint64() as Long);
+          message.proposalId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -2548,19 +2548,19 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
     };
   },
 
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
     return message;
   },
 
@@ -2572,7 +2572,7 @@ export const QueryTallyResultRequest = {
 
   fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
     };
   },
 

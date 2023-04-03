@@ -30,7 +30,7 @@ export interface Plan {
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
    */
-  height: Long;
+  height: bigint;
 
   /**
    * Any application specific upgrade info to be included on-chain
@@ -54,7 +54,7 @@ export interface PlanSDKType {
 
   /** @deprecated */
   time?: Date;
-  height: Long;
+  height: bigint;
   info: string;
 
   /** @deprecated */
@@ -125,7 +125,7 @@ export interface ModuleVersion {
   name: string;
 
   /** consensus version of the app module */
-  version: Long;
+  version: bigint;
 }
 
 /**
@@ -135,14 +135,14 @@ export interface ModuleVersion {
  */
 export interface ModuleVersionSDKType {
   name: string;
-  version: Long;
+  version: bigint;
 }
 
 function createBasePlan(): Plan {
   return {
     name: "",
     time: undefined,
-    height: Long.ZERO,
+    height: BigInt("0"),
     info: "",
     upgradedClientState: undefined
   };
@@ -158,8 +158,8 @@ export const Plan = {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(24).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.info !== "") {
@@ -191,7 +191,7 @@ export const Plan = {
           break;
 
         case 3:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -215,7 +215,7 @@ export const Plan = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
       info: isSet(object.info) ? String(object.info) : "",
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
     };
@@ -225,7 +225,7 @@ export const Plan = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.info !== undefined && (obj.info = message.info);
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
@@ -235,7 +235,7 @@ export const Plan = {
     const message = createBasePlan();
     message.name = object.name ?? "";
     message.time = object.time ?? undefined;
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
     message.info = object.info ?? "";
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
@@ -255,7 +255,7 @@ export const Plan = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
       info: isSet(object.info) ? String(object.info) : "",
       upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
     };
@@ -471,7 +471,7 @@ export const CancelSoftwareUpgradeProposal = {
 function createBaseModuleVersion(): ModuleVersion {
   return {
     name: "",
-    version: Long.UZERO
+    version: BigInt("0")
   };
 }
 
@@ -481,8 +481,8 @@ export const ModuleVersion = {
       writer.uint32(10).string(message.name);
     }
 
-    if (!message.version.isZero()) {
-      writer.uint32(16).uint64(message.version);
+    if (message.version !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.version.toString()));
     }
 
     return writer;
@@ -502,7 +502,7 @@ export const ModuleVersion = {
           break;
 
         case 2:
-          message.version = (reader.uint64() as Long);
+          message.version = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -517,21 +517,21 @@ export const ModuleVersion = {
   fromJSON(object: any): ModuleVersion {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0")
     };
   },
 
   toJSON(message: ModuleVersion): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());
+    message.version !== undefined && (obj.version = (message.version || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
+    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
     return message;
   },
 
@@ -545,7 +545,7 @@ export const ModuleVersion = {
   fromSDKJSON(object: any): ModuleVersionSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
+      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0")
     };
   },
 

@@ -3,8 +3,8 @@ import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON
 import { HttpRequest, HttpRequestSDKType } from "./http_request";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructSDKType } from "../../../protobuf/struct";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -161,7 +161,7 @@ export interface LogEntrySourceLocation {
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: Long;
+  line: bigint;
 
   /**
    * Optional. Human-readable name of the function or method being invoked, with
@@ -180,7 +180,7 @@ export interface LogEntrySourceLocation {
  */
 export interface LogEntrySourceLocationSDKType {
   file: string;
-  line: Long;
+  line: bigint;
   function: string;
 }
 
@@ -682,7 +682,7 @@ export const LogEntryOperation = {
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
-    line: Long.ZERO,
+    line: BigInt("0"),
     function: ""
   };
 }
@@ -693,8 +693,8 @@ export const LogEntrySourceLocation = {
       writer.uint32(10).string(message.file);
     }
 
-    if (!message.line.isZero()) {
-      writer.uint32(16).int64(message.line);
+    if (message.line !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.line.toString()));
     }
 
     if (message.function !== "") {
@@ -718,7 +718,7 @@ export const LogEntrySourceLocation = {
           break;
 
         case 2:
-          message.line = (reader.int64() as Long);
+          message.line = BigInt(reader.int64().toString());
           break;
 
         case 3:
@@ -737,7 +737,7 @@ export const LogEntrySourceLocation = {
   fromJSON(object: any): LogEntrySourceLocation {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
+      line: isSet(object.line) ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0"),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
@@ -745,7 +745,7 @@ export const LogEntrySourceLocation = {
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = (message.line || Long.ZERO).toString());
+    message.line !== undefined && (obj.line = (message.line || BigInt("0")).toString());
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
@@ -753,7 +753,7 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
+    message.line = object.line !== undefined && object.line !== null ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0");
     message.function = object.function ?? "";
     return message;
   },
@@ -769,7 +769,7 @@ export const LogEntrySourceLocation = {
   fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
+      line: isSet(object.line) ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0"),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },

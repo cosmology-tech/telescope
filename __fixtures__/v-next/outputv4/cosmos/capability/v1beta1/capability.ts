@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.capability.v1beta1";
  * provided to a Capability must be globally unique.
  */
 export interface Capability {
-  index: Long;
+  index: bigint;
 }
 
 /**
@@ -15,7 +15,7 @@ export interface Capability {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilitySDKType {
-  index: Long;
+  index: bigint;
 }
 
 /**
@@ -54,14 +54,14 @@ export interface CapabilityOwnersSDKType {
 
 function createBaseCapability(): Capability {
   return {
-    index: Long.UZERO
+    index: BigInt("0")
   };
 }
 
 export const Capability = {
   encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.index.isZero()) {
-      writer.uint32(8).uint64(message.index);
+    if (message.index !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.index.toString()));
     }
 
     return writer;
@@ -77,7 +77,7 @@ export const Capability = {
 
       switch (tag >>> 3) {
         case 1:
-          message.index = (reader.uint64() as Long);
+          message.index = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -91,19 +91,19 @@ export const Capability = {
 
   fromJSON(object: any): Capability {
     return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
+      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0")
     };
   },
 
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
+    message.index = object.index !== undefined && object.index !== null ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0");
     return message;
   },
 
@@ -115,7 +115,7 @@ export const Capability = {
 
   fromSDKJSON(object: any): CapabilitySDKType {
     return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
+      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0")
     };
   },
 
