@@ -35,11 +35,12 @@ export declare const baseTypes: {
     uint32(args: DecodeMethod): t.CallExpression;
     fixed32(args: DecodeMethod): t.CallExpression;
     sfixed32(args: DecodeMethod): t.CallExpression;
-    int64(args: DecodeMethod): t.TSAsExpression;
-    sint64(args: DecodeMethod): t.TSAsExpression;
-    uint64(args: DecodeMethod): t.TSAsExpression;
-    fixed64(args: DecodeMethod): t.TSAsExpression;
-    sfixed64(args: DecodeMethod): t.TSAsExpression;
+    long(type: string, args: DecodeMethod): t.CallExpression | t.TSAsExpression;
+    int64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
+    sint64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
+    uint64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
+    fixed64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
+    sfixed64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
     protoType(args: DecodeMethod): t.CallExpression;
     anyType(args: DecodeMethod): t.TSAsExpression;
     type(args: DecodeMethod): t.CallExpression | t.TSAsExpression;

@@ -23,7 +23,19 @@ export const TypeLong = {
   },
 
   fromValueExpressions: {
-    bigint: t.identifier('BigInt'),
+    bigint: t.arrowFunctionExpression(
+      [t.identifier('prop')],
+      t.callExpression(t.identifier('BigInt'), [
+        t.callExpression(
+          t.tSNonNullExpression(
+            t.tSNonNullExpression(
+              t.memberExpression(t.identifier('prop'), t.identifier('toString'))
+            )
+          ),
+          []
+        )
+      ])
+    ),
     long: t.memberExpression(t.identifier('Long'), t.identifier('fromValue'))
   },
 

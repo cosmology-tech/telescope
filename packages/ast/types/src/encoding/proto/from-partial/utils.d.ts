@@ -40,11 +40,11 @@ export declare const arrayTypes: {
     fixed32(): t.Identifier;
     sfixed32(): t.Identifier;
     enum(): t.Identifier;
-    long(): t.CallExpression;
-    int64(): t.CallExpression;
-    uint64(): t.CallExpression;
-    sint64(): t.CallExpression;
-    fixed64(): t.CallExpression;
-    sfixed64(): t.CallExpression;
+    long(args: FromPartialMethod): t.CallExpression;
+    int64(args: FromPartialMethod): t.CallExpression;
+    uint64(args: FromPartialMethod): t.CallExpression;
+    sint64(args: FromPartialMethod): t.CallExpression;
+    fixed64(args: FromPartialMethod): t.CallExpression;
+    sfixed64(args: FromPartialMethod): t.CallExpression;
     type(args: FromPartialMethod): t.CallExpression;
 };
