@@ -2,6 +2,15 @@ import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 
 export const TypeLong = {
+  propTypes: {
+    bigint: 'bigint',
+    long: 'Long'
+  },
+  propIdentifiers: {
+    bigint: t.identifier('bigint'),
+    long: t.identifier('Long')
+  },
+
   types: {
     bigint: 'BigInt',
     long: 'Long'
@@ -64,8 +73,16 @@ export const TypeLong = {
     }
   },
 
+  getPropType: (ctx: GenericParseContext): string => {
+    return TypeLong.getNode(ctx, TypeLong.propTypes);
+  },
+
   getType: (ctx: GenericParseContext): string => {
     return TypeLong.getNode(ctx, TypeLong.types);
+  },
+
+  getPropIdentifier: (ctx: GenericParseContext): t.Identifier => {
+    return TypeLong.getNode(ctx, TypeLong.propIdentifiers);
   },
 
   getIdentifier: (ctx: GenericParseContext): t.Identifier => {

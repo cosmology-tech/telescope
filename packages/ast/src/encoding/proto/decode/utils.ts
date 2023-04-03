@@ -328,7 +328,7 @@ export const baseTypes = {
                   []
               ),
               t.tsTypeReference(
-                  TypeLong.getIdentifier(args.context)
+                  TypeLong.getPropIdentifier(args.context)
               )
           );
       }

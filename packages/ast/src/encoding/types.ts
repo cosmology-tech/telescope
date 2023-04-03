@@ -302,7 +302,7 @@ export const getTSType = (context: GenericParseContext, type: string) => {
         case 'fixed64':
         case 'sfixed64':
             TypeLong.addUtil(context);
-            return t.tsTypeReference(TypeLong.getIdentifier(context))
+            return t.tsTypeReference(TypeLong.getPropIdentifier(context))
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':

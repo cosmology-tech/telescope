@@ -102,6 +102,9 @@ const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod
             valueExpression = t.callExpression(
               t.memberExpression(valueExpression, t.identifier('toString')),
               [])
+
+            args.context.addUtil('Long');
+
             // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
             valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
               [
@@ -1113,6 +1116,9 @@ export const arrayTypes = {
               valueExpression = t.callExpression(
                 t.memberExpression(valueExpression, t.identifier('toString')),
                 []);
+
+              args.context.addUtil('Long');
+
               // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
               valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
                 [

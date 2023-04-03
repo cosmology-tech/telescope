@@ -397,7 +397,7 @@ export const fromAminoJSON = {
             case 'fixed64':
             case 'sfixed64':
                 TypeLong.addUtil(args.context);
-                valueTypeType = TypeLong.getType(args.context);
+                valueTypeType = TypeLong.getPropType(args.context);
                 fromAminoJSON = t.callExpression(
                     TypeLong.getFromValue(args.context),
                     [
@@ -406,7 +406,7 @@ export const fromAminoJSON = {
                             t.tsUnionType(
                                 [
                                     t.tsTypeReference(
-                                        TypeLong.getIdentifier(args.context)
+                                        TypeLong.getPropIdentifier(args.context)
                                     ),
                                     t.tsStringKeyword()
                                 ]
@@ -444,7 +444,7 @@ export const fromAminoJSON = {
                         a
                     ]
                 );
-                keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
+                keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
                 break;
             case 'uint32':
             case 'int32':

@@ -359,14 +359,14 @@ export const fromSDKJSON = {
       case 'sfixed64':
         TypeLong.addUtil(args.context);
 
-        valueTypeType = TypeLong.getType(args.context);
+        valueTypeType = TypeLong.getPropType(args.context);
         fromSDKJSON = t.callExpression(
           TypeLong.getFromValue(args.context),
           [
             t.tsAsExpression(
               t.identifier('value'),
               t.tsUnionType([
-                t.tsTypeReference(TypeLong.getIdentifier(args.context)),
+                t.tsTypeReference(TypeLong.getPropIdentifier(args.context)),
                 t.tsStringKeyword()
               ])
             )
@@ -398,7 +398,7 @@ export const fromSDKJSON = {
         TypeLong.addUtil(args.context);
 
         wrapKey = (a) => t.callExpression(t.identifier('Number'), [a]);
-        keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
+        keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
         break;
       case 'uint32':
       case 'int32':

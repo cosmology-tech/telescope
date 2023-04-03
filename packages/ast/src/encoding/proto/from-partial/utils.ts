@@ -287,7 +287,7 @@ export const fromPartial = {
             case 'sfixed64':
                 TypeLong.addUtil(args.context);
 
-                valueTypeType = TypeLong.getType(args.context);
+                valueTypeType = TypeLong.getPropType(args.context);
                 fromPartial = TypeLong.getFromValue(args.context);
                 break;
             default:
@@ -318,7 +318,7 @@ export const fromPartial = {
 
                 TypeLong.addUtil(args.context);
 
-                keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
+                keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
                 break;
             case 'int32':
             case 'uint32':

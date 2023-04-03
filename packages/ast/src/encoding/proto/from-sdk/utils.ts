@@ -235,7 +235,7 @@ export const fromSDK = {
             case 'sfixed64':
                 TypeLong.addUtil(args.context);
 
-                valueTypeType = TypeLong.getType(args.context);
+                valueTypeType = TypeLong.getPropType(args.context);
                 fromSDK = t.callExpression(
                     TypeLong.getFromValue(args.context),
                     [
@@ -244,7 +244,7 @@ export const fromSDK = {
                             t.tsUnionType(
                                 [
                                     t.tsTypeReference(
-                                        TypeLong.getIdentifier(args.context)
+                                        TypeLong.getPropIdentifier(args.context)
                                     ),
                                     t.tsStringKeyword()
                                 ]
@@ -286,7 +286,7 @@ export const fromSDK = {
 
                 TypeLong.addUtil(args.context);
 
-                keyTypeType = t.tsTypeReference(TypeLong.getIdentifier(args.context));
+                keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
                 break;
             case 'uint32':
             case 'int32':
