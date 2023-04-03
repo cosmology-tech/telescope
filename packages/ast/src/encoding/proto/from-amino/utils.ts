@@ -708,7 +708,7 @@ export const arrayTypes = {
 
 export const fromAminoMessages = {
     height(context: ProtoParseContext, name: string, proto: ProtoType) {
-        context.addUtil('Long');
+        TypeLong.addUtil(context);
 
         const keepCase = context.options.prototypes.parser.keepCase;
         const casing = keepCase ? (str) => str : camel;
@@ -744,7 +744,7 @@ export const fromAminoMessages = {
 
     },
     duration(context: ProtoParseContext, name: string, proto: ProtoType) {
-        context.addUtil('Long');
+        TypeLong.addUtil(context);
         return [
             t.variableDeclaration('const', [
                 t.variableDeclarator(
