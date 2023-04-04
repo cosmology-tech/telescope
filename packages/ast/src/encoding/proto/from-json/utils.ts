@@ -147,14 +147,11 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.callExpression(
-                    TypeLong.getFromValue(args.context),
-                    [
+                TypeLong.getFromValueWithArgs(args.context,
                         t.memberExpression(
                             t.identifier('object'),
                             t.identifier(objProp)
                         )
-                    ]
                 ),
                 getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
@@ -437,21 +434,18 @@ export const fromJSON = {
                 TypeLong.addUtil(args.context);
 
                 valueTypeType = TypeLong.getPropType(args.context);
-                fromJSON = t.callExpression(
-                    TypeLong.getFromValue(args.context),
-                    [
-                        t.tsAsExpression(
-                            t.identifier('value'),
-                            t.tsUnionType(
-                                [
-                                    t.tsTypeReference(
-                                        TypeLong.getPropIdentifier(args.context)
-                                    ),
-                                    t.tsStringKeyword()
-                                ]
-                            )
+                fromJSON = TypeLong.getFromValueWithArgs(args.context,
+                    t.tsAsExpression(
+                        t.identifier('value'),
+                        t.tsUnionType(
+                            [
+                                t.tsTypeReference(
+                                    TypeLong.getPropIdentifier(args.context)
+                                ),
+                                t.tsStringKeyword()
+                            ]
                         )
-                    ]
+                    )
                 )
                 break;
             default:
@@ -668,12 +662,7 @@ export const arrayTypes = {
     long(args: FromJSONMethod) {
         TypeLong.addUtil(args.context);
 
-        return t.callExpression(
-            TypeLong.getFromValue(args.context),
-            [
-                t.identifier('e')
-            ]
-        );
+        return TypeLong.getFromValueWithArgs(args.context, t.identifier('e'));
     },
     uint64(args: FromJSONMethod) {
         return arrayTypes.long(args);

@@ -257,7 +257,7 @@ export const PeriodLock = {
 
   fromJSON(object: any): PeriodLock {
     return {
-      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0"),
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
@@ -283,7 +283,7 @@ export const PeriodLock = {
 
   fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
-    message.ID = object.ID !== undefined && object.ID !== null ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0");
+    message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt("0");
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.endTime = object.endTime ?? undefined;
@@ -303,7 +303,7 @@ export const PeriodLock = {
 
   fromSDKJSON(object: any): PeriodLockSDKType {
     return {
-      ID: isSet(object.ID) ? (prop => BigInt(prop.toString!!()))(object.ID) : BigInt("0"),
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0"),
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
@@ -515,7 +515,7 @@ export const SyntheticLock = {
 
   fromJSON(object: any): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlyingLockId) ? (prop => BigInt(prop.toString!!()))(object.underlyingLockId) : BigInt("0"),
+      underlyingLockId: isSet(object.underlyingLockId) ? BigInt(object.underlyingLockId.toString()) : BigInt("0"),
       synthDenom: isSet(object.synthDenom) ? String(object.synthDenom) : "",
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
@@ -533,7 +533,7 @@ export const SyntheticLock = {
 
   fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
     const message = createBaseSyntheticLock();
-    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? (prop => BigInt(prop.toString!!()))(object.underlyingLockId) : BigInt("0");
+    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? BigInt(object.underlyingLockId.toString()) : BigInt("0");
     message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
@@ -551,7 +551,7 @@ export const SyntheticLock = {
 
   fromSDKJSON(object: any): SyntheticLockSDKType {
     return {
-      underlying_lock_id: isSet(object.underlying_lock_id) ? (prop => BigInt(prop.toString!!()))(object.underlying_lock_id) : BigInt("0"),
+      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : BigInt("0"),
       synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined

@@ -1113,7 +1113,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 
@@ -1129,7 +1129,7 @@ export const IssueDetails = {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     return message;
   },
 
@@ -1145,7 +1145,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 

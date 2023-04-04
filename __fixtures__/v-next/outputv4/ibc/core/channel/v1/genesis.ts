@@ -158,7 +158,7 @@ export const GenesisState = {
       sendSequences: Array.isArray(object?.sendSequences) ? object.sendSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       recvSequences: Array.isArray(object?.recvSequences) ? object.recvSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       ackSequences: Array.isArray(object?.ackSequences) ? object.ackSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
-      nextChannelSequence: isSet(object.nextChannelSequence) ? (prop => BigInt(prop.toString!!()))(object.nextChannelSequence) : BigInt("0")
+      nextChannelSequence: isSet(object.nextChannelSequence) ? BigInt(object.nextChannelSequence.toString()) : BigInt("0")
     };
   },
 
@@ -220,7 +220,7 @@ export const GenesisState = {
     message.sendSequences = object.sendSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.recvSequences = object.recvSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.ackSequences = object.ackSequences?.map(e => PacketSequence.fromPartial(e)) || [];
-    message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? (prop => BigInt(prop.toString!!()))(object.nextChannelSequence) : BigInt("0");
+    message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? BigInt(object.nextChannelSequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -246,7 +246,7 @@ export const GenesisState = {
       send_sequences: Array.isArray(object?.send_sequences) ? object.send_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
       recv_sequences: Array.isArray(object?.recv_sequences) ? object.recv_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
       ack_sequences: Array.isArray(object?.ack_sequences) ? object.ack_sequences.map((e: any) => PacketSequence.fromSDKJSON(e)) : [],
-      next_channel_sequence: isSet(object.next_channel_sequence) ? (prop => BigInt(prop.toString!!()))(object.next_channel_sequence) : BigInt("0")
+      next_channel_sequence: isSet(object.next_channel_sequence) ? BigInt(object.next_channel_sequence.toString()) : BigInt("0")
     };
   },
 
@@ -360,7 +360,7 @@ export const PacketSequence = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -376,7 +376,7 @@ export const PacketSequence = {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -392,7 +392,7 @@ export const PacketSequence = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 

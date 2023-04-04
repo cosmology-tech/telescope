@@ -342,7 +342,7 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -356,7 +356,7 @@ export const LastValidatorPower = {
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -370,7 +370,7 @@ export const LastValidatorPower = {
   fromSDKJSON(object: any): LastValidatorPowerSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 

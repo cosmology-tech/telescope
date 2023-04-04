@@ -313,12 +313,12 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
-      count: isSet(object.count) ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0"),
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => BigInt(e.toString())) : [],
       linearBuckets: isSet(object.linearBuckets) ? Distribution_LinearBuckets.fromJSON(object.linearBuckets) : undefined,
       exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets) : undefined,
       explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined,
@@ -355,12 +355,12 @@ export const Distribution = {
 
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count !== undefined && object.count !== null ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0");
+    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt("0");
     message.mean = object.mean ?? 0;
     message.minimum = object.minimum ?? 0;
     message.maximum = object.maximum ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-    message.bucketCounts = object.bucketCounts?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
     message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_LinearBuckets.fromPartial(object.linearBuckets) : undefined;
     message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_ExponentialBuckets.fromPartial(object.exponentialBuckets) : undefined;
     message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
@@ -385,12 +385,12 @@ export const Distribution = {
 
   fromSDKJSON(object: any): DistributionSDKType {
     return {
-      count: isSet(object.count) ? (prop => BigInt(prop.toString!!()))(object.count) : BigInt("0"),
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
       sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
-      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e.toString())) : [],
       linear_buckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDKJSON(object.linear_buckets) : undefined,
       exponential_buckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDKJSON(object.exponential_buckets) : undefined,
       explicit_buckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDKJSON(object.explicit_buckets) : undefined,

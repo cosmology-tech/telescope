@@ -32,12 +32,12 @@ export declare const arrayTypes: {
     string(): t.CallExpression;
     bool(): t.CallExpression;
     bytes(args: FromSDKJSONMethod): t.CallExpression;
-    long(args: FromSDKJSONMethod): t.CallExpression;
-    uint64(args: FromSDKJSONMethod): t.CallExpression;
-    int64(args: FromSDKJSONMethod): t.CallExpression;
-    sint64(args: FromSDKJSONMethod): t.CallExpression;
-    fixed64(args: FromSDKJSONMethod): t.CallExpression;
-    sfixed64(args: FromSDKJSONMethod): t.CallExpression;
+    long(args: FromSDKJSONMethod): t.Expression;
+    uint64(args: FromSDKJSONMethod): t.Expression;
+    int64(args: FromSDKJSONMethod): t.Expression;
+    sint64(args: FromSDKJSONMethod): t.Expression;
+    fixed64(args: FromSDKJSONMethod): t.Expression;
+    sfixed64(args: FromSDKJSONMethod): t.Expression;
     number(): t.CallExpression;
     uint32(): t.CallExpression;
     int32(): t.CallExpression;

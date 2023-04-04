@@ -128,10 +128,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? (prop => BigInt(prop.toString!!()))(object.currentEpoch) : BigInt("0"),
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt("0"),
       currentEpochStartTime: isSet(object.currentEpochStartTime) ? new Date(object.currentEpochStartTime) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? (prop => BigInt(prop.toString!!()))(object.currentEpochStartHeight) : BigInt("0")
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0")
     };
   },
 
@@ -152,10 +152,10 @@ export const EpochInfo = {
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.currentEpoch) : BigInt("0");
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt("0");
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? (prop => BigInt(prop.toString!!()))(object.currentEpochStartHeight) : BigInt("0");
+    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -176,10 +176,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? (prop => BigInt(prop.toString!!()))(object.current_epoch) : BigInt("0"),
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt("0"),
       current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
       epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? (prop => BigInt(prop.toString!!()))(object.current_epoch_start_height) : BigInt("0")
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt("0")
     };
   },
 

@@ -886,7 +886,7 @@ export const QueryGasMeterResponse = {
 
   fromJSON(object: any): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gasMeter) ? (prop => BigInt(prop.toString!!()))(object.gasMeter) : BigInt("0")
+      gasMeter: isSet(object.gasMeter) ? BigInt(object.gasMeter.toString()) : BigInt("0")
     };
   },
 
@@ -898,7 +898,7 @@ export const QueryGasMeterResponse = {
 
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? (prop => BigInt(prop.toString!!()))(object.gasMeter) : BigInt("0");
+    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? BigInt(object.gasMeter.toString()) : BigInt("0");
     return message;
   },
 
@@ -910,7 +910,7 @@ export const QueryGasMeterResponse = {
 
   fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
     return {
-      gas_meter: isSet(object.gas_meter) ? (prop => BigInt(prop.toString!!()))(object.gas_meter) : BigInt("0")
+      gas_meter: isSet(object.gas_meter) ? BigInt(object.gas_meter.toString()) : BigInt("0")
     };
   },
 

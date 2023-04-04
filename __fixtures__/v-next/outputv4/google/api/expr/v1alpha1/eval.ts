@@ -306,8 +306,8 @@ export const EvalState_Result = {
 
   fromJSON(object: any): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? (prop => BigInt(prop.toString!!()))(object.expr) : BigInt("0"),
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt("0"),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -320,8 +320,8 @@ export const EvalState_Result = {
 
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? (prop => BigInt(prop.toString!!()))(object.expr) : BigInt("0");
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.expr = object.expr !== undefined && object.expr !== null ? BigInt(object.expr.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -334,8 +334,8 @@ export const EvalState_Result = {
 
   fromSDKJSON(object: any): EvalState_ResultSDKType {
     return {
-      expr: isSet(object.expr) ? (prop => BigInt(prop.toString!!()))(object.expr) : BigInt("0"),
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt("0"),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -591,7 +591,7 @@ export const UnknownSet = {
 
   fromJSON(object: any): UnknownSet {
     return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -609,7 +609,7 @@ export const UnknownSet = {
 
   fromPartial(object: DeepPartial<UnknownSet>): UnknownSet {
     const message = createBaseUnknownSet();
-    message.exprs = object.exprs?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.exprs = object.exprs?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -621,7 +621,7 @@ export const UnknownSet = {
 
   fromSDKJSON(object: any): UnknownSetSDKType {
     return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

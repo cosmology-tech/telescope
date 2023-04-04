@@ -2540,7 +2540,7 @@ export const QueryHistoricalInfoRequest = {
 
   fromJSON(object: any): QueryHistoricalInfoRequest {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -2552,7 +2552,7 @@ export const QueryHistoricalInfoRequest = {
 
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = createBaseQueryHistoricalInfoRequest();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -2564,7 +2564,7 @@ export const QueryHistoricalInfoRequest = {
 
   fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 

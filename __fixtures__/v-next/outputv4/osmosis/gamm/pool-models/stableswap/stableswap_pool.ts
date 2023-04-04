@@ -275,12 +275,12 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
       poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => BigInt(e.toString())) : [],
       scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
   },
@@ -312,12 +312,12 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
-    message.scalingFactors = object.scalingFactors?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
     message.scalingFactorController = object.scalingFactorController ?? "";
     return message;
   },
@@ -338,12 +338,12 @@ export const Pool = {
   fromSDKJSON(object: any): PoolSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
       pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : [],
       scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
     };
   },

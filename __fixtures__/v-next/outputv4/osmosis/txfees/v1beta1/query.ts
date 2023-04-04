@@ -332,7 +332,7 @@ export const QueryDenomSpotPriceResponse = {
 
   fromJSON(object: any): QueryDenomSpotPriceResponse {
     return {
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0"),
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0"),
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
@@ -346,7 +346,7 @@ export const QueryDenomSpotPriceResponse = {
 
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0");
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt("0");
     message.spotPrice = object.spotPrice ?? "";
     return message;
   },
@@ -360,7 +360,7 @@ export const QueryDenomSpotPriceResponse = {
 
   fromSDKJSON(object: any): QueryDenomSpotPriceResponseSDKType {
     return {
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0"),
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0"),
       spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
     };
   },
@@ -488,7 +488,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromJSON(object: any): QueryDenomPoolIdResponse {
     return {
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
     };
   },
 
@@ -500,7 +500,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0");
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt("0");
     return message;
   },
 
@@ -512,7 +512,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromSDKJSON(object: any): QueryDenomPoolIdResponseSDKType {
     return {
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
     };
   },
 

@@ -179,8 +179,8 @@ export const PageRequest = {
   fromJSON(object: any): PageRequest {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? (prop => BigInt(prop.toString!!()))(object.offset) : BigInt("0"),
-      limit: isSet(object.limit) ? (prop => BigInt(prop.toString!!()))(object.limit) : BigInt("0"),
+      offset: isSet(object.offset) ? BigInt(object.offset.toString()) : BigInt("0"),
+      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : BigInt("0"),
       countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
     };
@@ -199,8 +199,8 @@ export const PageRequest = {
   fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array();
-    message.offset = object.offset !== undefined && object.offset !== null ? (prop => BigInt(prop.toString!!()))(object.offset) : BigInt("0");
-    message.limit = object.limit !== undefined && object.limit !== null ? (prop => BigInt(prop.toString!!()))(object.limit) : BigInt("0");
+    message.offset = object.offset !== undefined && object.offset !== null ? BigInt(object.offset.toString()) : BigInt("0");
+    message.limit = object.limit !== undefined && object.limit !== null ? BigInt(object.limit.toString()) : BigInt("0");
     message.countTotal = object.countTotal ?? false;
     message.reverse = object.reverse ?? false;
     return message;
@@ -219,8 +219,8 @@ export const PageRequest = {
   fromSDKJSON(object: any): PageRequestSDKType {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? (prop => BigInt(prop.toString!!()))(object.offset) : BigInt("0"),
-      limit: isSet(object.limit) ? (prop => BigInt(prop.toString!!()))(object.limit) : BigInt("0"),
+      offset: isSet(object.offset) ? BigInt(object.offset.toString()) : BigInt("0"),
+      limit: isSet(object.limit) ? BigInt(object.limit.toString()) : BigInt("0"),
       count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
     };
@@ -287,7 +287,7 @@ export const PageResponse = {
   fromJSON(object: any): PageResponse {
     return {
       nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(),
-      total: isSet(object.total) ? (prop => BigInt(prop.toString!!()))(object.total) : BigInt("0")
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0")
     };
   },
 
@@ -301,7 +301,7 @@ export const PageResponse = {
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array();
-    message.total = object.total !== undefined && object.total !== null ? (prop => BigInt(prop.toString!!()))(object.total) : BigInt("0");
+    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt("0");
     return message;
   },
 
@@ -315,7 +315,7 @@ export const PageResponse = {
   fromSDKJSON(object: any): PageResponseSDKType {
     return {
       next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
-      total: isSet(object.total) ? (prop => BigInt(prop.toString!!()))(object.total) : BigInt("0")
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0")
     };
   },
 

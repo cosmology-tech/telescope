@@ -96,9 +96,9 @@ export const fromSDKJSON = {
         t.callExpression(t.identifier('isSet'), [
           t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
-        t.callExpression(
-          TypeLong.getFromValue(args.context),
-          [t.memberExpression(t.identifier('object'), t.identifier(origName))]
+        TypeLong.getFromValueWithArgs(
+          args.context,
+          t.memberExpression(t.identifier('object'), t.identifier(origName))
         ),
         getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
       )
@@ -360,17 +360,15 @@ export const fromSDKJSON = {
         TypeLong.addUtil(args.context);
 
         valueTypeType = TypeLong.getPropType(args.context);
-        fromSDKJSON = t.callExpression(
-          TypeLong.getFromValue(args.context),
-          [
-            t.tsAsExpression(
-              t.identifier('value'),
-              t.tsUnionType([
-                t.tsTypeReference(TypeLong.getPropIdentifier(args.context)),
-                t.tsStringKeyword()
-              ])
-            )
-          ]
+        fromSDKJSON = TypeLong.getFromValueWithArgs(
+          args.context,
+          t.tsAsExpression(
+            t.identifier('value'),
+            t.tsUnionType([
+              t.tsTypeReference(TypeLong.getPropIdentifier(args.context)),
+              t.tsStringKeyword()
+            ])
+          )
         );
         break;
       default:
@@ -398,7 +396,9 @@ export const fromSDKJSON = {
         TypeLong.addUtil(args.context);
 
         wrapKey = (a) => t.callExpression(t.identifier('Number'), [a]);
-        keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
+        keyTypeType = t.tsTypeReference(
+          TypeLong.getPropIdentifier(args.context)
+        );
         break;
       case 'uint32':
       case 'int32':
@@ -527,10 +527,7 @@ export const arrayTypes = {
   long(args: FromSDKJSONMethod) {
     TypeLong.addUtil(args.context);
 
-    return t.callExpression(
-      TypeLong.getFromValue(args.context),
-      [t.identifier('e')]
-    );
+    return TypeLong.getFromValueWithArgs(args.context, t.identifier('e'));
   },
   uint64(args: FromSDKJSONMethod) {
     return arrayTypes.long(args);

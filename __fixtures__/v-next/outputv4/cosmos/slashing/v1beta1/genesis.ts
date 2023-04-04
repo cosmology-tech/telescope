@@ -446,7 +446,7 @@ export const MissedBlock = {
 
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },
@@ -460,7 +460,7 @@ export const MissedBlock = {
 
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
     message.missed = object.missed ?? false;
     return message;
   },
@@ -474,7 +474,7 @@ export const MissedBlock = {
 
   fromSDKJSON(object: any): MissedBlockSDKType {
     return {
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },

@@ -273,7 +273,7 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
     };
   },
 
@@ -285,7 +285,7 @@ export const QueryProposalRequest = {
 
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     return message;
   },
 
@@ -297,7 +297,7 @@ export const QueryProposalRequest = {
 
   fromSDKJSON(object: any): QueryProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
     };
   },
 
@@ -654,7 +654,7 @@ export const QueryVoteRequest = {
 
   fromJSON(object: any): QueryVoteRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -668,7 +668,7 @@ export const QueryVoteRequest = {
 
   fromPartial(object: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     const message = createBaseQueryVoteRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.voter = object.voter ?? "";
     return message;
   },
@@ -682,7 +682,7 @@ export const QueryVoteRequest = {
 
   fromSDKJSON(object: any): QueryVoteRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -819,7 +819,7 @@ export const QueryVotesRequest = {
 
   fromJSON(object: any): QueryVotesRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -833,7 +833,7 @@ export const QueryVotesRequest = {
 
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = createBaseQueryVotesRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -847,7 +847,7 @@ export const QueryVotesRequest = {
 
   fromSDKJSON(object: any): QueryVotesRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1191,7 +1191,7 @@ export const QueryDepositRequest = {
 
   fromJSON(object: any): QueryDepositRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
@@ -1205,7 +1205,7 @@ export const QueryDepositRequest = {
 
   fromPartial(object: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     const message = createBaseQueryDepositRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.depositor = object.depositor ?? "";
     return message;
   },
@@ -1219,7 +1219,7 @@ export const QueryDepositRequest = {
 
   fromSDKJSON(object: any): QueryDepositRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
@@ -1356,7 +1356,7 @@ export const QueryDepositsRequest = {
 
   fromJSON(object: any): QueryDepositsRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1370,7 +1370,7 @@ export const QueryDepositsRequest = {
 
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = createBaseQueryDepositsRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -1384,7 +1384,7 @@ export const QueryDepositsRequest = {
 
   fromSDKJSON(object: any): QueryDepositsRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1539,7 +1539,7 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
     };
   },
 
@@ -1551,7 +1551,7 @@ export const QueryTallyResultRequest = {
 
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1563,7 +1563,7 @@ export const QueryTallyResultRequest = {
 
   fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
     };
   },
 

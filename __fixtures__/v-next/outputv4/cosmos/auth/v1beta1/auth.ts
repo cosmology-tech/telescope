@@ -127,8 +127,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      accountNumber: isSet(object.accountNumber) ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0"),
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -145,8 +145,8 @@ export const BaseAccount = {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0");
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -163,8 +163,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      account_number: isSet(object.account_number) ? (prop => BigInt(prop.toString!!()))(object.account_number) : BigInt("0"),
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -371,11 +371,11 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxMemoCharacters: isSet(object.maxMemoCharacters) ? (prop => BigInt(prop.toString!!()))(object.maxMemoCharacters) : BigInt("0"),
-      txSigLimit: isSet(object.txSigLimit) ? (prop => BigInt(prop.toString!!()))(object.txSigLimit) : BigInt("0"),
-      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? (prop => BigInt(prop.toString!!()))(object.txSizeCostPerByte) : BigInt("0"),
-      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostEd25519) : BigInt("0"),
-      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostSecp256k1) : BigInt("0")
+      maxMemoCharacters: isSet(object.maxMemoCharacters) ? BigInt(object.maxMemoCharacters.toString()) : BigInt("0"),
+      txSigLimit: isSet(object.txSigLimit) ? BigInt(object.txSigLimit.toString()) : BigInt("0"),
+      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? BigInt(object.txSizeCostPerByte.toString()) : BigInt("0"),
+      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt("0"),
+      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt("0")
     };
   },
 
@@ -391,11 +391,11 @@ export const Params = {
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? (prop => BigInt(prop.toString!!()))(object.maxMemoCharacters) : BigInt("0");
-    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? (prop => BigInt(prop.toString!!()))(object.txSigLimit) : BigInt("0");
-    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? (prop => BigInt(prop.toString!!()))(object.txSizeCostPerByte) : BigInt("0");
-    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostEd25519) : BigInt("0");
-    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? (prop => BigInt(prop.toString!!()))(object.sigVerifyCostSecp256k1) : BigInt("0");
+    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? BigInt(object.maxMemoCharacters.toString()) : BigInt("0");
+    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? BigInt(object.txSigLimit.toString()) : BigInt("0");
+    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? BigInt(object.txSizeCostPerByte.toString()) : BigInt("0");
+    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt("0");
+    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt("0");
     return message;
   },
 
@@ -411,11 +411,11 @@ export const Params = {
 
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_memo_characters: isSet(object.max_memo_characters) ? (prop => BigInt(prop.toString!!()))(object.max_memo_characters) : BigInt("0"),
-      tx_sig_limit: isSet(object.tx_sig_limit) ? (prop => BigInt(prop.toString!!()))(object.tx_sig_limit) : BigInt("0"),
-      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? (prop => BigInt(prop.toString!!()))(object.tx_size_cost_per_byte) : BigInt("0"),
-      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? (prop => BigInt(prop.toString!!()))(object.sig_verify_cost_ed25519) : BigInt("0"),
-      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? (prop => BigInt(prop.toString!!()))(object.sig_verify_cost_secp256k1) : BigInt("0")
+      max_memo_characters: isSet(object.max_memo_characters) ? BigInt(object.max_memo_characters.toString()) : BigInt("0"),
+      tx_sig_limit: isSet(object.tx_sig_limit) ? BigInt(object.tx_sig_limit.toString()) : BigInt("0"),
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? BigInt(object.tx_size_cost_per_byte.toString()) : BigInt("0"),
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? BigInt(object.sig_verify_cost_ed25519.toString()) : BigInt("0"),
+      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? BigInt(object.sig_verify_cost_secp256k1.toString()) : BigInt("0")
     };
   },
 

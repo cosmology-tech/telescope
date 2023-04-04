@@ -434,7 +434,7 @@ export const Code = {
 
   fromJSON(object: any): Code {
     return {
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
       codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -452,7 +452,7 @@ export const Code = {
 
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
@@ -470,7 +470,7 @@ export const Code = {
 
   fromSDKJSON(object: any): CodeSDKType {
     return {
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
       code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -654,7 +654,7 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     return {
       idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -668,7 +668,7 @@ export const Sequence = {
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -682,7 +682,7 @@ export const Sequence = {
   fromSDKJSON(object: any): SequenceSDKType {
     return {
       id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 

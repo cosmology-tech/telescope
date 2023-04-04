@@ -434,7 +434,7 @@ export const QueryAppliedPlanResponse = {
 
   fromJSON(object: any): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -446,7 +446,7 @@ export const QueryAppliedPlanResponse = {
 
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -458,7 +458,7 @@ export const QueryAppliedPlanResponse = {
 
   fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -509,7 +509,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.lastHeight) ? (prop => BigInt(prop.toString!!()))(object.lastHeight) : BigInt("0")
+      lastHeight: isSet(object.lastHeight) ? BigInt(object.lastHeight.toString()) : BigInt("0")
     };
   },
 
@@ -521,7 +521,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
-    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? (prop => BigInt(prop.toString!!()))(object.lastHeight) : BigInt("0");
+    message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? BigInt(object.lastHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -533,7 +533,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
     return {
-      last_height: isSet(object.last_height) ? (prop => BigInt(prop.toString!!()))(object.last_height) : BigInt("0")
+      last_height: isSet(object.last_height) ? BigInt(object.last_height.toString()) : BigInt("0")
     };
   },
 

@@ -228,7 +228,7 @@ export const Params = {
       inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
       inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
       goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? (prop => BigInt(prop.toString!!()))(object.blocksPerYear) : BigInt("0")
+      blocksPerYear: isSet(object.blocksPerYear) ? BigInt(object.blocksPerYear.toString()) : BigInt("0")
     };
   },
 
@@ -250,7 +250,7 @@ export const Params = {
     message.inflationMax = object.inflationMax ?? "";
     message.inflationMin = object.inflationMin ?? "";
     message.goalBonded = object.goalBonded ?? "";
-    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? (prop => BigInt(prop.toString!!()))(object.blocksPerYear) : BigInt("0");
+    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? BigInt(object.blocksPerYear.toString()) : BigInt("0");
     return message;
   },
 
@@ -272,7 +272,7 @@ export const Params = {
       inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
       inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
       goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
-      blocks_per_year: isSet(object.blocks_per_year) ? (prop => BigInt(prop.toString!!()))(object.blocks_per_year) : BigInt("0")
+      blocks_per_year: isSet(object.blocks_per_year) ? BigInt(object.blocks_per_year.toString()) : BigInt("0")
     };
   },
 

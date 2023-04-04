@@ -1311,8 +1311,8 @@ export const RequestInfo = {
   fromJSON(object: any): RequestInfo {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      blockVersion: isSet(object.blockVersion) ? (prop => BigInt(prop.toString!!()))(object.blockVersion) : BigInt("0"),
-      p2pVersion: isSet(object.p2pVersion) ? (prop => BigInt(prop.toString!!()))(object.p2pVersion) : BigInt("0")
+      blockVersion: isSet(object.blockVersion) ? BigInt(object.blockVersion.toString()) : BigInt("0"),
+      p2pVersion: isSet(object.p2pVersion) ? BigInt(object.p2pVersion.toString()) : BigInt("0")
     };
   },
 
@@ -1327,8 +1327,8 @@ export const RequestInfo = {
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
-    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? (prop => BigInt(prop.toString!!()))(object.blockVersion) : BigInt("0");
-    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? (prop => BigInt(prop.toString!!()))(object.p2pVersion) : BigInt("0");
+    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? BigInt(object.blockVersion.toString()) : BigInt("0");
+    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? BigInt(object.p2pVersion.toString()) : BigInt("0");
     return message;
   },
 
@@ -1343,8 +1343,8 @@ export const RequestInfo = {
   fromSDKJSON(object: any): RequestInfoSDKType {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      block_version: isSet(object.block_version) ? (prop => BigInt(prop.toString!!()))(object.block_version) : BigInt("0"),
-      p2p_version: isSet(object.p2p_version) ? (prop => BigInt(prop.toString!!()))(object.p2p_version) : BigInt("0")
+      block_version: isSet(object.block_version) ? BigInt(object.block_version.toString()) : BigInt("0"),
+      p2p_version: isSet(object.p2p_version) ? BigInt(object.p2p_version.toString()) : BigInt("0")
     };
   },
 
@@ -1537,7 +1537,7 @@ export const RequestInitChain = {
       consensusParams: isSet(object.consensusParams) ? ConsensusParams.fromJSON(object.consensusParams) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromJSON(e)) : [],
       appStateBytes: isSet(object.appStateBytes) ? bytesFromBase64(object.appStateBytes) : new Uint8Array(),
-      initialHeight: isSet(object.initialHeight) ? (prop => BigInt(prop.toString!!()))(object.initialHeight) : BigInt("0")
+      initialHeight: isSet(object.initialHeight) ? BigInt(object.initialHeight.toString()) : BigInt("0")
     };
   },
 
@@ -1565,7 +1565,7 @@ export const RequestInitChain = {
     message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : undefined;
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
-    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? (prop => BigInt(prop.toString!!()))(object.initialHeight) : BigInt("0");
+    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? BigInt(object.initialHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -1587,7 +1587,7 @@ export const RequestInitChain = {
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
       app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
-      initial_height: isSet(object.initial_height) ? (prop => BigInt(prop.toString!!()))(object.initial_height) : BigInt("0")
+      initial_height: isSet(object.initial_height) ? BigInt(object.initial_height.toString()) : BigInt("0")
     };
   },
 
@@ -1678,7 +1678,7 @@ export const RequestQuery = {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       prove: isSet(object.prove) ? Boolean(object.prove) : false
     };
   },
@@ -1696,7 +1696,7 @@ export const RequestQuery = {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.prove = object.prove ?? false;
     return message;
   },
@@ -1714,7 +1714,7 @@ export const RequestQuery = {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       prove: isSet(object.prove) ? Boolean(object.prove) : false
     };
   },
@@ -2066,7 +2066,7 @@ export const RequestEndBlock = {
 
   fromJSON(object: any): RequestEndBlock {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -2078,7 +2078,7 @@ export const RequestEndBlock = {
 
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -2090,7 +2090,7 @@ export const RequestEndBlock = {
 
   fromSDKJSON(object: any): RequestEndBlockSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -2361,7 +2361,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromJSON(object: any): RequestLoadSnapshotChunk {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunk: isSet(object.chunk) ? Number(object.chunk) : 0
     };
@@ -2377,7 +2377,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
@@ -2393,7 +2393,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunk: isSet(object.chunk) ? Number(object.chunk) : 0
     };
@@ -3097,8 +3097,8 @@ export const ResponseInfo = {
     return {
       data: isSet(object.data) ? String(object.data) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      appVersion: isSet(object.appVersion) ? (prop => BigInt(prop.toString!!()))(object.appVersion) : BigInt("0"),
-      lastBlockHeight: isSet(object.lastBlockHeight) ? (prop => BigInt(prop.toString!!()))(object.lastBlockHeight) : BigInt("0"),
+      appVersion: isSet(object.appVersion) ? BigInt(object.appVersion.toString()) : BigInt("0"),
+      lastBlockHeight: isSet(object.lastBlockHeight) ? BigInt(object.lastBlockHeight.toString()) : BigInt("0"),
       lastBlockAppHash: isSet(object.lastBlockAppHash) ? bytesFromBase64(object.lastBlockAppHash) : new Uint8Array()
     };
   },
@@ -3117,8 +3117,8 @@ export const ResponseInfo = {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
     message.version = object.version ?? "";
-    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? (prop => BigInt(prop.toString!!()))(object.appVersion) : BigInt("0");
-    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? (prop => BigInt(prop.toString!!()))(object.lastBlockHeight) : BigInt("0");
+    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? BigInt(object.appVersion.toString()) : BigInt("0");
+    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? BigInt(object.lastBlockHeight.toString()) : BigInt("0");
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
   },
@@ -3137,8 +3137,8 @@ export const ResponseInfo = {
     return {
       data: isSet(object.data) ? String(object.data) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      app_version: isSet(object.app_version) ? (prop => BigInt(prop.toString!!()))(object.app_version) : BigInt("0"),
-      last_block_height: isSet(object.last_block_height) ? (prop => BigInt(prop.toString!!()))(object.last_block_height) : BigInt("0"),
+      app_version: isSet(object.app_version) ? BigInt(object.app_version.toString()) : BigInt("0"),
+      last_block_height: isSet(object.last_block_height) ? BigInt(object.last_block_height.toString()) : BigInt("0"),
       last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
     };
   },
@@ -3491,11 +3491,11 @@ export const ResponseQuery = {
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       proofOps: isSet(object.proofOps) ? ProofOps.fromJSON(object.proofOps) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
   },
@@ -3519,11 +3519,11 @@ export const ResponseQuery = {
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.codespace = object.codespace ?? "";
     return message;
   },
@@ -3547,11 +3547,11 @@ export const ResponseQuery = {
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
   },
@@ -3765,8 +3765,8 @@ export const ResponseCheckTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? (prop => BigInt(prop.toString!!()))(object.gas_wanted) : BigInt("0"),
-      gasUsed: isSet(object.gas_used) ? (prop => BigInt(prop.toString!!()))(object.gas_used) : BigInt("0"),
+      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3797,8 +3797,8 @@ export const ResponseCheckTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? (prop => BigInt(prop.toString!!()))(object.gasWanted) : BigInt("0");
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? (prop => BigInt(prop.toString!!()))(object.gasUsed) : BigInt("0");
+    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt("0");
+    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt("0");
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -3823,8 +3823,8 @@ export const ResponseCheckTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? (prop => BigInt(prop.toString!!()))(object.gas_wanted) : BigInt("0"),
-      gas_used: isSet(object.gas_used) ? (prop => BigInt(prop.toString!!()))(object.gas_used) : BigInt("0"),
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3957,8 +3957,8 @@ export const ResponseDeliverTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? (prop => BigInt(prop.toString!!()))(object.gas_wanted) : BigInt("0"),
-      gasUsed: isSet(object.gas_used) ? (prop => BigInt(prop.toString!!()))(object.gas_used) : BigInt("0"),
+      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3989,8 +3989,8 @@ export const ResponseDeliverTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? (prop => BigInt(prop.toString!!()))(object.gasWanted) : BigInt("0");
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? (prop => BigInt(prop.toString!!()))(object.gasUsed) : BigInt("0");
+    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt("0");
+    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt("0");
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -4015,8 +4015,8 @@ export const ResponseDeliverTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? (prop => BigInt(prop.toString!!()))(object.gas_wanted) : BigInt("0"),
-      gas_used: isSet(object.gas_used) ? (prop => BigInt(prop.toString!!()))(object.gas_used) : BigInt("0"),
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -4221,7 +4221,7 @@ export const ResponseCommit = {
   fromJSON(object: any): ResponseCommit {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retainHeight: isSet(object.retainHeight) ? (prop => BigInt(prop.toString!!()))(object.retainHeight) : BigInt("0")
+      retainHeight: isSet(object.retainHeight) ? BigInt(object.retainHeight.toString()) : BigInt("0")
     };
   },
 
@@ -4235,7 +4235,7 @@ export const ResponseCommit = {
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
-    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? (prop => BigInt(prop.toString!!()))(object.retainHeight) : BigInt("0");
+    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? BigInt(object.retainHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -4249,7 +4249,7 @@ export const ResponseCommit = {
   fromSDKJSON(object: any): ResponseCommitSDKType {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retain_height: isSet(object.retain_height) ? (prop => BigInt(prop.toString!!()))(object.retain_height) : BigInt("0")
+      retain_height: isSet(object.retain_height) ? BigInt(object.retain_height.toString()) : BigInt("0")
     };
   },
 
@@ -4807,8 +4807,8 @@ export const BlockParams = {
 
   fromJSON(object: any): BlockParams {
     return {
-      maxBytes: isSet(object.maxBytes) ? (prop => BigInt(prop.toString!!()))(object.maxBytes) : BigInt("0"),
-      maxGas: isSet(object.maxGas) ? (prop => BigInt(prop.toString!!()))(object.maxGas) : BigInt("0")
+      maxBytes: isSet(object.maxBytes) ? BigInt(object.maxBytes.toString()) : BigInt("0"),
+      maxGas: isSet(object.maxGas) ? BigInt(object.maxGas.toString()) : BigInt("0")
     };
   },
 
@@ -4821,8 +4821,8 @@ export const BlockParams = {
 
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? (prop => BigInt(prop.toString!!()))(object.maxBytes) : BigInt("0");
-    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? (prop => BigInt(prop.toString!!()))(object.maxGas) : BigInt("0");
+    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? BigInt(object.maxBytes.toString()) : BigInt("0");
+    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? BigInt(object.maxGas.toString()) : BigInt("0");
     return message;
   },
 
@@ -4835,8 +4835,8 @@ export const BlockParams = {
 
   fromSDKJSON(object: any): BlockParamsSDKType {
     return {
-      max_bytes: isSet(object.max_bytes) ? (prop => BigInt(prop.toString!!()))(object.max_bytes) : BigInt("0"),
-      max_gas: isSet(object.max_gas) ? (prop => BigInt(prop.toString!!()))(object.max_gas) : BigInt("0")
+      max_bytes: isSet(object.max_bytes) ? BigInt(object.max_bytes.toString()) : BigInt("0"),
+      max_gas: isSet(object.max_gas) ? BigInt(object.max_gas.toString()) : BigInt("0")
     };
   },
 
@@ -5224,7 +5224,7 @@ export const TxResult = {
 
   fromJSON(object: any): TxResult {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       index: isSet(object.index) ? Number(object.index) : 0,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
       result: isSet(object.result) ? ResponseDeliverTx.fromJSON(object.result) : undefined
@@ -5242,7 +5242,7 @@ export const TxResult = {
 
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.index = object.index ?? 0;
     message.tx = object.tx ?? new Uint8Array();
     message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : undefined;
@@ -5260,7 +5260,7 @@ export const TxResult = {
 
   fromSDKJSON(object: any): TxResultSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       index: isSet(object.index) ? Number(object.index) : 0,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
       result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
@@ -5327,7 +5327,7 @@ export const Validator = {
   fromJSON(object: any): Validator {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5341,7 +5341,7 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.power = object.power !== undefined && object.power !== null ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -5355,7 +5355,7 @@ export const Validator = {
   fromSDKJSON(object: any): ValidatorSDKType {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5417,7 +5417,7 @@ export const ValidatorUpdate = {
   fromJSON(object: any): ValidatorUpdate {
     return {
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5431,7 +5431,7 @@ export const ValidatorUpdate = {
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.power = object.power !== undefined && object.power !== null ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -5445,7 +5445,7 @@ export const ValidatorUpdate = {
   fromSDKJSON(object: any): ValidatorUpdateSDKType {
     return {
       pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5625,9 +5625,9 @@ export const Evidence = {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? (prop => BigInt(prop.toString!!()))(object.totalVotingPower) : BigInt("0")
+      totalVotingPower: isSet(object.totalVotingPower) ? BigInt(object.totalVotingPower.toString()) : BigInt("0")
     };
   },
 
@@ -5645,9 +5645,9 @@ export const Evidence = {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.time = object.time ?? undefined;
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? (prop => BigInt(prop.toString!!()))(object.totalVotingPower) : BigInt("0");
+    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt("0");
     return message;
   },
 
@@ -5665,9 +5665,9 @@ export const Evidence = {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? (prop => BigInt(prop.toString!!()))(object.total_voting_power) : BigInt("0")
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt("0")
     };
   },
 
@@ -5758,7 +5758,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -5778,7 +5778,7 @@ export const Snapshot = {
 
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
@@ -5798,7 +5798,7 @@ export const Snapshot = {
 
   fromSDKJSON(object: any): SnapshotSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),

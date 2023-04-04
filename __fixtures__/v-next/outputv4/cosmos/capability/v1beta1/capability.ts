@@ -91,7 +91,7 @@ export const Capability = {
 
   fromJSON(object: any): Capability {
     return {
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0")
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0")
     };
   },
 
@@ -103,7 +103,7 @@ export const Capability = {
 
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
     return message;
   },
 
@@ -115,7 +115,7 @@ export const Capability = {
 
   fromSDKJSON(object: any): CapabilitySDKType {
     return {
-      index: isSet(object.index) ? (prop => BigInt(prop.toString!!()))(object.index) : BigInt("0")
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0")
     };
   },
 

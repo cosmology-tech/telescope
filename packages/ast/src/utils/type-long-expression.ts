@@ -32,19 +32,7 @@ export const TypeLong = {
   },
 
   fromValueExpressions: {
-    bigint: t.arrowFunctionExpression(
-      [t.identifier('prop')],
-      t.callExpression(t.identifier('BigInt'), [
-        t.callExpression(
-          t.tSNonNullExpression(
-            t.tSNonNullExpression(
-              t.memberExpression(t.identifier('prop'), t.identifier('toString'))
-            )
-          ),
-          []
-        )
-      ])
-    ),
+    bigint: t.identifier('BigInt'),
     long: t.memberExpression(t.identifier('Long'), t.identifier('fromValue'))
   },
 
@@ -99,6 +87,31 @@ export const TypeLong = {
 
   getFromValue: (ctx: GenericParseContext): t.Expression => {
     return TypeLong.getNode(ctx, TypeLong.fromValueExpressions);
+  },
+
+  getFromValueWithArgs: (
+    ctx: GenericParseContext,
+    arg: t.Expression
+  ): t.Expression => {
+    const longLib = ctx.pluginValue('prototypes.typingsFormat.longLibrary');
+    const args = [];
+
+    switch (longLib) {
+      case 'bigint':
+        args.push(
+          t.callExpression(
+            t.memberExpression(arg, t.identifier('toString')),
+            []
+          )
+        );
+      break;
+
+      case 'long':
+        args.push(arg);
+      default:
+    }
+
+    return t.callExpression(TypeLong.getFromValue(ctx), args);
   },
 
   getFromNumber: (ctx: GenericParseContext): t.Expression => {

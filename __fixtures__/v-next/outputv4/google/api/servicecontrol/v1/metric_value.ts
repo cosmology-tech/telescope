@@ -302,7 +302,7 @@ export const MetricValue = {
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined
@@ -343,7 +343,7 @@ export const MetricValue = {
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
@@ -379,7 +379,7 @@ export const MetricValue = {
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      int64_value: isSet(object.int64_value) ? (prop => BigInt(prop.toString!!()))(object.int64_value) : undefined,
+      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
       double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
       string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
       distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined

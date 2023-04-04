@@ -235,7 +235,7 @@ export const Params = {
       enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
       developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
       validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? (prop => BigInt(prop.toString!!()))(object.addrDerivationCostCreate) : BigInt("0"),
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt("0"),
       minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
     };
   },
@@ -255,7 +255,7 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? (prop => BigInt(prop.toString!!()))(object.addrDerivationCostCreate) : BigInt("0");
+    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt("0");
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },
@@ -275,7 +275,7 @@ export const Params = {
       enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
       developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
       validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
-      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? (prop => BigInt(prop.toString!!()))(object.addr_derivation_cost_create) : BigInt("0"),
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? BigInt(object.addr_derivation_cost_create.toString()) : BigInt("0"),
       min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
     };
   },

@@ -501,7 +501,7 @@ export const Params = {
     return {
       codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
       instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : 0,
-      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? (prop => BigInt(prop.toString!!()))(object.maxWasmCodeSize) : BigInt("0")
+      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? BigInt(object.maxWasmCodeSize.toString()) : BigInt("0")
     };
   },
 
@@ -517,7 +517,7 @@ export const Params = {
     const message = createBaseParams();
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
-    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? (prop => BigInt(prop.toString!!()))(object.maxWasmCodeSize) : BigInt("0");
+    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt("0");
     return message;
   },
 
@@ -533,7 +533,7 @@ export const Params = {
     return {
       code_upload_access: isSet(object.code_upload_access) ? AccessConfig.fromSDKJSON(object.code_upload_access) : undefined,
       instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
-      max_wasm_code_size: isSet(object.max_wasm_code_size) ? (prop => BigInt(prop.toString!!()))(object.max_wasm_code_size) : BigInt("0")
+      max_wasm_code_size: isSet(object.max_wasm_code_size) ? BigInt(object.max_wasm_code_size.toString()) : BigInt("0")
     };
   },
 
@@ -745,7 +745,7 @@ export const ContractInfo = {
 
   fromJSON(object: any): ContractInfo {
     return {
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -769,7 +769,7 @@ export const ContractInfo = {
 
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
@@ -793,7 +793,7 @@ export const ContractInfo = {
 
   fromSDKJSON(object: any): ContractInfoSDKType {
     return {
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -884,7 +884,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -902,7 +902,7 @@ export const ContractCodeHistoryEntry = {
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
@@ -920,7 +920,7 @@ export const ContractCodeHistoryEntry = {
   fromSDKJSON(object: any): ContractCodeHistoryEntrySDKType {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDKJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -985,8 +985,8 @@ export const AbsoluteTxPosition = {
 
   fromJSON(object: any): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.blockHeight) ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0"),
-      txIndex: isSet(object.txIndex) ? (prop => BigInt(prop.toString!!()))(object.txIndex) : BigInt("0")
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
+      txIndex: isSet(object.txIndex) ? BigInt(object.txIndex.toString()) : BigInt("0")
     };
   },
 
@@ -999,8 +999,8 @@ export const AbsoluteTxPosition = {
 
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0");
-    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? (prop => BigInt(prop.toString!!()))(object.txIndex) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
+    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? BigInt(object.txIndex.toString()) : BigInt("0");
     return message;
   },
 
@@ -1013,8 +1013,8 @@ export const AbsoluteTxPosition = {
 
   fromSDKJSON(object: any): AbsoluteTxPositionSDKType {
     return {
-      block_height: isSet(object.block_height) ? (prop => BigInt(prop.toString!!()))(object.block_height) : BigInt("0"),
-      tx_index: isSet(object.tx_index) ? (prop => BigInt(prop.toString!!()))(object.tx_index) : BigInt("0")
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
+      tx_index: isSet(object.tx_index) ? BigInt(object.tx_index.toString()) : BigInt("0")
     };
   },
 

@@ -719,9 +719,9 @@ export const CheckResponse_ConsumerInfo = {
 
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.projectNumber) ? (prop => BigInt(prop.toString!!()))(object.projectNumber) : BigInt("0"),
+      projectNumber: isSet(object.projectNumber) ? BigInt(object.projectNumber.toString()) : BigInt("0"),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumerNumber) ? (prop => BigInt(prop.toString!!()))(object.consumerNumber) : BigInt("0")
+      consumerNumber: isSet(object.consumerNumber) ? BigInt(object.consumerNumber.toString()) : BigInt("0")
     };
   },
 
@@ -735,9 +735,9 @@ export const CheckResponse_ConsumerInfo = {
 
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? (prop => BigInt(prop.toString!!()))(object.projectNumber) : BigInt("0");
+    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? BigInt(object.projectNumber.toString()) : BigInt("0");
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? (prop => BigInt(prop.toString!!()))(object.consumerNumber) : BigInt("0");
+    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? BigInt(object.consumerNumber.toString()) : BigInt("0");
     return message;
   },
 
@@ -751,9 +751,9 @@ export const CheckResponse_ConsumerInfo = {
 
   fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
     return {
-      project_number: isSet(object.project_number) ? (prop => BigInt(prop.toString!!()))(object.project_number) : BigInt("0"),
+      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt("0"),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumer_number: isSet(object.consumer_number) ? (prop => BigInt(prop.toString!!()))(object.consumer_number) : BigInt("0")
+      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt("0")
     };
   },
 

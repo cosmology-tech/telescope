@@ -288,7 +288,7 @@ export const QueryBalanceResponse = {
 
   fromJSON(object: any): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
     };
   },
 
@@ -300,7 +300,7 @@ export const QueryBalanceResponse = {
 
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0");
+    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt("0");
     return message;
   },
 
@@ -312,7 +312,7 @@ export const QueryBalanceResponse = {
 
   fromSDKJSON(object: any): QueryBalanceResponseSDKType {
     return {
-      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
     };
   },
 
@@ -603,7 +603,7 @@ export const QuerySupplyResponse = {
 
   fromJSON(object: any): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
     };
   },
 
@@ -615,7 +615,7 @@ export const QuerySupplyResponse = {
 
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0");
+    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt("0");
     return message;
   },
 
@@ -627,7 +627,7 @@ export const QuerySupplyResponse = {
 
   fromSDKJSON(object: any): QuerySupplyResponseSDKType {
     return {
-      amount: isSet(object.amount) ? (prop => BigInt(prop.toString!!()))(object.amount) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
     };
   },
 

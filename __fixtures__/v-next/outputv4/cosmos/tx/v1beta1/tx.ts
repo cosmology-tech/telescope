@@ -747,7 +747,7 @@ export const SignDoc = {
       bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
       authInfoBytes: isSet(object.authInfoBytes) ? bytesFromBase64(object.authInfoBytes) : new Uint8Array(),
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0")
+      accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt("0")
     };
   },
 
@@ -765,7 +765,7 @@ export const SignDoc = {
     message.bodyBytes = object.bodyBytes ?? new Uint8Array();
     message.authInfoBytes = object.authInfoBytes ?? new Uint8Array();
     message.chainId = object.chainId ?? "";
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0");
+    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt("0");
     return message;
   },
 
@@ -783,7 +783,7 @@ export const SignDoc = {
       body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
       auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
       chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      account_number: isSet(object.account_number) ? (prop => BigInt(prop.toString!!()))(object.account_number) : BigInt("0")
+      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt("0")
     };
   },
 
@@ -885,8 +885,8 @@ export const SignDocDirectAux = {
       bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0"),
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
     };
   },
@@ -907,8 +907,8 @@ export const SignDocDirectAux = {
     message.bodyBytes = object.bodyBytes ?? new Uint8Array();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.chainId = object.chainId ?? "";
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? (prop => BigInt(prop.toString!!()))(object.accountNumber) : BigInt("0");
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     message.tip = object.tip !== undefined && object.tip !== null ? Tip.fromPartial(object.tip) : undefined;
     return message;
   },
@@ -929,8 +929,8 @@ export const SignDocDirectAux = {
       body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
       public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
       chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      account_number: isSet(object.account_number) ? (prop => BigInt(prop.toString!!()))(object.account_number) : BigInt("0"),
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       tip: isSet(object.tip) ? Tip.fromSDKJSON(object.tip) : undefined
     };
   },
@@ -1025,7 +1025,7 @@ export const TxBody = {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       memo: isSet(object.memo) ? String(object.memo) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? (prop => BigInt(prop.toString!!()))(object.timeoutHeight) : BigInt("0"),
+      timeoutHeight: isSet(object.timeoutHeight) ? BigInt(object.timeoutHeight.toString()) : BigInt("0"),
       extensionOptions: Array.isArray(object?.extensionOptions) ? object.extensionOptions.map((e: any) => Any.fromJSON(e)) : [],
       nonCriticalExtensionOptions: Array.isArray(object?.nonCriticalExtensionOptions) ? object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e)) : []
     };
@@ -1062,7 +1062,7 @@ export const TxBody = {
     const message = createBaseTxBody();
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.memo = object.memo ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? (prop => BigInt(prop.toString!!()))(object.timeoutHeight) : BigInt("0");
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? BigInt(object.timeoutHeight.toString()) : BigInt("0");
     message.extensionOptions = object.extensionOptions?.map(e => Any.fromPartial(e)) || [];
     message.nonCriticalExtensionOptions = object.nonCriticalExtensionOptions?.map(e => Any.fromPartial(e)) || [];
     return message;
@@ -1082,7 +1082,7 @@ export const TxBody = {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
       memo: isSet(object.memo) ? String(object.memo) : "",
-      timeout_height: isSet(object.timeout_height) ? (prop => BigInt(prop.toString!!()))(object.timeout_height) : BigInt("0"),
+      timeout_height: isSet(object.timeout_height) ? BigInt(object.timeout_height.toString()) : BigInt("0"),
       extension_options: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromSDKJSON(e)) : [],
       non_critical_extension_options: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromSDKJSON(e)) : []
     };
@@ -1293,7 +1293,7 @@ export const SignerInfo = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       modeInfo: isSet(object.modeInfo) ? ModeInfo.fromJSON(object.modeInfo) : undefined,
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -1309,7 +1309,7 @@ export const SignerInfo = {
     const message = createBaseSignerInfo();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.modeInfo = object.modeInfo !== undefined && object.modeInfo !== null ? ModeInfo.fromPartial(object.modeInfo) : undefined;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -1325,7 +1325,7 @@ export const SignerInfo = {
     return {
       public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
       mode_info: isSet(object.mode_info) ? ModeInfo.fromSDKJSON(object.mode_info) : undefined,
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -1673,7 +1673,7 @@ export const Fee = {
   fromJSON(object: any): Fee {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      gasLimit: isSet(object.gasLimit) ? (prop => BigInt(prop.toString!!()))(object.gasLimit) : BigInt("0"),
+      gasLimit: isSet(object.gasLimit) ? BigInt(object.gasLimit.toString()) : BigInt("0"),
       payer: isSet(object.payer) ? String(object.payer) : "",
       granter: isSet(object.granter) ? String(object.granter) : ""
     };
@@ -1697,7 +1697,7 @@ export const Fee = {
   fromPartial(object: DeepPartial<Fee>): Fee {
     const message = createBaseFee();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.gasLimit = object.gasLimit !== undefined && object.gasLimit !== null ? (prop => BigInt(prop.toString!!()))(object.gasLimit) : BigInt("0");
+    message.gasLimit = object.gasLimit !== undefined && object.gasLimit !== null ? BigInt(object.gasLimit.toString()) : BigInt("0");
     message.payer = object.payer ?? "";
     message.granter = object.granter ?? "";
     return message;
@@ -1715,7 +1715,7 @@ export const Fee = {
   fromSDKJSON(object: any): FeeSDKType {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      gas_limit: isSet(object.gas_limit) ? (prop => BigInt(prop.toString!!()))(object.gas_limit) : BigInt("0"),
+      gas_limit: isSet(object.gas_limit) ? BigInt(object.gas_limit.toString()) : BigInt("0"),
       payer: isSet(object.payer) ? String(object.payer) : "",
       granter: isSet(object.granter) ? String(object.granter) : ""
     };

@@ -1697,7 +1697,7 @@ export const MsgTimeout = {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
       proofUnreceived: isSet(object.proofUnreceived) ? bytesFromBase64(object.proofUnreceived) : new Uint8Array(),
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
-      nextSequenceRecv: isSet(object.nextSequenceRecv) ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0"),
+      nextSequenceRecv: isSet(object.nextSequenceRecv) ? BigInt(object.nextSequenceRecv.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1717,7 +1717,7 @@ export const MsgTimeout = {
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
-    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0");
+    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? BigInt(object.nextSequenceRecv.toString()) : BigInt("0");
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1737,7 +1737,7 @@ export const MsgTimeout = {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? (prop => BigInt(prop.toString!!()))(object.next_sequence_recv) : BigInt("0"),
+      next_sequence_recv: isSet(object.next_sequence_recv) ? BigInt(object.next_sequence_recv.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1898,7 +1898,7 @@ export const MsgTimeoutOnClose = {
       proofUnreceived: isSet(object.proofUnreceived) ? bytesFromBase64(object.proofUnreceived) : new Uint8Array(),
       proofClose: isSet(object.proofClose) ? bytesFromBase64(object.proofClose) : new Uint8Array(),
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
-      nextSequenceRecv: isSet(object.nextSequenceRecv) ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0"),
+      nextSequenceRecv: isSet(object.nextSequenceRecv) ? BigInt(object.nextSequenceRecv.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -1920,7 +1920,7 @@ export const MsgTimeoutOnClose = {
     message.proofUnreceived = object.proofUnreceived ?? new Uint8Array();
     message.proofClose = object.proofClose ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
-    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? (prop => BigInt(prop.toString!!()))(object.nextSequenceRecv) : BigInt("0");
+    message.nextSequenceRecv = object.nextSequenceRecv !== undefined && object.nextSequenceRecv !== null ? BigInt(object.nextSequenceRecv.toString()) : BigInt("0");
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1942,7 +1942,7 @@ export const MsgTimeoutOnClose = {
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
       proof_close: isSet(object.proof_close) ? bytesFromBase64(object.proof_close) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? (prop => BigInt(prop.toString!!()))(object.next_sequence_recv) : BigInt("0"),
+      next_sequence_recv: isSet(object.next_sequence_recv) ? BigInt(object.next_sequence_recv.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },

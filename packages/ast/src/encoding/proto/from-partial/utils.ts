@@ -130,14 +130,11 @@ export const fromPartial = {
 
         return setNotUndefinedAndNotNull(
             prop,
-            t.callExpression(
-                TypeLong.getFromValue(args.context),
-                [
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    )
-                ]
+            TypeLong.getFromValueWithArgs(args.context,
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(prop)
+                )
             ),
             getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
         );
@@ -268,17 +265,27 @@ export const fromPartial = {
         const keyType = args.field.keyType;
         const valueType = args.field.parsedType.name
 
-        let fromPartial = null;
+        let fromPartialWithArgs = null;
         // valueTypeType: string for identifier
         let valueTypeType = valueType;
         switch (valueType) {
             case 'string':
-                fromPartial = t.identifier('String');
+                fromPartialWithArgs = t.callExpression(
+                  t.identifier('String'),
+                  [
+                      t.identifier('value')
+                  ]
+                );
                 break;
             case 'int32':
             case 'uint32':
                 valueTypeType = 'number';
-                fromPartial = t.identifier('Number');
+                fromPartialWithArgs = t.callExpression(
+                  t.identifier('Number'),
+                  [
+                      t.identifier('value')
+                  ]
+                );
                 break;
             case 'int64':
             case 'uint64':
@@ -288,12 +295,17 @@ export const fromPartial = {
                 TypeLong.addUtil(args.context);
 
                 valueTypeType = TypeLong.getPropType(args.context);
-                fromPartial = TypeLong.getFromValue(args.context);
+                fromPartialWithArgs = TypeLong.getFromValueWithArgs(args.context, t.identifier('value'));
                 break;
             default:
-                fromPartial = t.memberExpression(
+                fromPartialWithArgs = t.callExpression(
+                  t.memberExpression(
                     t.identifier(valueType),
                     t.identifier('fromPartial')
+                  ),
+                  [
+                      t.identifier('value')
+                  ]
                 );
         }
 
@@ -387,12 +399,7 @@ export const fromPartial = {
                                                     wrapKey(t.identifier('key')),
                                                     true
                                                 ),
-                                                t.callExpression(
-                                                    fromPartial,
-                                                    [
-                                                        t.identifier('value')
-                                                    ]
-                                                )
+                                                fromPartialWithArgs
                                             )
                                         )
                                     ])
@@ -513,11 +520,8 @@ export const arrayTypes = {
     long(args: FromPartialMethod) {
         TypeLong.addUtil(args.context);
 
-        return t.callExpression(
-            TypeLong.getFromValue(args.context),
-            [
-                t.identifier('e')
-            ]
+        return TypeLong.getFromValueWithArgs(args.context,
+            t.identifier('e')
         );
     },
     int64(args: FromPartialMethod) {

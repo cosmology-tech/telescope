@@ -810,8 +810,8 @@ export const QueryValidatorSlashesRequest = {
   fromJSON(object: any): QueryValidatorSlashesRequest {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      startingHeight: isSet(object.startingHeight) ? (prop => BigInt(prop.toString!!()))(object.startingHeight) : BigInt("0"),
-      endingHeight: isSet(object.endingHeight) ? (prop => BigInt(prop.toString!!()))(object.endingHeight) : BigInt("0"),
+      startingHeight: isSet(object.startingHeight) ? BigInt(object.startingHeight.toString()) : BigInt("0"),
+      endingHeight: isSet(object.endingHeight) ? BigInt(object.endingHeight.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -828,8 +828,8 @@ export const QueryValidatorSlashesRequest = {
   fromPartial(object: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
     const message = createBaseQueryValidatorSlashesRequest();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? (prop => BigInt(prop.toString!!()))(object.startingHeight) : BigInt("0");
-    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? (prop => BigInt(prop.toString!!()))(object.endingHeight) : BigInt("0");
+    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? BigInt(object.startingHeight.toString()) : BigInt("0");
+    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? BigInt(object.endingHeight.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -846,8 +846,8 @@ export const QueryValidatorSlashesRequest = {
   fromSDKJSON(object: any): QueryValidatorSlashesRequestSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      starting_height: isSet(object.starting_height) ? (prop => BigInt(prop.toString!!()))(object.starting_height) : BigInt("0"),
-      ending_height: isSet(object.ending_height) ? (prop => BigInt(prop.toString!!()))(object.ending_height) : BigInt("0"),
+      starting_height: isSet(object.starting_height) ? BigInt(object.starting_height.toString()) : BigInt("0"),
+      ending_height: isSet(object.ending_height) ? BigInt(object.ending_height.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },

@@ -194,7 +194,7 @@ export const Duration = {
 
   fromJSON(object: any): Duration {
     return {
-      seconds: isSet(object.seconds) ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
@@ -208,7 +208,7 @@ export const Duration = {
 
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0");
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt("0");
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -222,7 +222,7 @@ export const Duration = {
 
   fromSDKJSON(object: any): DurationSDKType {
     return {
-      seconds: isSet(object.seconds) ? (prop => BigInt(prop.toString!!()))(object.seconds) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },

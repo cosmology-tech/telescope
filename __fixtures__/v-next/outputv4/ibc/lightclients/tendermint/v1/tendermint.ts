@@ -805,8 +805,8 @@ export const Fraction = {
 
   fromJSON(object: any): Fraction {
     return {
-      numerator: isSet(object.numerator) ? (prop => BigInt(prop.toString!!()))(object.numerator) : BigInt("0"),
-      denominator: isSet(object.denominator) ? (prop => BigInt(prop.toString!!()))(object.denominator) : BigInt("0")
+      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt("0"),
+      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt("0")
     };
   },
 
@@ -819,8 +819,8 @@ export const Fraction = {
 
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
-    message.numerator = object.numerator !== undefined && object.numerator !== null ? (prop => BigInt(prop.toString!!()))(object.numerator) : BigInt("0");
-    message.denominator = object.denominator !== undefined && object.denominator !== null ? (prop => BigInt(prop.toString!!()))(object.denominator) : BigInt("0");
+    message.numerator = object.numerator !== undefined && object.numerator !== null ? BigInt(object.numerator.toString()) : BigInt("0");
+    message.denominator = object.denominator !== undefined && object.denominator !== null ? BigInt(object.denominator.toString()) : BigInt("0");
     return message;
   },
 
@@ -833,8 +833,8 @@ export const Fraction = {
 
   fromSDKJSON(object: any): FractionSDKType {
     return {
-      numerator: isSet(object.numerator) ? (prop => BigInt(prop.toString!!()))(object.numerator) : BigInt("0"),
-      denominator: isSet(object.denominator) ? (prop => BigInt(prop.toString!!()))(object.denominator) : BigInt("0")
+      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt("0"),
+      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt("0")
     };
   },
 

@@ -153,12 +153,12 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      groupSeq: isSet(object.groupSeq) ? (prop => BigInt(prop.toString!!()))(object.groupSeq) : BigInt("0"),
+      groupSeq: isSet(object.groupSeq) ? BigInt(object.groupSeq.toString()) : BigInt("0"),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
       groupMembers: Array.isArray(object?.groupMembers) ? object.groupMembers.map((e: any) => GroupMember.fromJSON(e)) : [],
-      groupPolicySeq: isSet(object.groupPolicySeq) ? (prop => BigInt(prop.toString!!()))(object.groupPolicySeq) : BigInt("0"),
+      groupPolicySeq: isSet(object.groupPolicySeq) ? BigInt(object.groupPolicySeq.toString()) : BigInt("0"),
       groupPolicies: Array.isArray(object?.groupPolicies) ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e)) : [],
-      proposalSeq: isSet(object.proposalSeq) ? (prop => BigInt(prop.toString!!()))(object.proposalSeq) : BigInt("0"),
+      proposalSeq: isSet(object.proposalSeq) ? BigInt(object.proposalSeq.toString()) : BigInt("0"),
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : []
     };
@@ -207,12 +207,12 @@ export const GenesisState = {
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq = object.groupSeq !== undefined && object.groupSeq !== null ? (prop => BigInt(prop.toString!!()))(object.groupSeq) : BigInt("0");
+    message.groupSeq = object.groupSeq !== undefined && object.groupSeq !== null ? BigInt(object.groupSeq.toString()) : BigInt("0");
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.groupMembers = object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
-    message.groupPolicySeq = object.groupPolicySeq !== undefined && object.groupPolicySeq !== null ? (prop => BigInt(prop.toString!!()))(object.groupPolicySeq) : BigInt("0");
+    message.groupPolicySeq = object.groupPolicySeq !== undefined && object.groupPolicySeq !== null ? BigInt(object.groupPolicySeq.toString()) : BigInt("0");
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.proposalSeq = object.proposalSeq !== undefined && object.proposalSeq !== null ? (prop => BigInt(prop.toString!!()))(object.proposalSeq) : BigInt("0");
+    message.proposalSeq = object.proposalSeq !== undefined && object.proposalSeq !== null ? BigInt(object.proposalSeq.toString()) : BigInt("0");
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     return message;
@@ -233,12 +233,12 @@ export const GenesisState = {
 
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      group_seq: isSet(object.group_seq) ? (prop => BigInt(prop.toString!!()))(object.group_seq) : BigInt("0"),
+      group_seq: isSet(object.group_seq) ? BigInt(object.group_seq.toString()) : BigInt("0"),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDKJSON(e)) : [],
       group_members: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromSDKJSON(e)) : [],
-      group_policy_seq: isSet(object.group_policy_seq) ? (prop => BigInt(prop.toString!!()))(object.group_policy_seq) : BigInt("0"),
+      group_policy_seq: isSet(object.group_policy_seq) ? BigInt(object.group_policy_seq.toString()) : BigInt("0"),
       group_policies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDKJSON(e)) : [],
-      proposal_seq: isSet(object.proposal_seq) ? (prop => BigInt(prop.toString!!()))(object.proposal_seq) : BigInt("0"),
+      proposal_seq: isSet(object.proposal_seq) ? BigInt(object.proposal_seq.toString()) : BigInt("0"),
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : []
     };

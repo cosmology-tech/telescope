@@ -517,7 +517,7 @@ export const ValidatorCurrentRewards = {
   fromJSON(object: any): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
@@ -537,7 +537,7 @@ export const ValidatorCurrentRewards = {
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     return message;
   },
 
@@ -551,7 +551,7 @@ export const ValidatorCurrentRewards = {
   fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
@@ -792,7 +792,7 @@ export const ValidatorSlashEvent = {
 
   fromJSON(object: any): ValidatorSlashEvent {
     return {
-      validatorPeriod: isSet(object.validatorPeriod) ? (prop => BigInt(prop.toString!!()))(object.validatorPeriod) : BigInt("0"),
+      validatorPeriod: isSet(object.validatorPeriod) ? BigInt(object.validatorPeriod.toString()) : BigInt("0"),
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
@@ -806,7 +806,7 @@ export const ValidatorSlashEvent = {
 
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
-    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.validatorPeriod) : BigInt("0");
+    message.validatorPeriod = object.validatorPeriod !== undefined && object.validatorPeriod !== null ? BigInt(object.validatorPeriod.toString()) : BigInt("0");
     message.fraction = object.fraction ?? "";
     return message;
   },
@@ -820,7 +820,7 @@ export const ValidatorSlashEvent = {
 
   fromSDKJSON(object: any): ValidatorSlashEventSDKType {
     return {
-      validator_period: isSet(object.validator_period) ? (prop => BigInt(prop.toString!!()))(object.validator_period) : BigInt("0"),
+      validator_period: isSet(object.validator_period) ? BigInt(object.validator_period.toString()) : BigInt("0"),
       fraction: isSet(object.fraction) ? String(object.fraction) : ""
     };
   },
@@ -1197,9 +1197,9 @@ export const DelegatorStartingInfo = {
 
   fromJSON(object: any): DelegatorStartingInfo {
     return {
-      previousPeriod: isSet(object.previousPeriod) ? (prop => BigInt(prop.toString!!()))(object.previousPeriod) : BigInt("0"),
+      previousPeriod: isSet(object.previousPeriod) ? BigInt(object.previousPeriod.toString()) : BigInt("0"),
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -1213,9 +1213,9 @@ export const DelegatorStartingInfo = {
 
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
-    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.previousPeriod) : BigInt("0");
+    message.previousPeriod = object.previousPeriod !== undefined && object.previousPeriod !== null ? BigInt(object.previousPeriod.toString()) : BigInt("0");
     message.stake = object.stake ?? "";
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -1229,9 +1229,9 @@ export const DelegatorStartingInfo = {
 
   fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
     return {
-      previous_period: isSet(object.previous_period) ? (prop => BigInt(prop.toString!!()))(object.previous_period) : BigInt("0"),
+      previous_period: isSet(object.previous_period) ? BigInt(object.previous_period.toString()) : BigInt("0"),
       stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 

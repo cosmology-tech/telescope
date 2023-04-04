@@ -365,7 +365,7 @@ export const DistrRecord = {
 
   fromJSON(object: any): DistrRecord {
     return {
-      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -379,7 +379,7 @@ export const DistrRecord = {
 
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     message.weight = object.weight ?? "";
     return message;
   },
@@ -393,7 +393,7 @@ export const DistrRecord = {
 
   fromSDKJSON(object: any): DistrRecordSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -464,8 +464,8 @@ export const PoolToGauge = {
 
   fromJSON(object: any): PoolToGauge {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
-      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
@@ -480,8 +480,8 @@ export const PoolToGauge = {
 
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
   },
@@ -496,8 +496,8 @@ export const PoolToGauge = {
 
   fromSDKJSON(object: any): PoolToGaugeSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
-      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },

@@ -632,7 +632,7 @@ export const GroupID = {
   fromJSON(object: any): GroupID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
@@ -648,7 +648,7 @@ export const GroupID = {
   fromPartial<I extends Exact<Partial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     return message;
   },
@@ -664,7 +664,7 @@ export const GroupID = {
   fromSDKJSON(object: any): GroupIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
@@ -865,7 +865,7 @@ export const Group = {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
     };
   },
 
@@ -883,7 +883,7 @@ export const Group = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
     message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
     return message;
   },
 
@@ -901,7 +901,7 @@ export const Group = {
       group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
     };
   },
 

@@ -397,7 +397,7 @@ export const QueryGroupInfoRequest = {
 
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0")
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0")
     };
   },
 
@@ -409,7 +409,7 @@ export const QueryGroupInfoRequest = {
 
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     return message;
   },
 
@@ -421,7 +421,7 @@ export const QueryGroupInfoRequest = {
 
   fromSDKJSON(object: any): QueryGroupInfoRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0")
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0")
     };
   },
 
@@ -706,7 +706,7 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -720,7 +720,7 @@ export const QueryGroupMembersRequest = {
 
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -734,7 +734,7 @@ export const QueryGroupMembersRequest = {
 
   fromSDKJSON(object: any): QueryGroupMembersRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1090,7 +1090,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1104,7 +1104,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -1118,7 +1118,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromSDKJSON(object: any): QueryGroupPoliciesByGroupRequestSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1465,7 +1465,7 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
     };
   },
 
@@ -1477,7 +1477,7 @@ export const QueryProposalRequest = {
 
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1489,7 +1489,7 @@ export const QueryProposalRequest = {
 
   fromSDKJSON(object: any): QueryProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
     };
   },
 
@@ -1816,7 +1816,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -1830,7 +1830,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.voter = object.voter ?? "";
     return message;
   },
@@ -1844,7 +1844,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromSDKJSON(object: any): QueryVoteByProposalVoterRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -1981,7 +1981,7 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1995,7 +1995,7 @@ export const QueryVotesByProposalRequest = {
 
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -2009,7 +2009,7 @@ export const QueryVotesByProposalRequest = {
 
   fromSDKJSON(object: any): QueryVotesByProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -2548,7 +2548,7 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
     };
   },
 
@@ -2560,7 +2560,7 @@ export const QueryTallyResultRequest = {
 
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     return message;
   },
 
@@ -2572,7 +2572,7 @@ export const QueryTallyResultRequest = {
 
   fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
     };
   },
 

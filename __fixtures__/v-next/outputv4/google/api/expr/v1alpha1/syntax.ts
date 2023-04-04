@@ -738,7 +738,7 @@ export const Expr = {
 
   fromJSON(object: any): Expr {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       constExpr: isSet(object.constExpr) ? Constant.fromJSON(object.constExpr) : undefined,
       identExpr: isSet(object.identExpr) ? Expr_Ident.fromJSON(object.identExpr) : undefined,
       selectExpr: isSet(object.selectExpr) ? Expr_Select.fromJSON(object.selectExpr) : undefined,
@@ -764,7 +764,7 @@ export const Expr = {
 
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.constExpr = object.constExpr !== undefined && object.constExpr !== null ? Constant.fromPartial(object.constExpr) : undefined;
     message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
     message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
@@ -790,7 +790,7 @@ export const Expr = {
 
   fromSDKJSON(object: any): ExprSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       const_expr: isSet(object.const_expr) ? Constant.fromSDKJSON(object.const_expr) : undefined,
       ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
       select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
@@ -1368,7 +1368,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
@@ -1386,7 +1386,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.fieldKey = object.fieldKey ?? undefined;
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
@@ -1404,7 +1404,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
       map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
@@ -1700,8 +1700,8 @@ export const Constant = {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? (prop => BigInt(prop.toString!!()))(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
+      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
@@ -1728,8 +1728,8 @@ export const Constant = {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? (prop => BigInt(prop.toString!!()))(object.uint64Value) : undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
@@ -1756,8 +1756,8 @@ export const Constant = {
     return {
       null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
       bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      int64_value: isSet(object.int64_value) ? (prop => BigInt(prop.toString!!()))(object.int64_value) : undefined,
-      uint64_value: isSet(object.uint64_value) ? (prop => BigInt(prop.toString!!()))(object.uint64_value) : undefined,
+      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
+      uint64_value: isSet(object.uint64_value) ? BigInt(object.uint64_value.toString()) : undefined,
       double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
       string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
       bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
@@ -1830,7 +1830,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
@@ -1844,7 +1844,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value ?? 0;
     return message;
   },
@@ -1858,7 +1858,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
@@ -1920,7 +1920,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
@@ -1934,7 +1934,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromPartial(object: DeepPartial<SourceInfo_MacroCallsEntry>): SourceInfo_MacroCallsEntry {
     const message = createBaseSourceInfo_MacroCallsEntry();
-    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   },
@@ -1948,7 +1948,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromSDKJSON(object: any): SourceInfo_MacroCallsEntrySDKType {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
     };
   },

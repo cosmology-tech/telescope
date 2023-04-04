@@ -90,7 +90,7 @@ export const App = {
 
   fromJSON(object: any): App {
     return {
-      protocol: isSet(object.protocol) ? (prop => BigInt(prop.toString!!()))(object.protocol) : BigInt("0"),
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt("0"),
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
@@ -104,7 +104,7 @@ export const App = {
 
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? (prop => BigInt(prop.toString!!()))(object.protocol) : BigInt("0");
+    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt("0");
     message.software = object.software ?? "";
     return message;
   },
@@ -118,7 +118,7 @@ export const App = {
 
   fromSDKJSON(object: any): AppSDKType {
     return {
-      protocol: isSet(object.protocol) ? (prop => BigInt(prop.toString!!()))(object.protocol) : BigInt("0"),
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt("0"),
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
@@ -180,8 +180,8 @@ export const Consensus = {
 
   fromJSON(object: any): Consensus {
     return {
-      block: isSet(object.block) ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0"),
-      app: isSet(object.app) ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0")
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
     };
   },
 
@@ -194,8 +194,8 @@ export const Consensus = {
 
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0");
-    message.app = object.app !== undefined && object.app !== null ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0");
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt("0");
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt("0");
     return message;
   },
 
@@ -208,8 +208,8 @@ export const Consensus = {
 
   fromSDKJSON(object: any): ConsensusSDKType {
     return {
-      block: isSet(object.block) ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0"),
-      app: isSet(object.app) ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0")
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
     };
   },
 

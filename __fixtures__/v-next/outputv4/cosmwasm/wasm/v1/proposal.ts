@@ -502,7 +502,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       runAs: isSet(object.runAs) ? String(object.runAs) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
@@ -534,7 +534,7 @@ export const InstantiateContractProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -560,7 +560,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       run_as: isSet(object.run_as) ? String(object.run_as) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
@@ -666,7 +666,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -686,7 +686,7 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -706,7 +706,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -1301,7 +1301,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1323,7 +1323,7 @@ export const PinCodesProposal = {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -1339,7 +1339,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1430,7 +1430,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1452,7 +1452,7 @@ export const UnpinCodesProposal = {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -1468,7 +1468,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

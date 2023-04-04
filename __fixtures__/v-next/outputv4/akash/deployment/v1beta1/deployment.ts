@@ -861,7 +861,7 @@ export const DeploymentID = {
   fromJSON(object: any): DeploymentID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0")
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0")
     };
   },
 
@@ -875,7 +875,7 @@ export const DeploymentID = {
   fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     return message;
   },
 
@@ -889,7 +889,7 @@ export const DeploymentID = {
   fromSDKJSON(object: any): DeploymentIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0")
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0")
     };
   },
 
@@ -971,7 +971,7 @@ export const Deployment = {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
     };
   },
 
@@ -989,7 +989,7 @@ export const Deployment = {
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
     return message;
   },
 
@@ -1007,7 +1007,7 @@ export const Deployment = {
       deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
     };
   },
 
@@ -1080,7 +1080,7 @@ export const DeploymentFilters = {
   fromJSON(object: any): DeploymentFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
@@ -1096,7 +1096,7 @@ export const DeploymentFilters = {
   fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.state = object.state ?? "";
     return message;
   },
@@ -1112,7 +1112,7 @@ export const DeploymentFilters = {
   fromSDKJSON(object: any): DeploymentFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       state: isSet(object.state) ? String(object.state) : ""
     };
   },

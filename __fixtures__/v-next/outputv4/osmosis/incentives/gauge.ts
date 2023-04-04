@@ -180,13 +180,13 @@ export const Gauge = {
 
   fromJSON(object: any): Gauge {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? (prop => BigInt(prop.toString!!()))(object.numEpochsPaidOver) : BigInt("0"),
-      filledEpochs: isSet(object.filledEpochs) ? (prop => BigInt(prop.toString!!()))(object.filledEpochs) : BigInt("0"),
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0"),
+      filledEpochs: isSet(object.filledEpochs) ? BigInt(object.filledEpochs.toString()) : BigInt("0"),
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -218,13 +218,13 @@ export const Gauge = {
 
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.isPerpetual = object.isPerpetual ?? false;
     message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? (prop => BigInt(prop.toString!!()))(object.numEpochsPaidOver) : BigInt("0");
-    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? (prop => BigInt(prop.toString!!()))(object.filledEpochs) : BigInt("0");
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0");
+    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt("0");
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -244,13 +244,13 @@ export const Gauge = {
 
   fromSDKJSON(object: any): GaugeSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
       distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? (prop => BigInt(prop.toString!!()))(object.num_epochs_paid_over) : BigInt("0"),
-      filled_epochs: isSet(object.filled_epochs) ? (prop => BigInt(prop.toString!!()))(object.filled_epochs) : BigInt("0"),
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt("0"),
+      filled_epochs: isSet(object.filled_epochs) ? BigInt(object.filled_epochs.toString()) : BigInt("0"),
       distributed_coins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },

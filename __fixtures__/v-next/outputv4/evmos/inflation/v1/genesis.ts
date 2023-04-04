@@ -129,10 +129,10 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      epochsPerPeriod: isSet(object.epochsPerPeriod) ? (prop => BigInt(prop.toString!!()))(object.epochsPerPeriod) : BigInt("0"),
-      skippedEpochs: isSet(object.skippedEpochs) ? (prop => BigInt(prop.toString!!()))(object.skippedEpochs) : BigInt("0")
+      epochsPerPeriod: isSet(object.epochsPerPeriod) ? BigInt(object.epochsPerPeriod.toString()) : BigInt("0"),
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt("0")
     };
   },
 
@@ -149,10 +149,10 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
-    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.epochsPerPeriod) : BigInt("0");
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? (prop => BigInt(prop.toString!!()))(object.skippedEpochs) : BigInt("0");
+    message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? BigInt(object.epochsPerPeriod.toString()) : BigInt("0");
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt("0");
     return message;
   },
 
@@ -169,10 +169,10 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      epochs_per_period: isSet(object.epochs_per_period) ? (prop => BigInt(prop.toString!!()))(object.epochs_per_period) : BigInt("0"),
-      skipped_epochs: isSet(object.skipped_epochs) ? (prop => BigInt(prop.toString!!()))(object.skipped_epochs) : BigInt("0")
+      epochs_per_period: isSet(object.epochs_per_period) ? BigInt(object.epochs_per_period.toString()) : BigInt("0"),
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt("0")
     };
   },
 

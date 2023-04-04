@@ -346,7 +346,7 @@ export const GaugeByIDRequest = {
 
   fromJSON(object: any): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 
@@ -358,7 +358,7 @@ export const GaugeByIDRequest = {
 
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     return message;
   },
 
@@ -370,7 +370,7 @@ export const GaugeByIDRequest = {
 
   fromSDKJSON(object: any): GaugeByIDRequestSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 
@@ -1443,8 +1443,8 @@ export const RewardsEstRequest = {
   fromJSON(object: any): RewardsEstRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
-      endEpoch: isSet(object.endEpoch) ? (prop => BigInt(prop.toString!!()))(object.endEpoch) : BigInt("0")
+      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => BigInt(e.toString())) : [],
+      endEpoch: isSet(object.endEpoch) ? BigInt(object.endEpoch.toString()) : BigInt("0")
     };
   },
 
@@ -1465,8 +1465,8 @@ export const RewardsEstRequest = {
   fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
-    message.lockIds = object.lockIds?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
-    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.endEpoch) : BigInt("0");
+    message.lockIds = object.lockIds?.map(e => BigInt(e.toString())) || [];
+    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? BigInt(object.endEpoch.toString()) : BigInt("0");
     return message;
   },
 
@@ -1481,8 +1481,8 @@ export const RewardsEstRequest = {
   fromSDKJSON(object: any): RewardsEstRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
-      end_epoch: isSet(object.end_epoch) ? (prop => BigInt(prop.toString!!()))(object.end_epoch) : BigInt("0")
+      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => BigInt(e.toString())) : [],
+      end_epoch: isSet(object.end_epoch) ? BigInt(object.end_epoch.toString()) : BigInt("0")
     };
   },
 

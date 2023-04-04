@@ -785,7 +785,7 @@ export const Header = {
     return {
       version: isSet(object.version) ? Consensus.fromJSON(object.version) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       lastBlockId: isSet(object.lastBlockId) ? BlockID.fromJSON(object.lastBlockId) : undefined,
       lastCommitHash: isSet(object.lastCommitHash) ? bytesFromBase64(object.lastCommitHash) : new Uint8Array(),
@@ -823,7 +823,7 @@ export const Header = {
     const message = createBaseHeader();
     message.version = object.version !== undefined && object.version !== null ? Consensus.fromPartial(object.version) : undefined;
     message.chainId = object.chainId ?? "";
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.time = object.time ?? undefined;
     message.lastBlockId = object.lastBlockId !== undefined && object.lastBlockId !== null ? BlockID.fromPartial(object.lastBlockId) : undefined;
     message.lastCommitHash = object.lastCommitHash ?? new Uint8Array();
@@ -861,7 +861,7 @@ export const Header = {
     return {
       version: isSet(object.version) ? Consensus.fromSDKJSON(object.version) : undefined,
       chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       last_block_id: isSet(object.last_block_id) ? BlockID.fromSDKJSON(object.last_block_id) : undefined,
       last_commit_hash: isSet(object.last_commit_hash) ? bytesFromBase64(object.last_commit_hash) : new Uint8Array(),
@@ -1087,7 +1087,7 @@ export const Vote = {
   fromJSON(object: any): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
@@ -1113,7 +1113,7 @@ export const Vote = {
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.type = object.type ?? 0;
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.timestamp = object.timestamp ?? undefined;
@@ -1139,7 +1139,7 @@ export const Vote = {
   fromSDKJSON(object: any): VoteSDKType {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
@@ -1230,7 +1230,7 @@ export const Commit = {
 
   fromJSON(object: any): Commit {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromJSON(e)) : []
@@ -1254,7 +1254,7 @@ export const Commit = {
 
   fromPartial(object: DeepPartial<Commit>): Commit {
     const message = createBaseCommit();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.round = object.round ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.signatures = object.signatures?.map(e => CommitSig.fromPartial(e)) || [];
@@ -1272,7 +1272,7 @@ export const Commit = {
 
   fromSDKJSON(object: any): CommitSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromSDKJSON(e)) : []
@@ -1510,7 +1510,7 @@ export const Proposal = {
   fromJSON(object: any): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -1534,7 +1534,7 @@ export const Proposal = {
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.type = object.type ?? 0;
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
@@ -1558,7 +1558,7 @@ export const Proposal = {
   fromSDKJSON(object: any): ProposalSDKType {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       round: isSet(object.round) ? Number(object.round) : 0,
       pol_round: isSet(object.pol_round) ? Number(object.pol_round) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
@@ -1828,9 +1828,9 @@ export const BlockMeta = {
   fromJSON(object: any): BlockMeta {
     return {
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
-      blockSize: isSet(object.blockSize) ? (prop => BigInt(prop.toString!!()))(object.blockSize) : BigInt("0"),
+      blockSize: isSet(object.blockSize) ? BigInt(object.blockSize.toString()) : BigInt("0"),
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
-      numTxs: isSet(object.numTxs) ? (prop => BigInt(prop.toString!!()))(object.numTxs) : BigInt("0")
+      numTxs: isSet(object.numTxs) ? BigInt(object.numTxs.toString()) : BigInt("0")
     };
   },
 
@@ -1846,9 +1846,9 @@ export const BlockMeta = {
   fromPartial(object: DeepPartial<BlockMeta>): BlockMeta {
     const message = createBaseBlockMeta();
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
-    message.blockSize = object.blockSize !== undefined && object.blockSize !== null ? (prop => BigInt(prop.toString!!()))(object.blockSize) : BigInt("0");
+    message.blockSize = object.blockSize !== undefined && object.blockSize !== null ? BigInt(object.blockSize.toString()) : BigInt("0");
     message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
-    message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? (prop => BigInt(prop.toString!!()))(object.numTxs) : BigInt("0");
+    message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? BigInt(object.numTxs.toString()) : BigInt("0");
     return message;
   },
 
@@ -1864,9 +1864,9 @@ export const BlockMeta = {
   fromSDKJSON(object: any): BlockMetaSDKType {
     return {
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
-      block_size: isSet(object.block_size) ? (prop => BigInt(prop.toString!!()))(object.block_size) : BigInt("0"),
+      block_size: isSet(object.block_size) ? BigInt(object.block_size.toString()) : BigInt("0"),
       header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
-      num_txs: isSet(object.num_txs) ? (prop => BigInt(prop.toString!!()))(object.num_txs) : BigInt("0")
+      num_txs: isSet(object.num_txs) ? BigInt(object.num_txs.toString()) : BigInt("0")
     };
   },
 

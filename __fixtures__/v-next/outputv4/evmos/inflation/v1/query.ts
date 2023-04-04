@@ -250,7 +250,7 @@ export const QueryPeriodResponse = {
 
   fromJSON(object: any): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
@@ -262,7 +262,7 @@ export const QueryPeriodResponse = {
 
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     return message;
   },
 
@@ -274,7 +274,7 @@ export const QueryPeriodResponse = {
 
   fromSDKJSON(object: any): QueryPeriodResponseSDKType {
     return {
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
@@ -512,7 +512,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromJSON(object: any): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skippedEpochs) ? (prop => BigInt(prop.toString!!()))(object.skippedEpochs) : BigInt("0")
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt("0")
     };
   },
 
@@ -524,7 +524,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? (prop => BigInt(prop.toString!!()))(object.skippedEpochs) : BigInt("0");
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt("0");
     return message;
   },
 
@@ -536,7 +536,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
     return {
-      skipped_epochs: isSet(object.skipped_epochs) ? (prop => BigInt(prop.toString!!()))(object.skipped_epochs) : BigInt("0")
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt("0")
     };
   },
 

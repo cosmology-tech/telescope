@@ -336,7 +336,7 @@ export const SignatureDescriptor = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -352,7 +352,7 @@ export const SignatureDescriptor = {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -368,7 +368,7 @@ export const SignatureDescriptor = {
     return {
       public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromSDKJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 

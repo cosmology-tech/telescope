@@ -74,7 +74,7 @@ export const GroupID = {
   fromJSON(object: any): GroupID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
@@ -90,7 +90,7 @@ export const GroupID = {
   fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     return message;
   },
@@ -106,7 +106,7 @@ export const GroupID = {
   fromSDKJSON(object: any): GroupIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },

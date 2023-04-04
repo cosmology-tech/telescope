@@ -244,7 +244,7 @@ export const LeaseID = {
   fromJSON(object: any): LeaseID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -264,7 +264,7 @@ export const LeaseID = {
   fromPartial<I extends Exact<DeepPartial<LeaseID>, I>>(object: I): LeaseID {
     const message = createBaseLeaseID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -284,7 +284,7 @@ export const LeaseID = {
   fromSDKJSON(object: any): LeaseIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -381,8 +381,8 @@ export const Lease = {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0"),
-      closedOn: isSet(object.closedOn) ? (prop => BigInt(prop.toString!!()))(object.closedOn) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0"),
+      closedOn: isSet(object.closedOn) ? BigInt(object.closedOn.toString()) : BigInt("0")
     };
   },
 
@@ -401,8 +401,8 @@ export const Lease = {
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     message.state = object.state ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
-    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? (prop => BigInt(prop.toString!!()))(object.closedOn) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
+    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? BigInt(object.closedOn.toString()) : BigInt("0");
     return message;
   },
 
@@ -421,8 +421,8 @@ export const Lease = {
       lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0"),
-      closed_on: isSet(object.closed_on) ? (prop => BigInt(prop.toString!!()))(object.closed_on) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0"),
+      closed_on: isSet(object.closed_on) ? BigInt(object.closed_on.toString()) : BigInt("0")
     };
   },
 
@@ -523,7 +523,7 @@ export const LeaseFilters = {
   fromJSON(object: any): LeaseFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",
@@ -545,7 +545,7 @@ export const LeaseFilters = {
   fromPartial<I extends Exact<DeepPartial<LeaseFilters>, I>>(object: I): LeaseFilters {
     const message = createBaseLeaseFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -567,7 +567,7 @@ export const LeaseFilters = {
   fromSDKJSON(object: any): LeaseFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",

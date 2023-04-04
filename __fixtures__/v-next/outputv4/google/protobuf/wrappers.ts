@@ -362,7 +362,7 @@ export const Int64Value = {
 
   fromJSON(object: any): Int64Value {
     return {
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -374,7 +374,7 @@ export const Int64Value = {
 
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -386,7 +386,7 @@ export const Int64Value = {
 
   fromSDKJSON(object: any): Int64ValueSDKType {
     return {
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -437,7 +437,7 @@ export const UInt64Value = {
 
   fromJSON(object: any): UInt64Value {
     return {
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -449,7 +449,7 @@ export const UInt64Value = {
 
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -461,7 +461,7 @@ export const UInt64Value = {
 
   fromSDKJSON(object: any): UInt64ValueSDKType {
     return {
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 

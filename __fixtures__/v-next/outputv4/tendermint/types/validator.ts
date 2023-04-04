@@ -92,7 +92,7 @@ export const ValidatorSet = {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       proposer: isSet(object.proposer) ? Validator.fromJSON(object.proposer) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? (prop => BigInt(prop.toString!!()))(object.totalVotingPower) : BigInt("0")
+      totalVotingPower: isSet(object.totalVotingPower) ? BigInt(object.totalVotingPower.toString()) : BigInt("0")
     };
   },
 
@@ -114,7 +114,7 @@ export const ValidatorSet = {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : undefined;
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? (prop => BigInt(prop.toString!!()))(object.totalVotingPower) : BigInt("0");
+    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt("0");
     return message;
   },
 
@@ -130,7 +130,7 @@ export const ValidatorSet = {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
       proposer: isSet(object.proposer) ? Validator.fromSDKJSON(object.proposer) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? (prop => BigInt(prop.toString!!()))(object.total_voting_power) : BigInt("0")
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt("0")
     };
   },
 
@@ -218,8 +218,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0"),
-      proposerPriority: isSet(object.proposerPriority) ? (prop => BigInt(prop.toString!!()))(object.proposerPriority) : BigInt("0")
+      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt("0"),
+      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt("0")
     };
   },
 
@@ -236,8 +236,8 @@ export const Validator = {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0");
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? (prop => BigInt(prop.toString!!()))(object.proposerPriority) : BigInt("0");
+    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt("0");
+    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt("0");
     return message;
   },
 
@@ -254,8 +254,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
       pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? (prop => BigInt(prop.toString!!()))(object.voting_power) : BigInt("0"),
-      proposer_priority: isSet(object.proposer_priority) ? (prop => BigInt(prop.toString!!()))(object.proposer_priority) : BigInt("0")
+      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt("0"),
+      proposer_priority: isSet(object.proposer_priority) ? BigInt(object.proposer_priority.toString()) : BigInt("0")
     };
   },
 
@@ -319,7 +319,7 @@ export const SimpleValidator = {
   fromJSON(object: any): SimpleValidator {
     return {
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0")
+      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt("0")
     };
   },
 
@@ -333,7 +333,7 @@ export const SimpleValidator = {
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0");
+    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt("0");
     return message;
   },
 
@@ -347,7 +347,7 @@ export const SimpleValidator = {
   fromSDKJSON(object: any): SimpleValidatorSDKType {
     return {
       pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? (prop => BigInt(prop.toString!!()))(object.voting_power) : BigInt("0")
+      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt("0")
     };
   },
 

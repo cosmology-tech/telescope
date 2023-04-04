@@ -321,7 +321,7 @@ export const QueryCurrentEpochResponse = {
 
   fromJSON(object: any): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.currentEpoch) ? (prop => BigInt(prop.toString!!()))(object.currentEpoch) : BigInt("0")
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt("0")
     };
   },
 
@@ -333,7 +333,7 @@ export const QueryCurrentEpochResponse = {
 
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.currentEpoch) : BigInt("0");
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt("0");
     return message;
   },
 
@@ -345,7 +345,7 @@ export const QueryCurrentEpochResponse = {
 
   fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
     return {
-      current_epoch: isSet(object.current_epoch) ? (prop => BigInt(prop.toString!!()))(object.current_epoch) : BigInt("0")
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt("0")
     };
   },
 

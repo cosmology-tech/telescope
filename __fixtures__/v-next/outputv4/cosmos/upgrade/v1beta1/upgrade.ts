@@ -215,7 +215,7 @@ export const Plan = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       info: isSet(object.info) ? String(object.info) : "",
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
     };
@@ -235,7 +235,7 @@ export const Plan = {
     const message = createBasePlan();
     message.name = object.name ?? "";
     message.time = object.time ?? undefined;
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.info = object.info ?? "";
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
@@ -255,7 +255,7 @@ export const Plan = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       info: isSet(object.info) ? String(object.info) : "",
       upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
     };
@@ -517,7 +517,7 @@ export const ModuleVersion = {
   fromJSON(object: any): ModuleVersion {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0")
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0")
     };
   },
 
@@ -531,7 +531,7 @@ export const ModuleVersion = {
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     return message;
   },
 
@@ -545,7 +545,7 @@ export const ModuleVersion = {
   fromSDKJSON(object: any): ModuleVersionSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0")
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0")
     };
   },
 

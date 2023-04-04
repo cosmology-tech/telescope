@@ -532,7 +532,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromJSON(object: any): ValidatorHistoricalRewardsRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined
     };
   },
@@ -548,7 +548,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromPartial(object: DeepPartial<ValidatorHistoricalRewardsRecord>): ValidatorHistoricalRewardsRecord {
     const message = createBaseValidatorHistoricalRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     message.rewards = object.rewards !== undefined && object.rewards !== null ? ValidatorHistoricalRewards.fromPartial(object.rewards) : undefined;
     return message;
   },
@@ -564,7 +564,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromSDKJSON(object: any): ValidatorHistoricalRewardsRecordSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDKJSON(object.rewards) : undefined
     };
   },
@@ -841,8 +841,8 @@ export const ValidatorSlashEventRecord = {
   fromJSON(object: any): ValidatorSlashEventRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       validatorSlashEvent: isSet(object.validatorSlashEvent) ? ValidatorSlashEvent.fromJSON(object.validatorSlashEvent) : undefined
     };
   },
@@ -859,8 +859,8 @@ export const ValidatorSlashEventRecord = {
   fromPartial(object: DeepPartial<ValidatorSlashEventRecord>): ValidatorSlashEventRecord {
     const message = createBaseValidatorSlashEventRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
-    message.period = object.period !== undefined && object.period !== null ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     message.validatorSlashEvent = object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null ? ValidatorSlashEvent.fromPartial(object.validatorSlashEvent) : undefined;
     return message;
   },
@@ -877,8 +877,8 @@ export const ValidatorSlashEventRecord = {
   fromSDKJSON(object: any): ValidatorSlashEventRecordSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
-      period: isSet(object.period) ? (prop => BigInt(prop.toString!!()))(object.period) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
       validator_slash_event: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDKJSON(object.validator_slash_event) : undefined
     };
   },

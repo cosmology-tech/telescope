@@ -126,7 +126,7 @@ export const ArithmeticTwapRequest = {
 
   fromJSON(object: any): ArithmeticTwapRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
@@ -146,7 +146,7 @@ export const ArithmeticTwapRequest = {
 
   fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -166,7 +166,7 @@ export const ArithmeticTwapRequest = {
 
   fromSDKJSON(object: any): ArithmeticTwapRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
       quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
@@ -327,7 +327,7 @@ export const ArithmeticTwapToNowRequest = {
 
   fromJSON(object: any): ArithmeticTwapToNowRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
@@ -345,7 +345,7 @@ export const ArithmeticTwapToNowRequest = {
 
   fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime ?? undefined;
@@ -363,7 +363,7 @@ export const ArithmeticTwapToNowRequest = {
 
   fromSDKJSON(object: any): ArithmeticTwapToNowRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
       quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined

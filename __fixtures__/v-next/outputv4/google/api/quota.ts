@@ -460,7 +460,7 @@ export const MetricRule_MetricCostsEntry = {
   fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -474,7 +474,7 @@ export const MetricRule_MetricCostsEntry = {
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -488,7 +488,7 @@ export const MetricRule_MetricCostsEntry = {
   fromSDKJSON(object: any): MetricRule_MetricCostsEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -560,8 +560,7 @@ export const MetricRule = {
       metricCosts: isObject(object.metricCosts) ? Object.entries(object.metricCosts).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {}
     };
@@ -588,7 +587,7 @@ export const MetricRule = {
       [key: string]: bigint;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = (prop => BigInt(prop.toString!!()))(value);
+        acc[key] = BigInt(value.toString());
       }
 
       return acc;
@@ -602,8 +601,7 @@ export const MetricRule = {
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {}
     };
@@ -615,8 +613,7 @@ export const MetricRule = {
       metric_costs: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {}
     };
@@ -687,7 +684,7 @@ export const QuotaLimit_ValuesEntry = {
   fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -701,7 +698,7 @@ export const QuotaLimit_ValuesEntry = {
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
     return message;
   },
 
@@ -715,7 +712,7 @@ export const QuotaLimit_ValuesEntry = {
   fromSDKJSON(object: any): QuotaLimit_ValuesEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? (prop => BigInt(prop.toString!!()))(object.value) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
     };
   },
 
@@ -858,17 +855,16 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      defaultLimit: isSet(object.defaultLimit) ? (prop => BigInt(prop.toString!!()))(object.defaultLimit) : BigInt("0"),
-      maxLimit: isSet(object.maxLimit) ? (prop => BigInt(prop.toString!!()))(object.maxLimit) : BigInt("0"),
-      freeTier: isSet(object.freeTier) ? (prop => BigInt(prop.toString!!()))(object.freeTier) : BigInt("0"),
+      defaultLimit: isSet(object.defaultLimit) ? BigInt(object.defaultLimit.toString()) : BigInt("0"),
+      maxLimit: isSet(object.maxLimit) ? BigInt(object.maxLimit.toString()) : BigInt("0"),
+      freeTier: isSet(object.freeTier) ? BigInt(object.freeTier.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {},
       displayName: isSet(object.displayName) ? String(object.displayName) : ""
@@ -901,9 +897,9 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? (prop => BigInt(prop.toString!!()))(object.defaultLimit) : BigInt("0");
-    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? (prop => BigInt(prop.toString!!()))(object.maxLimit) : BigInt("0");
-    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? (prop => BigInt(prop.toString!!()))(object.freeTier) : BigInt("0");
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt("0");
+    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt("0");
+    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt("0");
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";
@@ -911,7 +907,7 @@ export const QuotaLimit = {
       [key: string]: bigint;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
-        acc[key] = (prop => BigInt(prop.toString!!()))(value);
+        acc[key] = BigInt(value.toString());
       }
 
       return acc;
@@ -933,8 +929,7 @@ export const QuotaLimit = {
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {},
       displayName: object?.display_name
@@ -945,17 +940,16 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      default_limit: isSet(object.default_limit) ? (prop => BigInt(prop.toString!!()))(object.default_limit) : BigInt("0"),
-      max_limit: isSet(object.max_limit) ? (prop => BigInt(prop.toString!!()))(object.max_limit) : BigInt("0"),
-      free_tier: isSet(object.free_tier) ? (prop => BigInt(prop.toString!!()))(object.free_tier) : BigInt("0"),
+      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt("0"),
+      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt("0"),
+      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: bigint;
       }>((acc, [key, value]) => {
-        acc[key] = (prop => BigInt(prop.toString!!()))((value as bigint | string));
-
+        acc[key] = BigInt((value as bigint | string).toString());
         return acc;
       }, {}) : {},
       display_name: isSet(object.display_name) ? String(object.display_name) : ""

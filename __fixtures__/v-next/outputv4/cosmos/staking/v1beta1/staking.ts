@@ -1102,7 +1102,7 @@ export const Validator = {
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      unbondingHeight: isSet(object.unbondingHeight) ? (prop => BigInt(prop.toString!!()))(object.unbondingHeight) : BigInt("0"),
+      unbondingHeight: isSet(object.unbondingHeight) ? BigInt(object.unbondingHeight.toString()) : BigInt("0"),
       unbondingTime: isSet(object.unbondingTime) ? new Date(object.unbondingTime) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
@@ -1134,7 +1134,7 @@ export const Validator = {
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
     message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
-    message.unbondingHeight = object.unbondingHeight !== undefined && object.unbondingHeight !== null ? (prop => BigInt(prop.toString!!()))(object.unbondingHeight) : BigInt("0");
+    message.unbondingHeight = object.unbondingHeight !== undefined && object.unbondingHeight !== null ? BigInt(object.unbondingHeight.toString()) : BigInt("0");
     message.unbondingTime = object.unbondingTime ?? undefined;
     message.commission = object.commission !== undefined && object.commission !== null ? Commission.fromPartial(object.commission) : undefined;
     message.minSelfDelegation = object.minSelfDelegation ?? "";
@@ -1166,7 +1166,7 @@ export const Validator = {
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
       description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
-      unbonding_height: isSet(object.unbonding_height) ? (prop => BigInt(prop.toString!!()))(object.unbonding_height) : BigInt("0"),
+      unbonding_height: isSet(object.unbonding_height) ? BigInt(object.unbonding_height.toString()) : BigInt("0"),
       unbonding_time: isSet(object.unbonding_time) ? new Date(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromSDKJSON(object.commission) : undefined,
       min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
@@ -1935,7 +1935,7 @@ export const UnbondingDelegationEntry = {
 
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? (prop => BigInt(prop.toString!!()))(object.creationHeight) : BigInt("0"),
+      creationHeight: isSet(object.creationHeight) ? BigInt(object.creationHeight.toString()) : BigInt("0"),
       completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
@@ -1953,7 +1953,7 @@ export const UnbondingDelegationEntry = {
 
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
-    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? (prop => BigInt(prop.toString!!()))(object.creationHeight) : BigInt("0");
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt("0");
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.balance = object.balance ?? "";
@@ -1971,7 +1971,7 @@ export const UnbondingDelegationEntry = {
 
   fromSDKJSON(object: any): UnbondingDelegationEntrySDKType {
     return {
-      creation_height: isSet(object.creation_height) ? (prop => BigInt(prop.toString!!()))(object.creation_height) : BigInt("0"),
+      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt("0"),
       completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
@@ -2055,7 +2055,7 @@ export const RedelegationEntry = {
 
   fromJSON(object: any): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? (prop => BigInt(prop.toString!!()))(object.creationHeight) : BigInt("0"),
+      creationHeight: isSet(object.creationHeight) ? BigInt(object.creationHeight.toString()) : BigInt("0"),
       completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
@@ -2073,7 +2073,7 @@ export const RedelegationEntry = {
 
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
-    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? (prop => BigInt(prop.toString!!()))(object.creationHeight) : BigInt("0");
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt("0");
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.sharesDst = object.sharesDst ?? "";
@@ -2091,7 +2091,7 @@ export const RedelegationEntry = {
 
   fromSDKJSON(object: any): RedelegationEntrySDKType {
     return {
-      creation_height: isSet(object.creation_height) ? (prop => BigInt(prop.toString!!()))(object.creation_height) : BigInt("0"),
+      creation_height: isSet(object.creation_height) ? BigInt(object.creation_height.toString()) : BigInt("0"),
       completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : ""

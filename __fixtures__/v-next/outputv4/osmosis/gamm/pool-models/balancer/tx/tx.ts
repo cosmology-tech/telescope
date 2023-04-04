@@ -200,7 +200,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -212,7 +212,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -224,7 +224,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromSDKJSON(object: any): MsgCreateBalancerPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 

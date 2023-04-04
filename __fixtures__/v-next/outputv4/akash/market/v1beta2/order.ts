@@ -180,7 +180,7 @@ export const OrderID = {
   fromJSON(object: any): OrderID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
@@ -198,7 +198,7 @@ export const OrderID = {
   fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     return message;
@@ -216,7 +216,7 @@ export const OrderID = {
   fromSDKJSON(object: any): OrderIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
@@ -302,7 +302,7 @@ export const Order = {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
-      createdAt: isSet(object.createdAt) ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
     };
   },
 
@@ -320,7 +320,7 @@ export const Order = {
     message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : undefined;
     message.state = object.state ?? 0;
     message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? (prop => BigInt(prop.toString!!()))(object.createdAt) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
     return message;
   },
 
@@ -338,7 +338,7 @@ export const Order = {
       order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
-      created_at: isSet(object.created_at) ? (prop => BigInt(prop.toString!!()))(object.created_at) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
     };
   },
 
@@ -429,7 +429,7 @@ export const OrderFilters = {
   fromJSON(object: any): OrderFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       state: isSet(object.state) ? String(object.state) : ""
@@ -449,7 +449,7 @@ export const OrderFilters = {
   fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.state = object.state ?? "";
@@ -469,7 +469,7 @@ export const OrderFilters = {
   fromSDKJSON(object: any): OrderFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? (prop => BigInt(prop.toString!!()))(object.dseq) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       state: isSet(object.state) ? String(object.state) : ""

@@ -315,7 +315,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0")
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0")
     };
   },
 
@@ -331,7 +331,7 @@ export const SuperfluidIntermediaryAccount = {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -347,7 +347,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0")
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0")
     };
   },
 
@@ -418,7 +418,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epochNumber) ? (prop => BigInt(prop.toString!!()))(object.epochNumber) : BigInt("0"),
+      epochNumber: isSet(object.epochNumber) ? BigInt(object.epochNumber.toString()) : BigInt("0"),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -434,7 +434,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? (prop => BigInt(prop.toString!!()))(object.epochNumber) : BigInt("0");
+    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? BigInt(object.epochNumber.toString()) : BigInt("0");
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -450,7 +450,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromSDKJSON(object: any): OsmoEquivalentMultiplierRecordSDKType {
     return {
-      epoch_number: isSet(object.epoch_number) ? (prop => BigInt(prop.toString!!()))(object.epoch_number) : BigInt("0"),
+      epoch_number: isSet(object.epoch_number) ? BigInt(object.epoch_number.toString()) : BigInt("0"),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -634,7 +634,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0"),
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0"),
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
@@ -648,7 +648,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   },
@@ -662,7 +662,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromSDKJSON(object: any): LockIdIntermediaryAccountConnectionSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0"),
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0"),
       intermediary_account: isSet(object.intermediary_account) ? String(object.intermediary_account) : ""
     };
   },
@@ -727,7 +727,7 @@ export const UnpoolWhitelistedPools = {
 
   fromJSON(object: any): UnpoolWhitelistedPools {
     return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -745,7 +745,7 @@ export const UnpoolWhitelistedPools = {
 
   fromPartial(object: DeepPartial<UnpoolWhitelistedPools>): UnpoolWhitelistedPools {
     const message = createBaseUnpoolWhitelistedPools();
-    message.ids = object.ids?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.ids = object.ids?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -757,7 +757,7 @@ export const UnpoolWhitelistedPools = {
 
   fromSDKJSON(object: any): UnpoolWhitelistedPoolsSDKType {
     return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

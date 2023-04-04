@@ -200,7 +200,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -220,7 +220,7 @@ export const Snapshot = {
 
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
@@ -240,7 +240,7 @@ export const Snapshot = {
 
   fromSDKJSON(object: any): SnapshotSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -640,7 +640,7 @@ export const SnapshotIAVLItem = {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       height: isSet(object.height) ? Number(object.height) : 0
     };
   },
@@ -658,7 +658,7 @@ export const SnapshotIAVLItem = {
     const message = createBaseSnapshotIAVLItem();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.height = object.height ?? 0;
     return message;
   },
@@ -676,7 +676,7 @@ export const SnapshotIAVLItem = {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       height: isSet(object.height) ? Number(object.height) : 0
     };
   },

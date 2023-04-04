@@ -175,7 +175,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? (prop => BigInt(prop.toString!!()))(object.nextPoolNumber) : BigInt("0"),
+      nextPoolNumber: isSet(object.nextPoolNumber) ? BigInt(object.nextPoolNumber.toString()) : BigInt("0"),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -197,7 +197,7 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? (prop => BigInt(prop.toString!!()))(object.nextPoolNumber) : BigInt("0");
+    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? BigInt(object.nextPoolNumber.toString()) : BigInt("0");
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
@@ -213,7 +213,7 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      next_pool_number: isSet(object.next_pool_number) ? (prop => BigInt(prop.toString!!()))(object.next_pool_number) : BigInt("0"),
+      next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : BigInt("0"),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },

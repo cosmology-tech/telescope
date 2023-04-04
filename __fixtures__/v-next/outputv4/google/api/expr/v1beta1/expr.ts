@@ -1567,8 +1567,8 @@ export const Literal = {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? (prop => BigInt(prop.toString!!()))(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
+      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined
@@ -1591,8 +1591,8 @@ export const Literal = {
     const message = createBaseLiteral();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? (prop => BigInt(prop.toString!!()))(object.int64Value) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? (prop => BigInt(prop.toString!!()))(object.uint64Value) : undefined;
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
@@ -1615,8 +1615,8 @@ export const Literal = {
     return {
       null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
       bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
-      int64_value: isSet(object.int64_value) ? (prop => BigInt(prop.toString!!()))(object.int64_value) : undefined,
-      uint64_value: isSet(object.uint64_value) ? (prop => BigInt(prop.toString!!()))(object.uint64_value) : undefined,
+      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
+      uint64_value: isSet(object.uint64_value) ? BigInt(object.uint64_value.toString()) : undefined,
       double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
       string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
       bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined

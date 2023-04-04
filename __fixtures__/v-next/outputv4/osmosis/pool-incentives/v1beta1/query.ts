@@ -116,7 +116,7 @@ export const QueryGaugeIdsRequest = {
 
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -128,7 +128,7 @@ export const QueryGaugeIdsRequest = {
 
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -140,7 +140,7 @@ export const QueryGaugeIdsRequest = {
 
   fromSDKJSON(object: any): QueryGaugeIdsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -296,7 +296,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       gaugeIncentivePercentage: isSet(object.gaugeIncentivePercentage) ? String(object.gaugeIncentivePercentage) : ""
     };
@@ -312,7 +312,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
@@ -328,7 +328,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromSDKJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       gauge_incentive_percentage: isSet(object.gauge_incentive_percentage) ? String(object.gauge_incentive_percentage) : ""
     };
@@ -862,9 +862,9 @@ export const IncentivizedPool = {
 
   fromJSON(object: any): IncentivizedPool {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0")
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0")
     };
   },
 
@@ -878,9 +878,9 @@ export const IncentivizedPool = {
 
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.gaugeId) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -894,9 +894,9 @@ export const IncentivizedPool = {
 
   fromSDKJSON(object: any): IncentivizedPoolSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       lockable_duration: isSet(object.lockable_duration) ? Duration.fromSDKJSON(object.lockable_duration) : undefined,
-      gauge_id: isSet(object.gauge_id) ? (prop => BigInt(prop.toString!!()))(object.gauge_id) : BigInt("0")
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0")
     };
   },
 

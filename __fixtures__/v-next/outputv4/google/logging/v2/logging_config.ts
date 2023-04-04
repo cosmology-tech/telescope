@@ -5866,7 +5866,7 @@ export const CopyLogEntriesResponse = {
 
   fromJSON(object: any): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? (prop => BigInt(prop.toString!!()))(object.logEntriesCopiedCount) : BigInt("0")
+      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt("0")
     };
   },
 
@@ -5878,7 +5878,7 @@ export const CopyLogEntriesResponse = {
 
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? (prop => BigInt(prop.toString!!()))(object.logEntriesCopiedCount) : BigInt("0");
+    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt("0");
     return message;
   },
 
@@ -5890,7 +5890,7 @@ export const CopyLogEntriesResponse = {
 
   fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
     return {
-      log_entries_copied_count: isSet(object.log_entries_copied_count) ? (prop => BigInt(prop.toString!!()))(object.log_entries_copied_count) : BigInt("0")
+      log_entries_copied_count: isSet(object.log_entries_copied_count) ? BigInt(object.log_entries_copied_count.toString()) : BigInt("0")
     };
   },
 

@@ -247,7 +247,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -261,7 +261,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -275,7 +275,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromSDKJSON(object: any): GetValidatorSetByHeightRequestSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -346,7 +346,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0"),
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
@@ -368,7 +368,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
@@ -384,7 +384,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromSDKJSON(object: any): GetValidatorSetByHeightResponseSDKType {
     return {
-      block_height: isSet(object.block_height) ? (prop => BigInt(prop.toString!!()))(object.block_height) : BigInt("0"),
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
@@ -538,7 +538,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromJSON(object: any): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0"),
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
@@ -560,7 +560,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? (prop => BigInt(prop.toString!!()))(object.blockHeight) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
@@ -576,7 +576,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromSDKJSON(object: any): GetLatestValidatorSetResponseSDKType {
     return {
-      block_height: isSet(object.block_height) ? (prop => BigInt(prop.toString!!()))(object.block_height) : BigInt("0"),
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
@@ -666,8 +666,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0"),
-      proposerPriority: isSet(object.proposerPriority) ? (prop => BigInt(prop.toString!!()))(object.proposerPriority) : BigInt("0")
+      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt("0"),
+      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt("0")
     };
   },
 
@@ -684,8 +684,8 @@ export const Validator = {
     const message = createBaseValidator();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? (prop => BigInt(prop.toString!!()))(object.votingPower) : BigInt("0");
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? (prop => BigInt(prop.toString!!()))(object.proposerPriority) : BigInt("0");
+    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt("0");
+    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt("0");
     return message;
   },
 
@@ -702,8 +702,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? (prop => BigInt(prop.toString!!()))(object.voting_power) : BigInt("0"),
-      proposer_priority: isSet(object.proposer_priority) ? (prop => BigInt(prop.toString!!()))(object.proposer_priority) : BigInt("0")
+      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt("0"),
+      proposer_priority: isSet(object.proposer_priority) ? BigInt(object.proposer_priority.toString()) : BigInt("0")
     };
   },
 
@@ -757,7 +757,7 @@ export const GetBlockByHeightRequest = {
 
   fromJSON(object: any): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -769,7 +769,7 @@ export const GetBlockByHeightRequest = {
 
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -781,7 +781,7 @@ export const GetBlockByHeightRequest = {
 
   fromSDKJSON(object: any): GetBlockByHeightRequestSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 

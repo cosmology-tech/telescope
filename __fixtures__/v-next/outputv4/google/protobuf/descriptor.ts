@@ -4711,8 +4711,8 @@ export const UninterpretedOption = {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
       identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
-      positiveIntValue: isSet(object.positiveIntValue) ? (prop => BigInt(prop.toString!!()))(object.positiveIntValue) : BigInt("0"),
-      negativeIntValue: isSet(object.negativeIntValue) ? (prop => BigInt(prop.toString!!()))(object.negativeIntValue) : BigInt("0"),
+      positiveIntValue: isSet(object.positiveIntValue) ? BigInt(object.positiveIntValue.toString()) : BigInt("0"),
+      negativeIntValue: isSet(object.negativeIntValue) ? BigInt(object.negativeIntValue.toString()) : BigInt("0"),
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
       stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(),
       aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : ""
@@ -4741,8 +4741,8 @@ export const UninterpretedOption = {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
-    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? (prop => BigInt(prop.toString!!()))(object.positiveIntValue) : BigInt("0");
-    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? (prop => BigInt(prop.toString!!()))(object.negativeIntValue) : BigInt("0");
+    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? BigInt(object.positiveIntValue.toString()) : BigInt("0");
+    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? BigInt(object.negativeIntValue.toString()) : BigInt("0");
     message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
@@ -4765,8 +4765,8 @@ export const UninterpretedOption = {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDKJSON(e)) : [],
       identifier_value: isSet(object.identifier_value) ? String(object.identifier_value) : "",
-      positive_int_value: isSet(object.positive_int_value) ? (prop => BigInt(prop.toString!!()))(object.positive_int_value) : BigInt("0"),
-      negative_int_value: isSet(object.negative_int_value) ? (prop => BigInt(prop.toString!!()))(object.negative_int_value) : BigInt("0"),
+      positive_int_value: isSet(object.positive_int_value) ? BigInt(object.positive_int_value.toString()) : BigInt("0"),
+      negative_int_value: isSet(object.negative_int_value) ? BigInt(object.negative_int_value.toString()) : BigInt("0"),
       double_value: isSet(object.double_value) ? Number(object.double_value) : 0,
       string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(),
       aggregate_value: isSet(object.aggregate_value) ? String(object.aggregate_value) : ""

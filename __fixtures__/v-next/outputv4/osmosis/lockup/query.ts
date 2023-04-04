@@ -1920,7 +1920,7 @@ export const LockedRequest = {
 
   fromJSON(object: any): LockedRequest {
     return {
-      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
     };
   },
 
@@ -1932,7 +1932,7 @@ export const LockedRequest = {
 
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1944,7 +1944,7 @@ export const LockedRequest = {
 
   fromSDKJSON(object: any): LockedRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
     };
   },
 
@@ -2070,7 +2070,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lockId) ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
     };
   },
 
@@ -2082,7 +2082,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? (prop => BigInt(prop.toString!!()))(object.lockId) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
     return message;
   },
 
@@ -2094,7 +2094,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? (prop => BigInt(prop.toString!!()))(object.lock_id) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
     };
   },
 

@@ -156,7 +156,7 @@ export const MsgCreateStableswapPool = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initialPoolLiquidity) ? object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => BigInt(e.toString())) : [],
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
@@ -189,7 +189,7 @@ export const MsgCreateStableswapPool = {
     message.sender = object.sender ?? "";
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
-    message.scalingFactors = object.scalingFactors?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.scalingFactorController = object.scalingFactorController ?? "";
     return message;
@@ -211,7 +211,7 @@ export const MsgCreateStableswapPool = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       initial_pool_liquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : [],
       future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
       scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
     };
@@ -280,7 +280,7 @@ export const MsgCreateStableswapPoolResponse = {
 
   fromJSON(object: any): MsgCreateStableswapPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -292,7 +292,7 @@ export const MsgCreateStableswapPoolResponse = {
 
   fromPartial(object: DeepPartial<MsgCreateStableswapPoolResponse>): MsgCreateStableswapPoolResponse {
     const message = createBaseMsgCreateStableswapPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -304,7 +304,7 @@ export const MsgCreateStableswapPoolResponse = {
 
   fromSDKJSON(object: any): MsgCreateStableswapPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -386,8 +386,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   fromJSON(object: any): MsgStableSwapAdjustScalingFactors {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -408,8 +408,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   fromPartial(object: DeepPartial<MsgStableSwapAdjustScalingFactors>): MsgStableSwapAdjustScalingFactors {
     const message = createBaseMsgStableSwapAdjustScalingFactors();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
-    message.scalingFactors = object.scalingFactors?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -424,8 +424,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   fromSDKJSON(object: any): MsgStableSwapAdjustScalingFactorsSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
-      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

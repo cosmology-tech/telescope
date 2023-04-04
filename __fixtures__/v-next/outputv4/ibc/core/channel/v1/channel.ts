@@ -852,14 +852,14 @@ export const Packet = {
 
   fromJSON(object: any): Packet {
     return {
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
       sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
       destinationPort: isSet(object.destinationPort) ? String(object.destinationPort) : "",
       destinationChannel: isSet(object.destinationChannel) ? String(object.destinationChannel) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0")
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0")
     };
   },
 
@@ -878,14 +878,14 @@ export const Packet = {
 
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0");
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0");
     return message;
   },
 
@@ -904,14 +904,14 @@ export const Packet = {
 
   fromSDKJSON(object: any): PacketSDKType {
     return {
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       source_port: isSet(object.source_port) ? String(object.source_port) : "",
       source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
       destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
       destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? (prop => BigInt(prop.toString!!()))(object.timeout_timestamp) : BigInt("0")
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt("0")
     };
   },
 
@@ -998,7 +998,7 @@ export const PacketState = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -1016,7 +1016,7 @@ export const PacketState = {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     message.data = object.data ?? new Uint8Array();
     return message;
   },
@@ -1034,7 +1034,7 @@ export const PacketState = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },

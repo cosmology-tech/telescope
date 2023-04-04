@@ -91,9 +91,9 @@ export const Equivocation = {
 
   fromJSON(object: any): Equivocation {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0"),
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0"),
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
   },
@@ -109,9 +109,9 @@ export const Equivocation = {
 
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
-    message.height = object.height !== undefined && object.height !== null ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.time = object.time ?? undefined;
-    message.power = object.power !== undefined && object.power !== null ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
   },
@@ -127,9 +127,9 @@ export const Equivocation = {
 
   fromSDKJSON(object: any): EquivocationSDKType {
     return {
-      height: isSet(object.height) ? (prop => BigInt(prop.toString!!()))(object.height) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? (prop => BigInt(prop.toString!!()))(object.power) : BigInt("0"),
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0"),
       consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
     };
   },

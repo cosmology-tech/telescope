@@ -104,7 +104,7 @@ export const CommitInfo = {
 
   fromJSON(object: any): CommitInfo {
     return {
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
     };
   },
@@ -124,7 +124,7 @@ export const CommitInfo = {
 
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
   },
@@ -138,7 +138,7 @@ export const CommitInfo = {
 
   fromSDKJSON(object: any): CommitInfoSDKType {
     return {
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       store_infos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDKJSON(e)) : []
     };
   },
@@ -296,7 +296,7 @@ export const CommitID = {
 
   fromJSON(object: any): CommitID {
     return {
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
@@ -310,7 +310,7 @@ export const CommitID = {
 
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.hash = object.hash ?? new Uint8Array();
     return message;
   },
@@ -324,7 +324,7 @@ export const CommitID = {
 
   fromSDKJSON(object: any): CommitIDSDKType {
     return {
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },

@@ -743,7 +743,7 @@ export const QueryContractsByCodeRequest = {
 
   fromJSON(object: any): QueryContractsByCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -757,7 +757,7 @@ export const QueryContractsByCodeRequest = {
 
   fromPartial(object: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -771,7 +771,7 @@ export const QueryContractsByCodeRequest = {
 
   fromSDKJSON(object: any): QueryContractsByCodeRequestSDKType {
     return {
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1448,7 +1448,7 @@ export const QueryCodeRequest = {
 
   fromJSON(object: any): QueryCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0")
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0")
     };
   },
 
@@ -1460,7 +1460,7 @@ export const QueryCodeRequest = {
 
   fromPartial(object: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
     const message = createBaseQueryCodeRequest();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1472,7 +1472,7 @@ export const QueryCodeRequest = {
 
   fromSDKJSON(object: any): QueryCodeRequestSDKType {
     return {
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0")
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0")
     };
   },
 
@@ -1541,7 +1541,7 @@ export const CodeInfoResponse = {
 
   fromJSON(object: any): CodeInfoResponse {
     return {
-      codeId: isSet(object.codeId) ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       creator: isSet(object.creator) ? String(object.creator) : "",
       dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array()
     };
@@ -1557,7 +1557,7 @@ export const CodeInfoResponse = {
 
   fromPartial(object: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
     const message = createBaseCodeInfoResponse();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? (prop => BigInt(prop.toString!!()))(object.codeId) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.creator = object.creator ?? "";
     message.dataHash = object.dataHash ?? new Uint8Array();
     return message;
@@ -1573,7 +1573,7 @@ export const CodeInfoResponse = {
 
   fromSDKJSON(object: any): CodeInfoResponseSDKType {
     return {
-      code_id: isSet(object.code_id) ? (prop => BigInt(prop.toString!!()))(object.code_id) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       creator: isSet(object.creator) ? String(object.creator) : "",
       data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array()
     };
@@ -1992,7 +1992,7 @@ export const QueryPinnedCodesResponse = {
 
   fromJSON(object: any): QueryPinnedCodesResponse {
     return {
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
@@ -2012,7 +2012,7 @@ export const QueryPinnedCodesResponse = {
 
   fromPartial(object: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {
     const message = createBaseQueryPinnedCodesResponse();
-    message.codeIds = object.codeIds?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -2026,7 +2026,7 @@ export const QueryPinnedCodesResponse = {
 
   fromSDKJSON(object: any): QueryPinnedCodesResponseSDKType {
     return {
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e.toString())) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },

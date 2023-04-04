@@ -657,7 +657,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
@@ -671,7 +671,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   },
@@ -685,7 +685,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
     };
   },
@@ -747,7 +747,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
@@ -761,7 +761,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
-    message.key = object.key !== undefined && object.key !== null ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
   },
@@ -775,7 +775,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
     return {
-      key: isSet(object.key) ? (prop => BigInt(prop.toString!!()))(object.key) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
     };
   },

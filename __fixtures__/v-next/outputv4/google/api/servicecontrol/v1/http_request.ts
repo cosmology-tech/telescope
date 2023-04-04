@@ -285,9 +285,9 @@ export const HttpRequest = {
     return {
       requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
       requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
-      requestSize: isSet(object.requestSize) ? (prop => BigInt(prop.toString!!()))(object.requestSize) : BigInt("0"),
+      requestSize: isSet(object.requestSize) ? BigInt(object.requestSize.toString()) : BigInt("0"),
       status: isSet(object.status) ? Number(object.status) : 0,
-      responseSize: isSet(object.responseSize) ? (prop => BigInt(prop.toString!!()))(object.responseSize) : BigInt("0"),
+      responseSize: isSet(object.responseSize) ? BigInt(object.responseSize.toString()) : BigInt("0"),
       userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
@@ -296,7 +296,7 @@ export const HttpRequest = {
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
-      cacheFillBytes: isSet(object.cacheFillBytes) ? (prop => BigInt(prop.toString!!()))(object.cacheFillBytes) : BigInt("0"),
+      cacheFillBytes: isSet(object.cacheFillBytes) ? BigInt(object.cacheFillBytes.toString()) : BigInt("0"),
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
@@ -325,9 +325,9 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? (prop => BigInt(prop.toString!!()))(object.requestSize) : BigInt("0");
+    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? BigInt(object.requestSize.toString()) : BigInt("0");
     message.status = object.status ?? 0;
-    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? (prop => BigInt(prop.toString!!()))(object.responseSize) : BigInt("0");
+    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? BigInt(object.responseSize.toString()) : BigInt("0");
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
@@ -336,7 +336,7 @@ export const HttpRequest = {
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? (prop => BigInt(prop.toString!!()))(object.cacheFillBytes) : BigInt("0");
+    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? BigInt(object.cacheFillBytes.toString()) : BigInt("0");
     message.protocol = object.protocol ?? "";
     return message;
   },
@@ -365,9 +365,9 @@ export const HttpRequest = {
     return {
       request_method: isSet(object.request_method) ? String(object.request_method) : "",
       request_url: isSet(object.request_url) ? String(object.request_url) : "",
-      request_size: isSet(object.request_size) ? (prop => BigInt(prop.toString!!()))(object.request_size) : BigInt("0"),
+      request_size: isSet(object.request_size) ? BigInt(object.request_size.toString()) : BigInt("0"),
       status: isSet(object.status) ? Number(object.status) : 0,
-      response_size: isSet(object.response_size) ? (prop => BigInt(prop.toString!!()))(object.response_size) : BigInt("0"),
+      response_size: isSet(object.response_size) ? BigInt(object.response_size.toString()) : BigInt("0"),
       user_agent: isSet(object.user_agent) ? String(object.user_agent) : "",
       remote_ip: isSet(object.remote_ip) ? String(object.remote_ip) : "",
       server_ip: isSet(object.server_ip) ? String(object.server_ip) : "",
@@ -376,7 +376,7 @@ export const HttpRequest = {
       cache_lookup: isSet(object.cache_lookup) ? Boolean(object.cache_lookup) : false,
       cache_hit: isSet(object.cache_hit) ? Boolean(object.cache_hit) : false,
       cache_validated_with_origin_server: isSet(object.cache_validated_with_origin_server) ? Boolean(object.cache_validated_with_origin_server) : false,
-      cache_fill_bytes: isSet(object.cache_fill_bytes) ? (prop => BigInt(prop.toString!!()))(object.cache_fill_bytes) : BigInt("0"),
+      cache_fill_bytes: isSet(object.cache_fill_bytes) ? BigInt(object.cache_fill_bytes.toString()) : BigInt("0"),
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },

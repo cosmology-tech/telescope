@@ -70,8 +70,8 @@ export const BitArray = {
 
   fromJSON(object: any): BitArray {
     return {
-      bits: isSet(object.bits) ? (prop => BigInt(prop.toString!!()))(object.bits) : BigInt("0"),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt("0"),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -90,8 +90,8 @@ export const BitArray = {
 
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    message.bits = object.bits !== undefined && object.bits !== null ? (prop => BigInt(prop.toString!!()))(object.bits) : BigInt("0");
-    message.elems = object.elems?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.bits = object.bits !== undefined && object.bits !== null ? BigInt(object.bits.toString()) : BigInt("0");
+    message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -104,8 +104,8 @@ export const BitArray = {
 
   fromSDKJSON(object: any): BitArraySDKType {
     return {
-      bits: isSet(object.bits) ? (prop => BigInt(prop.toString!!()))(object.bits) : BigInt("0"),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt("0"),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

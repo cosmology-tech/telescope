@@ -1481,8 +1481,8 @@ export const QueryChannelConsensusStateRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? (prop => BigInt(prop.toString!!()))(object.revisionNumber) : BigInt("0"),
-      revisionHeight: isSet(object.revisionHeight) ? (prop => BigInt(prop.toString!!()))(object.revisionHeight) : BigInt("0")
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt("0"),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt("0")
     };
   },
 
@@ -1499,8 +1499,8 @@ export const QueryChannelConsensusStateRequest = {
     const message = createBaseQueryChannelConsensusStateRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? (prop => BigInt(prop.toString!!()))(object.revisionNumber) : BigInt("0");
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? (prop => BigInt(prop.toString!!()))(object.revisionHeight) : BigInt("0");
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt("0");
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -1517,8 +1517,8 @@ export const QueryChannelConsensusStateRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      revision_number: isSet(object.revision_number) ? (prop => BigInt(prop.toString!!()))(object.revision_number) : BigInt("0"),
-      revision_height: isSet(object.revision_height) ? (prop => BigInt(prop.toString!!()))(object.revision_height) : BigInt("0")
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt("0"),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt("0")
     };
   },
 
@@ -1712,7 +1712,7 @@ export const QueryPacketCommitmentRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -1728,7 +1728,7 @@ export const QueryPacketCommitmentRequest = {
     const message = createBaseQueryPacketCommitmentRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -1744,7 +1744,7 @@ export const QueryPacketCommitmentRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -2144,7 +2144,7 @@ export const QueryPacketReceiptRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -2160,7 +2160,7 @@ export const QueryPacketReceiptRequest = {
     const message = createBaseQueryPacketReceiptRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -2176,7 +2176,7 @@ export const QueryPacketReceiptRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -2354,7 +2354,7 @@ export const QueryPacketAcknowledgementRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -2370,7 +2370,7 @@ export const QueryPacketAcknowledgementRequest = {
     const message = createBaseQueryPacketAcknowledgementRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -2386,7 +2386,7 @@ export const QueryPacketAcknowledgementRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? (prop => BigInt(prop.toString!!()))(object.sequence) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
     };
   },
 
@@ -2586,7 +2586,7 @@ export const QueryPacketAcknowledgementsRequest = {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      packetCommitmentSequences: Array.isArray(object?.packetCommitmentSequences) ? object.packetCommitmentSequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packetCommitmentSequences: Array.isArray(object?.packetCommitmentSequences) ? object.packetCommitmentSequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -2610,7 +2610,7 @@ export const QueryPacketAcknowledgementsRequest = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
-    message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -2628,7 +2628,7 @@ export const QueryPacketAcknowledgementsRequest = {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
-      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -2837,7 +2837,7 @@ export const QueryUnreceivedPacketsRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      packetCommitmentSequences: Array.isArray(object?.packetCommitmentSequences) ? object.packetCommitmentSequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packetCommitmentSequences: Array.isArray(object?.packetCommitmentSequences) ? object.packetCommitmentSequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -2859,7 +2859,7 @@ export const QueryUnreceivedPacketsRequest = {
     const message = createBaseQueryUnreceivedPacketsRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -2875,7 +2875,7 @@ export const QueryUnreceivedPacketsRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -2956,7 +2956,7 @@ export const QueryUnreceivedPacketsResponse = {
 
   fromJSON(object: any): QueryUnreceivedPacketsResponse {
     return {
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e.toString())) : [],
       height: isSet(object.height) ? Height.fromJSON(object.height) : undefined
     };
   },
@@ -2976,7 +2976,7 @@ export const QueryUnreceivedPacketsResponse = {
 
   fromPartial(object: DeepPartial<QueryUnreceivedPacketsResponse>): QueryUnreceivedPacketsResponse {
     const message = createBaseQueryUnreceivedPacketsResponse();
-    message.sequences = object.sequences?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.sequences = object.sequences?.map(e => BigInt(e.toString())) || [];
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
   },
@@ -2990,7 +2990,7 @@ export const QueryUnreceivedPacketsResponse = {
 
   fromSDKJSON(object: any): QueryUnreceivedPacketsResponseSDKType {
     return {
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e.toString())) : [],
       height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
     };
   },
@@ -3081,7 +3081,7 @@ export const QueryUnreceivedAcksRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      packetAckSequences: Array.isArray(object?.packetAckSequences) ? object.packetAckSequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packetAckSequences: Array.isArray(object?.packetAckSequences) ? object.packetAckSequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -3103,7 +3103,7 @@ export const QueryUnreceivedAcksRequest = {
     const message = createBaseQueryUnreceivedAcksRequest();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.packetAckSequences = object.packetAckSequences?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.packetAckSequences = object.packetAckSequences?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -3119,7 +3119,7 @@ export const QueryUnreceivedAcksRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      packet_ack_sequences: Array.isArray(object?.packet_ack_sequences) ? object.packet_ack_sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : []
+      packet_ack_sequences: Array.isArray(object?.packet_ack_sequences) ? object.packet_ack_sequences.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -3200,7 +3200,7 @@ export const QueryUnreceivedAcksResponse = {
 
   fromJSON(object: any): QueryUnreceivedAcksResponse {
     return {
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e.toString())) : [],
       height: isSet(object.height) ? Height.fromJSON(object.height) : undefined
     };
   },
@@ -3220,7 +3220,7 @@ export const QueryUnreceivedAcksResponse = {
 
   fromPartial(object: DeepPartial<QueryUnreceivedAcksResponse>): QueryUnreceivedAcksResponse {
     const message = createBaseQueryUnreceivedAcksResponse();
-    message.sequences = object.sequences?.map(e => (prop => BigInt(prop.toString!!()))(e)) || [];
+    message.sequences = object.sequences?.map(e => BigInt(e.toString())) || [];
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
   },
@@ -3234,7 +3234,7 @@ export const QueryUnreceivedAcksResponse = {
 
   fromSDKJSON(object: any): QueryUnreceivedAcksResponseSDKType {
     return {
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => (prop => BigInt(prop.toString!!()))(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e.toString())) : [],
       height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
     };
   },
@@ -3401,7 +3401,7 @@ export const QueryNextSequenceReceiveResponse = {
 
   fromJSON(object: any): QueryNextSequenceReceiveResponse {
     return {
-      nextSequenceReceive: isSet(object.nextSequenceReceive) ? (prop => BigInt(prop.toString!!()))(object.nextSequenceReceive) : BigInt("0"),
+      nextSequenceReceive: isSet(object.nextSequenceReceive) ? BigInt(object.nextSequenceReceive.toString()) : BigInt("0"),
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined
     };
@@ -3417,7 +3417,7 @@ export const QueryNextSequenceReceiveResponse = {
 
   fromPartial(object: DeepPartial<QueryNextSequenceReceiveResponse>): QueryNextSequenceReceiveResponse {
     const message = createBaseQueryNextSequenceReceiveResponse();
-    message.nextSequenceReceive = object.nextSequenceReceive !== undefined && object.nextSequenceReceive !== null ? (prop => BigInt(prop.toString!!()))(object.nextSequenceReceive) : BigInt("0");
+    message.nextSequenceReceive = object.nextSequenceReceive !== undefined && object.nextSequenceReceive !== null ? BigInt(object.nextSequenceReceive.toString()) : BigInt("0");
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
@@ -3433,7 +3433,7 @@ export const QueryNextSequenceReceiveResponse = {
 
   fromSDKJSON(object: any): QueryNextSequenceReceiveResponseSDKType {
     return {
-      next_sequence_receive: isSet(object.next_sequence_receive) ? (prop => BigInt(prop.toString!!()))(object.next_sequence_receive) : BigInt("0"),
+      next_sequence_receive: isSet(object.next_sequence_receive) ? BigInt(object.next_sequence_receive.toString()) : BigInt("0"),
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
     };

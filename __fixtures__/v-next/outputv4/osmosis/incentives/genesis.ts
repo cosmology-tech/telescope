@@ -109,7 +109,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      lastGaugeId: isSet(object.lastGaugeId) ? (prop => BigInt(prop.toString!!()))(object.lastGaugeId) : BigInt("0")
+      lastGaugeId: isSet(object.lastGaugeId) ? BigInt(object.lastGaugeId.toString()) : BigInt("0")
     };
   },
 
@@ -138,7 +138,7 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? (prop => BigInt(prop.toString!!()))(object.lastGaugeId) : BigInt("0");
+    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? BigInt(object.lastGaugeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -156,7 +156,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
       lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
-      last_gauge_id: isSet(object.last_gauge_id) ? (prop => BigInt(prop.toString!!()))(object.last_gauge_id) : BigInt("0")
+      last_gauge_id: isSet(object.last_gauge_id) ? BigInt(object.last_gauge_id.toString()) : BigInt("0")
     };
   },
 

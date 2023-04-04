@@ -524,11 +524,11 @@ export const Params = {
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? (prop => BigInt(prop.toString!!()))(object.reductionPeriodInEpochs) : BigInt("0"),
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt("0"),
       reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
       distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? (prop => BigInt(prop.toString!!()))(object.mintingRewardsDistributionStartEpoch) : BigInt("0")
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt("0")
     };
   },
 
@@ -556,11 +556,11 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? (prop => BigInt(prop.toString!!()))(object.reductionPeriodInEpochs) : BigInt("0");
+    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt("0");
     message.reductionFactor = object.reductionFactor ?? "";
     message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : undefined;
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? (prop => BigInt(prop.toString!!()))(object.mintingRewardsDistributionStartEpoch) : BigInt("0");
+    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt("0");
     return message;
   },
 
@@ -582,11 +582,11 @@ export const Params = {
       mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
       genesis_epoch_provisions: isSet(object.genesis_epoch_provisions) ? String(object.genesis_epoch_provisions) : "",
       epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? (prop => BigInt(prop.toString!!()))(object.reduction_period_in_epochs) : BigInt("0"),
+      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? BigInt(object.reduction_period_in_epochs.toString()) : BigInt("0"),
       reduction_factor: isSet(object.reduction_factor) ? String(object.reduction_factor) : "",
       distribution_proportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDKJSON(object.distribution_proportions) : undefined,
       weighted_developer_rewards_receivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDKJSON(e)) : [],
-      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? (prop => BigInt(prop.toString!!()))(object.minting_rewards_distribution_start_epoch) : BigInt("0")
+      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? BigInt(object.minting_rewards_distribution_start_epoch.toString()) : BigInt("0")
     };
   },
 

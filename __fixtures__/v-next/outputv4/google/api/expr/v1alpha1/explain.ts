@@ -214,7 +214,7 @@ export const Explain_ExprStep = {
 
   fromJSON(object: any): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
     };
   },
@@ -228,7 +228,7 @@ export const Explain_ExprStep = {
 
   fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   },
@@ -242,7 +242,7 @@ export const Explain_ExprStep = {
 
   fromSDKJSON(object: any): Explain_ExprStepSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       value_index: isSet(object.value_index) ? Number(object.value_index) : 0
     };
   },

@@ -1157,10 +1157,10 @@ export const GroupInfo = {
 
   fromJSON(object: any): GroupInfo {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
       createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
@@ -1179,10 +1179,10 @@ export const GroupInfo = {
 
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1201,10 +1201,10 @@ export const GroupInfo = {
 
   fromSDKJSON(object: any): GroupInfoSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
       created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
@@ -1271,7 +1271,7 @@ export const GroupMember = {
 
   fromJSON(object: any): GroupMember {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       member: isSet(object.member) ? Member.fromJSON(object.member) : undefined
     };
   },
@@ -1285,7 +1285,7 @@ export const GroupMember = {
 
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
   },
@@ -1299,7 +1299,7 @@ export const GroupMember = {
 
   fromSDKJSON(object: any): GroupMemberSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       member: isSet(object.member) ? Member.fromSDKJSON(object.member) : undefined
     };
   },
@@ -1407,10 +1407,10 @@ export const GroupPolicyInfo = {
   fromJSON(object: any): GroupPolicyInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
       createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
@@ -1431,10 +1431,10 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    message.version = object.version !== undefined && object.version !== null ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0");
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1455,10 +1455,10 @@ export const GroupPolicyInfo = {
   fromSDKJSON(object: any): GroupPolicyInfoSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? (prop => BigInt(prop.toString!!()))(object.version) : BigInt("0"),
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined,
       created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
@@ -1625,13 +1625,13 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
-      groupVersion: isSet(object.groupVersion) ? (prop => BigInt(prop.toString!!()))(object.groupVersion) : BigInt("0"),
-      groupPolicyVersion: isSet(object.groupPolicyVersion) ? (prop => BigInt(prop.toString!!()))(object.groupPolicyVersion) : BigInt("0"),
+      groupVersion: isSet(object.groupVersion) ? BigInt(object.groupVersion.toString()) : BigInt("0"),
+      groupPolicyVersion: isSet(object.groupPolicyVersion) ? BigInt(object.groupPolicyVersion.toString()) : BigInt("0"),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
@@ -1673,13 +1673,13 @@ export const Proposal = {
 
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.id = object.id !== undefined && object.id !== null ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
     message.submitTime = object.submitTime ?? undefined;
-    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? (prop => BigInt(prop.toString!!()))(object.groupVersion) : BigInt("0");
-    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? (prop => BigInt(prop.toString!!()))(object.groupPolicyVersion) : BigInt("0");
+    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? BigInt(object.groupVersion.toString()) : BigInt("0");
+    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? BigInt(object.groupPolicyVersion.toString()) : BigInt("0");
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
     message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
@@ -1709,13 +1709,13 @@ export const Proposal = {
 
   fromSDKJSON(object: any): ProposalSDKType {
     return {
-      id: isSet(object.id) ? (prop => BigInt(prop.toString!!()))(object.id) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
-      group_version: isSet(object.group_version) ? (prop => BigInt(prop.toString!!()))(object.group_version) : BigInt("0"),
-      group_policy_version: isSet(object.group_policy_version) ? (prop => BigInt(prop.toString!!()))(object.group_policy_version) : BigInt("0"),
+      group_version: isSet(object.group_version) ? BigInt(object.group_version.toString()) : BigInt("0"),
+      group_policy_version: isSet(object.group_policy_version) ? BigInt(object.group_policy_version.toString()) : BigInt("0"),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
@@ -1952,7 +1952,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1972,7 +1972,7 @@ export const Vote = {
 
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -1992,7 +1992,7 @@ export const Vote = {
 
   fromSDKJSON(object: any): VoteSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",

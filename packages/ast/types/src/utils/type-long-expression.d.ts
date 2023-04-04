@@ -26,7 +26,7 @@ export declare const TypeLong: {
         long: t.MemberExpression;
     };
     fromValueExpressions: {
-        bigint: t.ArrowFunctionExpression;
+        bigint: t.Identifier;
         long: t.MemberExpression;
     };
     fromNumberExpressions: {
@@ -45,6 +45,7 @@ export declare const TypeLong: {
     getUZero: (ctx: GenericParseContext) => t.Expression;
     getZero: (ctx: GenericParseContext) => t.Expression;
     getFromValue: (ctx: GenericParseContext) => t.Expression;
+    getFromValueWithArgs: (ctx: GenericParseContext, arg: t.Expression) => t.Expression;
     getFromNumber: (ctx: GenericParseContext) => t.Expression;
     getFromString: (ctx: GenericParseContext) => t.Expression;
     getNode: (ctx: GenericParseContext, mappings: any) => any;

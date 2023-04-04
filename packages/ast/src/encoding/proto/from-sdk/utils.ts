@@ -236,21 +236,18 @@ export const fromSDK = {
                 TypeLong.addUtil(args.context);
 
                 valueTypeType = TypeLong.getPropType(args.context);
-                fromSDK = t.callExpression(
-                    TypeLong.getFromValue(args.context),
-                    [
-                        t.tsAsExpression(
-                            t.identifier('value'),
-                            t.tsUnionType(
-                                [
-                                    t.tsTypeReference(
-                                        TypeLong.getPropIdentifier(args.context)
-                                    ),
-                                    t.tsStringKeyword()
-                                ]
-                            )
+                fromSDK = TypeLong.getFromValueWithArgs(args.context,
+                    t.tsAsExpression(
+                        t.identifier('value'),
+                        t.tsUnionType(
+                            [
+                                t.tsTypeReference(
+                                    TypeLong.getPropIdentifier(args.context)
+                                ),
+                                t.tsStringKeyword()
+                            ]
                         )
-                    ]
+                    )
                 )
                 break;
             default:

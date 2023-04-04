@@ -615,7 +615,7 @@ export const MsgCreateGroupResponse = {
 
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0")
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0")
     };
   },
 
@@ -627,7 +627,7 @@ export const MsgCreateGroupResponse = {
 
   fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     return message;
   },
 
@@ -639,7 +639,7 @@ export const MsgCreateGroupResponse = {
 
   fromSDKJSON(object: any): MsgCreateGroupResponseSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0")
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0")
     };
   },
 
@@ -709,7 +709,7 @@ export const MsgUpdateGroupMembers = {
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       memberUpdates: Array.isArray(object?.memberUpdates) ? object.memberUpdates.map((e: any) => Member.fromJSON(e)) : []
     };
   },
@@ -731,7 +731,7 @@ export const MsgUpdateGroupMembers = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.memberUpdates = object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
     return message;
   },
@@ -747,7 +747,7 @@ export const MsgUpdateGroupMembers = {
   fromSDKJSON(object: any): MsgUpdateGroupMembersSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       member_updates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromSDKJSON(e)) : []
     };
   },
@@ -882,7 +882,7 @@ export const MsgUpdateGroupAdmin = {
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
     };
   },
@@ -898,7 +898,7 @@ export const MsgUpdateGroupAdmin = {
   fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.newAdmin = object.newAdmin ?? "";
     return message;
   },
@@ -914,7 +914,7 @@ export const MsgUpdateGroupAdmin = {
   fromSDKJSON(object: any): MsgUpdateGroupAdminSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
     };
   },
@@ -1043,7 +1043,7 @@ export const MsgUpdateGroupMetadata = {
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -1059,7 +1059,7 @@ export const MsgUpdateGroupMetadata = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.metadata = object.metadata ?? "";
     return message;
   },
@@ -1075,7 +1075,7 @@ export const MsgUpdateGroupMetadata = {
   fromSDKJSON(object: any): MsgUpdateGroupMetadataSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -1213,7 +1213,7 @@ export const MsgCreateGroupPolicy = {
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
     };
@@ -1231,7 +1231,7 @@ export const MsgCreateGroupPolicy = {
   fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
     message.admin = object.admin ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.metadata = object.metadata ?? "";
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
@@ -1249,7 +1249,7 @@ export const MsgCreateGroupPolicy = {
   fromSDKJSON(object: any): MsgCreateGroupPolicySDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
     };
@@ -1656,7 +1656,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0"),
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0"),
       groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : ""
     };
   },
@@ -1670,7 +1670,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
   },
@@ -1684,7 +1684,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromSDKJSON(object: any): MsgCreateGroupWithPolicyResponseSDKType {
     return {
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0"),
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0"),
       group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : ""
     };
   },
@@ -2274,7 +2274,7 @@ export const MsgSubmitProposalResponse = {
 
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
     };
   },
 
@@ -2286,7 +2286,7 @@ export const MsgSubmitProposalResponse = {
 
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     return message;
   },
 
@@ -2298,7 +2298,7 @@ export const MsgSubmitProposalResponse = {
 
   fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
     };
   },
 
@@ -2358,7 +2358,7 @@ export const MsgWithdrawProposal = {
 
   fromJSON(object: any): MsgWithdrawProposal {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -2372,7 +2372,7 @@ export const MsgWithdrawProposal = {
 
   fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.address = object.address ?? "";
     return message;
   },
@@ -2386,7 +2386,7 @@ export const MsgWithdrawProposal = {
 
   fromSDKJSON(object: any): MsgWithdrawProposalSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -2531,7 +2531,7 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -2551,7 +2551,7 @@ export const MsgVote = {
 
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -2571,7 +2571,7 @@ export const MsgVote = {
 
   fromSDKJSON(object: any): MsgVoteSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -2695,7 +2695,7 @@ export const MsgExec = {
 
   fromJSON(object: any): MsgExec {
     return {
-      proposalId: isSet(object.proposalId) ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -2709,7 +2709,7 @@ export const MsgExec = {
 
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? (prop => BigInt(prop.toString!!()))(object.proposalId) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
     message.signer = object.signer ?? "";
     return message;
   },
@@ -2723,7 +2723,7 @@ export const MsgExec = {
 
   fromSDKJSON(object: any): MsgExecSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? (prop => BigInt(prop.toString!!()))(object.proposal_id) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -2842,7 +2842,7 @@ export const MsgLeaveGroup = {
   fromJSON(object: any): MsgLeaveGroup {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0")
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt("0")
     };
   },
 
@@ -2856,7 +2856,7 @@ export const MsgLeaveGroup = {
   fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? (prop => BigInt(prop.toString!!()))(object.groupId) : BigInt("0");
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt("0");
     return message;
   },
 
@@ -2870,7 +2870,7 @@ export const MsgLeaveGroup = {
   fromSDKJSON(object: any): MsgLeaveGroupSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? (prop => BigInt(prop.toString!!()))(object.group_id) : BigInt("0")
+      group_id: isSet(object.group_id) ? BigInt(object.group_id.toString()) : BigInt("0")
     };
   },
 

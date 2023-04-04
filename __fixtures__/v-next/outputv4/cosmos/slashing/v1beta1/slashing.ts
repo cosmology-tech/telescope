@@ -153,11 +153,11 @@ export const ValidatorSigningInfo = {
   fromJSON(object: any): ValidatorSigningInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      startHeight: isSet(object.startHeight) ? (prop => BigInt(prop.toString!!()))(object.startHeight) : BigInt("0"),
-      indexOffset: isSet(object.indexOffset) ? (prop => BigInt(prop.toString!!()))(object.indexOffset) : BigInt("0"),
+      startHeight: isSet(object.startHeight) ? BigInt(object.startHeight.toString()) : BigInt("0"),
+      indexOffset: isSet(object.indexOffset) ? BigInt(object.indexOffset.toString()) : BigInt("0"),
       jailedUntil: isSet(object.jailedUntil) ? new Date(object.jailedUntil) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missedBlocksCounter: isSet(object.missedBlocksCounter) ? (prop => BigInt(prop.toString!!()))(object.missedBlocksCounter) : BigInt("0")
+      missedBlocksCounter: isSet(object.missedBlocksCounter) ? BigInt(object.missedBlocksCounter.toString()) : BigInt("0")
     };
   },
 
@@ -175,11 +175,11 @@ export const ValidatorSigningInfo = {
   fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
     message.address = object.address ?? "";
-    message.startHeight = object.startHeight !== undefined && object.startHeight !== null ? (prop => BigInt(prop.toString!!()))(object.startHeight) : BigInt("0");
-    message.indexOffset = object.indexOffset !== undefined && object.indexOffset !== null ? (prop => BigInt(prop.toString!!()))(object.indexOffset) : BigInt("0");
+    message.startHeight = object.startHeight !== undefined && object.startHeight !== null ? BigInt(object.startHeight.toString()) : BigInt("0");
+    message.indexOffset = object.indexOffset !== undefined && object.indexOffset !== null ? BigInt(object.indexOffset.toString()) : BigInt("0");
     message.jailedUntil = object.jailedUntil ?? undefined;
     message.tombstoned = object.tombstoned ?? false;
-    message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? (prop => BigInt(prop.toString!!()))(object.missedBlocksCounter) : BigInt("0");
+    message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? BigInt(object.missedBlocksCounter.toString()) : BigInt("0");
     return message;
   },
 
@@ -197,11 +197,11 @@ export const ValidatorSigningInfo = {
   fromSDKJSON(object: any): ValidatorSigningInfoSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      start_height: isSet(object.start_height) ? (prop => BigInt(prop.toString!!()))(object.start_height) : BigInt("0"),
-      index_offset: isSet(object.index_offset) ? (prop => BigInt(prop.toString!!()))(object.index_offset) : BigInt("0"),
+      start_height: isSet(object.start_height) ? BigInt(object.start_height.toString()) : BigInt("0"),
+      index_offset: isSet(object.index_offset) ? BigInt(object.index_offset.toString()) : BigInt("0"),
       jailed_until: isSet(object.jailed_until) ? new Date(object.jailed_until) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missed_blocks_counter: isSet(object.missed_blocks_counter) ? (prop => BigInt(prop.toString!!()))(object.missed_blocks_counter) : BigInt("0")
+      missed_blocks_counter: isSet(object.missed_blocks_counter) ? BigInt(object.missed_blocks_counter.toString()) : BigInt("0")
     };
   },
 
@@ -293,7 +293,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      signedBlocksWindow: isSet(object.signedBlocksWindow) ? (prop => BigInt(prop.toString!!()))(object.signedBlocksWindow) : BigInt("0"),
+      signedBlocksWindow: isSet(object.signedBlocksWindow) ? BigInt(object.signedBlocksWindow.toString()) : BigInt("0"),
       minSignedPerWindow: isSet(object.minSignedPerWindow) ? bytesFromBase64(object.minSignedPerWindow) : new Uint8Array(),
       downtimeJailDuration: isSet(object.downtimeJailDuration) ? Duration.fromJSON(object.downtimeJailDuration) : undefined,
       slashFractionDoubleSign: isSet(object.slashFractionDoubleSign) ? bytesFromBase64(object.slashFractionDoubleSign) : new Uint8Array(),
@@ -313,7 +313,7 @@ export const Params = {
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.signedBlocksWindow = object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null ? (prop => BigInt(prop.toString!!()))(object.signedBlocksWindow) : BigInt("0");
+    message.signedBlocksWindow = object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null ? BigInt(object.signedBlocksWindow.toString()) : BigInt("0");
     message.minSignedPerWindow = object.minSignedPerWindow ?? new Uint8Array();
     message.downtimeJailDuration = object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null ? Duration.fromPartial(object.downtimeJailDuration) : undefined;
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
@@ -333,7 +333,7 @@ export const Params = {
 
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      signed_blocks_window: isSet(object.signed_blocks_window) ? (prop => BigInt(prop.toString!!()))(object.signed_blocks_window) : BigInt("0"),
+      signed_blocks_window: isSet(object.signed_blocks_window) ? BigInt(object.signed_blocks_window.toString()) : BigInt("0"),
       min_signed_per_window: isSet(object.min_signed_per_window) ? bytesFromBase64(object.min_signed_per_window) : new Uint8Array(),
       downtime_jail_duration: isSet(object.downtime_jail_duration) ? Duration.fromSDKJSON(object.downtime_jail_duration) : undefined,
       slash_fraction_double_sign: isSet(object.slash_fraction_double_sign) ? bytesFromBase64(object.slash_fraction_double_sign) : new Uint8Array(),

@@ -181,7 +181,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      totalGas: isSet(object.totalGas) ? (prop => BigInt(prop.toString!!()))(object.totalGas) : BigInt("0")
+      totalGas: isSet(object.totalGas) ? BigInt(object.totalGas.toString()) : BigInt("0")
     };
   },
 
@@ -207,7 +207,7 @@ export const Incentive = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     message.startTime = object.startTime ?? undefined;
-    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? (prop => BigInt(prop.toString!!()))(object.totalGas) : BigInt("0");
+    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? BigInt(object.totalGas.toString()) : BigInt("0");
     return message;
   },
 
@@ -227,7 +227,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      total_gas: isSet(object.total_gas) ? (prop => BigInt(prop.toString!!()))(object.total_gas) : BigInt("0")
+      total_gas: isSet(object.total_gas) ? BigInt(object.total_gas.toString()) : BigInt("0")
     };
   },
 
@@ -308,7 +308,7 @@ export const GasMeter = {
     return {
       contract: isSet(object.contract) ? String(object.contract) : "",
       participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulativeGas: isSet(object.cumulativeGas) ? (prop => BigInt(prop.toString!!()))(object.cumulativeGas) : BigInt("0")
+      cumulativeGas: isSet(object.cumulativeGas) ? BigInt(object.cumulativeGas.toString()) : BigInt("0")
     };
   },
 
@@ -324,7 +324,7 @@ export const GasMeter = {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? (prop => BigInt(prop.toString!!()))(object.cumulativeGas) : BigInt("0");
+    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? BigInt(object.cumulativeGas.toString()) : BigInt("0");
     return message;
   },
 
@@ -340,7 +340,7 @@ export const GasMeter = {
     return {
       contract: isSet(object.contract) ? String(object.contract) : "",
       participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulative_gas: isSet(object.cumulative_gas) ? (prop => BigInt(prop.toString!!()))(object.cumulative_gas) : BigInt("0")
+      cumulative_gas: isSet(object.cumulative_gas) ? BigInt(object.cumulative_gas.toString()) : BigInt("0")
     };
   },
 

@@ -73,7 +73,7 @@ export const FeeToken = {
   fromJSON(object: any): FeeToken {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
     };
   },
 
@@ -87,7 +87,7 @@ export const FeeToken = {
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0");
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt("0");
     return message;
   },
 
@@ -101,7 +101,7 @@ export const FeeToken = {
   fromSDKJSON(object: any): FeeTokenSDKType {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? (prop => BigInt(prop.toString!!()))(object.poolID) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
     };
   },
 

@@ -1027,8 +1027,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromJSON(object: any): QueryConnectionConsensusStateRequest {
     return {
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? (prop => BigInt(prop.toString!!()))(object.revisionNumber) : BigInt("0"),
-      revisionHeight: isSet(object.revisionHeight) ? (prop => BigInt(prop.toString!!()))(object.revisionHeight) : BigInt("0")
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt("0"),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt("0")
     };
   },
 
@@ -1043,8 +1043,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromPartial(object: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
     const message = createBaseQueryConnectionConsensusStateRequest();
     message.connectionId = object.connectionId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? (prop => BigInt(prop.toString!!()))(object.revisionNumber) : BigInt("0");
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? (prop => BigInt(prop.toString!!()))(object.revisionHeight) : BigInt("0");
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt("0");
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -1059,8 +1059,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromSDKJSON(object: any): QueryConnectionConsensusStateRequestSDKType {
     return {
       connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      revision_number: isSet(object.revision_number) ? (prop => BigInt(prop.toString!!()))(object.revision_number) : BigInt("0"),
-      revision_height: isSet(object.revision_height) ? (prop => BigInt(prop.toString!!()))(object.revision_height) : BigInt("0")
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt("0"),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt("0")
     };
   },
 

@@ -335,7 +335,7 @@ export const QueryPoolRequest = {
 
   fromJSON(object: any): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -347,7 +347,7 @@ export const QueryPoolRequest = {
 
   fromPartial(object: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -359,7 +359,7 @@ export const QueryPoolRequest = {
 
   fromSDKJSON(object: any): QueryPoolRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -718,7 +718,7 @@ export const QueryNumPoolsResponse = {
 
   fromJSON(object: any): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? (prop => BigInt(prop.toString!!()))(object.numPools) : BigInt("0")
+      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt("0")
     };
   },
 
@@ -730,7 +730,7 @@ export const QueryNumPoolsResponse = {
 
   fromPartial(object: DeepPartial<QueryNumPoolsResponse>): QueryNumPoolsResponse {
     const message = createBaseQueryNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? (prop => BigInt(prop.toString!!()))(object.numPools) : BigInt("0");
+    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt("0");
     return message;
   },
 
@@ -742,7 +742,7 @@ export const QueryNumPoolsResponse = {
 
   fromSDKJSON(object: any): QueryNumPoolsResponseSDKType {
     return {
-      num_pools: isSet(object.num_pools) ? (prop => BigInt(prop.toString!!()))(object.num_pools) : BigInt("0")
+      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt("0")
     };
   },
 
@@ -793,7 +793,7 @@ export const QueryPoolTypeRequest = {
 
   fromJSON(object: any): QueryPoolTypeRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -805,7 +805,7 @@ export const QueryPoolTypeRequest = {
 
   fromPartial(object: DeepPartial<QueryPoolTypeRequest>): QueryPoolTypeRequest {
     const message = createBaseQueryPoolTypeRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -817,7 +817,7 @@ export const QueryPoolTypeRequest = {
 
   fromSDKJSON(object: any): QueryPoolTypeRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -952,7 +952,7 @@ export const QueryCalcJoinPoolSharesRequest = {
 
   fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -972,7 +972,7 @@ export const QueryCalcJoinPoolSharesRequest = {
 
   fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesRequest>): QueryCalcJoinPoolSharesRequest {
     const message = createBaseQueryCalcJoinPoolSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -986,7 +986,7 @@ export const QueryCalcJoinPoolSharesRequest = {
 
   fromSDKJSON(object: any): QueryCalcJoinPoolSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -1156,7 +1156,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
 
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
     };
   },
@@ -1170,7 +1170,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
 
   fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesRequest>): QueryCalcExitPoolCoinsFromSharesRequest {
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.shareInAmount = object.shareInAmount ?? "";
     return message;
   },
@@ -1184,7 +1184,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
 
   fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       share_in_amount: isSet(object.share_in_amount) ? String(object.share_in_amount) : ""
     };
   },
@@ -1324,7 +1324,7 @@ export const QueryPoolParamsRequest = {
 
   fromJSON(object: any): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -1336,7 +1336,7 @@ export const QueryPoolParamsRequest = {
 
   fromPartial(object: DeepPartial<QueryPoolParamsRequest>): QueryPoolParamsRequest {
     const message = createBaseQueryPoolParamsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1348,7 +1348,7 @@ export const QueryPoolParamsRequest = {
 
   fromSDKJSON(object: any): QueryPoolParamsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -1474,7 +1474,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -1486,7 +1486,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromPartial(object: DeepPartial<QueryTotalPoolLiquidityRequest>): QueryTotalPoolLiquidityRequest {
     const message = createBaseQueryTotalPoolLiquidityRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1498,7 +1498,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromSDKJSON(object: any): QueryTotalPoolLiquidityRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -1636,7 +1636,7 @@ export const QueryTotalSharesRequest = {
 
   fromJSON(object: any): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
@@ -1648,7 +1648,7 @@ export const QueryTotalSharesRequest = {
 
   fromPartial(object: DeepPartial<QueryTotalSharesRequest>): QueryTotalSharesRequest {
     const message = createBaseQueryTotalSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1660,7 +1660,7 @@ export const QueryTotalSharesRequest = {
 
   fromSDKJSON(object: any): QueryTotalSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -1795,7 +1795,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
 
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -1815,7 +1815,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
 
   fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesRequest>): QueryCalcJoinPoolNoSwapSharesRequest {
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -1829,7 +1829,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
 
   fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -2008,7 +2008,7 @@ export const QuerySpotPriceRequest = {
 
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
@@ -2024,7 +2024,7 @@ export const QuerySpotPriceRequest = {
 
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -2040,7 +2040,7 @@ export const QuerySpotPriceRequest = {
 
   fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
       quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
     };
@@ -2417,7 +2417,7 @@ export const QuerySwapExactAmountInRequest = {
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
@@ -2441,7 +2441,7 @@ export const QuerySwapExactAmountInRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountInRequest>): QuerySwapExactAmountInRequest {
     const message = createBaseQuerySwapExactAmountInRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -2459,7 +2459,7 @@ export const QuerySwapExactAmountInRequest = {
   fromSDKJSON(object: any): QuerySwapExactAmountInRequestSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
     };
@@ -2624,7 +2624,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
@@ -2648,7 +2648,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountOutRequest>): QuerySwapExactAmountOutRequest {
     const message = createBaseQuerySwapExactAmountOutRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? (prop => BigInt(prop.toString!!()))(object.poolId) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -2666,7 +2666,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromSDKJSON(object: any): QuerySwapExactAmountOutRequestSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? (prop => BigInt(prop.toString!!()))(object.pool_id) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };

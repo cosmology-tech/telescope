@@ -120,9 +120,9 @@ export const ProtocolVersion = {
 
   fromJSON(object: any): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? (prop => BigInt(prop.toString!!()))(object.p2p) : BigInt("0"),
-      block: isSet(object.block) ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0"),
-      app: isSet(object.app) ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
     };
   },
 
@@ -136,9 +136,9 @@ export const ProtocolVersion = {
 
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
-    message.p2p = object.p2p !== undefined && object.p2p !== null ? (prop => BigInt(prop.toString!!()))(object.p2p) : BigInt("0");
-    message.block = object.block !== undefined && object.block !== null ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0");
-    message.app = object.app !== undefined && object.app !== null ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0");
+    message.p2p = object.p2p !== undefined && object.p2p !== null ? BigInt(object.p2p.toString()) : BigInt("0");
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt("0");
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt("0");
     return message;
   },
 
@@ -152,9 +152,9 @@ export const ProtocolVersion = {
 
   fromSDKJSON(object: any): ProtocolVersionSDKType {
     return {
-      p2p: isSet(object.p2p) ? (prop => BigInt(prop.toString!!()))(object.p2p) : BigInt("0"),
-      block: isSet(object.block) ? (prop => BigInt(prop.toString!!()))(object.block) : BigInt("0"),
-      app: isSet(object.app) ? (prop => BigInt(prop.toString!!()))(object.app) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
     };
   },
 

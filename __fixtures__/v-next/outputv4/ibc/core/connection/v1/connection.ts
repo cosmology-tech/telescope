@@ -319,7 +319,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? (prop => BigInt(prop.toString!!()))(object.delayPeriod) : BigInt("0")
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0")
     };
   },
 
@@ -345,7 +345,7 @@ export const ConnectionEnd = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.delayPeriod) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
     return message;
   },
 
@@ -365,7 +365,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? (prop => BigInt(prop.toString!!()))(object.delay_period) : BigInt("0")
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0")
     };
   },
 
@@ -476,7 +476,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? (prop => BigInt(prop.toString!!()))(object.delayPeriod) : BigInt("0")
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0")
     };
   },
 
@@ -504,7 +504,7 @@ export const IdentifiedConnection = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? (prop => BigInt(prop.toString!!()))(object.delayPeriod) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
     return message;
   },
 
@@ -526,7 +526,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? (prop => BigInt(prop.toString!!()))(object.delay_period) : BigInt("0")
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0")
     };
   },
 
@@ -984,7 +984,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? (prop => BigInt(prop.toString!!()))(object.maxExpectedTimePerBlock) : BigInt("0")
+      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? BigInt(object.maxExpectedTimePerBlock.toString()) : BigInt("0")
     };
   },
 
@@ -996,7 +996,7 @@ export const Params = {
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? (prop => BigInt(prop.toString!!()))(object.maxExpectedTimePerBlock) : BigInt("0");
+    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? BigInt(object.maxExpectedTimePerBlock.toString()) : BigInt("0");
     return message;
   },
 
@@ -1008,7 +1008,7 @@ export const Params = {
 
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? (prop => BigInt(prop.toString!!()))(object.max_expected_time_per_block) : BigInt("0")
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? BigInt(object.max_expected_time_per_block.toString()) : BigInt("0")
     };
   },
 

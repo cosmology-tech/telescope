@@ -111,8 +111,8 @@ export const MsgIBCSend = {
   fromJSON(object: any): MsgIBCSend {
     return {
       channel: isSet(object.channel) ? String(object.channel) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? (prop => BigInt(prop.toString!!()))(object.timeoutHeight) : BigInt("0"),
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0"),
+      timeoutHeight: isSet(object.timeoutHeight) ? BigInt(object.timeoutHeight.toString()) : BigInt("0"),
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0"),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -129,8 +129,8 @@ export const MsgIBCSend = {
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? (prop => BigInt(prop.toString!!()))(object.timeoutHeight) : BigInt("0");
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? (prop => BigInt(prop.toString!!()))(object.timeoutTimestamp) : BigInt("0");
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? BigInt(object.timeoutHeight.toString()) : BigInt("0");
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0");
     message.data = object.data ?? new Uint8Array();
     return message;
   },
@@ -147,8 +147,8 @@ export const MsgIBCSend = {
   fromSDKJSON(object: any): MsgIBCSendSDKType {
     return {
       channel: isSet(object.channel) ? String(object.channel) : "",
-      timeout_height: isSet(object.timeout_height) ? (prop => BigInt(prop.toString!!()))(object.timeout_height) : BigInt("0"),
-      timeout_timestamp: isSet(object.timeout_timestamp) ? (prop => BigInt(prop.toString!!()))(object.timeout_timestamp) : BigInt("0"),
+      timeout_height: isSet(object.timeout_height) ? BigInt(object.timeout_height.toString()) : BigInt("0"),
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt("0"),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },

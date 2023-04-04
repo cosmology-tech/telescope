@@ -737,7 +737,7 @@ export const LogEntrySourceLocation = {
   fromJSON(object: any): LogEntrySourceLocation {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0"),
+      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt("0"),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
@@ -753,7 +753,7 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0");
+    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt("0");
     message.function = object.function ?? "";
     return message;
   },
@@ -769,7 +769,7 @@ export const LogEntrySourceLocation = {
   fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? (prop => BigInt(prop.toString!!()))(object.line) : BigInt("0"),
+      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt("0"),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },

@@ -367,7 +367,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? (prop => BigInt(prop.toString!!()))(object.settledAt) : BigInt("0")
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt("0")
     };
   },
 
@@ -389,7 +389,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? (prop => BigInt(prop.toString!!()))(object.settledAt) : BigInt("0");
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt("0");
     return message;
   },
 
@@ -411,7 +411,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? (prop => BigInt(prop.toString!!()))(object.settled_at) : BigInt("0")
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt("0")
     };
   },
 

@@ -160,7 +160,7 @@ export const GenesisState = {
       clientsMetadata: Array.isArray(object?.clientsMetadata) ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? (prop => BigInt(prop.toString!!()))(object.nextClientSequence) : BigInt("0")
+      nextClientSequence: isSet(object.nextClientSequence) ? BigInt(object.nextClientSequence.toString()) : BigInt("0")
     };
   },
 
@@ -198,7 +198,7 @@ export const GenesisState = {
     message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? (prop => BigInt(prop.toString!!()))(object.nextClientSequence) : BigInt("0");
+    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? BigInt(object.nextClientSequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -220,7 +220,7 @@ export const GenesisState = {
       clients_metadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDKJSON(e)) : [],
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
-      next_client_sequence: isSet(object.next_client_sequence) ? (prop => BigInt(prop.toString!!()))(object.next_client_sequence) : BigInt("0")
+      next_client_sequence: isSet(object.next_client_sequence) ? BigInt(object.next_client_sequence.toString()) : BigInt("0")
     };
   },
 
