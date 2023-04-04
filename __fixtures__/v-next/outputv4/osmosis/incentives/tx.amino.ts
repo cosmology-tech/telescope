@@ -3,7 +3,6 @@ import { QueryCondition, QueryConditionSDKType, lockQueryTypeFromJSON } from "..
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../helpers";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeSDKType } from "./tx";
 export interface MsgCreateGaugeAminoType extends AminoMsg {

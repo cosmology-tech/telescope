@@ -1,6 +1,6 @@
 import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** GenesisState defines the mint module's genesis state. */

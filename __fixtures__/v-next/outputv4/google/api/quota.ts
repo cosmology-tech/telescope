@@ -1,5 +1,5 @@
-import { Long, DeepPartial, isSet, isObject } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial, Long, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 
 /**

@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: bigint;

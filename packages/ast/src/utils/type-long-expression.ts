@@ -55,7 +55,6 @@ export const TypeLong = {
 
     switch (longLib) {
       case 'long':
-      default:
         ctx.addUtil('Long');
         break;
     }
