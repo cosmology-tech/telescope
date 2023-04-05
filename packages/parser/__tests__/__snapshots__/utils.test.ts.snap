@@ -28,26 +28,6 @@ exports[`isRefIncluded osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
 exports[`isRefIncluded osmosis/gamm/v2/query.proto 1`] = `true`;
 
-exports[`isRefIncluded w minimatch case: 1 1`] = `false`;
-
-exports[`isRefIncluded w minimatch case: 2 1`] = `false`;
-
-exports[`isRefIncluded w minimatch case: 3 1`] = `false`;
-
-exports[`isRefIncluded w minimatch case: 4 1`] = `true`;
-
-exports[`isRefIncluded w minimatch case: 5 1`] = `true`;
-
-exports[`isRefIncluded w minimatch case: 6 1`] = `true`;
-
-exports[`isRefIncluded w minimatch case: 7 1`] = `false`;
-
-exports[`isRefIncluded w minimatch case: 8 1`] = `true`;
-
-exports[`isRefIncluded w minimatch case: 9 1`] = `false`;
-
-exports[`isRefIncluded w minimatch case: 10 1`] = `true`;
-
 exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
 exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/bank.proto 2`] = `true`;
