@@ -40,14 +40,6 @@ exports[`isRefIncluded cosmos.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
 exports[`isRefIncluded cosmos.* osmosis/gamm/v2/query.proto 1`] = `false`;
 
-exports[`isRefIncluded google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
-
-exports[`isRefIncluded osmosis/gamm/v1beta1/query.proto 1`] = `true`;
-
-exports[`isRefIncluded osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
-
-exports[`isRefIncluded osmosis/gamm/v2/query.proto 1`] = `true`;
-
 exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
 exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/query.proto 1`] = `false`;
@@ -135,3 +127,13 @@ exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/query.proto 1`] = `true`;
 exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
 
 exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v2/query.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto akash/cert/v1beta2/query.proto 1`] = `true`;
+
+exports[`proto akash/cert/v1beta2/query.proto google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto osmosis/gamm/v1beta1/query.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto osmosis/gamm/v2/query.proto 1`] = `false`;
