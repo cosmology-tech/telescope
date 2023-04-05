@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`empty akash/cert/v1beta2/query.proto 1`] = `true`;
+
 exports[`empty cosmos/bank/v1beta1/bank.proto 1`] = `true`;
 
 exports[`empty cosmos/bank/v1beta1/query.proto 1`] = `true`;
@@ -19,6 +21,8 @@ exports[`empty osmosis/gamm/v1beta1/query.proto 1`] = `true`;
 exports[`empty osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
 
 exports[`empty osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* akash/cert/v1beta2/query.proto 1`] = `false`;
 
 exports[`isRefIncluded cosmos.* cosmos/bank/v1beta1/bank.proto 1`] = `true`;
 
@@ -40,6 +44,8 @@ exports[`isRefIncluded cosmos.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
 exports[`isRefIncluded cosmos.* osmosis/gamm/v2/query.proto 1`] = `false`;
 
+exports[`isRefIncluded pkg *.gov.* akash/cert/v1beta2/query.proto 1`] = `false`;
+
 exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
 exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/query.proto 1`] = `false`;
@@ -59,6 +65,8 @@ exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v1beta1/query.proto 1`] = `false
 exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
 exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v2/query.proto 1`] = `false`;
+
+exports[`isRefIncluded pkg evmos.erc20.* akash/cert/v1beta2/query.proto 1`] = `false`;
 
 exports[`isRefIncluded pkg evmos.erc20.* cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
@@ -80,6 +88,8 @@ exports[`isRefIncluded pkg evmos.erc20.* osmosis/gamm/v1beta1/tx.proto 1`] = `fa
 
 exports[`isRefIncluded pkg evmos.erc20.* osmosis/gamm/v2/query.proto 1`] = `false`;
 
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto akash/cert/v1beta2/query.proto 1`] = `false`;
+
 exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
 exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/bank/v1beta1/query.proto 1`] = `false`;
@@ -99,6 +109,8 @@ exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v1beta1/que
 exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
 
 exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto akash/cert/v1beta2/query.proto 1`] = `false`;
 
 exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
@@ -120,6 +132,20 @@ exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto osmosis/gamm/v1beta1
 
 exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto osmosis/gamm/v2/query.proto 1`] = `true`;
 
+exports[`pkg osmosis.gamm.v1beta1 akash/cert/v1beta2/query.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/bank/v1beta1/bank.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/bank/v1beta1/query.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/bank/v1beta1/tx.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/gov/v1beta1/gov.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/gov/v1beta1/query.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 cosmos/gov/v1beta1/tx.proto 1`] = `false`;
+
 exports[`pkg osmosis.gamm.v1beta1 google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
 
 exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/query.proto 1`] = `true`;
@@ -129,6 +155,18 @@ exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
 exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v2/query.proto 1`] = `false`;
 
 exports[`proto akash/cert/v1beta2/query.proto akash/cert/v1beta2/query.proto 1`] = `true`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/bank/v1beta1/bank.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/bank/v1beta1/query.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/bank/v1beta1/tx.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/gov/v1beta1/gov.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/gov/v1beta1/query.proto 1`] = `false`;
+
+exports[`proto akash/cert/v1beta2/query.proto cosmos/gov/v1beta1/tx.proto 1`] = `false`;
 
 exports[`proto akash/cert/v1beta2/query.proto google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
 

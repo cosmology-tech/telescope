@@ -11,6 +11,7 @@ const protos = [
     'cosmos/gov/v1beta1/gov.proto',
     'cosmos/gov/v1beta1/query.proto',
     'cosmos/gov/v1beta1/tx.proto',
+    'akash/cert/v1beta2/query.proto',
     'google/api/expr/conformance/v1alpha1/conformance_service.proto',
     'osmosis/gamm/v1beta1/query.proto',
     'osmosis/gamm/v1beta1/tx.proto',
@@ -93,19 +94,7 @@ cases(`pkg osmosis.gamm.v1beta1`, opts => {
         packages: ['osmosis.gamm.v1beta1']
     });
     expect(included).toMatchSnapshot();
-},
-    [
-        'google/api/expr/conformance/v1alpha1/conformance_service.proto',
-        'osmosis/gamm/v2/query.proto',
-        'osmosis/gamm/v1beta1/query.proto',
-        'osmosis/gamm/v1beta1/tx.proto'
-    ].map(el => {
-        return {
-            name: el,
-            value: el
-        }
-    })
-);
+}, protoNameValPairs);
 
 cases(`proto akash/cert/v1beta2/query.proto`, opts => {
     const ref = store.findProto(opts.value);
@@ -115,17 +104,4 @@ cases(`proto akash/cert/v1beta2/query.proto`, opts => {
         packages: []
     });
     expect(included).toMatchSnapshot();
-},
-    [
-        'google/api/expr/conformance/v1alpha1/conformance_service.proto',
-        'akash/cert/v1beta2/query.proto',
-        'osmosis/gamm/v2/query.proto',
-        'osmosis/gamm/v1beta1/query.proto',
-        'osmosis/gamm/v1beta1/tx.proto'
-    ].map(el => {
-        return {
-            name: el,
-            value: el
-        }
-    })
-);
+}, protoNameValPairs);
