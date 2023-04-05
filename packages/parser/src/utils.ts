@@ -119,7 +119,7 @@ export const isRefIncluded = (
         return true;
     }
 
-    const protoMatched = include?.packages?.some(protoName => {
+    const protoMatched = include?.protos?.some(protoName => {
         if (!globPattern.test(protoName)) {
             return ref.filename === protoName;
         }
