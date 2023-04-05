@@ -20,6 +20,26 @@ exports[`empty osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
 
 exports[`empty osmosis/gamm/v2/query.proto 1`] = `true`;
 
+exports[`isRefIncluded cosmos.* cosmos/bank/v1beta1/bank.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* cosmos/bank/v1beta1/query.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* cosmos/bank/v1beta1/tx.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* cosmos/gov/v1beta1/gov.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* cosmos/gov/v1beta1/query.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* cosmos/gov/v1beta1/tx.proto 1`] = `true`;
+
+exports[`isRefIncluded cosmos.* google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`isRefIncluded cosmos.* osmosis/gamm/v1beta1/query.proto 1`] = `false`;
+
+exports[`isRefIncluded cosmos.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded cosmos.* osmosis/gamm/v2/query.proto 1`] = `false`;
+
 exports[`isRefIncluded google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
 
 exports[`isRefIncluded osmosis/gamm/v1beta1/query.proto 1`] = `true`;
@@ -28,50 +48,90 @@ exports[`isRefIncluded osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
 exports[`isRefIncluded osmosis/gamm/v2/query.proto 1`] = `true`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/bank.proto 1`] = `false`;
+exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/bank.proto 2`] = `true`;
+exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/query.proto 1`] = `false`;
+exports[`isRefIncluded pkg *.gov.* cosmos/bank/v1beta1/tx.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/query.proto 2`] = `true`;
+exports[`isRefIncluded pkg *.gov.* cosmos/gov/v1beta1/gov.proto 1`] = `true`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/tx.proto 1`] = `false`;
+exports[`isRefIncluded pkg *.gov.* cosmos/gov/v1beta1/query.proto 1`] = `true`;
 
-exports[`isRefIncluded w minimatch cosmos/bank/v1beta1/tx.proto 2`] = `true`;
+exports[`isRefIncluded pkg *.gov.* cosmos/gov/v1beta1/tx.proto 1`] = `true`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/gov.proto 1`] = `true`;
+exports[`isRefIncluded pkg *.gov.* google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/gov.proto 2`] = `true`;
+exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v1beta1/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/query.proto 1`] = `true`;
+exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/query.proto 2`] = `true`;
+exports[`isRefIncluded pkg *.gov.* osmosis/gamm/v2/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/tx.proto 1`] = `true`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch cosmos/gov/v1beta1/tx.proto 2`] = `true`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/bank/v1beta1/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/bank/v1beta1/tx.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch google/api/expr/conformance/v1alpha1/conformance_service.proto 2`] = `false`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/gov/v1beta1/gov.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/gov/v1beta1/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v1beta1/query.proto 2`] = `true`;
+exports[`isRefIncluded pkg evmos.erc20.* cosmos/gov/v1beta1/tx.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
+exports[`isRefIncluded pkg evmos.erc20.* google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v1beta1/tx.proto 2`] = `false`;
+exports[`isRefIncluded pkg evmos.erc20.* osmosis/gamm/v1beta1/query.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v2/query.proto 1`] = `true`;
+exports[`isRefIncluded pkg evmos.erc20.* osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
 
-exports[`isRefIncluded w minimatch osmosis/gamm/v2/query.proto 2`] = `false`;
+exports[`isRefIncluded pkg evmos.erc20.* osmosis/gamm/v2/query.proto 1`] = `false`;
 
-exports[`pkg google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/bank/v1beta1/bank.proto 1`] = `false`;
 
-exports[`pkg osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/bank/v1beta1/query.proto 1`] = `false`;
 
-exports[`pkg osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/bank/v1beta1/tx.proto 1`] = `false`;
 
-exports[`pkg osmosis/gamm/v2/query.proto 1`] = `false`;
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/gov/v1beta1/gov.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/gov/v1beta1/query.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto cosmos/gov/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/*.proto osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/bank/v1beta1/bank.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/bank/v1beta1/query.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/bank/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/gov/v1beta1/gov.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/gov/v1beta1/query.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto cosmos/gov/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded proto osmosis/**/gamm/**/query.proto osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`pkg osmosis.gamm.v1beta1 google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
+
+exports[`pkg osmosis.gamm.v1beta1 osmosis/gamm/v2/query.proto 1`] = `false`;

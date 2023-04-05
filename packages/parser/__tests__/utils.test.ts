@@ -52,36 +52,56 @@ const protoNameValPairs = protos.map(el => {
         value: el
     }
 });
-cases(`isRefIncluded w minimatch`, opts => {
+
+cases(`isRefIncluded pkg evmos.erc20.*`, opts => {
     const ref = store.findProto(opts.value);
     const included = isRefIncluded(ref, {
-        protos: [
-            'osmosis/**/gamm/**/query.proto'
-        ],
         packages: [
-            '*.gov.*',
             'evmos.erc20.*'
         ]
     });
     expect(included).toMatchSnapshot();
-},
-    protoNameValPairs
-);
+}, protoNameValPairs);
 
-cases(`isRefIncluded w minimatch`, opts => {
+cases(`isRefIncluded pkg *.gov.*`, opts => {
+    const ref = store.findProto(opts.value);
+    const included = isRefIncluded(ref, {
+        packages: [
+            '*.gov.*'
+        ]
+    });
+    expect(included).toMatchSnapshot();
+}, protoNameValPairs);
+
+cases(`isRefIncluded proto osmosis/**/gamm/**/*.proto`, opts => {
     const ref = store.findProto(opts.value);
     const included = isRefIncluded(ref, {
         protos: [
-            'osmosis/**/gamm/v1beta1/query.proto'
-        ],
+            'osmosis/**/gamm/**/*.proto'
+        ]
+    });
+    expect(included).toMatchSnapshot();
+}, protoNameValPairs);
+
+cases(`isRefIncluded proto osmosis/**/gamm/**/query.proto`, opts => {
+    const ref = store.findProto(opts.value);
+    const included = isRefIncluded(ref, {
+        protos: [
+            'osmosis/**/gamm/**/query.proto'
+        ]
+    });
+    expect(included).toMatchSnapshot();
+}, protoNameValPairs);
+
+cases(`isRefIncluded cosmos.*`, opts => {
+    const ref = store.findProto(opts.value);
+    const included = isRefIncluded(ref, {
         packages: [
             'cosmos.*'
         ]
     });
     expect(included).toMatchSnapshot();
-},
-    protoNameValPairs
-);
+}, protoNameValPairs);
 
 cases(`empty`, opts => {
     const ref = store.findProto(opts.value);
@@ -95,7 +115,7 @@ cases(`empty`, opts => {
     protoNameValPairs
 );
 
-cases(`pkg`, opts => {
+cases(`pkg osmosis.gamm.v1beta1`, opts => {
     const ref = store.findProto(opts.value);
     const included = isRefIncluded(ref, {
         patterns: [],
