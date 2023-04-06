@@ -51,13 +51,13 @@ export interface AssetMultiplierResponseSDKType {
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
   valAddr: string;
-  gaugeId: Long;
+  gaugeId: bigint;
   address: string;
 }
 export interface SuperfluidIntermediaryAccountInfoSDKType {
   denom: string;
   val_addr: string;
-  gauge_id: Long;
+  gauge_id: bigint;
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
@@ -75,10 +75,10 @@ export interface AllIntermediaryAccountsResponseSDKType {
   pagination?: PageResponseSDKType;
 }
 export interface ConnectedIntermediaryAccountRequest {
-  lockId: Long;
+  lockId: bigint;
 }
 export interface ConnectedIntermediaryAccountRequestSDKType {
-  lock_id: Long;
+  lock_id: bigint;
 }
 export interface ConnectedIntermediaryAccountResponse {
   account?: SuperfluidIntermediaryAccountInfo;
@@ -215,10 +215,10 @@ export interface QueryTotalDelegationByDelegatorResponseSDKType {
 export interface QueryUnpoolWhitelistRequest {}
 export interface QueryUnpoolWhitelistRequestSDKType {}
 export interface QueryUnpoolWhitelistResponse {
-  poolIds: Long[];
+  poolIds: bigint[];
 }
 export interface QueryUnpoolWhitelistResponseSDKType {
-  pool_ids: Long[];
+  pool_ids: bigint[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -799,7 +799,7 @@ function createBaseSuperfluidIntermediaryAccountInfo(): SuperfluidIntermediaryAc
   return {
     denom: "",
     valAddr: "",
-    gaugeId: Long.UZERO,
+    gaugeId: BigInt("0"),
     address: ""
   };
 }
@@ -814,8 +814,8 @@ export const SuperfluidIntermediaryAccountInfo = {
       writer.uint32(18).string(message.valAddr);
     }
 
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(24).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     if (message.address !== "") {
@@ -843,7 +843,7 @@ export const SuperfluidIntermediaryAccountInfo = {
           break;
 
         case 3:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         case 4:
@@ -863,7 +863,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -872,7 +872,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
@@ -881,7 +881,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     const message = createBaseSuperfluidIntermediaryAccountInfo();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     message.address = object.address ?? "";
     return message;
   },
@@ -899,7 +899,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -1094,14 +1094,14 @@ export const AllIntermediaryAccountsResponse = {
 
 function createBaseConnectedIntermediaryAccountRequest(): ConnectedIntermediaryAccountRequest {
   return {
-    lockId: Long.UZERO
+    lockId: BigInt("0")
   };
 }
 
 export const ConnectedIntermediaryAccountRequest = {
   encode(message: ConnectedIntermediaryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.lockId.isZero()) {
-      writer.uint32(8).uint64(message.lockId);
+    if (message.lockId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.lockId.toString()));
     }
 
     return writer;
@@ -1117,7 +1117,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.lockId = (reader.uint64() as Long);
+          message.lockId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1131,19 +1131,19 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromJSON(object: any): ConnectedIntermediaryAccountRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: ConnectedIntermediaryAccountRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
     const message = createBaseConnectedIntermediaryAccountRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
     return message;
   },
 
@@ -1155,7 +1155,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromSDKJSON(object: any): ConnectedIntermediaryAccountRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
     };
   },
 
@@ -2909,7 +2909,7 @@ export const QueryUnpoolWhitelistResponse = {
     writer.uint32(10).fork();
 
     for (const v of message.poolIds) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -2930,10 +2930,10 @@ export const QueryUnpoolWhitelistResponse = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.poolIds.push((reader.uint64() as Long));
+              message.poolIds.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.poolIds.push((reader.uint64() as Long));
+            message.poolIds.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -2949,7 +2949,7 @@ export const QueryUnpoolWhitelistResponse = {
 
   fromJSON(object: any): QueryUnpoolWhitelistResponse {
     return {
-      poolIds: Array.isArray(object?.poolIds) ? object.poolIds.map((e: any) => Long.fromValue(e)) : []
+      poolIds: Array.isArray(object?.poolIds) ? object.poolIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -2957,7 +2957,7 @@ export const QueryUnpoolWhitelistResponse = {
     const obj: any = {};
 
     if (message.poolIds) {
-      obj.poolIds = message.poolIds.map(e => (e || Long.UZERO).toString());
+      obj.poolIds = message.poolIds.map(e => (e || BigInt("0")).toString());
     } else {
       obj.poolIds = [];
     }
@@ -2967,7 +2967,7 @@ export const QueryUnpoolWhitelistResponse = {
 
   fromPartial(object: DeepPartial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
     const message = createBaseQueryUnpoolWhitelistResponse();
-    message.poolIds = object.poolIds?.map(e => Long.fromValue(e)) || [];
+    message.poolIds = object.poolIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -2979,7 +2979,7 @@ export const QueryUnpoolWhitelistResponse = {
 
   fromSDKJSON(object: any): QueryUnpoolWhitelistResponseSDKType {
     return {
-      pool_ids: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => Long.fromValue(e)) : []
+      pool_ids: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

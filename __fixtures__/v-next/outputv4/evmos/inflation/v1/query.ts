@@ -14,12 +14,12 @@ export interface QueryPeriodRequestSDKType {}
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
-  period: Long;
+  period: bigint;
 }
 
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
-  period: Long;
+  period: bigint;
 }
 
 /**
@@ -69,7 +69,7 @@ export interface QuerySkippedEpochsRequestSDKType {}
  */
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
-  skippedEpochs: Long;
+  skippedEpochs: bigint;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface QuerySkippedEpochsResponse {
  * RPC method.
  */
 export interface QuerySkippedEpochsResponseSDKType {
-  skipped_epochs: Long;
+  skipped_epochs: bigint;
 }
 
 /**
@@ -213,14 +213,14 @@ export const QueryPeriodRequest = {
 
 function createBaseQueryPeriodResponse(): QueryPeriodResponse {
   return {
-    period: Long.UZERO
+    period: BigInt("0")
   };
 }
 
 export const QueryPeriodResponse = {
   encode(message: QueryPeriodResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.period.isZero()) {
-      writer.uint32(8).uint64(message.period);
+    if (message.period !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.period.toString()));
     }
 
     return writer;
@@ -236,7 +236,7 @@ export const QueryPeriodResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.period = (reader.uint64() as Long);
+          message.period = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -250,19 +250,19 @@ export const QueryPeriodResponse = {
 
   fromJSON(object: any): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
-    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
     return message;
   },
 
@@ -274,7 +274,7 @@ export const QueryPeriodResponse = {
 
   fromSDKJSON(object: any): QueryPeriodResponseSDKType {
     return {
-      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
     };
   },
 
@@ -475,14 +475,14 @@ export const QuerySkippedEpochsRequest = {
 
 function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
   return {
-    skippedEpochs: Long.UZERO
+    skippedEpochs: BigInt("0")
   };
 }
 
 export const QuerySkippedEpochsResponse = {
   encode(message: QuerySkippedEpochsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.skippedEpochs.isZero()) {
-      writer.uint32(8).uint64(message.skippedEpochs);
+    if (message.skippedEpochs !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.skippedEpochs.toString()));
     }
 
     return writer;
@@ -498,7 +498,7 @@ export const QuerySkippedEpochsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.skippedEpochs = (reader.uint64() as Long);
+          message.skippedEpochs = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -512,19 +512,19 @@ export const QuerySkippedEpochsResponse = {
 
   fromJSON(object: any): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || Long.UZERO).toString());
+    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt("0");
     return message;
   },
 
@@ -536,7 +536,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
     return {
-      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt("0")
     };
   },
 

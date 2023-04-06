@@ -21,7 +21,7 @@ export interface MsgRegisterDevFeeInfo {
    * the nonce that determines the contract's address - it can be an EOA nonce
    * or a factory contract nonce
    */
-  nonces: Long[];
+  nonces: bigint[];
 }
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
@@ -29,7 +29,7 @@ export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
   withdraw_address: string;
-  nonces: Long[];
+  nonces: bigint[];
 }
 
 /**
@@ -128,7 +128,7 @@ export const MsgRegisterDevFeeInfo = {
     writer.uint32(34).fork();
 
     for (const v of message.nonces) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -161,10 +161,10 @@ export const MsgRegisterDevFeeInfo = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.nonces.push((reader.uint64() as Long));
+              message.nonces.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.nonces.push((reader.uint64() as Long));
+            message.nonces.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -183,7 +183,7 @@ export const MsgRegisterDevFeeInfo = {
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
       deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -194,7 +194,7 @@ export const MsgRegisterDevFeeInfo = {
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
 
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
+      obj.nonces = message.nonces.map(e => (e || BigInt("0")).toString());
     } else {
       obj.nonces = [];
     }
@@ -207,7 +207,7 @@ export const MsgRegisterDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
-    message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
+    message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -225,7 +225,7 @@ export const MsgRegisterDevFeeInfo = {
       contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
       deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
       withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

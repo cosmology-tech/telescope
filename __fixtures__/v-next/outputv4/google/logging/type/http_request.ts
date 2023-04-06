@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../protobuf/duration";
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.logging.type";
 
 /**
@@ -23,7 +23,7 @@ export interface HttpRequest {
    * The size of the HTTP request message in bytes, including the request
    * headers and the request body.
    */
-  requestSize: Long;
+  requestSize: bigint;
 
   /**
    * The response code indicating the status of response.
@@ -35,7 +35,7 @@ export interface HttpRequest {
    * The size of the HTTP response message sent back to the client, in bytes,
    * including the response headers and the response body.
    */
-  responseSize: Long;
+  responseSize: bigint;
 
   /**
    * The user agent sent by the client. Example:
@@ -91,7 +91,7 @@ export interface HttpRequest {
    * The number of HTTP response bytes inserted into cache. Set only when a
    * cache fill was attempted.
    */
-  cacheFillBytes: Long;
+  cacheFillBytes: bigint;
 
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
@@ -105,9 +105,9 @@ export interface HttpRequest {
 export interface HttpRequestSDKType {
   request_method: string;
   request_url: string;
-  request_size: Long;
+  request_size: bigint;
   status: number;
-  response_size: Long;
+  response_size: bigint;
   user_agent: string;
   remote_ip: string;
   server_ip: string;
@@ -116,7 +116,7 @@ export interface HttpRequestSDKType {
   cache_lookup: boolean;
   cache_hit: boolean;
   cache_validated_with_origin_server: boolean;
-  cache_fill_bytes: Long;
+  cache_fill_bytes: bigint;
   protocol: string;
 }
 
@@ -124,9 +124,9 @@ function createBaseHttpRequest(): HttpRequest {
   return {
     requestMethod: "",
     requestUrl: "",
-    requestSize: Long.ZERO,
+    requestSize: BigInt("0"),
     status: 0,
-    responseSize: Long.ZERO,
+    responseSize: BigInt("0"),
     userAgent: "",
     remoteIp: "",
     serverIp: "",
@@ -135,7 +135,7 @@ function createBaseHttpRequest(): HttpRequest {
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,
-    cacheFillBytes: Long.ZERO,
+    cacheFillBytes: BigInt("0"),
     protocol: ""
   };
 }
@@ -150,16 +150,16 @@ export const HttpRequest = {
       writer.uint32(18).string(message.requestUrl);
     }
 
-    if (!message.requestSize.isZero()) {
-      writer.uint32(24).int64(message.requestSize);
+    if (message.requestSize !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.requestSize.toString()));
     }
 
     if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
 
-    if (!message.responseSize.isZero()) {
-      writer.uint32(40).int64(message.responseSize);
+    if (message.responseSize !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.responseSize.toString()));
     }
 
     if (message.userAgent !== "") {
@@ -194,8 +194,8 @@ export const HttpRequest = {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
 
-    if (!message.cacheFillBytes.isZero()) {
-      writer.uint32(96).int64(message.cacheFillBytes);
+    if (message.cacheFillBytes !== BigInt(0)) {
+      writer.uint32(96).int64(Long.fromString(message.cacheFillBytes.toString()));
     }
 
     if (message.protocol !== "") {
@@ -223,7 +223,7 @@ export const HttpRequest = {
           break;
 
         case 3:
-          message.requestSize = (reader.int64() as Long);
+          message.requestSize = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -231,7 +231,7 @@ export const HttpRequest = {
           break;
 
         case 5:
-          message.responseSize = (reader.int64() as Long);
+          message.responseSize = BigInt(reader.int64().toString());
           break;
 
         case 6:
@@ -267,7 +267,7 @@ export const HttpRequest = {
           break;
 
         case 12:
-          message.cacheFillBytes = (reader.int64() as Long);
+          message.cacheFillBytes = BigInt(reader.int64().toString());
           break;
 
         case 15:
@@ -287,9 +287,9 @@ export const HttpRequest = {
     return {
       requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
       requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
-      requestSize: isSet(object.requestSize) ? Long.fromValue(object.requestSize) : Long.ZERO,
+      requestSize: isSet(object.requestSize) ? BigInt(object.requestSize.toString()) : BigInt("0"),
       status: isSet(object.status) ? Number(object.status) : 0,
-      responseSize: isSet(object.responseSize) ? Long.fromValue(object.responseSize) : Long.ZERO,
+      responseSize: isSet(object.responseSize) ? BigInt(object.responseSize.toString()) : BigInt("0"),
       userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
@@ -298,7 +298,7 @@ export const HttpRequest = {
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
-      cacheFillBytes: isSet(object.cacheFillBytes) ? Long.fromValue(object.cacheFillBytes) : Long.ZERO,
+      cacheFillBytes: isSet(object.cacheFillBytes) ? BigInt(object.cacheFillBytes.toString()) : BigInt("0"),
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
@@ -307,9 +307,9 @@ export const HttpRequest = {
     const obj: any = {};
     message.requestMethod !== undefined && (obj.requestMethod = message.requestMethod);
     message.requestUrl !== undefined && (obj.requestUrl = message.requestUrl);
-    message.requestSize !== undefined && (obj.requestSize = (message.requestSize || Long.ZERO).toString());
+    message.requestSize !== undefined && (obj.requestSize = (message.requestSize || BigInt("0")).toString());
     message.status !== undefined && (obj.status = Math.round(message.status));
-    message.responseSize !== undefined && (obj.responseSize = (message.responseSize || Long.ZERO).toString());
+    message.responseSize !== undefined && (obj.responseSize = (message.responseSize || BigInt("0")).toString());
     message.userAgent !== undefined && (obj.userAgent = message.userAgent);
     message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
     message.serverIp !== undefined && (obj.serverIp = message.serverIp);
@@ -318,7 +318,7 @@ export const HttpRequest = {
     message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
     message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
     message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
-    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = (message.cacheFillBytes || Long.ZERO).toString());
+    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = (message.cacheFillBytes || BigInt("0")).toString());
     message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
@@ -327,9 +327,9 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? Long.fromValue(object.requestSize) : Long.ZERO;
+    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? BigInt(object.requestSize.toString()) : BigInt("0");
     message.status = object.status ?? 0;
-    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? Long.fromValue(object.responseSize) : Long.ZERO;
+    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? BigInt(object.responseSize.toString()) : BigInt("0");
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
@@ -338,7 +338,7 @@ export const HttpRequest = {
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
+    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? BigInt(object.cacheFillBytes.toString()) : BigInt("0");
     message.protocol = object.protocol ?? "";
     return message;
   },
@@ -367,9 +367,9 @@ export const HttpRequest = {
     return {
       request_method: isSet(object.request_method) ? String(object.request_method) : "",
       request_url: isSet(object.request_url) ? String(object.request_url) : "",
-      request_size: isSet(object.request_size) ? Long.fromValue(object.request_size) : Long.ZERO,
+      request_size: isSet(object.request_size) ? BigInt(object.request_size.toString()) : BigInt("0"),
       status: isSet(object.status) ? Number(object.status) : 0,
-      response_size: isSet(object.response_size) ? Long.fromValue(object.response_size) : Long.ZERO,
+      response_size: isSet(object.response_size) ? BigInt(object.response_size.toString()) : BigInt("0"),
       user_agent: isSet(object.user_agent) ? String(object.user_agent) : "",
       remote_ip: isSet(object.remote_ip) ? String(object.remote_ip) : "",
       server_ip: isSet(object.server_ip) ? String(object.server_ip) : "",
@@ -378,7 +378,7 @@ export const HttpRequest = {
       cache_lookup: isSet(object.cache_lookup) ? Boolean(object.cache_lookup) : false,
       cache_hit: isSet(object.cache_hit) ? Boolean(object.cache_hit) : false,
       cache_validated_with_origin_server: isSet(object.cache_validated_with_origin_server) ? Boolean(object.cache_validated_with_origin_server) : false,
-      cache_fill_bytes: isSet(object.cache_fill_bytes) ? Long.fromValue(object.cache_fill_bytes) : Long.ZERO,
+      cache_fill_bytes: isSet(object.cache_fill_bytes) ? BigInt(object.cache_fill_bytes.toString()) : BigInt("0"),
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },

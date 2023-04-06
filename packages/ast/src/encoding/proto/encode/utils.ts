@@ -5,6 +5,7 @@ import { getKeyTypeEntryName } from '..';
 import { ProtoParseContext } from '../../context';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ProtoField } from '@osmonauts/types';
+import { TypeLong } from '../../../utils';
 
 const notUndefined = (prop: string): t.Expression => {
     return t.binaryExpression(
@@ -34,21 +35,6 @@ const notEmptyString = (prop: string): t.Expression => {
         ),
         t.stringLiteral('')
     )
-};
-
-const longNotZero = (prop: string): t.Expression => {
-    return t.unaryExpression('!',
-        t.callExpression(
-            t.memberExpression(
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(prop)
-                ),
-                t.identifier('isZero')
-            ),
-            []
-        )
-    );
 };
 
 const lengthNotZero = (prop: string): t.Expression => {
@@ -93,7 +79,43 @@ const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => 
     return test;
 }
 
-const scalarType = (num: number, prop: string, type: string) => {
+//TODO:: 1. see if string works.
+// 2. or to use long to get the value and then convert to BigInt
+const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod) => {
+    let valueExpression: t.Expression = t.memberExpression(
+      t.identifier('message'),
+      t.identifier(prop)
+    );
+
+    switch (type) {
+      case 'int64':
+      case 'sint64':
+      case 'uint64':
+      case 'fixed64':
+      case 'sfixed64':
+        TypeLong.addUtil(args.context);
+
+        const longType = TypeLong.getType(args.context);
+
+        switch (longType) {
+          case 'BigInt':
+            valueExpression = t.callExpression(
+              t.memberExpression(valueExpression, t.identifier('toString')),
+              [])
+
+            args.context.addUtil('Long');
+
+            // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
+            valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
+              [
+                valueExpression
+              ]
+            );
+            break;
+        }
+        break;
+    }
+
     return t.blockStatement([
         t.expressionStatement(
             t.callExpression(
@@ -110,10 +132,7 @@ const scalarType = (num: number, prop: string, type: string) => {
                     t.identifier(type)
                 ),
                 [
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(prop)
-                    )
+                    valueExpression
                 ]
             )
         )
@@ -218,31 +237,31 @@ export const encode = {
     int64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.int64(num, prop, args.isOptional);
+        return types.int64(num, prop, args.isOptional, args);
     },
 
     sint64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.sint64(num, prop, args.isOptional);
+        return types.sint64(num, prop, args.isOptional, args);
     },
 
     uint64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.uint64(num, prop, args.isOptional);
+        return types.uint64(num, prop, args.isOptional, args);
     },
 
     fixed64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.fixed64(num, prop, args.isOptional);
+        return types.fixed64(num, prop, args.isOptional, args);
     },
 
     sfixed64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.sfixed64(num, prop, args.isOptional);
+        return types.sfixed64(num, prop, args.isOptional, args);
     },
 
     bool(args: EncodeMethod) {
@@ -450,10 +469,10 @@ export const types = {
     //     writer.uint32(24).int64(message.int64Value);
     //   }
 
-    int64(num: number, prop: string, isOptional: boolean) {
+    int64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, longNotZero(prop), isOptional),
-            scalarType(num, prop, 'int64')
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            scalarType(num, prop, 'int64', args)
         )
     },
 
@@ -461,10 +480,10 @@ export const types = {
     //     writer.uint32(24).sint64(message.sint64Value);
     //   }
 
-    sint64(num: number, prop: string, isOptional: boolean) {
+    sint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, longNotZero(prop), isOptional),
-            scalarType(num, prop, 'sint64')
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            scalarType(num, prop, 'sint64', args)
         )
     },
 
@@ -472,24 +491,24 @@ export const types = {
     //     writer.uint32(24).uint64(message.int64Value);
     //   }
 
-    uint64(num: number, prop: string, isOptional: boolean) {
+    uint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, longNotZero(prop), isOptional),
-            scalarType(num, prop, 'uint64')
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            scalarType(num, prop, 'uint64', args)
         )
     },
 
-    fixed64(num: number, prop: string, isOptional: boolean) {
+    fixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, longNotZero(prop), isOptional),
-            scalarType(num, prop, 'fixed64')
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            scalarType(num, prop, 'fixed64', args)
         )
     },
 
-    sfixed64(num: number, prop: string, isOptional: boolean) {
+    sfixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, longNotZero(prop), isOptional),
-            scalarType(num, prop, 'sfixed64')
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            scalarType(num, prop, 'sfixed64', args)
         )
     },
 
@@ -1081,70 +1100,62 @@ export const arrayTypes = {
             )
         );
     },
-    int64() {
-        return t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('int64')
-                ),
+    long(type: string, args: EncodeMethod){
+      let valueExpression: t.Expression = t.identifier('v');
+
+      switch (type) {
+        case 'int64':
+        case 'sint64':
+        case 'uint64':
+        case 'fixed64':
+        case 'sfixed64':
+          const longType = TypeLong.getType(args.context);
+
+          switch (longType) {
+            case 'BigInt':
+              valueExpression = t.callExpression(
+                t.memberExpression(valueExpression, t.identifier('toString')),
+                []);
+
+              args.context.addUtil('Long');
+
+              // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
+              valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
                 [
-                    t.identifier('v')
+                  valueExpression
                 ]
-            )
-        );
+              );
+              break;
+          }
+          break;
+      }
+
+      return t.expressionStatement(
+        t.callExpression(
+            t.memberExpression(
+                t.identifier('writer'),
+                t.identifier(type)
+            ),
+            [
+              valueExpression
+            ]
+        )
+    );
     },
-    sint64() {
-        return t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('sint64')
-                ),
-                [
-                    t.identifier('v')
-                ]
-            )
-        );
+    int64(args: EncodeMethod) {
+        return arrayTypes.long('int64', args);
     },
-    uint64() {
-        return t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('uint64')
-                ),
-                [
-                    t.identifier('v')
-                ]
-            )
-        );
+    sint64(args: EncodeMethod) {
+        return arrayTypes.long('sint64', args);
     },
-    fixed64() {
-        return t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('fixed64')
-                ),
-                [
-                    t.identifier('v')
-                ]
-            )
-        );
+    uint64(args: EncodeMethod) {
+        return arrayTypes.long('uint64', args);
     },
-    sfixed64() {
-        return t.expressionStatement(
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('writer'),
-                    t.identifier('sfixed64')
-                ),
-                [
-                    t.identifier('v')
-                ]
-            )
-        );
+    fixed64(args: EncodeMethod) {
+        return arrayTypes.long('fixed64', args);
+    },
+    sfixed64(args: EncodeMethod) {
+        return arrayTypes.long('sfixed64', args);
     },
     string(args: EncodeMethod) {
         const useCosmosSDKDec = args.context.pluginValue(

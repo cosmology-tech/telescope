@@ -10,6 +10,7 @@ export declare const toAmino: {
     durationString(args: ToAminoParseField): t.ObjectProperty;
     durationType(args: ToAminoParseField): t.ObjectProperty;
     height(args: ToAminoParseField): t.ObjectProperty;
+    coinAmount(args: ToAminoParseField): t.CallExpression | t.MemberExpression;
     coin(args: ToAminoParseField): t.ObjectProperty;
     type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField): any;
     typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField): t.ObjectProperty;

@@ -3,7 +3,6 @@ import { QueryCondition, QueryConditionSDKType, lockQueryTypeFromJSON } from "..
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../helpers";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeSDKType } from "./tx";
 export interface MsgCreateGaugeAminoType extends AminoMsg {
@@ -88,7 +87,7 @@ export const AminoConverter = {
           lockQueryType: lockQueryTypeFromJSON(distribute_to.lock_query_type),
           denom: distribute_to.denom,
           duration: {
-            seconds: Long.fromNumber(Math.floor(parseInt(distribute_to.duration) / 1_000_000_000)),
+            seconds: BigInt(Math.floor(parseInt(distribute_to.duration) / 1_000_000_000)),
             nanos: parseInt(distribute_to.duration) % 1_000_000_000
           },
           timestamp: distribute_to.timestamp
@@ -98,7 +97,7 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         startTime: start_time,
-        numEpochsPaidOver: Long.fromString(num_epochs_paid_over)
+        numEpochsPaidOver: BigInt(num_epochs_paid_over)
       };
     }
   },
@@ -125,7 +124,7 @@ export const AminoConverter = {
     }: MsgAddToGaugeAminoType["value"]): MsgAddToGauge => {
       return {
         owner,
-        gaugeId: Long.fromString(gauge_id),
+        gaugeId: BigInt(gauge_id),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

@@ -36,7 +36,7 @@ export interface Params {
   goalBonded: string;
 
   /** expected blocks per year */
-  blocksPerYear: Long;
+  blocksPerYear: bigint;
 }
 
 /** Params holds parameters for the mint module. */
@@ -46,7 +46,7 @@ export interface ParamsSDKType {
   inflation_max: string;
   inflation_min: string;
   goal_bonded: string;
-  blocks_per_year: Long;
+  blocks_per_year: bigint;
 }
 
 function createBaseMinter(): Minter {
@@ -146,7 +146,7 @@ function createBaseParams(): Params {
     inflationMax: "",
     inflationMin: "",
     goalBonded: "",
-    blocksPerYear: Long.UZERO
+    blocksPerYear: BigInt("0")
   };
 }
 
@@ -172,8 +172,8 @@ export const Params = {
       writer.uint32(42).string(Decimal.fromUserInput(message.goalBonded, 18).atomics);
     }
 
-    if (!message.blocksPerYear.isZero()) {
-      writer.uint32(48).uint64(message.blocksPerYear);
+    if (message.blocksPerYear !== BigInt(0)) {
+      writer.uint32(48).uint64(Long.fromString(message.blocksPerYear.toString()));
     }
 
     return writer;
@@ -209,7 +209,7 @@ export const Params = {
           break;
 
         case 6:
-          message.blocksPerYear = (reader.uint64() as Long);
+          message.blocksPerYear = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -228,7 +228,7 @@ export const Params = {
       inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
       inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
       goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? Long.fromValue(object.blocksPerYear) : Long.UZERO
+      blocksPerYear: isSet(object.blocksPerYear) ? BigInt(object.blocksPerYear.toString()) : BigInt("0")
     };
   },
 
@@ -239,7 +239,7 @@ export const Params = {
     message.inflationMax !== undefined && (obj.inflationMax = message.inflationMax);
     message.inflationMin !== undefined && (obj.inflationMin = message.inflationMin);
     message.goalBonded !== undefined && (obj.goalBonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || Long.UZERO).toString());
+    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || BigInt("0")).toString());
     return obj;
   },
 
@@ -250,7 +250,7 @@ export const Params = {
     message.inflationMax = object.inflationMax ?? "";
     message.inflationMin = object.inflationMin ?? "";
     message.goalBonded = object.goalBonded ?? "";
-    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? Long.fromValue(object.blocksPerYear) : Long.UZERO;
+    message.blocksPerYear = object.blocksPerYear !== undefined && object.blocksPerYear !== null ? BigInt(object.blocksPerYear.toString()) : BigInt("0");
     return message;
   },
 
@@ -272,7 +272,7 @@ export const Params = {
       inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
       inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
       goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
-      blocks_per_year: isSet(object.blocks_per_year) ? Long.fromValue(object.blocks_per_year) : Long.UZERO
+      blocks_per_year: isSet(object.blocks_per_year) ? BigInt(object.blocks_per_year.toString()) : BigInt("0")
     };
   },
 

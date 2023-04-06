@@ -52,13 +52,13 @@ export interface LastValidatorPower {
   address: string;
 
   /** power defines the power of the validator. */
-  power: Long;
+  power: bigint;
 }
 
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
   address: string;
-  power: Long;
+  power: bigint;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -296,7 +296,7 @@ export const GenesisState = {
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
     address: "",
-    power: Long.ZERO
+    power: BigInt("0")
   };
 }
 
@@ -306,8 +306,8 @@ export const LastValidatorPower = {
       writer.uint32(10).string(message.address);
     }
 
-    if (!message.power.isZero()) {
-      writer.uint32(16).int64(message.power);
+    if (message.power !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.power.toString()));
     }
 
     return writer;
@@ -327,7 +327,7 @@ export const LastValidatorPower = {
           break;
 
         case 2:
-          message.power = (reader.int64() as Long);
+          message.power = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -342,21 +342,21 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -370,7 +370,7 @@ export const LastValidatorPower = {
   fromSDKJSON(object: any): LastValidatorPowerSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 

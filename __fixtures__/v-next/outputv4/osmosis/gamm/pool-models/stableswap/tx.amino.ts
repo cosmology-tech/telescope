@@ -2,7 +2,6 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../../helpers";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
 export interface MsgCreateStableswapPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
@@ -73,7 +72,7 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        scalingFactors: scaling_factors.map(el0 => Long.fromString(el0)),
+        scalingFactors: scaling_factors.map(el0 => BigInt(el0)),
         futurePoolGovernor: future_pool_governor,
         scalingFactorController: scaling_factor_controller
       };
@@ -99,8 +98,8 @@ export const AminoConverter = {
     }: MsgStableSwapAdjustScalingFactorsAminoType["value"]): MsgStableSwapAdjustScalingFactors => {
       return {
         sender,
-        poolId: Long.fromString(pool_id),
-        scalingFactors: scaling_factors.map(el0 => Long.fromString(el0))
+        poolId: BigInt(pool_id),
+        scalingFactors: scaling_factors.map(el0 => BigInt(el0))
       };
     }
   }

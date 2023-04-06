@@ -57,15 +57,15 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
                 case 'sfixed32':
                     return fromPartial.array(args, arrayTypes.sfixed32());
                 case 'int64':
-                    return fromPartial.array(args, arrayTypes.int64());
+                    return fromPartial.array(args, arrayTypes.int64(args));
                 case 'sint64':
-                    return fromPartial.array(args, arrayTypes.sint64());
+                    return fromPartial.array(args, arrayTypes.sint64(args));
                 case 'uint64':
-                    return fromPartial.array(args, arrayTypes.uint64());
+                    return fromPartial.array(args, arrayTypes.uint64(args));
                 case 'fixed64':
-                    return fromPartial.array(args, arrayTypes.fixed64());
+                    return fromPartial.array(args, arrayTypes.fixed64(args));
                 case 'sfixed64':
-                    return fromPartial.array(args, arrayTypes.sfixed64());
+                    return fromPartial.array(args, arrayTypes.sfixed64(args));
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -229,7 +229,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
         ],
         t.blockStatement([
 
-            // init 
+            // init
             t.variableDeclaration(
                 'const',
                 [
@@ -245,7 +245,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
 
             ...fields,
 
-            // RETURN 
+            // RETURN
             t.returnStatement(
                 t.identifier('message')
             )

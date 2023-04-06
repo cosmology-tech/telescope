@@ -1,15 +1,15 @@
-import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
-  total: Long;
-  index: Long;
+  total: bigint;
+  index: bigint;
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
 export interface ProofSDKType {
-  total: Long;
-  index: Long;
+  total: bigint;
+  index: bigint;
   leaf_hash: Uint8Array;
   aunts: Uint8Array[];
 }
@@ -69,8 +69,8 @@ export interface ProofOpsSDKType {
 
 function createBaseProof(): Proof {
   return {
-    total: Long.ZERO,
-    index: Long.ZERO,
+    total: BigInt("0"),
+    index: BigInt("0"),
     leafHash: new Uint8Array(),
     aunts: []
   };
@@ -78,12 +78,12 @@ function createBaseProof(): Proof {
 
 export const Proof = {
   encode(message: Proof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.total.isZero()) {
-      writer.uint32(8).int64(message.total);
+    if (message.total !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.total.toString()));
     }
 
-    if (!message.index.isZero()) {
-      writer.uint32(16).int64(message.index);
+    if (message.index !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.index.toString()));
     }
 
     if (message.leafHash.length !== 0) {
@@ -107,11 +107,11 @@ export const Proof = {
 
       switch (tag >>> 3) {
         case 1:
-          message.total = (reader.int64() as Long);
+          message.total = BigInt(reader.int64().toString());
           break;
 
         case 2:
-          message.index = (reader.int64() as Long);
+          message.index = BigInt(reader.int64().toString());
           break;
 
         case 3:
@@ -133,8 +133,8 @@ export const Proof = {
 
   fromJSON(object: any): Proof {
     return {
-      total: isSet(object.total) ? Long.fromValue(object.total) : Long.ZERO,
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       leafHash: isSet(object.leafHash) ? bytesFromBase64(object.leafHash) : new Uint8Array(),
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
@@ -142,8 +142,8 @@ export const Proof = {
 
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    message.total !== undefined && (obj.total = (message.total || Long.ZERO).toString());
-    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
+    message.total !== undefined && (obj.total = (message.total || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
     message.leafHash !== undefined && (obj.leafHash = base64FromBytes(message.leafHash !== undefined ? message.leafHash : new Uint8Array()));
 
     if (message.aunts) {
@@ -157,8 +157,8 @@ export const Proof = {
 
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
-    message.total = object.total !== undefined && object.total !== null ? Long.fromValue(object.total) : Long.ZERO;
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -175,8 +175,8 @@ export const Proof = {
 
   fromSDKJSON(object: any): ProofSDKType {
     return {
-      total: isSet(object.total) ? Long.fromValue(object.total) : Long.ZERO,
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };

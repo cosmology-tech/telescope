@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../helpers";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
 export interface MsgSuperfluidDelegateAminoType extends AminoMsg {
   type: "osmosis/superfluid-delegate";
@@ -64,7 +63,7 @@ export const AminoConverter = {
     }: MsgSuperfluidDelegateAminoType["value"]): MsgSuperfluidDelegate => {
       return {
         sender,
-        lockId: Long.fromString(lock_id),
+        lockId: BigInt(lock_id),
         valAddr: val_addr
       };
     }
@@ -86,7 +85,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUndelegateAminoType["value"]): MsgSuperfluidUndelegate => {
       return {
         sender,
-        lockId: Long.fromString(lock_id)
+        lockId: BigInt(lock_id)
       };
     }
   },
@@ -107,7 +106,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUnbondLockAminoType["value"]): MsgSuperfluidUnbondLock => {
       return {
         sender,
-        lockId: Long.fromString(lock_id)
+        lockId: BigInt(lock_id)
       };
     }
   },
@@ -159,7 +158,7 @@ export const AminoConverter = {
     }: MsgUnPoolWhitelistedPoolAminoType["value"]): MsgUnPoolWhitelistedPool => {
       return {
         sender,
-        poolId: Long.fromString(pool_id)
+        poolId: BigInt(pool_id)
       };
     }
   }

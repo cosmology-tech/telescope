@@ -50,7 +50,7 @@ export interface RemoveSuperfluidAssetsProposalSDKType {
 export interface UpdateUnpoolWhiteListProposal {
   title: string;
   description: string;
-  ids: Long[];
+  ids: bigint[];
   isOverwrite: boolean;
 }
 
@@ -61,7 +61,7 @@ export interface UpdateUnpoolWhiteListProposal {
 export interface UpdateUnpoolWhiteListProposalSDKType {
   title: string;
   description: string;
-  ids: Long[];
+  ids: bigint[];
   is_overwrite: boolean;
 }
 
@@ -321,7 +321,7 @@ export const UpdateUnpoolWhiteListProposal = {
     writer.uint32(26).fork();
 
     for (const v of message.ids) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -355,10 +355,10 @@ export const UpdateUnpoolWhiteListProposal = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.ids.push((reader.uint64() as Long));
+              message.ids.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.ids.push((reader.uint64() as Long));
+            message.ids.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -380,7 +380,7 @@ export const UpdateUnpoolWhiteListProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : [],
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
       isOverwrite: isSet(object.isOverwrite) ? Boolean(object.isOverwrite) : false
     };
   },
@@ -391,7 +391,7 @@ export const UpdateUnpoolWhiteListProposal = {
     message.description !== undefined && (obj.description = message.description);
 
     if (message.ids) {
-      obj.ids = message.ids.map(e => (e || Long.UZERO).toString());
+      obj.ids = message.ids.map(e => (e || BigInt("0")).toString());
     } else {
       obj.ids = [];
     }
@@ -404,7 +404,7 @@ export const UpdateUnpoolWhiteListProposal = {
     const message = createBaseUpdateUnpoolWhiteListProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
+    message.ids = object.ids?.map(e => BigInt(e.toString())) || [];
     message.isOverwrite = object.isOverwrite ?? false;
     return message;
   },
@@ -422,7 +422,7 @@ export const UpdateUnpoolWhiteListProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : [],
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
       is_overwrite: isSet(object.is_overwrite) ? Boolean(object.is_overwrite) : false
     };
   },

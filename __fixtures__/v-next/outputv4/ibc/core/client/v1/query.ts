@@ -97,10 +97,10 @@ export interface QueryConsensusStateRequest {
   clientId: string;
 
   /** consensus state revision number */
-  revisionNumber: Long;
+  revisionNumber: bigint;
 
   /** consensus state revision height */
-  revisionHeight: Long;
+  revisionHeight: bigint;
 
   /**
    * latest_height overrrides the height field and queries the latest stored
@@ -116,8 +116,8 @@ export interface QueryConsensusStateRequest {
  */
 export interface QueryConsensusStateRequestSDKType {
   client_id: string;
-  revision_number: Long;
-  revision_height: Long;
+  revision_number: bigint;
+  revision_height: bigint;
   latest_height: boolean;
 }
 
@@ -668,8 +668,8 @@ export const QueryClientStatesResponse = {
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   return {
     clientId: "",
-    revisionNumber: Long.UZERO,
-    revisionHeight: Long.UZERO,
+    revisionNumber: BigInt("0"),
+    revisionHeight: BigInt("0"),
     latestHeight: false
   };
 }
@@ -680,12 +680,12 @@ export const QueryConsensusStateRequest = {
       writer.uint32(10).string(message.clientId);
     }
 
-    if (!message.revisionNumber.isZero()) {
-      writer.uint32(16).uint64(message.revisionNumber);
+    if (message.revisionNumber !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.revisionNumber.toString()));
     }
 
-    if (!message.revisionHeight.isZero()) {
-      writer.uint32(24).uint64(message.revisionHeight);
+    if (message.revisionHeight !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.revisionHeight.toString()));
     }
 
     if (message.latestHeight === true) {
@@ -709,11 +709,11 @@ export const QueryConsensusStateRequest = {
           break;
 
         case 2:
-          message.revisionNumber = (reader.uint64() as Long);
+          message.revisionNumber = BigInt(reader.uint64().toString());
           break;
 
         case 3:
-          message.revisionHeight = (reader.uint64() as Long);
+          message.revisionHeight = BigInt(reader.uint64().toString());
           break;
 
         case 4:
@@ -732,8 +732,8 @@ export const QueryConsensusStateRequest = {
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
-      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO,
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt("0"),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt("0"),
       latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
     };
   },
@@ -741,8 +741,8 @@ export const QueryConsensusStateRequest = {
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt("0")).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt("0")).toString());
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
     return obj;
   },
@@ -750,8 +750,8 @@ export const QueryConsensusStateRequest = {
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt("0");
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt("0");
     message.latestHeight = object.latestHeight ?? false;
     return message;
   },
@@ -768,8 +768,8 @@ export const QueryConsensusStateRequest = {
   fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
     return {
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
-      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO,
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt("0"),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt("0"),
       latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
     };
   },

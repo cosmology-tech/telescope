@@ -2,7 +2,6 @@ import { AccessConfig, AccessConfigSDKType, accessTypeFromJSON } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { toBase64, fromBase64, fromUtf8, toUtf8 } from "@cosmjs/encoding";
-import { Long } from "../../../helpers";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminSDKType } from "./tx";
 export interface MsgStoreCodeAminoType extends AminoMsg {
   type: "wasm/MsgStoreCode";
@@ -130,7 +129,7 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        codeId: Long.fromString(code_id),
+        codeId: BigInt(code_id),
         label,
         msg: toUtf8(JSON.stringify(msg)),
         funds: funds.map(el0 => ({
@@ -199,7 +198,7 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        codeId: Long.fromString(code_id),
+        codeId: BigInt(code_id),
         msg: toUtf8(JSON.stringify(msg))
       };
     }

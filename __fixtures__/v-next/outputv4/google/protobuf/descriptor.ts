@@ -1191,8 +1191,8 @@ export interface UninterpretedOption {
    * identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue: string;
-  positiveIntValue: Long;
-  negativeIntValue: Long;
+  positiveIntValue: bigint;
+  negativeIntValue: bigint;
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;
@@ -1209,8 +1209,8 @@ export interface UninterpretedOption {
 export interface UninterpretedOptionSDKType {
   name: UninterpretedOption_NamePartSDKType[];
   identifier_value: string;
-  positive_int_value: Long;
-  negative_int_value: Long;
+  positive_int_value: bigint;
+  negative_int_value: bigint;
   double_value: number;
   string_value: Uint8Array;
   aggregate_value: string;
@@ -4620,8 +4620,8 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   return {
     name: [],
     identifierValue: "",
-    positiveIntValue: Long.UZERO,
-    negativeIntValue: Long.ZERO,
+    positiveIntValue: BigInt("0"),
+    negativeIntValue: BigInt("0"),
     doubleValue: 0,
     stringValue: new Uint8Array(),
     aggregateValue: ""
@@ -4638,12 +4638,12 @@ export const UninterpretedOption = {
       writer.uint32(26).string(message.identifierValue);
     }
 
-    if (!message.positiveIntValue.isZero()) {
-      writer.uint32(32).uint64(message.positiveIntValue);
+    if (message.positiveIntValue !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.positiveIntValue.toString()));
     }
 
-    if (!message.negativeIntValue.isZero()) {
-      writer.uint32(40).int64(message.negativeIntValue);
+    if (message.negativeIntValue !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.negativeIntValue.toString()));
     }
 
     if (message.doubleValue !== 0) {
@@ -4679,11 +4679,11 @@ export const UninterpretedOption = {
           break;
 
         case 4:
-          message.positiveIntValue = (reader.uint64() as Long);
+          message.positiveIntValue = BigInt(reader.uint64().toString());
           break;
 
         case 5:
-          message.negativeIntValue = (reader.int64() as Long);
+          message.negativeIntValue = BigInt(reader.int64().toString());
           break;
 
         case 6:
@@ -4711,8 +4711,8 @@ export const UninterpretedOption = {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
       identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
-      positiveIntValue: isSet(object.positiveIntValue) ? Long.fromValue(object.positiveIntValue) : Long.UZERO,
-      negativeIntValue: isSet(object.negativeIntValue) ? Long.fromValue(object.negativeIntValue) : Long.ZERO,
+      positiveIntValue: isSet(object.positiveIntValue) ? BigInt(object.positiveIntValue.toString()) : BigInt("0"),
+      negativeIntValue: isSet(object.negativeIntValue) ? BigInt(object.negativeIntValue.toString()) : BigInt("0"),
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
       stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(),
       aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : ""
@@ -4729,8 +4729,8 @@ export const UninterpretedOption = {
     }
 
     message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-    message.positiveIntValue !== undefined && (obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString());
-    message.negativeIntValue !== undefined && (obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString());
+    message.positiveIntValue !== undefined && (obj.positiveIntValue = (message.positiveIntValue || BigInt("0")).toString());
+    message.negativeIntValue !== undefined && (obj.negativeIntValue = (message.negativeIntValue || BigInt("0")).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array()));
     message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
@@ -4741,8 +4741,8 @@ export const UninterpretedOption = {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map(e => UninterpretedOption_NamePart.fromPartial(e)) || [];
     message.identifierValue = object.identifierValue ?? "";
-    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? Long.fromValue(object.positiveIntValue) : Long.UZERO;
-    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? Long.fromValue(object.negativeIntValue) : Long.ZERO;
+    message.positiveIntValue = object.positiveIntValue !== undefined && object.positiveIntValue !== null ? BigInt(object.positiveIntValue.toString()) : BigInt("0");
+    message.negativeIntValue = object.negativeIntValue !== undefined && object.negativeIntValue !== null ? BigInt(object.negativeIntValue.toString()) : BigInt("0");
     message.doubleValue = object.doubleValue ?? 0;
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
@@ -4765,8 +4765,8 @@ export const UninterpretedOption = {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDKJSON(e)) : [],
       identifier_value: isSet(object.identifier_value) ? String(object.identifier_value) : "",
-      positive_int_value: isSet(object.positive_int_value) ? Long.fromValue(object.positive_int_value) : Long.UZERO,
-      negative_int_value: isSet(object.negative_int_value) ? Long.fromValue(object.negative_int_value) : Long.ZERO,
+      positive_int_value: isSet(object.positive_int_value) ? BigInt(object.positive_int_value.toString()) : BigInt("0"),
+      negative_int_value: isSet(object.negative_int_value) ? BigInt(object.negative_int_value.toString()) : BigInt("0"),
       double_value: isSet(object.double_value) ? Number(object.double_value) : 0,
       string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(),
       aggregate_value: isSet(object.aggregate_value) ? String(object.aggregate_value) : ""

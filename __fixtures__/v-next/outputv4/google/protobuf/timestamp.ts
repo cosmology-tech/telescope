@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -92,7 +92,7 @@ export interface Timestamp {
    * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
    * 9999-12-31T23:59:59Z inclusive.
    */
-  seconds: Long;
+  seconds: bigint;
 
   /**
    * Non-negative fractions of a second at nanosecond resolution. Negative
@@ -188,21 +188,21 @@ export interface Timestamp {
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
 export interface TimestampSDKType {
-  seconds: Long;
+  seconds: bigint;
   nanos: number;
 }
 
 function createBaseTimestamp(): Timestamp {
   return {
-    seconds: Long.ZERO,
+    seconds: BigInt("0"),
     nanos: 0
   };
 }
 
 export const Timestamp = {
   encode(message: Timestamp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.seconds.isZero()) {
-      writer.uint32(8).int64(message.seconds);
+    if (message.seconds !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.seconds.toString()));
     }
 
     if (message.nanos !== 0) {
@@ -222,7 +222,7 @@ export const Timestamp = {
 
       switch (tag >>> 3) {
         case 1:
-          message.seconds = (reader.int64() as Long);
+          message.seconds = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -240,21 +240,21 @@ export const Timestamp = {
 
   fromJSON(object: any): Timestamp {
     return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt("0")).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
 
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt("0");
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -268,7 +268,7 @@ export const Timestamp = {
 
   fromSDKJSON(object: any): TimestampSDKType {
     return {
-      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },

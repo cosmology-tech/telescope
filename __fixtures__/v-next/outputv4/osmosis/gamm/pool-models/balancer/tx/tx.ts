@@ -21,12 +21,12 @@ export interface MsgCreateBalancerPoolSDKType {
 
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
-  poolId: Long;
+  poolId: bigint;
 }
 
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseSDKType {
-  pool_id: Long;
+  pool_id: bigint;
 }
 
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
@@ -163,14 +163,14 @@ export const MsgCreateBalancerPool = {
 
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
   return {
-    poolId: Long.UZERO
+    poolId: BigInt("0")
   };
 }
 
 export const MsgCreateBalancerPoolResponse = {
   encode(message: MsgCreateBalancerPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
-      writer.uint32(8).uint64(message.poolId);
+    if (message.poolId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
     }
 
     return writer;
@@ -186,7 +186,7 @@ export const MsgCreateBalancerPoolResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -200,19 +200,19 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -224,7 +224,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromSDKJSON(object: any): MsgCreateBalancerPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 

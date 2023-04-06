@@ -1,6 +1,6 @@
 import { IdentifiedConnection, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsSDKType, Params, ParamsSDKType } from "./connection";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
@@ -9,7 +9,7 @@ export interface GenesisState {
   clientConnectionPaths: ConnectionPaths[];
 
   /** the sequence for the next generated connection identifier */
-  nextConnectionSequence: Long;
+  nextConnectionSequence: bigint;
   params?: Params;
 }
 
@@ -17,7 +17,7 @@ export interface GenesisState {
 export interface GenesisStateSDKType {
   connections: IdentifiedConnectionSDKType[];
   client_connection_paths: ConnectionPathsSDKType[];
-  next_connection_sequence: Long;
+  next_connection_sequence: bigint;
   params?: ParamsSDKType;
 }
 
@@ -25,7 +25,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     connections: [],
     clientConnectionPaths: [],
-    nextConnectionSequence: Long.UZERO,
+    nextConnectionSequence: BigInt("0"),
     params: undefined
   };
 }
@@ -40,8 +40,8 @@ export const GenesisState = {
       ConnectionPaths.encode(v!, writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.nextConnectionSequence.isZero()) {
-      writer.uint32(24).uint64(message.nextConnectionSequence);
+    if (message.nextConnectionSequence !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.nextConnectionSequence.toString()));
     }
 
     if (message.params !== undefined) {
@@ -69,7 +69,7 @@ export const GenesisState = {
           break;
 
         case 3:
-          message.nextConnectionSequence = (reader.uint64() as Long);
+          message.nextConnectionSequence = BigInt(reader.uint64().toString());
           break;
 
         case 4:
@@ -89,7 +89,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e)) : [],
       clientConnectionPaths: Array.isArray(object?.clientConnectionPaths) ? object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e)) : [],
-      nextConnectionSequence: isSet(object.nextConnectionSequence) ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO,
+      nextConnectionSequence: isSet(object.nextConnectionSequence) ? BigInt(object.nextConnectionSequence.toString()) : BigInt("0"),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -109,7 +109,7 @@ export const GenesisState = {
       obj.clientConnectionPaths = [];
     }
 
-    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = (message.nextConnectionSequence || Long.UZERO).toString());
+    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = (message.nextConnectionSequence || BigInt("0")).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -118,7 +118,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];
-    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO;
+    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? BigInt(object.nextConnectionSequence.toString()) : BigInt("0");
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
@@ -136,7 +136,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
       client_connection_paths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromSDKJSON(e)) : [],
-      next_connection_sequence: isSet(object.next_connection_sequence) ? Long.fromValue(object.next_connection_sequence) : Long.UZERO,
+      next_connection_sequence: isSet(object.next_connection_sequence) ? BigInt(object.next_connection_sequence.toString()) : BigInt("0"),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },

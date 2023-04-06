@@ -1,25 +1,25 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { toTimestamp, Long, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
   startTime?: Date;
   duration?: Duration;
-  currentEpoch: Long;
+  currentEpoch: bigint;
   currentEpochStartTime?: Date;
   epochCountingStarted: boolean;
-  currentEpochStartHeight: Long;
+  currentEpochStartHeight: bigint;
 }
 export interface EpochInfoSDKType {
   identifier: string;
   start_time?: Date;
   duration?: DurationSDKType;
-  current_epoch: Long;
+  current_epoch: bigint;
   current_epoch_start_time?: Date;
   epoch_counting_started: boolean;
-  current_epoch_start_height: Long;
+  current_epoch_start_height: bigint;
 }
 
 /** GenesisState defines the epochs module's genesis state. */
@@ -37,10 +37,10 @@ function createBaseEpochInfo(): EpochInfo {
     identifier: "",
     startTime: undefined,
     duration: undefined,
-    currentEpoch: Long.ZERO,
+    currentEpoch: BigInt("0"),
     currentEpochStartTime: undefined,
     epochCountingStarted: false,
-    currentEpochStartHeight: Long.ZERO
+    currentEpochStartHeight: BigInt("0")
   };
 }
 
@@ -58,8 +58,8 @@ export const EpochInfo = {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
 
-    if (!message.currentEpoch.isZero()) {
-      writer.uint32(32).int64(message.currentEpoch);
+    if (message.currentEpoch !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.currentEpoch.toString()));
     }
 
     if (message.currentEpochStartTime !== undefined) {
@@ -70,8 +70,8 @@ export const EpochInfo = {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
 
-    if (!message.currentEpochStartHeight.isZero()) {
-      writer.uint32(56).int64(message.currentEpochStartHeight);
+    if (message.currentEpochStartHeight !== BigInt(0)) {
+      writer.uint32(56).int64(Long.fromString(message.currentEpochStartHeight.toString()));
     }
 
     return writer;
@@ -99,7 +99,7 @@ export const EpochInfo = {
           break;
 
         case 4:
-          message.currentEpoch = (reader.int64() as Long);
+          message.currentEpoch = BigInt(reader.int64().toString());
           break;
 
         case 5:
@@ -111,7 +111,7 @@ export const EpochInfo = {
           break;
 
         case 7:
-          message.currentEpochStartHeight = (reader.int64() as Long);
+          message.currentEpochStartHeight = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -128,10 +128,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO,
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt("0"),
       currentEpochStartTime: isSet(object.currentEpochStartTime) ? new Date(object.currentEpochStartTime) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0")
     };
   },
 
@@ -140,10 +140,10 @@ export const EpochInfo = {
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt("0")).toString());
     message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
     message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || Long.ZERO).toString());
+    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt("0")).toString());
     return obj;
   },
 
@@ -152,10 +152,10 @@ export const EpochInfo = {
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt("0");
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO;
+    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -176,10 +176,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO,
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt("0"),
       current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
       epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? Long.fromValue(object.current_epoch_start_height) : Long.ZERO
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt("0")
     };
   },
 

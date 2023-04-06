@@ -50,7 +50,7 @@ export const AminoConverter = {
         contractAddress: contract_address,
         deployerAddress: deployer_address,
         withdrawAddress: withdraw_address,
-        nonces: nonces.map(el0 => Long.fromString(el0))
+        nonces: nonces.map(el0 => BigInt(el0))
       };
     }
   },

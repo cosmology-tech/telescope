@@ -1,6 +1,5 @@
 import { Plan, PlanSDKType } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx";
@@ -59,7 +58,7 @@ export const AminoConverter = {
         plan: {
           name: plan.name,
           time: plan.time,
-          height: Long.fromString(plan.height),
+          height: BigInt(plan.height),
           info: plan.info,
           upgradedClientState: {
             typeUrl: plan.upgraded_client_state.type_url,

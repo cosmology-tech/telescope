@@ -49,7 +49,7 @@ export interface InstantiateContractProposal {
   admin: string;
 
   /** CodeID is the reference to the stored WASM code */
-  codeId: Long;
+  codeId: bigint;
 
   /** Label is optional metadata to be stored with a constract instance. */
   label: string;
@@ -70,7 +70,7 @@ export interface InstantiateContractProposalSDKType {
   description: string;
   run_as: string;
   admin: string;
-  code_id: Long;
+  code_id: bigint;
   label: string;
   msg: Uint8Array;
   funds: CoinSDKType[];
@@ -88,7 +88,7 @@ export interface MigrateContractProposal {
   contract: string;
 
   /** CodeID references the new WASM codesudo */
-  codeId: Long;
+  codeId: bigint;
 
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
@@ -99,7 +99,7 @@ export interface MigrateContractProposalSDKType {
   title: string;
   description: string;
   contract: string;
-  code_id: Long;
+  code_id: bigint;
   msg: Uint8Array;
 }
 
@@ -223,7 +223,7 @@ export interface PinCodesProposal {
   description: string;
 
   /** CodeIDs references the new WASM codes */
-  codeIds: Long[];
+  codeIds: bigint[];
 }
 
 /**
@@ -233,7 +233,7 @@ export interface PinCodesProposal {
 export interface PinCodesProposalSDKType {
   title: string;
   description: string;
-  code_ids: Long[];
+  code_ids: bigint[];
 }
 
 /**
@@ -248,7 +248,7 @@ export interface UnpinCodesProposal {
   description: string;
 
   /** CodeIDs references the WASM codes */
-  codeIds: Long[];
+  codeIds: bigint[];
 }
 
 /**
@@ -258,7 +258,7 @@ export interface UnpinCodesProposal {
 export interface UnpinCodesProposalSDKType {
   title: string;
   description: string;
-  code_ids: Long[];
+  code_ids: bigint[];
 }
 
 function createBaseStoreCodeProposal(): StoreCodeProposal {
@@ -402,7 +402,7 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
     description: "",
     runAs: "",
     admin: "",
-    codeId: Long.UZERO,
+    codeId: BigInt("0"),
     label: "",
     msg: new Uint8Array(),
     funds: []
@@ -427,8 +427,8 @@ export const InstantiateContractProposal = {
       writer.uint32(34).string(message.admin);
     }
 
-    if (!message.codeId.isZero()) {
-      writer.uint32(40).uint64(message.codeId);
+    if (message.codeId !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.codeId.toString()));
     }
 
     if (message.label !== "") {
@@ -472,7 +472,7 @@ export const InstantiateContractProposal = {
           break;
 
         case 5:
-          message.codeId = (reader.uint64() as Long);
+          message.codeId = BigInt(reader.uint64().toString());
           break;
 
         case 6:
@@ -502,7 +502,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       runAs: isSet(object.runAs) ? String(object.runAs) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
@@ -515,7 +515,7 @@ export const InstantiateContractProposal = {
     message.description !== undefined && (obj.description = message.description);
     message.runAs !== undefined && (obj.runAs = message.runAs);
     message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
     message.label !== undefined && (obj.label = message.label);
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
 
@@ -534,7 +534,7 @@ export const InstantiateContractProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -560,7 +560,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       run_as: isSet(object.run_as) ? String(object.run_as) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
@@ -593,7 +593,7 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
     title: "",
     description: "",
     contract: "",
-    codeId: Long.UZERO,
+    codeId: BigInt("0"),
     msg: new Uint8Array()
   };
 }
@@ -612,8 +612,8 @@ export const MigrateContractProposal = {
       writer.uint32(34).string(message.contract);
     }
 
-    if (!message.codeId.isZero()) {
-      writer.uint32(40).uint64(message.codeId);
+    if (message.codeId !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.codeId.toString()));
     }
 
     if (message.msg.length !== 0) {
@@ -645,7 +645,7 @@ export const MigrateContractProposal = {
           break;
 
         case 5:
-          message.codeId = (reader.uint64() as Long);
+          message.codeId = BigInt(reader.uint64().toString());
           break;
 
         case 6:
@@ -666,7 +666,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -676,7 +676,7 @@ export const MigrateContractProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
@@ -686,7 +686,7 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -706,7 +706,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -1251,7 +1251,7 @@ export const PinCodesProposal = {
     writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -1280,10 +1280,10 @@ export const PinCodesProposal = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
+              message.codeIds.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.codeIds.push((reader.uint64() as Long));
+            message.codeIds.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -1301,7 +1301,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1311,7 +1311,7 @@ export const PinCodesProposal = {
     message.description !== undefined && (obj.description = message.description);
 
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt("0")).toString());
     } else {
       obj.codeIds = [];
     }
@@ -1323,7 +1323,7 @@ export const PinCodesProposal = {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -1339,7 +1339,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1380,7 +1380,7 @@ export const UnpinCodesProposal = {
     writer.uint32(26).fork();
 
     for (const v of message.codeIds) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -1409,10 +1409,10 @@ export const UnpinCodesProposal = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.codeIds.push((reader.uint64() as Long));
+              message.codeIds.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.codeIds.push((reader.uint64() as Long));
+            message.codeIds.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -1430,7 +1430,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
@@ -1440,7 +1440,7 @@ export const UnpinCodesProposal = {
     message.description !== undefined && (obj.description = message.description);
 
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt("0")).toString());
     } else {
       obj.codeIds = [];
     }
@@ -1452,7 +1452,7 @@ export const UnpinCodesProposal = {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
+    message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -1468,7 +1468,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : []
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

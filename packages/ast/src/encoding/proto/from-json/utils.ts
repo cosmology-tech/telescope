@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
-import { callExpression, identifier } from '../../../utils';
+import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ProtoField } from '@osmonauts/types';
 
@@ -133,7 +133,7 @@ export const fromJSON = {
     long(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
-        args.context.addUtil('Long');
+        TypeLong.addUtil(args.context);
 
         return t.objectProperty(
             t.identifier(messageProp),
@@ -147,17 +147,11 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromValue')
-                    ),
-                    [
+                TypeLong.getFromValueWithArgs(args.context,
                         t.memberExpression(
                             t.identifier('object'),
                             t.identifier(objProp)
                         )
-                    ]
                 ),
                 getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
@@ -434,25 +428,24 @@ export const fromJSON = {
                 break;
             case 'int64':
             case 'uint64':
-                valueTypeType = 'Long';
-                fromJSON = t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromValue')
-                    ),
-                    [
-                        t.tsAsExpression(
-                            t.identifier('value'),
-                            t.tsUnionType(
-                                [
-                                    t.tsTypeReference(
-                                        t.identifier('Long')
-                                    ),
-                                    t.tsStringKeyword()
-                                ]
-                            )
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
+                TypeLong.addUtil(args.context);
+
+                valueTypeType = TypeLong.getPropType(args.context);
+                fromJSON = TypeLong.getFromValueWithArgs(args.context,
+                    t.tsAsExpression(
+                        t.identifier('value'),
+                        t.tsUnionType(
+                            [
+                                t.tsTypeReference(
+                                    TypeLong.getPropIdentifier(args.context)
+                                ),
+                                t.tsStringKeyword()
+                            ]
                         )
-                    ]
+                    )
                 )
                 break;
             default:
@@ -476,13 +469,18 @@ export const fromJSON = {
                 break;
             case 'int64':
             case 'uint64':
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
                         a
                     ]
                 );
-                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                TypeLong.addUtil(args.context);
+
+                keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
                 break;
             case 'uint32':
             case 'int32':
@@ -661,31 +659,25 @@ export const arrayTypes = {
         );
     },
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : [],
-    long() {
-        return t.callExpression(
-            t.memberExpression(
-                t.identifier('Long'),
-                t.identifier('fromValue')
-            ),
-            [
-                t.identifier('e')
-            ]
-        );
+    long(args: FromJSONMethod) {
+        TypeLong.addUtil(args.context);
+
+        return TypeLong.getFromValueWithArgs(args.context, t.identifier('e'));
     },
-    uint64() {
-        return arrayTypes.long();
+    uint64(args: FromJSONMethod) {
+        return arrayTypes.long(args);
     },
-    int64() {
-        return arrayTypes.long();
+    int64(args: FromJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sint64() {
-        return arrayTypes.long();
+    sint64(args: FromJSONMethod) {
+        return arrayTypes.long(args);
     },
-    fixed64() {
-        return arrayTypes.long();
+    fixed64(args: FromJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sfixed64() {
-        return arrayTypes.long();
+    sfixed64(args: FromJSONMethod) {
+        return arrayTypes.long(args);
     },
     // myUint32Array: Array.isArray(object?.myUint32Array) ? object.myUint32Array.map((e: any) => Number(e)) : [],
     number() {

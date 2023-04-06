@@ -1,14 +1,14 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
-  poolId: Long;
+  poolId: bigint;
 }
 export interface QueryGaugeIdsRequestSDKType {
-  pool_id: Long;
+  pool_id: bigint;
 }
 export interface QueryGaugeIdsResponse {
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
@@ -17,12 +17,12 @@ export interface QueryGaugeIdsResponseSDKType {
   gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType[];
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
-  gaugeId: Long;
+  gaugeId: bigint;
   duration?: Duration;
   gaugeIncentivePercentage: string;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
-  gauge_id: Long;
+  gauge_id: bigint;
   duration?: DurationSDKType;
   gauge_incentive_percentage: string;
 }
@@ -53,14 +53,14 @@ export interface QueryLockableDurationsResponseSDKType {
 export interface QueryIncentivizedPoolsRequest {}
 export interface QueryIncentivizedPoolsRequestSDKType {}
 export interface IncentivizedPool {
-  poolId: Long;
+  poolId: bigint;
   lockableDuration?: Duration;
-  gaugeId: Long;
+  gaugeId: bigint;
 }
 export interface IncentivizedPoolSDKType {
-  pool_id: Long;
+  pool_id: bigint;
   lockable_duration?: DurationSDKType;
-  gauge_id: Long;
+  gauge_id: bigint;
 }
 export interface QueryIncentivizedPoolsResponse {
   incentivizedPools: IncentivizedPool[];
@@ -79,14 +79,14 @@ export interface QueryExternalIncentiveGaugesResponseSDKType {
 
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
   return {
-    poolId: Long.UZERO
+    poolId: BigInt("0")
   };
 }
 
 export const QueryGaugeIdsRequest = {
   encode(message: QueryGaugeIdsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
-      writer.uint32(8).uint64(message.poolId);
+    if (message.poolId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
     }
 
     return writer;
@@ -102,7 +102,7 @@ export const QueryGaugeIdsRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -116,19 +116,19 @@ export const QueryGaugeIdsRequest = {
 
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: QueryGaugeIdsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     return message;
   },
 
@@ -140,7 +140,7 @@ export const QueryGaugeIdsRequest = {
 
   fromSDKJSON(object: any): QueryGaugeIdsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
     };
   },
 
@@ -241,7 +241,7 @@ export const QueryGaugeIdsResponse = {
 
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
   return {
-    gaugeId: Long.UZERO,
+    gaugeId: BigInt("0"),
     duration: undefined,
     gaugeIncentivePercentage: ""
   };
@@ -249,8 +249,8 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(8).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     if (message.duration !== undefined) {
@@ -274,7 +274,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -296,7 +296,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       gaugeIncentivePercentage: isSet(object.gaugeIncentivePercentage) ? String(object.gaugeIncentivePercentage) : ""
     };
@@ -304,7 +304,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.gaugeIncentivePercentage !== undefined && (obj.gaugeIncentivePercentage = message.gaugeIncentivePercentage);
     return obj;
@@ -312,7 +312,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
@@ -328,7 +328,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromSDKJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       gauge_incentive_percentage: isSet(object.gauge_incentive_percentage) ? String(object.gauge_incentive_percentage) : ""
     };
@@ -807,24 +807,24 @@ export const QueryIncentivizedPoolsRequest = {
 
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
-    poolId: Long.UZERO,
+    poolId: BigInt("0"),
     lockableDuration: undefined,
-    gaugeId: Long.UZERO
+    gaugeId: BigInt("0")
   };
 }
 
 export const IncentivizedPool = {
   encode(message: IncentivizedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.poolId.isZero()) {
-      writer.uint32(8).uint64(message.poolId);
+    if (message.poolId !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
     }
 
     if (message.lockableDuration !== undefined) {
       Duration.encode(message.lockableDuration, writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.gaugeId.isZero()) {
-      writer.uint32(24).uint64(message.gaugeId);
+    if (message.gaugeId !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.gaugeId.toString()));
     }
 
     return writer;
@@ -840,7 +840,7 @@ export const IncentivizedPool = {
 
       switch (tag >>> 3) {
         case 1:
-          message.poolId = (reader.uint64() as Long);
+          message.poolId = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -848,7 +848,7 @@ export const IncentivizedPool = {
           break;
 
         case 3:
-          message.gaugeId = (reader.uint64() as Long);
+          message.gaugeId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -862,25 +862,25 @@ export const IncentivizedPool = {
 
   fromJSON(object: any): IncentivizedPool {
     return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
       lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: IncentivizedPool): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
     message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration ? Duration.toJSON(message.lockableDuration) : undefined);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
     message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -894,9 +894,9 @@ export const IncentivizedPool = {
 
   fromSDKJSON(object: any): IncentivizedPoolSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
       lockable_duration: isSet(object.lockable_duration) ? Duration.fromSDKJSON(object.lockable_duration) : undefined,
-      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0")
     };
   },
 

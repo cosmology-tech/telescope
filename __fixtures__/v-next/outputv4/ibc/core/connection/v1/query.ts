@@ -182,8 +182,8 @@ export interface QueryConnectionClientStateResponseSDKType {
 export interface QueryConnectionConsensusStateRequest {
   /** connection identifier */
   connectionId: string;
-  revisionNumber: Long;
-  revisionHeight: Long;
+  revisionNumber: bigint;
+  revisionHeight: bigint;
 }
 
 /**
@@ -192,8 +192,8 @@ export interface QueryConnectionConsensusStateRequest {
  */
 export interface QueryConnectionConsensusStateRequestSDKType {
   connection_id: string;
-  revision_number: Long;
-  revision_height: Long;
+  revision_number: bigint;
+  revision_height: bigint;
 }
 
 /**
@@ -972,8 +972,8 @@ export const QueryConnectionClientStateResponse = {
 function createBaseQueryConnectionConsensusStateRequest(): QueryConnectionConsensusStateRequest {
   return {
     connectionId: "",
-    revisionNumber: Long.UZERO,
-    revisionHeight: Long.UZERO
+    revisionNumber: BigInt("0"),
+    revisionHeight: BigInt("0")
   };
 }
 
@@ -983,12 +983,12 @@ export const QueryConnectionConsensusStateRequest = {
       writer.uint32(10).string(message.connectionId);
     }
 
-    if (!message.revisionNumber.isZero()) {
-      writer.uint32(16).uint64(message.revisionNumber);
+    if (message.revisionNumber !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.revisionNumber.toString()));
     }
 
-    if (!message.revisionHeight.isZero()) {
-      writer.uint32(24).uint64(message.revisionHeight);
+    if (message.revisionHeight !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.revisionHeight.toString()));
     }
 
     return writer;
@@ -1008,11 +1008,11 @@ export const QueryConnectionConsensusStateRequest = {
           break;
 
         case 2:
-          message.revisionNumber = (reader.uint64() as Long);
+          message.revisionNumber = BigInt(reader.uint64().toString());
           break;
 
         case 3:
-          message.revisionHeight = (reader.uint64() as Long);
+          message.revisionHeight = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1027,24 +1027,24 @@ export const QueryConnectionConsensusStateRequest = {
   fromJSON(object: any): QueryConnectionConsensusStateRequest {
     return {
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
-      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt("0"),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: QueryConnectionConsensusStateRequest): unknown {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt("0")).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
     const message = createBaseQueryConnectionConsensusStateRequest();
     message.connectionId = object.connectionId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt("0");
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -1059,8 +1059,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromSDKJSON(object: any): QueryConnectionConsensusStateRequestSDKType {
     return {
       connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
-      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt("0"),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt("0")
     };
   },
 

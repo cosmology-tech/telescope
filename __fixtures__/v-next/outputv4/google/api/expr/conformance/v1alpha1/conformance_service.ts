@@ -227,7 +227,7 @@ export interface IssueDetails {
   position?: SourcePosition;
 
   /** Expression ID from [Expr][], 0 if unknown. */
-  id: Long;
+  id: bigint;
 }
 
 /**
@@ -238,7 +238,7 @@ export interface IssueDetails {
 export interface IssueDetailsSDKType {
   severity: IssueDetails_Severity;
   position?: SourcePositionSDKType;
-  id: Long;
+  id: bigint;
 }
 
 function createBaseParseRequest(): ParseRequest {
@@ -1058,7 +1058,7 @@ function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
     position: undefined,
-    id: Long.ZERO
+    id: BigInt("0")
   };
 }
 
@@ -1072,8 +1072,8 @@ export const IssueDetails = {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.id.isZero()) {
-      writer.uint32(24).int64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.id.toString()));
     }
 
     return writer;
@@ -1097,7 +1097,7 @@ export const IssueDetails = {
           break;
 
         case 3:
-          message.id = (reader.int64() as Long);
+          message.id = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -1113,7 +1113,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 
@@ -1121,7 +1121,7 @@ export const IssueDetails = {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     return obj;
   },
 
@@ -1129,7 +1129,7 @@ export const IssueDetails = {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     return message;
   },
 
@@ -1145,7 +1145,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
     };
   },
 

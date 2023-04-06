@@ -420,7 +420,7 @@ export interface QueryDelegatorValidatorResponseSDKType {
  */
 export interface QueryHistoricalInfoRequest {
   /** height defines at which height to query the historical info. */
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -428,7 +428,7 @@ export interface QueryHistoricalInfoRequest {
  * method.
  */
 export interface QueryHistoricalInfoRequestSDKType {
-  height: Long;
+  height: bigint;
 }
 
 /**
@@ -2503,14 +2503,14 @@ export const QueryDelegatorValidatorResponse = {
 
 function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
   return {
-    height: Long.ZERO
+    height: BigInt("0")
   };
 }
 
 export const QueryHistoricalInfoRequest = {
   encode(message: QueryHistoricalInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.height.toString()));
     }
 
     return writer;
@@ -2526,7 +2526,7 @@ export const QueryHistoricalInfoRequest = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -2540,19 +2540,19 @@ export const QueryHistoricalInfoRequest = {
 
   fromJSON(object: any): QueryHistoricalInfoRequest {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: QueryHistoricalInfoRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = createBaseQueryHistoricalInfoRequest();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -2564,7 +2564,7 @@ export const QueryHistoricalInfoRequest = {
 
   fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 

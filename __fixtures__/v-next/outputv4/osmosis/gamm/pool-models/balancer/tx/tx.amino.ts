@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType, SmoothWeightChangeParams, SmoothWeightChangeParamsSDKType } from "../balancerPool";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../../../helpers";
 import { Timestamp, TimestampSDKType } from "../../../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../../cosmos/base/v1beta1/coin";
@@ -68,14 +67,14 @@ export const AminoConverter = {
             initial_pool_weights: poolParams.smoothWeightChangeParams.initialPoolWeights.map(el0 => ({
               token: {
                 denom: el0.token.denom,
-                amount: Long.fromValue(el0.token.amount).toString()
+                amount: el0.token.amount
               },
               weight: el0.weight
             })),
             target_pool_weights: poolParams.smoothWeightChangeParams.targetPoolWeights.map(el0 => ({
               token: {
                 denom: el0.token.denom,
-                amount: Long.fromValue(el0.token.amount).toString()
+                amount: el0.token.amount
               },
               weight: el0.weight
             }))
@@ -84,7 +83,7 @@ export const AminoConverter = {
         pool_assets: poolAssets.map(el0 => ({
           token: {
             denom: el0.token.denom,
-            amount: Long.fromValue(el0.token.amount).toString()
+            amount: el0.token.amount
           },
           weight: el0.weight
         })),
@@ -105,7 +104,7 @@ export const AminoConverter = {
           smoothWeightChangeParams: {
             startTime: pool_params.smooth_weight_change_params.start_time,
             duration: {
-              seconds: Long.fromNumber(Math.floor(parseInt(pool_params.smooth_weight_change_params.duration) / 1_000_000_000)),
+              seconds: BigInt(Math.floor(parseInt(pool_params.smooth_weight_change_params.duration) / 1_000_000_000)),
               nanos: parseInt(pool_params.smooth_weight_change_params.duration) % 1_000_000_000
             },
             initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map(el2 => ({

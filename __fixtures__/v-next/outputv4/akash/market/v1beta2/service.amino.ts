@@ -4,7 +4,6 @@ import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
 export interface MsgCreateBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-bid";
   value: {
@@ -96,7 +95,7 @@ export const AminoConverter = {
         },
         deposit: {
           denom: deposit.denom,
-          amount: Long.fromValue(deposit.amount).toString()
+          amount: deposit.amount
         }
       };
     },
@@ -109,7 +108,7 @@ export const AminoConverter = {
       return {
         order: {
           owner: order.owner,
-          dseq: Long.fromString(order.dseq),
+          dseq: BigInt(order.dseq),
           gseq: order.gseq,
           oseq: order.oseq
         },
@@ -146,7 +145,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -175,7 +174,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -204,7 +203,7 @@ export const AminoConverter = {
       return {
         bidId: {
           owner: bid_id.owner,
-          dseq: Long.fromString(bid_id.dseq),
+          dseq: BigInt(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -233,7 +232,7 @@ export const AminoConverter = {
       return {
         leaseId: {
           owner: lease_id.owner,
-          dseq: Long.fromString(lease_id.dseq),
+          dseq: BigInt(lease_id.dseq),
           gseq: lease_id.gseq,
           oseq: lease_id.oseq,
           provider: lease_id.provider

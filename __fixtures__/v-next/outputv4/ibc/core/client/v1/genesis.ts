@@ -1,6 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 
 /** GenesisState defines the ibc client submodule's genesis state. */
@@ -19,7 +19,7 @@ export interface GenesisState {
   createLocalhost: boolean;
 
   /** the sequence for the next generated client identifier */
-  nextClientSequence: Long;
+  nextClientSequence: bigint;
 }
 
 /** GenesisState defines the ibc client submodule's genesis state. */
@@ -29,7 +29,7 @@ export interface GenesisStateSDKType {
   clients_metadata: IdentifiedGenesisMetadataSDKType[];
   params?: ParamsSDKType;
   create_localhost: boolean;
-  next_client_sequence: Long;
+  next_client_sequence: bigint;
 }
 
 /**
@@ -78,7 +78,7 @@ function createBaseGenesisState(): GenesisState {
     clientsMetadata: [],
     params: undefined,
     createLocalhost: false,
-    nextClientSequence: Long.UZERO
+    nextClientSequence: BigInt("0")
   };
 }
 
@@ -104,8 +104,8 @@ export const GenesisState = {
       writer.uint32(40).bool(message.createLocalhost);
     }
 
-    if (!message.nextClientSequence.isZero()) {
-      writer.uint32(48).uint64(message.nextClientSequence);
+    if (message.nextClientSequence !== BigInt(0)) {
+      writer.uint32(48).uint64(Long.fromString(message.nextClientSequence.toString()));
     }
 
     return writer;
@@ -141,7 +141,7 @@ export const GenesisState = {
           break;
 
         case 6:
-          message.nextClientSequence = (reader.uint64() as Long);
+          message.nextClientSequence = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -160,7 +160,7 @@ export const GenesisState = {
       clientsMetadata: Array.isArray(object?.clientsMetadata) ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? Long.fromValue(object.nextClientSequence) : Long.UZERO
+      nextClientSequence: isSet(object.nextClientSequence) ? BigInt(object.nextClientSequence.toString()) : BigInt("0")
     };
   },
 
@@ -187,7 +187,7 @@ export const GenesisState = {
 
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.createLocalhost !== undefined && (obj.createLocalhost = message.createLocalhost);
-    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || Long.UZERO).toString());
+    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || BigInt("0")).toString());
     return obj;
   },
 
@@ -198,7 +198,7 @@ export const GenesisState = {
     message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? Long.fromValue(object.nextClientSequence) : Long.UZERO;
+    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? BigInt(object.nextClientSequence.toString()) : BigInt("0");
     return message;
   },
 
@@ -220,7 +220,7 @@ export const GenesisState = {
       clients_metadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDKJSON(e)) : [],
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
-      next_client_sequence: isSet(object.next_client_sequence) ? Long.fromValue(object.next_client_sequence) : Long.UZERO
+      next_client_sequence: isSet(object.next_client_sequence) ? BigInt(object.next_client_sequence.toString()) : BigInt("0")
     };
   },
 

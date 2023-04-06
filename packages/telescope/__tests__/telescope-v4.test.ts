@@ -68,6 +68,7 @@ const options: TelescopeOptions = {
       customTypes: {
         useCosmosSDKDec: true
       },
+      longLibrary: 'bigint',
       useDeepPartial: true,
       useExact: false,
       timestamp: 'date',

@@ -1,8 +1,8 @@
 import { Params, ParamsSDKType } from "./params";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 
 /**
@@ -26,7 +26,7 @@ export interface GenesisState {
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
-  lastGaugeId: Long;
+  lastGaugeId: bigint;
 }
 
 /**
@@ -37,7 +37,7 @@ export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   gauges: GaugeSDKType[];
   lockable_durations: DurationSDKType[];
-  last_gauge_id: Long;
+  last_gauge_id: bigint;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -45,7 +45,7 @@ function createBaseGenesisState(): GenesisState {
     params: undefined,
     gauges: [],
     lockableDurations: [],
-    lastGaugeId: Long.UZERO
+    lastGaugeId: BigInt("0")
   };
 }
 
@@ -63,8 +63,8 @@ export const GenesisState = {
       Duration.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
-    if (!message.lastGaugeId.isZero()) {
-      writer.uint32(32).uint64(message.lastGaugeId);
+    if (message.lastGaugeId !== BigInt(0)) {
+      writer.uint32(32).uint64(Long.fromString(message.lastGaugeId.toString()));
     }
 
     return writer;
@@ -92,7 +92,7 @@ export const GenesisState = {
           break;
 
         case 4:
-          message.lastGaugeId = (reader.uint64() as Long);
+          message.lastGaugeId = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -109,7 +109,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      lastGaugeId: isSet(object.lastGaugeId) ? Long.fromValue(object.lastGaugeId) : Long.UZERO
+      lastGaugeId: isSet(object.lastGaugeId) ? BigInt(object.lastGaugeId.toString()) : BigInt("0")
     };
   },
 
@@ -129,7 +129,7 @@ export const GenesisState = {
       obj.lockableDurations = [];
     }
 
-    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || Long.UZERO).toString());
+    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || BigInt("0")).toString());
     return obj;
   },
 
@@ -138,7 +138,7 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? Long.fromValue(object.lastGaugeId) : Long.UZERO;
+    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? BigInt(object.lastGaugeId.toString()) : BigInt("0");
     return message;
   },
 
@@ -156,7 +156,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
       lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
-      last_gauge_id: isSet(object.last_gauge_id) ? Long.fromValue(object.last_gauge_id) : Long.UZERO
+      last_gauge_id: isSet(object.last_gauge_id) ? BigInt(object.last_gauge_id.toString()) : BigInt("0")
     };
   },
 

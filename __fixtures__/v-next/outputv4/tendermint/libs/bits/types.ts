@@ -1,32 +1,32 @@
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
-  bits: Long;
-  elems: Long[];
+  bits: bigint;
+  elems: bigint[];
 }
 export interface BitArraySDKType {
-  bits: Long;
-  elems: Long[];
+  bits: bigint;
+  elems: bigint[];
 }
 
 function createBaseBitArray(): BitArray {
   return {
-    bits: Long.ZERO,
+    bits: BigInt("0"),
     elems: []
   };
 }
 
 export const BitArray = {
   encode(message: BitArray, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.bits.isZero()) {
-      writer.uint32(8).int64(message.bits);
+    if (message.bits !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.bits.toString()));
     }
 
     writer.uint32(18).fork();
 
     for (const v of message.elems) {
-      writer.uint64(v);
+      writer.uint64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -43,7 +43,7 @@ export const BitArray = {
 
       switch (tag >>> 3) {
         case 1:
-          message.bits = (reader.int64() as Long);
+          message.bits = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -51,10 +51,10 @@ export const BitArray = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.elems.push((reader.uint64() as Long));
+              message.elems.push(BigInt(reader.uint64().toString()));
             }
           } else {
-            message.elems.push((reader.uint64() as Long));
+            message.elems.push(BigInt(reader.uint64().toString()));
           }
 
           break;
@@ -70,17 +70,17 @@ export const BitArray = {
 
   fromJSON(object: any): BitArray {
     return {
-      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt("0"),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
     };
   },
 
   toJSON(message: BitArray): unknown {
     const obj: any = {};
-    message.bits !== undefined && (obj.bits = (message.bits || Long.ZERO).toString());
+    message.bits !== undefined && (obj.bits = (message.bits || BigInt("0")).toString());
 
     if (message.elems) {
-      obj.elems = message.elems.map(e => (e || Long.UZERO).toString());
+      obj.elems = message.elems.map(e => (e || BigInt("0")).toString());
     } else {
       obj.elems = [];
     }
@@ -90,8 +90,8 @@ export const BitArray = {
 
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    message.bits = object.bits !== undefined && object.bits !== null ? Long.fromValue(object.bits) : Long.ZERO;
-    message.elems = object.elems?.map(e => Long.fromValue(e)) || [];
+    message.bits = object.bits !== undefined && object.bits !== null ? BigInt(object.bits.toString()) : BigInt("0");
+    message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
     return message;
   },
 
@@ -104,8 +104,8 @@ export const BitArray = {
 
   fromSDKJSON(object: any): BitArraySDKType {
     return {
-      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt("0"),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
     };
   },
 

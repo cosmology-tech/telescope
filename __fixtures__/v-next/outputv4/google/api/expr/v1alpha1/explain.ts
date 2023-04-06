@@ -42,7 +42,7 @@ export interface ExplainSDKType {
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
-  id: Long;
+  id: bigint;
 
   /** Index of the value in the values list. */
   valueIndex: number;
@@ -50,7 +50,7 @@ export interface Explain_ExprStep {
 
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
-  id: Long;
+  id: bigint;
   value_index: number;
 }
 
@@ -168,15 +168,15 @@ export const Explain = {
 
 function createBaseExplain_ExprStep(): Explain_ExprStep {
   return {
-    id: Long.ZERO,
+    id: BigInt("0"),
     valueIndex: 0
   };
 }
 
 export const Explain_ExprStep = {
   encode(message: Explain_ExprStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
-      writer.uint32(8).int64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.id.toString()));
     }
 
     if (message.valueIndex !== 0) {
@@ -196,7 +196,7 @@ export const Explain_ExprStep = {
 
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.int64() as Long);
+          message.id = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -214,21 +214,21 @@ export const Explain_ExprStep = {
 
   fromJSON(object: any): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
     };
   },
 
   toJSON(message: Explain_ExprStep): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));
     return obj;
   },
 
   fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   },
@@ -242,7 +242,7 @@ export const Explain_ExprStep = {
 
   fromSDKJSON(object: any): Explain_ExprStepSDKType {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       value_index: isSet(object.value_index) ? Number(object.value_index) : 0
     };
   },

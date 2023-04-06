@@ -4,7 +4,6 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
 import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
@@ -217,7 +216,7 @@ export const AminoConverter = {
         version,
         deposit: {
           denom: deposit.denom,
-          amount: Long.fromValue(deposit.amount).toString()
+          amount: deposit.amount
         },
         depositor
       };
@@ -232,7 +231,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         groups: groups.map(el0 => ({
           name: el0.name,
@@ -311,7 +310,7 @@ export const AminoConverter = {
         },
         amount: {
           denom: amount.denom,
-          amount: Long.fromValue(amount.amount).toString()
+          amount: amount.amount
         },
         depositor
       };
@@ -324,7 +323,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         amount: {
           denom: amount.denom,
@@ -355,7 +354,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         },
         version
       };
@@ -379,7 +378,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq)
+          dseq: BigInt(id.dseq)
         }
       };
     }
@@ -403,7 +402,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -428,7 +427,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -453,7 +452,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: Long.fromString(id.dseq),
+          dseq: BigInt(id.dseq),
           gseq: id.gseq
         }
       };

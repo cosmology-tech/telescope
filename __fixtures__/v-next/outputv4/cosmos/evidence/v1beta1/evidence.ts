@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
@@ -8,9 +8,9 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  * signing misbehavior.
  */
 export interface Equivocation {
-  height: Long;
+  height: bigint;
   time?: Date;
-  power: Long;
+  power: bigint;
   consensusAddress: string;
 }
 
@@ -19,33 +19,33 @@ export interface Equivocation {
  * signing misbehavior.
  */
 export interface EquivocationSDKType {
-  height: Long;
+  height: bigint;
   time?: Date;
-  power: Long;
+  power: bigint;
   consensus_address: string;
 }
 
 function createBaseEquivocation(): Equivocation {
   return {
-    height: Long.ZERO,
+    height: BigInt("0"),
     time: undefined,
-    power: Long.ZERO,
+    power: BigInt("0"),
     consensusAddress: ""
   };
 }
 
 export const Equivocation = {
   encode(message: Equivocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.power.isZero()) {
-      writer.uint32(24).int64(message.power);
+    if (message.power !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.power.toString()));
     }
 
     if (message.consensusAddress !== "") {
@@ -65,7 +65,7 @@ export const Equivocation = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -73,7 +73,7 @@ export const Equivocation = {
           break;
 
         case 3:
-          message.power = (reader.int64() as Long);
+          message.power = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -91,27 +91,27 @@ export const Equivocation = {
 
   fromJSON(object: any): Equivocation {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0"),
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
   },
 
   toJSON(message: Equivocation): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
     message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
 
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.time = object.time ?? undefined;
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
   },
@@ -127,9 +127,9 @@ export const Equivocation = {
 
   fromSDKJSON(object: any): EquivocationSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0"),
       consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
     };
   },

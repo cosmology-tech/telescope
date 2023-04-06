@@ -284,13 +284,13 @@ export interface RequestFlush {}
 export interface RequestFlushSDKType {}
 export interface RequestInfo {
   version: string;
-  blockVersion: Long;
-  p2pVersion: Long;
+  blockVersion: bigint;
+  p2pVersion: bigint;
 }
 export interface RequestInfoSDKType {
   version: string;
-  block_version: Long;
-  p2p_version: Long;
+  block_version: bigint;
+  p2p_version: bigint;
 }
 
 /** nondeterministic */
@@ -310,7 +310,7 @@ export interface RequestInitChain {
   consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
   appStateBytes: Uint8Array;
-  initialHeight: Long;
+  initialHeight: bigint;
 }
 export interface RequestInitChainSDKType {
   time?: Date;
@@ -318,18 +318,18 @@ export interface RequestInitChainSDKType {
   consensus_params?: ConsensusParamsSDKType;
   validators: ValidatorUpdateSDKType[];
   app_state_bytes: Uint8Array;
-  initial_height: Long;
+  initial_height: bigint;
 }
 export interface RequestQuery {
   data: Uint8Array;
   path: string;
-  height: Long;
+  height: bigint;
   prove: boolean;
 }
 export interface RequestQuerySDKType {
   data: Uint8Array;
   path: string;
-  height: Long;
+  height: bigint;
   prove: boolean;
 }
 export interface RequestBeginBlock {
@@ -359,10 +359,10 @@ export interface RequestDeliverTxSDKType {
   tx: Uint8Array;
 }
 export interface RequestEndBlock {
-  height: Long;
+  height: bigint;
 }
 export interface RequestEndBlockSDKType {
-  height: Long;
+  height: bigint;
 }
 export interface RequestCommit {}
 export interface RequestCommitSDKType {}
@@ -390,14 +390,14 @@ export interface RequestOfferSnapshotSDKType {
 
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunk {
-  height: Long;
+  height: bigint;
   format: number;
   chunk: number;
 }
 
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunkSDKType {
-  height: Long;
+  height: bigint;
   format: number;
   chunk: number;
 }
@@ -472,15 +472,15 @@ export interface ResponseFlushSDKType {}
 export interface ResponseInfo {
   data: string;
   version: string;
-  appVersion: Long;
-  lastBlockHeight: Long;
+  appVersion: bigint;
+  lastBlockHeight: bigint;
   lastBlockAppHash: Uint8Array;
 }
 export interface ResponseInfoSDKType {
   data: string;
   version: string;
-  app_version: Long;
-  last_block_height: Long;
+  app_version: bigint;
+  last_block_height: bigint;
   last_block_app_hash: Uint8Array;
 }
 
@@ -517,22 +517,22 @@ export interface ResponseQuery {
 
   /** nondeterministic */
   info: string;
-  index: Long;
+  index: bigint;
   key: Uint8Array;
   value: Uint8Array;
   proofOps?: ProofOps;
-  height: Long;
+  height: bigint;
   codespace: string;
 }
 export interface ResponseQuerySDKType {
   code: number;
   log: string;
   info: string;
-  index: Long;
+  index: bigint;
   key: Uint8Array;
   value: Uint8Array;
   proof_ops?: ProofOpsSDKType;
-  height: Long;
+  height: bigint;
   codespace: string;
 }
 export interface ResponseBeginBlock {
@@ -550,8 +550,8 @@ export interface ResponseCheckTx {
 
   /** nondeterministic */
   info: string;
-  gasWanted: Long;
-  gasUsed: Long;
+  gasWanted: bigint;
+  gasUsed: bigint;
   events: Event[];
   codespace: string;
 }
@@ -560,8 +560,8 @@ export interface ResponseCheckTxSDKType {
   data: Uint8Array;
   log: string;
   info: string;
-  gas_wanted: Long;
-  gas_used: Long;
+  gas_wanted: bigint;
+  gas_used: bigint;
   events: EventSDKType[];
   codespace: string;
 }
@@ -574,8 +574,8 @@ export interface ResponseDeliverTx {
 
   /** nondeterministic */
   info: string;
-  gasWanted: Long;
-  gasUsed: Long;
+  gasWanted: bigint;
+  gasUsed: bigint;
   events: Event[];
   codespace: string;
 }
@@ -584,8 +584,8 @@ export interface ResponseDeliverTxSDKType {
   data: Uint8Array;
   log: string;
   info: string;
-  gas_wanted: Long;
-  gas_used: Long;
+  gas_wanted: bigint;
+  gas_used: bigint;
   events: EventSDKType[];
   codespace: string;
 }
@@ -602,11 +602,11 @@ export interface ResponseEndBlockSDKType {
 export interface ResponseCommit {
   /** reserve 1 */
   data: Uint8Array;
-  retainHeight: Long;
+  retainHeight: bigint;
 }
 export interface ResponseCommitSDKType {
   data: Uint8Array;
-  retain_height: Long;
+  retain_height: bigint;
 }
 export interface ResponseListSnapshots {
   snapshots: Snapshot[];
@@ -666,16 +666,16 @@ export interface ConsensusParamsSDKType {
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
   /** Note: must be greater than 0 */
-  maxBytes: Long;
+  maxBytes: bigint;
 
   /** Note: must be greater or equal to -1 */
-  maxGas: Long;
+  maxGas: bigint;
 }
 
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
-  max_bytes: Long;
-  max_gas: Long;
+  max_bytes: bigint;
+  max_gas: bigint;
 }
 export interface LastCommitInfo {
   round: number;
@@ -728,7 +728,7 @@ export interface EventAttributeSDKType {
  * One usage is indexing transaction results.
  */
 export interface TxResult {
-  height: Long;
+  height: bigint;
   index: number;
   tx: Uint8Array;
   result?: ResponseDeliverTx;
@@ -740,7 +740,7 @@ export interface TxResult {
  * One usage is indexing transaction results.
  */
 export interface TxResultSDKType {
-  height: Long;
+  height: bigint;
   index: number;
   tx: Uint8Array;
   result?: ResponseDeliverTxSDKType;
@@ -755,25 +755,25 @@ export interface Validator {
   address: Uint8Array;
 
   /** The voting power */
-  power: Long;
+  power: bigint;
 }
 
 /** Validator */
 export interface ValidatorSDKType {
   address: Uint8Array;
-  power: Long;
+  power: bigint;
 }
 
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
   pubKey?: PublicKey;
-  power: Long;
+  power: bigint;
 }
 
 /** ValidatorUpdate */
 export interface ValidatorUpdateSDKType {
   pub_key?: PublicKeySDKType;
-  power: Long;
+  power: bigint;
 }
 
 /** VoteInfo */
@@ -794,7 +794,7 @@ export interface Evidence {
   validator?: Validator;
 
   /** The height when the offense occurred */
-  height: Long;
+  height: bigint;
 
   /** The corresponding time where the offense occurred */
   time?: Date;
@@ -804,18 +804,18 @@ export interface Evidence {
    * not store historical validators.
    * https://github.com/tendermint/tendermint/issues/4581
    */
-  totalVotingPower: Long;
+  totalVotingPower: bigint;
 }
 export interface EvidenceSDKType {
   type: EvidenceType;
   validator?: ValidatorSDKType;
-  height: Long;
+  height: bigint;
   time?: Date;
-  total_voting_power: Long;
+  total_voting_power: bigint;
 }
 export interface Snapshot {
   /** The height at which the snapshot was taken */
-  height: Long;
+  height: bigint;
 
   /** The application-specific snapshot format */
   format: number;
@@ -830,7 +830,7 @@ export interface Snapshot {
   metadata: Uint8Array;
 }
 export interface SnapshotSDKType {
-  height: Long;
+  height: bigint;
   format: number;
   chunks: number;
   hash: Uint8Array;
@@ -1256,8 +1256,8 @@ export const RequestFlush = {
 function createBaseRequestInfo(): RequestInfo {
   return {
     version: "",
-    blockVersion: Long.UZERO,
-    p2pVersion: Long.UZERO
+    blockVersion: BigInt("0"),
+    p2pVersion: BigInt("0")
   };
 }
 
@@ -1267,12 +1267,12 @@ export const RequestInfo = {
       writer.uint32(10).string(message.version);
     }
 
-    if (!message.blockVersion.isZero()) {
-      writer.uint32(16).uint64(message.blockVersion);
+    if (message.blockVersion !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.blockVersion.toString()));
     }
 
-    if (!message.p2pVersion.isZero()) {
-      writer.uint32(24).uint64(message.p2pVersion);
+    if (message.p2pVersion !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.p2pVersion.toString()));
     }
 
     return writer;
@@ -1292,11 +1292,11 @@ export const RequestInfo = {
           break;
 
         case 2:
-          message.blockVersion = (reader.uint64() as Long);
+          message.blockVersion = BigInt(reader.uint64().toString());
           break;
 
         case 3:
-          message.p2pVersion = (reader.uint64() as Long);
+          message.p2pVersion = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -1311,24 +1311,24 @@ export const RequestInfo = {
   fromJSON(object: any): RequestInfo {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      blockVersion: isSet(object.blockVersion) ? Long.fromValue(object.blockVersion) : Long.UZERO,
-      p2pVersion: isSet(object.p2pVersion) ? Long.fromValue(object.p2pVersion) : Long.UZERO
+      blockVersion: isSet(object.blockVersion) ? BigInt(object.blockVersion.toString()) : BigInt("0"),
+      p2pVersion: isSet(object.p2pVersion) ? BigInt(object.p2pVersion.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || Long.UZERO).toString());
-    message.p2pVersion !== undefined && (obj.p2pVersion = (message.p2pVersion || Long.UZERO).toString());
+    message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || BigInt("0")).toString());
+    message.p2pVersion !== undefined && (obj.p2pVersion = (message.p2pVersion || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
-    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? Long.fromValue(object.blockVersion) : Long.UZERO;
-    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? Long.fromValue(object.p2pVersion) : Long.UZERO;
+    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? BigInt(object.blockVersion.toString()) : BigInt("0");
+    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? BigInt(object.p2pVersion.toString()) : BigInt("0");
     return message;
   },
 
@@ -1343,8 +1343,8 @@ export const RequestInfo = {
   fromSDKJSON(object: any): RequestInfoSDKType {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      block_version: isSet(object.block_version) ? Long.fromValue(object.block_version) : Long.UZERO,
-      p2p_version: isSet(object.p2p_version) ? Long.fromValue(object.p2p_version) : Long.UZERO
+      block_version: isSet(object.block_version) ? BigInt(object.block_version.toString()) : BigInt("0"),
+      p2p_version: isSet(object.p2p_version) ? BigInt(object.p2p_version.toString()) : BigInt("0")
     };
   },
 
@@ -1455,7 +1455,7 @@ function createBaseRequestInitChain(): RequestInitChain {
     consensusParams: undefined,
     validators: [],
     appStateBytes: new Uint8Array(),
-    initialHeight: Long.ZERO
+    initialHeight: BigInt("0")
   };
 }
 
@@ -1481,8 +1481,8 @@ export const RequestInitChain = {
       writer.uint32(42).bytes(message.appStateBytes);
     }
 
-    if (!message.initialHeight.isZero()) {
-      writer.uint32(48).int64(message.initialHeight);
+    if (message.initialHeight !== BigInt(0)) {
+      writer.uint32(48).int64(Long.fromString(message.initialHeight.toString()));
     }
 
     return writer;
@@ -1518,7 +1518,7 @@ export const RequestInitChain = {
           break;
 
         case 6:
-          message.initialHeight = (reader.int64() as Long);
+          message.initialHeight = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -1537,7 +1537,7 @@ export const RequestInitChain = {
       consensusParams: isSet(object.consensusParams) ? ConsensusParams.fromJSON(object.consensusParams) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromJSON(e)) : [],
       appStateBytes: isSet(object.appStateBytes) ? bytesFromBase64(object.appStateBytes) : new Uint8Array(),
-      initialHeight: isSet(object.initialHeight) ? Long.fromValue(object.initialHeight) : Long.ZERO
+      initialHeight: isSet(object.initialHeight) ? BigInt(object.initialHeight.toString()) : BigInt("0")
     };
   },
 
@@ -1554,7 +1554,7 @@ export const RequestInitChain = {
     }
 
     message.appStateBytes !== undefined && (obj.appStateBytes = base64FromBytes(message.appStateBytes !== undefined ? message.appStateBytes : new Uint8Array()));
-    message.initialHeight !== undefined && (obj.initialHeight = (message.initialHeight || Long.ZERO).toString());
+    message.initialHeight !== undefined && (obj.initialHeight = (message.initialHeight || BigInt("0")).toString());
     return obj;
   },
 
@@ -1565,7 +1565,7 @@ export const RequestInitChain = {
     message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : undefined;
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
-    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? Long.fromValue(object.initialHeight) : Long.ZERO;
+    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? BigInt(object.initialHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -1587,7 +1587,7 @@ export const RequestInitChain = {
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
       app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
-      initial_height: isSet(object.initial_height) ? Long.fromValue(object.initial_height) : Long.ZERO
+      initial_height: isSet(object.initial_height) ? BigInt(object.initial_height.toString()) : BigInt("0")
     };
   },
 
@@ -1614,7 +1614,7 @@ function createBaseRequestQuery(): RequestQuery {
   return {
     data: new Uint8Array(),
     path: "",
-    height: Long.ZERO,
+    height: BigInt("0"),
     prove: false
   };
 }
@@ -1629,8 +1629,8 @@ export const RequestQuery = {
       writer.uint32(18).string(message.path);
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(24).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.prove === true) {
@@ -1658,7 +1658,7 @@ export const RequestQuery = {
           break;
 
         case 3:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -1678,7 +1678,7 @@ export const RequestQuery = {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       prove: isSet(object.prove) ? Boolean(object.prove) : false
     };
   },
@@ -1687,7 +1687,7 @@ export const RequestQuery = {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.prove !== undefined && (obj.prove = message.prove);
     return obj;
   },
@@ -1696,7 +1696,7 @@ export const RequestQuery = {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.prove = object.prove ?? false;
     return message;
   },
@@ -1714,7 +1714,7 @@ export const RequestQuery = {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       prove: isSet(object.prove) ? Boolean(object.prove) : false
     };
   },
@@ -2029,14 +2029,14 @@ export const RequestDeliverTx = {
 
 function createBaseRequestEndBlock(): RequestEndBlock {
   return {
-    height: Long.ZERO
+    height: BigInt("0")
   };
 }
 
 export const RequestEndBlock = {
   encode(message: RequestEndBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.height.toString()));
     }
 
     return writer;
@@ -2052,7 +2052,7 @@ export const RequestEndBlock = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -2066,19 +2066,19 @@ export const RequestEndBlock = {
 
   fromJSON(object: any): RequestEndBlock {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: RequestEndBlock): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     return message;
   },
 
@@ -2090,7 +2090,7 @@ export const RequestEndBlock = {
 
   fromSDKJSON(object: any): RequestEndBlockSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
     };
   },
 
@@ -2306,7 +2306,7 @@ export const RequestOfferSnapshot = {
 
 function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
   return {
-    height: Long.UZERO,
+    height: BigInt("0"),
     format: 0,
     chunk: 0
   };
@@ -2314,8 +2314,8 @@ function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
 
 export const RequestLoadSnapshotChunk = {
   encode(message: RequestLoadSnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).uint64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.height.toString()));
     }
 
     if (message.format !== 0) {
@@ -2339,7 +2339,7 @@ export const RequestLoadSnapshotChunk = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.uint64() as Long);
+          message.height = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -2361,7 +2361,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromJSON(object: any): RequestLoadSnapshotChunk {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunk: isSet(object.chunk) ? Number(object.chunk) : 0
     };
@@ -2369,7 +2369,7 @@ export const RequestLoadSnapshotChunk = {
 
   toJSON(message: RequestLoadSnapshotChunk): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunk !== undefined && (obj.chunk = Math.round(message.chunk));
     return obj;
@@ -2377,7 +2377,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
@@ -2393,7 +2393,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunk: isSet(object.chunk) ? Number(object.chunk) : 0
     };
@@ -3024,8 +3024,8 @@ function createBaseResponseInfo(): ResponseInfo {
   return {
     data: "",
     version: "",
-    appVersion: Long.UZERO,
-    lastBlockHeight: Long.ZERO,
+    appVersion: BigInt("0"),
+    lastBlockHeight: BigInt("0"),
     lastBlockAppHash: new Uint8Array()
   };
 }
@@ -3040,12 +3040,12 @@ export const ResponseInfo = {
       writer.uint32(18).string(message.version);
     }
 
-    if (!message.appVersion.isZero()) {
-      writer.uint32(24).uint64(message.appVersion);
+    if (message.appVersion !== BigInt(0)) {
+      writer.uint32(24).uint64(Long.fromString(message.appVersion.toString()));
     }
 
-    if (!message.lastBlockHeight.isZero()) {
-      writer.uint32(32).int64(message.lastBlockHeight);
+    if (message.lastBlockHeight !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.lastBlockHeight.toString()));
     }
 
     if (message.lastBlockAppHash.length !== 0) {
@@ -3073,11 +3073,11 @@ export const ResponseInfo = {
           break;
 
         case 3:
-          message.appVersion = (reader.uint64() as Long);
+          message.appVersion = BigInt(reader.uint64().toString());
           break;
 
         case 4:
-          message.lastBlockHeight = (reader.int64() as Long);
+          message.lastBlockHeight = BigInt(reader.int64().toString());
           break;
 
         case 5:
@@ -3097,8 +3097,8 @@ export const ResponseInfo = {
     return {
       data: isSet(object.data) ? String(object.data) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      appVersion: isSet(object.appVersion) ? Long.fromValue(object.appVersion) : Long.UZERO,
-      lastBlockHeight: isSet(object.lastBlockHeight) ? Long.fromValue(object.lastBlockHeight) : Long.ZERO,
+      appVersion: isSet(object.appVersion) ? BigInt(object.appVersion.toString()) : BigInt("0"),
+      lastBlockHeight: isSet(object.lastBlockHeight) ? BigInt(object.lastBlockHeight.toString()) : BigInt("0"),
       lastBlockAppHash: isSet(object.lastBlockAppHash) ? bytesFromBase64(object.lastBlockAppHash) : new Uint8Array()
     };
   },
@@ -3107,8 +3107,8 @@ export const ResponseInfo = {
     const obj: any = {};
     message.data !== undefined && (obj.data = message.data);
     message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || Long.UZERO).toString());
-    message.lastBlockHeight !== undefined && (obj.lastBlockHeight = (message.lastBlockHeight || Long.ZERO).toString());
+    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || BigInt("0")).toString());
+    message.lastBlockHeight !== undefined && (obj.lastBlockHeight = (message.lastBlockHeight || BigInt("0")).toString());
     message.lastBlockAppHash !== undefined && (obj.lastBlockAppHash = base64FromBytes(message.lastBlockAppHash !== undefined ? message.lastBlockAppHash : new Uint8Array()));
     return obj;
   },
@@ -3117,8 +3117,8 @@ export const ResponseInfo = {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
     message.version = object.version ?? "";
-    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? Long.fromValue(object.appVersion) : Long.UZERO;
-    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? Long.fromValue(object.lastBlockHeight) : Long.ZERO;
+    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? BigInt(object.appVersion.toString()) : BigInt("0");
+    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? BigInt(object.lastBlockHeight.toString()) : BigInt("0");
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
   },
@@ -3137,8 +3137,8 @@ export const ResponseInfo = {
     return {
       data: isSet(object.data) ? String(object.data) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO,
-      last_block_height: isSet(object.last_block_height) ? Long.fromValue(object.last_block_height) : Long.ZERO,
+      app_version: isSet(object.app_version) ? BigInt(object.app_version.toString()) : BigInt("0"),
+      last_block_height: isSet(object.last_block_height) ? BigInt(object.last_block_height.toString()) : BigInt("0"),
       last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
     };
   },
@@ -3382,11 +3382,11 @@ function createBaseResponseQuery(): ResponseQuery {
     code: 0,
     log: "",
     info: "",
-    index: Long.ZERO,
+    index: BigInt("0"),
     key: new Uint8Array(),
     value: new Uint8Array(),
     proofOps: undefined,
-    height: Long.ZERO,
+    height: BigInt("0"),
     codespace: ""
   };
 }
@@ -3405,8 +3405,8 @@ export const ResponseQuery = {
       writer.uint32(34).string(message.info);
     }
 
-    if (!message.index.isZero()) {
-      writer.uint32(40).int64(message.index);
+    if (message.index !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.index.toString()));
     }
 
     if (message.key.length !== 0) {
@@ -3421,8 +3421,8 @@ export const ResponseQuery = {
       ProofOps.encode(message.proofOps, writer.uint32(66).fork()).ldelim();
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(72).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(72).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.codespace !== "") {
@@ -3454,7 +3454,7 @@ export const ResponseQuery = {
           break;
 
         case 5:
-          message.index = (reader.int64() as Long);
+          message.index = BigInt(reader.int64().toString());
           break;
 
         case 6:
@@ -3470,7 +3470,7 @@ export const ResponseQuery = {
           break;
 
         case 9:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 10:
@@ -3491,11 +3491,11 @@ export const ResponseQuery = {
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       proofOps: isSet(object.proofOps) ? ProofOps.fromJSON(object.proofOps) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
   },
@@ -3505,11 +3505,11 @@ export const ResponseQuery = {
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     message.proofOps !== undefined && (obj.proofOps = message.proofOps ? ProofOps.toJSON(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.codespace !== undefined && (obj.codespace = message.codespace);
     return obj;
   },
@@ -3519,11 +3519,11 @@ export const ResponseQuery = {
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.codespace = object.codespace ?? "";
     return message;
   },
@@ -3547,11 +3547,11 @@ export const ResponseQuery = {
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
   },
@@ -3665,8 +3665,8 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
     data: new Uint8Array(),
     log: "",
     info: "",
-    gasWanted: Long.ZERO,
-    gasUsed: Long.ZERO,
+    gasWanted: BigInt("0"),
+    gasUsed: BigInt("0"),
     events: [],
     codespace: ""
   };
@@ -3690,12 +3690,12 @@ export const ResponseCheckTx = {
       writer.uint32(34).string(message.info);
     }
 
-    if (!message.gasWanted.isZero()) {
-      writer.uint32(40).int64(message.gasWanted);
+    if (message.gasWanted !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.gasWanted.toString()));
     }
 
-    if (!message.gasUsed.isZero()) {
-      writer.uint32(48).int64(message.gasUsed);
+    if (message.gasUsed !== BigInt(0)) {
+      writer.uint32(48).int64(Long.fromString(message.gasUsed.toString()));
     }
 
     for (const v of message.events) {
@@ -3735,11 +3735,11 @@ export const ResponseCheckTx = {
           break;
 
         case 5:
-          message.gasWanted = (reader.int64() as Long);
+          message.gasWanted = BigInt(reader.int64().toString());
           break;
 
         case 6:
-          message.gasUsed = (reader.int64() as Long);
+          message.gasUsed = BigInt(reader.int64().toString());
           break;
 
         case 7:
@@ -3765,8 +3765,8 @@ export const ResponseCheckTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gasUsed: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3778,8 +3778,8 @@ export const ResponseCheckTx = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || Long.ZERO).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || Long.ZERO).toString());
+    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt("0")).toString());
+    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt("0")).toString());
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -3797,8 +3797,8 @@ export const ResponseCheckTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
+    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt("0");
+    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt("0");
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -3823,8 +3823,8 @@ export const ResponseCheckTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3857,8 +3857,8 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
     data: new Uint8Array(),
     log: "",
     info: "",
-    gasWanted: Long.ZERO,
-    gasUsed: Long.ZERO,
+    gasWanted: BigInt("0"),
+    gasUsed: BigInt("0"),
     events: [],
     codespace: ""
   };
@@ -3882,12 +3882,12 @@ export const ResponseDeliverTx = {
       writer.uint32(34).string(message.info);
     }
 
-    if (!message.gasWanted.isZero()) {
-      writer.uint32(40).int64(message.gasWanted);
+    if (message.gasWanted !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.gasWanted.toString()));
     }
 
-    if (!message.gasUsed.isZero()) {
-      writer.uint32(48).int64(message.gasUsed);
+    if (message.gasUsed !== BigInt(0)) {
+      writer.uint32(48).int64(Long.fromString(message.gasUsed.toString()));
     }
 
     for (const v of message.events) {
@@ -3927,11 +3927,11 @@ export const ResponseDeliverTx = {
           break;
 
         case 5:
-          message.gasWanted = (reader.int64() as Long);
+          message.gasWanted = BigInt(reader.int64().toString());
           break;
 
         case 6:
-          message.gasUsed = (reader.int64() as Long);
+          message.gasUsed = BigInt(reader.int64().toString());
           break;
 
         case 7:
@@ -3957,8 +3957,8 @@ export const ResponseDeliverTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gasUsed: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      gasWanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gasUsed: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -3970,8 +3970,8 @@ export const ResponseDeliverTx = {
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || Long.ZERO).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || Long.ZERO).toString());
+    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt("0")).toString());
+    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt("0")).toString());
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -3989,8 +3989,8 @@ export const ResponseDeliverTx = {
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.ZERO;
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.ZERO;
+    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt("0");
+    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt("0");
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
@@ -4015,8 +4015,8 @@ export const ResponseDeliverTx = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
-      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt("0"),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt("0"),
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
@@ -4175,7 +4175,7 @@ export const ResponseEndBlock = {
 function createBaseResponseCommit(): ResponseCommit {
   return {
     data: new Uint8Array(),
-    retainHeight: Long.ZERO
+    retainHeight: BigInt("0")
   };
 }
 
@@ -4185,8 +4185,8 @@ export const ResponseCommit = {
       writer.uint32(18).bytes(message.data);
     }
 
-    if (!message.retainHeight.isZero()) {
-      writer.uint32(24).int64(message.retainHeight);
+    if (message.retainHeight !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.retainHeight.toString()));
     }
 
     return writer;
@@ -4206,7 +4206,7 @@ export const ResponseCommit = {
           break;
 
         case 3:
-          message.retainHeight = (reader.int64() as Long);
+          message.retainHeight = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -4221,21 +4221,21 @@ export const ResponseCommit = {
   fromJSON(object: any): ResponseCommit {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retainHeight: isSet(object.retainHeight) ? Long.fromValue(object.retainHeight) : Long.ZERO
+      retainHeight: isSet(object.retainHeight) ? BigInt(object.retainHeight.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: ResponseCommit): unknown {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || Long.ZERO).toString());
+    message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
-    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? Long.fromValue(object.retainHeight) : Long.ZERO;
+    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? BigInt(object.retainHeight.toString()) : BigInt("0");
     return message;
   },
 
@@ -4249,7 +4249,7 @@ export const ResponseCommit = {
   fromSDKJSON(object: any): ResponseCommitSDKType {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      retain_height: isSet(object.retain_height) ? Long.fromValue(object.retain_height) : Long.ZERO
+      retain_height: isSet(object.retain_height) ? BigInt(object.retain_height.toString()) : BigInt("0")
     };
   },
 
@@ -4761,19 +4761,19 @@ export const ConsensusParams = {
 
 function createBaseBlockParams(): BlockParams {
   return {
-    maxBytes: Long.ZERO,
-    maxGas: Long.ZERO
+    maxBytes: BigInt("0"),
+    maxGas: BigInt("0")
   };
 }
 
 export const BlockParams = {
   encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.maxBytes.isZero()) {
-      writer.uint32(8).int64(message.maxBytes);
+    if (message.maxBytes !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.maxBytes.toString()));
     }
 
-    if (!message.maxGas.isZero()) {
-      writer.uint32(16).int64(message.maxGas);
+    if (message.maxGas !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.maxGas.toString()));
     }
 
     return writer;
@@ -4789,11 +4789,11 @@ export const BlockParams = {
 
       switch (tag >>> 3) {
         case 1:
-          message.maxBytes = (reader.int64() as Long);
+          message.maxBytes = BigInt(reader.int64().toString());
           break;
 
         case 2:
-          message.maxGas = (reader.int64() as Long);
+          message.maxGas = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -4807,22 +4807,22 @@ export const BlockParams = {
 
   fromJSON(object: any): BlockParams {
     return {
-      maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO,
-      maxGas: isSet(object.maxGas) ? Long.fromValue(object.maxGas) : Long.ZERO
+      maxBytes: isSet(object.maxBytes) ? BigInt(object.maxBytes.toString()) : BigInt("0"),
+      maxGas: isSet(object.maxGas) ? BigInt(object.maxGas.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
-    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || Long.ZERO).toString());
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || BigInt("0")).toString());
+    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? Long.fromValue(object.maxBytes) : Long.ZERO;
-    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? Long.fromValue(object.maxGas) : Long.ZERO;
+    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? BigInt(object.maxBytes.toString()) : BigInt("0");
+    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? BigInt(object.maxGas.toString()) : BigInt("0");
     return message;
   },
 
@@ -4835,8 +4835,8 @@ export const BlockParams = {
 
   fromSDKJSON(object: any): BlockParamsSDKType {
     return {
-      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
-      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO
+      max_bytes: isSet(object.max_bytes) ? BigInt(object.max_bytes.toString()) : BigInt("0"),
+      max_gas: isSet(object.max_gas) ? BigInt(object.max_gas.toString()) : BigInt("0")
     };
   },
 
@@ -5160,7 +5160,7 @@ export const EventAttribute = {
 
 function createBaseTxResult(): TxResult {
   return {
-    height: Long.ZERO,
+    height: BigInt("0"),
     index: 0,
     tx: new Uint8Array(),
     result: undefined
@@ -5169,8 +5169,8 @@ function createBaseTxResult(): TxResult {
 
 export const TxResult = {
   encode(message: TxResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.index !== 0) {
@@ -5198,7 +5198,7 @@ export const TxResult = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -5224,7 +5224,7 @@ export const TxResult = {
 
   fromJSON(object: any): TxResult {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       index: isSet(object.index) ? Number(object.index) : 0,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
       result: isSet(object.result) ? ResponseDeliverTx.fromJSON(object.result) : undefined
@@ -5233,7 +5233,7 @@ export const TxResult = {
 
   toJSON(message: TxResult): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.index !== undefined && (obj.index = Math.round(message.index));
     message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
     message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toJSON(message.result) : undefined);
@@ -5242,7 +5242,7 @@ export const TxResult = {
 
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.index = object.index ?? 0;
     message.tx = object.tx ?? new Uint8Array();
     message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : undefined;
@@ -5260,7 +5260,7 @@ export const TxResult = {
 
   fromSDKJSON(object: any): TxResultSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       index: isSet(object.index) ? Number(object.index) : 0,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
       result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
@@ -5281,7 +5281,7 @@ export const TxResult = {
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
-    power: Long.ZERO
+    power: BigInt("0")
   };
 }
 
@@ -5291,8 +5291,8 @@ export const Validator = {
       writer.uint32(10).bytes(message.address);
     }
 
-    if (!message.power.isZero()) {
-      writer.uint32(24).int64(message.power);
+    if (message.power !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.power.toString()));
     }
 
     return writer;
@@ -5312,7 +5312,7 @@ export const Validator = {
           break;
 
         case 3:
-          message.power = (reader.int64() as Long);
+          message.power = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -5327,21 +5327,21 @@ export const Validator = {
   fromJSON(object: any): Validator {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
-    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -5355,7 +5355,7 @@ export const Validator = {
   fromSDKJSON(object: any): ValidatorSDKType {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5371,7 +5371,7 @@ export const Validator = {
 function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
     pubKey: undefined,
-    power: Long.ZERO
+    power: BigInt("0")
   };
 }
 
@@ -5381,8 +5381,8 @@ export const ValidatorUpdate = {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
 
-    if (!message.power.isZero()) {
-      writer.uint32(16).int64(message.power);
+    if (message.power !== BigInt(0)) {
+      writer.uint32(16).int64(Long.fromString(message.power.toString()));
     }
 
     return writer;
@@ -5402,7 +5402,7 @@ export const ValidatorUpdate = {
           break;
 
         case 2:
-          message.power = (reader.int64() as Long);
+          message.power = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -5417,21 +5417,21 @@ export const ValidatorUpdate = {
   fromJSON(object: any): ValidatorUpdate {
     return {
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: ValidatorUpdate): unknown {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
     return message;
   },
 
@@ -5445,7 +5445,7 @@ export const ValidatorUpdate = {
   fromSDKJSON(object: any): ValidatorUpdateSDKType {
     return {
       pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
     };
   },
 
@@ -5552,9 +5552,9 @@ function createBaseEvidence(): Evidence {
   return {
     type: 0,
     validator: undefined,
-    height: Long.ZERO,
+    height: BigInt("0"),
     time: undefined,
-    totalVotingPower: Long.ZERO
+    totalVotingPower: BigInt("0")
   };
 }
 
@@ -5568,16 +5568,16 @@ export const Evidence = {
       Validator.encode(message.validator, writer.uint32(18).fork()).ldelim();
     }
 
-    if (!message.height.isZero()) {
-      writer.uint32(24).int64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.height.toString()));
     }
 
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
     }
 
-    if (!message.totalVotingPower.isZero()) {
-      writer.uint32(40).int64(message.totalVotingPower);
+    if (message.totalVotingPower !== BigInt(0)) {
+      writer.uint32(40).int64(Long.fromString(message.totalVotingPower.toString()));
     }
 
     return writer;
@@ -5601,7 +5601,7 @@ export const Evidence = {
           break;
 
         case 3:
-          message.height = (reader.int64() as Long);
+          message.height = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -5609,7 +5609,7 @@ export const Evidence = {
           break;
 
         case 5:
-          message.totalVotingPower = (reader.int64() as Long);
+          message.totalVotingPower = BigInt(reader.int64().toString());
           break;
 
         default:
@@ -5625,9 +5625,9 @@ export const Evidence = {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? Long.fromValue(object.totalVotingPower) : Long.ZERO
+      totalVotingPower: isSet(object.totalVotingPower) ? BigInt(object.totalVotingPower.toString()) : BigInt("0")
     };
   },
 
@@ -5635,9 +5635,9 @@ export const Evidence = {
     const obj: any = {};
     message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || Long.ZERO).toString());
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt("0")).toString());
     return obj;
   },
 
@@ -5645,9 +5645,9 @@ export const Evidence = {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.time = object.time ?? undefined;
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
+    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt("0");
     return message;
   },
 
@@ -5665,9 +5665,9 @@ export const Evidence = {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt("0")
     };
   },
 
@@ -5685,7 +5685,7 @@ export const Evidence = {
 
 function createBaseSnapshot(): Snapshot {
   return {
-    height: Long.UZERO,
+    height: BigInt("0"),
     format: 0,
     chunks: 0,
     hash: new Uint8Array(),
@@ -5695,8 +5695,8 @@ function createBaseSnapshot(): Snapshot {
 
 export const Snapshot = {
   encode(message: Snapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
-      writer.uint32(8).uint64(message.height);
+    if (message.height !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.height.toString()));
     }
 
     if (message.format !== 0) {
@@ -5728,7 +5728,7 @@ export const Snapshot = {
 
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.uint64() as Long);
+          message.height = BigInt(reader.uint64().toString());
           break;
 
         case 2:
@@ -5758,7 +5758,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -5768,7 +5768,7 @@ export const Snapshot = {
 
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
     message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
@@ -5778,7 +5778,7 @@ export const Snapshot = {
 
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.UZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
@@ -5798,7 +5798,7 @@ export const Snapshot = {
 
   fromSDKJSON(object: any): SnapshotSDKType {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),

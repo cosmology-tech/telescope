@@ -6,8 +6,8 @@ import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPoo
 import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
+import { Long, DeepPartial, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /** Params holds parameters for the incentives module */

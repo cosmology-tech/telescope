@@ -1,6 +1,6 @@
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 
 /**
@@ -96,7 +96,7 @@ export interface ConnectionEnd {
    * packet-verification NOTE: delay period logic is only implemented by some
    * clients.
    */
-  delayPeriod: Long;
+  delayPeriod: bigint;
 }
 
 /**
@@ -110,7 +110,7 @@ export interface ConnectionEndSDKType {
   versions: VersionSDKType[];
   state: State;
   counterparty?: CounterpartySDKType;
-  delay_period: Long;
+  delay_period: bigint;
 }
 
 /**
@@ -137,7 +137,7 @@ export interface IdentifiedConnection {
   counterparty?: Counterparty;
 
   /** delay period associated with this connection. */
-  delayPeriod: Long;
+  delayPeriod: bigint;
 }
 
 /**
@@ -150,7 +150,7 @@ export interface IdentifiedConnectionSDKType {
   versions: VersionSDKType[];
   state: State;
   counterparty?: CounterpartySDKType;
-  delay_period: Long;
+  delay_period: bigint;
 }
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
@@ -232,12 +232,12 @@ export interface Params {
    * largest amount of time that the chain might reasonably take to produce the next block under normal operating
    * conditions. A safe choice is 3-5x the expected time per block.
    */
-  maxExpectedTimePerBlock: Long;
+  maxExpectedTimePerBlock: bigint;
 }
 
 /** Params defines the set of Connection parameters. */
 export interface ParamsSDKType {
-  max_expected_time_per_block: Long;
+  max_expected_time_per_block: bigint;
 }
 
 function createBaseConnectionEnd(): ConnectionEnd {
@@ -246,7 +246,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
     versions: [],
     state: 0,
     counterparty: undefined,
-    delayPeriod: Long.UZERO
+    delayPeriod: BigInt("0")
   };
 }
 
@@ -268,8 +268,8 @@ export const ConnectionEnd = {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
 
-    if (!message.delayPeriod.isZero()) {
-      writer.uint32(40).uint64(message.delayPeriod);
+    if (message.delayPeriod !== BigInt(0)) {
+      writer.uint32(40).uint64(Long.fromString(message.delayPeriod.toString()));
     }
 
     return writer;
@@ -301,7 +301,7 @@ export const ConnectionEnd = {
           break;
 
         case 5:
-          message.delayPeriod = (reader.uint64() as Long);
+          message.delayPeriod = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -319,7 +319,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0")
     };
   },
 
@@ -335,7 +335,7 @@ export const ConnectionEnd = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
     return obj;
   },
 
@@ -345,7 +345,7 @@ export const ConnectionEnd = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
     return message;
   },
 
@@ -365,7 +365,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0")
     };
   },
 
@@ -394,7 +394,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
     versions: [],
     state: 0,
     counterparty: undefined,
-    delayPeriod: Long.UZERO
+    delayPeriod: BigInt("0")
   };
 }
 
@@ -420,8 +420,8 @@ export const IdentifiedConnection = {
       Counterparty.encode(message.counterparty, writer.uint32(42).fork()).ldelim();
     }
 
-    if (!message.delayPeriod.isZero()) {
-      writer.uint32(48).uint64(message.delayPeriod);
+    if (message.delayPeriod !== BigInt(0)) {
+      writer.uint32(48).uint64(Long.fromString(message.delayPeriod.toString()));
     }
 
     return writer;
@@ -457,7 +457,7 @@ export const IdentifiedConnection = {
           break;
 
         case 6:
-          message.delayPeriod = (reader.uint64() as Long);
+          message.delayPeriod = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -476,7 +476,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0")
     };
   },
 
@@ -493,7 +493,7 @@ export const IdentifiedConnection = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
     return obj;
   },
 
@@ -504,7 +504,7 @@ export const IdentifiedConnection = {
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
     return message;
   },
 
@@ -526,7 +526,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0")
     };
   },
 
@@ -947,14 +947,14 @@ export const Version = {
 
 function createBaseParams(): Params {
   return {
-    maxExpectedTimePerBlock: Long.UZERO
+    maxExpectedTimePerBlock: BigInt("0")
   };
 }
 
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.maxExpectedTimePerBlock.isZero()) {
-      writer.uint32(8).uint64(message.maxExpectedTimePerBlock);
+    if (message.maxExpectedTimePerBlock !== BigInt(0)) {
+      writer.uint32(8).uint64(Long.fromString(message.maxExpectedTimePerBlock.toString()));
     }
 
     return writer;
@@ -970,7 +970,7 @@ export const Params = {
 
       switch (tag >>> 3) {
         case 1:
-          message.maxExpectedTimePerBlock = (reader.uint64() as Long);
+          message.maxExpectedTimePerBlock = BigInt(reader.uint64().toString());
           break;
 
         default:
@@ -984,19 +984,19 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO
+      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? BigInt(object.maxExpectedTimePerBlock.toString()) : BigInt("0")
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || Long.UZERO).toString());
+    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || BigInt("0")).toString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO;
+    message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? BigInt(object.maxExpectedTimePerBlock.toString()) : BigInt("0");
     return message;
   },
 
@@ -1008,7 +1008,7 @@ export const Params = {
 
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? Long.fromValue(object.max_expected_time_per_block) : Long.UZERO
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? BigInt(object.max_expected_time_per_block.toString()) : BigInt("0")
     };
   },
 

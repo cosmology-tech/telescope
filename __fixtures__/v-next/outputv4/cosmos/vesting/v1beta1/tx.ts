@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Period, PeriodSDKType } from "./vesting";
-import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 
 /**
@@ -12,7 +12,7 @@ export interface MsgCreateVestingAccount {
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
-  endTime: Long;
+  endTime: bigint;
   delayed: boolean;
 }
 
@@ -24,7 +24,7 @@ export interface MsgCreateVestingAccountSDKType {
   from_address: string;
   to_address: string;
   amount: CoinSDKType[];
-  end_time: Long;
+  end_time: bigint;
   delayed: boolean;
 }
 
@@ -67,7 +67,7 @@ export interface MsgCreatePermanentLockedAccountResponseSDKType {}
 export interface MsgCreatePeriodicVestingAccount {
   fromAddress: string;
   toAddress: string;
-  startTime: Long;
+  startTime: bigint;
   vestingPeriods: Period[];
 }
 
@@ -78,7 +78,7 @@ export interface MsgCreatePeriodicVestingAccount {
 export interface MsgCreatePeriodicVestingAccountSDKType {
   from_address: string;
   to_address: string;
-  start_time: Long;
+  start_time: bigint;
   vesting_periods: PeriodSDKType[];
 }
 
@@ -99,7 +99,7 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
     fromAddress: "",
     toAddress: "",
     amount: [],
-    endTime: Long.ZERO,
+    endTime: BigInt("0"),
     delayed: false
   };
 }
@@ -118,8 +118,8 @@ export const MsgCreateVestingAccount = {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
-    if (!message.endTime.isZero()) {
-      writer.uint32(32).int64(message.endTime);
+    if (message.endTime !== BigInt(0)) {
+      writer.uint32(32).int64(Long.fromString(message.endTime.toString()));
     }
 
     if (message.delayed === true) {
@@ -151,7 +151,7 @@ export const MsgCreateVestingAccount = {
           break;
 
         case 4:
-          message.endTime = (reader.int64() as Long);
+          message.endTime = BigInt(reader.int64().toString());
           break;
 
         case 5:
@@ -172,7 +172,7 @@ export const MsgCreateVestingAccount = {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO,
+      endTime: isSet(object.endTime) ? BigInt(object.endTime.toString()) : BigInt("0"),
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -188,7 +188,7 @@ export const MsgCreateVestingAccount = {
       obj.amount = [];
     }
 
-    message.endTime !== undefined && (obj.endTime = (message.endTime || Long.ZERO).toString());
+    message.endTime !== undefined && (obj.endTime = (message.endTime || BigInt("0")).toString());
     message.delayed !== undefined && (obj.delayed = message.delayed);
     return obj;
   },
@@ -198,7 +198,7 @@ export const MsgCreateVestingAccount = {
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
+    message.endTime = object.endTime !== undefined && object.endTime !== null ? BigInt(object.endTime.toString()) : BigInt("0");
     message.delayed = object.delayed ?? false;
     return message;
   },
@@ -218,7 +218,7 @@ export const MsgCreateVestingAccount = {
       from_address: isSet(object.from_address) ? String(object.from_address) : "",
       to_address: isSet(object.to_address) ? String(object.to_address) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO,
+      end_time: isSet(object.end_time) ? BigInt(object.end_time.toString()) : BigInt("0"),
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -474,7 +474,7 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: Long.ZERO,
+    startTime: BigInt("0"),
     vestingPeriods: []
   };
 }
@@ -489,8 +489,8 @@ export const MsgCreatePeriodicVestingAccount = {
       writer.uint32(18).string(message.toAddress);
     }
 
-    if (!message.startTime.isZero()) {
-      writer.uint32(24).int64(message.startTime);
+    if (message.startTime !== BigInt(0)) {
+      writer.uint32(24).int64(Long.fromString(message.startTime.toString()));
     }
 
     for (const v of message.vestingPeriods) {
@@ -518,7 +518,7 @@ export const MsgCreatePeriodicVestingAccount = {
           break;
 
         case 3:
-          message.startTime = (reader.int64() as Long);
+          message.startTime = BigInt(reader.int64().toString());
           break;
 
         case 4:
@@ -538,7 +538,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? Long.fromValue(object.startTime) : Long.ZERO,
+      startTime: isSet(object.startTime) ? BigInt(object.startTime.toString()) : BigInt("0"),
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },
@@ -547,7 +547,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
+    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt("0")).toString());
 
     if (message.vestingPeriods) {
       obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
@@ -562,7 +562,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? BigInt(object.startTime.toString()) : BigInt("0");
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
   },
@@ -580,7 +580,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       from_address: isSet(object.from_address) ? String(object.from_address) : "",
       to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
+      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : BigInt("0"),
       vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
     };
   },

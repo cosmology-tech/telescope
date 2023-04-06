@@ -2,8 +2,8 @@ import { ParsedExpr, ParsedExprAmino, ParsedExprSDKType, SourcePosition, SourceP
 import { Decl, DeclAmino, DeclSDKType, CheckedExpr, CheckedExprAmino, CheckedExprSDKType } from "../../v1alpha1/checked";
 import { ExprValue, ExprValueAmino, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
+import { Long, isSet, DeepPartial, isObject } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject, Long } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 
 /** Severities of issues. */

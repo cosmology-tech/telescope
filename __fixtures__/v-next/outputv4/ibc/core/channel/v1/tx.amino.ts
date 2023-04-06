@@ -1,7 +1,7 @@
 import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, orderFromJSON } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault, Long } from "../../../../helpers";
+import { AminoHeight, omitDefault } from "../../../../helpers";
 import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx";
 export interface MsgChannelOpenInitAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenInit";
@@ -259,8 +259,8 @@ export const AminoConverter = {
         counterpartyVersion: counterparty_version,
         proofInit: proof_init,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -306,8 +306,8 @@ export const AminoConverter = {
         counterpartyVersion: counterparty_version,
         proofTry: proof_try,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -345,8 +345,8 @@ export const AminoConverter = {
         channelId: channel_id,
         proofAck: proof_ack,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -409,8 +409,8 @@ export const AminoConverter = {
         channelId: channel_id,
         proofInit: proof_init,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -454,22 +454,22 @@ export const AminoConverter = {
     }: MsgRecvPacketAminoType["value"]): MsgRecvPacket => {
       return {
         packet: {
-          sequence: Long.fromString(packet.sequence),
+          sequence: BigInt(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofCommitment: proof_commitment,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };
@@ -516,24 +516,24 @@ export const AminoConverter = {
     }: MsgTimeoutAminoType["value"]): MsgTimeout => {
       return {
         packet: {
-          sequence: Long.fromString(packet.sequence),
+          sequence: BigInt(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: Long.fromString(next_sequence_recv),
+        nextSequenceRecv: BigInt(next_sequence_recv),
         signer
       };
     }
@@ -582,25 +582,25 @@ export const AminoConverter = {
     }: MsgTimeoutOnCloseAminoType["value"]): MsgTimeoutOnClose => {
       return {
         packet: {
-          sequence: Long.fromString(packet.sequence),
+          sequence: BigInt(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofClose: proof_close,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: Long.fromString(next_sequence_recv),
+        nextSequenceRecv: BigInt(next_sequence_recv),
         signer
       };
     }
@@ -646,23 +646,23 @@ export const AminoConverter = {
     }: MsgAcknowledgementAminoType["value"]): MsgAcknowledgement => {
       return {
         packet: {
-          sequence: Long.fromString(packet.sequence),
+          sequence: BigInt(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         acknowledgement,
         proofAcked: proof_acked,
         proofHeight: proof_height ? {
-          revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
-          revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0", true),
+          revisionNumber: BigInt(proof_height.revision_number || "0", true)
         } : undefined,
         signer
       };

@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 
 /**
@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.base.store.v1beta1";
  * a version/height.
  */
 export interface CommitInfo {
-  version: Long;
+  version: bigint;
   storeInfos: StoreInfo[];
 }
 
@@ -16,7 +16,7 @@ export interface CommitInfo {
  * a version/height.
  */
 export interface CommitInfoSDKType {
-  version: Long;
+  version: bigint;
   store_infos: StoreInfoSDKType[];
 }
 
@@ -43,7 +43,7 @@ export interface StoreInfoSDKType {
  * committed.
  */
 export interface CommitID {
-  version: Long;
+  version: bigint;
   hash: Uint8Array;
 }
 
@@ -52,21 +52,21 @@ export interface CommitID {
  * committed.
  */
 export interface CommitIDSDKType {
-  version: Long;
+  version: bigint;
   hash: Uint8Array;
 }
 
 function createBaseCommitInfo(): CommitInfo {
   return {
-    version: Long.ZERO,
+    version: BigInt("0"),
     storeInfos: []
   };
 }
 
 export const CommitInfo = {
   encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.version.isZero()) {
-      writer.uint32(8).int64(message.version);
+    if (message.version !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.version.toString()));
     }
 
     for (const v of message.storeInfos) {
@@ -86,7 +86,7 @@ export const CommitInfo = {
 
       switch (tag >>> 3) {
         case 1:
-          message.version = (reader.int64() as Long);
+          message.version = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -104,14 +104,14 @@ export const CommitInfo = {
 
   fromJSON(object: any): CommitInfo {
     return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
     };
   },
 
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
+    message.version !== undefined && (obj.version = (message.version || BigInt("0")).toString());
 
     if (message.storeInfos) {
       obj.storeInfos = message.storeInfos.map(e => e ? StoreInfo.toJSON(e) : undefined);
@@ -124,7 +124,7 @@ export const CommitInfo = {
 
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
   },
@@ -138,7 +138,7 @@ export const CommitInfo = {
 
   fromSDKJSON(object: any): CommitInfoSDKType {
     return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       store_infos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDKJSON(e)) : []
     };
   },
@@ -250,15 +250,15 @@ export const StoreInfo = {
 
 function createBaseCommitID(): CommitID {
   return {
-    version: Long.ZERO,
+    version: BigInt("0"),
     hash: new Uint8Array()
   };
 }
 
 export const CommitID = {
   encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.version.isZero()) {
-      writer.uint32(8).int64(message.version);
+    if (message.version !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.version.toString()));
     }
 
     if (message.hash.length !== 0) {
@@ -278,7 +278,7 @@ export const CommitID = {
 
       switch (tag >>> 3) {
         case 1:
-          message.version = (reader.int64() as Long);
+          message.version = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -296,21 +296,21 @@ export const CommitID = {
 
   fromJSON(object: any): CommitID {
     return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
 
   toJSON(message: CommitID): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
+    message.version !== undefined && (obj.version = (message.version || BigInt("0")).toString());
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
 
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
-    message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt("0");
     message.hash = object.hash ?? new Uint8Array();
     return message;
   },
@@ -324,7 +324,7 @@ export const CommitID = {
 
   fromSDKJSON(object: any): CommitIDSDKType {
     return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt("0"),
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },

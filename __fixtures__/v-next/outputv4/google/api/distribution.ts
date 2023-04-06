@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 
 /**
@@ -26,7 +26,7 @@ export interface Distribution {
    * must equal the sum of the values in `bucket_counts` if a histogram is
    * provided.
    */
-  count: Long;
+  count: bigint;
 
   /**
    * The arithmetic mean of the values in the population. If `count` is zero
@@ -76,7 +76,7 @@ export interface Distribution {
    * counts for the finite buckets (number 1 through N-2). The N'th value in
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
-  bucketCounts: Long[];
+  bucketCounts: bigint[];
 
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
@@ -99,12 +99,12 @@ export interface Distribution {
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
 export interface DistributionSDKType {
-  count: Long;
+  count: bigint;
   mean: number;
   sum_of_squared_deviation: number;
   range?: Distribution_RangeSDKType;
   bucket_options?: Distribution_BucketOptionsSDKType;
-  bucket_counts: Long[];
+  bucket_counts: bigint[];
   exemplars: Distribution_ExemplarSDKType[];
 }
 
@@ -335,7 +335,7 @@ export interface Distribution_ExemplarSDKType {
 
 function createBaseDistribution(): Distribution {
   return {
-    count: Long.ZERO,
+    count: BigInt("0"),
     mean: 0,
     sumOfSquaredDeviation: 0,
     range: undefined,
@@ -347,8 +347,8 @@ function createBaseDistribution(): Distribution {
 
 export const Distribution = {
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.count.isZero()) {
-      writer.uint32(8).int64(message.count);
+    if (message.count !== BigInt(0)) {
+      writer.uint32(8).int64(Long.fromString(message.count.toString()));
     }
 
     if (message.mean !== 0) {
@@ -370,7 +370,7 @@ export const Distribution = {
     writer.uint32(58).fork();
 
     for (const v of message.bucketCounts) {
-      writer.int64(v);
+      writer.int64(Long.fromString(v.toString()));
     }
 
     writer.ldelim();
@@ -392,7 +392,7 @@ export const Distribution = {
 
       switch (tag >>> 3) {
         case 1:
-          message.count = (reader.int64() as Long);
+          message.count = BigInt(reader.int64().toString());
           break;
 
         case 2:
@@ -416,10 +416,10 @@ export const Distribution = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.bucketCounts.push((reader.int64() as Long));
+              message.bucketCounts.push(BigInt(reader.int64().toString()));
             }
           } else {
-            message.bucketCounts.push((reader.int64() as Long));
+            message.bucketCounts.push(BigInt(reader.int64().toString()));
           }
 
           break;
@@ -439,26 +439,26 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
-      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
       range: isSet(object.range) ? Distribution_Range.fromJSON(object.range) : undefined,
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromValue(e)) : [],
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => BigInt(e.toString())) : [],
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
 
   toJSON(message: Distribution): unknown {
     const obj: any = {};
-    message.count !== undefined && (obj.count = (message.count || Long.ZERO).toString());
+    message.count !== undefined && (obj.count = (message.count || BigInt("0")).toString());
     message.mean !== undefined && (obj.mean = message.mean);
     message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
     message.range !== undefined && (obj.range = message.range ? Distribution_Range.toJSON(message.range) : undefined);
     message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
 
     if (message.bucketCounts) {
-      obj.bucketCounts = message.bucketCounts.map(e => (e || Long.ZERO).toString());
+      obj.bucketCounts = message.bucketCounts.map(e => (e || BigInt("0")).toString());
     } else {
       obj.bucketCounts = [];
     }
@@ -474,12 +474,12 @@ export const Distribution = {
 
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
+    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt("0");
     message.mean = object.mean ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
     message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : undefined;
     message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
-    message.bucketCounts = object.bucketCounts?.map(e => Long.fromValue(e)) || [];
+    message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   },
@@ -498,12 +498,12 @@ export const Distribution = {
 
   fromSDKJSON(object: any): DistributionSDKType {
     return {
-      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt("0"),
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
       range: isSet(object.range) ? Distribution_Range.fromSDKJSON(object.range) : undefined,
       bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
-      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e.toString())) : [],
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
     };
   },

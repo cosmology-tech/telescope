@@ -153,7 +153,7 @@ export interface Account {
   transferred?: DecCoin;
 
   /** block height at which this account was last settled */
-  settledAt: Long;
+  settledAt: bigint;
 
   /**
    * bech32 encoded account address of the depositor.
@@ -176,7 +176,7 @@ export interface AccountSDKType {
   state: Account_State;
   balance?: DecCoinSDKType;
   transferred?: DecCoinSDKType;
-  settled_at: Long;
+  settled_at: bigint;
   depositor: string;
   funds?: DecCoinSDKType;
 }
@@ -300,7 +300,7 @@ function createBaseAccount(): Account {
     state: 0,
     balance: undefined,
     transferred: undefined,
-    settledAt: Long.ZERO,
+    settledAt: BigInt("0"),
     depositor: "",
     funds: undefined
   };
@@ -328,8 +328,8 @@ export const Account = {
       DecCoin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
 
-    if (!message.settledAt.isZero()) {
-      writer.uint32(48).int64(message.settledAt);
+    if (message.settledAt !== BigInt(0)) {
+      writer.uint32(48).int64(Long.fromString(message.settledAt.toString()));
     }
 
     if (message.depositor !== "") {
@@ -373,7 +373,7 @@ export const Account = {
           break;
 
         case 6:
-          message.settledAt = (reader.int64() as Long);
+          message.settledAt = BigInt(reader.int64().toString());
           break;
 
         case 7:
@@ -400,7 +400,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt("0"),
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromJSON(object.funds) : undefined
     };
@@ -413,7 +413,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt("0")).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toJSON(message.funds) : undefined);
     return obj;
@@ -426,7 +426,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt("0");
     message.depositor = object.depositor ?? "";
     message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
     return message;
@@ -452,7 +452,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? Long.fromValue(object.settled_at) : Long.ZERO,
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt("0"),
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromSDKJSON(object.funds) : undefined
     };

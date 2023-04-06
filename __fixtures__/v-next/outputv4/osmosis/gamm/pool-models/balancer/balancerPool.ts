@@ -121,7 +121,7 @@ export interface PoolAssetSDKType {
 }
 export interface Pool {
   address: string;
-  id: Long;
+  id: bigint;
   poolParams?: PoolParams;
 
   /**
@@ -151,7 +151,7 @@ export interface Pool {
 }
 export interface PoolSDKType {
   address: string;
-  id: Long;
+  id: bigint;
   pool_params?: PoolParamsSDKType;
   future_pool_governor: string;
   total_shares?: CoinSDKType;
@@ -499,7 +499,7 @@ export const PoolAsset = {
 function createBasePool(): Pool {
   return {
     address: "",
-    id: Long.UZERO,
+    id: BigInt("0"),
     poolParams: undefined,
     futurePoolGovernor: "",
     totalShares: undefined,
@@ -514,8 +514,8 @@ export const Pool = {
       writer.uint32(10).string(message.address);
     }
 
-    if (!message.id.isZero()) {
-      writer.uint32(16).uint64(message.id);
+    if (message.id !== BigInt(0)) {
+      writer.uint32(16).uint64(Long.fromString(message.id.toString()));
     }
 
     if (message.poolParams !== undefined) {
@@ -555,7 +555,7 @@ export const Pool = {
           break;
 
         case 2:
-          message.id = (reader.uint64() as Long);
+          message.id = BigInt(reader.uint64().toString());
           break;
 
         case 3:
@@ -590,7 +590,7 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
@@ -602,7 +602,7 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -620,7 +620,7 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
@@ -644,7 +644,7 @@ export const Pool = {
   fromSDKJSON(object: any): PoolSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
