@@ -82,6 +82,7 @@ interface TelescopeOpts {
         dir: string;
         filename: string;
         packages: string[];
+        protos?: string[];
         addToBundle: boolean;
     };
     stargateClients?: {
@@ -153,7 +154,7 @@ interface TelescopeOpts {
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
-export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
-export type TelescopeOption = keyof TelescopeOpts;
+export declare type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
+export declare type TelescopeOption = keyof TelescopeOpts;
 export declare const defaultTelescopeOptions: TelescopeOptions;
 export {};

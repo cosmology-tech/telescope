@@ -1,5 +1,5 @@
 import * as dotty from 'dotty';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, getProtoRefByPackage } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedLCDFactory } from '@osmonauts/ast';
@@ -80,9 +80,12 @@ const makeLCD = (
     builder.lcdClients.forEach(file => {
 
         // ADD all option
-        // which defaults to including cosmos 
+        // which defaults to including cosmos
         // and defaults to base for each
-        if (!packages.includes(file.package)) {
+        // if (!packages.includes(file.package)) {
+        if (!isRefIncluded(getProtoRefByPackage(file.package), {
+          packages
+        })) {
             return;
         }
 
@@ -142,7 +145,7 @@ const makeLCD = (
 
 // TODO
 /*
- move all options for lcd into previous `lcd` prop and 
+ move all options for lcd into previous `lcd` prop and
  clean up all these many options for one nested object full of options
 */
 
@@ -154,7 +157,7 @@ const createAllLCDBundles = (
     if (!builder.options.lcdClients.bundle) return;
 
 
-    // [x] loop through every bundle 
+    // [x] loop through every bundle
     // [x] if not cosmos, add all cosmos
     // [x] call makeLCD
     // [x] add to bundle

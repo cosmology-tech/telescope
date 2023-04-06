@@ -26,3 +26,9 @@ export declare const instanceType: (obj: any) => {
     name: any;
     type: string;
 };
+/**
+ * get a protoref instance for scope check by package.
+ * @param pkg package used to do the scope check.
+ * @returns
+ */
+export declare const getProtoRefByPackage: (pkg: string) => ProtoRef;

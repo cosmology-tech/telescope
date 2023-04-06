@@ -259,7 +259,7 @@ export const instanceType = (obj: any) => {
     if (obj.name.match(/^[a-z]/)) {
         throw new Error('instanceType() cannot find protobufjs Type')
     }
-    // duck typing... 
+    // duck typing...
     // TODO why did we lose instance types/names?
     if (obj.fields) {
         return {
@@ -276,3 +276,31 @@ export const instanceType = (obj: any) => {
     throw new Error('instanceType() cannot find protobufjs Type')
 };
 
+/**
+ * get a protoref instance for scope check by package.
+ * @param pkg package used to do the scope check.
+ * @returns
+ */
+export const getProtoRefByPackage = (pkg: string): ProtoRef => {
+  return {
+    absolute: '',
+    filename: '',
+    proto: {
+        package: pkg,
+        imports: null,
+        root: {},
+        importNames: null
+    },
+    traversed: {
+        package: pkg,
+        imports: null,
+        root: {},
+        importNames: null,
+        acceptsInterface: {},
+        implementsInterface: {},
+        parsedExports: {},
+        parsedImports: {},
+        symbols: null
+    }
+}
+};

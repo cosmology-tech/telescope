@@ -1,5 +1,5 @@
 import * as dotty from 'dotty';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, getProtoRefByPackage } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcTmFactory } from '@osmonauts/ast';
@@ -84,9 +84,11 @@ const makeRPC = (
     builder.rpcQueryClients.forEach(file => {
 
         // ADD all option
-        // which defaults to including cosmos 
+        // which defaults to including cosmos
         // and defaults to base for each
-        if (!packages.includes(file.package)) {
+        if (!isRefIncluded(getProtoRefByPackage(file.package), {
+          packages
+        })) {
             return;
         }
 
@@ -152,7 +154,7 @@ const makeRPC = (
 
 // TODO
 /*
- move all options for rpc into previous `rpc` prop and 
+ move all options for rpc into previous `rpc` prop and
  clean up all these many options for one nested object full of options
 */
 
@@ -164,7 +166,7 @@ const makeAllRPCBundles = (
 
     if (!builder.options.rpcClients.bundle) return;
 
-    // [x] loop through every bundle 
+    // [x] loop through every bundle
     // [x] if not cosmos, add all cosmos
     // [x] call makeRPC
 

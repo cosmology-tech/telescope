@@ -1,5 +1,5 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
@@ -27,14 +27,17 @@ export const plugin = (
     const {
         dir,
         filename: fname,
-        packages
+        packages,
+        protos
     } = opts;
 
     const localname = join(dir, fname);
 
     const refs = builder.store.filterProtoWhere((ref: ProtoRef) => {
-        return packages.includes(ref.proto.package) &&
-            !isExcluded(builder, ref);
+        return isRefIncluded(ref,{
+          packages,
+          protos
+        }) && !isExcluded(builder, ref);
     });
 
     const services: ProtoService[] = refs.map(ref => {
@@ -65,7 +68,10 @@ export const plugin = (
 
     const progImports = queryContexts.reduce((m, c) => {
 
-        if (!builder.options.aggregatedLCD.packages.includes(c.ref.proto.package)) {
+        if (!isRefIncluded(c.ref, {
+          packages,
+          protos
+        })) {
             return m;
         }
 

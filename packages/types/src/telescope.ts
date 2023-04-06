@@ -98,6 +98,7 @@ interface TelescopeOpts {
         dir: string;
         filename: string;
         packages: string[];
+        protos?: string[];
         addToBundle: boolean;
     };
 
