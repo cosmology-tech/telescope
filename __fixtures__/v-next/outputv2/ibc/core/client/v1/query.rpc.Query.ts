@@ -97,7 +97,7 @@ export const QueryClientStateDesc: UnaryMethodDefinitionish = {
   methodName: "ClientState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClientStateRequest.encode(this).finish();
@@ -121,7 +121,7 @@ export const QueryClientStatesDesc: UnaryMethodDefinitionish = {
   methodName: "ClientStates",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClientStatesRequest.encode(this).finish();
@@ -145,7 +145,7 @@ export const QueryConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "ConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConsensusStateRequest.encode(this).finish();
@@ -169,7 +169,7 @@ export const QueryConsensusStatesDesc: UnaryMethodDefinitionish = {
   methodName: "ConsensusStates",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConsensusStatesRequest.encode(this).finish();
@@ -193,7 +193,7 @@ export const QueryClientStatusDesc: UnaryMethodDefinitionish = {
   methodName: "ClientStatus",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClientStatusRequest.encode(this).finish();
@@ -217,7 +217,7 @@ export const QueryClientParamsDesc: UnaryMethodDefinitionish = {
   methodName: "ClientParams",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClientParamsRequest.encode(this).finish();
@@ -241,7 +241,7 @@ export const QueryUpgradedClientStateDesc: UnaryMethodDefinitionish = {
   methodName: "UpgradedClientState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUpgradedClientStateRequest.encode(this).finish();
@@ -265,7 +265,7 @@ export const QueryUpgradedConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "UpgradedConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUpgradedConsensusStateRequest.encode(this).finish();

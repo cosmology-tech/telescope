@@ -77,7 +77,7 @@ export const QueryConnectionDesc: UnaryMethodDefinitionish = {
   methodName: "Connection",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionRequest.encode(this).finish();
@@ -101,7 +101,7 @@ export const QueryConnectionsDesc: UnaryMethodDefinitionish = {
   methodName: "Connections",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionsRequest.encode(this).finish();
@@ -125,7 +125,7 @@ export const QueryClientConnectionsDesc: UnaryMethodDefinitionish = {
   methodName: "ClientConnections",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClientConnectionsRequest.encode(this).finish();
@@ -149,7 +149,7 @@ export const QueryConnectionClientStateDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionClientState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionClientStateRequest.encode(this).finish();
@@ -173,7 +173,7 @@ export const QueryConnectionConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionConsensusStateRequest.encode(this).finish();

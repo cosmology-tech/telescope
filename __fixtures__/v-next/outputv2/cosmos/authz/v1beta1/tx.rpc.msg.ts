@@ -60,7 +60,7 @@ export const MsgGrantDesc: UnaryMethodDefinitionish = {
   methodName: "Grant",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgGrant.encode(this).finish();
@@ -84,7 +84,7 @@ export const MsgExecDesc: UnaryMethodDefinitionish = {
   methodName: "Exec",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExec.encode(this).finish();
@@ -108,7 +108,7 @@ export const MsgRevokeDesc: UnaryMethodDefinitionish = {
   methodName: "Revoke",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRevoke.encode(this).finish();

@@ -71,7 +71,7 @@ export const QueryGaugeIdsDesc: UnaryMethodDefinitionish = {
   methodName: "GaugeIds",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGaugeIdsRequest.encode(this).finish();
@@ -95,7 +95,7 @@ export const QueryDistrInfoDesc: UnaryMethodDefinitionish = {
   methodName: "DistrInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDistrInfoRequest.encode(this).finish();
@@ -119,7 +119,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -143,7 +143,7 @@ export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
   methodName: "LockableDurations",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryLockableDurationsRequest.encode(this).finish();
@@ -167,7 +167,7 @@ export const QueryIncentivizedPoolsDesc: UnaryMethodDefinitionish = {
   methodName: "IncentivizedPools",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryIncentivizedPoolsRequest.encode(this).finish();
@@ -191,7 +191,7 @@ export const QueryExternalIncentiveGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "ExternalIncentiveGauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryExternalIncentiveGaugesRequest.encode(this).finish();

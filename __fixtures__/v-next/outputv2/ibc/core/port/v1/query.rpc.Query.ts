@@ -31,7 +31,7 @@ export const QueryAppVersionDesc: UnaryMethodDefinitionish = {
   methodName: "AppVersion",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAppVersionRequest.encode(this).finish();

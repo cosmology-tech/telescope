@@ -46,7 +46,7 @@ export const MsgGrantAllowanceDesc: UnaryMethodDefinitionish = {
   methodName: "GrantAllowance",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgGrantAllowance.encode(this).finish();
@@ -70,7 +70,7 @@ export const MsgRevokeAllowanceDesc: UnaryMethodDefinitionish = {
   methodName: "RevokeAllowance",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRevokeAllowance.encode(this).finish();

@@ -57,7 +57,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -81,7 +81,7 @@ export const QueryDenomAuthorityMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "DenomAuthorityMetadata",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomAuthorityMetadataRequest.encode(this).finish();
@@ -105,7 +105,7 @@ export const QueryDenomsFromCreatorDesc: UnaryMethodDefinitionish = {
   methodName: "DenomsFromCreator",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomsFromCreatorRequest.encode(this).finish();

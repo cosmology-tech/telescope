@@ -156,7 +156,7 @@ export const QueryChannelDesc: UnaryMethodDefinitionish = {
   methodName: "Channel",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelRequest.encode(this).finish();
@@ -180,7 +180,7 @@ export const QueryChannelsDesc: UnaryMethodDefinitionish = {
   methodName: "Channels",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelsRequest.encode(this).finish();
@@ -204,7 +204,7 @@ export const QueryConnectionChannelsDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionChannels",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionChannelsRequest.encode(this).finish();
@@ -228,7 +228,7 @@ export const QueryChannelClientStateDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelClientState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelClientStateRequest.encode(this).finish();
@@ -252,7 +252,7 @@ export const QueryChannelConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelConsensusStateRequest.encode(this).finish();
@@ -276,7 +276,7 @@ export const QueryPacketCommitmentDesc: UnaryMethodDefinitionish = {
   methodName: "PacketCommitment",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketCommitmentRequest.encode(this).finish();
@@ -300,7 +300,7 @@ export const QueryPacketCommitmentsDesc: UnaryMethodDefinitionish = {
   methodName: "PacketCommitments",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketCommitmentsRequest.encode(this).finish();
@@ -324,7 +324,7 @@ export const QueryPacketReceiptDesc: UnaryMethodDefinitionish = {
   methodName: "PacketReceipt",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketReceiptRequest.encode(this).finish();
@@ -348,7 +348,7 @@ export const QueryPacketAcknowledgementDesc: UnaryMethodDefinitionish = {
   methodName: "PacketAcknowledgement",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketAcknowledgementRequest.encode(this).finish();
@@ -372,7 +372,7 @@ export const QueryPacketAcknowledgementsDesc: UnaryMethodDefinitionish = {
   methodName: "PacketAcknowledgements",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketAcknowledgementsRequest.encode(this).finish();
@@ -396,7 +396,7 @@ export const QueryUnreceivedPacketsDesc: UnaryMethodDefinitionish = {
   methodName: "UnreceivedPackets",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUnreceivedPacketsRequest.encode(this).finish();
@@ -420,7 +420,7 @@ export const QueryUnreceivedAcksDesc: UnaryMethodDefinitionish = {
   methodName: "UnreceivedAcks",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUnreceivedAcksRequest.encode(this).finish();
@@ -444,7 +444,7 @@ export const QueryNextSequenceReceiveDesc: UnaryMethodDefinitionish = {
   methodName: "NextSequenceReceive",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNextSequenceReceiveRequest.encode(this).finish();

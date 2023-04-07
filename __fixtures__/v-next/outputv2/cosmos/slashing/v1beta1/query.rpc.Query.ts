@@ -50,7 +50,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -74,7 +74,7 @@ export const QuerySigningInfoDesc: UnaryMethodDefinitionish = {
   methodName: "SigningInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySigningInfoRequest.encode(this).finish();
@@ -98,7 +98,7 @@ export const QuerySigningInfosDesc: UnaryMethodDefinitionish = {
   methodName: "SigningInfos",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySigningInfosRequest.encode(this).finish();

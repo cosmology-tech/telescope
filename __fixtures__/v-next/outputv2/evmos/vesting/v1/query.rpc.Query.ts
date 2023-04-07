@@ -31,7 +31,7 @@ export const QueryBalancesDesc: UnaryMethodDefinitionish = {
   methodName: "Balances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBalancesRequest.encode(this).finish();

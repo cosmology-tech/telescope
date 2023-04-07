@@ -66,7 +66,7 @@ export const MsgSubmitProposalDesc: UnaryMethodDefinitionish = {
   methodName: "SubmitProposal",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSubmitProposal.encode(this).finish();
@@ -90,7 +90,7 @@ export const MsgVoteDesc: UnaryMethodDefinitionish = {
   methodName: "Vote",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgVote.encode(this).finish();
@@ -114,7 +114,7 @@ export const MsgVoteWeightedDesc: UnaryMethodDefinitionish = {
   methodName: "VoteWeighted",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgVoteWeighted.encode(this).finish();
@@ -138,7 +138,7 @@ export const MsgDepositDesc: UnaryMethodDefinitionish = {
   methodName: "Deposit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDeposit.encode(this).finish();

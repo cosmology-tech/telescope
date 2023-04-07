@@ -77,7 +77,7 @@ export const ServiceGetNodeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "GetNodeInfo",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetNodeInfoRequest.encode(this).finish();
@@ -101,7 +101,7 @@ export const ServiceGetSyncingDesc: UnaryMethodDefinitionish = {
   methodName: "GetSyncing",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetSyncingRequest.encode(this).finish();
@@ -125,7 +125,7 @@ export const ServiceGetLatestBlockDesc: UnaryMethodDefinitionish = {
   methodName: "GetLatestBlock",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetLatestBlockRequest.encode(this).finish();
@@ -149,7 +149,7 @@ export const ServiceGetBlockByHeightDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlockByHeight",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetBlockByHeightRequest.encode(this).finish();
@@ -173,7 +173,7 @@ export const ServiceGetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
   methodName: "GetLatestValidatorSet",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetLatestValidatorSetRequest.encode(this).finish();
@@ -197,7 +197,7 @@ export const ServiceGetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
   methodName: "GetValidatorSetByHeight",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetValidatorSetByHeightRequest.encode(this).finish();

@@ -70,7 +70,7 @@ export const MsgJoinPoolDesc: UnaryMethodDefinitionish = {
   methodName: "JoinPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinPool.encode(this).finish();
@@ -94,7 +94,7 @@ export const MsgExitPoolDesc: UnaryMethodDefinitionish = {
   methodName: "ExitPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitPool.encode(this).finish();
@@ -118,7 +118,7 @@ export const MsgSwapExactAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "SwapExactAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSwapExactAmountIn.encode(this).finish();
@@ -142,7 +142,7 @@ export const MsgSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "SwapExactAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSwapExactAmountOut.encode(this).finish();
@@ -166,7 +166,7 @@ export const MsgJoinSwapExternAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "JoinSwapExternAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinSwapExternAmountIn.encode(this).finish();
@@ -190,7 +190,7 @@ export const MsgJoinSwapShareAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "JoinSwapShareAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinSwapShareAmountOut.encode(this).finish();
@@ -214,7 +214,7 @@ export const MsgExitSwapExternAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "ExitSwapExternAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitSwapExternAmountOut.encode(this).finish();
@@ -238,7 +238,7 @@ export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "ExitSwapShareAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitSwapShareAmountIn.encode(this).finish();

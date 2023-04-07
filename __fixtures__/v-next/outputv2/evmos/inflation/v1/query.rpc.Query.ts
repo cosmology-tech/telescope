@@ -75,7 +75,7 @@ export const QueryPeriodDesc: UnaryMethodDefinitionish = {
   methodName: "Period",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPeriodRequest.encode(this).finish();
@@ -99,7 +99,7 @@ export const QueryEpochMintProvisionDesc: UnaryMethodDefinitionish = {
   methodName: "EpochMintProvision",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryEpochMintProvisionRequest.encode(this).finish();
@@ -123,7 +123,7 @@ export const QuerySkippedEpochsDesc: UnaryMethodDefinitionish = {
   methodName: "SkippedEpochs",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySkippedEpochsRequest.encode(this).finish();
@@ -147,7 +147,7 @@ export const QueryCirculatingSupplyDesc: UnaryMethodDefinitionish = {
   methodName: "CirculatingSupply",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCirculatingSupplyRequest.encode(this).finish();
@@ -171,7 +171,7 @@ export const QueryInflationRateDesc: UnaryMethodDefinitionish = {
   methodName: "InflationRate",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryInflationRateRequest.encode(this).finish();
@@ -195,7 +195,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();

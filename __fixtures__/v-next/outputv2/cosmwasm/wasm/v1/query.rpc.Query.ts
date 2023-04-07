@@ -100,7 +100,7 @@ export const QueryContractInfoDesc: UnaryMethodDefinitionish = {
   methodName: "ContractInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryContractInfoRequest.encode(this).finish();
@@ -124,7 +124,7 @@ export const QueryContractHistoryDesc: UnaryMethodDefinitionish = {
   methodName: "ContractHistory",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryContractHistoryRequest.encode(this).finish();
@@ -148,7 +148,7 @@ export const QueryContractsByCodeDesc: UnaryMethodDefinitionish = {
   methodName: "ContractsByCode",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryContractsByCodeRequest.encode(this).finish();
@@ -172,7 +172,7 @@ export const QueryAllContractStateDesc: UnaryMethodDefinitionish = {
   methodName: "AllContractState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllContractStateRequest.encode(this).finish();
@@ -196,7 +196,7 @@ export const QueryRawContractStateDesc: UnaryMethodDefinitionish = {
   methodName: "RawContractState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryRawContractStateRequest.encode(this).finish();
@@ -220,7 +220,7 @@ export const QuerySmartContractStateDesc: UnaryMethodDefinitionish = {
   methodName: "SmartContractState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySmartContractStateRequest.encode(this).finish();
@@ -244,7 +244,7 @@ export const QueryCodeDesc: UnaryMethodDefinitionish = {
   methodName: "Code",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCodeRequest.encode(this).finish();
@@ -268,7 +268,7 @@ export const QueryCodesDesc: UnaryMethodDefinitionish = {
   methodName: "Codes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCodesRequest.encode(this).finish();
@@ -292,7 +292,7 @@ export const QueryPinnedCodesDesc: UnaryMethodDefinitionish = {
   methodName: "PinnedCodes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPinnedCodesRequest.encode(this).finish();

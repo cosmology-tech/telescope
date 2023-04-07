@@ -56,7 +56,7 @@ export const QueryModuleAccountBalanceDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleAccountBalance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryModuleAccountBalanceRequest.encode(this).finish();
@@ -80,7 +80,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -104,7 +104,7 @@ export const QueryClaimRecordDesc: UnaryMethodDefinitionish = {
   methodName: "ClaimRecord",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClaimRecordRequest.encode(this).finish();
@@ -128,7 +128,7 @@ export const QueryClaimableForActionDesc: UnaryMethodDefinitionish = {
   methodName: "ClaimableForAction",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClaimableForActionRequest.encode(this).finish();
@@ -152,7 +152,7 @@ export const QueryTotalClaimableDesc: UnaryMethodDefinitionish = {
   methodName: "TotalClaimable",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalClaimableRequest.encode(this).finish();

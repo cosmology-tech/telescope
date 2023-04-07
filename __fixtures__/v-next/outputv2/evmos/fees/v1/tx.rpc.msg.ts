@@ -52,7 +52,7 @@ export const MsgRegisterDevFeeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "RegisterDevFeeInfo",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRegisterDevFeeInfo.encode(this).finish();
@@ -76,7 +76,7 @@ export const MsgCancelDevFeeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "CancelDevFeeInfo",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCancelDevFeeInfo.encode(this).finish();
@@ -100,7 +100,7 @@ export const MsgUpdateDevFeeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateDevFeeInfo",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateDevFeeInfo.encode(this).finish();

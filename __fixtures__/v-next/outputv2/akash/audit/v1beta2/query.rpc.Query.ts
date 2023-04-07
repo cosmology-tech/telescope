@@ -74,7 +74,7 @@ export const QueryAllProvidersAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "AllProvidersAttributes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllProvidersAttributesRequest.encode(this).finish();
@@ -98,7 +98,7 @@ export const QueryProviderAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "ProviderAttributes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProviderAttributesRequest.encode(this).finish();
@@ -122,7 +122,7 @@ export const QueryProviderAuditorAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "ProviderAuditorAttributes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProviderAuditorRequest.encode(this).finish();
@@ -146,7 +146,7 @@ export const QueryAuditorAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "AuditorAttributes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAuditorAttributesRequest.encode(this).finish();

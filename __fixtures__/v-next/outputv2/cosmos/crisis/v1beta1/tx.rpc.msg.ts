@@ -30,7 +30,7 @@ export const MsgVerifyInvariantDesc: UnaryMethodDefinitionish = {
   methodName: "VerifyInvariant",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgVerifyInvariant.encode(this).finish();

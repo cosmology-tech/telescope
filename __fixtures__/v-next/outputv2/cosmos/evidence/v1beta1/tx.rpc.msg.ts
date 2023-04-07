@@ -34,7 +34,7 @@ export const MsgSubmitEvidenceDesc: UnaryMethodDefinitionish = {
   methodName: "SubmitEvidence",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSubmitEvidence.encode(this).finish();

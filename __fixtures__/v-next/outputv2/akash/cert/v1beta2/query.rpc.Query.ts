@@ -32,7 +32,7 @@ export const QueryCertificatesDesc: UnaryMethodDefinitionish = {
   methodName: "Certificates",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCertificatesRequest.encode(this).finish();

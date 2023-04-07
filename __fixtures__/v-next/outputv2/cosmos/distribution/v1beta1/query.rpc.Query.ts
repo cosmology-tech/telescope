@@ -100,7 +100,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -124,7 +124,7 @@ export const QueryValidatorOutstandingRewardsDesc: UnaryMethodDefinitionish = {
   methodName: "ValidatorOutstandingRewards",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryValidatorOutstandingRewardsRequest.encode(this).finish();
@@ -148,7 +148,7 @@ export const QueryValidatorCommissionDesc: UnaryMethodDefinitionish = {
   methodName: "ValidatorCommission",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryValidatorCommissionRequest.encode(this).finish();
@@ -172,7 +172,7 @@ export const QueryValidatorSlashesDesc: UnaryMethodDefinitionish = {
   methodName: "ValidatorSlashes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryValidatorSlashesRequest.encode(this).finish();
@@ -196,7 +196,7 @@ export const QueryDelegationRewardsDesc: UnaryMethodDefinitionish = {
   methodName: "DelegationRewards",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDelegationRewardsRequest.encode(this).finish();
@@ -220,7 +220,7 @@ export const QueryDelegationTotalRewardsDesc: UnaryMethodDefinitionish = {
   methodName: "DelegationTotalRewards",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDelegationTotalRewardsRequest.encode(this).finish();
@@ -244,7 +244,7 @@ export const QueryDelegatorValidatorsDesc: UnaryMethodDefinitionish = {
   methodName: "DelegatorValidators",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDelegatorValidatorsRequest.encode(this).finish();
@@ -268,7 +268,7 @@ export const QueryDelegatorWithdrawAddressDesc: UnaryMethodDefinitionish = {
   methodName: "DelegatorWithdrawAddress",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDelegatorWithdrawAddressRequest.encode(this).finish();
@@ -292,7 +292,7 @@ export const QueryCommunityPoolDesc: UnaryMethodDefinitionish = {
   methodName: "CommunityPool",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCommunityPoolRequest.encode(this).finish();

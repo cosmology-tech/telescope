@@ -71,7 +71,7 @@ export const ServiceSimulateDesc: UnaryMethodDefinitionish = {
   methodName: "Simulate",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SimulateRequest.encode(this).finish();
@@ -95,7 +95,7 @@ export const ServiceGetTxDesc: UnaryMethodDefinitionish = {
   methodName: "GetTx",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetTxRequest.encode(this).finish();
@@ -119,7 +119,7 @@ export const ServiceBroadcastTxDesc: UnaryMethodDefinitionish = {
   methodName: "BroadcastTx",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return BroadcastTxRequest.encode(this).finish();
@@ -143,7 +143,7 @@ export const ServiceGetTxsEventDesc: UnaryMethodDefinitionish = {
   methodName: "GetTxsEvent",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetTxsEventRequest.encode(this).finish();
@@ -167,7 +167,7 @@ export const ServiceGetBlockWithTxsDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlockWithTxs",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetBlockWithTxsRequest.encode(this).finish();

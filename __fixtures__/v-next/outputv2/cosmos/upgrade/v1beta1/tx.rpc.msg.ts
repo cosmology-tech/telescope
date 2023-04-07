@@ -48,7 +48,7 @@ export const MsgSoftwareUpgradeDesc: UnaryMethodDefinitionish = {
   methodName: "SoftwareUpgrade",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSoftwareUpgrade.encode(this).finish();
@@ -72,7 +72,7 @@ export const MsgCancelUpgradeDesc: UnaryMethodDefinitionish = {
   methodName: "CancelUpgrade",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCancelUpgrade.encode(this).finish();

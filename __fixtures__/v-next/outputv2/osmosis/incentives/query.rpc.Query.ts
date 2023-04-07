@@ -114,7 +114,7 @@ export const QueryModuleToDistributeCoinsDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleToDistributeCoins",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ModuleToDistributeCoinsRequest.encode(this).finish();
@@ -138,7 +138,7 @@ export const QueryGaugeByIDDesc: UnaryMethodDefinitionish = {
   methodName: "GaugeByID",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GaugeByIDRequest.encode(this).finish();
@@ -162,7 +162,7 @@ export const QueryGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "Gauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GaugesRequest.encode(this).finish();
@@ -186,7 +186,7 @@ export const QueryActiveGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "ActiveGauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ActiveGaugesRequest.encode(this).finish();
@@ -210,7 +210,7 @@ export const QueryActiveGaugesPerDenomDesc: UnaryMethodDefinitionish = {
   methodName: "ActiveGaugesPerDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ActiveGaugesPerDenomRequest.encode(this).finish();
@@ -234,7 +234,7 @@ export const QueryUpcomingGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "UpcomingGauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return UpcomingGaugesRequest.encode(this).finish();
@@ -258,7 +258,7 @@ export const QueryUpcomingGaugesPerDenomDesc: UnaryMethodDefinitionish = {
   methodName: "UpcomingGaugesPerDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return UpcomingGaugesPerDenomRequest.encode(this).finish();
@@ -282,7 +282,7 @@ export const QueryRewardsEstDesc: UnaryMethodDefinitionish = {
   methodName: "RewardsEst",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return RewardsEstRequest.encode(this).finish();
@@ -306,7 +306,7 @@ export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
   methodName: "LockableDurations",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryLockableDurationsRequest.encode(this).finish();

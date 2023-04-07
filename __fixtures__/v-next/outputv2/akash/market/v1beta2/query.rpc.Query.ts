@@ -75,7 +75,7 @@ export const QueryOrdersDesc: UnaryMethodDefinitionish = {
   methodName: "Orders",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryOrdersRequest.encode(this).finish();
@@ -99,7 +99,7 @@ export const QueryOrderDesc: UnaryMethodDefinitionish = {
   methodName: "Order",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryOrderRequest.encode(this).finish();
@@ -123,7 +123,7 @@ export const QueryBidsDesc: UnaryMethodDefinitionish = {
   methodName: "Bids",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBidsRequest.encode(this).finish();
@@ -147,7 +147,7 @@ export const QueryBidDesc: UnaryMethodDefinitionish = {
   methodName: "Bid",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBidRequest.encode(this).finish();
@@ -171,7 +171,7 @@ export const QueryLeasesDesc: UnaryMethodDefinitionish = {
   methodName: "Leases",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryLeasesRequest.encode(this).finish();
@@ -195,7 +195,7 @@ export const QueryLeaseDesc: UnaryMethodDefinitionish = {
   methodName: "Lease",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryLeaseRequest.encode(this).finish();

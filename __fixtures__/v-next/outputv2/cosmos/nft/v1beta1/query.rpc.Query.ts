@@ -85,7 +85,7 @@ export const QueryBalanceDesc: UnaryMethodDefinitionish = {
   methodName: "Balance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBalanceRequest.encode(this).finish();
@@ -109,7 +109,7 @@ export const QueryOwnerDesc: UnaryMethodDefinitionish = {
   methodName: "Owner",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryOwnerRequest.encode(this).finish();
@@ -133,7 +133,7 @@ export const QuerySupplyDesc: UnaryMethodDefinitionish = {
   methodName: "Supply",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySupplyRequest.encode(this).finish();
@@ -157,7 +157,7 @@ export const QueryNFTsDesc: UnaryMethodDefinitionish = {
   methodName: "NFTs",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNFTsRequest.encode(this).finish();
@@ -181,7 +181,7 @@ export const QueryNFTDesc: UnaryMethodDefinitionish = {
   methodName: "NFT",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNFTRequest.encode(this).finish();
@@ -205,7 +205,7 @@ export const QueryClassDesc: UnaryMethodDefinitionish = {
   methodName: "Class",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClassRequest.encode(this).finish();
@@ -229,7 +229,7 @@ export const QueryClassesDesc: UnaryMethodDefinitionish = {
   methodName: "Classes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClassesRequest.encode(this).finish();

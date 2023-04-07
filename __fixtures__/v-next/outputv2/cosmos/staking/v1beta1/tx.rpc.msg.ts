@@ -75,7 +75,7 @@ export const MsgCreateValidatorDesc: UnaryMethodDefinitionish = {
   methodName: "CreateValidator",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateValidator.encode(this).finish();
@@ -99,7 +99,7 @@ export const MsgEditValidatorDesc: UnaryMethodDefinitionish = {
   methodName: "EditValidator",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgEditValidator.encode(this).finish();
@@ -123,7 +123,7 @@ export const MsgDelegateDesc: UnaryMethodDefinitionish = {
   methodName: "Delegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDelegate.encode(this).finish();
@@ -147,7 +147,7 @@ export const MsgBeginRedelegateDesc: UnaryMethodDefinitionish = {
   methodName: "BeginRedelegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgBeginRedelegate.encode(this).finish();
@@ -171,7 +171,7 @@ export const MsgUndelegateDesc: UnaryMethodDefinitionish = {
   methodName: "Undelegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUndelegate.encode(this).finish();

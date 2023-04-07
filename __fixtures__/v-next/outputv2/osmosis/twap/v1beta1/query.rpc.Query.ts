@@ -41,7 +41,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ParamsRequest.encode(this).finish();
@@ -65,7 +65,7 @@ export const QueryArithmeticTwapDesc: UnaryMethodDefinitionish = {
   methodName: "ArithmeticTwap",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ArithmeticTwapRequest.encode(this).finish();
@@ -89,7 +89,7 @@ export const QueryArithmeticTwapToNowDesc: UnaryMethodDefinitionish = {
   methodName: "ArithmeticTwapToNow",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ArithmeticTwapToNowRequest.encode(this).finish();

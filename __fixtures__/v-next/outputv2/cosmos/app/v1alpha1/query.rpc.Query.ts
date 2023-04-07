@@ -31,7 +31,7 @@ export const QueryConfigDesc: UnaryMethodDefinitionish = {
   methodName: "Config",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConfigRequest.encode(this).finish();

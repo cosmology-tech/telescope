@@ -43,7 +43,7 @@ export const MsgCreateClawbackVestingAccountDesc: UnaryMethodDefinitionish = {
   methodName: "CreateClawbackVestingAccount",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateClawbackVestingAccount.encode(this).finish();
@@ -67,7 +67,7 @@ export const MsgClawbackDesc: UnaryMethodDefinitionish = {
   methodName: "Clawback",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgClawback.encode(this).finish();

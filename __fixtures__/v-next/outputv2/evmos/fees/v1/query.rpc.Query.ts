@@ -62,7 +62,7 @@ export const QueryDevFeeInfosDesc: UnaryMethodDefinitionish = {
   methodName: "DevFeeInfos",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDevFeeInfosRequest.encode(this).finish();
@@ -86,7 +86,7 @@ export const QueryDevFeeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "DevFeeInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDevFeeInfoRequest.encode(this).finish();
@@ -110,7 +110,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -134,7 +134,7 @@ export const QueryDevFeeInfosPerDeployerDesc: UnaryMethodDefinitionish = {
   methodName: "DevFeeInfosPerDeployer",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDevFeeInfosPerDeployerRequest.encode(this).finish();

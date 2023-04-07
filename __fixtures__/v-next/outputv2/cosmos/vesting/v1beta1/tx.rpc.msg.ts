@@ -57,7 +57,7 @@ export const MsgCreateVestingAccountDesc: UnaryMethodDefinitionish = {
   methodName: "CreateVestingAccount",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateVestingAccount.encode(this).finish();
@@ -81,7 +81,7 @@ export const MsgCreatePermanentLockedAccountDesc: UnaryMethodDefinitionish = {
   methodName: "CreatePermanentLockedAccount",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreatePermanentLockedAccount.encode(this).finish();
@@ -105,7 +105,7 @@ export const MsgCreatePeriodicVestingAccountDesc: UnaryMethodDefinitionish = {
   methodName: "CreatePeriodicVestingAccount",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreatePeriodicVestingAccount.encode(this).finish();

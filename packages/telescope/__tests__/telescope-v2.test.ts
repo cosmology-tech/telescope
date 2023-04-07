@@ -152,8 +152,3 @@ describe('bundle package registries and root file names', () => {
     // console.log(JSON.stringify(result, null, 2));
   });
 })
-
-
-
-
-

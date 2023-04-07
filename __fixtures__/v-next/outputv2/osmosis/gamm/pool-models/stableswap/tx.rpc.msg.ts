@@ -35,7 +35,7 @@ export const MsgCreateStableswapPoolDesc: UnaryMethodDefinitionish = {
   methodName: "CreateStableswapPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateStableswapPool.encode(this).finish();
@@ -59,7 +59,7 @@ export const MsgStableSwapAdjustScalingFactorsDesc: UnaryMethodDefinitionish = {
   methodName: "StableSwapAdjustScalingFactors",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgStableSwapAdjustScalingFactors.encode(this).finish();

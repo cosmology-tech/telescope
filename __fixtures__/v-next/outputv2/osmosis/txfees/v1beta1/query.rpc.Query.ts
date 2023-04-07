@@ -57,7 +57,7 @@ export const QueryFeeTokensDesc: UnaryMethodDefinitionish = {
   methodName: "FeeTokens",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryFeeTokensRequest.encode(this).finish();
@@ -81,7 +81,7 @@ export const QueryDenomSpotPriceDesc: UnaryMethodDefinitionish = {
   methodName: "DenomSpotPrice",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomSpotPriceRequest.encode(this).finish();
@@ -105,7 +105,7 @@ export const QueryDenomPoolIdDesc: UnaryMethodDefinitionish = {
   methodName: "DenomPoolId",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomPoolIdRequest.encode(this).finish();
@@ -129,7 +129,7 @@ export const QueryBaseDenomDesc: UnaryMethodDefinitionish = {
   methodName: "BaseDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBaseDenomRequest.encode(this).finish();

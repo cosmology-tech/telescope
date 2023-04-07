@@ -51,7 +51,7 @@ export const QueryAllowanceDesc: UnaryMethodDefinitionish = {
   methodName: "Allowance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllowanceRequest.encode(this).finish();
@@ -75,7 +75,7 @@ export const QueryAllowancesDesc: UnaryMethodDefinitionish = {
   methodName: "Allowances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllowancesRequest.encode(this).finish();
@@ -99,7 +99,7 @@ export const QueryAllowancesByGranterDesc: UnaryMethodDefinitionish = {
   methodName: "AllowancesByGranter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllowancesByGranterRequest.encode(this).finish();

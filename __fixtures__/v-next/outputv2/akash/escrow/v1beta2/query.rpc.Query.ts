@@ -48,7 +48,7 @@ export const QueryAccountsDesc: UnaryMethodDefinitionish = {
   methodName: "Accounts",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAccountsRequest.encode(this).finish();
@@ -72,7 +72,7 @@ export const QueryPaymentsDesc: UnaryMethodDefinitionish = {
   methodName: "Payments",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPaymentsRequest.encode(this).finish();

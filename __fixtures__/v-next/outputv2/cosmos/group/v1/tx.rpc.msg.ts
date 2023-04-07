@@ -136,7 +136,7 @@ export const MsgCreateGroupDesc: UnaryMethodDefinitionish = {
   methodName: "CreateGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateGroup.encode(this).finish();
@@ -160,7 +160,7 @@ export const MsgUpdateGroupMembersDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateGroupMembers",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupMembers.encode(this).finish();
@@ -184,7 +184,7 @@ export const MsgUpdateGroupAdminDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateGroupAdmin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupAdmin.encode(this).finish();
@@ -208,7 +208,7 @@ export const MsgUpdateGroupMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateGroupMetadata",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupMetadata.encode(this).finish();
@@ -232,7 +232,7 @@ export const MsgCreateGroupPolicyDesc: UnaryMethodDefinitionish = {
   methodName: "CreateGroupPolicy",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateGroupPolicy.encode(this).finish();
@@ -256,7 +256,7 @@ export const MsgCreateGroupWithPolicyDesc: UnaryMethodDefinitionish = {
   methodName: "CreateGroupWithPolicy",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateGroupWithPolicy.encode(this).finish();
@@ -280,7 +280,7 @@ export const MsgUpdateGroupPolicyAdminDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateGroupPolicyAdmin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupPolicyAdmin.encode(this).finish();
@@ -304,7 +304,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyDesc: UnaryMethodDefinitionish = 
   methodName: "UpdateGroupPolicyDecisionPolicy",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupPolicyDecisionPolicy.encode(this).finish();
@@ -328,7 +328,7 @@ export const MsgUpdateGroupPolicyMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateGroupPolicyMetadata",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateGroupPolicyMetadata.encode(this).finish();
@@ -352,7 +352,7 @@ export const MsgSubmitProposalDesc: UnaryMethodDefinitionish = {
   methodName: "SubmitProposal",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSubmitProposal.encode(this).finish();
@@ -376,7 +376,7 @@ export const MsgWithdrawProposalDesc: UnaryMethodDefinitionish = {
   methodName: "WithdrawProposal",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgWithdrawProposal.encode(this).finish();
@@ -400,7 +400,7 @@ export const MsgVoteDesc: UnaryMethodDefinitionish = {
   methodName: "Vote",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgVote.encode(this).finish();
@@ -424,7 +424,7 @@ export const MsgExecDesc: UnaryMethodDefinitionish = {
   methodName: "Exec",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExec.encode(this).finish();
@@ -448,7 +448,7 @@ export const MsgLeaveGroupDesc: UnaryMethodDefinitionish = {
   methodName: "LeaveGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgLeaveGroup.encode(this).finish();

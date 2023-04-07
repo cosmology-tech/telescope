@@ -63,7 +63,7 @@ export const MsgLockTokensDesc: UnaryMethodDefinitionish = {
   methodName: "LockTokens",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgLockTokens.encode(this).finish();
@@ -87,7 +87,7 @@ export const MsgBeginUnlockingAllDesc: UnaryMethodDefinitionish = {
   methodName: "BeginUnlockingAll",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgBeginUnlockingAll.encode(this).finish();
@@ -111,7 +111,7 @@ export const MsgBeginUnlockingDesc: UnaryMethodDefinitionish = {
   methodName: "BeginUnlocking",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgBeginUnlocking.encode(this).finish();
@@ -135,7 +135,7 @@ export const MsgExtendLockupDesc: UnaryMethodDefinitionish = {
   methodName: "ExtendLockup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExtendLockup.encode(this).finish();
@@ -159,7 +159,7 @@ export const MsgForceUnlockDesc: UnaryMethodDefinitionish = {
   methodName: "ForceUnlock",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgForceUnlock.encode(this).finish();

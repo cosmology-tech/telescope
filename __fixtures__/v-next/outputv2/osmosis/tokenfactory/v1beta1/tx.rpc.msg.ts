@@ -55,7 +55,7 @@ export const MsgCreateDenomDesc: UnaryMethodDefinitionish = {
   methodName: "CreateDenom",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateDenom.encode(this).finish();
@@ -79,7 +79,7 @@ export const MsgMintDesc: UnaryMethodDefinitionish = {
   methodName: "Mint",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgMint.encode(this).finish();
@@ -103,7 +103,7 @@ export const MsgBurnDesc: UnaryMethodDefinitionish = {
   methodName: "Burn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgBurn.encode(this).finish();
@@ -127,7 +127,7 @@ export const MsgChangeAdminDesc: UnaryMethodDefinitionish = {
   methodName: "ChangeAdmin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChangeAdmin.encode(this).finish();
@@ -151,7 +151,7 @@ export const MsgSetDenomMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "SetDenomMetadata",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSetDenomMetadata.encode(this).finish();

@@ -128,7 +128,7 @@ export const QueryGroupInfoDesc: UnaryMethodDefinitionish = {
   methodName: "GroupInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupInfoRequest.encode(this).finish();
@@ -152,7 +152,7 @@ export const QueryGroupPolicyInfoDesc: UnaryMethodDefinitionish = {
   methodName: "GroupPolicyInfo",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupPolicyInfoRequest.encode(this).finish();
@@ -176,7 +176,7 @@ export const QueryGroupMembersDesc: UnaryMethodDefinitionish = {
   methodName: "GroupMembers",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupMembersRequest.encode(this).finish();
@@ -200,7 +200,7 @@ export const QueryGroupsByAdminDesc: UnaryMethodDefinitionish = {
   methodName: "GroupsByAdmin",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupsByAdminRequest.encode(this).finish();
@@ -224,7 +224,7 @@ export const QueryGroupPoliciesByGroupDesc: UnaryMethodDefinitionish = {
   methodName: "GroupPoliciesByGroup",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupPoliciesByGroupRequest.encode(this).finish();
@@ -248,7 +248,7 @@ export const QueryGroupPoliciesByAdminDesc: UnaryMethodDefinitionish = {
   methodName: "GroupPoliciesByAdmin",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupPoliciesByAdminRequest.encode(this).finish();
@@ -272,7 +272,7 @@ export const QueryProposalDesc: UnaryMethodDefinitionish = {
   methodName: "Proposal",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProposalRequest.encode(this).finish();
@@ -296,7 +296,7 @@ export const QueryProposalsByGroupPolicyDesc: UnaryMethodDefinitionish = {
   methodName: "ProposalsByGroupPolicy",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProposalsByGroupPolicyRequest.encode(this).finish();
@@ -320,7 +320,7 @@ export const QueryVoteByProposalVoterDesc: UnaryMethodDefinitionish = {
   methodName: "VoteByProposalVoter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryVoteByProposalVoterRequest.encode(this).finish();
@@ -344,7 +344,7 @@ export const QueryVotesByProposalDesc: UnaryMethodDefinitionish = {
   methodName: "VotesByProposal",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryVotesByProposalRequest.encode(this).finish();
@@ -368,7 +368,7 @@ export const QueryVotesByVoterDesc: UnaryMethodDefinitionish = {
   methodName: "VotesByVoter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryVotesByVoterRequest.encode(this).finish();
@@ -392,7 +392,7 @@ export const QueryGroupsByMemberDesc: UnaryMethodDefinitionish = {
   methodName: "GroupsByMember",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupsByMemberRequest.encode(this).finish();
@@ -416,7 +416,7 @@ export const QueryTallyResultDesc: UnaryMethodDefinitionish = {
   methodName: "TallyResult",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTallyResultRequest.encode(this).finish();

@@ -30,7 +30,7 @@ export const MsgSendDesc: UnaryMethodDefinitionish = {
   methodName: "Send",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSend.encode(this).finish();

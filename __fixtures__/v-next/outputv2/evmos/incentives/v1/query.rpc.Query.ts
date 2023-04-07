@@ -89,7 +89,7 @@ export const QueryIncentivesDesc: UnaryMethodDefinitionish = {
   methodName: "Incentives",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryIncentivesRequest.encode(this).finish();
@@ -113,7 +113,7 @@ export const QueryIncentiveDesc: UnaryMethodDefinitionish = {
   methodName: "Incentive",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryIncentiveRequest.encode(this).finish();
@@ -137,7 +137,7 @@ export const QueryGasMetersDesc: UnaryMethodDefinitionish = {
   methodName: "GasMeters",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGasMetersRequest.encode(this).finish();
@@ -161,7 +161,7 @@ export const QueryGasMeterDesc: UnaryMethodDefinitionish = {
   methodName: "GasMeter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGasMeterRequest.encode(this).finish();
@@ -185,7 +185,7 @@ export const QueryAllocationMetersDesc: UnaryMethodDefinitionish = {
   methodName: "AllocationMeters",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllocationMetersRequest.encode(this).finish();
@@ -209,7 +209,7 @@ export const QueryAllocationMeterDesc: UnaryMethodDefinitionish = {
   methodName: "AllocationMeter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllocationMeterRequest.encode(this).finish();
@@ -233,7 +233,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();

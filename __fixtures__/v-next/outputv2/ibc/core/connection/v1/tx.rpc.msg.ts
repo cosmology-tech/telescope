@@ -60,7 +60,7 @@ export const MsgConnectionOpenInitDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenInit.encode(this).finish();
@@ -84,7 +84,7 @@ export const MsgConnectionOpenTryDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenTry",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenTry.encode(this).finish();
@@ -108,7 +108,7 @@ export const MsgConnectionOpenAckDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenAck",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenAck.encode(this).finish();
@@ -132,7 +132,7 @@ export const MsgConnectionOpenConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenConfirm.encode(this).finish();

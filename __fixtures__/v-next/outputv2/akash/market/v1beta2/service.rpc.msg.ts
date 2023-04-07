@@ -65,7 +65,7 @@ export const MsgCreateBidDesc: UnaryMethodDefinitionish = {
   methodName: "CreateBid",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateBid.encode(this).finish();
@@ -89,7 +89,7 @@ export const MsgCloseBidDesc: UnaryMethodDefinitionish = {
   methodName: "CloseBid",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseBid.encode(this).finish();
@@ -113,7 +113,7 @@ export const MsgWithdrawLeaseDesc: UnaryMethodDefinitionish = {
   methodName: "WithdrawLease",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgWithdrawLease.encode(this).finish();
@@ -137,7 +137,7 @@ export const MsgCreateLeaseDesc: UnaryMethodDefinitionish = {
   methodName: "CreateLease",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateLease.encode(this).finish();
@@ -161,7 +161,7 @@ export const MsgCloseLeaseDesc: UnaryMethodDefinitionish = {
   methodName: "CloseLease",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseLease.encode(this).finish();

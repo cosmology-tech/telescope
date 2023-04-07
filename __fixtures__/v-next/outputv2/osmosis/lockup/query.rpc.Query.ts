@@ -169,7 +169,7 @@ export const QueryModuleBalanceDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleBalance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ModuleBalanceRequest.encode(this).finish();
@@ -193,7 +193,7 @@ export const QueryModuleLockedAmountDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleLockedAmount",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ModuleLockedAmountRequest.encode(this).finish();
@@ -217,7 +217,7 @@ export const QueryAccountUnlockableCoinsDesc: UnaryMethodDefinitionish = {
   methodName: "AccountUnlockableCoins",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountUnlockableCoinsRequest.encode(this).finish();
@@ -241,7 +241,7 @@ export const QueryAccountUnlockingCoinsDesc: UnaryMethodDefinitionish = {
   methodName: "AccountUnlockingCoins",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountUnlockingCoinsRequest.encode(this).finish();
@@ -265,7 +265,7 @@ export const QueryAccountLockedCoinsDesc: UnaryMethodDefinitionish = {
   methodName: "AccountLockedCoins",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedCoinsRequest.encode(this).finish();
@@ -289,7 +289,7 @@ export const QueryAccountLockedPastTimeDesc: UnaryMethodDefinitionish = {
   methodName: "AccountLockedPastTime",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedPastTimeRequest.encode(this).finish();
@@ -313,7 +313,7 @@ export const QueryAccountLockedPastTimeNotUnlockingOnlyDesc: UnaryMethodDefiniti
   methodName: "AccountLockedPastTimeNotUnlockingOnly",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedPastTimeNotUnlockingOnlyRequest.encode(this).finish();
@@ -337,7 +337,7 @@ export const QueryAccountUnlockedBeforeTimeDesc: UnaryMethodDefinitionish = {
   methodName: "AccountUnlockedBeforeTime",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountUnlockedBeforeTimeRequest.encode(this).finish();
@@ -361,7 +361,7 @@ export const QueryAccountLockedPastTimeDenomDesc: UnaryMethodDefinitionish = {
   methodName: "AccountLockedPastTimeDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedPastTimeDenomRequest.encode(this).finish();
@@ -385,7 +385,7 @@ export const QueryLockedDenomDesc: UnaryMethodDefinitionish = {
   methodName: "LockedDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return LockedDenomRequest.encode(this).finish();
@@ -409,7 +409,7 @@ export const QueryLockedByIDDesc: UnaryMethodDefinitionish = {
   methodName: "LockedByID",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return LockedRequest.encode(this).finish();
@@ -433,7 +433,7 @@ export const QuerySyntheticLockupsByLockupIDDesc: UnaryMethodDefinitionish = {
   methodName: "SyntheticLockupsByLockupID",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SyntheticLockupsByLockupIDRequest.encode(this).finish();
@@ -457,7 +457,7 @@ export const QueryAccountLockedLongerDurationDesc: UnaryMethodDefinitionish = {
   methodName: "AccountLockedLongerDuration",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedLongerDurationRequest.encode(this).finish();
@@ -481,7 +481,7 @@ export const QueryAccountLockedDurationDesc: UnaryMethodDefinitionish = {
   methodName: "AccountLockedDuration",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedDurationRequest.encode(this).finish();
@@ -505,7 +505,7 @@ export const QueryAccountLockedLongerDurationNotUnlockingOnlyDesc: UnaryMethodDe
   methodName: "AccountLockedLongerDurationNotUnlockingOnly",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedLongerDurationNotUnlockingOnlyRequest.encode(this).finish();
@@ -529,7 +529,7 @@ export const QueryAccountLockedLongerDurationDenomDesc: UnaryMethodDefinitionish
   methodName: "AccountLockedLongerDurationDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AccountLockedLongerDurationDenomRequest.encode(this).finish();
@@ -553,7 +553,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();

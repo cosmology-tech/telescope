@@ -50,7 +50,7 @@ export const QueryDenomTraceDesc: UnaryMethodDefinitionish = {
   methodName: "DenomTrace",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomTraceRequest.encode(this).finish();
@@ -74,7 +74,7 @@ export const QueryDenomTracesDesc: UnaryMethodDefinitionish = {
   methodName: "DenomTraces",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomTracesRequest.encode(this).finish();
@@ -98,7 +98,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();

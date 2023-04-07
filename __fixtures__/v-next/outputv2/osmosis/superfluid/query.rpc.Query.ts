@@ -166,7 +166,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -190,7 +190,7 @@ export const QueryAssetTypeDesc: UnaryMethodDefinitionish = {
   methodName: "AssetType",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AssetTypeRequest.encode(this).finish();
@@ -214,7 +214,7 @@ export const QueryAllAssetsDesc: UnaryMethodDefinitionish = {
   methodName: "AllAssets",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AllAssetsRequest.encode(this).finish();
@@ -238,7 +238,7 @@ export const QueryAssetMultiplierDesc: UnaryMethodDefinitionish = {
   methodName: "AssetMultiplier",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AssetMultiplierRequest.encode(this).finish();
@@ -262,7 +262,7 @@ export const QueryAllIntermediaryAccountsDesc: UnaryMethodDefinitionish = {
   methodName: "AllIntermediaryAccounts",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AllIntermediaryAccountsRequest.encode(this).finish();
@@ -286,7 +286,7 @@ export const QueryConnectedIntermediaryAccountDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectedIntermediaryAccount",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ConnectedIntermediaryAccountRequest.encode(this).finish();
@@ -310,7 +310,7 @@ export const QueryTotalDelegationByValidatorForDenomDesc: UnaryMethodDefinitioni
   methodName: "TotalDelegationByValidatorForDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalDelegationByValidatorForDenomRequest.encode(this).finish();
@@ -334,7 +334,7 @@ export const QueryTotalSuperfluidDelegationsDesc: UnaryMethodDefinitionish = {
   methodName: "TotalSuperfluidDelegations",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return TotalSuperfluidDelegationsRequest.encode(this).finish();
@@ -358,7 +358,7 @@ export const QuerySuperfluidDelegationAmountDesc: UnaryMethodDefinitionish = {
   methodName: "SuperfluidDelegationAmount",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SuperfluidDelegationAmountRequest.encode(this).finish();
@@ -382,7 +382,7 @@ export const QuerySuperfluidDelegationsByDelegatorDesc: UnaryMethodDefinitionish
   methodName: "SuperfluidDelegationsByDelegator",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SuperfluidDelegationsByDelegatorRequest.encode(this).finish();
@@ -406,7 +406,7 @@ export const QuerySuperfluidUndelegationsByDelegatorDesc: UnaryMethodDefinitioni
   methodName: "SuperfluidUndelegationsByDelegator",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SuperfluidUndelegationsByDelegatorRequest.encode(this).finish();
@@ -430,7 +430,7 @@ export const QuerySuperfluidDelegationsByValidatorDenomDesc: UnaryMethodDefiniti
   methodName: "SuperfluidDelegationsByValidatorDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SuperfluidDelegationsByValidatorDenomRequest.encode(this).finish();
@@ -454,7 +454,7 @@ export const QueryEstimateSuperfluidDelegatedAmountByValidatorDenomDesc: UnaryMe
   methodName: "EstimateSuperfluidDelegatedAmountByValidatorDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode(this).finish();
@@ -478,7 +478,7 @@ export const QueryTotalDelegationByDelegatorDesc: UnaryMethodDefinitionish = {
   methodName: "TotalDelegationByDelegator",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalDelegationByDelegatorRequest.encode(this).finish();
@@ -502,7 +502,7 @@ export const QueryUnpoolWhitelistDesc: UnaryMethodDefinitionish = {
   methodName: "UnpoolWhitelist",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUnpoolWhitelistRequest.encode(this).finish();

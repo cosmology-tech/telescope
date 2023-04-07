@@ -74,7 +74,7 @@ export const QueryCurrentPlanDesc: UnaryMethodDefinitionish = {
   methodName: "CurrentPlan",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCurrentPlanRequest.encode(this).finish();
@@ -98,7 +98,7 @@ export const QueryAppliedPlanDesc: UnaryMethodDefinitionish = {
   methodName: "AppliedPlan",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAppliedPlanRequest.encode(this).finish();
@@ -122,7 +122,7 @@ export const QueryUpgradedConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "UpgradedConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUpgradedConsensusStateRequest.encode(this).finish();
@@ -146,7 +146,7 @@ export const QueryModuleVersionsDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleVersions",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryModuleVersionsRequest.encode(this).finish();
@@ -170,7 +170,7 @@ export const QueryAuthorityDesc: UnaryMethodDefinitionish = {
   methodName: "Authority",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAuthorityRequest.encode(this).finish();

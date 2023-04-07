@@ -45,7 +45,7 @@ export const MsgConvertCoinDesc: UnaryMethodDefinitionish = {
   methodName: "ConvertCoin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConvertCoin.encode(this).finish();
@@ -69,7 +69,7 @@ export const MsgConvertERC20Desc: UnaryMethodDefinitionish = {
   methodName: "ConvertERC20",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConvertERC20.encode(this).finish();

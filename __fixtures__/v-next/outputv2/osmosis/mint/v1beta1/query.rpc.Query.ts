@@ -39,7 +39,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -63,7 +63,7 @@ export const QueryEpochProvisionsDesc: UnaryMethodDefinitionish = {
   methodName: "EpochProvisions",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryEpochProvisionsRequest.encode(this).finish();

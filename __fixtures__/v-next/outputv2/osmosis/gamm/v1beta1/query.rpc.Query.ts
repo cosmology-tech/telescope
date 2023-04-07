@@ -146,7 +146,7 @@ export const QueryPoolsDesc: UnaryMethodDefinitionish = {
   methodName: "Pools",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolsRequest.encode(this).finish();
@@ -170,7 +170,7 @@ export const QueryNumPoolsDesc: UnaryMethodDefinitionish = {
   methodName: "NumPools",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNumPoolsRequest.encode(this).finish();
@@ -194,7 +194,7 @@ export const QueryTotalLiquidityDesc: UnaryMethodDefinitionish = {
   methodName: "TotalLiquidity",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalLiquidityRequest.encode(this).finish();
@@ -218,7 +218,7 @@ export const QueryPoolsWithFilterDesc: UnaryMethodDefinitionish = {
   methodName: "PoolsWithFilter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolsWithFilterRequest.encode(this).finish();
@@ -242,7 +242,7 @@ export const QueryPoolDesc: UnaryMethodDefinitionish = {
   methodName: "Pool",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolRequest.encode(this).finish();
@@ -266,7 +266,7 @@ export const QueryPoolTypeDesc: UnaryMethodDefinitionish = {
   methodName: "PoolType",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolTypeRequest.encode(this).finish();
@@ -290,7 +290,7 @@ export const QueryCalcJoinPoolNoSwapSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcJoinPoolNoSwapShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcJoinPoolNoSwapSharesRequest.encode(this).finish();
@@ -314,7 +314,7 @@ export const QueryCalcJoinPoolSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcJoinPoolShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcJoinPoolSharesRequest.encode(this).finish();
@@ -338,7 +338,7 @@ export const QueryCalcExitPoolCoinsFromSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcExitPoolCoinsFromShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcExitPoolCoinsFromSharesRequest.encode(this).finish();
@@ -362,7 +362,7 @@ export const QueryPoolParamsDesc: UnaryMethodDefinitionish = {
   methodName: "PoolParams",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolParamsRequest.encode(this).finish();
@@ -386,7 +386,7 @@ export const QueryTotalPoolLiquidityDesc: UnaryMethodDefinitionish = {
   methodName: "TotalPoolLiquidity",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalPoolLiquidityRequest.encode(this).finish();
@@ -410,7 +410,7 @@ export const QueryTotalSharesDesc: UnaryMethodDefinitionish = {
   methodName: "TotalShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalSharesRequest.encode(this).finish();
@@ -434,7 +434,7 @@ export const QuerySpotPriceDesc: UnaryMethodDefinitionish = {
   methodName: "SpotPrice",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySpotPriceRequest.encode(this).finish();
@@ -458,7 +458,7 @@ export const QueryEstimateSwapExactAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "EstimateSwapExactAmountIn",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySwapExactAmountInRequest.encode(this).finish();
@@ -482,7 +482,7 @@ export const QueryEstimateSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "EstimateSwapExactAmountOut",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySwapExactAmountOutRequest.encode(this).finish();

@@ -42,7 +42,7 @@ export const QueryProvidersDesc: UnaryMethodDefinitionish = {
   methodName: "Providers",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProvidersRequest.encode(this).finish();
@@ -66,7 +66,7 @@ export const QueryProviderDesc: UnaryMethodDefinitionish = {
   methodName: "Provider",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProviderRequest.encode(this).finish();

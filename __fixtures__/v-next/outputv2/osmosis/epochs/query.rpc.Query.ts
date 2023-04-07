@@ -39,7 +39,7 @@ export const QueryEpochInfosDesc: UnaryMethodDefinitionish = {
   methodName: "EpochInfos",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryEpochsInfoRequest.encode(this).finish();
@@ -63,7 +63,7 @@ export const QueryCurrentEpochDesc: UnaryMethodDefinitionish = {
   methodName: "CurrentEpoch",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCurrentEpochRequest.encode(this).finish();

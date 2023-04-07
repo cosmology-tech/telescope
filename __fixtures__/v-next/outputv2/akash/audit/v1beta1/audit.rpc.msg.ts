@@ -39,7 +39,7 @@ export const MsgSignProviderAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "SignProviderAttributes",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSignProviderAttributes.encode(this).finish();
@@ -63,7 +63,7 @@ export const MsgDeleteProviderAttributesDesc: UnaryMethodDefinitionish = {
   methodName: "DeleteProviderAttributes",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDeleteProviderAttributes.encode(this).finish();

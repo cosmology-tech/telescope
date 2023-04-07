@@ -60,7 +60,7 @@ export const QueryTotalUnclaimedDesc: UnaryMethodDefinitionish = {
   methodName: "TotalUnclaimed",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalUnclaimedRequest.encode(this).finish();
@@ -84,7 +84,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -108,7 +108,7 @@ export const QueryClaimsRecordsDesc: UnaryMethodDefinitionish = {
   methodName: "ClaimsRecords",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClaimsRecordsRequest.encode(this).finish();
@@ -132,7 +132,7 @@ export const QueryClaimsRecordDesc: UnaryMethodDefinitionish = {
   methodName: "ClaimsRecord",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryClaimsRecordRequest.encode(this).finish();

@@ -47,7 +47,7 @@ export const MsgCreateProviderDesc: UnaryMethodDefinitionish = {
   methodName: "CreateProvider",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateProvider.encode(this).finish();
@@ -71,7 +71,7 @@ export const MsgUpdateProviderDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateProvider",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateProvider.encode(this).finish();
@@ -95,7 +95,7 @@ export const MsgDeleteProviderDesc: UnaryMethodDefinitionish = {
   methodName: "DeleteProvider",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDeleteProvider.encode(this).finish();

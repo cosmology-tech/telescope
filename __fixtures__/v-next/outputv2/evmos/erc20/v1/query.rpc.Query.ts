@@ -51,7 +51,7 @@ export const QueryTokenPairsDesc: UnaryMethodDefinitionish = {
   methodName: "TokenPairs",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTokenPairsRequest.encode(this).finish();
@@ -75,7 +75,7 @@ export const QueryTokenPairDesc: UnaryMethodDefinitionish = {
   methodName: "TokenPair",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTokenPairRequest.encode(this).finish();
@@ -99,7 +99,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();

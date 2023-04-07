@@ -31,7 +31,7 @@ export const QuerySpotPriceDesc: UnaryMethodDefinitionish = {
   methodName: "SpotPrice",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySpotPriceRequest.encode(this).finish();

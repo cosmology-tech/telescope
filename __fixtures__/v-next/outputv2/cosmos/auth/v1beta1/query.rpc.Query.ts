@@ -87,7 +87,7 @@ export const QueryAccountsDesc: UnaryMethodDefinitionish = {
   methodName: "Accounts",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAccountsRequest.encode(this).finish();
@@ -111,7 +111,7 @@ export const QueryAccountDesc: UnaryMethodDefinitionish = {
   methodName: "Account",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAccountRequest.encode(this).finish();
@@ -135,7 +135,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -159,7 +159,7 @@ export const QueryModuleAccountsDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleAccounts",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryModuleAccountsRequest.encode(this).finish();
@@ -183,7 +183,7 @@ export const QueryBech32PrefixDesc: UnaryMethodDefinitionish = {
   methodName: "Bech32Prefix",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return Bech32PrefixRequest.encode(this).finish();
@@ -207,7 +207,7 @@ export const QueryAddressBytesToStringDesc: UnaryMethodDefinitionish = {
   methodName: "AddressBytesToString",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AddressBytesToStringRequest.encode(this).finish();
@@ -231,7 +231,7 @@ export const QueryAddressStringToBytesDesc: UnaryMethodDefinitionish = {
   methodName: "AddressStringToBytes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return AddressStringToBytesRequest.encode(this).finish();

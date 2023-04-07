@@ -47,7 +47,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -71,7 +71,7 @@ export const QueryInflationDesc: UnaryMethodDefinitionish = {
   methodName: "Inflation",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryInflationRequest.encode(this).finish();
@@ -95,7 +95,7 @@ export const QueryAnnualProvisionsDesc: UnaryMethodDefinitionish = {
   methodName: "AnnualProvisions",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAnnualProvisionsRequest.encode(this).finish();

@@ -28,7 +28,7 @@ export const MsgCreateBalancerPoolDesc: UnaryMethodDefinitionish = {
   methodName: "CreateBalancerPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateBalancerPool.encode(this).finish();

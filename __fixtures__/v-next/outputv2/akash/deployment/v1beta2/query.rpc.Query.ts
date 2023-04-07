@@ -51,7 +51,7 @@ export const QueryDeploymentsDesc: UnaryMethodDefinitionish = {
   methodName: "Deployments",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDeploymentsRequest.encode(this).finish();
@@ -75,7 +75,7 @@ export const QueryDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "Deployment",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDeploymentRequest.encode(this).finish();
@@ -99,7 +99,7 @@ export const QueryGroupDesc: UnaryMethodDefinitionish = {
   methodName: "Group",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGroupRequest.encode(this).finish();

@@ -42,7 +42,7 @@ export const QueryEvidenceDesc: UnaryMethodDefinitionish = {
   methodName: "Evidence",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryEvidenceRequest.encode(this).finish();
@@ -66,7 +66,7 @@ export const QueryAllEvidenceDesc: UnaryMethodDefinitionish = {
   methodName: "AllEvidence",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllEvidenceRequest.encode(this).finish();

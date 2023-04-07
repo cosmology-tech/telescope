@@ -34,7 +34,7 @@ export const MsgUnjailDesc: UnaryMethodDefinitionish = {
   methodName: "Unjail",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUnjail.encode(this).finish();

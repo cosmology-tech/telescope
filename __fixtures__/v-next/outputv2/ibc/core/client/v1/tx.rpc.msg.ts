@@ -55,7 +55,7 @@ export const MsgCreateClientDesc: UnaryMethodDefinitionish = {
   methodName: "CreateClient",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateClient.encode(this).finish();
@@ -79,7 +79,7 @@ export const MsgUpdateClientDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateClient",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateClient.encode(this).finish();
@@ -103,7 +103,7 @@ export const MsgUpgradeClientDesc: UnaryMethodDefinitionish = {
   methodName: "UpgradeClient",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpgradeClient.encode(this).finish();
@@ -127,7 +127,7 @@ export const MsgSubmitMisbehaviourDesc: UnaryMethodDefinitionish = {
   methodName: "SubmitMisbehaviour",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSubmitMisbehaviour.encode(this).finish();

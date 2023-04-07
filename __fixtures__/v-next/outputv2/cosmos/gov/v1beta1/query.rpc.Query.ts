@@ -88,7 +88,7 @@ export const QueryProposalDesc: UnaryMethodDefinitionish = {
   methodName: "Proposal",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProposalRequest.encode(this).finish();
@@ -112,7 +112,7 @@ export const QueryProposalsDesc: UnaryMethodDefinitionish = {
   methodName: "Proposals",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryProposalsRequest.encode(this).finish();
@@ -136,7 +136,7 @@ export const QueryVoteDesc: UnaryMethodDefinitionish = {
   methodName: "Vote",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryVoteRequest.encode(this).finish();
@@ -160,7 +160,7 @@ export const QueryVotesDesc: UnaryMethodDefinitionish = {
   methodName: "Votes",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryVotesRequest.encode(this).finish();
@@ -184,7 +184,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -208,7 +208,7 @@ export const QueryDepositDesc: UnaryMethodDefinitionish = {
   methodName: "Deposit",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDepositRequest.encode(this).finish();
@@ -232,7 +232,7 @@ export const QueryDepositsDesc: UnaryMethodDefinitionish = {
   methodName: "Deposits",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDepositsRequest.encode(this).finish();
@@ -256,7 +256,7 @@ export const QueryTallyResultDesc: UnaryMethodDefinitionish = {
   methodName: "TallyResult",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTallyResultRequest.encode(this).finish();

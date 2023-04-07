@@ -67,7 +67,7 @@ export const MsgSetWithdrawAddressDesc: UnaryMethodDefinitionish = {
   methodName: "SetWithdrawAddress",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSetWithdrawAddress.encode(this).finish();
@@ -91,7 +91,7 @@ export const MsgWithdrawDelegatorRewardDesc: UnaryMethodDefinitionish = {
   methodName: "WithdrawDelegatorReward",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgWithdrawDelegatorReward.encode(this).finish();
@@ -115,7 +115,7 @@ export const MsgWithdrawValidatorCommissionDesc: UnaryMethodDefinitionish = {
   methodName: "WithdrawValidatorCommission",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgWithdrawValidatorCommission.encode(this).finish();
@@ -139,7 +139,7 @@ export const MsgFundCommunityPoolDesc: UnaryMethodDefinitionish = {
   methodName: "FundCommunityPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgFundCommunityPool.encode(this).finish();

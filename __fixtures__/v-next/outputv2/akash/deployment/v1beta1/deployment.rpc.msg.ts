@@ -80,7 +80,7 @@ export const MsgCreateDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "CreateDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateDeployment.encode(this).finish();
@@ -104,7 +104,7 @@ export const MsgDepositDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "DepositDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDepositDeployment.encode(this).finish();
@@ -128,7 +128,7 @@ export const MsgUpdateDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateDeployment.encode(this).finish();
@@ -152,7 +152,7 @@ export const MsgCloseDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "CloseDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseDeployment.encode(this).finish();
@@ -176,7 +176,7 @@ export const MsgCloseGroupDesc: UnaryMethodDefinitionish = {
   methodName: "CloseGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseGroup.encode(this).finish();
@@ -200,7 +200,7 @@ export const MsgPauseGroupDesc: UnaryMethodDefinitionish = {
   methodName: "PauseGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgPauseGroup.encode(this).finish();
@@ -224,7 +224,7 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
   methodName: "StartGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgStartGroup.encode(this).finish();

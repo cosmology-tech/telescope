@@ -107,7 +107,7 @@ export const MsgChannelOpenInitDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenInit.encode(this).finish();
@@ -131,7 +131,7 @@ export const MsgChannelOpenTryDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenTry",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenTry.encode(this).finish();
@@ -155,7 +155,7 @@ export const MsgChannelOpenAckDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenAck",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenAck.encode(this).finish();
@@ -179,7 +179,7 @@ export const MsgChannelOpenConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenConfirm.encode(this).finish();
@@ -203,7 +203,7 @@ export const MsgChannelCloseInitDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelCloseInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelCloseInit.encode(this).finish();
@@ -227,7 +227,7 @@ export const MsgChannelCloseConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelCloseConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelCloseConfirm.encode(this).finish();
@@ -251,7 +251,7 @@ export const MsgRecvPacketDesc: UnaryMethodDefinitionish = {
   methodName: "RecvPacket",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRecvPacket.encode(this).finish();
@@ -275,7 +275,7 @@ export const MsgTimeoutDesc: UnaryMethodDefinitionish = {
   methodName: "Timeout",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgTimeout.encode(this).finish();
@@ -299,7 +299,7 @@ export const MsgTimeoutOnCloseDesc: UnaryMethodDefinitionish = {
   methodName: "TimeoutOnClose",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgTimeoutOnClose.encode(this).finish();
@@ -323,7 +323,7 @@ export const MsgAcknowledgementDesc: UnaryMethodDefinitionish = {
   methodName: "Acknowledgement",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgAcknowledgement.encode(this).finish();

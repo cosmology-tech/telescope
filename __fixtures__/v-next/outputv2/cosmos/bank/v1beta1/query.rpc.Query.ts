@@ -110,7 +110,7 @@ export const QueryBalanceDesc: UnaryMethodDefinitionish = {
   methodName: "Balance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBalanceRequest.encode(this).finish();
@@ -134,7 +134,7 @@ export const QueryAllBalancesDesc: UnaryMethodDefinitionish = {
   methodName: "AllBalances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllBalancesRequest.encode(this).finish();
@@ -158,7 +158,7 @@ export const QuerySpendableBalancesDesc: UnaryMethodDefinitionish = {
   methodName: "SpendableBalances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySpendableBalancesRequest.encode(this).finish();
@@ -182,7 +182,7 @@ export const QueryTotalSupplyDesc: UnaryMethodDefinitionish = {
   methodName: "TotalSupply",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalSupplyRequest.encode(this).finish();
@@ -206,7 +206,7 @@ export const QuerySupplyOfDesc: UnaryMethodDefinitionish = {
   methodName: "SupplyOf",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySupplyOfRequest.encode(this).finish();
@@ -230,7 +230,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -254,7 +254,7 @@ export const QueryDenomMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "DenomMetadata",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomMetadataRequest.encode(this).finish();
@@ -278,7 +278,7 @@ export const QueryDenomsMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "DenomsMetadata",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomsMetadataRequest.encode(this).finish();
@@ -302,7 +302,7 @@ export const QueryDenomOwnersDesc: UnaryMethodDefinitionish = {
   methodName: "DenomOwners",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomOwnersRequest.encode(this).finish();

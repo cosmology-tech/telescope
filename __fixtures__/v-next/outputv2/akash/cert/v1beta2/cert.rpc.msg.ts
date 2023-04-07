@@ -38,7 +38,7 @@ export const MsgCreateCertificateDesc: UnaryMethodDefinitionish = {
   methodName: "CreateCertificate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateCertificate.encode(this).finish();
@@ -62,7 +62,7 @@ export const MsgRevokeCertificateDesc: UnaryMethodDefinitionish = {
   methodName: "RevokeCertificate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRevokeCertificate.encode(this).finish();

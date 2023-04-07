@@ -56,7 +56,7 @@ export const QueryGrantsDesc: UnaryMethodDefinitionish = {
   methodName: "Grants",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGrantsRequest.encode(this).finish();
@@ -80,7 +80,7 @@ export const QueryGranterGrantsDesc: UnaryMethodDefinitionish = {
   methodName: "GranterGrants",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGranterGrantsRequest.encode(this).finish();
@@ -104,7 +104,7 @@ export const QueryGranteeGrantsDesc: UnaryMethodDefinitionish = {
   methodName: "GranteeGrants",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryGranteeGrantsRequest.encode(this).finish();

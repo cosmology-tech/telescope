@@ -36,7 +36,7 @@ export const MsgCreateGaugeDesc: UnaryMethodDefinitionish = {
   methodName: "CreateGauge",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateGauge.encode(this).finish();
@@ -60,7 +60,7 @@ export const MsgAddToGaugeDesc: UnaryMethodDefinitionish = {
   methodName: "AddToGauge",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgAddToGauge.encode(this).finish();

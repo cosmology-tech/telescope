@@ -72,7 +72,7 @@ export const MsgStoreCodeDesc: UnaryMethodDefinitionish = {
   methodName: "StoreCode",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgStoreCode.encode(this).finish();
@@ -96,7 +96,7 @@ export const MsgInstantiateContractDesc: UnaryMethodDefinitionish = {
   methodName: "InstantiateContract",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgInstantiateContract.encode(this).finish();
@@ -120,7 +120,7 @@ export const MsgExecuteContractDesc: UnaryMethodDefinitionish = {
   methodName: "ExecuteContract",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExecuteContract.encode(this).finish();
@@ -144,7 +144,7 @@ export const MsgMigrateContractDesc: UnaryMethodDefinitionish = {
   methodName: "MigrateContract",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgMigrateContract.encode(this).finish();
@@ -168,7 +168,7 @@ export const MsgUpdateAdminDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateAdmin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateAdmin.encode(this).finish();
@@ -192,7 +192,7 @@ export const MsgClearAdminDesc: UnaryMethodDefinitionish = {
   methodName: "ClearAdmin",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgClearAdmin.encode(this).finish();

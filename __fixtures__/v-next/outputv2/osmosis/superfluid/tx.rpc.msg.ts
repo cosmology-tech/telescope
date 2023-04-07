@@ -64,7 +64,7 @@ export const MsgSuperfluidDelegateDesc: UnaryMethodDefinitionish = {
   methodName: "SuperfluidDelegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSuperfluidDelegate.encode(this).finish();
@@ -88,7 +88,7 @@ export const MsgSuperfluidUndelegateDesc: UnaryMethodDefinitionish = {
   methodName: "SuperfluidUndelegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSuperfluidUndelegate.encode(this).finish();
@@ -112,7 +112,7 @@ export const MsgSuperfluidUnbondLockDesc: UnaryMethodDefinitionish = {
   methodName: "SuperfluidUnbondLock",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSuperfluidUnbondLock.encode(this).finish();
@@ -136,7 +136,7 @@ export const MsgLockAndSuperfluidDelegateDesc: UnaryMethodDefinitionish = {
   methodName: "LockAndSuperfluidDelegate",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgLockAndSuperfluidDelegate.encode(this).finish();
@@ -160,7 +160,7 @@ export const MsgUnPoolWhitelistedPoolDesc: UnaryMethodDefinitionish = {
   methodName: "UnPoolWhitelistedPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUnPoolWhitelistedPool.encode(this).finish();
