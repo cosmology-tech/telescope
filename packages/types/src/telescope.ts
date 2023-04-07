@@ -99,6 +99,7 @@ interface TelescopeOpts {
         dir: string;
         filename: string;
         packages: string[];
+        protos?: string[];
         addToBundle: boolean;
     };
 
@@ -126,6 +127,7 @@ interface TelescopeOpts {
             dir: string;
             filename?: string;
             packages: string[];
+            protos?: string[];
             addToBundle: boolean;
             methodName?: string;
         }[];
@@ -150,6 +152,7 @@ interface TelescopeOpts {
             dir: string;
             filename?: string;
             packages: string[];
+            protos?: string[];
             addToBundle: boolean;
             methodNameQuery?: string;
             methodNameTx?: string;

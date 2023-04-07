@@ -1,5 +1,5 @@
 import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@osmonauts/types';
-import { ProtoStore, getObjectName } from '@osmonauts/proto-parser';
+import { ProtoStore, getObjectName, isRefExcluded } from '@osmonauts/proto-parser';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 import { getPluginValue } from '../plugins';
 import { TelescopeBaseTypes } from './types';
@@ -48,9 +48,8 @@ export class GenericParseContext implements ParseContext {
     }
 
     isExcluded() {
-        const packages = this.pluginValue('prototypes.excluded.packages') ?? [];
-        const protos = this.pluginValue('prototypes.excluded.protos') ?? [];
-        return packages.includes(this.ref.proto.package) || protos.includes(this.ref.filename);
+        const excluded = this.pluginValue('prototypes.excluded');
+        return isRefExcluded(this.ref, excluded)
     }
 
     addUtil(util) {

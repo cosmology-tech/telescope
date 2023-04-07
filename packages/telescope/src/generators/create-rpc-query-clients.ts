@@ -76,6 +76,7 @@ export const plugin = (
         const filename = bundler.getFilename(localname);
 
         const bundlerFile = {
+          proto: c.ref.filename,
           package: c.ref.proto.package,
           localname,
           filename
