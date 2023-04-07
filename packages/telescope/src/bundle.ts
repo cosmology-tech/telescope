@@ -1,4 +1,4 @@
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoStore, isRefExcluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
 import { importNamespace } from '@osmonauts/ast';
 import * as dotty from 'dotty';
 import { TelescopeBuilder } from './index';
@@ -21,15 +21,12 @@ export const getPackagesBundled = (store: ProtoStore) => {
     const objectified = {};
     const pkgs = getPackages(store);
     Object.keys(pkgs).forEach(key => {
-        if (store.options.prototypes?.excluded?.packages?.includes?.(key)) return;
+        if (isRefExcluded(createEmptyProtoRef(key), store.options.prototypes?.excluded)) return;
         const files = pkgs[key];
         dotty.put(objectified, key, {
             pkg: key,
             files: files.filter(file => {
-                // TODO implement pattern
-                const val = store.options.prototypes?.excluded?.protos?.includes?.(file.filename);
-                if (typeof val === 'undefined') return true;
-                return !val;
+                return !isRefExcluded(createEmptyProtoRef(key, file.filename), store.options.prototypes?.excluded);
             })
         });
     });
@@ -54,7 +51,7 @@ export const bundlePackages = (store: ProtoStore) => {
     });
 };
 
-// TODO review bundle registry methods 
+// TODO review bundle registry methods
 export const bundleRegistries = (telescope: TelescopeBuilder) => {
     const withMutations = telescope.contexts.filter(
         ctx => ctx.mutations.length

@@ -155,7 +155,7 @@ export const isRefExcluded = (
       protos?: string[];
   }
 ) => {
-  return !isRefIncluded(ref, exclude);
+  return isRefIncluded(ref, exclude);
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
