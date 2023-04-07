@@ -63,7 +63,7 @@ exports[`test gRPC-web Msg Client 4`] = `
   methodName: "Grant",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgGrant.encode(this).finish();
@@ -90,7 +90,7 @@ exports[`test gRPC-web Msg Client 5`] = `
   methodName: "Exec",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExec.encode(this).finish();
@@ -117,7 +117,7 @@ exports[`test gRPC-web Msg Client 6`] = `
   methodName: "Revoke",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRevoke.encode(this).finish();

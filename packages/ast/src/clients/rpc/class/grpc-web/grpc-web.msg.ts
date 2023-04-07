@@ -368,7 +368,7 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
                                     t.booleanLiteral(false)
                                 ),
                                 t.objectProperty(
-                                    t.identifier('reponseStream'),
+                                    t.identifier('responseStream'),
                                     t.booleanLiteral(false)
                                 ),
                                 t.objectProperty(
