@@ -1,5 +1,5 @@
 import * as dotty from 'dotty';
-import { getNestedProto, isRefIncluded, getProtoRefByPackage } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcTmFactory } from '@osmonauts/ast';
@@ -70,6 +70,7 @@ const makeRPC = (
         dir: string;
         filename?: string;
         packages: string[];
+        protos?: string[];
         addToBundle: boolean;
         methodNameQuery?: string;
         methodNameTx?: string;
@@ -77,6 +78,7 @@ const makeRPC = (
 ) => {
     const dir = rpc.dir;
     const packages = rpc.packages;
+    const protos = rpc.protos;
     const methodName = rpc.methodNameQuery ?? 'createRPCQueryClient'
     const localname = getFileName(dir, rpc.filename ?? 'rpc');
 
@@ -86,8 +88,9 @@ const makeRPC = (
         // ADD all option
         // which defaults to including cosmos
         // and defaults to base for each
-        if (!isRefIncluded(getProtoRefByPackage(file.package), {
-          packages
+        if (!isRefIncluded(createEmptyProtoRef(file.package, file.proto), {
+          packages,
+          protos
         })) {
             return;
         }

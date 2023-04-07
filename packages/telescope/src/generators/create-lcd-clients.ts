@@ -96,6 +96,7 @@ export const plugin = (
         bundler.addToBundle(c, localname);
 
         return {
+            proto: c.ref.filename,
             // TODO use this to build LCD aggregators with scopes
             package: c.ref.proto.package,
             localname,

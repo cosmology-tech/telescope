@@ -84,6 +84,13 @@ export const createTypeUrlTypeMap = (
 // Optimized checking for the most common glob patterns.
 const globPattern = /\*+([^+@!?\*\[\(]*)/;
 
+
+/**
+ * test if a proto ref is included by the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param exclude patterns(will be deprecated soon), packages, proto files to include
+ * @returns
+ */
 export const isRefIncluded = (
     ref: ProtoRef,
     include?: {
@@ -132,6 +139,23 @@ export const isRefIncluded = (
 
     return false;
 
+};
+
+/**
+ * test if a proto ref is excluded from the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param exclude patterns(will be deprecated soon), packages, proto files to exclude
+ * @returns
+ */
+export const isRefExcluded = (
+  ref: ProtoRef,
+  exclude?: {
+      patterns?: string[];
+      packages?: string[];
+      protos?: string[];
+  }
+) => {
+  return !isRefIncluded(ref, exclude);
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
@@ -281,10 +305,10 @@ export const instanceType = (obj: any) => {
  * @param pkg package used to do the scope check.
  * @returns
  */
-export const getProtoRefByPackage = (pkg: string): ProtoRef => {
+export const createEmptyProtoRef = (pkg?: string, filename?: string): ProtoRef => {
   return {
     absolute: '',
-    filename: '',
+    filename: filename,
     proto: {
         package: pkg,
         imports: null,

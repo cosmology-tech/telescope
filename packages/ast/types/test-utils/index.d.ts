@@ -79,7 +79,7 @@ export declare const defaultTelescopeOptions: {
         dir: string;
         filename: string;
         packages: string[];
-        protos: string[];
+        protos?: string[];
         addToBundle: boolean;
     };
     stargateClients: {
@@ -101,6 +101,7 @@ export declare const defaultTelescopeOptions: {
             dir: string;
             filename?: string;
             packages: string[];
+            protos?: string[];
             addToBundle: boolean;
             methodName?: string;
         }[];
@@ -118,6 +119,7 @@ export declare const defaultTelescopeOptions: {
             dir: string;
             filename?: string;
             packages: string[];
+            protos?: string[];
             addToBundle: boolean;
             methodNameQuery?: string;
             methodNameTx?: string;
