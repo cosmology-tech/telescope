@@ -719,10 +719,10 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                                         t.optionalMemberExpression(
                                                                             t.memberExpression(
                                                                                 t.thisExpression(),
-                                                                                t.identifier('metadata'),
+                                                                                t.identifier('options'),
                                                                                 false
                                                                             ),
-                                                                            t.identifier('options'),
+                                                                            t.identifier('metadata'),
                                                                             false,
                                                                             true
                                                                         ),
@@ -897,20 +897,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                                                                                 "=",
                                                                                                                 t.memberExpression(
                                                                                                                     t.identifier('err'),
-                                                                                                                    t.identifier('code')
-                                                                                                                ),
-                                                                                                                t.memberExpression(
-                                                                                                                    t.identifier('response'),
                                                                                                                     t.identifier('metadata')
-                                                                                                                )
-                                                                                                            )
-                                                                                                        ), 
-                                                                                                        t.expressionStatement(
-                                                                                                            t.assignmentExpression(
-                                                                                                                "=",
-                                                                                                                t.memberExpression(
-                                                                                                                    t.identifier('err'),
-                                                                                                                    t.identifier('response')
                                                                                                                 ),
                                                                                                                 t.memberExpression(
                                                                                                                     t.identifier('response'),
