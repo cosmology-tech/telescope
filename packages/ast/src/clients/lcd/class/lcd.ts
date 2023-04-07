@@ -71,37 +71,37 @@ const returnAwaitRequest = (
     }
 
     let returned: t.Expression = t.awaitExpression(
-      callExpression(
-        t.memberExpression(
-          t.memberExpression(t.thisExpression(), t.identifier('req')),
-          t.identifier('get')
-        ),
-        args,
-        t.tsTypeParameterInstantiation([
-          t.tsTypeReference(
-            t.identifier(getResponseTypeName(context, responseType))
-          )
-        ])
-      )
+        callExpression(
+            t.memberExpression(
+                t.memberExpression(t.thisExpression(), t.identifier('req')),
+                t.identifier('get')
+            ),
+            args,
+            t.tsTypeParameterInstantiation([
+                t.tsTypeReference(
+                    t.identifier(getResponseTypeName(context, responseType))
+                )
+            ])
+        )
     );
 
     if (context.pluginValue('useSDKTypes') &&
-      context.pluginValue('prototypes.methods.fromSDKJSON')) {
-      //useSDKTypes && prototypes.methods.fromSDKJSON
-      returned = t.callExpression(
-        t.memberExpression(
-          t.identifier(responseType),
-          t.identifier('fromSDKJSON')
-        ),
-        [returned]
-      );
+        context.pluginValue('prototypes.methods.fromSDKJSON')) {
+        //useSDKTypes && prototypes.methods.fromSDKJSON
+        returned = t.callExpression(
+            t.memberExpression(
+                t.identifier(responseType),
+                t.identifier('fromSDKJSON')
+            ),
+            [returned]
+        );
     } else if (!context.pluginValue('useSDKTypes') &&
-      context.pluginValue('prototypes.methods.fromJSON')) {
-      //!useSDKTypes && prototypes.methods.fromJSON
-      returned = t.callExpression(
-        t.memberExpression(t.identifier(responseType), t.identifier('fromJSON')),
-        [returned]
-      );
+        context.pluginValue('prototypes.methods.fromJSON')) {
+        //!useSDKTypes && prototypes.methods.fromJSON
+        returned = t.callExpression(
+            t.memberExpression(t.identifier(responseType), t.identifier('fromJSON')),
+            [returned]
+        );
     }
 
     return t.returnStatement(returned);
@@ -253,35 +253,59 @@ export const getUrlTemplateString = (url: string) => {
     };
 };
 
+const routeRegexForReplace = /[^\{\}\\-\_\\.$/a-zA-Z0-9]+/g;
 export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     const route = info.url
         .split('/')
         .filter(a => a !== '')
         .map(a => {
             if (a.startsWith('{')) {
-                return `$${a}`;
+                // clean weird routes like this one:
+                // /ibc/apps/transfer/v1/denom_traces/{hash=**}
+                return `$${a}`
+                    .replace(routeRegexForReplace, '')
+                    .replace('{', `{params.`)
             } else {
                 return a;
             }
         })
         .join('/');
 
+    // clean route here
+
     const parsed = getAstFromString(`\`${route}\``);
     // @ts-ignore
     const ast: t.TemplateLiteral = parsed.program.body[0].expression;
 
-    ast.expressions = ast.expressions.map((identifier: t.Identifier) => {
-        const name = info.casing?.[identifier.name] ? info.casing[identifier.name] : identifier.name;
-        if (!name) {
-            console.warn(route);
-            console.warn('route type not yet supported');
-            return;
+    ast.expressions = ast.expressions.map((expr: t.MemberExpression) => {
+        return expr;
+        let name;
+        switch (expr.property.type) {
+            case 'MemberExpression': {
+                // e.g. params.thing.another
+                const memberExpr: t.MemberExpression = expr.property;
+                name = memberExpr.object.name;
+                console.log(info.casing?.[name], info)
+                name = info.casing?.[name] ? info.casing[name] : name;
+                expr.property.object.name = name;
+            }
+                break;
+            case 'Identifier': {
+                // e.g. params.thing
+                const identifier: t.Identifier = expr.property;
+                name = identifier.name;
+                console.log(info.casing?.[name], info)
+                name = info.casing?.[name] ? info.casing[name] : name;
+                expr.property.name = name;
+            }
+                break;
+            case 'Identifier':
+                break;
+            default:
+                throw new Error('unknown expression type in route parsing');
         }
-        return t.memberExpression(
-            t.identifier('params'),
-            t.identifier(name)
-        )
-    }).filter(Boolean)
+        return expr;
+    }).filter(Boolean);
     return ast;
 };
 
