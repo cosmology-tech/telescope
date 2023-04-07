@@ -672,9 +672,9 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                     ),
                     t.classMethod(
                         "method",
-                        t.identifier('unary'),
+                        t.identifier('unary<T extends UnaryMethodDefinitionish>'),
                         [
-                            identifier('methodDesc', t.tsTypeAnnotation(t.tsTypeReference(t.identifier('UnaryMethodDefinitionish')))),
+                            identifier('methodDesc', t.tsTypeAnnotation(t.tsTypeReference(t.identifier('T')))),
                             identifier('_request', t.tsTypeAnnotation(t.tsAnyKeyword())),
                             identifier('metadata', t.tsTypeAnnotation(t.tsUnionType([t.tsTypeReference(t.tsQualifiedName(t.identifier('grpc'), t.identifier('Metadata'))), t.tsUndefinedKeyword()])))
                         ],

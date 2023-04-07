@@ -25,6 +25,7 @@
     "build": "npm run build:module && npm run build:main",
     "buidl": "npm run build && npm run build:ts",
     "buidl:clean": "npm run clean && npm run buidl",
+    "buidl:type": "rm -rf types && yarn build:ts && yarn build",
     "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
