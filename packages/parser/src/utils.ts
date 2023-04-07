@@ -150,11 +150,20 @@ export const isRefIncluded = (
 export const isRefExcluded = (
   ref: ProtoRef,
   exclude?: {
-      patterns?: string[];
       packages?: string[];
       protos?: string[];
   }
 ) => {
+  // if no include object, no filter
+  if (!exclude) return false;
+  // if no arrays are populated, no filter
+  if (
+      !exclude.packages?.length &&
+      !exclude.protos?.length
+  ) {
+      return false;
+  }
+
   return isRefIncluded(ref, exclude);
 };
 

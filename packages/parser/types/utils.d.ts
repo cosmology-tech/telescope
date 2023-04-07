@@ -23,7 +23,6 @@ export declare const isRefIncluded: (ref: ProtoRef, include?: {
  * @returns
  */
 export declare const isRefExcluded: (ref: ProtoRef, exclude?: {
-    patterns?: string[];
     packages?: string[];
     protos?: string[];
 }) => boolean;
