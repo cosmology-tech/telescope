@@ -456,7 +456,7 @@ export class GrpcWebImpl {
     this.options = options;
   }
 
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = { ..._request,
       ...methodDesc.requestType
     };
