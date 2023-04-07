@@ -22,9 +22,15 @@ export const plugin = (
 
     // get mapping of packages and rpc query filenames.
     const obj = {};
-    builder.rpcQueryClients.map(queryClient => {
-        const path = `./${queryClient.localname.replace(/\.ts$/, '')}`;
-        dotty.put(obj, queryClient.package, path);
+    const bundlerFiles = builder.stateManagers["reactQuery"];
+
+    if(!bundlerFiles || !bundlerFiles.length){
+      return;
+    }
+
+    bundlerFiles.map(bundlerFile => {
+        const path = `./${bundlerFile.localname.replace(/\.ts$/, '')}`;
+        dotty.put(obj, bundlerFile.package, path);
     });
 
     // create proto ref for context
@@ -65,7 +71,7 @@ export const plugin = (
         'createRpcQueryHooks'
     )
 
-    // generate imports added by context.addUtils
+    // generate imports added by context.addUtil
     const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
     const importStmts = getImportStatements(
         localname,

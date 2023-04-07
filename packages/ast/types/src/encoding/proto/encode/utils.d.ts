@@ -28,7 +28,7 @@ export declare const encode: {
     keyHash(args: EncodeMethod): t.ExpressionStatement;
 };
 export declare const types: {
-    string(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    string(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     double(num: number, prop: string, isOptional: boolean): t.IfStatement;
     float(num: number, prop: string, isOptional: boolean): t.IfStatement;
     int32(num: number, prop: string, isOptional: boolean): t.IfStatement;
@@ -36,11 +36,11 @@ export declare const types: {
     uint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
     fixed32(num: number, prop: string, isOptional: boolean): t.IfStatement;
     sfixed32(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    int64(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    sint64(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    uint64(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    fixed64(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    sfixed64(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    int64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
+    sint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
+    uint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
+    fixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
+    sfixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
     type(num: number, prop: string, name: string, isAnyType: boolean): t.IfStatement;
     enum(context: ProtoParseContext, num: number, field: ProtoField, isOptional: boolean, isOneOf: boolean): t.IfStatement;
@@ -62,11 +62,12 @@ export declare const arrayTypes: {
     uint32(): t.ExpressionStatement;
     fixed32(): t.ExpressionStatement;
     sfixed32(): t.ExpressionStatement;
-    int64(): t.ExpressionStatement;
-    sint64(): t.ExpressionStatement;
-    uint64(): t.ExpressionStatement;
-    fixed64(): t.ExpressionStatement;
-    sfixed64(): t.ExpressionStatement;
+    long(type: string, args: EncodeMethod): t.ExpressionStatement;
+    int64(args: EncodeMethod): t.ExpressionStatement;
+    sint64(args: EncodeMethod): t.ExpressionStatement;
+    uint64(args: EncodeMethod): t.ExpressionStatement;
+    fixed64(args: EncodeMethod): t.ExpressionStatement;
+    sfixed64(args: EncodeMethod): t.ExpressionStatement;
     string(args: EncodeMethod): t.ExpressionStatement;
     bytes(args: EncodeMethod): t.ExpressionStatement;
     enum(): t.ExpressionStatement;

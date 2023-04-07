@@ -13,7 +13,9 @@ export declare class Bundler {
     readonly rpcQueryClients: BundlerFile[];
     readonly rpcMsgClients: BundlerFile[];
     readonly registries: BundlerFile[];
+    readonly stateManagers: Record<string, BundlerFile[]>;
     constructor(builder: TelescopeBuilder, bundle: Bundle);
+    addStateManagers(type: string, files: BundlerFile[]): void;
     addLCDClients(files: BundlerFile[]): void;
     addRPCQueryClients(files: BundlerFile[]): void;
     addRPCMsgClients(files: BundlerFile[]): void;

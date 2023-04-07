@@ -102,7 +102,6 @@ export const toJSON = {
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
-        args.context.addUtil('Long');
         const { messageProp, objProp } = getPropNames(args.field);
         return notUndefinedSetValue(
             messageProp,

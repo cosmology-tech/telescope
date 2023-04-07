@@ -13,6 +13,7 @@ export declare const UTILS: {
     base64FromBytes: string;
     bytesFromBase64: string;
     BrowserHeaders: string;
+    Decimal: string;
     createProtobufRpcClient: string;
     decodeBech32Pubkey: string;
     DeepPartial: string;

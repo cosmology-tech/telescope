@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { FromSDKMethod } from './index';
-import { callExpression, identifier } from '../../../utils';
+import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getFieldNames } from '../../types';
 
 export const fromSDK = {
@@ -146,7 +146,36 @@ export const fromSDK = {
     },
 
     timestamp(args: FromSDKMethod) {
-        return fromSDK.type(args);
+      let timestampFormat = args.context.pluginValue(
+        'prototypes.typingsFormat.timestamp'
+      );
+      const env = args.context.pluginValue(
+        'env'
+      );
+      if(env == 'default'){
+        timestampFormat = 'timestamp';
+      }
+      switch (timestampFormat) {
+        case 'timestamp':
+          return fromSDK.type(args);
+        case 'date':
+        default:
+          args.context.addUtil('toTimestamp');
+          return fromSDK.timestampDate(args);
+      }
+    },
+
+    timestampDate(args: FromSDKMethod) {
+      const { propName, origName } = getFieldNames(args.field);
+
+      return t.objectProperty(
+        t.identifier(propName),
+        t.logicalExpression(
+          '??',
+          t.memberExpression(t.identifier('object'), t.identifier(origName)),
+          t.identifier('undefined')
+        )
+      );
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -201,25 +230,24 @@ export const fromSDK = {
                 break;
             case 'int64':
             case 'uint64':
-                valueTypeType = 'Long';
-                fromSDK = t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Long'),
-                        t.identifier('fromValue')
-                    ),
-                    [
-                        t.tsAsExpression(
-                            t.identifier('value'),
-                            t.tsUnionType(
-                                [
-                                    t.tsTypeReference(
-                                        t.identifier('Long')
-                                    ),
-                                    t.tsStringKeyword()
-                                ]
-                            )
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
+                TypeLong.addUtil(args.context);
+
+                valueTypeType = TypeLong.getPropType(args.context);
+                fromSDK = TypeLong.getFromValueWithArgs(args.context,
+                    t.tsAsExpression(
+                        t.identifier('value'),
+                        t.tsUnionType(
+                            [
+                                t.tsTypeReference(
+                                    TypeLong.getPropIdentifier(args.context)
+                                ),
+                                t.tsStringKeyword()
+                            ]
                         )
-                    ]
+                    )
                 )
                 break;
             default:
@@ -243,13 +271,19 @@ export const fromSDK = {
                 break;
             case 'int64':
             case 'uint64':
+            case 'sint64':
+            case 'fixed64':
+            case 'sfixed64':
                 wrapKey = (a) => t.callExpression(
                     t.identifier('Number'),
                     [
                         a
                     ]
                 );
-                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+
+                TypeLong.addUtil(args.context);
+
+                keyTypeType = t.tsTypeReference(TypeLong.getPropIdentifier(args.context));
                 break;
             case 'uint32':
             case 'int32':

@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
-import { identifier, objectMethod } from '../../../utils';
+import { identifier, objectMethod, TypeLong } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { encode, arrayTypes } from './utils';
 
@@ -61,15 +61,20 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                 case 'sfixed32':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.sfixed32())];
                 case 'int64':
-                    return [...m, ...encode.forkDelimArray(args, arrayTypes.int64())];
+                    TypeLong.addUtil(args.context);
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.int64(args))];
                 case 'sint64':
-                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sint64())];
+                    TypeLong.addUtil(args.context);
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sint64(args))];
                 case 'uint64':
-                    return [...m, ...encode.forkDelimArray(args, arrayTypes.uint64())];
+                    TypeLong.addUtil(args.context);
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.uint64(args))];
                 case 'fixed64':
-                    return [...m, ...encode.forkDelimArray(args, arrayTypes.fixed64())];
+                    TypeLong.addUtil(args.context);
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.fixed64(args))];
                 case 'sfixed64':
-                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sfixed64())];
+                    TypeLong.addUtil(args.context);
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sfixed64(args))];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -192,7 +197,7 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
             )
         ],
 
-        // body 
+        // body
         t.blockStatement(body),
         false,
         false,

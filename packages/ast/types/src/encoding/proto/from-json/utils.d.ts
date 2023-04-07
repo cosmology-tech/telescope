@@ -23,6 +23,8 @@ export declare const fromJSON: {
     duration(args: FromJSONMethod): t.ObjectProperty;
     durationString(args: FromJSONMethod): t.ObjectProperty;
     timestamp(args: FromJSONMethod): t.ObjectProperty;
+    timestampTimestamp(args: FromJSONMethod): t.ObjectProperty;
+    timestampDate(args: FromJSONMethod): t.ObjectProperty;
     keyHash(args: FromJSONMethod): t.ObjectProperty;
     array(args: FromJSONMethod, expr: t.Expression): t.ObjectProperty;
 };
@@ -30,12 +32,12 @@ export declare const arrayTypes: {
     string(): t.CallExpression;
     bool(): t.CallExpression;
     bytes(args: FromJSONMethod): t.CallExpression;
-    long(): t.CallExpression;
-    uint64(): t.CallExpression;
-    int64(): t.CallExpression;
-    sint64(): t.CallExpression;
-    fixed64(): t.CallExpression;
-    sfixed64(): t.CallExpression;
+    long(args: FromJSONMethod): t.Expression;
+    uint64(args: FromJSONMethod): t.Expression;
+    int64(args: FromJSONMethod): t.Expression;
+    sint64(args: FromJSONMethod): t.Expression;
+    fixed64(args: FromJSONMethod): t.Expression;
+    sfixed64(args: FromJSONMethod): t.Expression;
     number(): t.CallExpression;
     uint32(): t.CallExpression;
     int32(): t.CallExpression;

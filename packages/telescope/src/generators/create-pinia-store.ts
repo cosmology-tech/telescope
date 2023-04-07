@@ -1,127 +1,120 @@
-import { Statement } from '@babel/types'
+import { Statement } from '@babel/types';
 import { Bundler } from '../bundler';
 import { TelescopeBuilder } from '../builder';
-import { buildAllImports, getDepsFromQueries, getImportStatements } from '../imports';
+import {
+  buildAllImports,
+  getDepsFromQueries,
+  getImportStatements
+} from '../imports';
 import { parse } from '../parse';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 
 import { createPiniaStore } from '@osmonauts/ast';
 
-export const plugin = (
-  builder: TelescopeBuilder,
-  bundler: Bundler
-) => {
-
+export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
   if (!builder.options.pinia?.enabled) {
     return;
   }
 
   // get mapping of packages and rpc query filenames.
-  const obj = {};
-  builder.contexts.map(c => {
 
-    if (!builder.options.lcdClients?.enabled) {
-      return;
-    }
+  if (!builder.options.lcdClients?.enabled) {
+    return;
+  }
 
-    const queryContexts = bundler
-      .contexts
-      .filter(context =>
-        context.queries.length > 0 ||
-        context.services.length > 0
-      );
+  const queryContexts = bundler.contexts.filter(
+    (context) => context.queries.length > 0 || context.services.length > 0
+  );
 
-    if (queryContexts.length > 0) {
+  if (queryContexts.length > 0) {
+    const piniaBundlerFiles = [];
 
-      // [x] write out one registry helper for all contexts w/mutations
-      queryContexts.forEach(c => {
+    // [x] write out one registry helper for all contexts w/mutations
+    queryContexts.forEach((c) => {
+      const enabled = c.proto.pluginValue('lcdClients.enabled');
+      if (!enabled) return;
 
-        const enabled = c.proto.pluginValue('lcdClients.enabled');
-        if (!enabled) return;
+      const includePinia =
+        c.proto.pluginValue('pinia.enabled') &&
+        isRefIncluded(c.ref, c.proto.pluginValue('pinia.include'));
+      if (!includePinia) return;
 
-        const includePinia = c.proto.pluginValue('pinia.enabled') && isRefIncluded(
-          c.ref,
-          c.proto.pluginValue('pinia.include')
-        );
-        if (!includePinia) return;
+      if (c.proto.isExcluded()) return;
 
+      const ctx = bundler.getFreshContext(c);
 
-        if (c.proto.isExcluded()) return;
+      // get mutations, services
+      parse(ctx);
 
-        const ctx = bundler.getFreshContext(c);
+      const proto = getNestedProto(c.ref.traversed);
 
-        // get mutations, services
-        parse(ctx);
+      //// Anything except Msg Service OK...
+      const allowedRpcServices =
+        builder.options.rpcClients.enabledServices.filter((a) => a !== 'Msg');
 
-        const proto = getNestedProto(c.ref.traversed);
+      let name, getImportsFrom;
 
-        //// Anything except Msg Service OK...
-        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
-
-        let name, getImportsFrom;
-
-        // get imports
-        allowedRpcServices.forEach(svcKey => {
-          if (proto[svcKey]) {
-            if (svcKey === 'Query') {
-              getImportsFrom = ctx.queries;
-            } else {
-              getImportsFrom = ctx.services;
-            }
-            name = svcKey;
+      // get imports
+      allowedRpcServices.forEach((svcKey) => {
+        if (proto[svcKey]) {
+          if (svcKey === 'Query') {
+            getImportsFrom = ctx.queries;
+          } else {
+            getImportsFrom = ctx.services;
           }
-        });
-
-        const localname = bundler.getLocalFilename(c.ref, 'pinia.store');
-        const filename = bundler.getFilename(localname);
-
-        let ast = null;
-
-        allowedRpcServices.forEach(svcKey => {
-          if (proto[svcKey]) {
-            ast = createPiniaStore(ctx.generic, proto[svcKey]);
-          }
-        });
-
-        if (!ast) {
-          return;
+          name = svcKey;
         }
+      });
 
-        const serviceImports = getDepsFromQueries(
-          getImportsFrom,
-          localname
-        );
+      const localname = bundler.getLocalFilename(c.ref, 'pinia.store');
+      const filename = bundler.getFilename(localname);
 
-        const imports = buildAllImports(ctx, serviceImports, localname);
+      const bundlerFile = {
+        package: c.ref.proto.package,
+        localname,
+        filename
+      };
 
-        const piniaImport = getImportStatements('pinia', [{
-          type: "import",
+      let ast = null;
+
+      allowedRpcServices.forEach((svcKey) => {
+        if (proto[svcKey]) {
+          ast = createPiniaStore(ctx.generic, proto[svcKey]);
+        }
+      });
+
+      if (!ast) {
+        return;
+      }
+
+      piniaBundlerFiles.push(bundlerFile);
+
+      const serviceImports = getDepsFromQueries(getImportsFrom, localname);
+
+      const imports = buildAllImports(ctx, serviceImports, localname);
+
+      const piniaImport = getImportStatements('pinia', [
+        {
+          type: 'import',
           name: 'defineStore',
           path: 'pinia'
-        }, {
-          type: "import",
+        },
+        {
+          type: 'import',
           name: 'LCDQueryClient',
           path: './query.lcd'
-        }])
+        }
+      ]);
 
-        const prog = []
-          .concat([...imports, ...piniaImport])
-          .concat(ctx.body)
-          .concat(ast);
+      const prog = []
+        .concat([...imports, ...piniaImport])
+        .concat(ctx.body)
+        .concat(ast);
 
-        bundler.writeAst(prog, filename);
-        bundler.addToBundle(c, localname);
+      bundler.writeAst(prog, filename);
+      bundler.addToBundle(c, localname);
+    });
 
-        return {
-          // TODO use this to build LCD aggregators with scopes
-          package: c.ref.proto.package,
-          localname,
-          filename
-        };
-
-      });
-    }
-
-  });
-
-}
+    bundler.addStateManagers('pinia', piniaBundlerFiles);
+  }
+};
