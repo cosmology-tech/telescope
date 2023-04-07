@@ -278,27 +278,28 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     const ast: t.TemplateLiteral = parsed.program.body[0].expression;
 
     ast.expressions = ast.expressions.map((expr: t.MemberExpression) => {
-        return expr;
         let name;
-        switch (expr.property.type) {
+        switch (expr.object.type) {
             case 'MemberExpression': {
                 // e.g. params.thing.another
-                const memberExpr: t.MemberExpression = expr.property;
-                name = memberExpr.object.name;
-                console.log(info.casing?.[name], info)
+                const memberExpr: t.MemberExpression = expr.object;
+                // @ts-ignore
+                name = memberExpr.property.name;
                 name = info.casing?.[name] ? info.casing[name] : name;
-                expr.property.object.name = name;
-            }
+                // @ts-ignore
+                expr.object.property.name = name;
                 break;
+            }
             case 'Identifier': {
                 // e.g. params.thing
+                // @ts-ignore
                 const identifier: t.Identifier = expr.property;
                 name = identifier.name;
-                console.log(info.casing?.[name], info)
                 name = info.casing?.[name] ? info.casing[name] : name;
+                // @ts-ignore
                 expr.property.name = name;
-            }
                 break;
+            }
             case 'Identifier':
                 break;
             default:
