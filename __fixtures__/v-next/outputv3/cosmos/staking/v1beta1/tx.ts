@@ -3,7 +3,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { toBase64, fromBase64 } from "@cosmjs/encoding";
 import { encodeBech32Pubkey, decodeBech32Pubkey } from "@cosmjs/amino";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -1294,7 +1294,7 @@ export const MsgBeginRedelegateResponse = {
 
   fromJSON(object: any): MsgBeginRedelegateResponse {
     return {
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
     };
   },
 
@@ -1312,13 +1312,13 @@ export const MsgBeginRedelegateResponse = {
 
   fromSDK(object: MsgBeginRedelegateResponseSDKType): MsgBeginRedelegateResponse {
     return {
-      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined
+      completionTime: object.completion_time ?? undefined
     };
   },
 
   toSDK(message: MsgBeginRedelegateResponse): MsgBeginRedelegateResponseSDKType {
     const obj: any = {};
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     return obj;
   },
 
@@ -1546,7 +1546,7 @@ export const MsgUndelegateResponse = {
 
   fromJSON(object: any): MsgUndelegateResponse {
     return {
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
     };
   },
 
@@ -1564,13 +1564,13 @@ export const MsgUndelegateResponse = {
 
   fromSDK(object: MsgUndelegateResponseSDKType): MsgUndelegateResponse {
     return {
-      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined
+      completionTime: object.completion_time ?? undefined
     };
   },
 
   toSDK(message: MsgUndelegateResponse): MsgUndelegateResponseSDKType {
     const obj: any = {};
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     return obj;
   },
 

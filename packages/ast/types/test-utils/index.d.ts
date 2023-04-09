@@ -5,6 +5,7 @@ import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
 export declare const printCode: (ast: any) => void;
 export declare const defaultTelescopeOptions: {
+    env: "default" | "v-next";
     experimentalGlobalProtoNamespace: boolean;
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
@@ -30,6 +31,7 @@ export declare const defaultTelescopeOptions: {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            fromSDKJSON?: boolean;
             toAmino?: boolean;
             fromAmino?: boolean;
             toProto?: boolean;
@@ -49,6 +51,10 @@ export declare const defaultTelescopeOptions: {
             protos?: string[];
         };
         typingsFormat?: {
+            customTypes?: {
+                useCosmosSDKDec?: boolean;
+            };
+            longLibrary?: "bigint" | "long";
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: "date" | "timestamp";

@@ -131,6 +131,19 @@ describe('cosmos/tx/v1beta1/tx', () => {
     })
 });
 
+describe('cosmos/staking/v1beta1', () => {
+  const ref = store.findProto('cosmos/staking/v1beta1/staking.proto');
+  const res = traverse(store, ref);
+  it('Delegation', () => {
+      const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+      context.options.prototypes!.typingsFormat!.customTypes!.useCosmosSDKDec = true;
+      expectCode(createObjectWithMethods(
+          context,
+          'Delegation', getNestedProto(res).Delegation
+      ))
+  })
+});
+
 describe('google/api/expr/v1alpha1/checked', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
     const res = traverse(store, ref);

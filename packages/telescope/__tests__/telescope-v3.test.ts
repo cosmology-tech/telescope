@@ -12,6 +12,7 @@ store.traverseAll();
 
 const options: TelescopeOptions = {
 
+    env: 'v-next',
     removeUnusedImports: false,
     classesUseArrowFunctions: false,
 

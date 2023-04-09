@@ -1,8 +1,8 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /**
@@ -360,7 +360,7 @@ export const SmoothWeightChangeParams = {
 
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
       targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
@@ -398,7 +398,7 @@ export const SmoothWeightChangeParams = {
 
   fromSDK(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
     return {
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : [],
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
@@ -407,7 +407,7 @@ export const SmoothWeightChangeParams = {
 
   toSDK(message: SmoothWeightChangeParams): SmoothWeightChangeParamsSDKType {
     const obj: any = {};
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
 
     if (message.initialPoolWeights) {

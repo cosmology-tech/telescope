@@ -1,5 +1,6 @@
 import * as t from '@babel/types';
 import { FromAminoParseField } from './index';
+import { GenericParseContext } from '../../context';
 export declare const fromAmino: {
     defaultType(args: FromAminoParseField): t.ObjectProperty;
     string(args: FromAminoParseField): t.ObjectProperty;
@@ -18,5 +19,5 @@ export declare const fromAmino: {
     pubkey(args: FromAminoParseField): t.ObjectProperty;
 };
 export declare const arrayTypes: {
-    long(varname: string): t.CallExpression;
+    long(varname: string, ctx: GenericParseContext): t.CallExpression;
 };
