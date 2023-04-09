@@ -6,6 +6,7 @@ export interface Bundle {
     base: string;
 }
 export interface BundlerFile {
+    proto?: string;
     package?: string;
     localname: string;
     filename: string;

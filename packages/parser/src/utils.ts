@@ -80,6 +80,17 @@ export const createTypeUrlTypeMap = (
     return result;
 };
 
+// https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
+// Optimized checking for the most common glob patterns.
+const globPattern = /\*+([^+@!?\*\[\(]*)/;
+
+
+/**
+ * test if a proto ref is included by the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param exclude patterns(will be deprecated soon), packages, proto files to include
+ * @returns
+ */
 export const isRefIncluded = (
     ref: ProtoRef,
     include?: {
@@ -99,20 +110,61 @@ export const isRefIncluded = (
         return true;
     }
 
+    // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
     if (include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
         return true;
     }
 
-    if (include?.packages?.includes(ref.proto.package)) {
+    const pkgMatched = include?.packages?.some(pkgName => {
+        if (!globPattern.test(pkgName)) {
+            return ref.proto.package === pkgName;
+        }
+        return minimatch(ref.proto.package, pkgName)
+    });
+
+    if (pkgMatched) {
         return true;
     }
 
-    if (include?.protos?.includes(ref.filename)) {
+    const protoMatched = include?.protos?.some(protoName => {
+        if (!globPattern.test(protoName)) {
+            return ref.filename === protoName;
+        }
+        return minimatch(ref.filename, protoName)
+    });
+
+    if (protoMatched) {
         return true;
     }
 
     return false;
 
+};
+
+/**
+ * test if a proto ref is excluded from the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param exclude patterns(will be deprecated soon), packages, proto files to exclude
+ * @returns
+ */
+export const isRefExcluded = (
+  ref: ProtoRef,
+  exclude?: {
+      packages?: string[];
+      protos?: string[];
+  }
+) => {
+  // if no include object, no filter
+  if (!exclude) return false;
+  // if no arrays are populated, no filter
+  if (
+      !exclude.packages?.length &&
+      !exclude.protos?.length
+  ) {
+      return false;
+  }
+
+  return isRefIncluded(ref, exclude);
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
@@ -240,7 +292,7 @@ export const instanceType = (obj: any) => {
     if (obj.name.match(/^[a-z]/)) {
         throw new Error('instanceType() cannot find protobufjs Type')
     }
-    // duck typing... 
+    // duck typing...
     // TODO why did we lose instance types/names?
     if (obj.fields) {
         return {
@@ -257,3 +309,31 @@ export const instanceType = (obj: any) => {
     throw new Error('instanceType() cannot find protobufjs Type')
 };
 
+/**
+ * get a protoref instance for scope check by package.
+ * @param pkg package used to do the scope check.
+ * @returns
+ */
+export const createEmptyProtoRef = (pkg?: string, filename?: string): ProtoRef => {
+  return {
+    absolute: '',
+    filename: filename,
+    proto: {
+        package: pkg,
+        imports: null,
+        root: {},
+        importNames: null
+    },
+    traversed: {
+        package: pkg,
+        imports: null,
+        root: {},
+        importNames: null,
+        acceptsInterface: {},
+        implementsInterface: {},
+        parsedExports: {},
+        parsedImports: {},
+        symbols: null
+    }
+}
+};

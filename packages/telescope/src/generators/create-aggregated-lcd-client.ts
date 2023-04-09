@@ -1,5 +1,5 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, isRefExcluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
@@ -8,11 +8,6 @@ import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
-
-const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
-    return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
-        builder.options.prototypes?.excluded?.packages?.includes(ref.proto.package);
-};
 
 export const plugin = (
     builder: TelescopeBuilder
@@ -27,14 +22,17 @@ export const plugin = (
     const {
         dir,
         filename: fname,
-        packages
+        packages,
+        protos
     } = opts;
 
     const localname = join(dir, fname);
 
     const refs = builder.store.filterProtoWhere((ref: ProtoRef) => {
-        return packages.includes(ref.proto.package) &&
-            !isExcluded(builder, ref);
+        return isRefIncluded(ref,{
+          packages,
+          protos
+        }) && !isRefExcluded(ref, builder.options.prototypes?.excluded);
     });
 
     const services: ProtoService[] = refs.map(ref => {
@@ -65,7 +63,10 @@ export const plugin = (
 
     const progImports = queryContexts.reduce((m, c) => {
 
-        if (!builder.options.aggregatedLCD.packages.includes(c.ref.proto.package)) {
+        if (!isRefIncluded(c.ref, {
+          packages,
+          protos
+        })) {
             return m;
         }
 

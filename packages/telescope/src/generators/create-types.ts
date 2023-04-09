@@ -7,13 +7,8 @@ import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { ProtoRef } from '@osmonauts/types';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefExcluded } from '@osmonauts/proto-parser';
 import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@osmonauts/ast';
-
-const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
-    return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
-        builder.options.prototypes?.excluded?.packages?.includes(ref.proto.package);
-};
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -28,7 +23,7 @@ export const plugin = (
     bundler.contexts = baseProtos.map(ref => {
         const context = builder.context(ref);
 
-        if (isExcluded(builder, ref)) return;
+        if (isRefExcluded(ref, builder.options.prototypes?.excluded)) return;
 
         parse(context);
         context.buildBase();

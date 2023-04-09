@@ -42,6 +42,34 @@ it('/cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}', () => {
     expect(getUrlTemplateString('/cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}')).toMatchSnapshot();
 })
 
+/////
+// UNIQUE CASES
+
+
+it('/ibc/apps/transfer/v1/denom_traces/{hash=**}', () => {
+    expect(renderTemplateTag({
+        method: 'get',
+        url: '/ibc/apps/transfer/v1/denom_traces/{hash=**}',
+        pathParams: ['hash'],
+        queryParams: [],
+        paramMap: { hash: 'hash' },
+        casing: { hash: 'hash' }
+    })).toEqual("`ibc/apps/transfer/v1/denom_traces/${params.hash}`")
+})
+
+it('/ibc/apps/fee/v1/channels/{packet_id.channel_id}/ports/{packet_id.port_id}/sequences/{packet_id.sequence}/incentivized_packet', () => {
+    expect(renderTemplateTag({
+        method: 'get',
+        url: '/ibc/apps/fee/v1/channels/{packet_id.channel_id}/ports/{packet_id.port_id}/sequences/{packet_id.sequence}/incentivized_packet',
+        pathParams: ['packet_id'],
+        queryParams: [],
+        paramMap: { packet_id: 'packet_id' },
+        casing: { packet_id: 'packet_id' }
+    })).toEqual("`ibc/apps/fee/v1/channels/${params.packet_id.channel_id}/ports/${params.packet_id.port_id}/sequences/${params.packet_id.sequence}/incentivized_packet`")
+})
+
+
+/////
 
 it('1', () => {
     expect(renderTemplateTag({
