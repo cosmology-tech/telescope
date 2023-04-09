@@ -540,8 +540,18 @@ export const grpcWebRpcInterface = () => {
                                             t.tsUndefinedKeyword()
                                         ]
                                     )
-                                ))
-                        ]
+                            )),      
+                        ],
+                        t.tsTypeAnnotation(
+                            t.tSTypeReference(
+                                t.identifier('Promise'),
+                                t.tsTypeParameterInstantiation(
+                                    [
+                                        t.tsAnyKeyword()
+                                    ]
+                                )
+                            )
+                        )
                     )
                 ]
         )
