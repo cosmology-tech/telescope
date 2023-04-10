@@ -580,7 +580,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                             t.tsTypeLiteral(
                                 [
                                     t.tsPropertySignature(
-                                        t.identifier('transport'),
+                                        t.identifier('transport?'),
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
                                                 t.tsQualifiedName(
@@ -591,13 +591,13 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                         )
                                     ),
                                     t.tsPropertySignature(
-                                        t.identifier('debug'),
+                                        t.identifier('debug?'),
                                         t.tsTypeAnnotation(
                                             t.tsBooleanKeyword()
                                         )
                                     ),
                                     t.tsPropertySignature(
-                                        t.identifier('metadata'),
+                                        t.identifier('metadata?'),
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
                                                 t.tsQualifiedName(
@@ -624,7 +624,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                     t.tsTypeLiteral(
                                         [
                                             t.tsPropertySignature(
-                                                t.identifier('transport'),
+                                                t.identifier('transport?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsTypeReference(
                                                         t.tsQualifiedName(
@@ -635,13 +635,13 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                 )
                                             ),
                                             t.tsPropertySignature(
-                                                t.identifier('debug'),
+                                                t.identifier('debug?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsBooleanKeyword()
                                                 )
                                             ),
                                             t.tsPropertySignature(
-                                                t.identifier('metadata'),
+                                                t.identifier('metadata?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsTypeReference(
                                                         t.tsQualifiedName(
