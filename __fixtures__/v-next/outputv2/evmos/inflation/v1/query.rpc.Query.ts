@@ -6,33 +6,26 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** Period retrieves current period. */
   period(request?: DeepPartial<QueryPeriodRequest>, metadata?: grpc.Metadata): Promise<QueryPeriodResponse>;
-
   /** EpochMintProvision retrieves current minting epoch provision value. */
   epochMintProvision(request?: DeepPartial<QueryEpochMintProvisionRequest>, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse>;
-
   /** SkippedEpochs retrieves the total number of skipped epochs. */
   skippedEpochs(request?: DeepPartial<QuerySkippedEpochsRequest>, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse>;
-
   /**
    * CirculatingSupply retrieves the total number of tokens that are in
    * circulation (i.e. excluding unvested tokens).
    */
   circulatingSupply(request?: DeepPartial<QueryCirculatingSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse>;
-
   /** InflationRate retrieves the inflation rate of the current period. */
   inflationRate(request?: DeepPartial<QueryInflationRateRequest>, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse>;
-
   /** Params retrieves the total set of minting parameters. */
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.period = this.period.bind(this);
@@ -42,31 +35,24 @@ export class QueryClientImpl implements Query {
     this.inflationRate = this.inflationRate.bind(this);
     this.params = this.params.bind(this);
   }
-
   period(request: DeepPartial<QueryPeriodRequest> = {}, metadata?: grpc.Metadata): Promise<QueryPeriodResponse> {
     return this.rpc.unary(QueryPeriodDesc, QueryPeriodRequest.fromPartial(request), metadata);
   }
-
   epochMintProvision(request: DeepPartial<QueryEpochMintProvisionRequest> = {}, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse> {
     return this.rpc.unary(QueryEpochMintProvisionDesc, QueryEpochMintProvisionRequest.fromPartial(request), metadata);
   }
-
   skippedEpochs(request: DeepPartial<QuerySkippedEpochsRequest> = {}, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse> {
     return this.rpc.unary(QuerySkippedEpochsDesc, QuerySkippedEpochsRequest.fromPartial(request), metadata);
   }
-
   circulatingSupply(request: DeepPartial<QueryCirculatingSupplyRequest> = {}, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse> {
     return this.rpc.unary(QueryCirculatingSupplyDesc, QueryCirculatingSupplyRequest.fromPartial(request), metadata);
   }
-
   inflationRate(request: DeepPartial<QueryInflationRateRequest> = {}, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse> {
     return this.rpc.unary(QueryInflationRateDesc, QueryInflationRateRequest.fromPartial(request), metadata);
   }
-
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "evmos.inflation.v1.Query"
@@ -80,19 +66,16 @@ export const QueryPeriodDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryPeriodRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryPeriodResponse.decode(data),
-
+      return {
+        ...QueryPeriodResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryEpochMintProvisionDesc: UnaryMethodDefinitionish = {
@@ -104,19 +87,16 @@ export const QueryEpochMintProvisionDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryEpochMintProvisionRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryEpochMintProvisionResponse.decode(data),
-
+      return {
+        ...QueryEpochMintProvisionResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QuerySkippedEpochsDesc: UnaryMethodDefinitionish = {
@@ -128,19 +108,16 @@ export const QuerySkippedEpochsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QuerySkippedEpochsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QuerySkippedEpochsResponse.decode(data),
-
+      return {
+        ...QuerySkippedEpochsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryCirculatingSupplyDesc: UnaryMethodDefinitionish = {
@@ -152,19 +129,16 @@ export const QueryCirculatingSupplyDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryCirculatingSupplyRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryCirculatingSupplyResponse.decode(data),
-
+      return {
+        ...QueryCirculatingSupplyResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryInflationRateDesc: UnaryMethodDefinitionish = {
@@ -176,19 +150,16 @@ export const QueryInflationRateDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryInflationRateRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryInflationRateResponse.decode(data),
-
+      return {
+        ...QueryInflationRateResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryParamsDesc: UnaryMethodDefinitionish = {
@@ -200,19 +171,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -225,7 +193,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -234,12 +201,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -263,5 +231,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

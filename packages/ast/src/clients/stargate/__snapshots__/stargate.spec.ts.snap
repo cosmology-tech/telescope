@@ -62,7 +62,8 @@ exports[`createStargateClient w/o defaults 2`] = `
   aminoTypes: AminoTypes;
 } => {
   const registry = new Registry([...protoTypeRegistry]);
-  const aminoTypes = new AminoTypes({ ...aminoConverters
+  const aminoTypes = new AminoTypes({
+    ...aminoConverters
   });
   return {
     registry,
@@ -83,7 +84,8 @@ exports[`createStargateClient w/o defaults 3`] = `
 `;
 
 exports[`createStargateClientAminoRegistry 1`] = `
-"export const aminoConverters = { ...somepackage1.gamm.v1beta1.AminoConverter,
+"export const aminoConverters = {
+  ...somepackage1.gamm.v1beta1.AminoConverter,
   ...somepackage1.superfluid.v1beta1.AminoConverter,
   ...somepackage1.lockup.AminoConverter
 };"
@@ -101,7 +103,8 @@ exports[`createStargateClientOptions 1`] = `
   aminoTypes: AminoTypes;
 } => {
   const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
-  const aminoTypes = new AminoTypes({ ...aminoConverters
+  const aminoTypes = new AminoTypes({
+    ...aminoConverters
   });
   return {
     registry,

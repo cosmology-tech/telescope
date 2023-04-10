@@ -6,19 +6,16 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Returns list of `Authorization`, granted to the grantee by the granter. */
   grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse>;
-
   /**
    * GranterGrants returns list of `GrantAuthorization`, granted by granter.
    * 
    * Since: cosmos-sdk 0.46
    */
   granterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse>;
-
   /**
    * GranteeGrants returns a list of `GrantAuthorization` by grantee.
    * 
@@ -28,26 +25,21 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.grants = this.grants.bind(this);
     this.granterGrants = this.granterGrants.bind(this);
     this.granteeGrants = this.granteeGrants.bind(this);
   }
-
   grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse> {
     return this.rpc.unary(QueryGrantsDesc, QueryGrantsRequest.fromPartial(request), metadata);
   }
-
   granterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse> {
     return this.rpc.unary(QueryGranterGrantsDesc, QueryGranterGrantsRequest.fromPartial(request), metadata);
   }
-
   granteeGrants(request: DeepPartial<QueryGranteeGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranteeGrantsResponse> {
     return this.rpc.unary(QueryGranteeGrantsDesc, QueryGranteeGrantsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "cosmos.authz.v1beta1.Query"
@@ -61,19 +53,16 @@ export const QueryGrantsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryGrantsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryGrantsResponse.decode(data),
-
+      return {
+        ...QueryGrantsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryGranterGrantsDesc: UnaryMethodDefinitionish = {
@@ -85,19 +74,16 @@ export const QueryGranterGrantsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryGranterGrantsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryGranterGrantsResponse.decode(data),
-
+      return {
+        ...QueryGranterGrantsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryGranteeGrantsDesc: UnaryMethodDefinitionish = {
@@ -109,19 +95,16 @@ export const QueryGranteeGrantsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryGranteeGrantsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryGranteeGrantsResponse.decode(data),
-
+      return {
+        ...QueryGranteeGrantsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -134,7 +117,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -143,12 +125,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -172,5 +155,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

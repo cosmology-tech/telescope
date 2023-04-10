@@ -4,7 +4,6 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /**
@@ -13,7 +12,6 @@ export interface Query {
    * Accounts queries all accounts
    */
   accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
-
   /**
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
@@ -23,11 +21,9 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
   }
-
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Accounts queries all accounts */
@@ -36,7 +32,6 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Accounts", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
   };
-
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Payments queries all payments */
@@ -53,10 +48,8 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
       return queryService.accounts(request);
     },
-
     payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
       return queryService.payments(request);
     }
-
   };
 };

@@ -7,10 +7,11 @@ export class Query {
    * parameters.
    */
   static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/osmosis/ibc-rate-limit/v1beta1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/osmosis/ibc-rate-limit/v1beta1/params?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

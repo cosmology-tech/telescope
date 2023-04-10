@@ -3,7 +3,6 @@ import { Height, HeightSDKType } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
-
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
  * is called by a relayer on Chain A.
@@ -13,7 +12,6 @@ export interface MsgChannelOpenInit {
   channel?: Channel;
   signer: string;
 }
-
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
  * is called by a relayer on Chain A.
@@ -23,20 +21,16 @@ export interface MsgChannelOpenInitSDKType {
   channel?: ChannelSDKType;
   signer: string;
 }
-
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponse {}
-
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseSDKType {}
-
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
  * on Chain B.
  */
 export interface MsgChannelOpenTry {
   portId: string;
-
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
    * the channel identifier of the previous channel in state INIT
@@ -48,7 +42,6 @@ export interface MsgChannelOpenTry {
   proofHeight?: Height;
   signer: string;
 }
-
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
  * on Chain B.
@@ -62,13 +55,10 @@ export interface MsgChannelOpenTrySDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponse {}
-
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseSDKType {}
-
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
  * the change of channel state to TRYOPEN on Chain B.
@@ -82,7 +72,6 @@ export interface MsgChannelOpenAck {
   proofHeight?: Height;
   signer: string;
 }
-
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
  * the change of channel state to TRYOPEN on Chain B.
@@ -96,13 +85,10 @@ export interface MsgChannelOpenAckSDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponse {}
-
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseSDKType {}
-
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
  * acknowledge the change of channel state to OPEN on Chain A.
@@ -114,7 +100,6 @@ export interface MsgChannelOpenConfirm {
   proofHeight?: Height;
   signer: string;
 }
-
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
  * acknowledge the change of channel state to OPEN on Chain A.
@@ -126,19 +111,16 @@ export interface MsgChannelOpenConfirmSDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
  * type.
  */
 export interface MsgChannelOpenConfirmResponse {}
-
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
  * type.
  */
 export interface MsgChannelOpenConfirmResponseSDKType {}
-
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
  * to close a channel with Chain B.
@@ -148,7 +130,6 @@ export interface MsgChannelCloseInit {
   channelId: string;
   signer: string;
 }
-
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
  * to close a channel with Chain B.
@@ -158,13 +139,10 @@ export interface MsgChannelCloseInitSDKType {
   channel_id: string;
   signer: string;
 }
-
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponse {}
-
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseSDKType {}
-
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
  * to acknowledge the change of channel state to CLOSED on Chain A.
@@ -176,7 +154,6 @@ export interface MsgChannelCloseConfirm {
   proofHeight?: Height;
   signer: string;
 }
-
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
  * to acknowledge the change of channel state to CLOSED on Chain A.
@@ -188,19 +165,16 @@ export interface MsgChannelCloseConfirmSDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
  * type.
  */
 export interface MsgChannelCloseConfirmResponse {}
-
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
  * type.
  */
 export interface MsgChannelCloseConfirmResponseSDKType {}
-
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacket {
   packet?: Packet;
@@ -208,7 +182,6 @@ export interface MsgRecvPacket {
   proofHeight?: Height;
   signer: string;
 }
-
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketSDKType {
   packet?: PacketSDKType;
@@ -216,13 +189,10 @@ export interface MsgRecvPacketSDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponse {}
-
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseSDKType {}
-
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeout {
   packet?: Packet;
@@ -231,7 +201,6 @@ export interface MsgTimeout {
   nextSequenceRecv: bigint;
   signer: string;
 }
-
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutSDKType {
   packet?: PacketSDKType;
@@ -240,13 +209,10 @@ export interface MsgTimeoutSDKType {
   next_sequence_recv: bigint;
   signer: string;
 }
-
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponse {}
-
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseSDKType {}
-
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnClose {
   packet?: Packet;
@@ -256,7 +222,6 @@ export interface MsgTimeoutOnClose {
   nextSequenceRecv: bigint;
   signer: string;
 }
-
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseSDKType {
   packet?: PacketSDKType;
@@ -266,13 +231,10 @@ export interface MsgTimeoutOnCloseSDKType {
   next_sequence_recv: bigint;
   signer: string;
 }
-
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponse {}
-
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseSDKType {}
-
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgement {
   packet?: Packet;
@@ -281,7 +243,6 @@ export interface MsgAcknowledgement {
   proofHeight?: Height;
   signer: string;
 }
-
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementSDKType {
   packet?: PacketSDKType;
@@ -290,13 +251,10 @@ export interface MsgAcknowledgementSDKType {
   proof_height?: HeightSDKType;
   signer: string;
 }
-
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
-
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponseSDKType {}
-
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
   return {
     portId: "",
@@ -304,54 +262,42 @@ function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
     signer: ""
   };
 }
-
 export const MsgChannelOpenInit = {
   encode(message: MsgChannelOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInit();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.channel = Channel.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelOpenInit {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -359,7 +305,6 @@ export const MsgChannelOpenInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelOpenInit): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -367,7 +312,6 @@ export const MsgChannelOpenInit = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenInit>): MsgChannelOpenInit {
     const message = createBaseMsgChannelOpenInit();
     message.portId = object.portId ?? "";
@@ -375,7 +319,6 @@ export const MsgChannelOpenInit = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelOpenInitSDKType): MsgChannelOpenInit {
     return {
       portId: object?.port_id,
@@ -383,7 +326,6 @@ export const MsgChannelOpenInit = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelOpenInitSDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -391,7 +333,6 @@ export const MsgChannelOpenInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelOpenInit): MsgChannelOpenInitSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -399,65 +340,50 @@ export const MsgChannelOpenInit = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
   return {};
 }
-
 export const MsgChannelOpenInitResponse = {
   encode(_: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInitResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInitResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelOpenInitResponse {
     return {};
   },
-
   toJSON(_: MsgChannelOpenInitResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenInitResponse>): MsgChannelOpenInitResponse {
     const message = createBaseMsgChannelOpenInitResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelOpenInitResponseSDKType): MsgChannelOpenInitResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelOpenInitResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
   return {
     portId: "",
@@ -469,86 +395,66 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
     signer: ""
   };
 }
-
 export const MsgChannelOpenTry = {
   encode(message: MsgChannelOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.previousChannelId !== "") {
       writer.uint32(18).string(message.previousChannelId);
     }
-
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.counterpartyVersion !== "") {
       writer.uint32(34).string(message.counterpartyVersion);
     }
-
     if (message.proofInit.length !== 0) {
       writer.uint32(42).bytes(message.proofInit);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(58).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.previousChannelId = reader.string();
           break;
-
         case 3:
           message.channel = Channel.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.counterpartyVersion = reader.string();
           break;
-
         case 5:
           message.proofInit = reader.bytes();
           break;
-
         case 6:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelOpenTry {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -560,7 +466,6 @@ export const MsgChannelOpenTry = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelOpenTry): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -572,7 +477,6 @@ export const MsgChannelOpenTry = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenTry>): MsgChannelOpenTry {
     const message = createBaseMsgChannelOpenTry();
     message.portId = object.portId ?? "";
@@ -584,7 +488,6 @@ export const MsgChannelOpenTry = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelOpenTrySDKType): MsgChannelOpenTry {
     return {
       portId: object?.port_id,
@@ -596,7 +499,6 @@ export const MsgChannelOpenTry = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelOpenTrySDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -608,7 +510,6 @@ export const MsgChannelOpenTry = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelOpenTry): MsgChannelOpenTrySDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -620,65 +521,50 @@ export const MsgChannelOpenTry = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
   return {};
 }
-
 export const MsgChannelOpenTryResponse = {
   encode(_: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTryResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTryResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelOpenTryResponse {
     return {};
   },
-
   toJSON(_: MsgChannelOpenTryResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenTryResponse>): MsgChannelOpenTryResponse {
     const message = createBaseMsgChannelOpenTryResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelOpenTryResponseSDKType): MsgChannelOpenTryResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelOpenTryResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
   return {
     portId: "",
@@ -690,86 +576,66 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
     signer: ""
   };
 }
-
 export const MsgChannelOpenAck = {
   encode(message: MsgChannelOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
-
     if (message.counterpartyChannelId !== "") {
       writer.uint32(26).string(message.counterpartyChannelId);
     }
-
     if (message.counterpartyVersion !== "") {
       writer.uint32(34).string(message.counterpartyVersion);
     }
-
     if (message.proofTry.length !== 0) {
       writer.uint32(42).bytes(message.proofTry);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(58).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAck {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAck();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.channelId = reader.string();
           break;
-
         case 3:
           message.counterpartyChannelId = reader.string();
           break;
-
         case 4:
           message.counterpartyVersion = reader.string();
           break;
-
         case 5:
           message.proofTry = reader.bytes();
           break;
-
         case 6:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelOpenAck {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -781,7 +647,6 @@ export const MsgChannelOpenAck = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelOpenAck): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -793,7 +658,6 @@ export const MsgChannelOpenAck = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenAck>): MsgChannelOpenAck {
     const message = createBaseMsgChannelOpenAck();
     message.portId = object.portId ?? "";
@@ -805,7 +669,6 @@ export const MsgChannelOpenAck = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelOpenAckSDKType): MsgChannelOpenAck {
     return {
       portId: object?.port_id,
@@ -817,7 +680,6 @@ export const MsgChannelOpenAck = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelOpenAckSDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -829,7 +691,6 @@ export const MsgChannelOpenAck = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelOpenAck): MsgChannelOpenAckSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -841,65 +702,50 @@ export const MsgChannelOpenAck = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
   return {};
 }
-
 export const MsgChannelOpenAckResponse = {
   encode(_: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAckResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAckResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelOpenAckResponse {
     return {};
   },
-
   toJSON(_: MsgChannelOpenAckResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenAckResponse>): MsgChannelOpenAckResponse {
     const message = createBaseMsgChannelOpenAckResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelOpenAckResponseSDKType): MsgChannelOpenAckResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelOpenAckResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
   return {
     portId: "",
@@ -909,70 +755,54 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
     signer: ""
   };
 }
-
 export const MsgChannelOpenConfirm = {
   encode(message: MsgChannelOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
-
     if (message.proofAck.length !== 0) {
       writer.uint32(26).bytes(message.proofAck);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(42).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirm {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirm();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.channelId = reader.string();
           break;
-
         case 3:
           message.proofAck = reader.bytes();
           break;
-
         case 4:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelOpenConfirm {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -982,7 +812,6 @@ export const MsgChannelOpenConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelOpenConfirm): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -992,7 +821,6 @@ export const MsgChannelOpenConfirm = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenConfirm>): MsgChannelOpenConfirm {
     const message = createBaseMsgChannelOpenConfirm();
     message.portId = object.portId ?? "";
@@ -1002,7 +830,6 @@ export const MsgChannelOpenConfirm = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelOpenConfirmSDKType): MsgChannelOpenConfirm {
     return {
       portId: object?.port_id,
@@ -1012,7 +839,6 @@ export const MsgChannelOpenConfirm = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelOpenConfirmSDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -1022,7 +848,6 @@ export const MsgChannelOpenConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1032,65 +857,50 @@ export const MsgChannelOpenConfirm = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmResponse {
   return {};
 }
-
 export const MsgChannelOpenConfirmResponse = {
   encode(_: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirmResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirmResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelOpenConfirmResponse {
     return {};
   },
-
   toJSON(_: MsgChannelOpenConfirmResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenConfirmResponse>): MsgChannelOpenConfirmResponse {
     const message = createBaseMsgChannelOpenConfirmResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelOpenConfirmResponseSDKType): MsgChannelOpenConfirmResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelOpenConfirmResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
   return {
     portId: "",
@@ -1098,54 +908,42 @@ function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
     signer: ""
   };
 }
-
 export const MsgChannelCloseInit = {
   encode(message: MsgChannelCloseInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
-
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInit();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.channelId = reader.string();
           break;
-
         case 3:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelCloseInit {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -1153,7 +951,6 @@ export const MsgChannelCloseInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelCloseInit): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -1161,7 +958,6 @@ export const MsgChannelCloseInit = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelCloseInit>): MsgChannelCloseInit {
     const message = createBaseMsgChannelCloseInit();
     message.portId = object.portId ?? "";
@@ -1169,7 +965,6 @@ export const MsgChannelCloseInit = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelCloseInitSDKType): MsgChannelCloseInit {
     return {
       portId: object?.port_id,
@@ -1177,7 +972,6 @@ export const MsgChannelCloseInit = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelCloseInitSDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -1185,7 +979,6 @@ export const MsgChannelCloseInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelCloseInit): MsgChannelCloseInitSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1193,65 +986,50 @@ export const MsgChannelCloseInit = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
   return {};
 }
-
 export const MsgChannelCloseInitResponse = {
   encode(_: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInitResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInitResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelCloseInitResponse {
     return {};
   },
-
   toJSON(_: MsgChannelCloseInitResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelCloseInitResponse>): MsgChannelCloseInitResponse {
     const message = createBaseMsgChannelCloseInitResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelCloseInitResponseSDKType): MsgChannelCloseInitResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelCloseInitResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
   return {
     portId: "",
@@ -1261,70 +1039,54 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
     signer: ""
   };
 }
-
 export const MsgChannelCloseConfirm = {
   encode(message: MsgChannelCloseConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
-
     if (message.proofInit.length !== 0) {
       writer.uint32(26).bytes(message.proofInit);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(42).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirm {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirm();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.channelId = reader.string();
           break;
-
         case 3:
           message.proofInit = reader.bytes();
           break;
-
         case 4:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgChannelCloseConfirm {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -1334,7 +1096,6 @@ export const MsgChannelCloseConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgChannelCloseConfirm): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -1344,7 +1105,6 @@ export const MsgChannelCloseConfirm = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgChannelCloseConfirm>): MsgChannelCloseConfirm {
     const message = createBaseMsgChannelCloseConfirm();
     message.portId = object.portId ?? "";
@@ -1354,7 +1114,6 @@ export const MsgChannelCloseConfirm = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgChannelCloseConfirmSDKType): MsgChannelCloseConfirm {
     return {
       portId: object?.port_id,
@@ -1364,7 +1123,6 @@ export const MsgChannelCloseConfirm = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgChannelCloseConfirmSDKType {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
@@ -1374,7 +1132,6 @@ export const MsgChannelCloseConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -1384,65 +1141,50 @@ export const MsgChannelCloseConfirm = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmResponse {
   return {};
 }
-
 export const MsgChannelCloseConfirmResponse = {
   encode(_: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirmResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirmResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgChannelCloseConfirmResponse {
     return {};
   },
-
   toJSON(_: MsgChannelCloseConfirmResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgChannelCloseConfirmResponse>): MsgChannelCloseConfirmResponse {
     const message = createBaseMsgChannelCloseConfirmResponse();
     return message;
   },
-
   fromSDK(_: MsgChannelCloseConfirmResponseSDKType): MsgChannelCloseConfirmResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgChannelCloseConfirmResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgRecvPacket(): MsgRecvPacket {
   return {
     packet: undefined,
@@ -1451,62 +1193,48 @@ function createBaseMsgRecvPacket(): MsgRecvPacket {
     signer: ""
   };
 }
-
 export const MsgRecvPacket = {
   encode(message: MsgRecvPacket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.proofCommitment.length !== 0) {
       writer.uint32(18).bytes(message.proofCommitment);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(34).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacket();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.packet = Packet.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.proofCommitment = reader.bytes();
           break;
-
         case 3:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgRecvPacket {
     return {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
@@ -1515,7 +1243,6 @@ export const MsgRecvPacket = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgRecvPacket): unknown {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
@@ -1524,7 +1251,6 @@ export const MsgRecvPacket = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgRecvPacket>): MsgRecvPacket {
     const message = createBaseMsgRecvPacket();
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
@@ -1533,7 +1259,6 @@ export const MsgRecvPacket = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgRecvPacketSDKType): MsgRecvPacket {
     return {
       packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
@@ -1542,7 +1267,6 @@ export const MsgRecvPacket = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgRecvPacketSDKType {
     return {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
@@ -1551,7 +1275,6 @@ export const MsgRecvPacket = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgRecvPacket): MsgRecvPacketSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -1560,65 +1283,50 @@ export const MsgRecvPacket = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
   return {};
 }
-
 export const MsgRecvPacketResponse = {
   encode(_: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacketResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacketResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgRecvPacketResponse {
     return {};
   },
-
   toJSON(_: MsgRecvPacketResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgRecvPacketResponse>): MsgRecvPacketResponse {
     const message = createBaseMsgRecvPacketResponse();
     return message;
   },
-
   fromSDK(_: MsgRecvPacketResponseSDKType): MsgRecvPacketResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgRecvPacketResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgRecvPacketResponse): MsgRecvPacketResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgTimeout(): MsgTimeout {
   return {
     packet: undefined,
@@ -1628,70 +1336,54 @@ function createBaseMsgTimeout(): MsgTimeout {
     signer: ""
   };
 }
-
 export const MsgTimeout = {
   encode(message: MsgTimeout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.proofUnreceived.length !== 0) {
       writer.uint32(18).bytes(message.proofUnreceived);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.nextSequenceRecv !== BigInt(0)) {
       writer.uint32(32).uint64(Long.fromString(message.nextSequenceRecv.toString()));
     }
-
     if (message.signer !== "") {
       writer.uint32(42).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeout {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeout();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.packet = Packet.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.proofUnreceived = reader.bytes();
           break;
-
         case 3:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.nextSequenceRecv = BigInt(reader.uint64().toString());
           break;
-
         case 5:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgTimeout {
     return {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
@@ -1701,7 +1393,6 @@ export const MsgTimeout = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgTimeout): unknown {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
@@ -1711,7 +1402,6 @@ export const MsgTimeout = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgTimeout>): MsgTimeout {
     const message = createBaseMsgTimeout();
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
@@ -1721,7 +1411,6 @@ export const MsgTimeout = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgTimeoutSDKType): MsgTimeout {
     return {
       packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
@@ -1731,7 +1420,6 @@ export const MsgTimeout = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgTimeoutSDKType {
     return {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
@@ -1741,7 +1429,6 @@ export const MsgTimeout = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgTimeout): MsgTimeoutSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -1751,65 +1438,50 @@ export const MsgTimeout = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
   return {};
 }
-
 export const MsgTimeoutResponse = {
   encode(_: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgTimeoutResponse {
     return {};
   },
-
   toJSON(_: MsgTimeoutResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgTimeoutResponse>): MsgTimeoutResponse {
     const message = createBaseMsgTimeoutResponse();
     return message;
   },
-
   fromSDK(_: MsgTimeoutResponseSDKType): MsgTimeoutResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgTimeoutResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgTimeoutResponse): MsgTimeoutResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
   return {
     packet: undefined,
@@ -1820,78 +1492,60 @@ function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
     signer: ""
   };
 }
-
 export const MsgTimeoutOnClose = {
   encode(message: MsgTimeoutOnClose, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.proofUnreceived.length !== 0) {
       writer.uint32(18).bytes(message.proofUnreceived);
     }
-
     if (message.proofClose.length !== 0) {
       writer.uint32(26).bytes(message.proofClose);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.nextSequenceRecv !== BigInt(0)) {
       writer.uint32(40).uint64(Long.fromString(message.nextSequenceRecv.toString()));
     }
-
     if (message.signer !== "") {
       writer.uint32(50).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnClose {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnClose();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.packet = Packet.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.proofUnreceived = reader.bytes();
           break;
-
         case 3:
           message.proofClose = reader.bytes();
           break;
-
         case 4:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.nextSequenceRecv = BigInt(reader.uint64().toString());
           break;
-
         case 6:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgTimeoutOnClose {
     return {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
@@ -1902,7 +1556,6 @@ export const MsgTimeoutOnClose = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgTimeoutOnClose): unknown {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
@@ -1913,7 +1566,6 @@ export const MsgTimeoutOnClose = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgTimeoutOnClose>): MsgTimeoutOnClose {
     const message = createBaseMsgTimeoutOnClose();
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
@@ -1924,7 +1576,6 @@ export const MsgTimeoutOnClose = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgTimeoutOnCloseSDKType): MsgTimeoutOnClose {
     return {
       packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
@@ -1935,7 +1586,6 @@ export const MsgTimeoutOnClose = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgTimeoutOnCloseSDKType {
     return {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
@@ -1946,7 +1596,6 @@ export const MsgTimeoutOnClose = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgTimeoutOnClose): MsgTimeoutOnCloseSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -1957,65 +1606,50 @@ export const MsgTimeoutOnClose = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
   return {};
 }
-
 export const MsgTimeoutOnCloseResponse = {
   encode(_: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnCloseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnCloseResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgTimeoutOnCloseResponse {
     return {};
   },
-
   toJSON(_: MsgTimeoutOnCloseResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgTimeoutOnCloseResponse>): MsgTimeoutOnCloseResponse {
     const message = createBaseMsgTimeoutOnCloseResponse();
     return message;
   },
-
   fromSDK(_: MsgTimeoutOnCloseResponseSDKType): MsgTimeoutOnCloseResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgTimeoutOnCloseResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };
-
 function createBaseMsgAcknowledgement(): MsgAcknowledgement {
   return {
     packet: undefined,
@@ -2025,70 +1659,54 @@ function createBaseMsgAcknowledgement(): MsgAcknowledgement {
     signer: ""
   };
 }
-
 export const MsgAcknowledgement = {
   encode(message: MsgAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.acknowledgement.length !== 0) {
       writer.uint32(18).bytes(message.acknowledgement);
     }
-
     if (message.proofAcked.length !== 0) {
       writer.uint32(26).bytes(message.proofAcked);
     }
-
     if (message.proofHeight !== undefined) {
       Height.encode(message.proofHeight, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.signer !== "") {
       writer.uint32(42).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgement {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgement();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.packet = Packet.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.acknowledgement = reader.bytes();
           break;
-
         case 3:
           message.proofAcked = reader.bytes();
           break;
-
         case 4:
           message.proofHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAcknowledgement {
     return {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
@@ -2098,7 +1716,6 @@ export const MsgAcknowledgement = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toJSON(message: MsgAcknowledgement): unknown {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
@@ -2108,7 +1725,6 @@ export const MsgAcknowledgement = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgAcknowledgement>): MsgAcknowledgement {
     const message = createBaseMsgAcknowledgement();
     message.packet = object.packet !== undefined && object.packet !== null ? Packet.fromPartial(object.packet) : undefined;
@@ -2118,7 +1734,6 @@ export const MsgAcknowledgement = {
     message.signer = object.signer ?? "";
     return message;
   },
-
   fromSDK(object: MsgAcknowledgementSDKType): MsgAcknowledgement {
     return {
       packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
@@ -2128,7 +1743,6 @@ export const MsgAcknowledgement = {
       signer: object?.signer
     };
   },
-
   fromSDKJSON(object: any): MsgAcknowledgementSDKType {
     return {
       packet: isSet(object.packet) ? Packet.fromSDKJSON(object.packet) : undefined,
@@ -2138,7 +1752,6 @@ export const MsgAcknowledgement = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-
   toSDK(message: MsgAcknowledgement): MsgAcknowledgementSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
@@ -2148,61 +1761,47 @@ export const MsgAcknowledgement = {
     obj.signer = message.signer;
     return obj;
   }
-
 };
-
 function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
   return {};
 }
-
 export const MsgAcknowledgementResponse = {
   encode(_: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgementResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgementResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgAcknowledgementResponse {
     return {};
   },
-
   toJSON(_: MsgAcknowledgementResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgAcknowledgementResponse>): MsgAcknowledgementResponse {
     const message = createBaseMsgAcknowledgementResponse();
     return message;
   },
-
   fromSDK(_: MsgAcknowledgementResponseSDKType): MsgAcknowledgementResponse {
     return {};
   },
-
   fromSDKJSON(_: any): MsgAcknowledgementResponseSDKType {
     return {};
   },
-
   toSDK(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseSDKType {
     const obj: any = {};
     return obj;
   }
-
 };

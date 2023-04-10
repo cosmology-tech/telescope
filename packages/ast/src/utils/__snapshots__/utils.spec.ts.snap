@@ -14,7 +14,8 @@ exports[`recursiveNamespace 1`] = `
           aminoTypes: AminoTypes;
         } => {
           const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
-          const aminoTypes = new AminoTypes({ ...aminoConverters
+          const aminoTypes = new AminoTypes({
+            ...aminoConverters
           });
           return {
             registry,

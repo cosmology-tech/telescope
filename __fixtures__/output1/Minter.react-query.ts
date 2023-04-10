@@ -154,7 +154,6 @@ export function useMinterUpdatePerAddressLimitMutation(options?: Omit<UseMutatio
 }
 export interface MinterUpdateStartTimeMutation {
   client: MinterClient;
-  msg: Timestamp;
   args?: {
     fee?: number | StdFee | "auto";
     memo?: string;

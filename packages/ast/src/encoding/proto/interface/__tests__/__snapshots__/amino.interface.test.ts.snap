@@ -5,7 +5,6 @@ exports[`GenesisState interface 1`] = `
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
-
   /** accounts are the accounts present at genesis. */
   accounts: AnyAmino[];
 }"
@@ -37,20 +36,17 @@ export interface PageRequestAmino {
    * should be set.
    */
   key: Uint8Array;
-
   /**
    * offset is a numeric offset that can be used when key is unavailable.
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
   offset: string;
-
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
   limit: string;
-
   /**
    * count_total is set to true  to indicate that the result set should include
    * a count of the total number of items available for pagination in UIs.
@@ -58,7 +54,6 @@ export interface PageRequestAmino {
    * is set.
    */
   count_total: boolean;
-
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
@@ -85,7 +80,6 @@ export interface PageResponseAmino {
    * there are no more results.
    */
   next_key: Uint8Array;
-
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
@@ -145,7 +139,6 @@ exports[`cosmos/authz/v1beta1/authz.proto Grant 1`] = `
  */
 export interface GrantAmino {
   authorization?: AnyAmino;
-
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -173,10 +166,8 @@ exports[`cosmos/authz/v1beta1/query.proto QueryGrantsRequest 1`] = `
 export interface QueryGrantsRequestAmino {
   granter: string;
   grantee: string;
-
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
   msg_type_url: string;
-
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }"

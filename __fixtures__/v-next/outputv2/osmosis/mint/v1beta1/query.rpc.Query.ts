@@ -5,32 +5,26 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
-
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of minting parameters. */
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-
   /** EpochProvisions returns the current minting epoch provisions value. */
   epochProvisions(request?: DeepPartial<QueryEpochProvisionsRequest>, metadata?: grpc.Metadata): Promise<QueryEpochProvisionsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.params = this.params.bind(this);
     this.epochProvisions = this.epochProvisions.bind(this);
   }
-
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
   epochProvisions(request: DeepPartial<QueryEpochProvisionsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryEpochProvisionsResponse> {
     return this.rpc.unary(QueryEpochProvisionsDesc, QueryEpochProvisionsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "osmosis.mint.v1beta1.Query"
@@ -44,19 +38,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryEpochProvisionsDesc: UnaryMethodDefinitionish = {
@@ -68,19 +59,16 @@ export const QueryEpochProvisionsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryEpochProvisionsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryEpochProvisionsResponse.decode(data),
-
+      return {
+        ...QueryEpochProvisionsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -93,7 +81,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -102,12 +89,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -131,5 +119,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

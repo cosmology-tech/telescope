@@ -51,7 +51,8 @@ import * as _227 from "./rpc/code";
 import * as _228 from "./rpc/error_details";
 import * as _229 from "./rpc/status";
 export namespace google {
-  export const api = { ..._178,
+  export const api = {
+    ..._178,
     ..._179,
     ..._180,
     ..._181,
@@ -84,18 +85,22 @@ export namespace google {
     ..._208
   };
   export namespace logging {
-    export const type = { ..._209,
+    export const type = {
+      ..._209,
       ..._210
     };
-    export const v2 = { ..._211,
+    export const v2 = {
+      ..._211,
       ..._212,
       ..._213,
       ..._214
     };
   }
-  export const longrunning = { ..._215
+  export const longrunning = {
+    ..._215
   };
-  export const protobuf = { ..._216,
+  export const protobuf = {
+    ..._216,
     ..._217,
     ..._218,
     ..._219,
@@ -107,7 +112,8 @@ export namespace google {
     ..._225,
     ..._226
   };
-  export const rpc = { ..._227,
+  export const rpc = {
+    ..._227,
     ..._228,
     ..._229
   };

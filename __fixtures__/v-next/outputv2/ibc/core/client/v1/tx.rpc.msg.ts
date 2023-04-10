@@ -5,24 +5,19 @@ import { DeepPartial } from "../../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
-
 /** Msg defines the ibc/client Msg service. */
 export interface Msg {
   /** CreateClient defines a rpc handler method for MsgCreateClient. */
   createClient(request: DeepPartial<MsgCreateClient>, metadata?: grpc.Metadata): Promise<MsgCreateClientResponse>;
-
   /** UpdateClient defines a rpc handler method for MsgUpdateClient. */
   updateClient(request: DeepPartial<MsgUpdateClient>, metadata?: grpc.Metadata): Promise<MsgUpdateClientResponse>;
-
   /** UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
   upgradeClient(request: DeepPartial<MsgUpgradeClient>, metadata?: grpc.Metadata): Promise<MsgUpgradeClientResponse>;
-
   /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
   submitMisbehaviour(request: DeepPartial<MsgSubmitMisbehaviour>, metadata?: grpc.Metadata): Promise<MsgSubmitMisbehaviourResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.createClient = this.createClient.bind(this);
@@ -30,23 +25,18 @@ export class MsgClientImpl implements Msg {
     this.upgradeClient = this.upgradeClient.bind(this);
     this.submitMisbehaviour = this.submitMisbehaviour.bind(this);
   }
-
   createClient(request: DeepPartial<MsgCreateClient>, metadata?: grpc.Metadata): Promise<MsgCreateClientResponse> {
     return this.rpc.unary(MsgCreateClientDesc, MsgCreateClient.fromPartial(request), metadata);
   }
-
   updateClient(request: DeepPartial<MsgUpdateClient>, metadata?: grpc.Metadata): Promise<MsgUpdateClientResponse> {
     return this.rpc.unary(MsgUpdateClientDesc, MsgUpdateClient.fromPartial(request), metadata);
   }
-
   upgradeClient(request: DeepPartial<MsgUpgradeClient>, metadata?: grpc.Metadata): Promise<MsgUpgradeClientResponse> {
     return this.rpc.unary(MsgUpgradeClientDesc, MsgUpgradeClient.fromPartial(request), metadata);
   }
-
   submitMisbehaviour(request: DeepPartial<MsgSubmitMisbehaviour>, metadata?: grpc.Metadata): Promise<MsgSubmitMisbehaviourResponse> {
     return this.rpc.unary(MsgSubmitMisbehaviourDesc, MsgSubmitMisbehaviour.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "ibc.core.client.v1.Msg"
@@ -60,19 +50,16 @@ export const MsgCreateClientDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreateClient.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreateClientResponse.decode(data),
-
+      return {
+        ...MsgCreateClientResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgUpdateClientDesc: UnaryMethodDefinitionish = {
@@ -84,19 +71,16 @@ export const MsgUpdateClientDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgUpdateClient.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgUpdateClientResponse.decode(data),
-
+      return {
+        ...MsgUpdateClientResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgUpgradeClientDesc: UnaryMethodDefinitionish = {
@@ -108,19 +92,16 @@ export const MsgUpgradeClientDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgUpgradeClient.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgUpgradeClientResponse.decode(data),
-
+      return {
+        ...MsgUpgradeClientResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgSubmitMisbehaviourDesc: UnaryMethodDefinitionish = {
@@ -132,19 +113,16 @@ export const MsgSubmitMisbehaviourDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgSubmitMisbehaviour.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgSubmitMisbehaviourResponse.decode(data),
-
+      return {
+        ...MsgSubmitMisbehaviourResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -157,7 +135,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -166,12 +143,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -195,5 +173,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

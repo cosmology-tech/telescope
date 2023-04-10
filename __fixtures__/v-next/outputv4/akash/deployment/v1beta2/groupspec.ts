@@ -3,21 +3,18 @@ import { Resource, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
   requirements?: PlacementRequirements;
   resources: Resource[];
 }
-
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
   requirements?: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
-
 function createBaseGroupSpec(): GroupSpec {
   return {
     name: "",
@@ -25,54 +22,42 @@ function createBaseGroupSpec(): GroupSpec {
     resources: []
   };
 }
-
 export const GroupSpec = {
   encode(message: GroupSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.requirements !== undefined) {
       PlacementRequirements.encode(message.requirements, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.resources) {
       Resource.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GroupSpec {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupSpec();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.requirements = PlacementRequirements.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.resources.push(Resource.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GroupSpec {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -80,21 +65,17 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromJSON(e)) : []
     };
   },
-
   toJSON(message: GroupSpec): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);
-
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toJSON(e) : undefined);
     } else {
       obj.resources = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
@@ -102,7 +83,6 @@ export const GroupSpec = {
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: GroupSpecSDKType): GroupSpec {
     return {
       name: object?.name,
@@ -110,7 +90,6 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): GroupSpecSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -118,19 +97,15 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: GroupSpec): GroupSpecSDKType {
     const obj: any = {};
     obj.name = message.name;
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toSDK(message.requirements) : undefined);
-
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toSDK(e) : undefined);
     } else {
       obj.resources = [];
     }
-
     return obj;
   }
-
 };

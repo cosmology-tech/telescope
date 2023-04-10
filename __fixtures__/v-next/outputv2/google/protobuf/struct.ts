@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
  * `Value` type union.
@@ -20,7 +19,6 @@ export function nullValueFromJSON(object: any): NullValue {
     case 0:
     case "NULL_VALUE":
       return NullValue.NULL_VALUE;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -31,7 +29,6 @@ export function nullValueToJSON(object: NullValue): string {
   switch (object) {
     case NullValue.NULL_VALUE:
       return "NULL_VALUE";
-
     case NullValue.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -57,7 +54,6 @@ export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -78,7 +74,6 @@ export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
   value: Uint8Array;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -99,7 +94,6 @@ export interface StructAminoMsg {
   type: "/google.protobuf.Struct";
   value: StructAmino;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -115,7 +109,6 @@ export interface StructSDKType {
     [key: string]: ValueSDKType;
   };
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -127,19 +120,14 @@ export interface StructSDKType {
 export interface Value {
   /** Represents a null value. */
   nullValue?: NullValue;
-
   /** Represents a double value. */
   numberValue?: number;
-
   /** Represents a string value. */
   stringValue?: string;
-
   /** Represents a boolean value. */
   boolValue?: boolean;
-
   /** Represents a structured value. */
   structValue?: Struct;
-
   /** Represents a repeated `Value`. */
   listValue?: ListValue;
 }
@@ -147,7 +135,6 @@ export interface ValueProtoMsg {
   typeUrl: "/google.protobuf.Value";
   value: Uint8Array;
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -159,19 +146,14 @@ export interface ValueProtoMsg {
 export interface ValueAmino {
   /** Represents a null value. */
   null_value?: NullValue;
-
   /** Represents a double value. */
   number_value?: number;
-
   /** Represents a string value. */
   string_value?: string;
-
   /** Represents a boolean value. */
   bool_value?: boolean;
-
   /** Represents a structured value. */
   struct_value?: StructAmino;
-
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
@@ -179,7 +161,6 @@ export interface ValueAminoMsg {
   type: "/google.protobuf.Value";
   value: ValueAmino;
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -196,7 +177,6 @@ export interface ValueSDKType {
   struct_value?: StructSDKType;
   list_value?: ListValueSDKType;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
@@ -210,7 +190,6 @@ export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
@@ -224,7 +203,6 @@ export interface ListValueAminoMsg {
   type: "/google.protobuf.ListValue";
   value: ListValueAmino;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
@@ -233,125 +211,101 @@ export interface ListValueAminoMsg {
 export interface ListValueSDKType {
   values: ValueSDKType[];
 }
-
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
     value: undefined
   };
 }
-
 export const Struct_FieldsEntry = {
   encode(message: Struct_FieldsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_FieldsEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = reader.string();
           break;
-
         case 2:
           message.value = Value.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Struct_FieldsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: Struct_FieldsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
     const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
     return {
       key: object?.key,
       value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
-
   toSDK(message: Struct_FieldsEntry): Struct_FieldsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
   },
-
   fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
     return {
       key: object.key,
       value: object?.value ? Value.fromAmino(object.value) : undefined
     };
   },
-
   toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
     return Struct_FieldsEntry.fromAmino(object.value);
   },
-
   fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
     return Struct_FieldsEntry.decode(message.value);
   },
-
   toProto(message: Struct_FieldsEntry): Uint8Array {
     return Struct_FieldsEntry.encode(message).finish();
   }
-
 };
-
 function createBaseStruct(): Struct {
   return {
     fields: {}
   };
 }
-
 export const Struct = {
   typeUrl: "/google.protobuf.Struct",
-
   encode(message: Struct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
       Struct_FieldsEntry.encode({
@@ -361,34 +315,26 @@ export const Struct = {
     });
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Struct {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           const entry1 = Struct_FieldsEntry.decode(reader, reader.uint32());
-
           if (entry1.value !== undefined) {
             message.fields[entry1.key] = entry1.value;
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Struct {
     return {
       fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
@@ -399,20 +345,16 @@ export const Struct = {
       }, {}) : {}
     };
   },
-
   toJSON(message: Struct): unknown {
     const obj: any = {};
     obj.fields = {};
-
     if (message.fields) {
       Object.entries(message.fields).forEach(([k, v]) => {
         obj.fields[k] = Value.toJSON(v);
       });
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Struct>): Struct {
     const message = createBaseStruct();
     message.fields = Object.entries(object.fields ?? {}).reduce<{
@@ -421,12 +363,10 @@ export const Struct = {
       if (value !== undefined) {
         acc[key] = Value.fromPartial(value);
       }
-
       return acc;
     }, {});
     return message;
   },
-
   fromSDK(object: StructSDKType): Struct {
     return {
       fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
@@ -437,20 +377,16 @@ export const Struct = {
       }, {}) : {}
     };
   },
-
   toSDK(message: Struct): StructSDKType {
     const obj: any = {};
     obj.fields = {};
-
     if (message.fields) {
       Object.entries(message.fields).forEach(([k, v]) => {
         obj.fields[k] = Value.toSDK(v);
       });
     }
-
     return obj;
   },
-
   fromAmino(object: StructAmino): Struct {
     return {
       fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
@@ -461,41 +397,32 @@ export const Struct = {
       }, {}) : {}
     };
   },
-
   toAmino(message: Struct): StructAmino {
     const obj: any = {};
     obj.fields = {};
-
     if (message.fields) {
       Object.entries(message.fields).forEach(([k, v]) => {
         obj.fields[k] = Value.toAmino(v);
       });
     }
-
     return obj;
   },
-
   fromAminoMsg(object: StructAminoMsg): Struct {
     return Struct.fromAmino(object.value);
   },
-
   fromProtoMsg(message: StructProtoMsg): Struct {
     return Struct.decode(message.value);
   },
-
   toProto(message: Struct): Uint8Array {
     return Struct.encode(message).finish();
   },
-
   toProtoMsg(message: Struct): StructProtoMsg {
     return {
       typeUrl: "/google.protobuf.Struct",
       value: Struct.encode(message).finish()
     };
   }
-
 };
-
 function createBaseValue(): Value {
   return {
     nullValue: undefined,
@@ -506,80 +433,61 @@ function createBaseValue(): Value {
     listValue: undefined
   };
 }
-
 export const Value = {
   typeUrl: "/google.protobuf.Value",
-
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
-
     if (message.numberValue !== undefined) {
       writer.uint32(17).double(message.numberValue);
     }
-
     if (message.stringValue !== undefined) {
       writer.uint32(26).string(message.stringValue);
     }
-
     if (message.boolValue !== undefined) {
       writer.uint32(32).bool(message.boolValue);
     }
-
     if (message.structValue !== undefined) {
       Struct.encode(message.structValue, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.listValue !== undefined) {
       ListValue.encode(message.listValue, writer.uint32(50).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nullValue = (reader.int32() as any);
           break;
-
         case 2:
           message.numberValue = reader.double();
           break;
-
         case 3:
           message.stringValue = reader.string();
           break;
-
         case 4:
           message.boolValue = reader.bool();
           break;
-
         case 5:
           message.structValue = Struct.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.listValue = ListValue.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Value {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
@@ -590,7 +498,6 @@ export const Value = {
       listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined
     };
   },
-
   toJSON(message: Value): unknown {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
@@ -601,7 +508,6 @@ export const Value = {
     message.listValue !== undefined && (obj.listValue = message.listValue ? ListValue.toJSON(message.listValue) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
@@ -612,7 +518,6 @@ export const Value = {
     message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
     return message;
   },
-
   fromSDK(object: ValueSDKType): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -623,7 +528,6 @@ export const Value = {
       listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined
     };
   },
-
   toSDK(message: Value): ValueSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
@@ -634,7 +538,6 @@ export const Value = {
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     return obj;
   },
-
   fromAmino(object: ValueAmino): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -645,7 +548,6 @@ export const Value = {
       listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
     };
   },
-
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
@@ -656,144 +558,112 @@ export const Value = {
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: ValueAminoMsg): Value {
     return Value.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
-
   toProto(message: Value): Uint8Array {
     return Value.encode(message).finish();
   },
-
   toProtoMsg(message: Value): ValueProtoMsg {
     return {
       typeUrl: "/google.protobuf.Value",
       value: Value.encode(message).finish()
     };
   }
-
 };
-
 function createBaseListValue(): ListValue {
   return {
     values: []
   };
 }
-
 export const ListValue = {
   typeUrl: "/google.protobuf.ListValue",
-
   encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.values.push(Value.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
     };
   },
-
   toJSON(message: ListValue): unknown {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListValue>): ListValue {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: ListValueSDKType): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
     };
   },
-
   toSDK(message: ListValue): ListValueSDKType {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromAmino(object: ListValueAmino): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
     };
   },
-
   toAmino(message: ListValue): ListValueAmino {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: ListValueAminoMsg): ListValue {
     return ListValue.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);
   },
-
   toProto(message: ListValue): Uint8Array {
     return ListValue.encode(message).finish();
   },
-
   toProtoMsg(message: ListValue): ListValueProtoMsg {
     return {
       typeUrl: "/google.protobuf.ListValue",
       value: ListValue.encode(message).finish()
     };
   }
-
 };

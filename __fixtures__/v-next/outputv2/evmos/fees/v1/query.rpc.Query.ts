@@ -7,18 +7,14 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** DevFeeInfos retrieves all registered contracts for fee distribution */
   devFeeInfos(request?: DeepPartial<QueryDevFeeInfosRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse>;
-
   /** DevFeeInfo retrieves a registered contract for fee distribution */
   devFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse>;
-
   /** Params retrieves the fees module params */
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-
   /**
    * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
    * registered for fee distribution
@@ -27,7 +23,6 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.devFeeInfos = this.devFeeInfos.bind(this);
@@ -35,25 +30,20 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
-
   devFeeInfos(request: DeepPartial<QueryDevFeeInfosRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse> {
     return this.rpc.unary(QueryDevFeeInfosDesc, QueryDevFeeInfosRequest.fromPartial(request), metadata);
   }
-
   devFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse> {
     return this.rpc.unary(QueryDevFeeInfoDesc, QueryDevFeeInfoRequest.fromPartial(request), metadata);
   }
-
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
   devFeeInfosPerDeployer(request: DeepPartial<QueryDevFeeInfosPerDeployerRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosPerDeployerResponse> {
     return this.rpc.unary(QueryDevFeeInfosPerDeployerDesc, QueryDevFeeInfosPerDeployerRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "evmos.fees.v1.Query"
@@ -67,19 +57,16 @@ export const QueryDevFeeInfosDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDevFeeInfosRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDevFeeInfosResponse.decode(data),
-
+      return {
+        ...QueryDevFeeInfosResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDevFeeInfoDesc: UnaryMethodDefinitionish = {
@@ -91,19 +78,16 @@ export const QueryDevFeeInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDevFeeInfoRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDevFeeInfoResponse.decode(data),
-
+      return {
+        ...QueryDevFeeInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryParamsDesc: UnaryMethodDefinitionish = {
@@ -115,19 +99,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDevFeeInfosPerDeployerDesc: UnaryMethodDefinitionish = {
@@ -139,19 +120,16 @@ export const QueryDevFeeInfosPerDeployerDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDevFeeInfosPerDeployerRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDevFeeInfosPerDeployerResponse.decode(data),
-
+      return {
+        ...QueryDevFeeInfosPerDeployerResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -164,7 +142,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -173,12 +150,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -202,5 +180,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

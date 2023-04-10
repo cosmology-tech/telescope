@@ -2,7 +2,6 @@ import { Duration, DurationSDKType } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
-
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -22,7 +21,6 @@ export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay?: Duration;
 }
-
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -41,22 +39,18 @@ export interface RetryInfo {
 export interface RetryInfoSDKType {
   retry_delay?: DurationSDKType;
 }
-
 /** Describes additional debugging info. */
 export interface DebugInfo {
   /** The stack trace entries indicating where the error occurred. */
   stackEntries: string[];
-
   /** Additional debugging information provided by the server. */
   detail: string;
 }
-
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
   stack_entries: string[];
   detail: string;
 }
-
 /**
  * Describes how a quota check failed.
  * 
@@ -74,7 +68,6 @@ export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
 }
-
 /**
  * Describes how a quota check failed.
  * 
@@ -91,7 +84,6 @@ export interface QuotaFailure {
 export interface QuotaFailureSDKType {
   violations: QuotaFailure_ViolationSDKType[];
 }
-
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -103,7 +95,6 @@ export interface QuotaFailure_Violation {
    * developer project id>".
    */
   subject: string;
-
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -115,7 +106,6 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
-
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -132,7 +122,6 @@ export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -167,7 +156,6 @@ export interface ErrorInfo {
    * /[A-Z0-9_]+/.
    */
   reason: string;
-
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -177,7 +165,6 @@ export interface ErrorInfo {
    * infrastructure, the error domain is "googleapis.com".
    */
   domain: string;
-
   /**
    * Additional structured details about this error.
    * 
@@ -192,7 +179,6 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
-
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -226,7 +212,6 @@ export interface ErrorInfoSDKType {
     [key: string]: string;
   };
 }
-
 /**
  * Describes what preconditions have failed.
  * 
@@ -238,7 +223,6 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
-
 /**
  * Describes what preconditions have failed.
  * 
@@ -249,7 +233,6 @@ export interface PreconditionFailure {
 export interface PreconditionFailureSDKType {
   violations: PreconditionFailure_ViolationSDKType[];
 }
-
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_Violation {
   /**
@@ -258,14 +241,12 @@ export interface PreconditionFailure_Violation {
    * example, "TOS" for "Terms of Service violation".
    */
   type: string;
-
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
   subject: string;
-
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
@@ -274,14 +255,12 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
-
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
   subject: string;
   description: string;
 }
-
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
@@ -290,7 +269,6 @@ export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
 }
-
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
@@ -298,7 +276,6 @@ export interface BadRequest {
 export interface BadRequestSDKType {
   field_violations: BadRequest_FieldViolationSDKType[];
 }
-
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolation {
   /**
@@ -307,17 +284,14 @@ export interface BadRequest_FieldViolation {
    * field. E.g., "field_violations.field" would identify this field.
    */
   field: string;
-
   /** A description of why the request element is bad. */
   description: string;
 }
-
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
   field: string;
   description: string;
 }
-
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
@@ -328,14 +302,12 @@ export interface RequestInfo {
    * it. For example, it can be used to identify requests in the service's logs.
    */
   requestId: string;
-
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
 }
-
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
@@ -344,7 +316,6 @@ export interface RequestInfoSDKType {
   request_id: string;
   serving_data: string;
 }
-
 /** Describes the resource that is being accessed. */
 export interface ResourceInfo {
   /**
@@ -353,21 +324,18 @@ export interface ResourceInfo {
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
   resourceType: string;
-
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
   resourceName: string;
-
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
   owner: string;
-
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
@@ -375,7 +343,6 @@ export interface ResourceInfo {
    */
   description: string;
 }
-
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
   resource_type: string;
@@ -383,7 +350,6 @@ export interface ResourceInfoSDKType {
   owner: string;
   description: string;
 }
-
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -395,7 +361,6 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
-
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -406,22 +371,18 @@ export interface Help {
 export interface HelpSDKType {
   links: Help_LinkSDKType[];
 }
-
 /** Describes a URL link. */
 export interface Help_Link {
   /** Describes what the link offers. */
   description: string;
-
   /** The URL of the link. */
   url: string;
 }
-
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
   description: string;
   url: string;
 }
-
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
@@ -433,11 +394,9 @@ export interface LocalizedMessage {
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
   locale: string;
-
   /** The localized error message in the above locale. */
   message: string;
 }
-
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
@@ -446,451 +405,361 @@ export interface LocalizedMessageSDKType {
   locale: string;
   message: string;
 }
-
 function createBaseRetryInfo(): RetryInfo {
   return {
     retryDelay: undefined
   };
 }
-
 export const RetryInfo = {
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
       Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): RetryInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRetryInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.retryDelay = Duration.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RetryInfo {
     return {
       retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
     };
   },
-
   toJSON(message: RetryInfo): unknown {
     const obj: any = {};
     message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
     message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
   },
-
   fromSDK(object: RetryInfoSDKType): RetryInfo {
     return {
       retryDelay: object.retry_delay ? Duration.fromSDK(object.retry_delay) : undefined
     };
   },
-
   fromSDKJSON(object: any): RetryInfoSDKType {
     return {
       retry_delay: isSet(object.retry_delay) ? Duration.fromSDKJSON(object.retry_delay) : undefined
     };
   },
-
   toSDK(message: RetryInfo): RetryInfoSDKType {
     const obj: any = {};
     message.retryDelay !== undefined && (obj.retry_delay = message.retryDelay ? Duration.toSDK(message.retryDelay) : undefined);
     return obj;
   }
-
 };
-
 function createBaseDebugInfo(): DebugInfo {
   return {
     stackEntries: [],
     detail: ""
   };
 }
-
 export const DebugInfo = {
   encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
-
     if (message.detail !== "") {
       writer.uint32(18).string(message.detail);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DebugInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDebugInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.stackEntries.push(reader.string());
           break;
-
         case 2:
           message.detail = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DebugInfo {
     return {
       stackEntries: Array.isArray(object?.stackEntries) ? object.stackEntries.map((e: any) => String(e)) : [],
       detail: isSet(object.detail) ? String(object.detail) : ""
     };
   },
-
   toJSON(message: DebugInfo): unknown {
     const obj: any = {};
-
     if (message.stackEntries) {
       obj.stackEntries = message.stackEntries.map(e => e);
     } else {
       obj.stackEntries = [];
     }
-
     message.detail !== undefined && (obj.detail = message.detail);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
     const message = createBaseDebugInfo();
     message.stackEntries = object.stackEntries?.map(e => e) || [];
     message.detail = object.detail ?? "";
     return message;
   },
-
   fromSDK(object: DebugInfoSDKType): DebugInfo {
     return {
       stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
       detail: object?.detail
     };
   },
-
   fromSDKJSON(object: any): DebugInfoSDKType {
     return {
       stack_entries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => String(e)) : [],
       detail: isSet(object.detail) ? String(object.detail) : ""
     };
   },
-
   toSDK(message: DebugInfo): DebugInfoSDKType {
     const obj: any = {};
-
     if (message.stackEntries) {
       obj.stack_entries = message.stackEntries.map(e => e);
     } else {
       obj.stack_entries = [];
     }
-
     obj.detail = message.detail;
     return obj;
   }
-
 };
-
 function createBaseQuotaFailure(): QuotaFailure {
   return {
     violations: []
   };
 }
-
 export const QuotaFailure = {
   encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.violations.push(QuotaFailure_Violation.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QuotaFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e)) : []
     };
   },
-
   toJSON(message: QuotaFailure): unknown {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toJSON(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<QuotaFailure>): QuotaFailure {
     const message = createBaseQuotaFailure();
     message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: QuotaFailureSDKType): QuotaFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): QuotaFailureSDKType {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: QuotaFailure): QuotaFailureSDKType {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toSDK(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
   return {
     subject: "",
     description: ""
   };
 }
-
 export const QuotaFailure_Violation = {
   encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QuotaFailure_Violation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure_Violation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subject = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QuotaFailure_Violation {
     return {
       subject: isSet(object.subject) ? String(object.subject) : "",
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toJSON(message: QuotaFailure_Violation): unknown {
     const obj: any = {};
     message.subject !== undefined && (obj.subject = message.subject);
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-
   fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
     const message = createBaseQuotaFailure_Violation();
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
   },
-
   fromSDK(object: QuotaFailure_ViolationSDKType): QuotaFailure_Violation {
     return {
       subject: object?.subject,
       description: object?.description
     };
   },
-
   fromSDKJSON(object: any): QuotaFailure_ViolationSDKType {
     return {
       subject: isSet(object.subject) ? String(object.subject) : "",
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toSDK(message: QuotaFailure_Violation): QuotaFailure_ViolationSDKType {
     const obj: any = {};
     obj.subject = message.subject;
     obj.description = message.description;
     return obj;
   }
-
 };
-
 function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
   return {
     key: "",
     value: ""
   };
 }
-
 export const ErrorInfo_MetadataEntry = {
   encode(message: ErrorInfo_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-
     if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo_MetadataEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = reader.string();
           break;
-
         case 2:
           message.value = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ErrorInfo_MetadataEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-
   toJSON(message: ErrorInfo_MetadataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
     const message = createBaseErrorInfo_MetadataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
   },
-
   fromSDK(object: ErrorInfo_MetadataEntrySDKType): ErrorInfo_MetadataEntry {
     return {
       key: object?.key,
       value: object?.value
     };
   },
-
   fromSDKJSON(object: any): ErrorInfo_MetadataEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-
   toSDK(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   }
-
 };
-
 function createBaseErrorInfo(): ErrorInfo {
   return {
     reason: "",
@@ -898,17 +767,14 @@ function createBaseErrorInfo(): ErrorInfo {
     metadata: {}
   };
 }
-
 export const ErrorInfo = {
   encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
     }
-
     if (message.domain !== "") {
       writer.uint32(18).string(message.domain);
     }
-
     Object.entries(message.metadata).forEach(([key, value]) => {
       ErrorInfo_MetadataEntry.encode({
         key: (key as any),
@@ -917,42 +783,32 @@ export const ErrorInfo = {
     });
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ErrorInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reason = reader.string();
           break;
-
         case 2:
           message.domain = reader.string();
           break;
-
         case 3:
           const entry3 = ErrorInfo_MetadataEntry.decode(reader, reader.uint32());
-
           if (entry3.value !== undefined) {
             message.metadata[entry3.key] = entry3.value;
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ErrorInfo {
     return {
       reason: isSet(object.reason) ? String(object.reason) : "",
@@ -965,22 +821,18 @@ export const ErrorInfo = {
       }, {}) : {}
     };
   },
-
   toJSON(message: ErrorInfo): unknown {
     const obj: any = {};
     message.reason !== undefined && (obj.reason = message.reason);
     message.domain !== undefined && (obj.domain = message.domain);
     obj.metadata = {};
-
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
         obj.metadata[k] = v;
       });
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
     const message = createBaseErrorInfo();
     message.reason = object.reason ?? "";
@@ -991,12 +843,10 @@ export const ErrorInfo = {
       if (value !== undefined) {
         acc[key] = String(value);
       }
-
       return acc;
     }, {});
     return message;
   },
-
   fromSDK(object: ErrorInfoSDKType): ErrorInfo {
     return {
       reason: object?.reason,
@@ -1009,7 +859,6 @@ export const ErrorInfo = {
       }, {}) : {}
     };
   },
-
   fromSDKJSON(object: any): ErrorInfoSDKType {
     return {
       reason: isSet(object.reason) ? String(object.reason) : "",
@@ -1022,111 +871,87 @@ export const ErrorInfo = {
       }, {}) : {}
     };
   },
-
   toSDK(message: ErrorInfo): ErrorInfoSDKType {
     const obj: any = {};
     obj.reason = message.reason;
     obj.domain = message.domain;
     obj.metadata = {};
-
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
         obj.metadata[k] = v;
       });
     }
-
     return obj;
   }
-
 };
-
 function createBasePreconditionFailure(): PreconditionFailure {
   return {
     violations: []
   };
 }
-
 export const PreconditionFailure = {
   encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PreconditionFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
     };
   },
-
   toJSON(message: PreconditionFailure): unknown {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: PreconditionFailureSDKType): PreconditionFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): PreconditionFailureSDKType {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: PreconditionFailure): PreconditionFailureSDKType {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toSDK(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   }
-
 };
-
 function createBasePreconditionFailure_Violation(): PreconditionFailure_Violation {
   return {
     type: "",
@@ -1134,54 +959,42 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
     description: ""
   };
 }
-
 export const PreconditionFailure_Violation = {
   encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-
     if (message.subject !== "") {
       writer.uint32(18).string(message.subject);
     }
-
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure_Violation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure_Violation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.string();
           break;
-
         case 2:
           message.subject = reader.string();
           break;
-
         case 3:
           message.description = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PreconditionFailure_Violation {
     return {
       type: isSet(object.type) ? String(object.type) : "",
@@ -1189,7 +1002,6 @@ export const PreconditionFailure_Violation = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toJSON(message: PreconditionFailure_Violation): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
@@ -1197,7 +1009,6 @@ export const PreconditionFailure_Violation = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-
   fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
     const message = createBasePreconditionFailure_Violation();
     message.type = object.type ?? "";
@@ -1205,7 +1016,6 @@ export const PreconditionFailure_Violation = {
     message.description = object.description ?? "";
     return message;
   },
-
   fromSDK(object: PreconditionFailure_ViolationSDKType): PreconditionFailure_Violation {
     return {
       type: object?.type,
@@ -1213,7 +1023,6 @@ export const PreconditionFailure_Violation = {
       description: object?.description
     };
   },
-
   fromSDKJSON(object: any): PreconditionFailure_ViolationSDKType {
     return {
       type: isSet(object.type) ? String(object.type) : "",
@@ -1221,7 +1030,6 @@ export const PreconditionFailure_Violation = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toSDK(message: PreconditionFailure_Violation): PreconditionFailure_ViolationSDKType {
     const obj: any = {};
     obj.type = message.type;
@@ -1229,276 +1037,221 @@ export const PreconditionFailure_Violation = {
     obj.description = message.description;
     return obj;
   }
-
 };
-
 function createBaseBadRequest(): BadRequest {
   return {
     fieldViolations: []
   };
 }
-
 export const BadRequest = {
   encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.fieldViolations.push(BadRequest_FieldViolation.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): BadRequest {
     return {
       fieldViolations: Array.isArray(object?.fieldViolations) ? object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e)) : []
     };
   },
-
   toJSON(message: BadRequest): unknown {
     const obj: any = {};
-
     if (message.fieldViolations) {
       obj.fieldViolations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toJSON(e) : undefined);
     } else {
       obj.fieldViolations = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<BadRequest>): BadRequest {
     const message = createBaseBadRequest();
     message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: BadRequestSDKType): BadRequest {
     return {
       fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): BadRequestSDKType {
     return {
       field_violations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: BadRequest): BadRequestSDKType {
     const obj: any = {};
-
     if (message.fieldViolations) {
       obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toSDK(e) : undefined);
     } else {
       obj.field_violations = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
   return {
     field: "",
     description: ""
   };
 }
-
 export const BadRequest_FieldViolation = {
   encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): BadRequest_FieldViolation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest_FieldViolation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.field = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): BadRequest_FieldViolation {
     return {
       field: isSet(object.field) ? String(object.field) : "",
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toJSON(message: BadRequest_FieldViolation): unknown {
     const obj: any = {};
     message.field !== undefined && (obj.field = message.field);
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-
   fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
     const message = createBaseBadRequest_FieldViolation();
     message.field = object.field ?? "";
     message.description = object.description ?? "";
     return message;
   },
-
   fromSDK(object: BadRequest_FieldViolationSDKType): BadRequest_FieldViolation {
     return {
       field: object?.field,
       description: object?.description
     };
   },
-
   fromSDKJSON(object: any): BadRequest_FieldViolationSDKType {
     return {
       field: isSet(object.field) ? String(object.field) : "",
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toSDK(message: BadRequest_FieldViolation): BadRequest_FieldViolationSDKType {
     const obj: any = {};
     obj.field = message.field;
     obj.description = message.description;
     return obj;
   }
-
 };
-
 function createBaseRequestInfo(): RequestInfo {
   return {
     requestId: "",
     servingData: ""
   };
 }
-
 export const RequestInfo = {
   encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
-
     if (message.servingData !== "") {
       writer.uint32(18).string(message.servingData);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): RequestInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequestInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.requestId = reader.string();
           break;
-
         case 2:
           message.servingData = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RequestInfo {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       servingData: isSet(object.servingData) ? String(object.servingData) : ""
     };
   },
-
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.servingData !== undefined && (obj.servingData = message.servingData);
     return obj;
   },
-
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.requestId = object.requestId ?? "";
     message.servingData = object.servingData ?? "";
     return message;
   },
-
   fromSDK(object: RequestInfoSDKType): RequestInfo {
     return {
       requestId: object?.request_id,
       servingData: object?.serving_data
     };
   },
-
   fromSDKJSON(object: any): RequestInfoSDKType {
     return {
       request_id: isSet(object.request_id) ? String(object.request_id) : "",
       serving_data: isSet(object.serving_data) ? String(object.serving_data) : ""
     };
   },
-
   toSDK(message: RequestInfo): RequestInfoSDKType {
     const obj: any = {};
     obj.request_id = message.requestId;
     obj.serving_data = message.servingData;
     return obj;
   }
-
 };
-
 function createBaseResourceInfo(): ResourceInfo {
   return {
     resourceType: "",
@@ -1507,62 +1260,48 @@ function createBaseResourceInfo(): ResourceInfo {
     description: ""
   };
 }
-
 export const ResourceInfo = {
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
     }
-
     if (message.resourceName !== "") {
       writer.uint32(18).string(message.resourceName);
     }
-
     if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
-
     if (message.description !== "") {
       writer.uint32(34).string(message.description);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.resourceType = reader.string();
           break;
-
         case 2:
           message.resourceName = reader.string();
           break;
-
         case 3:
           message.owner = reader.string();
           break;
-
         case 4:
           message.description = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ResourceInfo {
     return {
       resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
@@ -1571,7 +1310,6 @@ export const ResourceInfo = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toJSON(message: ResourceInfo): unknown {
     const obj: any = {};
     message.resourceType !== undefined && (obj.resourceType = message.resourceType);
@@ -1580,7 +1318,6 @@ export const ResourceInfo = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.resourceType = object.resourceType ?? "";
@@ -1589,7 +1326,6 @@ export const ResourceInfo = {
     message.description = object.description ?? "";
     return message;
   },
-
   fromSDK(object: ResourceInfoSDKType): ResourceInfo {
     return {
       resourceType: object?.resource_type,
@@ -1598,7 +1334,6 @@ export const ResourceInfo = {
       description: object?.description
     };
   },
-
   fromSDKJSON(object: any): ResourceInfoSDKType {
     return {
       resource_type: isSet(object.resource_type) ? String(object.resource_type) : "",
@@ -1607,7 +1342,6 @@ export const ResourceInfo = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-
   toSDK(message: ResourceInfo): ResourceInfoSDKType {
     const obj: any = {};
     obj.resource_type = message.resourceType;
@@ -1616,272 +1350,218 @@ export const ResourceInfo = {
     obj.description = message.description;
     return obj;
   }
-
 };
-
 function createBaseHelp(): Help {
   return {
     links: []
   };
 }
-
 export const Help = {
   encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Help {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.links.push(Help_Link.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Help {
     return {
       links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Help): unknown {
     const obj: any = {};
-
     if (message.links) {
       obj.links = message.links.map(e => e ? Help_Link.toJSON(e) : undefined);
     } else {
       obj.links = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Help>): Help {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: HelpSDKType): Help {
     return {
       links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): HelpSDKType {
     return {
       links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: Help): HelpSDKType {
     const obj: any = {};
-
     if (message.links) {
       obj.links = message.links.map(e => e ? Help_Link.toSDK(e) : undefined);
     } else {
       obj.links = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseHelp_Link(): Help_Link {
   return {
     description: "",
     url: ""
   };
 }
-
 export const Help_Link = {
   encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
-
     if (message.url !== "") {
       writer.uint32(18).string(message.url);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Help_Link {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp_Link();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.description = reader.string();
           break;
-
         case 2:
           message.url = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Help_Link {
     return {
       description: isSet(object.description) ? String(object.description) : "",
       url: isSet(object.url) ? String(object.url) : ""
     };
   },
-
   toJSON(message: Help_Link): unknown {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     message.url !== undefined && (obj.url = message.url);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Help_Link>): Help_Link {
     const message = createBaseHelp_Link();
     message.description = object.description ?? "";
     message.url = object.url ?? "";
     return message;
   },
-
   fromSDK(object: Help_LinkSDKType): Help_Link {
     return {
       description: object?.description,
       url: object?.url
     };
   },
-
   fromSDKJSON(object: any): Help_LinkSDKType {
     return {
       description: isSet(object.description) ? String(object.description) : "",
       url: isSet(object.url) ? String(object.url) : ""
     };
   },
-
   toSDK(message: Help_Link): Help_LinkSDKType {
     const obj: any = {};
     obj.description = message.description;
     obj.url = message.url;
     return obj;
   }
-
 };
-
 function createBaseLocalizedMessage(): LocalizedMessage {
   return {
     locale: "",
     message: ""
   };
 }
-
 export const LocalizedMessage = {
   encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
     }
-
     if (message.message !== "") {
       writer.uint32(18).string(message.message);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LocalizedMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLocalizedMessage();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.locale = reader.string();
           break;
-
         case 2:
           message.message = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LocalizedMessage {
     return {
       locale: isSet(object.locale) ? String(object.locale) : "",
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
-
   toJSON(message: LocalizedMessage): unknown {
     const obj: any = {};
     message.locale !== undefined && (obj.locale = message.locale);
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
-
   fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {
     const message = createBaseLocalizedMessage();
     message.locale = object.locale ?? "";
     message.message = object.message ?? "";
     return message;
   },
-
   fromSDK(object: LocalizedMessageSDKType): LocalizedMessage {
     return {
       locale: object?.locale,
       message: object?.message
     };
   },
-
   fromSDKJSON(object: any): LocalizedMessageSDKType {
     return {
       locale: isSet(object.locale) ? String(object.locale) : "",
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
-
   toSDK(message: LocalizedMessage): LocalizedMessageSDKType {
     const obj: any = {};
     obj.locale = message.locale;
     obj.message = message.message;
     return obj;
   }
-
 };

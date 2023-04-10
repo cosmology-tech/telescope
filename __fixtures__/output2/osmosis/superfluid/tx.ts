@@ -20,7 +20,6 @@ export interface MsgSuperfluidUnbondLock {
   lockId: Long;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
-
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
  * and then does a superfluid lock from the newly created lockup, to the
@@ -34,7 +33,6 @@ export interface MsgLockAndSuperfluidDelegate {
 export interface MsgLockAndSuperfluidDelegateResponse {
   ID: Long;
 }
-
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -52,7 +50,6 @@ export interface MsgUnPoolWhitelistedPool {
 export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: Long[];
 }
-
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   return {
     sender: "",
@@ -60,54 +57,42 @@ function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
     valAddr: ""
   };
 }
-
 export const MsgSuperfluidDelegate = {
   encode(message: MsgSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
-
     if (message.valAddr !== "") {
       writer.uint32(26).string(message.valAddr);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegate();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.lockId = (reader.uint64() as Long);
           break;
-
         case 3:
           message.valAddr = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSuperfluidDelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -115,7 +100,6 @@ export const MsgSuperfluidDelegate = {
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
-
   toJSON(message: MsgSuperfluidDelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
@@ -123,7 +107,6 @@ export const MsgSuperfluidDelegate = {
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgSuperfluidDelegate>): MsgSuperfluidDelegate {
     const message = createBaseMsgSuperfluidDelegate();
     message.sender = object.sender ?? "";
@@ -131,276 +114,216 @@ export const MsgSuperfluidDelegate = {
     message.valAddr = object.valAddr ?? "";
     return message;
   }
-
 };
-
 function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateResponse {
   return {};
 }
-
 export const MsgSuperfluidDelegateResponse = {
   encode(_: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegateResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgSuperfluidDelegateResponse {
     return {};
   },
-
   toJSON(_: MsgSuperfluidDelegateResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgSuperfluidDelegateResponse>): MsgSuperfluidDelegateResponse {
     const message = createBaseMsgSuperfluidDelegateResponse();
     return message;
   }
-
 };
-
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   return {
     sender: "",
     lockId: Long.UZERO
   };
 }
-
 export const MsgSuperfluidUndelegate = {
   encode(message: MsgSuperfluidUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegate();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.lockId = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSuperfluidUndelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
-
   toJSON(message: MsgSuperfluidUndelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgSuperfluidUndelegate>): MsgSuperfluidUndelegate {
     const message = createBaseMsgSuperfluidUndelegate();
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
-
 };
-
 function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateResponse {
   return {};
 }
-
 export const MsgSuperfluidUndelegateResponse = {
   encode(_: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegateResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgSuperfluidUndelegateResponse {
     return {};
   },
-
   toJSON(_: MsgSuperfluidUndelegateResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgSuperfluidUndelegateResponse>): MsgSuperfluidUndelegateResponse {
     const message = createBaseMsgSuperfluidUndelegateResponse();
     return message;
   }
-
 };
-
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   return {
     sender: "",
     lockId: Long.UZERO
   };
 }
-
 export const MsgSuperfluidUnbondLock = {
   encode(message: MsgSuperfluidUnbondLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     if (!message.lockId.isZero()) {
       writer.uint32(16).uint64(message.lockId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLock();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.lockId = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSuperfluidUnbondLock {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
-
   toJSON(message: MsgSuperfluidUnbondLock): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgSuperfluidUnbondLock>): MsgSuperfluidUnbondLock {
     const message = createBaseMsgSuperfluidUnbondLock();
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
   }
-
 };
-
 function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockResponse {
   return {};
 }
-
 export const MsgSuperfluidUnbondLockResponse = {
   encode(_: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLockResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLockResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
     return {};
   },
-
   toJSON(_: MsgSuperfluidUnbondLockResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial(_: DeepPartial<MsgSuperfluidUnbondLockResponse>): MsgSuperfluidUnbondLockResponse {
     const message = createBaseMsgSuperfluidUnbondLockResponse();
     return message;
   }
-
 };
-
 function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate {
   return {
     sender: "",
@@ -408,54 +331,42 @@ function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate 
     valAddr: ""
   };
 }
-
 export const MsgLockAndSuperfluidDelegate = {
   encode(message: MsgLockAndSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.valAddr !== "") {
       writer.uint32(26).string(message.valAddr);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegate();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.valAddr = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgLockAndSuperfluidDelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -463,21 +374,17 @@ export const MsgLockAndSuperfluidDelegate = {
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
-
   toJSON(message: MsgLockAndSuperfluidDelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.coins = [];
     }
-
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegate>): MsgLockAndSuperfluidDelegate {
     const message = createBaseMsgLockAndSuperfluidDelegate();
     message.sender = object.sender ?? "";
@@ -485,231 +392,182 @@ export const MsgLockAndSuperfluidDelegate = {
     message.valAddr = object.valAddr ?? "";
     return message;
   }
-
 };
-
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {
     ID: Long.UZERO
   };
 }
-
 export const MsgLockAndSuperfluidDelegateResponse = {
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.ID = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
       ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
     };
   },
-
   toJSON(message: MsgLockAndSuperfluidDelegateResponse): unknown {
     const obj: any = {};
     message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
   }
-
 };
-
 function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
   return {
     sender: "",
     poolId: Long.UZERO
   };
 }
-
 export const MsgUnPoolWhitelistedPool = {
   encode(message: MsgUnPoolWhitelistedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnPoolWhitelistedPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPool();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.poolId = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgUnPoolWhitelistedPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-
   toJSON(message: MsgUnPoolWhitelistedPool): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPool>): MsgUnPoolWhitelistedPool {
     const message = createBaseMsgUnPoolWhitelistedPool();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
   }
-
 };
-
 function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolResponse {
   return {
     exitedLockIds: []
   };
 }
-
 export const MsgUnPoolWhitelistedPoolResponse = {
   encode(message: MsgUnPoolWhitelistedPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
-
     for (const v of message.exitedLockIds) {
       writer.uint64(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnPoolWhitelistedPoolResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.exitedLockIds.push((reader.uint64() as Long));
             }
           } else {
             message.exitedLockIds.push((reader.uint64() as Long));
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgUnPoolWhitelistedPoolResponse {
     return {
       exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
-
   toJSON(message: MsgUnPoolWhitelistedPoolResponse): unknown {
     const obj: any = {};
-
     if (message.exitedLockIds) {
       obj.exitedLockIds = message.exitedLockIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.exitedLockIds = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPoolResponse>): MsgUnPoolWhitelistedPoolResponse {
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
     message.exitedLockIds = object.exitedLockIds?.map(e => Long.fromValue(e)) || [];
     return message;
   }
-
 };
-
 /** Msg defines the Msg service. */
 export interface Msg {
   /** Execute superfluid delegation for a lockup */
   SuperfluidDelegate(request: MsgSuperfluidDelegate): Promise<MsgSuperfluidDelegateResponse>;
-
   /** Execute superfluid undelegation for a lockup */
   SuperfluidUndelegate(request: MsgSuperfluidUndelegate): Promise<MsgSuperfluidUndelegateResponse>;
-
   /**
    * For a given lock that is being superfluidly undelegated,
    * also unbond the underlying lock.
    */
   SuperfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse>;
-
   /** Execute lockup lock and superfluid delegation in a single msg */
   LockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse>;
   UnPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool): Promise<MsgUnPoolWhitelistedPoolResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.SuperfluidDelegate = this.SuperfluidDelegate.bind(this);
@@ -718,35 +576,29 @@ export class MsgClientImpl implements Msg {
     this.LockAndSuperfluidDelegate = this.LockAndSuperfluidDelegate.bind(this);
     this.UnPoolWhitelistedPool = this.UnPoolWhitelistedPool.bind(this);
   }
-
   SuperfluidDelegate(request: MsgSuperfluidDelegate): Promise<MsgSuperfluidDelegateResponse> {
     const data = MsgSuperfluidDelegate.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidDelegate", data);
     return promise.then(data => MsgSuperfluidDelegateResponse.decode(new _m0.Reader(data)));
   }
-
   SuperfluidUndelegate(request: MsgSuperfluidUndelegate): Promise<MsgSuperfluidUndelegateResponse> {
     const data = MsgSuperfluidUndelegate.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidUndelegate", data);
     return promise.then(data => MsgSuperfluidUndelegateResponse.decode(new _m0.Reader(data)));
   }
-
   SuperfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse> {
     const data = MsgSuperfluidUnbondLock.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidUnbondLock", data);
     return promise.then(data => MsgSuperfluidUnbondLockResponse.decode(new _m0.Reader(data)));
   }
-
   LockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse> {
     const data = MsgLockAndSuperfluidDelegate.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Msg", "LockAndSuperfluidDelegate", data);
     return promise.then(data => MsgLockAndSuperfluidDelegateResponse.decode(new _m0.Reader(data)));
   }
-
   UnPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool): Promise<MsgUnPoolWhitelistedPoolResponse> {
     const data = MsgUnPoolWhitelistedPool.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Msg", "UnPoolWhitelistedPool", data);
     return promise.then(data => MsgUnPoolWhitelistedPoolResponse.decode(new _m0.Reader(data)));
   }
-
 }

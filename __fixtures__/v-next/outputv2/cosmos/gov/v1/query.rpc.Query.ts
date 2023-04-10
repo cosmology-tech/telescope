@@ -6,36 +6,27 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsRequest, QueryProposalsRequestSDKType, QueryProposalsResponse, QueryProposalsResponseSDKType, QueryVoteRequest, QueryVoteRequestSDKType, QueryVoteResponse, QueryVoteResponseSDKType, QueryVotesRequest, QueryVotesRequestSDKType, QueryVotesResponse, QueryVotesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDepositRequest, QueryDepositRequestSDKType, QueryDepositResponse, QueryDepositResponseSDKType, QueryDepositsRequest, QueryDepositsRequestSDKType, QueryDepositsResponse, QueryDepositsResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service for gov module */
 export interface Query {
   /** Proposal queries proposal details based on ProposalID. */
   proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
-
   /** Proposals queries all proposals based on given status. */
   proposals(request: DeepPartial<QueryProposalsRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsResponse>;
-
   /** Vote queries voted information based on proposalID, voterAddr. */
   vote(request: DeepPartial<QueryVoteRequest>, metadata?: grpc.Metadata): Promise<QueryVoteResponse>;
-
   /** Votes queries votes of a given proposal. */
   votes(request: DeepPartial<QueryVotesRequest>, metadata?: grpc.Metadata): Promise<QueryVotesResponse>;
-
   /** Params queries all parameters of the gov module. */
   params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-
   /** Deposit queries single deposit information based proposalID, depositAddr. */
   deposit(request: DeepPartial<QueryDepositRequest>, metadata?: grpc.Metadata): Promise<QueryDepositResponse>;
-
   /** Deposits queries all deposits of a single proposal. */
   deposits(request: DeepPartial<QueryDepositsRequest>, metadata?: grpc.Metadata): Promise<QueryDepositsResponse>;
-
   /** TallyResult queries the tally of a proposal vote. */
   tallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.proposal = this.proposal.bind(this);
@@ -47,39 +38,30 @@ export class QueryClientImpl implements Query {
     this.deposits = this.deposits.bind(this);
     this.tallyResult = this.tallyResult.bind(this);
   }
-
   proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse> {
     return this.rpc.unary(QueryProposalDesc, QueryProposalRequest.fromPartial(request), metadata);
   }
-
   proposals(request: DeepPartial<QueryProposalsRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsResponse> {
     return this.rpc.unary(QueryProposalsDesc, QueryProposalsRequest.fromPartial(request), metadata);
   }
-
   vote(request: DeepPartial<QueryVoteRequest>, metadata?: grpc.Metadata): Promise<QueryVoteResponse> {
     return this.rpc.unary(QueryVoteDesc, QueryVoteRequest.fromPartial(request), metadata);
   }
-
   votes(request: DeepPartial<QueryVotesRequest>, metadata?: grpc.Metadata): Promise<QueryVotesResponse> {
     return this.rpc.unary(QueryVotesDesc, QueryVotesRequest.fromPartial(request), metadata);
   }
-
   params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
   deposit(request: DeepPartial<QueryDepositRequest>, metadata?: grpc.Metadata): Promise<QueryDepositResponse> {
     return this.rpc.unary(QueryDepositDesc, QueryDepositRequest.fromPartial(request), metadata);
   }
-
   deposits(request: DeepPartial<QueryDepositsRequest>, metadata?: grpc.Metadata): Promise<QueryDepositsResponse> {
     return this.rpc.unary(QueryDepositsDesc, QueryDepositsRequest.fromPartial(request), metadata);
   }
-
   tallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse> {
     return this.rpc.unary(QueryTallyResultDesc, QueryTallyResultRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "cosmos.gov.v1.Query"
@@ -93,19 +75,16 @@ export const QueryProposalDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryProposalRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryProposalResponse.decode(data),
-
+      return {
+        ...QueryProposalResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryProposalsDesc: UnaryMethodDefinitionish = {
@@ -117,19 +96,16 @@ export const QueryProposalsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryProposalsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryProposalsResponse.decode(data),
-
+      return {
+        ...QueryProposalsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryVoteDesc: UnaryMethodDefinitionish = {
@@ -141,19 +117,16 @@ export const QueryVoteDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryVoteRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryVoteResponse.decode(data),
-
+      return {
+        ...QueryVoteResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryVotesDesc: UnaryMethodDefinitionish = {
@@ -165,19 +138,16 @@ export const QueryVotesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryVotesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryVotesResponse.decode(data),
-
+      return {
+        ...QueryVotesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryParamsDesc: UnaryMethodDefinitionish = {
@@ -189,19 +159,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDepositDesc: UnaryMethodDefinitionish = {
@@ -213,19 +180,16 @@ export const QueryDepositDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDepositRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDepositResponse.decode(data),
-
+      return {
+        ...QueryDepositResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDepositsDesc: UnaryMethodDefinitionish = {
@@ -237,19 +201,16 @@ export const QueryDepositsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDepositsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDepositsResponse.decode(data),
-
+      return {
+        ...QueryDepositsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryTallyResultDesc: UnaryMethodDefinitionish = {
@@ -261,19 +222,16 @@ export const QueryTallyResultDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryTallyResultRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryTallyResultResponse.decode(data),
-
+      return {
+        ...QueryTallyResultResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -286,7 +244,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -295,12 +252,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -324,5 +282,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

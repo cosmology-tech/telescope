@@ -15,7 +15,8 @@ import * as akashDeploymentV1beta2ServiceAmino from "./deployment/v1beta2/servic
 import * as akashMarketV1beta2ServiceAmino from "./market/v1beta2/service.amino";
 import * as akashProviderV1beta1ProviderAmino from "./provider/v1beta1/provider.amino";
 import * as akashProviderV1beta2ProviderAmino from "./provider/v1beta2/provider.amino";
-export const akashAminoConverters = { ...akashAuditV1beta1AuditAmino.AminoConverter,
+export const akashAminoConverters = {
+  ...akashAuditV1beta1AuditAmino.AminoConverter,
   ...akashAuditV1beta2AuditAmino.AminoConverter,
   ...akashCertV1beta2CertAmino.AminoConverter,
   ...akashDeploymentV1beta2ServiceAmino.AminoConverter,
@@ -33,7 +34,8 @@ export const getSigningAkashClientOptions = ({
   aminoTypes: AminoTypes;
 } => {
   const registry = new Registry([...defaultTypes, ...akashProtoRegistry]);
-  const aminoTypes = new AminoTypes({ ...akashAminoConverters
+  const aminoTypes = new AminoTypes({
+    ...akashAminoConverters
   });
   return {
     registry,

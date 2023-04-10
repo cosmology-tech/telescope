@@ -6,42 +6,34 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
-
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Params queries the parameters of slashing module */
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-
   /** SigningInfo queries the signing info of given cons address */
   signingInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse>;
-
   /** SigningInfos queries signing info of all validators */
   signingInfos(request?: DeepPartial<QuerySigningInfosRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.params = this.params.bind(this);
     this.signingInfo = this.signingInfo.bind(this);
     this.signingInfos = this.signingInfos.bind(this);
   }
-
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
   signingInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse> {
     return this.rpc.unary(QuerySigningInfoDesc, QuerySigningInfoRequest.fromPartial(request), metadata);
   }
-
   signingInfos(request: DeepPartial<QuerySigningInfosRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse> {
     return this.rpc.unary(QuerySigningInfosDesc, QuerySigningInfosRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "cosmos.slashing.v1beta1.Query"
@@ -55,19 +47,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QuerySigningInfoDesc: UnaryMethodDefinitionish = {
@@ -79,19 +68,16 @@ export const QuerySigningInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QuerySigningInfoRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QuerySigningInfoResponse.decode(data),
-
+      return {
+        ...QuerySigningInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QuerySigningInfosDesc: UnaryMethodDefinitionish = {
@@ -103,19 +89,16 @@ export const QuerySigningInfosDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QuerySigningInfosRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QuerySigningInfosResponse.decode(data),
-
+      return {
+        ...QuerySigningInfosResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -128,7 +111,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -137,12 +119,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -166,5 +149,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

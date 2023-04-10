@@ -2,7 +2,6 @@ import { DistrRecord, DistrRecordSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
-
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -17,7 +16,6 @@ export interface ReplacePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
-
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -32,7 +30,6 @@ export interface ReplacePoolIncentivesProposalSDKType {
   description: string;
   records: DistrRecordSDKType[];
 }
-
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -47,7 +44,6 @@ export interface UpdatePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
-
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -62,7 +58,6 @@ export interface UpdatePoolIncentivesProposalSDKType {
   description: string;
   records: DistrRecordSDKType[];
 }
-
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
   return {
     title: "",
@@ -70,54 +65,42 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
     records: []
   };
 }
-
 export const ReplacePoolIncentivesProposal = {
   encode(message: ReplacePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     for (const v of message.records) {
       DistrRecord.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ReplacePoolIncentivesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReplacePoolIncentivesProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.records.push(DistrRecord.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ReplacePoolIncentivesProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -125,21 +108,17 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
     };
   },
-
   toJSON(message: ReplacePoolIncentivesProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
-
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
     } else {
       obj.records = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
     message.title = object.title ?? "";
@@ -147,7 +126,6 @@ export const ReplacePoolIncentivesProposal = {
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
     return {
       title: object?.title,
@@ -155,7 +133,6 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): ReplacePoolIncentivesProposalSDKType {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -163,23 +140,18 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
     } else {
       obj.records = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
   return {
     title: "",
@@ -187,54 +159,42 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
     records: []
   };
 }
-
 export const UpdatePoolIncentivesProposal = {
   encode(message: UpdatePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     for (const v of message.records) {
       DistrRecord.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePoolIncentivesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdatePoolIncentivesProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.records.push(DistrRecord.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdatePoolIncentivesProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -242,21 +202,17 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
     };
   },
-
   toJSON(message: UpdatePoolIncentivesProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
-
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
     } else {
       obj.records = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
     const message = createBaseUpdatePoolIncentivesProposal();
     message.title = object.title ?? "";
@@ -264,7 +220,6 @@ export const UpdatePoolIncentivesProposal = {
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
     return {
       title: object?.title,
@@ -272,7 +227,6 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): UpdatePoolIncentivesProposalSDKType {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -280,19 +234,15 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
     } else {
       obj.records = [];
     }
-
     return obj;
   }
-
 };

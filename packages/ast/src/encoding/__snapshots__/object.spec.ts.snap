@@ -6,48 +6,37 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-
     if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
-
     if (message.shares !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.shares, 18).atomics);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Delegation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.delegatorAddress = reader.string();
           break;
-
         case 2:
           message.validatorAddress = reader.string();
           break;
-
         case 3:
           message.shares = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Delegation {
     return {
       delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
@@ -55,7 +44,6 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
       shares: isSet(object.shares) ? String(object.shares) : ""
     };
   },
-
   toJSON(message: Delegation): unknown {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
@@ -63,7 +51,6 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     message.shares !== undefined && (obj.shares = message.shares);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Delegation>): Delegation {
     const message = createBaseDelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -71,7 +58,6 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     message.shares = object.shares ?? "";
     return message;
   },
-
   fromSDK(object: DelegationSDKType): Delegation {
     return {
       delegatorAddress: object?.delegator_address,
@@ -79,7 +65,6 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
       shares: object?.shares
     };
   },
-
   toSDK(message: Delegation): DelegationSDKType {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
@@ -87,7 +72,6 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     obj.shares = message.shares;
     return obj;
   }
-
 };"
 `;
 
@@ -97,48 +81,37 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.data !== undefined) {
       SignatureDescriptor_Data.encode(message.data, writer.uint32(18).fork()).ldelim();
     }
-
     if (!message.sequence.isZero()) {
       writer.uint32(24).uint64(message.sequence);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.publicKey = Any.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.data = SignatureDescriptor_Data.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.sequence = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SignatureDescriptor {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
@@ -146,7 +119,6 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
-
   toJSON(message: SignatureDescriptor): unknown {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
@@ -154,7 +126,6 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
@@ -162,7 +133,6 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
   },
-
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
     return {
       publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
@@ -170,7 +140,6 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
       sequence: object?.sequence
     };
   },
-
   toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
@@ -178,7 +147,6 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     obj.sequence = message.sequence;
     return obj;
   }
-
 };"
 `;
 
@@ -188,74 +156,58 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     for (const v of message.signatures) {
       SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SignatureDescriptors {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.signatures.push(SignatureDescriptor.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SignatureDescriptors {
     return {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
     };
   },
-
   toJSON(message: SignatureDescriptors): unknown {
     const obj: any = {};
-
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
     } else {
       obj.signatures = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: SignatureDescriptorsSDKType): SignatureDescriptors {
     return {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDK(e)) : []
     };
   },
-
   toSDK(message: SignatureDescriptors): SignatureDescriptorsSDKType {
     const obj: any = {};
-
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toSDK(e) : undefined);
     } else {
       obj.signatures = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -265,56 +217,43 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-
     if (message.signDoc !== undefined) {
       SignDocDirectAux.encode(message.signDoc, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.mode !== 0) {
       writer.uint32(24).int32(message.mode);
     }
-
     if (message.sig.length !== 0) {
       writer.uint32(34).bytes(message.sig);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AuxSignerData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.address = reader.string();
           break;
-
         case 2:
           message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.mode = (reader.int32() as any);
           break;
-
         case 4:
           message.sig = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AuxSignerData {
     return {
       address: isSet(object.address) ? String(object.address) : "",
@@ -323,7 +262,6 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
-
   toJSON(message: AuxSignerData): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
@@ -332,7 +270,6 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     message.sig !== undefined && (obj.sig = base64FromBytes(message.sig !== undefined ? message.sig : new Uint8Array()));
     return obj;
   },
-
   fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
@@ -341,7 +278,6 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     message.sig = object.sig ?? new Uint8Array();
     return message;
   },
-
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
       address: object?.address,
@@ -350,7 +286,6 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       sig: object?.sig
     };
   },
-
   toSDK(message: AuxSignerData): AuxSignerDataSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -359,7 +294,6 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     obj.sig = message.sig;
     return obj;
   }
-
 };"
 `;
 
@@ -369,75 +303,61 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     if (message.single !== undefined) {
       ModeInfo_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.multi !== undefined) {
       ModeInfo_Multi.encode(message.multi, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ModeInfo_Multi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.single = ModeInfo_Single.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.multi = ModeInfo_Multi.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ModeInfo_Multi {
     return {
       single: isSet(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
       multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
     };
   },
-
   toJSON(message: ModeInfo_Multi): unknown {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toJSON(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
     return message;
   },
-
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
     return {
       single: object.single ? ModeInfo_Single.fromSDK(object.single) : undefined,
       multi: object.multi ? ModeInfo_Multi.fromSDK(object.multi) : undefined
     };
   },
-
   toSDK(message: ModeInfo_Multi): ModeInfo_MultiSDKType {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toSDK(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toSDK(message.multi) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -447,60 +367,46 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     writer.uint32(26).fork();
-
     for (const v of message.codeIds) {
       writer.uint64(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.codeIds.push((reader.uint64() as Long));
             }
           } else {
             message.codeIds.push((reader.uint64() as Long));
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PinCodesProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -508,21 +414,17 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
-
   toJSON(message: PinCodesProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
-
     if (message.codeIds) {
       obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.codeIds = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
@@ -530,7 +432,6 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
   },
-
   fromSDK(object: PinCodesProposalSDKType): PinCodesProposal {
     return {
       title: object?.title,
@@ -538,21 +439,17 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
-
   toSDK(message: PinCodesProposal): PinCodesProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e);
     } else {
       obj.code_ids = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -562,60 +459,46 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     writer.uint32(26).fork();
-
     for (const v of message.codeIds) {
       writer.uint64(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.codeIds.push((reader.uint64() as Long));
             }
           } else {
             message.codeIds.push((reader.uint64() as Long));
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UnpinCodesProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -623,21 +506,17 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
-
   toJSON(message: UnpinCodesProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
-
     if (message.codeIds) {
       obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
     } else {
       obj.codeIds = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
@@ -645,7 +524,6 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
   },
-
   fromSDK(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
     return {
       title: object?.title,
@@ -653,21 +531,17 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
-
   toSDK(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e);
     } else {
       obj.code_ids = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -677,75 +551,61 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-
     if (message.queryData.length !== 0) {
       writer.uint32(18).bytes(message.queryData);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRawContractStateRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.address = reader.string();
           break;
-
         case 2:
           message.queryData = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRawContractStateRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
     };
   },
-
   toJSON(message: QueryRawContractStateRequest): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
     return obj;
   },
-
   fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? "";
     message.queryData = object.queryData ?? new Uint8Array();
     return message;
   },
-
   fromSDK(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
     return {
       address: object?.address,
       queryData: object?.query_data
     };
   },
-
   toSDK(message: QueryRawContractStateRequest): QueryRawContractStateRequestSDKType {
     const obj: any = {};
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
   }
-
 };"
 `;
 
@@ -755,68 +615,52 @@ exports[`evmos/fees/v1/tx 1`] = `
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
-
     if (message.deployerAddress !== "") {
       writer.uint32(18).string(message.deployerAddress);
     }
-
     if (message.withdrawAddress !== "") {
       writer.uint32(26).string(message.withdrawAddress);
     }
-
     writer.uint32(34).fork();
-
     for (const v of message.nonces) {
       writer.uint64(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.contractAddress = reader.string();
           break;
-
         case 2:
           message.deployerAddress = reader.string();
           break;
-
         case 3:
           message.withdrawAddress = reader.string();
           break;
-
         case 4:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.nonces.push((reader.uint64() as Long));
             }
           } else {
             message.nonces.push((reader.uint64() as Long));
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgRegisterDevFeeInfo {
     return {
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
@@ -825,22 +669,18 @@ exports[`evmos/fees/v1/tx 1`] = `
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
     };
   },
-
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
     } else {
       obj.nonces = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
@@ -849,7 +689,6 @@ exports[`evmos/fees/v1/tx 1`] = `
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
   },
-
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
     return {
       contractAddress: object?.contract_address,
@@ -858,22 +697,18 @@ exports[`evmos/fees/v1/tx 1`] = `
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
     };
   },
-
   toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
-
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => e);
     } else {
       obj.nonces = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -883,56 +718,43 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
     }
-
     if (message.syntaxVersion !== "") {
       writer.uint32(18).string(message.syntaxVersion);
     }
-
     if (message.sourceLocation !== "") {
       writer.uint32(26).string(message.sourceLocation);
     }
-
     if (message.disableMacros === true) {
       writer.uint32(32).bool(message.disableMacros);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ParseRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.celSource = reader.string();
           break;
-
         case 2:
           message.syntaxVersion = reader.string();
           break;
-
         case 3:
           message.sourceLocation = reader.string();
           break;
-
         case 4:
           message.disableMacros = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ParseRequest {
     return {
       celSource: isSet(object.celSource) ? String(object.celSource) : "",
@@ -941,7 +763,6 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
       disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
     };
   },
-
   toJSON(message: ParseRequest): unknown {
     const obj: any = {};
     message.celSource !== undefined && (obj.celSource = message.celSource);
@@ -950,7 +771,6 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
     message.celSource = object.celSource ?? "";
@@ -959,7 +779,6 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     message.disableMacros = object.disableMacros ?? false;
     return message;
   },
-
   fromSDK(object: ParseRequestSDKType): ParseRequest {
     return {
       celSource: object?.cel_source,
@@ -968,7 +787,6 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
       disableMacros: object?.disable_macros
     };
   },
-
   toSDK(message: ParseRequest): ParseRequestSDKType {
     const obj: any = {};
     obj.cel_source = message.celSource;
@@ -977,7 +795,6 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     obj.disable_macros = message.disableMacros;
     return obj;
   }
-
 };"
 `;
 
@@ -987,72 +804,55 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
-
     for (const v of message.params) {
       Type.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.typeParams) {
       writer.uint32(26).string(v!);
     }
-
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.isInstanceFunction === true) {
       writer.uint32(40).bool(message.isInstanceFunction);
     }
-
     if (message.doc !== "") {
       writer.uint32(50).string(message.doc);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.overloadId = reader.string();
           break;
-
         case 2:
           message.params.push(Type.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.typeParams.push(reader.string());
           break;
-
         case 4:
           message.resultType = Type.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.isInstanceFunction = reader.bool();
           break;
-
         case 6:
           message.doc = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Decl_FunctionDecl_Overload {
     return {
       overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
@@ -1063,29 +863,24 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-
   toJSON(message: Decl_FunctionDecl_Overload): unknown {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
-
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toJSON(e) : undefined);
     } else {
       obj.params = [];
     }
-
     if (message.typeParams) {
       obj.typeParams = message.typeParams.map(e => e);
     } else {
       obj.typeParams = [];
     }
-
     message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
     message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
     const message = createBaseDecl_FunctionDecl_Overload();
     message.overloadId = object.overloadId ?? "";
@@ -1096,7 +891,6 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     message.doc = object.doc ?? "";
     return message;
   },
-
   fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
     return {
       overloadId: object?.overload_id,
@@ -1107,29 +901,24 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       doc: object?.doc
     };
   },
-
   toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
     const obj: any = {};
     obj.overload_id = message.overloadId;
-
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
     } else {
       obj.params = [];
     }
-
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e);
     } else {
       obj.type_params = [];
     }
-
     message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
     obj.is_instance_function = message.isInstanceFunction;
     obj.doc = message.doc;
     return obj;
   }
-
 };"
 `;
 
@@ -1139,128 +928,97 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.null !== undefined) {
       writer.uint32(16).int32(message.null);
     }
-
     if (message.primitive !== undefined) {
       writer.uint32(24).int32(message.primitive);
     }
-
     if (message.wrapper !== undefined) {
       writer.uint32(32).int32(message.wrapper);
     }
-
     if (message.wellKnown !== undefined) {
       writer.uint32(40).int32(message.wellKnown);
     }
-
     if (message.listType !== undefined) {
       Type_ListType.encode(message.listType, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.mapType !== undefined) {
       Type_MapType.encode(message.mapType, writer.uint32(58).fork()).ldelim();
     }
-
     if (message.function !== undefined) {
       Type_FunctionType.encode(message.function, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.messageType !== undefined) {
       writer.uint32(74).string(message.messageType);
     }
-
     if (message.typeParam !== undefined) {
       writer.uint32(82).string(message.typeParam);
     }
-
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(90).fork()).ldelim();
     }
-
     if (message.error !== undefined) {
       Empty.encode(message.error, writer.uint32(98).fork()).ldelim();
     }
-
     if (message.abstractType !== undefined) {
       Type_AbstractType.encode(message.abstractType, writer.uint32(114).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.dyn = Empty.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.null = (reader.int32() as any);
           break;
-
         case 3:
           message.primitive = (reader.int32() as any);
           break;
-
         case 4:
           message.wrapper = (reader.int32() as any);
           break;
-
         case 5:
           message.wellKnown = (reader.int32() as any);
           break;
-
         case 6:
           message.listType = Type_ListType.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.mapType = Type_MapType.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.function = Type_FunctionType.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.messageType = reader.string();
           break;
-
         case 10:
           message.typeParam = reader.string();
           break;
-
         case 11:
           message.type = Type.decode(reader, reader.uint32());
           break;
-
         case 12:
           message.error = Empty.decode(reader, reader.uint32());
           break;
-
         case 14:
           message.abstractType = Type_AbstractType.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type {
     return {
       dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
@@ -1278,7 +1036,6 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
     };
   },
-
   toJSON(message: Type): unknown {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
@@ -1296,7 +1053,6 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
@@ -1314,7 +1070,6 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
   },
-
   fromSDK(object: TypeSDKType): Type {
     return {
       dyn: object.dyn ? Empty.fromSDK(object.dyn) : undefined,
@@ -1332,7 +1087,6 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       abstractType: object.abstract_type ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
     };
   },
-
   toSDK(message: Type): TypeSDKType {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
@@ -1350,7 +1104,6 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -1360,75 +1113,61 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.valueType !== undefined) {
       Type.encode(message.valueType, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.keyType = Type.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.valueType = Type.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type_MapType {
     return {
       keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
       valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
     };
   },
-
   toJSON(message: Type_MapType): unknown {
     const obj: any = {};
     message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
     message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
   },
-
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
     return {
       keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
       valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
     };
   },
-
   toSDK(message: Type_MapType): Type_MapTypeSDKType {
     const obj: any = {};
     message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
     message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -1447,70 +1186,52 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.exprVersion !== "") {
       writer.uint32(50).string(message.exprVersion);
     }
-
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
-
           if (entry2.value !== undefined) {
             message.referenceMap[entry2.key] = entry2.value;
           }
-
           break;
-
         case 3:
           const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
-
           if (entry3.value !== undefined) {
             message.typeMap[entry3.key] = entry3.value;
           }
-
           break;
-
         case 5:
           message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.exprVersion = reader.string();
           break;
-
         case 4:
           message.expr = Expr.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
@@ -1530,31 +1251,25 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
     };
   },
-
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
     obj.referenceMap = {};
-
     if (message.referenceMap) {
       Object.entries(message.referenceMap).forEach(([k, v]) => {
         obj.referenceMap[k] = Reference.toJSON(v);
       });
     }
-
     obj.typeMap = {};
-
     if (message.typeMap) {
       Object.entries(message.typeMap).forEach(([k, v]) => {
         obj.typeMap[k] = Type.toJSON(v);
       });
     }
-
     message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
     message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
@@ -1563,7 +1278,6 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       if (value !== undefined) {
         acc[Number(key)] = Reference.fromPartial(value);
       }
-
       return acc;
     }, {});
     message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
@@ -1572,7 +1286,6 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       if (value !== undefined) {
         acc[Number(key)] = Type.fromPartial(value);
       }
-
       return acc;
     }, {});
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
@@ -1580,7 +1293,6 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
   },
-
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
     return {
       referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
@@ -1600,31 +1312,25 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       expr: object.expr ? Expr.fromSDK(object.expr) : undefined
     };
   },
-
   toSDK(message: CheckedExpr): CheckedExprSDKType {
     const obj: any = {};
     obj.reference_map = {};
-
     if (message.referenceMap) {
       Object.entries(message.referenceMap).forEach(([k, v]) => {
         obj.reference_map[k] = Reference.toSDK(v);
       });
     }
-
     obj.type_map = {};
-
     if (message.typeMap) {
       Object.entries(message.typeMap).forEach(([k, v]) => {
         obj.type_map[k] = Type.toSDK(v);
       });
     }
-
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     obj.expr_version = message.exprVersion;
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -1634,96 +1340,73 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
-
     if (message.boolValue !== undefined) {
       writer.uint32(16).bool(message.boolValue);
     }
-
     if (message.int64Value !== undefined) {
       writer.uint32(24).int64(message.int64Value);
     }
-
     if (message.uint64Value !== undefined) {
       writer.uint32(32).uint64(message.uint64Value);
     }
-
     if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
     }
-
     if (message.stringValue !== undefined) {
       writer.uint32(50).string(message.stringValue);
     }
-
     if (message.bytesValue !== undefined) {
       writer.uint32(58).bytes(message.bytesValue);
     }
-
     if (message.durationValue !== undefined) {
       Duration.encode(message.durationValue, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.timestampValue !== undefined) {
       Timestamp.encode(toTimestamp(message.timestampValue), writer.uint32(74).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Constant {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nullValue = (reader.int32() as any);
           break;
-
         case 2:
           message.boolValue = reader.bool();
           break;
-
         case 3:
           message.int64Value = (reader.int64() as Long);
           break;
-
         case 4:
           message.uint64Value = (reader.uint64() as Long);
           break;
-
         case 5:
           message.doubleValue = reader.double();
           break;
-
         case 6:
           message.stringValue = reader.string();
           break;
-
         case 7:
           message.bytesValue = reader.bytes();
           break;
-
         case 8:
           message.durationValue = Duration.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.timestampValue = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Constant {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
@@ -1737,7 +1420,6 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },
-
   toJSON(message: Constant): unknown {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
@@ -1751,7 +1433,6 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<Constant>): Constant {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
@@ -1765,7 +1446,6 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },
-
   fromSDK(object: ConstantSDKType): Constant {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -1779,7 +1459,6 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       timestampValue: object.timestamp_value ? Timestamp.fromSDK(object.timestamp_value) : undefined
     };
   },
-
   toSDK(message: Constant): ConstantSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
@@ -1793,7 +1472,6 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -1803,75 +1481,61 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = Value.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.value = Value.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Entry {
     return {
       key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: Entry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: EntrySDKType): Entry {
     return {
       key: object.key ? Value.fromSDK(object.key) : undefined,
       value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
-
   toSDK(message: Entry): EntrySDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -1883,74 +1547,58 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.entries.push(MapValue_Entry.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MapValue {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
     };
   },
-
   toJSON(message: MapValue): unknown {
     const obj: any = {};
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: MapValueSDKType): MapValue {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDK(e)) : []
     };
   },
-
   toSDK(message: MapValue): MapValueSDKType {
     const obj: any = {};
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -1962,13 +1610,10 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     if (message.location !== "") {
       writer.uint32(18).string(message.location);
     }
-
     writer.uint32(26).fork();
-
     for (const v of message.lineOffsets) {
       writer.int32(v);
     }
-
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
       SourceInfo_PositionsEntry.encode({
@@ -1978,51 +1623,39 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     });
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           message.location = reader.string();
           break;
-
         case 3:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.lineOffsets.push(reader.int32());
             }
           } else {
             message.lineOffsets.push(reader.int32());
           }
-
           break;
-
         case 4:
           const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
-
           if (entry4.value !== undefined) {
             message.positions[entry4.key] = entry4.value;
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SourceInfo {
     return {
       location: isSet(object.location) ? String(object.location) : "",
@@ -2035,28 +1668,22 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       }, {}) : {}
     };
   },
-
   toJSON(message: SourceInfo): unknown {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
-
     if (message.lineOffsets) {
       obj.lineOffsets = message.lineOffsets.map(e => Math.round(e));
     } else {
       obj.lineOffsets = [];
     }
-
     obj.positions = {};
-
     if (message.positions) {
       Object.entries(message.positions).forEach(([k, v]) => {
         obj.positions[k] = Math.round(v);
       });
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.location = object.location ?? "";
@@ -2067,12 +1694,10 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       if (value !== undefined) {
         acc[Number(key)] = Number(value);
       }
-
       return acc;
     }, {});
     return message;
   },
-
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
       location: object?.location,
@@ -2085,28 +1710,22 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       }, {}) : {}
     };
   },
-
   toSDK(message: SourceInfo): SourceInfoSDKType {
     const obj: any = {};
     obj.location = message.location;
-
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
       obj.line_offsets = [];
     }
-
     obj.positions = {};
-
     if (message.positions) {
       Object.entries(message.positions).forEach(([k, v]) => {
         obj.positions[k] = Math.round(v);
       });
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -2116,7 +1735,6 @@ exports[`google/api/quota keyType 1`] = `
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-
     Object.entries(message.metricCosts).forEach(([key, value]) => {
       MetricRule_MetricCostsEntry.encode({
         key: (key as any),
@@ -2125,38 +1743,29 @@ exports[`google/api/quota keyType 1`] = `
     });
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.selector = reader.string();
           break;
-
         case 2:
           const entry2 = MetricRule_MetricCostsEntry.decode(reader, reader.uint32());
-
           if (entry2.value !== undefined) {
             message.metricCosts[entry2.key] = entry2.value;
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MetricRule {
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
@@ -2168,21 +1777,17 @@ exports[`google/api/quota keyType 1`] = `
       }, {}) : {}
     };
   },
-
   toJSON(message: MetricRule): unknown {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     obj.metricCosts = {};
-
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
         obj.metricCosts[k] = v.toString();
       });
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? "";
@@ -2192,12 +1797,10 @@ exports[`google/api/quota keyType 1`] = `
       if (value !== undefined) {
         acc[key] = Long.fromValue(value);
       }
-
       return acc;
     }, {});
     return message;
   },
-
   fromSDK(object: MetricRuleSDKType): MetricRule {
     return {
       selector: object?.selector,
@@ -2209,21 +1812,17 @@ exports[`google/api/quota keyType 1`] = `
       }, {}) : {}
     };
   },
-
   toSDK(message: MetricRule): MetricRuleSDKType {
     const obj: any = {};
     obj.selector = message.selector;
     obj.metric_costs = {};
-
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
         obj.metric_costs[k] = v.toString();
       });
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -2235,128 +1834,97 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
     }
-
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(90).fork()).ldelim();
     }
-
     if (message.severity !== 0) {
       writer.uint32(96).int32(message.severity);
     }
-
     if (message.httpRequest !== undefined) {
       HttpRequest.encode(message.httpRequest, writer.uint32(114).fork()).ldelim();
     }
-
     if (message.trace !== "") {
       writer.uint32(122).string(message.trace);
     }
-
     if (message.insertId !== "") {
       writer.uint32(34).string(message.insertId);
     }
-
     Object.entries(message.labels).forEach(([key, value]) => {
       LogEntry_LabelsEntry.encode({
         key: (key as any),
         value
       }, writer.uint32(106).fork()).ldelim();
     });
-
     if (message.protoPayload !== undefined) {
       Any.encode(message.protoPayload, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.textPayload !== undefined) {
       writer.uint32(26).string(message.textPayload);
     }
-
     if (message.structPayload !== undefined) {
       Struct.encode(message.structPayload, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.operation !== undefined) {
       LogEntryOperation.encode(message.operation, writer.uint32(130).fork()).ldelim();
     }
-
     if (message.sourceLocation !== undefined) {
       LogEntrySourceLocation.encode(message.sourceLocation, writer.uint32(138).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LogEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 10:
           message.name = reader.string();
           break;
-
         case 11:
           message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
-
         case 12:
           message.severity = (reader.int32() as any);
           break;
-
         case 14:
           message.httpRequest = HttpRequest.decode(reader, reader.uint32());
           break;
-
         case 15:
           message.trace = reader.string();
           break;
-
         case 4:
           message.insertId = reader.string();
           break;
-
         case 13:
           const entry13 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
-
           if (entry13.value !== undefined) {
             message.labels[entry13.key] = entry13.value;
           }
-
           break;
-
         case 2:
           message.protoPayload = Any.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.textPayload = reader.string();
           break;
-
         case 6:
           message.structPayload = Struct.decode(reader, reader.uint32());
           break;
-
         case 16:
           message.operation = LogEntryOperation.decode(reader, reader.uint32());
           break;
-
         case 17:
           message.sourceLocation = LogEntrySourceLocation.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LogEntry {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -2378,7 +1946,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined
     };
   },
-
   toJSON(message: LogEntry): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -2388,13 +1955,11 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.trace !== undefined && (obj.trace = message.trace);
     message.insertId !== undefined && (obj.insertId = message.insertId);
     obj.labels = {};
-
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-
     message.protoPayload !== undefined && (obj.protoPayload = message.protoPayload ? Any.toJSON(message.protoPayload) : undefined);
     message.textPayload !== undefined && (obj.textPayload = message.textPayload);
     message.structPayload !== undefined && (obj.structPayload = message.structPayload ? Struct.toJSON(message.structPayload) : undefined);
@@ -2402,7 +1967,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation ? LogEntrySourceLocation.toJSON(message.sourceLocation) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.name = object.name ?? "";
@@ -2417,7 +1981,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       if (value !== undefined) {
         acc[key] = String(value);
       }
-
       return acc;
     }, {});
     message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
@@ -2427,7 +1990,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
     return message;
   },
-
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
       name: object?.name,
@@ -2449,7 +2011,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       sourceLocation: object.source_location ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
     };
   },
-
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -2459,13 +2020,11 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     obj.trace = message.trace;
     obj.insert_id = message.insertId;
     obj.labels = {};
-
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-
     message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
     obj.text_payload = message.textPayload;
     message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toSDK(message.structPayload) : undefined);
@@ -2473,7 +2032,6 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -2497,74 +2055,58 @@ exports[`google/rpc/error_details name collisions 2`] = `
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PreconditionFailure {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PreconditionFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
     };
   },
-
   toJSON(message: PreconditionFailure): unknown {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: PreconditionFailureSDKType): PreconditionFailure {
     return {
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDK(e)) : []
     };
   },
-
   toSDK(message: PreconditionFailure): PreconditionFailureSDKType {
     const obj: any = {};
-
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toSDK(e) : undefined);
     } else {
       obj.violations = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -2574,64 +2116,49 @@ exports[`ibc/core/port/v1/query 1`] = `
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-
     if (message.connectionId !== "") {
       writer.uint32(18).string(message.connectionId);
     }
-
     if (message.ordering !== 0) {
       writer.uint32(24).int32(message.ordering);
     }
-
     if (message.counterparty !== undefined) {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.proposedVersion !== "") {
       writer.uint32(42).string(message.proposedVersion);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.portId = reader.string();
           break;
-
         case 2:
           message.connectionId = reader.string();
           break;
-
         case 3:
           message.ordering = (reader.int32() as any);
           break;
-
         case 4:
           message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.proposedVersion = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryAppVersionRequest {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
@@ -2641,7 +2168,6 @@ exports[`ibc/core/port/v1/query 1`] = `
       proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
     };
   },
-
   toJSON(message: QueryAppVersionRequest): unknown {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
@@ -2651,7 +2177,6 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.proposedVersion !== undefined && (obj.proposedVersion = message.proposedVersion);
     return obj;
   },
-
   fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? "";
@@ -2661,7 +2186,6 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },
-
   fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
     return {
       portId: object?.port_id,
@@ -2671,7 +2195,6 @@ exports[`ibc/core/port/v1/query 1`] = `
       proposedVersion: object?.proposed_version
     };
   },
-
   toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
     const obj: any = {};
     obj.port_id = message.portId;
@@ -2681,7 +2204,6 @@ exports[`ibc/core/port/v1/query 1`] = `
     obj.proposed_version = message.proposedVersion;
     return obj;
   }
-
 };"
 `;
 
@@ -2757,10 +2279,8 @@ exports[`ibc/core/types/v1/genesis name collisions 1`] = `
 export interface GenesisState {
   /** ICS002 - Clients genesis state */
   clientGenesis?: GenesisState1;
-
   /** ICS003 - Connections genesis state */
   connectionGenesis?: GenesisState2;
-
   /** ICS004 - Channel genesis state */
   channelGenesis?: GenesisState3;
 }"
@@ -2772,48 +2292,37 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     if (message.clientGenesis !== undefined) {
       GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.connectionGenesis !== undefined) {
       GenesisState2.encode(message.connectionGenesis, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.channelGenesis !== undefined) {
       GenesisState3.encode(message.channelGenesis, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.clientGenesis = GenesisState1.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.connectionGenesis = GenesisState2.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.channelGenesis = GenesisState3.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GenesisState {
     return {
       clientGenesis: isSet(object.clientGenesis) ? GenesisState1.fromJSON(object.clientGenesis) : undefined,
@@ -2821,7 +2330,6 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
       channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
     };
   },
-
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
@@ -2829,7 +2337,6 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.channelGenesis !== undefined && (obj.channelGenesis = message.channelGenesis ? GenesisState3.toJSON(message.channelGenesis) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : undefined;
@@ -2837,7 +2344,6 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : undefined;
     return message;
   },
-
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       clientGenesis: object.client_genesis ? GenesisState1.fromSDK(object.client_genesis) : undefined,
@@ -2845,7 +2351,6 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
       channelGenesis: object.channel_genesis ? GenesisState3.fromSDK(object.channel_genesis) : undefined
     };
   },
-
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.client_genesis = message.clientGenesis ? GenesisState1.toSDK(message.clientGenesis) : undefined);
@@ -2853,7 +2358,6 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.channelGenesis !== undefined && (obj.channel_genesis = message.channelGenesis ? GenesisState3.toSDK(message.channelGenesis) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -3012,87 +2516,69 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.pools.push(Any.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryPoolsResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-
   toJSON(message: QueryPoolsResponse): unknown {
     const obj: any = {};
-
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
     } else {
       obj.pools = [];
     }
-
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
-
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
-
   toSDK(message: QueryPoolsResponse): QueryPoolsResponseSDKType {
     const obj: any = {};
-
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
     } else {
       obj.pools = [];
     }
-
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
   }
-
 };"
 `;
 
@@ -3102,56 +2588,43 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     if (!message.poolId.isZero()) {
       writer.uint32(16).uint64(message.poolId);
     }
-
     if (message.shareOutAmount !== "") {
       writer.uint32(26).string(message.shareOutAmount);
     }
-
     for (const v of message.tokenInMaxs) {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgJoinPool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.poolId = (reader.uint64() as Long);
           break;
-
         case 3:
           message.shareOutAmount = reader.string();
           break;
-
         case 4:
           message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgJoinPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -3160,22 +2633,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-
   toJSON(message: MsgJoinPool): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
-
     if (message.tokenInMaxs) {
       obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.tokenInMaxs = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
@@ -3184,7 +2653,6 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
     return {
       sender: object?.sender,
@@ -3193,22 +2661,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
       tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
-
   toSDK(message: MsgJoinPool): MsgJoinPoolSDKType {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId;
     obj.share_out_amount = message.shareOutAmount;
-
     if (message.tokenInMaxs) {
       obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
       obj.token_in_maxs = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -3218,56 +2682,43 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     for (const v of message.routes) {
       SwapAmountInRoute.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.tokenIn !== undefined) {
       Coin.encode(message.tokenIn, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.tokenOutMinAmount !== "") {
       writer.uint32(34).string(message.tokenOutMinAmount);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountIn {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.routes.push(SwapAmountInRoute.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.tokenIn = Coin.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.tokenOutMinAmount = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSwapExactAmountIn {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -3276,22 +2727,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
     };
   },
-
   toJSON(message: MsgSwapExactAmountIn): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
     } else {
       obj.routes = [];
     }
-
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn ? Coin.toJSON(message.tokenIn) : undefined);
     message.tokenOutMinAmount !== undefined && (obj.tokenOutMinAmount = message.tokenOutMinAmount);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgSwapExactAmountIn>): MsgSwapExactAmountIn {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
@@ -3300,7 +2747,6 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? "";
     return message;
   },
-
   fromSDK(object: MsgSwapExactAmountInSDKType): MsgSwapExactAmountIn {
     return {
       sender: object?.sender,
@@ -3309,22 +2755,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
       tokenOutMinAmount: object?.token_out_min_amount
     };
   },
-
   toSDK(message: MsgSwapExactAmountIn): MsgSwapExactAmountInSDKType {
     const obj: any = {};
     obj.sender = message.sender;
-
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toSDK(e) : undefined);
     } else {
       obj.routes = [];
     }
-
     message.tokenIn !== undefined && (obj.token_in = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
     obj.token_out_min_amount = message.tokenOutMinAmount;
     return obj;
   }
-
 };"
 `;
 
@@ -3334,56 +2776,43 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-
     for (const v of message.routes) {
       SwapAmountOutRoute.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.tokenInMaxAmount !== "") {
       writer.uint32(26).string(message.tokenInMaxAmount);
     }
-
     if (message.tokenOut !== undefined) {
       Coin.encode(message.tokenOut, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSwapExactAmountOut {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sender = reader.string();
           break;
-
         case 2:
           message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.tokenInMaxAmount = reader.string();
           break;
-
         case 4:
           message.tokenOut = Coin.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSwapExactAmountOut {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -3392,22 +2821,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
     };
   },
-
   toJSON(message: MsgSwapExactAmountOut): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
     } else {
       obj.routes = [];
     }
-
     message.tokenInMaxAmount !== undefined && (obj.tokenInMaxAmount = message.tokenInMaxAmount);
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut ? Coin.toJSON(message.tokenOut) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgSwapExactAmountOut>): MsgSwapExactAmountOut {
     const message = createBaseMsgSwapExactAmountOut();
     message.sender = object.sender ?? "";
@@ -3416,7 +2841,6 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     return message;
   },
-
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
     return {
       sender: object?.sender,
@@ -3425,21 +2849,17 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       tokenOut: object.token_out ? Coin.fromSDK(object.token_out) : undefined
     };
   },
-
   toSDK(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutSDKType {
     const obj: any = {};
     obj.sender = message.sender;
-
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toSDK(e) : undefined);
     } else {
       obj.routes = [];
     }
-
     obj.token_in_max_amount = message.tokenInMaxAmount;
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
   }
-
 };"
 `;

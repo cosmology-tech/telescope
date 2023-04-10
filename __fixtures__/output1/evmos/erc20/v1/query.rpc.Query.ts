@@ -7,28 +7,23 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** TokenPairs retrieves registered token pairs */
   tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse>;
-
   /** TokenPair retrieves a registered token pair */
   tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse>;
-
   /** Params retrieves the erc20 module params */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.tokenPairs = this.tokenPairs.bind(this);
     this.tokenPair = this.tokenPair.bind(this);
     this.params = this.params.bind(this);
   }
-
   tokenPairs(request: QueryTokenPairsRequest = {
     pagination: undefined
   }): Promise<QueryTokenPairsResponse> {
@@ -36,19 +31,16 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);
     return promise.then(data => QueryTokenPairsResponse.decode(new _m0.Reader(data)));
   }
-
   tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
     const data = QueryTokenPairRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPair", data);
     return promise.then(data => QueryTokenPairResponse.decode(new _m0.Reader(data)));
   }
-
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -57,15 +49,12 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse> {
       return queryService.tokenPairs(request);
     },
-
     tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
       return queryService.tokenPair(request);
     },
-
     params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
-
   };
 };
 export interface UseTokenPairsQuery<TData> extends ReactQueryParams<QueryTokenPairsResponse, TData> {
@@ -77,26 +66,18 @@ export interface UseTokenPairQuery<TData> extends ReactQueryParams<QueryTokenPai
 export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
   request?: QueryParamsRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useTokenPairs = <TData = QueryTokenPairsResponse,>({
     request,
     options
@@ -106,7 +87,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.tokenPairs(request);
     }, options);
   };
-
   const useTokenPair = <TData = QueryTokenPairResponse,>({
     request,
     options
@@ -116,7 +96,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.tokenPair(request);
     }, options);
   };
-
   const useParams = <TData = QueryParamsResponse,>({
     request,
     options
@@ -126,15 +105,9 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.params(request);
     }, options);
   };
-
   return {
-    /** TokenPairs retrieves registered token pairs */
-    useTokenPairs,
-
-    /** TokenPair retrieves a registered token pair */
-    useTokenPair,
-
-    /** Params retrieves the erc20 module params */
-    useParams
+    /** TokenPairs retrieves registered token pairs */useTokenPairs,
+    /** TokenPair retrieves a registered token pair */useTokenPair,
+    /** Params retrieves the erc20 module params */useParams
   };
 };

@@ -3,7 +3,6 @@ import { LCDClient } from "@osmonauts/lcd";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -12,11 +11,9 @@ export class LCDQueryClient {
     this.req = requestClient;
     this.balances = this.balances.bind(this);
   }
-
   /* Retrieves the unvested, vested and locked tokens for a vesting account */
   async balances(params: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType> {
     const endpoint = `evmos/vesting/v1/balances/${params.address}`;
     return await this.req.get<QueryBalancesResponseSDKType>(endpoint);
   }
-
 }

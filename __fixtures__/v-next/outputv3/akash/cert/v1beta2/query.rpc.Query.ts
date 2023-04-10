@@ -5,10 +5,11 @@ import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertifi
 export class Query {
   /** Certificates queries certificates */
   static Certificates(request: QueryCertificatesRequest, initRequest?: fm.InitReq): Promise<QueryCertificatesResponse> {
-    return fm.fetchReq(`/akash/cert/v1beta2/certificates/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/cert/v1beta2/certificates/list?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

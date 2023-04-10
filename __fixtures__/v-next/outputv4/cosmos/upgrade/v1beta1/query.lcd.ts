@@ -3,7 +3,6 @@ import { LCDClient } from "@osmonauts/lcd";
 import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPlanResponse, QueryCurrentPlanResponseSDKType, QueryAppliedPlanRequest, QueryAppliedPlanRequestSDKType, QueryAppliedPlanResponse, QueryAppliedPlanResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType, QueryModuleVersionsRequest, QueryModuleVersionsRequestSDKType, QueryModuleVersionsResponse, QueryModuleVersionsResponseSDKType, QueryAuthorityRequest, QueryAuthorityRequestSDKType, QueryAuthorityResponse, QueryAuthorityResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -16,19 +15,16 @@ export class LCDQueryClient {
     this.moduleVersions = this.moduleVersions.bind(this);
     this.authority = this.authority.bind(this);
   }
-
   /* CurrentPlan queries the current upgrade plan. */
   async currentPlan(_params: QueryCurrentPlanRequest = {}): Promise<QueryCurrentPlanResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/current_plan`;
     return QueryCurrentPlanResponse.fromSDKJSON(await this.req.get<QueryCurrentPlanResponseSDKType>(endpoint));
   }
-
   /* AppliedPlan queries a previously applied upgrade plan by its name. */
   async appliedPlan(params: QueryAppliedPlanRequest): Promise<QueryAppliedPlanResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/applied_plan/${params.name}`;
     return QueryAppliedPlanResponse.fromSDKJSON(await this.req.get<QueryAppliedPlanResponseSDKType>(endpoint));
   }
-
   /* UpgradedConsensusState queries the consensus state that will serve
    as a trusted kernel for the next version of this chain. It will only be
    stored at the last height of this chain.
@@ -39,7 +35,6 @@ export class LCDQueryClient {
     const endpoint = `cosmos/upgrade/v1beta1/upgraded_consensus_state/${params.lastHeight}`;
     return QueryUpgradedConsensusStateResponse.fromSDKJSON(await this.req.get<QueryUpgradedConsensusStateResponseSDKType>(endpoint));
   }
-
   /* ModuleVersions queries the list of module versions from state.
   
    Since: cosmos-sdk 0.43 */
@@ -47,19 +42,15 @@ export class LCDQueryClient {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.moduleName !== "undefined") {
       options.params.module_name = params.moduleName;
     }
-
     const endpoint = `cosmos/upgrade/v1beta1/module_versions`;
     return QueryModuleVersionsResponse.fromSDKJSON(await this.req.get<QueryModuleVersionsResponseSDKType>(endpoint, options));
   }
-
   /* Returns the account with authority to conduct upgrades */
   async authority(_params: QueryAuthorityRequest = {}): Promise<QueryAuthorityResponseSDKType> {
     const endpoint = `cosmos/upgrade/v1beta1/authority`;
     return QueryAuthorityResponse.fromSDKJSON(await this.req.get<QueryAuthorityResponseSDKType>(endpoint));
   }
-
 }

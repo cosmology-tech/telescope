@@ -13,27 +13,34 @@ import * as _531 from "./abci/types.rpc.ABCIApplication";
 import * as _556 from "./lcd";
 import * as _557 from "./rpc.query";
 export namespace tendermint {
-  export const abci = { ..._305,
+  export const abci = {
+    ..._305,
     ..._531
   };
-  export const crypto = { ..._306,
+  export const crypto = {
+    ..._306,
     ..._307
   };
   export namespace libs {
-    export const bits = { ..._308
+    export const bits = {
+      ..._308
     };
   }
-  export const p2p = { ..._309
+  export const p2p = {
+    ..._309
   };
-  export const types = { ..._310,
+  export const types = {
+    ..._310,
     ..._311,
     ..._312,
     ..._313,
     ..._314
   };
-  export const version = { ..._315
+  export const version = {
+    ..._315
   };
-  export const ClientFactory = { ..._556,
+  export const ClientFactory = {
+    ..._556,
     ..._557
   };
 }

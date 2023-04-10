@@ -8,40 +8,31 @@ import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /** ModuleToDistributeCoins returns coins that are going to be distributed */
   moduleToDistributeCoins(request?: DeepPartial<ModuleToDistributeCoinsRequest>, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse>;
-
   /** GaugeByID returns gauges by their respective ID */
   gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse>;
-
   /** Gauges returns both upcoming and active gauges */
   gauges(request?: DeepPartial<GaugesRequest>, metadata?: grpc.Metadata): Promise<GaugesResponse>;
-
   /** ActiveGauges returns active gauges */
   activeGauges(request?: DeepPartial<ActiveGaugesRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse>;
-
   /** ActiveGaugesPerDenom returns active gauges by denom */
   activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse>;
-
   /** Returns scheduled gauges that have not yet occured */
   upcomingGauges(request?: DeepPartial<UpcomingGaugesRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse>;
-
   /**
    * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
    * by denom
    */
   upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse>;
-
   /**
    * RewardsEst returns an estimate of the rewards from now until a specified
    * time in the future The querier either provides an address or a set of locks
    * for which they want to find the associated rewards
    */
   rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse>;
-
   /**
    * LockableDurations returns lockable durations that are valid to distribute
    * incentives for
@@ -50,7 +41,6 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.moduleToDistributeCoins = this.moduleToDistributeCoins.bind(this);
@@ -63,49 +53,39 @@ export class QueryClientImpl implements Query {
     this.rewardsEst = this.rewardsEst.bind(this);
     this.lockableDurations = this.lockableDurations.bind(this);
   }
-
   moduleToDistributeCoins(request: DeepPartial<ModuleToDistributeCoinsRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse> {
     return this.rpc.unary(ModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
   }
-
   gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse> {
     return this.rpc.unary(GaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
   }
-
   gauges(request: DeepPartial<GaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<GaugesResponse> {
     return this.rpc.unary(GaugesDesc, GaugesRequest.fromPartial(request), metadata);
   }
-
   activeGauges(request: DeepPartial<ActiveGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse> {
     return this.rpc.unary(ActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
   }
-
   activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse> {
     return this.rpc.unary(ActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
   }
-
   upcomingGauges(request: DeepPartial<UpcomingGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse> {
     return this.rpc.unary(UpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
   }
-
   upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse> {
     return this.rpc.unary(UpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
   }
-
   rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse> {
     return this.rpc.unary(RewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
   }
-
   lockableDurations(request: DeepPartial<QueryLockableDurationsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse> {
     return this.rpc.unary(QueryLockableDurationsDesc, QueryLockableDurationsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "osmosis.incentives.Query"
@@ -119,19 +99,16 @@ export const QueryModuleToDistributeCoinsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ModuleToDistributeCoinsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ModuleToDistributeCoinsResponse.decode(data),
-
+      return {
+        ...ModuleToDistributeCoinsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryGaugeByIDDesc: UnaryMethodDefinitionish = {
@@ -143,19 +120,16 @@ export const QueryGaugeByIDDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GaugeByIDRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GaugeByIDResponse.decode(data),
-
+      return {
+        ...GaugeByIDResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryGaugesDesc: UnaryMethodDefinitionish = {
@@ -167,19 +141,16 @@ export const QueryGaugesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GaugesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GaugesResponse.decode(data),
-
+      return {
+        ...GaugesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryActiveGaugesDesc: UnaryMethodDefinitionish = {
@@ -191,19 +162,16 @@ export const QueryActiveGaugesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ActiveGaugesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ActiveGaugesResponse.decode(data),
-
+      return {
+        ...ActiveGaugesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryActiveGaugesPerDenomDesc: UnaryMethodDefinitionish = {
@@ -215,19 +183,16 @@ export const QueryActiveGaugesPerDenomDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ActiveGaugesPerDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ActiveGaugesPerDenomResponse.decode(data),
-
+      return {
+        ...ActiveGaugesPerDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryUpcomingGaugesDesc: UnaryMethodDefinitionish = {
@@ -239,19 +204,16 @@ export const QueryUpcomingGaugesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return UpcomingGaugesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...UpcomingGaugesResponse.decode(data),
-
+      return {
+        ...UpcomingGaugesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryUpcomingGaugesPerDenomDesc: UnaryMethodDefinitionish = {
@@ -263,19 +225,16 @@ export const QueryUpcomingGaugesPerDenomDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return UpcomingGaugesPerDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...UpcomingGaugesPerDenomResponse.decode(data),
-
+      return {
+        ...UpcomingGaugesPerDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryRewardsEstDesc: UnaryMethodDefinitionish = {
@@ -287,19 +246,16 @@ export const QueryRewardsEstDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return RewardsEstRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...RewardsEstResponse.decode(data),
-
+      return {
+        ...RewardsEstResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
@@ -311,19 +267,16 @@ export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryLockableDurationsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryLockableDurationsResponse.decode(data),
-
+      return {
+        ...QueryLockableDurationsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -336,7 +289,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -345,12 +297,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -374,5 +327,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

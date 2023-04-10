@@ -3,7 +3,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -67,20 +66,16 @@ export interface Documentation {
    * plain text.
    */
   summary: string;
-
   /** The top level pages for the documentation set. */
   pages: Page[];
-
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: DocumentationRule[];
-
   /** The URL to the root of documentation. */
   documentationRootUrl: string;
-
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
@@ -88,7 +83,6 @@ export interface Documentation {
    * urls are relative to.
    */
   serviceRootUrl: string;
-
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -106,7 +100,6 @@ export interface Documentation {
    */
   overview: string;
 }
-
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRule {
   /**
@@ -118,17 +111,14 @@ export interface DocumentationRule {
    * applicable elements, the whole pattern "*" is used.
    */
   selector: string;
-
   /** Description of the selected API(s). */
   description: string;
-
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
   deprecationDescription: string;
 }
-
 /**
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
@@ -151,20 +141,17 @@ export interface Page {
    * `[Java][Tutorial.Java]`.
    */
   name: string;
-
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
   content: string;
-
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
   subpages: Page[];
 }
-
 function createBaseDocumentation(): Documentation {
   return {
     summary: "",
@@ -175,78 +162,60 @@ function createBaseDocumentation(): Documentation {
     overview: ""
   };
 }
-
 export const Documentation = {
   encode(message: Documentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.summary !== "") {
       writer.uint32(10).string(message.summary);
     }
-
     for (const v of message.pages) {
       Page.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-
     for (const v of message.rules) {
       DocumentationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.documentationRootUrl !== "") {
       writer.uint32(34).string(message.documentationRootUrl);
     }
-
     if (message.serviceRootUrl !== "") {
       writer.uint32(50).string(message.serviceRootUrl);
     }
-
     if (message.overview !== "") {
       writer.uint32(18).string(message.overview);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Documentation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.summary = reader.string();
           break;
-
         case 5:
           message.pages.push(Page.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.rules.push(DocumentationRule.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.documentationRootUrl = reader.string();
           break;
-
         case 6:
           message.serviceRootUrl = reader.string();
           break;
-
         case 2:
           message.overview = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Documentation {
     return {
       summary: isSet(object.summary) ? String(object.summary) : "",
@@ -257,29 +226,24 @@ export const Documentation = {
       overview: isSet(object.overview) ? String(object.overview) : ""
     };
   },
-
   toJSON(message: Documentation): unknown {
     const obj: any = {};
     message.summary !== undefined && (obj.summary = message.summary);
-
     if (message.pages) {
       obj.pages = message.pages.map(e => e ? Page.toJSON(e) : undefined);
     } else {
       obj.pages = [];
     }
-
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? DocumentationRule.toJSON(e) : undefined);
     } else {
       obj.rules = [];
     }
-
     message.documentationRootUrl !== undefined && (obj.documentationRootUrl = message.documentationRootUrl);
     message.serviceRootUrl !== undefined && (obj.serviceRootUrl = message.serviceRootUrl);
     message.overview !== undefined && (obj.overview = message.overview);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Documentation>): Documentation {
     const message = createBaseDocumentation();
     message.summary = object.summary ?? "";
@@ -290,9 +254,7 @@ export const Documentation = {
     message.overview = object.overview ?? "";
     return message;
   }
-
 };
-
 function createBaseDocumentationRule(): DocumentationRule {
   return {
     selector: "",
@@ -300,54 +262,42 @@ function createBaseDocumentationRule(): DocumentationRule {
     deprecationDescription: ""
   };
 }
-
 export const DocumentationRule = {
   encode(message: DocumentationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     if (message.deprecationDescription !== "") {
       writer.uint32(26).string(message.deprecationDescription);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DocumentationRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentationRule();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.selector = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.deprecationDescription = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DocumentationRule {
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
@@ -355,7 +305,6 @@ export const DocumentationRule = {
       deprecationDescription: isSet(object.deprecationDescription) ? String(object.deprecationDescription) : ""
     };
   },
-
   toJSON(message: DocumentationRule): unknown {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
@@ -363,7 +312,6 @@ export const DocumentationRule = {
     message.deprecationDescription !== undefined && (obj.deprecationDescription = message.deprecationDescription);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
     message.selector = object.selector ?? "";
@@ -371,9 +319,7 @@ export const DocumentationRule = {
     message.deprecationDescription = object.deprecationDescription ?? "";
     return message;
   }
-
 };
-
 function createBasePage(): Page {
   return {
     name: "",
@@ -381,54 +327,42 @@ function createBasePage(): Page {
     subpages: []
   };
 }
-
 export const Page = {
   encode(message: Page, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.content !== "") {
       writer.uint32(18).string(message.content);
     }
-
     for (const v of message.subpages) {
       Page.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Page {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePage();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.content = reader.string();
           break;
-
         case 3:
           message.subpages.push(Page.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Page {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -436,21 +370,17 @@ export const Page = {
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Page): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.content !== undefined && (obj.content = message.content);
-
     if (message.subpages) {
       obj.subpages = message.subpages.map(e => e ? Page.toJSON(e) : undefined);
     } else {
       obj.subpages = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Page>): Page {
     const message = createBasePage();
     message.name = object.name ?? "";
@@ -458,5 +388,4 @@ export const Page = {
     message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
     return message;
   }
-
 };

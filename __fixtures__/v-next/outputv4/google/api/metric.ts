@@ -4,7 +4,6 @@ import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * The kind of measurement. It describes how the data is reported.
  * For information on setting the start time and end time based on
@@ -13,13 +12,10 @@ export const protobufPackage = "google.api";
 export enum MetricDescriptor_MetricKind {
   /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
   METRIC_KIND_UNSPECIFIED = 0,
-
   /** GAUGE - An instantaneous measurement of a value. */
   GAUGE = 1,
-
   /** DELTA - The change in a value during a time interval. */
   DELTA = 2,
-
   /**
    * CUMULATIVE - A value accumulated over a time interval.  Cumulative
    * measurements in a time series should have the same start time
@@ -36,19 +32,15 @@ export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescript
     case 0:
     case "METRIC_KIND_UNSPECIFIED":
       return MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED;
-
     case 1:
     case "GAUGE":
       return MetricDescriptor_MetricKind.GAUGE;
-
     case 2:
     case "DELTA":
       return MetricDescriptor_MetricKind.DELTA;
-
     case 3:
     case "CUMULATIVE":
       return MetricDescriptor_MetricKind.CUMULATIVE;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -59,48 +51,37 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
   switch (object) {
     case MetricDescriptor_MetricKind.METRIC_KIND_UNSPECIFIED:
       return "METRIC_KIND_UNSPECIFIED";
-
     case MetricDescriptor_MetricKind.GAUGE:
       return "GAUGE";
-
     case MetricDescriptor_MetricKind.DELTA:
       return "DELTA";
-
     case MetricDescriptor_MetricKind.CUMULATIVE:
       return "CUMULATIVE";
-
     case MetricDescriptor_MetricKind.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /** The value type of a metric. */
 export enum MetricDescriptor_ValueType {
   /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
   VALUE_TYPE_UNSPECIFIED = 0,
-
   /**
    * BOOL - The value is a boolean.
    * This value type can be used only if the metric kind is `GAUGE`.
    */
   BOOL = 1,
-
   /** INT64 - The value is a signed 64-bit integer. */
   INT64 = 2,
-
   /** DOUBLE - The value is a double precision floating point number. */
   DOUBLE = 3,
-
   /**
    * STRING - The value is a text string.
    * This value type can be used only if the metric kind is `GAUGE`.
    */
   STRING = 4,
-
   /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
   DISTRIBUTION = 5,
-
   /** MONEY - The value is money. */
   MONEY = 6,
   UNRECOGNIZED = -1,
@@ -111,31 +92,24 @@ export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescripto
     case 0:
     case "VALUE_TYPE_UNSPECIFIED":
       return MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED;
-
     case 1:
     case "BOOL":
       return MetricDescriptor_ValueType.BOOL;
-
     case 2:
     case "INT64":
       return MetricDescriptor_ValueType.INT64;
-
     case 3:
     case "DOUBLE":
       return MetricDescriptor_ValueType.DOUBLE;
-
     case 4:
     case "STRING":
       return MetricDescriptor_ValueType.STRING;
-
     case 5:
     case "DISTRIBUTION":
       return MetricDescriptor_ValueType.DISTRIBUTION;
-
     case 6:
     case "MONEY":
       return MetricDescriptor_ValueType.MONEY;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -146,31 +120,23 @@ export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueT
   switch (object) {
     case MetricDescriptor_ValueType.VALUE_TYPE_UNSPECIFIED:
       return "VALUE_TYPE_UNSPECIFIED";
-
     case MetricDescriptor_ValueType.BOOL:
       return "BOOL";
-
     case MetricDescriptor_ValueType.INT64:
       return "INT64";
-
     case MetricDescriptor_ValueType.DOUBLE:
       return "DOUBLE";
-
     case MetricDescriptor_ValueType.STRING:
       return "STRING";
-
     case MetricDescriptor_ValueType.DISTRIBUTION:
       return "DISTRIBUTION";
-
     case MetricDescriptor_ValueType.MONEY:
       return "MONEY";
-
     case MetricDescriptor_ValueType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -179,7 +145,6 @@ export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueT
 export interface MetricDescriptor {
   /** The resource name of the metric descriptor. */
   name: string;
-
   /**
    * The metric type, including its DNS name prefix. The type is not
    * URL-encoded. All user-defined metric types have the DNS name
@@ -191,7 +156,6 @@ export interface MetricDescriptor {
    *     "appengine.googleapis.com/http/server/response_latencies"
    */
   type: string;
-
   /**
    * The set of labels that can be used to describe a specific
    * instance of this metric type. For example, the
@@ -201,19 +165,16 @@ export interface MetricDescriptor {
    * for responses that failed.
    */
   labels: LabelDescriptor[];
-
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
   metricKind: MetricDescriptor_MetricKind;
-
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
   valueType: MetricDescriptor_ValueType;
-
   /**
    * The units in which the metric value is reported. It is only applicable
    * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -319,10 +280,8 @@ export interface MetricDescriptor {
    *    (so a metric value `0.03` means "3 percent").
    */
   unit: string;
-
   /** A detailed description of the metric, which can be used in documentation. */
   description: string;
-
   /**
    * A concise name for the metric, which can be displayed in user interfaces.
    * Use sentence case without an ending period, for example "Request count".
@@ -330,13 +289,10 @@ export interface MetricDescriptor {
    * associated with user-visible concepts, such as Quota.
    */
   displayName: string;
-
   /** Optional. Metadata which can be used to guide usage of the metric. */
   metadata?: MetricDescriptor_MetricDescriptorMetadata;
-
   /** Optional. The launch stage of the metric definition. */
   launchStage: LaunchStage;
-
   /**
    * Read-only. If present, then a [time
    * series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -346,7 +302,6 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
-
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -365,14 +320,11 @@ export interface MetricDescriptorSDKType {
   launch_stage: LaunchStage;
   monitored_resource_types: string[];
 }
-
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
-
   /** @deprecated */
   launchStage: LaunchStage;
-
   /**
    * The sampling period of metric data points. For metrics which are written
    * periodically, consecutive data points are stored at this time interval,
@@ -380,7 +332,6 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * a smaller sampling period.
    */
   samplePeriod?: Duration;
-
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
@@ -388,7 +339,6 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
-
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
   /** @deprecated */
@@ -404,7 +354,6 @@ export interface Metric_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * A specific metric, identified by specifying values for all of the
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
@@ -415,7 +364,6 @@ export interface Metric {
    * For example, `custom.googleapis.com/invoice/paid/amount`.
    */
   type: string;
-
   /**
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
@@ -424,7 +372,6 @@ export interface Metric {
     [key: string]: string;
   };
 }
-
 /**
  * A specific metric, identified by specifying values for all of the
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
@@ -435,7 +382,6 @@ export interface MetricSDKType {
     [key: string]: string;
   };
 }
-
 function createBaseMetricDescriptor(): MetricDescriptor {
   return {
     name: "",
@@ -451,118 +397,90 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     monitoredResourceTypes: []
   };
 }
-
 export const MetricDescriptor = {
   encode(message: MetricDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.type !== "") {
       writer.uint32(66).string(message.type);
     }
-
     for (const v of message.labels) {
       LabelDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.metricKind !== 0) {
       writer.uint32(24).int32(message.metricKind);
     }
-
     if (message.valueType !== 0) {
       writer.uint32(32).int32(message.valueType);
     }
-
     if (message.unit !== "") {
       writer.uint32(42).string(message.unit);
     }
-
     if (message.description !== "") {
       writer.uint32(50).string(message.description);
     }
-
     if (message.displayName !== "") {
       writer.uint32(58).string(message.displayName);
     }
-
     if (message.metadata !== undefined) {
       MetricDescriptor_MetricDescriptorMetadata.encode(message.metadata, writer.uint32(82).fork()).ldelim();
     }
-
     if (message.launchStage !== 0) {
       writer.uint32(96).int32(message.launchStage);
     }
-
     for (const v of message.monitoredResourceTypes) {
       writer.uint32(106).string(v!);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricDescriptor();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 8:
           message.type = reader.string();
           break;
-
         case 2:
           message.labels.push(LabelDescriptor.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.metricKind = (reader.int32() as any);
           break;
-
         case 4:
           message.valueType = (reader.int32() as any);
           break;
-
         case 5:
           message.unit = reader.string();
           break;
-
         case 6:
           message.description = reader.string();
           break;
-
         case 7:
           message.displayName = reader.string();
           break;
-
         case 10:
           message.metadata = MetricDescriptor_MetricDescriptorMetadata.decode(reader, reader.uint32());
           break;
-
         case 12:
           message.launchStage = (reader.int32() as any);
           break;
-
         case 13:
           message.monitoredResourceTypes.push(reader.string());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MetricDescriptor {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -578,18 +496,15 @@ export const MetricDescriptor = {
       monitoredResourceTypes: Array.isArray(object?.monitoredResourceTypes) ? object.monitoredResourceTypes.map((e: any) => String(e)) : []
     };
   },
-
   toJSON(message: MetricDescriptor): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = message.type);
-
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
     } else {
       obj.labels = [];
     }
-
     message.metricKind !== undefined && (obj.metricKind = metricDescriptor_MetricKindToJSON(message.metricKind));
     message.valueType !== undefined && (obj.valueType = metricDescriptor_ValueTypeToJSON(message.valueType));
     message.unit !== undefined && (obj.unit = message.unit);
@@ -597,16 +512,13 @@ export const MetricDescriptor = {
     message.displayName !== undefined && (obj.displayName = message.displayName);
     message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toJSON(message.metadata) : undefined);
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-
     if (message.monitoredResourceTypes) {
       obj.monitoredResourceTypes = message.monitoredResourceTypes.map(e => e);
     } else {
       obj.monitoredResourceTypes = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MetricDescriptor>): MetricDescriptor {
     const message = createBaseMetricDescriptor();
     message.name = object.name ?? "";
@@ -622,7 +534,6 @@ export const MetricDescriptor = {
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
   },
-
   fromSDK(object: MetricDescriptorSDKType): MetricDescriptor {
     return {
       name: object?.name,
@@ -638,7 +549,6 @@ export const MetricDescriptor = {
       monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
     };
   },
-
   fromSDKJSON(object: any): MetricDescriptorSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -654,18 +564,15 @@ export const MetricDescriptor = {
       monitored_resource_types: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => String(e)) : []
     };
   },
-
   toSDK(message: MetricDescriptor): MetricDescriptorSDKType {
     const obj: any = {};
     obj.name = message.name;
     obj.type = message.type;
-
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
     } else {
       obj.labels = [];
     }
-
     message.metricKind !== undefined && (obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind));
     message.valueType !== undefined && (obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType));
     obj.unit = message.unit;
@@ -673,18 +580,14 @@ export const MetricDescriptor = {
     obj.display_name = message.displayName;
     message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toSDK(message.metadata) : undefined);
     message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
-
     if (message.monitoredResourceTypes) {
       obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
     } else {
       obj.monitored_resource_types = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
@@ -692,54 +595,42 @@ function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor
     ingestDelay: undefined
   };
 }
-
 export const MetricDescriptor_MetricDescriptorMetadata = {
   encode(message: MetricDescriptor_MetricDescriptorMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.launchStage !== 0) {
       writer.uint32(8).int32(message.launchStage);
     }
-
     if (message.samplePeriod !== undefined) {
       Duration.encode(message.samplePeriod, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.ingestDelay !== undefined) {
       Duration.encode(message.ingestDelay, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MetricDescriptor_MetricDescriptorMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.launchStage = (reader.int32() as any);
           break;
-
         case 2:
           message.samplePeriod = Duration.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.ingestDelay = Duration.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
@@ -747,7 +638,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
       ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };
   },
-
   toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
     const obj: any = {};
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
@@ -755,7 +645,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
@@ -763,7 +652,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
   },
-
   fromSDK(object: MetricDescriptor_MetricDescriptorMetadataSDKType): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
@@ -771,7 +659,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
       ingestDelay: object.ingest_delay ? Duration.fromSDK(object.ingest_delay) : undefined
     };
   },
-
   fromSDKJSON(object: any): MetricDescriptor_MetricDescriptorMetadataSDKType {
     return {
       launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
@@ -779,7 +666,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
       ingest_delay: isSet(object.ingest_delay) ? Duration.fromSDKJSON(object.ingest_delay) : undefined
     };
   },
-
   toSDK(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataSDKType {
     const obj: any = {};
     message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
@@ -787,112 +673,91 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.ingestDelay !== undefined && (obj.ingest_delay = message.ingestDelay ? Duration.toSDK(message.ingestDelay) : undefined);
     return obj;
   }
-
 };
-
 function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
   return {
     key: "",
     value: ""
   };
 }
-
 export const Metric_LabelsEntry = {
   encode(message: Metric_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-
     if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Metric_LabelsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetric_LabelsEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = reader.string();
           break;
-
         case 2:
           message.value = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Metric_LabelsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-
   toJSON(message: Metric_LabelsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Metric_LabelsEntry>): Metric_LabelsEntry {
     const message = createBaseMetric_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
   },
-
   fromSDK(object: Metric_LabelsEntrySDKType): Metric_LabelsEntry {
     return {
       key: object?.key,
       value: object?.value
     };
   },
-
   fromSDKJSON(object: any): Metric_LabelsEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-
   toSDK(message: Metric_LabelsEntry): Metric_LabelsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   }
-
 };
-
 function createBaseMetric(): Metric {
   return {
     type: "",
     labels: {}
   };
 }
-
 export const Metric = {
   encode(message: Metric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(26).string(message.type);
     }
-
     Object.entries(message.labels).forEach(([key, value]) => {
       Metric_LabelsEntry.encode({
         key: (key as any),
@@ -901,38 +766,29 @@ export const Metric = {
     });
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Metric {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetric();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 3:
           message.type = reader.string();
           break;
-
         case 2:
           const entry2 = Metric_LabelsEntry.decode(reader, reader.uint32());
-
           if (entry2.value !== undefined) {
             message.labels[entry2.key] = entry2.value;
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Metric {
     return {
       type: isSet(object.type) ? String(object.type) : "",
@@ -944,21 +800,17 @@ export const Metric = {
       }, {}) : {}
     };
   },
-
   toJSON(message: Metric): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     obj.labels = {};
-
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Metric>): Metric {
     const message = createBaseMetric();
     message.type = object.type ?? "";
@@ -968,12 +820,10 @@ export const Metric = {
       if (value !== undefined) {
         acc[key] = String(value);
       }
-
       return acc;
     }, {});
     return message;
   },
-
   fromSDK(object: MetricSDKType): Metric {
     return {
       type: object?.type,
@@ -985,7 +835,6 @@ export const Metric = {
       }, {}) : {}
     };
   },
-
   fromSDKJSON(object: any): MetricSDKType {
     return {
       type: isSet(object.type) ? String(object.type) : "",
@@ -997,19 +846,15 @@ export const Metric = {
       }, {}) : {}
     };
   },
-
   toSDK(message: Metric): MetricSDKType {
     const obj: any = {};
     obj.type = message.type;
     obj.labels = {};
-
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-
     return obj;
   }
-
 };

@@ -10,23 +10,29 @@ import * as _313 from "./types/types";
 import * as _314 from "./types/validator";
 import * as _315 from "./version/types";
 export namespace tendermint {
-  export const abci = { ..._305
+  export const abci = {
+    ..._305
   };
-  export const crypto = { ..._306,
+  export const crypto = {
+    ..._306,
     ..._307
   };
   export namespace libs {
-    export const bits = { ..._308
+    export const bits = {
+      ..._308
     };
   }
-  export const p2p = { ..._309
+  export const p2p = {
+    ..._309
   };
-  export const types = { ..._310,
+  export const types = {
+    ..._310,
     ..._311,
     ..._312,
     ..._313,
     ..._314
   };
-  export const version = { ..._315
+  export const version = {
+    ..._315
   };
 }

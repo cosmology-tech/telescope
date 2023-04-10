@@ -5,15 +5,12 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPlanResponse, QueryCurrentPlanResponseSDKType, QueryAppliedPlanRequest, QueryAppliedPlanRequestSDKType, QueryAppliedPlanResponse, QueryAppliedPlanResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType, QueryModuleVersionsRequest, QueryModuleVersionsRequestSDKType, QueryModuleVersionsResponse, QueryModuleVersionsResponseSDKType, QueryAuthorityRequest, QueryAuthorityRequestSDKType, QueryAuthorityResponse, QueryAuthorityResponseSDKType } from "./query";
-
 /** Query defines the gRPC upgrade querier service. */
 export interface Query {
   /** CurrentPlan queries the current upgrade plan. */
   currentPlan(request?: DeepPartial<QueryCurrentPlanRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentPlanResponse>;
-
   /** AppliedPlan queries a previously applied upgrade plan by its name. */
   appliedPlan(request: DeepPartial<QueryAppliedPlanRequest>, metadata?: grpc.Metadata): Promise<QueryAppliedPlanResponse>;
-
   /**
    * UpgradedConsensusState queries the consensus state that will serve
    * as a trusted kernel for the next version of this chain. It will only be
@@ -23,20 +20,17 @@ export interface Query {
    * (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
    */
   upgradedConsensusState(request: DeepPartial<QueryUpgradedConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse>;
-
   /**
    * ModuleVersions queries the list of module versions from state.
    * 
    * Since: cosmos-sdk 0.43
    */
   moduleVersions(request: DeepPartial<QueryModuleVersionsRequest>, metadata?: grpc.Metadata): Promise<QueryModuleVersionsResponse>;
-
   /** Returns the account with authority to conduct upgrades */
   authority(request?: DeepPartial<QueryAuthorityRequest>, metadata?: grpc.Metadata): Promise<QueryAuthorityResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.currentPlan = this.currentPlan.bind(this);
@@ -45,27 +39,21 @@ export class QueryClientImpl implements Query {
     this.moduleVersions = this.moduleVersions.bind(this);
     this.authority = this.authority.bind(this);
   }
-
   currentPlan(request: DeepPartial<QueryCurrentPlanRequest> = {}, metadata?: grpc.Metadata): Promise<QueryCurrentPlanResponse> {
     return this.rpc.unary(QueryCurrentPlanDesc, QueryCurrentPlanRequest.fromPartial(request), metadata);
   }
-
   appliedPlan(request: DeepPartial<QueryAppliedPlanRequest>, metadata?: grpc.Metadata): Promise<QueryAppliedPlanResponse> {
     return this.rpc.unary(QueryAppliedPlanDesc, QueryAppliedPlanRequest.fromPartial(request), metadata);
   }
-
   upgradedConsensusState(request: DeepPartial<QueryUpgradedConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse> {
     return this.rpc.unary(QueryUpgradedConsensusStateDesc, QueryUpgradedConsensusStateRequest.fromPartial(request), metadata);
   }
-
   moduleVersions(request: DeepPartial<QueryModuleVersionsRequest>, metadata?: grpc.Metadata): Promise<QueryModuleVersionsResponse> {
     return this.rpc.unary(QueryModuleVersionsDesc, QueryModuleVersionsRequest.fromPartial(request), metadata);
   }
-
   authority(request: DeepPartial<QueryAuthorityRequest> = {}, metadata?: grpc.Metadata): Promise<QueryAuthorityResponse> {
     return this.rpc.unary(QueryAuthorityDesc, QueryAuthorityRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "cosmos.upgrade.v1beta1.Query"
@@ -79,19 +67,16 @@ export const QueryCurrentPlanDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryCurrentPlanRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryCurrentPlanResponse.decode(data),
-
+      return {
+        ...QueryCurrentPlanResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAppliedPlanDesc: UnaryMethodDefinitionish = {
@@ -103,19 +88,16 @@ export const QueryAppliedPlanDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryAppliedPlanRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryAppliedPlanResponse.decode(data),
-
+      return {
+        ...QueryAppliedPlanResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryUpgradedConsensusStateDesc: UnaryMethodDefinitionish = {
@@ -127,19 +109,16 @@ export const QueryUpgradedConsensusStateDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryUpgradedConsensusStateRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryUpgradedConsensusStateResponse.decode(data),
-
+      return {
+        ...QueryUpgradedConsensusStateResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryModuleVersionsDesc: UnaryMethodDefinitionish = {
@@ -151,19 +130,16 @@ export const QueryModuleVersionsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryModuleVersionsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryModuleVersionsResponse.decode(data),
-
+      return {
+        ...QueryModuleVersionsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAuthorityDesc: UnaryMethodDefinitionish = {
@@ -175,19 +151,16 @@ export const QueryAuthorityDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryAuthorityRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryAuthorityResponse.decode(data),
-
+      return {
+        ...QueryAuthorityResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -200,7 +173,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -209,12 +181,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -238,5 +211,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

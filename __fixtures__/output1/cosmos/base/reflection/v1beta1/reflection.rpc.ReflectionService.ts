@@ -4,7 +4,6 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
-
 /** ReflectionService defines a service for interface reflection. */
 export interface ReflectionService {
   /**
@@ -12,7 +11,6 @@ export interface ReflectionService {
    * registry.
    */
   listAllInterfaces(request?: ListAllInterfacesRequest): Promise<ListAllInterfacesResponse>;
-
   /**
    * ListImplementations list all the concrete types that implement a given
    * interface.
@@ -21,25 +19,21 @@ export interface ReflectionService {
 }
 export class ReflectionServiceClientImpl implements ReflectionService {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.listAllInterfaces = this.listAllInterfaces.bind(this);
     this.listImplementations = this.listImplementations.bind(this);
   }
-
   listAllInterfaces(request: ListAllInterfacesRequest = {}): Promise<ListAllInterfacesResponse> {
     const data = ListAllInterfacesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v1beta1.ReflectionService", "ListAllInterfaces", data);
     return promise.then(data => ListAllInterfacesResponse.decode(new _m0.Reader(data)));
   }
-
   listImplementations(request: ListImplementationsRequest): Promise<ListImplementationsResponse> {
     const data = ListImplementationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v1beta1.ReflectionService", "ListImplementations", data);
     return promise.then(data => ListImplementationsResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -48,11 +42,9 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     listAllInterfaces(request?: ListAllInterfacesRequest): Promise<ListAllInterfacesResponse> {
       return queryService.listAllInterfaces(request);
     },
-
     listImplementations(request: ListImplementationsRequest): Promise<ListImplementationsResponse> {
       return queryService.listImplementations(request);
     }
-
   };
 };
 export interface UseListAllInterfacesQuery<TData> extends ReactQueryParams<ListAllInterfacesResponse, TData> {
@@ -61,26 +53,18 @@ export interface UseListAllInterfacesQuery<TData> extends ReactQueryParams<ListA
 export interface UseListImplementationsQuery<TData> extends ReactQueryParams<ListImplementationsResponse, TData> {
   request: ListImplementationsRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, ReflectionServiceClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): ReflectionServiceClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new ReflectionServiceClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useListAllInterfaces = <TData = ListAllInterfacesResponse,>({
     request,
     options
@@ -90,7 +74,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.listAllInterfaces(request);
     }, options);
   };
-
   const useListImplementations = <TData = ListImplementationsResponse,>({
     request,
     options
@@ -100,14 +83,12 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.listImplementations(request);
     }, options);
   };
-
   return {
     /**
      * ListAllInterfaces lists all the interfaces registered in the interface
      * registry.
      */
     useListAllInterfaces,
-
     /**
      * ListImplementations list all the concrete types that implement a given
      * interface.

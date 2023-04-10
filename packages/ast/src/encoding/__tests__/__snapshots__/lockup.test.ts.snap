@@ -14,48 +14,37 @@ exports[`osmosis/lockup/tx duration 2`] = `
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockTokens {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.owner = reader.string();
           break;
-
         case 2:
           message.duration = Duration.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgLockTokens {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
@@ -63,21 +52,17 @@ exports[`osmosis/lockup/tx duration 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.coins = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
@@ -85,7 +70,6 @@ exports[`osmosis/lockup/tx duration 2`] = `
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
       owner: object?.owner,
@@ -93,21 +77,17 @@ exports[`osmosis/lockup/tx duration 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
-
   toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
     const obj: any = {};
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
       obj.coins = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
@@ -181,48 +161,37 @@ exports[`osmosis/lockup/tx string 2`] = `
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-
     if (message.duration !== undefined) {
       Duration.encode(toDuration(message.duration), writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockTokens {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.owner = reader.string();
           break;
-
         case 2:
           message.duration = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgLockTokens {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
@@ -230,21 +199,17 @@ exports[`osmosis/lockup/tx string 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration);
-
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.coins = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
@@ -252,7 +217,6 @@ exports[`osmosis/lockup/tx string 2`] = `
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
       owner: object?.owner,
@@ -260,21 +224,17 @@ exports[`osmosis/lockup/tx string 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
-
   toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
     const obj: any = {};
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
       obj.coins = [];
     }
-
     return obj;
   }
-
 };"
 `;
 
