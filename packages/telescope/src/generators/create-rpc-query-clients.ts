@@ -107,6 +107,32 @@ export const plugin = (
                         }
                         asts.push(grpcWebRpcInterface())
                         asts.push(getGrpcWebImpl(ctx.generic))
+
+                        /* Added the sameway as Tendermint implement, if modify below then modify this one too */
+                        // see if current file has been reactQuery enabled and included
+                        const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('reactQuery.include')
+                        )
+
+                        if (includeReactQueryHooks) {
+                            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+                            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                            asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+
+                            reactQueryBundlerFiles.push(bundlerFile);
+                        }
+
+                        // whether mobx plugin is enabled has been dealt with inside createMobxQueryStores
+                        const mobxQueryStoreAst = createMobxQueryStores(
+                            ctx.generic,
+                            proto[svcKey]
+                        );
+
+                        if (mobxQueryStoreAst) {
+                            asts.push(mobxQueryStoreAst);
+                            mobxBundlerFiles.push(bundlerFile);
+                        }
                     }
                 })
                 break;

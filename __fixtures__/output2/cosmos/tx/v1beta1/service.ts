@@ -5,8 +5,8 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { TxResponse, GasInfo, Result } from "../../base/abci/v1beta1/abci";
 import { BlockID } from "../../../tendermint/types/types";
 import { Block } from "../../../tendermint/types/block";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.tx.v1beta1";
 
 /** OrderBy defines the sorting order */

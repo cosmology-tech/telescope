@@ -21,6 +21,7 @@ export * from "./ibc/client";
 export * from "./osmosis/bundle";
 export * from "./osmosis/client";
 export * from "./tendermint/bundle";
+export * from "./hooks";
 export * from "./extern";
 export * from "./react-query";
 export * from "./grpc-web";

@@ -3,8 +3,8 @@
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /**

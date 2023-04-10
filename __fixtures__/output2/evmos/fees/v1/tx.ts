@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */

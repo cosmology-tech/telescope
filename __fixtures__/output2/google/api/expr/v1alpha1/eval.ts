@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Value } from "./value";
 import { Status } from "../../../rpc/status";
+import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /**

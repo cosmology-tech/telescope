@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { SuperfluidAsset } from "../superfluid";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 
 /**

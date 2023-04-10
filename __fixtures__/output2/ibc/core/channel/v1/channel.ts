@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Height } from "../../client/v1/client";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 
 /**

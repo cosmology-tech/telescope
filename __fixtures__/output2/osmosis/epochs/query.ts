@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { EpochInfo } from "./genesis";
+import { Long, DeepPartial, isSet, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, Rpc } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoResponse {

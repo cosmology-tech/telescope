@@ -1,5 +1,5 @@
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 
 /** Minter represents the minting state. */

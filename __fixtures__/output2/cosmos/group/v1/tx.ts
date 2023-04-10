@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Member, VoteOption, voteOptionFromJSON, voteOptionToJSON } from "./types";
 import { Any } from "../../../google/protobuf/any";
+import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 
 /** Exec defines modes of execution of a proposal on creation or on new vote. */

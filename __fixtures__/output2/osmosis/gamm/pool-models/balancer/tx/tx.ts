@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { PoolParams, PoolAsset } from "../balancerPool";
+import { Long, isSet, DeepPartial, Rpc } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, Rpc } from "../../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 
 /** ===================== MsgCreatePool */

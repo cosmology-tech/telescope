@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Duration } from "../../google/protobuf/duration";
+import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 
 /**

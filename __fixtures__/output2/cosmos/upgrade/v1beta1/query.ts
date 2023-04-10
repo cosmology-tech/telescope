@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Plan, ModuleVersion } from "./upgrade";
+import { Long, DeepPartial, isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /**

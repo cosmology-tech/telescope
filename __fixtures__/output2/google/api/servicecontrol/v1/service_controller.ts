@@ -3,8 +3,8 @@
 import { Operation } from "./operation";
 import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**

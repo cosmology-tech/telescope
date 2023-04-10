@@ -4,8 +4,8 @@ import { Proof } from "../crypto/proof";
 import { Consensus } from "../version/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { ValidatorSet } from "./validator";
+import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long, fromJsonTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 
 /** BlockIdFlag indicates which BlcokID the signature is for */

@@ -4,8 +4,8 @@ import { Struct } from "../../protobuf/struct";
 import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
+import { Long, isSet, DeepPartial, isObject, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 
 /**

@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { FeeToken } from "./feetoken";
+import { Long, DeepPartial, isSet, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, Rpc } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensResponse {

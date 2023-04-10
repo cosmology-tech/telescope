@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { DevFeeInfo } from "./fees";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 
 /** GenesisState defines the module's genesis state. */

@@ -6,8 +6,8 @@ import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, S
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock } from "../lockup/lock";
 import { DelegationResponse } from "../../cosmos/staking/v1beta1/staking";
+import { Long, DeepPartial, isSet, Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, Rpc } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {

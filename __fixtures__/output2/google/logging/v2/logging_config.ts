@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */

@@ -4,8 +4,8 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { Incentive, GasMeter } from "./incentives";
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
+import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, Rpc } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 
 /**
