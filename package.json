@@ -41,6 +41,6 @@
     "url": "https://github.com/osmosis-labs/telescope"
   },
   "dependencies": {
-    "@jest/transform": "28.1.3"
+    "@jest/transform": "29.5.0"
   }
 }
