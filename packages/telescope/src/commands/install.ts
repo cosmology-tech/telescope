@@ -101,7 +101,7 @@ export default async (argv) => {
     // install
     if (!Array.isArray(pkg)) pkg = [pkg];
     const tmp = join(TMPDIR, rnd());
-    mkdirp(tmp);
+    mkdirp.sync(tmp);
     process.chdir(tmp);
     exec(`npm install ${getPackages(pkg)} --production --prefix ./protobufs`);
 
