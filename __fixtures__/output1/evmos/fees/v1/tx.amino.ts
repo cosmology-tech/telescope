@@ -1,4 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
+import { Long } from "../../../helpers";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType } from "./tx";
 export interface MsgRegisterDevFeeInfoAminoType extends AminoMsg {
   type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";

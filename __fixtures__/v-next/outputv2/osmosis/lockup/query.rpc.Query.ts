@@ -9,69 +9,51 @@ import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Return full balance of the module */
   moduleBalance(request?: DeepPartial<ModuleBalanceRequest>, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse>;
-
   /** Return locked balance of the module */
   moduleLockedAmount(request?: DeepPartial<ModuleLockedAmountRequest>, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse>;
-
   /** Returns unlockable coins which are not withdrawn yet */
   accountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse>;
-
   /** Returns unlocking coins */
   accountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse>;
-
   /** Return a locked coins that can't be withdrawn */
   accountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse>;
-
   /** Returns locked records of an account with unlock time beyond timestamp */
   accountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse>;
-
   /**
    * Returns locked records of an account with unlock time beyond timestamp
    * excluding tokens started unlocking
    */
   accountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
-
   /** Returns unlocked records with unlock time before timestamp */
   accountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse>;
-
   /** Returns lock records by address, timestamp, denom */
   accountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse>;
-
   /** Returns total locked per denom with longer past given time */
   lockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse>;
-
   /** Returns lock record by id */
   lockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse>;
-
   /** Returns synthetic lockups by native lockup id */
   syntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse>;
-
   /** Returns account locked records with longer duration */
   accountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse>;
-
   /** Returns account locked records with a specific duration */
   accountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse>;
-
   /**
    * Returns account locked records with longer duration excluding tokens
    * started unlocking
    */
   accountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
-
   /** Returns account's locked records for a denom with longer duration */
   accountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse>;
-
   /** Params returns lockup params. */
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.moduleBalance = this.moduleBalance.bind(this);
@@ -92,75 +74,57 @@ export class QueryClientImpl implements Query {
     this.accountLockedLongerDurationDenom = this.accountLockedLongerDurationDenom.bind(this);
     this.params = this.params.bind(this);
   }
-
   moduleBalance(request: DeepPartial<ModuleBalanceRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse> {
     return this.rpc.unary(ModuleBalanceDesc, ModuleBalanceRequest.fromPartial(request), metadata);
   }
-
   moduleLockedAmount(request: DeepPartial<ModuleLockedAmountRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse> {
     return this.rpc.unary(ModuleLockedAmountDesc, ModuleLockedAmountRequest.fromPartial(request), metadata);
   }
-
   accountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse> {
     return this.rpc.unary(AccountUnlockableCoinsDesc, AccountUnlockableCoinsRequest.fromPartial(request), metadata);
   }
-
   accountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse> {
     return this.rpc.unary(AccountUnlockingCoinsDesc, AccountUnlockingCoinsRequest.fromPartial(request), metadata);
   }
-
   accountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse> {
     return this.rpc.unary(AccountLockedCoinsDesc, AccountLockedCoinsRequest.fromPartial(request), metadata);
   }
-
   accountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse> {
     return this.rpc.unary(AccountLockedPastTimeDesc, AccountLockedPastTimeRequest.fromPartial(request), metadata);
   }
-
   accountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
     return this.rpc.unary(AccountLockedPastTimeNotUnlockingOnlyDesc, AccountLockedPastTimeNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
-
   accountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse> {
     return this.rpc.unary(AccountUnlockedBeforeTimeDesc, AccountUnlockedBeforeTimeRequest.fromPartial(request), metadata);
   }
-
   accountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse> {
     return this.rpc.unary(AccountLockedPastTimeDenomDesc, AccountLockedPastTimeDenomRequest.fromPartial(request), metadata);
   }
-
   lockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse> {
     return this.rpc.unary(LockedDenomDesc, LockedDenomRequest.fromPartial(request), metadata);
   }
-
   lockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse> {
     return this.rpc.unary(LockedDesc, LockedRequest.fromPartial(request), metadata);
   }
-
   syntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse> {
     return this.rpc.unary(SyntheticLockupsByLockupIDDesc, SyntheticLockupsByLockupIDRequest.fromPartial(request), metadata);
   }
-
   accountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse> {
     return this.rpc.unary(AccountLockedLongerDurationDesc, AccountLockedLongerDurationRequest.fromPartial(request), metadata);
   }
-
   accountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse> {
     return this.rpc.unary(AccountLockedDurationDesc, AccountLockedDurationRequest.fromPartial(request), metadata);
   }
-
   accountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
     return this.rpc.unary(AccountLockedLongerDurationNotUnlockingOnlyDesc, AccountLockedLongerDurationNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
-
   accountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse> {
     return this.rpc.unary(AccountLockedLongerDurationDenomDesc, AccountLockedLongerDurationDenomRequest.fromPartial(request), metadata);
   }
-
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "osmosis.lockup.Query"
@@ -174,19 +138,16 @@ export const QueryModuleBalanceDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ModuleBalanceRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ModuleBalanceResponse.decode(data),
-
+      return {
+        ...ModuleBalanceResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryModuleLockedAmountDesc: UnaryMethodDefinitionish = {
@@ -198,19 +159,16 @@ export const QueryModuleLockedAmountDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ModuleLockedAmountRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ModuleLockedAmountResponse.decode(data),
-
+      return {
+        ...ModuleLockedAmountResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountUnlockableCoinsDesc: UnaryMethodDefinitionish = {
@@ -222,19 +180,16 @@ export const QueryAccountUnlockableCoinsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountUnlockableCoinsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountUnlockableCoinsResponse.decode(data),
-
+      return {
+        ...AccountUnlockableCoinsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountUnlockingCoinsDesc: UnaryMethodDefinitionish = {
@@ -246,19 +201,16 @@ export const QueryAccountUnlockingCoinsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountUnlockingCoinsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountUnlockingCoinsResponse.decode(data),
-
+      return {
+        ...AccountUnlockingCoinsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedCoinsDesc: UnaryMethodDefinitionish = {
@@ -270,19 +222,16 @@ export const QueryAccountLockedCoinsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountLockedCoinsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedCoinsResponse.decode(data),
-
+      return {
+        ...AccountLockedCoinsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedPastTimeDesc: UnaryMethodDefinitionish = {
@@ -294,19 +243,16 @@ export const QueryAccountLockedPastTimeDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountLockedPastTimeRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedPastTimeResponse.decode(data),
-
+      return {
+        ...AccountLockedPastTimeResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedPastTimeNotUnlockingOnlyDesc: UnaryMethodDefinitionish = {
@@ -318,19 +264,16 @@ export const QueryAccountLockedPastTimeNotUnlockingOnlyDesc: UnaryMethodDefiniti
     serializeBinary() {
       return AccountLockedPastTimeNotUnlockingOnlyRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedPastTimeNotUnlockingOnlyResponse.decode(data),
-
+      return {
+        ...AccountLockedPastTimeNotUnlockingOnlyResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountUnlockedBeforeTimeDesc: UnaryMethodDefinitionish = {
@@ -342,19 +285,16 @@ export const QueryAccountUnlockedBeforeTimeDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountUnlockedBeforeTimeRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountUnlockedBeforeTimeResponse.decode(data),
-
+      return {
+        ...AccountUnlockedBeforeTimeResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedPastTimeDenomDesc: UnaryMethodDefinitionish = {
@@ -366,19 +306,16 @@ export const QueryAccountLockedPastTimeDenomDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountLockedPastTimeDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedPastTimeDenomResponse.decode(data),
-
+      return {
+        ...AccountLockedPastTimeDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryLockedDenomDesc: UnaryMethodDefinitionish = {
@@ -390,19 +327,16 @@ export const QueryLockedDenomDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return LockedDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...LockedDenomResponse.decode(data),
-
+      return {
+        ...LockedDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryLockedByIDDesc: UnaryMethodDefinitionish = {
@@ -414,19 +348,16 @@ export const QueryLockedByIDDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return LockedRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...LockedResponse.decode(data),
-
+      return {
+        ...LockedResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QuerySyntheticLockupsByLockupIDDesc: UnaryMethodDefinitionish = {
@@ -438,19 +369,16 @@ export const QuerySyntheticLockupsByLockupIDDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return SyntheticLockupsByLockupIDRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...SyntheticLockupsByLockupIDResponse.decode(data),
-
+      return {
+        ...SyntheticLockupsByLockupIDResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedLongerDurationDesc: UnaryMethodDefinitionish = {
@@ -462,19 +390,16 @@ export const QueryAccountLockedLongerDurationDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountLockedLongerDurationRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedLongerDurationResponse.decode(data),
-
+      return {
+        ...AccountLockedLongerDurationResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedDurationDesc: UnaryMethodDefinitionish = {
@@ -486,19 +411,16 @@ export const QueryAccountLockedDurationDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return AccountLockedDurationRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedDurationResponse.decode(data),
-
+      return {
+        ...AccountLockedDurationResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedLongerDurationNotUnlockingOnlyDesc: UnaryMethodDefinitionish = {
@@ -510,19 +432,16 @@ export const QueryAccountLockedLongerDurationNotUnlockingOnlyDesc: UnaryMethodDe
     serializeBinary() {
       return AccountLockedLongerDurationNotUnlockingOnlyRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(data),
-
+      return {
+        ...AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAccountLockedLongerDurationDenomDesc: UnaryMethodDefinitionish = {
@@ -534,19 +453,16 @@ export const QueryAccountLockedLongerDurationDenomDesc: UnaryMethodDefinitionish
     serializeBinary() {
       return AccountLockedLongerDurationDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...AccountLockedLongerDurationDenomResponse.decode(data),
-
+      return {
+        ...AccountLockedLongerDurationDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryParamsDesc: UnaryMethodDefinitionish = {
@@ -558,19 +474,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryParamsResponse.decode(data),
-
+      return {
+        ...QueryParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -583,7 +496,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -592,12 +504,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -621,5 +534,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

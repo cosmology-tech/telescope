@@ -16,13 +16,11 @@ export const usePiniaStore = defineStore('akash/cert/v1beta2/query.proto', {
       const requestClient = useEndpoint().restClient;
       return new LCDQueryClient({ requestClient });
     }
-
   },
   actions: {
     async fetchCertificates(param : QueryCertificatesRequestSDKType) {
       this.certificates = await this.lcdClient.certificates(param);
       return this.certificates;
     }
-
   }
 });

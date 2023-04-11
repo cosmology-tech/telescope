@@ -4,7 +4,6 @@ import { Distribution_Exemplar } from "../../distribution";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
-
 /**
  * Distribution represents a frequency distribution of double-valued sample
  * points. It contains the size of the population of sample points plus
@@ -18,19 +17,15 @@ export const protobufPackage = "google.api.servicecontrol.v1";
 export interface Distribution {
   /** The total number of samples in the distribution. Must be >= 0. */
   count: Long;
-
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
   mean: number;
-
   /** The minimum of the population of values. Ignored if `count` is zero. */
   minimum: number;
-
   /** The maximum of the population of values. Ignored if `count` is zero. */
   maximum: number;
-
   /**
    * The sum of squared deviations from the mean:
    *   Sum[i=1..count]((x_i - mean)^2)
@@ -38,7 +33,6 @@ export interface Distribution {
    * must be zero, otherwise validation of the request fails.
    */
   sumOfSquaredDeviation: number;
-
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
    * optional. If present, they must sum to the `count` value.
@@ -53,20 +47,15 @@ export interface Distribution {
    * Any suffix of trailing zeros may be omitted.
    */
   bucketCounts: Long[];
-
   /** Buckets with constant width. */
   linearBuckets?: Distribution_LinearBuckets;
-
   /** Buckets with exponentially growing width. */
   exponentialBuckets?: Distribution_ExponentialBuckets;
-
   /** Buckets with arbitrary user-provided width. */
   explicitBuckets?: Distribution_ExplicitBuckets;
-
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
-
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBuckets {
   /**
@@ -75,7 +64,6 @@ export interface Distribution_LinearBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
-
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
@@ -83,7 +71,6 @@ export interface Distribution_LinearBuckets {
    * Must be strictly positive.
    */
   width: number;
-
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
@@ -91,7 +78,6 @@ export interface Distribution_LinearBuckets {
    */
   offset: number;
 }
-
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBuckets {
   /**
@@ -100,7 +86,6 @@ export interface Distribution_ExponentialBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
-
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
@@ -108,7 +93,6 @@ export interface Distribution_ExponentialBuckets {
    * Must be larger than 1.0.
    */
   growthFactor: number;
-
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
@@ -117,7 +101,6 @@ export interface Distribution_ExponentialBuckets {
    */
   scale: number;
 }
-
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBuckets {
   /**
@@ -139,7 +122,6 @@ export interface Distribution_ExplicitBuckets {
    */
   bounds: number[];
 }
-
 function createBaseDistribution(): Distribution {
   return {
     count: Long.ZERO,
@@ -154,123 +136,93 @@ function createBaseDistribution(): Distribution {
     exemplars: []
   };
 }
-
 export const Distribution = {
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
     }
-
     if (message.mean !== 0) {
       writer.uint32(17).double(message.mean);
     }
-
     if (message.minimum !== 0) {
       writer.uint32(25).double(message.minimum);
     }
-
     if (message.maximum !== 0) {
       writer.uint32(33).double(message.maximum);
     }
-
     if (message.sumOfSquaredDeviation !== 0) {
       writer.uint32(41).double(message.sumOfSquaredDeviation);
     }
-
     writer.uint32(50).fork();
-
     for (const v of message.bucketCounts) {
       writer.int64(v);
     }
-
     writer.ldelim();
-
     if (message.linearBuckets !== undefined) {
       Distribution_LinearBuckets.encode(message.linearBuckets, writer.uint32(58).fork()).ldelim();
     }
-
     if (message.exponentialBuckets !== undefined) {
       Distribution_ExponentialBuckets.encode(message.exponentialBuckets, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.explicitBuckets !== undefined) {
       Distribution_ExplicitBuckets.encode(message.explicitBuckets, writer.uint32(74).fork()).ldelim();
     }
-
     for (const v of message.exemplars) {
       Distribution_Exemplar.encode(v!, writer.uint32(82).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.count = (reader.int64() as Long);
           break;
-
         case 2:
           message.mean = reader.double();
           break;
-
         case 3:
           message.minimum = reader.double();
           break;
-
         case 4:
           message.maximum = reader.double();
           break;
-
         case 5:
           message.sumOfSquaredDeviation = reader.double();
           break;
-
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.bucketCounts.push((reader.int64() as Long));
             }
           } else {
             message.bucketCounts.push((reader.int64() as Long));
           }
-
           break;
-
         case 7:
           message.linearBuckets = Distribution_LinearBuckets.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.exponentialBuckets = Distribution_ExponentialBuckets.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.explicitBuckets = Distribution_ExplicitBuckets.decode(reader, reader.uint32());
           break;
-
         case 10:
           message.exemplars.push(Distribution_Exemplar.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution {
     return {
       count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
@@ -285,7 +237,6 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Distribution): unknown {
     const obj: any = {};
     message.count !== undefined && (obj.count = (message.count || Long.ZERO).toString());
@@ -293,26 +244,21 @@ export const Distribution = {
     message.minimum !== undefined && (obj.minimum = message.minimum);
     message.maximum !== undefined && (obj.maximum = message.maximum);
     message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
-
     if (message.bucketCounts) {
       obj.bucketCounts = message.bucketCounts.map(e => (e || Long.ZERO).toString());
     } else {
       obj.bucketCounts = [];
     }
-
     message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_LinearBuckets.toJSON(message.linearBuckets) : undefined);
     message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toJSON(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toJSON(message.explicitBuckets) : undefined);
-
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toJSON(e) : undefined);
     } else {
       obj.exemplars = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
@@ -327,9 +273,7 @@ export const Distribution = {
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   }
-
 };
-
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
   return {
     numFiniteBuckets: 0,
@@ -337,54 +281,42 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
     offset: 0
   };
 }
-
 export const Distribution_LinearBuckets = {
   encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-
     if (message.width !== 0) {
       writer.uint32(17).double(message.width);
     }
-
     if (message.offset !== 0) {
       writer.uint32(25).double(message.offset);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_LinearBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_LinearBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.numFiniteBuckets = reader.int32();
           break;
-
         case 2:
           message.width = reader.double();
           break;
-
         case 3:
           message.offset = reader.double();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_LinearBuckets {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
@@ -392,7 +324,6 @@ export const Distribution_LinearBuckets = {
       offset: isSet(object.offset) ? Number(object.offset) : 0
     };
   },
-
   toJSON(message: Distribution_LinearBuckets): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
@@ -400,7 +331,6 @@ export const Distribution_LinearBuckets = {
     message.offset !== undefined && (obj.offset = message.offset);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_LinearBuckets>): Distribution_LinearBuckets {
     const message = createBaseDistribution_LinearBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -408,9 +338,7 @@ export const Distribution_LinearBuckets = {
     message.offset = object.offset ?? 0;
     return message;
   }
-
 };
-
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
   return {
     numFiniteBuckets: 0,
@@ -418,54 +346,42 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
     scale: 0
   };
 }
-
 export const Distribution_ExponentialBuckets = {
   encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-
     if (message.growthFactor !== 0) {
       writer.uint32(17).double(message.growthFactor);
     }
-
     if (message.scale !== 0) {
       writer.uint32(25).double(message.scale);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExponentialBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExponentialBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.numFiniteBuckets = reader.int32();
           break;
-
         case 2:
           message.growthFactor = reader.double();
           break;
-
         case 3:
           message.scale = reader.double();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_ExponentialBuckets {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
@@ -473,7 +389,6 @@ export const Distribution_ExponentialBuckets = {
       scale: isSet(object.scale) ? Number(object.scale) : 0
     };
   },
-
   toJSON(message: Distribution_ExponentialBuckets): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
@@ -481,7 +396,6 @@ export const Distribution_ExponentialBuckets = {
     message.scale !== undefined && (obj.scale = message.scale);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_ExponentialBuckets>): Distribution_ExponentialBuckets {
     const message = createBaseDistribution_ExponentialBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -489,80 +403,62 @@ export const Distribution_ExponentialBuckets = {
     message.scale = object.scale ?? 0;
     return message;
   }
-
 };
-
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
   return {
     bounds: []
   };
 }
-
 export const Distribution_ExplicitBuckets = {
   encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
-
     for (const v of message.bounds) {
       writer.double(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExplicitBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExplicitBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.bounds.push(reader.double());
             }
           } else {
             message.bounds.push(reader.double());
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_ExplicitBuckets {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
-
   toJSON(message: Distribution_ExplicitBuckets): unknown {
     const obj: any = {};
-
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
       obj.bounds = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_ExplicitBuckets>): Distribution_ExplicitBuckets {
     const message = createBaseDistribution_ExplicitBuckets();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;
   }
-
 };

@@ -54,14 +54,12 @@ exports[`createHelperObject 1`] = `
         value: MsgJoinPool.encode(value).finish()
       };
     },
-
     exitPool(value: MsgExitPool) {
       return {
         typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     joinPool(value: MsgJoinPool) {
@@ -70,14 +68,12 @@ exports[`createHelperObject 1`] = `
         value
       };
     },
-
     exitPool(value: MsgExitPool) {
       return {
         typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value
       };
     }
-
   },
   toJSON: {
     joinPool(value: MsgJoinPool) {
@@ -86,14 +82,12 @@ exports[`createHelperObject 1`] = `
         value: MsgJoinPool.toJSON(value)
       };
     },
-
     exitPool(value: MsgExitPool) {
       return {
         typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     joinPool(value: any) {
@@ -102,14 +96,12 @@ exports[`createHelperObject 1`] = `
         value: MsgJoinPool.fromJSON(value)
       };
     },
-
     exitPool(value: any) {
       return {
         typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     joinPool(value: MsgJoinPool) {
@@ -118,14 +110,12 @@ exports[`createHelperObject 1`] = `
         value: MsgJoinPool.fromPartial(value)
       };
     },
-
     exitPool(value: MsgExitPool) {
       return {
         typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.fromPartial(value)
       };
     }
-
   }
 };"
 `;

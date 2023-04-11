@@ -5,7 +5,6 @@ import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseSDKType } from "./tx";
-
 /** Msg defines the erc20 Msg service. */
 export interface Msg {
   /**
@@ -13,7 +12,6 @@ export interface Msg {
    * that is registered on the token mapping.
    */
   convertCoin(request: DeepPartial<MsgConvertCoin>, metadata?: grpc.Metadata): Promise<MsgConvertCoinResponse>;
-
   /**
    * ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
    * contract that is registered on the token mapping.
@@ -22,21 +20,17 @@ export interface Msg {
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.convertCoin = this.convertCoin.bind(this);
     this.convertERC20 = this.convertERC20.bind(this);
   }
-
   convertCoin(request: DeepPartial<MsgConvertCoin>, metadata?: grpc.Metadata): Promise<MsgConvertCoinResponse> {
     return this.rpc.unary(MsgConvertCoinDesc, MsgConvertCoin.fromPartial(request), metadata);
   }
-
   convertERC20(request: DeepPartial<MsgConvertERC20>, metadata?: grpc.Metadata): Promise<MsgConvertERC20Response> {
     return this.rpc.unary(MsgConvertERC20Desc, MsgConvertERC20.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "evmos.erc20.v1.Msg"
@@ -50,19 +44,16 @@ export const MsgConvertCoinDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgConvertCoin.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgConvertCoinResponse.decode(data),
-
+      return {
+        ...MsgConvertCoinResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgConvertERC20Desc: UnaryMethodDefinitionish = {
@@ -74,19 +65,16 @@ export const MsgConvertERC20Desc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgConvertERC20.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgConvertERC20Response.decode(data),
-
+      return {
+        ...MsgConvertERC20Response.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -99,7 +87,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -108,12 +95,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -137,5 +125,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

@@ -7,10 +7,10 @@ export class Msg {
    * counterfactual signing.
    */
   static SubmitEvidence(request: MsgSubmitEvidence, initRequest?: fm.InitReq): Promise<MsgSubmitEvidenceResponse> {
-    return fm.fetchReq(`/cosmos.evidence.v1beta1/SubmitEvidence`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.evidence.v1beta1/SubmitEvidence`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
 }

@@ -7,42 +7,32 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryValidatorOutstandingRewardsRequest, QueryValidatorOutstandingRewardsRequestSDKType, QueryValidatorOutstandingRewardsResponse, QueryValidatorOutstandingRewardsResponseSDKType, QueryValidatorCommissionRequest, QueryValidatorCommissionRequestSDKType, QueryValidatorCommissionResponse, QueryValidatorCommissionResponseSDKType, QueryValidatorSlashesRequest, QueryValidatorSlashesRequestSDKType, QueryValidatorSlashesResponse, QueryValidatorSlashesResponseSDKType, QueryDelegationRewardsRequest, QueryDelegationRewardsRequestSDKType, QueryDelegationRewardsResponse, QueryDelegationRewardsResponseSDKType, QueryDelegationTotalRewardsRequest, QueryDelegationTotalRewardsRequestSDKType, QueryDelegationTotalRewardsResponse, QueryDelegationTotalRewardsResponseSDKType, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsRequestSDKType, QueryDelegatorValidatorsResponse, QueryDelegatorValidatorsResponseSDKType, QueryDelegatorWithdrawAddressRequest, QueryDelegatorWithdrawAddressRequestSDKType, QueryDelegatorWithdrawAddressResponse, QueryDelegatorWithdrawAddressResponseSDKType, QueryCommunityPoolRequest, QueryCommunityPoolRequestSDKType, QueryCommunityPoolResponse, QueryCommunityPoolResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service for distribution module. */
 export interface Query {
   /** Params queries params of the distribution module. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-
   /** ValidatorOutstandingRewards queries rewards of a validator address. */
   validatorOutstandingRewards(request: QueryValidatorOutstandingRewardsRequest): Promise<QueryValidatorOutstandingRewardsResponse>;
-
   /** ValidatorCommission queries accumulated commission for a validator. */
   validatorCommission(request: QueryValidatorCommissionRequest): Promise<QueryValidatorCommissionResponse>;
-
   /** ValidatorSlashes queries slash events of a validator. */
   validatorSlashes(request: QueryValidatorSlashesRequest): Promise<QueryValidatorSlashesResponse>;
-
   /** DelegationRewards queries the total rewards accrued by a delegation. */
   delegationRewards(request: QueryDelegationRewardsRequest): Promise<QueryDelegationRewardsResponse>;
-
   /**
    * DelegationTotalRewards queries the total rewards accrued by a each
    * validator.
    */
   delegationTotalRewards(request: QueryDelegationTotalRewardsRequest): Promise<QueryDelegationTotalRewardsResponse>;
-
   /** DelegatorValidators queries the validators of a delegator. */
   delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
-
   /** DelegatorWithdrawAddress queries withdraw address of a delegator. */
   delegatorWithdrawAddress(request: QueryDelegatorWithdrawAddressRequest): Promise<QueryDelegatorWithdrawAddressResponse>;
-
   /** CommunityPool queries the community pool coins. */
   communityPool(request?: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.params = this.params.bind(this);
@@ -55,61 +45,51 @@ export class QueryClientImpl implements Query {
     this.delegatorWithdrawAddress = this.delegatorWithdrawAddress.bind(this);
     this.communityPool = this.communityPool.bind(this);
   }
-
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
-
   validatorOutstandingRewards(request: QueryValidatorOutstandingRewardsRequest): Promise<QueryValidatorOutstandingRewardsResponse> {
     const data = QueryValidatorOutstandingRewardsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "ValidatorOutstandingRewards", data);
     return promise.then(data => QueryValidatorOutstandingRewardsResponse.decode(new _m0.Reader(data)));
   }
-
   validatorCommission(request: QueryValidatorCommissionRequest): Promise<QueryValidatorCommissionResponse> {
     const data = QueryValidatorCommissionRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "ValidatorCommission", data);
     return promise.then(data => QueryValidatorCommissionResponse.decode(new _m0.Reader(data)));
   }
-
   validatorSlashes(request: QueryValidatorSlashesRequest): Promise<QueryValidatorSlashesResponse> {
     const data = QueryValidatorSlashesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "ValidatorSlashes", data);
     return promise.then(data => QueryValidatorSlashesResponse.decode(new _m0.Reader(data)));
   }
-
   delegationRewards(request: QueryDelegationRewardsRequest): Promise<QueryDelegationRewardsResponse> {
     const data = QueryDelegationRewardsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "DelegationRewards", data);
     return promise.then(data => QueryDelegationRewardsResponse.decode(new _m0.Reader(data)));
   }
-
   delegationTotalRewards(request: QueryDelegationTotalRewardsRequest): Promise<QueryDelegationTotalRewardsResponse> {
     const data = QueryDelegationTotalRewardsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "DelegationTotalRewards", data);
     return promise.then(data => QueryDelegationTotalRewardsResponse.decode(new _m0.Reader(data)));
   }
-
   delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse> {
     const data = QueryDelegatorValidatorsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "DelegatorValidators", data);
     return promise.then(data => QueryDelegatorValidatorsResponse.decode(new _m0.Reader(data)));
   }
-
   delegatorWithdrawAddress(request: QueryDelegatorWithdrawAddressRequest): Promise<QueryDelegatorWithdrawAddressResponse> {
     const data = QueryDelegatorWithdrawAddressRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "DelegatorWithdrawAddress", data);
     return promise.then(data => QueryDelegatorWithdrawAddressResponse.decode(new _m0.Reader(data)));
   }
-
   communityPool(request: QueryCommunityPoolRequest = {}): Promise<QueryCommunityPoolResponse> {
     const data = QueryCommunityPoolRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "CommunityPool", data);
     return promise.then(data => QueryCommunityPoolResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -118,39 +98,30 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     },
-
     validatorOutstandingRewards(request: QueryValidatorOutstandingRewardsRequest): Promise<QueryValidatorOutstandingRewardsResponse> {
       return queryService.validatorOutstandingRewards(request);
     },
-
     validatorCommission(request: QueryValidatorCommissionRequest): Promise<QueryValidatorCommissionResponse> {
       return queryService.validatorCommission(request);
     },
-
     validatorSlashes(request: QueryValidatorSlashesRequest): Promise<QueryValidatorSlashesResponse> {
       return queryService.validatorSlashes(request);
     },
-
     delegationRewards(request: QueryDelegationRewardsRequest): Promise<QueryDelegationRewardsResponse> {
       return queryService.delegationRewards(request);
     },
-
     delegationTotalRewards(request: QueryDelegationTotalRewardsRequest): Promise<QueryDelegationTotalRewardsResponse> {
       return queryService.delegationTotalRewards(request);
     },
-
     delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse> {
       return queryService.delegatorValidators(request);
     },
-
     delegatorWithdrawAddress(request: QueryDelegatorWithdrawAddressRequest): Promise<QueryDelegatorWithdrawAddressResponse> {
       return queryService.delegatorWithdrawAddress(request);
     },
-
     communityPool(request?: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse> {
       return queryService.communityPool(request);
     }
-
   };
 };
 export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
@@ -180,26 +151,18 @@ export interface UseDelegatorWithdrawAddressQuery<TData> extends ReactQueryParam
 export interface UseCommunityPoolQuery<TData> extends ReactQueryParams<QueryCommunityPoolResponse, TData> {
   request?: QueryCommunityPoolRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useParams = <TData = QueryParamsResponse,>({
     request,
     options
@@ -209,7 +172,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.params(request);
     }, options);
   };
-
   const useValidatorOutstandingRewards = <TData = QueryValidatorOutstandingRewardsResponse,>({
     request,
     options
@@ -219,7 +181,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.validatorOutstandingRewards(request);
     }, options);
   };
-
   const useValidatorCommission = <TData = QueryValidatorCommissionResponse,>({
     request,
     options
@@ -229,7 +190,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.validatorCommission(request);
     }, options);
   };
-
   const useValidatorSlashes = <TData = QueryValidatorSlashesResponse,>({
     request,
     options
@@ -239,7 +199,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.validatorSlashes(request);
     }, options);
   };
-
   const useDelegationRewards = <TData = QueryDelegationRewardsResponse,>({
     request,
     options
@@ -249,7 +208,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.delegationRewards(request);
     }, options);
   };
-
   const useDelegationTotalRewards = <TData = QueryDelegationTotalRewardsResponse,>({
     request,
     options
@@ -259,7 +217,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.delegationTotalRewards(request);
     }, options);
   };
-
   const useDelegatorValidators = <TData = QueryDelegatorValidatorsResponse,>({
     request,
     options
@@ -269,7 +226,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.delegatorValidators(request);
     }, options);
   };
-
   const useDelegatorWithdrawAddress = <TData = QueryDelegatorWithdrawAddressResponse,>({
     request,
     options
@@ -279,7 +235,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.delegatorWithdrawAddress(request);
     }, options);
   };
-
   const useCommunityPool = <TData = QueryCommunityPoolResponse,>({
     request,
     options
@@ -289,36 +244,19 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.communityPool(request);
     }, options);
   };
-
   return {
-    /** Params queries params of the distribution module. */
-    useParams,
-
-    /** ValidatorOutstandingRewards queries rewards of a validator address. */
-    useValidatorOutstandingRewards,
-
-    /** ValidatorCommission queries accumulated commission for a validator. */
-    useValidatorCommission,
-
-    /** ValidatorSlashes queries slash events of a validator. */
-    useValidatorSlashes,
-
-    /** DelegationRewards queries the total rewards accrued by a delegation. */
-    useDelegationRewards,
-
+    /** Params queries params of the distribution module. */useParams,
+    /** ValidatorOutstandingRewards queries rewards of a validator address. */useValidatorOutstandingRewards,
+    /** ValidatorCommission queries accumulated commission for a validator. */useValidatorCommission,
+    /** ValidatorSlashes queries slash events of a validator. */useValidatorSlashes,
+    /** DelegationRewards queries the total rewards accrued by a delegation. */useDelegationRewards,
     /**
      * DelegationTotalRewards queries the total rewards accrued by a each
      * validator.
      */
     useDelegationTotalRewards,
-
-    /** DelegatorValidators queries the validators of a delegator. */
-    useDelegatorValidators,
-
-    /** DelegatorWithdrawAddress queries withdraw address of a delegator. */
-    useDelegatorWithdrawAddress,
-
-    /** CommunityPool queries the community pool coins. */
-    useCommunityPool
+    /** DelegatorValidators queries the validators of a delegator. */useDelegatorValidators,
+    /** DelegatorWithdrawAddress queries withdraw address of a delegator. */useDelegatorWithdrawAddress,
+    /** CommunityPool queries the community pool coins. */useCommunityPool
   };
 };

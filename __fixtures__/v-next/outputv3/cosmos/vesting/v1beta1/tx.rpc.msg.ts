@@ -8,32 +8,32 @@ export class Msg {
    * account.
    */
   static CreateVestingAccount(request: MsgCreateVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreateVestingAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreateVestingAccount`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreateVestingAccount`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /**
    * CreatePermanentLockedAccount defines a method that enables creating a permanent
    * locked account.
    */
   static CreatePermanentLockedAccount(request: MsgCreatePermanentLockedAccount, initRequest?: fm.InitReq): Promise<MsgCreatePermanentLockedAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePermanentLockedAccount`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePermanentLockedAccount`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /**
    * CreatePeriodicVestingAccount defines a method that enables creating a
    * periodic vesting account.
    */
   static CreatePeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreatePeriodicVestingAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePeriodicVestingAccount`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePeriodicVestingAccount`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
 }

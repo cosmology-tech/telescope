@@ -12,19 +12,15 @@ export interface Query {
    * query endpoint
    */
   feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
-
   /** DenomSpotPrice returns all spot prices by each registered token denom. */
   denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse>;
-
   /** Returns the poolID for a specified denom input. */
   denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse>;
-
   /** Returns a list of all base denom tokens and their corresponding pools. */
   baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.feeTokens = this.feeTokens.bind(this);
@@ -32,31 +28,26 @@ export class QueryClientImpl implements Query {
     this.denomPoolId = this.denomPoolId.bind(this);
     this.baseDenom = this.baseDenom.bind(this);
   }
-
   feeTokens(request: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponse> {
     const data = QueryFeeTokensRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "FeeTokens", data);
     return promise.then(data => QueryFeeTokensResponse.decode(new _m0.Reader(data)));
   }
-
   denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
     const data = QueryDenomSpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomSpotPrice", data);
     return promise.then(data => QueryDenomSpotPriceResponse.decode(new _m0.Reader(data)));
   }
-
   denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
     const data = QueryDenomPoolIdRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomPoolId", data);
     return promise.then(data => QueryDenomPoolIdResponse.decode(new _m0.Reader(data)));
   }
-
   baseDenom(request: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponse> {
     const data = QueryBaseDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "BaseDenom", data);
     return promise.then(data => QueryBaseDenomResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -65,19 +56,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
       return queryService.feeTokens(request);
     },
-
     denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
       return queryService.denomSpotPrice(request);
     },
-
     denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
       return queryService.denomPoolId(request);
     },
-
     baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse> {
       return queryService.baseDenom(request);
     }
-
   };
 };
 export interface UseFeeTokensQuery<TData> extends ReactQueryParams<QueryFeeTokensResponse, TData> {
@@ -92,26 +79,18 @@ export interface UseDenomPoolIdQuery<TData> extends ReactQueryParams<QueryDenomP
 export interface UseBaseDenomQuery<TData> extends ReactQueryParams<QueryBaseDenomResponse, TData> {
   request?: QueryBaseDenomRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useFeeTokens = <TData = QueryFeeTokensResponse,>({
     request,
     options
@@ -121,7 +100,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.feeTokens(request);
     }, options);
   };
-
   const useDenomSpotPrice = <TData = QueryDenomSpotPriceResponse,>({
     request,
     options
@@ -131,7 +109,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.denomSpotPrice(request);
     }, options);
   };
-
   const useDenomPoolId = <TData = QueryDenomPoolIdResponse,>({
     request,
     options
@@ -141,7 +118,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.denomPoolId(request);
     }, options);
   };
-
   const useBaseDenom = <TData = QueryBaseDenomResponse,>({
     request,
     options
@@ -151,7 +127,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.baseDenom(request);
     }, options);
   };
-
   return {
     /**
      * FeeTokens returns a list of all the whitelisted fee tokens and their
@@ -159,14 +134,8 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * query endpoint
      */
     useFeeTokens,
-
-    /** DenomSpotPrice returns all spot prices by each registered token denom. */
-    useDenomSpotPrice,
-
-    /** Returns the poolID for a specified denom input. */
-    useDenomPoolId,
-
-    /** Returns a list of all base denom tokens and their corresponding pools. */
-    useBaseDenom
+    /** DenomSpotPrice returns all spot prices by each registered token denom. */useDenomSpotPrice,
+    /** Returns the poolID for a specified denom input. */useDenomPoolId,
+    /** Returns a list of all base denom tokens and their corresponding pools. */useBaseDenom
   };
 };

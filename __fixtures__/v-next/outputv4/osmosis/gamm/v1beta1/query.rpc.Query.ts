@@ -14,23 +14,19 @@ export interface Query {
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
   numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse>;
   totalLiquidity(request?: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse>;
-
   /**
    * PoolsWithFilter allows you to query specific pools with requested
    * parameters
    */
   poolsWithFilter(request: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponse>;
-
   /** Per Pool gRPC Endpoints */
   pool(request: QueryPoolRequest): Promise<QueryPoolResponse>;
-
   /**
    * PoolType returns the type of the pool.
    * Returns "Balancer" as a string literal when the pool is a balancer pool.
    * Errors if the pool is failed to be type caseted.
    */
   poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse>;
-
   /**
    * Simulates joining pool without a swap. Returns the amount of shares you'd
    * get and tokens needed to provide
@@ -41,20 +37,17 @@ export interface Query {
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse>;
   totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse>;
   totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse>;
-
   /**
    * SpotPrice defines a gRPC query handler that returns the spot price given
    * a base denomination and a quote denomination.
    */
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse>;
-
   /** Estimate the swap. */
   estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse>;
   estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.pools = this.pools.bind(this);
@@ -73,7 +66,6 @@ export class QueryClientImpl implements Query {
     this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
     this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
-
   pools(request: QueryPoolsRequest = {
     pagination: undefined
   }): Promise<QueryPoolsResponse> {
@@ -81,91 +73,76 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pools", data);
     return promise.then(data => QueryPoolsResponse.decode(new _m0.Reader(data)));
   }
-
   numPools(request: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const data = QueryNumPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "NumPools", data);
     return promise.then(data => QueryNumPoolsResponse.decode(new _m0.Reader(data)));
   }
-
   totalLiquidity(request: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const data = QueryTotalLiquidityRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalLiquidity", data);
     return promise.then(data => QueryTotalLiquidityResponse.decode(new _m0.Reader(data)));
   }
-
   poolsWithFilter(request: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponse> {
     const data = QueryPoolsWithFilterRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolsWithFilter", data);
     return promise.then(data => QueryPoolsWithFilterResponse.decode(new _m0.Reader(data)));
   }
-
   pool(request: QueryPoolRequest): Promise<QueryPoolResponse> {
     const data = QueryPoolRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pool", data);
     return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
   }
-
   poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse> {
     const data = QueryPoolTypeRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolType", data);
     return promise.then(data => QueryPoolTypeResponse.decode(new _m0.Reader(data)));
   }
-
   calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): Promise<QueryCalcJoinPoolNoSwapSharesResponse> {
     const data = QueryCalcJoinPoolNoSwapSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcJoinPoolNoSwapShares", data);
     return promise.then(data => QueryCalcJoinPoolNoSwapSharesResponse.decode(new _m0.Reader(data)));
   }
-
   calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponse> {
     const data = QueryCalcJoinPoolSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcJoinPoolShares", data);
     return promise.then(data => QueryCalcJoinPoolSharesResponse.decode(new _m0.Reader(data)));
   }
-
   calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponse> {
     const data = QueryCalcExitPoolCoinsFromSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcExitPoolCoinsFromShares", data);
     return promise.then(data => QueryCalcExitPoolCoinsFromSharesResponse.decode(new _m0.Reader(data)));
   }
-
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const data = QueryPoolParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolParams", data);
     return promise.then(data => QueryPoolParamsResponse.decode(new _m0.Reader(data)));
   }
-
   totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const data = QueryTotalPoolLiquidityRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalPoolLiquidity", data);
     return promise.then(data => QueryTotalPoolLiquidityResponse.decode(new _m0.Reader(data)));
   }
-
   totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const data = QueryTotalSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalShares", data);
     return promise.then(data => QueryTotalSharesResponse.decode(new _m0.Reader(data)));
   }
-
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
     const data = QuerySpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "SpotPrice", data);
     return promise.then(data => QuerySpotPriceResponse.decode(new _m0.Reader(data)));
   }
-
   estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
     const data = QuerySwapExactAmountInRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "EstimateSwapExactAmountIn", data);
     return promise.then(data => QuerySwapExactAmountInResponse.decode(new _m0.Reader(data)));
   }
-
   estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
     const data = QuerySwapExactAmountOutRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "EstimateSwapExactAmountOut", data);
     return promise.then(data => QuerySwapExactAmountOutResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -174,63 +151,48 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse> {
       return queryService.pools(request);
     },
-
     numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
       return queryService.numPools(request);
     },
-
     totalLiquidity(request?: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
       return queryService.totalLiquidity(request);
     },
-
     poolsWithFilter(request: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponse> {
       return queryService.poolsWithFilter(request);
     },
-
     pool(request: QueryPoolRequest): Promise<QueryPoolResponse> {
       return queryService.pool(request);
     },
-
     poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse> {
       return queryService.poolType(request);
     },
-
     calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): Promise<QueryCalcJoinPoolNoSwapSharesResponse> {
       return queryService.calcJoinPoolNoSwapShares(request);
     },
-
     calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponse> {
       return queryService.calcJoinPoolShares(request);
     },
-
     calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponse> {
       return queryService.calcExitPoolCoinsFromShares(request);
     },
-
     poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
       return queryService.poolParams(request);
     },
-
     totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
       return queryService.totalPoolLiquidity(request);
     },
-
     totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
       return queryService.totalShares(request);
     },
-
     spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
       return queryService.spotPrice(request);
     },
-
     estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
       return queryService.estimateSwapExactAmountIn(request);
     },
-
     estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
       return queryService.estimateSwapExactAmountOut(request);
     }
-
   };
 };
 export interface UsePoolsQuery<TData> extends ReactQueryParams<QueryPoolsResponse, TData> {
@@ -278,26 +240,18 @@ export interface UseEstimateSwapExactAmountInQuery<TData> extends ReactQueryPara
 export interface UseEstimateSwapExactAmountOutQuery<TData> extends ReactQueryParams<QuerySwapExactAmountOutResponse, TData> {
   request: QuerySwapExactAmountOutRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const usePools = <TData = QueryPoolsResponse,>({
     request,
     options
@@ -307,7 +261,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.pools(request);
     }, options);
   };
-
   const useNumPools = <TData = QueryNumPoolsResponse,>({
     request,
     options
@@ -317,7 +270,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.numPools(request);
     }, options);
   };
-
   const useTotalLiquidity = <TData = QueryTotalLiquidityResponse,>({
     request,
     options
@@ -327,7 +279,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.totalLiquidity(request);
     }, options);
   };
-
   const usePoolsWithFilter = <TData = QueryPoolsWithFilterResponse,>({
     request,
     options
@@ -337,7 +288,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.poolsWithFilter(request);
     }, options);
   };
-
   const usePool = <TData = QueryPoolResponse,>({
     request,
     options
@@ -347,7 +297,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.pool(request);
     }, options);
   };
-
   const usePoolType = <TData = QueryPoolTypeResponse,>({
     request,
     options
@@ -357,7 +306,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.poolType(request);
     }, options);
   };
-
   const useCalcJoinPoolNoSwapShares = <TData = QueryCalcJoinPoolNoSwapSharesResponse,>({
     request,
     options
@@ -367,7 +315,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.calcJoinPoolNoSwapShares(request);
     }, options);
   };
-
   const useCalcJoinPoolShares = <TData = QueryCalcJoinPoolSharesResponse,>({
     request,
     options
@@ -377,7 +324,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.calcJoinPoolShares(request);
     }, options);
   };
-
   const useCalcExitPoolCoinsFromShares = <TData = QueryCalcExitPoolCoinsFromSharesResponse,>({
     request,
     options
@@ -387,7 +333,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.calcExitPoolCoinsFromShares(request);
     }, options);
   };
-
   const usePoolParams = <TData = QueryPoolParamsResponse,>({
     request,
     options
@@ -397,7 +342,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.poolParams(request);
     }, options);
   };
-
   const useTotalPoolLiquidity = <TData = QueryTotalPoolLiquidityResponse,>({
     request,
     options
@@ -407,7 +351,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.totalPoolLiquidity(request);
     }, options);
   };
-
   const useTotalShares = <TData = QueryTotalSharesResponse,>({
     request,
     options
@@ -417,7 +360,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.totalShares(request);
     }, options);
   };
-
   const useSpotPrice = <TData = QuerySpotPriceResponse,>({
     request,
     options
@@ -427,7 +369,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.spotPrice(request);
     }, options);
   };
-
   const useEstimateSwapExactAmountIn = <TData = QuerySwapExactAmountInResponse,>({
     request,
     options
@@ -437,7 +378,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.estimateSwapExactAmountIn(request);
     }, options);
   };
-
   const useEstimateSwapExactAmountOut = <TData = QuerySwapExactAmountOutResponse,>({
     request,
     options
@@ -447,28 +387,22 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.estimateSwapExactAmountOut(request);
     }, options);
   };
-
   return {
     usePools,
     useNumPools,
     useTotalLiquidity,
-
     /**
      * PoolsWithFilter allows you to query specific pools with requested
      * parameters
      */
     usePoolsWithFilter,
-
-    /** Per Pool gRPC Endpoints */
-    usePool,
-
+    /** Per Pool gRPC Endpoints */usePool,
     /**
      * PoolType returns the type of the pool.
      * Returns "Balancer" as a string literal when the pool is a balancer pool.
      * Errors if the pool is failed to be type caseted.
      */
     usePoolType,
-
     /**
      * Simulates joining pool without a swap. Returns the amount of shares you'd
      * get and tokens needed to provide
@@ -479,21 +413,17 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     usePoolParams,
     useTotalPoolLiquidity,
     useTotalShares,
-
     /**
      * SpotPrice defines a gRPC query handler that returns the spot price given
      * a base denomination and a quote denomination.
      */
     useSpotPrice,
-
-    /** Estimate the swap. */
-    useEstimateSwapExactAmountIn,
+    /** Estimate the swap. */useEstimateSwapExactAmountIn,
     useEstimateSwapExactAmountOut
   };
 };
 export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   class QueryPoolsStore extends QueryStore<QueryPoolsRequest, QueryPoolsResponse> {
     constructor() {
       super(queryService?.pools);
@@ -507,13 +437,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     pools(request?: QueryPoolsRequest): MobxResponse<QueryPoolsResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryNumPoolsStore extends QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse> {
     constructor() {
       super(queryService?.numPools);
@@ -527,13 +454,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     numPools(request?: QueryNumPoolsRequest): MobxResponse<QueryNumPoolsResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryTotalLiquidityStore extends QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse> {
     constructor() {
       super(queryService?.totalLiquidity);
@@ -547,13 +471,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     totalLiquidity(request?: QueryTotalLiquidityRequest): MobxResponse<QueryTotalLiquidityResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryPoolsWithFilterStore extends QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse> {
     constructor() {
       super(queryService?.poolsWithFilter);
@@ -567,13 +488,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     poolsWithFilter(request: QueryPoolsWithFilterRequest): MobxResponse<QueryPoolsWithFilterResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryPoolStore extends QueryStore<QueryPoolRequest, QueryPoolResponse> {
     constructor() {
       super(queryService?.pool);
@@ -587,13 +505,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     pool(request: QueryPoolRequest): MobxResponse<QueryPoolResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryPoolTypeStore extends QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse> {
     constructor() {
       super(queryService?.poolType);
@@ -607,13 +522,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     poolType(request: QueryPoolTypeRequest): MobxResponse<QueryPoolTypeResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryCalcJoinPoolNoSwapSharesStore extends QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse> {
     constructor() {
       super(queryService?.calcJoinPoolNoSwapShares);
@@ -627,13 +539,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): MobxResponse<QueryCalcJoinPoolNoSwapSharesResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryCalcJoinPoolSharesStore extends QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse> {
     constructor() {
       super(queryService?.calcJoinPoolShares);
@@ -647,13 +556,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): MobxResponse<QueryCalcJoinPoolSharesResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryCalcExitPoolCoinsFromSharesStore extends QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse> {
     constructor() {
       super(queryService?.calcExitPoolCoinsFromShares);
@@ -667,13 +573,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): MobxResponse<QueryCalcExitPoolCoinsFromSharesResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryPoolParamsStore extends QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse> {
     constructor() {
       super(queryService?.poolParams);
@@ -687,13 +590,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     poolParams(request: QueryPoolParamsRequest): MobxResponse<QueryPoolParamsResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryTotalPoolLiquidityStore extends QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse> {
     constructor() {
       super(queryService?.totalPoolLiquidity);
@@ -707,13 +607,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): MobxResponse<QueryTotalPoolLiquidityResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryTotalSharesStore extends QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse> {
     constructor() {
       super(queryService?.totalShares);
@@ -727,13 +624,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     totalShares(request: QueryTotalSharesRequest): MobxResponse<QueryTotalSharesResponse> {
       return this.getData(request);
     }
-
   }
-
   class QuerySpotPriceStore extends QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse> {
     constructor() {
       super(queryService?.spotPrice);
@@ -747,13 +641,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     spotPrice(request: QuerySpotPriceRequest): MobxResponse<QuerySpotPriceResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryEstimateSwapExactAmountInStore extends QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse> {
     constructor() {
       super(queryService?.estimateSwapExactAmountIn);
@@ -767,13 +658,10 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): MobxResponse<QuerySwapExactAmountInResponse> {
       return this.getData(request);
     }
-
   }
-
   class QueryEstimateSwapExactAmountOutStore extends QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse> {
     constructor() {
       super(queryService?.estimateSwapExactAmountOut);
@@ -787,34 +675,26 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): MobxResponse<QuerySwapExactAmountOutResponse> {
       return this.getData(request);
     }
-
   }
-
   return {
     QueryPoolsStore,
     QueryNumPoolsStore,
     QueryTotalLiquidityStore,
-
     /**
      * PoolsWithFilter allows you to query specific pools with requested
      * parameters
      */
     QueryPoolsWithFilterStore,
-
-    /** Per Pool gRPC Endpoints */
-    QueryPoolStore,
-
+    /** Per Pool gRPC Endpoints */QueryPoolStore,
     /**
      * PoolType returns the type of the pool.
      * Returns "Balancer" as a string literal when the pool is a balancer pool.
      * Errors if the pool is failed to be type caseted.
      */
     QueryPoolTypeStore,
-
     /**
      * Simulates joining pool without a swap. Returns the amount of shares you'd
      * get and tokens needed to provide
@@ -825,15 +705,12 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
     QueryPoolParamsStore,
     QueryTotalPoolLiquidityStore,
     QueryTotalSharesStore,
-
     /**
      * SpotPrice defines a gRPC query handler that returns the spot price given
      * a base denomination and a quote denomination.
      */
     QuerySpotPriceStore,
-
-    /** Estimate the swap. */
-    QueryEstimateSwapExactAmountInStore,
+    /** Estimate the swap. */QueryEstimateSwapExactAmountInStore,
     QueryEstimateSwapExactAmountOutStore
   };
 };

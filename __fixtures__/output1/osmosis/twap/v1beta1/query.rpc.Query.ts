@@ -13,32 +13,27 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.params = this.params.bind(this);
     this.arithmeticTwap = this.arithmeticTwap.bind(this);
     this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
-
   params(request: ParamsRequest = {}): Promise<ParamsResponse> {
     const data = ParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "Params", data);
     return promise.then(data => ParamsResponse.decode(new _m0.Reader(data)));
   }
-
   arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse> {
     const data = ArithmeticTwapRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "ArithmeticTwap", data);
     return promise.then(data => ArithmeticTwapResponse.decode(new _m0.Reader(data)));
   }
-
   arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponse> {
     const data = ArithmeticTwapToNowRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "ArithmeticTwapToNow", data);
     return promise.then(data => ArithmeticTwapToNowResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -47,15 +42,12 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     params(request?: ParamsRequest): Promise<ParamsResponse> {
       return queryService.params(request);
     },
-
     arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse> {
       return queryService.arithmeticTwap(request);
     },
-
     arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponse> {
       return queryService.arithmeticTwapToNow(request);
     }
-
   };
 };
 export interface UseParamsQuery<TData> extends ReactQueryParams<ParamsResponse, TData> {
@@ -67,26 +59,18 @@ export interface UseArithmeticTwapQuery<TData> extends ReactQueryParams<Arithmet
 export interface UseArithmeticTwapToNowQuery<TData> extends ReactQueryParams<ArithmeticTwapToNowResponse, TData> {
   request: ArithmeticTwapToNowRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useParams = <TData = ParamsResponse,>({
     request,
     options
@@ -96,7 +80,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.params(request);
     }, options);
   };
-
   const useArithmeticTwap = <TData = ArithmeticTwapResponse,>({
     request,
     options
@@ -106,7 +89,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.arithmeticTwap(request);
     }, options);
   };
-
   const useArithmeticTwapToNow = <TData = ArithmeticTwapToNowResponse,>({
     request,
     options
@@ -116,7 +98,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.arithmeticTwapToNow(request);
     }, options);
   };
-
   return {
     useParams,
     useArithmeticTwap,

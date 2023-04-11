@@ -5,7 +5,6 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Retrieves the unvested, vested and locked tokens for a vesting account */
@@ -13,18 +12,15 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.balances = this.balances.bind(this);
   }
-
   balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.vesting.v1.Query", "Balances", data);
     return promise.then(data => QueryBalancesResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -33,32 +29,23 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
       return queryService.balances(request);
     }
-
   };
 };
 export interface UseBalancesQuery<TData> extends ReactQueryParams<QueryBalancesResponse, TData> {
   request: QueryBalancesRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useBalances = <TData = QueryBalancesResponse,>({
     request,
     options
@@ -68,9 +55,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.balances(request);
     }, options);
   };
-
   return {
-    /** Retrieves the unvested, vested and locked tokens for a vesting account */
-    useBalances
+    /** Retrieves the unvested, vested and locked tokens for a vesting account */useBalances
   };
 };

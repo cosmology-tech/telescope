@@ -28,7 +28,6 @@ export interface ABCIApplication {
 }
 export class ABCIApplicationClientImpl implements ABCIApplication {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.echo = this.echo.bind(this);
@@ -47,97 +46,81 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     this.loadSnapshotChunk = this.loadSnapshotChunk.bind(this);
     this.applySnapshotChunk = this.applySnapshotChunk.bind(this);
   }
-
   echo(request: RequestEcho): Promise<ResponseEcho> {
     const data = RequestEcho.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Echo", data);
     return promise.then(data => ResponseEcho.decode(new _m0.Reader(data)));
   }
-
   flush(request: RequestFlush = {}): Promise<ResponseFlush> {
     const data = RequestFlush.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Flush", data);
     return promise.then(data => ResponseFlush.decode(new _m0.Reader(data)));
   }
-
   info(request: RequestInfo): Promise<ResponseInfo> {
     const data = RequestInfo.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Info", data);
     return promise.then(data => ResponseInfo.decode(new _m0.Reader(data)));
   }
-
   setOption(request: RequestSetOption): Promise<ResponseSetOption> {
     const data = RequestSetOption.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "SetOption", data);
     return promise.then(data => ResponseSetOption.decode(new _m0.Reader(data)));
   }
-
   deliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
     const data = RequestDeliverTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "DeliverTx", data);
     return promise.then(data => ResponseDeliverTx.decode(new _m0.Reader(data)));
   }
-
   checkTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
     const data = RequestCheckTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "CheckTx", data);
     return promise.then(data => ResponseCheckTx.decode(new _m0.Reader(data)));
   }
-
   query(request: RequestQuery): Promise<ResponseQuery> {
     const data = RequestQuery.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Query", data);
     return promise.then(data => ResponseQuery.decode(new _m0.Reader(data)));
   }
-
   commit(request: RequestCommit = {}): Promise<ResponseCommit> {
     const data = RequestCommit.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Commit", data);
     return promise.then(data => ResponseCommit.decode(new _m0.Reader(data)));
   }
-
   initChain(request: RequestInitChain): Promise<ResponseInitChain> {
     const data = RequestInitChain.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "InitChain", data);
     return promise.then(data => ResponseInitChain.decode(new _m0.Reader(data)));
   }
-
   beginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
     const data = RequestBeginBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "BeginBlock", data);
     return promise.then(data => ResponseBeginBlock.decode(new _m0.Reader(data)));
   }
-
   endBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
     const data = RequestEndBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "EndBlock", data);
     return promise.then(data => ResponseEndBlock.decode(new _m0.Reader(data)));
   }
-
   listSnapshots(request: RequestListSnapshots = {}): Promise<ResponseListSnapshots> {
     const data = RequestListSnapshots.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ListSnapshots", data);
     return promise.then(data => ResponseListSnapshots.decode(new _m0.Reader(data)));
   }
-
   offerSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
     const data = RequestOfferSnapshot.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "OfferSnapshot", data);
     return promise.then(data => ResponseOfferSnapshot.decode(new _m0.Reader(data)));
   }
-
   loadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
     const data = RequestLoadSnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "LoadSnapshotChunk", data);
     return promise.then(data => ResponseLoadSnapshotChunk.decode(new _m0.Reader(data)));
   }
-
   applySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
     const data = RequestApplySnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ApplySnapshotChunk", data);
     return promise.then(data => ResponseApplySnapshotChunk.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -146,63 +129,48 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     echo(request: RequestEcho): Promise<ResponseEcho> {
       return queryService.echo(request);
     },
-
     flush(request?: RequestFlush): Promise<ResponseFlush> {
       return queryService.flush(request);
     },
-
     info(request: RequestInfo): Promise<ResponseInfo> {
       return queryService.info(request);
     },
-
     setOption(request: RequestSetOption): Promise<ResponseSetOption> {
       return queryService.setOption(request);
     },
-
     deliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
       return queryService.deliverTx(request);
     },
-
     checkTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
       return queryService.checkTx(request);
     },
-
     query(request: RequestQuery): Promise<ResponseQuery> {
       return queryService.query(request);
     },
-
     commit(request?: RequestCommit): Promise<ResponseCommit> {
       return queryService.commit(request);
     },
-
     initChain(request: RequestInitChain): Promise<ResponseInitChain> {
       return queryService.initChain(request);
     },
-
     beginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
       return queryService.beginBlock(request);
     },
-
     endBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
       return queryService.endBlock(request);
     },
-
     listSnapshots(request?: RequestListSnapshots): Promise<ResponseListSnapshots> {
       return queryService.listSnapshots(request);
     },
-
     offerSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
       return queryService.offerSnapshot(request);
     },
-
     loadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
       return queryService.loadSnapshotChunk(request);
     },
-
     applySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
       return queryService.applySnapshotChunk(request);
     }
-
   };
 };
 export interface UseEchoQuery<TData> extends ReactQueryParams<ResponseEcho, TData> {
@@ -250,26 +218,18 @@ export interface UseLoadSnapshotChunkQuery<TData> extends ReactQueryParams<Respo
 export interface UseApplySnapshotChunkQuery<TData> extends ReactQueryParams<ResponseApplySnapshotChunk, TData> {
   request: RequestApplySnapshotChunk;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, ABCIApplicationClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): ABCIApplicationClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new ABCIApplicationClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useEcho = <TData = ResponseEcho,>({
     request,
     options
@@ -279,7 +239,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.echo(request);
     }, options);
   };
-
   const useFlush = <TData = ResponseFlush,>({
     request,
     options
@@ -289,7 +248,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.flush(request);
     }, options);
   };
-
   const useInfo = <TData = ResponseInfo,>({
     request,
     options
@@ -299,7 +257,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.info(request);
     }, options);
   };
-
   const useSetOption = <TData = ResponseSetOption,>({
     request,
     options
@@ -309,7 +266,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.setOption(request);
     }, options);
   };
-
   const useDeliverTx = <TData = ResponseDeliverTx,>({
     request,
     options
@@ -319,7 +275,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.deliverTx(request);
     }, options);
   };
-
   const useCheckTx = <TData = ResponseCheckTx,>({
     request,
     options
@@ -329,7 +284,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.checkTx(request);
     }, options);
   };
-
   const useQuery = <TData = ResponseQuery,>({
     request,
     options
@@ -339,7 +293,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.query(request);
     }, options);
   };
-
   const useCommit = <TData = ResponseCommit,>({
     request,
     options
@@ -349,7 +302,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.commit(request);
     }, options);
   };
-
   const useInitChain = <TData = ResponseInitChain,>({
     request,
     options
@@ -359,7 +311,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.initChain(request);
     }, options);
   };
-
   const useBeginBlock = <TData = ResponseBeginBlock,>({
     request,
     options
@@ -369,7 +320,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.beginBlock(request);
     }, options);
   };
-
   const useEndBlock = <TData = ResponseEndBlock,>({
     request,
     options
@@ -379,7 +329,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.endBlock(request);
     }, options);
   };
-
   const useListSnapshots = <TData = ResponseListSnapshots,>({
     request,
     options
@@ -389,7 +338,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.listSnapshots(request);
     }, options);
   };
-
   const useOfferSnapshot = <TData = ResponseOfferSnapshot,>({
     request,
     options
@@ -399,7 +347,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.offerSnapshot(request);
     }, options);
   };
-
   const useLoadSnapshotChunk = <TData = ResponseLoadSnapshotChunk,>({
     request,
     options
@@ -409,7 +356,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.loadSnapshotChunk(request);
     }, options);
   };
-
   const useApplySnapshotChunk = <TData = ResponseApplySnapshotChunk,>({
     request,
     options
@@ -419,7 +365,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.applySnapshotChunk(request);
     }, options);
   };
-
   return {
     useEcho,
     useFlush,

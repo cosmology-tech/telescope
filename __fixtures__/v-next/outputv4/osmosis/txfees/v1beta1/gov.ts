@@ -2,7 +2,6 @@ import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
-
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -15,7 +14,6 @@ export interface UpdateFeeTokenProposal {
   description: string;
   feetoken?: FeeToken;
 }
-
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -28,7 +26,6 @@ export interface UpdateFeeTokenProposalSDKType {
   description: string;
   feetoken?: FeeTokenSDKType;
 }
-
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
     title: "",
@@ -36,54 +33,42 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
     feetoken: undefined
   };
 }
-
 export const UpdateFeeTokenProposal = {
   encode(message: UpdateFeeTokenProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     if (message.feetoken !== undefined) {
       FeeToken.encode(message.feetoken, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateFeeTokenProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateFeeTokenProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.feetoken = FeeToken.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateFeeTokenProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -91,7 +76,6 @@ export const UpdateFeeTokenProposal = {
       feetoken: isSet(object.feetoken) ? FeeToken.fromJSON(object.feetoken) : undefined
     };
   },
-
   toJSON(message: UpdateFeeTokenProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
@@ -99,7 +83,6 @@ export const UpdateFeeTokenProposal = {
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
@@ -107,7 +90,6 @@ export const UpdateFeeTokenProposal = {
     message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : undefined;
     return message;
   },
-
   fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
     return {
       title: object?.title,
@@ -115,7 +97,6 @@ export const UpdateFeeTokenProposal = {
       feetoken: object.feetoken ? FeeToken.fromSDK(object.feetoken) : undefined
     };
   },
-
   fromSDKJSON(object: any): UpdateFeeTokenProposalSDKType {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -123,7 +104,6 @@ export const UpdateFeeTokenProposal = {
       feetoken: isSet(object.feetoken) ? FeeToken.fromSDKJSON(object.feetoken) : undefined
     };
   },
-
   toSDK(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalSDKType {
     const obj: any = {};
     obj.title = message.title;
@@ -131,5 +111,4 @@ export const UpdateFeeTokenProposal = {
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
     return obj;
   }
-
 };

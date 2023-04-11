@@ -49,7 +49,8 @@ import * as _551 from "./rpc.tx";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
-      export const v1 = { ..._230,
+      export const v1 = {
+        ..._230,
         ..._231,
         ..._232,
         ..._233,
@@ -59,13 +60,15 @@ export namespace ibc {
         ..._475,
         ..._480
       };
-      export const v2 = { ..._234
+      export const v2 = {
+        ..._234
       };
     }
   }
   export namespace core {
     export namespace channel {
-      export const v1 = { ..._235,
+      export const v1 = {
+        ..._235,
         ..._236,
         ..._237,
         ..._238,
@@ -77,7 +80,8 @@ export namespace ibc {
       };
     }
     export namespace client {
-      export const v1 = { ..._239,
+      export const v1 = {
+        ..._239,
         ..._240,
         ..._241,
         ..._242,
@@ -89,11 +93,13 @@ export namespace ibc {
       };
     }
     export namespace commitment {
-      export const v1 = { ..._243
+      export const v1 = {
+        ..._243
       };
     }
     export namespace connection {
-      export const v1 = { ..._244,
+      export const v1 = {
+        ..._244,
         ..._245,
         ..._246,
         ..._247,
@@ -105,32 +111,39 @@ export namespace ibc {
       };
     }
     export namespace port {
-      export const v1 = { ..._248,
+      export const v1 = {
+        ..._248,
         ..._479
       };
     }
     export namespace types {
-      export const v1 = { ..._249
+      export const v1 = {
+        ..._249
       };
     }
   }
   export namespace lightclients {
     export namespace localhost {
-      export const v1 = { ..._250
+      export const v1 = {
+        ..._250
       };
     }
     export namespace solomachine {
-      export const v1 = { ..._251
+      export const v1 = {
+        ..._251
       };
-      export const v2 = { ..._252
+      export const v2 = {
+        ..._252
       };
     }
     export namespace tendermint {
-      export const v1 = { ..._253
+      export const v1 = {
+        ..._253
       };
     }
   }
-  export const ClientFactory = { ..._549,
+  export const ClientFactory = {
+    ..._549,
     ..._550,
     ..._551
   };

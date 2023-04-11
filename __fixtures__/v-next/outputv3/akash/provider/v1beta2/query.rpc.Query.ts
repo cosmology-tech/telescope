@@ -5,18 +5,20 @@ import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResp
 export class Query {
   /** Providers queries providers */
   static Providers(request: QueryProvidersRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
-    return fm.fetchReq(`/akash/provider/v1beta2/providers?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/provider/v1beta2/providers?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
   /** Provider queries provider details */
   static Provider(request: QueryProviderRequest, initRequest?: fm.InitReq): Promise<QueryProviderResponse> {
-    return fm.fetchReq(`/akash/provider/v1beta2/providers/${request["owner"]}?${fm.renderURLSearchParams({ ...request
-    }, ["owner"])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/provider/v1beta2/providers/${request["owner"]}?${fm.renderURLSearchParams({
+      ...request
+    }, ["owner"])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

@@ -6,7 +6,6 @@ import { Status } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.longrunning";
-
 /**
  * This resource represents a long-running operation that is the result of a
  * network API call.
@@ -18,7 +17,6 @@ export interface Operation {
    * `name` should be a resource name ending with `operations/{unique_id}`.
    */
   name: string;
-
   /**
    * Service-specific metadata associated with the operation.  It typically
    * contains progress information and common metadata such as create time.
@@ -26,17 +24,14 @@ export interface Operation {
    * long-running operation should document the metadata type, if any.
    */
   metadata?: Any;
-
   /**
    * If the value is `false`, it means the operation is still in progress.
    * If `true`, the operation is completed, and either `error` or `response` is
    * available.
    */
   done: boolean;
-
   /** The error result of the operation in case of failure or cancellation. */
   error?: Status;
-
   /**
    * The normal response of the operation in case of success.  If the original
    * method returns no data on success, such as `Delete`, the response is
@@ -49,54 +44,43 @@ export interface Operation {
    */
   response?: Any;
 }
-
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
   /** The name of the operation resource. */
   name: string;
 }
-
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequest {
   /** The name of the operation's parent resource. */
   name: string;
-
   /** The standard list filter. */
   filter: string;
-
   /** The standard list page size. */
   pageSize: number;
-
   /** The standard list page token. */
   pageToken: string;
 }
-
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponse {
   /** A list of operations that matches the specified filter in the request. */
   operations: Operation[];
-
   /** The standard List next-page token. */
   nextPageToken: string;
 }
-
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
-
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequest {
   /** The name of the operation resource to wait on. */
   name: string;
-
   /**
    * The maximum duration to wait before timing out. If left blank, the wait
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
@@ -104,7 +88,6 @@ export interface WaitOperationRequest {
    */
   timeout?: Duration;
 }
-
 /**
  * A message representing the message types used by a long-running operation.
  * 
@@ -130,7 +113,6 @@ export interface OperationInfo {
    * Note: Altering this value constitutes a breaking change.
    */
   responseType: string;
-
   /**
    * Required. The message name of the metadata type for this long-running
    * operation.
@@ -142,7 +124,6 @@ export interface OperationInfo {
    */
   metadataType: string;
 }
-
 function createBaseOperation(): Operation {
   return {
     name: "",
@@ -152,70 +133,54 @@ function createBaseOperation(): Operation {
     response: undefined
   };
 }
-
 export const Operation = {
   encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.metadata !== undefined) {
       Any.encode(message.metadata, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.done === true) {
       writer.uint32(24).bool(message.done);
     }
-
     if (message.error !== undefined) {
       Status.encode(message.error, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.response !== undefined) {
       Any.encode(message.response, writer.uint32(42).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.metadata = Any.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.done = reader.bool();
           break;
-
         case 4:
           message.error = Status.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.response = Any.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Operation {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -225,7 +190,6 @@ export const Operation = {
       response: isSet(object.response) ? Any.fromJSON(object.response) : undefined
     };
   },
-
   toJSON(message: Operation): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -235,7 +199,6 @@ export const Operation = {
     message.response !== undefined && (obj.response = message.response ? Any.toJSON(message.response) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
@@ -245,66 +208,52 @@ export const Operation = {
     message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : undefined;
     return message;
   }
-
 };
-
 function createBaseGetOperationRequest(): GetOperationRequest {
   return {
     name: ""
   };
 }
-
 export const GetOperationRequest = {
   encode(message: GetOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetOperationRequest>): GetOperationRequest {
     const message = createBaseGetOperationRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseListOperationsRequest(): ListOperationsRequest {
   return {
     name: "",
@@ -313,62 +262,48 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
     pageToken: ""
   };
 }
-
 export const ListOperationsRequest = {
   encode(message: ListOperationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
     }
-
     if (message.filter !== "") {
       writer.uint32(10).string(message.filter);
     }
-
     if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-
     if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 4:
           message.name = reader.string();
           break;
-
         case 1:
           message.filter = reader.string();
           break;
-
         case 2:
           message.pageSize = reader.int32();
           break;
-
         case 3:
           message.pageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListOperationsRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -377,7 +312,6 @@ export const ListOperationsRequest = {
       pageToken: isSet(object.pageToken) ? String(object.pageToken) : ""
     };
   },
-
   toJSON(message: ListOperationsRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -386,7 +320,6 @@ export const ListOperationsRequest = {
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListOperationsRequest>): ListOperationsRequest {
     const message = createBaseListOperationsRequest();
     message.name = object.name ?? "";
@@ -395,332 +328,263 @@ export const ListOperationsRequest = {
     message.pageToken = object.pageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseListOperationsResponse(): ListOperationsResponse {
   return {
     operations: [],
     nextPageToken: ""
   };
 }
-
 export const ListOperationsResponse = {
   encode(message: ListOperationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.operations.push(Operation.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.nextPageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListOperationsResponse {
     return {
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromJSON(e)) : [],
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-
   toJSON(message: ListOperationsResponse): unknown {
     const obj: any = {};
-
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toJSON(e) : undefined);
     } else {
       obj.operations = [];
     }
-
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListOperationsResponse>): ListOperationsResponse {
     const message = createBaseListOperationsResponse();
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseCancelOperationRequest(): CancelOperationRequest {
   return {
     name: ""
   };
 }
-
 export const CancelOperationRequest = {
   encode(message: CancelOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CancelOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelOperationRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CancelOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: CancelOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CancelOperationRequest>): CancelOperationRequest {
     const message = createBaseCancelOperationRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseDeleteOperationRequest(): DeleteOperationRequest {
   return {
     name: ""
   };
 }
-
 export const DeleteOperationRequest = {
   encode(message: DeleteOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteOperationRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DeleteOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: DeleteOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DeleteOperationRequest>): DeleteOperationRequest {
     const message = createBaseDeleteOperationRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
     name: "",
     timeout: undefined
   };
 }
-
 export const WaitOperationRequest = {
   encode(message: WaitOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.timeout !== undefined) {
       Duration.encode(message.timeout, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): WaitOperationRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWaitOperationRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.timeout = Duration.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): WaitOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
     };
   },
-
   toJSON(message: WaitOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
     message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
     return message;
   }
-
 };
-
 function createBaseOperationInfo(): OperationInfo {
   return {
     responseType: "",
     metadataType: ""
   };
 }
-
 export const OperationInfo = {
   encode(message: OperationInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.responseType !== "") {
       writer.uint32(10).string(message.responseType);
     }
-
     if (message.metadataType !== "") {
       writer.uint32(18).string(message.metadataType);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): OperationInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationInfo();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.responseType = reader.string();
           break;
-
         case 2:
           message.metadataType = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): OperationInfo {
     return {
       responseType: isSet(object.responseType) ? String(object.responseType) : "",
       metadataType: isSet(object.metadataType) ? String(object.metadataType) : ""
     };
   },
-
   toJSON(message: OperationInfo): unknown {
     const obj: any = {};
     message.responseType !== undefined && (obj.responseType = message.responseType);
     message.metadataType !== undefined && (obj.metadataType = message.metadataType);
     return obj;
   },
-
   fromPartial(object: DeepPartial<OperationInfo>): OperationInfo {
     const message = createBaseOperationInfo();
     message.responseType = object.responseType ?? "";
     message.metadataType = object.metadataType ?? "";
     return message;
   }
-
 };

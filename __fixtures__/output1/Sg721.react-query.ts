@@ -225,7 +225,12 @@ export function useSg721BurnMutation(options?: Omit<UseMutationOptions<ExecuteRe
 }
 export interface Sg721MintMutation {
   client: Sg721Client;
-  msg: MintMsgForEmpty;
+  msg: {
+    extension: Empty;
+    owner: string;
+    tokenId: string;
+    tokenUri?: string;
+  };
   args?: {
     fee?: number | StdFee | "auto";
     memo?: string;

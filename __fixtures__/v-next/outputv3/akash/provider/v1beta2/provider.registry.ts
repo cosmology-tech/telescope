@@ -15,21 +15,18 @@ export const MessageComposer = {
         value: MsgCreateProvider.encode(value).finish()
       };
     },
-
     updateProvider(value: MsgUpdateProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
         value: MsgUpdateProvider.encode(value).finish()
       };
     },
-
     deleteProvider(value: MsgDeleteProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
         value: MsgDeleteProvider.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createProvider(value: MsgCreateProvider) {
@@ -38,21 +35,18 @@ export const MessageComposer = {
         value
       };
     },
-
     updateProvider(value: MsgUpdateProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
         value
       };
     },
-
     deleteProvider(value: MsgDeleteProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
         value
       };
     }
-
   },
   toJSON: {
     createProvider(value: MsgCreateProvider) {
@@ -61,21 +55,18 @@ export const MessageComposer = {
         value: MsgCreateProvider.toJSON(value)
       };
     },
-
     updateProvider(value: MsgUpdateProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
         value: MsgUpdateProvider.toJSON(value)
       };
     },
-
     deleteProvider(value: MsgDeleteProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
         value: MsgDeleteProvider.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createProvider(value: any) {
@@ -84,21 +75,18 @@ export const MessageComposer = {
         value: MsgCreateProvider.fromJSON(value)
       };
     },
-
     updateProvider(value: any) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
         value: MsgUpdateProvider.fromJSON(value)
       };
     },
-
     deleteProvider(value: any) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
         value: MsgDeleteProvider.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createProvider(value: MsgCreateProvider) {
@@ -107,20 +95,17 @@ export const MessageComposer = {
         value: MsgCreateProvider.fromPartial(value)
       };
     },
-
     updateProvider(value: MsgUpdateProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
         value: MsgUpdateProvider.fromPartial(value)
       };
     },
-
     deleteProvider(value: MsgDeleteProvider) {
       return {
         typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
         value: MsgDeleteProvider.fromPartial(value)
       };
     }
-
   }
 };

@@ -18,44 +18,36 @@ exports[`builds stores. 1`] = `
       const requestClient = useEndpoint().restClient;
       return new LCDQueryClient({ requestClient });
     }
-
   },
   actions: {
     async fetchAccounts(param : QueryAccountsRequestSDKType) {
       this.accounts = await this.lcdClient.accounts(param);
       return this.accounts;
     },
-
     async fetchAccount(param : QueryAccountRequestSDKType) {
       this.account = await this.lcdClient.account(param);
       return this.account;
     },
-
     async fetchParams(param : QueryParamsRequestSDKType) {
       this.params = await this.lcdClient.params(param);
       return this.params;
     },
-
     async fetchModuleAccounts(param : QueryModuleAccountsRequestSDKType) {
       this.moduleAccounts = await this.lcdClient.moduleAccounts(param);
       return this.moduleAccounts;
     },
-
     async fetchBech32Prefix(param : Bech32PrefixRequestSDKType) {
       this.bech32Prefix = await this.lcdClient.bech32Prefix(param);
       return this.bech32Prefix;
     },
-
     async fetchAddressBytesToString(param : AddressBytesToStringRequestSDKType) {
       this.addressBytesToString = await this.lcdClient.addressBytesToString(param);
       return this.addressBytesToString;
     },
-
     async fetchAddressStringToBytes(param : AddressStringToBytesRequestSDKType) {
       this.addressStringToBytes = await this.lcdClient.addressStringToBytes(param);
       return this.addressStringToBytes;
     }
-
   }
 });"
 `;

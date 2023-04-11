@@ -8,28 +8,21 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 1`] = `
 export interface ClientState {
   chainId: string;
   trustLevel?: Fraction;
-
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
   trustingPeriod?: Duration;
-
   /** duration of the staking unbonding period */
   unbondingPeriod?: Duration;
-
   /** defines how much new (untrusted) header's Time can drift into the future. */
   maxClockDrift?: Duration;
-
   /** Block height when the client was frozen due to a misbehaviour */
   frozenHeight?: Height;
-
   /** Latest height the client was updated to */
   latestHeight?: Height;
-
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
-
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -40,13 +33,11 @@ export interface ClientState {
    * "upgradedIBCState"}\`
    */
   upgradePath: string[];
-
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
    */
   allowUpdateAfterExpiry: boolean;
-
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
    * whose chain has experienced a misbehaviour event
@@ -61,112 +52,85 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
-
     if (message.trustLevel !== undefined) {
       Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.trustingPeriod !== undefined) {
       Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.unbondingPeriod !== undefined) {
       Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.maxClockDrift !== undefined) {
       Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.frozenHeight !== undefined) {
       Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.latestHeight !== undefined) {
       Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
     }
-
     for (const v of message.proofSpecs) {
       ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-
     for (const v of message.upgradePath) {
       writer.uint32(74).string(v!);
     }
-
     if (message.allowUpdateAfterExpiry === true) {
       writer.uint32(80).bool(message.allowUpdateAfterExpiry);
     }
-
     if (message.allowUpdateAfterMisbehaviour === true) {
       writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.chainId = reader.string();
           break;
-
         case 2:
           message.trustLevel = Fraction.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.trustingPeriod = Duration.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.unbondingPeriod = Duration.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.maxClockDrift = Duration.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.frozenHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.latestHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
           break;
-
         case 9:
           message.upgradePath.push(reader.string());
           break;
-
         case 10:
           message.allowUpdateAfterExpiry = reader.bool();
           break;
-
         case 11:
           message.allowUpdateAfterMisbehaviour = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ClientState {
     return {
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
@@ -182,7 +146,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
       allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour) ? Boolean(object.allowUpdateAfterMisbehaviour) : false
     };
   },
-
   toJSON(message: ClientState): unknown {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
@@ -192,24 +155,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift ? Duration.toJSON(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proofSpecs = message.proofSpecs.map(e => e ? ProofSpec.toJSON(e) : undefined);
     } else {
       obj.proofSpecs = [];
     }
-
     if (message.upgradePath) {
       obj.upgradePath = message.upgradePath.map(e => e);
     } else {
       obj.upgradePath = [];
     }
-
     message.allowUpdateAfterExpiry !== undefined && (obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry);
     message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
@@ -225,7 +184,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
   },
-
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
       chainId: object?.chain_id,
@@ -241,7 +199,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
       allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
     };
   },
-
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;
@@ -251,24 +208,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
     } else {
       obj.proof_specs = [];
     }
-
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
       obj.upgrade_path = [];
     }
-
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   }
-
 };"
 `;
 
@@ -454,28 +407,21 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 1`] = `
 export interface ClientState {
   chainId: string;
   trustLevel?: Fraction;
-
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
   trustingPeriod?: string;
-
   /** duration of the staking unbonding period */
   unbondingPeriod?: string;
-
   /** defines how much new (untrusted) header's Time can drift into the future. */
   maxClockDrift?: string;
-
   /** Block height when the client was frozen due to a misbehaviour */
   frozenHeight?: Height;
-
   /** Latest height the client was updated to */
   latestHeight?: Height;
-
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
-
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -486,13 +432,11 @@ export interface ClientState {
    * "upgradedIBCState"}\`
    */
   upgradePath: string[];
-
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
    */
   allowUpdateAfterExpiry: boolean;
-
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
    * whose chain has experienced a misbehaviour event
@@ -507,112 +451,85 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
-
     if (message.trustLevel !== undefined) {
       Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.trustingPeriod !== undefined) {
       Duration.encode(toDuration(message.trustingPeriod), writer.uint32(26).fork()).ldelim();
     }
-
     if (message.unbondingPeriod !== undefined) {
       Duration.encode(toDuration(message.unbondingPeriod), writer.uint32(34).fork()).ldelim();
     }
-
     if (message.maxClockDrift !== undefined) {
       Duration.encode(toDuration(message.maxClockDrift), writer.uint32(42).fork()).ldelim();
     }
-
     if (message.frozenHeight !== undefined) {
       Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.latestHeight !== undefined) {
       Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
     }
-
     for (const v of message.proofSpecs) {
       ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-
     for (const v of message.upgradePath) {
       writer.uint32(74).string(v!);
     }
-
     if (message.allowUpdateAfterExpiry === true) {
       writer.uint32(80).bool(message.allowUpdateAfterExpiry);
     }
-
     if (message.allowUpdateAfterMisbehaviour === true) {
       writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.chainId = reader.string();
           break;
-
         case 2:
           message.trustLevel = Fraction.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.trustingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.unbondingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
-
         case 5:
           message.maxClockDrift = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
-
         case 6:
           message.frozenHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.latestHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
           break;
-
         case 9:
           message.upgradePath.push(reader.string());
           break;
-
         case 10:
           message.allowUpdateAfterExpiry = reader.bool();
           break;
-
         case 11:
           message.allowUpdateAfterMisbehaviour = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ClientState {
     return {
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
@@ -628,7 +545,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour) ? Boolean(object.allowUpdateAfterMisbehaviour) : false
     };
   },
-
   toJSON(message: ClientState): unknown {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
@@ -638,24 +554,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift);
     message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proofSpecs = message.proofSpecs.map(e => e ? ProofSpec.toJSON(e) : undefined);
     } else {
       obj.proofSpecs = [];
     }
-
     if (message.upgradePath) {
       obj.upgradePath = message.upgradePath.map(e => e);
     } else {
       obj.upgradePath = [];
     }
-
     message.allowUpdateAfterExpiry !== undefined && (obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry);
     message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
@@ -671,7 +583,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
   },
-
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
       chainId: object?.chain_id,
@@ -687,7 +598,6 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
     };
   },
-
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;
@@ -697,24 +607,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
     } else {
       obj.proof_specs = [];
     }
-
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
       obj.upgrade_path = [];
     }
-
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   }
-
 };"
 `;
 

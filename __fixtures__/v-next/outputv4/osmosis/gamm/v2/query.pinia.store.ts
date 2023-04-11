@@ -14,13 +14,11 @@ export const usePiniaStore = defineStore('osmosis/gamm/v2/query.proto', {
       const requestClient = useEndpoint().restClient;
       return new LCDQueryClient({ requestClient });
     }
-
   },
   actions: {
     async fetchSpotPrice(param : QuerySpotPriceRequestSDKType) {
       this.spotPrice = await this.lcdClient.spotPrice(param);
       return this.spotPrice;
     }
-
   }
 });

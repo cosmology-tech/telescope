@@ -6,7 +6,6 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /**
@@ -15,21 +14,18 @@ export interface Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
   allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse>;
-
   /**
    * ProviderAttributes queries all provider signed attributes
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
   providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse>;
-
   /**
    * ProviderAuditorAttributes queries provider signed attributes by specific auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
   providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse>;
-
   /**
    * AuditorAttributes queries all providers signed by this auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -39,11 +35,9 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
   }
-
   /* AllProvidersAttributes queries all providers
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
@@ -54,7 +48,6 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "AllProvidersAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
-
   /* ProviderAttributes queries all provider signed attributes
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
@@ -63,7 +56,6 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
-
   /* ProviderAuditorAttributes queries provider signed attributes by specific auditor
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
@@ -72,7 +64,6 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAuditorAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
-
   /* AuditorAttributes queries all providers signed by this auditor
    buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
@@ -89,19 +80,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse> {
       return queryService.allProvidersAttributes(request);
     },
-
     providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse> {
       return queryService.providerAttributes(request);
     },
-
     providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse> {
       return queryService.providerAuditorAttributes(request);
     },
-
     auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponse> {
       return queryService.auditorAttributes(request);
     }
-
   };
 };
 export interface UseAllProvidersAttributesQuery<TData> extends ReactQueryParams<QueryProvidersResponse, TData> {
@@ -116,26 +103,18 @@ export interface UseProviderAuditorAttributesQuery<TData> extends ReactQueryPara
 export interface UseAuditorAttributesQuery<TData> extends ReactQueryParams<QueryProvidersResponse, TData> {
   request: QueryAuditorAttributesRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useAllProvidersAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
@@ -145,7 +124,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.allProvidersAttributes(request);
     }, options);
   };
-
   const useProviderAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
@@ -155,7 +133,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.providerAttributes(request);
     }, options);
   };
-
   const useProviderAuditorAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
@@ -165,7 +142,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.providerAuditorAttributes(request);
     }, options);
   };
-
   const useAuditorAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
@@ -175,7 +151,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.auditorAttributes(request);
     }, options);
   };
-
   return {
     /**
      * AllProvidersAttributes queries all providers
@@ -183,21 +158,18 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
      */
     useAllProvidersAttributes,
-
     /**
      * ProviderAttributes queries all provider signed attributes
      * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
      * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
      */
     useProviderAttributes,
-
     /**
      * ProviderAuditorAttributes queries provider signed attributes by specific auditor
      * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
      * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
      */
     useProviderAuditorAttributes,
-
     /**
      * AuditorAttributes queries all providers signed by this auditor
      * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE

@@ -4,39 +4,32 @@ import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from 
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
-
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
   /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
   PRIMITIVE_TYPE_UNSPECIFIED = 0,
-
   /** BOOL - Boolean type. */
   BOOL = 1,
-
   /**
    * INT64 - Int64 type.
    * 
    * Proto-based integer values are widened to int64.
    */
   INT64 = 2,
-
   /**
    * UINT64 - Uint64 type.
    * 
    * Proto-based unsigned integer values are widened to uint64.
    */
   UINT64 = 3,
-
   /**
    * DOUBLE - Double type.
    * 
    * Proto-based float values are widened to double values.
    */
   DOUBLE = 4,
-
   /** STRING - String type. */
   STRING = 5,
-
   /** BYTES - Bytes type. */
   BYTES = 6,
   UNRECOGNIZED = -1,
@@ -47,31 +40,24 @@ export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
     case 0:
     case "PRIMITIVE_TYPE_UNSPECIFIED":
       return Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED;
-
     case 1:
     case "BOOL":
       return Type_PrimitiveType.BOOL;
-
     case 2:
     case "INT64":
       return Type_PrimitiveType.INT64;
-
     case 3:
     case "UINT64":
       return Type_PrimitiveType.UINT64;
-
     case 4:
     case "DOUBLE":
       return Type_PrimitiveType.DOUBLE;
-
     case 5:
     case "STRING":
       return Type_PrimitiveType.STRING;
-
     case 6:
     case "BYTES":
       return Type_PrimitiveType.BYTES;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -82,36 +68,27 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
   switch (object) {
     case Type_PrimitiveType.PRIMITIVE_TYPE_UNSPECIFIED:
       return "PRIMITIVE_TYPE_UNSPECIFIED";
-
     case Type_PrimitiveType.BOOL:
       return "BOOL";
-
     case Type_PrimitiveType.INT64:
       return "INT64";
-
     case Type_PrimitiveType.UINT64:
       return "UINT64";
-
     case Type_PrimitiveType.DOUBLE:
       return "DOUBLE";
-
     case Type_PrimitiveType.STRING:
       return "STRING";
-
     case Type_PrimitiveType.BYTES:
       return "BYTES";
-
     case Type_PrimitiveType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /** Well-known protobuf types treated with first-class support in CEL. */
 export enum Type_WellKnownType {
   /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
   WELL_KNOWN_TYPE_UNSPECIFIED = 0,
-
   /**
    * ANY - Well-known protobuf.Any type.
    * 
@@ -120,10 +97,8 @@ export enum Type_WellKnownType {
    * message type specified at evaluation time.
    */
   ANY = 1,
-
   /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */
   TIMESTAMP = 2,
-
   /** DURATION - Well-known protobuf.Duration type, internally referenced as `duration`. */
   DURATION = 3,
   UNRECOGNIZED = -1,
@@ -134,19 +109,15 @@ export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
     case 0:
     case "WELL_KNOWN_TYPE_UNSPECIFIED":
       return Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED;
-
     case 1:
     case "ANY":
       return Type_WellKnownType.ANY;
-
     case 2:
     case "TIMESTAMP":
       return Type_WellKnownType.TIMESTAMP;
-
     case 3:
     case "DURATION":
       return Type_WellKnownType.DURATION;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -157,16 +128,12 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
   switch (object) {
     case Type_WellKnownType.WELL_KNOWN_TYPE_UNSPECIFIED:
       return "WELL_KNOWN_TYPE_UNSPECIFIED";
-
     case Type_WellKnownType.ANY:
       return "ANY";
-
     case Type_WellKnownType.TIMESTAMP:
       return "TIMESTAMP";
-
     case Type_WellKnownType.DURATION:
       return "DURATION";
-
     case Type_WellKnownType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -188,7 +155,6 @@ export interface CheckedExpr_TypeMapEntrySDKType {
   key: bigint;
   value?: TypeSDKType;
 }
-
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExpr {
   /**
@@ -211,7 +177,6 @@ export interface CheckedExpr {
   referenceMap?: {
     [key: bigint]: Reference;
   };
-
   /**
    * A map from expression ids to types.
    * 
@@ -222,13 +187,11 @@ export interface CheckedExpr {
   typeMap?: {
     [key: bigint]: Type;
   };
-
   /**
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
   sourceInfo?: SourceInfo;
-
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -239,14 +202,12 @@ export interface CheckedExpr {
    * the same or similar transformations prior to evaluation.
    */
   exprVersion: string;
-
   /**
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
   expr?: Expr;
 }
-
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
   reference_map?: {
@@ -259,33 +220,24 @@ export interface CheckedExprSDKType {
   expr_version: string;
   expr?: ExprSDKType;
 }
-
 /** Represents a CEL type. */
 export interface Type {
   /** Dynamic type. */
   dyn?: Empty;
-
   /** Null value. */
   null?: NullValue;
-
   /** Primitive types: `true`, `1u`, `-2.0`, `'string'`, `b'bytes'`. */
   primitive?: Type_PrimitiveType;
-
   /** Wrapper of a primitive type, e.g. `google.protobuf.Int64Value`. */
   wrapper?: Type_PrimitiveType;
-
   /** Well-known protobuf type such as `google.protobuf.Timestamp`. */
   wellKnown?: Type_WellKnownType;
-
   /** Parameterized list with elements of `list_type`, e.g. `list<timestamp>`. */
   listType?: Type_ListType;
-
   /** Parameterized map with typed keys and values. */
   mapType?: Type_MapType;
-
   /** Function type. */
   function?: Type_FunctionType;
-
   /**
    * Protocol buffer message type.
    * 
@@ -293,7 +245,6 @@ export interface Type {
    * example, `google.plus.Profile`.
    */
   messageType?: string;
-
   /**
    * Type param type.
    * 
@@ -302,7 +253,6 @@ export interface Type {
    * named `E`.
    */
   typeParam?: string;
-
   /**
    * Type type.
    * 
@@ -310,7 +260,6 @@ export interface Type {
    * target type of `Primitive.INT`.
    */
   type?: Type;
-
   /**
    * Error type.
    * 
@@ -319,11 +268,9 @@ export interface Type {
    * errors present in the expression.
    */
   error?: Empty;
-
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
-
 /** Represents a CEL type. */
 export interface TypeSDKType {
   dyn?: EmptySDKType;
@@ -340,63 +287,51 @@ export interface TypeSDKType {
   error?: EmptySDKType;
   abstract_type?: Type_AbstractTypeSDKType;
 }
-
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
-
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
   elem_type?: TypeSDKType;
 }
-
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
   keyType?: Type;
-
   /** The type of the value. */
   valueType?: Type;
 }
-
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
   key_type?: TypeSDKType;
   value_type?: TypeSDKType;
 }
-
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
   resultType?: Type;
-
   /** Argument types of the function. */
   argTypes: Type[];
 }
-
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   result_type?: TypeSDKType;
   arg_types: TypeSDKType[];
 }
-
 /** Application defined abstract type. */
 export interface Type_AbstractType {
   /** The fully qualified name of this abstract type. */
   name: string;
-
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
 }
-
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
   name: string;
   parameter_types: TypeSDKType[];
 }
-
 /**
  * Represents a declaration of a named value or function.
  * 
@@ -415,14 +350,11 @@ export interface Decl {
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
    */
   name: string;
-
   /** Identifier declaration. */
   ident?: Decl_IdentDecl;
-
   /** Function declaration. */
   function?: Decl_FunctionDecl;
 }
-
 /**
  * Represents a declaration of a named value or function.
  * 
@@ -434,7 +366,6 @@ export interface DeclSDKType {
   ident?: Decl_IdentDeclSDKType;
   function?: Decl_FunctionDeclSDKType;
 }
-
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
@@ -446,17 +377,14 @@ export interface DeclSDKType {
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
   type?: Type;
-
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
   value?: Constant;
-
   /** Documentation string for the identifier. */
   doc: string;
 }
-
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
@@ -470,7 +398,6 @@ export interface Decl_IdentDeclSDKType {
   value?: ConstantSDKType;
   doc: string;
 }
-
 /**
  * Function declaration specifies one or more overloads which indicate the
  * function's parameter types and return type.
@@ -482,7 +409,6 @@ export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
 }
-
 /**
  * Function declaration specifies one or more overloads which indicate the
  * function's parameter types and return type.
@@ -493,7 +419,6 @@ export interface Decl_FunctionDecl {
 export interface Decl_FunctionDeclSDKType {
   overloads: Decl_FunctionDecl_OverloadSDKType[];
 }
-
 /**
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
@@ -515,7 +440,6 @@ export interface Decl_FunctionDecl_Overload {
    * was resolved for the function `name`.
    */
   overloadId: string;
-
   /**
    * List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
    * 
@@ -529,7 +453,6 @@ export interface Decl_FunctionDecl_Overload {
    * type param name also appears as the `type` of on at least one params.
    */
   params: Type[];
-
   /**
    * The type param names associated with the function declaration.
    * 
@@ -537,13 +460,11 @@ export interface Decl_FunctionDecl_Overload {
    * the type params of `K, V`.
    */
   typeParams: string[];
-
   /**
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
   resultType?: Type;
-
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -552,11 +473,9 @@ export interface Decl_FunctionDecl_Overload {
    * expected type of the target receiver.
    */
   isInstanceFunction: boolean;
-
   /** Documentation string for the overload. */
   doc: string;
 }
-
 /**
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
@@ -577,12 +496,10 @@ export interface Decl_FunctionDecl_OverloadSDKType {
   is_instance_function: boolean;
   doc: string;
 }
-
 /** Describes a resolved reference to a declaration. */
 export interface Reference {
   /** The fully qualified name of the declaration. */
   name: string;
-
   /**
    * For references to functions, this is a list of `Overload.overload_id`
    * values which match according to typing rules.
@@ -594,201 +511,164 @@ export interface Reference {
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
   overloadId: string[];
-
   /**
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
   value?: Constant;
 }
-
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {
   name: string;
   overload_id: string[];
   value?: ConstantSDKType;
 }
-
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
     key: BigInt("0"),
     value: undefined
   };
 }
-
 export const CheckedExpr_ReferenceMapEntry = {
   encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== BigInt(0)) {
       writer.uint32(8).int64(Long.fromString(message.key.toString()));
     }
-
     if (message.value !== undefined) {
       Reference.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = BigInt(reader.int64().toString());
           break;
-
         case 2:
           message.value = Reference.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
       key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
     message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
     return {
       key: object?.key,
       value: object.value ? Reference.fromSDK(object.value) : undefined
     };
   },
-
   fromSDKJSON(object: any): CheckedExpr_ReferenceMapEntrySDKType {
     return {
       key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Reference.fromSDKJSON(object.value) : undefined
     };
   },
-
   toSDK(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Reference.toSDK(message.value) : undefined);
     return obj;
   }
-
 };
-
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
     key: BigInt("0"),
     value: undefined
   };
 }
-
 export const CheckedExpr_TypeMapEntry = {
   encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== BigInt(0)) {
       writer.uint32(8).int64(Long.fromString(message.key.toString()));
     }
-
     if (message.value !== undefined) {
       Type.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_TypeMapEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = BigInt(reader.int64().toString());
           break;
-
         case 2:
           message.value = Type.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
       key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
     message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
     return {
       key: object?.key,
       value: object.value ? Type.fromSDK(object.value) : undefined
     };
   },
-
   fromSDKJSON(object: any): CheckedExpr_TypeMapEntrySDKType {
     return {
       key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
       value: isSet(object.value) ? Type.fromSDKJSON(object.value) : undefined
     };
   },
-
   toSDK(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Type.toSDK(message.value) : undefined);
     return obj;
   }
-
 };
-
 function createBaseCheckedExpr(): CheckedExpr {
   return {
     referenceMap: {},
@@ -798,7 +678,6 @@ function createBaseCheckedExpr(): CheckedExpr {
     expr: undefined
   };
 }
-
 export const CheckedExpr = {
   encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
@@ -813,70 +692,52 @@ export const CheckedExpr = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.exprVersion !== "") {
       writer.uint32(50).string(message.exprVersion);
     }
-
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
-
           if (entry2.value !== undefined) {
             message.referenceMap[entry2.key] = entry2.value;
           }
-
           break;
-
         case 3:
           const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
-
           if (entry3.value !== undefined) {
             message.typeMap[entry3.key] = entry3.value;
           }
-
           break;
-
         case 5:
           message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.exprVersion = reader.string();
           break;
-
         case 4:
           message.expr = Expr.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
@@ -896,31 +757,25 @@ export const CheckedExpr = {
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
     };
   },
-
   toJSON(message: CheckedExpr): unknown {
     const obj: any = {};
     obj.referenceMap = {};
-
     if (message.referenceMap) {
       Object.entries(message.referenceMap).forEach(([k, v]) => {
         obj.referenceMap[k] = Reference.toJSON(v);
       });
     }
-
     obj.typeMap = {};
-
     if (message.typeMap) {
       Object.entries(message.typeMap).forEach(([k, v]) => {
         obj.typeMap[k] = Type.toJSON(v);
       });
     }
-
     message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
     message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
@@ -929,7 +784,6 @@ export const CheckedExpr = {
       if (value !== undefined) {
         acc[Number(key)] = Reference.fromPartial(value);
       }
-
       return acc;
     }, {});
     message.typeMap = Object.entries(object.typeMap ?? {}).reduce<{
@@ -938,7 +792,6 @@ export const CheckedExpr = {
       if (value !== undefined) {
         acc[Number(key)] = Type.fromPartial(value);
       }
-
       return acc;
     }, {});
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
@@ -946,7 +799,6 @@ export const CheckedExpr = {
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
   },
-
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
     return {
       referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
@@ -966,7 +818,6 @@ export const CheckedExpr = {
       expr: object.expr ? Expr.fromSDK(object.expr) : undefined
     };
   },
-
   fromSDKJSON(object: any): CheckedExprSDKType {
     return {
       reference_map: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
@@ -986,33 +837,26 @@ export const CheckedExpr = {
       expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined
     };
   },
-
   toSDK(message: CheckedExpr): CheckedExprSDKType {
     const obj: any = {};
     obj.reference_map = {};
-
     if (message.referenceMap) {
       Object.entries(message.referenceMap).forEach(([k, v]) => {
         obj.reference_map[k] = Reference.toSDK(v);
       });
     }
-
     obj.type_map = {};
-
     if (message.typeMap) {
       Object.entries(message.typeMap).forEach(([k, v]) => {
         obj.type_map[k] = Type.toSDK(v);
       });
     }
-
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     obj.expr_version = message.exprVersion;
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     return obj;
   }
-
 };
-
 function createBaseType(): Type {
   return {
     dyn: undefined,
@@ -1030,134 +874,102 @@ function createBaseType(): Type {
     abstractType: undefined
   };
 }
-
 export const Type = {
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.null !== undefined) {
       writer.uint32(16).int32(message.null);
     }
-
     if (message.primitive !== undefined) {
       writer.uint32(24).int32(message.primitive);
     }
-
     if (message.wrapper !== undefined) {
       writer.uint32(32).int32(message.wrapper);
     }
-
     if (message.wellKnown !== undefined) {
       writer.uint32(40).int32(message.wellKnown);
     }
-
     if (message.listType !== undefined) {
       Type_ListType.encode(message.listType, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.mapType !== undefined) {
       Type_MapType.encode(message.mapType, writer.uint32(58).fork()).ldelim();
     }
-
     if (message.function !== undefined) {
       Type_FunctionType.encode(message.function, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.messageType !== undefined) {
       writer.uint32(74).string(message.messageType);
     }
-
     if (message.typeParam !== undefined) {
       writer.uint32(82).string(message.typeParam);
     }
-
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(90).fork()).ldelim();
     }
-
     if (message.error !== undefined) {
       Empty.encode(message.error, writer.uint32(98).fork()).ldelim();
     }
-
     if (message.abstractType !== undefined) {
       Type_AbstractType.encode(message.abstractType, writer.uint32(114).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.dyn = Empty.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.null = (reader.int32() as any);
           break;
-
         case 3:
           message.primitive = (reader.int32() as any);
           break;
-
         case 4:
           message.wrapper = (reader.int32() as any);
           break;
-
         case 5:
           message.wellKnown = (reader.int32() as any);
           break;
-
         case 6:
           message.listType = Type_ListType.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.mapType = Type_MapType.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.function = Type_FunctionType.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.messageType = reader.string();
           break;
-
         case 10:
           message.typeParam = reader.string();
           break;
-
         case 11:
           message.type = Type.decode(reader, reader.uint32());
           break;
-
         case 12:
           message.error = Empty.decode(reader, reader.uint32());
           break;
-
         case 14:
           message.abstractType = Type_AbstractType.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type {
     return {
       dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
@@ -1175,7 +987,6 @@ export const Type = {
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
     };
   },
-
   toJSON(message: Type): unknown {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
@@ -1193,7 +1004,6 @@ export const Type = {
     message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
@@ -1211,7 +1021,6 @@ export const Type = {
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
   },
-
   fromSDK(object: TypeSDKType): Type {
     return {
       dyn: object.dyn ? Empty.fromSDK(object.dyn) : undefined,
@@ -1229,7 +1038,6 @@ export const Type = {
       abstractType: object.abstract_type ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
     };
   },
-
   fromSDKJSON(object: any): TypeSDKType {
     return {
       dyn: isSet(object.dyn) ? Empty.fromSDKJSON(object.dyn) : undefined,
@@ -1247,7 +1055,6 @@ export const Type = {
       abstract_type: isSet(object.abstract_type) ? Type_AbstractType.fromSDKJSON(object.abstract_type) : undefined
     };
   },
-
   toSDK(message: Type): TypeSDKType {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
@@ -1265,378 +1072,302 @@ export const Type = {
     message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
     return obj;
   }
-
 };
-
 function createBaseType_ListType(): Type_ListType {
   return {
     elemType: undefined
   };
 }
-
 export const Type_ListType = {
   encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type_ListType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_ListType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.elemType = Type.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type_ListType {
     return {
       elemType: isSet(object.elemType) ? Type.fromJSON(object.elemType) : undefined
     };
   },
-
   toJSON(message: Type_ListType): unknown {
     const obj: any = {};
     message.elemType !== undefined && (obj.elemType = message.elemType ? Type.toJSON(message.elemType) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type_ListType>): Type_ListType {
     const message = createBaseType_ListType();
     message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : undefined;
     return message;
   },
-
   fromSDK(object: Type_ListTypeSDKType): Type_ListType {
     return {
       elemType: object.elem_type ? Type.fromSDK(object.elem_type) : undefined
     };
   },
-
   fromSDKJSON(object: any): Type_ListTypeSDKType {
     return {
       elem_type: isSet(object.elem_type) ? Type.fromSDKJSON(object.elem_type) : undefined
     };
   },
-
   toSDK(message: Type_ListType): Type_ListTypeSDKType {
     const obj: any = {};
     message.elemType !== undefined && (obj.elem_type = message.elemType ? Type.toSDK(message.elemType) : undefined);
     return obj;
   }
-
 };
-
 function createBaseType_MapType(): Type_MapType {
   return {
     keyType: undefined,
     valueType: undefined
   };
 }
-
 export const Type_MapType = {
   encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.valueType !== undefined) {
       Type.encode(message.valueType, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.keyType = Type.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.valueType = Type.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type_MapType {
     return {
       keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
       valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
     };
   },
-
   toJSON(message: Type_MapType): unknown {
     const obj: any = {};
     message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
     message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
   },
-
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
     return {
       keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
       valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
     };
   },
-
   fromSDKJSON(object: any): Type_MapTypeSDKType {
     return {
       key_type: isSet(object.key_type) ? Type.fromSDKJSON(object.key_type) : undefined,
       value_type: isSet(object.value_type) ? Type.fromSDKJSON(object.value_type) : undefined
     };
   },
-
   toSDK(message: Type_MapType): Type_MapTypeSDKType {
     const obj: any = {};
     message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
     message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
     return obj;
   }
-
 };
-
 function createBaseType_FunctionType(): Type_FunctionType {
   return {
     resultType: undefined,
     argTypes: []
   };
 }
-
 export const Type_FunctionType = {
   encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
     }
-
     for (const v of message.argTypes) {
       Type.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type_FunctionType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_FunctionType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.resultType = Type.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.argTypes.push(Type.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type_FunctionType {
     return {
       resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
       argTypes: Array.isArray(object?.argTypes) ? object.argTypes.map((e: any) => Type.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Type_FunctionType): unknown {
     const obj: any = {};
     message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
-
     if (message.argTypes) {
       obj.argTypes = message.argTypes.map(e => e ? Type.toJSON(e) : undefined);
     } else {
       obj.argTypes = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type_FunctionType>): Type_FunctionType {
     const message = createBaseType_FunctionType();
     message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Type_FunctionTypeSDKType): Type_FunctionType {
     return {
       resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
       argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): Type_FunctionTypeSDKType {
     return {
       result_type: isSet(object.result_type) ? Type.fromSDKJSON(object.result_type) : undefined,
       arg_types: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: Type_FunctionType): Type_FunctionTypeSDKType {
     const obj: any = {};
     message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
-
     if (message.argTypes) {
       obj.arg_types = message.argTypes.map(e => e ? Type.toSDK(e) : undefined);
     } else {
       obj.arg_types = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseType_AbstractType(): Type_AbstractType {
   return {
     name: "",
     parameterTypes: []
   };
 }
-
 export const Type_AbstractType = {
   encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     for (const v of message.parameterTypes) {
       Type.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Type_AbstractType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_AbstractType();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.parameterTypes.push(Type.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Type_AbstractType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       parameterTypes: Array.isArray(object?.parameterTypes) ? object.parameterTypes.map((e: any) => Type.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Type_AbstractType): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-
     if (message.parameterTypes) {
       obj.parameterTypes = message.parameterTypes.map(e => e ? Type.toJSON(e) : undefined);
     } else {
       obj.parameterTypes = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Type_AbstractType>): Type_AbstractType {
     const message = createBaseType_AbstractType();
     message.name = object.name ?? "";
     message.parameterTypes = object.parameterTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Type_AbstractTypeSDKType): Type_AbstractType {
     return {
       name: object?.name,
       parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): Type_AbstractTypeSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       parameter_types: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: Type_AbstractType): Type_AbstractTypeSDKType {
     const obj: any = {};
     obj.name = message.name;
-
     if (message.parameterTypes) {
       obj.parameter_types = message.parameterTypes.map(e => e ? Type.toSDK(e) : undefined);
     } else {
       obj.parameter_types = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseDecl(): Decl {
   return {
     name: "",
@@ -1644,54 +1375,42 @@ function createBaseDecl(): Decl {
     function: undefined
   };
 }
-
 export const Decl = {
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.ident !== undefined) {
       Decl_IdentDecl.encode(message.ident, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.function !== undefined) {
       Decl_FunctionDecl.encode(message.function, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Decl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.ident = Decl_IdentDecl.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.function = Decl_FunctionDecl.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Decl {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -1699,7 +1418,6 @@ export const Decl = {
       function: isSet(object.function) ? Decl_FunctionDecl.fromJSON(object.function) : undefined
     };
   },
-
   toJSON(message: Decl): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -1707,7 +1425,6 @@ export const Decl = {
     message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toJSON(message.function) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
     message.name = object.name ?? "";
@@ -1715,7 +1432,6 @@ export const Decl = {
     message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   },
-
   fromSDK(object: DeclSDKType): Decl {
     return {
       name: object?.name,
@@ -1723,7 +1439,6 @@ export const Decl = {
       function: object.function ? Decl_FunctionDecl.fromSDK(object.function) : undefined
     };
   },
-
   fromSDKJSON(object: any): DeclSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -1731,7 +1446,6 @@ export const Decl = {
       function: isSet(object.function) ? Decl_FunctionDecl.fromSDKJSON(object.function) : undefined
     };
   },
-
   toSDK(message: Decl): DeclSDKType {
     const obj: any = {};
     obj.name = message.name;
@@ -1739,9 +1453,7 @@ export const Decl = {
     message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toSDK(message.function) : undefined);
     return obj;
   }
-
 };
-
 function createBaseDecl_IdentDecl(): Decl_IdentDecl {
   return {
     type: undefined,
@@ -1749,54 +1461,42 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
     doc: ""
   };
 }
-
 export const Decl_IdentDecl = {
   encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.value !== undefined) {
       Constant.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.doc !== "") {
       writer.uint32(26).string(message.doc);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Decl_IdentDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_IdentDecl();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = Type.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.value = Constant.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.doc = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Decl_IdentDecl {
     return {
       type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
@@ -1804,7 +1504,6 @@ export const Decl_IdentDecl = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-
   toJSON(message: Decl_IdentDecl): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
@@ -1812,7 +1511,6 @@ export const Decl_IdentDecl = {
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Decl_IdentDecl>): Decl_IdentDecl {
     const message = createBaseDecl_IdentDecl();
     message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
@@ -1820,7 +1518,6 @@ export const Decl_IdentDecl = {
     message.doc = object.doc ?? "";
     return message;
   },
-
   fromSDK(object: Decl_IdentDeclSDKType): Decl_IdentDecl {
     return {
       type: object.type ? Type.fromSDK(object.type) : undefined,
@@ -1828,7 +1525,6 @@ export const Decl_IdentDecl = {
       doc: object?.doc
     };
   },
-
   fromSDKJSON(object: any): Decl_IdentDeclSDKType {
     return {
       type: isSet(object.type) ? Type.fromSDKJSON(object.type) : undefined,
@@ -1836,7 +1532,6 @@ export const Decl_IdentDecl = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-
   toSDK(message: Decl_IdentDecl): Decl_IdentDeclSDKType {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
@@ -1844,96 +1539,75 @@ export const Decl_IdentDecl = {
     obj.doc = message.doc;
     return obj;
   }
-
 };
-
 function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
   return {
     overloads: []
   };
 }
-
 export const Decl_FunctionDecl = {
   encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.overloads.push(Decl_FunctionDecl_Overload.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Decl_FunctionDecl {
     return {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Decl_FunctionDecl): unknown {
     const obj: any = {};
-
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
     } else {
       obj.overloads = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Decl_FunctionDecl>): Decl_FunctionDecl {
     const message = createBaseDecl_FunctionDecl();
     message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Decl_FunctionDeclSDKType): Decl_FunctionDecl {
     return {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDK(e)) : []
     };
   },
-
   fromSDKJSON(object: any): Decl_FunctionDeclSDKType {
     return {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDKJSON(e)) : []
     };
   },
-
   toSDK(message: Decl_FunctionDecl): Decl_FunctionDeclSDKType {
     const obj: any = {};
-
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toSDK(e) : undefined);
     } else {
       obj.overloads = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
   return {
     overloadId: "",
@@ -1944,78 +1618,60 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
     doc: ""
   };
 }
-
 export const Decl_FunctionDecl_Overload = {
   encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
-
     for (const v of message.params) {
       Type.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.typeParams) {
       writer.uint32(26).string(v!);
     }
-
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.isInstanceFunction === true) {
       writer.uint32(40).bool(message.isInstanceFunction);
     }
-
     if (message.doc !== "") {
       writer.uint32(50).string(message.doc);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.overloadId = reader.string();
           break;
-
         case 2:
           message.params.push(Type.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.typeParams.push(reader.string());
           break;
-
         case 4:
           message.resultType = Type.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.isInstanceFunction = reader.bool();
           break;
-
         case 6:
           message.doc = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Decl_FunctionDecl_Overload {
     return {
       overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
@@ -2026,29 +1682,24 @@ export const Decl_FunctionDecl_Overload = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-
   toJSON(message: Decl_FunctionDecl_Overload): unknown {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
-
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toJSON(e) : undefined);
     } else {
       obj.params = [];
     }
-
     if (message.typeParams) {
       obj.typeParams = message.typeParams.map(e => e);
     } else {
       obj.typeParams = [];
     }
-
     message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
     message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
     const message = createBaseDecl_FunctionDecl_Overload();
     message.overloadId = object.overloadId ?? "";
@@ -2059,7 +1710,6 @@ export const Decl_FunctionDecl_Overload = {
     message.doc = object.doc ?? "";
     return message;
   },
-
   fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
     return {
       overloadId: object?.overload_id,
@@ -2070,7 +1720,6 @@ export const Decl_FunctionDecl_Overload = {
       doc: object?.doc
     };
   },
-
   fromSDKJSON(object: any): Decl_FunctionDecl_OverloadSDKType {
     return {
       overload_id: isSet(object.overload_id) ? String(object.overload_id) : "",
@@ -2081,31 +1730,25 @@ export const Decl_FunctionDecl_Overload = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-
   toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
     const obj: any = {};
     obj.overload_id = message.overloadId;
-
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
     } else {
       obj.params = [];
     }
-
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e);
     } else {
       obj.type_params = [];
     }
-
     message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
     obj.is_instance_function = message.isInstanceFunction;
     obj.doc = message.doc;
     return obj;
   }
-
 };
-
 function createBaseReference(): Reference {
   return {
     name: "",
@@ -2113,54 +1756,42 @@ function createBaseReference(): Reference {
     value: undefined
   };
 }
-
 export const Reference = {
   encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     for (const v of message.overloadId) {
       writer.uint32(26).string(v!);
     }
-
     if (message.value !== undefined) {
       Constant.encode(message.value, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Reference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReference();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 3:
           message.overloadId.push(reader.string());
           break;
-
         case 4:
           message.value = Constant.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Reference {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -2168,21 +1799,17 @@ export const Reference = {
       value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: Reference): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-
     if (message.overloadId) {
       obj.overloadId = message.overloadId.map(e => e);
     } else {
       obj.overloadId = [];
     }
-
     message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Reference>): Reference {
     const message = createBaseReference();
     message.name = object.name ?? "";
@@ -2190,7 +1817,6 @@ export const Reference = {
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: ReferenceSDKType): Reference {
     return {
       name: object?.name,
@@ -2198,7 +1824,6 @@ export const Reference = {
       value: object.value ? Constant.fromSDK(object.value) : undefined
     };
   },
-
   fromSDKJSON(object: any): ReferenceSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -2206,19 +1831,15 @@ export const Reference = {
       value: isSet(object.value) ? Constant.fromSDKJSON(object.value) : undefined
     };
   },
-
   toSDK(message: Reference): ReferenceSDKType {
     const obj: any = {};
     obj.name = message.name;
-
     if (message.overloadId) {
       obj.overload_id = message.overloadId.map(e => e);
     } else {
       obj.overload_id = [];
     }
-
     message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
     return obj;
   }
-
 };

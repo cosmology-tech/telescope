@@ -6,33 +6,25 @@ import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deployment";
-
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
   createDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse>;
-
   /** DepositDeployment deposits more funds into the deployment account */
   depositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse>;
-
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
   updateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse>;
-
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
   closeDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse>;
-
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
   closeGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse>;
-
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
   pauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse>;
-
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
   startGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.createDeployment = this.createDeployment.bind(this);
@@ -43,35 +35,27 @@ export class MsgClientImpl implements Msg {
     this.pauseGroup = this.pauseGroup.bind(this);
     this.startGroup = this.startGroup.bind(this);
   }
-
   createDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse> {
     return this.rpc.unary(MsgCreateDeploymentDesc, MsgCreateDeployment.fromPartial(request), metadata);
   }
-
   depositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse> {
     return this.rpc.unary(MsgDepositDeploymentDesc, MsgDepositDeployment.fromPartial(request), metadata);
   }
-
   updateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse> {
     return this.rpc.unary(MsgUpdateDeploymentDesc, MsgUpdateDeployment.fromPartial(request), metadata);
   }
-
   closeDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse> {
     return this.rpc.unary(MsgCloseDeploymentDesc, MsgCloseDeployment.fromPartial(request), metadata);
   }
-
   closeGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse> {
     return this.rpc.unary(MsgCloseGroupDesc, MsgCloseGroup.fromPartial(request), metadata);
   }
-
   pauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse> {
     return this.rpc.unary(MsgPauseGroupDesc, MsgPauseGroup.fromPartial(request), metadata);
   }
-
   startGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse> {
     return this.rpc.unary(MsgStartGroupDesc, MsgStartGroup.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "akash.deployment.v1beta1.Msg"
@@ -85,19 +69,16 @@ export const MsgCreateDeploymentDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreateDeployment.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreateDeploymentResponse.decode(data),
-
+      return {
+        ...MsgCreateDeploymentResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgDepositDeploymentDesc: UnaryMethodDefinitionish = {
@@ -109,19 +90,16 @@ export const MsgDepositDeploymentDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgDepositDeployment.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgDepositDeploymentResponse.decode(data),
-
+      return {
+        ...MsgDepositDeploymentResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgUpdateDeploymentDesc: UnaryMethodDefinitionish = {
@@ -133,19 +111,16 @@ export const MsgUpdateDeploymentDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgUpdateDeployment.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgUpdateDeploymentResponse.decode(data),
-
+      return {
+        ...MsgUpdateDeploymentResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgCloseDeploymentDesc: UnaryMethodDefinitionish = {
@@ -157,19 +132,16 @@ export const MsgCloseDeploymentDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCloseDeployment.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCloseDeploymentResponse.decode(data),
-
+      return {
+        ...MsgCloseDeploymentResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgCloseGroupDesc: UnaryMethodDefinitionish = {
@@ -181,19 +153,16 @@ export const MsgCloseGroupDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCloseGroup.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCloseGroupResponse.decode(data),
-
+      return {
+        ...MsgCloseGroupResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgPauseGroupDesc: UnaryMethodDefinitionish = {
@@ -205,19 +174,16 @@ export const MsgPauseGroupDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgPauseGroup.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgPauseGroupResponse.decode(data),
-
+      return {
+        ...MsgPauseGroupResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
@@ -229,19 +195,16 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgStartGroup.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgStartGroupResponse.decode(data),
-
+      return {
+        ...MsgStartGroupResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -254,7 +217,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -263,12 +225,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -292,5 +255,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

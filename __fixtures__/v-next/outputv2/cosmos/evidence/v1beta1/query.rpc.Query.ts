@@ -6,34 +6,28 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */
   evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse>;
-
   /** AllEvidence queries all evidence. */
   allEvidence(request?: DeepPartial<QueryAllEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.evidence = this.evidence.bind(this);
     this.allEvidence = this.allEvidence.bind(this);
   }
-
   evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse> {
     return this.rpc.unary(QueryEvidenceDesc, QueryEvidenceRequest.fromPartial(request), metadata);
   }
-
   allEvidence(request: DeepPartial<QueryAllEvidenceRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse> {
     return this.rpc.unary(QueryAllEvidenceDesc, QueryAllEvidenceRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "cosmos.evidence.v1beta1.Query"
@@ -47,19 +41,16 @@ export const QueryEvidenceDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryEvidenceRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryEvidenceResponse.decode(data),
-
+      return {
+        ...QueryEvidenceResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryAllEvidenceDesc: UnaryMethodDefinitionish = {
@@ -71,19 +62,16 @@ export const QueryAllEvidenceDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryAllEvidenceRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryAllEvidenceResponse.decode(data),
-
+      return {
+        ...QueryAllEvidenceResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -96,7 +84,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -105,12 +92,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -134,5 +122,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

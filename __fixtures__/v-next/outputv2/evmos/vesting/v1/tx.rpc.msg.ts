@@ -6,7 +6,6 @@ import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
-
 /** Msg defines the vesting Msg service. */
 export interface Msg {
   /**
@@ -14,27 +13,22 @@ export interface Msg {
    * clawback and the configuration of vesting and lockup schedules.
    */
   createClawbackVestingAccount(request: DeepPartial<MsgCreateClawbackVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreateClawbackVestingAccountResponse>;
-
   /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
   clawback(request: DeepPartial<MsgClawback>, metadata?: grpc.Metadata): Promise<MsgClawbackResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.createClawbackVestingAccount = this.createClawbackVestingAccount.bind(this);
     this.clawback = this.clawback.bind(this);
   }
-
   createClawbackVestingAccount(request: DeepPartial<MsgCreateClawbackVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreateClawbackVestingAccountResponse> {
     return this.rpc.unary(MsgCreateClawbackVestingAccountDesc, MsgCreateClawbackVestingAccount.fromPartial(request), metadata);
   }
-
   clawback(request: DeepPartial<MsgClawback>, metadata?: grpc.Metadata): Promise<MsgClawbackResponse> {
     return this.rpc.unary(MsgClawbackDesc, MsgClawback.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "evmos.vesting.v1.Msg"
@@ -48,19 +42,16 @@ export const MsgCreateClawbackVestingAccountDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreateClawbackVestingAccount.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreateClawbackVestingAccountResponse.decode(data),
-
+      return {
+        ...MsgCreateClawbackVestingAccountResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgClawbackDesc: UnaryMethodDefinitionish = {
@@ -72,19 +63,16 @@ export const MsgClawbackDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgClawback.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgClawbackResponse.decode(data),
-
+      return {
+        ...MsgClawbackResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -97,7 +85,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -106,12 +93,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -135,5 +123,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

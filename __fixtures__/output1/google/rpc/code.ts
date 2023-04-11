@@ -1,5 +1,4 @@
 export const protobufPackage = "google.rpc";
-
 /**
  * The canonical error codes for gRPC APIs.
  * 
@@ -16,14 +15,12 @@ export enum Code {
    * HTTP Mapping: 200 OK
    */
   OK = 0,
-
   /**
    * CANCELLED - The operation was cancelled, typically by the caller.
    * 
    * HTTP Mapping: 499 Client Closed Request
    */
   CANCELLED = 1,
-
   /**
    * UNKNOWN - Unknown error.  For example, this error may be returned when
    * a `Status` value received from another address space belongs to
@@ -34,7 +31,6 @@ export enum Code {
    * HTTP Mapping: 500 Internal Server Error
    */
   UNKNOWN = 2,
-
   /**
    * INVALID_ARGUMENT - The client specified an invalid argument.  Note that this differs
    * from `FAILED_PRECONDITION`.  `INVALID_ARGUMENT` indicates arguments
@@ -44,7 +40,6 @@ export enum Code {
    * HTTP Mapping: 400 Bad Request
    */
   INVALID_ARGUMENT = 3,
-
   /**
    * DEADLINE_EXCEEDED - The deadline expired before the operation could complete. For operations
    * that change the state of the system, this error may be returned
@@ -55,7 +50,6 @@ export enum Code {
    * HTTP Mapping: 504 Gateway Timeout
    */
   DEADLINE_EXCEEDED = 4,
-
   /**
    * NOT_FOUND - Some requested entity (e.g., file or directory) was not found.
    * 
@@ -68,7 +62,6 @@ export enum Code {
    * HTTP Mapping: 404 Not Found
    */
   NOT_FOUND = 5,
-
   /**
    * ALREADY_EXISTS - The entity that a client attempted to create (e.g., file or directory)
    * already exists.
@@ -76,7 +69,6 @@ export enum Code {
    * HTTP Mapping: 409 Conflict
    */
   ALREADY_EXISTS = 6,
-
   /**
    * PERMISSION_DENIED - The caller does not have permission to execute the specified
    * operation. `PERMISSION_DENIED` must not be used for rejections
@@ -90,7 +82,6 @@ export enum Code {
    * HTTP Mapping: 403 Forbidden
    */
   PERMISSION_DENIED = 7,
-
   /**
    * UNAUTHENTICATED - The request does not have valid authentication credentials for the
    * operation.
@@ -98,7 +89,6 @@ export enum Code {
    * HTTP Mapping: 401 Unauthorized
    */
   UNAUTHENTICATED = 16,
-
   /**
    * RESOURCE_EXHAUSTED - Some resource has been exhausted, perhaps a per-user quota, or
    * perhaps the entire file system is out of space.
@@ -106,7 +96,6 @@ export enum Code {
    * HTTP Mapping: 429 Too Many Requests
    */
   RESOURCE_EXHAUSTED = 8,
-
   /**
    * FAILED_PRECONDITION - The operation was rejected because the system is not in a state
    * required for the operation's execution.  For example, the directory
@@ -128,7 +117,6 @@ export enum Code {
    * HTTP Mapping: 400 Bad Request
    */
   FAILED_PRECONDITION = 9,
-
   /**
    * ABORTED - The operation was aborted, typically due to a concurrency issue such as
    * a sequencer check failure or transaction abort.
@@ -139,7 +127,6 @@ export enum Code {
    * HTTP Mapping: 409 Conflict
    */
   ABORTED = 10,
-
   /**
    * OUT_OF_RANGE - The operation was attempted past the valid range.  E.g., seeking or
    * reading past end-of-file.
@@ -160,7 +147,6 @@ export enum Code {
    * HTTP Mapping: 400 Bad Request
    */
   OUT_OF_RANGE = 11,
-
   /**
    * UNIMPLEMENTED - The operation is not implemented or is not supported/enabled in this
    * service.
@@ -168,7 +154,6 @@ export enum Code {
    * HTTP Mapping: 501 Not Implemented
    */
   UNIMPLEMENTED = 12,
-
   /**
    * INTERNAL - Internal errors.  This means that some invariants expected by the
    * underlying system have been broken.  This error code is reserved
@@ -177,7 +162,6 @@ export enum Code {
    * HTTP Mapping: 500 Internal Server Error
    */
   INTERNAL = 13,
-
   /**
    * UNAVAILABLE - The service is currently unavailable.  This is most likely a
    * transient condition, which can be corrected by retrying with
@@ -190,7 +174,6 @@ export enum Code {
    * HTTP Mapping: 503 Service Unavailable
    */
   UNAVAILABLE = 14,
-
   /**
    * DATA_LOSS - Unrecoverable data loss or corruption.
    * 
@@ -205,71 +188,54 @@ export function codeFromJSON(object: any): Code {
     case 0:
     case "OK":
       return Code.OK;
-
     case 1:
     case "CANCELLED":
       return Code.CANCELLED;
-
     case 2:
     case "UNKNOWN":
       return Code.UNKNOWN;
-
     case 3:
     case "INVALID_ARGUMENT":
       return Code.INVALID_ARGUMENT;
-
     case 4:
     case "DEADLINE_EXCEEDED":
       return Code.DEADLINE_EXCEEDED;
-
     case 5:
     case "NOT_FOUND":
       return Code.NOT_FOUND;
-
     case 6:
     case "ALREADY_EXISTS":
       return Code.ALREADY_EXISTS;
-
     case 7:
     case "PERMISSION_DENIED":
       return Code.PERMISSION_DENIED;
-
     case 16:
     case "UNAUTHENTICATED":
       return Code.UNAUTHENTICATED;
-
     case 8:
     case "RESOURCE_EXHAUSTED":
       return Code.RESOURCE_EXHAUSTED;
-
     case 9:
     case "FAILED_PRECONDITION":
       return Code.FAILED_PRECONDITION;
-
     case 10:
     case "ABORTED":
       return Code.ABORTED;
-
     case 11:
     case "OUT_OF_RANGE":
       return Code.OUT_OF_RANGE;
-
     case 12:
     case "UNIMPLEMENTED":
       return Code.UNIMPLEMENTED;
-
     case 13:
     case "INTERNAL":
       return Code.INTERNAL;
-
     case 14:
     case "UNAVAILABLE":
       return Code.UNAVAILABLE;
-
     case 15:
     case "DATA_LOSS":
       return Code.DATA_LOSS;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -280,55 +246,38 @@ export function codeToJSON(object: Code): string {
   switch (object) {
     case Code.OK:
       return "OK";
-
     case Code.CANCELLED:
       return "CANCELLED";
-
     case Code.UNKNOWN:
       return "UNKNOWN";
-
     case Code.INVALID_ARGUMENT:
       return "INVALID_ARGUMENT";
-
     case Code.DEADLINE_EXCEEDED:
       return "DEADLINE_EXCEEDED";
-
     case Code.NOT_FOUND:
       return "NOT_FOUND";
-
     case Code.ALREADY_EXISTS:
       return "ALREADY_EXISTS";
-
     case Code.PERMISSION_DENIED:
       return "PERMISSION_DENIED";
-
     case Code.UNAUTHENTICATED:
       return "UNAUTHENTICATED";
-
     case Code.RESOURCE_EXHAUSTED:
       return "RESOURCE_EXHAUSTED";
-
     case Code.FAILED_PRECONDITION:
       return "FAILED_PRECONDITION";
-
     case Code.ABORTED:
       return "ABORTED";
-
     case Code.OUT_OF_RANGE:
       return "OUT_OF_RANGE";
-
     case Code.UNIMPLEMENTED:
       return "UNIMPLEMENTED";
-
     case Code.INTERNAL:
       return "INTERNAL";
-
     case Code.UNAVAILABLE:
       return "UNAVAILABLE";
-
     case Code.DATA_LOSS:
       return "DATA_LOSS";
-
     case Code.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

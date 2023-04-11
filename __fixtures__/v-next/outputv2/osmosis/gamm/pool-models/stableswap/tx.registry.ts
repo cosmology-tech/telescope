@@ -16,14 +16,12 @@ export const MessageComposer = {
         value: MsgCreateStableswapPool.encode(value).finish()
       };
     },
-
     stableSwapAdjustScalingFactors(value: MsgStableSwapAdjustScalingFactors) {
       return {
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
         value: MsgStableSwapAdjustScalingFactors.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createStableswapPool(value: MsgCreateStableswapPool) {
@@ -32,14 +30,12 @@ export const MessageComposer = {
         value
       };
     },
-
     stableSwapAdjustScalingFactors(value: MsgStableSwapAdjustScalingFactors) {
       return {
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
         value
       };
     }
-
   },
   toJSON: {
     createStableswapPool(value: MsgCreateStableswapPool) {
@@ -48,14 +44,12 @@ export const MessageComposer = {
         value: MsgCreateStableswapPool.toJSON(value)
       };
     },
-
     stableSwapAdjustScalingFactors(value: MsgStableSwapAdjustScalingFactors) {
       return {
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
         value: MsgStableSwapAdjustScalingFactors.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createStableswapPool(value: any) {
@@ -64,14 +58,12 @@ export const MessageComposer = {
         value: MsgCreateStableswapPool.fromJSON(value)
       };
     },
-
     stableSwapAdjustScalingFactors(value: any) {
       return {
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
         value: MsgStableSwapAdjustScalingFactors.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createStableswapPool(value: MsgCreateStableswapPool) {
@@ -80,13 +72,11 @@ export const MessageComposer = {
         value: MsgCreateStableswapPool.fromPartial(value)
       };
     },
-
     stableSwapAdjustScalingFactors(value: MsgStableSwapAdjustScalingFactors) {
       return {
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
         value: MsgStableSwapAdjustScalingFactors.fromPartial(value)
       };
     }
-
   }
 };

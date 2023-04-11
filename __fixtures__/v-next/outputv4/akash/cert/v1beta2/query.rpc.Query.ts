@@ -8,7 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import { QueryStore, MobxResponse } from "../../../mobx";
 import { makeObservable, override } from "mobx";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Certificates queries certificates */
@@ -16,11 +15,9 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
   }
-
   /* Certificates queries certificates */
   certificates = async (request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> => {
     const data = QueryCertificatesRequest.encode(request).finish();
@@ -35,32 +32,23 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> {
       return queryService.certificates(request);
     }
-
   };
 };
 export interface UseCertificatesQuery<TData> extends ReactQueryParams<QueryCertificatesResponse, TData> {
   request: QueryCertificatesRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useCertificates = <TData = QueryCertificatesResponse,>({
     request,
     options
@@ -70,15 +58,12 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.certificates(request);
     }, options);
   };
-
   return {
-    /** Certificates queries certificates */
-    useCertificates
+    /** Certificates queries certificates */useCertificates
   };
 };
 export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   class QueryCertificatesStore extends QueryStore<QueryCertificatesRequest, QueryCertificatesResponse> {
     constructor() {
       super(queryService?.certificates);
@@ -92,15 +77,11 @@ export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
         getData: override
       });
     }
-
     certificates(request: QueryCertificatesRequest): MobxResponse<QueryCertificatesResponse> {
       return this.getData(request);
     }
-
   }
-
   return {
-    /** Certificates queries certificates */
-    QueryCertificatesStore
+    /** Certificates queries certificates */QueryCertificatesStore
   };
 };

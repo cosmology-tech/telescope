@@ -3,7 +3,6 @@
 exports[`cosmos LCDClient 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -20,50 +19,40 @@ exports[`cosmos LCDClient 1`] = `
     this.denomsMetadata = this.denomsMetadata.bind(this);
     this.denomOwners = this.denomOwners.bind(this);
   }
-
   /* Balance queries the balance of a single coin for a single account. */
   async balance(params: QueryBalanceRequest): Promise<QueryBalanceResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
-
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}/by_denom\`;
     return await this.req.get<QueryBalanceResponseSDKType>(endpoint, options);
   }
-
   /* AllBalances queries the balance of all coins for a single account. */
   async allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
     return await this.req.get<QueryAllBalancesResponseSDKType>(endpoint, options);
   }
-
   /* SpendableBalances queries the spenable balance of all coins for a single
    account. */
   async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
     return await this.req.get<QuerySpendableBalancesResponseSDKType>(endpoint, options);
   }
-
   /* TotalSupply queries the total supply of all coins. */
   async totalSupply(params: QueryTotalSupplyRequest = {
     pagination: undefined
@@ -71,41 +60,33 @@ exports[`cosmos LCDClient 1`] = `
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/bank/v1beta1/supply\`;
     return await this.req.get<QueryTotalSupplyResponseSDKType>(endpoint, options);
   }
-
   /* SupplyOf queries the supply of a single coin. */
   async supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
-
     const endpoint = \`cosmos/bank/v1beta1/supply/by_denom\`;
     return await this.req.get<QuerySupplyOfResponseSDKType>(endpoint, options);
   }
-
   /* Params queries the parameters of x/bank module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = \`cosmos/bank/v1beta1/params\`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
-
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponseSDKType> {
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
     return await this.req.get<QueryDenomMetadataResponseSDKType>(endpoint);
   }
-
   /* DenomsMetadata queries the client metadata for all registered coin
    denominations. */
   async denomsMetadata(params: QueryDenomsMetadataRequest = {
@@ -114,37 +95,30 @@ exports[`cosmos LCDClient 1`] = `
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
     return await this.req.get<QueryDenomsMetadataResponseSDKType>(endpoint, options);
   }
-
   /* DenomOwners queries for all account addresses that own a particular token
    denomination. */
   async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
     return await this.req.get<QueryDenomOwnersResponseSDKType>(endpoint, options);
   }
-
 }"
 `;
 
 exports[`cosmos fee LCDClient 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -155,42 +129,34 @@ exports[`cosmos fee LCDClient 1`] = `
     this.allowances = this.allowances.bind(this);
     this.allowancesByGranter = this.allowancesByGranter.bind(this);
   }
-
   /* Allowance returns fee granted to the grantee by the granter. */
   async allowance(params: QueryAllowanceRequest): Promise<QueryAllowanceResponseSDKType> {
     const endpoint = \`cosmos/feegrant/v1beta1/allowance/\${params.granter}/\${params.grantee}\`;
     return await this.req.get<QueryAllowanceResponseSDKType>(endpoint);
   }
-
   /* Allowances returns all the grants for address. */
   async allowances(params: QueryAllowancesRequest): Promise<QueryAllowancesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/feegrant/v1beta1/allowances/\${params.grantee}\`;
     return await this.req.get<QueryAllowancesResponseSDKType>(endpoint, options);
   }
-
   /* AllowancesByGranter returns all the grants given by an address
    Since v0.46 */
   async allowancesByGranter(params: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/feegrant/v1beta1/issued/\${params.granter}\`;
     return await this.req.get<QueryAllowancesByGranterResponseSDKType>(endpoint, options);
   }
-
 }"
 `;
 
@@ -199,7 +165,6 @@ exports[`cosmos/app/v1alpha1/query.proto 1`] = `""`;
 exports[`cosmos/gov/v1beta1/query.proto 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -215,98 +180,79 @@ exports[`cosmos/gov/v1beta1/query.proto 1`] = `
     this.deposits = this.deposits.bind(this);
     this.tallyResult = this.tallyResult.bind(this);
   }
-
   /* Proposal queries proposal details based on ProposalID. */
   async proposal(params: QueryProposalRequest): Promise<QueryProposalResponseSDKType> {
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}\`;
     return await this.req.get<QueryProposalResponseSDKType>(endpoint);
   }
-
   /* Proposals queries all proposals based on given status. */
   async proposals(params: QueryProposalsRequest): Promise<QueryProposalsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.proposalStatus !== "undefined") {
       options.params.proposal_status = params.proposalStatus;
     }
-
     if (typeof params?.voter !== "undefined") {
       options.params.voter = params.voter;
     }
-
     if (typeof params?.depositor !== "undefined") {
       options.params.depositor = params.depositor;
     }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/gov/v1beta1/proposals\`;
     return await this.req.get<QueryProposalsResponseSDKType>(endpoint, options);
   }
-
   /* Vote queries voted information based on proposalID, voterAddr. */
   async vote(params: QueryVoteRequest): Promise<QueryVoteResponseSDKType> {
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}/votes/\${params.voter}\`;
     return await this.req.get<QueryVoteResponseSDKType>(endpoint);
   }
-
   /* Votes queries votes of a given proposal. */
   async votes(params: QueryVotesRequest): Promise<QueryVotesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}/votes\`;
     return await this.req.get<QueryVotesResponseSDKType>(endpoint, options);
   }
-
   /* Params queries all parameters of the gov module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const endpoint = \`cosmos/gov/v1beta1/params/\${params.params_type}\`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
-
   /* Deposit queries single deposit information based proposalID, depositAddr. */
   async deposit(params: QueryDepositRequest): Promise<QueryDepositResponseSDKType> {
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}/deposits/\${params.depositor}\`;
     return await this.req.get<QueryDepositResponseSDKType>(endpoint);
   }
-
   /* Deposits queries all deposits of a single proposal. */
   async deposits(params: QueryDepositsRequest): Promise<QueryDepositsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}/deposits\`;
     return await this.req.get<QueryDepositsResponseSDKType>(endpoint, options);
   }
-
   /* TallyResult queries the tally of a proposal vote. */
   async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponseSDKType> {
     const endpoint = \`cosmos/gov/v1beta1/proposals/\${params.proposal_id}/tally\`;
     return await this.req.get<QueryTallyResultResponseSDKType>(endpoint);
   }
-
 }"
 `;
 
 exports[`cosmos/group/v1/query.proto 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -327,156 +273,125 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     this.groupsByMember = this.groupsByMember.bind(this);
     this.tallyResult = this.tallyResult.bind(this);
   }
-
   /* GroupInfo queries group info based on group id. */
   async groupInfo(params: QueryGroupInfoRequest): Promise<QueryGroupInfoResponseSDKType> {
     const endpoint = \`cosmos/group/v1/group_info/\${params.group_id}\`;
     return await this.req.get<QueryGroupInfoResponseSDKType>(endpoint);
   }
-
   /* GroupPolicyInfo queries group policy info based on account address of group policy. */
   async groupPolicyInfo(params: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponseSDKType> {
     const endpoint = \`cosmos/group/v1/group_policy_info/\${params.address}\`;
     return await this.req.get<QueryGroupPolicyInfoResponseSDKType>(endpoint);
   }
-
   /* GroupMembers queries members of a group */
   async groupMembers(params: QueryGroupMembersRequest): Promise<QueryGroupMembersResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/group_members/\${params.group_id}\`;
     return await this.req.get<QueryGroupMembersResponseSDKType>(endpoint, options);
   }
-
   /* GroupsByAdmin queries groups by admin address. */
   async groupsByAdmin(params: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/groups_by_admin/\${params.admin}\`;
     return await this.req.get<QueryGroupsByAdminResponseSDKType>(endpoint, options);
   }
-
   /* GroupPoliciesByGroup queries group policies by group id. */
   async groupPoliciesByGroup(params: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/group_policies_by_group/\${params.group_id}\`;
     return await this.req.get<QueryGroupPoliciesByGroupResponseSDKType>(endpoint, options);
   }
-
   /* GroupsByAdmin queries group policies by admin address. */
   async groupPoliciesByAdmin(params: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/group_policies_by_admin/\${params.admin}\`;
     return await this.req.get<QueryGroupPoliciesByAdminResponseSDKType>(endpoint, options);
   }
-
   /* Proposal queries a proposal based on proposal id. */
   async proposal(params: QueryProposalRequest): Promise<QueryProposalResponseSDKType> {
     const endpoint = \`cosmos/group/v1/proposal/\${params.proposal_id}\`;
     return await this.req.get<QueryProposalResponseSDKType>(endpoint);
   }
-
   /* ProposalsByGroupPolicy queries proposals based on account address of group policy. */
   async proposalsByGroupPolicy(params: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/proposals_by_group_policy/\${params.address}\`;
     return await this.req.get<QueryProposalsByGroupPolicyResponseSDKType>(endpoint, options);
   }
-
   /* VoteByProposalVoter queries a vote by proposal id and voter. */
   async voteByProposalVoter(params: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponseSDKType> {
     const endpoint = \`cosmos/group/v1/vote_by_proposal_voter/\${params.proposal_id}/\${params.voter}\`;
     return await this.req.get<QueryVoteByProposalVoterResponseSDKType>(endpoint);
   }
-
   /* VotesByProposal queries a vote by proposal. */
   async votesByProposal(params: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/votes_by_proposal/\${params.proposal_id}\`;
     return await this.req.get<QueryVotesByProposalResponseSDKType>(endpoint, options);
   }
-
   /* VotesByVoter queries a vote by voter. */
   async votesByVoter(params: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/votes_by_voter/\${params.voter}\`;
     return await this.req.get<QueryVotesByVoterResponseSDKType>(endpoint, options);
   }
-
   /* GroupsByMember queries groups by member address. */
   async groupsByMember(params: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/group/v1/groups_by_member/\${params.address}\`;
     return await this.req.get<QueryGroupsByMemberResponseSDKType>(endpoint, options);
   }
-
   /* TallyResult queries the tally of a proposal votes. */
   async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponseSDKType> {
     const endpoint = \`cosmos/group/v1/proposals/\${params.proposal_id}/tally\`;
     return await this.req.get<QueryTallyResultResponseSDKType>(endpoint);
   }
-
 }"
 `;
 
 exports[`cosmos/staking/v1beta1/query.proto 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -498,170 +413,137 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     this.pool = this.pool.bind(this);
     this.params = this.params.bind(this);
   }
-
   /* Validators queries all validators that match the given status. */
   async validators(params: QueryValidatorsRequest): Promise<QueryValidatorsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.status !== "undefined") {
       options.params.status = params.status;
     }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/validators\`;
     return await this.req.get<QueryValidatorsResponseSDKType>(endpoint, options);
   }
-
   /* Validator queries validator info for given validator address. */
   async validator(params: QueryValidatorRequest): Promise<QueryValidatorResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}\`;
     return await this.req.get<QueryValidatorResponseSDKType>(endpoint);
   }
-
   /* ValidatorDelegations queries delegate info for given validator. */
   async validatorDelegations(params: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations\`;
     return await this.req.get<QueryValidatorDelegationsResponseSDKType>(endpoint, options);
   }
-
   /* ValidatorUnbondingDelegations queries unbonding delegations of a validator. */
   async validatorUnbondingDelegations(params: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/unbonding_delegations\`;
     return await this.req.get<QueryValidatorUnbondingDelegationsResponseSDKType>(endpoint, options);
   }
-
   /* Delegation queries delegate info for given validator delegator pair. */
   async delegation(params: QueryDelegationRequest): Promise<QueryDelegationResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations/\${params.delegatorAddr}\`;
     return await this.req.get<QueryDelegationResponseSDKType>(endpoint);
   }
-
   /* UnbondingDelegation queries unbonding info for given validator delegator
    pair. */
   async unbondingDelegation(params: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations/\${params.delegatorAddr}/unbonding_delegation\`;
     return await this.req.get<QueryUnbondingDelegationResponseSDKType>(endpoint);
   }
-
   /* DelegatorDelegations queries all delegations of a given delegator address. */
   async delegatorDelegations(params: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/delegations/\${params.delegatorAddr}\`;
     return await this.req.get<QueryDelegatorDelegationsResponseSDKType>(endpoint, options);
   }
-
   /* DelegatorUnbondingDelegations queries all unbonding delegations of a given
    delegator address. */
   async delegatorUnbondingDelegations(params: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/unbonding_delegations\`;
     return await this.req.get<QueryDelegatorUnbondingDelegationsResponseSDKType>(endpoint, options);
   }
-
   /* Redelegations queries redelegations of given address. */
   async redelegations(params: QueryRedelegationsRequest): Promise<QueryRedelegationsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.srcValidatorAddr !== "undefined") {
       options.params.src_validator_addr = params.srcValidatorAddr;
     }
-
     if (typeof params?.dstValidatorAddr !== "undefined") {
       options.params.dst_validator_addr = params.dstValidatorAddr;
     }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/redelegations\`;
     return await this.req.get<QueryRedelegationsResponseSDKType>(endpoint, options);
   }
-
   /* DelegatorValidators queries all validators info for given delegator
    address. */
   async delegatorValidators(params: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/validators\`;
     return await this.req.get<QueryDelegatorValidatorsResponseSDKType>(endpoint, options);
   }
-
   /* DelegatorValidator queries validator info for given delegator validator
    pair. */
   async delegatorValidator(params: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/validators/\${params.validatorAddr}\`;
     return await this.req.get<QueryDelegatorValidatorResponseSDKType>(endpoint);
   }
-
   /* HistoricalInfo queries the historical info for given height. */
   async historicalInfo(params: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/historical_info/\${params.height}\`;
     return await this.req.get<QueryHistoricalInfoResponseSDKType>(endpoint);
   }
-
   /* Pool queries the pool info. */
   async pool(_params: QueryPoolRequest = {}): Promise<QueryPoolResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/pool\`;
     return await this.req.get<QueryPoolResponseSDKType>(endpoint);
   }
-
   /* Parameters queries the staking parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/params\`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
-
 }"
 `;
 
 exports[`osmosis LCDClient 1`] = `
 "export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -683,7 +565,6 @@ exports[`osmosis LCDClient 1`] = `
     this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
     this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
-
   /* Pools */
   async pools(params: QueryPoolsRequest = {
     pagination: undefined
@@ -691,56 +572,45 @@ exports[`osmosis LCDClient 1`] = `
     const options: any = {
       params: {}
     };
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/pools\`;
     return await this.req.get<QueryPoolsResponseSDKType>(endpoint, options);
   }
-
   /* NumPools */
   async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/num_pools\`;
     return await this.req.get<QueryNumPoolsResponseSDKType>(endpoint);
   }
-
   /* TotalLiquidity */
   async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/total_liquidity\`;
     return await this.req.get<QueryTotalLiquidityResponseSDKType>(endpoint);
   }
-
   /* PoolsWithFilter allows you to query specific pools with requested
    parameters */
   async poolsWithFilter(params: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.minLiquidity !== "undefined") {
       options.params.min_liquidity = params.minLiquidity;
     }
-
     if (typeof params?.poolType !== "undefined") {
       options.params.pool_type = params.poolType;
     }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/filtered_pools\`;
     return await this.req.get<QueryPoolsWithFilterResponseSDKType>(endpoint, options);
   }
-
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
     return await this.req.get<QueryPoolResponseSDKType>(endpoint);
   }
-
   /* PoolType returns the type of the pool.
    Returns "Balancer" as a string literal when the pool is a balancer pool.
    Errors if the pool is failed to be type caseted. */
@@ -748,116 +618,92 @@ exports[`osmosis LCDClient 1`] = `
     const endpoint = \`osmosis/gamm/v1beta1/pool_type/\${params.poolId}\`;
     return await this.req.get<QueryPoolTypeResponseSDKType>(endpoint);
   }
-
   /* CalcJoinPoolShares */
   async calcJoinPoolShares(params: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.tokensIn !== "undefined") {
       options.params.tokens_in = params.tokensIn;
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/join_swap_exact_in\`;
     return await this.req.get<QueryCalcJoinPoolSharesResponseSDKType>(endpoint, options);
   }
-
   /* CalcExitPoolCoinsFromShares */
   async calcExitPoolCoinsFromShares(params: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.shareInAmount !== "undefined") {
       options.params.share_in_amount = params.shareInAmount;
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/exit_swap_share_amount_in\`;
     return await this.req.get<QueryCalcExitPoolCoinsFromSharesResponseSDKType>(endpoint, options);
   }
-
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
     return await this.req.get<QueryPoolParamsResponseSDKType>(endpoint);
   }
-
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
     return await this.req.get<QueryTotalPoolLiquidityResponseSDKType>(endpoint);
   }
-
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponseSDKType> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
     return await this.req.get<QueryTotalSharesResponseSDKType>(endpoint);
   }
-
   /* SpotPrice defines a gRPC query handler that returns the spot price given
    a base denomination and a quote denomination. */
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.baseAssetDenom !== "undefined") {
       options.params.base_asset_denom = params.baseAssetDenom;
     }
-
     if (typeof params?.quoteAssetDenom !== "undefined") {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
     return await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options);
   }
-
   /* Estimate the swap. */
   async estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
-
     if (typeof params?.tokenIn !== "undefined") {
       options.params.token_in = params.tokenIn;
     }
-
     if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_in\`;
     return await this.req.get<QuerySwapExactAmountInResponseSDKType>(endpoint, options);
   }
-
   /* EstimateSwapExactAmountOut */
   async estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponseSDKType> {
     const options: any = {
       params: {}
     };
-
     if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
-
     if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
-
     if (typeof params?.tokenOut !== "undefined") {
       options.params.token_out = params.tokenOut;
     }
-
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
     return await this.req.get<QuerySwapExactAmountOutResponseSDKType>(endpoint, options);
   }
-
 }"
 `;
 

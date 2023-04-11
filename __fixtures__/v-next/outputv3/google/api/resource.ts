@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * A description of the historical or future-looking state of the
  * resource pattern.
@@ -9,13 +8,11 @@ export const protobufPackage = "google.api";
 export enum ResourceDescriptor_History {
   /** HISTORY_UNSPECIFIED - The "unset" value. */
   HISTORY_UNSPECIFIED = 0,
-
   /**
    * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
    * additional patterns were added later.
    */
   ORIGINALLY_SINGLE_PATTERN = 1,
-
   /**
    * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
    * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
@@ -31,15 +28,12 @@ export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescrip
     case 0:
     case "HISTORY_UNSPECIFIED":
       return ResourceDescriptor_History.HISTORY_UNSPECIFIED;
-
     case 1:
     case "ORIGINALLY_SINGLE_PATTERN":
       return ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN;
-
     case 2:
     case "FUTURE_MULTI_PATTERN":
       return ResourceDescriptor_History.FUTURE_MULTI_PATTERN;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -50,24 +44,19 @@ export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_Hist
   switch (object) {
     case ResourceDescriptor_History.HISTORY_UNSPECIFIED:
       return "HISTORY_UNSPECIFIED";
-
     case ResourceDescriptor_History.ORIGINALLY_SINGLE_PATTERN:
       return "ORIGINALLY_SINGLE_PATTERN";
-
     case ResourceDescriptor_History.FUTURE_MULTI_PATTERN:
       return "FUTURE_MULTI_PATTERN";
-
     case ResourceDescriptor_History.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /** A flag representing a specific style that a resource claims to conform to. */
 export enum ResourceDescriptor_Style {
   /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
   STYLE_UNSPECIFIED = 0,
-
   /**
    * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
    * 
@@ -88,11 +77,9 @@ export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescripto
     case 0:
     case "STYLE_UNSPECIFIED":
       return ResourceDescriptor_Style.STYLE_UNSPECIFIED;
-
     case 1:
     case "DECLARATIVE_FRIENDLY":
       return ResourceDescriptor_Style.DECLARATIVE_FRIENDLY;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -103,16 +90,13 @@ export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style)
   switch (object) {
     case ResourceDescriptor_Style.STYLE_UNSPECIFIED:
       return "STYLE_UNSPECIFIED";
-
     case ResourceDescriptor_Style.DECLARATIVE_FRIENDLY:
       return "DECLARATIVE_FRIENDLY";
-
     case ResourceDescriptor_Style.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -176,7 +160,6 @@ export interface ResourceDescriptor {
    * characters allowed for the `resource_type_kind` is 100.
    */
   type: string;
-
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -199,13 +182,11 @@ export interface ResourceDescriptor {
    * type of resource.
    */
   pattern: string[];
-
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
   nameField: string;
-
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -224,7 +205,6 @@ export interface ResourceDescriptor {
    *     }
    */
   history: ResourceDescriptor_History;
-
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -236,14 +216,12 @@ export interface ResourceDescriptor {
    * https://aip.dev/156
    */
   plural: string;
-
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
   singular: string;
-
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
@@ -255,7 +233,6 @@ export interface ResourceDescriptorProtoMsg {
   typeUrl: "/google.api.ResourceDescriptor";
   value: Uint8Array;
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -319,7 +296,6 @@ export interface ResourceDescriptorAmino {
    * characters allowed for the `resource_type_kind` is 100.
    */
   type: string;
-
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -342,13 +318,11 @@ export interface ResourceDescriptorAmino {
    * type of resource.
    */
   pattern: string[];
-
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
   name_field: string;
-
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -367,7 +341,6 @@ export interface ResourceDescriptorAmino {
    *     }
    */
   history: ResourceDescriptor_History;
-
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -379,14 +352,12 @@ export interface ResourceDescriptorAmino {
    * https://aip.dev/156
    */
   plural: string;
-
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
   singular: string;
-
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
@@ -398,7 +369,6 @@ export interface ResourceDescriptorAminoMsg {
   type: "/google.api.ResourceDescriptor";
   value: ResourceDescriptorAmino;
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -457,7 +427,6 @@ export interface ResourceDescriptorSDKType {
   singular: string;
   style: ResourceDescriptor_Style[];
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
@@ -486,7 +455,6 @@ export interface ResourceReference {
    *     }
    */
   type: string;
-
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -506,7 +474,6 @@ export interface ResourceReferenceProtoMsg {
   typeUrl: "/google.api.ResourceReference";
   value: Uint8Array;
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
@@ -535,7 +502,6 @@ export interface ResourceReferenceAmino {
    *     }
    */
   type: string;
-
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -555,7 +521,6 @@ export interface ResourceReferenceAminoMsg {
   type: "/google.api.ResourceReference";
   value: ResourceReferenceAmino;
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
@@ -564,7 +529,6 @@ export interface ResourceReferenceSDKType {
   type: string;
   child_type: string;
 }
-
 function createBaseResourceDescriptor(): ResourceDescriptor {
   return {
     type: "",
@@ -576,100 +540,76 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
     style: []
   };
 }
-
 export const ResourceDescriptor = {
   typeUrl: "/google.api.ResourceDescriptor",
-
   encode(message: ResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-
     for (const v of message.pattern) {
       writer.uint32(18).string(v!);
     }
-
     if (message.nameField !== "") {
       writer.uint32(26).string(message.nameField);
     }
-
     if (message.history !== 0) {
       writer.uint32(32).int32(message.history);
     }
-
     if (message.plural !== "") {
       writer.uint32(42).string(message.plural);
     }
-
     if (message.singular !== "") {
       writer.uint32(50).string(message.singular);
     }
-
     writer.uint32(82).fork();
-
     for (const v of message.style) {
       writer.int32(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceDescriptor();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.string();
           break;
-
         case 2:
           message.pattern.push(reader.string());
           break;
-
         case 3:
           message.nameField = reader.string();
           break;
-
         case 4:
           message.history = (reader.int32() as any);
           break;
-
         case 5:
           message.plural = reader.string();
           break;
-
         case 6:
           message.singular = reader.string();
           break;
-
         case 10:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.style.push((reader.int32() as any));
             }
           } else {
             message.style.push((reader.int32() as any));
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ResourceDescriptor {
     return {
       type: isSet(object.type) ? String(object.type) : "",
@@ -681,31 +621,25 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-
   toJSON(message: ResourceDescriptor): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
-
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-
     message.nameField !== undefined && (obj.nameField = message.nameField);
     message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
     message.plural !== undefined && (obj.plural = message.plural);
     message.singular !== undefined && (obj.singular = message.singular);
-
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
       obj.style = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
     const message = createBaseResourceDescriptor();
     message.type = object.type ?? "";
@@ -717,7 +651,6 @@ export const ResourceDescriptor = {
     message.style = object.style?.map(e => e) || [];
     return message;
   },
-
   fromSDK(object: ResourceDescriptorSDKType): ResourceDescriptor {
     return {
       type: object?.type,
@@ -729,31 +662,25 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-
   toSDK(message: ResourceDescriptor): ResourceDescriptorSDKType {
     const obj: any = {};
     obj.type = message.type;
-
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-
     obj.name_field = message.nameField;
     message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
     obj.plural = message.plural;
     obj.singular = message.singular;
-
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
       obj.style = [];
     }
-
     return obj;
   },
-
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
     return {
       type: object.type,
@@ -765,166 +692,133 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-
   toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
     const obj: any = {};
     obj.type = message.type;
-
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-
     obj.name_field = message.nameField;
     obj.history = message.history;
     obj.plural = message.plural;
     obj.singular = message.singular;
-
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
       obj.style = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: ResourceDescriptorAminoMsg): ResourceDescriptor {
     return ResourceDescriptor.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ResourceDescriptorProtoMsg): ResourceDescriptor {
     return ResourceDescriptor.decode(message.value);
   },
-
   toProto(message: ResourceDescriptor): Uint8Array {
     return ResourceDescriptor.encode(message).finish();
   },
-
   toProtoMsg(message: ResourceDescriptor): ResourceDescriptorProtoMsg {
     return {
       typeUrl: "/google.api.ResourceDescriptor",
       value: ResourceDescriptor.encode(message).finish()
     };
   }
-
 };
-
 function createBaseResourceReference(): ResourceReference {
   return {
     type: "",
     childType: ""
   };
 }
-
 export const ResourceReference = {
   typeUrl: "/google.api.ResourceReference",
-
   encode(message: ResourceReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-
     if (message.childType !== "") {
       writer.uint32(18).string(message.childType);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourceReference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceReference();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.string();
           break;
-
         case 2:
           message.childType = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ResourceReference {
     return {
       type: isSet(object.type) ? String(object.type) : "",
       childType: isSet(object.childType) ? String(object.childType) : ""
     };
   },
-
   toJSON(message: ResourceReference): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.childType !== undefined && (obj.childType = message.childType);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {
     const message = createBaseResourceReference();
     message.type = object.type ?? "";
     message.childType = object.childType ?? "";
     return message;
   },
-
   fromSDK(object: ResourceReferenceSDKType): ResourceReference {
     return {
       type: object?.type,
       childType: object?.child_type
     };
   },
-
   toSDK(message: ResourceReference): ResourceReferenceSDKType {
     const obj: any = {};
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
   },
-
   fromAmino(object: ResourceReferenceAmino): ResourceReference {
     return {
       type: object.type,
       childType: object.child_type
     };
   },
-
   toAmino(message: ResourceReference): ResourceReferenceAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
   },
-
   fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {
     return ResourceReference.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ResourceReferenceProtoMsg): ResourceReference {
     return ResourceReference.decode(message.value);
   },
-
   toProto(message: ResourceReference): Uint8Array {
     return ResourceReference.encode(message).finish();
   },
-
   toProtoMsg(message: ResourceReference): ResourceReferenceProtoMsg {
     return {
       typeUrl: "/google.api.ResourceReference",
       value: ResourceReference.encode(message).finish()
     };
   }
-
 };

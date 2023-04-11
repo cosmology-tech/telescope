@@ -6,7 +6,6 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Certificates queries certificates */
@@ -14,16 +13,13 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.certificates = this.certificates.bind(this);
   }
-
   certificates(request: DeepPartial<QueryCertificatesRequest>, metadata?: grpc.Metadata): Promise<QueryCertificatesResponse> {
     return this.rpc.unary(QueryCertificatesDesc, QueryCertificatesRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "akash.cert.v1beta2.Query"
@@ -37,19 +33,16 @@ export const QueryCertificatesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryCertificatesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryCertificatesResponse.decode(data),
-
+      return {
+        ...QueryCertificatesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -62,7 +55,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -71,12 +63,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -100,5 +93,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

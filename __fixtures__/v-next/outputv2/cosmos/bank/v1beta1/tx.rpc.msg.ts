@@ -6,32 +6,26 @@ import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
-
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
   send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse>;
-
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
   multiSend(request: DeepPartial<MsgMultiSend>, metadata?: grpc.Metadata): Promise<MsgMultiSendResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.send = this.send.bind(this);
     this.multiSend = this.multiSend.bind(this);
   }
-
   send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse> {
     return this.rpc.unary(MsgSendDesc, MsgSend.fromPartial(request), metadata);
   }
-
   multiSend(request: DeepPartial<MsgMultiSend>, metadata?: grpc.Metadata): Promise<MsgMultiSendResponse> {
     return this.rpc.unary(MsgMultiSendDesc, MsgMultiSend.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "cosmos.bank.v1beta1.Msg"
@@ -45,19 +39,16 @@ export const MsgSendDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgSend.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgSendResponse.decode(data),
-
+      return {
+        ...MsgSendResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgMultiSendDesc: UnaryMethodDefinitionish = {
@@ -69,19 +60,16 @@ export const MsgMultiSendDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgMultiSend.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgMultiSendResponse.decode(data),
-
+      return {
+        ...MsgMultiSendResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -94,7 +82,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -103,12 +90,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -132,5 +120,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

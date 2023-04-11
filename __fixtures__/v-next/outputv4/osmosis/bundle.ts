@@ -104,7 +104,8 @@ import * as _558 from "./rpc.query";
 import * as _559 from "./rpc.tx";
 export namespace osmosis {
   export namespace claim {
-    export const v1beta1 = { ..._254,
+    export const v1beta1 = {
+      ..._254,
       ..._255,
       ..._256,
       ..._257,
@@ -113,14 +114,16 @@ export namespace osmosis {
     };
   }
   export namespace epochs {
-    export const v1beta1 = { ..._258,
+    export const v1beta1 = {
+      ..._258,
       ..._259,
       ..._501,
       ..._514
     };
   }
   export namespace gamm {
-    export const v1beta1 = { ..._260,
+    export const v1beta1 = {
+      ..._260,
       ..._261,
       ..._262,
       ..._263,
@@ -133,14 +136,16 @@ export namespace osmosis {
     };
     export namespace poolmodels {
       export namespace balancer {
-        export const v1beta1 = { ..._264,
+        export const v1beta1 = {
+          ..._264,
           ..._486,
           ..._493,
           ..._526
         };
       }
       export namespace stableswap {
-        export const v1beta1 = { ..._265,
+        export const v1beta1 = {
+          ..._265,
           ..._266,
           ..._487,
           ..._494,
@@ -148,20 +153,23 @@ export namespace osmosis {
         };
       }
     }
-    export const v2 = { ..._267,
+    export const v2 = {
+      ..._267,
       ..._503,
       ..._516,
       ..._534
     };
   }
   export namespace ibcratelimit {
-    export const v1beta1 = { ..._268,
+    export const v1beta1 = {
+      ..._268,
       ..._269,
       ..._504,
       ..._517
     };
   }
-  export const incentives = { ..._270,
+  export const incentives = {
+    ..._270,
     ..._271,
     ..._272,
     ..._273,
@@ -172,7 +180,8 @@ export namespace osmosis {
     ..._518,
     ..._529
   };
-  export const lockup = { ..._275,
+  export const lockup = {
+    ..._275,
     ..._276,
     ..._277,
     ..._278,
@@ -184,7 +193,8 @@ export namespace osmosis {
     ..._530
   };
   export namespace mint {
-    export const v1beta1 = { ..._280,
+    export const v1beta1 = {
+      ..._280,
       ..._281,
       ..._282,
       ..._507,
@@ -192,7 +202,8 @@ export namespace osmosis {
     };
   }
   export namespace poolincentives {
-    export const v1beta1 = { ..._283,
+    export const v1beta1 = {
+      ..._283,
       ..._284,
       ..._285,
       ..._286,
@@ -201,10 +212,12 @@ export namespace osmosis {
     };
   }
   export namespace store {
-    export const v1beta1 = { ..._287
+    export const v1beta1 = {
+      ..._287
     };
   }
-  export const superfluid = { ..._288,
+  export const superfluid = {
+    ..._288,
     ..._289,
     ..._290,
     ..._291,
@@ -216,7 +229,8 @@ export namespace osmosis {
     ..._531
   };
   export namespace tokenfactory {
-    export const v1beta1 = { ..._293,
+    export const v1beta1 = {
+      ..._293,
       ..._294,
       ..._295,
       ..._296,
@@ -229,7 +243,8 @@ export namespace osmosis {
     };
   }
   export namespace twap {
-    export const v1beta1 = { ..._298,
+    export const v1beta1 = {
+      ..._298,
       ..._299,
       ..._300,
       ..._511,
@@ -237,7 +252,8 @@ export namespace osmosis {
     };
   }
   export namespace txfees {
-    export const v1beta1 = { ..._301,
+    export const v1beta1 = {
+      ..._301,
       ..._302,
       ..._303,
       ..._304,
@@ -245,7 +261,8 @@ export namespace osmosis {
       ..._525
     };
   }
-  export const ClientFactory = { ..._556,
+  export const ClientFactory = {
+    ..._556,
     ..._557,
     ..._558,
     ..._559

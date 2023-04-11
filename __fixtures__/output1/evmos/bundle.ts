@@ -55,7 +55,8 @@ import * as _547 from "./rpc.tx";
 import * as _548 from "./evmos-rpc-client.tx";
 export namespace evmos {
   export namespace claims {
-    export const v1 = { ..._153,
+    export const v1 = {
+      ..._153,
       ..._154,
       ..._155,
       ..._444,
@@ -63,14 +64,16 @@ export namespace evmos {
     };
   }
   export namespace epochs {
-    export const v1 = { ..._156,
+    export const v1 = {
+      ..._156,
       ..._157,
       ..._445,
       ..._453
     };
   }
   export namespace erc20 {
-    export const v1 = { ..._158,
+    export const v1 = {
+      ..._158,
       ..._159,
       ..._160,
       ..._161,
@@ -82,7 +85,8 @@ export namespace evmos {
     };
   }
   export namespace fees {
-    export const v1 = { ..._162,
+    export const v1 = {
+      ..._162,
       ..._163,
       ..._164,
       ..._165,
@@ -94,7 +98,8 @@ export namespace evmos {
     };
   }
   export namespace incentives {
-    export const v1 = { ..._166,
+    export const v1 = {
+      ..._166,
       ..._167,
       ..._168,
       ..._448,
@@ -102,7 +107,8 @@ export namespace evmos {
     };
   }
   export namespace inflation {
-    export const v1 = { ..._169,
+    export const v1 = {
+      ..._169,
       ..._170,
       ..._171,
       ..._449,
@@ -110,14 +116,16 @@ export namespace evmos {
     };
   }
   export namespace recovery {
-    export const v1 = { ..._172,
+    export const v1 = {
+      ..._172,
       ..._173,
       ..._450,
       ..._458
     };
   }
   export namespace vesting {
-    export const v1 = { ..._174,
+    export const v1 = {
+      ..._174,
       ..._175,
       ..._176,
       ..._440,
@@ -127,7 +135,8 @@ export namespace evmos {
       ..._462
     };
   }
-  export const ClientFactory = { ..._543,
+  export const ClientFactory = {
+    ..._543,
     ..._544,
     ..._545,
     ..._546,

@@ -9,30 +9,23 @@ import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Orders queries orders with filters */
   orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse>;
-
   /** Order queries order details */
   order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse>;
-
   /** Bids queries bids with filters */
   bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse>;
-
   /** Bid queries bid details */
   bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse>;
-
   /** Leases queries leases with filters */
   leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse>;
-
   /** Lease queries lease details */
   lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.orders = this.orders.bind(this);
@@ -42,31 +35,24 @@ export class QueryClientImpl implements Query {
     this.leases = this.leases.bind(this);
     this.lease = this.lease.bind(this);
   }
-
   orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse> {
     return this.rpc.unary(QueryOrdersDesc, QueryOrdersRequest.fromPartial(request), metadata);
   }
-
   order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse> {
     return this.rpc.unary(QueryOrderDesc, QueryOrderRequest.fromPartial(request), metadata);
   }
-
   bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse> {
     return this.rpc.unary(QueryBidsDesc, QueryBidsRequest.fromPartial(request), metadata);
   }
-
   bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse> {
     return this.rpc.unary(QueryBidDesc, QueryBidRequest.fromPartial(request), metadata);
   }
-
   leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse> {
     return this.rpc.unary(QueryLeasesDesc, QueryLeasesRequest.fromPartial(request), metadata);
   }
-
   lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse> {
     return this.rpc.unary(QueryLeaseDesc, QueryLeaseRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "akash.market.v1beta2.Query"
@@ -80,19 +66,16 @@ export const QueryOrdersDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryOrdersRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryOrdersResponse.decode(data),
-
+      return {
+        ...QueryOrdersResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryOrderDesc: UnaryMethodDefinitionish = {
@@ -104,19 +87,16 @@ export const QueryOrderDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryOrderRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryOrderResponse.decode(data),
-
+      return {
+        ...QueryOrderResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryBidsDesc: UnaryMethodDefinitionish = {
@@ -128,19 +108,16 @@ export const QueryBidsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryBidsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryBidsResponse.decode(data),
-
+      return {
+        ...QueryBidsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryBidDesc: UnaryMethodDefinitionish = {
@@ -152,19 +129,16 @@ export const QueryBidDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryBidRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryBidResponse.decode(data),
-
+      return {
+        ...QueryBidResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryLeasesDesc: UnaryMethodDefinitionish = {
@@ -176,19 +150,16 @@ export const QueryLeasesDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryLeasesRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryLeasesResponse.decode(data),
-
+      return {
+        ...QueryLeasesResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryLeaseDesc: UnaryMethodDefinitionish = {
@@ -200,19 +171,16 @@ export const QueryLeaseDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryLeaseRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryLeaseResponse.decode(data),
-
+      return {
+        ...QueryLeaseResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -225,7 +193,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -234,12 +201,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -263,5 +231,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

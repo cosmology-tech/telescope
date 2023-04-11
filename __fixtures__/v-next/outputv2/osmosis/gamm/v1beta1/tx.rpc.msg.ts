@@ -17,7 +17,6 @@ export interface Msg {
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.joinPool = this.joinPool.bind(this);
@@ -29,39 +28,30 @@ export class MsgClientImpl implements Msg {
     this.exitSwapExternAmountOut = this.exitSwapExternAmountOut.bind(this);
     this.exitSwapShareAmountIn = this.exitSwapShareAmountIn.bind(this);
   }
-
   joinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse> {
     return this.rpc.unary(MsgJoinPoolDesc, MsgJoinPool.fromPartial(request), metadata);
   }
-
   exitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse> {
     return this.rpc.unary(MsgExitPoolDesc, MsgExitPool.fromPartial(request), metadata);
   }
-
   swapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse> {
     return this.rpc.unary(MsgSwapExactAmountInDesc, MsgSwapExactAmountIn.fromPartial(request), metadata);
   }
-
   swapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse> {
     return this.rpc.unary(MsgSwapExactAmountOutDesc, MsgSwapExactAmountOut.fromPartial(request), metadata);
   }
-
   joinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse> {
     return this.rpc.unary(MsgJoinSwapExternAmountInDesc, MsgJoinSwapExternAmountIn.fromPartial(request), metadata);
   }
-
   joinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse> {
     return this.rpc.unary(MsgJoinSwapShareAmountOutDesc, MsgJoinSwapShareAmountOut.fromPartial(request), metadata);
   }
-
   exitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse> {
     return this.rpc.unary(MsgExitSwapExternAmountOutDesc, MsgExitSwapExternAmountOut.fromPartial(request), metadata);
   }
-
   exitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse> {
     return this.rpc.unary(MsgExitSwapShareAmountInDesc, MsgExitSwapShareAmountIn.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "osmosis.gamm.v1beta1.Msg"
@@ -75,19 +65,16 @@ export const MsgJoinPoolDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgJoinPool.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgJoinPoolResponse.decode(data),
-
+      return {
+        ...MsgJoinPoolResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgExitPoolDesc: UnaryMethodDefinitionish = {
@@ -99,19 +86,16 @@ export const MsgExitPoolDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgExitPool.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgExitPoolResponse.decode(data),
-
+      return {
+        ...MsgExitPoolResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgSwapExactAmountInDesc: UnaryMethodDefinitionish = {
@@ -123,19 +107,16 @@ export const MsgSwapExactAmountInDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgSwapExactAmountIn.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgSwapExactAmountInResponse.decode(data),
-
+      return {
+        ...MsgSwapExactAmountInResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
@@ -147,19 +128,16 @@ export const MsgSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgSwapExactAmountOut.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgSwapExactAmountOutResponse.decode(data),
-
+      return {
+        ...MsgSwapExactAmountOutResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgJoinSwapExternAmountInDesc: UnaryMethodDefinitionish = {
@@ -171,19 +149,16 @@ export const MsgJoinSwapExternAmountInDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgJoinSwapExternAmountIn.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgJoinSwapExternAmountInResponse.decode(data),
-
+      return {
+        ...MsgJoinSwapExternAmountInResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgJoinSwapShareAmountOutDesc: UnaryMethodDefinitionish = {
@@ -195,19 +170,16 @@ export const MsgJoinSwapShareAmountOutDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgJoinSwapShareAmountOut.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgJoinSwapShareAmountOutResponse.decode(data),
-
+      return {
+        ...MsgJoinSwapShareAmountOutResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgExitSwapExternAmountOutDesc: UnaryMethodDefinitionish = {
@@ -219,19 +191,16 @@ export const MsgExitSwapExternAmountOutDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgExitSwapExternAmountOut.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgExitSwapExternAmountOutResponse.decode(data),
-
+      return {
+        ...MsgExitSwapExternAmountOutResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
@@ -243,19 +212,16 @@ export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgExitSwapShareAmountIn.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgExitSwapShareAmountInResponse.decode(data),
-
+      return {
+        ...MsgExitSwapShareAmountInResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -268,7 +234,6 @@ export class GrpcWebImpl {
     debug: boolean;
     metadata: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport: grpc.TransportFactory;
     debug: boolean;
@@ -277,12 +242,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.metadata?.options.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -306,5 +272,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

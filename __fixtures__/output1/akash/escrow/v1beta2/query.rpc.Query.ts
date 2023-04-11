@@ -6,7 +6,6 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /**
@@ -15,7 +14,6 @@ export interface Query {
    * Accounts queries all accounts
    */
   accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
-
   /**
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
@@ -25,11 +23,9 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
   }
-
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Accounts queries all accounts */
@@ -38,7 +34,6 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.escrow.v1beta2.Query", "Accounts", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
   };
-
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Payments queries all payments */
@@ -55,11 +50,9 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
       return queryService.accounts(request);
     },
-
     payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
       return queryService.payments(request);
     }
-
   };
 };
 export interface UseAccountsQuery<TData> extends ReactQueryParams<QueryAccountsResponse, TData> {
@@ -68,26 +61,18 @@ export interface UseAccountsQuery<TData> extends ReactQueryParams<QueryAccountsR
 export interface UsePaymentsQuery<TData> extends ReactQueryParams<QueryPaymentsResponse, TData> {
   request: QueryPaymentsRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useAccounts = <TData = QueryAccountsResponse,>({
     request,
     options
@@ -97,7 +82,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.accounts(request);
     }, options);
   };
-
   const usePayments = <TData = QueryPaymentsResponse,>({
     request,
     options
@@ -107,7 +91,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.payments(request);
     }, options);
   };
-
   return {
     /**
      * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -115,7 +98,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * Accounts queries all accounts
      */
     useAccounts,
-
     /**
      * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
      * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
