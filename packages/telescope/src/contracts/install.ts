@@ -1,7 +1,7 @@
 import { resolve, join, dirname, basename, extname } from 'path';
-import { sync as mkdirp } from 'mkdirp';
 import { sync as glob } from 'glob';
-import { sync as rimraf } from 'rimraf';
+import { mkdirp } from 'mkdirp';
+import { rimrafSync as rimraf } from 'rimraf';
 import { exec } from 'shelljs';
 import { prompt } from '../prompt';
 import { parse } from 'parse-package-name';
@@ -66,7 +66,7 @@ export default async (argv) => {
     // install
     if (!Array.isArray(pkg)) pkg = [pkg];
     const tmp = join(TMPDIR, rnd());
-    mkdirp(tmp);
+    mkdirp.sync(tmp);
     process.chdir(tmp);
     exec(`npm install ${getPackages(pkg)} --production --prefix ./smart-contracts`);
 
@@ -95,7 +95,7 @@ export default async (argv) => {
     for (const [src, dst, pkg] of cmds) {
         rimraf(dst);
         console.log(`installing ${pkg}...`);
-        mkdirp(dirname(dst));
+        mkdirp.sync(dirname(dst));
         exec(`mv ${src} ${dst}`);
     }
 

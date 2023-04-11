@@ -131,7 +131,7 @@ Install helpers and cosmjs [dependencies listed here](#dependencies)
 ```js
 import { join } from 'path';
 import telescope from '@osmonauts/telescope';
-import { sync as rimraf } from 'rimraf';
+import { rimrafSync as rimraf } from 'rimraf';
 
 const protoDirs = [join(__dirname, '/../proto')];
 const outPath = join(__dirname, '../src/codegen');

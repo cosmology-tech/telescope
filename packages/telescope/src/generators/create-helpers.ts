@@ -1,5 +1,5 @@
 import { join, dirname } from 'path';
-import { sync as mkdirp } from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
@@ -19,14 +19,14 @@ const write = (
   content: string
 ) => {
   const indexOutFile = join(builder.outPath, indexFile);
-  mkdirp(dirname(indexOutFile));
+  mkdirp.sync(dirname(indexOutFile));
   writeContentToFile(builder.outPath, builder.options, header + content, indexOutFile);
 }
 
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
-  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.longLibrary === 'bigint' ? internalForBigInt :internal);
+  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.longLibrary === 'bigint' ? internalForBigInt : internal);
 
   // should be exported
   if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {

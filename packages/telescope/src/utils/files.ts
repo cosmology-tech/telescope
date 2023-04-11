@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { parse, ParserPlugin } from '@babel/parser';
 import { TelescopeOptions } from '@osmonauts/types';
-import { sync as mkdirp } from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import minimatch from 'minimatch';
@@ -73,6 +73,6 @@ export const writeContentToFile = (
     }
 
     const text = tsLintPrefix + esLintPrefix + content;
-    mkdirp(dirname(filename));
+    mkdirp.sync(dirname(filename));
     writeFileSync(filename, text);
 }

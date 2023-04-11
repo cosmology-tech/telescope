@@ -1,6 +1,6 @@
 import { join } from 'path';
 import telescope from '@osmonauts/telescope';
-import { sync as rimraf } from 'rimraf';
+import { rimrafSync as rimraf } from 'rimraf';
 
 const protoDirs = [join(__dirname, '/../../../__fixtures__/chain1')];
 const outPath = join(__dirname, '/../src/codegen');

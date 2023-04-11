@@ -74,7 +74,7 @@
     "jest-in-case": "^1.0.2",
     "prettier": "^2.8.7",
     "regenerator-runtime": "^0.13.11",
-    "rimraf": "3.0.2",
+    "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   },
