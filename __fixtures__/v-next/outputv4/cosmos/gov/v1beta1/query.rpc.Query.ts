@@ -109,6 +109,16 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     }
   };
 };
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+  const queryService = new QueryClientImpl(rpc);
+  _queryClients.set(rpc, queryService);
+  return queryService;
+};
 export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
   class QueryProposalStore {
