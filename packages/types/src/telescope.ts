@@ -161,6 +161,9 @@ interface TelescopeOpts {
     reactQuery?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -169,6 +172,9 @@ interface TelescopeOpts {
     mobx?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -177,6 +183,9 @@ interface TelescopeOpts {
     pinia?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
