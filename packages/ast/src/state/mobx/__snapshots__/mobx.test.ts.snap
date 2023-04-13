@@ -5,43 +5,43 @@ exports[`builds stores. 1`] = `
   const queryService = getQueryService(rpc);
   class QueryAccountsStore {
     store = new QueryStore<QueryAccountsRequest, QueryAccountsResponse>(queryService?.accounts);
-    accounts(request) {
+    accounts(request: QueryAccountsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryAccountStore {
     store = new QueryStore<QueryAccountRequest, QueryAccountResponse>(queryService?.account);
-    account(request) {
+    account(request: QueryAccountRequest) {
       return this.store.getData(request);
     }
   }
   class QueryParamsStore {
     store = new QueryStore<QueryParamsRequest, QueryParamsResponse>(queryService?.params);
-    params(request) {
+    params(request: QueryParamsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryModuleAccountsStore {
     store = new QueryStore<QueryModuleAccountsRequest, QueryModuleAccountsResponse>(queryService?.moduleAccounts);
-    moduleAccounts(request) {
+    moduleAccounts(request: QueryModuleAccountsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryBech32PrefixStore {
     store = new QueryStore<Bech32PrefixRequest, Bech32PrefixResponse>(queryService?.bech32Prefix);
-    bech32Prefix(request) {
+    bech32Prefix(request: Bech32PrefixRequest) {
       return this.store.getData(request);
     }
   }
   class QueryAddressBytesToStringStore {
     store = new QueryStore<AddressBytesToStringRequest, AddressBytesToStringResponse>(queryService?.addressBytesToString);
-    addressBytesToString(request) {
+    addressBytesToString(request: AddressBytesToStringRequest) {
       return this.store.getData(request);
     }
   }
   class QueryAddressStringToBytesStore {
     store = new QueryStore<AddressStringToBytesRequest, AddressStringToBytesResponse>(queryService?.addressStringToBytes);
-    addressStringToBytes(request) {
+    addressStringToBytes(request: AddressStringToBytesRequest) {
       return this.store.getData(request);
     }
   }

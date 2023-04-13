@@ -113,49 +113,49 @@ export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => 
   const queryService = getQueryService(rpc);
   class QueryProposalStore {
     store = new QueryStore<QueryProposalRequest, QueryProposalResponse>(queryService?.proposal);
-    proposal(request) {
+    proposal(request: QueryProposalRequest) {
       return this.store.getData(request);
     }
   }
   class QueryProposalsStore {
     store = new QueryStore<QueryProposalsRequest, QueryProposalsResponse>(queryService?.proposals);
-    proposals(request) {
+    proposals(request: QueryProposalsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryVoteStore {
     store = new QueryStore<QueryVoteRequest, QueryVoteResponse>(queryService?.vote);
-    vote(request) {
+    vote(request: QueryVoteRequest) {
       return this.store.getData(request);
     }
   }
   class QueryVotesStore {
     store = new QueryStore<QueryVotesRequest, QueryVotesResponse>(queryService?.votes);
-    votes(request) {
+    votes(request: QueryVotesRequest) {
       return this.store.getData(request);
     }
   }
   class QueryParamsStore {
     store = new QueryStore<QueryParamsRequest, QueryParamsResponse>(queryService?.params);
-    params(request) {
+    params(request: QueryParamsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryDepositStore {
     store = new QueryStore<QueryDepositRequest, QueryDepositResponse>(queryService?.deposit);
-    deposit(request) {
+    deposit(request: QueryDepositRequest) {
       return this.store.getData(request);
     }
   }
   class QueryDepositsStore {
     store = new QueryStore<QueryDepositsRequest, QueryDepositsResponse>(queryService?.deposits);
-    deposits(request) {
+    deposits(request: QueryDepositsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryTallyResultStore {
     store = new QueryStore<QueryTallyResultRequest, QueryTallyResultResponse>(queryService?.tallyResult);
-    tallyResult(request) {
+    tallyResult(request: QueryTallyResultRequest) {
       return this.store.getData(request);
     }
   }

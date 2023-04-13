@@ -426,91 +426,91 @@ export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => 
   const queryService = getQueryService(rpc);
   class QueryPoolsStore {
     store = new QueryStore<QueryPoolsRequest, QueryPoolsResponse>(queryService?.pools);
-    pools(request) {
+    pools(request: QueryPoolsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryNumPoolsStore {
     store = new QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse>(queryService?.numPools);
-    numPools(request) {
+    numPools(request: QueryNumPoolsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryTotalLiquidityStore {
     store = new QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>(queryService?.totalLiquidity);
-    totalLiquidity(request) {
+    totalLiquidity(request: QueryTotalLiquidityRequest) {
       return this.store.getData(request);
     }
   }
   class QueryPoolsWithFilterStore {
     store = new QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>(queryService?.poolsWithFilter);
-    poolsWithFilter(request) {
+    poolsWithFilter(request: QueryPoolsWithFilterRequest) {
       return this.store.getData(request);
     }
   }
   class QueryPoolStore {
     store = new QueryStore<QueryPoolRequest, QueryPoolResponse>(queryService?.pool);
-    pool(request) {
+    pool(request: QueryPoolRequest) {
       return this.store.getData(request);
     }
   }
   class QueryPoolTypeStore {
     store = new QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse>(queryService?.poolType);
-    poolType(request) {
+    poolType(request: QueryPoolTypeRequest) {
       return this.store.getData(request);
     }
   }
   class QueryCalcJoinPoolNoSwapSharesStore {
     store = new QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>(queryService?.calcJoinPoolNoSwapShares);
-    calcJoinPoolNoSwapShares(request) {
+    calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest) {
       return this.store.getData(request);
     }
   }
   class QueryCalcJoinPoolSharesStore {
     store = new QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>(queryService?.calcJoinPoolShares);
-    calcJoinPoolShares(request) {
+    calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest) {
       return this.store.getData(request);
     }
   }
   class QueryCalcExitPoolCoinsFromSharesStore {
     store = new QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>(queryService?.calcExitPoolCoinsFromShares);
-    calcExitPoolCoinsFromShares(request) {
+    calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest) {
       return this.store.getData(request);
     }
   }
   class QueryPoolParamsStore {
     store = new QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse>(queryService?.poolParams);
-    poolParams(request) {
+    poolParams(request: QueryPoolParamsRequest) {
       return this.store.getData(request);
     }
   }
   class QueryTotalPoolLiquidityStore {
     store = new QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>(queryService?.totalPoolLiquidity);
-    totalPoolLiquidity(request) {
+    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest) {
       return this.store.getData(request);
     }
   }
   class QueryTotalSharesStore {
     store = new QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse>(queryService?.totalShares);
-    totalShares(request) {
+    totalShares(request: QueryTotalSharesRequest) {
       return this.store.getData(request);
     }
   }
   class QuerySpotPriceStore {
     store = new QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse>(queryService?.spotPrice);
-    spotPrice(request) {
+    spotPrice(request: QuerySpotPriceRequest) {
       return this.store.getData(request);
     }
   }
   class QueryEstimateSwapExactAmountInStore {
     store = new QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>(queryService?.estimateSwapExactAmountIn);
-    estimateSwapExactAmountIn(request) {
+    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest) {
       return this.store.getData(request);
     }
   }
   class QueryEstimateSwapExactAmountOutStore {
     store = new QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>(queryService?.estimateSwapExactAmountOut);
-    estimateSwapExactAmountOut(request) {
+    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest) {
       return this.store.getData(request);
     }
   }

@@ -248,7 +248,12 @@ const buildStore = (
       t.classMethod(
         'method',
         t.identifier(name),
-        [t.identifier('request')],
+        [
+          identifier(
+            'request',
+            t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
+          )
+        ],
         t.blockStatement(
           [
             t.returnStatement(

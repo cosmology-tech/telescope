@@ -70,7 +70,7 @@ export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => 
   const queryService = getQueryService(rpc);
   class QuerySpotPriceStore {
     store = new QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse>(queryService?.spotPrice);
-    spotPrice(request) {
+    spotPrice(request: QuerySpotPriceRequest) {
       return this.store.getData(request);
     }
   }

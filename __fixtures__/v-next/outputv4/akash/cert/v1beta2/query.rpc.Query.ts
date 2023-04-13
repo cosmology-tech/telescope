@@ -66,7 +66,7 @@ export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => 
   const queryService = getQueryService(rpc);
   class QueryCertificatesStore {
     store = new QueryStore<QueryCertificatesRequest, QueryCertificatesResponse>(queryService?.certificates);
-    certificates(request) {
+    certificates(request: QueryCertificatesRequest) {
       return this.store.getData(request);
     }
   }
