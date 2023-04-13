@@ -109,142 +109,54 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     }
   };
 };
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-  class QueryProposalStore extends QueryStore<QueryProposalRequest, QueryProposalResponse> {
-    constructor() {
-      super(queryService?.proposal);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    proposal(request: QueryProposalRequest): MobxResponse<QueryProposalResponse> {
-      return this.getData(request);
+  class QueryProposalStore {
+    store = new QueryStore<QueryProposalRequest, QueryProposalResponse>(queryService?.proposal);
+    proposal(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryProposalsStore extends QueryStore<QueryProposalsRequest, QueryProposalsResponse> {
-    constructor() {
-      super(queryService?.proposals);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    proposals(request: QueryProposalsRequest): MobxResponse<QueryProposalsResponse> {
-      return this.getData(request);
+  class QueryProposalsStore {
+    store = new QueryStore<QueryProposalsRequest, QueryProposalsResponse>(queryService?.proposals);
+    proposals(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryVoteStore extends QueryStore<QueryVoteRequest, QueryVoteResponse> {
-    constructor() {
-      super(queryService?.vote);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    vote(request: QueryVoteRequest): MobxResponse<QueryVoteResponse> {
-      return this.getData(request);
+  class QueryVoteStore {
+    store = new QueryStore<QueryVoteRequest, QueryVoteResponse>(queryService?.vote);
+    vote(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryVotesStore extends QueryStore<QueryVotesRequest, QueryVotesResponse> {
-    constructor() {
-      super(queryService?.votes);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    votes(request: QueryVotesRequest): MobxResponse<QueryVotesResponse> {
-      return this.getData(request);
+  class QueryVotesStore {
+    store = new QueryStore<QueryVotesRequest, QueryVotesResponse>(queryService?.votes);
+    votes(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    params(request: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
+  class QueryParamsStore {
+    store = new QueryStore<QueryParamsRequest, QueryParamsResponse>(queryService?.params);
+    params(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryDepositStore extends QueryStore<QueryDepositRequest, QueryDepositResponse> {
-    constructor() {
-      super(queryService?.deposit);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    deposit(request: QueryDepositRequest): MobxResponse<QueryDepositResponse> {
-      return this.getData(request);
+  class QueryDepositStore {
+    store = new QueryStore<QueryDepositRequest, QueryDepositResponse>(queryService?.deposit);
+    deposit(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryDepositsStore extends QueryStore<QueryDepositsRequest, QueryDepositsResponse> {
-    constructor() {
-      super(queryService?.deposits);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    deposits(request: QueryDepositsRequest): MobxResponse<QueryDepositsResponse> {
-      return this.getData(request);
+  class QueryDepositsStore {
+    store = new QueryStore<QueryDepositsRequest, QueryDepositsResponse>(queryService?.deposits);
+    deposits(request) {
+      return this.store.getData(request);
     }
   }
-  class QueryTallyResultStore extends QueryStore<QueryTallyResultRequest, QueryTallyResultResponse> {
-    constructor() {
-      super(queryService?.tallyResult);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    tallyResult(request: QueryTallyResultRequest): MobxResponse<QueryTallyResultResponse> {
-      return this.getData(request);
+  class QueryTallyResultStore {
+    store = new QueryStore<QueryTallyResultRequest, QueryTallyResultResponse>(queryService?.tallyResult);
+    tallyResult(request) {
+      return this.store.getData(request);
     }
   }
   return {

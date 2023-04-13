@@ -24,7 +24,7 @@ export const plugin = (builder: TelescopeBuilder) => {
     dotty.put(obj, queryClient.package, path);
   });
 
-  commonBundlePlugin(builder, 'stores.ts', obj, (context, obj) => {
+  commonBundlePlugin(builder, 'mobx-stores.ts', obj, (context, obj) => {
     // generate code for createRpcQueryHooks and imports of related packages.
     return createMobxQueryFactory(context, obj);
   });

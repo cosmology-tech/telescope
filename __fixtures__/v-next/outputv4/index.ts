@@ -22,7 +22,7 @@ export * from "./osmosis/bundle";
 export * from "./osmosis/client";
 export * from "./tendermint/bundle";
 export * from "./hooks";
-export * from "./stores";
+export * from "./mobx-stores";
 export * from "./extern";
 export * from "./react-query";
 export * from "./mobx";

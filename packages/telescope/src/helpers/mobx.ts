@@ -1,9 +1,6 @@
 export const mobx = `
 import {
-  action,
-  computed,
-  makeObservable,
-  observable,
+  makeAutoObservable,
   runInAction
 } from 'mobx';
 
@@ -24,15 +21,7 @@ export class QueryStore<Request, Response> {
 
   constructor(fetchFunc?: (request: Request) => Promise<Response>) {
     this.fetchFunc = fetchFunc;
-    makeObservable(this, {
-      state: observable,
-      request: observable.ref,
-      response: observable.ref,
-      isLoading: computed,
-      isSuccess: computed,
-      refetch: action.bound,
-      getData: action.bound,
-    });
+    makeAutoObservable(this)
   }
 
   get isLoading() {
@@ -43,7 +32,7 @@ export class QueryStore<Request, Response> {
     return this.state === 'success';
   }
 
-  async refetch(): Promise<void> {
+  refetch = async (): Promise<void> => {
     runInAction(() => {
       this.response = void 0;
       this.state = 'loading';
