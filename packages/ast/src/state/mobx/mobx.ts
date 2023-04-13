@@ -4,7 +4,8 @@ import {
   makeCommentLineWithBlocks,
   objectProperty,
   classMethod,
-  classDeclaration
+  classDeclaration,
+  newExpression
 } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { isRefIncluded } from '@osmonauts/proto-parser';
@@ -102,7 +103,7 @@ export const buildRpcStores = (
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
       t.variableDeclarator(
-        t.identifier('createRpcQueryStores'),
+        t.identifier('createRpcQueryMobxStores'),
         t.arrowFunctionExpression(
           [
             identifier(
@@ -222,96 +223,52 @@ const buildStore = (
 
   const storeClassName = makeQueryStoreName(name);
 
-  const storeQueryClass = classDeclaration(
+  const storeQueryClass = t.classDeclaration(
     t.identifier(storeClassName),
-    t.identifier('QueryStore'),
+    null,
     t.classBody([
-      t.classMethod(
-        'constructor',
-        t.identifier('constructor'),
-        [],
-        t.blockStatement([
-          t.expressionStatement(
-            t.callExpression(t.super(), [
-              t.optionalMemberExpression(
-                t.identifier('queryService'),
-                t.identifier(name),
-                false,
-                true
-              )
-            ])
-          ),
-          t.expressionStatement(
-            t.callExpression(t.identifier('makeObservable'), [
-              t.thisExpression(),
-              t.objectExpression([
-                t.objectProperty(
-                  t.identifier('state'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('request'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('response'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('isLoading'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('isSuccess'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('refetch'),
-                  t.identifier('override')
-                ),
-                t.objectProperty(
-                  t.identifier('getData'),
-                  t.identifier('override')
-                )
-              ])
-            ])
-          )
-        ])
+      t.classProperty(
+        t.identifier('store'),
+        newExpression(
+          t.identifier('QueryStore'),
+          [
+            t.optionalMemberExpression(
+              t.identifier('queryService'),
+              t.identifier(name),
+              false,
+              true
+            )
+          ],
+          t.tsTypeParameterInstantiation([
+            t.tsTypeReference(t.identifier(requestType)),
+            t.tsTypeReference(t.identifier(responseType))
+          ])
+        )
       ),
-      classMethod(
+      t.classMethod(
         'method',
         t.identifier(name),
         [
           identifier(
             'request',
-            t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType))),
-            isOptional
+            t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
           )
         ],
-        t.blockStatement([
-          t.returnStatement(
-            t.callExpression(
-              t.memberExpression(t.thisExpression(), t.identifier('getData')),
-              [t.identifier('request')]
+        t.blockStatement(
+          [
+            t.returnStatement(
+              t.callExpression(
+                t.memberExpression(
+                  t.memberExpression(t.thisExpression(), t.identifier('store')),
+                  t.identifier('getData')
+                ),
+                [t.identifier('request')]
+              )
             )
-          )
-        ]),
-        t.tsTypeAnnotation(
-          t.tsTypeReference(
-            t.identifier('MobxResponse'),
-            t.tsTypeParameterInstantiation([
-              t.tsTypeReference(t.identifier(responseType))
-            ])
-          )
+          ],
+          []
         )
       )
-    ]),
-    [],
-    // TODO the lines below have no impact (see classDeclaration)
-    null,
-    t.tsTypeParameterInstantiation([
-      t.tsTypeReference(t.identifier(requestType)),
-      t.tsTypeReference(t.identifier(responseType))
     ])
   );
 

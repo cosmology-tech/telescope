@@ -218,4 +218,19 @@ export const makeCommentLineWithBlocks = (comment: string): t.CommentLine[] => {
     return [makeCommentBlock(comment)];
 }
 
+export const newExpression = (
+  callee: t.Expression | t.V8IntrinsicIdentifier,
+  _arguments: (
+    | t.Expression
+    | t.SpreadElement
+    | t.JSXNamespacedName
+    | t.ArgumentPlaceholder
+  )[],
+  typeParameters?: t.TSTypeParameterInstantiation
+): t.NewExpression => {
+  const expr =  t.newExpression(callee, _arguments);
 
+  expr.typeParameters = typeParameters;
+
+  return expr;
+};

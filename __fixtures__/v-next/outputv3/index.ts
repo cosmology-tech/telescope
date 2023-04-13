@@ -23,5 +23,4 @@ export * from "./osmosis/client";
 export * from "./tendermint/bundle";
 export * from "./extern";
 export * from "./react-query";
-export * from "./mobx";
 export * from "./grpc-gateway";

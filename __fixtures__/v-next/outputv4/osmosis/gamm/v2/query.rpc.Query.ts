@@ -66,23 +66,12 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useSpotPrice
   };
 };
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-  class QuerySpotPriceStore extends QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse> {
-    constructor() {
-      super(queryService?.spotPrice);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    spotPrice(request: QuerySpotPriceRequest): MobxResponse<QuerySpotPriceResponse> {
-      return this.getData(request);
+  class QuerySpotPriceStore {
+    store = new QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse>(queryService?.spotPrice);
+    spotPrice(request: QuerySpotPriceRequest) {
+      return this.store.getData(request);
     }
   }
   return {

@@ -62,23 +62,12 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     /** Certificates queries certificates */useCertificates
   };
 };
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-  class QueryCertificatesStore extends QueryStore<QueryCertificatesRequest, QueryCertificatesResponse> {
-    constructor() {
-      super(queryService?.certificates);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    certificates(request: QueryCertificatesRequest): MobxResponse<QueryCertificatesResponse> {
-      return this.getData(request);
+  class QueryCertificatesStore {
+    store = new QueryStore<QueryCertificatesRequest, QueryCertificatesResponse>(queryService?.certificates);
+    certificates(request: QueryCertificatesRequest) {
+      return this.store.getData(request);
     }
   }
   return {

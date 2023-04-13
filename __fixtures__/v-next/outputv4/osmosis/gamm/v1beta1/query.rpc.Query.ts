@@ -422,261 +422,96 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useEstimateSwapExactAmountOut
   };
 };
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-  class QueryPoolsStore extends QueryStore<QueryPoolsRequest, QueryPoolsResponse> {
-    constructor() {
-      super(queryService?.pools);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    pools(request?: QueryPoolsRequest): MobxResponse<QueryPoolsResponse> {
-      return this.getData(request);
+  class QueryPoolsStore {
+    store = new QueryStore<QueryPoolsRequest, QueryPoolsResponse>(queryService?.pools);
+    pools(request: QueryPoolsRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryNumPoolsStore extends QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse> {
-    constructor() {
-      super(queryService?.numPools);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    numPools(request?: QueryNumPoolsRequest): MobxResponse<QueryNumPoolsResponse> {
-      return this.getData(request);
+  class QueryNumPoolsStore {
+    store = new QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse>(queryService?.numPools);
+    numPools(request: QueryNumPoolsRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryTotalLiquidityStore extends QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse> {
-    constructor() {
-      super(queryService?.totalLiquidity);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    totalLiquidity(request?: QueryTotalLiquidityRequest): MobxResponse<QueryTotalLiquidityResponse> {
-      return this.getData(request);
+  class QueryTotalLiquidityStore {
+    store = new QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>(queryService?.totalLiquidity);
+    totalLiquidity(request: QueryTotalLiquidityRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryPoolsWithFilterStore extends QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse> {
-    constructor() {
-      super(queryService?.poolsWithFilter);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    poolsWithFilter(request: QueryPoolsWithFilterRequest): MobxResponse<QueryPoolsWithFilterResponse> {
-      return this.getData(request);
+  class QueryPoolsWithFilterStore {
+    store = new QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>(queryService?.poolsWithFilter);
+    poolsWithFilter(request: QueryPoolsWithFilterRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryPoolStore extends QueryStore<QueryPoolRequest, QueryPoolResponse> {
-    constructor() {
-      super(queryService?.pool);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    pool(request: QueryPoolRequest): MobxResponse<QueryPoolResponse> {
-      return this.getData(request);
+  class QueryPoolStore {
+    store = new QueryStore<QueryPoolRequest, QueryPoolResponse>(queryService?.pool);
+    pool(request: QueryPoolRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryPoolTypeStore extends QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse> {
-    constructor() {
-      super(queryService?.poolType);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    poolType(request: QueryPoolTypeRequest): MobxResponse<QueryPoolTypeResponse> {
-      return this.getData(request);
+  class QueryPoolTypeStore {
+    store = new QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse>(queryService?.poolType);
+    poolType(request: QueryPoolTypeRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryCalcJoinPoolNoSwapSharesStore extends QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse> {
-    constructor() {
-      super(queryService?.calcJoinPoolNoSwapShares);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): MobxResponse<QueryCalcJoinPoolNoSwapSharesResponse> {
-      return this.getData(request);
+  class QueryCalcJoinPoolNoSwapSharesStore {
+    store = new QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>(queryService?.calcJoinPoolNoSwapShares);
+    calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryCalcJoinPoolSharesStore extends QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse> {
-    constructor() {
-      super(queryService?.calcJoinPoolShares);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): MobxResponse<QueryCalcJoinPoolSharesResponse> {
-      return this.getData(request);
+  class QueryCalcJoinPoolSharesStore {
+    store = new QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>(queryService?.calcJoinPoolShares);
+    calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryCalcExitPoolCoinsFromSharesStore extends QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse> {
-    constructor() {
-      super(queryService?.calcExitPoolCoinsFromShares);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): MobxResponse<QueryCalcExitPoolCoinsFromSharesResponse> {
-      return this.getData(request);
+  class QueryCalcExitPoolCoinsFromSharesStore {
+    store = new QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>(queryService?.calcExitPoolCoinsFromShares);
+    calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryPoolParamsStore extends QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse> {
-    constructor() {
-      super(queryService?.poolParams);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    poolParams(request: QueryPoolParamsRequest): MobxResponse<QueryPoolParamsResponse> {
-      return this.getData(request);
+  class QueryPoolParamsStore {
+    store = new QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse>(queryService?.poolParams);
+    poolParams(request: QueryPoolParamsRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryTotalPoolLiquidityStore extends QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse> {
-    constructor() {
-      super(queryService?.totalPoolLiquidity);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): MobxResponse<QueryTotalPoolLiquidityResponse> {
-      return this.getData(request);
+  class QueryTotalPoolLiquidityStore {
+    store = new QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>(queryService?.totalPoolLiquidity);
+    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryTotalSharesStore extends QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse> {
-    constructor() {
-      super(queryService?.totalShares);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    totalShares(request: QueryTotalSharesRequest): MobxResponse<QueryTotalSharesResponse> {
-      return this.getData(request);
+  class QueryTotalSharesStore {
+    store = new QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse>(queryService?.totalShares);
+    totalShares(request: QueryTotalSharesRequest) {
+      return this.store.getData(request);
     }
   }
-  class QuerySpotPriceStore extends QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse> {
-    constructor() {
-      super(queryService?.spotPrice);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    spotPrice(request: QuerySpotPriceRequest): MobxResponse<QuerySpotPriceResponse> {
-      return this.getData(request);
+  class QuerySpotPriceStore {
+    store = new QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse>(queryService?.spotPrice);
+    spotPrice(request: QuerySpotPriceRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryEstimateSwapExactAmountInStore extends QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse> {
-    constructor() {
-      super(queryService?.estimateSwapExactAmountIn);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): MobxResponse<QuerySwapExactAmountInResponse> {
-      return this.getData(request);
+  class QueryEstimateSwapExactAmountInStore {
+    store = new QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>(queryService?.estimateSwapExactAmountIn);
+    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest) {
+      return this.store.getData(request);
     }
   }
-  class QueryEstimateSwapExactAmountOutStore extends QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse> {
-    constructor() {
-      super(queryService?.estimateSwapExactAmountOut);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): MobxResponse<QuerySwapExactAmountOutResponse> {
-      return this.getData(request);
+  class QueryEstimateSwapExactAmountOutStore {
+    store = new QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>(queryService?.estimateSwapExactAmountOut);
+    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest) {
+      return this.store.getData(request);
     }
   }
   return {
