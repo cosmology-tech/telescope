@@ -132,6 +132,9 @@ interface TelescopeOpts {
     reactQuery?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -140,6 +143,9 @@ interface TelescopeOpts {
     mobx?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -148,6 +154,9 @@ interface TelescopeOpts {
     pinia?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -157,7 +166,7 @@ interface TelescopeOpts {
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
-export declare type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
-export declare type TelescopeOption = keyof TelescopeOpts;
+export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
+export type TelescopeOption = keyof TelescopeOpts;
 export declare const defaultTelescopeOptions: TelescopeOptions;
 export {};

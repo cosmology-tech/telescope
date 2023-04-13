@@ -73,12 +73,12 @@ npm install -g @osmonauts/telescope
 
 ### Generate
 
-Use the `generate` command to create a new package. 
+Use the `generate` command to create a new package.
 
 ```sh
 telescope generate
 cd ./your-new-project
-yarn 
+yarn
 ```
 ### Add Protobufs
 
@@ -98,7 +98,7 @@ telescope install @protobufs/osmosis
 
 ### Transpile
 
-To create the Typescript files, run the `transpile` command. 
+To create the Typescript files, run the `transpile` command.
 
 ```sh
 telescope transpile
@@ -224,7 +224,7 @@ telescope({
 ### LCD Client Options
 
 | option                         | description                                                     | defaults   |
-| ------------------------------ | --------------------------------------------------------------  | ---------- |   
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `lcdClients.enabled`           | generate LCD clients that can query proto `Query` messages      | `true`     |
 | `lcdClients.bundle`            | will generate factory bundle aggregate of all LCD Clients       | `true`     |
 | `lcdClients.scoped`            | will generate factory of scoped LCD Clients                     | `undefined`|
@@ -235,7 +235,7 @@ See [LCD Clients](#lcd-clients) for more info.
 ### RPC Client Options
 
 | option                         | description                                                     | defaults                      |
-| ------------------------------ | --------------------------------------------------------------  | ----------------------------- |    
+| ------------------------------ | --------------------------------------------------------------  | ----------------------------- |
 | `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      | `true`                        |
 | `rpcClients.bundle`            | will generate factory bundle aggregate of all RPC Clients       | `true`                        |
 | `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      | `true`                        |
@@ -257,23 +257,36 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
+| `reactQuery.include.protos`                            | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
+| `reactQuery.include.packages`                            | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
+| `reactQuery.include.patterns`                            | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
 
 #### Mobx
 
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `mobx.enabled`                   | if true, will create mobx stores that use `mobx`                        | `false`  |
+| `mobx.include.protos`                            | if set, will create the mobx stores on matched proto filenames or patterns using minimatch           | `[]`     |
+| `mobx.include.packages`                            | if set, will create the mobx stores on matched packages files using minimatch           | `[]`     |
+| `mobx.include.patterns`                            | if set, will create the mobx stores on matched patterns of proto files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+
 
 #### Pinia
 
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `pinia.enabled`                  | if true, will create pinia stores that use `pinia`                      | `false`  |
+| `mobx.include.protos`                            | if set, will create the pinia stores on matched proto filenames or patterns using minimatch           | `[]`     |
+| `mobx.include.packages`                            | if set, will create the pinia stores on matched packages files using minimatch           | `[]`     |
+| `mobx.include.patterns`                            | if set, will create the pinia stores on matched patterns of proto files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+
 
 ### Typings and Formating
 
-| option                                    | description                                                     | defaults  | 
+| option                                    | description                                                     | defaults  |
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
+| `prototypes.typingsFormat.customTypes.useCosmosSDKDec` | enable handling "prototypes.typingsFormat.customTypes.useCosmosSDKDec" proto custom type. Used to show decimal fields with the custom type correctly. Highly recommend set to true.    | `false`    |
+| `prototypes.typingsFormat.longLibrary` | 'long' or 'bigint', the way of generating int64 proto types, set to 'bigint' to enable using more stable built-in type   | `long`    |
 | `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `true`    |
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
@@ -281,7 +294,7 @@ See [RPC Clients](#rpc-clients) for more info.
 
 ### Protobuf parser
 
-| option                                    | description                                                     | defaults  | 
+| option                                    | description                                                     | defaults  |
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.parser.keepCase`              | passes `keepCase` to protobuf `parse()` to keep original casing | `true`   |
 | `prototypes.parser.alternateCommentMode`  | passes `alternateCommentMode` to protobuf `parse()` method      | `true`    |
@@ -313,6 +326,7 @@ See [RPC Clients](#rpc-clients) for more info.
 
 | option                         | description                                                        | defaults   |
 | ------------------------------ | -----------------------------------------------------------------  | ---------- |
+| `env`          | 'default' or 'v-next', set to 'v-next' to enable yet to release features                                             | `default`     |
 | `removeUnusedImports`          | removes unused imports                                             | `true`     |
 | `classesUseArrowFunctions`     | classes use arrow functions instead of `bind()`ing in constructors | `false`    |
 | `includeExternalHelpers`       | exports a few helpers functions in `extern.ts`                     | `false`    |
@@ -462,7 +476,7 @@ const res = await signAndBroadcast({
 
 ## LCD Clients
 
-For querying data via REST endpoints, you can use LCD Clients. For a better developer experience, you can generate a factory of scoped bundles of all LCD Clients with the `lcdClients` option. 
+For querying data via REST endpoints, you can use LCD Clients. For a better developer experience, you can generate a factory of scoped bundles of all LCD Clients with the `lcdClients` option.
 
 ```ts
 const options: TelescopeOptions = {
@@ -540,7 +554,7 @@ main().then(() => {
 ```
 ## RPC Clients
 
-For querying data via RPC endpoints, you can use RPC Clients. For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `rpcClients` option. 
+For querying data via RPC endpoints, you can use RPC Clients. For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `rpcClients` option.
 
 ```ts
 const options: TelescopeOptions = {
@@ -593,7 +607,7 @@ const main = async () => {
 
 If you want to instantiate a single client, you can generate RPC classes with the `rpcClients` option;
 
-For any module that has a `Msg`, `Query` or `Service` type, a 
+For any module that has a `Msg`, `Query` or `Service` type, a
 
 ```js
 import { osmosis, cosmos } from 'osmojs';
@@ -651,7 +665,7 @@ export const getCustomSigningClient = async ({ rpcEndpoint, signer }: { rpcEndpo
     ...osmosis.superfluid.AminoConverter
   });
 
-  // load the 
+  // load the
   osmosis.gamm.v1beta1.load(registry);
   osmosis.lockup.load(registry);
   osmosis.superfluid.load(registry);
@@ -673,7 +687,7 @@ Generate TypeScript SDKs for your CosmWasm smart contracts by using the `cosmwas
 ```ts
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 const options: TelescopeOptions = {
-  cosmwasm: { 
+  cosmwasm: {
     contracts: [
       {
         name: 'SG721',
@@ -722,7 +736,7 @@ Here is an example of a `config-overrides.js`:
 
 https://github.com/pyramation/osmosis-ui/blob/main/config-overrides.js
 
-### Babel 
+### Babel
 
 This should not be an issue, but if you experience problems with syntax or are not using `preset-env`, you may need these babel plugins:
 
