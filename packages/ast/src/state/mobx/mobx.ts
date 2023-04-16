@@ -44,33 +44,15 @@ export const createMobxQueryStores = (
 /**
  * Create an AST to generate creating store functions.
  * eg:
- * export const createRpcStores = (rpc: ProtobufRpcClient | undefined) => {
+ * export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
  *   const queryService = getQueryService(rpc);
  *
- *   class BalanceStoreInherited extends QueryStore<
- *     QueryBalanceRequest,
- *     QueryBalanceResponse
- *   > {
- *     constructor() {
- *       super(queryService?.balance);
- *       makeObservable(this, {
- *         state: override,
- *         request: override,
- *         response: override,
- *         isLoading: override,
- *         isSuccess: override,
- *         refetch: override,
- *         getData: override
- *       });
- *     }
- *
- *     balance(request: QueryBalanceRequest): MobxResponse<QueryBalanceResponse> {
- *       return this.getData(request);
- *     }
+ *   class QueryCertificatesStore {
+ *    ...
  *   }
  *
  *   return {
- *     BalanceStoreInherited
+ *     QueryCertificatesStore
  *   };
  * };
  * @param {Object=} context - context of generating the file
@@ -159,25 +141,10 @@ export const buildRpcStores = (
 /**
  * Create an AST of inherited store.
  * eg:
- *   class BalanceStore extends QueryStore<
- *     QueryBalanceRequest,
- *     QueryBalanceResponse
- *   > {
- *     constructor() {
- *       super(queryService?.balance);
- *       makeObservable(this, {
- *         state: override,
- *         request: override,
- *         response: override,
- *         isLoading: override,
- *         isSuccess: override,
- *         refetch: override,
- *         getData: override
- *       });
- *     }
- *
- *     balance(request: QueryBalanceRequest): MobxResponse<QueryBalanceResponse> {
- *       return this.getData(request);
+ *   class QueryCertificatesStore {
+ *     store = new QueryStore<QueryCertificatesRequest, QueryCertificatesResponse>(queryService?.certificates);
+ *     certificates(request: QueryCertificatesRequest) {
+ *       return this.store.getData(request);
  *     }
  *   }
  * @param {Object=} context - context of generating the file
