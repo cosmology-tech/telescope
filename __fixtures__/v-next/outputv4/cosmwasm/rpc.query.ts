@@ -29,6 +29,9 @@ export const createRPCQueryClient = async ({
         },
         tendermint: {
           v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
+        },
+        node: {
+          v1beta1: (await import("../cosmos/base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
       distribution: {

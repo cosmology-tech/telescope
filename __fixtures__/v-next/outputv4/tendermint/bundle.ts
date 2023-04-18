@@ -1,46 +1,46 @@
-import * as _305 from "./abci/types";
-import * as _306 from "./crypto/keys";
-import * as _307 from "./crypto/proof";
-import * as _308 from "./libs/bits/types";
-import * as _309 from "./p2p/types";
-import * as _310 from "./types/block";
-import * as _311 from "./types/evidence";
-import * as _312 from "./types/params";
-import * as _313 from "./types/types";
-import * as _314 from "./types/validator";
-import * as _315 from "./version/types";
-import * as _535 from "./abci/types.rpc.ABCIApplication";
-import * as _560 from "./lcd";
-import * as _561 from "./rpc.query";
+import * as _352 from "./abci/types";
+import * as _353 from "./crypto/keys";
+import * as _354 from "./crypto/proof";
+import * as _355 from "./libs/bits/types";
+import * as _356 from "./p2p/types";
+import * as _357 from "./types/block";
+import * as _358 from "./types/evidence";
+import * as _359 from "./types/params";
+import * as _360 from "./types/types";
+import * as _361 from "./types/validator";
+import * as _362 from "./version/types";
+import * as _623 from "./abci/types.rpc.ABCIApplication";
+import * as _648 from "./lcd";
+import * as _649 from "./rpc.query";
 export namespace tendermint {
   export const abci = {
-    ..._305,
-    ..._535
+    ..._352,
+    ..._623
   };
   export const crypto = {
-    ..._306,
-    ..._307
+    ..._353,
+    ..._354
   };
   export namespace libs {
     export const bits = {
-      ..._308
+      ..._355
     };
   }
   export const p2p = {
-    ..._309
+    ..._356
   };
   export const types = {
-    ..._310,
-    ..._311,
-    ..._312,
-    ..._313,
-    ..._314
+    ..._357,
+    ..._358,
+    ..._359,
+    ..._360,
+    ..._361
   };
   export const version = {
-    ..._315
+    ..._362
   };
   export const ClientFactory = {
-    ..._560,
-    ..._561
+    ..._648,
+    ..._649
   };
 }

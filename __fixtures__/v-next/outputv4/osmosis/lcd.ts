@@ -37,6 +37,11 @@ export const createLCDClient = async ({
           v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
             requestClient
           })
+        },
+        node: {
+          v1beta1: new (await import("../cosmos/base/node/v1beta1/query.lcd")).LCDQueryClient({
+            requestClient
+          })
         }
       },
       distribution: {
@@ -158,6 +163,36 @@ export const createLCDClient = async ({
       },
       txfees: {
         v1beta1: new (await import("./txfees/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      concentratedliquidity: {
+        v1beta1: new (await import("./concentrated-liquidity/pool-model/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      cosmwasmpool: {
+        v1beta1: new (await import("./cosmwasmpool/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      downtimedetector: {
+        v1beta1: new (await import("./downtime-detector/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      poolmanager: {
+        v1beta1: new (await import("./poolmanager/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      protorev: {
+        v1beta1: new (await import("./protorev/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      valsetpref: {
+        v1beta1: new (await import("./valset-pref/v1beta1/query.lcd")).LCDQueryClient({
           requestClient
         })
       }

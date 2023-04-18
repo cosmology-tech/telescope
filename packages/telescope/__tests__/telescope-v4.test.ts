@@ -27,6 +27,8 @@ const options: TelescopeOptions = {
     files: ['akash/deployment/v1beta1/deployment.ts']
   },
 
+  experimentalGlobalProtoNamespace: true, //  [ 'v1beta1' ] concentratedliquidity
+
   eslintDisable: {
     disableAll: false,
     patterns: ['akash/**/*amino.ts'],
@@ -236,7 +238,14 @@ const options: TelescopeOptions = {
 
 const input: TelescopeInput = {
   outPath,
-  protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
+  protoDirs: [
+    __dirname + '/../../../__fixtures__/chain1',
+    __dirname + '/../../../__fixtures__/osmojs/ics23/proto',
+    __dirname + '/../../../__fixtures__/osmojs/cosmos-sdk/proto',
+    __dirname + '/../../../__fixtures__/osmojs/ibc-go/proto',
+    __dirname + '/../../../__fixtures__/osmojs/wasmd/proto',
+    __dirname + '/../../../__fixtures__/osmojs/osmosis/proto',
+  ],
   options
 };
 

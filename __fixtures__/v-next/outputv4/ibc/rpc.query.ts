@@ -29,6 +29,9 @@ export const createRPCQueryClient = async ({
         },
         tendermint: {
           v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
+        },
+        node: {
+          v1beta1: (await import("../cosmos/base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
       distribution: {
@@ -73,6 +76,17 @@ export const createRPCQueryClient = async ({
       applications: {
         transfer: {
           v1: (await import("./applications/transfer/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        },
+        fee: {
+          v1: (await import("./applications/fee/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        },
+        interchain_accounts: {
+          controller: {
+            v1: (await import("./applications/interchain_accounts/controller/v1/query.rpc.Query")).createRpcQueryExtension(client)
+          },
+          host: {
+            v1: (await import("./applications/interchain_accounts/host/v1/query.rpc.Query")).createRpcQueryExtension(client)
+          }
         }
       },
       core: {

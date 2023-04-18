@@ -37,6 +37,11 @@ export const createLCDClient = async ({
           v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
             requestClient
           })
+        },
+        node: {
+          v1beta1: new (await import("../cosmos/base/node/v1beta1/query.lcd")).LCDQueryClient({
+            requestClient
+          })
         }
       },
       distribution: {
@@ -109,6 +114,23 @@ export const createLCDClient = async ({
           v1: new (await import("./applications/transfer/v1/query.lcd")).LCDQueryClient({
             requestClient
           })
+        },
+        fee: {
+          v1: new (await import("./applications/fee/v1/query.lcd")).LCDQueryClient({
+            requestClient
+          })
+        },
+        interchain_accounts: {
+          controller: {
+            v1: new (await import("./applications/interchain_accounts/controller/v1/query.lcd")).LCDQueryClient({
+              requestClient
+            })
+          },
+          host: {
+            v1: new (await import("./applications/interchain_accounts/host/v1/query.lcd")).LCDQueryClient({
+              requestClient
+            })
+          }
         }
       },
       core: {

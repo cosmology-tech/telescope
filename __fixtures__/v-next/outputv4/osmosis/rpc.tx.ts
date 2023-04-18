@@ -63,6 +63,18 @@ export const createRPCMsgClient = async ({
     superfluid: new (await import("./superfluid/tx.rpc.msg")).MsgClientImpl(rpc),
     tokenfactory: {
       v1beta1: new (await import("./tokenfactory/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+    },
+    concentratedliquidity: {
+      v1beta1: new (await import("./concentrated-liquidity/tx.rpc.msg")).MsgClientImpl(rpc)
+    },
+    poolmanager: {
+      v1beta1: new (await import("./poolmanager/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+    },
+    protorev: {
+      v1beta1: new (await import("./protorev/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+    },
+    valsetpref: {
+      v1beta1: new (await import("./valset-pref/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
     }
   }
 });
