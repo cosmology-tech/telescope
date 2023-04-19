@@ -21,8 +21,6 @@ export * from "./ibc/client";
 export * from "./osmosis/bundle";
 export * from "./osmosis/client";
 export * from "./tendermint/bundle";
-export * from "./amino/bundle";
-export * from "./capability/bundle";
 export * from "./hooks";
 export * from "./mobx.stores";
 export * from "./extern";

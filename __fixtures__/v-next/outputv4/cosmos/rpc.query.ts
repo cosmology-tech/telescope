@@ -29,9 +29,6 @@ export const createRPCQueryClient = async ({
         },
         tendermint: {
           v1beta1: (await import("./base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
-        },
-        node: {
-          v1beta1: (await import("./base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
       distribution: {

@@ -29,9 +29,6 @@ export const createRPCQueryClient = async ({
         },
         tendermint: {
           v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
-        },
-        node: {
-          v1beta1: (await import("../cosmos/base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
       distribution: {
@@ -103,24 +100,6 @@ export const createRPCQueryClient = async ({
       },
       txfees: {
         v1beta1: (await import("./txfees/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      concentratedliquidity: {
-        v1beta1: (await import("./concentrated-liquidity/pool-model/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      cosmwasmpool: {
-        v1beta1: (await import("./cosmwasmpool/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      downtimedetector: {
-        v1beta1: (await import("./downtime-detector/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      poolmanager: {
-        v1beta1: (await import("./poolmanager/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      protorev: {
-        v1beta1: (await import("./protorev/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      valsetpref: {
-        v1beta1: (await import("./valset-pref/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       }
     }
   };
