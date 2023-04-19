@@ -319,7 +319,14 @@ export namespace osmosis {
     };
   }
   export const concentratedliquidity = {
-    ..._329
+    ..._329,
+    v1beta1: {
+      ..._557,
+      ..._568,
+      ..._585,
+      ..._604,
+      ..._617
+    }
   };
   export namespace cosmwasmpool {
     export const v1beta1 = {
