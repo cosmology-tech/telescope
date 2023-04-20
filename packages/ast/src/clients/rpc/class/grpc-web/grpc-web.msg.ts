@@ -341,7 +341,13 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
             )
         });
     
-    const methodsDesc = [] 
+    const methodsDesc = []
+    
+    //check if service name is 'service' if it is then ommit it because proto method doesn't contain service prefix in it methods
+    let service_name = service.name
+    if (service_name == 'Service') {
+        service_name = ''
+    }
 
     for (let i = 0; i < methods.length; i++) {
         const methodName = methods[i].methodName
@@ -352,7 +358,7 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
                 'const',
                 [
                     t.variableDeclarator(
-                        t.identifier(service.name + methodName + 'Desc: UnaryMethodDefinitionish'),
+                        t.identifier(service_name + methodName + 'Desc: UnaryMethodDefinitionish'),
                         t.objectExpression(
                             [
                                 t.objectProperty(

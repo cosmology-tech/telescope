@@ -61,7 +61,7 @@ export class ServiceClientImpl implements Service {
 export const ServiceDesc = {
   serviceName: "cosmos.tx.v1beta1.Service"
 };
-export const ServiceSimulateDesc: UnaryMethodDefinitionish = {
+export const SimulateDesc: UnaryMethodDefinitionish = {
   methodName: "Simulate",
   service: ServiceDesc,
   requestStream: false,
@@ -85,7 +85,7 @@ export const ServiceSimulateDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
-export const ServiceGetTxDesc: UnaryMethodDefinitionish = {
+export const GetTxDesc: UnaryMethodDefinitionish = {
   methodName: "GetTx",
   service: ServiceDesc,
   requestStream: false,
@@ -109,7 +109,7 @@ export const ServiceGetTxDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
-export const ServiceBroadcastTxDesc: UnaryMethodDefinitionish = {
+export const BroadcastTxDesc: UnaryMethodDefinitionish = {
   methodName: "BroadcastTx",
   service: ServiceDesc,
   requestStream: false,
@@ -133,7 +133,7 @@ export const ServiceBroadcastTxDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
-export const ServiceGetTxsEventDesc: UnaryMethodDefinitionish = {
+export const GetTxsEventDesc: UnaryMethodDefinitionish = {
   methodName: "GetTxsEvent",
   service: ServiceDesc,
   requestStream: false,
@@ -157,7 +157,7 @@ export const ServiceGetTxsEventDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
-export const ServiceGetBlockWithTxsDesc: UnaryMethodDefinitionish = {
+export const GetBlockWithTxsDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlockWithTxs",
   service: ServiceDesc,
   requestStream: false,
