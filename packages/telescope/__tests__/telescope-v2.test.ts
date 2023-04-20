@@ -5,7 +5,7 @@ import { TelescopeInput } from '../src';
 import { kebab } from "case";
 import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
-import { TelescopeParseContext } from '../types/src/build';
+import { TelescopeParseContext } from '../src/build';
 
 const outPath = __dirname + '/../../../__fixtures__/v-next/outputv2';
 const store = getTestProtoStore();
@@ -15,7 +15,7 @@ store.traverseAll();
 const options: TelescopeOptions = {
 
   env: 'v-next',
-  removeUnusedImports: false,
+  removeUnusedImports: true,
   classesUseArrowFunctions: false,
 
   tsDisable: {
@@ -63,10 +63,10 @@ const options: TelescopeOptions = {
       toSDK: true,
       fromSDK: true,
       //
-      toAmino: true,
-      fromAmino: true,
-      fromProto: true,
-      toProto: true
+      toAmino: false,
+      fromAmino: false,
+      fromProto: false,
+      toProto: false
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
