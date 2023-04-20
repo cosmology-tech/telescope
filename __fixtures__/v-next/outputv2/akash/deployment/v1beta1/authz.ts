@@ -2,11 +2,11 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
-
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
+
 export interface DepositDeploymentAuthorization {
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
@@ -18,11 +18,11 @@ export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: Uint8Array;
 }
-
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
+
 export interface DepositDeploymentAuthorizationAmino {
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
@@ -34,11 +34,11 @@ export interface DepositDeploymentAuthorizationAminoMsg {
   type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: DepositDeploymentAuthorizationAmino;
 }
-
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
+
 export interface DepositDeploymentAuthorizationSDKType {
   spend_limit?: CoinSDKType;
 }

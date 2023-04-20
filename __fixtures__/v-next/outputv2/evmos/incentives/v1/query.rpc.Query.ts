@@ -1,38 +1,33 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./genesis";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesResponse, QueryIncentivesResponseSDKType, QueryIncentiveRequest, QueryIncentiveRequestSDKType, QueryIncentiveResponse, QueryIncentiveResponseSDKType, QueryGasMetersRequest, QueryGasMetersRequestSDKType, QueryGasMetersResponse, QueryGasMetersResponseSDKType, QueryGasMeterRequest, QueryGasMeterRequestSDKType, QueryGasMeterResponse, QueryGasMeterResponseSDKType, QueryAllocationMetersRequest, QueryAllocationMetersRequestSDKType, QueryAllocationMetersResponse, QueryAllocationMetersResponseSDKType, QueryAllocationMeterRequest, QueryAllocationMeterRequestSDKType, QueryAllocationMeterResponse, QueryAllocationMeterResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
+import { QueryIncentivesRequest, QueryIncentivesResponse, QueryIncentiveRequest, QueryIncentiveResponse, QueryGasMetersRequest, QueryGasMetersResponse, QueryGasMeterRequest, QueryGasMeterResponse, QueryAllocationMetersRequest, QueryAllocationMetersResponse, QueryAllocationMeterRequest, QueryAllocationMeterResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
 /** Query defines the gRPC querier service. */
+
 export interface Query {
   /** Incentives retrieves registered incentives */
   incentives(request?: DeepPartial<QueryIncentivesRequest>, metadata?: grpc.Metadata): Promise<QueryIncentivesResponse>;
-
   /** Incentive retrieves a registered incentive */
+
   incentive(request: DeepPartial<QueryIncentiveRequest>, metadata?: grpc.Metadata): Promise<QueryIncentiveResponse>;
-
   /** GasMeters retrieves active gas meters for a given contract */
+
   gasMeters(request: DeepPartial<QueryGasMetersRequest>, metadata?: grpc.Metadata): Promise<QueryGasMetersResponse>;
-
   /** GasMeter Retrieves a active gas meter */
-  gasMeter(request: DeepPartial<QueryGasMeterRequest>, metadata?: grpc.Metadata): Promise<QueryGasMeterResponse>;
 
+  gasMeter(request: DeepPartial<QueryGasMeterRequest>, metadata?: grpc.Metadata): Promise<QueryGasMeterResponse>;
   /**
    * AllocationMeters retrieves active allocation meters for a given
    * denomination
    */
+
   allocationMeters(request?: DeepPartial<QueryAllocationMetersRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMetersResponse>;
-
   /** AllocationMeter Retrieves a active gas meter */
-  allocationMeter(request: DeepPartial<QueryAllocationMeterRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMeterResponse>;
 
+  allocationMeter(request: DeepPartial<QueryAllocationMeterRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMeterResponse>;
   /** Params retrieves the incentives module params */
+
   params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {

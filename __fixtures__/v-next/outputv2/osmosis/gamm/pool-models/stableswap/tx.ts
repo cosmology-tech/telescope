@@ -3,8 +3,8 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/co
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateStableswapPool {
   sender: string;
   poolParams?: PoolParams;
@@ -17,8 +17,8 @@ export interface MsgCreateStableswapPoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool";
   value: Uint8Array;
 }
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateStableswapPoolAmino {
   sender: string;
   pool_params?: PoolParamsAmino;
@@ -31,8 +31,8 @@ export interface MsgCreateStableswapPoolAminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
   value: MsgCreateStableswapPoolAmino;
 }
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
   pool_params?: PoolParamsSDKType;
@@ -41,8 +41,8 @@ export interface MsgCreateStableswapPoolSDKType {
   future_pool_governor: string;
   scaling_factor_controller: string;
 }
-
 /** Returns a poolID with custom poolName. */
+
 export interface MsgCreateStableswapPoolResponse {
   poolId: Long;
 }
@@ -50,8 +50,8 @@ export interface MsgCreateStableswapPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse";
   value: Uint8Array;
 }
-
 /** Returns a poolID with custom poolName. */
+
 export interface MsgCreateStableswapPoolResponseAmino {
   pool_id: string;
 }
@@ -59,16 +59,16 @@ export interface MsgCreateStableswapPoolResponseAminoMsg {
   type: "osmosis/gamm/create-stableswap-pool-response";
   value: MsgCreateStableswapPoolResponseAmino;
 }
-
 /** Returns a poolID with custom poolName. */
+
 export interface MsgCreateStableswapPoolResponseSDKType {
   pool_id: Long;
 }
-
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
+
 export interface MsgStableSwapAdjustScalingFactors {
   sender: string;
   poolId: Long;
@@ -78,11 +78,11 @@ export interface MsgStableSwapAdjustScalingFactorsProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors";
   value: Uint8Array;
 }
-
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
+
 export interface MsgStableSwapAdjustScalingFactorsAmino {
   sender: string;
   pool_id: string;
@@ -92,11 +92,11 @@ export interface MsgStableSwapAdjustScalingFactorsAminoMsg {
   type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
   value: MsgStableSwapAdjustScalingFactorsAmino;
 }
-
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
+
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
   sender: string;
   pool_id: Long;

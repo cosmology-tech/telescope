@@ -3,8 +3,8 @@ import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPay
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
-
 /** QueryAccountRequest is request type for the Query/Account RPC method */
+
 export interface QueryAccountsRequest {
   scope: string;
   xid: string;
@@ -16,8 +16,8 @@ export interface QueryAccountsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest";
   value: Uint8Array;
 }
-
 /** QueryAccountRequest is request type for the Query/Account RPC method */
+
 export interface QueryAccountsRequestAmino {
   scope: string;
   xid: string;
@@ -29,8 +29,8 @@ export interface QueryAccountsRequestAminoMsg {
   type: "/akash.escrow.v1beta2.QueryAccountsRequest";
   value: QueryAccountsRequestAmino;
 }
-
 /** QueryAccountRequest is request type for the Query/Account RPC method */
+
 export interface QueryAccountsRequestSDKType {
   scope: string;
   xid: string;
@@ -38,8 +38,8 @@ export interface QueryAccountsRequestSDKType {
   state: string;
   pagination?: PageRequestSDKType;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
@@ -48,8 +48,8 @@ export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsResponse";
   value: Uint8Array;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryAccountsResponseAmino {
   accounts: AccountAmino[];
   pagination?: PageResponseAmino;
@@ -58,14 +58,14 @@ export interface QueryAccountsResponseAminoMsg {
   type: "/akash.escrow.v1beta2.QueryAccountsResponse";
   value: QueryAccountsResponseAmino;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryAccountsResponseSDKType {
   accounts: AccountSDKType[];
   pagination?: PageResponseSDKType;
 }
-
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
+
 export interface QueryPaymentsRequest {
   scope: string;
   xid: string;
@@ -78,8 +78,8 @@ export interface QueryPaymentsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest";
   value: Uint8Array;
 }
-
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
+
 export interface QueryPaymentsRequestAmino {
   scope: string;
   xid: string;
@@ -92,8 +92,8 @@ export interface QueryPaymentsRequestAminoMsg {
   type: "/akash.escrow.v1beta2.QueryPaymentsRequest";
   value: QueryPaymentsRequestAmino;
 }
-
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
+
 export interface QueryPaymentsRequestSDKType {
   scope: string;
   xid: string;
@@ -102,8 +102,8 @@ export interface QueryPaymentsRequestSDKType {
   state: string;
   pagination?: PageRequestSDKType;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
   pagination?: PageResponse;
@@ -112,8 +112,8 @@ export interface QueryPaymentsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsResponse";
   value: Uint8Array;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryPaymentsResponseAmino {
   payments: FractionalPaymentAmino[];
   pagination?: PageResponseAmino;
@@ -122,8 +122,8 @@ export interface QueryPaymentsResponseAminoMsg {
   type: "/akash.escrow.v1beta2.QueryPaymentsResponse";
   value: QueryPaymentsResponseAmino;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryPaymentsResponseSDKType {
   payments: FractionalPaymentSDKType[];
   pagination?: PageResponseSDKType;

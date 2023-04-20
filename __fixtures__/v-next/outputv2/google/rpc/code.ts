@@ -1,5 +1,4 @@
 export const protobufPackage = "google.rpc";
-
 /**
  * The canonical error codes for gRPC APIs.
  * 
@@ -9,6 +8,7 @@ export const protobufPackage = "google.rpc";
  * `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
  * Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
  */
+
 export enum Code {
   /**
    * OK - Not an error; returned on success

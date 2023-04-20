@@ -1,63 +1,63 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
-
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
+
 export interface Incentive {
   /** contract address */
   contract: string;
-
   /** denoms and percentage of rewards to be allocated */
+
   allocations: DecCoin[];
-
   /** number of remaining epochs */
+
   epochs: number;
-
   /** distribution start time */
-  startTime?: Date;
 
+  startTime?: Date;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
+
   totalGas: Long;
 }
 export interface IncentiveProtoMsg {
   typeUrl: "/evmos.incentives.v1.Incentive";
   value: Uint8Array;
 }
-
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
+
 export interface IncentiveAmino {
   /** contract address */
   contract: string;
-
   /** denoms and percentage of rewards to be allocated */
+
   allocations: DecCoinAmino[];
-
   /** number of remaining epochs */
+
   epochs: number;
-
   /** distribution start time */
-  start_time?: Date;
 
+  start_time?: Date;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
+
   total_gas: string;
 }
 export interface IncentiveAminoMsg {
   type: "/evmos.incentives.v1.Incentive";
   value: IncentiveAmino;
 }
-
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
+
 export interface IncentiveSDKType {
   contract: string;
   allocations: DecCoinSDKType[];
@@ -65,91 +65,91 @@ export interface IncentiveSDKType {
   start_time?: Date;
   total_gas: Long;
 }
-
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
+
 export interface GasMeter {
   /** hex address of the incentivized contract */
   contract: string;
-
   /** participant address that interacts with the incentive */
-  participant: string;
 
+  participant: string;
   /** cumulative gas spent during the epoch */
+
   cumulativeGas: Long;
 }
 export interface GasMeterProtoMsg {
   typeUrl: "/evmos.incentives.v1.GasMeter";
   value: Uint8Array;
 }
-
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
+
 export interface GasMeterAmino {
   /** hex address of the incentivized contract */
   contract: string;
-
   /** participant address that interacts with the incentive */
-  participant: string;
 
+  participant: string;
   /** cumulative gas spent during the epoch */
+
   cumulative_gas: string;
 }
 export interface GasMeterAminoMsg {
   type: "/evmos.incentives.v1.GasMeter";
   value: GasMeterAmino;
 }
-
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
+
 export interface GasMeterSDKType {
   contract: string;
   participant: string;
   cumulative_gas: Long;
 }
-
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
+
 export interface RegisterIncentiveProposal {
   /** title of the proposal */
   title: string;
-
   /** proposal description */
+
   description: string;
-
   /** contract address */
+
   contract: string;
-
   /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoin[];
 
+  allocations: DecCoin[];
   /** number of remaining epochs */
+
   epochs: number;
 }
 export interface RegisterIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
   value: Uint8Array;
 }
-
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
+
 export interface RegisterIncentiveProposalAmino {
   /** title of the proposal */
   title: string;
-
   /** proposal description */
+
   description: string;
-
   /** contract address */
+
   contract: string;
-
   /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoinAmino[];
 
+  allocations: DecCoinAmino[];
   /** number of remaining epochs */
+
   epochs: number;
 }
 export interface RegisterIncentiveProposalAminoMsg {
   type: "/evmos.incentives.v1.RegisterIncentiveProposal";
   value: RegisterIncentiveProposalAmino;
 }
-
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
+
 export interface RegisterIncentiveProposalSDKType {
   title: string;
   description: string;
@@ -157,40 +157,40 @@ export interface RegisterIncentiveProposalSDKType {
   allocations: DecCoinSDKType[];
   epochs: number;
 }
-
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+
 export interface CancelIncentiveProposal {
   /** title of the proposal */
   title: string;
-
   /** proposal description */
-  description: string;
 
+  description: string;
   /** contract address */
+
   contract: string;
 }
 export interface CancelIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";
   value: Uint8Array;
 }
-
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+
 export interface CancelIncentiveProposalAmino {
   /** title of the proposal */
   title: string;
-
   /** proposal description */
-  description: string;
 
+  description: string;
   /** contract address */
+
   contract: string;
 }
 export interface CancelIncentiveProposalAminoMsg {
   type: "/evmos.incentives.v1.CancelIncentiveProposal";
   value: CancelIncentiveProposalAmino;
 }
-
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+
 export interface CancelIncentiveProposalSDKType {
   title: string;
   description: string;

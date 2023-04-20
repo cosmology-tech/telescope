@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -59,34 +58,34 @@ export const protobufPackage = "google.api";
  * The directive `suppress_warning` does not directly affect documentation
  * and is documented together with service config validation.
  */
+
 export interface Documentation {
   /**
    * A short summary of what the service does. Can only be provided by
    * plain text.
    */
   summary: string;
-
   /** The top level pages for the documentation set. */
-  pages: Page[];
 
+  pages: Page[];
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
+
   rules: DocumentationRule[];
-
   /** The URL to the root of documentation. */
-  documentationRootUrl: string;
 
+  documentationRootUrl: string;
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-  serviceRootUrl: string;
 
+  serviceRootUrl: string;
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -102,13 +101,13 @@ export interface Documentation {
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
+
   overview: string;
 }
 export interface DocumentationProtoMsg {
   typeUrl: "/google.api.Documentation";
   value: Uint8Array;
 }
-
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -166,34 +165,34 @@ export interface DocumentationProtoMsg {
  * The directive `suppress_warning` does not directly affect documentation
  * and is documented together with service config validation.
  */
+
 export interface DocumentationAmino {
   /**
    * A short summary of what the service does. Can only be provided by
    * plain text.
    */
   summary: string;
-
   /** The top level pages for the documentation set. */
-  pages: PageAmino[];
 
+  pages: PageAmino[];
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
+
   rules: DocumentationRuleAmino[];
-
   /** The URL to the root of documentation. */
-  documentation_root_url: string;
 
+  documentation_root_url: string;
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-  service_root_url: string;
 
+  service_root_url: string;
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -209,13 +208,13 @@ export interface DocumentationAmino {
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
+
   overview: string;
 }
 export interface DocumentationAminoMsg {
   type: "/google.api.Documentation";
   value: DocumentationAmino;
 }
-
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -273,6 +272,7 @@ export interface DocumentationAminoMsg {
  * The directive `suppress_warning` does not directly affect documentation
  * and is documented together with service config validation.
  */
+
 export interface DocumentationSDKType {
   summary: string;
   pages: PageSDKType[];
@@ -281,8 +281,8 @@ export interface DocumentationSDKType {
   service_root_url: string;
   overview: string;
 }
-
 /** A documentation rule provides information about individual API elements. */
+
 export interface DocumentationRule {
   /**
    * The selector is a comma-separated list of patterns. Each pattern is a
@@ -293,22 +293,22 @@ export interface DocumentationRule {
    * applicable elements, the whole pattern "*" is used.
    */
   selector: string;
-
   /** Description of the selected API(s). */
-  description: string;
 
+  description: string;
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
+
   deprecationDescription: string;
 }
 export interface DocumentationRuleProtoMsg {
   typeUrl: "/google.api.DocumentationRule";
   value: Uint8Array;
 }
-
 /** A documentation rule provides information about individual API elements. */
+
 export interface DocumentationRuleAmino {
   /**
    * The selector is a comma-separated list of patterns. Each pattern is a
@@ -319,32 +319,32 @@ export interface DocumentationRuleAmino {
    * applicable elements, the whole pattern "*" is used.
    */
   selector: string;
-
   /** Description of the selected API(s). */
-  description: string;
 
+  description: string;
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
+
   deprecation_description: string;
 }
 export interface DocumentationRuleAminoMsg {
   type: "/google.api.DocumentationRule";
   value: DocumentationRuleAmino;
 }
-
 /** A documentation rule provides information about individual API elements. */
+
 export interface DocumentationRuleSDKType {
   selector: string;
   description: string;
   deprecation_description: string;
 }
-
 /**
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
+
 export interface Page {
   /**
    * The name of the page. It will be used as an identity of the page to
@@ -363,28 +363,28 @@ export interface Page {
    * `[Java][Tutorial.Java]`.
    */
   name: string;
-
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-  content: string;
 
+  content: string;
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
+
   subpages: Page[];
 }
 export interface PageProtoMsg {
   typeUrl: "/google.api.Page";
   value: Uint8Array;
 }
-
 /**
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
+
 export interface PageAmino {
   /**
    * The name of the page. It will be used as an identity of the page to
@@ -403,28 +403,28 @@ export interface PageAmino {
    * `[Java][Tutorial.Java]`.
    */
   name: string;
-
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-  content: string;
 
+  content: string;
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
+
   subpages: PageAmino[];
 }
 export interface PageAminoMsg {
   type: "/google.api.Page";
   value: PageAmino;
 }
-
 /**
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
+
 export interface PageSDKType {
   name: string;
   content: string;

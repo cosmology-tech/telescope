@@ -1,8 +1,7 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
-
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -12,6 +11,7 @@ export const protobufPackage = "cosmos.app.v1alpha1";
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
+
 export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
@@ -20,7 +20,6 @@ export interface ConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.Config";
   value: Uint8Array;
 }
-
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -30,6 +29,7 @@ export interface ConfigProtoMsg {
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
+
 export interface ConfigAmino {
   /** modules are the module configurations for the app. */
   modules: ModuleConfigAmino[];
@@ -38,7 +38,6 @@ export interface ConfigAminoMsg {
   type: "cosmos-sdk/Config";
   value: ConfigAmino;
 }
-
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -48,11 +47,12 @@ export interface ConfigAminoMsg {
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
+
 export interface ConfigSDKType {
   modules: ModuleConfigSDKType[];
 }
-
 /** ModuleConfig is a module configuration for an app. */
+
 export interface ModuleConfig {
   /**
    * name is the unique name of the module within the app. It should be a name
@@ -67,19 +67,19 @@ export interface ModuleConfig {
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
-
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
+
   config?: Any;
 }
 export interface ModuleConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
   value: Uint8Array;
 }
-
 /** ModuleConfig is a module configuration for an app. */
+
 export interface ModuleConfigAmino {
   /**
    * name is the unique name of the module within the app. It should be a name
@@ -94,19 +94,19 @@ export interface ModuleConfigAmino {
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
-
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
+
   config?: AnyAmino;
 }
 export interface ModuleConfigAminoMsg {
   type: "cosmos-sdk/ModuleConfig";
   value: ModuleConfigAmino;
 }
-
 /** ModuleConfig is a module configuration for an app. */
+
 export interface ModuleConfigSDKType {
   name: string;
   config?: AnySDKType;

@@ -1,29 +1,28 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
-
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+
 export interface MsgCreateClawbackVestingAccount {
   /**
    * from_address specifies the account to provide the funds and sign the
    * clawback request
    */
   fromAddress: string;
-
   /** to_address specifies the account to receive the funds */
+
   toAddress: string;
-
   /** start_time defines the time at which the vesting period begins */
+
   startTime?: Date;
-
   /** lockup_periods defines the unlocking schedule relative to the start_time */
+
   lockupPeriods: Period[];
-
   /** vesting_periods defines thevesting schedule relative to the start_time */
-  vestingPeriods: Period[];
 
+  vestingPeriods: Period[];
   /**
    * merge specifies a the creation mechanism for existing
    * ClawbackVestingAccounts. If true, merge this new grant into an existing
@@ -31,33 +30,33 @@ export interface MsgCreateClawbackVestingAccount {
    * creates a new account. New grants to an existing account must be from the
    * same from_address.
    */
+
   merge: boolean;
 }
 export interface MsgCreateClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: Uint8Array;
 }
-
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+
 export interface MsgCreateClawbackVestingAccountAmino {
   /**
    * from_address specifies the account to provide the funds and sign the
    * clawback request
    */
   from_address: string;
-
   /** to_address specifies the account to receive the funds */
+
   to_address: string;
-
   /** start_time defines the time at which the vesting period begins */
+
   start_time?: Date;
-
   /** lockup_periods defines the unlocking schedule relative to the start_time */
+
   lockup_periods: PeriodAmino[];
-
   /** vesting_periods defines thevesting schedule relative to the start_time */
-  vesting_periods: PeriodAmino[];
 
+  vesting_periods: PeriodAmino[];
   /**
    * merge specifies a the creation mechanism for existing
    * ClawbackVestingAccounts. If true, merge this new grant into an existing
@@ -65,14 +64,15 @@ export interface MsgCreateClawbackVestingAccountAmino {
    * creates a new account. New grants to an existing account must be from the
    * same from_address.
    */
+
   merge: boolean;
 }
 export interface MsgCreateClawbackVestingAccountAminoMsg {
   type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: MsgCreateClawbackVestingAccountAmino;
 }
-
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
   to_address: string;
@@ -81,104 +81,104 @@ export interface MsgCreateClawbackVestingAccountSDKType {
   vesting_periods: PeriodSDKType[];
   merge: boolean;
 }
-
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
  */
+
 export interface MsgCreateClawbackVestingAccountResponse {}
 export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
   value: Uint8Array;
 }
-
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
  */
+
 export interface MsgCreateClawbackVestingAccountResponseAmino {}
 export interface MsgCreateClawbackVestingAccountResponseAminoMsg {
   type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
   value: MsgCreateClawbackVestingAccountResponseAmino;
 }
-
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
  */
-export interface MsgCreateClawbackVestingAccountResponseSDKType {}
 
+export interface MsgCreateClawbackVestingAccountResponseSDKType {}
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
  */
+
 export interface MsgClawback {
   /** funder_address is the address which funded the account */
   funderAddress: string;
-
   /** account_address is the address of the ClawbackVestingAccount to claw back from. */
-  accountAddress: string;
 
+  accountAddress: string;
   /**
    * dest_address specifies where the clawed-back tokens should be transferred
    * to. If empty, the tokens will be transferred back to the original funder of
    * the account.
    */
+
   destAddress: string;
 }
 export interface MsgClawbackProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawback";
   value: Uint8Array;
 }
-
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
  */
+
 export interface MsgClawbackAmino {
   /** funder_address is the address which funded the account */
   funder_address: string;
-
   /** account_address is the address of the ClawbackVestingAccount to claw back from. */
-  account_address: string;
 
+  account_address: string;
   /**
    * dest_address specifies where the clawed-back tokens should be transferred
    * to. If empty, the tokens will be transferred back to the original funder of
    * the account.
    */
+
   dest_address: string;
 }
 export interface MsgClawbackAminoMsg {
   type: "/evmos.vesting.v1.MsgClawback";
   value: MsgClawbackAmino;
 }
-
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
  */
+
 export interface MsgClawbackSDKType {
   funder_address: string;
   account_address: string;
   dest_address: string;
 }
-
 /** MsgClawbackResponse defines the MsgClawback response type. */
+
 export interface MsgClawbackResponse {}
 export interface MsgClawbackResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
   value: Uint8Array;
 }
-
 /** MsgClawbackResponse defines the MsgClawback response type. */
+
 export interface MsgClawbackResponseAmino {}
 export interface MsgClawbackResponseAminoMsg {
   type: "/evmos.vesting.v1.MsgClawbackResponse";
   value: MsgClawbackResponseAmino;
 }
-
 /** MsgClawbackResponse defines the MsgClawback response type. */
+
 export interface MsgClawbackResponseSDKType {}
 
 function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAccount {

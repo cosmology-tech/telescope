@@ -95,8 +95,8 @@ export interface GaugesRequestSDKType {
 export interface GaugesResponse {
   /** Upcoming and active gauges */
   data: Gauge[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponse;
 }
 export interface GaugesResponseProtoMsg {
@@ -106,8 +106,8 @@ export interface GaugesResponseProtoMsg {
 export interface GaugesResponseAmino {
   /** Upcoming and active gauges */
   data: GaugeAmino[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponseAmino;
 }
 export interface GaugesResponseAminoMsg {
@@ -140,8 +140,8 @@ export interface ActiveGaugesRequestSDKType {
 export interface ActiveGaugesResponse {
   /** Active gagues only */
   data: Gauge[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponse;
 }
 export interface ActiveGaugesResponseProtoMsg {
@@ -151,8 +151,8 @@ export interface ActiveGaugesResponseProtoMsg {
 export interface ActiveGaugesResponseAmino {
   /** Active gagues only */
   data: GaugeAmino[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponseAmino;
 }
 export interface ActiveGaugesResponseAminoMsg {
@@ -166,8 +166,8 @@ export interface ActiveGaugesResponseSDKType {
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
   denom: string;
-
   /** Pagination defines pagination for the request */
+
   pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestProtoMsg {
@@ -177,8 +177,8 @@ export interface ActiveGaugesPerDenomRequestProtoMsg {
 export interface ActiveGaugesPerDenomRequestAmino {
   /** Desired denom when querying active gagues */
   denom: string;
-
   /** Pagination defines pagination for the request */
+
   pagination?: PageRequestAmino;
 }
 export interface ActiveGaugesPerDenomRequestAminoMsg {
@@ -192,8 +192,8 @@ export interface ActiveGaugesPerDenomRequestSDKType {
 export interface ActiveGaugesPerDenomResponse {
   /** Active gagues that match denom in query */
   data: Gauge[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomResponseProtoMsg {
@@ -203,8 +203,8 @@ export interface ActiveGaugesPerDenomResponseProtoMsg {
 export interface ActiveGaugesPerDenomResponseAmino {
   /** Active gagues that match denom in query */
   data: GaugeAmino[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponseAmino;
 }
 export interface ActiveGaugesPerDenomResponseAminoMsg {
@@ -237,8 +237,8 @@ export interface UpcomingGaugesRequestSDKType {
 export interface UpcomingGaugesResponse {
   /** Gauges whose distribution is upcoming */
   data: Gauge[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesResponseProtoMsg {
@@ -248,8 +248,8 @@ export interface UpcomingGaugesResponseProtoMsg {
 export interface UpcomingGaugesResponseAmino {
   /** Gauges whose distribution is upcoming */
   data: GaugeAmino[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponseAmino;
 }
 export interface UpcomingGaugesResponseAminoMsg {
@@ -263,8 +263,8 @@ export interface UpcomingGaugesResponseSDKType {
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
-
   /** Pagination defines pagination for the request */
+
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestProtoMsg {
@@ -274,8 +274,8 @@ export interface UpcomingGaugesPerDenomRequestProtoMsg {
 export interface UpcomingGaugesPerDenomRequestAmino {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
-
   /** Pagination defines pagination for the request */
+
   pagination?: PageRequestAmino;
 }
 export interface UpcomingGaugesPerDenomRequestAminoMsg {
@@ -289,8 +289,8 @@ export interface UpcomingGaugesPerDenomRequestSDKType {
 export interface UpcomingGaugesPerDenomResponse {
   /** Upcoming gagues that match denom in query */
   upcomingGauges: Gauge[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomResponseProtoMsg {
@@ -300,8 +300,8 @@ export interface UpcomingGaugesPerDenomResponseProtoMsg {
 export interface UpcomingGaugesPerDenomResponseAmino {
   /** Upcoming gagues that match denom in query */
   upcoming_gauges: GaugeAmino[];
-
   /** Pagination defines pagination for the response */
+
   pagination?: PageResponseAmino;
 }
 export interface UpcomingGaugesPerDenomResponseAminoMsg {
@@ -315,14 +315,14 @@ export interface UpcomingGaugesPerDenomResponseSDKType {
 export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */
   owner: string;
-
   /** Lock IDs included in future reward estimation */
-  lockIds: Long[];
 
+  lockIds: Long[];
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
+
   endEpoch: Long;
 }
 export interface RewardsEstRequestProtoMsg {
@@ -332,14 +332,14 @@ export interface RewardsEstRequestProtoMsg {
 export interface RewardsEstRequestAmino {
   /** Address that is being queried for future estimated rewards */
   owner: string;
-
   /** Lock IDs included in future reward estimation */
-  lock_ids: string[];
 
+  lock_ids: string[];
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
+
   end_epoch: string;
 }
 export interface RewardsEstRequestAminoMsg {

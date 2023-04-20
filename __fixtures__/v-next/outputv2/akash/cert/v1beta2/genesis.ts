@@ -2,8 +2,8 @@ import { Certificate, CertificateAmino, CertificateSDKType } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
-
 /** GenesisCertificate defines certificate entry at genesis */
+
 export interface GenesisCertificate {
   owner: string;
   certificate?: Certificate;
@@ -12,8 +12,8 @@ export interface GenesisCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisCertificate";
   value: Uint8Array;
 }
-
 /** GenesisCertificate defines certificate entry at genesis */
+
 export interface GenesisCertificateAmino {
   owner: string;
   certificate?: CertificateAmino;
@@ -22,14 +22,14 @@ export interface GenesisCertificateAminoMsg {
   type: "/akash.cert.v1beta2.GenesisCertificate";
   value: GenesisCertificateAmino;
 }
-
 /** GenesisCertificate defines certificate entry at genesis */
+
 export interface GenesisCertificateSDKType {
   owner: string;
   certificate?: CertificateSDKType;
 }
-
 /** GenesisState defines the basic genesis state used by cert module */
+
 export interface GenesisState {
   certificates: GenesisCertificate[];
 }
@@ -37,8 +37,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the basic genesis state used by cert module */
+
 export interface GenesisStateAmino {
   certificates: GenesisCertificateAmino[];
 }
@@ -46,8 +46,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.cert.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the basic genesis state used by cert module */
+
 export interface GenesisStateSDKType {
   certificates: GenesisCertificateSDKType[];
 }

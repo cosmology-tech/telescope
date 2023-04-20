@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
-
 /** This describes how the endpoint is implemented when the lease is deployed */
+
 export enum Endpoint_Kind {
   /** SHARED_HTTP - Describes an endpoint that becomes a Kubernetes Ingress */
   SHARED_HTTP = 0,
@@ -52,8 +52,8 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Endpoint describes a publicly accessible IP service */
+
 export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
@@ -62,8 +62,8 @@ export interface EndpointProtoMsg {
   typeUrl: "/akash.base.v1beta2.Endpoint";
   value: Uint8Array;
 }
-
 /** Endpoint describes a publicly accessible IP service */
+
 export interface EndpointAmino {
   kind: Endpoint_Kind;
   sequence_number: number;
@@ -72,8 +72,8 @@ export interface EndpointAminoMsg {
   type: "/akash.base.v1beta2.Endpoint";
   value: EndpointAmino;
 }
-
 /** Endpoint describes a publicly accessible IP service */
+
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
   sequence_number: number;

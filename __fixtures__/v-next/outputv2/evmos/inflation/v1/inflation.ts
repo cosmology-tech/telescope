@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
-
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -11,30 +10,30 @@ export const protobufPackage = "evmos.inflation.v1";
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
+
 export interface InflationDistribution {
   /**
    * staking_rewards defines the proportion of the minted minted_denom that is
    * to be allocated as staking rewards
    */
   stakingRewards: string;
-
   /**
    * usage_incentives defines the proportion of the minted minted_denom that is
    * to be allocated to the incentives module address
    */
-  usageIncentives: string;
 
+  usageIncentives: string;
   /**
    * community_pool defines the proportion of the minted minted_denom that is to
    * be allocated to the community pool
    */
+
   communityPool: string;
 }
 export interface InflationDistributionProtoMsg {
   typeUrl: "/evmos.inflation.v1.InflationDistribution";
   value: Uint8Array;
 }
-
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -44,30 +43,30 @@ export interface InflationDistributionProtoMsg {
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
+
 export interface InflationDistributionAmino {
   /**
    * staking_rewards defines the proportion of the minted minted_denom that is
    * to be allocated as staking rewards
    */
   staking_rewards: string;
-
   /**
    * usage_incentives defines the proportion of the minted minted_denom that is
    * to be allocated to the incentives module address
    */
-  usage_incentives: string;
 
+  usage_incentives: string;
   /**
    * community_pool defines the proportion of the minted minted_denom that is to
    * be allocated to the community pool
    */
+
   community_pool: string;
 }
 export interface InflationDistributionAminoMsg {
   type: "/evmos.inflation.v1.InflationDistribution";
   value: InflationDistributionAmino;
 }
-
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -77,12 +76,12 @@ export interface InflationDistributionAminoMsg {
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
+
 export interface InflationDistributionSDKType {
   staking_rewards: string;
   usage_incentives: string;
   community_pool: string;
 }
-
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
  * each period. Calculation reference:
@@ -90,27 +89,27 @@ export interface InflationDistributionSDKType {
  * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
  * (max_variance / bonding_target))
  */
+
 export interface ExponentialCalculation {
   /** initial value */
   a: string;
-
   /** reduction factor */
+
   r: string;
-
   /** long term inflation */
+
   c: string;
-
   /** bonding target */
-  bondingTarget: string;
 
+  bondingTarget: string;
   /** max variance */
+
   maxVariance: string;
 }
 export interface ExponentialCalculationProtoMsg {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
   value: Uint8Array;
 }
-
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
  * each period. Calculation reference:
@@ -118,27 +117,27 @@ export interface ExponentialCalculationProtoMsg {
  * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
  * (max_variance / bonding_target))
  */
+
 export interface ExponentialCalculationAmino {
   /** initial value */
   a: string;
-
   /** reduction factor */
+
   r: string;
-
   /** long term inflation */
+
   c: string;
-
   /** bonding target */
-  bonding_target: string;
 
+  bonding_target: string;
   /** max variance */
+
   max_variance: string;
 }
 export interface ExponentialCalculationAminoMsg {
   type: "/evmos.inflation.v1.ExponentialCalculation";
   value: ExponentialCalculationAmino;
 }
-
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
  * each period. Calculation reference:
@@ -146,6 +145,7 @@ export interface ExponentialCalculationAminoMsg {
  * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
  * (max_variance / bonding_target))
  */
+
 export interface ExponentialCalculationSDKType {
   a: string;
   r: string;

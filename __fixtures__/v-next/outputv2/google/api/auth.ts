@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -22,6 +21,7 @@ export const protobufPackage = "google.api";
  *         oauth:
  *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
+
 export interface Authentication {
   /**
    * A list of authentication rules that apply to individual API methods.
@@ -29,15 +29,14 @@ export interface Authentication {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: AuthenticationRule[];
-
   /** Defines a set of authentication providers that a service supports. */
+
   providers: AuthProvider[];
 }
 export interface AuthenticationProtoMsg {
   typeUrl: "/google.api.Authentication";
   value: Uint8Array;
 }
-
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -58,6 +57,7 @@ export interface AuthenticationProtoMsg {
  *         oauth:
  *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
+
 export interface AuthenticationAmino {
   /**
    * A list of authentication rules that apply to individual API methods.
@@ -65,15 +65,14 @@ export interface AuthenticationAmino {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: AuthenticationRuleAmino[];
-
   /** Defines a set of authentication providers that a service supports. */
+
   providers: AuthProviderAmino[];
 }
 export interface AuthenticationAminoMsg {
   type: "/google.api.Authentication";
   value: AuthenticationAmino;
 }
-
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -94,11 +93,11 @@ export interface AuthenticationAminoMsg {
  *         oauth:
  *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
+
 export interface AuthenticationSDKType {
   rules: AuthenticationRuleSDKType[];
   providers: AuthProviderSDKType[];
 }
-
 /**
  * Authentication rules for the service.
  * 
@@ -110,6 +109,7 @@ export interface AuthenticationSDKType {
  * If a method doesn't have any auth requirements, request credentials will be
  * ignored.
  */
+
 export interface AuthenticationRule {
   /**
    * Selects the methods to which this rule applies.
@@ -117,24 +117,23 @@ export interface AuthenticationRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /** The requirements for OAuth credentials. */
-  oauth?: OAuthRequirements;
 
+  oauth?: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allowWithoutCredential: boolean;
 
+  allowWithoutCredential: boolean;
   /** Requirements for additional authentication providers. */
+
   requirements: AuthRequirement[];
 }
 export interface AuthenticationRuleProtoMsg {
   typeUrl: "/google.api.AuthenticationRule";
   value: Uint8Array;
 }
-
 /**
  * Authentication rules for the service.
  * 
@@ -146,6 +145,7 @@ export interface AuthenticationRuleProtoMsg {
  * If a method doesn't have any auth requirements, request credentials will be
  * ignored.
  */
+
 export interface AuthenticationRuleAmino {
   /**
    * Selects the methods to which this rule applies.
@@ -153,24 +153,23 @@ export interface AuthenticationRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /** The requirements for OAuth credentials. */
-  oauth?: OAuthRequirementsAmino;
 
+  oauth?: OAuthRequirementsAmino;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allow_without_credential: boolean;
 
+  allow_without_credential: boolean;
   /** Requirements for additional authentication providers. */
+
   requirements: AuthRequirementAmino[];
 }
 export interface AuthenticationRuleAminoMsg {
   type: "/google.api.AuthenticationRule";
   value: AuthenticationRuleAmino;
 }
-
 /**
  * Authentication rules for the service.
  * 
@@ -182,21 +181,21 @@ export interface AuthenticationRuleAminoMsg {
  * If a method doesn't have any auth requirements, request credentials will be
  * ignored.
  */
+
 export interface AuthenticationRuleSDKType {
   selector: string;
   oauth?: OAuthRequirementsSDKType;
   allow_without_credential: boolean;
   requirements: AuthRequirementSDKType[];
 }
-
 /** Specifies a location to extract JWT from an API request. */
+
 export interface JwtLocation {
   /** Specifies HTTP header name to extract JWT token. */
   header?: string;
-
   /** Specifies URL query parameter name to extract JWT token. */
-  query?: string;
 
+  query?: string;
   /**
    * The value prefix. The value format is "value_prefix{token}"
    * Only applies to "in" header type. Must be empty for "in" query type.
@@ -207,21 +206,21 @@ export interface JwtLocation {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
+
   valuePrefix: string;
 }
 export interface JwtLocationProtoMsg {
   typeUrl: "/google.api.JwtLocation";
   value: Uint8Array;
 }
-
 /** Specifies a location to extract JWT from an API request. */
+
 export interface JwtLocationAmino {
   /** Specifies HTTP header name to extract JWT token. */
   header?: string;
-
   /** Specifies URL query parameter name to extract JWT token. */
-  query?: string;
 
+  query?: string;
   /**
    * The value prefix. The value format is "value_prefix{token}"
    * Only applies to "in" header type. Must be empty for "in" query type.
@@ -232,25 +231,26 @@ export interface JwtLocationAmino {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
+
   value_prefix: string;
 }
 export interface JwtLocationAminoMsg {
   type: "/google.api.JwtLocation";
   value: JwtLocationAmino;
 }
-
 /** Specifies a location to extract JWT from an API request. */
+
 export interface JwtLocationSDKType {
   header?: string;
   query?: string;
   value_prefix: string;
 }
-
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthProvider {
   /**
    * The unique identifier of the auth provider. It will be referred to by
@@ -259,7 +259,6 @@ export interface AuthProvider {
    * Example: "bookstore_auth".
    */
   id: string;
-
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -268,8 +267,8 @@ export interface AuthProvider {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer: string;
 
+  issuer: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -284,8 +283,8 @@ export interface AuthProvider {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwksUri: string;
 
+  jwksUri: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -305,14 +304,14 @@ export interface AuthProvider {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
 
+  audiences: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorizationUrl: string;
 
+  authorizationUrl: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -332,18 +331,19 @@ export interface AuthProvider {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
+
   jwtLocations: JwtLocation[];
 }
 export interface AuthProviderProtoMsg {
   typeUrl: "/google.api.AuthProvider";
   value: Uint8Array;
 }
-
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthProviderAmino {
   /**
    * The unique identifier of the auth provider. It will be referred to by
@@ -352,7 +352,6 @@ export interface AuthProviderAmino {
    * Example: "bookstore_auth".
    */
   id: string;
-
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -361,8 +360,8 @@ export interface AuthProviderAmino {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer: string;
 
+  issuer: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -377,8 +376,8 @@ export interface AuthProviderAmino {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwks_uri: string;
 
+  jwks_uri: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -398,14 +397,14 @@ export interface AuthProviderAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
 
+  audiences: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorization_url: string;
 
+  authorization_url: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -425,18 +424,19 @@ export interface AuthProviderAmino {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
+
   jwt_locations: JwtLocationAmino[];
 }
 export interface AuthProviderAminoMsg {
   type: "/google.api.AuthProvider";
   value: AuthProviderAmino;
 }
-
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthProviderSDKType {
   id: string;
   issuer: string;
@@ -445,7 +445,6 @@ export interface AuthProviderSDKType {
   authorization_url: string;
   jwt_locations: JwtLocationSDKType[];
 }
-
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
@@ -466,6 +465,7 @@ export interface AuthProviderSDKType {
  * request to be accepted and passed to the backend, a request can still fail
  * due to the backend requiring additional scopes or permissions.
  */
+
 export interface OAuthRequirements {
   /**
    * The list of publicly documented OAuth scopes that are allowed access. An
@@ -482,7 +482,6 @@ export interface OAuthRequirementsProtoMsg {
   typeUrl: "/google.api.OAuthRequirements";
   value: Uint8Array;
 }
-
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
@@ -503,6 +502,7 @@ export interface OAuthRequirementsProtoMsg {
  * request to be accepted and passed to the backend, a request can still fail
  * due to the backend requiring additional scopes or permissions.
  */
+
 export interface OAuthRequirementsAmino {
   /**
    * The list of publicly documented OAuth scopes that are allowed access. An
@@ -519,7 +519,6 @@ export interface OAuthRequirementsAminoMsg {
   type: "/google.api.OAuthRequirements";
   value: OAuthRequirementsAmino;
 }
-
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
@@ -540,15 +539,16 @@ export interface OAuthRequirementsAminoMsg {
  * request to be accepted and passed to the backend, a request can still fail
  * due to the backend requiring additional scopes or permissions.
  */
+
 export interface OAuthRequirementsSDKType {
   canonical_scopes: string;
 }
-
 /**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthRequirement {
   /**
    * [id][google.api.AuthProvider.id] from authentication provider.
@@ -558,7 +558,6 @@ export interface AuthRequirement {
    *     provider_id: bookstore_auth
    */
   providerId: string;
-
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -577,18 +576,19 @@ export interface AuthRequirement {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
+
   audiences: string;
 }
 export interface AuthRequirementProtoMsg {
   typeUrl: "/google.api.AuthRequirement";
   value: Uint8Array;
 }
-
 /**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthRequirementAmino {
   /**
    * [id][google.api.AuthProvider.id] from authentication provider.
@@ -598,7 +598,6 @@ export interface AuthRequirementAmino {
    *     provider_id: bookstore_auth
    */
   provider_id: string;
-
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -617,18 +616,19 @@ export interface AuthRequirementAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
+
   audiences: string;
 }
 export interface AuthRequirementAminoMsg {
   type: "/google.api.AuthRequirement";
   value: AuthRequirementAmino;
 }
-
 /**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+
 export interface AuthRequirementSDKType {
   provider_id: string;
   audiences: string;

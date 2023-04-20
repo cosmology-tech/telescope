@@ -4,8 +4,8 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
-
 /** GenesisDeployment defines the basic genesis state used by deployment module */
+
 export interface GenesisDeployment {
   deployment?: Deployment;
   groups: Group[];
@@ -14,8 +14,8 @@ export interface GenesisDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
   value: Uint8Array;
 }
-
 /** GenesisDeployment defines the basic genesis state used by deployment module */
+
 export interface GenesisDeploymentAmino {
   deployment?: DeploymentAmino;
   groups: GroupAmino[];
@@ -24,14 +24,14 @@ export interface GenesisDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.GenesisDeployment";
   value: GenesisDeploymentAmino;
 }
-
 /** GenesisDeployment defines the basic genesis state used by deployment module */
+
 export interface GenesisDeploymentSDKType {
   deployment?: DeploymentSDKType;
   groups: GroupSDKType[];
 }
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params?: Params;
@@ -40,8 +40,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisStateAmino {
   deployments: GenesisDeploymentAmino[];
   params?: ParamsAmino;
@@ -50,8 +50,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.deployment.v1beta1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisStateSDKType {
   deployments: GenesisDeploymentSDKType[];
   params?: ParamsSDKType;

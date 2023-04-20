@@ -2,8 +2,8 @@ import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
-
 /** GenesisState defines the basic genesis state used by provider module */
+
 export interface GenesisState {
   providers: Provider[];
 }
@@ -11,8 +11,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.provider.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the basic genesis state used by provider module */
+
 export interface GenesisStateAmino {
   providers: ProviderAmino[];
 }
@@ -20,8 +20,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.provider.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the basic genesis state used by provider module */
+
 export interface GenesisStateSDKType {
   providers: ProviderSDKType[];
 }

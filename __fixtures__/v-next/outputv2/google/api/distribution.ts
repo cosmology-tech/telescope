@@ -1,9 +1,8 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../protobuf/timestamp";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Timestamp } from "../protobuf/timestamp";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
-
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -20,6 +19,7 @@ export const protobufPackage = "google.api";
  * non-finite values (infinities or NaNs) in the population of values, as this
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
+
 export interface Distribution {
   /**
    * The number of values in the population. Must be non-negative. This value
@@ -27,13 +27,12 @@ export interface Distribution {
    * provided.
    */
   count: Long;
-
   /**
    * The arithmetic mean of the values in the population. If `count` is zero
    * then this field must be zero.
    */
-  mean: number;
 
+  mean: number;
   /**
    * The sum of squared deviations from the mean of the values in the
    * population. For values x_i this is:
@@ -45,20 +44,20 @@ export interface Distribution {
    * 
    * If `count` is zero then this field must be zero.
    */
-  sumOfSquaredDeviation: number;
 
+  sumOfSquaredDeviation: number;
   /**
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range?: Distribution_Range;
 
+  range?: Distribution_Range;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucketOptions?: Distribution_BucketOptions;
 
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -76,16 +75,16 @@ export interface Distribution {
    * counts for the finite buckets (number 1 through N-2). The N'th value in
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
-  bucketCounts: Long[];
 
+  bucketCounts: Long[];
   /** Must be in increasing order of `value` field. */
+
   exemplars: Distribution_Exemplar[];
 }
 export interface DistributionProtoMsg {
   typeUrl: "/google.api.Distribution";
   value: Uint8Array;
 }
-
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -102,6 +101,7 @@ export interface DistributionProtoMsg {
  * non-finite values (infinities or NaNs) in the population of values, as this
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
+
 export interface DistributionAmino {
   /**
    * The number of values in the population. Must be non-negative. This value
@@ -109,13 +109,12 @@ export interface DistributionAmino {
    * provided.
    */
   count: string;
-
   /**
    * The arithmetic mean of the values in the population. If `count` is zero
    * then this field must be zero.
    */
-  mean: number;
 
+  mean: number;
   /**
    * The sum of squared deviations from the mean of the values in the
    * population. For values x_i this is:
@@ -127,20 +126,20 @@ export interface DistributionAmino {
    * 
    * If `count` is zero then this field must be zero.
    */
-  sum_of_squared_deviation: number;
 
+  sum_of_squared_deviation: number;
   /**
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range?: Distribution_RangeAmino;
 
+  range?: Distribution_RangeAmino;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucket_options?: Distribution_BucketOptionsAmino;
 
+  bucket_options?: Distribution_BucketOptionsAmino;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -158,16 +157,16 @@ export interface DistributionAmino {
    * counts for the finite buckets (number 1 through N-2). The N'th value in
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
-  bucket_counts: string[];
 
+  bucket_counts: string[];
   /** Must be in increasing order of `value` field. */
+
   exemplars: Distribution_ExemplarAmino[];
 }
 export interface DistributionAminoMsg {
   type: "/google.api.Distribution";
   value: DistributionAmino;
 }
-
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -184,6 +183,7 @@ export interface DistributionAminoMsg {
  * non-finite values (infinities or NaNs) in the population of values, as this
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
+
 export interface DistributionSDKType {
   count: Long;
   mean: number;
@@ -193,39 +193,38 @@ export interface DistributionSDKType {
   bucket_counts: Long[];
   exemplars: Distribution_ExemplarSDKType[];
 }
-
 /** The range of the population values. */
+
 export interface Distribution_Range {
   /** The minimum of the population values. */
   min: number;
-
   /** The maximum of the population values. */
+
   max: number;
 }
 export interface Distribution_RangeProtoMsg {
   typeUrl: "/google.api.Range";
   value: Uint8Array;
 }
-
 /** The range of the population values. */
+
 export interface Distribution_RangeAmino {
   /** The minimum of the population values. */
   min: number;
-
   /** The maximum of the population values. */
+
   max: number;
 }
 export interface Distribution_RangeAminoMsg {
   type: "/google.api.Range";
   value: Distribution_RangeAmino;
 }
-
 /** The range of the population values. */
+
 export interface Distribution_RangeSDKType {
   min: number;
   max: number;
 }
-
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
  * for the distribution. The buckets can be in a linear sequence, an
@@ -243,21 +242,21 @@ export interface Distribution_RangeSDKType {
  * upper bound of the overflow bucket is +infinity. The finite buckets are
  * so-called because both bounds are finite.
  */
+
 export interface Distribution_BucketOptions {
   /** The linear bucket. */
   linearBuckets?: Distribution_BucketOptions_Linear;
-
   /** The exponential buckets. */
-  exponentialBuckets?: Distribution_BucketOptions_Exponential;
 
+  exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
+
   explicitBuckets?: Distribution_BucketOptions_Explicit;
 }
 export interface Distribution_BucketOptionsProtoMsg {
   typeUrl: "/google.api.BucketOptions";
   value: Uint8Array;
 }
-
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
  * for the distribution. The buckets can be in a linear sequence, an
@@ -275,21 +274,21 @@ export interface Distribution_BucketOptionsProtoMsg {
  * upper bound of the overflow bucket is +infinity. The finite buckets are
  * so-called because both bounds are finite.
  */
+
 export interface Distribution_BucketOptionsAmino {
   /** The linear bucket. */
   linear_buckets?: Distribution_BucketOptions_LinearAmino;
-
   /** The exponential buckets. */
-  exponential_buckets?: Distribution_BucketOptions_ExponentialAmino;
 
+  exponential_buckets?: Distribution_BucketOptions_ExponentialAmino;
   /** The explicit buckets. */
+
   explicit_buckets?: Distribution_BucketOptions_ExplicitAmino;
 }
 export interface Distribution_BucketOptionsAminoMsg {
   type: "/google.api.BucketOptions";
   value: Distribution_BucketOptionsAmino;
 }
-
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
  * for the distribution. The buckets can be in a linear sequence, an
@@ -307,12 +306,12 @@ export interface Distribution_BucketOptionsAminoMsg {
  * upper bound of the overflow bucket is +infinity. The finite buckets are
  * so-called because both bounds are finite.
  */
+
 export interface Distribution_BucketOptionsSDKType {
   linear_buckets?: Distribution_BucketOptions_LinearSDKType;
   exponential_buckets?: Distribution_BucketOptions_ExponentialSDKType;
   explicit_buckets?: Distribution_BucketOptions_ExplicitSDKType;
 }
-
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -324,21 +323,21 @@ export interface Distribution_BucketOptionsSDKType {
  *    Upper bound (0 <= i < N-1):     offset + (width * i).
  *    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
  */
+
 export interface Distribution_BucketOptions_Linear {
   /** Must be greater than 0. */
   numFiniteBuckets: number;
-
   /** Must be greater than 0. */
-  width: number;
 
+  width: number;
   /** Lower bound of the first bucket. */
+
   offset: number;
 }
 export interface Distribution_BucketOptions_LinearProtoMsg {
   typeUrl: "/google.api.Linear";
   value: Uint8Array;
 }
-
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -350,21 +349,21 @@ export interface Distribution_BucketOptions_LinearProtoMsg {
  *    Upper bound (0 <= i < N-1):     offset + (width * i).
  *    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
  */
+
 export interface Distribution_BucketOptions_LinearAmino {
   /** Must be greater than 0. */
   num_finite_buckets: number;
-
   /** Must be greater than 0. */
-  width: number;
 
+  width: number;
   /** Lower bound of the first bucket. */
+
   offset: number;
 }
 export interface Distribution_BucketOptions_LinearAminoMsg {
   type: "/google.api.Linear";
   value: Distribution_BucketOptions_LinearAmino;
 }
-
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -376,12 +375,12 @@ export interface Distribution_BucketOptions_LinearAminoMsg {
  *    Upper bound (0 <= i < N-1):     offset + (width * i).
  *    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
  */
+
 export interface Distribution_BucketOptions_LinearSDKType {
   num_finite_buckets: number;
   width: number;
   offset: number;
 }
-
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -393,21 +392,21 @@ export interface Distribution_BucketOptions_LinearSDKType {
  *    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
  *    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
  */
+
 export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   numFiniteBuckets: number;
-
   /** Must be greater than 1. */
-  growthFactor: number;
 
+  growthFactor: number;
   /** Must be greater than 0. */
+
   scale: number;
 }
 export interface Distribution_BucketOptions_ExponentialProtoMsg {
   typeUrl: "/google.api.Exponential";
   value: Uint8Array;
 }
-
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -419,21 +418,21 @@ export interface Distribution_BucketOptions_ExponentialProtoMsg {
  *    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
  *    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
  */
+
 export interface Distribution_BucketOptions_ExponentialAmino {
   /** Must be greater than 0. */
   num_finite_buckets: number;
-
   /** Must be greater than 1. */
-  growth_factor: number;
 
+  growth_factor: number;
   /** Must be greater than 0. */
+
   scale: number;
 }
 export interface Distribution_BucketOptions_ExponentialAminoMsg {
   type: "/google.api.Exponential";
   value: Distribution_BucketOptions_ExponentialAmino;
 }
-
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -445,12 +444,12 @@ export interface Distribution_BucketOptions_ExponentialAminoMsg {
  *    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
  *    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
  */
+
 export interface Distribution_BucketOptions_ExponentialSDKType {
   num_finite_buckets: number;
   growth_factor: number;
   scale: number;
 }
-
 /**
  * Specifies a set of buckets with arbitrary widths.
  * 
@@ -464,6 +463,7 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
  * only one element, then there are no finite buckets, and that single
  * element is the common boundary of the overflow and underflow buckets.
  */
+
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
@@ -472,7 +472,6 @@ export interface Distribution_BucketOptions_ExplicitProtoMsg {
   typeUrl: "/google.api.Explicit";
   value: Uint8Array;
 }
-
 /**
  * Specifies a set of buckets with arbitrary widths.
  * 
@@ -486,6 +485,7 @@ export interface Distribution_BucketOptions_ExplicitProtoMsg {
  * only one element, then there are no finite buckets, and that single
  * element is the common boundary of the overflow and underflow buckets.
  */
+
 export interface Distribution_BucketOptions_ExplicitAmino {
   /** The values must be monotonically increasing. */
   bounds: number[];
@@ -494,7 +494,6 @@ export interface Distribution_BucketOptions_ExplicitAminoMsg {
   type: "/google.api.Explicit";
   value: Distribution_BucketOptions_ExplicitAmino;
 }
-
 /**
  * Specifies a set of buckets with arbitrary widths.
  * 
@@ -508,10 +507,10 @@ export interface Distribution_BucketOptions_ExplicitAminoMsg {
  * only one element, then there are no finite buckets, and that single
  * element is the common boundary of the overflow and underflow buckets.
  */
+
 export interface Distribution_BucketOptions_ExplicitSDKType {
   bounds: number[];
 }
-
 /**
  * Exemplars are example points that may be used to annotate aggregated
  * distribution values. They are metadata that gives information about a
@@ -519,16 +518,16 @@ export interface Distribution_BucketOptions_ExplicitSDKType {
  * was active when a value was added. They may contain further information,
  * such as a example values and timestamps, origin, etc.
  */
+
 export interface Distribution_Exemplar {
   /**
    * Value of the exemplar point. This value determines to which bucket the
    * exemplar belongs.
    */
   value: number;
-
   /** The observation (sampling) time of the above value. */
-  timestamp?: Date;
 
+  timestamp?: Date;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -542,13 +541,13 @@ export interface Distribution_Exemplar {
    * There may be only a single attachment of any given message type in a
    * single exemplar, and this is enforced by the system.
    */
+
   attachments: Any[];
 }
 export interface Distribution_ExemplarProtoMsg {
   typeUrl: "/google.api.Exemplar";
   value: Uint8Array;
 }
-
 /**
  * Exemplars are example points that may be used to annotate aggregated
  * distribution values. They are metadata that gives information about a
@@ -556,16 +555,16 @@ export interface Distribution_ExemplarProtoMsg {
  * was active when a value was added. They may contain further information,
  * such as a example values and timestamps, origin, etc.
  */
+
 export interface Distribution_ExemplarAmino {
   /**
    * Value of the exemplar point. This value determines to which bucket the
    * exemplar belongs.
    */
   value: number;
-
   /** The observation (sampling) time of the above value. */
-  timestamp?: Date;
 
+  timestamp?: Date;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -579,13 +578,13 @@ export interface Distribution_ExemplarAmino {
    * There may be only a single attachment of any given message type in a
    * single exemplar, and this is enforced by the system.
    */
+
   attachments: AnyAmino[];
 }
 export interface Distribution_ExemplarAminoMsg {
   type: "/google.api.Exemplar";
   value: Distribution_ExemplarAmino;
 }
-
 /**
  * Exemplars are example points that may be used to annotate aggregated
  * distribution values. They are metadata that gives information about a
@@ -593,6 +592,7 @@ export interface Distribution_ExemplarAminoMsg {
  * was active when a value was added. They may contain further information,
  * such as a example values and timestamps, origin, etc.
  */
+
 export interface Distribution_ExemplarSDKType {
   value: number;
   timestamp?: Date;

@@ -1,5 +1,4 @@
 export const protobufPackage = "google.api";
-
 /**
  * Defines the supported values for `google.rpc.ErrorInfo.reason` for the
  * `googleapis.com` error domain. This error domain is reserved for [Service
@@ -12,6 +11,7 @@ export const protobufPackage = "google.api";
  * reason. For more information, see the definition of the specific error
  * reason.
  */
+
 export enum ErrorReason {
   /** ERROR_REASON_UNSPECIFIED - Do not use this default value. */
   ERROR_REASON_UNSPECIFIED = 0,

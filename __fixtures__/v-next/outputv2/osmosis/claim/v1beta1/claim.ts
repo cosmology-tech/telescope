@@ -54,46 +54,46 @@ export function actionToJSON(object: Action): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** A Claim Records is the metadata of claim data per address */
+
 export interface ClaimRecord {
   /** address of claim user */
   address: string;
-
   /** total initial claimable amount for the user */
-  initialClaimableAmount: Coin[];
 
+  initialClaimableAmount: Coin[];
   /**
    * true if action is completed
    * index of bool in array refers to action enum #
    */
+
   actionCompleted: boolean[];
 }
 export interface ClaimRecordProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
   value: Uint8Array;
 }
-
 /** A Claim Records is the metadata of claim data per address */
+
 export interface ClaimRecordAmino {
   /** address of claim user */
   address: string;
-
   /** total initial claimable amount for the user */
-  initial_claimable_amount: CoinAmino[];
 
+  initial_claimable_amount: CoinAmino[];
   /**
    * true if action is completed
    * index of bool in array refers to action enum #
    */
+
   action_completed: boolean[];
 }
 export interface ClaimRecordAminoMsg {
   type: "osmosis/claim/claim-record";
   value: ClaimRecordAmino;
 }
-
 /** A Claim Records is the metadata of claim data per address */
+
 export interface ClaimRecordSDKType {
   address: string;
   initial_claimable_amount: CoinSDKType[];

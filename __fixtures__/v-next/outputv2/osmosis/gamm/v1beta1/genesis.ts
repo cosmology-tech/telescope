@@ -9,8 +9,8 @@ import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswa
 import { Long, DeepPartial, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
-
 /** Params holds parameters for the incentives module */
+
 export interface Params {
   poolCreationFee: Coin[];
 }
@@ -18,8 +18,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Params";
   value: Uint8Array;
 }
-
 /** Params holds parameters for the incentives module */
+
 export interface ParamsAmino {
   pool_creation_fee: CoinAmino[];
 }
@@ -27,17 +27,17 @@ export interface ParamsAminoMsg {
   type: "osmosis/gamm/params";
   value: ParamsAmino;
 }
-
 /** Params holds parameters for the incentives module */
+
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
 }
-
 /** GenesisState defines the gamm module's genesis state. */
+
 export interface GenesisState {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
-
   /** will be renamed to next_pool_id in an upcoming version */
+
   nextPoolNumber: Long;
   params?: Params;
 }
@@ -48,12 +48,12 @@ export interface GenesisStateProtoMsg {
 export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
   pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
 };
-
 /** GenesisState defines the gamm module's genesis state. */
+
 export interface GenesisStateAmino {
   pools: AnyAmino[];
-
   /** will be renamed to next_pool_id in an upcoming version */
+
   next_pool_number: string;
   params?: ParamsAmino;
 }
@@ -61,8 +61,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/gamm/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the gamm module's genesis state. */
+
 export interface GenesisStateSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   next_pool_number: Long;

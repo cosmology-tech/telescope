@@ -1,9 +1,8 @@
-import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
+import { Option, OptionAmino, OptionSDKType, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -15,19 +14,19 @@ export const protobufPackage = "google.protobuf";
  * this message itself. See https://cloud.google.com/apis/design/glossary for
  * detailed terminology.
  */
+
 export interface Api {
   /**
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
    */
   name: string;
-
   /** The methods of this interface, in unspecified order. */
+
   methods: Method[];
-
   /** Any metadata attached to the interface. */
-  options: Option[];
 
+  options: Option[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -49,25 +48,25 @@ export interface Api {
    * be omitted. Zero major versions must only be used for
    * experimental, non-GA interfaces.
    */
-  version: string;
 
+  version: string;
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
+
   sourceContext?: SourceContext;
-
   /** Included interfaces. See [Mixin][]. */
-  mixins: Mixin[];
 
+  mixins: Mixin[];
   /** The source syntax of the service. */
+
   syntax: Syntax;
 }
 export interface ApiProtoMsg {
   typeUrl: "/google.protobuf.Api";
   value: Uint8Array;
 }
-
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -79,19 +78,19 @@ export interface ApiProtoMsg {
  * this message itself. See https://cloud.google.com/apis/design/glossary for
  * detailed terminology.
  */
+
 export interface ApiAmino {
   /**
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
    */
   name: string;
-
   /** The methods of this interface, in unspecified order. */
+
   methods: MethodAmino[];
-
   /** Any metadata attached to the interface. */
-  options: OptionAmino[];
 
+  options: OptionAmino[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -113,25 +112,25 @@ export interface ApiAmino {
    * be omitted. Zero major versions must only be used for
    * experimental, non-GA interfaces.
    */
-  version: string;
 
+  version: string;
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
+
   source_context?: SourceContextAmino;
-
   /** Included interfaces. See [Mixin][]. */
-  mixins: MixinAmino[];
 
+  mixins: MixinAmino[];
   /** The source syntax of the service. */
+
   syntax: Syntax;
 }
 export interface ApiAminoMsg {
   type: "/google.protobuf.Api";
   value: ApiAmino;
 }
-
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -143,6 +142,7 @@ export interface ApiAminoMsg {
  * this message itself. See https://cloud.google.com/apis/design/glossary for
  * detailed terminology.
  */
+
 export interface ApiSDKType {
   name: string;
   methods: MethodSDKType[];
@@ -152,64 +152,64 @@ export interface ApiSDKType {
   mixins: MixinSDKType[];
   syntax: Syntax;
 }
-
 /** Method represents a method of an API interface. */
+
 export interface Method {
   /** The simple name of this method. */
   name: string;
-
   /** A URL of the input message type. */
+
   requestTypeUrl: string;
-
   /** If true, the request is streamed. */
+
   requestStreaming: boolean;
-
   /** The URL of the output message type. */
+
   responseTypeUrl: string;
-
   /** If true, the response is streamed. */
+
   responseStreaming: boolean;
-
   /** Any metadata attached to the method. */
-  options: Option[];
 
+  options: Option[];
   /** The source syntax of this method. */
+
   syntax: Syntax;
 }
 export interface MethodProtoMsg {
   typeUrl: "/google.protobuf.Method";
   value: Uint8Array;
 }
-
 /** Method represents a method of an API interface. */
+
 export interface MethodAmino {
   /** The simple name of this method. */
   name: string;
-
   /** A URL of the input message type. */
+
   request_type_url: string;
-
   /** If true, the request is streamed. */
+
   request_streaming: boolean;
-
   /** The URL of the output message type. */
+
   response_type_url: string;
-
   /** If true, the response is streamed. */
+
   response_streaming: boolean;
-
   /** Any metadata attached to the method. */
-  options: OptionAmino[];
 
+  options: OptionAmino[];
   /** The source syntax of this method. */
+
   syntax: Syntax;
 }
 export interface MethodAminoMsg {
   type: "/google.protobuf.Method";
   value: MethodAmino;
 }
-
 /** Method represents a method of an API interface. */
+
 export interface MethodSDKType {
   name: string;
   request_type_url: string;
@@ -219,7 +219,6 @@ export interface MethodSDKType {
   options: OptionSDKType[];
   syntax: Syntax;
 }
-
 /**
  * Declares an API Interface to be included in this interface. The including
  * interface must redeclare all the methods from the included interface, but
@@ -300,21 +299,21 @@ export interface MethodSDKType {
  *       ...
  *     }
  */
+
 export interface Mixin {
   /** The fully qualified name of the interface which is included. */
   name: string;
-
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
+
   root: string;
 }
 export interface MixinProtoMsg {
   typeUrl: "/google.protobuf.Mixin";
   value: Uint8Array;
 }
-
 /**
  * Declares an API Interface to be included in this interface. The including
  * interface must redeclare all the methods from the included interface, but
@@ -395,21 +394,21 @@ export interface MixinProtoMsg {
  *       ...
  *     }
  */
+
 export interface MixinAmino {
   /** The fully qualified name of the interface which is included. */
   name: string;
-
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
+
   root: string;
 }
 export interface MixinAminoMsg {
   type: "/google.protobuf.Mixin";
   value: MixinAmino;
 }
-
 /**
  * Declares an API Interface to be included in this interface. The including
  * interface must redeclare all the methods from the included interface, but
@@ -490,6 +489,7 @@ export interface MixinAminoMsg {
  *       ...
  *     }
  */
+
 export interface MixinSDKType {
   name: string;
   root: string;

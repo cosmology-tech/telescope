@@ -2,8 +2,8 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } f
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.escrow.v1beta2";
-
 /** State stores state for an escrow account */
+
 export enum Account_State {
   /** invalid - AccountStateInvalid is an invalid state */
   invalid = 0,
@@ -63,8 +63,8 @@ export function account_StateToJSON(object: Account_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Payment State */
+
 export enum FractionalPayment_State {
   /** invalid - PaymentStateInvalid is the state when the payment is invalid */
   invalid = 0,
@@ -124,8 +124,8 @@ export function fractionalPayment_StateToJSON(object: FractionalPayment_State): 
       return "UNRECOGNIZED";
   }
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountID {
   scope: string;
   xid: string;
@@ -134,8 +134,8 @@ export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.AccountID";
   value: Uint8Array;
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountIDAmino {
   scope: string;
   xid: string;
@@ -144,90 +144,90 @@ export interface AccountIDAminoMsg {
   type: "/akash.escrow.v1beta2.AccountID";
   value: AccountIDAmino;
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountIDSDKType {
   scope: string;
   xid: string;
 }
-
 /** Account stores state for an escrow account */
+
 export interface Account {
   /** unique identifier for this escrow account */
   id?: AccountID;
-
   /** bech32 encoded account address of the owner of this escrow account */
+
   owner: string;
-
   /** current state of this escrow account */
+
   state: Account_State;
-
   /** unspent coins received from the owner's wallet */
+
   balance?: DecCoin;
-
   /** total coins spent by this account */
+
   transferred?: DecCoin;
-
   /** block height at which this account was last settled */
-  settledAt: Long;
 
+  settledAt: Long;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor: string;
 
+  depositor: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
+
   funds?: DecCoin;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.Account";
   value: Uint8Array;
 }
-
 /** Account stores state for an escrow account */
+
 export interface AccountAmino {
   /** unique identifier for this escrow account */
   id?: AccountIDAmino;
-
   /** bech32 encoded account address of the owner of this escrow account */
+
   owner: string;
-
   /** current state of this escrow account */
+
   state: Account_State;
-
   /** unspent coins received from the owner's wallet */
+
   balance?: DecCoinAmino;
-
   /** total coins spent by this account */
+
   transferred?: DecCoinAmino;
-
   /** block height at which this account was last settled */
-  settled_at: string;
 
+  settled_at: string;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor: string;
 
+  depositor: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
+
   funds?: DecCoinAmino;
 }
 export interface AccountAminoMsg {
   type: "/akash.escrow.v1beta2.Account";
   value: AccountAmino;
 }
-
 /** Account stores state for an escrow account */
+
 export interface AccountSDKType {
   id?: AccountIDSDKType;
   owner: string;
@@ -238,8 +238,8 @@ export interface AccountSDKType {
   depositor: string;
   funds?: DecCoinSDKType;
 }
-
 /** Payment stores state for a payment */
+
 export interface FractionalPayment {
   accountId?: AccountID;
   paymentId: string;
@@ -253,8 +253,8 @@ export interface FractionalPaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
   value: Uint8Array;
 }
-
 /** Payment stores state for a payment */
+
 export interface FractionalPaymentAmino {
   account_id?: AccountIDAmino;
   payment_id: string;
@@ -268,8 +268,8 @@ export interface FractionalPaymentAminoMsg {
   type: "/akash.escrow.v1beta2.FractionalPayment";
   value: FractionalPaymentAmino;
 }
-
 /** Payment stores state for a payment */
+
 export interface FractionalPaymentSDKType {
   account_id?: AccountIDSDKType;
   payment_id: string;

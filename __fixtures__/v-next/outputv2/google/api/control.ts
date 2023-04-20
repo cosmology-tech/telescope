@@ -1,12 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Selects and configures the service controller used by the service.  The
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
+
 export interface Control {
   /**
    * The service control environment to use. If empty, no control plane
@@ -18,12 +18,12 @@ export interface ControlProtoMsg {
   typeUrl: "/google.api.Control";
   value: Uint8Array;
 }
-
 /**
  * Selects and configures the service controller used by the service.  The
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
+
 export interface ControlAmino {
   /**
    * The service control environment to use. If empty, no control plane
@@ -35,12 +35,12 @@ export interface ControlAminoMsg {
   type: "/google.api.Control";
   value: ControlAmino;
 }
-
 /**
  * Selects and configures the service controller used by the service.  The
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
+
 export interface ControlSDKType {
   environment: string;
 }

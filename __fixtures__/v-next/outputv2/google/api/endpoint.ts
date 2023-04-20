@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
  * APIs. It is commonly known as a service endpoint. A service may expose
@@ -20,10 +19,10 @@ export const protobufPackage = "google.api";
  *     - name: library-example.googleapis.com
  *       allow_cors: true
  */
+
 export interface Endpoint {
   /** The canonical name of this endpoint. */
   name: string;
-
   /**
    * Unimplemented. Dot not use.
    * 
@@ -35,8 +34,8 @@ export interface Endpoint {
    */
 
   /** @deprecated */
-  aliases: string[];
 
+  aliases: string[];
   /**
    * The specification of an Internet routable address of API frontend that will
    * handle requests to this [API
@@ -44,8 +43,8 @@ export interface Endpoint {
    * either a valid IPv4 address or a fully-qualified domain name. For example,
    * "8.8.8.8" or "myservice.appspot.com".
    */
-  target: string;
 
+  target: string;
   /**
    * Allowing
    * [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka
@@ -54,13 +53,13 @@ export interface Endpoint {
    * the browser to determine whether the subsequent cross-origin request is
    * allowed to proceed.
    */
+
   allowCors: boolean;
 }
 export interface EndpointProtoMsg {
   typeUrl: "/google.api.Endpoint";
   value: Uint8Array;
 }
-
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
  * APIs. It is commonly known as a service endpoint. A service may expose
@@ -79,10 +78,10 @@ export interface EndpointProtoMsg {
  *     - name: library-example.googleapis.com
  *       allow_cors: true
  */
+
 export interface EndpointAmino {
   /** The canonical name of this endpoint. */
   name: string;
-
   /**
    * Unimplemented. Dot not use.
    * 
@@ -94,8 +93,8 @@ export interface EndpointAmino {
    */
 
   /** @deprecated */
-  aliases: string[];
 
+  aliases: string[];
   /**
    * The specification of an Internet routable address of API frontend that will
    * handle requests to this [API
@@ -103,8 +102,8 @@ export interface EndpointAmino {
    * either a valid IPv4 address or a fully-qualified domain name. For example,
    * "8.8.8.8" or "myservice.appspot.com".
    */
-  target: string;
 
+  target: string;
   /**
    * Allowing
    * [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka
@@ -113,13 +112,13 @@ export interface EndpointAmino {
    * the browser to determine whether the subsequent cross-origin request is
    * allowed to proceed.
    */
+
   allow_cors: boolean;
 }
 export interface EndpointAminoMsg {
   type: "/google.api.Endpoint";
   value: EndpointAmino;
 }
-
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
  * APIs. It is commonly known as a service endpoint. A service may expose
@@ -138,10 +137,11 @@ export interface EndpointAminoMsg {
  *     - name: library-example.googleapis.com
  *       allow_cors: true
  */
+
 export interface EndpointSDKType {
   name: string;
-
   /** @deprecated */
+
   aliases: string[];
   target: string;
   allow_cors: boolean;

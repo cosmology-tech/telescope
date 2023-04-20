@@ -1,28 +1,28 @@
-import { Action, ActionSDKType, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
+import { Action, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryModuleAccountBalanceRequest {}
 export interface QueryModuleAccountBalanceRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest";
   value: Uint8Array;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryModuleAccountBalanceRequestAmino {}
 export interface QueryModuleAccountBalanceRequestAminoMsg {
   type: "osmosis/claim/query-module-account-balance-request";
   value: QueryModuleAccountBalanceRequestAmino;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryModuleAccountBalanceRequestSDKType {}
 
+export interface QueryModuleAccountBalanceRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryModuleAccountBalanceResponse {
   /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
@@ -31,8 +31,8 @@ export interface QueryModuleAccountBalanceResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse";
   value: Uint8Array;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryModuleAccountBalanceResponseAmino {
   /** params defines the parameters of the module. */
   moduleAccountBalance: CoinAmino[];
@@ -41,30 +41,30 @@ export interface QueryModuleAccountBalanceResponseAminoMsg {
   type: "osmosis/claim/query-module-account-balance-response";
   value: QueryModuleAccountBalanceResponseAmino;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryModuleAccountBalanceResponseSDKType {
   moduleAccountBalance: CoinSDKType[];
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest";
   value: Uint8Array;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
   type: "osmosis/claim/query-params-request";
   value: QueryParamsRequestAmino;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequestSDKType {}
 
+export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
@@ -73,8 +73,8 @@ export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse";
   value: Uint8Array;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
@@ -83,8 +83,8 @@ export interface QueryParamsResponseAminoMsg {
   type: "osmosis/claim/query-params-response";
   value: QueryParamsResponseAmino;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponseSDKType {
   params?: ParamsSDKType;
 }

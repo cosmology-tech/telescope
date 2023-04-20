@@ -2,8 +2,8 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.escrow.v1beta1";
-
 /** State stores state for an escrow account */
+
 export enum Account_State {
   /** invalid - AccountStateInvalid is an invalid state */
   invalid = 0,
@@ -63,8 +63,8 @@ export function account_StateToJSON(object: Account_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Payment State */
+
 export enum Payment_State {
   /** invalid - PaymentStateInvalid is the state when the payment is invalid */
   invalid = 0,
@@ -124,8 +124,8 @@ export function payment_StateToJSON(object: Payment_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountID {
   scope: string;
   xid: string;
@@ -134,8 +134,8 @@ export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.AccountID";
   value: Uint8Array;
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountIDAmino {
   scope: string;
   xid: string;
@@ -144,64 +144,64 @@ export interface AccountIDAminoMsg {
   type: "/akash.escrow.v1beta1.AccountID";
   value: AccountIDAmino;
 }
-
 /** AccountID is the account identifier */
+
 export interface AccountIDSDKType {
   scope: string;
   xid: string;
 }
-
 /** Account stores state for an escrow account */
+
 export interface Account {
   /** unique identifier for this escrow account */
   id?: AccountID;
-
   /** bech32 encoded account address of the owner of this escrow account */
+
   owner: string;
-
   /** current state of this escrow account */
+
   state: Account_State;
-
   /** unspent coins received from the owner's wallet */
+
   balance?: Coin;
-
   /** total coins spent by this account */
-  transferred?: Coin;
 
+  transferred?: Coin;
   /** block height at which this account was last settled */
+
   settledAt: Long;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Account";
   value: Uint8Array;
 }
-
 /** Account stores state for an escrow account */
+
 export interface AccountAmino {
   /** unique identifier for this escrow account */
   id?: AccountIDAmino;
-
   /** bech32 encoded account address of the owner of this escrow account */
+
   owner: string;
-
   /** current state of this escrow account */
+
   state: Account_State;
-
   /** unspent coins received from the owner's wallet */
+
   balance?: CoinAmino;
-
   /** total coins spent by this account */
-  transferred?: CoinAmino;
 
+  transferred?: CoinAmino;
   /** block height at which this account was last settled */
+
   settled_at: string;
 }
 export interface AccountAminoMsg {
   type: "/akash.escrow.v1beta1.Account";
   value: AccountAmino;
 }
-
 /** Account stores state for an escrow account */
+
 export interface AccountSDKType {
   id?: AccountIDSDKType;
   owner: string;
@@ -210,8 +210,8 @@ export interface AccountSDKType {
   transferred?: CoinSDKType;
   settled_at: Long;
 }
-
 /** Payment stores state for a payment */
+
 export interface Payment {
   accountId?: AccountID;
   paymentId: string;
@@ -225,8 +225,8 @@ export interface PaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Payment";
   value: Uint8Array;
 }
-
 /** Payment stores state for a payment */
+
 export interface PaymentAmino {
   account_id?: AccountIDAmino;
   payment_id: string;
@@ -240,8 +240,8 @@ export interface PaymentAminoMsg {
   type: "/akash.escrow.v1beta1.Payment";
   value: PaymentAmino;
 }
-
 /** Payment stores state for a payment */
+
 export interface PaymentSDKType {
   account_id?: AccountIDSDKType;
   payment_id: string;

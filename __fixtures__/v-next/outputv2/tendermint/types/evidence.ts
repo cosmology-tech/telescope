@@ -1,5 +1,5 @@
 import { Vote, VoteAmino, VoteSDKType, LightBlock, LightBlockAmino, LightBlockSDKType } from "./types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Timestamp } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorAmino, ValidatorSDKType } from "./validator";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -24,8 +24,8 @@ export interface EvidenceSDKType {
   duplicate_vote_evidence?: DuplicateVoteEvidenceSDKType;
   light_client_attack_evidence?: LightClientAttackEvidenceSDKType;
 }
-
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+
 export interface DuplicateVoteEvidence {
   voteA?: Vote;
   voteB?: Vote;
@@ -37,8 +37,8 @@ export interface DuplicateVoteEvidenceProtoMsg {
   typeUrl: "/tendermint.types.DuplicateVoteEvidence";
   value: Uint8Array;
 }
-
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+
 export interface DuplicateVoteEvidenceAmino {
   vote_a?: VoteAmino;
   vote_b?: VoteAmino;
@@ -50,8 +50,8 @@ export interface DuplicateVoteEvidenceAminoMsg {
   type: "/tendermint.types.DuplicateVoteEvidence";
   value: DuplicateVoteEvidenceAmino;
 }
-
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+
 export interface DuplicateVoteEvidenceSDKType {
   vote_a?: VoteSDKType;
   vote_b?: VoteSDKType;
@@ -59,8 +59,8 @@ export interface DuplicateVoteEvidenceSDKType {
   validator_power: Long;
   timestamp?: Date;
 }
-
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+
 export interface LightClientAttackEvidence {
   conflictingBlock?: LightBlock;
   commonHeight: Long;
@@ -72,8 +72,8 @@ export interface LightClientAttackEvidenceProtoMsg {
   typeUrl: "/tendermint.types.LightClientAttackEvidence";
   value: Uint8Array;
 }
-
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+
 export interface LightClientAttackEvidenceAmino {
   conflicting_block?: LightBlockAmino;
   common_height: string;
@@ -85,8 +85,8 @@ export interface LightClientAttackEvidenceAminoMsg {
   type: "/tendermint.types.LightClientAttackEvidence";
   value: LightClientAttackEvidenceAmino;
 }
-
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
   common_height: Long;

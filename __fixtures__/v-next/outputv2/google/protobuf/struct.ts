@@ -1,13 +1,13 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
  * `Value` type union.
  * 
  *  The JSON representation for `NullValue` is JSON `null`.
  */
+
 export enum NullValue {
   /** NULL_VALUE - Null value. */
   NULL_VALUE = 0,
@@ -57,7 +57,6 @@ export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -68,6 +67,7 @@ export interface Struct_FieldsEntrySDKType {
  * 
  * The JSON representation for `Struct` is JSON object.
  */
+
 export interface Struct {
   /** Unordered map of dynamically typed values. */
   fields?: {
@@ -78,7 +78,6 @@ export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
   value: Uint8Array;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -89,6 +88,7 @@ export interface StructProtoMsg {
  * 
  * The JSON representation for `Struct` is JSON object.
  */
+
 export interface StructAmino {
   /** Unordered map of dynamically typed values. */
   fields?: {
@@ -99,7 +99,6 @@ export interface StructAminoMsg {
   type: "/google.protobuf.Struct";
   value: StructAmino;
 }
-
 /**
  * `Struct` represents a structured data value, consisting of fields
  * which map to dynamically typed values. In some languages, `Struct`
@@ -110,12 +109,12 @@ export interface StructAminoMsg {
  * 
  * The JSON representation for `Struct` is JSON object.
  */
+
 export interface StructSDKType {
   fields?: {
     [key: string]: ValueSDKType;
   };
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -124,30 +123,30 @@ export interface StructSDKType {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+
 export interface Value {
   /** Represents a null value. */
   nullValue?: NullValue;
-
   /** Represents a double value. */
+
   numberValue?: number;
-
   /** Represents a string value. */
+
   stringValue?: string;
-
   /** Represents a boolean value. */
+
   boolValue?: boolean;
-
   /** Represents a structured value. */
-  structValue?: Struct;
 
+  structValue?: Struct;
   /** Represents a repeated `Value`. */
+
   listValue?: ListValue;
 }
 export interface ValueProtoMsg {
   typeUrl: "/google.protobuf.Value";
   value: Uint8Array;
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -156,30 +155,30 @@ export interface ValueProtoMsg {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+
 export interface ValueAmino {
   /** Represents a null value. */
   null_value?: NullValue;
-
   /** Represents a double value. */
+
   number_value?: number;
-
   /** Represents a string value. */
+
   string_value?: string;
-
   /** Represents a boolean value. */
+
   bool_value?: boolean;
-
   /** Represents a structured value. */
-  struct_value?: StructAmino;
 
+  struct_value?: StructAmino;
   /** Represents a repeated `Value`. */
+
   list_value?: ListValueAmino;
 }
 export interface ValueAminoMsg {
   type: "/google.protobuf.Value";
   value: ValueAmino;
 }
-
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -188,6 +187,7 @@ export interface ValueAminoMsg {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+
 export interface ValueSDKType {
   null_value?: NullValue;
   number_value?: number;
@@ -196,12 +196,12 @@ export interface ValueSDKType {
   struct_value?: StructSDKType;
   list_value?: ListValueSDKType;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
  * The JSON representation for `ListValue` is JSON array.
  */
+
 export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
@@ -210,12 +210,12 @@ export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
  * The JSON representation for `ListValue` is JSON array.
  */
+
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
   values: ValueAmino[];
@@ -224,12 +224,12 @@ export interface ListValueAminoMsg {
   type: "/google.protobuf.ListValue";
   value: ListValueAmino;
 }
-
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
  * The JSON representation for `ListValue` is JSON array.
  */
+
 export interface ListValueSDKType {
   values: ValueSDKType[];
 }

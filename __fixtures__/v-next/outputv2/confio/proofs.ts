@@ -72,13 +72,13 @@ export function hashOpToJSON(object: HashOp): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * LengthOp defines how to process the key and value of the LeafOp
  * to include length information. After encoding the length with the given
  * algorithm, the length will be prepended to the key and value bytes.
  * (Each one with it's own encoded length)
  */
+
 export enum LengthOp {
   /** NO_PREFIX - NO_PREFIX don't include any length info */
   NO_PREFIX = 0,
@@ -188,7 +188,6 @@ export function lengthOpToJSON(object: LengthOp): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -210,6 +209,7 @@ export function lengthOpToJSON(object: LengthOp): string {
  * in the ProofSpec is valuable to prevent this mutability. And why all trees should
  * length-prefix the data before hashing it.
  */
+
 export interface ExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
@@ -220,7 +220,6 @@ export interface ExistenceProofProtoMsg {
   typeUrl: "/ics23.ExistenceProof";
   value: Uint8Array;
 }
-
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -242,6 +241,7 @@ export interface ExistenceProofProtoMsg {
  * in the ProofSpec is valuable to prevent this mutability. And why all trees should
  * length-prefix the data before hashing it.
  */
+
 export interface ExistenceProofAmino {
   key: Uint8Array;
   value: Uint8Array;
@@ -252,7 +252,6 @@ export interface ExistenceProofAminoMsg {
   type: "/ics23.ExistenceProof";
   value: ExistenceProofAmino;
 }
-
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -274,18 +273,19 @@ export interface ExistenceProofAminoMsg {
  * in the ProofSpec is valuable to prevent this mutability. And why all trees should
  * length-prefix the data before hashing it.
  */
+
 export interface ExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
   leaf?: LeafOpSDKType;
   path: InnerOpSDKType[];
 }
-
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
  * then there is no valid proof for the given key.
  */
+
 export interface NonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
@@ -296,12 +296,12 @@ export interface NonExistenceProofProtoMsg {
   typeUrl: "/ics23.NonExistenceProof";
   value: Uint8Array;
 }
-
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
  * then there is no valid proof for the given key.
  */
+
 export interface NonExistenceProofAmino {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
@@ -312,19 +312,19 @@ export interface NonExistenceProofAminoMsg {
   type: "/ics23.NonExistenceProof";
   value: NonExistenceProofAmino;
 }
-
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
  * then there is no valid proof for the given key.
  */
+
 export interface NonExistenceProofSDKType {
   key: Uint8Array;
   left?: ExistenceProofSDKType;
   right?: ExistenceProofSDKType;
 }
-
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
+
 export interface CommitmentProof {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
@@ -335,8 +335,8 @@ export interface CommitmentProofProtoMsg {
   typeUrl: "/ics23.CommitmentProof";
   value: Uint8Array;
 }
-
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
+
 export interface CommitmentProofAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
@@ -347,15 +347,14 @@ export interface CommitmentProofAminoMsg {
   type: "/ics23.CommitmentProof";
   value: CommitmentProofAmino;
 }
-
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
+
 export interface CommitmentProofSDKType {
   exist?: ExistenceProofSDKType;
   nonexist?: NonExistenceProofSDKType;
   batch?: BatchProofSDKType;
   compressed?: CompressedBatchProofSDKType;
 }
-
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
  * must be flexible to represent the internal transformation from
@@ -372,23 +371,23 @@ export interface CommitmentProofSDKType {
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
+
 export interface LeafOp {
   hash: HashOp;
   prehashKey: HashOp;
   prehashValue: HashOp;
   length: LengthOp;
-
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
    * a leaf node from an inner node.
    */
+
   prefix: Uint8Array;
 }
 export interface LeafOpProtoMsg {
   typeUrl: "/ics23.LeafOp";
   value: Uint8Array;
 }
-
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
  * must be flexible to represent the internal transformation from
@@ -405,23 +404,23 @@ export interface LeafOpProtoMsg {
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
+
 export interface LeafOpAmino {
   hash: HashOp;
   prehash_key: HashOp;
   prehash_value: HashOp;
   length: LengthOp;
-
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
    * a leaf node from an inner node.
    */
+
   prefix: Uint8Array;
 }
 export interface LeafOpAminoMsg {
   type: "/ics23.LeafOp";
   value: LeafOpAmino;
 }
-
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
  * must be flexible to represent the internal transformation from
@@ -438,6 +437,7 @@ export interface LeafOpAminoMsg {
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
+
 export interface LeafOpSDKType {
   hash: HashOp;
   prehash_key: HashOp;
@@ -445,7 +445,6 @@ export interface LeafOpSDKType {
   length: LengthOp;
   prefix: Uint8Array;
 }
-
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
  * It represents concatenating two children and hashing them to provide the next result.
@@ -463,6 +462,7 @@ export interface LeafOpSDKType {
  * some value to differentiate from leaf nodes, should be included in prefix and suffix.
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
+
 export interface InnerOp {
   hash: HashOp;
   prefix: Uint8Array;
@@ -472,7 +472,6 @@ export interface InnerOpProtoMsg {
   typeUrl: "/ics23.InnerOp";
   value: Uint8Array;
 }
-
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
  * It represents concatenating two children and hashing them to provide the next result.
@@ -490,6 +489,7 @@ export interface InnerOpProtoMsg {
  * some value to differentiate from leaf nodes, should be included in prefix and suffix.
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
+
 export interface InnerOpAmino {
   hash: HashOp;
   prefix: Uint8Array;
@@ -499,7 +499,6 @@ export interface InnerOpAminoMsg {
   type: "/ics23.InnerOp";
   value: InnerOpAmino;
 }
-
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
  * It represents concatenating two children and hashing them to provide the next result.
@@ -517,12 +516,12 @@ export interface InnerOpAminoMsg {
  * some value to differentiate from leaf nodes, should be included in prefix and suffix.
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
+
 export interface InnerOpSDKType {
   hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
 }
-
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
  * This can be stored in the client and used to validate any incoming proofs.
@@ -535,6 +534,7 @@ export interface InnerOpSDKType {
  * We need this for proper security, requires client knows a priori what
  * tree format server uses. But not in code, rather a configuration object.
  */
+
 export interface ProofSpec {
   /**
    * any field in the ExistenceProof must be the same as in this spec.
@@ -542,18 +542,17 @@ export interface ProofSpec {
    */
   leafSpec?: LeafOp;
   innerSpec?: InnerSpec;
-
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
-  maxDepth: number;
 
+  maxDepth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
+
   minDepth: number;
 }
 export interface ProofSpecProtoMsg {
   typeUrl: "/ics23.ProofSpec";
   value: Uint8Array;
 }
-
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
  * This can be stored in the client and used to validate any incoming proofs.
@@ -566,6 +565,7 @@ export interface ProofSpecProtoMsg {
  * We need this for proper security, requires client knows a priori what
  * tree format server uses. But not in code, rather a configuration object.
  */
+
 export interface ProofSpecAmino {
   /**
    * any field in the ExistenceProof must be the same as in this spec.
@@ -573,18 +573,17 @@ export interface ProofSpecAmino {
    */
   leaf_spec?: LeafOpAmino;
   inner_spec?: InnerSpecAmino;
-
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
-  max_depth: number;
 
+  max_depth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
+
   min_depth: number;
 }
 export interface ProofSpecAminoMsg {
   type: "/ics23.ProofSpec";
   value: ProofSpecAmino;
 }
-
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
  * This can be stored in the client and used to validate any incoming proofs.
@@ -597,13 +596,13 @@ export interface ProofSpecAminoMsg {
  * We need this for proper security, requires client knows a priori what
  * tree format server uses. But not in code, rather a configuration object.
  */
+
 export interface ProofSpecSDKType {
   leaf_spec?: LeafOpSDKType;
   inner_spec?: InnerSpecSDKType;
   max_depth: number;
   min_depth: number;
 }
-
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -614,6 +613,7 @@ export interface ProofSpecSDKType {
  * isRightMost(spec: InnerSpec, op: InnerOp)
  * isLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)
  */
+
 export interface InnerSpec {
   /**
    * Child order is the ordering of the children node, must count from 0
@@ -624,18 +624,17 @@ export interface InnerSpec {
   childSize: number;
   minPrefixLength: number;
   maxPrefixLength: number;
-
   /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
-  emptyChild: Uint8Array;
 
+  emptyChild: Uint8Array;
   /** hash is the algorithm that must be used for each InnerOp */
+
   hash: HashOp;
 }
 export interface InnerSpecProtoMsg {
   typeUrl: "/ics23.InnerSpec";
   value: Uint8Array;
 }
-
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -646,6 +645,7 @@ export interface InnerSpecProtoMsg {
  * isRightMost(spec: InnerSpec, op: InnerOp)
  * isLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)
  */
+
 export interface InnerSpecAmino {
   /**
    * Child order is the ordering of the children node, must count from 0
@@ -656,18 +656,17 @@ export interface InnerSpecAmino {
   child_size: number;
   min_prefix_length: number;
   max_prefix_length: number;
-
   /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
-  empty_child: Uint8Array;
 
+  empty_child: Uint8Array;
   /** hash is the algorithm that must be used for each InnerOp */
+
   hash: HashOp;
 }
 export interface InnerSpecAminoMsg {
   type: "/ics23.InnerSpec";
   value: InnerSpecAmino;
 }
-
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -678,6 +677,7 @@ export interface InnerSpecAminoMsg {
  * isRightMost(spec: InnerSpec, op: InnerOp)
  * isLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)
  */
+
 export interface InnerSpecSDKType {
   child_order: number[];
   child_size: number;
@@ -686,8 +686,8 @@ export interface InnerSpecSDKType {
   empty_child: Uint8Array;
   hash: HashOp;
 }
-
 /** BatchProof is a group of multiple proof types than can be compressed */
+
 export interface BatchProof {
   entries: BatchEntry[];
 }
@@ -695,8 +695,8 @@ export interface BatchProofProtoMsg {
   typeUrl: "/ics23.BatchProof";
   value: Uint8Array;
 }
-
 /** BatchProof is a group of multiple proof types than can be compressed */
+
 export interface BatchProofAmino {
   entries: BatchEntryAmino[];
 }
@@ -704,13 +704,13 @@ export interface BatchProofAminoMsg {
   type: "/ics23.BatchProof";
   value: BatchProofAmino;
 }
-
 /** BatchProof is a group of multiple proof types than can be compressed */
+
 export interface BatchProofSDKType {
   entries: BatchEntrySDKType[];
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface BatchEntry {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
@@ -719,8 +719,8 @@ export interface BatchEntryProtoMsg {
   typeUrl: "/ics23.BatchEntry";
   value: Uint8Array;
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface BatchEntryAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
@@ -729,8 +729,8 @@ export interface BatchEntryAminoMsg {
   type: "/ics23.BatchEntry";
   value: BatchEntryAmino;
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface BatchEntrySDKType {
   exist?: ExistenceProofSDKType;
   nonexist?: NonExistenceProofSDKType;
@@ -755,8 +755,8 @@ export interface CompressedBatchProofSDKType {
   entries: CompressedBatchEntrySDKType[];
   lookup_inners: InnerOpSDKType[];
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface CompressedBatchEntry {
   exist?: CompressedExistenceProof;
   nonexist?: CompressedNonExistenceProof;
@@ -765,8 +765,8 @@ export interface CompressedBatchEntryProtoMsg {
   typeUrl: "/ics23.CompressedBatchEntry";
   value: Uint8Array;
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface CompressedBatchEntryAmino {
   exist?: CompressedExistenceProofAmino;
   nonexist?: CompressedNonExistenceProofAmino;
@@ -775,8 +775,8 @@ export interface CompressedBatchEntryAminoMsg {
   type: "/ics23.CompressedBatchEntry";
   value: CompressedBatchEntryAmino;
 }
-
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
+
 export interface CompressedBatchEntrySDKType {
   exist?: CompressedExistenceProofSDKType;
   nonexist?: CompressedNonExistenceProofSDKType;
@@ -785,8 +785,8 @@ export interface CompressedExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
   leaf?: LeafOp;
-
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
+
   path: number[];
 }
 export interface CompressedExistenceProofProtoMsg {
@@ -797,8 +797,8 @@ export interface CompressedExistenceProofAmino {
   key: Uint8Array;
   value: Uint8Array;
   leaf?: LeafOpAmino;
-
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
+
   path: number[];
 }
 export interface CompressedExistenceProofAminoMsg {

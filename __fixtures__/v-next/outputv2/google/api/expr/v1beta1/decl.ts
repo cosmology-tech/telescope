@@ -2,52 +2,52 @@ import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
-
 /** A declaration. */
+
 export interface Decl {
   /** The id of the declaration. */
   id: number;
-
   /** The name of the declaration. */
+
   name: string;
-
   /** The documentation string for the declaration. */
+
   doc: string;
-
   /** An identifier declaration. */
-  ident?: IdentDecl;
 
+  ident?: IdentDecl;
   /** A function declaration. */
+
   function?: FunctionDecl;
 }
 export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
   value: Uint8Array;
 }
-
 /** A declaration. */
+
 export interface DeclAmino {
   /** The id of the declaration. */
   id: number;
-
   /** The name of the declaration. */
+
   name: string;
-
   /** The documentation string for the declaration. */
+
   doc: string;
-
   /** An identifier declaration. */
-  ident?: IdentDeclAmino;
 
+  ident?: IdentDeclAmino;
   /** A function declaration. */
+
   function?: FunctionDeclAmino;
 }
 export interface DeclAminoMsg {
   type: "/google.api.expr.v1beta1.Decl";
   value: DeclAmino;
 }
-
 /** A declaration. */
+
 export interface DeclSDKType {
   id: number;
   name: string;
@@ -55,132 +55,132 @@ export interface DeclSDKType {
   ident?: IdentDeclSDKType;
   function?: FunctionDeclSDKType;
 }
-
 /**
  * The declared type of a variable.
  * 
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
+
 export interface DeclType {
   /** The expression id of the declared type, if applicable. */
   id: number;
-
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
-  type: string;
 
+  type: string;
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
+
   typeParams: DeclType[];
 }
 export interface DeclTypeProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.DeclType";
   value: Uint8Array;
 }
-
 /**
  * The declared type of a variable.
  * 
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
+
 export interface DeclTypeAmino {
   /** The expression id of the declared type, if applicable. */
   id: number;
-
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
-  type: string;
 
+  type: string;
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
+
   type_params: DeclTypeAmino[];
 }
 export interface DeclTypeAminoMsg {
   type: "/google.api.expr.v1beta1.DeclType";
   value: DeclTypeAmino;
 }
-
 /**
  * The declared type of a variable.
  * 
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
+
 export interface DeclTypeSDKType {
   id: number;
   type: string;
   type_params: DeclTypeSDKType[];
 }
-
 /** An identifier declaration. */
+
 export interface IdentDecl {
   /** Optional type of the identifier. */
   type?: DeclType;
-
   /** Optional value of the identifier. */
+
   value?: Expr;
 }
 export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
 }
-
 /** An identifier declaration. */
+
 export interface IdentDeclAmino {
   /** Optional type of the identifier. */
   type?: DeclTypeAmino;
-
   /** Optional value of the identifier. */
+
   value?: ExprAmino;
 }
 export interface IdentDeclAminoMsg {
   type: "/google.api.expr.v1beta1.IdentDecl";
   value: IdentDeclAmino;
 }
-
 /** An identifier declaration. */
+
 export interface IdentDeclSDKType {
   type?: DeclTypeSDKType;
   value?: ExprSDKType;
 }
-
 /** A function declaration. */
+
 export interface FunctionDecl {
   /** The function arguments. */
   args: IdentDecl[];
-
   /** Optional declared return type. */
-  returnType?: DeclType;
 
+  returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
+
   receiverFunction: boolean;
 }
 export interface FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
   value: Uint8Array;
 }
-
 /** A function declaration. */
+
 export interface FunctionDeclAmino {
   /** The function arguments. */
   args: IdentDeclAmino[];
-
   /** Optional declared return type. */
-  return_type?: DeclTypeAmino;
 
+  return_type?: DeclTypeAmino;
   /** If the first argument of the function is the receiver. */
+
   receiver_function: boolean;
 }
 export interface FunctionDeclAminoMsg {
   type: "/google.api.expr.v1beta1.FunctionDecl";
   value: FunctionDeclAmino;
 }
-
 /** A function declaration. */
+
 export interface FunctionDeclSDKType {
   args: IdentDeclSDKType[];
   return_type?: DeclTypeSDKType;

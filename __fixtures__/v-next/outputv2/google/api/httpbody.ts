@@ -1,8 +1,7 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -48,24 +47,24 @@ export const protobufPackage = "google.api";
  * Use of this type only changes how the request and response bodies are
  * handled, all other features will continue to work unchanged.
  */
+
 export interface HttpBody {
   /** The HTTP Content-Type header value specifying the content type of the body. */
   contentType: string;
-
   /** The HTTP request/response body as raw binary. */
-  data: Uint8Array;
 
+  data: Uint8Array;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
+
   extensions: Any[];
 }
 export interface HttpBodyProtoMsg {
   typeUrl: "/google.api.HttpBody";
   value: Uint8Array;
 }
-
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -111,24 +110,24 @@ export interface HttpBodyProtoMsg {
  * Use of this type only changes how the request and response bodies are
  * handled, all other features will continue to work unchanged.
  */
+
 export interface HttpBodyAmino {
   /** The HTTP Content-Type header value specifying the content type of the body. */
   content_type: string;
-
   /** The HTTP request/response body as raw binary. */
-  data: Uint8Array;
 
+  data: Uint8Array;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
+
   extensions: AnyAmino[];
 }
 export interface HttpBodyAminoMsg {
   type: "/google.api.HttpBody";
   value: HttpBodyAmino;
 }
-
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -174,6 +173,7 @@ export interface HttpBodyAminoMsg {
  * Use of this type only changes how the request and response bodies are
  * handled, all other features will continue to work unchanged.
  */
+
 export interface HttpBodySDKType {
   content_type: string;
   data: Uint8Array;

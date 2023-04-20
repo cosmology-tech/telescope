@@ -3,98 +3,97 @@ import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
-
 /**
  * The state of an evaluation.
  * 
  * Can represent an initial, partial, or completed state of evaluation.
  */
+
 export interface EvalState {
   /** The unique values referenced in this message. */
   values: ExprValue[];
-
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
+
   results: EvalState_Result[];
 }
 export interface EvalStateProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.EvalState";
   value: Uint8Array;
 }
-
 /**
  * The state of an evaluation.
  * 
  * Can represent an initial, partial, or completed state of evaluation.
  */
+
 export interface EvalStateAmino {
   /** The unique values referenced in this message. */
   values: ExprValueAmino[];
-
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
+
   results: EvalState_ResultAmino[];
 }
 export interface EvalStateAminoMsg {
   type: "/google.api.expr.v1beta1.EvalState";
   value: EvalStateAmino;
 }
-
 /**
  * The state of an evaluation.
  * 
  * Can represent an initial, partial, or completed state of evaluation.
  */
+
 export interface EvalStateSDKType {
   values: ExprValueSDKType[];
   results: EvalState_ResultSDKType[];
 }
-
 /** A single evaluation result. */
+
 export interface EvalState_Result {
   /** The expression this result is for. */
   expr?: IdRef;
-
   /** The index in `values` of the resulting value. */
+
   value: number;
 }
 export interface EvalState_ResultProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Result";
   value: Uint8Array;
 }
-
 /** A single evaluation result. */
+
 export interface EvalState_ResultAmino {
   /** The expression this result is for. */
   expr?: IdRefAmino;
-
   /** The index in `values` of the resulting value. */
+
   value: number;
 }
 export interface EvalState_ResultAminoMsg {
   type: "/google.api.expr.v1beta1.Result";
   value: EvalState_ResultAmino;
 }
-
 /** A single evaluation result. */
+
 export interface EvalState_ResultSDKType {
   expr?: IdRefSDKType;
   value: number;
 }
-
 /** The value of an evaluated expression. */
+
 export interface ExprValue {
   /** A concrete value. */
   value?: Value;
-
   /**
    * The set of errors in the critical path of evalution.
    * 
@@ -113,8 +112,8 @@ export interface ExprValue {
    * The exact subset of errors included for this case is unspecified and
    * depends on the implementation details of the evaluator.
    */
-  error?: ErrorSet;
 
+  error?: ErrorSet;
   /**
    * The set of unknowns in the critical path of evaluation.
    * 
@@ -141,18 +140,18 @@ export interface ExprValue {
    *     <unknown> + <error> -> <error>
    *     foo(<unknown>, <error>) -> <error>
    */
+
   unknown?: UnknownSet;
 }
 export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ExprValue";
   value: Uint8Array;
 }
-
 /** The value of an evaluated expression. */
+
 export interface ExprValueAmino {
   /** A concrete value. */
   value?: ValueAmino;
-
   /**
    * The set of errors in the critical path of evalution.
    * 
@@ -171,8 +170,8 @@ export interface ExprValueAmino {
    * The exact subset of errors included for this case is unspecified and
    * depends on the implementation details of the evaluator.
    */
-  error?: ErrorSetAmino;
 
+  error?: ErrorSetAmino;
   /**
    * The set of unknowns in the critical path of evaluation.
    * 
@@ -199,25 +198,26 @@ export interface ExprValueAmino {
    *     <unknown> + <error> -> <error>
    *     foo(<unknown>, <error>) -> <error>
    */
+
   unknown?: UnknownSetAmino;
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1beta1.ExprValue";
   value: ExprValueAmino;
 }
-
 /** The value of an evaluated expression. */
+
 export interface ExprValueSDKType {
   value?: ValueSDKType;
   error?: ErrorSetSDKType;
   unknown?: UnknownSetSDKType;
 }
-
 /**
  * A set of errors.
  * 
  * The errors included depend on the context. See `ExprValue.error`.
  */
+
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
@@ -226,12 +226,12 @@ export interface ErrorSetProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ErrorSet";
   value: Uint8Array;
 }
-
 /**
  * A set of errors.
  * 
  * The errors included depend on the context. See `ExprValue.error`.
  */
+
 export interface ErrorSetAmino {
   /** The errors in the set. */
   errors: StatusAmino[];
@@ -240,21 +240,21 @@ export interface ErrorSetAminoMsg {
   type: "/google.api.expr.v1beta1.ErrorSet";
   value: ErrorSetAmino;
 }
-
 /**
  * A set of errors.
  * 
  * The errors included depend on the context. See `ExprValue.error`.
  */
+
 export interface ErrorSetSDKType {
   errors: StatusSDKType[];
 }
-
 /**
  * A set of expressions for which the value is unknown.
  * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
+
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: IdRef[];
@@ -263,12 +263,12 @@ export interface UnknownSetProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.UnknownSet";
   value: Uint8Array;
 }
-
 /**
  * A set of expressions for which the value is unknown.
  * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
+
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
   exprs: IdRefAmino[];
@@ -277,17 +277,17 @@ export interface UnknownSetAminoMsg {
   type: "/google.api.expr.v1beta1.UnknownSet";
   value: UnknownSetAmino;
 }
-
 /**
  * A set of expressions for which the value is unknown.
  * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
+
 export interface UnknownSetSDKType {
   exprs: IdRefSDKType[];
 }
-
 /** A reference to an expression id. */
+
 export interface IdRef {
   /** The expression id. */
   id: number;
@@ -296,8 +296,8 @@ export interface IdRefProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdRef";
   value: Uint8Array;
 }
-
 /** A reference to an expression id. */
+
 export interface IdRefAmino {
   /** The expression id. */
   id: number;
@@ -306,8 +306,8 @@ export interface IdRefAminoMsg {
   type: "/google.api.expr.v1beta1.IdRef";
   value: IdRefAmino;
 }
-
 /** A reference to an expression id. */
+
 export interface IdRefSDKType {
   id: number;
 }

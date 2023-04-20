@@ -1,11 +1,11 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v2";
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceRequest {
   poolId: Long;
   baseAssetDenom: string;
@@ -15,11 +15,11 @@ export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
   value: Uint8Array;
 }
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceRequestAmino {
   pool_id: string;
   base_asset_denom: string;
@@ -29,21 +29,21 @@ export interface QuerySpotPriceRequestAminoMsg {
   type: "osmosis/gamm/v2/query-spot-price-request";
   value: QuerySpotPriceRequestAmino;
 }
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceRequestSDKType {
   pool_id: Long;
   base_asset_denom: string;
   quote_asset_denom: string;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
@@ -52,11 +52,11 @@ export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
   value: Uint8Array;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
@@ -65,11 +65,11 @@ export interface QuerySpotPriceResponseAminoMsg {
   type: "osmosis/gamm/v2/query-spot-price-response";
   value: QuerySpotPriceResponseAmino;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
+
 export interface QuerySpotPriceResponseSDKType {
   spot_price: string;
 }

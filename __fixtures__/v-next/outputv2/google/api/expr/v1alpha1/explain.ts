@@ -2,13 +2,13 @@ import { Value, ValueAmino, ValueSDKType } from "./value";
 import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";
-
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
  */
 
 /** @deprecated */
+
 export interface Explain {
   /**
    * All of the observed values.
@@ -17,7 +17,6 @@ export interface Explain {
    * Separating values from steps is needed to remove redundant values.
    */
   values: Value[];
-
   /**
    * List of steps.
    * 
@@ -25,19 +24,20 @@ export interface Explain {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
+
   exprSteps: Explain_ExprStep[];
 }
 export interface ExplainProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Explain";
   value: Uint8Array;
 }
-
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
  */
 
 /** @deprecated */
+
 export interface ExplainAmino {
   /**
    * All of the observed values.
@@ -46,7 +46,6 @@ export interface ExplainAmino {
    * Separating values from steps is needed to remove redundant values.
    */
   values: ValueAmino[];
-
   /**
    * List of steps.
    * 
@@ -54,51 +53,52 @@ export interface ExplainAmino {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
+
   expr_steps: Explain_ExprStepAmino[];
 }
 export interface ExplainAminoMsg {
   type: "/google.api.expr.v1alpha1.Explain";
   value: ExplainAmino;
 }
-
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
  */
 
 /** @deprecated */
+
 export interface ExplainSDKType {
   values: ValueSDKType[];
   expr_steps: Explain_ExprStepSDKType[];
 }
-
 /** ID and value index of one step. */
+
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
   id: Long;
-
   /** Index of the value in the values list. */
+
   valueIndex: number;
 }
 export interface Explain_ExprStepProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep";
   value: Uint8Array;
 }
-
 /** ID and value index of one step. */
+
 export interface Explain_ExprStepAmino {
   /** ID of corresponding Expr node. */
   id: string;
-
   /** Index of the value in the values list. */
+
   value_index: number;
 }
 export interface Explain_ExprStepAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprStep";
   value: Explain_ExprStepAmino;
 }
-
 /** ID and value index of one step. */
+
 export interface Explain_ExprStepSDKType {
   id: Long;
   value_index: number;

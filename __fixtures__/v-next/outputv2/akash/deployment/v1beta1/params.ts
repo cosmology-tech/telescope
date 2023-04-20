@@ -2,8 +2,8 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
-
 /** Params defines the parameters for the x/deployment package */
+
 export interface Params {
   deploymentMinDeposit?: Coin;
 }
@@ -11,8 +11,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Params";
   value: Uint8Array;
 }
-
 /** Params defines the parameters for the x/deployment package */
+
 export interface ParamsAmino {
   deployment_min_deposit?: CoinAmino;
 }
@@ -20,8 +20,8 @@ export interface ParamsAminoMsg {
   type: "/akash.deployment.v1beta1.Params";
   value: ParamsAmino;
 }
-
 /** Params defines the parameters for the x/deployment package */
+
 export interface ParamsSDKType {
   deployment_min_deposit?: CoinSDKType;
 }

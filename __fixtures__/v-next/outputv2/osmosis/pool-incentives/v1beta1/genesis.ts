@@ -3,8 +3,8 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
-
 /** GenesisState defines the pool incentives module's genesis state. */
+
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
@@ -16,8 +16,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the pool incentives module's genesis state. */
+
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
@@ -29,8 +29,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/poolincentives/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the pool incentives module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   lockable_durations: DurationSDKType[];

@@ -1,25 +1,21 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { UnaryMethodDefinitionish } from "../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
-
+import { MsgLockTokens, MsgLockTokensResponse, MsgBeginUnlockingAll, MsgBeginUnlockingAllResponse, MsgBeginUnlocking, MsgBeginUnlockingResponse, MsgExtendLockup, MsgExtendLockupResponse, MsgForceUnlock, MsgForceUnlockResponse } from "./tx";
 /** Msg defines the Msg service. */
+
 export interface Msg {
   /** LockTokens lock tokens */
   lockTokens(request: DeepPartial<MsgLockTokens>, metadata?: grpc.Metadata): Promise<MsgLockTokensResponse>;
-
   /** BeginUnlockingAll begin unlocking all tokens */
+
   beginUnlockingAll(request: DeepPartial<MsgBeginUnlockingAll>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingAllResponse>;
-
   /** MsgBeginUnlocking begins unlocking tokens by lock ID */
-  beginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse>;
 
+  beginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse>;
   /** MsgEditLockup edits the existing lockups by lock ID */
+
   extendLockup(request: DeepPartial<MsgExtendLockup>, metadata?: grpc.Metadata): Promise<MsgExtendLockupResponse>;
   forceUnlock(request: DeepPartial<MsgForceUnlock>, metadata?: grpc.Metadata): Promise<MsgForceUnlockResponse>;
 }

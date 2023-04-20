@@ -1,8 +1,8 @@
 import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
+import { Timestamp } from "../../protobuf/timestamp";
+import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -27,8 +27,8 @@ export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /** An individual entry in a log. */
+
 export interface LogEntry {
   /**
    * Required. The resource name of the log to which this log entry belongs:
@@ -56,7 +56,6 @@ export interface LogEntry {
    * any results.
    */
   logName: string;
-
   /**
    * Required. The monitored resource that produced this log entry.
    * 
@@ -64,8 +63,8 @@ export interface LogEntry {
    * the monitored resource designating the particular database that reported
    * the error.
    */
-  resource?: MonitoredResource;
 
+  resource?: MonitoredResource;
   /**
    * The log entry payload, represented as a protocol buffer. Some Google
    * Cloud Platform services use this field for their log entry payloads.
@@ -76,17 +75,17 @@ export interface LogEntry {
    *   "type.googleapis.com/google.cloud.audit.AuditLog"
    *   "type.googleapis.com/google.appengine.logging.v1.RequestLog"
    */
+
   protoPayload?: Any;
-
   /** The log entry payload, represented as a Unicode string (UTF-8). */
-  textPayload?: string;
 
+  textPayload?: string;
   /**
    * The log entry payload, represented as a structure that is
    * expressed as a JSON object.
    */
-  jsonPayload?: Struct;
 
+  jsonPayload?: Struct;
   /**
    * Optional. The time the event described by the log entry occurred. This time is used
    * to compute the log entry's age and to enforce the logs retention period.
@@ -100,14 +99,14 @@ export interface LogEntry {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
+
   timestamp?: Date;
-
   /** Output only. The time the log entry was received by Logging. */
+
   receiveTimestamp?: Date;
-
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
-  severity: LogSeverity;
 
+  severity: LogSeverity;
   /**
    * Optional. A unique identifier for the log entry. If you provide a value, then
    * Logging considers other log entries in the same project, with the same
@@ -121,14 +120,14 @@ export interface LogEntry {
    * In queries, the `insert_id` is also used to order log entries that have
    * the same `log_name` and `timestamp` values.
    */
-  insertId: string;
 
+  insertId: string;
   /**
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
    */
-  httpRequest?: HttpRequest;
 
+  httpRequest?: HttpRequest;
   /**
    * Optional. A map of key, value pairs that provides additional information about the
    * log entry. The labels can be user-defined or system-defined.
@@ -145,24 +144,24 @@ export interface LogEntry {
    * written. The truncation is indicated by an ellipsis at the
    * end of the character string.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperation;
 
+  operation?: LogEntryOperation;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any. If it
    * contains a relative resource name, the name is assumed to be relative to
    * `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
 
+  trace: string;
   /**
    * Optional. The span ID within the trace associated with the log entry.
    * 
@@ -170,8 +169,8 @@ export interface LogEntry {
    * 16-character hexadecimal encoding of an 8-byte array, such as
    * `000000000000004a`.
    */
-  spanId: string;
 
+  spanId: string;
   /**
    * Optional. The sampling decision of the trace associated with the log entry.
    * 
@@ -181,23 +180,24 @@ export interface LogEntry {
    * unknown at the time. A non-sampled `trace` value is still useful as a
    * request correlation identifier. The default is False.
    */
+
   traceSampled: boolean;
-
   /** Optional. Source code location information associated with the log entry, if any. */
-  sourceLocation?: LogEntrySourceLocation;
 
+  sourceLocation?: LogEntrySourceLocation;
   /**
    * Optional. Information indicating this LogEntry is part of a sequence of multiple log
    * entries split from a single LogEntry.
    */
+
   split?: LogSplit;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.logging.v2.LogEntry";
   value: Uint8Array;
 }
-
 /** An individual entry in a log. */
+
 export interface LogEntryAmino {
   /**
    * Required. The resource name of the log to which this log entry belongs:
@@ -225,7 +225,6 @@ export interface LogEntryAmino {
    * any results.
    */
   log_name: string;
-
   /**
    * Required. The monitored resource that produced this log entry.
    * 
@@ -233,8 +232,8 @@ export interface LogEntryAmino {
    * the monitored resource designating the particular database that reported
    * the error.
    */
-  resource?: MonitoredResourceAmino;
 
+  resource?: MonitoredResourceAmino;
   /**
    * The log entry payload, represented as a protocol buffer. Some Google
    * Cloud Platform services use this field for their log entry payloads.
@@ -245,17 +244,17 @@ export interface LogEntryAmino {
    *   "type.googleapis.com/google.cloud.audit.AuditLog"
    *   "type.googleapis.com/google.appengine.logging.v1.RequestLog"
    */
+
   proto_payload?: AnyAmino;
-
   /** The log entry payload, represented as a Unicode string (UTF-8). */
-  text_payload?: string;
 
+  text_payload?: string;
   /**
    * The log entry payload, represented as a structure that is
    * expressed as a JSON object.
    */
-  json_payload?: StructAmino;
 
+  json_payload?: StructAmino;
   /**
    * Optional. The time the event described by the log entry occurred. This time is used
    * to compute the log entry's age and to enforce the logs retention period.
@@ -269,14 +268,14 @@ export interface LogEntryAmino {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
+
   timestamp?: Date;
-
   /** Output only. The time the log entry was received by Logging. */
+
   receive_timestamp?: Date;
-
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
-  severity: LogSeverity;
 
+  severity: LogSeverity;
   /**
    * Optional. A unique identifier for the log entry. If you provide a value, then
    * Logging considers other log entries in the same project, with the same
@@ -290,14 +289,14 @@ export interface LogEntryAmino {
    * In queries, the `insert_id` is also used to order log entries that have
    * the same `log_name` and `timestamp` values.
    */
-  insert_id: string;
 
+  insert_id: string;
   /**
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
    */
-  http_request?: HttpRequestAmino;
 
+  http_request?: HttpRequestAmino;
   /**
    * Optional. A map of key, value pairs that provides additional information about the
    * log entry. The labels can be user-defined or system-defined.
@@ -314,24 +313,24 @@ export interface LogEntryAmino {
    * written. The truncation is indicated by an ellipsis at the
    * end of the character string.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperationAmino;
 
+  operation?: LogEntryOperationAmino;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any. If it
    * contains a relative resource name, the name is assumed to be relative to
    * `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
 
+  trace: string;
   /**
    * Optional. The span ID within the trace associated with the log entry.
    * 
@@ -339,8 +338,8 @@ export interface LogEntryAmino {
    * 16-character hexadecimal encoding of an 8-byte array, such as
    * `000000000000004a`.
    */
-  span_id: string;
 
+  span_id: string;
   /**
    * Optional. The sampling decision of the trace associated with the log entry.
    * 
@@ -350,23 +349,24 @@ export interface LogEntryAmino {
    * unknown at the time. A non-sampled `trace` value is still useful as a
    * request correlation identifier. The default is False.
    */
+
   trace_sampled: boolean;
-
   /** Optional. Source code location information associated with the log entry, if any. */
-  source_location?: LogEntrySourceLocationAmino;
 
+  source_location?: LogEntrySourceLocationAmino;
   /**
    * Optional. Information indicating this LogEntry is part of a sequence of multiple log
    * entries split from a single LogEntry.
    */
+
   split?: LogSplitAmino;
 }
 export interface LogEntryAminoMsg {
   type: "/google.logging.v2.LogEntry";
   value: LogEntryAmino;
 }
-
 /** An individual entry in a log. */
+
 export interface LogEntrySDKType {
   log_name: string;
   resource?: MonitoredResourceSDKType;
@@ -388,93 +388,92 @@ export interface LogEntrySDKType {
   source_location?: LogEntrySourceLocationSDKType;
   split?: LogSplitSDKType;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperation {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the same
    * identifier are assumed to be part of the same operation.
    */
   id: string;
-
   /**
    * Optional. An arbitrary producer identifier. The combination of `id` and
    * `producer` must be globally unique. Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
+
   producer: string;
-
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
 
+  first: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
+
   last: boolean;
 }
 export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntryOperation";
   value: Uint8Array;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperationAmino {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the same
    * identifier are assumed to be part of the same operation.
    */
   id: string;
-
   /**
    * Optional. An arbitrary producer identifier. The combination of `id` and
    * `producer` must be globally unique. Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
+
   producer: string;
-
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
 
+  first: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
+
   last: boolean;
 }
 export interface LogEntryOperationAminoMsg {
   type: "/google.logging.v2.LogEntryOperation";
   value: LogEntryOperationAmino;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperationSDKType {
   id: string;
   producer: string;
   first: boolean;
   last: boolean;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocation {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
   file: string;
-
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: Long;
 
+  line: Long;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -483,30 +482,30 @@ export interface LogEntrySourceLocation {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
+
   function: string;
 }
 export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation";
   value: Uint8Array;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocationAmino {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
   file: string;
-
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: string;
 
+  line: string;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -515,28 +514,29 @@ export interface LogEntrySourceLocationAmino {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
+
   function: string;
 }
 export interface LogEntrySourceLocationAminoMsg {
   type: "/google.logging.v2.LogEntrySourceLocation";
   value: LogEntrySourceLocationAmino;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocationSDKType {
   file: string;
   line: Long;
   function: string;
 }
-
 /**
  * Additional information used to correlate multiple log entries. Used when a
  * single LogEntry would exceed the Google Cloud Logging size limit and is
  * split across multiple log entries.
  */
+
 export interface LogSplit {
   /**
    * A globally unique identifier for all log entries in a sequence of split log
@@ -544,27 +544,27 @@ export interface LogSplit {
    * part of the same sequence of split log entries.
    */
   uid: string;
-
   /**
    * The index of this LogEntry in the sequence of split log entries. Log
    * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
    * entries.
    */
-  index: number;
 
+  index: number;
   /** The total number of log entries that the original LogEntry was split into. */
+
   totalSplits: number;
 }
 export interface LogSplitProtoMsg {
   typeUrl: "/google.logging.v2.LogSplit";
   value: Uint8Array;
 }
-
 /**
  * Additional information used to correlate multiple log entries. Used when a
  * single LogEntry would exceed the Google Cloud Logging size limit and is
  * split across multiple log entries.
  */
+
 export interface LogSplitAmino {
   /**
    * A globally unique identifier for all log entries in a sequence of split log
@@ -572,27 +572,27 @@ export interface LogSplitAmino {
    * part of the same sequence of split log entries.
    */
   uid: string;
-
   /**
    * The index of this LogEntry in the sequence of split log entries. Log
    * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
    * entries.
    */
-  index: number;
 
+  index: number;
   /** The total number of log entries that the original LogEntry was split into. */
+
   total_splits: number;
 }
 export interface LogSplitAminoMsg {
   type: "/google.logging.v2.LogSplit";
   value: LogSplitAmino;
 }
-
 /**
  * Additional information used to correlate multiple log entries. Used when a
  * single LogEntry would exceed the Google Cloud Logging size limit and is
  * split across multiple log entries.
  */
+
 export interface LogSplitSDKType {
   uid: string;
   index: number;

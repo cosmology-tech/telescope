@@ -5,8 +5,8 @@ import { Status, StatusAmino, StatusSDKType } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
-
 /** An indicator of why entries were omitted. */
+
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   /** REASON_UNSPECIFIED - Unexpected default. */
   REASON_UNSPECIFIED = 0,
@@ -64,8 +64,8 @@ export function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: Tail
       return "UNRECOGNIZED";
   }
 }
-
 /** The parameters to DeleteLog. */
+
 export interface DeleteLogRequest {
   /**
    * Required. The resource name of the log to delete:
@@ -88,8 +88,8 @@ export interface DeleteLogRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogRequest";
   value: Uint8Array;
 }
-
 /** The parameters to DeleteLog. */
+
 export interface DeleteLogRequestAmino {
   /**
    * Required. The resource name of the log to delete:
@@ -112,8 +112,8 @@ export interface DeleteLogRequestAminoMsg {
   type: "/google.logging.v2.DeleteLogRequest";
   value: DeleteLogRequestAmino;
 }
-
 /** The parameters to DeleteLog. */
+
 export interface DeleteLogRequestSDKType {
   log_name: string;
 }
@@ -137,8 +137,8 @@ export interface WriteLogEntriesRequest_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /** The parameters to WriteLogEntries. */
+
 export interface WriteLogEntriesRequest {
   /**
    * Optional. A default log resource name that is assigned to all log entries
@@ -160,7 +160,6 @@ export interface WriteLogEntriesRequest {
    * individual log entry.
    */
   logName: string;
-
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
@@ -171,18 +170,18 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource?: MonitoredResource;
 
+  resource?: MonitoredResource;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
    * as a label in this parameter, then the log entry's label is not changed.
    * See [LogEntry][google.logging.v2.LogEntry].
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Required. The log entries to send to Logging. The order of log
    * entries in this list does not matter. Values supplied in this method's
@@ -209,8 +208,8 @@ export interface WriteLogEntriesRequest {
    * `entries.write`, you should try to include several log entries in this
    * list, rather than calling this method for each individual log entry.
    */
-  entries: LogEntry[];
 
+  entries: LogEntry[];
   /**
    * Optional. Whether valid entries should be written even if some other
    * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -218,21 +217,22 @@ export interface WriteLogEntriesRequest {
    * with one of the failed entries and the response includes error details
    * keyed by the entries' zero-based index in the `entries.write` method.
    */
-  partialSuccess: boolean;
 
+  partialSuccess: boolean;
   /**
    * Optional. If true, the request should expect normal response, but the
    * entries won't be persisted nor exported. Useful for checking whether the
    * logging API endpoints are working properly before sending valuable data.
    */
+
   dryRun: boolean;
 }
 export interface WriteLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesRequest";
   value: Uint8Array;
 }
-
 /** The parameters to WriteLogEntries. */
+
 export interface WriteLogEntriesRequestAmino {
   /**
    * Optional. A default log resource name that is assigned to all log entries
@@ -254,7 +254,6 @@ export interface WriteLogEntriesRequestAmino {
    * individual log entry.
    */
   log_name: string;
-
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
@@ -265,18 +264,18 @@ export interface WriteLogEntriesRequestAmino {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource?: MonitoredResourceAmino;
 
+  resource?: MonitoredResourceAmino;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
    * as a label in this parameter, then the log entry's label is not changed.
    * See [LogEntry][google.logging.v2.LogEntry].
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Required. The log entries to send to Logging. The order of log
    * entries in this list does not matter. Values supplied in this method's
@@ -303,8 +302,8 @@ export interface WriteLogEntriesRequestAmino {
    * `entries.write`, you should try to include several log entries in this
    * list, rather than calling this method for each individual log entry.
    */
-  entries: LogEntryAmino[];
 
+  entries: LogEntryAmino[];
   /**
    * Optional. Whether valid entries should be written even if some other
    * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -312,21 +311,22 @@ export interface WriteLogEntriesRequestAmino {
    * with one of the failed entries and the response includes error details
    * keyed by the entries' zero-based index in the `entries.write` method.
    */
-  partial_success: boolean;
 
+  partial_success: boolean;
   /**
    * Optional. If true, the request should expect normal response, but the
    * entries won't be persisted nor exported. Useful for checking whether the
    * logging API endpoints are working properly before sending valuable data.
    */
+
   dry_run: boolean;
 }
 export interface WriteLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.WriteLogEntriesRequest";
   value: WriteLogEntriesRequestAmino;
 }
-
 /** The parameters to WriteLogEntries. */
+
 export interface WriteLogEntriesRequestSDKType {
   log_name: string;
   resource?: MonitoredResourceSDKType;
@@ -337,22 +337,22 @@ export interface WriteLogEntriesRequestSDKType {
   partial_success: boolean;
   dry_run: boolean;
 }
-
 /** Result returned from WriteLogEntries. */
+
 export interface WriteLogEntriesResponse {}
 export interface WriteLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesResponse";
   value: Uint8Array;
 }
-
 /** Result returned from WriteLogEntries. */
+
 export interface WriteLogEntriesResponseAmino {}
 export interface WriteLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.WriteLogEntriesResponse";
   value: WriteLogEntriesResponseAmino;
 }
-
 /** Result returned from WriteLogEntries. */
+
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
@@ -374,8 +374,8 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
   value?: StatusSDKType;
 }
-
 /** Error details for WriteLogEntries with partial success. */
+
 export interface WriteLogEntriesPartialErrors {
   /**
    * When `WriteLogEntriesRequest.partial_success` is true, records the error
@@ -393,8 +393,8 @@ export interface WriteLogEntriesPartialErrorsProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors";
   value: Uint8Array;
 }
-
 /** Error details for WriteLogEntries with partial success. */
+
 export interface WriteLogEntriesPartialErrorsAmino {
   /**
    * When `WriteLogEntriesRequest.partial_success` is true, records the error
@@ -412,15 +412,15 @@ export interface WriteLogEntriesPartialErrorsAminoMsg {
   type: "/google.logging.v2.WriteLogEntriesPartialErrors";
   value: WriteLogEntriesPartialErrorsAmino;
 }
-
 /** Error details for WriteLogEntries with partial success. */
+
 export interface WriteLogEntriesPartialErrorsSDKType {
   log_entry_errors?: {
     [key: number]: StatusSDKType;
   };
 }
-
 /** The parameters to `ListLogEntries`. */
+
 export interface ListLogEntriesRequest {
   /**
    * Required. Names of one or more parent resources from which to
@@ -441,7 +441,6 @@ export interface ListLogEntriesRequest {
    * Projects listed in the `project_ids` field are added to this list.
    */
   resourceNames: string[];
-
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
@@ -451,8 +450,8 @@ export interface ListLogEntriesRequest {
    * cause the filter to return no results. The maximum length of the filter is
    * 20000 characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. How the results should be sorted.  Presently, the only permitted
    * values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -461,30 +460,31 @@ export interface ListLogEntriesRequest {
    * in order of decreasing timestamps (newest first).  Entries with equal
    * timestamps are returned in order of their `insert_id` values.
    */
-  orderBy: string;
 
+  orderBy: string;
   /**
    * Optional. The maximum number of results to return from this request. Default is 50.
    * If the value is negative or exceeds 1000, the request is rejected. The
    * presence of `next_page_token` in the response indicates that more results
    * might be available.
    */
-  pageSize: number;
 
+  pageSize: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `page_token` must be the value of
    * `next_page_token` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
+
   pageToken: string;
 }
 export interface ListLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogEntriesRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `ListLogEntries`. */
+
 export interface ListLogEntriesRequestAmino {
   /**
    * Required. Names of one or more parent resources from which to
@@ -505,7 +505,6 @@ export interface ListLogEntriesRequestAmino {
    * Projects listed in the `project_ids` field are added to this list.
    */
   resource_names: string[];
-
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
@@ -515,8 +514,8 @@ export interface ListLogEntriesRequestAmino {
    * cause the filter to return no results. The maximum length of the filter is
    * 20000 characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. How the results should be sorted.  Presently, the only permitted
    * values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -525,30 +524,31 @@ export interface ListLogEntriesRequestAmino {
    * in order of decreasing timestamps (newest first).  Entries with equal
    * timestamps are returned in order of their `insert_id` values.
    */
-  order_by: string;
 
+  order_by: string;
   /**
    * Optional. The maximum number of results to return from this request. Default is 50.
    * If the value is negative or exceeds 1000, the request is rejected. The
    * presence of `next_page_token` in the response indicates that more results
    * might be available.
    */
-  page_size: number;
 
+  page_size: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `page_token` must be the value of
    * `next_page_token` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
+
   page_token: string;
 }
 export interface ListLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.ListLogEntriesRequest";
   value: ListLogEntriesRequestAmino;
 }
-
 /** The parameters to `ListLogEntries`. */
+
 export interface ListLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
@@ -556,8 +556,8 @@ export interface ListLogEntriesRequestSDKType {
   page_size: number;
   page_token: string;
 }
-
 /** Result returned from `ListLogEntries`. */
+
 export interface ListLogEntriesResponse {
   /**
    * A list of log entries.  If `entries` is empty, `nextPageToken` may still be
@@ -565,7 +565,6 @@ export interface ListLogEntriesResponse {
    * more information.
    */
   entries: LogEntry[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -578,14 +577,15 @@ export interface ListLogEntriesResponse {
    * speeding up the search by changing your filter to specify a single log name
    * or resource type, or to narrow the time range of the search.
    */
+
   nextPageToken: string;
 }
 export interface ListLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogEntriesResponse";
   value: Uint8Array;
 }
-
 /** Result returned from `ListLogEntries`. */
+
 export interface ListLogEntriesResponseAmino {
   /**
    * A list of log entries.  If `entries` is empty, `nextPageToken` may still be
@@ -593,7 +593,6 @@ export interface ListLogEntriesResponseAmino {
    * more information.
    */
   entries: LogEntryAmino[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -606,20 +605,21 @@ export interface ListLogEntriesResponseAmino {
    * speeding up the search by changing your filter to specify a single log name
    * or resource type, or to narrow the time range of the search.
    */
+
   next_page_token: string;
 }
 export interface ListLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.ListLogEntriesResponse";
   value: ListLogEntriesResponseAmino;
 }
-
 /** Result returned from `ListLogEntries`. */
+
 export interface ListLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
   next_page_token: string;
 }
-
 /** The parameters to ListMonitoredResourceDescriptors */
+
 export interface ListMonitoredResourceDescriptorsRequest {
   /**
    * Optional. The maximum number of results to return from this request.
@@ -627,21 +627,21 @@ export interface ListMonitoredResourceDescriptorsRequest {
    * response indicates that more results might be available.
    */
   pageSize: number;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
+
   pageToken: string;
 }
 export interface ListMonitoredResourceDescriptorsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to ListMonitoredResourceDescriptors */
+
 export interface ListMonitoredResourceDescriptorsRequestAmino {
   /**
    * Optional. The maximum number of results to return from this request.
@@ -649,67 +649,67 @@ export interface ListMonitoredResourceDescriptorsRequestAmino {
    * response indicates that more results might be available.
    */
   page_size: number;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
+
   page_token: string;
 }
 export interface ListMonitoredResourceDescriptorsRequestAminoMsg {
   type: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
   value: ListMonitoredResourceDescriptorsRequestAmino;
 }
-
 /** The parameters to ListMonitoredResourceDescriptors */
+
 export interface ListMonitoredResourceDescriptorsRequestSDKType {
   page_size: number;
   page_token: string;
 }
-
 /** Result returned from ListMonitoredResourceDescriptors. */
+
 export interface ListMonitoredResourceDescriptorsResponse {
   /** A list of resource descriptors. */
   resourceDescriptors: MonitoredResourceDescriptor[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListMonitoredResourceDescriptorsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
   value: Uint8Array;
 }
-
 /** Result returned from ListMonitoredResourceDescriptors. */
+
 export interface ListMonitoredResourceDescriptorsResponseAmino {
   /** A list of resource descriptors. */
   resource_descriptors: MonitoredResourceDescriptorAmino[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListMonitoredResourceDescriptorsResponseAminoMsg {
   type: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
   value: ListMonitoredResourceDescriptorsResponseAmino;
 }
-
 /** Result returned from ListMonitoredResourceDescriptors. */
+
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
   resource_descriptors: MonitoredResourceDescriptorSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to ListLogs. */
+
 export interface ListLogsRequest {
   /**
    * Required. The resource name that owns the logs:
@@ -720,22 +720,21 @@ export interface ListLogsRequest {
    * *  `folders/[FOLDER_ID]`
    */
   parent: string;
-
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
 
+  pageSize: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The resource name that owns the logs:
    * 
@@ -751,14 +750,15 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
+
   resourceNames: string[];
 }
 export interface ListLogsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to ListLogs. */
+
 export interface ListLogsRequestAmino {
   /**
    * Required. The resource name that owns the logs:
@@ -769,22 +769,21 @@ export interface ListLogsRequestAmino {
    * *  `folders/[FOLDER_ID]`
    */
   parent: string;
-
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
 
+  page_size: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The resource name that owns the logs:
    * 
@@ -800,22 +799,23 @@ export interface ListLogsRequestAmino {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
+
   resource_names: string[];
 }
 export interface ListLogsRequestAminoMsg {
   type: "/google.logging.v2.ListLogsRequest";
   value: ListLogsRequestAmino;
 }
-
 /** The parameters to ListLogs. */
+
 export interface ListLogsRequestSDKType {
   parent: string;
   page_size: number;
   page_token: string;
   resource_names: string[];
 }
-
 /** Result returned from ListLogs. */
+
 export interface ListLogsResponse {
   /**
    * A list of log names. For example,
@@ -823,20 +823,20 @@ export interface ListLogsResponse {
    * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
    */
   logNames: string[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListLogsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogsResponse";
   value: Uint8Array;
 }
-
 /** Result returned from ListLogs. */
+
 export interface ListLogsResponseAmino {
   /**
    * A list of log names. For example,
@@ -844,26 +844,26 @@ export interface ListLogsResponseAmino {
    * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
    */
   log_names: string[];
-
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListLogsResponseAminoMsg {
   type: "/google.logging.v2.ListLogsResponse";
   value: ListLogsResponseAmino;
 }
-
 /** Result returned from ListLogs. */
+
 export interface ListLogsResponseSDKType {
   log_names: string[];
   next_page_token: string;
 }
-
 /** The parameters to `TailLogEntries`. */
+
 export interface TailLogEntriesRequest {
   /**
    * Required. Name of a parent resource from which to retrieve log entries:
@@ -881,7 +881,6 @@ export interface TailLogEntriesRequest {
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    */
   resourceNames: string[];
-
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -891,22 +890,23 @@ export interface TailLogEntriesRequest {
    * the filter to return no results. The maximum length of the filter is 20000
    * characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. The amount of time to buffer log entries at the server before
    * being returned to prevent out of order results due to late arriving log
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
+
   bufferWindow?: Duration;
 }
 export interface TailLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.TailLogEntriesRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `TailLogEntries`. */
+
 export interface TailLogEntriesRequestAmino {
   /**
    * Required. Name of a parent resource from which to retrieve log entries:
@@ -924,7 +924,6 @@ export interface TailLogEntriesRequestAmino {
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    */
   resource_names: string[];
-
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -934,29 +933,30 @@ export interface TailLogEntriesRequestAmino {
    * the filter to return no results. The maximum length of the filter is 20000
    * characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. The amount of time to buffer log entries at the server before
    * being returned to prevent out of order results due to late arriving log
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
+
   buffer_window?: DurationAmino;
 }
 export interface TailLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.TailLogEntriesRequest";
   value: TailLogEntriesRequestAmino;
 }
-
 /** The parameters to `TailLogEntries`. */
+
 export interface TailLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
   buffer_window?: DurationSDKType;
 }
-
 /** Result returned from `TailLogEntries`. */
+
 export interface TailLogEntriesResponse {
   /**
    * A list of log entries. Each response in the stream will order entries with
@@ -964,7 +964,6 @@ export interface TailLogEntriesResponse {
    * between separate responses.
    */
   entries: LogEntry[];
-
   /**
    * If entries that otherwise would have been included in the session were not
    * sent back to the client, counts of relevant entries omitted from the
@@ -972,14 +971,15 @@ export interface TailLogEntriesResponse {
    * one of each reason per response. The counts represent the number of
    * suppressed entries since the last streamed response.
    */
+
   suppressionInfo: TailLogEntriesResponse_SuppressionInfo[];
 }
 export interface TailLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.TailLogEntriesResponse";
   value: Uint8Array;
 }
-
 /** Result returned from `TailLogEntries`. */
+
 export interface TailLogEntriesResponseAmino {
   /**
    * A list of log entries. Each response in the stream will order entries with
@@ -987,7 +987,6 @@ export interface TailLogEntriesResponseAmino {
    * between separate responses.
    */
   entries: LogEntryAmino[];
-
   /**
    * If entries that otherwise would have been included in the session were not
    * sent back to the client, counts of relevant entries omitted from the
@@ -995,46 +994,47 @@ export interface TailLogEntriesResponseAmino {
    * one of each reason per response. The counts represent the number of
    * suppressed entries since the last streamed response.
    */
+
   suppression_info: TailLogEntriesResponse_SuppressionInfoAmino[];
 }
 export interface TailLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.TailLogEntriesResponse";
   value: TailLogEntriesResponseAmino;
 }
-
 /** Result returned from `TailLogEntries`. */
+
 export interface TailLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
   suppression_info: TailLogEntriesResponse_SuppressionInfoSDKType[];
 }
-
 /** Information about entries that were omitted from the session. */
+
 export interface TailLogEntriesResponse_SuppressionInfo {
   /** The reason that entries were omitted from the session. */
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
-
   /** A lower bound on the count of entries omitted due to `reason`. */
+
   suppressedCount: number;
 }
 export interface TailLogEntriesResponse_SuppressionInfoProtoMsg {
   typeUrl: "/google.logging.v2.SuppressionInfo";
   value: Uint8Array;
 }
-
 /** Information about entries that were omitted from the session. */
+
 export interface TailLogEntriesResponse_SuppressionInfoAmino {
   /** The reason that entries were omitted from the session. */
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
-
   /** A lower bound on the count of entries omitted due to `reason`. */
+
   suppressed_count: number;
 }
 export interface TailLogEntriesResponse_SuppressionInfoAminoMsg {
   type: "/google.logging.v2.SuppressionInfo";
   value: TailLogEntriesResponse_SuppressionInfoAmino;
 }
-
 /** Information about entries that were omitted from the session. */
+
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
   suppressed_count: number;

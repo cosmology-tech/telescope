@@ -2,8 +2,8 @@ import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, Syntheti
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";
-
 /** GenesisState defines the lockup module's genesis state. */
+
 export interface GenesisState {
   lastLockId: Long;
   locks: PeriodLock[];
@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.lockup.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the lockup module's genesis state. */
+
 export interface GenesisStateAmino {
   last_lock_id: string;
   locks: PeriodLockAmino[];
@@ -24,8 +24,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/lockup/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the lockup module's genesis state. */
+
 export interface GenesisStateSDKType {
   last_lock_id: Long;
   locks: PeriodLockSDKType[];

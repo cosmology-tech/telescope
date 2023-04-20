@@ -1,40 +1,39 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.epochs.v1beta1";
-
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
  */
+
 export interface EpochInfo {
   /** identifier is a unique reference to this particular timer. */
   identifier: string;
-
   /**
    * start_time is the time at which the timer first ever ticks.
    * If start_time is in the future, the epoch will not begin until the start
    * time.
    */
-  startTime?: Date;
 
+  startTime?: Date;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
    * be greater than the chains expected block time.
    * Duration must be non-zero.
    */
-  duration?: Duration;
 
+  duration?: Duration;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
    * The first tick (current_epoch=1) is defined as
    * the first block whose blocktime is greater than the EpochInfo start_time.
    */
-  currentEpoch: Long;
 
+  currentEpoch: Long;
   /**
    * current_epoch_start_time describes the start time of the current timer
    * interval. The interval is (current_epoch_start_time,
@@ -54,56 +53,56 @@ export interface EpochInfo {
    * * The t=34 block will start the epoch for (30, 35]
    * * The **t=36** block will start the epoch for (35, 40]
    */
-  currentEpochStartTime?: Date;
 
+  currentEpochStartTime?: Date;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
    */
-  epochCountingStarted: boolean;
 
+  epochCountingStarted: boolean;
   /**
    * current_epoch_start_height is the block height at which the current epoch
    * started. (The block height at which the timer last ticked)
    */
+
   currentEpochStartHeight: Long;
 }
 export interface EpochInfoProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.EpochInfo";
   value: Uint8Array;
 }
-
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
  */
+
 export interface EpochInfoAmino {
   /** identifier is a unique reference to this particular timer. */
   identifier: string;
-
   /**
    * start_time is the time at which the timer first ever ticks.
    * If start_time is in the future, the epoch will not begin until the start
    * time.
    */
-  start_time?: Date;
 
+  start_time?: Date;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
    * be greater than the chains expected block time.
    * Duration must be non-zero.
    */
-  duration?: DurationAmino;
 
+  duration?: DurationAmino;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
    * The first tick (current_epoch=1) is defined as
    * the first block whose blocktime is greater than the EpochInfo start_time.
    */
-  current_epoch: string;
 
+  current_epoch: string;
   /**
    * current_epoch_start_time describes the start time of the current timer
    * interval. The interval is (current_epoch_start_time,
@@ -123,29 +122,30 @@ export interface EpochInfoAmino {
    * * The t=34 block will start the epoch for (30, 35]
    * * The **t=36** block will start the epoch for (35, 40]
    */
-  current_epoch_start_time?: Date;
 
+  current_epoch_start_time?: Date;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
    */
-  epoch_counting_started: boolean;
 
+  epoch_counting_started: boolean;
   /**
    * current_epoch_start_height is the block height at which the current epoch
    * started. (The block height at which the timer last ticked)
    */
+
   current_epoch_start_height: string;
 }
 export interface EpochInfoAminoMsg {
   type: "osmosis/epochs/epoch-info";
   value: EpochInfoAmino;
 }
-
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
  */
+
 export interface EpochInfoSDKType {
   identifier: string;
   start_time?: Date;
@@ -155,8 +155,8 @@ export interface EpochInfoSDKType {
   epoch_counting_started: boolean;
   current_epoch_start_height: Long;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisState {
   epochs: EpochInfo[];
 }
@@ -164,8 +164,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
 }
@@ -173,8 +173,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/epochs/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisStateSDKType {
   epochs: EpochInfoSDKType[];
 }

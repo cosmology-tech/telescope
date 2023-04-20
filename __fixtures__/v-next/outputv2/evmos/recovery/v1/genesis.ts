@@ -2,8 +2,8 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
-
 /** GenesisState defines the recovery module's genesis state. */
+
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
@@ -12,8 +12,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.recovery.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the recovery module's genesis state. */
+
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
@@ -22,39 +22,39 @@ export interface GenesisStateAminoMsg {
   type: "/evmos.recovery.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the recovery module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
 }
-
 /** Params holds parameters for the recovery module */
+
 export interface Params {
   /** enable recovery IBC middleware */
   enableRecovery: boolean;
-
   /** duration added to timeout timestamp for balances recovered via IBC packets */
+
   packetTimeoutDuration?: Duration;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.recovery.v1.Params";
   value: Uint8Array;
 }
-
 /** Params holds parameters for the recovery module */
+
 export interface ParamsAmino {
   /** enable recovery IBC middleware */
   enable_recovery: boolean;
-
   /** duration added to timeout timestamp for balances recovered via IBC packets */
+
   packet_timeout_duration?: DurationAmino;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.recovery.v1.Params";
   value: ParamsAmino;
 }
-
 /** Params holds parameters for the recovery module */
+
 export interface ParamsSDKType {
   enable_recovery: boolean;
   packet_timeout_duration?: DurationSDKType;

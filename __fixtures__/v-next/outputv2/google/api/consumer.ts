@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /** Supported data type of the property values */
+
 export enum Property_PropertyType {
   /** UNSPECIFIED - The type is unspecified, and will result in an error. */
   UNSPECIFIED = 0,
@@ -72,7 +72,6 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -91,6 +90,7 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
+
 export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
@@ -99,7 +99,6 @@ export interface ProjectPropertiesProtoMsg {
   typeUrl: "/google.api.ProjectProperties";
   value: Uint8Array;
 }
-
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -118,6 +117,7 @@ export interface ProjectPropertiesProtoMsg {
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
+
 export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
   properties: PropertyAmino[];
@@ -126,7 +126,6 @@ export interface ProjectPropertiesAminoMsg {
   type: "/google.api.ProjectProperties";
   value: ProjectPropertiesAmino;
 }
-
 /**
  * A descriptor for defining project properties for a service. One service may
  * have many consumer projects, and the service may want to behave differently
@@ -145,10 +144,10 @@ export interface ProjectPropertiesAminoMsg {
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
+
 export interface ProjectPropertiesSDKType {
   properties: PropertySDKType[];
 }
-
 /**
  * Defines project properties.
  * 
@@ -161,21 +160,21 @@ export interface ProjectPropertiesSDKType {
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
+
 export interface Property {
   /** The name of the property (a.k.a key). */
   name: string;
-
   /** The type of this property. */
-  type: Property_PropertyType;
 
+  type: Property_PropertyType;
   /** The description of the property */
+
   description: string;
 }
 export interface PropertyProtoMsg {
   typeUrl: "/google.api.Property";
   value: Uint8Array;
 }
-
 /**
  * Defines project properties.
  * 
@@ -188,21 +187,21 @@ export interface PropertyProtoMsg {
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
+
 export interface PropertyAmino {
   /** The name of the property (a.k.a key). */
   name: string;
-
   /** The type of this property. */
-  type: Property_PropertyType;
 
+  type: Property_PropertyType;
   /** The description of the property */
+
   description: string;
 }
 export interface PropertyAminoMsg {
   type: "/google.api.Property";
   value: PropertyAmino;
 }
-
 /**
  * Defines project properties.
  * 
@@ -215,6 +214,7 @@ export interface PropertyAminoMsg {
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
+
 export interface PropertySDKType {
   name: string;
   type: Property_PropertyType;

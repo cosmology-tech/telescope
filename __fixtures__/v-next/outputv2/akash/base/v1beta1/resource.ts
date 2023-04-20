@@ -4,8 +4,8 @@ import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPU {
   units?: ResourceValue;
   attributes: Attribute[];
@@ -14,8 +14,8 @@ export interface CPUProtoMsg {
   typeUrl: "/akash.base.v1beta1.CPU";
   value: Uint8Array;
 }
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPUAmino {
   units?: ResourceValueAmino;
   attributes: AttributeAmino[];
@@ -24,14 +24,14 @@ export interface CPUAminoMsg {
   type: "/akash.base.v1beta1.CPU";
   value: CPUAmino;
 }
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPUSDKType {
   units?: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface Memory {
   quantity?: ResourceValue;
   attributes: Attribute[];
@@ -40,8 +40,8 @@ export interface MemoryProtoMsg {
   typeUrl: "/akash.base.v1beta1.Memory";
   value: Uint8Array;
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
@@ -50,14 +50,14 @@ export interface MemoryAminoMsg {
   type: "/akash.base.v1beta1.Memory";
   value: MemoryAmino;
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface MemorySDKType {
   quantity?: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface Storage {
   quantity?: ResourceValue;
   attributes: Attribute[];
@@ -66,8 +66,8 @@ export interface StorageProtoMsg {
   typeUrl: "/akash.base.v1beta1.Storage";
   value: Uint8Array;
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface StorageAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
@@ -76,17 +76,17 @@ export interface StorageAminoMsg {
   type: "/akash.base.v1beta1.Storage";
   value: StorageAmino;
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface StorageSDKType {
   quantity?: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnits {
   cpu?: CPU;
   memory?: Memory;
@@ -97,11 +97,11 @@ export interface ResourceUnitsProtoMsg {
   typeUrl: "/akash.base.v1beta1.ResourceUnits";
   value: Uint8Array;
 }
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
@@ -112,11 +112,11 @@ export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta1.ResourceUnits";
   value: ResourceUnitsAmino;
 }
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnitsSDKType {
   cpu?: CPUSDKType;
   memory?: MemorySDKType;

@@ -45,11 +45,11 @@ export function scalarTypeToJSON(object: ScalarType): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
  */
+
 export interface InterfaceDescriptor {
   /**
    * name is the name of the interface. It should be a short-name (without
@@ -58,22 +58,22 @@ export interface InterfaceDescriptor {
    * fully-qualified name will be a.b.C.
    */
   name: string;
-
   /**
    * description is a human-readable description of the interface and its
    * purpose.
    */
+
   description: string;
 }
 export interface InterfaceDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.InterfaceDescriptor";
   value: Uint8Array;
 }
-
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
  */
+
 export interface InterfaceDescriptorAmino {
   /**
    * name is the name of the interface. It should be a short-name (without
@@ -82,27 +82,26 @@ export interface InterfaceDescriptorAmino {
    * fully-qualified name will be a.b.C.
    */
   name: string;
-
   /**
    * description is a human-readable description of the interface and its
    * purpose.
    */
+
   description: string;
 }
 export interface InterfaceDescriptorAminoMsg {
   type: "/cosmos_proto.InterfaceDescriptor";
   value: InterfaceDescriptorAmino;
 }
-
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
  */
+
 export interface InterfaceDescriptorSDKType {
   name: string;
   description: string;
 }
-
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -112,6 +111,7 @@ export interface InterfaceDescriptorSDKType {
  * valid syntactical representation for a given semantic meaning,
  * i.e. the encoding should be deterministic.
  */
+
 export interface ScalarDescriptor {
   /**
    * name is the name of the scalar. It should be a short-name (without
@@ -120,27 +120,26 @@ export interface ScalarDescriptor {
    * fully-qualified name will be a.b.C.
    */
   name: string;
-
   /**
    * description is a human-readable description of the scalar and its
    * encoding format. For instance a big integer or decimal scalar should
    * specify precisely the expected encoding format.
    */
-  description: string;
 
+  description: string;
   /**
    * field_type is the type of field with which this scalar can be used.
    * Scalars can be used with one and only one type of field so that
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
+
   fieldType: ScalarType[];
 }
 export interface ScalarDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.ScalarDescriptor";
   value: Uint8Array;
 }
-
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -150,6 +149,7 @@ export interface ScalarDescriptorProtoMsg {
  * valid syntactical representation for a given semantic meaning,
  * i.e. the encoding should be deterministic.
  */
+
 export interface ScalarDescriptorAmino {
   /**
    * name is the name of the scalar. It should be a short-name (without
@@ -158,27 +158,26 @@ export interface ScalarDescriptorAmino {
    * fully-qualified name will be a.b.C.
    */
   name: string;
-
   /**
    * description is a human-readable description of the scalar and its
    * encoding format. For instance a big integer or decimal scalar should
    * specify precisely the expected encoding format.
    */
-  description: string;
 
+  description: string;
   /**
    * field_type is the type of field with which this scalar can be used.
    * Scalars can be used with one and only one type of field so that
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
+
   field_type: ScalarType[];
 }
 export interface ScalarDescriptorAminoMsg {
   type: "/cosmos_proto.ScalarDescriptor";
   value: ScalarDescriptorAmino;
 }
-
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -188,6 +187,7 @@ export interface ScalarDescriptorAminoMsg {
  * valid syntactical representation for a given semantic meaning,
  * i.e. the encoding should be deterministic.
  */
+
 export interface ScalarDescriptorSDKType {
   name: string;
   description: string;

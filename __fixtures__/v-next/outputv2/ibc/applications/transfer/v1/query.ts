@@ -3,11 +3,11 @@ import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, Pa
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
-
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
  */
+
 export interface QueryDenomTraceRequest {
   /** hash (in hex format) of the denomination trace information. */
   hash: string;
@@ -16,11 +16,11 @@ export interface QueryDenomTraceRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
   value: Uint8Array;
 }
-
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
  */
+
 export interface QueryDenomTraceRequestAmino {
   /** hash (in hex format) of the denomination trace information. */
   hash: string;
@@ -29,19 +29,19 @@ export interface QueryDenomTraceRequestAminoMsg {
   type: "cosmos-sdk/QueryDenomTraceRequest";
   value: QueryDenomTraceRequestAmino;
 }
-
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
  */
+
 export interface QueryDenomTraceRequestSDKType {
   hash: string;
 }
-
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
  */
+
 export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
   denomTrace?: DenomTrace;
@@ -50,11 +50,11 @@ export interface QueryDenomTraceResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse";
   value: Uint8Array;
 }
-
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
  */
+
 export interface QueryDenomTraceResponseAmino {
   /** denom_trace returns the requested denomination trace information. */
   denom_trace?: DenomTraceAmino;
@@ -63,19 +63,19 @@ export interface QueryDenomTraceResponseAminoMsg {
   type: "cosmos-sdk/QueryDenomTraceResponse";
   value: QueryDenomTraceResponseAmino;
 }
-
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
  */
+
 export interface QueryDenomTraceResponseSDKType {
   denom_trace?: DenomTraceSDKType;
 }
-
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
  * method
  */
+
 export interface QueryDenomTracesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -84,11 +84,11 @@ export interface QueryDenomTracesRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
   value: Uint8Array;
 }
-
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
  * method
  */
+
 export interface QueryDenomTracesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
@@ -97,74 +97,74 @@ export interface QueryDenomTracesRequestAminoMsg {
   type: "cosmos-sdk/QueryDenomTracesRequest";
   value: QueryDenomTracesRequestAmino;
 }
-
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
  * method
  */
+
 export interface QueryDenomTracesRequestSDKType {
   pagination?: PageRequestSDKType;
 }
-
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
  */
+
 export interface QueryDenomTracesResponse {
   /** denom_traces returns all denominations trace information. */
   denomTraces: DenomTrace[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponse;
 }
 export interface QueryDenomTracesResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse";
   value: Uint8Array;
 }
-
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
  */
+
 export interface QueryDenomTracesResponseAmino {
   /** denom_traces returns all denominations trace information. */
   denom_traces: DenomTraceAmino[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponseAmino;
 }
 export interface QueryDenomTracesResponseAminoMsg {
   type: "cosmos-sdk/QueryDenomTracesResponse";
   value: QueryDenomTracesResponseAmino;
 }
-
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
  */
+
 export interface QueryDenomTracesResponseSDKType {
   denom_traces: DenomTraceSDKType[];
   pagination?: PageResponseSDKType;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
   value: Uint8Array;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
   type: "cosmos-sdk/QueryParamsRequest";
   value: QueryParamsRequestAmino;
 }
-
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequestSDKType {}
 
+export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
@@ -173,8 +173,8 @@ export interface QueryParamsResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse";
   value: Uint8Array;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
@@ -183,8 +183,8 @@ export interface QueryParamsResponseAminoMsg {
   type: "cosmos-sdk/QueryParamsResponse";
   value: QueryParamsResponseAmino;
 }
-
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+
 export interface QueryParamsResponseSDKType {
   params?: ParamsSDKType;
 }

@@ -1,10 +1,9 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructAmino, StructSDKType } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -16,6 +15,7 @@ export const protobufPackage = "google.api";
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
  */
+
 export interface MonitoredResourceDescriptor {
   /**
    * Optional. The resource name of the monitored resource descriptor:
@@ -26,42 +26,41 @@ export interface MonitoredResourceDescriptor {
    * resource name format `"monitoredResourceDescriptors/{type}"`.
    */
   name: string;
-
   /**
    * Required. The monitored resource type. For example, the type
    * `"cloudsql_database"` represents databases in Google Cloud SQL.
    */
-  type: string;
 
+  type: string;
   /**
    * Optional. A concise name for the monitored resource type that might be
    * displayed in user interfaces. It should be a Title Cased Noun Phrase,
    * without any article or other determiners. For example,
    * `"Google Cloud SQL Database"`.
    */
-  displayName: string;
 
+  displayName: string;
   /**
    * Optional. A detailed description of the monitored resource type that might
    * be used in documentation.
    */
-  description: string;
 
+  description: string;
   /**
    * Required. A set of labels used to describe instances of this monitored
    * resource type. For example, an individual Google Cloud SQL database is
    * identified by values for the labels `"database_id"` and `"zone"`.
    */
-  labels: LabelDescriptor[];
 
+  labels: LabelDescriptor[];
   /** Optional. The launch stage of the monitored resource definition. */
+
   launchStage: LaunchStage;
 }
 export interface MonitoredResourceDescriptorProtoMsg {
   typeUrl: "/google.api.MonitoredResourceDescriptor";
   value: Uint8Array;
 }
-
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -73,6 +72,7 @@ export interface MonitoredResourceDescriptorProtoMsg {
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
  */
+
 export interface MonitoredResourceDescriptorAmino {
   /**
    * Optional. The resource name of the monitored resource descriptor:
@@ -83,42 +83,41 @@ export interface MonitoredResourceDescriptorAmino {
    * resource name format `"monitoredResourceDescriptors/{type}"`.
    */
   name: string;
-
   /**
    * Required. The monitored resource type. For example, the type
    * `"cloudsql_database"` represents databases in Google Cloud SQL.
    */
-  type: string;
 
+  type: string;
   /**
    * Optional. A concise name for the monitored resource type that might be
    * displayed in user interfaces. It should be a Title Cased Noun Phrase,
    * without any article or other determiners. For example,
    * `"Google Cloud SQL Database"`.
    */
-  display_name: string;
 
+  display_name: string;
   /**
    * Optional. A detailed description of the monitored resource type that might
    * be used in documentation.
    */
-  description: string;
 
+  description: string;
   /**
    * Required. A set of labels used to describe instances of this monitored
    * resource type. For example, an individual Google Cloud SQL database is
    * identified by values for the labels `"database_id"` and `"zone"`.
    */
-  labels: LabelDescriptorAmino[];
 
+  labels: LabelDescriptorAmino[];
   /** Optional. The launch stage of the monitored resource definition. */
+
   launch_stage: LaunchStage;
 }
 export interface MonitoredResourceDescriptorAminoMsg {
   type: "/google.api.MonitoredResourceDescriptor";
   value: MonitoredResourceDescriptorAmino;
 }
-
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -130,6 +129,7 @@ export interface MonitoredResourceDescriptorAminoMsg {
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
  */
+
 export interface MonitoredResourceDescriptorSDKType {
   name: string;
   type: string;
@@ -158,7 +158,6 @@ export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -174,6 +173,7 @@ export interface MonitoredResource_LabelsEntrySDKType {
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
  */
+
 export interface MonitoredResource {
   /**
    * Required. The monitored resource type. This field must match
@@ -181,12 +181,12 @@ export interface MonitoredResource {
    * example, the type of a Compute Engine VM instance is `gce_instance`.
    */
   type: string;
-
   /**
    * Required. Values for all of the labels listed in the associated monitored
    * resource descriptor. For example, Compute Engine VM instances use the
    * labels `"project_id"`, `"instance_id"`, and `"zone"`.
    */
+
   labels: {
     [key: string]: string;
   };
@@ -195,7 +195,6 @@ export interface MonitoredResourceProtoMsg {
   typeUrl: "/google.api.MonitoredResource";
   value: Uint8Array;
 }
-
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -211,6 +210,7 @@ export interface MonitoredResourceProtoMsg {
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
  */
+
 export interface MonitoredResourceAmino {
   /**
    * Required. The monitored resource type. This field must match
@@ -218,12 +218,12 @@ export interface MonitoredResourceAmino {
    * example, the type of a Compute Engine VM instance is `gce_instance`.
    */
   type: string;
-
   /**
    * Required. Values for all of the labels listed in the associated monitored
    * resource descriptor. For example, Compute Engine VM instances use the
    * labels `"project_id"`, `"instance_id"`, and `"zone"`.
    */
+
   labels: {
     [key: string]: string;
   };
@@ -232,7 +232,6 @@ export interface MonitoredResourceAminoMsg {
   type: "/google.api.MonitoredResource";
   value: MonitoredResourceAmino;
 }
-
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -248,6 +247,7 @@ export interface MonitoredResourceAminoMsg {
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
  */
+
 export interface MonitoredResourceSDKType {
   type: string;
   labels: {
@@ -274,7 +274,6 @@ export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
  * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
@@ -283,6 +282,7 @@ export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
  * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  */
+
 export interface MonitoredResourceMetadata {
   /**
    * Output only. Values for predefined system metadata labels.
@@ -297,8 +297,8 @@ export interface MonitoredResourceMetadata {
    *       "spot_instance": false }
    */
   systemLabels?: Struct;
-
   /** Output only. A map of user-defined metadata labels. */
+
   userLabels: {
     [key: string]: string;
   };
@@ -307,7 +307,6 @@ export interface MonitoredResourceMetadataProtoMsg {
   typeUrl: "/google.api.MonitoredResourceMetadata";
   value: Uint8Array;
 }
-
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
  * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
@@ -316,6 +315,7 @@ export interface MonitoredResourceMetadataProtoMsg {
  * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  */
+
 export interface MonitoredResourceMetadataAmino {
   /**
    * Output only. Values for predefined system metadata labels.
@@ -330,8 +330,8 @@ export interface MonitoredResourceMetadataAmino {
    *       "spot_instance": false }
    */
   system_labels?: StructAmino;
-
   /** Output only. A map of user-defined metadata labels. */
+
   user_labels: {
     [key: string]: string;
   };
@@ -340,7 +340,6 @@ export interface MonitoredResourceMetadataAminoMsg {
   type: "/google.api.MonitoredResourceMetadata";
   value: MonitoredResourceMetadataAmino;
 }
-
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
  * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
@@ -349,6 +348,7 @@ export interface MonitoredResourceMetadataAminoMsg {
  * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  */
+
 export interface MonitoredResourceMetadataSDKType {
   system_labels?: StructSDKType;
   user_labels: {

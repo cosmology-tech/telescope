@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
-
 /** ModuleDescriptor describes an app module. */
+
 export interface ModuleDescriptor {
   /**
    * go_import names the package that should be imported by an app to load the
@@ -12,15 +12,14 @@ export interface ModuleDescriptor {
    * precedence over go_package when both are defined.
    */
   goImport: string;
-
   /**
    * use_package refers to a protobuf package that this module
    * uses and exposes to the world. In an app, only one module should "use"
    * or own a single protobuf package. It is assumed that the module uses
    * all of the .proto files in a single package.
    */
-  usePackage: PackageReference[];
 
+  usePackage: PackageReference[];
   /**
    * can_migrate_from defines which module versions this module can migrate
    * state from. The framework will check that one module version is able to
@@ -30,14 +29,15 @@ export interface ModuleDescriptor {
    * declares it can migrate from v1, the framework knows how to migrate
    * from v1 to v3, assuming all 3 module versions are registered at runtime.
    */
+
   canMigrateFrom: MigrateFromInfo[];
 }
 export interface ModuleDescriptorProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.ModuleDescriptor";
   value: Uint8Array;
 }
-
 /** ModuleDescriptor describes an app module. */
+
 export interface ModuleDescriptorAmino {
   /**
    * go_import names the package that should be imported by an app to load the
@@ -47,15 +47,14 @@ export interface ModuleDescriptorAmino {
    * precedence over go_package when both are defined.
    */
   go_import: string;
-
   /**
    * use_package refers to a protobuf package that this module
    * uses and exposes to the world. In an app, only one module should "use"
    * or own a single protobuf package. It is assumed that the module uses
    * all of the .proto files in a single package.
    */
-  use_package: PackageReferenceAmino[];
 
+  use_package: PackageReferenceAmino[];
   /**
    * can_migrate_from defines which module versions this module can migrate
    * state from. The framework will check that one module version is able to
@@ -65,25 +64,25 @@ export interface ModuleDescriptorAmino {
    * declares it can migrate from v1, the framework knows how to migrate
    * from v1 to v3, assuming all 3 module versions are registered at runtime.
    */
+
   can_migrate_from: MigrateFromInfoAmino[];
 }
 export interface ModuleDescriptorAminoMsg {
   type: "cosmos-sdk/ModuleDescriptor";
   value: ModuleDescriptorAmino;
 }
-
 /** ModuleDescriptor describes an app module. */
+
 export interface ModuleDescriptorSDKType {
   go_import: string;
   use_package: PackageReferenceSDKType[];
   can_migrate_from: MigrateFromInfoSDKType[];
 }
-
 /** PackageReference is a reference to a protobuf package used by a module. */
+
 export interface PackageReference {
   /** name is the fully-qualified name of the package. */
   name: string;
-
   /**
    * revision is the optional revision of the package that is being used.
    * Protobuf packages used in Cosmos should generally have a major version
@@ -121,18 +120,18 @@ export interface PackageReference {
    *   are important good client UX
    * * protobuf files are changed in backwards and forwards compatible ways
    */
+
   revision: number;
 }
 export interface PackageReferenceProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.PackageReference";
   value: Uint8Array;
 }
-
 /** PackageReference is a reference to a protobuf package used by a module. */
+
 export interface PackageReferenceAmino {
   /** name is the fully-qualified name of the package. */
   name: string;
-
   /**
    * revision is the optional revision of the package that is being used.
    * Protobuf packages used in Cosmos should generally have a major version
@@ -170,23 +169,24 @@ export interface PackageReferenceAmino {
    *   are important good client UX
    * * protobuf files are changed in backwards and forwards compatible ways
    */
+
   revision: number;
 }
 export interface PackageReferenceAminoMsg {
   type: "cosmos-sdk/PackageReference";
   value: PackageReferenceAmino;
 }
-
 /** PackageReference is a reference to a protobuf package used by a module. */
+
 export interface PackageReferenceSDKType {
   name: string;
   revision: number;
 }
-
 /**
  * MigrateFromInfo is information on a module version that a newer module
  * can migrate from.
  */
+
 export interface MigrateFromInfo {
   /**
    * module is the fully-qualified protobuf name of the module config object
@@ -198,11 +198,11 @@ export interface MigrateFromInfoProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.MigrateFromInfo";
   value: Uint8Array;
 }
-
 /**
  * MigrateFromInfo is information on a module version that a newer module
  * can migrate from.
  */
+
 export interface MigrateFromInfoAmino {
   /**
    * module is the fully-qualified protobuf name of the module config object
@@ -214,11 +214,11 @@ export interface MigrateFromInfoAminoMsg {
   type: "cosmos-sdk/MigrateFromInfo";
   value: MigrateFromInfoAmino;
 }
-
 /**
  * MigrateFromInfo is information on a module version that a newer module
  * can migrate from.
  */
+
 export interface MigrateFromInfoSDKType {
   module: string;
 }

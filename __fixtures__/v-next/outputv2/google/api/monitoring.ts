@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Monitoring configuration of the service.
  * 
@@ -56,6 +55,7 @@ export const protobufPackage = "google.api";
  *         - library.googleapis.com/book/returned_count
  *         - library.googleapis.com/book/num_overdue
  */
+
 export interface Monitoring {
   /**
    * Monitoring configurations for sending metrics to the producer project.
@@ -66,7 +66,6 @@ export interface Monitoring {
    * in the Monitoring configuration.
    */
   producerDestinations: Monitoring_MonitoringDestination[];
-
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -75,13 +74,13 @@ export interface Monitoring {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
+
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
 export interface MonitoringProtoMsg {
   typeUrl: "/google.api.Monitoring";
   value: Uint8Array;
 }
-
 /**
  * Monitoring configuration of the service.
  * 
@@ -136,6 +135,7 @@ export interface MonitoringProtoMsg {
  *         - library.googleapis.com/book/returned_count
  *         - library.googleapis.com/book/num_overdue
  */
+
 export interface MonitoringAmino {
   /**
    * Monitoring configurations for sending metrics to the producer project.
@@ -146,7 +146,6 @@ export interface MonitoringAmino {
    * in the Monitoring configuration.
    */
   producer_destinations: Monitoring_MonitoringDestinationAmino[];
-
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -155,13 +154,13 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
+
   consumer_destinations: Monitoring_MonitoringDestinationAmino[];
 }
 export interface MonitoringAminoMsg {
   type: "/google.api.Monitoring";
   value: MonitoringAmino;
 }
-
 /**
  * Monitoring configuration of the service.
  * 
@@ -216,59 +215,60 @@ export interface MonitoringAminoMsg {
  *         - library.googleapis.com/book/returned_count
  *         - library.googleapis.com/book/num_overdue
  */
+
 export interface MonitoringSDKType {
   producer_destinations: Monitoring_MonitoringDestinationSDKType[];
   consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
 }
-
 /**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
+
 export interface Monitoring_MonitoringDestination {
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitoredResource: string;
-
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
+
   metrics: string[];
 }
 export interface Monitoring_MonitoringDestinationProtoMsg {
   typeUrl: "/google.api.MonitoringDestination";
   value: Uint8Array;
 }
-
 /**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
+
 export interface Monitoring_MonitoringDestinationAmino {
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitored_resource: string;
-
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
+
   metrics: string[];
 }
 export interface Monitoring_MonitoringDestinationAminoMsg {
   type: "/google.api.MonitoringDestination";
   value: Monitoring_MonitoringDestinationAmino;
 }
-
 /**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
+
 export interface Monitoring_MonitoringDestinationSDKType {
   monitored_resource: string;
   metrics: string[];

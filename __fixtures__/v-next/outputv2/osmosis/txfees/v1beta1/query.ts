@@ -30,11 +30,11 @@ export interface QueryFeeTokensResponseAminoMsg {
 export interface QueryFeeTokensResponseSDKType {
   fee_tokens: FeeTokenSDKType[];
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceRequest {
   denom: string;
 }
@@ -42,11 +42,11 @@ export interface QueryDenomSpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceRequest";
   value: Uint8Array;
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceRequestAmino {
   denom: string;
 }
@@ -54,19 +54,19 @@ export interface QueryDenomSpotPriceRequestAminoMsg {
   type: "osmosis/txfees/query-denom-spot-price-request";
   value: QueryDenomSpotPriceRequestAmino;
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceRequestSDKType {
   denom: string;
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceResponse {
   poolID: Long;
   spotPrice: string;
@@ -75,11 +75,11 @@ export interface QueryDenomSpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceResponse";
   value: Uint8Array;
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceResponseAmino {
   poolID: string;
   spot_price: string;
@@ -88,11 +88,11 @@ export interface QueryDenomSpotPriceResponseAminoMsg {
   type: "osmosis/txfees/query-denom-spot-price-response";
   value: QueryDenomSpotPriceResponseAmino;
 }
-
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
+
 export interface QueryDenomSpotPriceResponseSDKType {
   poolID: Long;
   spot_price: string;

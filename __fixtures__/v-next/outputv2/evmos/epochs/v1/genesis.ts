@@ -1,4 +1,4 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -38,8 +38,8 @@ export interface EpochInfoSDKType {
   epoch_counting_started: boolean;
   current_epoch_start_height: Long;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisState {
   epochs: EpochInfo[];
 }
@@ -47,8 +47,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.epochs.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
 }
@@ -56,8 +56,8 @@ export interface GenesisStateAminoMsg {
   type: "/evmos.epochs.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the epochs module's genesis state. */
+
 export interface GenesisStateSDKType {
   epochs: EpochInfoSDKType[];
 }

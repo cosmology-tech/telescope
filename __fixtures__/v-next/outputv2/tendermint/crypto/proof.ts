@@ -30,8 +30,8 @@ export interface ProofSDKType {
 export interface ValueOp {
   /** Encoded in ProofOp.Key. */
   key: Uint8Array;
-
   /** To encode in ProofOp.Data */
+
   proof?: Proof;
 }
 export interface ValueOpProtoMsg {
@@ -41,8 +41,8 @@ export interface ValueOpProtoMsg {
 export interface ValueOpAmino {
   /** Encoded in ProofOp.Key. */
   key: Uint8Array;
-
   /** To encode in ProofOp.Data */
+
   proof?: ProofAmino;
 }
 export interface ValueOpAminoMsg {
@@ -76,12 +76,12 @@ export interface DominoOpSDKType {
   input: string;
   output: string;
 }
-
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
  * for example neighbouring node hash
  */
+
 export interface ProofOp {
   type: string;
   key: Uint8Array;
@@ -91,12 +91,12 @@ export interface ProofOpProtoMsg {
   typeUrl: "/tendermint.crypto.ProofOp";
   value: Uint8Array;
 }
-
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
  * for example neighbouring node hash
  */
+
 export interface ProofOpAmino {
   type: string;
   key: Uint8Array;
@@ -106,19 +106,19 @@ export interface ProofOpAminoMsg {
   type: "/tendermint.crypto.ProofOp";
   value: ProofOpAmino;
 }
-
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
  * for example neighbouring node hash
  */
+
 export interface ProofOpSDKType {
   type: string;
   key: Uint8Array;
   data: Uint8Array;
 }
-
 /** ProofOps is Merkle proof defined by the list of ProofOps */
+
 export interface ProofOps {
   ops: ProofOp[];
 }
@@ -126,8 +126,8 @@ export interface ProofOpsProtoMsg {
   typeUrl: "/tendermint.crypto.ProofOps";
   value: Uint8Array;
 }
-
 /** ProofOps is Merkle proof defined by the list of ProofOps */
+
 export interface ProofOpsAmino {
   ops: ProofOpAmino[];
 }
@@ -135,8 +135,8 @@ export interface ProofOpsAminoMsg {
   type: "/tendermint.crypto.ProofOps";
   value: ProofOpsAmino;
 }
-
 /** ProofOps is Merkle proof defined by the list of ProofOps */
+
 export interface ProofOpsSDKType {
   ops: ProofOpSDKType[];
 }

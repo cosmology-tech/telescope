@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
-
 /** Params holds parameters for the superfluid module */
+
 export interface Params {
   /**
    * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
@@ -16,8 +16,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.superfluid.Params";
   value: Uint8Array;
 }
-
 /** Params holds parameters for the superfluid module */
+
 export interface ParamsAmino {
   /**
    * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
@@ -31,8 +31,8 @@ export interface ParamsAminoMsg {
   type: "osmosis/params";
   value: ParamsAmino;
 }
-
 /** Params holds parameters for the superfluid module */
+
 export interface ParamsSDKType {
   minimum_risk_factor: string;
 }

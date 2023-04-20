@@ -2,8 +2,8 @@ import { AuditedAttributes, AuditedAttributesAmino, AuditedAttributesSDKType } f
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
-
 /** GenesisState defines the basic genesis state used by audit module */
+
 export interface GenesisState {
   attributes: AuditedAttributes[];
 }
@@ -11,8 +11,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.audit.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the basic genesis state used by audit module */
+
 export interface GenesisStateAmino {
   attributes: AuditedAttributesAmino[];
 }
@@ -20,8 +20,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.audit.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the basic genesis state used by audit module */
+
 export interface GenesisStateSDKType {
   attributes: AuditedAttributesSDKType[];
 }

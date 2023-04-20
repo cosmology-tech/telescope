@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /** Value types that can be used as label values. */
+
 export enum LabelDescriptor_ValueType {
   /** STRING - A variable-length string. This is the default. */
   STRING = 0,
@@ -52,40 +52,40 @@ export function labelDescriptor_ValueTypeToJSON(object: LabelDescriptor_ValueTyp
       return "UNRECOGNIZED";
   }
 }
-
 /** A description of a label. */
+
 export interface LabelDescriptor {
   /** The label key. */
   key: string;
-
   /** The type of data that can be assigned to the label. */
-  valueType: LabelDescriptor_ValueType;
 
+  valueType: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
+
   description: string;
 }
 export interface LabelDescriptorProtoMsg {
   typeUrl: "/google.api.LabelDescriptor";
   value: Uint8Array;
 }
-
 /** A description of a label. */
+
 export interface LabelDescriptorAmino {
   /** The label key. */
   key: string;
-
   /** The type of data that can be assigned to the label. */
-  value_type: LabelDescriptor_ValueType;
 
+  value_type: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
+
   description: string;
 }
 export interface LabelDescriptorAminoMsg {
   type: "/google.api.LabelDescriptor";
   value: LabelDescriptorAmino;
 }
-
 /** A description of a label. */
+
 export interface LabelDescriptorSDKType {
   key: string;
   value_type: LabelDescriptor_ValueType;

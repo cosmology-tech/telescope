@@ -2,8 +2,8 @@ import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, Pa
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
-
 /** GenesisState defines the ibc-transfer genesis state */
+
 export interface GenesisState {
   portId: string;
   denomTraces: DenomTrace[];
@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the ibc-transfer genesis state */
+
 export interface GenesisStateAmino {
   port_id: string;
   denom_traces: DenomTraceAmino[];
@@ -24,8 +24,8 @@ export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the ibc-transfer genesis state */
+
 export interface GenesisStateSDKType {
   port_id: string;
   denom_traces: DenomTraceSDKType[];

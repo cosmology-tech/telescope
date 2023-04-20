@@ -1,12 +1,12 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
 import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
-
 /** Defines the importance of the data contained in the operation. */
+
 export enum Operation_Importance {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
@@ -73,8 +73,8 @@ export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /** Represents information regarding an operation. */
+
 export interface Operation {
   /**
    * Identity of the operation. This must be unique within the scope of the
@@ -88,10 +88,9 @@ export interface Operation {
    * is recommended. See RFC 4122 for details.
    */
   operationId: string;
-
   /** Fully qualified name of the operation. Reserved for future use. */
-  operationName: string;
 
+  operationName: string;
   /**
    * Identity of the consumer who is using the service.
    * This field should be filled in for the operations initiated by a
@@ -106,11 +105,11 @@ export interface Operation {
    *     - organizations/ORGANIZATION_NUMBER,
    *     - api`_`key:API_KEY.
    */
+
   consumerId: string;
-
   /** Required. Start time of the operation. */
-  startTime?: Date;
 
+  startTime?: Date;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -118,8 +117,8 @@ export interface Operation {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  endTime?: Date;
 
+  endTime?: Date;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
@@ -138,10 +137,10 @@ export interface Operation {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Represents information about this operation. Each MetricValueSet
    * corresponds to a metric defined in the service configuration.
@@ -154,23 +153,24 @@ export interface Operation {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
+
   metricValueSets: MetricValueSet[];
-
   /** Represents information to be logged. */
+
   logEntries: LogEntry[];
-
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_Importance;
 
+  importance: Operation_Importance;
   /** Unimplemented. */
+
   extensions: Any[];
 }
 export interface OperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.Operation";
   value: Uint8Array;
 }
-
 /** Represents information regarding an operation. */
+
 export interface OperationAmino {
   /**
    * Identity of the operation. This must be unique within the scope of the
@@ -184,10 +184,9 @@ export interface OperationAmino {
    * is recommended. See RFC 4122 for details.
    */
   operation_id: string;
-
   /** Fully qualified name of the operation. Reserved for future use. */
-  operation_name: string;
 
+  operation_name: string;
   /**
    * Identity of the consumer who is using the service.
    * This field should be filled in for the operations initiated by a
@@ -202,11 +201,11 @@ export interface OperationAmino {
    *     - organizations/ORGANIZATION_NUMBER,
    *     - api`_`key:API_KEY.
    */
+
   consumer_id: string;
-
   /** Required. Start time of the operation. */
-  start_time?: Date;
 
+  start_time?: Date;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -214,8 +213,8 @@ export interface OperationAmino {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  end_time?: Date;
 
+  end_time?: Date;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
@@ -234,10 +233,10 @@ export interface OperationAmino {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * Represents information about this operation. Each MetricValueSet
    * corresponds to a metric defined in the service configuration.
@@ -250,23 +249,24 @@ export interface OperationAmino {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
+
   metric_value_sets: MetricValueSetAmino[];
-
   /** Represents information to be logged. */
+
   log_entries: LogEntryAmino[];
-
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_Importance;
 
+  importance: Operation_Importance;
   /** Unimplemented. */
+
   extensions: AnyAmino[];
 }
 export interface OperationAminoMsg {
   type: "/google.api.servicecontrol.v1.Operation";
   value: OperationAmino;
 }
-
 /** Represents information regarding an operation. */
+
 export interface OperationSDKType {
   operation_id: string;
   operation_name: string;

@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
-
 /** Params holds parameters for the incentives module */
+
 export interface Params {
   /**
    * distr_epoch_identifier is what epoch type distribution will be triggered by
@@ -14,8 +14,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";
   value: Uint8Array;
 }
-
 /** Params holds parameters for the incentives module */
+
 export interface ParamsAmino {
   /**
    * distr_epoch_identifier is what epoch type distribution will be triggered by
@@ -27,8 +27,8 @@ export interface ParamsAminoMsg {
   type: "osmosis/incentives/params";
   value: ParamsAmino;
 }
-
 /** Params holds parameters for the incentives module */
+
 export interface ParamsSDKType {
   distr_epoch_identifier: string;
 }

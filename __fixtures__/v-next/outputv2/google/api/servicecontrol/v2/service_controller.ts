@@ -3,8 +3,8 @@ import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
-
 /** Request message for the Check method. */
+
 export interface CheckRequest {
   /**
    * The service name as specified in its service configuration. For example,
@@ -15,29 +15,29 @@ export interface CheckRequest {
    * for the definition of a service name.
    */
   serviceName: string;
-
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
+
   serviceConfigId: string;
-
   /** Describes attributes about the operation being executed by the service. */
+
   attributes?: AttributeContext;
-
   /** Describes the resources and the policies applied to each resource. */
-  resources: ResourceInfo[];
 
+  resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
+
   flags: string;
 }
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
   value: Uint8Array;
 }
-
 /** Request message for the Check method. */
+
 export interface CheckRequestAmino {
   /**
    * The service name as specified in its service configuration. For example,
@@ -48,29 +48,29 @@ export interface CheckRequestAmino {
    * for the definition of a service name.
    */
   service_name: string;
-
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
+
   service_config_id: string;
-
   /** Describes attributes about the operation being executed by the service. */
+
   attributes?: AttributeContextAmino;
-
   /** Describes the resources and the policies applied to each resource. */
-  resources: ResourceInfoAmino[];
 
+  resources: ResourceInfoAmino[];
   /** Optional. Contains a comma-separated list of flags. */
+
   flags: string;
 }
 export interface CheckRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.CheckRequest";
   value: CheckRequestAmino;
 }
-
 /** Request message for the Check method. */
+
 export interface CheckRequestSDKType {
   service_name: string;
   service_config_id: string;
@@ -78,21 +78,20 @@ export interface CheckRequestSDKType {
   resources: ResourceInfoSDKType[];
   flags: string;
 }
-
 /** Describes a resource referenced in the request. */
+
 export interface ResourceInfo {
   /** The name of the resource referenced in the request. */
   name: string;
-
   /** The resource type in the format of "{service}/{kind}". */
-  type: string;
 
+  type: string;
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-  permission: string;
 
+  permission: string;
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
@@ -103,34 +102,34 @@ export interface ResourceInfo {
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-  container: string;
 
+  container: string;
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
+
   location: string;
 }
 export interface ResourceInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
   value: Uint8Array;
 }
-
 /** Describes a resource referenced in the request. */
+
 export interface ResourceInfoAmino {
   /** The name of the resource referenced in the request. */
   name: string;
-
   /** The resource type in the format of "{service}/{kind}". */
-  type: string;
 
+  type: string;
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-  permission: string;
 
+  permission: string;
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
@@ -141,21 +140,22 @@ export interface ResourceInfoAmino {
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-  container: string;
 
+  container: string;
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
+
   location: string;
 }
 export interface ResourceInfoAminoMsg {
   type: "/google.api.servicecontrol.v2.ResourceInfo";
   value: ResourceInfoAmino;
 }
-
 /** Describes a resource referenced in the request. */
+
 export interface ResourceInfoSDKType {
   name: string;
   type: string;
@@ -183,8 +183,8 @@ export interface CheckResponse_HeadersEntrySDKType {
   key: string;
   value: string;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponse {
   /**
    * Operation is allowed when this field is not set. Any non-'OK' status
@@ -192,8 +192,8 @@ export interface CheckResponse {
    * would contain additional details about the denial.
    */
   status?: Status;
-
   /** Returns a set of request contexts generated from the `CheckRequest`. */
+
   headers: {
     [key: string]: string;
   };
@@ -202,8 +202,8 @@ export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
   value: Uint8Array;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponseAmino {
   /**
    * Operation is allowed when this field is not set. Any non-'OK' status
@@ -211,8 +211,8 @@ export interface CheckResponseAmino {
    * would contain additional details about the denial.
    */
   status?: StatusAmino;
-
   /** Returns a set of request contexts generated from the `CheckRequest`. */
+
   headers: {
     [key: string]: string;
   };
@@ -221,16 +221,16 @@ export interface CheckResponseAminoMsg {
   type: "/google.api.servicecontrol.v2.CheckResponse";
   value: CheckResponseAmino;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponseSDKType {
   status?: StatusSDKType;
   headers: {
     [key: string]: string;
   };
 }
-
 /** Request message for the Report method. */
+
 export interface ReportRequest {
   /**
    * The service name as specified in its service configuration. For example,
@@ -241,27 +241,27 @@ export interface ReportRequest {
    * for the definition of a service name.
    */
   serviceName: string;
-
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  serviceConfigId: string;
 
+  serviceConfigId: string;
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
+
   operations: AttributeContext[];
 }
 export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
   value: Uint8Array;
 }
-
 /** Request message for the Report method. */
+
 export interface ReportRequestAmino {
   /**
    * The service name as specified in its service configuration. For example,
@@ -272,57 +272,57 @@ export interface ReportRequestAmino {
    * for the definition of a service name.
    */
   service_name: string;
-
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  service_config_id: string;
 
+  service_config_id: string;
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
+
   operations: AttributeContextAmino[];
 }
 export interface ReportRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.ReportRequest";
   value: ReportRequestAmino;
 }
-
 /** Request message for the Report method. */
+
 export interface ReportRequestSDKType {
   service_name: string;
   service_config_id: string;
   operations: AttributeContextSDKType[];
 }
-
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
  */
+
 export interface ReportResponse {}
 export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
   value: Uint8Array;
 }
-
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
  */
+
 export interface ReportResponseAmino {}
 export interface ReportResponseAminoMsg {
   type: "/google.api.servicecontrol.v2.ReportResponse";
   value: ReportResponseAmino;
 }
-
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
  */
+
 export interface ReportResponseSDKType {}
 
 function createBaseCheckRequest(): CheckRequest {

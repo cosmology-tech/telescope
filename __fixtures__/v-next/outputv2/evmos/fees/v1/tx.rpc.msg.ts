@@ -1,25 +1,24 @@
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
-
+import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoResponse, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoResponse, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoResponse } from "./tx";
 /** Msg defines the fees Msg service. */
+
 export interface Msg {
   /**
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
   registerDevFeeInfo(request: DeepPartial<MsgRegisterDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgRegisterDevFeeInfoResponse>;
-
   /**
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  cancelDevFeeInfo(request: DeepPartial<MsgCancelDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgCancelDevFeeInfoResponse>;
 
+  cancelDevFeeInfo(request: DeepPartial<MsgCancelDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgCancelDevFeeInfoResponse>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
+
   updateDevFeeInfo(request: DeepPartial<MsgUpdateDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgUpdateDevFeeInfoResponse>;
 }
 export class MsgClientImpl implements Msg {

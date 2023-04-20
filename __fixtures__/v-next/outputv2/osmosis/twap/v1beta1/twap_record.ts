@@ -1,8 +1,7 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
-
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
  * The asset pair assets should be lexicographically sorted.
@@ -12,45 +11,45 @@ export const protobufPackage = "osmosis.twap.v1beta1";
  * than an optimal state storage format. The system bottleneck is elsewhere for
  * now.
  */
+
 export interface TwapRecord {
   poolId: Long;
-
   /** Lexicographically smaller denom of the pair */
+
   asset0Denom: string;
-
   /** Lexicographically larger denom of the pair */
+
   asset1Denom: string;
-
   /** height this record corresponds to, for debugging purposes */
-  height: Long;
 
+  height: Long;
   /**
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time?: Date;
 
+  time?: Date;
   /**
    * We store the last spot prices in the struct, so that we can interpolate
    * accumulator values for times between when accumulator records are stored.
    */
+
   p0LastSpotPrice: string;
   p1LastSpotPrice: string;
   p0ArithmeticTwapAccumulator: string;
   p1ArithmeticTwapAccumulator: string;
-
   /**
    * This field contains the time in which the last spot price error occured.
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
+
   lastErrorTime?: Date;
 }
 export interface TwapRecordProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
   value: Uint8Array;
 }
-
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
  * The asset pair assets should be lexicographically sorted.
@@ -60,45 +59,45 @@ export interface TwapRecordProtoMsg {
  * than an optimal state storage format. The system bottleneck is elsewhere for
  * now.
  */
+
 export interface TwapRecordAmino {
   pool_id: string;
-
   /** Lexicographically smaller denom of the pair */
+
   asset0_denom: string;
-
   /** Lexicographically larger denom of the pair */
+
   asset1_denom: string;
-
   /** height this record corresponds to, for debugging purposes */
-  height: string;
 
+  height: string;
   /**
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time?: Date;
 
+  time?: Date;
   /**
    * We store the last spot prices in the struct, so that we can interpolate
    * accumulator values for times between when accumulator records are stored.
    */
+
   p0_last_spot_price: string;
   p1_last_spot_price: string;
   p0_arithmetic_twap_accumulator: string;
   p1_arithmetic_twap_accumulator: string;
-
   /**
    * This field contains the time in which the last spot price error occured.
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
+
   last_error_time?: Date;
 }
 export interface TwapRecordAminoMsg {
   type: "osmosis/twap/twap-record";
   value: TwapRecordAmino;
 }
-
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
  * The asset pair assets should be lexicographically sorted.
@@ -108,6 +107,7 @@ export interface TwapRecordAminoMsg {
  * than an optimal state storage format. The system bottleneck is elsewhere for
  * now.
  */
+
 export interface TwapRecordSDKType {
   pool_id: Long;
   asset0_denom: string;

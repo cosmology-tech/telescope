@@ -1,8 +1,6 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
+import { QueryDenomTraceRequest, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -16,14 +14,16 @@ export class LCDQueryClient {
     this.denomTraces = this.denomTraces.bind(this);
     this.params = this.params.bind(this);
   }
-
   /* DenomTrace queries a denomination trace information. */
+
+
   async denomTrace(params: QueryDenomTraceRequest): Promise<QueryDenomTraceResponseSDKType> {
     const endpoint = `ibc/apps/transfer/v1/denom_traces/${params.hash}`;
     return await this.req.get<QueryDenomTraceResponseSDKType>(endpoint);
   }
-
   /* DenomTraces queries all denomination traces. */
+
+
   async denomTraces(params: QueryDenomTracesRequest = {
     pagination: undefined
   }): Promise<QueryDenomTracesResponseSDKType> {
@@ -38,8 +38,9 @@ export class LCDQueryClient {
     const endpoint = `ibc/apps/transfer/v1/denom_traces`;
     return await this.req.get<QueryDenomTracesResponseSDKType>(endpoint, options);
   }
-
   /* Params queries all parameters of the ibc-transfer module. */
+
+
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `ibc/apps/transfer/v1/params`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);

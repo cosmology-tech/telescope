@@ -81,8 +81,8 @@ export interface MsgBeginUnlockingAllResponseSDKType {
 export interface MsgBeginUnlocking {
   owner: string;
   ID: Long;
-
   /** Amount of unlocking coins. Unlock all if not set. */
+
   coins: Coin[];
 }
 export interface MsgBeginUnlockingProtoMsg {
@@ -92,8 +92,8 @@ export interface MsgBeginUnlockingProtoMsg {
 export interface MsgBeginUnlockingAmino {
   owner: string;
   ID: string;
-
   /** Amount of unlocking coins. Unlock all if not set. */
+
   coins: CoinAmino[];
 }
 export interface MsgBeginUnlockingAminoMsg {
@@ -122,49 +122,49 @@ export interface MsgBeginUnlockingResponseAminoMsg {
 export interface MsgBeginUnlockingResponseSDKType {
   success: boolean;
 }
-
 /**
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
+
 export interface MsgExtendLockup {
   owner: string;
   ID: Long;
-
   /**
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
    */
+
   duration?: Duration;
 }
 export interface MsgExtendLockupProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockup";
   value: Uint8Array;
 }
-
 /**
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
+
 export interface MsgExtendLockupAmino {
   owner: string;
   ID: string;
-
   /**
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
    */
+
   duration?: DurationAmino;
 }
 export interface MsgExtendLockupAminoMsg {
   type: "osmosis/lockup/extend-lockup";
   value: MsgExtendLockupAmino;
 }
-
 /**
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
+
 export interface MsgExtendLockupSDKType {
   owner: string;
   ID: Long;
@@ -187,43 +187,43 @@ export interface MsgExtendLockupResponseAminoMsg {
 export interface MsgExtendLockupResponseSDKType {
   success: boolean;
 }
-
 /**
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
+
 export interface MsgForceUnlock {
   owner: string;
   ID: Long;
-
   /** Amount of unlocking coins. Unlock all if not set. */
+
   coins: Coin[];
 }
 export interface MsgForceUnlockProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlock";
   value: Uint8Array;
 }
-
 /**
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
+
 export interface MsgForceUnlockAmino {
   owner: string;
   ID: string;
-
   /** Amount of unlocking coins. Unlock all if not set. */
+
   coins: CoinAmino[];
 }
 export interface MsgForceUnlockAminoMsg {
   type: "osmosis/lockup/force-unlock";
   value: MsgForceUnlockAmino;
 }
-
 /**
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
+
 export interface MsgForceUnlockSDKType {
   owner: string;
   ID: Long;

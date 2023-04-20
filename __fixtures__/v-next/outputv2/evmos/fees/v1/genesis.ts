@@ -2,102 +2,102 @@ import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisState {
   /** module parameters */
   params?: Params;
-
   /** active registered contracts */
+
   devFeeInfos: DevFeeInfo[];
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.fees.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
-
   /** active registered contracts */
+
   dev_fee_infos: DevFeeInfoAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.fees.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   dev_fee_infos: DevFeeInfoSDKType[];
 }
-
 /** Params defines the fees module params */
+
 export interface Params {
   /** parameter to enable fees */
   enableFees: boolean;
-
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to the registered contract owner
    */
-  developerShares: string;
 
+  developerShares: string;
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to validators
    */
-  validatorShares: string;
 
+  validatorShares: string;
   /**
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addrDerivationCostCreate: Long;
 
+  addrDerivationCostCreate: Long;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
+
   minGasPrice: string;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.fees.v1.Params";
   value: Uint8Array;
 }
-
 /** Params defines the fees module params */
+
 export interface ParamsAmino {
   /** parameter to enable fees */
   enable_fees: boolean;
-
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to the registered contract owner
    */
-  developer_shares: string;
 
+  developer_shares: string;
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to validators
    */
-  validator_shares: string;
 
+  validator_shares: string;
   /**
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addr_derivation_cost_create: string;
 
+  addr_derivation_cost_create: string;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
+
   min_gas_price: string;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.fees.v1.Params";
   value: ParamsAmino;
 }
-
 /** Params defines the fees module params */
+
 export interface ParamsSDKType {
   enable_fees: boolean;
   developer_shares: string;

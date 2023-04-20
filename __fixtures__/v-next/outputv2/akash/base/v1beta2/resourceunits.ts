@@ -3,11 +3,11 @@ import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnits {
   cpu?: CPU;
   memory?: Memory;
@@ -18,11 +18,11 @@ export interface ResourceUnitsProtoMsg {
   typeUrl: "/akash.base.v1beta2.ResourceUnits";
   value: Uint8Array;
 }
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
@@ -33,11 +33,11 @@ export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta2.ResourceUnits";
   value: ResourceUnitsAmino;
 }
-
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+
 export interface ResourceUnitsSDKType {
   cpu?: CPUSDKType;
   memory?: MemorySDKType;

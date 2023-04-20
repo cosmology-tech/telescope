@@ -1,9 +1,6 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
+import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -18,8 +15,9 @@ export class LCDQueryClient {
     this.params = this.params.bind(this);
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
-
   /* DevFeeInfos retrieves all registered contracts for fee distribution */
+
+
   async devFeeInfos(params: QueryDevFeeInfosRequest = {
     pagination: undefined
   }): Promise<QueryDevFeeInfosResponseSDKType> {
@@ -34,21 +32,24 @@ export class LCDQueryClient {
     const endpoint = `evmos/fees/v1/fees`;
     return await this.req.get<QueryDevFeeInfosResponseSDKType>(endpoint, options);
   }
-
   /* DevFeeInfo retrieves a registered contract for fee distribution */
+
+
   async devFeeInfo(params: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType> {
     const endpoint = `evmos/fees/v1/fees/${params.contractAddress}`;
     return await this.req.get<QueryDevFeeInfoResponseSDKType>(endpoint);
   }
-
   /* Params retrieves the fees module params */
+
+
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/fees/v1/params`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
-
   /* DevFeeInfosPerDeployer retrieves all contracts that a deployer has
    registered for fee distribution */
+
+
   async devFeeInfosPerDeployer(params: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponseSDKType> {
     const options: any = {
       params: {}

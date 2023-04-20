@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -26,6 +25,7 @@ export const protobufPackage = "google.api";
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
  */
+
 export interface Visibility {
   /**
    * A list of visibility rules that apply to individual API elements.
@@ -38,7 +38,6 @@ export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
   value: Uint8Array;
 }
-
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -63,6 +62,7 @@ export interface VisibilityProtoMsg {
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
  */
+
 export interface VisibilityAmino {
   /**
    * A list of visibility rules that apply to individual API elements.
@@ -75,7 +75,6 @@ export interface VisibilityAminoMsg {
   type: "/google.api.Visibility";
   value: VisibilityAmino;
 }
-
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -100,14 +99,15 @@ export interface VisibilityAminoMsg {
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
  */
+
 export interface VisibilitySDKType {
   rules: VisibilityRuleSDKType[];
 }
-
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
+
 export interface VisibilityRule {
   /**
    * Selects methods, messages, fields, enums, etc. to which this rule applies.
@@ -115,7 +115,6 @@ export interface VisibilityRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -133,17 +132,18 @@ export interface VisibilityRule {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
+
   restriction: string;
 }
 export interface VisibilityRuleProtoMsg {
   typeUrl: "/google.api.VisibilityRule";
   value: Uint8Array;
 }
-
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
+
 export interface VisibilityRuleAmino {
   /**
    * Selects methods, messages, fields, enums, etc. to which this rule applies.
@@ -151,7 +151,6 @@ export interface VisibilityRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -169,17 +168,18 @@ export interface VisibilityRuleAmino {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
+
   restriction: string;
 }
 export interface VisibilityRuleAminoMsg {
   type: "/google.api.VisibilityRule";
   value: VisibilityRuleAmino;
 }
-
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
+
 export interface VisibilityRuleSDKType {
   selector: string;
   restriction: string;

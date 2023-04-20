@@ -2,74 +2,74 @@ import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisState {
   /** module parameters */
   params?: Params;
-
   /** registered token pairs */
+
   tokenPairs: TokenPair[];
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.erc20.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
-
   /** registered token pairs */
+
   token_pairs: TokenPairAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.erc20.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   token_pairs: TokenPairSDKType[];
 }
-
 /** Params defines the erc20 module params */
+
 export interface Params {
   /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
   enableErc20: boolean;
-
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
    * Coin by transferring the Tokens through a MsgEthereumTx to the
    * ModuleAddress Ethereum address.
    */
+
   enableEvmHook: boolean;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.erc20.v1.Params";
   value: Uint8Array;
 }
-
 /** Params defines the erc20 module params */
+
 export interface ParamsAmino {
   /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
   enable_erc20: boolean;
-
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
    * Coin by transferring the Tokens through a MsgEthereumTx to the
    * ModuleAddress Ethereum address.
    */
+
   enable_evm_hook: boolean;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.erc20.v1.Params";
   value: ParamsAmino;
 }
-
 /** Params defines the erc20 module params */
+
 export interface ParamsSDKType {
   enable_erc20: boolean;
   enable_evm_hook: boolean;

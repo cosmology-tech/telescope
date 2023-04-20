@@ -2,50 +2,50 @@ import { FileDescriptorProto, FileDescriptorProtoAmino, FileDescriptorProtoSDKTy
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
-
 /** The version number of protocol compiler. */
+
 export interface Version {
   major: number;
   minor: number;
   patch: number;
-
   /**
    * A suffix for alpha, beta or rc release, e.g., "alpha-1", "rc2". It should
    * be empty for mainline stable releases.
    */
+
   suffix: string;
 }
 export interface VersionProtoMsg {
   typeUrl: "/google.protobuf.compiler.Version";
   value: Uint8Array;
 }
-
 /** The version number of protocol compiler. */
+
 export interface VersionAmino {
   major: number;
   minor: number;
   patch: number;
-
   /**
    * A suffix for alpha, beta or rc release, e.g., "alpha-1", "rc2". It should
    * be empty for mainline stable releases.
    */
+
   suffix: string;
 }
 export interface VersionAminoMsg {
   type: "/google.protobuf.compiler.Version";
   value: VersionAmino;
 }
-
 /** The version number of protocol compiler. */
+
 export interface VersionSDKType {
   major: number;
   minor: number;
   patch: number;
   suffix: string;
 }
-
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
+
 export interface CodeGeneratorRequest {
   /**
    * The .proto files that were explicitly listed on the command-line.  The
@@ -53,10 +53,9 @@ export interface CodeGeneratorRequest {
    * descriptor will be included in proto_file, below.
    */
   fileToGenerate: string[];
-
   /** The generator parameter passed on the command-line. */
-  parameter: string;
 
+  parameter: string;
   /**
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
@@ -73,17 +72,18 @@ export interface CodeGeneratorRequest {
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
-  protoFile: FileDescriptorProto[];
 
+  protoFile: FileDescriptorProto[];
   /** The version number of protocol compiler. */
+
   compilerVersion?: Version;
 }
 export interface CodeGeneratorRequestProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
   value: Uint8Array;
 }
-
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
+
 export interface CodeGeneratorRequestAmino {
   /**
    * The .proto files that were explicitly listed on the command-line.  The
@@ -91,10 +91,9 @@ export interface CodeGeneratorRequestAmino {
    * descriptor will be included in proto_file, below.
    */
   file_to_generate: string[];
-
   /** The generator parameter passed on the command-line. */
-  parameter: string;
 
+  parameter: string;
   /**
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
@@ -111,25 +110,26 @@ export interface CodeGeneratorRequestAmino {
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
-  proto_file: FileDescriptorProtoAmino[];
 
+  proto_file: FileDescriptorProtoAmino[];
   /** The version number of protocol compiler. */
+
   compiler_version?: VersionAmino;
 }
 export interface CodeGeneratorRequestAminoMsg {
   type: "/google.protobuf.compiler.CodeGeneratorRequest";
   value: CodeGeneratorRequestAmino;
 }
-
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
+
 export interface CodeGeneratorRequestSDKType {
   file_to_generate: string[];
   parameter: string;
   proto_file: FileDescriptorProtoSDKType[];
   compiler_version?: VersionSDKType;
 }
-
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
+
 export interface CodeGeneratorResponse {
   /**
    * Error message.  If non-empty, code generation failed.  The plugin process
@@ -148,8 +148,8 @@ export interface CodeGeneratorResponseProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
   value: Uint8Array;
 }
-
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
+
 export interface CodeGeneratorResponseAmino {
   /**
    * Error message.  If non-empty, code generation failed.  The plugin process
@@ -168,14 +168,14 @@ export interface CodeGeneratorResponseAminoMsg {
   type: "/google.protobuf.compiler.CodeGeneratorResponse";
   value: CodeGeneratorResponseAmino;
 }
-
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
+
 export interface CodeGeneratorResponseSDKType {
   error: string;
   file: CodeGeneratorResponse_FileSDKType[];
 }
-
 /** Represents a single generated file. */
+
 export interface CodeGeneratorResponse_File {
   /**
    * The file name, relative to the output directory.  The name must not
@@ -191,7 +191,6 @@ export interface CodeGeneratorResponse_File {
    * CodeGeneratorResponse before writing files to disk.
    */
   name: string;
-
   /**
    * If non-empty, indicates that the named file should already exist, and the
    * content here is to be inserted into that file at a defined insertion
@@ -231,17 +230,18 @@ export interface CodeGeneratorResponse_File {
    * 
    * If |insertion_point| is present, |name| must also be present.
    */
-  insertionPoint: string;
 
+  insertionPoint: string;
   /** The file contents. */
+
   content: string;
 }
 export interface CodeGeneratorResponse_FileProtoMsg {
   typeUrl: "/google.protobuf.compiler.File";
   value: Uint8Array;
 }
-
 /** Represents a single generated file. */
+
 export interface CodeGeneratorResponse_FileAmino {
   /**
    * The file name, relative to the output directory.  The name must not
@@ -257,7 +257,6 @@ export interface CodeGeneratorResponse_FileAmino {
    * CodeGeneratorResponse before writing files to disk.
    */
   name: string;
-
   /**
    * If non-empty, indicates that the named file should already exist, and the
    * content here is to be inserted into that file at a defined insertion
@@ -297,17 +296,18 @@ export interface CodeGeneratorResponse_FileAmino {
    * 
    * If |insertion_point| is present, |name| must also be present.
    */
-  insertion_point: string;
 
+  insertion_point: string;
   /** The file contents. */
+
   content: string;
 }
 export interface CodeGeneratorResponse_FileAminoMsg {
   type: "/google.protobuf.compiler.File";
   value: CodeGeneratorResponse_FileAmino;
 }
-
 /** Represents a single generated file. */
+
 export interface CodeGeneratorResponse_FileSDKType {
   name: string;
   insertion_point: string;

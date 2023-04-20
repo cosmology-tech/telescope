@@ -2,8 +2,8 @@ import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
-
 /** ProviderInfo */
+
 export interface ProviderInfo {
   email: string;
   website: string;
@@ -12,8 +12,8 @@ export interface ProviderInfoProtoMsg {
   typeUrl: "/akash.provider.v1beta1.ProviderInfo";
   value: Uint8Array;
 }
-
 /** ProviderInfo */
+
 export interface ProviderInfoAmino {
   email: string;
   website: string;
@@ -22,14 +22,14 @@ export interface ProviderInfoAminoMsg {
   type: "/akash.provider.v1beta1.ProviderInfo";
   value: ProviderInfoAmino;
 }
-
 /** ProviderInfo */
+
 export interface ProviderInfoSDKType {
   email: string;
   website: string;
 }
-
 /** MsgCreateProvider defines an SDK message for creating a provider */
+
 export interface MsgCreateProvider {
   owner: string;
   hostUri: string;
@@ -40,8 +40,8 @@ export interface MsgCreateProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgCreateProvider";
   value: Uint8Array;
 }
-
 /** MsgCreateProvider defines an SDK message for creating a provider */
+
 export interface MsgCreateProviderAmino {
   owner: string;
   host_uri: string;
@@ -52,33 +52,33 @@ export interface MsgCreateProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgCreateProvider";
   value: MsgCreateProviderAmino;
 }
-
 /** MsgCreateProvider defines an SDK message for creating a provider */
+
 export interface MsgCreateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
   info?: ProviderInfoSDKType;
 }
-
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
+
 export interface MsgCreateProviderResponse {}
 export interface MsgCreateProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse";
   value: Uint8Array;
 }
-
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
+
 export interface MsgCreateProviderResponseAmino {}
 export interface MsgCreateProviderResponseAminoMsg {
   type: "/akash.provider.v1beta1.MsgCreateProviderResponse";
   value: MsgCreateProviderResponseAmino;
 }
-
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
-export interface MsgCreateProviderResponseSDKType {}
 
+export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
+
 export interface MsgUpdateProvider {
   owner: string;
   hostUri: string;
@@ -89,8 +89,8 @@ export interface MsgUpdateProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider";
   value: Uint8Array;
 }
-
 /** MsgUpdateProvider defines an SDK message for updating a provider */
+
 export interface MsgUpdateProviderAmino {
   owner: string;
   host_uri: string;
@@ -101,33 +101,33 @@ export interface MsgUpdateProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgUpdateProvider";
   value: MsgUpdateProviderAmino;
 }
-
 /** MsgUpdateProvider defines an SDK message for updating a provider */
+
 export interface MsgUpdateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
   info?: ProviderInfoSDKType;
 }
-
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
+
 export interface MsgUpdateProviderResponse {}
 export interface MsgUpdateProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
   value: Uint8Array;
 }
-
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
+
 export interface MsgUpdateProviderResponseAmino {}
 export interface MsgUpdateProviderResponseAminoMsg {
   type: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
   value: MsgUpdateProviderResponseAmino;
 }
-
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
-export interface MsgUpdateProviderResponseSDKType {}
 
+export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
+
 export interface MsgDeleteProvider {
   owner: string;
 }
@@ -135,8 +135,8 @@ export interface MsgDeleteProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider";
   value: Uint8Array;
 }
-
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
+
 export interface MsgDeleteProviderAmino {
   owner: string;
 }
@@ -144,30 +144,30 @@ export interface MsgDeleteProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgDeleteProvider";
   value: MsgDeleteProviderAmino;
 }
-
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
+
 export interface MsgDeleteProviderSDKType {
   owner: string;
 }
-
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
+
 export interface MsgDeleteProviderResponse {}
 export interface MsgDeleteProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
   value: Uint8Array;
 }
-
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
+
 export interface MsgDeleteProviderResponseAmino {}
 export interface MsgDeleteProviderResponseAminoMsg {
   type: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
   value: MsgDeleteProviderResponseAmino;
 }
-
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
-export interface MsgDeleteProviderResponseSDKType {}
 
+export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
+
 export interface Provider {
   owner: string;
   hostUri: string;
@@ -178,8 +178,8 @@ export interface ProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta1.Provider";
   value: Uint8Array;
 }
-
 /** Provider stores owner and host details */
+
 export interface ProviderAmino {
   owner: string;
   host_uri: string;
@@ -190,8 +190,8 @@ export interface ProviderAminoMsg {
   type: "/akash.provider.v1beta1.Provider";
   value: ProviderAmino;
 }
-
 /** Provider stores owner and host details */
+
 export interface ProviderSDKType {
   owner: string;
   host_uri: string;

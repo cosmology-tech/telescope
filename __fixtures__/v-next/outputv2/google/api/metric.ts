@@ -1,15 +1,15 @@
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * The kind of measurement. It describes how the data is reported.
  * For information on setting the start time and end time based on
  * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
  */
+
 export enum MetricDescriptor_MetricKind {
   /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
   METRIC_KIND_UNSPECIFIED = 0,
@@ -75,8 +75,8 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
       return "UNRECOGNIZED";
   }
 }
-
 /** The value type of a metric. */
+
 export enum MetricDescriptor_ValueType {
   /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
   VALUE_TYPE_UNSPECIFIED = 0,
@@ -172,16 +172,15 @@ export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueT
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
  * existing data unusable.
  */
+
 export interface MetricDescriptor {
   /** The resource name of the metric descriptor. */
   name: string;
-
   /**
    * The metric type, including its DNS name prefix. The type is not
    * URL-encoded. All user-defined metric types have the DNS name
@@ -192,8 +191,8 @@ export interface MetricDescriptor {
    *     "external.googleapis.com/prometheus/up"
    *     "appengine.googleapis.com/http/server/response_latencies"
    */
-  type: string;
 
+  type: string;
   /**
    * The set of labels that can be used to describe a specific
    * instance of this metric type. For example, the
@@ -202,20 +201,20 @@ export interface MetricDescriptor {
    * you can look at latencies for successful responses or just
    * for responses that failed.
    */
-  labels: LabelDescriptor[];
 
+  labels: LabelDescriptor[];
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  metricKind: MetricDescriptor_MetricKind;
 
+  metricKind: MetricDescriptor_MetricKind;
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  valueType: MetricDescriptor_ValueType;
 
+  valueType: MetricDescriptor_ValueType;
   /**
    * The units in which the metric value is reported. It is only applicable
    * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -320,25 +319,25 @@ export interface MetricDescriptor {
    *    0..1, that will be multiplied by 100 and displayed as a percentage
    *    (so a metric value `0.03` means "3 percent").
    */
+
   unit: string;
-
   /** A detailed description of the metric, which can be used in documentation. */
-  description: string;
 
+  description: string;
   /**
    * A concise name for the metric, which can be displayed in user interfaces.
    * Use sentence case without an ending period, for example "Request count".
    * This field is optional but it is recommended to be set for any metrics
    * associated with user-visible concepts, such as Quota.
    */
+
   displayName: string;
-
   /** Optional. Metadata which can be used to guide usage of the metric. */
+
   metadata?: MetricDescriptor_MetricDescriptorMetadata;
-
   /** Optional. The launch stage of the metric definition. */
-  launchStage: LaunchStage;
 
+  launchStage: LaunchStage;
   /**
    * Read-only. If present, then a [time
    * series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -346,22 +345,22 @@ export interface MetricDescriptor {
    * with this metric type can only be associated with one of the monitored
    * resource types listed here.
    */
+
   monitoredResourceTypes: string[];
 }
 export interface MetricDescriptorProtoMsg {
   typeUrl: "/google.api.MetricDescriptor";
   value: Uint8Array;
 }
-
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
  * existing data unusable.
  */
+
 export interface MetricDescriptorAmino {
   /** The resource name of the metric descriptor. */
   name: string;
-
   /**
    * The metric type, including its DNS name prefix. The type is not
    * URL-encoded. All user-defined metric types have the DNS name
@@ -372,8 +371,8 @@ export interface MetricDescriptorAmino {
    *     "external.googleapis.com/prometheus/up"
    *     "appengine.googleapis.com/http/server/response_latencies"
    */
-  type: string;
 
+  type: string;
   /**
    * The set of labels that can be used to describe a specific
    * instance of this metric type. For example, the
@@ -382,20 +381,20 @@ export interface MetricDescriptorAmino {
    * you can look at latencies for successful responses or just
    * for responses that failed.
    */
-  labels: LabelDescriptorAmino[];
 
+  labels: LabelDescriptorAmino[];
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  metric_kind: MetricDescriptor_MetricKind;
 
+  metric_kind: MetricDescriptor_MetricKind;
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  value_type: MetricDescriptor_ValueType;
 
+  value_type: MetricDescriptor_ValueType;
   /**
    * The units in which the metric value is reported. It is only applicable
    * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -500,25 +499,25 @@ export interface MetricDescriptorAmino {
    *    0..1, that will be multiplied by 100 and displayed as a percentage
    *    (so a metric value `0.03` means "3 percent").
    */
+
   unit: string;
-
   /** A detailed description of the metric, which can be used in documentation. */
-  description: string;
 
+  description: string;
   /**
    * A concise name for the metric, which can be displayed in user interfaces.
    * Use sentence case without an ending period, for example "Request count".
    * This field is optional but it is recommended to be set for any metrics
    * associated with user-visible concepts, such as Quota.
    */
+
   display_name: string;
-
   /** Optional. Metadata which can be used to guide usage of the metric. */
+
   metadata?: MetricDescriptor_MetricDescriptorMetadataAmino;
-
   /** Optional. The launch stage of the metric definition. */
-  launch_stage: LaunchStage;
 
+  launch_stage: LaunchStage;
   /**
    * Read-only. If present, then a [time
    * series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -526,18 +525,19 @@ export interface MetricDescriptorAmino {
    * with this metric type can only be associated with one of the monitored
    * resource types listed here.
    */
+
   monitored_resource_types: string[];
 }
 export interface MetricDescriptorAminoMsg {
   type: "/google.api.MetricDescriptor";
   value: MetricDescriptorAmino;
 }
-
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
  * existing data unusable.
  */
+
 export interface MetricDescriptorSDKType {
   name: string;
   type: string;
@@ -551,62 +551,62 @@ export interface MetricDescriptorSDKType {
   launch_stage: LaunchStage;
   monitored_resource_types: string[];
 }
-
 /** Additional annotations that can be used to guide the usage of a metric. */
+
 export interface MetricDescriptor_MetricDescriptorMetadata {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
 
   /** @deprecated */
   launchStage: LaunchStage;
-
   /**
    * The sampling period of metric data points. For metrics which are written
    * periodically, consecutive data points are stored at this time interval,
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  samplePeriod?: Duration;
 
+  samplePeriod?: Duration;
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
+
   ingestDelay?: Duration;
 }
 export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
   typeUrl: "/google.api.MetricDescriptorMetadata";
   value: Uint8Array;
 }
-
 /** Additional annotations that can be used to guide the usage of a metric. */
+
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
 
   /** @deprecated */
   launch_stage: LaunchStage;
-
   /**
    * The sampling period of metric data points. For metrics which are written
    * periodically, consecutive data points are stored at this time interval,
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  sample_period?: DurationAmino;
 
+  sample_period?: DurationAmino;
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
+
   ingest_delay?: DurationAmino;
 }
 export interface MetricDescriptor_MetricDescriptorMetadataAminoMsg {
   type: "/google.api.MetricDescriptorMetadata";
   value: MetricDescriptor_MetricDescriptorMetadataAmino;
 }
-
 /** Additional annotations that can be used to guide the usage of a metric. */
+
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
   /** @deprecated */
   launch_stage: LaunchStage;
@@ -633,22 +633,22 @@ export interface Metric_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * A specific metric, identified by specifying values for all of the
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
  */
+
 export interface Metric {
   /**
    * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
    * For example, `custom.googleapis.com/invoice/paid/amount`.
    */
   type: string;
-
   /**
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
    */
+
   labels: {
     [key: string]: string;
   };
@@ -657,22 +657,22 @@ export interface MetricProtoMsg {
   typeUrl: "/google.api.Metric";
   value: Uint8Array;
 }
-
 /**
  * A specific metric, identified by specifying values for all of the
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
  */
+
 export interface MetricAmino {
   /**
    * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
    * For example, `custom.googleapis.com/invoice/paid/amount`.
    */
   type: string;
-
   /**
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
    */
+
   labels: {
     [key: string]: string;
   };
@@ -681,11 +681,11 @@ export interface MetricAminoMsg {
   type: "/google.api.Metric";
   value: MetricAmino;
 }
-
 /**
  * A specific metric, identified by specifying values for all of the
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
  */
+
 export interface MetricSDKType {
   type: string;
   labels: {

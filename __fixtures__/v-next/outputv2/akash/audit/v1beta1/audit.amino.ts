@@ -1,6 +1,5 @@
 /* eslint-disable */
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType } from "./audit";
+import { MsgSignProviderAttributes, MsgDeleteProviderAttributes } from "./audit";
 export const AminoConverter = {
   "/akash.audit.v1beta1.MsgSignProviderAttributes": {
     aminoType: "/akash.audit.v1beta1.MsgSignProviderAttributes",

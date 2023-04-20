@@ -1,7 +1,6 @@
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./group";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deployment";
+import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deployment";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/akash.deployment.v1beta1.MsgCreateDeployment", MsgCreateDeployment], ["/akash.deployment.v1beta1.MsgDepositDeployment", MsgDepositDeployment], ["/akash.deployment.v1beta1.MsgUpdateDeployment", MsgUpdateDeployment], ["/akash.deployment.v1beta1.MsgCloseDeployment", MsgCloseDeployment], ["/akash.deployment.v1beta1.MsgCloseGroup", MsgCloseGroup], ["/akash.deployment.v1beta1.MsgPauseGroup", MsgPauseGroup], ["/akash.deployment.v1beta1.MsgStartGroup", MsgStartGroup]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

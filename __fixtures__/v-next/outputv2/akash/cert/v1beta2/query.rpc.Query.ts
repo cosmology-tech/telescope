@@ -1,16 +1,13 @@
-import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { ReactQueryParams } from "../../../react-query";
-import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ProtobufRpcClient } from "@cosmjs/stargate";
 import { useQuery } from "@tanstack/react-query";
-import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
-
+import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
 /** Query defines the gRPC querier service */
+
 export interface Query {
   /** Certificates queries certificates */
   certificates(request: DeepPartial<QueryCertificatesRequest>, metadata?: grpc.Metadata): Promise<QueryCertificatesResponse>;

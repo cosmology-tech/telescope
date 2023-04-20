@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Path Translation specifies how to combine the backend address with the
  * request path in order to produce the appropriate forwarding URL for the
@@ -11,6 +10,7 @@ export const protobufPackage = "google.api";
  * do not accept requests over HTTP/HTTPS should leave `path_translation`
  * unspecified.
  */
+
 export enum BackendRule_PathTranslation {
   PATH_TRANSLATION_UNSPECIFIED = 0,
 
@@ -103,8 +103,8 @@ export function backendRule_PathTranslationToJSON(object: BackendRule_PathTransl
       return "UNRECOGNIZED";
   }
 }
-
 /** `Backend` defines the backend configuration for a service. */
+
 export interface Backend {
   /**
    * A list of API backend rules that apply to individual API methods.
@@ -117,8 +117,8 @@ export interface BackendProtoMsg {
   typeUrl: "/google.api.Backend";
   value: Uint8Array;
 }
-
 /** `Backend` defines the backend configuration for a service. */
+
 export interface BackendAmino {
   /**
    * A list of API backend rules that apply to individual API methods.
@@ -131,13 +131,13 @@ export interface BackendAminoMsg {
   type: "/google.api.Backend";
   value: BackendAmino;
 }
-
 /** `Backend` defines the backend configuration for a service. */
+
 export interface BackendSDKType {
   rules: BackendRuleSDKType[];
 }
-
 /** A backend rule provides configuration for an individual API element. */
+
 export interface BackendRule {
   /**
    * Selects the methods to which this rule applies.
@@ -145,7 +145,6 @@ export interface BackendRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * The address of the API backend.
    * 
@@ -168,42 +167,42 @@ export interface BackendRule {
    * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
    * to specify the protocol version.
    */
-  address: string;
 
+  address: string;
   /**
    * The number of seconds to wait for a response from a request. The default
    * varies based on the request protocol and deployment environment.
    */
-  deadline: number;
 
+  deadline: number;
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
    * value lower than this will be rejected.
    */
-  minDeadline: number;
 
+  minDeadline: number;
   /**
    * The number of seconds to wait for the completion of a long running
    * operation. The default is no deadline.
    */
+
   operationDeadline: number;
   pathTranslation: BackendRule_PathTranslation;
-
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
    * This ID token will be added in the HTTP "authorization" header, and sent
    * to the backend.
    */
-  jwtAudience?: string;
 
+  jwtAudience?: string;
   /**
    * When disable_auth is true, a JWT ID token won't be generated and the
    * original "Authorization" HTTP header will be preserved. If the header is
    * used to carry the original token and is expected by the backend, this
    * field must be set to true to preserve the header.
    */
-  disableAuth?: boolean;
 
+  disableAuth?: boolean;
   /**
    * The protocol used for sending a request to the backend.
    * The supported values are "http/1.1" and "h2".
@@ -227,14 +226,15 @@ export interface BackendRule {
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for more details on the supported values.
    */
+
   protocol: string;
 }
 export interface BackendRuleProtoMsg {
   typeUrl: "/google.api.BackendRule";
   value: Uint8Array;
 }
-
 /** A backend rule provides configuration for an individual API element. */
+
 export interface BackendRuleAmino {
   /**
    * Selects the methods to which this rule applies.
@@ -242,7 +242,6 @@ export interface BackendRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * The address of the API backend.
    * 
@@ -265,42 +264,42 @@ export interface BackendRuleAmino {
    * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
    * to specify the protocol version.
    */
-  address: string;
 
+  address: string;
   /**
    * The number of seconds to wait for a response from a request. The default
    * varies based on the request protocol and deployment environment.
    */
-  deadline: number;
 
+  deadline: number;
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
    * value lower than this will be rejected.
    */
-  min_deadline: number;
 
+  min_deadline: number;
   /**
    * The number of seconds to wait for the completion of a long running
    * operation. The default is no deadline.
    */
+
   operation_deadline: number;
   path_translation: BackendRule_PathTranslation;
-
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
    * This ID token will be added in the HTTP "authorization" header, and sent
    * to the backend.
    */
-  jwt_audience?: string;
 
+  jwt_audience?: string;
   /**
    * When disable_auth is true, a JWT ID token won't be generated and the
    * original "Authorization" HTTP header will be preserved. If the header is
    * used to carry the original token and is expected by the backend, this
    * field must be set to true to preserve the header.
    */
-  disable_auth?: boolean;
 
+  disable_auth?: boolean;
   /**
    * The protocol used for sending a request to the backend.
    * The supported values are "http/1.1" and "h2".
@@ -324,14 +323,15 @@ export interface BackendRuleAmino {
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for more details on the supported values.
    */
+
   protocol: string;
 }
 export interface BackendRuleAminoMsg {
   type: "/google.api.BackendRule";
   value: BackendRuleAmino;
 }
-
 /** A backend rule provides configuration for an individual API element. */
+
 export interface BackendRuleSDKType {
   selector: string;
   address: string;

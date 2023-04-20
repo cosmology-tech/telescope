@@ -2,85 +2,85 @@ import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, G
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisState {
   /** module parameters */
   params?: Params;
-
   /** active incentives */
-  incentives: Incentive[];
 
+  incentives: Incentive[];
   /** active Gasmeters */
+
   gasMeters: GasMeter[];
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.incentives.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
-
   /** active incentives */
-  incentives: IncentiveAmino[];
 
+  incentives: IncentiveAmino[];
   /** active Gasmeters */
+
   gas_meters: GasMeterAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.incentives.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   incentives: IncentiveSDKType[];
   gas_meters: GasMeterSDKType[];
 }
-
 /** Params defines the incentives module params */
+
 export interface Params {
   /** parameter to enable incentives */
   enableIncentives: boolean;
-
   /** maximum percentage an incentive can allocate per denomination */
+
   allocationLimit: string;
-
   /** identifier for the epochs module hooks */
-  incentivesEpochIdentifier: string;
 
+  incentivesEpochIdentifier: string;
   /** scaling factor for capping rewards */
+
   rewardScaler: string;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.incentives.v1.Params";
   value: Uint8Array;
 }
-
 /** Params defines the incentives module params */
+
 export interface ParamsAmino {
   /** parameter to enable incentives */
   enable_incentives: boolean;
-
   /** maximum percentage an incentive can allocate per denomination */
+
   allocation_limit: string;
-
   /** identifier for the epochs module hooks */
-  incentives_epoch_identifier: string;
 
+  incentives_epoch_identifier: string;
   /** scaling factor for capping rewards */
+
   reward_scaler: string;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.incentives.v1.Params";
   value: ParamsAmino;
 }
-
 /** Params defines the incentives module params */
+
 export interface ParamsSDKType {
   enable_incentives: boolean;
   allocation_limit: string;

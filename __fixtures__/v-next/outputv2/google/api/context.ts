@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -40,6 +39,7 @@ export const protobufPackage = "google.api";
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
+
 export interface Context {
   /**
    * A list of RPC context rules that apply to individual API methods.
@@ -52,7 +52,6 @@ export interface ContextProtoMsg {
   typeUrl: "/google.api.Context";
   value: Uint8Array;
 }
-
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -91,6 +90,7 @@ export interface ContextProtoMsg {
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
+
 export interface ContextAmino {
   /**
    * A list of RPC context rules that apply to individual API methods.
@@ -103,7 +103,6 @@ export interface ContextAminoMsg {
   type: "/google.api.Context";
   value: ContextAmino;
 }
-
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -142,14 +141,15 @@ export interface ContextAminoMsg {
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
+
 export interface ContextSDKType {
   rules: ContextRuleSDKType[];
 }
-
 /**
  * A context rule provides information about the context for an individual API
  * element.
  */
+
 export interface ContextRule {
   /**
    * Selects the methods to which this rule applies.
@@ -157,34 +157,34 @@ export interface ContextRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /** A list of full type names of requested contexts. */
+
   requested: string[];
-
   /** A list of full type names of provided contexts. */
-  provided: string[];
 
+  provided: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowedRequestExtensions: string[];
 
+  allowedRequestExtensions: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
+
   allowedResponseExtensions: string[];
 }
 export interface ContextRuleProtoMsg {
   typeUrl: "/google.api.ContextRule";
   value: Uint8Array;
 }
-
 /**
  * A context rule provides information about the context for an individual API
  * element.
  */
+
 export interface ContextRuleAmino {
   /**
    * Selects the methods to which this rule applies.
@@ -192,34 +192,34 @@ export interface ContextRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /** A list of full type names of requested contexts. */
+
   requested: string[];
-
   /** A list of full type names of provided contexts. */
-  provided: string[];
 
+  provided: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowed_request_extensions: string[];
 
+  allowed_request_extensions: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
+
   allowed_response_extensions: string[];
 }
 export interface ContextRuleAminoMsg {
   type: "/google.api.ContextRule";
   value: ContextRuleAmino;
 }
-
 /**
  * A context rule provides information about the context for an individual API
  * element.
  */
+
 export interface ContextRuleSDKType {
   selector: string;
   requested: string[];

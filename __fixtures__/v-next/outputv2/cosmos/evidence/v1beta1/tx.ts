@@ -2,11 +2,11 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
-
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
+
 export interface MsgSubmitEvidence {
   submitter: string;
   evidence?: (Any) | undefined;
@@ -18,11 +18,11 @@ export interface MsgSubmitEvidenceProtoMsg {
 export type MsgSubmitEvidenceEncoded = Omit<MsgSubmitEvidence, "evidence"> & {
   evidence?: AnyProtoMsg | undefined;
 };
-
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
+
 export interface MsgSubmitEvidenceAmino {
   submitter: string;
   evidence?: AnyAmino;
@@ -31,17 +31,17 @@ export interface MsgSubmitEvidenceAminoMsg {
   type: "cosmos-sdk/MsgSubmitEvidence";
   value: MsgSubmitEvidenceAmino;
 }
-
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
+
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
   evidence?: AnySDKType | undefined;
 }
-
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+
 export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
@@ -50,8 +50,8 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
   value: Uint8Array;
 }
-
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
@@ -60,8 +60,8 @@ export interface MsgSubmitEvidenceResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitEvidenceResponse";
   value: MsgSubmitEvidenceResponseAmino;
 }
-
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+
 export interface MsgSubmitEvidenceResponseSDKType {
   hash: Uint8Array;
 }

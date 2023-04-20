@@ -1,7 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
-
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -86,6 +85,7 @@ export const protobufPackage = "google.protobuf";
  * http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
+
 export interface Timestamp {
   /**
    * Represents seconds of UTC time since Unix epoch
@@ -93,20 +93,19 @@ export interface Timestamp {
    * 9999-12-31T23:59:59Z inclusive.
    */
   seconds: Long;
-
   /**
    * Non-negative fractions of a second at nanosecond resolution. Negative
    * second values with fractions must still have non-negative nanos values
    * that count forward in time. Must be from 0 to 999,999,999
    * inclusive.
    */
+
   nanos: number;
 }
 export interface TimestampProtoMsg {
   typeUrl: "/google.protobuf.Timestamp";
   value: Uint8Array;
 }
-
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -191,12 +190,12 @@ export interface TimestampProtoMsg {
  * http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
+
 export type TimestampAmino = string;
 export interface TimestampAminoMsg {
   type: "/google.protobuf.Timestamp";
   value: TimestampAmino;
 }
-
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -281,6 +280,7 @@ export interface TimestampAminoMsg {
  * http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
+
 export interface TimestampSDKType {
   seconds: Long;
   nanos: number;

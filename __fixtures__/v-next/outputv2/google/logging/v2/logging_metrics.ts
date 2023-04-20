@@ -1,11 +1,11 @@
 import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
-
 /** Logging API version. */
+
 export enum LogMetric_ApiVersion {
   /** V2 - Logging API v2. */
   V2 = 0,
@@ -65,7 +65,6 @@ export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -75,6 +74,7 @@ export interface LogMetric_LabelExtractorsEntrySDKType {
  * extracted values along with an optional histogram of the values as specified
  * by the bucket options.
  */
+
 export interface LogMetric {
   /**
    * Required. The client-assigned metric identifier.
@@ -92,13 +92,12 @@ export interface LogMetric {
    * `"nginx/requests"`.
    */
   name: string;
-
   /**
    * Optional. A description of this metric, which is used in documentation.
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
 
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
@@ -108,14 +107,14 @@ export interface LogMetric {
    * 
    * The maximum length of the filter is 20000 characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. If set to True, then this metric is disabled and it does not
    * generate any points.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Optional. The metric descriptor associated with the logs-based metric.
    * If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -139,8 +138,8 @@ export interface LogMetric {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metricDescriptor?: MetricDescriptor;
 
+  metricDescriptor?: MetricDescriptor;
   /**
    * Optional. A `value_extractor` is required when using a distribution
    * logs-based metric to extract the values to record from a log entry.
@@ -162,8 +161,8 @@ export interface LogMetric {
    * 
    * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
    */
-  valueExtractor: string;
 
+  valueExtractor: string;
   /**
    * Optional. A map from a label key string to an extractor expression which is
    * used to extract data from a log entry field and assign as the label value.
@@ -180,44 +179,44 @@ export interface LogMetric {
    * Note that there are upper bounds on the maximum number of labels and the
    * number of active time series that are allowed in a project.
    */
+
   labelExtractors: {
     [key: string]: string;
   };
-
   /**
    * Optional. The `bucket_options` are required when the logs-based metric is
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucketOptions?: Distribution_BucketOptions;
 
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  createTime?: Date;
 
+  createTime?: Date;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  updateTime?: Date;
 
+  updateTime?: Date;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
    */
 
   /** @deprecated */
+
   version: LogMetric_ApiVersion;
 }
 export interface LogMetricProtoMsg {
   typeUrl: "/google.logging.v2.LogMetric";
   value: Uint8Array;
 }
-
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -227,6 +226,7 @@ export interface LogMetricProtoMsg {
  * extracted values along with an optional histogram of the values as specified
  * by the bucket options.
  */
+
 export interface LogMetricAmino {
   /**
    * Required. The client-assigned metric identifier.
@@ -244,13 +244,12 @@ export interface LogMetricAmino {
    * `"nginx/requests"`.
    */
   name: string;
-
   /**
    * Optional. A description of this metric, which is used in documentation.
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
 
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
@@ -260,14 +259,14 @@ export interface LogMetricAmino {
    * 
    * The maximum length of the filter is 20000 characters.
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. If set to True, then this metric is disabled and it does not
    * generate any points.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Optional. The metric descriptor associated with the logs-based metric.
    * If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -291,8 +290,8 @@ export interface LogMetricAmino {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metric_descriptor?: MetricDescriptorAmino;
 
+  metric_descriptor?: MetricDescriptorAmino;
   /**
    * Optional. A `value_extractor` is required when using a distribution
    * logs-based metric to extract the values to record from a log entry.
@@ -314,8 +313,8 @@ export interface LogMetricAmino {
    * 
    * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
    */
-  value_extractor: string;
 
+  value_extractor: string;
   /**
    * Optional. A map from a label key string to an extractor expression which is
    * used to extract data from a log entry field and assign as the label value.
@@ -332,44 +331,44 @@ export interface LogMetricAmino {
    * Note that there are upper bounds on the maximum number of labels and the
    * number of active time series that are allowed in a project.
    */
+
   label_extractors: {
     [key: string]: string;
   };
-
   /**
    * Optional. The `bucket_options` are required when the logs-based metric is
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucket_options?: Distribution_BucketOptionsAmino;
 
+  bucket_options?: Distribution_BucketOptionsAmino;
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  create_time?: Date;
 
+  create_time?: Date;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  update_time?: Date;
 
+  update_time?: Date;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
    */
 
   /** @deprecated */
+
   version: LogMetric_ApiVersion;
 }
 export interface LogMetricAminoMsg {
   type: "/google.logging.v2.LogMetric";
   value: LogMetricAmino;
 }
-
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -379,6 +378,7 @@ export interface LogMetricAminoMsg {
  * extracted values along with an optional histogram of the values as specified
  * by the bucket options.
  */
+
 export interface LogMetricSDKType {
   name: string;
   description: string;
@@ -392,12 +392,12 @@ export interface LogMetricSDKType {
   bucket_options?: Distribution_BucketOptionsSDKType;
   create_time?: Date;
   update_time?: Date;
-
   /** @deprecated */
+
   version: LogMetric_ApiVersion;
 }
-
 /** The parameters to ListLogMetrics. */
+
 export interface ListLogMetricsRequest {
   /**
    * Required. The name of the project containing the metrics:
@@ -405,28 +405,28 @@ export interface ListLogMetricsRequest {
    *     "projects/[PROJECT_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   pageSize: number;
 }
 export interface ListLogMetricsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to ListLogMetrics. */
+
 export interface ListLogMetricsRequestAmino {
   /**
    * Required. The name of the project containing the metrics:
@@ -434,75 +434,75 @@ export interface ListLogMetricsRequestAmino {
    *     "projects/[PROJECT_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   page_size: number;
 }
 export interface ListLogMetricsRequestAminoMsg {
   type: "/google.logging.v2.ListLogMetricsRequest";
   value: ListLogMetricsRequestAmino;
 }
-
 /** The parameters to ListLogMetrics. */
+
 export interface ListLogMetricsRequestSDKType {
   parent: string;
   page_token: string;
   page_size: number;
 }
-
 /** Result returned from ListLogMetrics. */
+
 export interface ListLogMetricsResponse {
   /** A list of logs-based metrics. */
   metrics: LogMetric[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListLogMetricsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsResponse";
   value: Uint8Array;
 }
-
 /** Result returned from ListLogMetrics. */
+
 export interface ListLogMetricsResponseAmino {
   /** A list of logs-based metrics. */
   metrics: LogMetricAmino[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListLogMetricsResponseAminoMsg {
   type: "/google.logging.v2.ListLogMetricsResponse";
   value: ListLogMetricsResponseAmino;
 }
-
 /** Result returned from ListLogMetrics. */
+
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to GetLogMetric. */
+
 export interface GetLogMetricRequest {
   /**
    * Required. The resource name of the desired metric:
@@ -515,8 +515,8 @@ export interface GetLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetLogMetricRequest";
   value: Uint8Array;
 }
-
 /** The parameters to GetLogMetric. */
+
 export interface GetLogMetricRequestAmino {
   /**
    * Required. The resource name of the desired metric:
@@ -529,13 +529,13 @@ export interface GetLogMetricRequestAminoMsg {
   type: "/google.logging.v2.GetLogMetricRequest";
   value: GetLogMetricRequestAmino;
 }
-
 /** The parameters to GetLogMetric. */
+
 export interface GetLogMetricRequestSDKType {
   metric_name: string;
 }
-
 /** The parameters to CreateLogMetric. */
+
 export interface CreateLogMetricRequest {
   /**
    * Required. The resource name of the project in which to create the metric:
@@ -545,19 +545,19 @@ export interface CreateLogMetricRequest {
    * The new metric must be provided in the request.
    */
   parent: string;
-
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
+
   metric?: LogMetric;
 }
 export interface CreateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest";
   value: Uint8Array;
 }
-
 /** The parameters to CreateLogMetric. */
+
 export interface CreateLogMetricRequestAmino {
   /**
    * Required. The resource name of the project in which to create the metric:
@@ -567,25 +567,25 @@ export interface CreateLogMetricRequestAmino {
    * The new metric must be provided in the request.
    */
   parent: string;
-
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
+
   metric?: LogMetricAmino;
 }
 export interface CreateLogMetricRequestAminoMsg {
   type: "/google.logging.v2.CreateLogMetricRequest";
   value: CreateLogMetricRequestAmino;
 }
-
 /** The parameters to CreateLogMetric. */
+
 export interface CreateLogMetricRequestSDKType {
   parent: string;
   metric?: LogMetricSDKType;
 }
-
 /** The parameters to UpdateLogMetric. */
+
 export interface UpdateLogMetricRequest {
   /**
    * Required. The resource name of the metric to update:
@@ -597,16 +597,16 @@ export interface UpdateLogMetricRequest {
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
   metricName: string;
-
   /** Required. The updated metric. */
+
   metric?: LogMetric;
 }
 export interface UpdateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
   value: Uint8Array;
 }
-
 /** The parameters to UpdateLogMetric. */
+
 export interface UpdateLogMetricRequestAmino {
   /**
    * Required. The resource name of the metric to update:
@@ -618,22 +618,22 @@ export interface UpdateLogMetricRequestAmino {
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
   metric_name: string;
-
   /** Required. The updated metric. */
+
   metric?: LogMetricAmino;
 }
 export interface UpdateLogMetricRequestAminoMsg {
   type: "/google.logging.v2.UpdateLogMetricRequest";
   value: UpdateLogMetricRequestAmino;
 }
-
 /** The parameters to UpdateLogMetric. */
+
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
   metric?: LogMetricSDKType;
 }
-
 /** The parameters to DeleteLogMetric. */
+
 export interface DeleteLogMetricRequest {
   /**
    * Required. The resource name of the metric to delete:
@@ -646,8 +646,8 @@ export interface DeleteLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
   value: Uint8Array;
 }
-
 /** The parameters to DeleteLogMetric. */
+
 export interface DeleteLogMetricRequestAmino {
   /**
    * Required. The resource name of the metric to delete:
@@ -660,8 +660,8 @@ export interface DeleteLogMetricRequestAminoMsg {
   type: "/google.logging.v2.DeleteLogMetricRequest";
   value: DeleteLogMetricRequestAmino;
 }
-
 /** The parameters to DeleteLogMetric. */
+
 export interface DeleteLogMetricRequestSDKType {
   metric_name: string;
 }

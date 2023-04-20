@@ -3,27 +3,27 @@ import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType, OsmoEqui
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisState {
   params?: Params;
-
   /**
    * superfluid_assets defines the registered superfluid assets that have been
    * registered via governance.
    */
-  superfluidAssets: SuperfluidAsset[];
 
+  superfluidAssets: SuperfluidAsset[];
   /**
    * osmo_equivalent_multipliers is the records of osmo equivalent amount of
    * each superfluid registered pool, updated every epoch.
    */
-  osmoEquivalentMultipliers: OsmoEquivalentMultiplierRecord[];
 
+  osmoEquivalentMultipliers: OsmoEquivalentMultiplierRecord[];
   /**
    * intermediary_accounts is a secondary account for superfluid staking that
    * plays an intermediary role between validators and the delegators.
    */
+
   intermediaryAccounts: SuperfluidIntermediaryAccount[];
   intemediaryAccountConnections: LockIdIntermediaryAccountConnection[];
 }
@@ -31,27 +31,27 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.superfluid.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateAmino {
   params?: ParamsAmino;
-
   /**
    * superfluid_assets defines the registered superfluid assets that have been
    * registered via governance.
    */
-  superfluid_assets: SuperfluidAssetAmino[];
 
+  superfluid_assets: SuperfluidAssetAmino[];
   /**
    * osmo_equivalent_multipliers is the records of osmo equivalent amount of
    * each superfluid registered pool, updated every epoch.
    */
-  osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordAmino[];
 
+  osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordAmino[];
   /**
    * intermediary_accounts is a secondary account for superfluid staking that
    * plays an intermediary role between validators and the delegators.
    */
+
   intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
   intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
 }
@@ -59,8 +59,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   superfluid_assets: SuperfluidAssetSDKType[];

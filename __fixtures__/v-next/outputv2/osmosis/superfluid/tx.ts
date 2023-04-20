@@ -98,12 +98,12 @@ export interface MsgSuperfluidUnbondLockResponseAminoMsg {
   value: MsgSuperfluidUnbondLockResponseAmino;
 }
 export interface MsgSuperfluidUnbondLockResponseSDKType {}
-
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
  * and then does a superfluid lock from the newly created lockup, to the
  * specified validator addr.
  */
+
 export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];
@@ -113,12 +113,12 @@ export interface MsgLockAndSuperfluidDelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
   value: Uint8Array;
 }
-
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
  * and then does a superfluid lock from the newly created lockup, to the
  * specified validator addr.
  */
+
 export interface MsgLockAndSuperfluidDelegateAmino {
   sender: string;
   coins: CoinAmino[];
@@ -128,12 +128,12 @@ export interface MsgLockAndSuperfluidDelegateAminoMsg {
   type: "osmosis/lock-and-superfluid-delegate";
   value: MsgLockAndSuperfluidDelegateAmino;
 }
-
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
  * and then does a superfluid lock from the newly created lockup, to the
  * specified validator addr.
  */
+
 export interface MsgLockAndSuperfluidDelegateSDKType {
   sender: string;
   coins: CoinSDKType[];
@@ -156,7 +156,6 @@ export interface MsgLockAndSuperfluidDelegateResponseAminoMsg {
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: Long;
 }
-
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -167,6 +166,7 @@ export interface MsgLockAndSuperfluidDelegateResponseSDKType {
  * If the lock was unbonding, the new lockup durations should be the time left
  * until unbond completion.
  */
+
 export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: Long;
@@ -175,7 +175,6 @@ export interface MsgUnPoolWhitelistedPoolProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
   value: Uint8Array;
 }
-
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -186,6 +185,7 @@ export interface MsgUnPoolWhitelistedPoolProtoMsg {
  * If the lock was unbonding, the new lockup durations should be the time left
  * until unbond completion.
  */
+
 export interface MsgUnPoolWhitelistedPoolAmino {
   sender: string;
   pool_id: string;
@@ -194,7 +194,6 @@ export interface MsgUnPoolWhitelistedPoolAminoMsg {
   type: "osmosis/unpool-whitelisted-pool";
   value: MsgUnPoolWhitelistedPoolAmino;
 }
-
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -205,6 +204,7 @@ export interface MsgUnPoolWhitelistedPoolAminoMsg {
  * If the lock was unbonding, the new lockup durations should be the time left
  * until unbond completion.
  */
+
 export interface MsgUnPoolWhitelistedPoolSDKType {
   sender: string;
   pool_id: Long;

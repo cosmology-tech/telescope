@@ -2,8 +2,8 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisState {
   params?: Params;
 }
@@ -11,8 +11,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisStateAmino {
   params?: ParamsAmino;
 }
@@ -20,8 +20,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.inflation.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState stores slice of genesis deployment instance */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
 }

@@ -11,8 +11,8 @@ import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswa
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
-
 /** =============================== Pool */
+
 export interface QueryPoolRequest {
   poolId: Long;
 }
@@ -20,8 +20,8 @@ export interface QueryPoolRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
   value: Uint8Array;
 }
-
 /** =============================== Pool */
+
 export interface QueryPoolRequestAmino {
   pool_id: string;
 }
@@ -29,8 +29,8 @@ export interface QueryPoolRequestAminoMsg {
   type: "osmosis/gamm/query-pool-request";
   value: QueryPoolRequestAmino;
 }
-
 /** =============================== Pool */
+
 export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
@@ -54,8 +54,8 @@ export interface QueryPoolResponseAminoMsg {
 export interface QueryPoolResponseSDKType {
   pool?: Pool1SDKType | Pool2SDKType | AnySDKType | undefined;
 }
-
 /** =============================== Pools */
+
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -64,8 +64,8 @@ export interface QueryPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
   value: Uint8Array;
 }
-
 /** =============================== Pools */
+
 export interface QueryPoolsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
@@ -74,15 +74,15 @@ export interface QueryPoolsRequestAminoMsg {
   type: "osmosis/gamm/query-pools-request";
   value: QueryPoolsRequestAmino;
 }
-
 /** =============================== Pools */
+
 export interface QueryPoolsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponse;
 }
 export interface QueryPoolsResponseProtoMsg {
@@ -94,8 +94,8 @@ export type QueryPoolsResponseEncoded = Omit<QueryPoolsResponse, "pools"> & {
 };
 export interface QueryPoolsResponseAmino {
   pools: AnyAmino[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponseAmino;
 }
 export interface QueryPoolsResponseAminoMsg {
@@ -106,22 +106,22 @@ export interface QueryPoolsResponseSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
-
 /** =============================== NumPools */
+
 export interface QueryNumPoolsRequest {}
 export interface QueryNumPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest";
   value: Uint8Array;
 }
-
 /** =============================== NumPools */
+
 export interface QueryNumPoolsRequestAmino {}
 export interface QueryNumPoolsRequestAminoMsg {
   type: "osmosis/gamm/query-num-pools-request";
   value: QueryNumPoolsRequestAmino;
 }
-
 /** =============================== NumPools */
+
 export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
   numPools: Long;
@@ -140,8 +140,8 @@ export interface QueryNumPoolsResponseAminoMsg {
 export interface QueryNumPoolsResponseSDKType {
   num_pools: Long;
 }
-
 /** =============================== PoolType */
+
 export interface QueryPoolTypeRequest {
   poolId: Long;
 }
@@ -149,8 +149,8 @@ export interface QueryPoolTypeRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
   value: Uint8Array;
 }
-
 /** =============================== PoolType */
+
 export interface QueryPoolTypeRequestAmino {
   pool_id: string;
 }
@@ -158,8 +158,8 @@ export interface QueryPoolTypeRequestAminoMsg {
   type: "osmosis/gamm/query-pool-type-request";
   value: QueryPoolTypeRequestAmino;
 }
-
 /** =============================== PoolType */
+
 export interface QueryPoolTypeRequestSDKType {
   pool_id: Long;
 }
@@ -180,8 +180,8 @@ export interface QueryPoolTypeResponseAminoMsg {
 export interface QueryPoolTypeResponseSDKType {
   pool_type: string;
 }
-
 /** =============================== CalcJoinPoolShares */
+
 export interface QueryCalcJoinPoolSharesRequest {
   poolId: Long;
   tokensIn: Coin[];
@@ -190,8 +190,8 @@ export interface QueryCalcJoinPoolSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest";
   value: Uint8Array;
 }
-
 /** =============================== CalcJoinPoolShares */
+
 export interface QueryCalcJoinPoolSharesRequestAmino {
   pool_id: string;
   tokens_in: CoinAmino[];
@@ -200,8 +200,8 @@ export interface QueryCalcJoinPoolSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-shares-request";
   value: QueryCalcJoinPoolSharesRequestAmino;
 }
-
 /** =============================== CalcJoinPoolShares */
+
 export interface QueryCalcJoinPoolSharesRequestSDKType {
   pool_id: Long;
   tokens_in: CoinSDKType[];
@@ -226,8 +226,8 @@ export interface QueryCalcJoinPoolSharesResponseSDKType {
   share_out_amount: string;
   tokens_out: CoinSDKType[];
 }
-
 /** =============================== CalcExitPoolCoinsFromShares */
+
 export interface QueryCalcExitPoolCoinsFromSharesRequest {
   poolId: Long;
   shareInAmount: string;
@@ -236,8 +236,8 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest";
   value: Uint8Array;
 }
-
 /** =============================== CalcExitPoolCoinsFromShares */
+
 export interface QueryCalcExitPoolCoinsFromSharesRequestAmino {
   pool_id: string;
   share_in_amount: string;
@@ -246,8 +246,8 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request";
   value: QueryCalcExitPoolCoinsFromSharesRequestAmino;
 }
-
 /** =============================== CalcExitPoolCoinsFromShares */
+
 export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
   pool_id: Long;
   share_in_amount: string;
@@ -269,8 +269,8 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseAminoMsg {
 export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
   tokens_out: CoinSDKType[];
 }
-
 /** =============================== PoolParams */
+
 export interface QueryPoolParamsRequest {
   poolId: Long;
 }
@@ -278,8 +278,8 @@ export interface QueryPoolParamsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
   value: Uint8Array;
 }
-
 /** =============================== PoolParams */
+
 export interface QueryPoolParamsRequestAmino {
   pool_id: string;
 }
@@ -287,8 +287,8 @@ export interface QueryPoolParamsRequestAminoMsg {
   type: "osmosis/gamm/query-pool-params-request";
   value: QueryPoolParamsRequestAmino;
 }
-
 /** =============================== PoolParams */
+
 export interface QueryPoolParamsRequestSDKType {
   pool_id: Long;
 }
@@ -309,8 +309,8 @@ export interface QueryPoolParamsResponseAminoMsg {
 export interface QueryPoolParamsResponseSDKType {
   params?: AnySDKType;
 }
-
 /** =============================== PoolLiquidity */
+
 export interface QueryTotalPoolLiquidityRequest {
   poolId: Long;
 }
@@ -318,8 +318,8 @@ export interface QueryTotalPoolLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
   value: Uint8Array;
 }
-
 /** =============================== PoolLiquidity */
+
 export interface QueryTotalPoolLiquidityRequestAmino {
   pool_id: string;
 }
@@ -327,8 +327,8 @@ export interface QueryTotalPoolLiquidityRequestAminoMsg {
   type: "osmosis/gamm/query-total-pool-liquidity-request";
   value: QueryTotalPoolLiquidityRequestAmino;
 }
-
 /** =============================== PoolLiquidity */
+
 export interface QueryTotalPoolLiquidityRequestSDKType {
   pool_id: Long;
 }
@@ -349,8 +349,8 @@ export interface QueryTotalPoolLiquidityResponseAminoMsg {
 export interface QueryTotalPoolLiquidityResponseSDKType {
   liquidity: CoinSDKType[];
 }
-
 /** =============================== TotalShares */
+
 export interface QueryTotalSharesRequest {
   poolId: Long;
 }
@@ -358,8 +358,8 @@ export interface QueryTotalSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
   value: Uint8Array;
 }
-
 /** =============================== TotalShares */
+
 export interface QueryTotalSharesRequestAmino {
   pool_id: string;
 }
@@ -367,8 +367,8 @@ export interface QueryTotalSharesRequestAminoMsg {
   type: "osmosis/gamm/query-total-shares-request";
   value: QueryTotalSharesRequestAmino;
 }
-
 /** =============================== TotalShares */
+
 export interface QueryTotalSharesRequestSDKType {
   pool_id: Long;
 }
@@ -389,8 +389,8 @@ export interface QueryTotalSharesResponseAminoMsg {
 export interface QueryTotalSharesResponseSDKType {
   total_shares?: CoinSDKType;
 }
-
 /** =============================== CalcJoinPoolNoSwapShares */
+
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
   poolId: Long;
   tokensIn: Coin[];
@@ -399,8 +399,8 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest";
   value: Uint8Array;
 }
-
 /** =============================== CalcJoinPoolNoSwapShares */
+
 export interface QueryCalcJoinPoolNoSwapSharesRequestAmino {
   pool_id: string;
   tokens_in: CoinAmino[];
@@ -409,8 +409,8 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request";
   value: QueryCalcJoinPoolNoSwapSharesRequestAmino;
 }
-
 /** =============================== CalcJoinPoolNoSwapShares */
+
 export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
   pool_id: Long;
   tokens_in: CoinSDKType[];
@@ -435,13 +435,13 @@ export interface QueryCalcJoinPoolNoSwapSharesResponseSDKType {
   tokens_out: CoinSDKType[];
   shares_out: string;
 }
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceRequest {
   poolId: Long;
   baseAssetDenom: string;
@@ -451,13 +451,13 @@ export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest";
   value: Uint8Array;
 }
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceRequestAmino {
   pool_id: string;
   base_asset_denom: string;
@@ -467,13 +467,13 @@ export interface QuerySpotPriceRequestAminoMsg {
   type: "osmosis/gamm/query-spot-price-request";
   value: QuerySpotPriceRequestAmino;
 }
-
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceRequestSDKType {
   pool_id: Long;
   base_asset_denom: string;
@@ -504,8 +504,8 @@ export interface QueryPoolsWithFilterRequestSDKType {
 }
 export interface QueryPoolsWithFilterResponse {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponse;
 }
 export interface QueryPoolsWithFilterResponseProtoMsg {
@@ -517,8 +517,8 @@ export type QueryPoolsWithFilterResponseEncoded = Omit<QueryPoolsWithFilterRespo
 };
 export interface QueryPoolsWithFilterResponseAmino {
   pools: AnyAmino[];
-
   /** pagination defines the pagination in the response. */
+
   pagination?: PageResponseAmino;
 }
 export interface QueryPoolsWithFilterResponseAminoMsg {
@@ -529,13 +529,13 @@ export interface QueryPoolsWithFilterResponseSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
@@ -544,13 +544,13 @@ export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
   value: Uint8Array;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
@@ -559,18 +559,18 @@ export interface QuerySpotPriceResponseAminoMsg {
   type: "osmosis/gamm/query-spot-price-response";
   value: QuerySpotPriceResponseAmino;
 }
-
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
 
 /** @deprecated */
+
 export interface QuerySpotPriceResponseSDKType {
   spot_price: string;
 }
-
 /** =============================== EstimateSwapExactAmountIn */
+
 export interface QuerySwapExactAmountInRequest {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
@@ -582,8 +582,8 @@ export interface QuerySwapExactAmountInRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
   value: Uint8Array;
 }
-
 /** =============================== EstimateSwapExactAmountIn */
+
 export interface QuerySwapExactAmountInRequestAmino {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
@@ -595,8 +595,8 @@ export interface QuerySwapExactAmountInRequestAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-in-request";
   value: QuerySwapExactAmountInRequestAmino;
 }
-
 /** =============================== EstimateSwapExactAmountIn */
+
 export interface QuerySwapExactAmountInRequestSDKType {
   sender: string;
   pool_id: Long;
@@ -620,8 +620,8 @@ export interface QuerySwapExactAmountInResponseAminoMsg {
 export interface QuerySwapExactAmountInResponseSDKType {
   token_out_amount: string;
 }
-
 /** =============================== EstimateSwapExactAmountOut */
+
 export interface QuerySwapExactAmountOutRequest {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
@@ -633,8 +633,8 @@ export interface QuerySwapExactAmountOutRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
   value: Uint8Array;
 }
-
 /** =============================== EstimateSwapExactAmountOut */
+
 export interface QuerySwapExactAmountOutRequestAmino {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
@@ -646,8 +646,8 @@ export interface QuerySwapExactAmountOutRequestAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-out-request";
   value: QuerySwapExactAmountOutRequestAmino;
 }
-
 /** =============================== EstimateSwapExactAmountOut */
+
 export interface QuerySwapExactAmountOutRequestSDKType {
   sender: string;
   pool_id: Long;

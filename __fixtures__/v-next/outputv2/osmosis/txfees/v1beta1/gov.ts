@@ -2,7 +2,6 @@ import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
-
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -10,6 +9,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * used to update the Pool to associate with the denom. If Pool ID is set to 0,
  * it will remove the denom from the whitelisted set.
  */
+
 export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
@@ -19,7 +19,6 @@ export interface UpdateFeeTokenProposalProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   value: Uint8Array;
 }
-
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -27,6 +26,7 @@ export interface UpdateFeeTokenProposalProtoMsg {
  * used to update the Pool to associate with the denom. If Pool ID is set to 0,
  * it will remove the denom from the whitelisted set.
  */
+
 export interface UpdateFeeTokenProposalAmino {
   title: string;
   description: string;
@@ -36,7 +36,6 @@ export interface UpdateFeeTokenProposalAminoMsg {
   type: "osmosis/txfees/update-fee-token-proposal";
   value: UpdateFeeTokenProposalAmino;
 }
-
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -44,6 +43,7 @@ export interface UpdateFeeTokenProposalAminoMsg {
  * used to update the Pool to associate with the denom. If Pool ID is set to 0,
  * it will remove the denom from the whitelisted set.
  */
+
 export interface UpdateFeeTokenProposalSDKType {
   title: string;
   description: string;

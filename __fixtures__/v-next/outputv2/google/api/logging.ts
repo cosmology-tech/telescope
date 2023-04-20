@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Logging configuration of the service.
  * 
@@ -33,6 +32,7 @@ export const protobufPackage = "google.api";
  *         logs:
  *         - activity_history
  */
+
 export interface Logging {
   /**
    * Logging configurations for sending logs to the producer project.
@@ -41,20 +41,19 @@ export interface Logging {
    * one producer destination.
    */
   producerDestinations: Logging_LoggingDestination[];
-
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
+
   consumerDestinations: Logging_LoggingDestination[];
 }
 export interface LoggingProtoMsg {
   typeUrl: "/google.api.Logging";
   value: Uint8Array;
 }
-
 /**
  * Logging configuration of the service.
  * 
@@ -86,6 +85,7 @@ export interface LoggingProtoMsg {
  *         logs:
  *         - activity_history
  */
+
 export interface LoggingAmino {
   /**
    * Logging configurations for sending logs to the producer project.
@@ -94,20 +94,19 @@ export interface LoggingAmino {
    * one producer destination.
    */
   producer_destinations: Logging_LoggingDestinationAmino[];
-
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
+
   consumer_destinations: Logging_LoggingDestinationAmino[];
 }
 export interface LoggingAminoMsg {
   type: "/google.api.Logging";
   value: LoggingAmino;
 }
-
 /**
  * Logging configuration of the service.
  * 
@@ -139,63 +138,64 @@ export interface LoggingAminoMsg {
  *         logs:
  *         - activity_history
  */
+
 export interface LoggingSDKType {
   producer_destinations: Logging_LoggingDestinationSDKType[];
   consumer_destinations: Logging_LoggingDestinationSDKType[];
 }
-
 /**
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
  */
+
 export interface Logging_LoggingDestination {
   /**
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitoredResource: string;
-
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
+
   logs: string[];
 }
 export interface Logging_LoggingDestinationProtoMsg {
   typeUrl: "/google.api.LoggingDestination";
   value: Uint8Array;
 }
-
 /**
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
  */
+
 export interface Logging_LoggingDestinationAmino {
   /**
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitored_resource: string;
-
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
+
   logs: string[];
 }
 export interface Logging_LoggingDestinationAminoMsg {
   type: "/google.api.LoggingDestination";
   value: Logging_LoggingDestinationAmino;
 }
-
 /**
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
  */
+
 export interface Logging_LoggingDestinationSDKType {
   monitored_resource: string;
   logs: string[];

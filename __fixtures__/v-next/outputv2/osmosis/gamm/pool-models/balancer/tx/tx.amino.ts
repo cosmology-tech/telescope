@@ -1,6 +1,5 @@
 //@ts-nocheck
-import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
-import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType } from "./tx";
+import { MsgCreateBalancerPool } from "./tx";
 export const AminoConverter = {
   "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool": {
     aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",

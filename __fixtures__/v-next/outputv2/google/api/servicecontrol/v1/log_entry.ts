@@ -1,7 +1,7 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
+import { Timestamp } from "../../../protobuf/timestamp";
+import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -26,170 +26,170 @@ export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /** An individual log entry. */
+
 export interface LogEntry {
   /**
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
    * `"book_log"`.
    */
   name: string;
-
   /**
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp?: Date;
 
+  timestamp?: Date;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeverity;
 
+  severity: LogSeverity;
   /**
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest?: HttpRequest;
 
+  httpRequest?: HttpRequest;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
    * relative to `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
 
+  trace: string;
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
    * the implementation will generate one based on operation_id.
    */
-  insertId: string;
 
+  insertId: string;
   /**
    * A set of user-defined (key, value) data that provides additional
    * information about the log entry.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The log entry payload, represented as a protocol buffer that is
    * expressed as a JSON object. The only accepted type currently is
    * [AuditLog][google.cloud.audit.AuditLog].
    */
+
   protoPayload?: Any;
-
   /** The log entry payload, represented as a Unicode string (UTF-8). */
-  textPayload?: string;
 
+  textPayload?: string;
   /**
    * The log entry payload, represented as a structure that
    * is expressed as a JSON object.
    */
-  structPayload?: Struct;
 
+  structPayload?: Struct;
   /**
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperation;
 
+  operation?: LogEntryOperation;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
+
   sourceLocation?: LogEntrySourceLocation;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry";
   value: Uint8Array;
 }
-
 /** An individual log entry. */
+
 export interface LogEntryAmino {
   /**
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
    * `"book_log"`.
    */
   name: string;
-
   /**
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp?: Date;
 
+  timestamp?: Date;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeverity;
 
+  severity: LogSeverity;
   /**
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  http_request?: HttpRequestAmino;
 
+  http_request?: HttpRequestAmino;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
    * relative to `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
 
+  trace: string;
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
    * the implementation will generate one based on operation_id.
    */
-  insert_id: string;
 
+  insert_id: string;
   /**
    * A set of user-defined (key, value) data that provides additional
    * information about the log entry.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The log entry payload, represented as a protocol buffer that is
    * expressed as a JSON object. The only accepted type currently is
    * [AuditLog][google.cloud.audit.AuditLog].
    */
+
   proto_payload?: AnyAmino;
-
   /** The log entry payload, represented as a Unicode string (UTF-8). */
-  text_payload?: string;
 
+  text_payload?: string;
   /**
    * The log entry payload, represented as a structure that
    * is expressed as a JSON object.
    */
-  struct_payload?: StructAmino;
 
+  struct_payload?: StructAmino;
   /**
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperationAmino;
 
+  operation?: LogEntryOperationAmino;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
+
   source_location?: LogEntrySourceLocationAmino;
 }
 export interface LogEntryAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntry";
   value: LogEntryAmino;
 }
-
 /** An individual log entry. */
+
 export interface LogEntrySDKType {
   name: string;
   timestamp?: Date;
@@ -206,93 +206,92 @@ export interface LogEntrySDKType {
   operation?: LogEntryOperationSDKType;
   source_location?: LogEntrySourceLocationSDKType;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperation {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the
    * same identifier are assumed to be part of the same operation.
    */
   id: string;
-
   /**
    * Optional. An arbitrary producer identifier. The combination of
    * `id` and `producer` must be globally unique.  Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
+
   producer: string;
-
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
 
+  first: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
+
   last: boolean;
 }
 export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation";
   value: Uint8Array;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperationAmino {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the
    * same identifier are assumed to be part of the same operation.
    */
   id: string;
-
   /**
    * Optional. An arbitrary producer identifier. The combination of
    * `id` and `producer` must be globally unique.  Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
+
   producer: string;
-
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
 
+  first: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
+
   last: boolean;
 }
 export interface LogEntryOperationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntryOperation";
   value: LogEntryOperationAmino;
 }
-
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+
 export interface LogEntryOperationSDKType {
   id: string;
   producer: string;
   first: boolean;
   last: boolean;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocation {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
   file: string;
-
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: Long;
 
+  line: Long;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -301,30 +300,30 @@ export interface LogEntrySourceLocation {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
+
   function: string;
 }
 export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
   value: Uint8Array;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocationAmino {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
   file: string;
-
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: string;
 
+  line: string;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -333,17 +332,18 @@ export interface LogEntrySourceLocationAmino {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
+
   function: string;
 }
 export interface LogEntrySourceLocationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
   value: LogEntrySourceLocationAmino;
 }
-
 /**
  * Additional information about the source code location that produced the log
  * entry.
  */
+
 export interface LogEntrySourceLocationSDKType {
   file: string;
   line: Long;

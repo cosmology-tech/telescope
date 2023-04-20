@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
-
 /** Unit stores cpu, memory and storage metrics */
+
 export interface ResourceValue {
   val: Uint8Array;
 }
@@ -10,8 +10,8 @@ export interface ResourceValueProtoMsg {
   typeUrl: "/akash.base.v1beta1.ResourceValue";
   value: Uint8Array;
 }
-
 /** Unit stores cpu, memory and storage metrics */
+
 export interface ResourceValueAmino {
   val: Uint8Array;
 }
@@ -19,8 +19,8 @@ export interface ResourceValueAminoMsg {
   type: "/akash.base.v1beta1.ResourceValue";
   value: ResourceValueAmino;
 }
-
 /** Unit stores cpu, memory and storage metrics */
+
 export interface ResourceValueSDKType {
   val: Uint8Array;
 }

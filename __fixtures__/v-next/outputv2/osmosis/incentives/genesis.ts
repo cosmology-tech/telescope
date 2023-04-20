@@ -4,67 +4,67 @@ import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
-
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized
  */
+
 export interface GenesisState {
   /** params are all the parameters of the module */
   params?: Params;
-
   /** gauges are all gauges that should exist at genesis */
-  gauges: Gauge[];
 
+  gauges: Gauge[];
   /**
    * lockable_durations are all lockup durations that gauges can be locked for
    * in order to recieve incentives
    */
-  lockableDurations: Duration[];
 
+  lockableDurations: Duration[];
   /**
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
+
   lastGaugeId: Long;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.incentives.GenesisState";
   value: Uint8Array;
 }
-
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized
  */
+
 export interface GenesisStateAmino {
   /** params are all the parameters of the module */
   params?: ParamsAmino;
-
   /** gauges are all gauges that should exist at genesis */
-  gauges: GaugeAmino[];
 
+  gauges: GaugeAmino[];
   /**
    * lockable_durations are all lockup durations that gauges can be locked for
    * in order to recieve incentives
    */
-  lockable_durations: DurationAmino[];
 
+  lockable_durations: DurationAmino[];
   /**
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
+
   last_gauge_id: string;
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/incentives/genesis-state";
   value: GenesisStateAmino;
 }
-
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized
  */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   gauges: GaugeSDKType[];

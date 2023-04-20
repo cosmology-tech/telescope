@@ -2,8 +2,8 @@ import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPay
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
-
 /** GenesisState defines the basic genesis state used by escrow module */
+
 export interface GenesisState {
   accounts: Account[];
   payments: FractionalPayment[];
@@ -12,8 +12,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the basic genesis state used by escrow module */
+
 export interface GenesisStateAmino {
   accounts: AccountAmino[];
   payments: FractionalPaymentAmino[];
@@ -22,8 +22,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.escrow.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the basic genesis state used by escrow module */
+
 export interface GenesisStateSDKType {
   accounts: AccountSDKType[];
   payments: FractionalPaymentSDKType[];

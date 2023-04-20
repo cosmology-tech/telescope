@@ -3,8 +3,8 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } f
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
-
 /** State is an enum which refers to state of bid */
+
 export enum Bid_State {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
@@ -74,8 +74,8 @@ export function bid_StateToJSON(object: Bid_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** MsgCreateBid defines an SDK message for creating Bid */
+
 export interface MsgCreateBid {
   order?: OrderID;
   provider: string;
@@ -86,8 +86,8 @@ export interface MsgCreateBidProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateBid";
   value: Uint8Array;
 }
-
 /** MsgCreateBid defines an SDK message for creating Bid */
+
 export interface MsgCreateBidAmino {
   order?: OrderIDAmino;
   provider: string;
@@ -98,33 +98,33 @@ export interface MsgCreateBidAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateBid";
   value: MsgCreateBidAmino;
 }
-
 /** MsgCreateBid defines an SDK message for creating Bid */
+
 export interface MsgCreateBidSDKType {
   order?: OrderIDSDKType;
   provider: string;
   price?: DecCoinSDKType;
   deposit?: CoinSDKType;
 }
-
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+
 export interface MsgCreateBidResponse {}
 export interface MsgCreateBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse";
   value: Uint8Array;
 }
-
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+
 export interface MsgCreateBidResponseAmino {}
 export interface MsgCreateBidResponseAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateBidResponse";
   value: MsgCreateBidResponseAmino;
 }
-
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
-export interface MsgCreateBidResponseSDKType {}
 
+export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
+
 export interface MsgCloseBid {
   bidId?: BidID;
 }
@@ -132,8 +132,8 @@ export interface MsgCloseBidProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseBid";
   value: Uint8Array;
 }
-
 /** MsgCloseBid defines an SDK message for closing bid */
+
 export interface MsgCloseBidAmino {
   bid_id?: BidIDAmino;
 }
@@ -141,33 +141,33 @@ export interface MsgCloseBidAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseBid";
   value: MsgCloseBidAmino;
 }
-
 /** MsgCloseBid defines an SDK message for closing bid */
+
 export interface MsgCloseBidSDKType {
   bid_id?: BidIDSDKType;
 }
-
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+
 export interface MsgCloseBidResponse {}
 export interface MsgCloseBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
   value: Uint8Array;
 }
-
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+
 export interface MsgCloseBidResponseAmino {}
 export interface MsgCloseBidResponseAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseBidResponse";
   value: MsgCloseBidResponseAmino;
 }
-
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
-export interface MsgCloseBidResponseSDKType {}
 
+export interface MsgCloseBidResponseSDKType {}
 /**
  * BidID stores owner and all other seq numbers
  * A successful bid becomes a Lease(ID).
  */
+
 export interface BidID {
   owner: string;
   dseq: Long;
@@ -179,11 +179,11 @@ export interface BidIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.BidID";
   value: Uint8Array;
 }
-
 /**
  * BidID stores owner and all other seq numbers
  * A successful bid becomes a Lease(ID).
  */
+
 export interface BidIDAmino {
   owner: string;
   dseq: string;
@@ -195,11 +195,11 @@ export interface BidIDAminoMsg {
   type: "/akash.market.v1beta2.BidID";
   value: BidIDAmino;
 }
-
 /**
  * BidID stores owner and all other seq numbers
  * A successful bid becomes a Lease(ID).
  */
+
 export interface BidIDSDKType {
   owner: string;
   dseq: Long;
@@ -207,8 +207,8 @@ export interface BidIDSDKType {
   oseq: number;
   provider: string;
 }
-
 /** Bid stores BidID, state of bid and price */
+
 export interface Bid {
   bidId?: BidID;
   state: Bid_State;
@@ -219,8 +219,8 @@ export interface BidProtoMsg {
   typeUrl: "/akash.market.v1beta2.Bid";
   value: Uint8Array;
 }
-
 /** Bid stores BidID, state of bid and price */
+
 export interface BidAmino {
   bid_id?: BidIDAmino;
   state: Bid_State;
@@ -231,16 +231,16 @@ export interface BidAminoMsg {
   type: "/akash.market.v1beta2.Bid";
   value: BidAmino;
 }
-
 /** Bid stores BidID, state of bid and price */
+
 export interface BidSDKType {
   bid_id?: BidIDSDKType;
   state: Bid_State;
   price?: DecCoinSDKType;
   created_at: Long;
 }
-
 /** BidFilters defines flags for bid list filter */
+
 export interface BidFilters {
   owner: string;
   dseq: Long;
@@ -253,8 +253,8 @@ export interface BidFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.BidFilters";
   value: Uint8Array;
 }
-
 /** BidFilters defines flags for bid list filter */
+
 export interface BidFiltersAmino {
   owner: string;
   dseq: string;
@@ -267,8 +267,8 @@ export interface BidFiltersAminoMsg {
   type: "/akash.market.v1beta2.BidFilters";
   value: BidFiltersAmino;
 }
-
 /** BidFilters defines flags for bid list filter */
+
 export interface BidFiltersSDKType {
   owner: string;
   dseq: Long;

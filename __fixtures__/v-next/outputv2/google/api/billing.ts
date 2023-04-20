@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Billing related configuration of the service.
  * 
@@ -36,6 +35,7 @@ export const protobufPackage = "google.api";
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
+
 export interface Billing {
   /**
    * Billing configurations for sending metrics to the consumer project.
@@ -49,7 +49,6 @@ export interface BillingProtoMsg {
   typeUrl: "/google.api.Billing";
   value: Uint8Array;
 }
-
 /**
  * Billing related configuration of the service.
  * 
@@ -84,6 +83,7 @@ export interface BillingProtoMsg {
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
+
 export interface BillingAmino {
   /**
    * Billing configurations for sending metrics to the consumer project.
@@ -97,7 +97,6 @@ export interface BillingAminoMsg {
   type: "/google.api.Billing";
   value: BillingAmino;
 }
-
 /**
  * Billing related configuration of the service.
  * 
@@ -132,58 +131,59 @@ export interface BillingAminoMsg {
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
+
 export interface BillingSDKType {
   consumer_destinations: Billing_BillingDestinationSDKType[];
 }
-
 /**
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
+
 export interface Billing_BillingDestination {
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitoredResource: string;
-
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
+
   metrics: string[];
 }
 export interface Billing_BillingDestinationProtoMsg {
   typeUrl: "/google.api.BillingDestination";
   value: Uint8Array;
 }
-
 /**
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
+
 export interface Billing_BillingDestinationAmino {
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitored_resource: string;
-
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
+
   metrics: string[];
 }
 export interface Billing_BillingDestinationAminoMsg {
   type: "/google.api.BillingDestination";
   value: Billing_BillingDestinationAmino;
 }
-
 /**
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
+
 export interface Billing_BillingDestinationSDKType {
   monitored_resource: string;
   metrics: string[];

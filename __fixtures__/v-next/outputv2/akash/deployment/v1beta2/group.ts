@@ -3,8 +3,8 @@ import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** State is an enum which refers to state of group */
+
 export enum Group_State {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
@@ -74,8 +74,8 @@ export function group_StateToJSON(object: Group_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Group stores group id, state and specifications of group */
+
 export interface Group {
   groupId?: GroupID;
   state: Group_State;
@@ -86,8 +86,8 @@ export interface GroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Group";
   value: Uint8Array;
 }
-
 /** Group stores group id, state and specifications of group */
+
 export interface GroupAmino {
   group_id?: GroupIDAmino;
   state: Group_State;
@@ -98,8 +98,8 @@ export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta2.Group";
   value: GroupAmino;
 }
-
 /** Group stores group id, state and specifications of group */
+
 export interface GroupSDKType {
   group_id?: GroupIDSDKType;
   state: Group_State;

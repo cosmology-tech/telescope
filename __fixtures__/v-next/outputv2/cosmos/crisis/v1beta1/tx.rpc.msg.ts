@@ -1,11 +1,10 @@
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
-
+import { MsgVerifyInvariant, MsgVerifyInvariantResponse } from "./tx";
 /** Msg defines the bank Msg service. */
+
 export interface Msg {
   /** VerifyInvariant defines a method to verify a particular invariance. */
   verifyInvariant(request: DeepPartial<MsgVerifyInvariant>, metadata?: grpc.Metadata): Promise<MsgVerifyInvariantResponse>;

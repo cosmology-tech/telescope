@@ -1,12 +1,10 @@
-import { Config, ConfigSDKType } from "./config";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
-
+import { QueryConfigRequest, QueryConfigResponse } from "./query";
 /** Query is the app module query service. */
+
 export interface Query {
   /** Config returns the current app config. */
   config(request?: DeepPartial<QueryConfigRequest>, metadata?: grpc.Metadata): Promise<QueryConfigResponse>;

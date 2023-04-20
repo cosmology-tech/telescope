@@ -1,11 +1,10 @@
 import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { Timestamp } from "../../protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { Long, isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.rpc.context";
-
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -25,6 +24,7 @@ export const protobufPackage = "google.rpc.context";
  * verify the system specification before relying on an attribute generated
  * a system.
  */
+
 export interface AttributeContext {
   /**
    * The origin of a network activity. In a multi hop network activity,
@@ -32,45 +32,44 @@ export interface AttributeContext {
    * the `source` and the `origin` must have the same content.
    */
   origin?: AttributeContext_Peer;
-
   /**
    * The source of a network activity, such as starting a TCP connection.
    * In a multi hop network activity, the source represents the sender of the
    * last hop.
    */
-  source?: AttributeContext_Peer;
 
+  source?: AttributeContext_Peer;
   /**
    * The destination of a network activity, such as accepting a TCP connection.
    * In a multi hop network activity, the destination represents the receiver of
    * the last hop.
    */
+
   destination?: AttributeContext_Peer;
-
   /** Represents a network request, such as an HTTP request. */
+
   request?: AttributeContext_Request;
-
   /** Represents a network response, such as an HTTP response. */
-  response?: AttributeContext_Response;
 
+  response?: AttributeContext_Response;
   /**
    * Represents a target resource that is involved with a network activity.
    * If multiple resources are involved with an activity, this must be the
    * primary one.
    */
+
   resource?: AttributeContext_Resource;
-
   /** Represents an API operation that is involved to a network activity. */
-  api?: AttributeContext_Api;
 
+  api?: AttributeContext_Api;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
+
   extensions: Any[];
 }
 export interface AttributeContextProtoMsg {
   typeUrl: "/google.rpc.context.AttributeContext";
   value: Uint8Array;
 }
-
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -90,6 +89,7 @@ export interface AttributeContextProtoMsg {
  * verify the system specification before relying on an attribute generated
  * a system.
  */
+
 export interface AttributeContextAmino {
   /**
    * The origin of a network activity. In a multi hop network activity,
@@ -97,45 +97,44 @@ export interface AttributeContextAmino {
    * the `source` and the `origin` must have the same content.
    */
   origin?: AttributeContext_PeerAmino;
-
   /**
    * The source of a network activity, such as starting a TCP connection.
    * In a multi hop network activity, the source represents the sender of the
    * last hop.
    */
-  source?: AttributeContext_PeerAmino;
 
+  source?: AttributeContext_PeerAmino;
   /**
    * The destination of a network activity, such as accepting a TCP connection.
    * In a multi hop network activity, the destination represents the receiver of
    * the last hop.
    */
+
   destination?: AttributeContext_PeerAmino;
-
   /** Represents a network request, such as an HTTP request. */
+
   request?: AttributeContext_RequestAmino;
-
   /** Represents a network response, such as an HTTP response. */
-  response?: AttributeContext_ResponseAmino;
 
+  response?: AttributeContext_ResponseAmino;
   /**
    * Represents a target resource that is involved with a network activity.
    * If multiple resources are involved with an activity, this must be the
    * primary one.
    */
+
   resource?: AttributeContext_ResourceAmino;
-
   /** Represents an API operation that is involved to a network activity. */
-  api?: AttributeContext_ApiAmino;
 
+  api?: AttributeContext_ApiAmino;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
+
   extensions: AnyAmino[];
 }
 export interface AttributeContextAminoMsg {
   type: "/google.rpc.context.AttributeContext";
   value: AttributeContextAmino;
 }
-
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
  * 
@@ -155,6 +154,7 @@ export interface AttributeContextAminoMsg {
  * verify the system specification before relying on an attribute generated
  * a system.
  */
+
 export interface AttributeContextSDKType {
   origin?: AttributeContext_PeerSDKType;
   source?: AttributeContext_PeerSDKType;
@@ -185,87 +185,87 @@ export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * This message defines attributes for a node that handles a network request.
  * The node can be either a service or an application that sends, forwards,
  * or receives the request. Service peers should fill in
  * `principal` and `labels` as appropriate.
  */
+
 export interface AttributeContext_Peer {
   /** The IP address of the peer. */
   ip: string;
-
   /** The network port of the peer. */
-  port: Long;
 
+  port: Long;
   /** The labels associated with the peer. */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The identity of this peer. Similar to `Request.auth.principal`, but
    * relative to the peer instead of the request. For example, the
    * idenity associated with a load balancer that forwared the request.
    */
-  principal: string;
 
+  principal: string;
   /**
    * The CLDR country/region code associated with the above IP address.
    * If the IP address is private, the `region_code` should reflect the
    * physical location where this peer is running.
    */
+
   regionCode: string;
 }
 export interface AttributeContext_PeerProtoMsg {
   typeUrl: "/google.rpc.context.Peer";
   value: Uint8Array;
 }
-
 /**
  * This message defines attributes for a node that handles a network request.
  * The node can be either a service or an application that sends, forwards,
  * or receives the request. Service peers should fill in
  * `principal` and `labels` as appropriate.
  */
+
 export interface AttributeContext_PeerAmino {
   /** The IP address of the peer. */
   ip: string;
-
   /** The network port of the peer. */
-  port: string;
 
+  port: string;
   /** The labels associated with the peer. */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The identity of this peer. Similar to `Request.auth.principal`, but
    * relative to the peer instead of the request. For example, the
    * idenity associated with a load balancer that forwared the request.
    */
-  principal: string;
 
+  principal: string;
   /**
    * The CLDR country/region code associated with the above IP address.
    * If the IP address is private, the `region_code` should reflect the
    * physical location where this peer is running.
    */
+
   region_code: string;
 }
 export interface AttributeContext_PeerAminoMsg {
   type: "/google.rpc.context.Peer";
   value: AttributeContext_PeerAmino;
 }
-
 /**
  * This message defines attributes for a node that handles a network request.
  * The node can be either a service or an application that sends, forwards,
  * or receives the request. Service peers should fill in
  * `principal` and `labels` as appropriate.
  */
+
 export interface AttributeContext_PeerSDKType {
   ip: string;
   port: Long;
@@ -275,12 +275,12 @@ export interface AttributeContext_PeerSDKType {
   principal: string;
   region_code: string;
 }
-
 /**
  * This message defines attributes associated with API operations, such as
  * a network API request. The terminology is based on the conventions used
  * by Google APIs, Istio, and OpenAPI.
  */
+
 export interface AttributeContext_Api {
   /**
    * The API service name. It is a logical identifier for a networked API,
@@ -288,36 +288,36 @@ export interface AttributeContext_Api {
    * API management system being used for handling the request.
    */
   service: string;
-
   /**
    * The API operation name. For gRPC requests, it is the fully qualified API
    * method name, such as "google.pubsub.v1.Publisher.Publish". For OpenAPI
    * requests, it is the `operationId`, such as "getPet".
    */
-  operation: string;
 
+  operation: string;
   /**
    * The API protocol used for sending the request, such as "http", "https",
    * "grpc", or "internal".
    */
-  protocol: string;
 
+  protocol: string;
   /**
    * The API version associated with the API operation above, such as "v1" or
    * "v1alpha1".
    */
+
   version: string;
 }
 export interface AttributeContext_ApiProtoMsg {
   typeUrl: "/google.rpc.context.Api";
   value: Uint8Array;
 }
-
 /**
  * This message defines attributes associated with API operations, such as
  * a network API request. The terminology is based on the conventions used
  * by Google APIs, Istio, and OpenAPI.
  */
+
 export interface AttributeContext_ApiAmino {
   /**
    * The API service name. It is a logical identifier for a networked API,
@@ -325,48 +325,48 @@ export interface AttributeContext_ApiAmino {
    * API management system being used for handling the request.
    */
   service: string;
-
   /**
    * The API operation name. For gRPC requests, it is the fully qualified API
    * method name, such as "google.pubsub.v1.Publisher.Publish". For OpenAPI
    * requests, it is the `operationId`, such as "getPet".
    */
-  operation: string;
 
+  operation: string;
   /**
    * The API protocol used for sending the request, such as "http", "https",
    * "grpc", or "internal".
    */
-  protocol: string;
 
+  protocol: string;
   /**
    * The API version associated with the API operation above, such as "v1" or
    * "v1alpha1".
    */
+
   version: string;
 }
 export interface AttributeContext_ApiAminoMsg {
   type: "/google.rpc.context.Api";
   value: AttributeContext_ApiAmino;
 }
-
 /**
  * This message defines attributes associated with API operations, such as
  * a network API request. The terminology is based on the conventions used
  * by Google APIs, Istio, and OpenAPI.
  */
+
 export interface AttributeContext_ApiSDKType {
   service: string;
   operation: string;
   protocol: string;
   version: string;
 }
-
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
  * correlate to concepts in other standards.
  */
+
 export interface AttributeContext_Auth {
   /**
    * The authenticated principal. Reflects the issuer (`iss`) and subject
@@ -376,7 +376,6 @@ export interface AttributeContext_Auth {
    * "https://accounts.google.com/{id}"
    */
   principal: string;
-
   /**
    * The intended audience(s) for this authentication information. Reflects
    * the audience (`aud`) claim within a JWT. The audience
@@ -393,16 +392,16 @@ export interface AttributeContext_Auth {
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
-  audiences: string[];
 
+  audiences: string[];
   /**
    * The authorized presenter of the credential. Reflects the optional
    * Authorized Presenter (`azp`) claim within a JWT or the
    * OAuth client id. For example, a Google Cloud Platform client id looks
    * as follows: "123456789012.apps.googleusercontent.com".
    */
-  presenter: string;
 
+  presenter: string;
   /**
    * Structured claims presented with the credential. JWTs include
    * `{key: value}` pairs for standard and private claims. The following
@@ -420,8 +419,8 @@ export interface AttributeContext_Auth {
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
-  claims?: Struct;
 
+  claims?: Struct;
   /**
    * A list of access level resource names that allow resources to be
    * accessed by authenticated requester. It is part of Secure GCP processing
@@ -431,18 +430,19 @@ export interface AttributeContext_Auth {
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
+
   accessLevels: string[];
 }
 export interface AttributeContext_AuthProtoMsg {
   typeUrl: "/google.rpc.context.Auth";
   value: Uint8Array;
 }
-
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
  * correlate to concepts in other standards.
  */
+
 export interface AttributeContext_AuthAmino {
   /**
    * The authenticated principal. Reflects the issuer (`iss`) and subject
@@ -452,7 +452,6 @@ export interface AttributeContext_AuthAmino {
    * "https://accounts.google.com/{id}"
    */
   principal: string;
-
   /**
    * The intended audience(s) for this authentication information. Reflects
    * the audience (`aud`) claim within a JWT. The audience
@@ -469,16 +468,16 @@ export interface AttributeContext_AuthAmino {
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
-  audiences: string[];
 
+  audiences: string[];
   /**
    * The authorized presenter of the credential. Reflects the optional
    * Authorized Presenter (`azp`) claim within a JWT or the
    * OAuth client id. For example, a Google Cloud Platform client id looks
    * as follows: "123456789012.apps.googleusercontent.com".
    */
-  presenter: string;
 
+  presenter: string;
   /**
    * Structured claims presented with the credential. JWTs include
    * `{key: value}` pairs for standard and private claims. The following
@@ -496,8 +495,8 @@ export interface AttributeContext_AuthAmino {
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
-  claims?: StructAmino;
 
+  claims?: StructAmino;
   /**
    * A list of access level resource names that allow resources to be
    * accessed by authenticated requester. It is part of Secure GCP processing
@@ -507,18 +506,19 @@ export interface AttributeContext_AuthAmino {
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
+
   access_levels: string[];
 }
 export interface AttributeContext_AuthAminoMsg {
   type: "/google.rpc.context.Auth";
   value: AttributeContext_AuthAmino;
 }
-
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
  * correlate to concepts in other standards.
  */
+
 export interface AttributeContext_AuthSDKType {
   principal: string;
   audiences: string[];
@@ -546,12 +546,12 @@ export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
  * the actual request to an equivalent HTTP request.
  */
+
 export interface AttributeContext_Request {
   /**
    * The unique ID for a request, which can be propagated to downstream
@@ -559,73 +559,73 @@ export interface AttributeContext_Request {
    * within a single day for a specific service.
    */
   id: string;
-
   /** The HTTP request method, such as `GET`, `POST`. */
-  method: string;
 
+  method: string;
   /**
    * The HTTP request headers. If multiple headers share the same key, they
    * must be merged according to the HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
+
   headers: {
     [key: string]: string;
   };
-
   /** The HTTP URL path. */
+
   path: string;
-
   /** The HTTP request `Host` header value. */
+
   host: string;
-
   /** The HTTP URL scheme, such as `http` and `https`. */
-  scheme: string;
 
+  scheme: string;
   /**
    * The HTTP URL query in the format of `name1=value1&name2=value2`, as it
    * appears in the first line of the HTTP request. No decoding is performed.
    */
-  query: string;
 
+  query: string;
   /**
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
+
   time?: Date;
-
   /** The HTTP request size in bytes. If unknown, it must be -1. */
-  size: Long;
 
+  size: Long;
   /**
    * The network protocol used with the request, such as "http/1.1",
    * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for details.
    */
-  protocol: string;
 
+  protocol: string;
   /**
    * A special parameter for request reason. It is used by security systems
    * to associate auditing information with a request.
    */
-  reason: string;
 
+  reason: string;
   /**
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
+
   auth?: AttributeContext_Auth;
 }
 export interface AttributeContext_RequestProtoMsg {
   typeUrl: "/google.rpc.context.Request";
   value: Uint8Array;
 }
-
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
  * the actual request to an equivalent HTTP request.
  */
+
 export interface AttributeContext_RequestAmino {
   /**
    * The unique ID for a request, which can be propagated to downstream
@@ -633,73 +633,73 @@ export interface AttributeContext_RequestAmino {
    * within a single day for a specific service.
    */
   id: string;
-
   /** The HTTP request method, such as `GET`, `POST`. */
-  method: string;
 
+  method: string;
   /**
    * The HTTP request headers. If multiple headers share the same key, they
    * must be merged according to the HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
+
   headers: {
     [key: string]: string;
   };
-
   /** The HTTP URL path. */
+
   path: string;
-
   /** The HTTP request `Host` header value. */
+
   host: string;
-
   /** The HTTP URL scheme, such as `http` and `https`. */
-  scheme: string;
 
+  scheme: string;
   /**
    * The HTTP URL query in the format of `name1=value1&name2=value2`, as it
    * appears in the first line of the HTTP request. No decoding is performed.
    */
-  query: string;
 
+  query: string;
   /**
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
+
   time?: Date;
-
   /** The HTTP request size in bytes. If unknown, it must be -1. */
-  size: string;
 
+  size: string;
   /**
    * The network protocol used with the request, such as "http/1.1",
    * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for details.
    */
-  protocol: string;
 
+  protocol: string;
   /**
    * A special parameter for request reason. It is used by security systems
    * to associate auditing information with a request.
    */
-  reason: string;
 
+  reason: string;
   /**
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
+
   auth?: AttributeContext_AuthAmino;
 }
 export interface AttributeContext_RequestAminoMsg {
   type: "/google.rpc.context.Request";
   value: AttributeContext_RequestAmino;
 }
-
 /**
  * This message defines attributes for an HTTP request. If the actual
  * request is not an HTTP request, the runtime system should try to map
  * the actual request to an equivalent HTTP request.
  */
+
 export interface AttributeContext_RequestSDKType {
   id: string;
   method: string;
@@ -736,89 +736,89 @@ export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
  */
+
 export interface AttributeContext_Response {
   /** The HTTP response status code, such as `200` and `404`. */
   code: Long;
-
   /** The HTTP response size in bytes. If unknown, it must be -1. */
-  size: Long;
 
+  size: Long;
   /**
    * The HTTP response headers. If multiple headers share the same key, they
    * must be merged according to HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
+
   headers: {
     [key: string]: string;
   };
-
   /**
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time?: Date;
 
+  time?: Date;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
+
   backendLatency?: Duration;
 }
 export interface AttributeContext_ResponseProtoMsg {
   typeUrl: "/google.rpc.context.Response";
   value: Uint8Array;
 }
-
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
  */
+
 export interface AttributeContext_ResponseAmino {
   /** The HTTP response status code, such as `200` and `404`. */
   code: string;
-
   /** The HTTP response size in bytes. If unknown, it must be -1. */
-  size: string;
 
+  size: string;
   /**
    * The HTTP response headers. If multiple headers share the same key, they
    * must be merged according to HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
+
   headers: {
     [key: string]: string;
   };
-
   /**
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time?: Date;
 
+  time?: Date;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
+
   backend_latency?: DurationAmino;
 }
 export interface AttributeContext_ResponseAminoMsg {
   type: "/google.rpc.context.Response";
   value: AttributeContext_ResponseAmino;
 }
-
 /**
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
  */
+
 export interface AttributeContext_ResponseSDKType {
   code: Long;
   size: Long;
@@ -868,12 +868,12 @@ export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * This message defines core attributes for a resource. A resource is an
  * addressable (named) entity provided by the destination service. For
  * example, a file stored on a network storage service.
  */
+
 export interface AttributeContext_Resource {
   /**
    * The name of the service that this resource belongs to, such as
@@ -881,7 +881,6 @@ export interface AttributeContext_Resource {
    * hostname that actually serves the request.
    */
   service: string;
-
   /**
    * The stable identifier (name) of a resource on the `service`. A resource
    * can be logically identified as "//{resource.service}/{resource.name}".
@@ -896,24 +895,24 @@ export interface AttributeContext_Resource {
    * 
    * See https://cloud.google.com/apis/design/resource_names for details.
    */
-  name: string;
 
+  name: string;
   /**
    * The type of the resource. The syntax is platform-specific because
    * different platforms define their resources differently.
    * 
    * For Google APIs, the type format must be "{service}/{kind}".
    */
-  type: string;
 
+  type: string;
   /**
    * The labels or tags on the resource, such as AWS resource tags and
    * Kubernetes resource labels.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The unique identifier of the resource. UID is unique in the time
    * and space for this resource within the scope of the service. It is
@@ -921,8 +920,8 @@ export interface AttributeContext_Resource {
    * and must not be changed. UID is used to uniquely identify resources
    * with resource name reuses. This should be a UUID4.
    */
-  uid: string;
 
+  uid: string;
   /**
    * Annotations is an unstructured key-value map stored with a resource that
    * may be set by external tools to store and retrieve arbitrary metadata.
@@ -930,39 +929,39 @@ export interface AttributeContext_Resource {
    * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
+
   annotations: {
     [key: string]: string;
   };
-
   /** Mutable. The display name set by clients. Must be <= 63 characters. */
-  displayName: string;
 
+  displayName: string;
   /**
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  createTime?: Date;
 
+  createTime?: Date;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  updateTime?: Date;
 
+  updateTime?: Date;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  deleteTime?: Date;
 
+  deleteTime?: Date;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client
    * and server agree on the ordering of a resource being written.
    */
-  etag: string;
 
+  etag: string;
   /**
    * Immutable. The location of the resource. The location encoding is
    * specific to the service provider, and new encoding may be introduced
@@ -973,18 +972,19 @@ export interface AttributeContext_Resource {
    * semantics of `location` is identical to the
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
+
   location: string;
 }
 export interface AttributeContext_ResourceProtoMsg {
   typeUrl: "/google.rpc.context.Resource";
   value: Uint8Array;
 }
-
 /**
  * This message defines core attributes for a resource. A resource is an
  * addressable (named) entity provided by the destination service. For
  * example, a file stored on a network storage service.
  */
+
 export interface AttributeContext_ResourceAmino {
   /**
    * The name of the service that this resource belongs to, such as
@@ -992,7 +992,6 @@ export interface AttributeContext_ResourceAmino {
    * hostname that actually serves the request.
    */
   service: string;
-
   /**
    * The stable identifier (name) of a resource on the `service`. A resource
    * can be logically identified as "//{resource.service}/{resource.name}".
@@ -1007,24 +1006,24 @@ export interface AttributeContext_ResourceAmino {
    * 
    * See https://cloud.google.com/apis/design/resource_names for details.
    */
-  name: string;
 
+  name: string;
   /**
    * The type of the resource. The syntax is platform-specific because
    * different platforms define their resources differently.
    * 
    * For Google APIs, the type format must be "{service}/{kind}".
    */
-  type: string;
 
+  type: string;
   /**
    * The labels or tags on the resource, such as AWS resource tags and
    * Kubernetes resource labels.
    */
+
   labels: {
     [key: string]: string;
   };
-
   /**
    * The unique identifier of the resource. UID is unique in the time
    * and space for this resource within the scope of the service. It is
@@ -1032,8 +1031,8 @@ export interface AttributeContext_ResourceAmino {
    * and must not be changed. UID is used to uniquely identify resources
    * with resource name reuses. This should be a UUID4.
    */
-  uid: string;
 
+  uid: string;
   /**
    * Annotations is an unstructured key-value map stored with a resource that
    * may be set by external tools to store and retrieve arbitrary metadata.
@@ -1041,39 +1040,39 @@ export interface AttributeContext_ResourceAmino {
    * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
+
   annotations: {
     [key: string]: string;
   };
-
   /** Mutable. The display name set by clients. Must be <= 63 characters. */
-  display_name: string;
 
+  display_name: string;
   /**
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  create_time?: Date;
 
+  create_time?: Date;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  update_time?: Date;
 
+  update_time?: Date;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  delete_time?: Date;
 
+  delete_time?: Date;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client
    * and server agree on the ordering of a resource being written.
    */
-  etag: string;
 
+  etag: string;
   /**
    * Immutable. The location of the resource. The location encoding is
    * specific to the service provider, and new encoding may be introduced
@@ -1084,18 +1083,19 @@ export interface AttributeContext_ResourceAmino {
    * semantics of `location` is identical to the
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
+
   location: string;
 }
 export interface AttributeContext_ResourceAminoMsg {
   type: "/google.rpc.context.Resource";
   value: AttributeContext_ResourceAmino;
 }
-
 /**
  * This message defines core attributes for a resource. A resource is an
  * addressable (named) entity provided by the destination service. For
  * example, a file stored on a network storage service.
  */
+
 export interface AttributeContext_ResourceSDKType {
   service: string;
   name: string;

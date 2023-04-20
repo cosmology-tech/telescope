@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 
@@ -203,6 +202,7 @@ export const protobufPackage = "google.protobuf";
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
+
 export interface FieldMask {
   /** The set of field mask paths. */
   paths: string[];
@@ -211,7 +211,6 @@ export interface FieldMaskProtoMsg {
   typeUrl: "/google.protobuf.FieldMask";
   value: Uint8Array;
 }
-
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 
@@ -413,6 +412,7 @@ export interface FieldMaskProtoMsg {
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
+
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
   paths: string[];
@@ -421,7 +421,6 @@ export interface FieldMaskAminoMsg {
   type: "/google.protobuf.FieldMask";
   value: FieldMaskAmino;
 }
-
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 
@@ -623,6 +622,7 @@ export interface FieldMaskAminoMsg {
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
+
 export interface FieldMaskSDKType {
   paths: string[];
 }

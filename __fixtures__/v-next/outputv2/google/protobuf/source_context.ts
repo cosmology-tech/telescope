@@ -1,11 +1,11 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
+
 export interface SourceContext {
   /**
    * The path-qualified name of the .proto file that contained the associated
@@ -17,11 +17,11 @@ export interface SourceContextProtoMsg {
   typeUrl: "/google.protobuf.SourceContext";
   value: Uint8Array;
 }
-
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
+
 export interface SourceContextAmino {
   /**
    * The path-qualified name of the .proto file that contained the associated
@@ -33,11 +33,11 @@ export interface SourceContextAminoMsg {
   type: "/google.protobuf.SourceContext";
   value: SourceContextAmino;
 }
-
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
+
 export interface SourceContextSDKType {
   file_name: string;
 }

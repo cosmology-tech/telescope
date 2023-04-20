@@ -1,12 +1,10 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
-
+import { QueryBalancesRequest, QueryBalancesResponse } from "./query";
 /** Query defines the gRPC querier service. */
+
 export interface Query {
   /** Retrieves the unvested, vested and locked tokens for a vesting account */
   balances(request: DeepPartial<QueryBalancesRequest>, metadata?: grpc.Metadata): Promise<QueryBalancesResponse>;

@@ -2,8 +2,8 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
-
 /** Params is the params for the x/market module */
+
 export interface Params {
   bidMinDeposit?: Coin;
   orderMaxBids: number;
@@ -12,8 +12,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/akash.market.v1beta2.Params";
   value: Uint8Array;
 }
-
 /** Params is the params for the x/market module */
+
 export interface ParamsAmino {
   bid_min_deposit?: CoinAmino;
   order_max_bids: number;
@@ -22,8 +22,8 @@ export interface ParamsAminoMsg {
   type: "/akash.market.v1beta2.Params";
   value: ParamsAmino;
 }
-
 /** Params is the params for the x/market module */
+
 export interface ParamsSDKType {
   bid_min_deposit?: CoinSDKType;
   order_max_bids: number;

@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * ### System parameter configuration
  * 
@@ -10,6 +9,7 @@ export const protobufPackage = "google.api";
  * and/or a URL query parameter. This configuration specifies which methods
  * change the names of the system parameters.
  */
+
 export interface SystemParameters {
   /**
    * Define system parameters.
@@ -48,7 +48,6 @@ export interface SystemParametersProtoMsg {
   typeUrl: "/google.api.SystemParameters";
   value: Uint8Array;
 }
-
 /**
  * ### System parameter configuration
  * 
@@ -57,6 +56,7 @@ export interface SystemParametersProtoMsg {
  * and/or a URL query parameter. This configuration specifies which methods
  * change the names of the system parameters.
  */
+
 export interface SystemParametersAmino {
   /**
    * Define system parameters.
@@ -95,7 +95,6 @@ export interface SystemParametersAminoMsg {
   type: "/google.api.SystemParameters";
   value: SystemParametersAmino;
 }
-
 /**
  * ### System parameter configuration
  * 
@@ -104,14 +103,15 @@ export interface SystemParametersAminoMsg {
  * and/or a URL query parameter. This configuration specifies which methods
  * change the names of the system parameters.
  */
+
 export interface SystemParametersSDKType {
   rules: SystemParameterRuleSDKType[];
 }
-
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
+
 export interface SystemParameterRule {
   /**
    * Selects the methods to which this rule applies. Use '*' to indicate all
@@ -120,7 +120,6 @@ export interface SystemParameterRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -128,17 +127,18 @@ export interface SystemParameterRule {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
+
   parameters: SystemParameter[];
 }
 export interface SystemParameterRuleProtoMsg {
   typeUrl: "/google.api.SystemParameterRule";
   value: Uint8Array;
 }
-
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
+
 export interface SystemParameterRuleAmino {
   /**
    * Selects the methods to which this rule applies. Use '*' to indicate all
@@ -147,7 +147,6 @@ export interface SystemParameterRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -155,79 +154,80 @@ export interface SystemParameterRuleAmino {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
+
   parameters: SystemParameterAmino[];
 }
 export interface SystemParameterRuleAminoMsg {
   type: "/google.api.SystemParameterRule";
   value: SystemParameterRuleAmino;
 }
-
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
+
 export interface SystemParameterRuleSDKType {
   selector: string;
   parameters: SystemParameterSDKType[];
 }
-
 /**
  * Define a parameter's name and location. The parameter may be passed as either
  * an HTTP header or a URL query parameter, and if both are passed the behavior
  * is implementation-dependent.
  */
+
 export interface SystemParameter {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
   name: string;
-
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  httpHeader: string;
 
+  httpHeader: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
+
   urlQueryParameter: string;
 }
 export interface SystemParameterProtoMsg {
   typeUrl: "/google.api.SystemParameter";
   value: Uint8Array;
 }
-
 /**
  * Define a parameter's name and location. The parameter may be passed as either
  * an HTTP header or a URL query parameter, and if both are passed the behavior
  * is implementation-dependent.
  */
+
 export interface SystemParameterAmino {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
   name: string;
-
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  http_header: string;
 
+  http_header: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
+
   url_query_parameter: string;
 }
 export interface SystemParameterAminoMsg {
   type: "/google.api.SystemParameter";
   value: SystemParameterAmino;
 }
-
 /**
  * Define a parameter's name and location. The parameter may be passed as either
  * an HTTP header or a URL query parameter, and if both are passed the behavior
  * is implementation-dependent.
  */
+
 export interface SystemParameterSDKType {
   name: string;
   http_header: string;

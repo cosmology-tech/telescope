@@ -2,8 +2,8 @@ import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
-
 /** GenesisState defines the txfees module's genesis state. */
+
 export interface GenesisState {
   basedenom: string;
   feetokens: FeeToken[];
@@ -12,8 +12,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the txfees module's genesis state. */
+
 export interface GenesisStateAmino {
   basedenom: string;
   feetokens: FeeTokenAmino[];
@@ -22,8 +22,8 @@ export interface GenesisStateAminoMsg {
   type: "osmosis/txfees/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the txfees module's genesis state. */
+
 export interface GenesisStateSDKType {
   basedenom: string;
   feetokens: FeeTokenSDKType[];

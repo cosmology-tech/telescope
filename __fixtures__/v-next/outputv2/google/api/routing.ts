@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -363,6 +362,7 @@ export const protobufPackage = "google.api";
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
+
 export interface RoutingRule {
   /**
    * A collection of Routing Parameter specifications.
@@ -378,7 +378,6 @@ export interface RoutingRuleProtoMsg {
   typeUrl: "/google.api.RoutingRule";
   value: Uint8Array;
 }
-
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -740,6 +739,7 @@ export interface RoutingRuleProtoMsg {
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
+
 export interface RoutingRuleAmino {
   /**
    * A collection of Routing Parameter specifications.
@@ -755,7 +755,6 @@ export interface RoutingRuleAminoMsg {
   type: "/google.api.RoutingRule";
   value: RoutingRuleAmino;
 }
-
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -1117,15 +1116,15 @@ export interface RoutingRuleAminoMsg {
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
+
 export interface RoutingRuleSDKType {
   routing_parameters: RoutingParameterSDKType[];
 }
-
 /** A projection from an input message to the GRPC or REST header. */
+
 export interface RoutingParameter {
   /** A request field to extract the header key-value pair from. */
   field: string;
-
   /**
    * A pattern matching the key-value field. Optional.
    * If not specified, the whole field specified in the `field` field will be
@@ -1182,18 +1181,18 @@ export interface RoutingParameter {
    * 
    * See Example 1 for more details.
    */
+
   pathTemplate: string;
 }
 export interface RoutingParameterProtoMsg {
   typeUrl: "/google.api.RoutingParameter";
   value: Uint8Array;
 }
-
 /** A projection from an input message to the GRPC or REST header. */
+
 export interface RoutingParameterAmino {
   /** A request field to extract the header key-value pair from. */
   field: string;
-
   /**
    * A pattern matching the key-value field. Optional.
    * If not specified, the whole field specified in the `field` field will be
@@ -1250,14 +1249,15 @@ export interface RoutingParameterAmino {
    * 
    * See Example 1 for more details.
    */
+
   path_template: string;
 }
 export interface RoutingParameterAminoMsg {
   type: "/google.api.RoutingParameter";
   value: RoutingParameterAmino;
 }
-
 /** A projection from an input message to the GRPC or REST header. */
+
 export interface RoutingParameterSDKType {
   field: string;
   path_template: string;

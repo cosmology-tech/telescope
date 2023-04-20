@@ -1,28 +1,25 @@
-import { OrderID, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
-import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
+import { MsgCreateBid, MsgCreateBidResponse, MsgCloseBid, MsgCloseBidResponse } from "./bid";
+import { MsgWithdrawLease, MsgWithdrawLeaseResponse, MsgCreateLease, MsgCreateLeaseResponse, MsgCloseLease, MsgCloseLeaseResponse } from "./lease";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-
 /** Msg defines the market Msg service */
+
 export interface Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */
   createBid(request: DeepPartial<MsgCreateBid>, metadata?: grpc.Metadata): Promise<MsgCreateBidResponse>;
-
   /** CloseBid defines a method to close a bid given proper inputs. */
+
   closeBid(request: DeepPartial<MsgCloseBid>, metadata?: grpc.Metadata): Promise<MsgCloseBidResponse>;
-
   /** WithdrawLease withdraws accrued funds from the lease payment */
+
   withdrawLease(request: DeepPartial<MsgWithdrawLease>, metadata?: grpc.Metadata): Promise<MsgWithdrawLeaseResponse>;
-
   /** CreateLease creates a new lease */
-  createLease(request: DeepPartial<MsgCreateLease>, metadata?: grpc.Metadata): Promise<MsgCreateLeaseResponse>;
 
+  createLease(request: DeepPartial<MsgCreateLease>, metadata?: grpc.Metadata): Promise<MsgCreateLeaseResponse>;
   /** CloseLease defines a method to close an order given proper inputs. */
+
   closeLease(request: DeepPartial<MsgCloseLease>, metadata?: grpc.Metadata): Promise<MsgCloseLeaseResponse>;
 }
 export class MsgClientImpl implements Msg {

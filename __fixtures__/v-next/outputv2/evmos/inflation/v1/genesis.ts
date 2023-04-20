@@ -2,52 +2,52 @@ import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalcula
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";
-
 /** GenesisState defines the inflation module's genesis state. */
+
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
-
   /** amount of past periods, based on the epochs per period param */
+
   period: Long;
-
   /** inflation epoch identifier */
+
   epochIdentifier: string;
-
   /** number of epochs after which inflation is recalculated */
-  epochsPerPeriod: Long;
 
+  epochsPerPeriod: Long;
   /** number of epochs that have passed while inflation is disabled */
+
   skippedEpochs: Long;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.inflation.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the inflation module's genesis state. */
+
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
-
   /** amount of past periods, based on the epochs per period param */
+
   period: string;
-
   /** inflation epoch identifier */
+
   epoch_identifier: string;
-
   /** number of epochs after which inflation is recalculated */
-  epochs_per_period: string;
 
+  epochs_per_period: string;
   /** number of epochs that have passed while inflation is disabled */
+
   skipped_epochs: string;
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.inflation.v1.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the inflation module's genesis state. */
+
 export interface GenesisStateSDKType {
   params?: ParamsSDKType;
   period: Long;
@@ -55,46 +55,46 @@ export interface GenesisStateSDKType {
   epochs_per_period: Long;
   skipped_epochs: Long;
 }
-
 /** Params holds parameters for the inflation module. */
+
 export interface Params {
   /** type of coin to mint */
   mintDenom: string;
-
   /** variables to calculate exponential inflation */
+
   exponentialCalculation?: ExponentialCalculation;
-
   /** inflation distribution of the minted denom */
-  inflationDistribution?: InflationDistribution;
 
+  inflationDistribution?: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
+
   enableInflation: boolean;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.inflation.v1.Params";
   value: Uint8Array;
 }
-
 /** Params holds parameters for the inflation module. */
+
 export interface ParamsAmino {
   /** type of coin to mint */
   mint_denom: string;
-
   /** variables to calculate exponential inflation */
+
   exponential_calculation?: ExponentialCalculationAmino;
-
   /** inflation distribution of the minted denom */
-  inflation_distribution?: InflationDistributionAmino;
 
+  inflation_distribution?: InflationDistributionAmino;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
+
   enable_inflation: boolean;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.inflation.v1.Params";
   value: ParamsAmino;
 }
-
 /** Params holds parameters for the inflation module. */
+
 export interface ParamsSDKType {
   mint_denom: string;
   exponential_calculation?: ExponentialCalculationSDKType;

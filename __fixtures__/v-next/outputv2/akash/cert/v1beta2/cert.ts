@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
-
 /** State is an enum which refers to state of deployment */
+
 export enum Certificate_State {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
@@ -52,8 +52,8 @@ export function certificate_StateToJSON(object: Certificate_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** CertificateID stores owner and sequence number */
+
 export interface CertificateID {
   owner: string;
   serial: string;
@@ -62,8 +62,8 @@ export interface CertificateIDProtoMsg {
   typeUrl: "/akash.cert.v1beta2.CertificateID";
   value: Uint8Array;
 }
-
 /** CertificateID stores owner and sequence number */
+
 export interface CertificateIDAmino {
   owner: string;
   serial: string;
@@ -72,14 +72,14 @@ export interface CertificateIDAminoMsg {
   type: "/akash.cert.v1beta2.CertificateID";
   value: CertificateIDAmino;
 }
-
 /** CertificateID stores owner and sequence number */
+
 export interface CertificateIDSDKType {
   owner: string;
   serial: string;
 }
-
 /** Certificate stores state, certificate and it's public key */
+
 export interface Certificate {
   state: Certificate_State;
   cert: Uint8Array;
@@ -89,8 +89,8 @@ export interface CertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.Certificate";
   value: Uint8Array;
 }
-
 /** Certificate stores state, certificate and it's public key */
+
 export interface CertificateAmino {
   state: Certificate_State;
   cert: Uint8Array;
@@ -100,15 +100,15 @@ export interface CertificateAminoMsg {
   type: "/akash.cert.v1beta2.Certificate";
   value: CertificateAmino;
 }
-
 /** Certificate stores state, certificate and it's public key */
+
 export interface CertificateSDKType {
   state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
-
 /** CertificateFilter defines filters used to filter certificates */
+
 export interface CertificateFilter {
   owner: string;
   serial: string;
@@ -118,8 +118,8 @@ export interface CertificateFilterProtoMsg {
   typeUrl: "/akash.cert.v1beta2.CertificateFilter";
   value: Uint8Array;
 }
-
 /** CertificateFilter defines filters used to filter certificates */
+
 export interface CertificateFilterAmino {
   owner: string;
   serial: string;
@@ -129,15 +129,15 @@ export interface CertificateFilterAminoMsg {
   type: "/akash.cert.v1beta2.CertificateFilter";
   value: CertificateFilterAmino;
 }
-
 /** CertificateFilter defines filters used to filter certificates */
+
 export interface CertificateFilterSDKType {
   owner: string;
   serial: string;
   state: string;
 }
-
 /** MsgCreateCertificate defines an SDK message for creating certificate */
+
 export interface MsgCreateCertificate {
   owner: string;
   cert: Uint8Array;
@@ -147,8 +147,8 @@ export interface MsgCreateCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate";
   value: Uint8Array;
 }
-
 /** MsgCreateCertificate defines an SDK message for creating certificate */
+
 export interface MsgCreateCertificateAmino {
   owner: string;
   cert: Uint8Array;
@@ -158,32 +158,32 @@ export interface MsgCreateCertificateAminoMsg {
   type: "/akash.cert.v1beta2.MsgCreateCertificate";
   value: MsgCreateCertificateAmino;
 }
-
 /** MsgCreateCertificate defines an SDK message for creating certificate */
+
 export interface MsgCreateCertificateSDKType {
   owner: string;
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
-
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
+
 export interface MsgCreateCertificateResponse {}
 export interface MsgCreateCertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificateResponse";
   value: Uint8Array;
 }
-
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
+
 export interface MsgCreateCertificateResponseAmino {}
 export interface MsgCreateCertificateResponseAminoMsg {
   type: "/akash.cert.v1beta2.MsgCreateCertificateResponse";
   value: MsgCreateCertificateResponseAmino;
 }
-
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
-export interface MsgCreateCertificateResponseSDKType {}
 
+export interface MsgCreateCertificateResponseSDKType {}
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
+
 export interface MsgRevokeCertificate {
   id?: CertificateID;
 }
@@ -191,8 +191,8 @@ export interface MsgRevokeCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate";
   value: Uint8Array;
 }
-
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
+
 export interface MsgRevokeCertificateAmino {
   id?: CertificateIDAmino;
 }
@@ -200,27 +200,27 @@ export interface MsgRevokeCertificateAminoMsg {
   type: "/akash.cert.v1beta2.MsgRevokeCertificate";
   value: MsgRevokeCertificateAmino;
 }
-
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
+
 export interface MsgRevokeCertificateSDKType {
   id?: CertificateIDSDKType;
 }
-
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+
 export interface MsgRevokeCertificateResponse {}
 export interface MsgRevokeCertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
   value: Uint8Array;
 }
-
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+
 export interface MsgRevokeCertificateResponseAmino {}
 export interface MsgRevokeCertificateResponseAminoMsg {
   type: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
   value: MsgRevokeCertificateResponseAmino;
 }
-
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+
 export interface MsgRevokeCertificateResponseSDKType {}
 
 function createBaseCertificateID(): CertificateID {

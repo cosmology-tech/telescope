@@ -2,139 +2,139 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
-
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
+
 export interface MsgConvertCoin {
   /**
    * Cosmos coin which denomination is registered in a token pair. The coin
    * amount defines the amount of coins to convert.
    */
   coin?: Coin;
-
   /** recipient hex address to receive ERC20 token */
-  receiver: string;
 
+  receiver: string;
   /** cosmos bech32 address from the owner of the given Cosmos coins */
+
   sender: string;
 }
 export interface MsgConvertCoinProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
   value: Uint8Array;
 }
-
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
+
 export interface MsgConvertCoinAmino {
   /**
    * Cosmos coin which denomination is registered in a token pair. The coin
    * amount defines the amount of coins to convert.
    */
   coin?: CoinAmino;
-
   /** recipient hex address to receive ERC20 token */
-  receiver: string;
 
+  receiver: string;
   /** cosmos bech32 address from the owner of the given Cosmos coins */
+
   sender: string;
 }
 export interface MsgConvertCoinAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";
   value: MsgConvertCoinAmino;
 }
-
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
+
 export interface MsgConvertCoinSDKType {
   coin?: CoinSDKType;
   receiver: string;
   sender: string;
 }
-
 /** MsgConvertCoinResponse returns no fields */
+
 export interface MsgConvertCoinResponse {}
 export interface MsgConvertCoinResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
   value: Uint8Array;
 }
-
 /** MsgConvertCoinResponse returns no fields */
+
 export interface MsgConvertCoinResponseAmino {}
 export interface MsgConvertCoinResponseAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoinResponse";
   value: MsgConvertCoinResponseAmino;
 }
-
 /** MsgConvertCoinResponse returns no fields */
-export interface MsgConvertCoinResponseSDKType {}
 
+export interface MsgConvertCoinResponseSDKType {}
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
  */
+
 export interface MsgConvertERC20 {
   /** ERC20 token contract address registered in a token pair */
   contractAddress: string;
-
   /** amount of ERC20 tokens to convert */
+
   amount: string;
-
   /** bech32 address to receive native Cosmos coins */
-  receiver: string;
 
+  receiver: string;
   /** sender hex address from the owner of the given ERC20 tokens */
+
   sender: string;
 }
 export interface MsgConvertERC20ProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
   value: Uint8Array;
 }
-
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
  */
+
 export interface MsgConvertERC20Amino {
   /** ERC20 token contract address registered in a token pair */
   contract_address: string;
-
   /** amount of ERC20 tokens to convert */
+
   amount: string;
-
   /** bech32 address to receive native Cosmos coins */
-  receiver: string;
 
+  receiver: string;
   /** sender hex address from the owner of the given ERC20 tokens */
+
   sender: string;
 }
 export interface MsgConvertERC20AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertERC20";
   value: MsgConvertERC20Amino;
 }
-
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
  */
+
 export interface MsgConvertERC20SDKType {
   contract_address: string;
   amount: string;
   receiver: string;
   sender: string;
 }
-
 /** MsgConvertERC20Response returns no fields */
+
 export interface MsgConvertERC20Response {}
 export interface MsgConvertERC20ResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
   value: Uint8Array;
 }
-
 /** MsgConvertERC20Response returns no fields */
+
 export interface MsgConvertERC20ResponseAmino {}
 export interface MsgConvertERC20ResponseAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertERC20Response";
   value: MsgConvertERC20ResponseAmino;
 }
-
 /** MsgConvertERC20Response returns no fields */
+
 export interface MsgConvertERC20ResponseSDKType {}
 
 function createBaseMsgConvertCoin(): MsgConvertCoin {

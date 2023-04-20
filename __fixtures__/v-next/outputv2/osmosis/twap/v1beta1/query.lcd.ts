@@ -1,7 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Params, ParamsSDKType } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
-import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
+import { ParamsRequest, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -15,14 +13,16 @@ export class LCDQueryClient {
     this.arithmeticTwap = this.arithmeticTwap.bind(this);
     this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
-
   /* Params */
+
+
   async params(_params: ParamsRequest = {}): Promise<ParamsResponseSDKType> {
     const endpoint = `osmosis/twap/v1beta1/Params`;
     return await this.req.get<ParamsResponseSDKType>(endpoint);
   }
-
   /* ArithmeticTwap */
+
+
   async arithmeticTwap(params: ArithmeticTwapRequest): Promise<ArithmeticTwapResponseSDKType> {
     const options: any = {
       params: {}
@@ -51,8 +51,9 @@ export class LCDQueryClient {
     const endpoint = `osmosis/twap/v1beta1/ArithmeticTwap`;
     return await this.req.get<ArithmeticTwapResponseSDKType>(endpoint, options);
   }
-
   /* ArithmeticTwapToNow */
+
+
   async arithmeticTwapToNow(params: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponseSDKType> {
     const options: any = {
       params: {}

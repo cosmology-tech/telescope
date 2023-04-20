@@ -3,8 +3,8 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
-
 /** CertificateResponse contains a single X509 certificate and its serial number */
+
 export interface CertificateResponse {
   certificate?: Certificate;
   serial: string;
@@ -13,8 +13,8 @@ export interface CertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.CertificateResponse";
   value: Uint8Array;
 }
-
 /** CertificateResponse contains a single X509 certificate and its serial number */
+
 export interface CertificateResponseAmino {
   certificate?: CertificateAmino;
   serial: string;
@@ -23,14 +23,14 @@ export interface CertificateResponseAminoMsg {
   type: "/akash.cert.v1beta2.CertificateResponse";
   value: CertificateResponseAmino;
 }
-
 /** CertificateResponse contains a single X509 certificate and its serial number */
+
 export interface CertificateResponseSDKType {
   certificate?: CertificateSDKType;
   serial: string;
 }
-
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+
 export interface QueryCertificatesRequest {
   filter?: CertificateFilter;
   pagination?: PageRequest;
@@ -39,8 +39,8 @@ export interface QueryCertificatesRequestProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
   value: Uint8Array;
 }
-
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+
 export interface QueryCertificatesRequestAmino {
   filter?: CertificateFilterAmino;
   pagination?: PageRequestAmino;
@@ -49,14 +49,14 @@ export interface QueryCertificatesRequestAminoMsg {
   type: "/akash.cert.v1beta2.QueryCertificatesRequest";
   value: QueryCertificatesRequestAmino;
 }
-
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+
 export interface QueryCertificatesRequestSDKType {
   filter?: CertificateFilterSDKType;
   pagination?: PageRequestSDKType;
 }
-
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
@@ -65,8 +65,8 @@ export interface QueryCertificatesResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
   value: Uint8Array;
 }
-
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+
 export interface QueryCertificatesResponseAmino {
   certificates: CertificateResponseAmino[];
   pagination?: PageResponseAmino;
@@ -75,8 +75,8 @@ export interface QueryCertificatesResponseAminoMsg {
   type: "/akash.cert.v1beta2.QueryCertificatesResponse";
   value: QueryCertificatesResponseAmino;
 }
-
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
   pagination?: PageResponseSDKType;

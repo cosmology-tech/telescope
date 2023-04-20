@@ -2,7 +2,6 @@ import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from ".
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -13,6 +12,7 @@ export const protobufPackage = "google.api";
  *       - key: /customer_id
  *         description: Identifier of a library customer
  */
+
 export interface LogDescriptor {
   /**
    * The name of the log. It must be less than 512 characters long and can
@@ -21,31 +21,30 @@ export interface LogDescriptor {
    * slash, underscore, hyphen, period [/_-.].
    */
   name: string;
-
   /**
    * The set of labels that are available to describe a specific log entry.
    * Runtime requests that contain labels not specified here are
    * considered invalid.
    */
-  labels: LabelDescriptor[];
 
+  labels: LabelDescriptor[];
   /**
    * A human-readable description of this log. This information appears in
    * the documentation and can contain details.
    */
-  description: string;
 
+  description: string;
   /**
    * The human-readable name for this log. This information appears on
    * the user interface and should be concise.
    */
+
   displayName: string;
 }
 export interface LogDescriptorProtoMsg {
   typeUrl: "/google.api.LogDescriptor";
   value: Uint8Array;
 }
-
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -56,6 +55,7 @@ export interface LogDescriptorProtoMsg {
  *       - key: /customer_id
  *         description: Identifier of a library customer
  */
+
 export interface LogDescriptorAmino {
   /**
    * The name of the log. It must be less than 512 characters long and can
@@ -64,31 +64,30 @@ export interface LogDescriptorAmino {
    * slash, underscore, hyphen, period [/_-.].
    */
   name: string;
-
   /**
    * The set of labels that are available to describe a specific log entry.
    * Runtime requests that contain labels not specified here are
    * considered invalid.
    */
-  labels: LabelDescriptorAmino[];
 
+  labels: LabelDescriptorAmino[];
   /**
    * A human-readable description of this log. This information appears in
    * the documentation and can contain details.
    */
-  description: string;
 
+  description: string;
   /**
    * The human-readable name for this log. This information appears on
    * the user interface and should be concise.
    */
+
   display_name: string;
 }
 export interface LogDescriptorAminoMsg {
   type: "/google.api.LogDescriptor";
   value: LogDescriptorAmino;
 }
-
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -99,6 +98,7 @@ export interface LogDescriptorAminoMsg {
  *       - key: /customer_id
  *         description: Identifier of a library customer
  */
+
 export interface LogDescriptorSDKType {
   name: string;
   labels: LabelDescriptorSDKType[];

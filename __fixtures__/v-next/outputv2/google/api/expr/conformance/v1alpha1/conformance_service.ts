@@ -5,8 +5,8 @@ import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
 import { Long, isSet, DeepPartial, isObject } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
-
 /** Severities of issues. */
+
 export enum IssueDetails_Severity {
   /** SEVERITY_UNSPECIFIED - An unspecified severity. */
   SEVERITY_UNSPECIFIED = 0,
@@ -69,180 +69,180 @@ export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): stri
       return "UNRECOGNIZED";
   }
 }
-
 /** Request message for the Parse method. */
+
 export interface ParseRequest {
   /** Required. Source text in CEL syntax. */
   celSource: string;
-
   /** Tag for version of CEL syntax, for future use. */
+
   syntaxVersion: string;
-
   /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
-  sourceLocation: string;
 
+  sourceLocation: string;
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
+
   disableMacros: boolean;
 }
 export interface ParseRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: Uint8Array;
 }
-
 /** Request message for the Parse method. */
+
 export interface ParseRequestAmino {
   /** Required. Source text in CEL syntax. */
   cel_source: string;
-
   /** Tag for version of CEL syntax, for future use. */
+
   syntax_version: string;
-
   /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
-  source_location: string;
 
+  source_location: string;
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
+
   disable_macros: boolean;
 }
 export interface ParseRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: ParseRequestAmino;
 }
-
 /** Request message for the Parse method. */
+
 export interface ParseRequestSDKType {
   cel_source: string;
   syntax_version: string;
   source_location: string;
   disable_macros: boolean;
 }
-
 /** Response message for the Parse method. */
+
 export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
   parsedExpr?: ParsedExpr;
-
   /** Any number of issues with [StatusDetails][] as the details. */
+
   issues: Status[];
 }
 export interface ParseResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
   value: Uint8Array;
 }
-
 /** Response message for the Parse method. */
+
 export interface ParseResponseAmino {
   /** The parsed representation, or unset if parsing failed. */
   parsed_expr?: ParsedExprAmino;
-
   /** Any number of issues with [StatusDetails][] as the details. */
+
   issues: StatusAmino[];
 }
 export interface ParseResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
   value: ParseResponseAmino;
 }
-
 /** Response message for the Parse method. */
+
 export interface ParseResponseSDKType {
   parsed_expr?: ParsedExprSDKType;
   issues: StatusSDKType[];
 }
-
 /** Request message for the Check method. */
+
 export interface CheckRequest {
   /** Required. The parsed representation of the CEL program. */
   parsedExpr?: ParsedExpr;
-
   /**
    * Declarations of types for external variables and functions.
    * Required if program uses external variables or functions
    * not in the default environment.
    */
-  typeEnv: Decl[];
 
+  typeEnv: Decl[];
   /**
    * The protocol buffer context.  See "Name Resolution" in the
    * Language Definition.
    */
-  container: string;
 
+  container: string;
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
    * add declarations for the standard definitions to the type environment.  See
    * "Standard Definitions" in the Language Definition.
    */
+
   noStdEnv: boolean;
 }
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
   value: Uint8Array;
 }
-
 /** Request message for the Check method. */
+
 export interface CheckRequestAmino {
   /** Required. The parsed representation of the CEL program. */
   parsed_expr?: ParsedExprAmino;
-
   /**
    * Declarations of types for external variables and functions.
    * Required if program uses external variables or functions
    * not in the default environment.
    */
-  type_env: DeclAmino[];
 
+  type_env: DeclAmino[];
   /**
    * The protocol buffer context.  See "Name Resolution" in the
    * Language Definition.
    */
-  container: string;
 
+  container: string;
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
    * add declarations for the standard definitions to the type environment.  See
    * "Standard Definitions" in the Language Definition.
    */
+
   no_std_env: boolean;
 }
 export interface CheckRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
   value: CheckRequestAmino;
 }
-
 /** Request message for the Check method. */
+
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
   type_env: DeclSDKType[];
   container: string;
   no_std_env: boolean;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
   checkedExpr?: CheckedExpr;
-
   /** Any number of issues with [StatusDetails][] as the details. */
+
   issues: Status[];
 }
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: Uint8Array;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponseAmino {
   /** The annotated representation, or unset if checking failed. */
   checked_expr?: CheckedExprAmino;
-
   /** Any number of issues with [StatusDetails][] as the details. */
+
   issues: StatusAmino[];
 }
 export interface CheckResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: CheckResponseAmino;
 }
-
 /** Response message for the Check method. */
+
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
   issues: StatusSDKType[];
@@ -267,56 +267,56 @@ export interface EvalRequest_BindingsEntrySDKType {
   key: string;
   value?: ExprValueSDKType;
 }
-
 /** Request message for the Eval method. */
+
 export interface EvalRequest {
   /** Evaluate based on the parsed representation. */
   parsedExpr?: ParsedExpr;
-
   /** Evaluate based on the checked representation. */
-  checkedExpr?: CheckedExpr;
 
+  checkedExpr?: CheckedExpr;
   /**
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
+
   bindings?: {
     [key: string]: ExprValue;
   };
-
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+
   container: string;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
   value: Uint8Array;
 }
-
 /** Request message for the Eval method. */
+
 export interface EvalRequestAmino {
   /** Evaluate based on the parsed representation. */
   parsed_expr?: ParsedExprAmino;
-
   /** Evaluate based on the checked representation. */
-  checked_expr?: CheckedExprAmino;
 
+  checked_expr?: CheckedExprAmino;
   /**
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
+
   bindings?: {
     [key: string]: ExprValueAmino;
   };
-
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+
   container: string;
 }
 export interface EvalRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
   value: EvalRequestAmino;
 }
-
 /** Request message for the Eval method. */
+
 export interface EvalRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
   checked_expr?: CheckedExprSDKType;
@@ -325,94 +325,94 @@ export interface EvalRequestSDKType {
   };
   container: string;
 }
-
 /** Response message for the Eval method. */
+
 export interface EvalResponse {
   /** The execution result, or unset if execution couldn't start. */
   result?: ExprValue;
-
   /**
    * Any number of issues with [StatusDetails][] as the details.
    * Note that CEL execution errors are reified into [ExprValue][].
    * Nevertheless, we'll allow out-of-band issues to be raised,
    * which also makes the replies more regular.
    */
+
   issues: Status[];
 }
 export interface EvalResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: Uint8Array;
 }
-
 /** Response message for the Eval method. */
+
 export interface EvalResponseAmino {
   /** The execution result, or unset if execution couldn't start. */
   result?: ExprValueAmino;
-
   /**
    * Any number of issues with [StatusDetails][] as the details.
    * Note that CEL execution errors are reified into [ExprValue][].
    * Nevertheless, we'll allow out-of-band issues to be raised,
    * which also makes the replies more regular.
    */
+
   issues: StatusAmino[];
 }
 export interface EvalResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: EvalResponseAmino;
 }
-
 /** Response message for the Eval method. */
+
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
   issues: StatusSDKType[];
 }
-
 /**
  * Warnings or errors in service execution are represented by
  * [google.rpc.Status][google.rpc.Status] messages, with the following message
  * in the details field.
  */
+
 export interface IssueDetails {
   /** The severity of the issue. */
   severity: IssueDetails_Severity;
-
   /** Position in the source, if known. */
-  position?: SourcePosition;
 
+  position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
+
   id: Long;
 }
 export interface IssueDetailsProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
   value: Uint8Array;
 }
-
 /**
  * Warnings or errors in service execution are represented by
  * [google.rpc.Status][google.rpc.Status] messages, with the following message
  * in the details field.
  */
+
 export interface IssueDetailsAmino {
   /** The severity of the issue. */
   severity: IssueDetails_Severity;
-
   /** Position in the source, if known. */
-  position?: SourcePositionAmino;
 
+  position?: SourcePositionAmino;
   /** Expression ID from [Expr][], 0 if unknown. */
+
   id: string;
 }
 export interface IssueDetailsAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
   value: IssueDetailsAmino;
 }
-
 /**
  * Warnings or errors in service execution are represented by
  * [google.rpc.Status][google.rpc.Status] messages, with the following message
  * in the details field.
  */
+
 export interface IssueDetailsSDKType {
   severity: IssueDetails_Severity;
   position?: SourcePositionSDKType;

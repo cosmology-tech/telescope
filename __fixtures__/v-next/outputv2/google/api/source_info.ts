@@ -1,9 +1,9 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /** Source information used to create a Service Config */
+
 export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
@@ -12,8 +12,8 @@ export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.SourceInfo";
   value: Uint8Array;
 }
-
 /** Source information used to create a Service Config */
+
 export interface SourceInfoAmino {
   /** All files used during config generation. */
   source_files: AnyAmino[];
@@ -22,8 +22,8 @@ export interface SourceInfoAminoMsg {
   type: "/google.api.SourceInfo";
   value: SourceInfoAmino;
 }
-
 /** Source information used to create a Service Config */
+
 export interface SourceInfoSDKType {
   source_files: AnySDKType[];
 }

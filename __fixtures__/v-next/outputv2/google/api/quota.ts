@@ -1,7 +1,6 @@
 import { Long, DeepPartial, isSet, isObject } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
-
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -53,21 +52,21 @@ export const protobufPackage = "google.api";
  *        metric_kind: DELTA
  *        value_type: INT64
  */
+
 export interface Quota {
   /** List of `QuotaLimit` definitions for the service. */
   limits: QuotaLimit[];
-
   /**
    * List of `MetricRule` definitions, each one mapping a selected method to one
    * or more metrics.
    */
+
   metricRules: MetricRule[];
 }
 export interface QuotaProtoMsg {
   typeUrl: "/google.api.Quota";
   value: Uint8Array;
 }
-
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -119,21 +118,21 @@ export interface QuotaProtoMsg {
  *        metric_kind: DELTA
  *        value_type: INT64
  */
+
 export interface QuotaAmino {
   /** List of `QuotaLimit` definitions for the service. */
   limits: QuotaLimitAmino[];
-
   /**
    * List of `MetricRule` definitions, each one mapping a selected method to one
    * or more metrics.
    */
+
   metric_rules: MetricRuleAmino[];
 }
 export interface QuotaAminoMsg {
   type: "/google.api.Quota";
   value: QuotaAmino;
 }
-
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -185,6 +184,7 @@ export interface QuotaAminoMsg {
  *        metric_kind: DELTA
  *        value_type: INT64
  */
+
 export interface QuotaSDKType {
   limits: QuotaLimitSDKType[];
   metric_rules: MetricRuleSDKType[];
@@ -209,11 +209,11 @@ export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
   value: Long;
 }
-
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
  */
+
 export interface MetricRule {
   /**
    * Selects the methods to which this rule applies.
@@ -221,7 +221,6 @@ export interface MetricRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
@@ -230,6 +229,7 @@ export interface MetricRule {
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
    */
+
   metricCosts: {
     [key: string]: Long;
   };
@@ -238,11 +238,11 @@ export interface MetricRuleProtoMsg {
   typeUrl: "/google.api.MetricRule";
   value: Uint8Array;
 }
-
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
  */
+
 export interface MetricRuleAmino {
   /**
    * Selects the methods to which this rule applies.
@@ -250,7 +250,6 @@ export interface MetricRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
@@ -259,6 +258,7 @@ export interface MetricRuleAmino {
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
    */
+
   metric_costs: {
     [key: string]: string;
   };
@@ -267,11 +267,11 @@ export interface MetricRuleAminoMsg {
   type: "/google.api.MetricRule";
   value: MetricRuleAmino;
 }
-
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
  * metric's configured quota behaviors to apply to the method call.
  */
+
 export interface MetricRuleSDKType {
   selector: string;
   metric_costs: {
@@ -298,12 +298,12 @@ export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
   value: Long;
 }
-
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
  * for a limit type. There can be at most one limit for a duration and limit
  * type combination defined within a `QuotaGroup`.
  */
+
 export interface QuotaLimit {
   /**
    * Name of the quota limit.
@@ -314,14 +314,13 @@ export interface QuotaLimit {
    * The maximum length of the limit name is 64 characters.
    */
   name: string;
-
   /**
    * Optional. User-visible, extended description for this quota limit.
    * Should be used only when more context is needed to understand this limit
    * than provided by the limit's display name (see: `display_name`).
    */
-  description: string;
 
+  description: string;
   /**
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
@@ -334,8 +333,8 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  defaultLimit: Long;
 
+  defaultLimit: Long;
   /**
    * Maximum number of tokens that can be consumed during the specified
    * duration. Client application developers can override the default limit up
@@ -347,8 +346,8 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  maxLimit: Long;
 
+  maxLimit: Long;
   /**
    * Free tier value displayed in the Developers Console for this limit.
    * The free tier is the number of tokens that will be subtracted from the
@@ -359,22 +358,22 @@ export interface QuotaLimit {
    * 
    * Used by group-based quotas only.
    */
-  freeTier: Long;
 
+  freeTier: Long;
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
    * 
    * Used by group-based quotas only.
    */
-  duration: string;
 
+  duration: string;
   /**
    * The name of the metric this quota limit applies to. The quota limits with
    * the same metric will be checked together during runtime. The metric must be
    * defined within the service config.
    */
-  metric: string;
 
+  metric: string;
   /**
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
@@ -386,35 +385,36 @@ export interface QuotaLimit {
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */
-  unit: string;
 
+  unit: string;
   /**
    * Tiered limit values. You must specify this as a key:value pair, with an
    * integer value that is the maximum number of requests allowed for the
    * specified unit. Currently only STANDARD is supported.
    */
+
   values: {
     [key: string]: Long;
   };
-
   /**
    * User-visible display name for this limit.
    * Optional. If not set, the UI will provide a default display name based on
    * the quota configuration. This field can be used to override the default
    * display name generated from the configuration.
    */
+
   displayName: string;
 }
 export interface QuotaLimitProtoMsg {
   typeUrl: "/google.api.QuotaLimit";
   value: Uint8Array;
 }
-
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
  * for a limit type. There can be at most one limit for a duration and limit
  * type combination defined within a `QuotaGroup`.
  */
+
 export interface QuotaLimitAmino {
   /**
    * Name of the quota limit.
@@ -425,14 +425,13 @@ export interface QuotaLimitAmino {
    * The maximum length of the limit name is 64 characters.
    */
   name: string;
-
   /**
    * Optional. User-visible, extended description for this quota limit.
    * Should be used only when more context is needed to understand this limit
    * than provided by the limit's display name (see: `display_name`).
    */
-  description: string;
 
+  description: string;
   /**
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
@@ -445,8 +444,8 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  default_limit: string;
 
+  default_limit: string;
   /**
    * Maximum number of tokens that can be consumed during the specified
    * duration. Client application developers can override the default limit up
@@ -458,8 +457,8 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  max_limit: string;
 
+  max_limit: string;
   /**
    * Free tier value displayed in the Developers Console for this limit.
    * The free tier is the number of tokens that will be subtracted from the
@@ -470,22 +469,22 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  free_tier: string;
 
+  free_tier: string;
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
    * 
    * Used by group-based quotas only.
    */
-  duration: string;
 
+  duration: string;
   /**
    * The name of the metric this quota limit applies to. The quota limits with
    * the same metric will be checked together during runtime. The metric must be
    * defined within the service config.
    */
-  metric: string;
 
+  metric: string;
   /**
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
@@ -497,35 +496,36 @@ export interface QuotaLimitAmino {
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */
-  unit: string;
 
+  unit: string;
   /**
    * Tiered limit values. You must specify this as a key:value pair, with an
    * integer value that is the maximum number of requests allowed for the
    * specified unit. Currently only STANDARD is supported.
    */
+
   values: {
     [key: string]: string;
   };
-
   /**
    * User-visible display name for this limit.
    * Optional. If not set, the UI will provide a default display name based on
    * the quota configuration. This field can be used to override the default
    * display name generated from the configuration.
    */
+
   display_name: string;
 }
 export interface QuotaLimitAminoMsg {
   type: "/google.api.QuotaLimit";
   value: QuotaLimitAmino;
 }
-
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
  * for a limit type. There can be at most one limit for a duration and limit
  * type combination defined within a `QuotaGroup`.
  */
+
 export interface QuotaLimitSDKType {
   name: string;
   description: string;

@@ -1,11 +1,11 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Classifies set of possible modifications to an object in the service
  * configuration.
  */
+
 export enum ChangeType {
   /** CHANGE_TYPE_UNSPECIFIED - No value was provided. */
   CHANGE_TYPE_UNSPECIFIED = 0,
@@ -74,7 +74,6 @@ export function changeTypeToJSON(object: ChangeType): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
@@ -83,6 +82,7 @@ export function changeTypeToJSON(object: ChangeType): string {
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
+
 export interface ConfigChange {
   /**
    * Object hierarchy path to the change, with levels separated by a '.'
@@ -96,33 +96,32 @@ export interface ConfigChange {
    * - logging.producer_destinations[0]
    */
   element: string;
-
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  oldValue: string;
 
+  oldValue: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
+
   newValue: string;
-
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  changeType: ChangeType;
 
+  changeType: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
+
   advices: Advice[];
 }
 export interface ConfigChangeProtoMsg {
   typeUrl: "/google.api.ConfigChange";
   value: Uint8Array;
 }
-
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
@@ -131,6 +130,7 @@ export interface ConfigChangeProtoMsg {
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
+
 export interface ConfigChangeAmino {
   /**
    * Object hierarchy path to the change, with levels separated by a '.'
@@ -144,33 +144,32 @@ export interface ConfigChangeAmino {
    * - logging.producer_destinations[0]
    */
   element: string;
-
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  old_value: string;
 
+  old_value: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
+
   new_value: string;
-
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  change_type: ChangeType;
 
+  change_type: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
+
   advices: AdviceAmino[];
 }
 export interface ConfigChangeAminoMsg {
   type: "/google.api.ConfigChange";
   value: ConfigChangeAmino;
 }
-
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
@@ -179,6 +178,7 @@ export interface ConfigChangeAminoMsg {
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
+
 export interface ConfigChangeSDKType {
   element: string;
   old_value: string;
@@ -186,11 +186,11 @@ export interface ConfigChangeSDKType {
   change_type: ChangeType;
   advices: AdviceSDKType[];
 }
-
 /**
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
+
 export interface Advice {
   /**
    * Useful description for why this advice was applied and what actions should
@@ -202,11 +202,11 @@ export interface AdviceProtoMsg {
   typeUrl: "/google.api.Advice";
   value: Uint8Array;
 }
-
 /**
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
+
 export interface AdviceAmino {
   /**
    * Useful description for why this advice was applied and what actions should
@@ -218,11 +218,11 @@ export interface AdviceAminoMsg {
   type: "/google.api.Advice";
   value: AdviceAmino;
 }
-
 /**
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
+
 export interface AdviceSDKType {
   description: string;
 }

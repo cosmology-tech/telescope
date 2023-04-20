@@ -1,8 +1,8 @@
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** State is an enum which refers to state of deployment */
+
 export enum Deployment_State {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
@@ -52,8 +52,8 @@ export function deployment_StateToJSON(object: Deployment_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** DeploymentID stores owner and sequence number */
+
 export interface DeploymentID {
   owner: string;
   dseq: Long;
@@ -62,8 +62,8 @@ export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentID";
   value: Uint8Array;
 }
-
 /** DeploymentID stores owner and sequence number */
+
 export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
@@ -72,14 +72,14 @@ export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentID";
   value: DeploymentIDAmino;
 }
-
 /** DeploymentID stores owner and sequence number */
+
 export interface DeploymentIDSDKType {
   owner: string;
   dseq: Long;
 }
-
 /** Deployment stores deploymentID, state and version details */
+
 export interface Deployment {
   deploymentId?: DeploymentID;
   state: Deployment_State;
@@ -90,8 +90,8 @@ export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Deployment";
   value: Uint8Array;
 }
-
 /** Deployment stores deploymentID, state and version details */
+
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
   state: Deployment_State;
@@ -102,16 +102,16 @@ export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.Deployment";
   value: DeploymentAmino;
 }
-
 /** Deployment stores deploymentID, state and version details */
+
 export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
   created_at: Long;
 }
-
 /** DeploymentFilters defines filters used to filter deployments */
+
 export interface DeploymentFilters {
   owner: string;
   dseq: Long;
@@ -121,8 +121,8 @@ export interface DeploymentFiltersProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
   value: Uint8Array;
 }
-
 /** DeploymentFilters defines filters used to filter deployments */
+
 export interface DeploymentFiltersAmino {
   owner: string;
   dseq: string;
@@ -132,8 +132,8 @@ export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentFilters";
   value: DeploymentFiltersAmino;
 }
-
 /** DeploymentFilters defines filters used to filter deployments */
+
 export interface DeploymentFiltersSDKType {
   owner: string;
   dseq: Long;

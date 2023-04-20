@@ -1,8 +1,8 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** GroupID stores owner, deployment sequence number and group sequence number */
+
 export interface GroupID {
   owner: string;
   dseq: Long;
@@ -12,8 +12,8 @@ export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupID";
   value: Uint8Array;
 }
-
 /** GroupID stores owner, deployment sequence number and group sequence number */
+
 export interface GroupIDAmino {
   owner: string;
   dseq: string;
@@ -23,8 +23,8 @@ export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta2.GroupID";
   value: GroupIDAmino;
 }
-
 /** GroupID stores owner, deployment sequence number and group sequence number */
+
 export interface GroupIDSDKType {
   owner: string;
   dseq: Long;

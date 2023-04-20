@@ -9,8 +9,8 @@ import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1";
-
 /** Whether or not a service has been enabled for use by a consumer. */
+
 export enum State {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
@@ -67,8 +67,8 @@ export function stateToJSON(object: State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** A service that is available for use by the consumer. */
+
 export interface Service {
   /**
    * The resource name of the consumer and service.
@@ -77,32 +77,32 @@ export interface Service {
    * - projects/123/services/serviceusage.googleapis.com
    */
   name: string;
-
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - projects/123
    */
-  parent: string;
 
+  parent: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config?: ServiceConfig;
 
+  config?: ServiceConfig;
   /** Whether or not the service has been enabled for use by the consumer. */
+
   state: State;
 }
 export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.Service";
   value: Uint8Array;
 }
-
 /** A service that is available for use by the consumer. */
+
 export interface ServiceAmino {
   /**
    * The resource name of the consumer and service.
@@ -111,40 +111,40 @@ export interface ServiceAmino {
    * - projects/123/services/serviceusage.googleapis.com
    */
   name: string;
-
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - projects/123
    */
-  parent: string;
 
+  parent: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config?: ServiceConfigAmino;
 
+  config?: ServiceConfigAmino;
   /** Whether or not the service has been enabled for use by the consumer. */
+
   state: State;
 }
 export interface ServiceAminoMsg {
   type: "/google.api.serviceusage.v1.Service";
   value: ServiceAmino;
 }
-
 /** A service that is available for use by the consumer. */
+
 export interface ServiceSDKType {
   name: string;
   parent: string;
   config?: ServiceConfigSDKType;
   state: State;
 }
-
 /** The configuration of the service. */
+
 export interface ServiceConfig {
   /**
    * The DNS address at which this service is available.
@@ -153,55 +153,55 @@ export interface ServiceConfig {
    * `calendar.googleapis.com`.
    */
   name: string;
-
   /** The product title for this service. */
-  title: string;
 
+  title: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: Api[];
 
+  apis: Api[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
+
   documentation?: Documentation;
-
   /** Quota configuration. */
+
   quota?: Quota;
-
   /** Auth configuration. Contains only the OAuth rules. */
+
   authentication?: Authentication;
-
   /** Configuration controlling usage of this service. */
-  usage?: Usage;
 
+  usage?: Usage;
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: Endpoint[];
 
+  endpoints: Endpoint[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitoredResources: MonitoredResourceDescriptor[];
 
+  monitoredResources: MonitoredResourceDescriptor[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
+
   monitoring?: Monitoring;
 }
 export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
   value: Uint8Array;
 }
-
 /** The configuration of the service. */
+
 export interface ServiceConfigAmino {
   /**
    * The DNS address at which this service is available.
@@ -210,55 +210,55 @@ export interface ServiceConfigAmino {
    * `calendar.googleapis.com`.
    */
   name: string;
-
   /** The product title for this service. */
-  title: string;
 
+  title: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: ApiAmino[];
 
+  apis: ApiAmino[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
+
   documentation?: DocumentationAmino;
-
   /** Quota configuration. */
+
   quota?: QuotaAmino;
-
   /** Auth configuration. Contains only the OAuth rules. */
+
   authentication?: AuthenticationAmino;
-
   /** Configuration controlling usage of this service. */
-  usage?: UsageAmino;
 
+  usage?: UsageAmino;
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: EndpointAmino[];
 
+  endpoints: EndpointAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
 
+  monitored_resources: MonitoredResourceDescriptorAmino[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
+
   monitoring?: MonitoringAmino;
 }
 export interface ServiceConfigAminoMsg {
   type: "/google.api.serviceusage.v1.ServiceConfig";
   value: ServiceConfigAmino;
 }
-
 /** The configuration of the service. */
+
 export interface ServiceConfigSDKType {
   name: string;
   title: string;
@@ -271,8 +271,8 @@ export interface ServiceConfigSDKType {
   monitored_resources: MonitoredResourceDescriptorSDKType[];
   monitoring?: MonitoringSDKType;
 }
-
 /** The operation metadata returned for the batchend services operation. */
+
 export interface OperationMetadata {
   /**
    * The full name of the resources that this operation is directly
@@ -284,8 +284,8 @@ export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
   value: Uint8Array;
 }
-
 /** The operation metadata returned for the batchend services operation. */
+
 export interface OperationMetadataAmino {
   /**
    * The full name of the resources that this operation is directly
@@ -297,8 +297,8 @@ export interface OperationMetadataAminoMsg {
   type: "/google.api.serviceusage.v1.OperationMetadata";
   value: OperationMetadataAmino;
 }
-
 /** The operation metadata returned for the batchend services operation. */
+
 export interface OperationMetadataSDKType {
   resource_names: string[];
 }

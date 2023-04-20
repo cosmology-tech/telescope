@@ -1,10 +1,10 @@
 import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../protobuf/field_mask";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { Timestamp } from "../../protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.v2";
-
 /** Deprecated. This is unused. */
+
 export enum LogSink_VersionFormat {
   /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
   VERSION_FORMAT_UNSPECIFIED = 0,
@@ -54,8 +54,8 @@ export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): stri
       return "UNRECOGNIZED";
   }
 }
-
 /** LogBucket lifecycle states. */
+
 export enum LifecycleState {
   /**
    * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
@@ -111,7 +111,6 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * List of different operation states.
  * High level state of the operation. This is used to report the job's
@@ -119,6 +118,7 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
  * the current state of the operation can be queried even before the
  * operation is finished and the final result is available.
  */
+
 export enum OperationState {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
@@ -208,8 +208,8 @@ export function operationStateToJSON(object: OperationState): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Describes a repository in which log entries are stored. */
+
 export interface LogBucket {
   /**
    * Output only. The resource name of the bucket.
@@ -227,38 +227,37 @@ export interface LogBucket {
    * After a bucket has been created, the location cannot be changed.
    */
   name: string;
-
   /** Describes this bucket. */
-  description: string;
 
+  description: string;
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
+
   createTime?: Date;
-
   /** Output only. The last update timestamp of the bucket. */
-  updateTime?: Date;
 
+  updateTime?: Date;
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
    * this value is set to zero at bucket creation time, the default time of 30
    * days will be used.
    */
-  retentionDays: number;
 
+  retentionDays: number;
   /**
    * Whether the bucket is locked.
    * 
    * The retention period on a locked bucket cannot be changed. Locked buckets
    * may only be deleted if they are empty.
    */
+
   locked: boolean;
-
   /** Output only. The bucket lifecycle state. */
-  lifecycleState: LifecycleState;
 
+  lifecycleState: LifecycleState;
   /**
    * Log entry field paths that are denied access in this bucket.
    * 
@@ -268,8 +267,8 @@ export interface LogBucket {
    * Restricting a repeated field will restrict all values. Adding a parent will
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
-  restrictedFields: string[];
 
+  restrictedFields: string[];
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -277,14 +276,15 @@ export interface LogBucket {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
+
   cmekSettings?: CmekSettings;
 }
 export interface LogBucketProtoMsg {
   typeUrl: "/google.logging.v2.LogBucket";
   value: Uint8Array;
 }
-
 /** Describes a repository in which log entries are stored. */
+
 export interface LogBucketAmino {
   /**
    * Output only. The resource name of the bucket.
@@ -302,38 +302,37 @@ export interface LogBucketAmino {
    * After a bucket has been created, the location cannot be changed.
    */
   name: string;
-
   /** Describes this bucket. */
-  description: string;
 
+  description: string;
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
+
   create_time?: Date;
-
   /** Output only. The last update timestamp of the bucket. */
-  update_time?: Date;
 
+  update_time?: Date;
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
    * this value is set to zero at bucket creation time, the default time of 30
    * days will be used.
    */
-  retention_days: number;
 
+  retention_days: number;
   /**
    * Whether the bucket is locked.
    * 
    * The retention period on a locked bucket cannot be changed. Locked buckets
    * may only be deleted if they are empty.
    */
+
   locked: boolean;
-
   /** Output only. The bucket lifecycle state. */
-  lifecycle_state: LifecycleState;
 
+  lifecycle_state: LifecycleState;
   /**
    * Log entry field paths that are denied access in this bucket.
    * 
@@ -343,8 +342,8 @@ export interface LogBucketAmino {
    * Restricting a repeated field will restrict all values. Adding a parent will
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
-  restricted_fields: string[];
 
+  restricted_fields: string[];
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -352,14 +351,15 @@ export interface LogBucketAmino {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
+
   cmek_settings?: CmekSettingsAmino;
 }
 export interface LogBucketAminoMsg {
   type: "/google.logging.v2.LogBucket";
   value: LogBucketAmino;
 }
-
 /** Describes a repository in which log entries are stored. */
+
 export interface LogBucketSDKType {
   name: string;
   description: string;
@@ -371,8 +371,8 @@ export interface LogBucketSDKType {
   restricted_fields: string[];
   cmek_settings?: CmekSettingsSDKType;
 }
-
 /** Describes a view over log entries in a bucket. */
+
 export interface LogView {
   /**
    * The resource name of the view.
@@ -382,16 +382,15 @@ export interface LogView {
    *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
   name: string;
-
   /** Describes this view. */
+
   description: string;
-
   /** Output only. The creation timestamp of the view. */
+
   createTime?: Date;
-
   /** Output only. The last update timestamp of the view. */
-  updateTime?: Date;
 
+  updateTime?: Date;
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -408,14 +407,15 @@ export interface LogView {
    *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
    *                                AND LOG_ID("stdout")
    */
+
   filter: string;
 }
 export interface LogViewProtoMsg {
   typeUrl: "/google.logging.v2.LogView";
   value: Uint8Array;
 }
-
 /** Describes a view over log entries in a bucket. */
+
 export interface LogViewAmino {
   /**
    * The resource name of the view.
@@ -425,16 +425,15 @@ export interface LogViewAmino {
    *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
   name: string;
-
   /** Describes this view. */
+
   description: string;
-
   /** Output only. The creation timestamp of the view. */
+
   create_time?: Date;
-
   /** Output only. The last update timestamp of the view. */
-  update_time?: Date;
 
+  update_time?: Date;
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -451,14 +450,15 @@ export interface LogViewAmino {
    *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
    *                                AND LOG_ID("stdout")
    */
+
   filter: string;
 }
 export interface LogViewAminoMsg {
   type: "/google.logging.v2.LogView";
   value: LogViewAmino;
 }
-
 /** Describes a view over log entries in a bucket. */
+
 export interface LogViewSDKType {
   name: string;
   description: string;
@@ -466,7 +466,6 @@ export interface LogViewSDKType {
   update_time?: Date;
   filter: string;
 }
-
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -474,6 +473,7 @@ export interface LogViewSDKType {
  * entries are exported. The sink must be created within a project,
  * organization, billing account, or folder.
  */
+
 export interface LogSink {
   /**
    * Required. The client-assigned sink identifier, unique within the project.
@@ -484,7 +484,6 @@ export interface LogSink {
    * First character has to be alphanumeric.
    */
   name: string;
-
   /**
    * Required. The export destination:
    * 
@@ -498,8 +497,8 @@ export interface LogSink {
    * [Exporting Logs with
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
-  destination: string;
 
+  destination: string;
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
@@ -510,34 +509,34 @@ export interface LogSink {
    * 
    *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. A description of this sink.
    * 
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
 
+  description: string;
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
    * 
    * If a log entry is matched by both `filter` and one of `exclusion_filters`
    * it will not be exported.
    */
-  exclusions: LogExclusion[];
 
+  exclusions: LogExclusion[];
   /** Deprecated. This field is unused. */
 
   /** @deprecated */
-  outputVersionFormat: LogSink_VersionFormat;
 
+  outputVersionFormat: LogSink_VersionFormat;
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -557,8 +556,8 @@ export interface LogSink {
    * the sink do not have a writer_identity and no additional permissions are
    * required.
    */
-  writerIdentity: string;
 
+  writerIdentity: string;
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -578,30 +577,30 @@ export interface LogSink {
    *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
    *   resource.type=gce_instance
    */
+
   includeChildren: boolean;
-
   /** Optional. Options that affect sinks exporting data to BigQuery. */
-  bigqueryOptions?: BigQueryOptions;
 
+  bigqueryOptions?: BigQueryOptions;
   /**
    * Output only. The creation timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  createTime?: Date;
 
+  createTime?: Date;
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
+
   updateTime?: Date;
 }
 export interface LogSinkProtoMsg {
   typeUrl: "/google.logging.v2.LogSink";
   value: Uint8Array;
 }
-
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -609,6 +608,7 @@ export interface LogSinkProtoMsg {
  * entries are exported. The sink must be created within a project,
  * organization, billing account, or folder.
  */
+
 export interface LogSinkAmino {
   /**
    * Required. The client-assigned sink identifier, unique within the project.
@@ -619,7 +619,6 @@ export interface LogSinkAmino {
    * First character has to be alphanumeric.
    */
   name: string;
-
   /**
    * Required. The export destination:
    * 
@@ -633,8 +632,8 @@ export interface LogSinkAmino {
    * [Exporting Logs with
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
-  destination: string;
 
+  destination: string;
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
@@ -645,34 +644,34 @@ export interface LogSinkAmino {
    * 
    *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. A description of this sink.
    * 
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
 
+  description: string;
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
    * 
    * If a log entry is matched by both `filter` and one of `exclusion_filters`
    * it will not be exported.
    */
-  exclusions: LogExclusionAmino[];
 
+  exclusions: LogExclusionAmino[];
   /** Deprecated. This field is unused. */
 
   /** @deprecated */
-  output_version_format: LogSink_VersionFormat;
 
+  output_version_format: LogSink_VersionFormat;
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -692,8 +691,8 @@ export interface LogSinkAmino {
    * the sink do not have a writer_identity and no additional permissions are
    * required.
    */
-  writer_identity: string;
 
+  writer_identity: string;
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -713,30 +712,30 @@ export interface LogSinkAmino {
    *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
    *   resource.type=gce_instance
    */
+
   include_children: boolean;
-
   /** Optional. Options that affect sinks exporting data to BigQuery. */
-  bigquery_options?: BigQueryOptionsAmino;
 
+  bigquery_options?: BigQueryOptionsAmino;
   /**
    * Output only. The creation timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  create_time?: Date;
 
+  create_time?: Date;
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
+
   update_time?: Date;
 }
 export interface LogSinkAminoMsg {
   type: "/google.logging.v2.LogSink";
   value: LogSinkAmino;
 }
-
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -744,6 +743,7 @@ export interface LogSinkAminoMsg {
  * entries are exported. The sink must be created within a project,
  * organization, billing account, or folder.
  */
+
 export interface LogSinkSDKType {
   name: string;
   destination: string;
@@ -751,8 +751,8 @@ export interface LogSinkSDKType {
   description: string;
   disabled: boolean;
   exclusions: LogExclusionSDKType[];
-
   /** @deprecated */
+
   output_version_format: LogSink_VersionFormat;
   writer_identity: string;
   include_children: boolean;
@@ -760,8 +760,8 @@ export interface LogSinkSDKType {
   create_time?: Date;
   update_time?: Date;
 }
-
 /** Options that change functionality of a sink exporting data to BigQuery. */
+
 export interface BigQueryOptions {
   /**
    * Optional. Whether to use [BigQuery's partition
@@ -774,7 +774,6 @@ export interface BigQueryOptions {
    * timezone.
    */
   usePartitionedTables: boolean;
-
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
@@ -784,14 +783,15 @@ export interface BigQueryOptions {
    * meaning and will be false. Legacy sinks using partitioned tables will have
    * this field set to false.
    */
+
   usesTimestampColumnPartitioning: boolean;
 }
 export interface BigQueryOptionsProtoMsg {
   typeUrl: "/google.logging.v2.BigQueryOptions";
   value: Uint8Array;
 }
-
 /** Options that change functionality of a sink exporting data to BigQuery. */
+
 export interface BigQueryOptionsAmino {
   /**
    * Optional. Whether to use [BigQuery's partition
@@ -804,7 +804,6 @@ export interface BigQueryOptionsAmino {
    * timezone.
    */
   use_partitioned_tables: boolean;
-
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
@@ -814,20 +813,21 @@ export interface BigQueryOptionsAmino {
    * meaning and will be false. Legacy sinks using partitioned tables will have
    * this field set to false.
    */
+
   uses_timestamp_column_partitioning: boolean;
 }
 export interface BigQueryOptionsAminoMsg {
   type: "/google.logging.v2.BigQueryOptions";
   value: BigQueryOptionsAmino;
 }
-
 /** Options that change functionality of a sink exporting data to BigQuery. */
+
 export interface BigQueryOptionsSDKType {
   use_partitioned_tables: boolean;
   uses_timestamp_column_partitioning: boolean;
 }
-
 /** The parameters to `ListBuckets`. */
+
 export interface ListBucketsRequest {
   /**
    * Required. The parent resource whose buckets are to be listed:
@@ -842,28 +842,28 @@ export interface ListBucketsRequest {
    * buckets.
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
+
   pageSize: number;
 }
 export interface ListBucketsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `ListBuckets`. */
+
 export interface ListBucketsRequestAmino {
   /**
    * Required. The parent resource whose buckets are to be listed:
@@ -878,75 +878,75 @@ export interface ListBucketsRequestAmino {
    * buckets.
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
+
   page_size: number;
 }
 export interface ListBucketsRequestAminoMsg {
   type: "/google.logging.v2.ListBucketsRequest";
   value: ListBucketsRequestAmino;
 }
-
 /** The parameters to `ListBuckets`. */
+
 export interface ListBucketsRequestSDKType {
   parent: string;
   page_token: string;
   page_size: number;
 }
-
 /** The response from ListBuckets. */
+
 export interface ListBucketsResponse {
   /** A list of buckets. */
   buckets: LogBucket[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListBucketsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsResponse";
   value: Uint8Array;
 }
-
 /** The response from ListBuckets. */
+
 export interface ListBucketsResponseAmino {
   /** A list of buckets. */
   buckets: LogBucketAmino[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListBucketsResponseAminoMsg {
   type: "/google.logging.v2.ListBucketsResponse";
   value: ListBucketsResponseAmino;
 }
-
 /** The response from ListBuckets. */
+
 export interface ListBucketsResponseSDKType {
   buckets: LogBucketSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to `CreateBucket`. */
+
 export interface CreateBucketRequest {
   /**
    * Required. The resource in which to create the log bucket:
@@ -958,27 +958,27 @@ export interface CreateBucketRequest {
    *   `"projects/my-project/locations/global"`
    */
   parent: string;
-
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
-  bucketId: string;
 
+  bucketId: string;
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
+
   bucket?: LogBucket;
 }
 export interface CreateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateBucketRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `CreateBucket`. */
+
 export interface CreateBucketRequestAmino {
   /**
    * Required. The resource in which to create the log bucket:
@@ -990,34 +990,34 @@ export interface CreateBucketRequestAmino {
    *   `"projects/my-project/locations/global"`
    */
   parent: string;
-
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
-  bucket_id: string;
 
+  bucket_id: string;
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
+
   bucket?: LogBucketAmino;
 }
 export interface CreateBucketRequestAminoMsg {
   type: "/google.logging.v2.CreateBucketRequest";
   value: CreateBucketRequestAmino;
 }
-
 /** The parameters to `CreateBucket`. */
+
 export interface CreateBucketRequestSDKType {
   parent: string;
   bucket_id: string;
   bucket?: LogBucketSDKType;
 }
-
 /** The parameters to `UpdateBucket`. */
+
 export interface UpdateBucketRequest {
   /**
    * Required. The full resource name of the bucket to update.
@@ -1032,10 +1032,9 @@ export interface UpdateBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-
   /** Required. The updated bucket. */
-  bucket?: LogBucket;
 
+  bucket?: LogBucket;
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
    * bucket field will be overwritten if, and only if, it is in the update mask.
@@ -1046,14 +1045,15 @@ export interface UpdateBucketRequest {
    * 
    * For example: `updateMask=retention_days`
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateBucketRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `UpdateBucket`. */
+
 export interface UpdateBucketRequestAmino {
   /**
    * Required. The full resource name of the bucket to update.
@@ -1068,10 +1068,9 @@ export interface UpdateBucketRequestAmino {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-
   /** Required. The updated bucket. */
-  bucket?: LogBucketAmino;
 
+  bucket?: LogBucketAmino;
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
    * bucket field will be overwritten if, and only if, it is in the update mask.
@@ -1082,21 +1081,22 @@ export interface UpdateBucketRequestAmino {
    * 
    * For example: `updateMask=retention_days`
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateBucketRequestAminoMsg {
   type: "/google.logging.v2.UpdateBucketRequest";
   value: UpdateBucketRequestAmino;
 }
-
 /** The parameters to `UpdateBucket`. */
+
 export interface UpdateBucketRequestSDKType {
   name: string;
   bucket?: LogBucketSDKType;
   update_mask?: FieldMaskSDKType;
 }
-
 /** The parameters to `GetBucket`. */
+
 export interface GetBucketRequest {
   /**
    * Required. The resource name of the bucket:
@@ -1116,8 +1116,8 @@ export interface GetBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetBucketRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `GetBucket`. */
+
 export interface GetBucketRequestAmino {
   /**
    * Required. The resource name of the bucket:
@@ -1137,13 +1137,13 @@ export interface GetBucketRequestAminoMsg {
   type: "/google.logging.v2.GetBucketRequest";
   value: GetBucketRequestAmino;
 }
-
 /** The parameters to `GetBucket`. */
+
 export interface GetBucketRequestSDKType {
   name: string;
 }
-
 /** The parameters to `DeleteBucket`. */
+
 export interface DeleteBucketRequest {
   /**
    * Required. The full resource name of the bucket to delete.
@@ -1163,8 +1163,8 @@ export interface DeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteBucketRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `DeleteBucket`. */
+
 export interface DeleteBucketRequestAmino {
   /**
    * Required. The full resource name of the bucket to delete.
@@ -1184,13 +1184,13 @@ export interface DeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.DeleteBucketRequest";
   value: DeleteBucketRequestAmino;
 }
-
 /** The parameters to `DeleteBucket`. */
+
 export interface DeleteBucketRequestSDKType {
   name: string;
 }
-
 /** The parameters to `UndeleteBucket`. */
+
 export interface UndeleteBucketRequest {
   /**
    * Required. The full resource name of the bucket to undelete.
@@ -1210,8 +1210,8 @@ export interface UndeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `UndeleteBucket`. */
+
 export interface UndeleteBucketRequestAmino {
   /**
    * Required. The full resource name of the bucket to undelete.
@@ -1231,13 +1231,13 @@ export interface UndeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.UndeleteBucketRequest";
   value: UndeleteBucketRequestAmino;
 }
-
 /** The parameters to `UndeleteBucket`. */
+
 export interface UndeleteBucketRequestSDKType {
   name: string;
 }
-
 /** The parameters to `ListViews`. */
+
 export interface ListViewsRequest {
   /**
    * Required. The bucket whose views are to be listed:
@@ -1245,29 +1245,29 @@ export interface ListViewsRequest {
    *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * 
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   pageSize: number;
 }
 export interface ListViewsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `ListViews`. */
+
 export interface ListViewsRequestAmino {
   /**
    * Required. The bucket whose views are to be listed:
@@ -1275,76 +1275,76 @@ export interface ListViewsRequestAmino {
    *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * 
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   page_size: number;
 }
 export interface ListViewsRequestAminoMsg {
   type: "/google.logging.v2.ListViewsRequest";
   value: ListViewsRequestAmino;
 }
-
 /** The parameters to `ListViews`. */
+
 export interface ListViewsRequestSDKType {
   parent: string;
   page_token: string;
   page_size: number;
 }
-
 /** The response from ListViews. */
+
 export interface ListViewsResponse {
   /** A list of views. */
   views: LogView[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListViewsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsResponse";
   value: Uint8Array;
 }
-
 /** The response from ListViews. */
+
 export interface ListViewsResponseAmino {
   /** A list of views. */
   views: LogViewAmino[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListViewsResponseAminoMsg {
   type: "/google.logging.v2.ListViewsResponse";
   value: ListViewsResponseAmino;
 }
-
 /** The response from ListViews. */
+
 export interface ListViewsResponseSDKType {
   views: LogViewSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to `CreateView`. */
+
 export interface CreateViewRequest {
   /**
    * Required. The bucket in which to create the view
@@ -1356,19 +1356,19 @@ export interface CreateViewRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   parent: string;
-
   /** Required. The id to use for this view. */
-  viewId: string;
 
+  viewId: string;
   /** Required. The new view. */
+
   view?: LogView;
 }
 export interface CreateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateViewRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `CreateView`. */
+
 export interface CreateViewRequestAmino {
   /**
    * Required. The bucket in which to create the view
@@ -1380,26 +1380,26 @@ export interface CreateViewRequestAmino {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   parent: string;
-
   /** Required. The id to use for this view. */
-  view_id: string;
 
+  view_id: string;
   /** Required. The new view. */
+
   view?: LogViewAmino;
 }
 export interface CreateViewRequestAminoMsg {
   type: "/google.logging.v2.CreateViewRequest";
   value: CreateViewRequestAmino;
 }
-
 /** The parameters to `CreateView`. */
+
 export interface CreateViewRequestSDKType {
   parent: string;
   view_id: string;
   view?: LogViewSDKType;
 }
-
 /** The parameters to `UpdateView`. */
+
 export interface UpdateViewRequest {
   /**
    * Required. The full resource name of the view to update
@@ -1411,10 +1411,9 @@ export interface UpdateViewRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-
   /** Required. The updated view. */
-  view?: LogView;
 
+  view?: LogView;
   /**
    * Optional. Field mask that specifies the fields in `view` that need
    * an update. A field will be overwritten if, and only if, it is
@@ -1425,14 +1424,15 @@ export interface UpdateViewRequest {
    * 
    * For example: `updateMask=filter`
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateViewRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `UpdateView`. */
+
 export interface UpdateViewRequestAmino {
   /**
    * Required. The full resource name of the view to update
@@ -1444,10 +1444,9 @@ export interface UpdateViewRequestAmino {
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-
   /** Required. The updated view. */
-  view?: LogViewAmino;
 
+  view?: LogViewAmino;
   /**
    * Optional. Field mask that specifies the fields in `view` that need
    * an update. A field will be overwritten if, and only if, it is
@@ -1458,21 +1457,22 @@ export interface UpdateViewRequestAmino {
    * 
    * For example: `updateMask=filter`
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateViewRequestAminoMsg {
   type: "/google.logging.v2.UpdateViewRequest";
   value: UpdateViewRequestAmino;
 }
-
 /** The parameters to `UpdateView`. */
+
 export interface UpdateViewRequestSDKType {
   name: string;
   view?: LogViewSDKType;
   update_mask?: FieldMaskSDKType;
 }
-
 /** The parameters to `GetView`. */
+
 export interface GetViewRequest {
   /**
    * Required. The resource name of the policy:
@@ -1489,8 +1489,8 @@ export interface GetViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetViewRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `GetView`. */
+
 export interface GetViewRequestAmino {
   /**
    * Required. The resource name of the policy:
@@ -1507,13 +1507,13 @@ export interface GetViewRequestAminoMsg {
   type: "/google.logging.v2.GetViewRequest";
   value: GetViewRequestAmino;
 }
-
 /** The parameters to `GetView`. */
+
 export interface GetViewRequestSDKType {
   name: string;
 }
-
 /** The parameters to `DeleteView`. */
+
 export interface DeleteViewRequest {
   /**
    * Required. The full resource name of the view to delete:
@@ -1530,8 +1530,8 @@ export interface DeleteViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteViewRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `DeleteView`. */
+
 export interface DeleteViewRequestAmino {
   /**
    * Required. The full resource name of the view to delete:
@@ -1548,13 +1548,13 @@ export interface DeleteViewRequestAminoMsg {
   type: "/google.logging.v2.DeleteViewRequest";
   value: DeleteViewRequestAmino;
 }
-
 /** The parameters to `DeleteView`. */
+
 export interface DeleteViewRequestSDKType {
   name: string;
 }
-
 /** The parameters to `ListSinks`. */
+
 export interface ListSinksRequest {
   /**
    * Required. The parent resource whose sinks are to be listed:
@@ -1565,28 +1565,28 @@ export interface ListSinksRequest {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   pageSize: number;
 }
 export interface ListSinksRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `ListSinks`. */
+
 export interface ListSinksRequestAmino {
   /**
    * Required. The parent resource whose sinks are to be listed:
@@ -1597,75 +1597,75 @@ export interface ListSinksRequestAmino {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   page_size: number;
 }
 export interface ListSinksRequestAminoMsg {
   type: "/google.logging.v2.ListSinksRequest";
   value: ListSinksRequestAmino;
 }
-
 /** The parameters to `ListSinks`. */
+
 export interface ListSinksRequestSDKType {
   parent: string;
   page_token: string;
   page_size: number;
 }
-
 /** Result returned from `ListSinks`. */
+
 export interface ListSinksResponse {
   /** A list of sinks. */
   sinks: LogSink[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListSinksResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksResponse";
   value: Uint8Array;
 }
-
 /** Result returned from `ListSinks`. */
+
 export interface ListSinksResponseAmino {
   /** A list of sinks. */
   sinks: LogSinkAmino[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListSinksResponseAminoMsg {
   type: "/google.logging.v2.ListSinksResponse";
   value: ListSinksResponseAmino;
 }
-
 /** Result returned from `ListSinks`. */
+
 export interface ListSinksResponseSDKType {
   sinks: LogSinkSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to `GetSink`. */
+
 export interface GetSinkRequest {
   /**
    * Required. The resource name of the sink:
@@ -1685,8 +1685,8 @@ export interface GetSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSinkRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `GetSink`. */
+
 export interface GetSinkRequestAmino {
   /**
    * Required. The resource name of the sink:
@@ -1706,13 +1706,13 @@ export interface GetSinkRequestAminoMsg {
   type: "/google.logging.v2.GetSinkRequest";
   value: GetSinkRequestAmino;
 }
-
 /** The parameters to `GetSink`. */
+
 export interface GetSinkRequestSDKType {
   sink_name: string;
 }
-
 /** The parameters to `CreateSink`. */
+
 export interface CreateSinkRequest {
   /**
    * Required. The resource in which to create the sink:
@@ -1728,13 +1728,12 @@ export interface CreateSinkRequest {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-  sink?: LogSink;
 
+  sink?: LogSink;
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
    * in the new sink. If this value is omitted or set to false, and if the
@@ -1748,14 +1747,15 @@ export interface CreateSinkRequest {
    * be a unique service account used only for exports from the new sink. For
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
+
   uniqueWriterIdentity: boolean;
 }
 export interface CreateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateSinkRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `CreateSink`. */
+
 export interface CreateSinkRequestAmino {
   /**
    * Required. The resource in which to create the sink:
@@ -1771,13 +1771,12 @@ export interface CreateSinkRequestAmino {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-  sink?: LogSinkAmino;
 
+  sink?: LogSinkAmino;
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
    * in the new sink. If this value is omitted or set to false, and if the
@@ -1791,21 +1790,22 @@ export interface CreateSinkRequestAmino {
    * be a unique service account used only for exports from the new sink. For
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
+
   unique_writer_identity: boolean;
 }
 export interface CreateSinkRequestAminoMsg {
   type: "/google.logging.v2.CreateSinkRequest";
   value: CreateSinkRequestAmino;
 }
-
 /** The parameters to `CreateSink`. */
+
 export interface CreateSinkRequestSDKType {
   parent: string;
   sink?: LogSinkSDKType;
   unique_writer_identity: boolean;
 }
-
 /** The parameters to `UpdateSink`. */
+
 export interface UpdateSinkRequest {
   /**
    * Required. The full resource name of the sink to update, including the parent
@@ -1821,13 +1821,12 @@ export interface UpdateSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
-
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-  sink?: LogSink;
 
+  sink?: LogSink;
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
    * for a description of this field. When updating a sink, the effect of this
@@ -1841,8 +1840,8 @@ export interface UpdateSinkRequest {
    * +   It is an error if the old value is true and the new value is
    *     set to false or defaulted to false.
    */
-  uniqueWriterIdentity: boolean;
 
+  uniqueWriterIdentity: boolean;
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
@@ -1861,14 +1860,15 @@ export interface UpdateSinkRequest {
    * 
    * For example: `updateMask=filter`
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSinkRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `UpdateSink`. */
+
 export interface UpdateSinkRequestAmino {
   /**
    * Required. The full resource name of the sink to update, including the parent
@@ -1884,13 +1884,12 @@ export interface UpdateSinkRequestAmino {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sink_name: string;
-
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-  sink?: LogSinkAmino;
 
+  sink?: LogSinkAmino;
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
    * for a description of this field. When updating a sink, the effect of this
@@ -1904,8 +1903,8 @@ export interface UpdateSinkRequestAmino {
    * +   It is an error if the old value is true and the new value is
    *     set to false or defaulted to false.
    */
-  unique_writer_identity: boolean;
 
+  unique_writer_identity: boolean;
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
@@ -1924,22 +1923,23 @@ export interface UpdateSinkRequestAmino {
    * 
    * For example: `updateMask=filter`
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateSinkRequestAminoMsg {
   type: "/google.logging.v2.UpdateSinkRequest";
   value: UpdateSinkRequestAmino;
 }
-
 /** The parameters to `UpdateSink`. */
+
 export interface UpdateSinkRequestSDKType {
   sink_name: string;
   sink?: LogSinkSDKType;
   unique_writer_identity: boolean;
   update_mask?: FieldMaskSDKType;
 }
-
 /** The parameters to `DeleteSink`. */
+
 export interface DeleteSinkRequest {
   /**
    * Required. The full resource name of the sink to delete, including the parent
@@ -1960,8 +1960,8 @@ export interface DeleteSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteSinkRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `DeleteSink`. */
+
 export interface DeleteSinkRequestAmino {
   /**
    * Required. The full resource name of the sink to delete, including the parent
@@ -1982,12 +1982,11 @@ export interface DeleteSinkRequestAminoMsg {
   type: "/google.logging.v2.DeleteSinkRequest";
   value: DeleteSinkRequestAmino;
 }
-
 /** The parameters to `DeleteSink`. */
+
 export interface DeleteSinkRequestSDKType {
   sink_name: string;
 }
-
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -1995,6 +1994,7 @@ export interface DeleteSinkRequestSDKType {
  * organization-level and folder-level sinks don't apply to child resources.
  * Note also that you cannot modify the _Required sink or exclude logs from it.
  */
+
 export interface LogExclusion {
   /**
    * Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
@@ -2003,10 +2003,9 @@ export interface LogExclusion {
    * alphanumeric.
    */
   name: string;
-
   /** Optional. A description of this exclusion. */
-  description: string;
 
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
@@ -2019,35 +2018,35 @@ export interface LogExclusion {
    * 
    *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
    * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
    * value of this field.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Output only. The creation timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  createTime?: Date;
 
+  createTime?: Date;
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
+
   updateTime?: Date;
 }
 export interface LogExclusionProtoMsg {
   typeUrl: "/google.logging.v2.LogExclusion";
   value: Uint8Array;
 }
-
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -2055,6 +2054,7 @@ export interface LogExclusionProtoMsg {
  * organization-level and folder-level sinks don't apply to child resources.
  * Note also that you cannot modify the _Required sink or exclude logs from it.
  */
+
 export interface LogExclusionAmino {
   /**
    * Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
@@ -2063,10 +2063,9 @@ export interface LogExclusionAmino {
    * alphanumeric.
    */
   name: string;
-
   /** Optional. A description of this exclusion. */
-  description: string;
 
+  description: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
@@ -2079,35 +2078,35 @@ export interface LogExclusionAmino {
    * 
    *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
-  filter: string;
 
+  filter: string;
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
    * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
    * value of this field.
    */
-  disabled: boolean;
 
+  disabled: boolean;
   /**
    * Output only. The creation timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  create_time?: Date;
 
+  create_time?: Date;
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
+
   update_time?: Date;
 }
 export interface LogExclusionAminoMsg {
   type: "/google.logging.v2.LogExclusion";
   value: LogExclusionAmino;
 }
-
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -2115,6 +2114,7 @@ export interface LogExclusionAminoMsg {
  * organization-level and folder-level sinks don't apply to child resources.
  * Note also that you cannot modify the _Required sink or exclude logs from it.
  */
+
 export interface LogExclusionSDKType {
   name: string;
   description: string;
@@ -2123,8 +2123,8 @@ export interface LogExclusionSDKType {
   create_time?: Date;
   update_time?: Date;
 }
-
 /** The parameters to `ListExclusions`. */
+
 export interface ListExclusionsRequest {
   /**
    * Required. The parent resource whose exclusions are to be listed.
@@ -2135,28 +2135,28 @@ export interface ListExclusionsRequest {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
 
+  pageToken: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   pageSize: number;
 }
 export interface ListExclusionsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `ListExclusions`. */
+
 export interface ListExclusionsRequestAmino {
   /**
    * Required. The parent resource whose exclusions are to be listed.
@@ -2167,75 +2167,75 @@ export interface ListExclusionsRequestAmino {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
 
+  page_token: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
+
   page_size: number;
 }
 export interface ListExclusionsRequestAminoMsg {
   type: "/google.logging.v2.ListExclusionsRequest";
   value: ListExclusionsRequestAmino;
 }
-
 /** The parameters to `ListExclusions`. */
+
 export interface ListExclusionsRequestSDKType {
   parent: string;
   page_token: string;
   page_size: number;
 }
-
 /** Result returned from `ListExclusions`. */
+
 export interface ListExclusionsResponse {
   /** A list of exclusions. */
   exclusions: LogExclusion[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   nextPageToken: string;
 }
 export interface ListExclusionsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsResponse";
   value: Uint8Array;
 }
-
 /** Result returned from `ListExclusions`. */
+
 export interface ListExclusionsResponseAmino {
   /** A list of exclusions. */
   exclusions: LogExclusionAmino[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
+
   next_page_token: string;
 }
 export interface ListExclusionsResponseAminoMsg {
   type: "/google.logging.v2.ListExclusionsResponse";
   value: ListExclusionsResponseAmino;
 }
-
 /** Result returned from `ListExclusions`. */
+
 export interface ListExclusionsResponseSDKType {
   exclusions: LogExclusionSDKType[];
   next_page_token: string;
 }
-
 /** The parameters to `GetExclusion`. */
+
 export interface GetExclusionRequest {
   /**
    * Required. The resource name of an existing exclusion:
@@ -2255,8 +2255,8 @@ export interface GetExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetExclusionRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `GetExclusion`. */
+
 export interface GetExclusionRequestAmino {
   /**
    * Required. The resource name of an existing exclusion:
@@ -2276,13 +2276,13 @@ export interface GetExclusionRequestAminoMsg {
   type: "/google.logging.v2.GetExclusionRequest";
   value: GetExclusionRequestAmino;
 }
-
 /** The parameters to `GetExclusion`. */
+
 export interface GetExclusionRequestSDKType {
   name: string;
 }
-
 /** The parameters to `CreateExclusion`. */
+
 export interface CreateExclusionRequest {
   /**
    * Required. The parent resource in which to create the exclusion:
@@ -2298,19 +2298,19 @@ export interface CreateExclusionRequest {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
+
   exclusion?: LogExclusion;
 }
 export interface CreateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateExclusionRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `CreateExclusion`. */
+
 export interface CreateExclusionRequestAmino {
   /**
    * Required. The parent resource in which to create the exclusion:
@@ -2326,25 +2326,25 @@ export interface CreateExclusionRequestAmino {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
+
   exclusion?: LogExclusionAmino;
 }
 export interface CreateExclusionRequestAminoMsg {
   type: "/google.logging.v2.CreateExclusionRequest";
   value: CreateExclusionRequestAmino;
 }
-
 /** The parameters to `CreateExclusion`. */
+
 export interface CreateExclusionRequestSDKType {
   parent: string;
   exclusion?: LogExclusionSDKType;
 }
-
 /** The parameters to `UpdateExclusion`. */
+
 export interface UpdateExclusionRequest {
   /**
    * Required. The resource name of the exclusion to update:
@@ -2359,13 +2359,12 @@ export interface UpdateExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-  exclusion?: LogExclusion;
 
+  exclusion?: LogExclusion;
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
    * for the fields are taken from the corresponding fields in the
@@ -2375,14 +2374,15 @@ export interface UpdateExclusionRequest {
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `UpdateExclusion`. */
+
 export interface UpdateExclusionRequestAmino {
   /**
    * Required. The resource name of the exclusion to update:
@@ -2397,13 +2397,12 @@ export interface UpdateExclusionRequestAmino {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-  exclusion?: LogExclusionAmino;
 
+  exclusion?: LogExclusionAmino;
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
    * for the fields are taken from the corresponding fields in the
@@ -2413,21 +2412,22 @@ export interface UpdateExclusionRequestAmino {
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateExclusionRequestAminoMsg {
   type: "/google.logging.v2.UpdateExclusionRequest";
   value: UpdateExclusionRequestAmino;
 }
-
 /** The parameters to `UpdateExclusion`. */
+
 export interface UpdateExclusionRequestSDKType {
   name: string;
   exclusion?: LogExclusionSDKType;
   update_mask?: FieldMaskSDKType;
 }
-
 /** The parameters to `DeleteExclusion`. */
+
 export interface DeleteExclusionRequest {
   /**
    * Required. The resource name of an existing exclusion to delete:
@@ -2447,8 +2447,8 @@ export interface DeleteExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest";
   value: Uint8Array;
 }
-
 /** The parameters to `DeleteExclusion`. */
+
 export interface DeleteExclusionRequestAmino {
   /**
    * Required. The resource name of an existing exclusion to delete:
@@ -2468,12 +2468,11 @@ export interface DeleteExclusionRequestAminoMsg {
   type: "/google.logging.v2.DeleteExclusionRequest";
   value: DeleteExclusionRequestAmino;
 }
-
 /** The parameters to `DeleteExclusion`. */
+
 export interface DeleteExclusionRequestSDKType {
   name: string;
 }
-
 /**
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
@@ -2482,6 +2481,7 @@ export interface DeleteExclusionRequestSDKType {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetCmekSettingsRequest {
   /**
    * Required. The resource for which to retrieve CMEK settings.
@@ -2506,7 +2506,6 @@ export interface GetCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
   value: Uint8Array;
 }
-
 /**
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
@@ -2515,6 +2514,7 @@ export interface GetCmekSettingsRequestProtoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetCmekSettingsRequestAmino {
   /**
    * Required. The resource for which to retrieve CMEK settings.
@@ -2539,7 +2539,6 @@ export interface GetCmekSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetCmekSettingsRequest";
   value: GetCmekSettingsRequestAmino;
 }
-
 /**
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
@@ -2548,10 +2547,10 @@ export interface GetCmekSettingsRequestAminoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetCmekSettingsRequestSDKType {
   name: string;
 }
-
 /**
  * The parameters to
  * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
@@ -2560,6 +2559,7 @@ export interface GetCmekSettingsRequestSDKType {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateCmekSettingsRequest {
   /**
    * Required. The resource name for the CMEK settings to update.
@@ -2578,7 +2578,6 @@ export interface UpdateCmekSettingsRequest {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The CMEK settings to update.
    * 
@@ -2586,8 +2585,8 @@ export interface UpdateCmekSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  cmekSettings?: CmekSettings;
 
+  cmekSettings?: CmekSettings;
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2597,13 +2596,13 @@ export interface UpdateCmekSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
   value: Uint8Array;
 }
-
 /**
  * The parameters to
  * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
@@ -2612,6 +2611,7 @@ export interface UpdateCmekSettingsRequestProtoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateCmekSettingsRequestAmino {
   /**
    * Required. The resource name for the CMEK settings to update.
@@ -2630,7 +2630,6 @@ export interface UpdateCmekSettingsRequestAmino {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The CMEK settings to update.
    * 
@@ -2638,8 +2637,8 @@ export interface UpdateCmekSettingsRequestAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  cmek_settings?: CmekSettingsAmino;
 
+  cmek_settings?: CmekSettingsAmino;
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2649,13 +2648,13 @@ export interface UpdateCmekSettingsRequestAmino {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateCmekSettingsRequestAminoMsg {
   type: "/google.logging.v2.UpdateCmekSettingsRequest";
   value: UpdateCmekSettingsRequestAmino;
 }
-
 /**
  * The parameters to
  * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
@@ -2664,12 +2663,12 @@ export interface UpdateCmekSettingsRequestAminoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateCmekSettingsRequestSDKType {
   name: string;
   cmek_settings?: CmekSettingsSDKType;
   update_mask?: FieldMaskSDKType;
 }
-
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -2682,10 +2681,10 @@ export interface UpdateCmekSettingsRequestSDKType {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface CmekSettings {
   /** Output only. The resource name of the CMEK settings. */
   name: string;
-
   /**
    * The resource name for the configured Cloud KMS key.
    * 
@@ -2716,8 +2715,8 @@ export interface CmekSettings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsKeyName: string;
 
+  kmsKeyName: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -2732,13 +2731,13 @@ export interface CmekSettings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
+
   serviceAccountId: string;
 }
 export interface CmekSettingsProtoMsg {
   typeUrl: "/google.logging.v2.CmekSettings";
   value: Uint8Array;
 }
-
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -2751,10 +2750,10 @@ export interface CmekSettingsProtoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface CmekSettingsAmino {
   /** Output only. The resource name of the CMEK settings. */
   name: string;
-
   /**
    * The resource name for the configured Cloud KMS key.
    * 
@@ -2785,8 +2784,8 @@ export interface CmekSettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_key_name: string;
 
+  kms_key_name: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -2801,13 +2800,13 @@ export interface CmekSettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
+
   service_account_id: string;
 }
 export interface CmekSettingsAminoMsg {
   type: "/google.logging.v2.CmekSettings";
   value: CmekSettingsAmino;
 }
-
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -2820,12 +2819,12 @@ export interface CmekSettingsAminoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface CmekSettingsSDKType {
   name: string;
   kms_key_name: string;
   service_account_id: string;
 }
-
 /**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
@@ -2834,6 +2833,7 @@ export interface CmekSettingsSDKType {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetSettingsRequest {
   /**
    * Required. The resource for which to retrieve settings.
@@ -2858,7 +2858,6 @@ export interface GetSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSettingsRequest";
   value: Uint8Array;
 }
-
 /**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
@@ -2867,6 +2866,7 @@ export interface GetSettingsRequestProtoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetSettingsRequestAmino {
   /**
    * Required. The resource for which to retrieve settings.
@@ -2891,7 +2891,6 @@ export interface GetSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetSettingsRequest";
   value: GetSettingsRequestAmino;
 }
-
 /**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
@@ -2900,10 +2899,10 @@ export interface GetSettingsRequestAminoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface GetSettingsRequestSDKType {
   name: string;
 }
-
 /**
  * The parameters to
  * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
@@ -2912,6 +2911,7 @@ export interface GetSettingsRequestSDKType {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateSettingsRequest {
   /**
    * Required. The resource name for the settings to update.
@@ -2927,7 +2927,6 @@ export interface UpdateSettingsRequest {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The settings to update.
    * 
@@ -2935,8 +2934,8 @@ export interface UpdateSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  settings?: Settings;
 
+  settings?: Settings;
   /**
    * Optional. Field mask identifying which fields from `settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2946,13 +2945,13 @@ export interface UpdateSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
+
   updateMask?: FieldMask;
 }
 export interface UpdateSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest";
   value: Uint8Array;
 }
-
 /**
  * The parameters to
  * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
@@ -2961,6 +2960,7 @@ export interface UpdateSettingsRequestProtoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateSettingsRequestAmino {
   /**
    * Required. The resource name for the settings to update.
@@ -2976,7 +2976,6 @@ export interface UpdateSettingsRequestAmino {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The settings to update.
    * 
@@ -2984,8 +2983,8 @@ export interface UpdateSettingsRequestAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  settings?: SettingsAmino;
 
+  settings?: SettingsAmino;
   /**
    * Optional. Field mask identifying which fields from `settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2995,13 +2994,13 @@ export interface UpdateSettingsRequestAmino {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
+
   update_mask?: FieldMaskAmino;
 }
 export interface UpdateSettingsRequestAminoMsg {
   type: "/google.logging.v2.UpdateSettingsRequest";
   value: UpdateSettingsRequestAmino;
 }
-
 /**
  * The parameters to
  * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
@@ -3010,20 +3009,20 @@ export interface UpdateSettingsRequestAminoMsg {
  * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
  * more information.
  */
+
 export interface UpdateSettingsRequestSDKType {
   name: string;
   settings?: SettingsSDKType;
   update_mask?: FieldMaskSDKType;
 }
-
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
  */
+
 export interface Settings {
   /** Output only. The resource name of the settings. */
   name: string;
-
   /**
    * Optional. The resource name for the configured Cloud KMS key.
    * 
@@ -3053,8 +3052,8 @@ export interface Settings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsKeyName: string;
 
+  kmsKeyName: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -3069,36 +3068,36 @@ export interface Settings {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kmsServiceAccountId: string;
 
+  kmsServiceAccountId: string;
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
-  storageLocation: string;
 
+  storageLocation: string;
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
    * log ingestion if there is already an aggregated sink configured in the
    * hierarchy. The _Default sink can be re-enabled manually if needed.
    */
+
   disableDefaultSink: boolean;
 }
 export interface SettingsProtoMsg {
   typeUrl: "/google.logging.v2.Settings";
   value: Uint8Array;
 }
-
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
  */
+
 export interface SettingsAmino {
   /** Output only. The resource name of the settings. */
   name: string;
-
   /**
    * Optional. The resource name for the configured Cloud KMS key.
    * 
@@ -3128,8 +3127,8 @@ export interface SettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_key_name: string;
 
+  kms_key_name: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -3144,32 +3143,33 @@ export interface SettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_service_account_id: string;
 
+  kms_service_account_id: string;
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
-  storage_location: string;
 
+  storage_location: string;
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
    * log ingestion if there is already an aggregated sink configured in the
    * hierarchy. The _Default sink can be re-enabled manually if needed.
    */
+
   disable_default_sink: boolean;
 }
 export interface SettingsAminoMsg {
   type: "/google.logging.v2.Settings";
   value: SettingsAmino;
 }
-
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
  */
+
 export interface SettingsSDKType {
   name: string;
   kms_key_name: string;
@@ -3177,8 +3177,8 @@ export interface SettingsSDKType {
   storage_location: string;
   disable_default_sink: boolean;
 }
-
 /** The parameters to CopyLogEntries. */
+
 export interface CopyLogEntriesRequest {
   /**
    * Required. Log bucket from which to copy log entries.
@@ -3188,22 +3188,22 @@ export interface CopyLogEntriesRequest {
    *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
   name: string;
-
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
-  filter: string;
 
+  filter: string;
   /** Required. Destination to which to copy log entries. */
+
   destination: string;
 }
 export interface CopyLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
   value: Uint8Array;
 }
-
 /** The parameters to CopyLogEntries. */
+
 export interface CopyLogEntriesRequestAmino {
   /**
    * Required. Log bucket from which to copy log entries.
@@ -3213,48 +3213,47 @@ export interface CopyLogEntriesRequestAmino {
    *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
   name: string;
-
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
-  filter: string;
 
+  filter: string;
   /** Required. Destination to which to copy log entries. */
+
   destination: string;
 }
 export interface CopyLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesRequest";
   value: CopyLogEntriesRequestAmino;
 }
-
 /** The parameters to CopyLogEntries. */
+
 export interface CopyLogEntriesRequestSDKType {
   name: string;
   filter: string;
   destination: string;
 }
-
 /** Metadata for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesMetadata {
   /** The create time of an operation. */
   startTime?: Date;
-
   /** The end time of an operation. */
+
   endTime?: Date;
-
   /** State of an operation. */
+
   state: OperationState;
-
   /** Identifies whether the user has requested cancellation of the operation. */
+
   cancellationRequested: boolean;
-
   /** CopyLogEntries RPC request. */
+
   request?: CopyLogEntriesRequest;
-
   /** Estimated progress of the operation (0 - 100%). */
-  progress: number;
 
+  progress: number;
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
@@ -3264,33 +3263,33 @@ export interface CopyLogEntriesMetadata {
    * 
    * For example: `"serviceAccount:foo@bar.com"`
    */
+
   writerIdentity: string;
 }
 export interface CopyLogEntriesMetadataProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
   value: Uint8Array;
 }
-
 /** Metadata for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesMetadataAmino {
   /** The create time of an operation. */
   start_time?: Date;
-
   /** The end time of an operation. */
+
   end_time?: Date;
-
   /** State of an operation. */
+
   state: OperationState;
-
   /** Identifies whether the user has requested cancellation of the operation. */
+
   cancellation_requested: boolean;
-
   /** CopyLogEntries RPC request. */
+
   request?: CopyLogEntriesRequestAmino;
-
   /** Estimated progress of the operation (0 - 100%). */
-  progress: number;
 
+  progress: number;
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
@@ -3300,14 +3299,15 @@ export interface CopyLogEntriesMetadataAmino {
    * 
    * For example: `"serviceAccount:foo@bar.com"`
    */
+
   writer_identity: string;
 }
 export interface CopyLogEntriesMetadataAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesMetadata";
   value: CopyLogEntriesMetadataAmino;
 }
-
 /** Metadata for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesMetadataSDKType {
   start_time?: Date;
   end_time?: Date;
@@ -3317,8 +3317,8 @@ export interface CopyLogEntriesMetadataSDKType {
   progress: number;
   writer_identity: string;
 }
-
 /** Response type for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
@@ -3327,8 +3327,8 @@ export interface CopyLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
   value: Uint8Array;
 }
-
 /** Response type for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesResponseAmino {
   /** Number of log entries copied. */
   log_entries_copied_count: string;
@@ -3337,8 +3337,8 @@ export interface CopyLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesResponse";
   value: CopyLogEntriesResponseAmino;
 }
-
 /** Response type for CopyLogEntries long running operations. */
+
 export interface CopyLogEntriesResponseSDKType {
   log_entries_copied_count: Long;
 }

@@ -1,5 +1,5 @@
 import { LCDClient } from "@osmonauts/lcd";
-import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
+import { QuerySpotPriceRequest, QuerySpotPriceResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -11,9 +11,10 @@ export class LCDQueryClient {
     this.req = requestClient;
     this.spotPrice = this.spotPrice.bind(this);
   }
-
   /* SpotPrice defines a gRPC query handler that returns the spot price given
    a base denomination and a quote denomination. */
+
+
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
     const options: any = {
       params: {}

@@ -1,5 +1,4 @@
 export const protobufPackage = "google.logging.type";
-
 /**
  * The severity of the event described in a log entry, expressed as one of the
  * standard severity levels listed below.  For your reference, the levels are
@@ -17,6 +16,7 @@ export const protobufPackage = "google.logging.type";
  * FINER, and FINEST levels to `LogSeverity.DEBUG`. You can preserve the
  * original severity level in the log entry payload if you wish.
  */
+
 export enum LogSeverity {
   /** DEFAULT - (0) The log entry has no assigned severity level. */
   DEFAULT = 0,

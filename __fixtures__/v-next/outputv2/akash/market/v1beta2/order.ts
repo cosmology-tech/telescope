@@ -2,8 +2,8 @@ import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
-
 /** State is an enum which refers to state of order */
+
 export enum Order_State {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
@@ -63,8 +63,8 @@ export function order_StateToJSON(object: Order_State): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** OrderID stores owner and all other seq numbers */
+
 export interface OrderID {
   owner: string;
   dseq: Long;
@@ -75,8 +75,8 @@ export interface OrderIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderID";
   value: Uint8Array;
 }
-
 /** OrderID stores owner and all other seq numbers */
+
 export interface OrderIDAmino {
   owner: string;
   dseq: string;
@@ -87,16 +87,16 @@ export interface OrderIDAminoMsg {
   type: "/akash.market.v1beta2.OrderID";
   value: OrderIDAmino;
 }
-
 /** OrderID stores owner and all other seq numbers */
+
 export interface OrderIDSDKType {
   owner: string;
   dseq: Long;
   gseq: number;
   oseq: number;
 }
-
 /** Order stores orderID, state of order and other details */
+
 export interface Order {
   orderId?: OrderID;
   state: Order_State;
@@ -107,8 +107,8 @@ export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
   value: Uint8Array;
 }
-
 /** Order stores orderID, state of order and other details */
+
 export interface OrderAmino {
   order_id?: OrderIDAmino;
   state: Order_State;
@@ -119,16 +119,16 @@ export interface OrderAminoMsg {
   type: "/akash.market.v1beta2.Order";
   value: OrderAmino;
 }
-
 /** Order stores orderID, state of order and other details */
+
 export interface OrderSDKType {
   order_id?: OrderIDSDKType;
   state: Order_State;
   spec?: GroupSpecSDKType;
   created_at: Long;
 }
-
 /** OrderFilters defines flags for order list filter */
+
 export interface OrderFilters {
   owner: string;
   dseq: Long;
@@ -140,8 +140,8 @@ export interface OrderFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderFilters";
   value: Uint8Array;
 }
-
 /** OrderFilters defines flags for order list filter */
+
 export interface OrderFiltersAmino {
   owner: string;
   dseq: string;
@@ -153,8 +153,8 @@ export interface OrderFiltersAminoMsg {
   type: "/akash.market.v1beta2.OrderFilters";
   value: OrderFiltersAmino;
 }
-
 /** OrderFilters defines flags for order list filter */
+
 export interface OrderFiltersSDKType {
   owner: string;
   dseq: Long;

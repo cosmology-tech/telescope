@@ -3,8 +3,8 @@ import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
-
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
+
 export interface QueryProvidersRequest {
   pagination?: PageRequest;
 }
@@ -12,8 +12,8 @@ export interface QueryProvidersRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: Uint8Array;
 }
-
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
+
 export interface QueryProvidersRequestAmino {
   pagination?: PageRequestAmino;
 }
@@ -21,13 +21,13 @@ export interface QueryProvidersRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: QueryProvidersRequestAmino;
 }
-
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
+
 export interface QueryProvidersRequestSDKType {
   pagination?: PageRequestSDKType;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryProvidersResponse {
   providers: Provider[];
   pagination?: PageResponse;
@@ -36,8 +36,8 @@ export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse";
   value: Uint8Array;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryProvidersResponseAmino {
   providers: ProviderAmino[];
   pagination?: PageResponseAmino;
@@ -46,14 +46,14 @@ export interface QueryProvidersResponseAminoMsg {
   type: "/akash.provider.v1beta2.QueryProvidersResponse";
   value: QueryProvidersResponseAmino;
 }
-
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
   pagination?: PageResponseSDKType;
 }
-
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
+
 export interface QueryProviderRequest {
   owner: string;
 }
@@ -61,8 +61,8 @@ export interface QueryProviderRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest";
   value: Uint8Array;
 }
-
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
+
 export interface QueryProviderRequestAmino {
   owner: string;
 }
@@ -70,13 +70,13 @@ export interface QueryProviderRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderRequest";
   value: QueryProviderRequestAmino;
 }
-
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
+
 export interface QueryProviderRequestSDKType {
   owner: string;
 }
-
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
+
 export interface QueryProviderResponse {
   provider?: Provider;
 }
@@ -84,8 +84,8 @@ export interface QueryProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderResponse";
   value: Uint8Array;
 }
-
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
+
 export interface QueryProviderResponseAmino {
   provider?: ProviderAmino;
 }
@@ -93,8 +93,8 @@ export interface QueryProviderResponseAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderResponse";
   value: QueryProviderResponseAmino;
 }
-
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
+
 export interface QueryProviderResponseSDKType {
   provider?: ProviderSDKType;
 }

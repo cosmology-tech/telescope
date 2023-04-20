@@ -1,12 +1,12 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
  * to one or more HTTP REST API methods.
  */
+
 export interface Http {
   /**
    * A list of HTTP configuration rules that apply to individual API methods.
@@ -14,7 +14,6 @@ export interface Http {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: HttpRule[];
-
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
    * cases of single segment matches in reserved expansion, where "%2F" will be
@@ -23,18 +22,19 @@ export interface Http {
    * The default behavior is to not decode RFC 6570 reserved characters in multi
    * segment matches.
    */
+
   fullyDecodeReservedExpansion: boolean;
 }
 export interface HttpProtoMsg {
   typeUrl: "/google.api.Http";
   value: Uint8Array;
 }
-
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
  * to one or more HTTP REST API methods.
  */
+
 export interface HttpAmino {
   /**
    * A list of HTTP configuration rules that apply to individual API methods.
@@ -42,7 +42,6 @@ export interface HttpAmino {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: HttpRuleAmino[];
-
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
    * cases of single segment matches in reserved expansion, where "%2F" will be
@@ -51,23 +50,23 @@ export interface HttpAmino {
    * The default behavior is to not decode RFC 6570 reserved characters in multi
    * segment matches.
    */
+
   fully_decode_reserved_expansion: boolean;
 }
 export interface HttpAminoMsg {
   type: "/google.api.Http";
   value: HttpAmino;
 }
-
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
  * to one or more HTTP REST API methods.
  */
+
 export interface HttpSDKType {
   rules: HttpRuleSDKType[];
   fully_decode_reserved_expansion: boolean;
 }
-
 /**
  * # gRPC Transcoding
  * 
@@ -339,6 +338,7 @@ export interface HttpSDKType {
  * the request or response body to a repeated field. However, some gRPC
  * Transcoding implementations may not support this feature.
  */
+
 export interface HttpRule {
   /**
    * Selects a method to which this rule applies.
@@ -346,33 +346,32 @@ export interface HttpRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Maps to HTTP GET. Used for listing and getting information about
    * resources.
    */
+
   get?: string;
-
   /** Maps to HTTP PUT. Used for replacing a resource. */
+
   put?: string;
-
   /** Maps to HTTP POST. Used for creating a resource or performing an action. */
+
   post?: string;
-
   /** Maps to HTTP DELETE. Used for deleting a resource. */
+
   delete?: string;
-
   /** Maps to HTTP PATCH. Used for updating a resource. */
-  patch?: string;
 
+  patch?: string;
   /**
    * The custom pattern is used for specifying an HTTP method that is not
    * included in the `pattern` field, such as HEAD, or "*" to leave the
    * HTTP method unspecified for this rule. The wild-card rule is useful
    * for services that provide content to Web (HTML) clients.
    */
-  custom?: CustomHttpPattern;
 
+  custom?: CustomHttpPattern;
   /**
    * The name of the request field whose value is mapped to the HTTP request
    * body, or `*` for mapping all request fields not captured by the path
@@ -381,8 +380,8 @@ export interface HttpRule {
    * NOTE: the referred field must be present at the top-level of the request
    * message type.
    */
-  body: string;
 
+  body: string;
   /**
    * Optional. The name of the response field whose value is mapped to the HTTP
    * response body. When omitted, the entire response message will be used
@@ -391,20 +390,20 @@ export interface HttpRule {
    * NOTE: The referred field must be present at the top-level of the response
    * message type.
    */
-  responseBody: string;
 
+  responseBody: string;
   /**
    * Additional HTTP bindings for the selector. Nested bindings must
    * not contain an `additional_bindings` field themselves (that is,
    * the nesting may only be one level deep).
    */
+
   additionalBindings: HttpRule[];
 }
 export interface HttpRuleProtoMsg {
   typeUrl: "/google.api.HttpRule";
   value: Uint8Array;
 }
-
 /**
  * # gRPC Transcoding
  * 
@@ -676,6 +675,7 @@ export interface HttpRuleProtoMsg {
  * the request or response body to a repeated field. However, some gRPC
  * Transcoding implementations may not support this feature.
  */
+
 export interface HttpRuleAmino {
   /**
    * Selects a method to which this rule applies.
@@ -683,33 +683,32 @@ export interface HttpRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * Maps to HTTP GET. Used for listing and getting information about
    * resources.
    */
+
   get?: string;
-
   /** Maps to HTTP PUT. Used for replacing a resource. */
+
   put?: string;
-
   /** Maps to HTTP POST. Used for creating a resource or performing an action. */
+
   post?: string;
-
   /** Maps to HTTP DELETE. Used for deleting a resource. */
+
   delete?: string;
-
   /** Maps to HTTP PATCH. Used for updating a resource. */
-  patch?: string;
 
+  patch?: string;
   /**
    * The custom pattern is used for specifying an HTTP method that is not
    * included in the `pattern` field, such as HEAD, or "*" to leave the
    * HTTP method unspecified for this rule. The wild-card rule is useful
    * for services that provide content to Web (HTML) clients.
    */
-  custom?: CustomHttpPatternAmino;
 
+  custom?: CustomHttpPatternAmino;
   /**
    * The name of the request field whose value is mapped to the HTTP request
    * body, or `*` for mapping all request fields not captured by the path
@@ -718,8 +717,8 @@ export interface HttpRuleAmino {
    * NOTE: the referred field must be present at the top-level of the request
    * message type.
    */
-  body: string;
 
+  body: string;
   /**
    * Optional. The name of the response field whose value is mapped to the HTTP
    * response body. When omitted, the entire response message will be used
@@ -728,20 +727,20 @@ export interface HttpRuleAmino {
    * NOTE: The referred field must be present at the top-level of the response
    * message type.
    */
-  response_body: string;
 
+  response_body: string;
   /**
    * Additional HTTP bindings for the selector. Nested bindings must
    * not contain an `additional_bindings` field themselves (that is,
    * the nesting may only be one level deep).
    */
+
   additional_bindings: HttpRuleAmino[];
 }
 export interface HttpRuleAminoMsg {
   type: "/google.api.HttpRule";
   value: HttpRuleAmino;
 }
-
 /**
  * # gRPC Transcoding
  * 
@@ -1013,6 +1012,7 @@ export interface HttpRuleAminoMsg {
  * the request or response body to a repeated field. However, some gRPC
  * Transcoding implementations may not support this feature.
  */
+
 export interface HttpRuleSDKType {
   selector: string;
   get?: string;
@@ -1025,34 +1025,34 @@ export interface HttpRuleSDKType {
   response_body: string;
   additional_bindings: HttpRuleSDKType[];
 }
-
 /** A custom pattern is used for defining custom HTTP verb. */
+
 export interface CustomHttpPattern {
   /** The name of this custom HTTP verb. */
   kind: string;
-
   /** The path matched by this custom verb. */
+
   path: string;
 }
 export interface CustomHttpPatternProtoMsg {
   typeUrl: "/google.api.CustomHttpPattern";
   value: Uint8Array;
 }
-
 /** A custom pattern is used for defining custom HTTP verb. */
+
 export interface CustomHttpPatternAmino {
   /** The name of this custom HTTP verb. */
   kind: string;
-
   /** The path matched by this custom verb. */
+
   path: string;
 }
 export interface CustomHttpPatternAminoMsg {
   type: "/google.api.CustomHttpPattern";
   value: CustomHttpPatternAmino;
 }
-
 /** A custom pattern is used for defining custom HTTP verb. */
+
 export interface CustomHttpPatternSDKType {
   kind: string;
   path: string;

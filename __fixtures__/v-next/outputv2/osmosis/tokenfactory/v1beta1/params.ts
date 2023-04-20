@@ -2,8 +2,8 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
-
 /** Params defines the parameters for the tokenfactory module. */
+
 export interface Params {
   denomCreationFee: Coin[];
 }
@@ -11,8 +11,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.Params";
   value: Uint8Array;
 }
-
 /** Params defines the parameters for the tokenfactory module. */
+
 export interface ParamsAmino {
   denom_creation_fee: CoinAmino[];
 }
@@ -20,8 +20,8 @@ export interface ParamsAminoMsg {
   type: "osmosis/tokenfactory/params";
   value: ParamsAmino;
 }
-
 /** Params defines the parameters for the tokenfactory module. */
+
 export interface ParamsSDKType {
   denom_creation_fee: CoinSDKType[];
 }

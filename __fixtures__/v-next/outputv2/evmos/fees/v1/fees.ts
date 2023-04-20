@@ -1,55 +1,55 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
-
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
+
 export interface DevFeeInfo {
   /** hex address of registered contract */
   contractAddress: string;
-
   /** bech32 address of contract deployer */
-  deployerAddress: string;
 
+  deployerAddress: string;
   /**
    * bech32 address of account receiving the transaction fees
    * it defaults to deployer_address
    */
+
   withdrawAddress: string;
 }
 export interface DevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.DevFeeInfo";
   value: Uint8Array;
 }
-
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
+
 export interface DevFeeInfoAmino {
   /** hex address of registered contract */
   contract_address: string;
-
   /** bech32 address of contract deployer */
-  deployer_address: string;
 
+  deployer_address: string;
   /**
    * bech32 address of account receiving the transaction fees
    * it defaults to deployer_address
    */
+
   withdraw_address: string;
 }
 export interface DevFeeInfoAminoMsg {
   type: "/evmos.fees.v1.DevFeeInfo";
   value: DevFeeInfoAmino;
 }
-
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
+
 export interface DevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;

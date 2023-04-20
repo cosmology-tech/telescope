@@ -2,8 +2,8 @@ import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmi
 import { Long, isSet, DeepPartial } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateBalancerPool {
   sender: string;
   poolParams?: PoolParams;
@@ -14,8 +14,8 @@ export interface MsgCreateBalancerPoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
   value: Uint8Array;
 }
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateBalancerPoolAmino {
   sender: string;
   pool_params?: PoolParamsAmino;
@@ -26,16 +26,16 @@ export interface MsgCreateBalancerPoolAminoMsg {
   type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
   value: MsgCreateBalancerPoolAmino;
 }
-
 /** ===================== MsgCreatePool */
+
 export interface MsgCreateBalancerPoolSDKType {
   sender: string;
   pool_params?: PoolParamsSDKType;
   pool_assets: PoolAssetSDKType[];
   future_pool_governor: string;
 }
-
 /** Returns the poolID */
+
 export interface MsgCreateBalancerPoolResponse {
   poolId: Long;
 }
@@ -43,8 +43,8 @@ export interface MsgCreateBalancerPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
   value: Uint8Array;
 }
-
 /** Returns the poolID */
+
 export interface MsgCreateBalancerPoolResponseAmino {
   pool_id: string;
 }
@@ -52,8 +52,8 @@ export interface MsgCreateBalancerPoolResponseAminoMsg {
   type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
   value: MsgCreateBalancerPoolResponseAmino;
 }
-
 /** Returns the poolID */
+
 export interface MsgCreateBalancerPoolResponseSDKType {
   pool_id: Long;
 }

@@ -3,8 +3,8 @@ import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPU {
   units?: ResourceValue;
   attributes: Attribute[];
@@ -13,8 +13,8 @@ export interface CPUProtoMsg {
   typeUrl: "/akash.base.v1beta2.CPU";
   value: Uint8Array;
 }
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPUAmino {
   units?: ResourceValueAmino;
   attributes: AttributeAmino[];
@@ -23,14 +23,14 @@ export interface CPUAminoMsg {
   type: "/akash.base.v1beta2.CPU";
   value: CPUAmino;
 }
-
 /** CPU stores resource units and cpu config attributes */
+
 export interface CPUSDKType {
   units?: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface Memory {
   quantity?: ResourceValue;
   attributes: Attribute[];
@@ -39,8 +39,8 @@ export interface MemoryProtoMsg {
   typeUrl: "/akash.base.v1beta2.Memory";
   value: Uint8Array;
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
@@ -49,14 +49,14 @@ export interface MemoryAminoMsg {
   type: "/akash.base.v1beta2.Memory";
   value: MemoryAmino;
 }
-
 /** Memory stores resource quantity and memory attributes */
+
 export interface MemorySDKType {
   quantity?: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface Storage {
   name: string;
   quantity?: ResourceValue;
@@ -66,8 +66,8 @@ export interface StorageProtoMsg {
   typeUrl: "/akash.base.v1beta2.Storage";
   value: Uint8Array;
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface StorageAmino {
   name: string;
   quantity?: ResourceValueAmino;
@@ -77,8 +77,8 @@ export interface StorageAminoMsg {
   type: "/akash.base.v1beta2.Storage";
   value: StorageAmino;
 }
-
 /** Storage stores resource quantity and storage attributes */
+
 export interface StorageSDKType {
   name: string;
   quantity?: ResourceValueSDKType;

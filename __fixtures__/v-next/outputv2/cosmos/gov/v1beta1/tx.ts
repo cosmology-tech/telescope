@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionAmino, WeightedVoteOptionSDKType, TextProposal, TextProposalProtoMsg, TextProposalSDKType, voteOptionFromJSON, voteOptionToJSON } from "./gov";
+import { VoteOption, WeightedVoteOption, WeightedVoteOptionAmino, WeightedVoteOptionSDKType, TextProposal, TextProposalProtoMsg, TextProposalSDKType, voteOptionFromJSON, voteOptionToJSON } from "./gov";
 import { RegisterIncentiveProposal, RegisterIncentiveProposalProtoMsg, RegisterIncentiveProposalSDKType } from "../../../evmos/incentives/v1/incentives";
 import { ClientUpdateProposal, ClientUpdateProposalProtoMsg, ClientUpdateProposalSDKType, UpgradeProposal, UpgradeProposalProtoMsg, UpgradeProposalSDKType } from "../../../ibc/core/client/v1/client";
 import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalProtoMsg, ReplacePoolIncentivesProposalSDKType, UpdatePoolIncentivesProposal, UpdatePoolIncentivesProposalProtoMsg, UpdatePoolIncentivesProposalSDKType } from "../../../osmosis/pool-incentives/v1beta1/gov";
@@ -9,11 +9,11 @@ import { UpdateFeeTokenProposal, UpdateFeeTokenProposalProtoMsg, UpdateFeeTokenP
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1beta1";
-
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
  */
+
 export interface MsgSubmitProposal {
   content?: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
   initialDeposit: Coin[];
@@ -26,11 +26,11 @@ export interface MsgSubmitProposalProtoMsg {
 export type MsgSubmitProposalEncoded = Omit<MsgSubmitProposal, "content"> & {
   content?: TextProposalProtoMsg | RegisterIncentiveProposalProtoMsg | ClientUpdateProposalProtoMsg | UpgradeProposalProtoMsg | ReplacePoolIncentivesProposalProtoMsg | UpdatePoolIncentivesProposalProtoMsg | SetSuperfluidAssetsProposalProtoMsg | RemoveSuperfluidAssetsProposalProtoMsg | UpdateUnpoolWhiteListProposalProtoMsg | UpdateFeeTokenProposalProtoMsg | AnyProtoMsg | undefined;
 };
-
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
  */
+
 export interface MsgSubmitProposalAmino {
   content?: AnyAmino;
   initial_deposit: CoinAmino[];
@@ -40,18 +40,18 @@ export interface MsgSubmitProposalAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: MsgSubmitProposalAmino;
 }
-
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
  */
+
 export interface MsgSubmitProposalSDKType {
   content?: TextProposalSDKType | RegisterIncentiveProposalSDKType | ClientUpdateProposalSDKType | UpgradeProposalSDKType | ReplacePoolIncentivesProposalSDKType | UpdatePoolIncentivesProposalSDKType | SetSuperfluidAssetsProposalSDKType | RemoveSuperfluidAssetsProposalSDKType | UpdateUnpoolWhiteListProposalSDKType | UpdateFeeTokenProposalSDKType | AnySDKType | undefined;
   initial_deposit: CoinSDKType[];
   proposer: string;
 }
-
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
@@ -59,8 +59,8 @@ export interface MsgSubmitProposalResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse";
   value: Uint8Array;
 }
-
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
 }
@@ -68,13 +68,13 @@ export interface MsgSubmitProposalResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposalResponse";
   value: MsgSubmitProposalResponseAmino;
 }
-
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+
 export interface MsgSubmitProposalResponseSDKType {
   proposal_id: Long;
 }
-
 /** MsgVote defines a message to cast a vote. */
+
 export interface MsgVote {
   proposalId: Long;
   voter: string;
@@ -84,8 +84,8 @@ export interface MsgVoteProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVote";
   value: Uint8Array;
 }
-
 /** MsgVote defines a message to cast a vote. */
+
 export interface MsgVoteAmino {
   proposal_id: string;
   voter: string;
@@ -95,36 +95,36 @@ export interface MsgVoteAminoMsg {
   type: "cosmos-sdk/MsgVote";
   value: MsgVoteAmino;
 }
-
 /** MsgVote defines a message to cast a vote. */
+
 export interface MsgVoteSDKType {
   proposal_id: Long;
   voter: string;
   option: VoteOption;
 }
-
 /** MsgVoteResponse defines the Msg/Vote response type. */
+
 export interface MsgVoteResponse {}
 export interface MsgVoteResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse";
   value: Uint8Array;
 }
-
 /** MsgVoteResponse defines the Msg/Vote response type. */
+
 export interface MsgVoteResponseAmino {}
 export interface MsgVoteResponseAminoMsg {
   type: "cosmos-sdk/MsgVoteResponse";
   value: MsgVoteResponseAmino;
 }
-
 /** MsgVoteResponse defines the Msg/Vote response type. */
-export interface MsgVoteResponseSDKType {}
 
+export interface MsgVoteResponseSDKType {}
 /**
  * MsgVoteWeighted defines a message to cast a vote.
  * 
  * Since: cosmos-sdk 0.43
  */
+
 export interface MsgVoteWeighted {
   proposalId: Long;
   voter: string;
@@ -134,12 +134,12 @@ export interface MsgVoteWeightedProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted";
   value: Uint8Array;
 }
-
 /**
  * MsgVoteWeighted defines a message to cast a vote.
  * 
  * Since: cosmos-sdk 0.43
  */
+
 export interface MsgVoteWeightedAmino {
   proposal_id: string;
   voter: string;
@@ -149,48 +149,48 @@ export interface MsgVoteWeightedAminoMsg {
   type: "cosmos-sdk/MsgVoteWeighted";
   value: MsgVoteWeightedAmino;
 }
-
 /**
  * MsgVoteWeighted defines a message to cast a vote.
  * 
  * Since: cosmos-sdk 0.43
  */
+
 export interface MsgVoteWeightedSDKType {
   proposal_id: Long;
   voter: string;
   options: WeightedVoteOptionSDKType[];
 }
-
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
  * Since: cosmos-sdk 0.43
  */
+
 export interface MsgVoteWeightedResponse {}
 export interface MsgVoteWeightedResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse";
   value: Uint8Array;
 }
-
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
  * Since: cosmos-sdk 0.43
  */
+
 export interface MsgVoteWeightedResponseAmino {}
 export interface MsgVoteWeightedResponseAminoMsg {
   type: "cosmos-sdk/MsgVoteWeightedResponse";
   value: MsgVoteWeightedResponseAmino;
 }
-
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
  * Since: cosmos-sdk 0.43
  */
-export interface MsgVoteWeightedResponseSDKType {}
 
+export interface MsgVoteWeightedResponseSDKType {}
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+
 export interface MsgDeposit {
   proposalId: Long;
   depositor: string;
@@ -200,8 +200,8 @@ export interface MsgDepositProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgDeposit";
   value: Uint8Array;
 }
-
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+
 export interface MsgDepositAmino {
   proposal_id: string;
   depositor: string;
@@ -211,29 +211,29 @@ export interface MsgDepositAminoMsg {
   type: "cosmos-sdk/MsgDeposit";
   value: MsgDepositAmino;
 }
-
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+
 export interface MsgDepositSDKType {
   proposal_id: Long;
   depositor: string;
   amount: CoinSDKType[];
 }
-
 /** MsgDepositResponse defines the Msg/Deposit response type. */
+
 export interface MsgDepositResponse {}
 export interface MsgDepositResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse";
   value: Uint8Array;
 }
-
 /** MsgDepositResponse defines the Msg/Deposit response type. */
+
 export interface MsgDepositResponseAmino {}
 export interface MsgDepositResponseAminoMsg {
   type: "cosmos-sdk/MsgDepositResponse";
   value: MsgDepositResponseAmino;
 }
-
 /** MsgDepositResponse defines the Msg/Deposit response type. */
+
 export interface MsgDepositResponseSDKType {}
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {

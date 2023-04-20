@@ -1,11 +1,11 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * A description of the historical or future-looking state of the
  * resource pattern.
  */
+
 export enum ResourceDescriptor_History {
   /** HISTORY_UNSPECIFIED - The "unset" value. */
   HISTORY_UNSPECIFIED = 0,
@@ -62,8 +62,8 @@ export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_Hist
       return "UNRECOGNIZED";
   }
 }
-
 /** A flag representing a specific style that a resource claims to conform to. */
+
 export enum ResourceDescriptor_Style {
   /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
   STYLE_UNSPECIFIED = 0,
@@ -112,7 +112,6 @@ export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style)
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -162,6 +161,7 @@ export function resourceDescriptor_StyleToJSON(object: ResourceDescriptor_Style)
  *       pattern: "organizations/{organization}/logs/{log}"
  *       pattern: "billingAccounts/{billing_account}/logs/{log}"
  */
+
 export interface ResourceDescriptor {
   /**
    * The resource type. It must be in the format of
@@ -176,7 +176,6 @@ export interface ResourceDescriptor {
    * characters allowed for the `resource_type_kind` is 100.
    */
   type: string;
-
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -198,14 +197,14 @@ export interface ResourceDescriptor {
    * the same component name (e.g. "project") refers to IDs of the same
    * type of resource.
    */
-  pattern: string[];
 
+  pattern: string[];
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
-  nameField: string;
 
+  nameField: string;
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -223,8 +222,8 @@ export interface ResourceDescriptor {
    *       };
    *     }
    */
-  history: ResourceDescriptor_History;
 
+  history: ResourceDescriptor_History;
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -235,27 +234,27 @@ export interface ResourceDescriptor {
    * Note: The plural form is required even for singleton resources. See
    * https://aip.dev/156
    */
-  plural: string;
 
+  plural: string;
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
-  singular: string;
 
+  singular: string;
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
+
   style: ResourceDescriptor_Style[];
 }
 export interface ResourceDescriptorProtoMsg {
   typeUrl: "/google.api.ResourceDescriptor";
   value: Uint8Array;
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -305,6 +304,7 @@ export interface ResourceDescriptorProtoMsg {
  *       pattern: "organizations/{organization}/logs/{log}"
  *       pattern: "billingAccounts/{billing_account}/logs/{log}"
  */
+
 export interface ResourceDescriptorAmino {
   /**
    * The resource type. It must be in the format of
@@ -319,7 +319,6 @@ export interface ResourceDescriptorAmino {
    * characters allowed for the `resource_type_kind` is 100.
    */
   type: string;
-
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -341,14 +340,14 @@ export interface ResourceDescriptorAmino {
    * the same component name (e.g. "project") refers to IDs of the same
    * type of resource.
    */
-  pattern: string[];
 
+  pattern: string[];
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
-  name_field: string;
 
+  name_field: string;
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -366,8 +365,8 @@ export interface ResourceDescriptorAmino {
    *       };
    *     }
    */
-  history: ResourceDescriptor_History;
 
+  history: ResourceDescriptor_History;
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -378,27 +377,27 @@ export interface ResourceDescriptorAmino {
    * Note: The plural form is required even for singleton resources. See
    * https://aip.dev/156
    */
-  plural: string;
 
+  plural: string;
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
-  singular: string;
 
+  singular: string;
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
+
   style: ResourceDescriptor_Style[];
 }
 export interface ResourceDescriptorAminoMsg {
   type: "/google.api.ResourceDescriptor";
   value: ResourceDescriptorAmino;
 }
-
 /**
  * A simple descriptor of a resource type.
  * 
@@ -448,6 +447,7 @@ export interface ResourceDescriptorAminoMsg {
  *       pattern: "organizations/{organization}/logs/{log}"
  *       pattern: "billingAccounts/{billing_account}/logs/{log}"
  */
+
 export interface ResourceDescriptorSDKType {
   type: string;
   pattern: string[];
@@ -457,11 +457,11 @@ export interface ResourceDescriptorSDKType {
   singular: string;
   style: ResourceDescriptor_Style[];
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
  */
+
 export interface ResourceReference {
   /**
    * The resource type that the annotated field references.
@@ -486,7 +486,6 @@ export interface ResourceReference {
    *     }
    */
   type: string;
-
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -500,17 +499,18 @@ export interface ResourceReference {
    *       };
    *     }
    */
+
   childType: string;
 }
 export interface ResourceReferenceProtoMsg {
   typeUrl: "/google.api.ResourceReference";
   value: Uint8Array;
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
  */
+
 export interface ResourceReferenceAmino {
   /**
    * The resource type that the annotated field references.
@@ -535,7 +535,6 @@ export interface ResourceReferenceAmino {
    *     }
    */
   type: string;
-
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -549,17 +548,18 @@ export interface ResourceReferenceAmino {
    *       };
    *     }
    */
+
   child_type: string;
 }
 export interface ResourceReferenceAminoMsg {
   type: "/google.api.ResourceReference";
   value: ResourceReferenceAmino;
 }
-
 /**
  * Defines a proto annotation that describes a string field that refers to
  * an API resource.
  */
+
 export interface ResourceReferenceSDKType {
   type: string;
   child_type: string;

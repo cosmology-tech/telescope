@@ -4,40 +4,40 @@ import { ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
-
 /** GenesisState defines the claim module's genesis state. */
+
 export interface GenesisState {
   /** balance of the claim module's account */
   moduleAccountBalance?: Coin;
-
   /** params defines all the parameters of the module. */
-  params?: Params;
 
+  params?: Params;
   /** list of claim records, one for every airdrop recipient */
+
   claimRecords: ClaimRecord[];
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the claim module's genesis state. */
+
 export interface GenesisStateAmino {
   /** balance of the claim module's account */
   module_account_balance?: CoinAmino;
-
   /** params defines all the parameters of the module. */
-  params?: ParamsAmino;
 
+  params?: ParamsAmino;
   /** list of claim records, one for every airdrop recipient */
+
   claim_records: ClaimRecordAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/claim/genesis-state";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the claim module's genesis state. */
+
 export interface GenesisStateSDKType {
   module_account_balance?: CoinSDKType;
   params?: ParamsSDKType;

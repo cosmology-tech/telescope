@@ -1,10 +1,8 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
+import { QueryFeeTokensRequest, QueryFeeTokensResponse, QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse, QueryDenomPoolIdRequest, QueryDenomPoolIdResponse, QueryBaseDenomRequest, QueryBaseDenomResponse } from "./query";
 export interface Query {
   /**
    * FeeTokens returns a list of all the whitelisted fee tokens and their
@@ -12,14 +10,14 @@ export interface Query {
    * query endpoint
    */
   feeTokens(request?: DeepPartial<QueryFeeTokensRequest>, metadata?: grpc.Metadata): Promise<QueryFeeTokensResponse>;
-
   /** DenomSpotPrice returns all spot prices by each registered token denom. */
+
   denomSpotPrice(request: DeepPartial<QueryDenomSpotPriceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomSpotPriceResponse>;
-
   /** Returns the poolID for a specified denom input. */
-  denomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse>;
 
+  denomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse>;
   /** Returns a list of all base denom tokens and their corresponding pools. */
+
   baseDenom(request?: DeepPartial<QueryBaseDenomRequest>, metadata?: grpc.Metadata): Promise<QueryBaseDenomResponse>;
 }
 export class QueryClientImpl implements Query {

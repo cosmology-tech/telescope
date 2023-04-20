@@ -4,8 +4,8 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
-
 /** GenesisState defines the basic genesis state used by market module */
+
 export interface GenesisState {
   orders: Order[];
   leases: Lease[];
@@ -15,8 +15,8 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.market.v1beta2.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the basic genesis state used by market module */
+
 export interface GenesisStateAmino {
   orders: OrderAmino[];
   leases: LeaseAmino[];
@@ -26,8 +26,8 @@ export interface GenesisStateAminoMsg {
   type: "/akash.market.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the basic genesis state used by market module */
+
 export interface GenesisStateSDKType {
   orders: OrderSDKType[];
   leases: LeaseSDKType[];

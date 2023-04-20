@@ -2,7 +2,6 @@ import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives"
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
-
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -12,6 +11,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * pool and it is allocated to gauges and community pool by the DistrRecords
  * configuration. Note that gaugeId=0 represents the community pool.
  */
+
 export interface ReplacePoolIncentivesProposal {
   title: string;
   description: string;
@@ -21,7 +21,6 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   value: Uint8Array;
 }
-
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -31,6 +30,7 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * pool and it is allocated to gauges and community pool by the DistrRecords
  * configuration. Note that gaugeId=0 represents the community pool.
  */
+
 export interface ReplacePoolIncentivesProposalAmino {
   title: string;
   description: string;
@@ -40,7 +40,6 @@ export interface ReplacePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/replace-pool-incentives-proposal";
   value: ReplacePoolIncentivesProposalAmino;
 }
-
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -50,12 +49,12 @@ export interface ReplacePoolIncentivesProposalAminoMsg {
  * pool and it is allocated to gauges and community pool by the DistrRecords
  * configuration. Note that gaugeId=0 represents the community pool.
  */
+
 export interface ReplacePoolIncentivesProposalSDKType {
   title: string;
   description: string;
   records: DistrRecordSDKType[];
 }
-
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -65,6 +64,7 @@ export interface ReplacePoolIncentivesProposalSDKType {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
+
 export interface UpdatePoolIncentivesProposal {
   title: string;
   description: string;
@@ -74,7 +74,6 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   value: Uint8Array;
 }
-
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -84,6 +83,7 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
+
 export interface UpdatePoolIncentivesProposalAmino {
   title: string;
   description: string;
@@ -93,7 +93,6 @@ export interface UpdatePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/update-pool-incentives-proposal";
   value: UpdatePoolIncentivesProposalAmino;
 }
-
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -103,6 +102,7 @@ export interface UpdatePoolIncentivesProposalAminoMsg {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
+
 export interface UpdatePoolIncentivesProposalSDKType {
   title: string;
   description: string;

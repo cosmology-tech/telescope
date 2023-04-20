@@ -3,8 +3,8 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1be
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** Resource stores unit, total count and price of resource */
+
 export interface Resource {
   resources?: ResourceUnits;
   count: number;
@@ -14,8 +14,8 @@ export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Resource";
   value: Uint8Array;
 }
-
 /** Resource stores unit, total count and price of resource */
+
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
   count: number;
@@ -25,8 +25,8 @@ export interface ResourceAminoMsg {
   type: "/akash.deployment.v1beta2.Resource";
   value: ResourceAmino;
 }
-
 /** Resource stores unit, total count and price of resource */
+
 export interface ResourceSDKType {
   resources?: ResourceUnitsSDKType;
   count: number;

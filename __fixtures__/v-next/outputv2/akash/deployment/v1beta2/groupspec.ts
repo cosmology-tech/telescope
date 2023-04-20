@@ -3,8 +3,8 @@ import { Resource, ResourceAmino, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
-
 /** GroupSpec stores group specifications */
+
 export interface GroupSpec {
   name: string;
   requirements?: PlacementRequirements;
@@ -14,8 +14,8 @@ export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupSpec";
   value: Uint8Array;
 }
-
 /** GroupSpec stores group specifications */
+
 export interface GroupSpecAmino {
   name: string;
   requirements?: PlacementRequirementsAmino;
@@ -25,8 +25,8 @@ export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta2.GroupSpec";
   value: GroupSpecAmino;
 }
-
 /** GroupSpec stores group specifications */
+
 export interface GroupSpecSDKType {
   name: string;
   requirements?: PlacementRequirementsSDKType;

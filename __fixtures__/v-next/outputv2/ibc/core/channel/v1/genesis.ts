@@ -2,8 +2,8 @@ import { IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelSDKType, Pa
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.channel.v1";
-
 /** GenesisState defines the ibc channel submodule's genesis state. */
+
 export interface GenesisState {
   channels: IdentifiedChannel[];
   acknowledgements: PacketState[];
@@ -12,16 +12,16 @@ export interface GenesisState {
   sendSequences: PacketSequence[];
   recvSequences: PacketSequence[];
   ackSequences: PacketSequence[];
-
   /** the sequence for the next generated channel identifier */
+
   nextChannelSequence: Long;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.channel.v1.GenesisState";
   value: Uint8Array;
 }
-
 /** GenesisState defines the ibc channel submodule's genesis state. */
+
 export interface GenesisStateAmino {
   channels: IdentifiedChannelAmino[];
   acknowledgements: PacketStateAmino[];
@@ -30,16 +30,16 @@ export interface GenesisStateAmino {
   send_sequences: PacketSequenceAmino[];
   recv_sequences: PacketSequenceAmino[];
   ack_sequences: PacketSequenceAmino[];
-
   /** the sequence for the next generated channel identifier */
+
   next_channel_sequence: string;
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
-
 /** GenesisState defines the ibc channel submodule's genesis state. */
+
 export interface GenesisStateSDKType {
   channels: IdentifiedChannelSDKType[];
   acknowledgements: PacketStateSDKType[];
@@ -50,11 +50,11 @@ export interface GenesisStateSDKType {
   ack_sequences: PacketSequenceSDKType[];
   next_channel_sequence: Long;
 }
-
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
  * next send and receive sequences.
  */
+
 export interface PacketSequence {
   portId: string;
   channelId: string;
@@ -64,11 +64,11 @@ export interface PacketSequenceProtoMsg {
   typeUrl: "/ibc.core.channel.v1.PacketSequence";
   value: Uint8Array;
 }
-
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
  * next send and receive sequences.
  */
+
 export interface PacketSequenceAmino {
   port_id: string;
   channel_id: string;
@@ -78,11 +78,11 @@ export interface PacketSequenceAminoMsg {
   type: "cosmos-sdk/PacketSequence";
   value: PacketSequenceAmino;
 }
-
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
  * next send and receive sequences.
  */
+
 export interface PacketSequenceSDKType {
   port_id: string;
   channel_id: string;

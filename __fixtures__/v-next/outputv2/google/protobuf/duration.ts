@@ -1,7 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
-
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond
@@ -62,6 +61,7 @@ export const protobufPackage = "google.protobuf";
  * be expressed in JSON format as "3.000000001s", and 3 seconds and 1
  * microsecond should be expressed in JSON format as "3.000001s".
  */
+
 export interface Duration {
   /**
    * Signed seconds of the span of time. Must be from -315,576,000,000
@@ -69,7 +69,6 @@ export interface Duration {
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
   seconds: Long;
-
   /**
    * Signed fractions of a second at nanosecond resolution of the span
    * of time. Durations less than one second are represented with a 0
@@ -78,13 +77,13 @@ export interface Duration {
    * of the same sign as the `seconds` field. Must be from -999,999,999
    * to +999,999,999 inclusive.
    */
+
   nanos: number;
 }
 export interface DurationProtoMsg {
   typeUrl: "/google.protobuf.Duration";
   value: Uint8Array;
 }
-
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond
@@ -145,12 +144,12 @@ export interface DurationProtoMsg {
  * be expressed in JSON format as "3.000000001s", and 3 seconds and 1
  * microsecond should be expressed in JSON format as "3.000001s".
  */
+
 export type DurationAmino = string;
 export interface DurationAminoMsg {
   type: "/google.protobuf.Duration";
   value: DurationAmino;
 }
-
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond
@@ -211,6 +210,7 @@ export interface DurationAminoMsg {
  * be expressed in JSON format as "3.000000001s", and 3 seconds and 1
  * microsecond should be expressed in JSON format as "3.000001s".
  */
+
 export interface DurationSDKType {
   seconds: Long;
   nanos: number;

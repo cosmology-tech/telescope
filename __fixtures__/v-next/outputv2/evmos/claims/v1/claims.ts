@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
-
 /** Action defines the list of available actions to claim the airdrop tokens. */
+
 export enum Action {
   /** ACTION_UNSPECIFIED - UNSPECIFIED defines an invalid action. */
   ACTION_UNSPECIFIED = 0,
@@ -72,130 +72,130 @@ export function actionToJSON(object: Action): string {
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
+
 export interface Claim {
   /** action enum */
   action: Action;
-
   /** true if the action has been completed */
-  completed: boolean;
 
+  completed: boolean;
   /** claimable token amount for the action. Zero if completed */
+
   claimableAmount: string;
 }
 export interface ClaimProtoMsg {
   typeUrl: "/evmos.claims.v1.Claim";
   value: Uint8Array;
 }
-
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
+
 export interface ClaimAmino {
   /** action enum */
   action: Action;
-
   /** true if the action has been completed */
-  completed: boolean;
 
+  completed: boolean;
   /** claimable token amount for the action. Zero if completed */
+
   claimable_amount: string;
 }
 export interface ClaimAminoMsg {
   type: "/evmos.claims.v1.Claim";
   value: ClaimAmino;
 }
-
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
+
 export interface ClaimSDKType {
   action: Action;
   completed: boolean;
   claimable_amount: string;
 }
-
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+
 export interface ClaimsRecordAddress {
   /** bech32 or hex address of claim user */
   address: string;
-
   /** total initial claimable amount for the user */
-  initialClaimableAmount: string;
 
+  initialClaimableAmount: string;
   /** slice of the available actions completed */
+
   actionsCompleted: boolean[];
 }
 export interface ClaimsRecordAddressProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
   value: Uint8Array;
 }
-
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+
 export interface ClaimsRecordAddressAmino {
   /** bech32 or hex address of claim user */
   address: string;
-
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
 
+  initial_claimable_amount: string;
   /** slice of the available actions completed */
+
   actions_completed: boolean[];
 }
 export interface ClaimsRecordAddressAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecordAddress";
   value: ClaimsRecordAddressAmino;
 }
-
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+
 export interface ClaimsRecordAddressSDKType {
   address: string;
   initial_claimable_amount: string;
   actions_completed: boolean[];
 }
-
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
  * completed actions to claim the tokens.
  */
+
 export interface ClaimsRecord {
   /** total initial claimable amount for the user */
   initialClaimableAmount: string;
-
   /** slice of the available actions completed */
+
   actionsCompleted: boolean[];
 }
 export interface ClaimsRecordProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecord";
   value: Uint8Array;
 }
-
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
  * completed actions to claim the tokens.
  */
+
 export interface ClaimsRecordAmino {
   /** total initial claimable amount for the user */
   initial_claimable_amount: string;
-
   /** slice of the available actions completed */
+
   actions_completed: boolean[];
 }
 export interface ClaimsRecordAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecord";
   value: ClaimsRecordAmino;
 }
-
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
  * completed actions to claim the tokens.
  */
+
 export interface ClaimsRecordSDKType {
   initial_claimable_amount: string;
   actions_completed: boolean[];

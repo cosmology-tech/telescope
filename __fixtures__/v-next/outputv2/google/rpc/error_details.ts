@@ -2,7 +2,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
-
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -18,6 +17,7 @@ export const protobufPackage = "google.rpc";
  * number of retries have been reached or a maximum retry delay cap has been
  * reached.
  */
+
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay?: Duration;
@@ -26,7 +26,6 @@ export interface RetryInfoProtoMsg {
   typeUrl: "/google.rpc.RetryInfo";
   value: Uint8Array;
 }
-
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -42,6 +41,7 @@ export interface RetryInfoProtoMsg {
  * number of retries have been reached or a maximum retry delay cap has been
  * reached.
  */
+
 export interface RetryInfoAmino {
   /** Clients should wait at least this long between retrying the same request. */
   retry_delay?: DurationAmino;
@@ -50,7 +50,6 @@ export interface RetryInfoAminoMsg {
   type: "/google.rpc.RetryInfo";
   value: RetryInfoAmino;
 }
-
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -66,42 +65,42 @@ export interface RetryInfoAminoMsg {
  * number of retries have been reached or a maximum retry delay cap has been
  * reached.
  */
+
 export interface RetryInfoSDKType {
   retry_delay?: DurationSDKType;
 }
-
 /** Describes additional debugging info. */
+
 export interface DebugInfo {
   /** The stack trace entries indicating where the error occurred. */
   stackEntries: string[];
-
   /** Additional debugging information provided by the server. */
+
   detail: string;
 }
 export interface DebugInfoProtoMsg {
   typeUrl: "/google.rpc.DebugInfo";
   value: Uint8Array;
 }
-
 /** Describes additional debugging info. */
+
 export interface DebugInfoAmino {
   /** The stack trace entries indicating where the error occurred. */
   stack_entries: string[];
-
   /** Additional debugging information provided by the server. */
+
   detail: string;
 }
 export interface DebugInfoAminoMsg {
   type: "/google.rpc.DebugInfo";
   value: DebugInfoAmino;
 }
-
 /** Describes additional debugging info. */
+
 export interface DebugInfoSDKType {
   stack_entries: string[];
   detail: string;
 }
-
 /**
  * Describes how a quota check failed.
  * 
@@ -115,6 +114,7 @@ export interface DebugInfoSDKType {
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
+
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
@@ -123,7 +123,6 @@ export interface QuotaFailureProtoMsg {
   typeUrl: "/google.rpc.QuotaFailure";
   value: Uint8Array;
 }
-
 /**
  * Describes how a quota check failed.
  * 
@@ -137,6 +136,7 @@ export interface QuotaFailureProtoMsg {
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
+
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
   violations: QuotaFailure_ViolationAmino[];
@@ -145,7 +145,6 @@ export interface QuotaFailureAminoMsg {
   type: "/google.rpc.QuotaFailure";
   value: QuotaFailureAmino;
 }
-
 /**
  * Describes how a quota check failed.
  * 
@@ -159,14 +158,15 @@ export interface QuotaFailureAminoMsg {
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
+
 export interface QuotaFailureSDKType {
   violations: QuotaFailure_ViolationSDKType[];
 }
-
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
  */
+
 export interface QuotaFailure_Violation {
   /**
    * The subject on which the quota check failed.
@@ -174,7 +174,6 @@ export interface QuotaFailure_Violation {
    * developer project id>".
    */
   subject: string;
-
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -184,17 +183,18 @@ export interface QuotaFailure_Violation {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
+
   description: string;
 }
 export interface QuotaFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
-
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
  */
+
 export interface QuotaFailure_ViolationAmino {
   /**
    * The subject on which the quota check failed.
@@ -202,7 +202,6 @@ export interface QuotaFailure_ViolationAmino {
    * developer project id>".
    */
   subject: string;
-
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -212,17 +211,18 @@ export interface QuotaFailure_ViolationAmino {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
+
   description: string;
 }
 export interface QuotaFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
   value: QuotaFailure_ViolationAmino;
 }
-
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
  */
+
 export interface QuotaFailure_ViolationSDKType {
   subject: string;
   description: string;
@@ -247,7 +247,6 @@ export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
   value: string;
 }
-
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -274,6 +273,7 @@ export interface ErrorInfo_MetadataEntrySDKType {
  *       }
  *     }
  */
+
 export interface ErrorInfo {
   /**
    * The reason of the error. This is a constant value that identifies the
@@ -282,7 +282,6 @@ export interface ErrorInfo {
    * /[A-Z0-9_]+/.
    */
   reason: string;
-
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -291,8 +290,8 @@ export interface ErrorInfo {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
 
+  domain: string;
   /**
    * Additional structured details about this error.
    * 
@@ -303,6 +302,7 @@ export interface ErrorInfo {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
+
   metadata: {
     [key: string]: string;
   };
@@ -311,7 +311,6 @@ export interface ErrorInfoProtoMsg {
   typeUrl: "/google.rpc.ErrorInfo";
   value: Uint8Array;
 }
-
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -338,6 +337,7 @@ export interface ErrorInfoProtoMsg {
  *       }
  *     }
  */
+
 export interface ErrorInfoAmino {
   /**
    * The reason of the error. This is a constant value that identifies the
@@ -346,7 +346,6 @@ export interface ErrorInfoAmino {
    * /[A-Z0-9_]+/.
    */
   reason: string;
-
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -355,8 +354,8 @@ export interface ErrorInfoAmino {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
 
+  domain: string;
   /**
    * Additional structured details about this error.
    * 
@@ -367,6 +366,7 @@ export interface ErrorInfoAmino {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
+
   metadata: {
     [key: string]: string;
   };
@@ -375,7 +375,6 @@ export interface ErrorInfoAminoMsg {
   type: "/google.rpc.ErrorInfo";
   value: ErrorInfoAmino;
 }
-
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -402,6 +401,7 @@ export interface ErrorInfoAminoMsg {
  *       }
  *     }
  */
+
 export interface ErrorInfoSDKType {
   reason: string;
   domain: string;
@@ -409,7 +409,6 @@ export interface ErrorInfoSDKType {
     [key: string]: string;
   };
 }
-
 /**
  * Describes what preconditions have failed.
  * 
@@ -417,6 +416,7 @@ export interface ErrorInfoSDKType {
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
  */
+
 export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
@@ -425,7 +425,6 @@ export interface PreconditionFailureProtoMsg {
   typeUrl: "/google.rpc.PreconditionFailure";
   value: Uint8Array;
 }
-
 /**
  * Describes what preconditions have failed.
  * 
@@ -433,6 +432,7 @@ export interface PreconditionFailureProtoMsg {
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
  */
+
 export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_ViolationAmino[];
@@ -441,7 +441,6 @@ export interface PreconditionFailureAminoMsg {
   type: "/google.rpc.PreconditionFailure";
   value: PreconditionFailureAmino;
 }
-
 /**
  * Describes what preconditions have failed.
  * 
@@ -449,11 +448,12 @@ export interface PreconditionFailureAminoMsg {
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
  */
+
 export interface PreconditionFailureSDKType {
   violations: PreconditionFailure_ViolationSDKType[];
 }
-
 /** A message type used to describe a single precondition failure. */
+
 export interface PreconditionFailure_Violation {
   /**
    * The type of PreconditionFailure. We recommend using a service-specific
@@ -461,28 +461,28 @@ export interface PreconditionFailure_Violation {
    * example, "TOS" for "Terms of Service violation".
    */
   type: string;
-
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
 
+  subject: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
+
   description: string;
 }
 export interface PreconditionFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
-
 /** A message type used to describe a single precondition failure. */
+
 export interface PreconditionFailure_ViolationAmino {
   /**
    * The type of PreconditionFailure. We recommend using a service-specific
@@ -490,38 +490,38 @@ export interface PreconditionFailure_ViolationAmino {
    * example, "TOS" for "Terms of Service violation".
    */
   type: string;
-
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
 
+  subject: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
+
   description: string;
 }
 export interface PreconditionFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
   value: PreconditionFailure_ViolationAmino;
 }
-
 /** A message type used to describe a single precondition failure. */
+
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
   subject: string;
   description: string;
 }
-
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
+
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
@@ -530,11 +530,11 @@ export interface BadRequestProtoMsg {
   typeUrl: "/google.rpc.BadRequest";
   value: Uint8Array;
 }
-
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
+
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
   field_violations: BadRequest_FieldViolationAmino[];
@@ -543,16 +543,16 @@ export interface BadRequestAminoMsg {
   type: "/google.rpc.BadRequest";
   value: BadRequestAmino;
 }
-
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
  */
+
 export interface BadRequestSDKType {
   field_violations: BadRequest_FieldViolationSDKType[];
 }
-
 /** A message type used to describe a single bad request field. */
+
 export interface BadRequest_FieldViolation {
   /**
    * A path leading to a field in the request body. The value will be a
@@ -560,16 +560,16 @@ export interface BadRequest_FieldViolation {
    * field. E.g., "field_violations.field" would identify this field.
    */
   field: string;
-
   /** A description of why the request element is bad. */
+
   description: string;
 }
 export interface BadRequest_FieldViolationProtoMsg {
   typeUrl: "/google.rpc.FieldViolation";
   value: Uint8Array;
 }
-
 /** A message type used to describe a single bad request field. */
+
 export interface BadRequest_FieldViolationAmino {
   /**
    * A path leading to a field in the request body. The value will be a
@@ -577,75 +577,75 @@ export interface BadRequest_FieldViolationAmino {
    * field. E.g., "field_violations.field" would identify this field.
    */
   field: string;
-
   /** A description of why the request element is bad. */
+
   description: string;
 }
 export interface BadRequest_FieldViolationAminoMsg {
   type: "/google.rpc.FieldViolation";
   value: BadRequest_FieldViolationAmino;
 }
-
 /** A message type used to describe a single bad request field. */
+
 export interface BadRequest_FieldViolationSDKType {
   field: string;
   description: string;
 }
-
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
  */
+
 export interface RequestInfo {
   /**
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
   requestId: string;
-
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
+
   servingData: string;
 }
 export interface RequestInfoProtoMsg {
   typeUrl: "/google.rpc.RequestInfo";
   value: Uint8Array;
 }
-
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
  */
+
 export interface RequestInfoAmino {
   /**
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
   request_id: string;
-
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
+
   serving_data: string;
 }
 export interface RequestInfoAminoMsg {
   type: "/google.rpc.RequestInfo";
   value: RequestInfoAmino;
 }
-
 /**
  * Contains metadata about the request that clients can attach when filing a bug
  * or providing other forms of feedback.
  */
+
 export interface RequestInfoSDKType {
   request_id: string;
   serving_data: string;
 }
-
 /** Describes the resource that is being accessed. */
+
 export interface ResourceInfo {
   /**
    * A name for the type of resource being accessed, e.g. "sql table",
@@ -653,34 +653,34 @@ export interface ResourceInfo {
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
   resourceType: string;
-
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resourceName: string;
 
+  resourceName: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
 
+  owner: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
+
   description: string;
 }
 export interface ResourceInfoProtoMsg {
   typeUrl: "/google.rpc.ResourceInfo";
   value: Uint8Array;
 }
-
 /** Describes the resource that is being accessed. */
+
 export interface ResourceInfoAmino {
   /**
    * A name for the type of resource being accessed, e.g. "sql table",
@@ -688,41 +688,40 @@ export interface ResourceInfoAmino {
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
   resource_type: string;
-
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resource_name: string;
 
+  resource_name: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
 
+  owner: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
+
   description: string;
 }
 export interface ResourceInfoAminoMsg {
   type: "/google.rpc.ResourceInfo";
   value: ResourceInfoAmino;
 }
-
 /** Describes the resource that is being accessed. */
+
 export interface ResourceInfoSDKType {
   resource_type: string;
   resource_name: string;
   owner: string;
   description: string;
 }
-
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -730,6 +729,7 @@ export interface ResourceInfoSDKType {
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.
  */
+
 export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
@@ -738,7 +738,6 @@ export interface HelpProtoMsg {
   typeUrl: "/google.rpc.Help";
   value: Uint8Array;
 }
-
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -746,6 +745,7 @@ export interface HelpProtoMsg {
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.
  */
+
 export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_LinkAmino[];
@@ -754,7 +754,6 @@ export interface HelpAminoMsg {
   type: "/google.rpc.Help";
   value: HelpAmino;
 }
-
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -762,46 +761,47 @@ export interface HelpAminoMsg {
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.
  */
+
 export interface HelpSDKType {
   links: Help_LinkSDKType[];
 }
-
 /** Describes a URL link. */
+
 export interface Help_Link {
   /** Describes what the link offers. */
   description: string;
-
   /** The URL of the link. */
+
   url: string;
 }
 export interface Help_LinkProtoMsg {
   typeUrl: "/google.rpc.Link";
   value: Uint8Array;
 }
-
 /** Describes a URL link. */
+
 export interface Help_LinkAmino {
   /** Describes what the link offers. */
   description: string;
-
   /** The URL of the link. */
+
   url: string;
 }
 export interface Help_LinkAminoMsg {
   type: "/google.rpc.Link";
   value: Help_LinkAmino;
 }
-
 /** Describes a URL link. */
+
 export interface Help_LinkSDKType {
   description: string;
   url: string;
 }
-
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
  */
+
 export interface LocalizedMessage {
   /**
    * The locale used following the specification defined at
@@ -809,19 +809,19 @@ export interface LocalizedMessage {
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
   locale: string;
-
   /** The localized error message in the above locale. */
+
   message: string;
 }
 export interface LocalizedMessageProtoMsg {
   typeUrl: "/google.rpc.LocalizedMessage";
   value: Uint8Array;
 }
-
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
  */
+
 export interface LocalizedMessageAmino {
   /**
    * The locale used following the specification defined at
@@ -829,19 +829,19 @@ export interface LocalizedMessageAmino {
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
   locale: string;
-
   /** The localized error message in the above locale. */
+
   message: string;
 }
 export interface LocalizedMessageAminoMsg {
   type: "/google.rpc.LocalizedMessage";
   value: LocalizedMessageAmino;
 }
-
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
  */
+
 export interface LocalizedMessageSDKType {
   locale: string;
   message: string;

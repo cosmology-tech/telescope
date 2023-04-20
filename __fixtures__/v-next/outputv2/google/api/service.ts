@@ -21,7 +21,6 @@ import { UInt32Value, UInt32ValueAmino, UInt32ValueSDKType } from "../protobuf/w
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Service` is the root object of Google service configuration schema. It
  * describes basic information about a service, such as the name and the
@@ -46,6 +45,7 @@ export const protobufPackage = "google.api";
  *         requirements:
  *           provider_id: google_calendar_auth
  */
+
 export interface Service {
   /**
    * The service name, which is a DNS-like logical identifier for the
@@ -54,21 +54,20 @@ export interface Service {
    * of the service also owns the DNS name.
    */
   name: string;
-
   /** The product title for this service. */
+
   title: string;
-
   /** The Google project that owns this service. */
-  producerProjectId: string;
 
+  producerProjectId: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id: string;
 
+  id: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -76,8 +75,8 @@ export interface Service {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis: Api[];
 
+  apis: Api[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -88,8 +87,8 @@ export interface Service {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types: Type[];
 
+  types: Type[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -99,66 +98,66 @@ export interface Service {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
+
   enums: Enum[];
-
   /** Additional API documentation. */
+
   documentation?: Documentation;
-
   /** API backend configuration. */
+
   backend?: Backend;
-
   /** HTTP configuration. */
+
   http?: Http;
-
   /** Quota configuration. */
+
   quota?: Quota;
-
   /** Auth configuration. */
+
   authentication?: Authentication;
-
   /** Context configuration. */
+
   context?: Context;
-
   /** Configuration controlling usage of this service. */
-  usage?: Usage;
 
+  usage?: Usage;
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
+
   endpoints: Endpoint[];
-
   /** Configuration for the service control plane. */
+
   control?: Control;
-
   /** Defines the logs used by this service. */
+
   logs: LogDescriptor[];
-
   /** Defines the metrics used by this service. */
-  metrics: MetricDescriptor[];
 
+  metrics: MetricDescriptor[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
+
   monitoredResources: MonitoredResourceDescriptor[];
-
   /** Billing configuration. */
+
   billing?: Billing;
-
   /** Logging configuration. */
+
   logging?: Logging;
-
   /** Monitoring configuration. */
+
   monitoring?: Monitoring;
-
   /** System parameter configuration. */
+
   systemParameters?: SystemParameters;
-
   /** Output only. The source information for this configuration if available. */
-  sourceInfo?: SourceInfo;
 
+  sourceInfo?: SourceInfo;
   /**
    * Obsolete. Do not use.
    * 
@@ -167,13 +166,13 @@ export interface Service {
    */
 
   /** @deprecated */
+
   configVersion?: UInt32Value;
 }
 export interface ServiceProtoMsg {
   typeUrl: "/google.api.Service";
   value: Uint8Array;
 }
-
 /**
  * `Service` is the root object of Google service configuration schema. It
  * describes basic information about a service, such as the name and the
@@ -198,6 +197,7 @@ export interface ServiceProtoMsg {
  *         requirements:
  *           provider_id: google_calendar_auth
  */
+
 export interface ServiceAmino {
   /**
    * The service name, which is a DNS-like logical identifier for the
@@ -206,21 +206,20 @@ export interface ServiceAmino {
    * of the service also owns the DNS name.
    */
   name: string;
-
   /** The product title for this service. */
+
   title: string;
-
   /** The Google project that owns this service. */
-  producer_project_id: string;
 
+  producer_project_id: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id: string;
 
+  id: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -228,8 +227,8 @@ export interface ServiceAmino {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis: ApiAmino[];
 
+  apis: ApiAmino[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -240,8 +239,8 @@ export interface ServiceAmino {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types: TypeAmino[];
 
+  types: TypeAmino[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -251,66 +250,66 @@ export interface ServiceAmino {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
+
   enums: EnumAmino[];
-
   /** Additional API documentation. */
+
   documentation?: DocumentationAmino;
-
   /** API backend configuration. */
+
   backend?: BackendAmino;
-
   /** HTTP configuration. */
+
   http?: HttpAmino;
-
   /** Quota configuration. */
+
   quota?: QuotaAmino;
-
   /** Auth configuration. */
+
   authentication?: AuthenticationAmino;
-
   /** Context configuration. */
+
   context?: ContextAmino;
-
   /** Configuration controlling usage of this service. */
-  usage?: UsageAmino;
 
+  usage?: UsageAmino;
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
+
   endpoints: EndpointAmino[];
-
   /** Configuration for the service control plane. */
+
   control?: ControlAmino;
-
   /** Defines the logs used by this service. */
+
   logs: LogDescriptorAmino[];
-
   /** Defines the metrics used by this service. */
-  metrics: MetricDescriptorAmino[];
 
+  metrics: MetricDescriptorAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
+
   monitored_resources: MonitoredResourceDescriptorAmino[];
-
   /** Billing configuration. */
+
   billing?: BillingAmino;
-
   /** Logging configuration. */
+
   logging?: LoggingAmino;
-
   /** Monitoring configuration. */
+
   monitoring?: MonitoringAmino;
-
   /** System parameter configuration. */
+
   system_parameters?: SystemParametersAmino;
-
   /** Output only. The source information for this configuration if available. */
-  source_info?: SourceInfoAmino;
 
+  source_info?: SourceInfoAmino;
   /**
    * Obsolete. Do not use.
    * 
@@ -319,13 +318,13 @@ export interface ServiceAmino {
    */
 
   /** @deprecated */
+
   config_version?: UInt32ValueAmino;
 }
 export interface ServiceAminoMsg {
   type: "/google.api.Service";
   value: ServiceAmino;
 }
-
 /**
  * `Service` is the root object of Google service configuration schema. It
  * describes basic information about a service, such as the name and the
@@ -350,6 +349,7 @@ export interface ServiceAminoMsg {
  *         requirements:
  *           provider_id: google_calendar_auth
  */
+
 export interface ServiceSDKType {
   name: string;
   title: string;
@@ -375,8 +375,8 @@ export interface ServiceSDKType {
   monitoring?: MonitoringSDKType;
   system_parameters?: SystemParametersSDKType;
   source_info?: SourceInfoSDKType;
-
   /** @deprecated */
+
   config_version?: UInt32ValueSDKType;
 }
 

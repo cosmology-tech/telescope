@@ -1,7 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -83,6 +82,7 @@ export const protobufPackage = "google.protobuf";
  *       "value": "1.212s"
  *     }
  */
+
 export interface Any {
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
@@ -114,15 +114,14 @@ export interface Any {
    * used with implementation specific semantics.
    */
   typeUrl: string;
-
   /** Must be a valid serialized protocol buffer of the above specified type. */
+
   value: Uint8Array;
 }
 export interface AnyProtoMsg {
   typeUrl: "/google.protobuf.Any";
   value: Uint8Array;
 }
-
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -204,6 +203,7 @@ export interface AnyProtoMsg {
  *       "value": "1.212s"
  *     }
  */
+
 export interface AnyAmino {
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
@@ -235,15 +235,14 @@ export interface AnyAmino {
    * used with implementation specific semantics.
    */
   type: string;
-
   /** Must be a valid serialized protocol buffer of the above specified type. */
+
   value: any;
 }
 export interface AnyAminoMsg {
   type: string;
   value: AnyAmino;
 }
-
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -325,6 +324,7 @@ export interface AnyAminoMsg {
  *       "value": "1.212s"
  *     }
  */
+
 export interface AnySDKType {
   type_url: string;
   value: Uint8Array;

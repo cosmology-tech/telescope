@@ -1,5 +1,4 @@
 export const protobufPackage = "google.api";
-
 /**
  * An indicator of the behavior of a given field (for example, that a field
  * is required in requests, or given as output but ignored as input).
@@ -8,6 +7,7 @@ export const protobufPackage = "google.api";
  * 
  * Note: This enum **may** receive new values in the future.
  */
+
 export enum FieldBehavior {
   /** FIELD_BEHAVIOR_UNSPECIFIED - Conventional default for enums. Do not use this. */
   FIELD_BEHAVIOR_UNSPECIFIED = 0,

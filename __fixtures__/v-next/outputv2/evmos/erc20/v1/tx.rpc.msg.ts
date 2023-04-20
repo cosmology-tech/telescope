@@ -1,23 +1,21 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseSDKType } from "./tx";
-
+import { MsgConvertCoin, MsgConvertCoinResponse, MsgConvertERC20, MsgConvertERC20Response } from "./tx";
 /** Msg defines the erc20 Msg service. */
+
 export interface Msg {
   /**
    * ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
    * that is registered on the token mapping.
    */
   convertCoin(request: DeepPartial<MsgConvertCoin>, metadata?: grpc.Metadata): Promise<MsgConvertCoinResponse>;
-
   /**
    * ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
    * contract that is registered on the token mapping.
    */
+
   convertERC20(request: DeepPartial<MsgConvertERC20>, metadata?: grpc.Metadata): Promise<MsgConvertERC20Response>;
 }
 export class MsgClientImpl implements Msg {

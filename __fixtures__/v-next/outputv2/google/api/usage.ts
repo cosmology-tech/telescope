@@ -1,8 +1,8 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /** Configuration controlling usage of a service. */
+
 export interface Usage {
   /**
    * Requirements that must be satisfied before a consumer project can use the
@@ -16,14 +16,13 @@ export interface Usage {
    * included based on the business needs.
    */
   requirements: string[];
-
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRule[];
 
+  rules: UsageRule[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -34,14 +33,15 @@ export interface Usage {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
+
   producerNotificationChannel: string;
 }
 export interface UsageProtoMsg {
   typeUrl: "/google.api.Usage";
   value: Uint8Array;
 }
-
 /** Configuration controlling usage of a service. */
+
 export interface UsageAmino {
   /**
    * Requirements that must be satisfied before a consumer project can use the
@@ -55,14 +55,13 @@ export interface UsageAmino {
    * included based on the business needs.
    */
   requirements: string[];
-
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRuleAmino[];
 
+  rules: UsageRuleAmino[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -73,20 +72,20 @@ export interface UsageAmino {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
+
   producer_notification_channel: string;
 }
 export interface UsageAminoMsg {
   type: "/google.api.Usage";
   value: UsageAmino;
 }
-
 /** Configuration controlling usage of a service. */
+
 export interface UsageSDKType {
   requirements: string[];
   rules: UsageRuleSDKType[];
   producer_notification_channel: string;
 }
-
 /**
  * Usage configuration rules for the service.
  * 
@@ -114,6 +113,7 @@ export interface UsageSDKType {
  *       - selector: "google.example.library.v1.LibraryService.CreateBook"
  *         allow_unregistered_calls: true
  */
+
 export interface UsageRule {
   /**
    * Selects the methods to which this rule applies. Use '*' to indicate all
@@ -122,26 +122,25 @@ export interface UsageRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allowUnregisteredCalls: boolean;
 
+  allowUnregisteredCalls: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
+
   skipServiceControl: boolean;
 }
 export interface UsageRuleProtoMsg {
   typeUrl: "/google.api.UsageRule";
   value: Uint8Array;
 }
-
 /**
  * Usage configuration rules for the service.
  * 
@@ -169,6 +168,7 @@ export interface UsageRuleProtoMsg {
  *       - selector: "google.example.library.v1.LibraryService.CreateBook"
  *         allow_unregistered_calls: true
  */
+
 export interface UsageRuleAmino {
   /**
    * Selects the methods to which this rule applies. Use '*' to indicate all
@@ -177,26 +177,25 @@ export interface UsageRuleAmino {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allow_unregistered_calls: boolean;
 
+  allow_unregistered_calls: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
+
   skip_service_control: boolean;
 }
 export interface UsageRuleAminoMsg {
   type: "/google.api.UsageRule";
   value: UsageRuleAmino;
 }
-
 /**
  * Usage configuration rules for the service.
  * 
@@ -224,6 +223,7 @@ export interface UsageRuleAminoMsg {
  *       - selector: "google.example.library.v1.LibraryService.CreateBook"
  *         allow_unregistered_calls: true
  */
+
 export interface UsageRuleSDKType {
   selector: string;
   allow_unregistered_calls: boolean;

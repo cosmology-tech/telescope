@@ -1,12 +1,10 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
-
+import { MsgSubmitEvidence, MsgSubmitEvidenceResponse } from "./tx";
 /** Msg defines the evidence Msg service. */
+
 export interface Msg {
   /**
    * SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or

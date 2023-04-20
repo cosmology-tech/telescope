@@ -1,10 +1,10 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
-
 /** Code describes the status of the operation (or one of its steps). */
+
 export enum OperationMetadata_Status {
   /** STATUS_UNSPECIFIED - Unspecifed code. */
   STATUS_UNSPECIFIED = 0,
@@ -87,8 +87,8 @@ export function operationMetadata_StatusToJSON(object: OperationMetadata_Status)
       return "UNRECOGNIZED";
   }
 }
-
 /** The kind of diagnostic information possible. */
+
 export enum Diagnostic_Kind {
   /** WARNING - Warnings and errors */
   WARNING = 0,
@@ -221,8 +221,8 @@ export function configFile_FileTypeToJSON(object: ConfigFile_FileType): string {
       return "UNRECOGNIZED";
   }
 }
-
 /** Status of a Rollout. */
+
 export enum Rollout_RolloutStatus {
   /** ROLLOUT_STATUS_UNSPECIFIED - No status specified. */
   ROLLOUT_STATUS_UNSPECIFIED = 0,
@@ -318,181 +318,181 @@ export function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): stri
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
  */
+
 export interface ManagedService {
   /**
    * The name of the service. See the [overview](/service-management/overview)
    * for naming requirements.
    */
   serviceName: string;
-
   /** ID of the project that produces and owns this service. */
+
   producerProjectId: string;
 }
 export interface ManagedServiceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService";
   value: Uint8Array;
 }
-
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
  */
+
 export interface ManagedServiceAmino {
   /**
    * The name of the service. See the [overview](/service-management/overview)
    * for naming requirements.
    */
   service_name: string;
-
   /** ID of the project that produces and owns this service. */
+
   producer_project_id: string;
 }
 export interface ManagedServiceAminoMsg {
   type: "/google.api.servicemanagement.v1.ManagedService";
   value: ManagedServiceAmino;
 }
-
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
  */
+
 export interface ManagedServiceSDKType {
   service_name: string;
   producer_project_id: string;
 }
-
 /** The metadata associated with a long running operation resource. */
+
 export interface OperationMetadata {
   /**
    * The full name of the resources that this operation is directly
    * associated with.
    */
   resourceNames: string[];
-
   /** Detailed status information for each step. The order is undetermined. */
+
   steps: OperationMetadata_Step[];
-
   /** Percentage of completion of this operation, ranging from 0 to 100. */
-  progressPercentage: number;
 
+  progressPercentage: number;
   /** The start time of the operation. */
+
   startTime?: Date;
 }
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
   value: Uint8Array;
 }
-
 /** The metadata associated with a long running operation resource. */
+
 export interface OperationMetadataAmino {
   /**
    * The full name of the resources that this operation is directly
    * associated with.
    */
   resource_names: string[];
-
   /** Detailed status information for each step. The order is undetermined. */
+
   steps: OperationMetadata_StepAmino[];
-
   /** Percentage of completion of this operation, ranging from 0 to 100. */
-  progress_percentage: number;
 
+  progress_percentage: number;
   /** The start time of the operation. */
+
   start_time?: Date;
 }
 export interface OperationMetadataAminoMsg {
   type: "/google.api.servicemanagement.v1.OperationMetadata";
   value: OperationMetadataAmino;
 }
-
 /** The metadata associated with a long running operation resource. */
+
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
   start_time?: Date;
 }
-
 /** Represents the status of one operation step. */
+
 export interface OperationMetadata_Step {
   /** The short description of the step. */
   description: string;
-
   /** The status code. */
+
   status: OperationMetadata_Status;
 }
 export interface OperationMetadata_StepProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Step";
   value: Uint8Array;
 }
-
 /** Represents the status of one operation step. */
+
 export interface OperationMetadata_StepAmino {
   /** The short description of the step. */
   description: string;
-
   /** The status code. */
+
   status: OperationMetadata_Status;
 }
 export interface OperationMetadata_StepAminoMsg {
   type: "/google.api.servicemanagement.v1.Step";
   value: OperationMetadata_StepAmino;
 }
-
 /** Represents the status of one operation step. */
+
 export interface OperationMetadata_StepSDKType {
   description: string;
   status: OperationMetadata_Status;
 }
-
 /** Represents a diagnostic message (error or warning) */
+
 export interface Diagnostic {
   /** File name and line number of the error or warning. */
   location: string;
-
   /** The kind of diagnostic information provided. */
-  kind: Diagnostic_Kind;
 
+  kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
+
   message: string;
 }
 export interface DiagnosticProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
   value: Uint8Array;
 }
-
 /** Represents a diagnostic message (error or warning) */
+
 export interface DiagnosticAmino {
   /** File name and line number of the error or warning. */
   location: string;
-
   /** The kind of diagnostic information provided. */
-  kind: Diagnostic_Kind;
 
+  kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
+
   message: string;
 }
 export interface DiagnosticAminoMsg {
   type: "/google.api.servicemanagement.v1.Diagnostic";
   value: DiagnosticAmino;
 }
-
 /** Represents a diagnostic message (error or warning) */
+
 export interface DiagnosticSDKType {
   location: string;
   kind: Diagnostic_Kind;
   message: string;
 }
-
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
  */
+
 export interface ConfigSource {
   /**
    * A unique ID for a specific instance of this message, typically assigned
@@ -500,22 +500,22 @@ export interface ConfigSource {
    * generate one instead.
    */
   id: string;
-
   /**
    * Set of source configuration files that are used to generate a service
    * configuration (`google.api.Service`).
    */
+
   files: ConfigFile[];
 }
 export interface ConfigSourceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
   value: Uint8Array;
 }
-
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
  */
+
 export interface ConfigSourceAmino {
   /**
    * A unique ID for a specific instance of this message, typically assigned
@@ -523,67 +523,67 @@ export interface ConfigSourceAmino {
    * generate one instead.
    */
   id: string;
-
   /**
    * Set of source configuration files that are used to generate a service
    * configuration (`google.api.Service`).
    */
+
   files: ConfigFileAmino[];
 }
 export interface ConfigSourceAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigSource";
   value: ConfigSourceAmino;
 }
-
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
  */
+
 export interface ConfigSourceSDKType {
   id: string;
   files: ConfigFileSDKType[];
 }
-
 /** Generic specification of a source configuration file */
+
 export interface ConfigFile {
   /** The file name of the configuration file (full or relative path). */
   filePath: string;
-
   /** The bytes that constitute the file. */
-  fileContents: Uint8Array;
 
+  fileContents: Uint8Array;
   /** The type of configuration file this represents. */
+
   fileType: ConfigFile_FileType;
 }
 export interface ConfigFileProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
   value: Uint8Array;
 }
-
 /** Generic specification of a source configuration file */
+
 export interface ConfigFileAmino {
   /** The file name of the configuration file (full or relative path). */
   file_path: string;
-
   /** The bytes that constitute the file. */
-  file_contents: Uint8Array;
 
+  file_contents: Uint8Array;
   /** The type of configuration file this represents. */
+
   file_type: ConfigFile_FileType;
 }
 export interface ConfigFileAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigFile";
   value: ConfigFileAmino;
 }
-
 /** Generic specification of a source configuration file */
+
 export interface ConfigFileSDKType {
   file_path: string;
   file_contents: Uint8Array;
   file_type: ConfigFile_FileType;
 }
-
 /** Represents a service configuration with its name and id. */
+
 export interface ConfigRef {
   /**
    * Resource name of a service config. It must have the following
@@ -595,8 +595,8 @@ export interface ConfigRefProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
   value: Uint8Array;
 }
-
 /** Represents a service configuration with its name and id. */
+
 export interface ConfigRefAmino {
   /**
    * Resource name of a service config. It must have the following
@@ -608,18 +608,18 @@ export interface ConfigRefAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigRef";
   value: ConfigRefAmino;
 }
-
 /** Represents a service configuration with its name and id. */
+
 export interface ConfigRefSDKType {
   name: string;
 }
-
 /**
  * Change report associated with a particular service configuration.
  * 
  * It contains a list of ConfigChanges based on the comparison between
  * two service configurations.
  */
+
 export interface ChangeReport {
   /**
    * List of changes between two service configurations.
@@ -634,13 +634,13 @@ export interface ChangeReportProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
   value: Uint8Array;
 }
-
 /**
  * Change report associated with a particular service configuration.
  * 
  * It contains a list of ConfigChanges based on the comparison between
  * two service configurations.
  */
+
 export interface ChangeReportAmino {
   /**
    * List of changes between two service configurations.
@@ -655,22 +655,22 @@ export interface ChangeReportAminoMsg {
   type: "/google.api.servicemanagement.v1.ChangeReport";
   value: ChangeReportAmino;
 }
-
 /**
  * Change report associated with a particular service configuration.
  * 
  * It contains a list of ConfigChanges based on the comparison between
  * two service configurations.
  */
+
 export interface ChangeReportSDKType {
   config_changes: ConfigChangeSDKType[];
 }
-
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
  * service config, and then create a Rollout to push the service config.
  */
+
 export interface Rollout {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
@@ -683,45 +683,45 @@ export interface Rollout {
    * An example of the generated rollout_id is '2016-02-16r1'
    */
   rolloutId: string;
-
   /** Creation time of the rollout. Readonly. */
+
   createTime?: Date;
-
   /** The user who created the Rollout. Readonly. */
-  createdBy: string;
 
+  createdBy: string;
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
    * the system will automatically rollback to the current Rollout
    * version. Readonly.
    */
-  status: Rollout_RolloutStatus;
 
+  status: Rollout_RolloutStatus;
   /**
    * Google Service Control selects service configurations based on
    * traffic percentage.
    */
-  trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
 
+  trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
   /**
    * The strategy associated with a rollout to delete a `ManagedService`.
    * Readonly.
    */
-  deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
 
+  deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
   /** The name of the service associated with this Rollout. */
+
   serviceName: string;
 }
 export interface RolloutProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Rollout";
   value: Uint8Array;
 }
-
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
  * service config, and then create a Rollout to push the service config.
  */
+
 export interface RolloutAmino {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
@@ -734,45 +734,45 @@ export interface RolloutAmino {
    * An example of the generated rollout_id is '2016-02-16r1'
    */
   rollout_id: string;
-
   /** Creation time of the rollout. Readonly. */
+
   create_time?: Date;
-
   /** The user who created the Rollout. Readonly. */
-  created_by: string;
 
+  created_by: string;
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
    * the system will automatically rollback to the current Rollout
    * version. Readonly.
    */
-  status: Rollout_RolloutStatus;
 
+  status: Rollout_RolloutStatus;
   /**
    * Google Service Control selects service configurations based on
    * traffic percentage.
    */
-  traffic_percent_strategy?: Rollout_TrafficPercentStrategyAmino;
 
+  traffic_percent_strategy?: Rollout_TrafficPercentStrategyAmino;
   /**
    * The strategy associated with a rollout to delete a `ManagedService`.
    * Readonly.
    */
-  delete_service_strategy?: Rollout_DeleteServiceStrategyAmino;
 
+  delete_service_strategy?: Rollout_DeleteServiceStrategyAmino;
   /** The name of the service associated with this Rollout. */
+
   service_name: string;
 }
 export interface RolloutAminoMsg {
   type: "/google.api.servicemanagement.v1.Rollout";
   value: RolloutAmino;
 }
-
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
  * service config, and then create a Rollout to push the service config.
  */
+
 export interface RolloutSDKType {
   rollout_id: string;
   create_time?: Date;
@@ -802,7 +802,6 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
   value: number;
 }
-
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -835,6 +834,7 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
  *       }
  *     }
  */
+
 export interface Rollout_TrafficPercentStrategy {
   /**
    * Maps service configuration IDs to their corresponding traffic percentage.
@@ -849,7 +849,6 @@ export interface Rollout_TrafficPercentStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
   value: Uint8Array;
 }
-
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -882,6 +881,7 @@ export interface Rollout_TrafficPercentStrategyProtoMsg {
  *       }
  *     }
  */
+
 export interface Rollout_TrafficPercentStrategyAmino {
   /**
    * Maps service configuration IDs to their corresponding traffic percentage.
@@ -896,7 +896,6 @@ export interface Rollout_TrafficPercentStrategyAminoMsg {
   type: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
   value: Rollout_TrafficPercentStrategyAmino;
 }
-
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -929,36 +928,37 @@ export interface Rollout_TrafficPercentStrategyAminoMsg {
  *       }
  *     }
  */
+
 export interface Rollout_TrafficPercentStrategySDKType {
   percentages: {
     [key: string]: number;
   };
 }
-
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
  */
+
 export interface Rollout_DeleteServiceStrategy {}
 export interface Rollout_DeleteServiceStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
   value: Uint8Array;
 }
-
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
  */
+
 export interface Rollout_DeleteServiceStrategyAmino {}
 export interface Rollout_DeleteServiceStrategyAminoMsg {
   type: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
   value: Rollout_DeleteServiceStrategyAmino;
 }
-
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
  */
+
 export interface Rollout_DeleteServiceStrategySDKType {}
 
 function createBaseManagedService(): ManagedService {
