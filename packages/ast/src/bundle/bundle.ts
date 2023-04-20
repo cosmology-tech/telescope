@@ -20,10 +20,6 @@ export const recursiveModuleBundle = (
                 .filter(a => !a.startsWith('_')).map(otherKey=>( {key: otherKey, value: obj[key][otherKey]} ));
 
             if (others.length) {
-                if (!options.experimentalGlobalProtoNamespace) {
-                    throw new Error('namespace and package not supported, yet.')
-                }
-
                 // export recursive package through object properties
                 properties.push(...recursiveOtherNameSpaces(others))
             }

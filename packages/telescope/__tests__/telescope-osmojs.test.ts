@@ -27,8 +27,6 @@ const options: TelescopeOptions = {
     files: ['akash/deployment/v1beta1/deployment.ts']
   },
 
-  experimentalGlobalProtoNamespace: true, //  [ 'v1beta1' ] concentratedliquidity
-
   eslintDisable: {
     disableAll: false,
     patterns: ['akash/**/*amino.ts'],

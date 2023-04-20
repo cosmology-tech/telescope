@@ -168,7 +168,6 @@ cases(`recursiveModuleBundle`, opts => {
 ])
 
 cases(`recursiveModuleBundleExperimental`, opts => {
-  context.options.experimentalGlobalProtoNamespace = true
   expect(preview(recursiveModuleBundle(context.options, opts.data))).toMatchSnapshot();
 }, [
   {
