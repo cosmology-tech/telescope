@@ -79,8 +79,6 @@ const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => 
     return test;
 }
 
-//TODO:: 1. see if string works.
-// 2. or to use long to get the value and then convert to BigInt
 const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod) => {
     let valueExpression: t.Expression = t.memberExpression(
       t.identifier('message'),

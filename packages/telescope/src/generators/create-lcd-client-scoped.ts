@@ -100,22 +100,7 @@ const makeLCD = (
 
 
     const ctx = new TelescopeParseContext(
-        {
-            absolute: '',
-            filename: localname,
-            proto: {
-                package: dir,
-                imports: null,
-                root: {},
-                importNames: null
-            },
-            traversed: {
-                package: dir,
-                imports: null,
-                root: {},
-                importNames: null
-            }
-        },
+        createEmptyProtoRef(dir, localname),
         builder.store,
         builder.options
     );

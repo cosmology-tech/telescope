@@ -7,6 +7,7 @@ import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
+import { createEmptyProtoRef } from '@osmonauts/proto-parser';
 
 export const plugin = (
     builder: TelescopeBuilder
@@ -35,27 +36,7 @@ export const plugin = (
 
     // create proto ref for context
     const pkg = '@root';
-    const ref: ProtoRef = {
-        absolute: '',
-        filename: localname,
-        proto: {
-            package: pkg,
-            imports: null,
-            root: {},
-            importNames: null
-        },
-        traversed: {
-            package: pkg,
-            imports: null,
-            root: {},
-            importNames: null,
-            acceptsInterface: {},
-            implementsInterface: {},
-            parsedExports: {},
-            parsedImports: {},
-            symbols: null
-        }
-    }
+    const ref: ProtoRef = createEmptyProtoRef(pkg, localname)
 
     // create context
     const pCtx = new TelescopeParseContext(
