@@ -1,5 +1,5 @@
 import * as dotty from 'dotty';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { createEmptyProtoRef, getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcFactory } from '@osmonauts/ast';
@@ -84,7 +84,7 @@ const makeRPC = (
     builder.rpcMsgClients.forEach(file => {
 
         // ADD all option
-        // which defaults to including cosmos 
+        // which defaults to including cosmos
         // and defaults to base for each
         if (!packages.includes(file.package)) {
             return;
@@ -97,22 +97,7 @@ const makeRPC = (
     });
 
     const ctx = new TelescopeParseContext(
-        {
-            absolute: '',
-            filename: localname,
-            proto: {
-                package: dir,
-                imports: null,
-                root: {},
-                importNames: null
-            },
-            traversed: {
-                package: dir,
-                imports: null,
-                root: {},
-                importNames: null
-            }
-        },
+        createEmptyProtoRef(dir, localname),
         builder.store,
         builder.options
     );
@@ -151,7 +136,7 @@ const makeRPC = (
 
 // TODO
 /*
- move all options for rpc into previous `rpc` prop and 
+ move all options for rpc into previous `rpc` prop and
  clean up all these many options for one nested object full of options
 */
 
@@ -162,7 +147,7 @@ const makeAllRPCBundles = (
 
     if (!builder.options.rpcClients.bundle) return;
 
-    // [x] loop through every bundle 
+    // [x] loop through every bundle
     // [x] if not cosmos, add all cosmos
     // [x] call makeRPC
 
