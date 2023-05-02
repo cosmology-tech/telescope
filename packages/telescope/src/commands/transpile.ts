@@ -5,8 +5,7 @@ import { writeFileSync, readFileSync } from 'fs';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
 
-export default async (argv) => {
-  console.log(argv);
+export default async (argv) => {  
   if (argv.useDefaults) {
     const SKIP = ['aminoEncoding', 'packages'];
     Object.keys(defaultTelescopeOptions)
