@@ -1,7 +1,7 @@
 import { prompt } from '../prompt';
 import telescope from '../index';
 import path from 'path';
-import { writeFileSync, readFileSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
 
