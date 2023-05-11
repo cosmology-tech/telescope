@@ -2,8 +2,6 @@ import { TelescopeBuilder } from '../src/builder';
 import { TelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
-import { kebab } from "case";
-import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
 import { TelescopeParseContext } from '../src/build';
 
@@ -63,10 +61,10 @@ const options: TelescopeOptions = {
       toSDK: true,
       fromSDK: true,
       //
-      toAmino: false,
-      fromAmino: false,
-      fromProto: false,
-      toProto: false
+      toAmino: true,
+      fromAmino: true,
+      fromProto: true,
+      toProto: true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
@@ -101,7 +99,7 @@ const options: TelescopeOptions = {
   },
 
   reactQuery: {
-    enabled: true,
+    enabled: false,
     include: {
       patterns: [
         'osmosis/**/gamm/**/query.proto'
