@@ -6,13 +6,9 @@ import {
     createScopedGrpcWebFactory
 } from './grpc-web';
 
-// it('rpcRecursiveObjectProps', async () => {
-//     expectCode(rpcRecursiveObjectProps(['cosmos', 'bank', 'v1beta1']))
-// });
-
 it('createScopedGrpcWebFactory', async () => {
     const context = getGenericParseContext();
-    printCode(createScopedGrpcWebFactory(context, {
+    expectCode(createScopedGrpcWebFactory(context, {
         cosmos: {
             bank: {
                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
@@ -31,23 +27,3 @@ it('createScopedGrpcWebFactory', async () => {
     ))
 });
 
-// it('createScopedRpcTmFactory', async () => {
-//     const context = getGenericParseContext();
-//     expectCode(createScopedRpcTmFactory(context, {
-//         cosmos: {
-//             bank: {
-//                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
-//             },
-//             gov: {
-//                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
-//             },
-//         },
-//         osmosis: {
-//             gamm: {
-//                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
-//             }
-//         }
-//     },
-//         'createRpcFactorizzle',
-//     ))
-// });

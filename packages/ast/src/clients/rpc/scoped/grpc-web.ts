@@ -71,7 +71,7 @@ export const rpcNewAwaitImport = (
     );
 }
 
-export const rpcNewTmAwaitImport = (
+export const grpcWebNewAwaitImport = (
     path: string,
     className: string
 ) => {
@@ -143,7 +143,7 @@ export const rpcTmNestedImportObject = (
 ) => {
 
     if (typeof obj === 'string') {
-        return rpcNewTmAwaitImport(obj, className);
+        return grpcWebNewAwaitImport(obj, className);
     }
 
     const keys = Object.keys(obj);

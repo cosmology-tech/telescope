@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createScopedGrpcWebFactory 1`] = `
+"export const createRpcFactorizzle = async ({
+  grpcWebEndpoint
+}: {
+  grpcWebEndpoint: {
+    grpcWebEndpoint: string;
+  };
+}) => {
+  grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
+  const {
+    GrpcWebImpl
+  } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
+  let grpcWeb = GrpcWebImpl;
+
+  if (typeof document !== "undefined") {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: grpc.CrossBrowserHttpTransport({
+        withCredentials: false
+      })
+    });
+  } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: NodeHttpTransport()
+    });
+  } else {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: NodeHttpTransport()
+    });
+  }
+
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(grpcWeb)
+      },
+      gov: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(grpcWeb)
+      }
+    },
+    osmosis: {
+      gamm: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(grpcWeb)
+      }
+    }
+  };
+};"
+`;
