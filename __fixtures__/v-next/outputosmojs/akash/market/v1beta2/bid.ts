@@ -1,7 +1,7 @@
 import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -151,7 +151,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
   };
 }
 export const MsgCreateBid = {
-  encode(message: MsgCreateBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       OrderID.encode(message.order, writer.uint32(10).fork()).ldelim();
     }
@@ -166,8 +166,8 @@ export const MsgCreateBid = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBid();
     while (reader.pos < end) {
@@ -245,11 +245,11 @@ function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
   return {};
 }
 export const MsgCreateBidResponse = {
-  encode(_: MsgCreateBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBidResponse();
     while (reader.pos < end) {
@@ -290,14 +290,14 @@ function createBaseMsgCloseBid(): MsgCloseBid {
   };
 }
 export const MsgCloseBid = {
-  encode(message: MsgCloseBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBid();
     while (reader.pos < end) {
@@ -348,11 +348,11 @@ function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
   return {};
 }
 export const MsgCloseBidResponse = {
-  encode(_: MsgCloseBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBidResponse();
     while (reader.pos < end) {
@@ -397,12 +397,12 @@ function createBaseBidID(): BidID {
   };
 }
 export const BidID = {
-  encode(message: BidID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -415,8 +415,8 @@ export const BidID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidID();
     while (reader.pos < end) {
@@ -508,7 +508,7 @@ function createBaseBid(): Bid {
   };
 }
 export const Bid = {
-  encode(message: Bid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Bid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
@@ -519,12 +519,12 @@ export const Bid = {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Bid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Bid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBid();
     while (reader.pos < end) {
@@ -609,12 +609,12 @@ function createBaseBidFilters(): BidFilters {
   };
 }
 export const BidFilters = {
-  encode(message: BidFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -630,8 +630,8 @@ export const BidFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidFilters();
     while (reader.pos < end) {

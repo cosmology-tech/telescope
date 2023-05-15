@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -102,20 +102,20 @@ function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   };
 }
 export const MsgSuperfluidDelegate = {
-  encode(message: MsgSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidDelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.lockId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.lockId.toString()));
+      writer.uint32(16).uint64(message.lockId);
     }
     if (message.valAddr !== "") {
       writer.uint32(26).string(message.valAddr);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidDelegate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegate();
     while (reader.pos < end) {
@@ -184,11 +184,11 @@ function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateRespons
   return {};
 }
 export const MsgSuperfluidDelegateResponse = {
-  encode(_: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidDelegateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidDelegateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegateResponse();
     while (reader.pos < end) {
@@ -230,17 +230,17 @@ function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   };
 }
 export const MsgSuperfluidUndelegate = {
-  encode(message: MsgSuperfluidUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUndelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.lockId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.lockId.toString()));
+      writer.uint32(16).uint64(message.lockId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUndelegate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegate();
     while (reader.pos < end) {
@@ -300,11 +300,11 @@ function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateRes
   return {};
 }
 export const MsgSuperfluidUndelegateResponse = {
-  encode(_: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidUndelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUndelegateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUndelegateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegateResponse();
     while (reader.pos < end) {
@@ -346,17 +346,17 @@ function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   };
 }
 export const MsgSuperfluidUnbondLock = {
-  encode(message: MsgSuperfluidUnbondLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSuperfluidUnbondLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.lockId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.lockId.toString()));
+      writer.uint32(16).uint64(message.lockId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUnbondLock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLock();
     while (reader.pos < end) {
@@ -416,11 +416,11 @@ function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockRes
   return {};
 }
 export const MsgSuperfluidUnbondLockResponse = {
-  encode(_: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSuperfluidUnbondLockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSuperfluidUnbondLockResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUnbondLockResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLockResponse();
     while (reader.pos < end) {
@@ -463,7 +463,7 @@ function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate 
   };
 }
 export const MsgLockAndSuperfluidDelegate = {
-  encode(message: MsgLockAndSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockAndSuperfluidDelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -475,8 +475,8 @@ export const MsgLockAndSuperfluidDelegate = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegate();
     while (reader.pos < end) {
@@ -555,14 +555,14 @@ function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidD
   };
 }
 export const MsgLockAndSuperfluidDelegateResponse = {
-  encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockAndSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ID !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(8).uint64(message.ID);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     while (reader.pos < end) {
@@ -616,17 +616,17 @@ function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
   };
 }
 export const MsgUnPoolWhitelistedPool = {
-  encode(message: MsgUnPoolWhitelistedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUnPoolWhitelistedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnPoolWhitelistedPool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnPoolWhitelistedPool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPool();
     while (reader.pos < end) {
@@ -688,16 +688,16 @@ function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolR
   };
 }
 export const MsgUnPoolWhitelistedPoolResponse = {
-  encode(message: MsgUnPoolWhitelistedPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUnPoolWhitelistedPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.exitedLockIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnPoolWhitelistedPoolResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnPoolWhitelistedPoolResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
     while (reader.pos < end) {

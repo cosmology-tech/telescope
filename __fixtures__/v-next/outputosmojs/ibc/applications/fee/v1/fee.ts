@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** Fee defines the ICS29 receive, acknowledgement and timeout fees */
@@ -58,7 +58,7 @@ function createBaseFee(): Fee {
   };
 }
 export const Fee = {
-  encode(message: Fee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Fee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.recvFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -70,8 +70,8 @@ export const Fee = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Fee {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Fee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFee();
     while (reader.pos < end) {
@@ -168,7 +168,7 @@ function createBasePacketFee(): PacketFee {
   };
 }
 export const PacketFee = {
-  encode(message: PacketFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PacketFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
@@ -180,8 +180,8 @@ export const PacketFee = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PacketFee {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PacketFee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketFee();
     while (reader.pos < end) {
@@ -260,14 +260,14 @@ function createBasePacketFees(): PacketFees {
   };
 }
 export const PacketFees = {
-  encode(message: PacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PacketFees, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.packetFees) {
       PacketFee.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PacketFees {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PacketFees {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketFees();
     while (reader.pos < end) {
@@ -328,14 +328,14 @@ function createBaseIdentifiedPacketFees(): IdentifiedPacketFees {
   };
 }
 export const IdentifiedPacketFees = {
-  encode(message: IdentifiedPacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedPacketFees, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.packetFees) {
       PacketFee.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedPacketFees {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedPacketFees {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedPacketFees();
     while (reader.pos < end) {

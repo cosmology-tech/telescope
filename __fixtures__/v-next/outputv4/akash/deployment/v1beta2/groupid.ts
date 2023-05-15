@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
@@ -21,20 +21,20 @@ function createBaseGroupID(): GroupID {
   };
 }
 export const GroupID = {
-  encode(message: GroupID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GroupID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupID();
     while (reader.pos < end) {

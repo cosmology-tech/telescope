@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
@@ -67,7 +67,7 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   };
 }
 export const QueryAccountsRequest = {
-  encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -85,8 +85,8 @@ export const QueryAccountsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
     while (reader.pos < end) {
@@ -176,7 +176,7 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   };
 }
 export const QueryAccountsResponse = {
-  encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryAccountsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.accounts) {
       Account.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -185,8 +185,8 @@ export const QueryAccountsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
     while (reader.pos < end) {
@@ -261,7 +261,7 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
   };
 }
 export const QueryPaymentsRequest = {
-  encode(message: QueryPaymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPaymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -282,8 +282,8 @@ export const QueryPaymentsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPaymentsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPaymentsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPaymentsRequest();
     while (reader.pos < end) {
@@ -382,7 +382,7 @@ function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
   };
 }
 export const QueryPaymentsResponse = {
-  encode(message: QueryPaymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPaymentsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.payments) {
       FractionalPayment.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -391,8 +391,8 @@ export const QueryPaymentsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPaymentsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPaymentsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPaymentsResponse();
     while (reader.pos < end) {

@@ -1,8 +1,8 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** ===================== MsgCreatePosition */
@@ -156,18 +156,18 @@ function createBaseMsgCreatePosition(): MsgCreatePosition {
   };
 }
 export const MsgCreatePosition = {
-  encode(message: MsgCreatePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.sender !== "") {
       writer.uint32(18).string(message.sender);
     }
     if (message.lowerTick !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.lowerTick.toString()));
+      writer.uint32(24).int64(message.lowerTick);
     }
     if (message.upperTick !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.upperTick.toString()));
+      writer.uint32(32).int64(message.upperTick);
     }
     if (message.tokenDesired0 !== undefined) {
       Coin.encode(message.tokenDesired0, writer.uint32(42).fork()).ldelim();
@@ -183,8 +183,8 @@ export const MsgCreatePosition = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreatePosition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreatePosition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePosition();
     while (reader.pos < end) {
@@ -304,9 +304,9 @@ function createBaseMsgCreatePositionResponse(): MsgCreatePositionResponse {
   };
 }
 export const MsgCreatePositionResponse = {
-  encode(message: MsgCreatePositionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreatePositionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.positionId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.positionId.toString()));
+      writer.uint32(8).uint64(message.positionId);
     }
     if (message.amount0 !== "") {
       writer.uint32(18).string(message.amount0);
@@ -322,8 +322,8 @@ export const MsgCreatePositionResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreatePositionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreatePositionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePositionResponse();
     while (reader.pos < end) {
@@ -414,9 +414,9 @@ function createBaseMsgWithdrawPosition(): MsgWithdrawPosition {
   };
 }
 export const MsgWithdrawPosition = {
-  encode(message: MsgWithdrawPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawPosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.positionId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.positionId.toString()));
+      writer.uint32(8).uint64(message.positionId);
     }
     if (message.sender !== "") {
       writer.uint32(18).string(message.sender);
@@ -426,8 +426,8 @@ export const MsgWithdrawPosition = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawPosition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawPosition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawPosition();
     while (reader.pos < end) {
@@ -499,7 +499,7 @@ function createBaseMsgWithdrawPositionResponse(): MsgWithdrawPositionResponse {
   };
 }
 export const MsgWithdrawPositionResponse = {
-  encode(message: MsgWithdrawPositionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawPositionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.amount0 !== "") {
       writer.uint32(10).string(message.amount0);
     }
@@ -508,8 +508,8 @@ export const MsgWithdrawPositionResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawPositionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawPositionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawPositionResponse();
     while (reader.pos < end) {
@@ -572,10 +572,10 @@ function createBaseMsgCollectFees(): MsgCollectFees {
   };
 }
 export const MsgCollectFees = {
-  encode(message: MsgCollectFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCollectFees, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.positionIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     if (message.sender !== "") {
@@ -583,8 +583,8 @@ export const MsgCollectFees = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCollectFees {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCollectFees {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCollectFees();
     while (reader.pos < end) {
@@ -661,14 +661,14 @@ function createBaseMsgCollectFeesResponse(): MsgCollectFeesResponse {
   };
 }
 export const MsgCollectFeesResponse = {
-  encode(message: MsgCollectFeesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCollectFeesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.collectedFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCollectFeesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCollectFeesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCollectFeesResponse();
     while (reader.pos < end) {
@@ -730,10 +730,10 @@ function createBaseMsgCollectIncentives(): MsgCollectIncentives {
   };
 }
 export const MsgCollectIncentives = {
-  encode(message: MsgCollectIncentives, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCollectIncentives, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.positionIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     if (message.sender !== "") {
@@ -741,8 +741,8 @@ export const MsgCollectIncentives = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCollectIncentives {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCollectIncentives {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCollectIncentives();
     while (reader.pos < end) {
@@ -819,14 +819,14 @@ function createBaseMsgCollectIncentivesResponse(): MsgCollectIncentivesResponse 
   };
 }
 export const MsgCollectIncentivesResponse = {
-  encode(message: MsgCollectIncentivesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCollectIncentivesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.collectedIncentives) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCollectIncentivesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCollectIncentivesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCollectIncentivesResponse();
     while (reader.pos < end) {
@@ -893,9 +893,9 @@ function createBaseMsgCreateIncentive(): MsgCreateIncentive {
   };
 }
 export const MsgCreateIncentive = {
-  encode(message: MsgCreateIncentive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateIncentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.sender !== "") {
       writer.uint32(18).string(message.sender);
@@ -917,8 +917,8 @@ export const MsgCreateIncentive = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateIncentive {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateIncentive {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateIncentive();
     while (reader.pos < end) {
@@ -1029,7 +1029,7 @@ function createBaseMsgCreateIncentiveResponse(): MsgCreateIncentiveResponse {
   };
 }
 export const MsgCreateIncentiveResponse = {
-  encode(message: MsgCreateIncentiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateIncentiveResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.incentiveDenom !== "") {
       writer.uint32(10).string(message.incentiveDenom);
     }
@@ -1047,8 +1047,8 @@ export const MsgCreateIncentiveResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateIncentiveResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateIncentiveResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateIncentiveResponse();
     while (reader.pos < end) {
@@ -1138,10 +1138,10 @@ function createBaseMsgFungifyChargedPositions(): MsgFungifyChargedPositions {
   };
 }
 export const MsgFungifyChargedPositions = {
-  encode(message: MsgFungifyChargedPositions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgFungifyChargedPositions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.positionIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     if (message.sender !== "") {
@@ -1149,8 +1149,8 @@ export const MsgFungifyChargedPositions = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFungifyChargedPositions {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgFungifyChargedPositions {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFungifyChargedPositions();
     while (reader.pos < end) {
@@ -1227,14 +1227,14 @@ function createBaseMsgFungifyChargedPositionsResponse(): MsgFungifyChargedPositi
   };
 }
 export const MsgFungifyChargedPositionsResponse = {
-  encode(message: MsgFungifyChargedPositionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgFungifyChargedPositionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.newPositionId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.newPositionId.toString()));
+      writer.uint32(8).uint64(message.newPositionId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFungifyChargedPositionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgFungifyChargedPositionsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFungifyChargedPositionsResponse();
     while (reader.pos < end) {

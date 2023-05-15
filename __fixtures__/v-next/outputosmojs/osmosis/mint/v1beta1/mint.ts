@@ -1,6 +1,6 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -121,14 +121,14 @@ function createBaseMinter(): Minter {
   };
 }
 export const Minter = {
-  encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochProvisions !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Minter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
     while (reader.pos < end) {
@@ -182,7 +182,7 @@ function createBaseWeightedAddress(): WeightedAddress {
   };
 }
 export const WeightedAddress = {
-  encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -191,8 +191,8 @@ export const WeightedAddress = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): WeightedAddress {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
     while (reader.pos < end) {
@@ -257,7 +257,7 @@ function createBaseDistributionProportions(): DistributionProportions {
   };
 }
 export const DistributionProportions = {
-  encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistributionProportions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.staking !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
     }
@@ -272,8 +272,8 @@ export const DistributionProportions = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DistributionProportions {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
     while (reader.pos < end) {
@@ -360,7 +360,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
@@ -371,7 +371,7 @@ export const Params = {
       writer.uint32(26).string(message.epochIdentifier);
     }
     if (message.reductionPeriodInEpochs !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.reductionPeriodInEpochs.toString()));
+      writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
     if (message.reductionFactor !== "") {
       writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
@@ -383,12 +383,12 @@ export const Params = {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
-      writer.uint32(64).int64(Long.fromString(message.mintingRewardsDistributionStartEpoch.toString()));
+      writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType } from "./bid";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
@@ -147,12 +147,12 @@ function createBaseLeaseID(): LeaseID {
   };
 }
 export const LeaseID = {
-  encode(message: LeaseID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LeaseID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -165,8 +165,8 @@ export const LeaseID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LeaseID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LeaseID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseID();
     while (reader.pos < end) {
@@ -259,7 +259,7 @@ function createBaseLease(): Lease {
   };
 }
 export const Lease = {
-  encode(message: Lease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Lease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
     }
@@ -270,15 +270,15 @@ export const Lease = {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     if (message.closedOn !== BigInt(0)) {
-      writer.uint32(40).int64(Long.fromString(message.closedOn.toString()));
+      writer.uint32(40).int64(message.closedOn);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Lease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Lease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLease();
     while (reader.pos < end) {
@@ -372,12 +372,12 @@ function createBaseLeaseFilters(): LeaseFilters {
   };
 }
 export const LeaseFilters = {
-  encode(message: LeaseFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LeaseFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -393,8 +393,8 @@ export const LeaseFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LeaseFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LeaseFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseFilters();
     while (reader.pos < end) {
@@ -492,14 +492,14 @@ function createBaseMsgCreateLease(): MsgCreateLease {
   };
 }
 export const MsgCreateLease = {
-  encode(message: MsgCreateLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLease();
     while (reader.pos < end) {
@@ -550,11 +550,11 @@ function createBaseMsgCreateLeaseResponse(): MsgCreateLeaseResponse {
   return {};
 }
 export const MsgCreateLeaseResponse = {
-  encode(_: MsgCreateLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLeaseResponse();
     while (reader.pos < end) {
@@ -595,14 +595,14 @@ function createBaseMsgWithdrawLease(): MsgWithdrawLease {
   };
 }
 export const MsgWithdrawLease = {
-  encode(message: MsgWithdrawLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       LeaseID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLease();
     while (reader.pos < end) {
@@ -653,11 +653,11 @@ function createBaseMsgWithdrawLeaseResponse(): MsgWithdrawLeaseResponse {
   return {};
 }
 export const MsgWithdrawLeaseResponse = {
-  encode(_: MsgWithdrawLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgWithdrawLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLeaseResponse();
     while (reader.pos < end) {
@@ -698,14 +698,14 @@ function createBaseMsgCloseLease(): MsgCloseLease {
   };
 }
 export const MsgCloseLease = {
-  encode(message: MsgCloseLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLease();
     while (reader.pos < end) {
@@ -756,11 +756,11 @@ function createBaseMsgCloseLeaseResponse(): MsgCloseLeaseResponse {
   return {};
 }
 export const MsgCloseLeaseResponse = {
-  encode(_: MsgCloseLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLeaseResponse();
     while (reader.pos < end) {

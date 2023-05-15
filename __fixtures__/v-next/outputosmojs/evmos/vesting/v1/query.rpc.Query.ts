@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */
@@ -17,7 +17,7 @@ export class QueryClientImpl implements Query {
   balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.vesting.v1.Query", "Balances", data);
-    return promise.then(data => QueryBalancesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBalancesResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

@@ -1,6 +1,6 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** ===================== MsgCreateConcentratedPool */
 export interface MsgCreateConcentratedPool {
@@ -39,7 +39,7 @@ function createBaseMsgCreateConcentratedPool(): MsgCreateConcentratedPool {
   };
 }
 export const MsgCreateConcentratedPool = {
-  encode(message: MsgCreateConcentratedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateConcentratedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -50,7 +50,7 @@ export const MsgCreateConcentratedPool = {
       writer.uint32(26).string(message.denom1);
     }
     if (message.tickSpacing !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.tickSpacing.toString()));
+      writer.uint32(32).uint64(message.tickSpacing);
     }
     if (message.exponentAtPriceOne !== "") {
       writer.uint32(42).string(message.exponentAtPriceOne);
@@ -60,8 +60,8 @@ export const MsgCreateConcentratedPool = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateConcentratedPool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateConcentratedPool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateConcentratedPool();
     while (reader.pos < end) {
@@ -159,14 +159,14 @@ function createBaseMsgCreateConcentratedPoolResponse(): MsgCreateConcentratedPoo
   };
 }
 export const MsgCreateConcentratedPoolResponse = {
-  encode(message: MsgCreateConcentratedPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateConcentratedPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateConcentratedPoolResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateConcentratedPoolResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateConcentratedPoolResponse();
     while (reader.pos < end) {

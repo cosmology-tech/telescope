@@ -1,6 +1,6 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -45,7 +45,7 @@ function createBaseMinter(): Minter {
   };
 }
 export const Minter = {
-  encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.inflation !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflation, 18).atomics);
     }
@@ -54,8 +54,8 @@ export const Minter = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Minter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
     while (reader.pos < end) {
@@ -122,7 +122,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
@@ -139,12 +139,12 @@ export const Params = {
       writer.uint32(42).string(Decimal.fromUserInput(message.goalBonded, 18).atomics);
     }
     if (message.blocksPerYear !== BigInt(0)) {
-      writer.uint32(48).uint64(Long.fromString(message.blocksPerYear.toString()));
+      writer.uint32(48).uint64(message.blocksPerYear);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {

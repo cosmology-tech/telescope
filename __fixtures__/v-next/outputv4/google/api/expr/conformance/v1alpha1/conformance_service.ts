@@ -2,8 +2,8 @@ import { ParsedExpr, ParsedExprSDKType, SourcePosition, SourcePositionSDKType } 
 import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alpha1/checked";
 import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusSDKType } from "../../../../rpc/status";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject, Long } from "../../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -209,7 +209,7 @@ function createBaseParseRequest(): ParseRequest {
   };
 }
 export const ParseRequest = {
-  encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
     }
@@ -224,8 +224,8 @@ export const ParseRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ParseRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ParseRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
     while (reader.pos < end) {
@@ -306,7 +306,7 @@ function createBaseParseResponse(): ParseResponse {
   };
 }
 export const ParseResponse = {
-  encode(message: ParseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -315,8 +315,8 @@ export const ParseResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ParseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ParseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseResponse();
     while (reader.pos < end) {
@@ -389,7 +389,7 @@ function createBaseCheckRequest(): CheckRequest {
   };
 }
 export const CheckRequest = {
-  encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -404,8 +404,8 @@ export const CheckRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
     while (reader.pos < end) {
@@ -494,7 +494,7 @@ function createBaseCheckResponse(): CheckResponse {
   };
 }
 export const CheckResponse = {
-  encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.checkedExpr !== undefined) {
       CheckedExpr.encode(message.checkedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -503,8 +503,8 @@ export const CheckResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
     while (reader.pos < end) {
@@ -575,7 +575,7 @@ function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   };
 }
 export const EvalRequest_BindingsEntry = {
-  encode(message: EvalRequest_BindingsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalRequest_BindingsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -584,8 +584,8 @@ export const EvalRequest_BindingsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest_BindingsEntry();
     while (reader.pos < end) {
@@ -650,7 +650,7 @@ function createBaseEvalRequest(): EvalRequest {
   };
 }
 export const EvalRequest = {
-  encode(message: EvalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
     }
@@ -668,8 +668,8 @@ export const EvalRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest();
     while (reader.pos < end) {
@@ -785,7 +785,7 @@ function createBaseEvalResponse(): EvalResponse {
   };
 }
 export const EvalResponse = {
-  encode(message: EvalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.result !== undefined) {
       ExprValue.encode(message.result, writer.uint32(10).fork()).ldelim();
     }
@@ -794,8 +794,8 @@ export const EvalResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalResponse();
     while (reader.pos < end) {
@@ -867,7 +867,7 @@ function createBaseIssueDetails(): IssueDetails {
   };
 }
 export const IssueDetails = {
-  encode(message: IssueDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IssueDetails, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
     }
@@ -875,12 +875,12 @@ export const IssueDetails = {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
     if (message.id !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.id.toString()));
+      writer.uint32(24).int64(message.id);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IssueDetails {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IssueDetails {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIssueDetails();
     while (reader.pos < end) {

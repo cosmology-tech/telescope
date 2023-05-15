@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -91,7 +91,7 @@ function createBaseIncentive(): Incentive {
   };
 }
 export const Incentive = {
-  encode(message: Incentive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Incentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
@@ -105,12 +105,12 @@ export const Incentive = {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
     }
     if (message.totalGas !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.totalGas.toString()));
+      writer.uint32(40).uint64(message.totalGas);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Incentive {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Incentive {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentive();
     while (reader.pos < end) {
@@ -209,7 +209,7 @@ function createBaseGasMeter(): GasMeter {
   };
 }
 export const GasMeter = {
-  encode(message: GasMeter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GasMeter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
@@ -217,12 +217,12 @@ export const GasMeter = {
       writer.uint32(18).string(message.participant);
     }
     if (message.cumulativeGas !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.cumulativeGas.toString()));
+      writer.uint32(24).uint64(message.cumulativeGas);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GasMeter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GasMeter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGasMeter();
     while (reader.pos < end) {
@@ -297,7 +297,7 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   };
 }
 export const RegisterIncentiveProposal = {
-  encode(message: RegisterIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegisterIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -315,8 +315,8 @@ export const RegisterIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterIncentiveProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RegisterIncentiveProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterIncentiveProposal();
     while (reader.pos < end) {
@@ -415,7 +415,7 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
   };
 }
 export const CancelIncentiveProposal = {
-  encode(message: CancelIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CancelIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -427,8 +427,8 @@ export const CancelIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CancelIncentiveProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CancelIncentiveProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelIncentiveProposal();
     while (reader.pos < end) {

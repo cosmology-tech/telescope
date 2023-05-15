@@ -1,6 +1,6 @@
 import { Config, ConfigSDKType } from "./config";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 /** Query is the app module query service. */
@@ -17,7 +17,7 @@ export class QueryClientImpl implements Query {
   config(request: QueryConfigRequest = {}): Promise<QueryConfigResponse> {
     const data = QueryConfigRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.app.v1alpha1.Query", "Config", data);
-    return promise.then(data => QueryConfigResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryConfigResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

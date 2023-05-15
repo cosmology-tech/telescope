@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -28,17 +28,17 @@ function createBaseFeeToken(): FeeToken {
   };
 }
 export const FeeToken = {
-  encode(message: FeeToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.poolID !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolID.toString()));
+      writer.uint32(16).uint64(message.poolID);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FeeToken {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FeeToken {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeToken();
     while (reader.pos < end) {

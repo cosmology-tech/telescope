@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -44,17 +44,17 @@ function createBaseApp(): App {
   };
 }
 export const App = {
-  encode(message: App, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.protocol !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.protocol.toString()));
+      writer.uint32(8).uint64(message.protocol);
     }
     if (message.software !== "") {
       writer.uint32(18).string(message.software);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): App {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): App {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
     while (reader.pos < end) {
@@ -117,17 +117,17 @@ function createBaseConsensus(): Consensus {
   };
 }
 export const Consensus = {
-  encode(message: Consensus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.block !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.block.toString()));
+      writer.uint32(8).uint64(message.block);
     }
     if (message.app !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.app.toString()));
+      writer.uint32(16).uint64(message.app);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Consensus {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Consensus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
     while (reader.pos < end) {

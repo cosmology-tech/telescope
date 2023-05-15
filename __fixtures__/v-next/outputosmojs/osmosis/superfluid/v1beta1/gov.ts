@@ -1,6 +1,6 @@
 import { SuperfluidAsset, SuperfluidAssetSDKType } from "../superfluid";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -66,7 +66,7 @@ function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
   };
 }
 export const SetSuperfluidAssetsProposal = {
-  encode(message: SetSuperfluidAssetsProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SetSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -78,8 +78,8 @@ export const SetSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetSuperfluidAssetsProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SetSuperfluidAssetsProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSetSuperfluidAssetsProposal();
     while (reader.pos < end) {
@@ -160,7 +160,7 @@ function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsPropo
   };
 }
 export const RemoveSuperfluidAssetsProposal = {
-  encode(message: RemoveSuperfluidAssetsProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RemoveSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -172,8 +172,8 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RemoveSuperfluidAssetsProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RemoveSuperfluidAssetsProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRemoveSuperfluidAssetsProposal();
     while (reader.pos < end) {
@@ -255,7 +255,7 @@ function createBaseUpdateUnpoolWhiteListProposal(): UpdateUnpoolWhiteListProposa
   };
 }
 export const UpdateUnpoolWhiteListProposal = {
-  encode(message: UpdateUnpoolWhiteListProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateUnpoolWhiteListProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -264,7 +264,7 @@ export const UpdateUnpoolWhiteListProposal = {
     }
     writer.uint32(26).fork();
     for (const v of message.ids) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     if (message.isOverwrite === true) {
@@ -272,8 +272,8 @@ export const UpdateUnpoolWhiteListProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUnpoolWhiteListProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateUnpoolWhiteListProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateUnpoolWhiteListProposal();
     while (reader.pos < end) {

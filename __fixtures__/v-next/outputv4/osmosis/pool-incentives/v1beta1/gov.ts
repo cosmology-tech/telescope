@@ -1,5 +1,5 @@
 import { DistrRecord, DistrRecordSDKType } from "./incentives";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
@@ -66,7 +66,7 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
   };
 }
 export const ReplacePoolIncentivesProposal = {
-  encode(message: ReplacePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ReplacePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -78,8 +78,8 @@ export const ReplacePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReplacePoolIncentivesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ReplacePoolIncentivesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReplacePoolIncentivesProposal();
     while (reader.pos < end) {
@@ -160,7 +160,7 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
   };
 }
 export const UpdatePoolIncentivesProposal = {
-  encode(message: UpdatePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdatePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -172,8 +172,8 @@ export const UpdatePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePoolIncentivesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdatePoolIncentivesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdatePoolIncentivesProposal();
     while (reader.pos < end) {

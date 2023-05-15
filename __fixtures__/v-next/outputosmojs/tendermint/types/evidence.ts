@@ -1,8 +1,8 @@
 import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorSDKType } from "./validator";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -57,7 +57,7 @@ function createBaseEvidence(): Evidence {
   };
 }
 export const Evidence = {
-  encode(message: Evidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Evidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.duplicateVoteEvidence !== undefined) {
       DuplicateVoteEvidence.encode(message.duplicateVoteEvidence, writer.uint32(10).fork()).ldelim();
     }
@@ -66,8 +66,8 @@ export const Evidence = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Evidence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Evidence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidence();
     while (reader.pos < end) {
@@ -133,7 +133,7 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   };
 }
 export const DuplicateVoteEvidence = {
-  encode(message: DuplicateVoteEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DuplicateVoteEvidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.voteA !== undefined) {
       Vote.encode(message.voteA, writer.uint32(10).fork()).ldelim();
     }
@@ -141,18 +141,18 @@ export const DuplicateVoteEvidence = {
       Vote.encode(message.voteB, writer.uint32(18).fork()).ldelim();
     }
     if (message.totalVotingPower !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.totalVotingPower.toString()));
+      writer.uint32(24).int64(message.totalVotingPower);
     }
     if (message.validatorPower !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.validatorPower.toString()));
+      writer.uint32(32).int64(message.validatorPower);
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DuplicateVoteEvidence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DuplicateVoteEvidence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuplicateVoteEvidence();
     while (reader.pos < end) {
@@ -245,26 +245,26 @@ function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   };
 }
 export const LightClientAttackEvidence = {
-  encode(message: LightClientAttackEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LightClientAttackEvidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.conflictingBlock !== undefined) {
       LightBlock.encode(message.conflictingBlock, writer.uint32(10).fork()).ldelim();
     }
     if (message.commonHeight !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.commonHeight.toString()));
+      writer.uint32(16).int64(message.commonHeight);
     }
     for (const v of message.byzantineValidators) {
       Validator.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.totalVotingPower !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.totalVotingPower.toString()));
+      writer.uint32(32).int64(message.totalVotingPower);
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LightClientAttackEvidence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LightClientAttackEvidence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLightClientAttackEvidence();
     while (reader.pos < end) {
@@ -361,14 +361,14 @@ function createBaseEvidenceList(): EvidenceList {
   };
 }
 export const EvidenceList = {
-  encode(message: EvidenceList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvidenceList, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.evidence) {
       Evidence.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceList {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvidenceList {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceList();
     while (reader.pos < end) {

@@ -1,8 +1,8 @@
 import { Params, ParamsSDKType } from "./params";
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, BaseDenom, BaseDenomSDKType, PoolWeights, PoolWeightsSDKType } from "./protorev";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisState {
@@ -71,7 +71,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -85,30 +85,30 @@ export const GenesisState = {
       PoolWeights.encode(message.poolWeights, writer.uint32(34).fork()).ldelim();
     }
     if (message.daysSinceModuleGenesis !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.daysSinceModuleGenesis.toString()));
+      writer.uint32(40).uint64(message.daysSinceModuleGenesis);
     }
     for (const v of message.developerFees) {
       Coin.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     if (message.latestBlockHeight !== BigInt(0)) {
-      writer.uint32(56).uint64(Long.fromString(message.latestBlockHeight.toString()));
+      writer.uint32(56).uint64(message.latestBlockHeight);
     }
     if (message.developerAddress !== "") {
       writer.uint32(66).string(message.developerAddress);
     }
     if (message.maxPoolPointsPerBlock !== BigInt(0)) {
-      writer.uint32(72).uint64(Long.fromString(message.maxPoolPointsPerBlock.toString()));
+      writer.uint32(72).uint64(message.maxPoolPointsPerBlock);
     }
     if (message.maxPoolPointsPerTx !== BigInt(0)) {
-      writer.uint32(80).uint64(Long.fromString(message.maxPoolPointsPerTx.toString()));
+      writer.uint32(80).uint64(message.maxPoolPointsPerTx);
     }
     if (message.pointCountForBlock !== BigInt(0)) {
-      writer.uint32(88).uint64(Long.fromString(message.pointCountForBlock.toString()));
+      writer.uint32(88).uint64(message.pointCountForBlock);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {

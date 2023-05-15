@@ -4,8 +4,8 @@ import { IncentiveRecord, IncentiveRecordSDKType } from "./incentive_record";
 import { Params, ParamsSDKType } from "./params";
 import { Position, PositionSDKType } from "./position";
 import { AccumulatorContent, AccumulatorContentSDKType } from "../accum/v1beta1/accum";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
  * FullTick contains tick index and pool id along with other tick model
@@ -86,20 +86,20 @@ function createBaseFullTick(): FullTick {
   };
 }
 export const FullTick = {
-  encode(message: FullTick, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FullTick, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tickIndex !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.tickIndex.toString()));
+      writer.uint32(16).int64(message.tickIndex);
     }
     if (message.info !== undefined) {
       TickInfo.encode(message.info, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FullTick {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FullTick {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFullTick();
     while (reader.pos < end) {
@@ -174,7 +174,7 @@ function createBasePoolData(): PoolData {
   };
 }
 export const PoolData = {
-  encode(message: PoolData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
@@ -192,8 +192,8 @@ export const PoolData = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolData {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolData();
     while (reader.pos < end) {
@@ -309,7 +309,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -320,12 +320,12 @@ export const GenesisState = {
       Position.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.nextPositionId !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.nextPositionId.toString()));
+      writer.uint32(32).uint64(message.nextPositionId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -422,7 +422,7 @@ function createBaseAccumObject(): AccumObject {
   };
 }
 export const AccumObject = {
-  encode(message: AccumObject, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccumObject, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -431,8 +431,8 @@ export const AccumObject = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccumObject {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccumObject {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccumObject();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -315,9 +315,9 @@ function createBaseDistribution(): Distribution {
   };
 }
 export const Distribution = {
-  encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.count !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.count.toString()));
+      writer.uint32(8).int64(message.count);
     }
     if (message.mean !== 0) {
       writer.uint32(17).double(message.mean);
@@ -333,7 +333,7 @@ export const Distribution = {
     }
     writer.uint32(58).fork();
     for (const v of message.bucketCounts) {
-      writer.int64(Long.fromString(v.toString()));
+      writer.int64(v);
     }
     writer.ldelim();
     for (const v of message.exemplars) {
@@ -341,8 +341,8 @@ export const Distribution = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
     while (reader.pos < end) {
@@ -473,7 +473,7 @@ function createBaseDistribution_Range(): Distribution_Range {
   };
 }
 export const Distribution_Range = {
-  encode(message: Distribution_Range, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_Range, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.min !== 0) {
       writer.uint32(9).double(message.min);
     }
@@ -482,8 +482,8 @@ export const Distribution_Range = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Range {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_Range {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_Range();
     while (reader.pos < end) {
@@ -547,7 +547,7 @@ function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
   };
 }
 export const Distribution_BucketOptions = {
-  encode(message: Distribution_BucketOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.linearBuckets !== undefined) {
       Distribution_BucketOptions_Linear.encode(message.linearBuckets, writer.uint32(10).fork()).ldelim();
     }
@@ -559,8 +559,8 @@ export const Distribution_BucketOptions = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_BucketOptions {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_BucketOptions();
     while (reader.pos < end) {
@@ -633,7 +633,7 @@ function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptio
   };
 }
 export const Distribution_BucketOptions_Linear = {
-  encode(message: Distribution_BucketOptions_Linear, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Linear, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -645,8 +645,8 @@ export const Distribution_BucketOptions_Linear = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Linear {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_BucketOptions_Linear {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_BucketOptions_Linear();
     while (reader.pos < end) {
@@ -719,7 +719,7 @@ function createBaseDistribution_BucketOptions_Exponential(): Distribution_Bucket
   };
 }
 export const Distribution_BucketOptions_Exponential = {
-  encode(message: Distribution_BucketOptions_Exponential, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Exponential, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -731,8 +731,8 @@ export const Distribution_BucketOptions_Exponential = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Exponential {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_BucketOptions_Exponential {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_BucketOptions_Exponential();
     while (reader.pos < end) {
@@ -803,7 +803,7 @@ function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOpt
   };
 }
 export const Distribution_BucketOptions_Explicit = {
-  encode(message: Distribution_BucketOptions_Explicit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_BucketOptions_Explicit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.bounds) {
       writer.double(v);
@@ -811,8 +811,8 @@ export const Distribution_BucketOptions_Explicit = {
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_BucketOptions_Explicit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_BucketOptions_Explicit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_BucketOptions_Explicit();
     while (reader.pos < end) {
@@ -882,7 +882,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   };
 }
 export const Distribution_Exemplar = {
-  encode(message: Distribution_Exemplar, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_Exemplar, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
@@ -894,8 +894,8 @@ export const Distribution_Exemplar = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_Exemplar {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_Exemplar {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_Exemplar();
     while (reader.pos < end) {

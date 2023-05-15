@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -56,17 +56,17 @@ function createBaseCommitInfo(): CommitInfo {
   };
 }
 export const CommitInfo = {
-  encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommitInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.version !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.version.toString()));
+      writer.uint32(8).int64(message.version);
     }
     for (const v of message.storeInfos) {
       StoreInfo.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CommitInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CommitInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitInfo();
     while (reader.pos < end) {
@@ -137,7 +137,7 @@ function createBaseStoreInfo(): StoreInfo {
   };
 }
 export const StoreInfo = {
-  encode(message: StoreInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StoreInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -146,8 +146,8 @@ export const StoreInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): StoreInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): StoreInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreInfo();
     while (reader.pos < end) {
@@ -210,17 +210,17 @@ function createBaseCommitID(): CommitID {
   };
 }
 export const CommitID = {
-  encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CommitID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.version !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.version.toString()));
+      writer.uint32(8).int64(message.version);
     }
     if (message.hash.length !== 0) {
       writer.uint32(18).bytes(message.hash);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CommitID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CommitID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitID();
     while (reader.pos < end) {

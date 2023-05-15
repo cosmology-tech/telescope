@@ -1,6 +1,6 @@
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -172,7 +172,7 @@ function createBaseAccountID(): AccountID {
   };
 }
 export const AccountID = {
-  encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -181,8 +181,8 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
     while (reader.pos < end) {
@@ -251,7 +251,7 @@ function createBaseAccount(): Account {
   };
 }
 export const Account = {
-  encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -268,7 +268,7 @@ export const Account = {
       DecCoin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
     if (message.settledAt !== BigInt(0)) {
-      writer.uint32(48).int64(Long.fromString(message.settledAt.toString()));
+      writer.uint32(48).int64(message.settledAt);
     }
     if (message.depositor !== "") {
       writer.uint32(58).string(message.depositor);
@@ -278,8 +278,8 @@ export const Account = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Account {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Account {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
     while (reader.pos < end) {
@@ -401,7 +401,7 @@ function createBaseFractionalPayment(): FractionalPayment {
   };
 }
 export const FractionalPayment = {
-  encode(message: FractionalPayment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FractionalPayment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
@@ -425,8 +425,8 @@ export const FractionalPayment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FractionalPayment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FractionalPayment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFractionalPayment();
     while (reader.pos < end) {

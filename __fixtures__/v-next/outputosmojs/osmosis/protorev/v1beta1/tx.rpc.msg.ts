@@ -1,6 +1,6 @@
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { MsgSetHotRoutes, MsgSetHotRoutesSDKType, MsgSetHotRoutesResponse, MsgSetHotRoutesResponseSDKType, MsgSetDeveloperAccount, MsgSetDeveloperAccountSDKType, MsgSetDeveloperAccountResponse, MsgSetDeveloperAccountResponseSDKType, MsgSetMaxPoolPointsPerTx, MsgSetMaxPoolPointsPerTxSDKType, MsgSetMaxPoolPointsPerTxResponse, MsgSetMaxPoolPointsPerTxResponseSDKType, MsgSetMaxPoolPointsPerBlock, MsgSetMaxPoolPointsPerBlockSDKType, MsgSetMaxPoolPointsPerBlockResponse, MsgSetMaxPoolPointsPerBlockResponseSDKType, MsgSetPoolWeights, MsgSetPoolWeightsSDKType, MsgSetPoolWeightsResponse, MsgSetPoolWeightsResponseSDKType, MsgSetBaseDenoms, MsgSetBaseDenomsSDKType, MsgSetBaseDenomsResponse, MsgSetBaseDenomsResponseSDKType } from "./tx";
 export interface Msg {
   /**
@@ -48,31 +48,31 @@ export class MsgClientImpl implements Msg {
   setHotRoutes(request: MsgSetHotRoutes): Promise<MsgSetHotRoutesResponse> {
     const data = MsgSetHotRoutes.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetHotRoutes", data);
-    return promise.then(data => MsgSetHotRoutesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetHotRoutesResponse.decode(new BinaryReader(data)));
   }
   setDeveloperAccount(request: MsgSetDeveloperAccount): Promise<MsgSetDeveloperAccountResponse> {
     const data = MsgSetDeveloperAccount.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetDeveloperAccount", data);
-    return promise.then(data => MsgSetDeveloperAccountResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetDeveloperAccountResponse.decode(new BinaryReader(data)));
   }
   setMaxPoolPointsPerTx(request: MsgSetMaxPoolPointsPerTx): Promise<MsgSetMaxPoolPointsPerTxResponse> {
     const data = MsgSetMaxPoolPointsPerTx.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetMaxPoolPointsPerTx", data);
-    return promise.then(data => MsgSetMaxPoolPointsPerTxResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetMaxPoolPointsPerTxResponse.decode(new BinaryReader(data)));
   }
   setMaxPoolPointsPerBlock(request: MsgSetMaxPoolPointsPerBlock): Promise<MsgSetMaxPoolPointsPerBlockResponse> {
     const data = MsgSetMaxPoolPointsPerBlock.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetMaxPoolPointsPerBlock", data);
-    return promise.then(data => MsgSetMaxPoolPointsPerBlockResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetMaxPoolPointsPerBlockResponse.decode(new BinaryReader(data)));
   }
   setPoolWeights(request: MsgSetPoolWeights): Promise<MsgSetPoolWeightsResponse> {
     const data = MsgSetPoolWeights.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetPoolWeights", data);
-    return promise.then(data => MsgSetPoolWeightsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetPoolWeightsResponse.decode(new BinaryReader(data)));
   }
   setBaseDenoms(request: MsgSetBaseDenoms): Promise<MsgSetBaseDenomsResponse> {
     const data = MsgSetBaseDenoms.encode(request).finish();
     const promise = this.rpc.request("osmosis.protorev.v1beta1.Msg", "SetBaseDenoms", data);
-    return promise.then(data => MsgSetBaseDenomsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSetBaseDenomsResponse.decode(new BinaryReader(data)));
   }
 }

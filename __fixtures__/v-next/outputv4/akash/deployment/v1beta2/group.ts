@@ -1,7 +1,7 @@
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -81,7 +81,7 @@ function createBaseGroup(): Group {
   };
 }
 export const Group = {
-  encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Group, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
     }
@@ -92,12 +92,12 @@ export const Group = {
       GroupSpec.encode(message.groupSpec, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Group {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Group {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroup();
     while (reader.pos < end) {

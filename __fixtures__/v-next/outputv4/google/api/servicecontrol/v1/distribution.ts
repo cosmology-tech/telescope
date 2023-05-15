@@ -1,6 +1,6 @@
 import { Distribution_Exemplar } from "../../distribution";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -173,9 +173,9 @@ function createBaseDistribution(): Distribution {
   };
 }
 export const Distribution = {
-  encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.count !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.count.toString()));
+      writer.uint32(8).int64(message.count);
     }
     if (message.mean !== 0) {
       writer.uint32(17).double(message.mean);
@@ -191,7 +191,7 @@ export const Distribution = {
     }
     writer.uint32(50).fork();
     for (const v of message.bucketCounts) {
-      writer.int64(Long.fromString(v.toString()));
+      writer.int64(v);
     }
     writer.ldelim();
     if (message.linearBuckets !== undefined) {
@@ -208,8 +208,8 @@ export const Distribution = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
     while (reader.pos < end) {
@@ -368,7 +368,7 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
   };
 }
 export const Distribution_LinearBuckets = {
-  encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_LinearBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -380,8 +380,8 @@ export const Distribution_LinearBuckets = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_LinearBuckets {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_LinearBuckets {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_LinearBuckets();
     while (reader.pos < end) {
@@ -454,7 +454,7 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
   };
 }
 export const Distribution_ExponentialBuckets = {
-  encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_ExponentialBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
@@ -466,8 +466,8 @@ export const Distribution_ExponentialBuckets = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExponentialBuckets {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_ExponentialBuckets {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExponentialBuckets();
     while (reader.pos < end) {
@@ -538,7 +538,7 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
   };
 }
 export const Distribution_ExplicitBuckets = {
-  encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Distribution_ExplicitBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.bounds) {
       writer.double(v);
@@ -546,8 +546,8 @@ export const Distribution_ExplicitBuckets = {
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExplicitBuckets {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Distribution_ExplicitBuckets {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExplicitBuckets();
     while (reader.pos < end) {

@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ export class QueryClientImpl implements Query {
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
     const data = QuerySpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v2.Query", "SpotPrice", data);
-    return promise.then(data => QuerySpotPriceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySpotPriceResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

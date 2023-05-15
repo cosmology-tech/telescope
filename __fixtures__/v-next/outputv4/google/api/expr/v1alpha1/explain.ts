@@ -1,6 +1,6 @@
 import { Value, ValueSDKType } from "./value";
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -52,7 +52,7 @@ function createBaseExplain(): Explain {
   };
 }
 export const Explain = {
-  encode(message: Explain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Explain, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -61,8 +61,8 @@ export const Explain = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Explain {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Explain {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain();
     while (reader.pos < end) {
@@ -141,17 +141,17 @@ function createBaseExplain_ExprStep(): Explain_ExprStep {
   };
 }
 export const Explain_ExprStep = {
-  encode(message: Explain_ExprStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Explain_ExprStep, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.id.toString()));
+      writer.uint32(8).int64(message.id);
     }
     if (message.valueIndex !== 0) {
       writer.uint32(16).int32(message.valueIndex);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Explain_ExprStep {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Explain_ExprStep {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain_ExprStep();
     while (reader.pos < end) {

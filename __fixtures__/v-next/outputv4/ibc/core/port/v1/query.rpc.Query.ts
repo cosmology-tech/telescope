@@ -1,6 +1,6 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 /** Query defines the gRPC querier service */
@@ -17,7 +17,7 @@ export class QueryClientImpl implements Query {
   appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse> {
     const data = QueryAppVersionRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.port.v1.Query", "AppVersion", data);
-    return promise.then(data => QueryAppVersionResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAppVersionResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

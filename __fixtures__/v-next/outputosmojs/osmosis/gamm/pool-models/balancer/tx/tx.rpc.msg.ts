@@ -1,6 +1,6 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
 import { Rpc } from "../../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 export interface Msg {
   createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;
@@ -14,6 +14,6 @@ export class MsgClientImpl implements Msg {
   createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse> {
     const data = MsgCreateBalancerPool.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.poolmodels.balancer.v1beta1.Msg", "CreateBalancerPool", data);
-    return promise.then(data => MsgCreateBalancerPoolResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCreateBalancerPoolResponse.decode(new BinaryReader(data)));
   }
 }

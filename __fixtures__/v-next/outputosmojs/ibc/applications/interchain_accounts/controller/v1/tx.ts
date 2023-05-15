@@ -1,6 +1,6 @@
 import { InterchainAccountPacketData, InterchainAccountPacketDataSDKType } from "../../v1/packet";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { isSet, DeepPartial } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.controller.v1";
 /** MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccount {
@@ -58,7 +58,7 @@ function createBaseMsgRegisterInterchainAccount(): MsgRegisterInterchainAccount 
   };
 }
 export const MsgRegisterInterchainAccount = {
-  encode(message: MsgRegisterInterchainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRegisterInterchainAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -70,8 +70,8 @@ export const MsgRegisterInterchainAccount = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterInterchainAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterInterchainAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterInterchainAccount();
     while (reader.pos < end) {
@@ -143,7 +143,7 @@ function createBaseMsgRegisterInterchainAccountResponse(): MsgRegisterInterchain
   };
 }
 export const MsgRegisterInterchainAccountResponse = {
-  encode(message: MsgRegisterInterchainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRegisterInterchainAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
     }
@@ -152,8 +152,8 @@ export const MsgRegisterInterchainAccountResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterInterchainAccountResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterInterchainAccountResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterInterchainAccountResponse();
     while (reader.pos < end) {
@@ -218,7 +218,7 @@ function createBaseMsgSendTx(): MsgSendTx {
   };
 }
 export const MsgSendTx = {
-  encode(message: MsgSendTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSendTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -229,12 +229,12 @@ export const MsgSendTx = {
       InterchainAccountPacketData.encode(message.packetData, writer.uint32(26).fork()).ldelim();
     }
     if (message.relativeTimeout !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.relativeTimeout.toString()));
+      writer.uint32(32).uint64(message.relativeTimeout);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendTx {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendTx {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendTx();
     while (reader.pos < end) {
@@ -314,14 +314,14 @@ function createBaseMsgSendTxResponse(): MsgSendTxResponse {
   };
 }
 export const MsgSendTxResponse = {
-  encode(message: MsgSendTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSendTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sequence !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.sequence.toString()));
+      writer.uint32(8).uint64(message.sequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendTxResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendTxResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendTxResponse();
     while (reader.pos < end) {

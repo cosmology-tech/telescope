@@ -1,5 +1,5 @@
 import { Status, StatusSDKType } from "../../../rpc/status";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
@@ -234,7 +234,7 @@ function createBaseCheckError(): CheckError {
   };
 }
 export const CheckError = {
-  encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
@@ -249,8 +249,8 @@ export const CheckError = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckError {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckError {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckError();
     while (reader.pos < end) {

@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
@@ -110,7 +110,7 @@ function createBaseMsgLockTokens(): MsgLockTokens {
   };
 }
 export const MsgLockTokens = {
-  encode(message: MsgLockTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockTokens, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -122,8 +122,8 @@ export const MsgLockTokens = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockTokens {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockTokens {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
     while (reader.pos < end) {
@@ -202,14 +202,14 @@ function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
   };
 }
 export const MsgLockTokensResponse = {
-  encode(message: MsgLockTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgLockTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ID !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(8).uint64(message.ID);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLockTokensResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockTokensResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokensResponse();
     while (reader.pos < end) {
@@ -262,14 +262,14 @@ function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
   };
 }
 export const MsgBeginUnlockingAll = {
-  encode(message: MsgBeginUnlockingAll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingAll, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginUnlockingAll {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginUnlockingAll {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingAll();
     while (reader.pos < end) {
@@ -322,14 +322,14 @@ function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse 
   };
 }
 export const MsgBeginUnlockingAllResponse = {
-  encode(message: MsgBeginUnlockingAllResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingAllResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.unlocks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginUnlockingAllResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginUnlockingAllResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingAllResponse();
     while (reader.pos < end) {
@@ -392,20 +392,20 @@ function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
   };
 }
 export const MsgBeginUnlocking = {
-  encode(message: MsgBeginUnlocking, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlocking, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.ID !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginUnlocking {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginUnlocking {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlocking();
     while (reader.pos < end) {
@@ -484,14 +484,14 @@ function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
   };
 }
 export const MsgBeginUnlockingResponse = {
-  encode(message: MsgBeginUnlockingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgBeginUnlockingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginUnlockingResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginUnlockingResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingResponse();
     while (reader.pos < end) {
@@ -546,20 +546,20 @@ function createBaseMsgExtendLockup(): MsgExtendLockup {
   };
 }
 export const MsgExtendLockup = {
-  encode(message: MsgExtendLockup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExtendLockup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.ID !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(16).uint64(message.ID);
     }
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExtendLockup {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgExtendLockup {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExtendLockup();
     while (reader.pos < end) {
@@ -630,14 +630,14 @@ function createBaseMsgExtendLockupResponse(): MsgExtendLockupResponse {
   };
 }
 export const MsgExtendLockupResponse = {
-  encode(message: MsgExtendLockupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgExtendLockupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExtendLockupResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgExtendLockupResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExtendLockupResponse();
     while (reader.pos < end) {
@@ -692,20 +692,20 @@ function createBaseMsgForceUnlock(): MsgForceUnlock {
   };
 }
 export const MsgForceUnlock = {
-  encode(message: MsgForceUnlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgForceUnlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.ID !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgForceUnlock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgForceUnlock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgForceUnlock();
     while (reader.pos < end) {
@@ -784,14 +784,14 @@ function createBaseMsgForceUnlockResponse(): MsgForceUnlockResponse {
   };
 }
 export const MsgForceUnlockResponse = {
-  encode(message: MsgForceUnlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgForceUnlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgForceUnlockResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgForceUnlockResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgForceUnlockResponse();
     while (reader.pos < end) {

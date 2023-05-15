@@ -1,5 +1,5 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** ProviderInfo */
@@ -81,7 +81,7 @@ function createBaseProviderInfo(): ProviderInfo {
   };
 }
 export const ProviderInfo = {
-  encode(message: ProviderInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ProviderInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
     }
@@ -90,8 +90,8 @@ export const ProviderInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProviderInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ProviderInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderInfo();
     while (reader.pos < end) {
@@ -156,7 +156,7 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
   };
 }
 export const MsgCreateProvider = {
-  encode(message: MsgCreateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -171,8 +171,8 @@ export const MsgCreateProvider = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateProvider {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateProvider {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProvider();
     while (reader.pos < end) {
@@ -258,11 +258,11 @@ function createBaseMsgCreateProviderResponse(): MsgCreateProviderResponse {
   return {};
 }
 export const MsgCreateProviderResponse = {
-  encode(_: MsgCreateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateProviderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateProviderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProviderResponse();
     while (reader.pos < end) {
@@ -306,7 +306,7 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
   };
 }
 export const MsgUpdateProvider = {
-  encode(message: MsgUpdateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -321,8 +321,8 @@ export const MsgUpdateProvider = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateProvider {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProvider {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateProvider();
     while (reader.pos < end) {
@@ -408,11 +408,11 @@ function createBaseMsgUpdateProviderResponse(): MsgUpdateProviderResponse {
   return {};
 }
 export const MsgUpdateProviderResponse = {
-  encode(_: MsgUpdateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateProviderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProviderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateProviderResponse();
     while (reader.pos < end) {
@@ -453,14 +453,14 @@ function createBaseMsgDeleteProvider(): MsgDeleteProvider {
   };
 }
 export const MsgDeleteProvider = {
-  encode(message: MsgDeleteProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDeleteProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProvider {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProvider {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProvider();
     while (reader.pos < end) {
@@ -511,11 +511,11 @@ function createBaseMsgDeleteProviderResponse(): MsgDeleteProviderResponse {
   return {};
 }
 export const MsgDeleteProviderResponse = {
-  encode(_: MsgDeleteProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDeleteProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProviderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderResponse();
     while (reader.pos < end) {
@@ -559,7 +559,7 @@ function createBaseProvider(): Provider {
   };
 }
 export const Provider = {
-  encode(message: Provider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Provider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -574,8 +574,8 @@ export const Provider = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Provider {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Provider {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProvider();
     while (reader.pos < end) {

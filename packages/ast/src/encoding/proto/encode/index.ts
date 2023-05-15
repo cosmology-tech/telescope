@@ -4,6 +4,7 @@ import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '
 import { identifier, objectMethod, TypeLong } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { encode, arrayTypes } from './utils';
+import { BinaryCoder } from '../../../utils/binary-coder-expression';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement encode (${field.type} rules[${field.rule}] name[${name}])`);
@@ -141,7 +142,7 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
 };
 
 export const encodeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    context.addUtil('_m0');
+    BinaryCoder.addUtil(context);
 
     const fields = encodeMethodFields(context, name, proto);
     let varName = 'message';
@@ -177,19 +178,11 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
 
             t.assignmentPattern(
                 identifier('writer', t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.tsQualifiedName(
-                            t.identifier('_m0'),
-                            t.identifier('Writer')
-                        )
-                    )
+                    BinaryCoder.getWriterTypeRef(context)
                 )),
                 t.callExpression(
                     t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('_m0'),
-                            t.identifier('Writer')
-                        ),
+                        BinaryCoder.getWriterMemberExp(context),
                         t.identifier('create')
                     ),
                     []
@@ -204,12 +197,7 @@ export const encodeMethod = (context: ProtoParseContext, name: string, proto: Pr
         false,
         // return type
         t.tsTypeAnnotation(
-            t.tsTypeReference(
-                t.tsQualifiedName(
-                    t.identifier('_m0'),
-                    t.identifier('Writer')
-                )
-            )
+            BinaryCoder.getWriterTypeRef(context)
         )
     )
 };

@@ -3,8 +3,8 @@ import { PositionWithUnderlyingAssetBreakdown, PositionWithUnderlyingAssetBreakd
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "../params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** =============================== UserPositions */
@@ -142,17 +142,17 @@ function createBaseQueryUserPositionsRequest(): QueryUserPositionsRequest {
   };
 }
 export const QueryUserPositionsRequest = {
-  encode(message: QueryUserPositionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUserPositionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUserPositionsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryUserPositionsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUserPositionsRequest();
     while (reader.pos < end) {
@@ -214,14 +214,14 @@ function createBaseQueryUserPositionsResponse(): QueryUserPositionsResponse {
   };
 }
 export const QueryUserPositionsResponse = {
-  encode(message: QueryUserPositionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryUserPositionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.positions) {
       PositionWithUnderlyingAssetBreakdown.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUserPositionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryUserPositionsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUserPositionsResponse();
     while (reader.pos < end) {
@@ -282,14 +282,14 @@ function createBaseQueryPositionByIdRequest(): QueryPositionByIdRequest {
   };
 }
 export const QueryPositionByIdRequest = {
-  encode(message: QueryPositionByIdRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPositionByIdRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.positionId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.positionId.toString()));
+      writer.uint32(8).uint64(message.positionId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPositionByIdRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPositionByIdRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPositionByIdRequest();
     while (reader.pos < end) {
@@ -342,14 +342,14 @@ function createBaseQueryPositionByIdResponse(): QueryPositionByIdResponse {
   };
 }
 export const QueryPositionByIdResponse = {
-  encode(message: QueryPositionByIdResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPositionByIdResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.position !== undefined) {
       PositionWithUnderlyingAssetBreakdown.encode(message.position, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPositionByIdResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPositionByIdResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPositionByIdResponse();
     while (reader.pos < end) {
@@ -402,14 +402,14 @@ function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   };
 }
 export const QueryPoolsRequest = {
-  encode(message: QueryPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsRequest();
     while (reader.pos < end) {
@@ -463,7 +463,7 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   };
 }
 export const QueryPoolsResponse = {
-  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -472,8 +472,8 @@ export const QueryPoolsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
     while (reader.pos < end) {
@@ -541,11 +541,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -586,14 +586,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -647,7 +647,7 @@ function createBaseTickLiquidityNet(): TickLiquidityNet {
   };
 }
 export const TickLiquidityNet = {
-  encode(message: TickLiquidityNet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TickLiquidityNet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.liquidityNet !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.liquidityNet, 18).atomics);
     }
@@ -656,8 +656,8 @@ export const TickLiquidityNet = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TickLiquidityNet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TickLiquidityNet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTickLiquidityNet();
     while (reader.pos < end) {
@@ -721,7 +721,7 @@ function createBaseLiquidityDepthWithRange(): LiquidityDepthWithRange {
   };
 }
 export const LiquidityDepthWithRange = {
-  encode(message: LiquidityDepthWithRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LiquidityDepthWithRange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.liquidityAmount !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.liquidityAmount, 18).atomics);
     }
@@ -733,8 +733,8 @@ export const LiquidityDepthWithRange = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LiquidityDepthWithRange {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LiquidityDepthWithRange {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiquidityDepthWithRange();
     while (reader.pos < end) {
@@ -808,9 +808,9 @@ function createBaseQueryLiquidityNetInDirectionRequest(): QueryLiquidityNetInDir
   };
 }
 export const QueryLiquidityNetInDirectionRequest = {
-  encode(message: QueryLiquidityNetInDirectionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLiquidityNetInDirectionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tokenIn !== "") {
       writer.uint32(18).string(message.tokenIn);
@@ -823,8 +823,8 @@ export const QueryLiquidityNetInDirectionRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLiquidityNetInDirectionRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLiquidityNetInDirectionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLiquidityNetInDirectionRequest();
     while (reader.pos < end) {
@@ -906,20 +906,20 @@ function createBaseQueryLiquidityNetInDirectionResponse(): QueryLiquidityNetInDi
   };
 }
 export const QueryLiquidityNetInDirectionResponse = {
-  encode(message: QueryLiquidityNetInDirectionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLiquidityNetInDirectionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidityDepths) {
       TickLiquidityNet.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.currentTick !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.currentTick.toString()));
+      writer.uint32(16).int64(message.currentTick);
     }
     if (message.currentLiquidity !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.currentLiquidity, 18).atomics);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLiquidityNetInDirectionResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLiquidityNetInDirectionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLiquidityNetInDirectionResponse();
     while (reader.pos < end) {
@@ -998,14 +998,14 @@ function createBaseQueryTotalLiquidityForRangeRequest(): QueryTotalLiquidityForR
   };
 }
 export const QueryTotalLiquidityForRangeRequest = {
-  encode(message: QueryTotalLiquidityForRangeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalLiquidityForRangeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityForRangeRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityForRangeRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityForRangeRequest();
     while (reader.pos < end) {
@@ -1058,14 +1058,14 @@ function createBaseQueryTotalLiquidityForRangeResponse(): QueryTotalLiquidityFor
   };
 }
 export const QueryTotalLiquidityForRangeResponse = {
-  encode(message: QueryTotalLiquidityForRangeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalLiquidityForRangeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidity) {
       LiquidityDepthWithRange.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityForRangeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityForRangeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityForRangeResponse();
     while (reader.pos < end) {
@@ -1126,14 +1126,14 @@ function createBaseQueryClaimableFeesRequest(): QueryClaimableFeesRequest {
   };
 }
 export const QueryClaimableFeesRequest = {
-  encode(message: QueryClaimableFeesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableFeesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.positionId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.positionId.toString()));
+      writer.uint32(8).uint64(message.positionId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableFeesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableFeesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableFeesRequest();
     while (reader.pos < end) {
@@ -1186,14 +1186,14 @@ function createBaseQueryClaimableFeesResponse(): QueryClaimableFeesResponse {
   };
 }
 export const QueryClaimableFeesResponse = {
-  encode(message: QueryClaimableFeesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryClaimableFeesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.claimableFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimableFeesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableFeesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableFeesResponse();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructSDKType } from "../protobuf/struct";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -190,7 +190,7 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
   };
 }
 export const MonitoredResourceDescriptor = {
-  encode(message: MonitoredResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
     }
@@ -211,8 +211,8 @@ export const MonitoredResourceDescriptor = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceDescriptor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceDescriptor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceDescriptor();
     while (reader.pos < end) {
@@ -319,7 +319,7 @@ function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntr
   };
 }
 export const MonitoredResource_LabelsEntry = {
-  encode(message: MonitoredResource_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResource_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -328,8 +328,8 @@ export const MonitoredResource_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResource_LabelsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource_LabelsEntry();
     while (reader.pos < end) {
@@ -392,7 +392,7 @@ function createBaseMonitoredResource(): MonitoredResource {
   };
 }
 export const MonitoredResource = {
-  encode(message: MonitoredResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -404,8 +404,8 @@ export const MonitoredResource = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResource {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource();
     while (reader.pos < end) {
@@ -503,7 +503,7 @@ function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourc
   };
 }
 export const MonitoredResourceMetadata_UserLabelsEntry = {
-  encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -512,8 +512,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
     while (reader.pos < end) {
@@ -576,7 +576,7 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   };
 }
 export const MonitoredResourceMetadata = {
-  encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MonitoredResourceMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
     }
@@ -588,8 +588,8 @@ export const MonitoredResourceMetadata = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MonitoredResourceMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata();
     while (reader.pos < end) {

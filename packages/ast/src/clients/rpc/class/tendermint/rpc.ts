@@ -4,6 +4,7 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../../encoding';
 import { camel } from '@osmonauts/utils';
 import { processRpcComment, returnReponseType, cleanType, optionalBool } from '../utils/rpc';
+import { BinaryCoder } from '../../../../utils/binary-coder-expression';
 
 const rpcMethodDefinition = (
     name: string,
@@ -126,7 +127,7 @@ const promiseRequest = (name: string, packageImportName: string) => {
 };
 
 // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));
-const returnPromise = (name: string) => {
+const returnPromise = (name: string, context: GenericParseContext) => {
 
     name = cleanType(name);
 
@@ -148,10 +149,7 @@ const returnPromise = (name: string) => {
                         ),
                         [
                             t.newExpression(
-                                t.memberExpression(
-                                    t.identifier('_m0'),
-                                    t.identifier('Reader')
-                                ),
+                                BinaryCoder.getReaderMemberExp(context),
                                 [
                                     t.identifier('data')
                                 ]
@@ -222,8 +220,8 @@ const rpcClassMethod = (
         // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
         promiseRequest(msg, packageImport),
 
-        // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
-        returnPromise(responseType)
+        // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));
+        returnPromise(responseType, context)
 
     ]);
 
@@ -345,7 +343,7 @@ export const createRpcClientClass = (
 ) => {
 
     context.addUtil('Rpc');
-    context.addUtil('_m0');
+    BinaryCoder.addUtil(context);
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const name = getRpcClassName(service);

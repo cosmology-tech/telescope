@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ConfigRequest, ConfigRequestSDKType, ConfigResponse, ConfigResponseSDKType } from "./query";
 /** Service defines the gRPC querier service for node related queries. */
@@ -16,7 +16,7 @@ export class ServiceClientImpl implements Service {
   config(request: ConfigRequest = {}): Promise<ConfigResponse> {
     const data = ConfigRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.node.v1beta1.Service", "Config", data);
-    return promise.then(data => ConfigResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ConfigResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

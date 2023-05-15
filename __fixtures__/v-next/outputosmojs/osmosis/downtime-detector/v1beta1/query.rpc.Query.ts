@@ -1,7 +1,7 @@
 import { Downtime, DowntimeSDKType } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { RecoveredSinceDowntimeOfLengthRequest, RecoveredSinceDowntimeOfLengthRequestSDKType, RecoveredSinceDowntimeOfLengthResponse, RecoveredSinceDowntimeOfLengthResponseSDKType } from "./query";
 export interface Query {
@@ -16,7 +16,7 @@ export class QueryClientImpl implements Query {
   recoveredSinceDowntimeOfLength(request: RecoveredSinceDowntimeOfLengthRequest): Promise<RecoveredSinceDowntimeOfLengthResponse> {
     const data = RecoveredSinceDowntimeOfLengthRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.downtimedetector.v1beta1.Query", "RecoveredSinceDowntimeOfLength", data);
-    return promise.then(data => RecoveredSinceDowntimeOfLengthResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => RecoveredSinceDowntimeOfLengthResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

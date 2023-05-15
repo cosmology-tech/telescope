@@ -1,8 +1,8 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -70,7 +70,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
   };
 }
 export const MsgCreateGauge = {
-  encode(message: MsgCreateGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.isPerpetual === true) {
       writer.uint32(8).bool(message.isPerpetual);
     }
@@ -87,12 +87,12 @@ export const MsgCreateGauge = {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
     if (message.numEpochsPaidOver !== BigInt(0)) {
-      writer.uint32(48).uint64(Long.fromString(message.numEpochsPaidOver.toString()));
+      writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGauge {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateGauge {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGauge();
     while (reader.pos < end) {
@@ -196,11 +196,11 @@ function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
   return {};
 }
 export const MsgCreateGaugeResponse = {
-  encode(_: MsgCreateGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateGaugeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGaugeResponse();
     while (reader.pos < end) {
@@ -243,20 +243,20 @@ function createBaseMsgAddToGauge(): MsgAddToGauge {
   };
 }
 export const MsgAddToGauge = {
-  encode(message: MsgAddToGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgAddToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.gaugeId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.gaugeId.toString()));
+      writer.uint32(16).uint64(message.gaugeId);
     }
     for (const v of message.rewards) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGauge {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAddToGauge {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGauge();
     while (reader.pos < end) {
@@ -333,11 +333,11 @@ function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
   return {};
 }
 export const MsgAddToGaugeResponse = {
-  encode(_: MsgAddToGaugeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgAddToGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAddToGaugeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGaugeResponse();
     while (reader.pos < end) {

@@ -1,6 +1,6 @@
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -40,7 +40,7 @@ function createBaseValidatorSet(): ValidatorSet {
   };
 }
 export const ValidatorSet = {
-  encode(message: ValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -48,12 +48,12 @@ export const ValidatorSet = {
       Validator.encode(message.proposer, writer.uint32(18).fork()).ldelim();
     }
     if (message.totalVotingPower !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.totalVotingPower.toString()));
+      writer.uint32(24).int64(message.totalVotingPower);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSet();
     while (reader.pos < end) {
@@ -135,7 +135,7 @@ function createBaseValidator(): Validator {
   };
 }
 export const Validator = {
-  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -143,15 +143,15 @@ export const Validator = {
       PublicKey.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
     if (message.votingPower !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.votingPower.toString()));
+      writer.uint32(24).int64(message.votingPower);
     }
     if (message.proposerPriority !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.proposerPriority.toString()));
+      writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Validator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
     while (reader.pos < end) {
@@ -232,17 +232,17 @@ function createBaseSimpleValidator(): SimpleValidator {
   };
 }
 export const SimpleValidator = {
-  encode(message: SimpleValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SimpleValidator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
     if (message.votingPower !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.votingPower.toString()));
+      writer.uint32(16).int64(message.votingPower);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SimpleValidator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SimpleValidator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimpleValidator();
     while (reader.pos < end) {

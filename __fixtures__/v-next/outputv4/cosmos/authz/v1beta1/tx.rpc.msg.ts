@@ -1,7 +1,7 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 /** Msg defines the authz Msg service. */
 export interface Msg {
@@ -35,16 +35,16 @@ export class MsgClientImpl implements Msg {
   grant(request: MsgGrant): Promise<MsgGrantResponse> {
     const data = MsgGrant.encode(request).finish();
     const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Grant", data);
-    return promise.then(data => MsgGrantResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgGrantResponse.decode(new BinaryReader(data)));
   }
   exec(request: MsgExec): Promise<MsgExecResponse> {
     const data = MsgExec.encode(request).finish();
     const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Exec", data);
-    return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgExecResponse.decode(new BinaryReader(data)));
   }
   revoke(request: MsgRevoke): Promise<MsgRevokeResponse> {
     const data = MsgRevoke.encode(request).finish();
     const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Revoke", data);
-    return promise.then(data => MsgRevokeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgRevokeResponse.decode(new BinaryReader(data)));
   }
 }

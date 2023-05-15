@@ -6,8 +6,8 @@ import { Usage, UsageSDKType } from "../../usage";
 import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -621,7 +621,7 @@ function createBaseService(): Service {
   };
 }
 export const Service = {
-  encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -636,8 +636,8 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Service {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
     while (reader.pos < end) {
@@ -726,7 +726,7 @@ function createBaseServiceConfig(): ServiceConfig {
   };
 }
 export const ServiceConfig = {
-  encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -759,8 +759,8 @@ export const ServiceConfig = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceConfig {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
     while (reader.pos < end) {
@@ -918,14 +918,14 @@ function createBaseOperationMetadata(): OperationMetadata {
   };
 }
 export const OperationMetadata = {
-  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
     while (reader.pos < end) {
@@ -991,7 +991,7 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
   };
 }
 export const ConsumerQuotaMetric = {
-  encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1012,8 +1012,8 @@ export const ConsumerQuotaMetric = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetric {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConsumerQuotaMetric {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaMetric();
     while (reader.pos < end) {
@@ -1132,7 +1132,7 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
   };
 }
 export const ConsumerQuotaLimit = {
-  encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsumerQuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1153,8 +1153,8 @@ export const ConsumerQuotaLimit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConsumerQuotaLimit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaLimit();
     while (reader.pos < end) {
@@ -1261,7 +1261,7 @@ function createBaseQuotaBucket_DimensionsEntry(): QuotaBucket_DimensionsEntry {
   };
 }
 export const QuotaBucket_DimensionsEntry = {
-  encode(message: QuotaBucket_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaBucket_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1270,8 +1270,8 @@ export const QuotaBucket_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaBucket_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket_DimensionsEntry();
     while (reader.pos < end) {
@@ -1338,12 +1338,12 @@ function createBaseQuotaBucket(): QuotaBucket {
   };
 }
 export const QuotaBucket = {
-  encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.effectiveLimit !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.effectiveLimit.toString()));
+      writer.uint32(8).int64(message.effectiveLimit);
     }
     if (message.defaultLimit !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.defaultLimit.toString()));
+      writer.uint32(16).int64(message.defaultLimit);
     }
     if (message.producerOverride !== undefined) {
       QuotaOverride.encode(message.producerOverride, writer.uint32(26).fork()).ldelim();
@@ -1362,8 +1362,8 @@ export const QuotaBucket = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaBucket {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaBucket {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaBucket();
     while (reader.pos < end) {
@@ -1497,7 +1497,7 @@ function createBaseQuotaOverride_DimensionsEntry(): QuotaOverride_DimensionsEntr
   };
 }
 export const QuotaOverride_DimensionsEntry = {
-  encode(message: QuotaOverride_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1506,8 +1506,8 @@ export const QuotaOverride_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaOverride_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride_DimensionsEntry();
     while (reader.pos < end) {
@@ -1574,12 +1574,12 @@ function createBaseQuotaOverride(): QuotaOverride {
   };
 }
 export const QuotaOverride = {
-  encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaOverride, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.overrideValue !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.overrideValue.toString()));
+      writer.uint32(16).int64(message.overrideValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
       QuotaOverride_DimensionsEntry.encode({
@@ -1598,8 +1598,8 @@ export const QuotaOverride = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaOverride {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaOverride {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOverride();
     while (reader.pos < end) {
@@ -1732,14 +1732,14 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
   };
 }
 export const OverrideInlineSource = {
-  encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OverrideInlineSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OverrideInlineSource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OverrideInlineSource {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOverrideInlineSource();
     while (reader.pos < end) {
@@ -1801,7 +1801,7 @@ function createBaseAdminQuotaPolicy_DimensionsEntry(): AdminQuotaPolicy_Dimensio
   };
 }
 export const AdminQuotaPolicy_DimensionsEntry = {
-  encode(message: AdminQuotaPolicy_DimensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1810,8 +1810,8 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy_DimensionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AdminQuotaPolicy_DimensionsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy_DimensionsEntry();
     while (reader.pos < end) {
@@ -1878,12 +1878,12 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   };
 }
 export const AdminQuotaPolicy = {
-  encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AdminQuotaPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.policyValue !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.policyValue.toString()));
+      writer.uint32(16).int64(message.policyValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
       AdminQuotaPolicy_DimensionsEntry.encode({
@@ -1902,8 +1902,8 @@ export const AdminQuotaPolicy = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AdminQuotaPolicy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AdminQuotaPolicy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminQuotaPolicy();
     while (reader.pos < end) {
@@ -2037,7 +2037,7 @@ function createBaseServiceIdentity(): ServiceIdentity {
   };
 }
 export const ServiceIdentity = {
-  encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ServiceIdentity, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
     }
@@ -2046,8 +2046,8 @@ export const ServiceIdentity = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceIdentity {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceIdentity {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceIdentity();
     while (reader.pos < end) {

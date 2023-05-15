@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */
@@ -33,22 +33,22 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryDevFeeInfosResponse> {
     const data = QueryDevFeeInfosRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);
-    return promise.then(data => QueryDevFeeInfosResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryDevFeeInfosResponse.decode(new BinaryReader(data)));
   }
   devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
     const data = QueryDevFeeInfoRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfo", data);
-    return promise.then(data => QueryDevFeeInfoResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryDevFeeInfoResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
   devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> {
     const data = QueryDevFeeInfosPerDeployerRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfosPerDeployer", data);
-    return promise.then(data => QueryDevFeeInfosPerDeployerResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryDevFeeInfosPerDeployerResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
