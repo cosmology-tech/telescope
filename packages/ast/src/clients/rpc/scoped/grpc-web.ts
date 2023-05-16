@@ -3,7 +3,7 @@ import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
 import { rpcFuncArguments, rpcClassArguments, rpcRecursiveObjectProps } from './rpc';
 
-export const grpcScaffold = (): t.Statement[] => {
+export const grpcClientScaffold = (): t.Statement[] => {
     return [
         t.expressionStatement(
             t.assignmentExpression(
@@ -198,6 +198,37 @@ export const grpcScaffold = (): t.Statement[] => {
     ];
 };
 
+export const grpcFuncArguments = (): t.ObjectPattern[] => {
+    return [
+        objectPattern([
+            t.objectProperty(
+                t.identifier('grpcWebEndpoint'),
+                t.identifier('grpcWebEndpoint'),
+                false,
+                true
+            )
+        ], t.tsTypeAnnotation(
+            t.tsTypeLiteral([
+                t.tsPropertySignature(
+                    t.identifier('grpcWebEndpoint'),
+                    t.tsTypeAnnotation(
+                        t.tSTypeLiteral(
+                            [
+                                t.tsPropertySignature(
+                                    t.identifier('grpcWebEndpoint'),
+                                    t.tsTypeAnnotation(
+                                        t.tsStringKeyword()
+                                    )
+                                )
+                            ]
+                        )
+                    )
+                )
+            ])
+        ))
+    ];
+};
+
 export const grpcWebNewAwaitImport = (
     path: string,
     className: string
@@ -272,40 +303,44 @@ export const createScopedGrpcWebFactory = (
                     // createGrpcWebQueryClient
                     t.identifier(identifier),
                     t.arrowFunctionExpression(
-                        [
-                            objectPattern([
-                                t.objectProperty(
-                                    t.identifier('grpcWebEndpoint'),
-                                    t.identifier('grpcWebEndpoint'),
-                                    false,
-                                    true
-                                )
-                            ], t.tsTypeAnnotation(
-                                t.tsTypeLiteral([
-                                    t.tsPropertySignature(
-                                        t.identifier('grpcWebEndpoint'),
-                                        t.tsTypeAnnotation(
-                                            t.tSTypeLiteral(
-                                                [
-                                                    t.tsPropertySignature(
-                                                        t.identifier('grpcWebEndpoint'),
-                                                        t.tsTypeAnnotation(
-                                                            t.tsStringKeyword()
-                                                        )
-                                                    )
-                                                ]
-                                            )
-                                        )
-                                    )
-                                ])
-                            ))
-                        ],
+                        grpcFuncArguments(),
                         t.blockStatement(
-                            grpcScaffold().concat(
+                            grpcClientScaffold().concat(
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
                                     'GrpcWebImpl'
+                                )
+                            ))
+                        ),
+                        true
+                    )
+                )
+            ]
+        )
+    )
+}
+
+export const createScopedGrpcWebMsgFactory = (
+    obj: object,
+    identifier: string,
+    className: string
+) => {
+    return t.exportNamedDeclaration(
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                    t.identifier(identifier),
+                    t.arrowFunctionExpression(
+                        grpcFuncArguments(),
+                        //
+                        t.blockStatement(
+                            grpcClientScaffold().concat(
+                            t.returnStatement(
+                                grpcNestedImportObject(
+                                    obj,
+                                    className
                                 )
                             ))
                         ),

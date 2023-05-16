@@ -124,7 +124,6 @@ const makeRPC = (
     //based on rpc type to generate client from client factory
     let rpcast;
     
-    //temporary set this so test v3 will not fail
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
           // TODO no working scoped clients for grpc-gateway right now
@@ -148,7 +147,7 @@ const makeRPC = (
           break;
         default:
           break;
-      }
+    }
  
 
     const serviceImports = getDepsFromQueries(

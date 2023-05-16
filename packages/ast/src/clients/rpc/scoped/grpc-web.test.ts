@@ -3,7 +3,7 @@ import { expectCode, getGenericParseContext, printCode } from '../../../../test-
 
 import {
     // rpcRecursiveObjectProps,
-    // createScopedRrpcFactory,
+    createScopedGrpcWebMsgFactory,
     createScopedGrpcWebFactory
 } from './grpc-web';
 
@@ -39,6 +39,35 @@ it('createScopedGrpcWebFactory', async () => {
         }
       },
         'createRpcFactorizzle',
+    ))
+});
+
+it('createScopedGrpcWebMsgFactory', async () => {
+    expectCode(createScopedGrpcWebMsgFactory({
+        cosmos: {
+            authz: {
+              v1beta1: "../cosmos/authz/v1beta1/tx.rpc.msg"
+            },
+            bank: {
+              v1beta1: "../cosmos/bank/v1beta1/tx.rpc.msg"
+            },
+        },
+        osmosis: {
+            gamm: {
+              poolmodels: {
+                balancer: {
+                  v1beta1: "./gamm/pool-models/balancer/tx/tx.rpc.msg"
+                },
+                stableswap: {
+                  v1beta1: "./gamm/pool-models/stableswap/tx.rpc.msg"
+                }
+              },
+              v1beta1: "./gamm/v1beta1/tx.rpc.msg"
+            }
+        }
+    },
+        'createGrpcWebMsgClient',
+        'MsgClientImpl'
     ))
 });
 

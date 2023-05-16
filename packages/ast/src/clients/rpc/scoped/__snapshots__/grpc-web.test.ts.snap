@@ -61,3 +61,59 @@ exports[`createScopedGrpcWebFactory 1`] = `
   };
 };"
 `;
+
+exports[`createScopedGrpcWebMsgFactory 1`] = `
+"export const createGrpcWebMsgClient = async ({
+  grpcWebEndpoint
+}: {
+  grpcWebEndpoint: {
+    grpcWebEndpoint: string;
+  };
+}) => {
+  grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
+  const {
+    GrpcWebImpl
+  } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
+  let grpcWeb;
+
+  if (typeof document !== "undefined") {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: grpc.CrossBrowserHttpTransport({
+        withCredentials: false
+      })
+    });
+  } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: NodeHttpTransport()
+    });
+  } else {
+    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+      transport: NodeHttpTransport()
+    });
+  }
+
+  return {
+    cosmos: {
+      authz: {
+        v1beta1: new (await import("../cosmos/authz/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      },
+      bank: {
+        v1beta1: new (await import("../cosmos/bank/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      }
+    },
+    osmosis: {
+      gamm: {
+        poolmodels: {
+          balancer: {
+            v1beta1: new (await import("./gamm/pool-models/balancer/tx/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+          },
+          stableswap: {
+            v1beta1: new (await import("./gamm/pool-models/stableswap/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+          }
+        },
+        v1beta1: new (await import("./gamm/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      }
+    }
+  };
+};"
+`;
