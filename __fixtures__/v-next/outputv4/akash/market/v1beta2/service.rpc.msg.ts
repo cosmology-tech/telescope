@@ -3,7 +3,7 @@ import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 /** Msg defines the market Msg service */
 export interface Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */

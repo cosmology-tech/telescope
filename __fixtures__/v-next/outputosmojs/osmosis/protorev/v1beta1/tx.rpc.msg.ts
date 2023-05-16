@@ -1,6 +1,6 @@
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 import { MsgSetHotRoutes, MsgSetHotRoutesSDKType, MsgSetHotRoutesResponse, MsgSetHotRoutesResponseSDKType, MsgSetDeveloperAccount, MsgSetDeveloperAccountSDKType, MsgSetDeveloperAccountResponse, MsgSetDeveloperAccountResponseSDKType, MsgSetMaxPoolPointsPerTx, MsgSetMaxPoolPointsPerTxSDKType, MsgSetMaxPoolPointsPerTxResponse, MsgSetMaxPoolPointsPerTxResponseSDKType, MsgSetMaxPoolPointsPerBlock, MsgSetMaxPoolPointsPerBlockSDKType, MsgSetMaxPoolPointsPerBlockResponse, MsgSetMaxPoolPointsPerBlockResponseSDKType, MsgSetPoolWeights, MsgSetPoolWeightsSDKType, MsgSetPoolWeightsResponse, MsgSetPoolWeightsResponseSDKType, MsgSetBaseDenoms, MsgSetBaseDenomsSDKType, MsgSetBaseDenomsResponse, MsgSetBaseDenomsResponseSDKType } from "./tx";
 export interface Msg {
   /**

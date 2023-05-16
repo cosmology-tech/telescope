@@ -2,7 +2,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Rpc } from "../../helpers";
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { BinaryReader } from "../../binary";
 import { MsgCreatePosition, MsgCreatePositionSDKType, MsgCreatePositionResponse, MsgCreatePositionResponseSDKType, MsgWithdrawPosition, MsgWithdrawPositionSDKType, MsgWithdrawPositionResponse, MsgWithdrawPositionResponseSDKType, MsgCollectFees, MsgCollectFeesSDKType, MsgCollectFeesResponse, MsgCollectFeesResponseSDKType, MsgCollectIncentives, MsgCollectIncentivesSDKType, MsgCollectIncentivesResponse, MsgCollectIncentivesResponseSDKType, MsgFungifyChargedPositions, MsgFungifyChargedPositionsSDKType, MsgFungifyChargedPositionsResponse, MsgFungifyChargedPositionsResponseSDKType } from "./tx";
 export interface Msg {
   createPosition(request: MsgCreatePosition): Promise<MsgCreatePositionResponse>;

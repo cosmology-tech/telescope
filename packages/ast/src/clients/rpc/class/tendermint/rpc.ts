@@ -343,7 +343,7 @@ export const createRpcClientClass = (
 ) => {
 
     context.addUtil('Rpc');
-    BinaryCoder.addUtil(context);
+    BinaryCoder.addUtil(context, 'reader');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const name = getRpcClassName(service);

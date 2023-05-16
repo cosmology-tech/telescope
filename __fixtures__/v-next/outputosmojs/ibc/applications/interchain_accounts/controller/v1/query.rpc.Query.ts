@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType } from "./controller";
 import { Rpc } from "../../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { BinaryReader } from "../../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryInterchainAccountRequest, QueryInterchainAccountRequestSDKType, QueryInterchainAccountResponse, QueryInterchainAccountResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 /** Query provides defines the gRPC querier service. */

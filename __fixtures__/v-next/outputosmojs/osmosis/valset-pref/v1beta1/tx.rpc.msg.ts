@@ -1,7 +1,7 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 import { MsgSetValidatorSetPreference, MsgSetValidatorSetPreferenceSDKType, MsgSetValidatorSetPreferenceResponse, MsgSetValidatorSetPreferenceResponseSDKType, MsgDelegateToValidatorSet, MsgDelegateToValidatorSetSDKType, MsgDelegateToValidatorSetResponse, MsgDelegateToValidatorSetResponseSDKType, MsgUndelegateFromValidatorSet, MsgUndelegateFromValidatorSetSDKType, MsgUndelegateFromValidatorSetResponse, MsgUndelegateFromValidatorSetResponseSDKType, MsgRedelegateValidatorSet, MsgRedelegateValidatorSetSDKType, MsgRedelegateValidatorSetResponse, MsgRedelegateValidatorSetResponseSDKType, MsgWithdrawDelegationRewards, MsgWithdrawDelegationRewardsSDKType, MsgWithdrawDelegationRewardsResponse, MsgWithdrawDelegationRewardsResponseSDKType, MsgDelegateBondedTokens, MsgDelegateBondedTokensSDKType, MsgDelegateBondedTokensResponse, MsgDelegateBondedTokensResponseSDKType } from "./tx";
 /** Msg defines the valset-pref modules's gRPC message service. */
 export interface Msg {

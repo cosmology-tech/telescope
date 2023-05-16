@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType } from "./mint";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
 /** Query provides defines the gRPC querier service. */

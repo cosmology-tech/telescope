@@ -1,6 +1,6 @@
 import { InterchainAccountPacketData, InterchainAccountPacketDataSDKType } from "../../v1/packet";
 import { Rpc } from "../../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { BinaryReader } from "../../../../../binary";
 import { MsgRegisterInterchainAccount, MsgRegisterInterchainAccountSDKType, MsgRegisterInterchainAccountResponse, MsgRegisterInterchainAccountResponseSDKType, MsgSendTx, MsgSendTxSDKType, MsgSendTxResponse, MsgSendTxResponseSDKType } from "./tx";
 /** Msg defines the 27-interchain-accounts/controller Msg service. */
 export interface Msg {

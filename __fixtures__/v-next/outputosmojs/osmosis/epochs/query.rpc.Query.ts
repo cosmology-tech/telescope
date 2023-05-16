@@ -1,6 +1,6 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { Rpc } from "../../helpers";
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { BinaryReader } from "../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */

@@ -2,7 +2,7 @@ import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./co
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { Rpc } from "../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { BinaryReader } from "../../../../binary";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {

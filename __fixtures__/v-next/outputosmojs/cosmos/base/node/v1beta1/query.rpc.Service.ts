@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ConfigRequest, ConfigRequestSDKType, ConfigResponse, ConfigResponseSDKType } from "./query";
 /** Service defines the gRPC querier service for node related queries. */

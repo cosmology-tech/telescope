@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType } from "./query";
 export interface Query {

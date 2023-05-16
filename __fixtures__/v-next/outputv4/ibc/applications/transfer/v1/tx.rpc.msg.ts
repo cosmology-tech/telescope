@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import { Rpc } from "../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { BinaryReader } from "../../../../binary";
 import { MsgTransfer, MsgTransferSDKType, MsgTransferResponse, MsgTransferResponseSDKType } from "./tx";
 /** Msg defines the ibc/transfer Msg service. */
 export interface Msg {

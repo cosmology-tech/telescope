@@ -1,6 +1,6 @@
 import { Fee, FeeSDKType, PacketFee, PacketFeeSDKType } from "./fee";
 import { Rpc } from "../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { BinaryReader } from "../../../../binary";
 import { MsgRegisterPayee, MsgRegisterPayeeSDKType, MsgRegisterPayeeResponse, MsgRegisterPayeeResponseSDKType, MsgRegisterCounterpartyPayee, MsgRegisterCounterpartyPayeeSDKType, MsgRegisterCounterpartyPayeeResponse, MsgRegisterCounterpartyPayeeResponseSDKType, MsgPayPacketFee, MsgPayPacketFeeSDKType, MsgPayPacketFeeResponse, MsgPayPacketFeeResponseSDKType, MsgPayPacketFeeAsync, MsgPayPacketFeeAsyncSDKType, MsgPayPacketFeeAsyncResponse, MsgPayPacketFeeAsyncResponseSDKType } from "./tx";
 /** Msg defines the ICS29 Msg service. */
 export interface Msg {

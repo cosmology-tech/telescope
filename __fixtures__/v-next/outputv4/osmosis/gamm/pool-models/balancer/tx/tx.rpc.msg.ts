@@ -1,6 +1,6 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
 import { Rpc } from "../../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { BinaryReader } from "../../../../../binary";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 export interface Msg {
   createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;

@@ -1,7 +1,7 @@
 import { Downtime, DowntimeSDKType } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Rpc } from "../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { RecoveredSinceDowntimeOfLengthRequest, RecoveredSinceDowntimeOfLengthRequestSDKType, RecoveredSinceDowntimeOfLengthResponse, RecoveredSinceDowntimeOfLengthResponseSDKType } from "./query";
 export interface Query {

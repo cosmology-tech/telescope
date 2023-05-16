@@ -1,6 +1,6 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
 import { Rpc } from "../../../../helpers";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 /** Query defines the gRPC querier service */

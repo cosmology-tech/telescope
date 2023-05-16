@@ -2,20 +2,25 @@ import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 
 export const BinaryCoder = {
-  addUtil: (ctx?: GenericParseContext) => {
+  addUtil: (ctx?: GenericParseContext, type?: string) => {
     if (!ctx) {
       return;
     }
 
     const longLib = ctx.pluginValue('prototypes.typingsFormat.longLibrary');
+    type = type?.trim().toLowerCase();
 
     switch (longLib) {
       case 'long':
         ctx.addUtil('_m0');
         break;
       case 'bigint':
-        ctx.addUtil('BinaryReader');
-        ctx.addUtil('BinaryWriter');
+        if (!type || type === 'both' || type === 'reader') {
+          ctx.addUtil('BinaryReader');
+        }
+        if (!type || type === 'both' || type === 'writer') {
+          ctx.addUtil('BinaryWriter');
+        }
         break;
     }
   },
