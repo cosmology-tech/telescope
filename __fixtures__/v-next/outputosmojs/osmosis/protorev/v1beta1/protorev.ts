@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutes {
@@ -132,7 +132,7 @@ function createBaseTokenPairArbRoutes(): TokenPairArbRoutes {
   };
 }
 export const TokenPairArbRoutes = {
-  encode(message: TokenPairArbRoutes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TokenPairArbRoutes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.arbRoutes) {
       Route.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -144,8 +144,8 @@ export const TokenPairArbRoutes = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TokenPairArbRoutes {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TokenPairArbRoutes {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenPairArbRoutes();
     while (reader.pos < end) {
@@ -225,7 +225,7 @@ function createBaseRoute(): Route {
   };
 }
 export const Route = {
-  encode(message: Route, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Route, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.trades) {
       Trade.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -234,8 +234,8 @@ export const Route = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Route {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Route {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoute();
     while (reader.pos < end) {
@@ -307,9 +307,9 @@ function createBaseTrade(): Trade {
   };
 }
 export const Trade = {
-  encode(message: Trade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Trade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.pool.toString()));
+      writer.uint32(8).uint64(message.pool);
     }
     if (message.tokenIn !== "") {
       writer.uint32(18).string(message.tokenIn);
@@ -319,8 +319,8 @@ export const Trade = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Trade {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Trade {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrade();
     while (reader.pos < end) {
@@ -393,7 +393,7 @@ function createBaseRouteStatistics(): RouteStatistics {
   };
 }
 export const RouteStatistics = {
-  encode(message: RouteStatistics, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RouteStatistics, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.profits) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -402,13 +402,13 @@ export const RouteStatistics = {
     }
     writer.uint32(26).fork();
     for (const v of message.route) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RouteStatistics {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RouteStatistics {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRouteStatistics();
     while (reader.pos < end) {
@@ -504,20 +504,20 @@ function createBasePoolWeights(): PoolWeights {
   };
 }
 export const PoolWeights = {
-  encode(message: PoolWeights, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolWeights, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.stableWeight !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.stableWeight.toString()));
+      writer.uint32(8).uint64(message.stableWeight);
     }
     if (message.balancerWeight !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.balancerWeight.toString()));
+      writer.uint32(16).uint64(message.balancerWeight);
     }
     if (message.concentratedWeight !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.concentratedWeight.toString()));
+      writer.uint32(24).uint64(message.concentratedWeight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolWeights {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolWeights {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolWeights();
     while (reader.pos < end) {
@@ -589,7 +589,7 @@ function createBaseBaseDenom(): BaseDenom {
   };
 }
 export const BaseDenom = {
-  encode(message: BaseDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BaseDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -598,8 +598,8 @@ export const BaseDenom = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BaseDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BaseDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseDenom();
     while (reader.pos < end) {

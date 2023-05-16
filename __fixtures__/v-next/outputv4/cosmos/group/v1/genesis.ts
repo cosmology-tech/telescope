@@ -1,6 +1,6 @@
 import { GroupInfo, GroupInfoSDKType, GroupMember, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
@@ -54,9 +54,9 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupSeq !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.groupSeq.toString()));
+      writer.uint32(8).uint64(message.groupSeq);
     }
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -65,13 +65,13 @@ export const GenesisState = {
       GroupMember.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.groupPolicySeq !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.groupPolicySeq.toString()));
+      writer.uint32(32).uint64(message.groupPolicySeq);
     }
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     if (message.proposalSeq !== BigInt(0)) {
-      writer.uint32(48).uint64(Long.fromString(message.proposalSeq.toString()));
+      writer.uint32(48).uint64(message.proposalSeq);
     }
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -81,8 +81,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {

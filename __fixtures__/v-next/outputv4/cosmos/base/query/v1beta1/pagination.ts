@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -103,15 +103,15 @@ function createBasePageRequest(): PageRequest {
   };
 }
 export const PageRequest = {
-  encode(message: PageRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PageRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
     if (message.offset !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.offset.toString()));
+      writer.uint32(16).uint64(message.offset);
     }
     if (message.limit !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.limit.toString()));
+      writer.uint32(24).uint64(message.limit);
     }
     if (message.countTotal === true) {
       writer.uint32(32).bool(message.countTotal);
@@ -121,8 +121,8 @@ export const PageRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PageRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PageRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageRequest();
     while (reader.pos < end) {
@@ -212,17 +212,17 @@ function createBasePageResponse(): PageResponse {
   };
 }
 export const PageResponse = {
-  encode(message: PageResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PageResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
     }
     if (message.total !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.total.toString()));
+      writer.uint32(16).uint64(message.total);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PageResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PageResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageResponse();
     while (reader.pos < end) {

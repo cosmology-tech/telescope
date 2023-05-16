@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -325,7 +325,7 @@ function createBaseAuthentication(): Authentication {
   };
 }
 export const Authentication = {
-  encode(message: Authentication, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Authentication, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
@@ -334,8 +334,8 @@ export const Authentication = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Authentication {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Authentication {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthentication();
     while (reader.pos < end) {
@@ -416,7 +416,7 @@ function createBaseAuthenticationRule(): AuthenticationRule {
   };
 }
 export const AuthenticationRule = {
-  encode(message: AuthenticationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthenticationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -431,8 +431,8 @@ export const AuthenticationRule = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticationRule {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthenticationRule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthenticationRule();
     while (reader.pos < end) {
@@ -522,7 +522,7 @@ function createBaseJwtLocation(): JwtLocation {
   };
 }
 export const JwtLocation = {
-  encode(message: JwtLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: JwtLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
     }
@@ -534,8 +534,8 @@ export const JwtLocation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): JwtLocation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): JwtLocation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJwtLocation();
     while (reader.pos < end) {
@@ -611,7 +611,7 @@ function createBaseAuthProvider(): AuthProvider {
   };
 }
 export const AuthProvider = {
-  encode(message: AuthProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -632,8 +632,8 @@ export const AuthProvider = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuthProvider {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthProvider {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthProvider();
     while (reader.pos < end) {
@@ -739,14 +739,14 @@ function createBaseOAuthRequirements(): OAuthRequirements {
   };
 }
 export const OAuthRequirements = {
-  encode(message: OAuthRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OAuthRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OAuthRequirements {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OAuthRequirements {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOAuthRequirements();
     while (reader.pos < end) {
@@ -800,7 +800,7 @@ function createBaseAuthRequirement(): AuthRequirement {
   };
 }
 export const AuthRequirement = {
-  encode(message: AuthRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AuthRequirement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);
     }
@@ -809,8 +809,8 @@ export const AuthRequirement = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuthRequirement {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthRequirement {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthRequirement();
     while (reader.pos < end) {

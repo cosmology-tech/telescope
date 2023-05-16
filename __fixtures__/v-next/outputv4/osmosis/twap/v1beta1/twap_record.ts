@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
@@ -76,9 +76,9 @@ function createBaseTwapRecord(): TwapRecord {
   };
 }
 export const TwapRecord = {
-  encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.asset0Denom !== "") {
       writer.uint32(18).string(message.asset0Denom);
@@ -87,7 +87,7 @@ export const TwapRecord = {
       writer.uint32(26).string(message.asset1Denom);
     }
     if (message.height !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.height.toString()));
+      writer.uint32(32).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
@@ -109,8 +109,8 @@ export const TwapRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TwapRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TwapRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTwapRecord();
     while (reader.pos < end) {

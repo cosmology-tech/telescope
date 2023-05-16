@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
@@ -52,7 +52,7 @@ function createBaseAttribute(): Attribute {
   };
 }
 export const Attribute = {
-  encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -61,8 +61,8 @@ export const Attribute = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Attribute {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Attribute {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttribute();
     while (reader.pos < end) {
@@ -125,7 +125,7 @@ function createBaseSignedBy(): SignedBy {
   };
 }
 export const SignedBy = {
-  encode(message: SignedBy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SignedBy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allOf) {
       writer.uint32(10).string(v!);
     }
@@ -134,8 +134,8 @@ export const SignedBy = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SignedBy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SignedBy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedBy();
     while (reader.pos < end) {
@@ -214,7 +214,7 @@ function createBasePlacementRequirements(): PlacementRequirements {
   };
 }
 export const PlacementRequirements = {
-  encode(message: PlacementRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PlacementRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.signedBy !== undefined) {
       SignedBy.encode(message.signedBy, writer.uint32(10).fork()).ldelim();
     }
@@ -223,8 +223,8 @@ export const PlacementRequirements = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlacementRequirements {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PlacementRequirements {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlacementRequirements();
     while (reader.pos < end) {

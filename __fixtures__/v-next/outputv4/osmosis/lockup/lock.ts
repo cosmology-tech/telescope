@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -170,9 +170,9 @@ function createBasePeriodLock(): PeriodLock {
   };
 }
 export const PeriodLock = {
-  encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeriodLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ID !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(8).uint64(message.ID);
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
@@ -188,8 +188,8 @@ export const PeriodLock = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PeriodLock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PeriodLock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodLock();
     while (reader.pos < end) {
@@ -289,7 +289,7 @@ function createBaseQueryCondition(): QueryCondition {
   };
 }
 export const QueryCondition = {
-  encode(message: QueryCondition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCondition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
     }
@@ -304,8 +304,8 @@ export const QueryCondition = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCondition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCondition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCondition();
     while (reader.pos < end) {
@@ -388,9 +388,9 @@ function createBaseSyntheticLock(): SyntheticLock {
   };
 }
 export const SyntheticLock = {
-  encode(message: SyntheticLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SyntheticLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.underlyingLockId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.underlyingLockId.toString()));
+      writer.uint32(8).uint64(message.underlyingLockId);
     }
     if (message.synthDenom !== "") {
       writer.uint32(18).string(message.synthDenom);
@@ -403,8 +403,8 @@ export const SyntheticLock = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SyntheticLock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLock();
     while (reader.pos < end) {

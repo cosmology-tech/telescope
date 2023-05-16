@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -85,17 +85,17 @@ function createBaseDeploymentID(): DeploymentID {
   };
 }
 export const DeploymentID = {
-  encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentID();
     while (reader.pos < end) {
@@ -160,7 +160,7 @@ function createBaseDeployment(): Deployment {
   };
 }
 export const Deployment = {
-  encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
     }
@@ -171,12 +171,12 @@ export const Deployment = {
       writer.uint32(26).bytes(message.version);
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Deployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Deployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeployment();
     while (reader.pos < end) {
@@ -258,20 +258,20 @@ function createBaseDeploymentFilters(): DeploymentFilters {
   };
 }
 export const DeploymentFilters = {
-  encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.state !== "") {
       writer.uint32(26).string(message.state);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentFilters();
     while (reader.pos < end) {

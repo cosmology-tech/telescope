@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
@@ -83,7 +83,7 @@ function createBaseInflationDistribution(): InflationDistribution {
   };
 }
 export const InflationDistribution = {
-  encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InflationDistribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.stakingRewards !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
     }
@@ -95,8 +95,8 @@ export const InflationDistribution = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): InflationDistribution {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): InflationDistribution {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInflationDistribution();
     while (reader.pos < end) {
@@ -171,7 +171,7 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
   };
 }
 export const ExponentialCalculation = {
-  encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExponentialCalculation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.a !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
     }
@@ -189,8 +189,8 @@ export const ExponentialCalculation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ExponentialCalculation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ExponentialCalculation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExponentialCalculation();
     while (reader.pos < end) {

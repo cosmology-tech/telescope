@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface SwapAmountInRoute {
   poolId: bigint;
@@ -24,17 +24,17 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
   };
 }
 export const SwapAmountInRoute = {
-  encode(message: SwapAmountInRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SwapAmountInRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tokenOutDenom !== "") {
       writer.uint32(18).string(message.tokenOutDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SwapAmountInRoute {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SwapAmountInRoute {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountInRoute();
     while (reader.pos < end) {
@@ -97,17 +97,17 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
   };
 }
 export const SwapAmountOutRoute = {
-  encode(message: SwapAmountOutRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SwapAmountOutRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tokenInDenom !== "") {
       writer.uint32(18).string(message.tokenInDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SwapAmountOutRoute {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SwapAmountOutRoute {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountOutRoute();
     while (reader.pos < end) {

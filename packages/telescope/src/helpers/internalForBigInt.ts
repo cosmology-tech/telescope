@@ -1,15 +1,4 @@
-export const internalForBigInt = `import * as _m0 from 'protobufjs/minimal';
-import Long from 'long';
-
-// @ts-ignore
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-
-  _m0.configure();
-}
-
-export { Long };
-
+export const internalForBigInt = `
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -51,7 +40,7 @@ export interface AminoHeight {
   readonly revision_height?: string;
 }
 
-export function omitDefault<T extends string | number | Long | bigint>(
+export function omitDefault<T extends string | number | bigint>(
   input: T
 ): T | undefined {
   if (typeof input === 'string') {
@@ -64,10 +53,6 @@ export function omitDefault<T extends string | number | Long | bigint>(
 
   if (typeof input === 'bigint') {
     return input === BigInt(0) ? undefined : input;
-  }
-
-  if (Long.isLong(input)) {
-    return input.isZero() ? undefined : input;
   }
 
   throw new Error(\`Got unsupported type \${typeof input}\`);
@@ -179,8 +164,6 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Long
-  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>

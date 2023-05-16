@@ -1,6 +1,6 @@
 import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 /**
@@ -32,7 +32,7 @@ function createBaseRecoveredSinceDowntimeOfLengthRequest(): RecoveredSinceDownti
   };
 }
 export const RecoveredSinceDowntimeOfLengthRequest = {
-  encode(message: RecoveredSinceDowntimeOfLengthRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RecoveredSinceDowntimeOfLengthRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.downtime !== 0) {
       writer.uint32(8).int32(message.downtime);
     }
@@ -41,8 +41,8 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecoveredSinceDowntimeOfLengthRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RecoveredSinceDowntimeOfLengthRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
     while (reader.pos < end) {
@@ -104,14 +104,14 @@ function createBaseRecoveredSinceDowntimeOfLengthResponse(): RecoveredSinceDownt
   };
 }
 export const RecoveredSinceDowntimeOfLengthResponse = {
-  encode(message: RecoveredSinceDowntimeOfLengthResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RecoveredSinceDowntimeOfLengthResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.succesfullyRecovered === true) {
       writer.uint32(8).bool(message.succesfullyRecovered);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecoveredSinceDowntimeOfLengthResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RecoveredSinceDowntimeOfLengthResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecoveredSinceDowntimeOfLengthResponse();
     while (reader.pos < end) {

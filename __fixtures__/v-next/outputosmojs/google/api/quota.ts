@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet, isObject } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -288,7 +288,7 @@ function createBaseQuota(): Quota {
   };
 }
 export const Quota = {
-  encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Quota, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
     }
@@ -297,8 +297,8 @@ export const Quota = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Quota {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Quota {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuota();
     while (reader.pos < end) {
@@ -377,17 +377,17 @@ function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
   };
 }
 export const MetricRule_MetricCostsEntry = {
-  encode(message: MetricRule_MetricCostsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule_MetricCostsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.value.toString()));
+      writer.uint32(16).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_MetricCostsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule_MetricCostsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule_MetricCostsEntry();
     while (reader.pos < end) {
@@ -450,7 +450,7 @@ function createBaseMetricRule(): MetricRule {
   };
 }
 export const MetricRule = {
-  encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -462,8 +462,8 @@ export const MetricRule = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
     while (reader.pos < end) {
@@ -561,17 +561,17 @@ function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
   };
 }
 export const QuotaLimit_ValuesEntry = {
-  encode(message: QuotaLimit_ValuesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit_ValuesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.value.toString()));
+      writer.uint32(16).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_ValuesEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaLimit_ValuesEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit_ValuesEntry();
     while (reader.pos < end) {
@@ -642,7 +642,7 @@ function createBaseQuotaLimit(): QuotaLimit {
   };
 }
 export const QuotaLimit = {
-  encode(message: QuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(50).string(message.name);
     }
@@ -650,13 +650,13 @@ export const QuotaLimit = {
       writer.uint32(18).string(message.description);
     }
     if (message.defaultLimit !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.defaultLimit.toString()));
+      writer.uint32(24).int64(message.defaultLimit);
     }
     if (message.maxLimit !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.maxLimit.toString()));
+      writer.uint32(32).int64(message.maxLimit);
     }
     if (message.freeTier !== BigInt(0)) {
-      writer.uint32(56).int64(Long.fromString(message.freeTier.toString()));
+      writer.uint32(56).int64(message.freeTier);
     }
     if (message.duration !== "") {
       writer.uint32(42).string(message.duration);
@@ -678,8 +678,8 @@ export const QuotaLimit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaLimit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit();
     while (reader.pos < end) {

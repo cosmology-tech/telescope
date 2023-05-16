@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 /**
  * EpochInfo is a struct that describes the data going into
@@ -94,7 +94,7 @@ function createBaseEpochInfo(): EpochInfo {
   };
 }
 export const EpochInfo = {
-  encode(message: EpochInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
@@ -105,7 +105,7 @@ export const EpochInfo = {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
     if (message.currentEpoch !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.currentEpoch.toString()));
+      writer.uint32(32).int64(message.currentEpoch);
     }
     if (message.currentEpochStartTime !== undefined) {
       Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
@@ -114,12 +114,12 @@ export const EpochInfo = {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
     if (message.currentEpochStartHeight !== BigInt(0)) {
-      writer.uint32(64).int64(Long.fromString(message.currentEpochStartHeight.toString()));
+      writer.uint32(64).int64(message.currentEpochStartHeight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EpochInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EpochInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEpochInfo();
     while (reader.pos < end) {
@@ -226,14 +226,14 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {

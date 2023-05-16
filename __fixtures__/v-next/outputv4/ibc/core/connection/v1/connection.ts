@@ -1,6 +1,6 @@
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * State defines if a connection is in one of the following states:
@@ -210,7 +210,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
   };
 }
 export const ConnectionEnd = {
-  encode(message: ConnectionEnd, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConnectionEnd, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -224,12 +224,12 @@ export const ConnectionEnd = {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
     if (message.delayPeriod !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.delayPeriod.toString()));
+      writer.uint32(40).uint64(message.delayPeriod);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionEnd {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectionEnd {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionEnd();
     while (reader.pos < end) {
@@ -331,7 +331,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
   };
 }
 export const IdentifiedConnection = {
-  encode(message: IdentifiedConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedConnection, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -348,12 +348,12 @@ export const IdentifiedConnection = {
       Counterparty.encode(message.counterparty, writer.uint32(42).fork()).ldelim();
     }
     if (message.delayPeriod !== BigInt(0)) {
-      writer.uint32(48).uint64(Long.fromString(message.delayPeriod.toString()));
+      writer.uint32(48).uint64(message.delayPeriod);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedConnection {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedConnection {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedConnection();
     while (reader.pos < end) {
@@ -461,7 +461,7 @@ function createBaseCounterparty(): Counterparty {
   };
 }
 export const Counterparty = {
-  encode(message: Counterparty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -473,8 +473,8 @@ export const Counterparty = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Counterparty {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
     while (reader.pos < end) {
@@ -545,14 +545,14 @@ function createBaseClientPaths(): ClientPaths {
   };
 }
 export const ClientPaths = {
-  encode(message: ClientPaths, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ClientPaths, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.paths) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClientPaths {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClientPaths {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientPaths();
     while (reader.pos < end) {
@@ -614,7 +614,7 @@ function createBaseConnectionPaths(): ConnectionPaths {
   };
 }
 export const ConnectionPaths = {
-  encode(message: ConnectionPaths, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConnectionPaths, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -623,8 +623,8 @@ export const ConnectionPaths = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConnectionPaths {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectionPaths {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionPaths();
     while (reader.pos < end) {
@@ -695,7 +695,7 @@ function createBaseVersion(): Version {
   };
 }
 export const Version = {
-  encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Version, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
@@ -704,8 +704,8 @@ export const Version = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Version {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Version {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersion();
     while (reader.pos < end) {
@@ -775,14 +775,14 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.maxExpectedTimePerBlock !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.maxExpectedTimePerBlock.toString()));
+      writer.uint32(8).uint64(message.maxExpectedTimePerBlock);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {

@@ -69,6 +69,8 @@ export const UTILS = {
   makeObservable: 'mobx',
   UnaryMethodDefinitionishR: '__grpc-web__',
   UnaryMethodDefinitionish: '__grpc-web__',
+  BinaryReader: '__binary__',
+  BinaryWriter: '__binary__'
 };
 
 export const UTIL_HELPERS = [
@@ -76,6 +78,7 @@ export const UTIL_HELPERS = [
   '__extern__',
   '__react-query__',
   '__mobx__',
+  '__binary__',
   '__pinia-endpoint__',
   '__grpc-gateway__',
   '__grpc-web__'

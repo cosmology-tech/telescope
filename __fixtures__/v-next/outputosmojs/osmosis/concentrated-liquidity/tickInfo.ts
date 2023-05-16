@@ -1,5 +1,5 @@
 import { DecCoin, DecCoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
@@ -30,7 +30,7 @@ function createBaseTickInfo(): TickInfo {
   };
 }
 export const TickInfo = {
-  encode(message: TickInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TickInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.liquidityGross !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.liquidityGross, 18).atomics);
     }
@@ -45,8 +45,8 @@ export const TickInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TickInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TickInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTickInfo();
     while (reader.pos < end) {
@@ -142,14 +142,14 @@ function createBaseUptimeTracker(): UptimeTracker {
   };
 }
 export const UptimeTracker = {
-  encode(message: UptimeTracker, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UptimeTracker, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.uptimeGrowthOutside) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UptimeTracker {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UptimeTracker {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUptimeTracker();
     while (reader.pos < end) {

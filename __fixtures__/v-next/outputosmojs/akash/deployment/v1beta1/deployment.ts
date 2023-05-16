@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, Long, Rpc } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -151,7 +151,7 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   };
 }
 export const MsgCreateDeployment = {
-  encode(message: MsgCreateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -166,8 +166,8 @@ export const MsgCreateDeployment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeployment();
     while (reader.pos < end) {
@@ -253,11 +253,11 @@ function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
   return {};
 }
 export const MsgCreateDeploymentResponse = {
-  encode(_: MsgCreateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeploymentResponse();
     while (reader.pos < end) {
@@ -299,7 +299,7 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   };
 }
 export const MsgDepositDeployment = {
-  encode(message: MsgDepositDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDepositDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -308,8 +308,8 @@ export const MsgDepositDeployment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeployment();
     while (reader.pos < end) {
@@ -369,11 +369,11 @@ function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse 
   return {};
 }
 export const MsgDepositDeploymentResponse = {
-  encode(_: MsgDepositDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDepositDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeploymentResponse();
     while (reader.pos < end) {
@@ -416,7 +416,7 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   };
 }
 export const MsgUpdateDeployment = {
-  encode(message: MsgUpdateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -428,8 +428,8 @@ export const MsgUpdateDeployment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeployment();
     while (reader.pos < end) {
@@ -506,11 +506,11 @@ function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
   return {};
 }
 export const MsgUpdateDeploymentResponse = {
-  encode(_: MsgUpdateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeploymentResponse();
     while (reader.pos < end) {
@@ -551,14 +551,14 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   };
 }
 export const MsgCloseDeployment = {
-  encode(message: MsgCloseDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeployment();
     while (reader.pos < end) {
@@ -609,11 +609,11 @@ function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
   return {};
 }
 export const MsgCloseDeploymentResponse = {
-  encode(_: MsgCloseDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeploymentResponse();
     while (reader.pos < end) {
@@ -655,17 +655,17 @@ function createBaseDeploymentID(): DeploymentID {
   };
 }
 export const DeploymentID = {
-  encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentID();
     while (reader.pos < end) {
@@ -730,7 +730,7 @@ function createBaseDeployment(): Deployment {
   };
 }
 export const Deployment = {
-  encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
     }
@@ -741,12 +741,12 @@ export const Deployment = {
       writer.uint32(26).bytes(message.version);
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Deployment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Deployment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeployment();
     while (reader.pos < end) {
@@ -828,20 +828,20 @@ function createBaseDeploymentFilters(): DeploymentFilters {
   };
 }
 export const DeploymentFilters = {
-  encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.state !== "") {
       writer.uint32(26).string(message.state);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeploymentFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeploymentFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeploymentFilters();
     while (reader.pos < end) {
@@ -932,42 +932,42 @@ export class MsgClientImpl implements Msg {
   createDeployment = async (request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse> => {
     const data = MsgCreateDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CreateDeployment", data);
-    return promise.then(data => MsgCreateDeploymentResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCreateDeploymentResponse.decode(new BinaryReader(data)));
   };
   /* DepositDeployment deposits more funds into the deployment account */
   depositDeployment = async (request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse> => {
     const data = MsgDepositDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "DepositDeployment", data);
-    return promise.then(data => MsgDepositDeploymentResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgDepositDeploymentResponse.decode(new BinaryReader(data)));
   };
   /* UpdateDeployment defines a method to update a deployment given proper inputs. */
   updateDeployment = async (request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse> => {
     const data = MsgUpdateDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "UpdateDeployment", data);
-    return promise.then(data => MsgUpdateDeploymentResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateDeploymentResponse.decode(new BinaryReader(data)));
   };
   /* CloseDeployment defines a method to close a deployment given proper inputs. */
   closeDeployment = async (request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse> => {
     const data = MsgCloseDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseDeployment", data);
-    return promise.then(data => MsgCloseDeploymentResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCloseDeploymentResponse.decode(new BinaryReader(data)));
   };
   /* CloseGroup defines a method to close a group of a deployment given proper inputs. */
   closeGroup = async (request: MsgCloseGroup): Promise<MsgCloseGroupResponse> => {
     const data = MsgCloseGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseGroup", data);
-    return promise.then(data => MsgCloseGroupResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCloseGroupResponse.decode(new BinaryReader(data)));
   };
   /* PauseGroup defines a method to close a group of a deployment given proper inputs. */
   pauseGroup = async (request: MsgPauseGroup): Promise<MsgPauseGroupResponse> => {
     const data = MsgPauseGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "PauseGroup", data);
-    return promise.then(data => MsgPauseGroupResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgPauseGroupResponse.decode(new BinaryReader(data)));
   };
   /* StartGroup defines a method to close a group of a deployment given proper inputs. */
   startGroup = async (request: MsgStartGroup): Promise<MsgStartGroupResponse> => {
     const data = MsgStartGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "StartGroup", data);
-    return promise.then(data => MsgStartGroupResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgStartGroupResponse.decode(new BinaryReader(data)));
   };
 }

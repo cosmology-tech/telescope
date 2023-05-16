@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType } from "./query";
 export interface Query {
@@ -15,7 +15,7 @@ export class QueryClientImpl implements Query {
   params(request: ParamsRequest = {}): Promise<ParamsResponse> {
     const data = ParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.cosmwasmpool.v1beta1.Query", "Params", data);
-    return promise.then(data => ParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ParamsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

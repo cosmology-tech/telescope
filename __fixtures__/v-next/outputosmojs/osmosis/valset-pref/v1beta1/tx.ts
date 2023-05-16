@@ -1,7 +1,7 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** MsgCreateValidatorSetPreference is a list that holds validator-set. */
 export interface MsgSetValidatorSetPreference {
@@ -118,7 +118,7 @@ function createBaseMsgSetValidatorSetPreference(): MsgSetValidatorSetPreference 
   };
 }
 export const MsgSetValidatorSetPreference = {
-  encode(message: MsgSetValidatorSetPreference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetValidatorSetPreference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
@@ -127,8 +127,8 @@ export const MsgSetValidatorSetPreference = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetValidatorSetPreference {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetValidatorSetPreference {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetValidatorSetPreference();
     while (reader.pos < end) {
@@ -196,11 +196,11 @@ function createBaseMsgSetValidatorSetPreferenceResponse(): MsgSetValidatorSetPre
   return {};
 }
 export const MsgSetValidatorSetPreferenceResponse = {
-  encode(_: MsgSetValidatorSetPreferenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetValidatorSetPreferenceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetValidatorSetPreferenceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetValidatorSetPreferenceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetValidatorSetPreferenceResponse();
     while (reader.pos < end) {
@@ -242,7 +242,7 @@ function createBaseMsgDelegateToValidatorSet(): MsgDelegateToValidatorSet {
   };
 }
 export const MsgDelegateToValidatorSet = {
-  encode(message: MsgDelegateToValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDelegateToValidatorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
@@ -251,8 +251,8 @@ export const MsgDelegateToValidatorSet = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateToValidatorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegateToValidatorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateToValidatorSet();
     while (reader.pos < end) {
@@ -312,11 +312,11 @@ function createBaseMsgDelegateToValidatorSetResponse(): MsgDelegateToValidatorSe
   return {};
 }
 export const MsgDelegateToValidatorSetResponse = {
-  encode(_: MsgDelegateToValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDelegateToValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateToValidatorSetResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegateToValidatorSetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateToValidatorSetResponse();
     while (reader.pos < end) {
@@ -358,7 +358,7 @@ function createBaseMsgUndelegateFromValidatorSet(): MsgUndelegateFromValidatorSe
   };
 }
 export const MsgUndelegateFromValidatorSet = {
-  encode(message: MsgUndelegateFromValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUndelegateFromValidatorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
@@ -367,8 +367,8 @@ export const MsgUndelegateFromValidatorSet = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegateFromValidatorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUndelegateFromValidatorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegateFromValidatorSet();
     while (reader.pos < end) {
@@ -428,11 +428,11 @@ function createBaseMsgUndelegateFromValidatorSetResponse(): MsgUndelegateFromVal
   return {};
 }
 export const MsgUndelegateFromValidatorSetResponse = {
-  encode(_: MsgUndelegateFromValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUndelegateFromValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegateFromValidatorSetResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUndelegateFromValidatorSetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegateFromValidatorSetResponse();
     while (reader.pos < end) {
@@ -474,7 +474,7 @@ function createBaseMsgRedelegateValidatorSet(): MsgRedelegateValidatorSet {
   };
 }
 export const MsgRedelegateValidatorSet = {
-  encode(message: MsgRedelegateValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRedelegateValidatorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
@@ -483,8 +483,8 @@ export const MsgRedelegateValidatorSet = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRedelegateValidatorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRedelegateValidatorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRedelegateValidatorSet();
     while (reader.pos < end) {
@@ -552,11 +552,11 @@ function createBaseMsgRedelegateValidatorSetResponse(): MsgRedelegateValidatorSe
   return {};
 }
 export const MsgRedelegateValidatorSetResponse = {
-  encode(_: MsgRedelegateValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRedelegateValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRedelegateValidatorSetResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRedelegateValidatorSetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRedelegateValidatorSetResponse();
     while (reader.pos < end) {
@@ -597,14 +597,14 @@ function createBaseMsgWithdrawDelegationRewards(): MsgWithdrawDelegationRewards 
   };
 }
 export const MsgWithdrawDelegationRewards = {
-  encode(message: MsgWithdrawDelegationRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawDelegationRewards, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegationRewards {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawDelegationRewards {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegationRewards();
     while (reader.pos < end) {
@@ -655,11 +655,11 @@ function createBaseMsgWithdrawDelegationRewardsResponse(): MsgWithdrawDelegation
   return {};
 }
 export const MsgWithdrawDelegationRewardsResponse = {
-  encode(_: MsgWithdrawDelegationRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgWithdrawDelegationRewardsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegationRewardsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawDelegationRewardsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegationRewardsResponse();
     while (reader.pos < end) {
@@ -701,17 +701,17 @@ function createBaseMsgDelegateBondedTokens(): MsgDelegateBondedTokens {
   };
 }
 export const MsgDelegateBondedTokens = {
-  encode(message: MsgDelegateBondedTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgDelegateBondedTokens, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegator !== "") {
       writer.uint32(10).string(message.delegator);
     }
     if (message.lockID !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.lockID.toString()));
+      writer.uint32(16).uint64(message.lockID);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateBondedTokens {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegateBondedTokens {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateBondedTokens();
     while (reader.pos < end) {
@@ -771,11 +771,11 @@ function createBaseMsgDelegateBondedTokensResponse(): MsgDelegateBondedTokensRes
   return {};
 }
 export const MsgDelegateBondedTokensResponse = {
-  encode(_: MsgDelegateBondedTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgDelegateBondedTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateBondedTokensResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegateBondedTokensResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateBondedTokensResponse();
     while (reader.pos < end) {

@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 export interface CosmWasmPool {
   poolAddress: string;
@@ -22,7 +22,7 @@ function createBaseCosmWasmPool(): CosmWasmPool {
   };
 }
 export const CosmWasmPool = {
-  encode(message: CosmWasmPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CosmWasmPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolAddress !== "") {
       writer.uint32(10).string(message.poolAddress);
     }
@@ -30,15 +30,15 @@ export const CosmWasmPool = {
       writer.uint32(18).string(message.contractAddress);
     }
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(24).uint64(message.poolId);
     }
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(32).uint64(message.codeId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CosmWasmPool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CosmWasmPool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmWasmPool();
     while (reader.pos < end) {

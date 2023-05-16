@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "../params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryUserPositionsRequest, QueryUserPositionsRequestSDKType, QueryUserPositionsResponse, QueryUserPositionsResponseSDKType, QueryTotalLiquidityForRangeRequest, QueryTotalLiquidityForRangeRequestSDKType, QueryTotalLiquidityForRangeResponse, QueryTotalLiquidityForRangeResponseSDKType, QueryLiquidityNetInDirectionRequest, QueryLiquidityNetInDirectionRequestSDKType, QueryLiquidityNetInDirectionResponse, QueryLiquidityNetInDirectionResponseSDKType, QueryClaimableFeesRequest, QueryClaimableFeesRequestSDKType, QueryClaimableFeesResponse, QueryClaimableFeesResponseSDKType, QueryPositionByIdRequest, QueryPositionByIdRequestSDKType, QueryPositionByIdResponse, QueryPositionByIdResponseSDKType } from "./query";
 export interface Query {
@@ -47,37 +47,37 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryPoolsResponse> {
     const data = QueryPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "Pools", data);
-    return promise.then(data => QueryPoolsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolsResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
   userPositions(request: QueryUserPositionsRequest): Promise<QueryUserPositionsResponse> {
     const data = QueryUserPositionsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "UserPositions", data);
-    return promise.then(data => QueryUserPositionsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryUserPositionsResponse.decode(new BinaryReader(data)));
   }
   totalLiquidityForRange(request: QueryTotalLiquidityForRangeRequest): Promise<QueryTotalLiquidityForRangeResponse> {
     const data = QueryTotalLiquidityForRangeRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "TotalLiquidityForRange", data);
-    return promise.then(data => QueryTotalLiquidityForRangeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTotalLiquidityForRangeResponse.decode(new BinaryReader(data)));
   }
   liquidityNetInDirection(request: QueryLiquidityNetInDirectionRequest): Promise<QueryLiquidityNetInDirectionResponse> {
     const data = QueryLiquidityNetInDirectionRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "LiquidityNetInDirection", data);
-    return promise.then(data => QueryLiquidityNetInDirectionResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryLiquidityNetInDirectionResponse.decode(new BinaryReader(data)));
   }
   claimableFees(request: QueryClaimableFeesRequest): Promise<QueryClaimableFeesResponse> {
     const data = QueryClaimableFeesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "ClaimableFees", data);
-    return promise.then(data => QueryClaimableFeesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClaimableFeesResponse.decode(new BinaryReader(data)));
   }
   positionById(request: QueryPositionByIdRequest): Promise<QueryPositionByIdResponse> {
     const data = QueryPositionByIdRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.concentratedliquidity.v1beta1.Query", "PositionById", data);
-    return promise.then(data => QueryPositionByIdResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPositionByIdResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

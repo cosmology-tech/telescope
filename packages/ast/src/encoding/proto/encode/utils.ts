@@ -93,24 +93,6 @@ const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod
       case 'sfixed64':
         TypeLong.addUtil(args.context);
 
-        const longType = TypeLong.getType(args.context);
-
-        switch (longType) {
-          case 'BigInt':
-            valueExpression = t.callExpression(
-              t.memberExpression(valueExpression, t.identifier('toString')),
-              [])
-
-            args.context.addUtil('Long');
-
-            // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
-            valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
-              [
-                valueExpression
-              ]
-            );
-            break;
-        }
         break;
     }
 
@@ -1100,33 +1082,6 @@ export const arrayTypes = {
     },
     long(type: string, args: EncodeMethod){
       let valueExpression: t.Expression = t.identifier('v');
-
-      switch (type) {
-        case 'int64':
-        case 'sint64':
-        case 'uint64':
-        case 'fixed64':
-        case 'sfixed64':
-          const longType = TypeLong.getType(args.context);
-
-          switch (longType) {
-            case 'BigInt':
-              valueExpression = t.callExpression(
-                t.memberExpression(valueExpression, t.identifier('toString')),
-                []);
-
-              args.context.addUtil('Long');
-
-              // since writer int64 only takes Long, so Long.fromString is still needed but only within encoders.
-              valueExpression = t.callExpression(TypeLong.fromStringExpressions['long'],
-                [
-                  valueExpression
-                ]
-              );
-              break;
-          }
-          break;
-      }
 
       return t.expressionStatement(
         t.callExpression(

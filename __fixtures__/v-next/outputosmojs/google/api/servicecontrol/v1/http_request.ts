@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../../protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -121,7 +121,7 @@ function createBaseHttpRequest(): HttpRequest {
   };
 }
 export const HttpRequest = {
-  encode(message: HttpRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: HttpRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.requestMethod !== "") {
       writer.uint32(10).string(message.requestMethod);
     }
@@ -129,13 +129,13 @@ export const HttpRequest = {
       writer.uint32(18).string(message.requestUrl);
     }
     if (message.requestSize !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.requestSize.toString()));
+      writer.uint32(24).int64(message.requestSize);
     }
     if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
     if (message.responseSize !== BigInt(0)) {
-      writer.uint32(40).int64(Long.fromString(message.responseSize.toString()));
+      writer.uint32(40).int64(message.responseSize);
     }
     if (message.userAgent !== "") {
       writer.uint32(50).string(message.userAgent);
@@ -162,15 +162,15 @@ export const HttpRequest = {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
     if (message.cacheFillBytes !== BigInt(0)) {
-      writer.uint32(96).int64(Long.fromString(message.cacheFillBytes.toString()));
+      writer.uint32(96).int64(message.cacheFillBytes);
     }
     if (message.protocol !== "") {
       writer.uint32(122).string(message.protocol);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): HttpRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): HttpRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRequest();
     while (reader.pos < end) {

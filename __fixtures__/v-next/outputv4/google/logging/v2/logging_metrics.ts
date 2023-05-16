@@ -1,7 +1,7 @@
 import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
@@ -325,7 +325,7 @@ function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEn
   };
 }
 export const LogMetric_LabelExtractorsEntry = {
-  encode(message: LogMetric_LabelExtractorsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogMetric_LabelExtractorsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -334,8 +334,8 @@ export const LogMetric_LabelExtractorsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric_LabelExtractorsEntry();
     while (reader.pos < end) {
@@ -407,7 +407,7 @@ function createBaseLogMetric(): LogMetric {
   };
 }
 export const LogMetric = {
-  encode(message: LogMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LogMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -446,8 +446,8 @@ export const LogMetric = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LogMetric {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
     while (reader.pos < end) {
@@ -627,7 +627,7 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
   };
 }
 export const ListLogMetricsRequest = {
-  encode(message: ListLogMetricsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -639,8 +639,8 @@ export const ListLogMetricsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListLogMetricsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsRequest();
     while (reader.pos < end) {
@@ -712,7 +712,7 @@ function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
   };
 }
 export const ListLogMetricsResponse = {
-  encode(message: ListLogMetricsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListLogMetricsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -721,8 +721,8 @@ export const ListLogMetricsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListLogMetricsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();
     while (reader.pos < end) {
@@ -792,14 +792,14 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
   };
 }
 export const GetLogMetricRequest = {
-  encode(message: GetLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLogMetricRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLogMetricRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLogMetricRequest();
     while (reader.pos < end) {
@@ -853,7 +853,7 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   };
 }
 export const CreateLogMetricRequest = {
-  encode(message: CreateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CreateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -862,8 +862,8 @@ export const CreateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreateLogMetricRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreateLogMetricRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateLogMetricRequest();
     while (reader.pos < end) {
@@ -926,7 +926,7 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   };
 }
 export const UpdateLogMetricRequest = {
-  encode(message: UpdateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
@@ -935,8 +935,8 @@ export const UpdateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateLogMetricRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateLogMetricRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateLogMetricRequest();
     while (reader.pos < end) {
@@ -998,14 +998,14 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
   };
 }
 export const DeleteLogMetricRequest = {
-  encode(message: DeleteLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteLogMetricRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DeleteLogMetricRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogMetricRequest();
     while (reader.pos < end) {

@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -127,7 +127,7 @@ function createBaseConsensusParams(): ConsensusParams {
   };
 }
 export const ConsensusParams = {
-  encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConsensusParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
     }
@@ -142,8 +142,8 @@ export const ConsensusParams = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConsensusParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusParams();
     while (reader.pos < end) {
@@ -225,20 +225,20 @@ function createBaseBlockParams(): BlockParams {
   };
 }
 export const BlockParams = {
-  encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BlockParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.maxBytes !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.maxBytes.toString()));
+      writer.uint32(8).int64(message.maxBytes);
     }
     if (message.maxGas !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.maxGas.toString()));
+      writer.uint32(16).int64(message.maxGas);
     }
     if (message.timeIotaMs !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.timeIotaMs.toString()));
+      writer.uint32(24).int64(message.timeIotaMs);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BlockParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BlockParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockParams();
     while (reader.pos < end) {
@@ -311,20 +311,20 @@ function createBaseEvidenceParams(): EvidenceParams {
   };
 }
 export const EvidenceParams = {
-  encode(message: EvidenceParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvidenceParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.maxAgeNumBlocks !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.maxAgeNumBlocks.toString()));
+      writer.uint32(8).int64(message.maxAgeNumBlocks);
     }
     if (message.maxAgeDuration !== undefined) {
       Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
     }
     if (message.maxBytes !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.maxBytes.toString()));
+      writer.uint32(24).int64(message.maxBytes);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvidenceParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceParams();
     while (reader.pos < end) {
@@ -395,14 +395,14 @@ function createBaseValidatorParams(): ValidatorParams {
   };
 }
 export const ValidatorParams = {
-  encode(message: ValidatorParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorParams();
     while (reader.pos < end) {
@@ -463,14 +463,14 @@ function createBaseVersionParams(): VersionParams {
   };
 }
 export const VersionParams = {
-  encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VersionParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.appVersion !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.appVersion.toString()));
+      writer.uint32(8).uint64(message.appVersion);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): VersionParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): VersionParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionParams();
     while (reader.pos < end) {
@@ -524,17 +524,17 @@ function createBaseHashedParams(): HashedParams {
   };
 }
 export const HashedParams = {
-  encode(message: HashedParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: HashedParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockMaxBytes !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.blockMaxBytes.toString()));
+      writer.uint32(8).int64(message.blockMaxBytes);
     }
     if (message.blockMaxGas !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.blockMaxGas.toString()));
+      writer.uint32(16).int64(message.blockMaxGas);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): HashedParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): HashedParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHashedParams();
     while (reader.pos < end) {

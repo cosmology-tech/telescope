@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
 export enum AccessType {
@@ -231,14 +231,14 @@ function createBaseAccessTypeParam(): AccessTypeParam {
   };
 }
 export const AccessTypeParam = {
-  encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccessTypeParam, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccessTypeParam {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessTypeParam {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessTypeParam();
     while (reader.pos < end) {
@@ -292,7 +292,7 @@ function createBaseAccessConfig(): AccessConfig {
   };
 }
 export const AccessConfig = {
-  encode(message: AccessConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccessConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.permission !== 0) {
       writer.uint32(8).int32(message.permission);
     }
@@ -301,8 +301,8 @@ export const AccessConfig = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccessConfig {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessConfig();
     while (reader.pos < end) {
@@ -366,7 +366,7 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeUploadAccess !== undefined) {
       AccessConfig.encode(message.codeUploadAccess, writer.uint32(10).fork()).ldelim();
     }
@@ -374,12 +374,12 @@ export const Params = {
       writer.uint32(16).int32(message.instantiateDefaultPermission);
     }
     if (message.maxWasmCodeSize !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.maxWasmCodeSize.toString()));
+      writer.uint32(24).uint64(message.maxWasmCodeSize);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -452,7 +452,7 @@ function createBaseCodeInfo(): CodeInfo {
   };
 }
 export const CodeInfo = {
-  encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
     }
@@ -464,8 +464,8 @@ export const CodeInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CodeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeInfo();
     while (reader.pos < end) {
@@ -542,9 +542,9 @@ function createBaseContractInfo(): ContractInfo {
   };
 }
 export const ContractInfo = {
-  encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(8).uint64(message.codeId);
     }
     if (message.creator !== "") {
       writer.uint32(18).string(message.creator);
@@ -566,8 +566,8 @@ export const ContractInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContractInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContractInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractInfo();
     while (reader.pos < end) {
@@ -677,12 +677,12 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   };
 }
 export const ContractCodeHistoryEntry = {
-  encode(message: ContractCodeHistoryEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractCodeHistoryEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operation !== 0) {
       writer.uint32(8).int32(message.operation);
     }
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(16).uint64(message.codeId);
     }
     if (message.updated !== undefined) {
       AbsoluteTxPosition.encode(message.updated, writer.uint32(26).fork()).ldelim();
@@ -692,8 +692,8 @@ export const ContractCodeHistoryEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContractCodeHistoryEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContractCodeHistoryEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractCodeHistoryEntry();
     while (reader.pos < end) {
@@ -774,17 +774,17 @@ function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   };
 }
 export const AbsoluteTxPosition = {
-  encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AbsoluteTxPosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockHeight !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.blockHeight.toString()));
+      writer.uint32(8).uint64(message.blockHeight);
     }
     if (message.txIndex !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.txIndex.toString()));
+      writer.uint32(16).uint64(message.txIndex);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AbsoluteTxPosition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AbsoluteTxPosition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAbsoluteTxPosition();
     while (reader.pos < end) {
@@ -847,7 +847,7 @@ function createBaseModel(): Model {
   };
 }
 export const Model = {
-  encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Model, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -856,8 +856,8 @@ export const Model = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Model {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Model {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModel();
     while (reader.pos < end) {

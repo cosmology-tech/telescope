@@ -4,7 +4,7 @@ import { ProofOps, ProofOpsSDKType } from "../crypto/proof";
 import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params";
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { Rpc } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, RequestFlush, RequestFlushSDKType, ResponseFlush, ResponseFlushSDKType, RequestInfo, RequestInfoSDKType, ResponseInfo, ResponseInfoSDKType, RequestSetOption, RequestSetOptionSDKType, ResponseSetOption, ResponseSetOptionSDKType, RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestCheckTx, RequestCheckTxSDKType, ResponseCheckTx, ResponseCheckTxSDKType, RequestQuery, RequestQuerySDKType, ResponseQuery, ResponseQuerySDKType, RequestCommit, RequestCommitSDKType, ResponseCommit, ResponseCommitSDKType, RequestInitChain, RequestInitChainSDKType, ResponseInitChain, ResponseInitChainSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, RequestListSnapshots, RequestListSnapshotsSDKType, ResponseListSnapshots, ResponseListSnapshotsSDKType, RequestOfferSnapshot, RequestOfferSnapshotSDKType, ResponseOfferSnapshot, ResponseOfferSnapshotSDKType, RequestLoadSnapshotChunk, RequestLoadSnapshotChunkSDKType, ResponseLoadSnapshotChunk, ResponseLoadSnapshotChunkSDKType, RequestApplySnapshotChunk, RequestApplySnapshotChunkSDKType, ResponseApplySnapshotChunk, ResponseApplySnapshotChunkSDKType } from "./types";
 export interface ABCIApplication {
@@ -47,77 +47,77 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
   echo(request: RequestEcho): Promise<ResponseEcho> {
     const data = RequestEcho.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Echo", data);
-    return promise.then(data => ResponseEcho.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseEcho.decode(new BinaryReader(data)));
   }
   flush(request: RequestFlush = {}): Promise<ResponseFlush> {
     const data = RequestFlush.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Flush", data);
-    return promise.then(data => ResponseFlush.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseFlush.decode(new BinaryReader(data)));
   }
   info(request: RequestInfo): Promise<ResponseInfo> {
     const data = RequestInfo.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Info", data);
-    return promise.then(data => ResponseInfo.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseInfo.decode(new BinaryReader(data)));
   }
   setOption(request: RequestSetOption): Promise<ResponseSetOption> {
     const data = RequestSetOption.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "SetOption", data);
-    return promise.then(data => ResponseSetOption.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseSetOption.decode(new BinaryReader(data)));
   }
   deliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
     const data = RequestDeliverTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "DeliverTx", data);
-    return promise.then(data => ResponseDeliverTx.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseDeliverTx.decode(new BinaryReader(data)));
   }
   checkTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
     const data = RequestCheckTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "CheckTx", data);
-    return promise.then(data => ResponseCheckTx.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseCheckTx.decode(new BinaryReader(data)));
   }
   query(request: RequestQuery): Promise<ResponseQuery> {
     const data = RequestQuery.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Query", data);
-    return promise.then(data => ResponseQuery.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseQuery.decode(new BinaryReader(data)));
   }
   commit(request: RequestCommit = {}): Promise<ResponseCommit> {
     const data = RequestCommit.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Commit", data);
-    return promise.then(data => ResponseCommit.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseCommit.decode(new BinaryReader(data)));
   }
   initChain(request: RequestInitChain): Promise<ResponseInitChain> {
     const data = RequestInitChain.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "InitChain", data);
-    return promise.then(data => ResponseInitChain.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseInitChain.decode(new BinaryReader(data)));
   }
   beginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
     const data = RequestBeginBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "BeginBlock", data);
-    return promise.then(data => ResponseBeginBlock.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseBeginBlock.decode(new BinaryReader(data)));
   }
   endBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
     const data = RequestEndBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "EndBlock", data);
-    return promise.then(data => ResponseEndBlock.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseEndBlock.decode(new BinaryReader(data)));
   }
   listSnapshots(request: RequestListSnapshots = {}): Promise<ResponseListSnapshots> {
     const data = RequestListSnapshots.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ListSnapshots", data);
-    return promise.then(data => ResponseListSnapshots.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseListSnapshots.decode(new BinaryReader(data)));
   }
   offerSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
     const data = RequestOfferSnapshot.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "OfferSnapshot", data);
-    return promise.then(data => ResponseOfferSnapshot.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseOfferSnapshot.decode(new BinaryReader(data)));
   }
   loadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
     const data = RequestLoadSnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "LoadSnapshotChunk", data);
-    return promise.then(data => ResponseLoadSnapshotChunk.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseLoadSnapshotChunk.decode(new BinaryReader(data)));
   }
   applySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
     const data = RequestApplySnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ApplySnapshotChunk", data);
-    return promise.then(data => ResponseApplySnapshotChunk.decode(new _m0.Reader(data)));
+    return promise.then(data => ResponseApplySnapshotChunk.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

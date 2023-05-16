@@ -1,6 +1,6 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { Rpc } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */
@@ -20,12 +20,12 @@ export class QueryClientImpl implements Query {
   epochInfos(request: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponse> {
     const data = QueryEpochsInfoRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.epochs.v1beta1.Query", "EpochInfos", data);
-    return promise.then(data => QueryEpochsInfoResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryEpochsInfoResponse.decode(new BinaryReader(data)));
   }
   currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
     const data = QueryCurrentEpochRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.epochs.v1beta1.Query", "CurrentEpoch", data);
-    return promise.then(data => QueryCurrentEpochResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCurrentEpochResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

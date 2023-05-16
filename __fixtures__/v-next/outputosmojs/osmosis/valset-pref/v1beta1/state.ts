@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
@@ -55,7 +55,7 @@ function createBaseValidatorPreference(): ValidatorPreference {
   };
 }
 export const ValidatorPreference = {
-  encode(message: ValidatorPreference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorPreference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.valOperAddress !== "") {
       writer.uint32(10).string(message.valOperAddress);
     }
@@ -64,8 +64,8 @@ export const ValidatorPreference = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorPreference {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorPreference {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorPreference();
     while (reader.pos < end) {
@@ -127,14 +127,14 @@ function createBaseValidatorSetPreferences(): ValidatorSetPreferences {
   };
 }
 export const ValidatorSetPreferences = {
-  encode(message: ValidatorSetPreferences, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorSetPreferences, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.preferences) {
       ValidatorPreference.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSetPreferences {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSetPreferences {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSetPreferences();
     while (reader.pos < end) {

@@ -1,8 +1,8 @@
 import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -530,17 +530,17 @@ function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntr
   };
 }
 export const CheckedExpr_ReferenceMapEntry = {
-  encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr_ReferenceMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.key.toString()));
+      writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
       Reference.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_ReferenceMapEntry();
     while (reader.pos < end) {
@@ -603,17 +603,17 @@ function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   };
 }
 export const CheckedExpr_TypeMapEntry = {
-  encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr_TypeMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.key.toString()));
+      writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
       Type.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_TypeMapEntry();
     while (reader.pos < end) {
@@ -679,7 +679,7 @@ function createBaseCheckedExpr(): CheckedExpr {
   };
 }
 export const CheckedExpr = {
-  encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CheckedExpr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
         key: (key as any),
@@ -703,8 +703,8 @@ export const CheckedExpr = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CheckedExpr {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
     while (reader.pos < end) {
@@ -875,7 +875,7 @@ function createBaseType(): Type {
   };
 }
 export const Type = {
-  encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
     }
@@ -917,8 +917,8 @@ export const Type = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
     while (reader.pos < end) {
@@ -1079,14 +1079,14 @@ function createBaseType_ListType(): Type_ListType {
   };
 }
 export const Type_ListType = {
-  encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_ListType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type_ListType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type_ListType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_ListType();
     while (reader.pos < end) {
@@ -1140,7 +1140,7 @@ function createBaseType_MapType(): Type_MapType {
   };
 }
 export const Type_MapType = {
-  encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_MapType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
@@ -1149,8 +1149,8 @@ export const Type_MapType = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type_MapType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type_MapType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
     while (reader.pos < end) {
@@ -1213,7 +1213,7 @@ function createBaseType_FunctionType(): Type_FunctionType {
   };
 }
 export const Type_FunctionType = {
-  encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_FunctionType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
     }
@@ -1222,8 +1222,8 @@ export const Type_FunctionType = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type_FunctionType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type_FunctionType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_FunctionType();
     while (reader.pos < end) {
@@ -1294,7 +1294,7 @@ function createBaseType_AbstractType(): Type_AbstractType {
   };
 }
 export const Type_AbstractType = {
-  encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Type_AbstractType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1303,8 +1303,8 @@ export const Type_AbstractType = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Type_AbstractType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Type_AbstractType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_AbstractType();
     while (reader.pos < end) {
@@ -1376,7 +1376,7 @@ function createBaseDecl(): Decl {
   };
 }
 export const Decl = {
-  encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1388,8 +1388,8 @@ export const Decl = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Decl {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Decl {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
     while (reader.pos < end) {
@@ -1462,7 +1462,7 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
   };
 }
 export const Decl_IdentDecl = {
-  encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_IdentDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
     }
@@ -1474,8 +1474,8 @@ export const Decl_IdentDecl = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_IdentDecl {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Decl_IdentDecl {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_IdentDecl();
     while (reader.pos < end) {
@@ -1546,14 +1546,14 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
   };
 }
 export const Decl_FunctionDecl = {
-  encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_FunctionDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Decl_FunctionDecl {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl();
     while (reader.pos < end) {
@@ -1619,7 +1619,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
   };
 }
 export const Decl_FunctionDecl_Overload = {
-  encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Decl_FunctionDecl_Overload, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -1640,8 +1640,8 @@ export const Decl_FunctionDecl_Overload = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
     while (reader.pos < end) {
@@ -1757,7 +1757,7 @@ function createBaseReference(): Reference {
   };
 }
 export const Reference = {
-  encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Reference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1769,8 +1769,8 @@ export const Reference = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Reference {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Reference {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReference();
     while (reader.pos < end) {

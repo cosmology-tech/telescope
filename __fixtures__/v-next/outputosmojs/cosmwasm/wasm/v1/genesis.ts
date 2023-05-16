@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -84,7 +84,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -102,8 +102,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -226,7 +226,7 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
   };
 }
 export const GenesisState_GenMsgs = {
-  encode(message: GenesisState_GenMsgs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState_GenMsgs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
     }
@@ -238,8 +238,8 @@ export const GenesisState_GenMsgs = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState_GenMsgs {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState_GenMsgs {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState_GenMsgs();
     while (reader.pos < end) {
@@ -313,9 +313,9 @@ function createBaseCode(): Code {
   };
 }
 export const Code = {
-  encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
       CodeInfo.encode(message.codeInfo, writer.uint32(18).fork()).ldelim();
@@ -328,8 +328,8 @@ export const Code = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Code {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Code {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
     while (reader.pos < end) {
@@ -411,7 +411,7 @@ function createBaseContract(): Contract {
   };
 }
 export const Contract = {
-  encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -423,8 +423,8 @@ export const Contract = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Contract {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Contract {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
     while (reader.pos < end) {
@@ -504,17 +504,17 @@ function createBaseSequence(): Sequence {
   };
 }
 export const Sequence = {
-  encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.value.toString()));
+      writer.uint32(16).uint64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Sequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Sequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface Pool {
   /** pool's address holding all liquidity tokens. */
@@ -60,7 +60,7 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
-  encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -68,7 +68,7 @@ export const Pool = {
       writer.uint32(18).string(message.incentivesAddress);
     }
     if (message.id !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.id.toString()));
+      writer.uint32(24).uint64(message.id);
     }
     if (message.currentTickLiquidity !== "") {
       writer.uint32(34).string(Decimal.fromUserInput(message.currentTickLiquidity, 18).atomics);
@@ -86,7 +86,7 @@ export const Pool = {
       writer.uint32(66).string(message.currentTick);
     }
     if (message.tickSpacing !== BigInt(0)) {
-      writer.uint32(72).uint64(Long.fromString(message.tickSpacing.toString()));
+      writer.uint32(72).uint64(message.tickSpacing);
     }
     if (message.exponentAtPriceOne !== "") {
       writer.uint32(82).string(message.exponentAtPriceOne);
@@ -99,8 +99,8 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Pool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
     while (reader.pos < end) {

@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { GetAuthnDescriptorRequest, GetAuthnDescriptorRequestSDKType, GetAuthnDescriptorResponse, GetAuthnDescriptorResponseSDKType, GetChainDescriptorRequest, GetChainDescriptorRequestSDKType, GetChainDescriptorResponse, GetChainDescriptorResponseSDKType, GetCodecDescriptorRequest, GetCodecDescriptorRequestSDKType, GetCodecDescriptorResponse, GetCodecDescriptorResponseSDKType, GetConfigurationDescriptorRequest, GetConfigurationDescriptorRequestSDKType, GetConfigurationDescriptorResponse, GetConfigurationDescriptorResponseSDKType, GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorRequestSDKType, GetQueryServicesDescriptorResponse, GetQueryServicesDescriptorResponseSDKType, GetTxDescriptorRequest, GetTxDescriptorRequestSDKType, GetTxDescriptorResponse, GetTxDescriptorResponseSDKType } from "./reflection";
 /** ReflectionService defines a service for application reflection. */
@@ -35,32 +35,32 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   getAuthnDescriptor(request: GetAuthnDescriptorRequest = {}): Promise<GetAuthnDescriptorResponse> {
     const data = GetAuthnDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetAuthnDescriptor", data);
-    return promise.then(data => GetAuthnDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetAuthnDescriptorResponse.decode(new BinaryReader(data)));
   }
   getChainDescriptor(request: GetChainDescriptorRequest = {}): Promise<GetChainDescriptorResponse> {
     const data = GetChainDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetChainDescriptor", data);
-    return promise.then(data => GetChainDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetChainDescriptorResponse.decode(new BinaryReader(data)));
   }
   getCodecDescriptor(request: GetCodecDescriptorRequest = {}): Promise<GetCodecDescriptorResponse> {
     const data = GetCodecDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetCodecDescriptor", data);
-    return promise.then(data => GetCodecDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetCodecDescriptorResponse.decode(new BinaryReader(data)));
   }
   getConfigurationDescriptor(request: GetConfigurationDescriptorRequest = {}): Promise<GetConfigurationDescriptorResponse> {
     const data = GetConfigurationDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetConfigurationDescriptor", data);
-    return promise.then(data => GetConfigurationDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetConfigurationDescriptorResponse.decode(new BinaryReader(data)));
   }
   getQueryServicesDescriptor(request: GetQueryServicesDescriptorRequest = {}): Promise<GetQueryServicesDescriptorResponse> {
     const data = GetQueryServicesDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetQueryServicesDescriptor", data);
-    return promise.then(data => GetQueryServicesDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetQueryServicesDescriptorResponse.decode(new BinaryReader(data)));
   }
   getTxDescriptor(request: GetTxDescriptorRequest = {}): Promise<GetTxDescriptorResponse> {
     const data = GetTxDescriptorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v2alpha1.ReflectionService", "GetTxDescriptor", data);
-    return promise.then(data => GetTxDescriptorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetTxDescriptorResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

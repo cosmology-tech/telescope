@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** Allocation defines the spend limit for a particular port and channel */
@@ -44,7 +44,7 @@ function createBaseAllocation(): Allocation {
   };
 }
 export const Allocation = {
-  encode(message: Allocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Allocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
     }
@@ -59,8 +59,8 @@ export const Allocation = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Allocation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Allocation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocation();
     while (reader.pos < end) {
@@ -156,14 +156,14 @@ function createBaseTransferAuthorization(): TransferAuthorization {
   };
 }
 export const TransferAuthorization = {
-  encode(message: TransferAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TransferAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allocations) {
       Allocation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TransferAuthorization {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TransferAuthorization {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTransferAuthorization();
     while (reader.pos < end) {

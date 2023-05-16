@@ -1,6 +1,6 @@
 import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -103,12 +103,12 @@ function createBaseOrderID(): OrderID {
   };
 }
 export const OrderID = {
-  encode(message: OrderID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OrderID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -118,8 +118,8 @@ export const OrderID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OrderID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OrderID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderID();
     while (reader.pos < end) {
@@ -202,7 +202,7 @@ function createBaseOrder(): Order {
   };
 }
 export const Order = {
-  encode(message: Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Order, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
     }
@@ -213,12 +213,12 @@ export const Order = {
       GroupSpec.encode(message.spec, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Order {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Order {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrder();
     while (reader.pos < end) {
@@ -302,12 +302,12 @@ function createBaseOrderFilters(): OrderFilters {
   };
 }
 export const OrderFilters = {
-  encode(message: OrderFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OrderFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -320,8 +320,8 @@ export const OrderFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OrderFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OrderFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderFilters();
     while (reader.pos < end) {

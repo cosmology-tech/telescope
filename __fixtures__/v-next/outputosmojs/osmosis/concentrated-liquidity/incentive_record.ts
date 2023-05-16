@@ -1,7 +1,7 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -76,9 +76,9 @@ function createBaseIncentiveRecord(): IncentiveRecord {
   };
 }
 export const IncentiveRecord = {
-  encode(message: IncentiveRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IncentiveRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.incentiveDenom !== "") {
       writer.uint32(18).string(message.incentiveDenom);
@@ -94,8 +94,8 @@ export const IncentiveRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IncentiveRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IncentiveRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentiveRecord();
     while (reader.pos < end) {
@@ -186,7 +186,7 @@ function createBaseIncentiveRecordBody(): IncentiveRecordBody {
   };
 }
 export const IncentiveRecordBody = {
-  encode(message: IncentiveRecordBody, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IncentiveRecordBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.remainingAmount !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.remainingAmount, 18).atomics);
     }
@@ -198,8 +198,8 @@ export const IncentiveRecordBody = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IncentiveRecordBody {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IncentiveRecordBody {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentiveRecordBody();
     while (reader.pos < end) {

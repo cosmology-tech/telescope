@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 /**
@@ -154,7 +154,7 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
   };
 }
 export const SuperfluidAsset = {
-  encode(message: SuperfluidAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidAsset, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -163,8 +163,8 @@ export const SuperfluidAsset = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidAsset {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidAsset {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidAsset();
     while (reader.pos < end) {
@@ -228,7 +228,7 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
   };
 }
 export const SuperfluidIntermediaryAccount = {
-  encode(message: SuperfluidIntermediaryAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidIntermediaryAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -236,12 +236,12 @@ export const SuperfluidIntermediaryAccount = {
       writer.uint32(18).string(message.valAddr);
     }
     if (message.gaugeId !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.gaugeId.toString()));
+      writer.uint32(24).uint64(message.gaugeId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidIntermediaryAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidIntermediaryAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidIntermediaryAccount();
     while (reader.pos < end) {
@@ -314,9 +314,9 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
   };
 }
 export const OsmoEquivalentMultiplierRecord = {
-  encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OsmoEquivalentMultiplierRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochNumber !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.epochNumber.toString()));
+      writer.uint32(8).int64(message.epochNumber);
     }
     if (message.denom !== "") {
       writer.uint32(18).string(message.denom);
@@ -326,8 +326,8 @@ export const OsmoEquivalentMultiplierRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OsmoEquivalentMultiplierRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OsmoEquivalentMultiplierRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOsmoEquivalentMultiplierRecord();
     while (reader.pos < end) {
@@ -401,7 +401,7 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   };
 }
 export const SuperfluidDelegationRecord = {
-  encode(message: SuperfluidDelegationRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SuperfluidDelegationRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -416,8 +416,8 @@ export const SuperfluidDelegationRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationRecord();
     while (reader.pos < end) {
@@ -498,17 +498,17 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
   };
 }
 export const LockIdIntermediaryAccountConnection = {
-  encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockIdIntermediaryAccountConnection, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lockId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.lockId.toString()));
+      writer.uint32(8).uint64(message.lockId);
     }
     if (message.intermediaryAccount !== "") {
       writer.uint32(18).string(message.intermediaryAccount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockIdIntermediaryAccountConnection {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LockIdIntermediaryAccountConnection {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockIdIntermediaryAccountConnection();
     while (reader.pos < end) {
@@ -570,16 +570,16 @@ function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
   };
 }
 export const UnpoolWhitelistedPools = {
-  encode(message: UnpoolWhitelistedPools, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnpoolWhitelistedPools, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.ids) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UnpoolWhitelistedPools {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UnpoolWhitelistedPools {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpoolWhitelistedPools();
     while (reader.pos < end) {

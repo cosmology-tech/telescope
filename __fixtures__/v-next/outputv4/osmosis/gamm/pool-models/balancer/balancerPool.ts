@@ -1,8 +1,8 @@
 import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -153,7 +153,7 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   };
 }
 export const SmoothWeightChangeParams = {
-  encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SmoothWeightChangeParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
     }
@@ -168,8 +168,8 @@ export const SmoothWeightChangeParams = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SmoothWeightChangeParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SmoothWeightChangeParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSmoothWeightChangeParams();
     while (reader.pos < end) {
@@ -267,7 +267,7 @@ function createBasePoolParams(): PoolParams {
   };
 }
 export const PoolParams = {
-  encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.swapFee !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
@@ -279,8 +279,8 @@ export const PoolParams = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
     while (reader.pos < end) {
@@ -352,7 +352,7 @@ function createBasePoolAsset(): PoolAsset {
   };
 }
 export const PoolAsset = {
-  encode(message: PoolAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolAsset, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
     }
@@ -361,8 +361,8 @@ export const PoolAsset = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolAsset {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolAsset {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolAsset();
     while (reader.pos < end) {
@@ -430,12 +430,12 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
-  encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.id !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.id.toString()));
+      writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
@@ -454,8 +454,8 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Pool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
     while (reader.pos < end) {

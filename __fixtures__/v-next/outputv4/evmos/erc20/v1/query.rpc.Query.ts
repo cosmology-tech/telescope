@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */
@@ -27,17 +27,17 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryTokenPairsResponse> {
     const data = QueryTokenPairsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);
-    return promise.then(data => QueryTokenPairsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTokenPairsResponse.decode(new BinaryReader(data)));
   }
   tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
     const data = QueryTokenPairRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPair", data);
-    return promise.then(data => QueryTokenPairResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTokenPairResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

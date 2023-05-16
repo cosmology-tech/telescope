@@ -1,6 +1,6 @@
 import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext, SourceContextSDKType } from "./source_context";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
@@ -288,7 +288,7 @@ function createBaseApi(): Api {
   };
 }
 export const Api = {
-  encode(message: Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -312,8 +312,8 @@ export const Api = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Api {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Api {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApi();
     while (reader.pos < end) {
@@ -450,7 +450,7 @@ function createBaseMethod(): Method {
   };
 }
 export const Method = {
-  encode(message: Method, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -474,8 +474,8 @@ export const Method = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Method {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Method {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethod();
     while (reader.pos < end) {
@@ -591,7 +591,7 @@ function createBaseMixin(): Mixin {
   };
 }
 export const Mixin = {
-  encode(message: Mixin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -600,8 +600,8 @@ export const Mixin = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Mixin {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Mixin {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMixin();
     while (reader.pos < end) {
