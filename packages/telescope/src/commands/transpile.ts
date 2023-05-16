@@ -4,15 +4,13 @@ import path from 'path';
 import { writeFileSync } from 'fs';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
-
-export default async (argv) => {  
+export default async (argv) => {
   if (argv.useDefaults) {
     const SKIP = ['aminoEncoding', 'packages'];
-    Object.keys(defaultTelescopeOptions)
-      .forEach(key => {
-        if (SKIP.includes(key)) return;
-        argv[key] = defaultTelescopeOptions[key]
-      })
+    Object.keys(defaultTelescopeOptions).forEach((key) => {
+      if (SKIP.includes(key)) return;
+      argv[key] = defaultTelescopeOptions[key];
+    });
   }
 
   // Set config file as a separate Q to allow us to skip the rest of the interactive prompts if valid json is provided.
@@ -61,23 +59,23 @@ export default async (argv) => {
   ];
 
   // Get the config filename and path
-  let { config } = await prompt(configQ, argv);
-  let configFullPath = path.resolve(...config.split('/'));
+  const { config } = await prompt(configQ, argv);
+  const configFullPath = path.resolve(...config.split('/'));
   // Create empy config object
-  let conf = {};
+  const conf: { protoDirs?: string[] } = {};
   // Extract provided protoDirs from argv
-  const { protoDirs: extraProtoDirs, ...args } = argv;
+  let { protoDirs: extraProtoDirs, ...args } = argv;
   if (!Array.isArray(extraProtoDirs)) {
     extraProtoDirs = [extraProtoDirs];
   }
   try {
     // Read the config JSON
-    let json = require(configFullPath);
+    const json = require(configFullPath);
     // Assign values from config JSON to our empty config object
     Object.assign(conf, json);
     // Override any options with explicitly provided ones
     Object.assign(conf, args);
-    // Append provided protoDirs if any    
+    // Append provided protoDirs if any
     if (extraProtoDirs) {
       conf.protoDirs = [...(conf.protoDirs ?? []), ...extraProtoDirs];
     }
@@ -87,7 +85,7 @@ export default async (argv) => {
       throw new Error('Must provide a .json file for --config.');
     } else {
       // New config file to create. copy provided argv to our empty conf object
-      console.log("Config will be written to: " + configFullPath);
+      console.log('Config will be written to: ' + configFullPath);
       Object.assign(conf, argv);
     }
   }
@@ -97,7 +95,7 @@ export default async (argv) => {
     outPath,
     includeAminos,
     includeLCDClients,
-    includeRPCClients,
+    includeRPCClients
   } = await prompt(questions, conf);
 
   if (!Array.isArray(protoDirs)) {
@@ -113,7 +111,7 @@ export default async (argv) => {
       enabled: includeLCDClients
     },
     rpcClients: {
-      enabled: includeRPCClients,
+      enabled: includeRPCClients
     }
   };
   // Write out final config to provided config path.
@@ -127,7 +125,10 @@ export default async (argv) => {
         includeLCDClients,
         includeRPCClients,
         options
-      }, null, 2)
+      },
+      null,
+      2
+    )
   );
 
   await telescope({
