@@ -32,16 +32,30 @@ exports[`createScopedGrpcWebFactory 1`] = `
 
   return {
     cosmos: {
-      bank: {
-        v1beta1: new (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(rpc)
+      app: {
+        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
       },
-      gov: {
-        v1beta1: new (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(rpc)
+      auth: {
+        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+      },
+      authz: {
+        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+      },
+      bank: {
+        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+      },
+      base: {
+        tendermint: {
+          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).ServiceClientImpl(grpcWeb)
+        }
+      },
+      tx: {
+        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).ServiceClientImpl(grpcWeb)
       }
     },
-    osmosis: {
-      gamm: {
-        v1beta1: new (await import("./proto/cosmos/bank/v1beta1/query.lcd")).GrpcWebImpl(rpc)
+    cosmwasm: {
+      wasm: {
+        v1: new (await import("./wasm/v1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
       }
     }
   };

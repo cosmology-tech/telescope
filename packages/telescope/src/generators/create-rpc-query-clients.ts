@@ -97,8 +97,11 @@ export const plugin = (
                 allowedRpcServices.forEach(svcKey => {
                     if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
+
                         asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
                         asts.push(createGrpcWebQueryClass(ctx.generic, svc));
+
+                        // add descriptor for grpc-web
                         asts.push(GetDesc(ctx.generic, proto[svcKey]))
                         const Desces = getMethodDesc(ctx.generic, proto[svcKey]);
                         for (let i = 0; i < Desces.length; i++) {

@@ -1,13 +1,13 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
-import { rpcFuncArguments, rpcClassArguments, rpcNewAwaitImport, rpcRecursiveObjectProps, rpcNestedImportObject } from './rpc';
+import { rpcFuncArguments, rpcClassArguments, rpcRecursiveObjectProps } from './rpc';
 
 export const grpcWebNewAwaitImport = (
     path: string,
     className: string
 ) => {
-    return t.callExpression(
+    return t.newExpression(
         t.memberExpression(
             t.awaitExpression(
                 t.callExpression(
@@ -26,15 +26,27 @@ export const grpcWebNewAwaitImport = (
             t.identifier('grpcWeb')
         ]
     )
-
 }
 
-const rpcTmNestedImportObject = (
+export const grpcNestedImportObject = (
     obj: object,
     className: string
 ) => {
 
+    //make className dynamic based on object
     if (typeof obj === 'string') {
+        const serviceType = (obj as string).split(".").pop();
+        switch (serviceType) {
+            case "Query":
+            //   console.log("This is a Query RPC.");
+              break;
+            case "Service":
+              className = 'ServiceClientImpl';
+            //   console.log("This is a Service RPC.");
+              break;
+            default:
+              console.log("grpc service error!! This should not happend. Undefined service type");
+          }
         return grpcWebNewAwaitImport(obj, className);
     }
 
@@ -43,7 +55,7 @@ const rpcTmNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            rpcTmNestedImportObject(obj[name], className)
+            grpcNestedImportObject(obj[name], className)
         )
     }))
 };
@@ -285,7 +297,7 @@ export const createScopedGrpcWebFactory = (
                                 )     
                             ),
                             t.returnStatement(
-                                rpcNestedImportObject(
+                                grpcNestedImportObject(
                                     obj,
                                     'GrpcWebImpl'
                                 )
