@@ -270,6 +270,10 @@ export const grpcNestedImportObject = (
               className = 'ServiceClientImpl';
             //   console.log("This is a Service RPC.");
               break;
+            case "msg":
+                className = 'MsgClientImpl';
+            //   console.log("This is a Message RPC.");
+              break;
             default:
               console.log("grpc service error!! This should not happend. Undefined service type");
           }
