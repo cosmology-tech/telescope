@@ -125,33 +125,30 @@ const makeRPC = (
     let rpcast;
     
     //temporary set this so test v3 will not fail
-    if (builder.options?.rpcClients?.type === "tendermint") {
-            // TODO add addUtil to generic context
-            ctx.proto.addUtil('Rpc');
-
-            rpcast = createScopedRpcTmFactory(
-                ctx.proto,
-                obj,
-                methodName
-                // 'QueryClientImpl' // make option later
-            );
-    } else if (builder.options?.rpcClients?.type === "grpc-web") {
-            rpcast = createScopedGrpcWebFactory(
-                ctx.proto,
-                obj,
-                "createGrpcWebClient"
-            );
-    } else {
-        //TODO grpc-gateway, use tendermint as placeholder
-        ctx.proto.addUtil('Rpc');
-
-            rpcast = createScopedRpcTmFactory(
-                ctx.proto,
-                obj,
-                methodName
-                // 'QueryClientImpl' // make option later
-            );
-    }
+    switch (builder.options?.rpcClients?.type) {
+        case "grpc-gateway":
+          // TODO no working scoped clients for grpc-gateway right now
+        case "tendermint":
+          // TODO add addUtil to generic context
+          ctx.proto.addUtil('Rpc');
+          
+          rpcast = createScopedRpcTmFactory(
+            ctx.proto,
+            obj,
+            methodName
+            // 'QueryClientImpl' // make option later
+          );
+          break;
+        case "grpc-web":
+          rpcast = createScopedGrpcWebFactory(
+            ctx.proto,
+            obj,
+            "createGrpcWebClient"
+          );
+          break;
+        default:
+          break;
+      }
  
 
     const serviceImports = getDepsFromQueries(
