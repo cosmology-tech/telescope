@@ -1,4 +1,4 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";

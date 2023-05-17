@@ -2,10 +2,8 @@ import { TelescopeBuilder } from '../src/builder';
 import { TelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
-import { kebab } from "case";
-import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
-import { TelescopeParseContext } from '../types/src/build';
+import { TelescopeParseContext } from '../src/build';
 
 const outPath = __dirname + '/../../../__fixtures__/v-next/outputv2';
 const store = getTestProtoStore();
@@ -15,7 +13,7 @@ store.traverseAll();
 const options: TelescopeOptions = {
 
   env: 'v-next',
-  removeUnusedImports: false,
+  removeUnusedImports: true,
   classesUseArrowFunctions: false,
 
   tsDisable: {
@@ -101,7 +99,7 @@ const options: TelescopeOptions = {
   },
 
   reactQuery: {
-    enabled: true,
+    enabled: false,
     include: {
       patterns: [
         'osmosis/**/gamm/**/query.proto'
@@ -153,8 +151,3 @@ describe('bundle package registries and root file names', () => {
     // console.log(JSON.stringify(result, null, 2));
   });
 })
-
-
-
-
-

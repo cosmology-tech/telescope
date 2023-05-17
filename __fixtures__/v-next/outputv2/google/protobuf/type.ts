@@ -1,5 +1,5 @@
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "./any";
+import { Any, AnyAmino, AnySDKType } from "./any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";

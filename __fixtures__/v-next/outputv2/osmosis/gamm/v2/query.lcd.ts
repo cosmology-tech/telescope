@@ -1,5 +1,5 @@
 import { LCDClient } from "@osmonauts/lcd";
-import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
+import { QuerySpotPriceRequest, QuerySpotPriceResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

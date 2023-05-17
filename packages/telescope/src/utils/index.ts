@@ -67,6 +67,7 @@ export const UTILS = {
   useEndpoint: '__pinia-endpoint__',
   override: 'mobx',
   makeObservable: 'mobx',
+  NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',
   UnaryMethodDefinitionishR: '__grpc-web__',
   UnaryMethodDefinitionish: '__grpc-web__',
   BinaryReader: '__binary__',

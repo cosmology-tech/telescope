@@ -1,5 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../protobuf/timestamp";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Timestamp } from "../protobuf/timestamp";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";

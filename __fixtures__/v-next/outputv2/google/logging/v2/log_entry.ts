@@ -1,8 +1,8 @@
 import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
+import { Timestamp } from "../../protobuf/timestamp";
+import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";

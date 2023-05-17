@@ -341,7 +341,13 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
             )
         });
     
-    const methodsDesc = [] 
+    const methodsDesc = []
+    
+    //check if service name is 'service' if it is then ommit it because proto method doesn't contain service prefix in it methods
+    let service_name = service.name
+    if (service_name == 'Service') {
+        service_name = ''
+    }
 
     for (let i = 0; i < methods.length; i++) {
         const methodName = methods[i].methodName
@@ -352,7 +358,7 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
                 'const',
                 [
                     t.variableDeclarator(
-                        t.identifier(service.name + methodName + 'Desc: UnaryMethodDefinitionish'),
+                        t.identifier(service_name + methodName + 'Desc: UnaryMethodDefinitionish'),
                         t.objectExpression(
                             [
                                 t.objectProperty(
@@ -368,7 +374,7 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
                                     t.booleanLiteral(false)
                                 ),
                                 t.objectProperty(
-                                    t.identifier('reponseStream'),
+                                    t.identifier('responseStream'),
                                     t.booleanLiteral(false)
                                 ),
                                 t.objectProperty(
@@ -540,8 +546,18 @@ export const grpcWebRpcInterface = () => {
                                             t.tsUndefinedKeyword()
                                         ]
                                     )
-                                ))
-                        ]
+                            )),      
+                        ],
+                        t.tsTypeAnnotation(
+                            t.tSTypeReference(
+                                t.identifier('Promise'),
+                                t.tsTypeParameterInstantiation(
+                                    [
+                                        t.tsAnyKeyword()
+                                    ]
+                                )
+                            )
+                        )
                     )
                 ]
         )
@@ -570,7 +586,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                             t.tsTypeLiteral(
                                 [
                                     t.tsPropertySignature(
-                                        t.identifier('transport'),
+                                        t.identifier('transport?'),
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
                                                 t.tsQualifiedName(
@@ -581,13 +597,13 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                         )
                                     ),
                                     t.tsPropertySignature(
-                                        t.identifier('debug'),
+                                        t.identifier('debug?'),
                                         t.tsTypeAnnotation(
                                             t.tsBooleanKeyword()
                                         )
                                     ),
                                     t.tsPropertySignature(
-                                        t.identifier('metadata'),
+                                        t.identifier('metadata?'),
                                         t.tsTypeAnnotation(
                                             t.tsTypeReference(
                                                 t.tsQualifiedName(
@@ -614,7 +630,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                     t.tsTypeLiteral(
                                         [
                                             t.tsPropertySignature(
-                                                t.identifier('transport'),
+                                                t.identifier('transport?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsTypeReference(
                                                         t.tsQualifiedName(
@@ -625,13 +641,13 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                 )
                                             ),
                                             t.tsPropertySignature(
-                                                t.identifier('debug'),
+                                                t.identifier('debug?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsBooleanKeyword()
                                                 )
                                             ),
                                             t.tsPropertySignature(
-                                                t.identifier('metadata'),
+                                                t.identifier('metadata?'),
                                                 t.tsTypeAnnotation(
                                                     t.tsTypeReference(
                                                         t.tsQualifiedName(
@@ -672,11 +688,11 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                     ),
                     t.classMethod(
                         "method",
-                        t.identifier('unary'),
+                        t.identifier('unary<T extends UnaryMethodDefinitionish>'),
                         [
                             identifier('methodDesc', t.tsTypeAnnotation(t.tsTypeReference(t.identifier('T')))),
                             identifier('_request', t.tsTypeAnnotation(t.tsAnyKeyword())),
-                            identifier('metadata', t.tsTypeAnnotation(t.tsUnionType([t.tsTypeReference(t.tsQualifiedName(t.identifier('grpc'), t.identifier('metadata'))), t.tsUndefinedKeyword()])))
+                            identifier('metadata', t.tsTypeAnnotation(t.tsUnionType([t.tsTypeReference(t.tsQualifiedName(t.identifier('grpc'), t.identifier('Metadata'))), t.tsUndefinedKeyword()])))
                         ],
                         t.blockStatement(
                             [
@@ -719,10 +735,10 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                                         t.optionalMemberExpression(
                                                                             t.memberExpression(
                                                                                 t.thisExpression(),
-                                                                                t.identifier('metadata'),
+                                                                                t.identifier('options'),
                                                                                 false
                                                                             ),
-                                                                            t.identifier('options'),
+                                                                            t.identifier('metadata'),
                                                                             false,
                                                                             true
                                                                         ),
@@ -897,20 +913,7 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                                                                                 "=",
                                                                                                                 t.memberExpression(
                                                                                                                     t.identifier('err'),
-                                                                                                                    t.identifier('code')
-                                                                                                                ),
-                                                                                                                t.memberExpression(
-                                                                                                                    t.identifier('response'),
                                                                                                                     t.identifier('metadata')
-                                                                                                                )
-                                                                                                            )
-                                                                                                        ), 
-                                                                                                        t.expressionStatement(
-                                                                                                            t.assignmentExpression(
-                                                                                                                "=",
-                                                                                                                t.memberExpression(
-                                                                                                                    t.identifier('err'),
-                                                                                                                    t.identifier('response')
                                                                                                                 ),
                                                                                                                 t.memberExpression(
                                                                                                                     t.identifier('response'),

@@ -1,10 +1,6 @@
-import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
-import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
+import { QueryDeploymentsRequest, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

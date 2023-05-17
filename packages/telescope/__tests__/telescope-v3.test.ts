@@ -3,7 +3,7 @@ import { TelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
 import { getTestProtoStore } from '../test-utils';
-import { TelescopeParseContext } from '../types/src/build';
+import { TelescopeParseContext } from '../src/build';
 
 const outPath = __dirname + '/../../../__fixtures__/v-next/outputv3';
 const store = getTestProtoStore();

@@ -71,6 +71,23 @@ const balances = await client.${baseModule}.exchange.v1beta1
     .exchangeBalances()
 \`\`\`
 
+### gRPC-web Clients
+
+\`\`\`js
+import { ${baseModule} } from '${libName}';
+
+const { createGrpcWebClient } = ${baseModule}.ClientFactory; 
+const client = await createGrpcWebClient({ grpcWebEndpoint: RPC_ENDPOINT });
+
+// now you can query the cosmos modules
+const balance = await client.cosmos.bank.v1beta1
+    .allBalances({ address: '${exampleAddr}' });
+
+// you can also query the ${baseModule} modules
+const balances = await client.${baseModule}.exchange.v1beta1
+    .exchangeBalances()
+\`\`\`
+
 ### Composing Messages
 
 Import the \`${baseModule}\` object from \`${libName}\`. 
@@ -231,6 +248,26 @@ const fee: StdFee = {
 };
 const response = await stargateClient.signAndBroadcast(address, [msg], fee);
 \`\`\`
+
+If you create gRPC-web client instead of RPC client, you can sign it using stargateSigner and broadcast it as following
+
+\`\`\`
+const signed_tx = await signClient.sign('address', [msg], fee, 'gRPC-web memo', signerData);
+    console.log(signed_tx);
+    const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
+    // uncomment the following snippet to send transaction
+    const res = await client.cosmos.tx.v1beta1.broadcastTx(  
+      {
+        txBytes: txRawBytes,
+        //can be replace with BroadcastMode interface as enum
+        mode: 1
+      }
+    )
+    
+    console.log(res);
+\`\`\`
+
+Link to a working demo: https://github.com/hoangdv2429/grpc-web-js
 
 ## Advanced Usage
 

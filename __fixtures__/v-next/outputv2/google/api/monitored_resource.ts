@@ -1,5 +1,5 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructAmino, StructSDKType } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";

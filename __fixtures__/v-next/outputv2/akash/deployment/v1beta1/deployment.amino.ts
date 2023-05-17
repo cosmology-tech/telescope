@@ -1,7 +1,6 @@
 /* eslint-disable */
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deployment";
+import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./group";
+import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deployment";
 export const AminoConverter = {
   "/akash.deployment.v1beta1.MsgCreateDeployment": {
     aminoType: "/akash.deployment.v1beta1.MsgCreateDeployment",
