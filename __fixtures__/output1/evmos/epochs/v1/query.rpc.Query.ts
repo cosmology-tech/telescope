@@ -6,24 +6,20 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** EpochInfos provide running epochInfos */
   epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse>;
-
   /** CurrentEpoch provide current epoch of specified identifier */
   currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.epochInfos = this.epochInfos.bind(this);
     this.currentEpoch = this.currentEpoch.bind(this);
   }
-
   epochInfos(request: QueryEpochsInfoRequest = {
     pagination: undefined
   }): Promise<QueryEpochsInfoResponse> {
@@ -31,13 +27,11 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("evmos.epochs.v1.Query", "EpochInfos", data);
     return promise.then(data => QueryEpochsInfoResponse.decode(new _m0.Reader(data)));
   }
-
   currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
     const data = QueryCurrentEpochRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.epochs.v1.Query", "CurrentEpoch", data);
     return promise.then(data => QueryCurrentEpochResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -46,11 +40,9 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse> {
       return queryService.epochInfos(request);
     },
-
     currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
       return queryService.currentEpoch(request);
     }
-
   };
 };
 export interface UseEpochInfosQuery<TData> extends ReactQueryParams<QueryEpochsInfoResponse, TData> {
@@ -59,26 +51,18 @@ export interface UseEpochInfosQuery<TData> extends ReactQueryParams<QueryEpochsI
 export interface UseCurrentEpochQuery<TData> extends ReactQueryParams<QueryCurrentEpochResponse, TData> {
   request: QueryCurrentEpochRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useEpochInfos = <TData = QueryEpochsInfoResponse,>({
     request,
     options
@@ -88,7 +72,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.epochInfos(request);
     }, options);
   };
-
   const useCurrentEpoch = <TData = QueryCurrentEpochResponse,>({
     request,
     options
@@ -98,12 +81,8 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.currentEpoch(request);
     }, options);
   };
-
   return {
-    /** EpochInfos provide running epochInfos */
-    useEpochInfos,
-
-    /** CurrentEpoch provide current epoch of specified identifier */
-    useCurrentEpoch
+    /** EpochInfos provide running epochInfos */useEpochInfos,
+    /** CurrentEpoch provide current epoch of specified identifier */useCurrentEpoch
   };
 };

@@ -4,7 +4,6 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoResponse, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoResponse, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoResponse } from "./tx";
 /** Msg defines the fees Msg service. */
-
 export interface Msg {
   /**
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
@@ -15,34 +14,27 @@ export interface Msg {
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-
   cancelDevFeeInfo(request: DeepPartial<MsgCancelDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgCancelDevFeeInfoResponse>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-
   updateDevFeeInfo(request: DeepPartial<MsgUpdateDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgUpdateDevFeeInfoResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.registerDevFeeInfo = this.registerDevFeeInfo.bind(this);
     this.cancelDevFeeInfo = this.cancelDevFeeInfo.bind(this);
     this.updateDevFeeInfo = this.updateDevFeeInfo.bind(this);
   }
-
   registerDevFeeInfo(request: DeepPartial<MsgRegisterDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgRegisterDevFeeInfoResponse> {
     return this.rpc.unary(MsgRegisterDevFeeInfoDesc, MsgRegisterDevFeeInfo.fromPartial(request), metadata);
   }
-
   cancelDevFeeInfo(request: DeepPartial<MsgCancelDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgCancelDevFeeInfoResponse> {
     return this.rpc.unary(MsgCancelDevFeeInfoDesc, MsgCancelDevFeeInfo.fromPartial(request), metadata);
   }
-
   updateDevFeeInfo(request: DeepPartial<MsgUpdateDevFeeInfo>, metadata?: grpc.Metadata): Promise<MsgUpdateDevFeeInfoResponse> {
     return this.rpc.unary(MsgUpdateDevFeeInfoDesc, MsgUpdateDevFeeInfo.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "evmos.fees.v1.Msg"
@@ -56,19 +48,16 @@ export const MsgRegisterDevFeeInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgRegisterDevFeeInfo.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgRegisterDevFeeInfoResponse.decode(data),
-
+      return {
+        ...MsgRegisterDevFeeInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgCancelDevFeeInfoDesc: UnaryMethodDefinitionish = {
@@ -80,19 +69,16 @@ export const MsgCancelDevFeeInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCancelDevFeeInfo.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCancelDevFeeInfoResponse.decode(data),
-
+      return {
+        ...MsgCancelDevFeeInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgUpdateDevFeeInfoDesc: UnaryMethodDefinitionish = {
@@ -104,19 +90,16 @@ export const MsgUpdateDevFeeInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgUpdateDevFeeInfo.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgUpdateDevFeeInfoResponse.decode(data),
-
+      return {
+        ...MsgUpdateDevFeeInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -129,7 +112,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -138,12 +120,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -166,5 +149,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

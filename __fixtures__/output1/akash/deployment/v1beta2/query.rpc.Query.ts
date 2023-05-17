@@ -9,39 +9,32 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Deployments queries deployments */
   deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
-
   /** Deployment queries deployment details */
   deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
-
   /** Group queries group details */
   group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
   }
-
   /* Deployments queries deployments */
   deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> => {
     const data = QueryDeploymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployments", data);
     return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
   };
-
   /* Deployment queries deployment details */
   deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> => {
     const data = QueryDeploymentRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployment", data);
     return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
   };
-
   /* Group queries group details */
   group = async (request: QueryGroupRequest): Promise<QueryGroupResponse> => {
     const data = QueryGroupRequest.encode(request).finish();
@@ -56,15 +49,12 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
       return queryService.deployments(request);
     },
-
     deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
       return queryService.deployment(request);
     },
-
     group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
       return queryService.group(request);
     }
-
   };
 };
 export interface UseDeploymentsQuery<TData> extends ReactQueryParams<QueryDeploymentsResponse, TData> {
@@ -76,26 +66,18 @@ export interface UseDeploymentQuery<TData> extends ReactQueryParams<QueryDeploym
 export interface UseGroupQuery<TData> extends ReactQueryParams<QueryGroupResponse, TData> {
   request: QueryGroupRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useDeployments = <TData = QueryDeploymentsResponse,>({
     request,
     options
@@ -105,7 +87,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.deployments(request);
     }, options);
   };
-
   const useDeployment = <TData = QueryDeploymentResponse,>({
     request,
     options
@@ -115,7 +96,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.deployment(request);
     }, options);
   };
-
   const useGroup = <TData = QueryGroupResponse,>({
     request,
     options
@@ -125,15 +105,9 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.group(request);
     }, options);
   };
-
   return {
-    /** Deployments queries deployments */
-    useDeployments,
-
-    /** Deployment queries deployment details */
-    useDeployment,
-
-    /** Group queries group details */
-    useGroup
+    /** Deployments queries deployments */useDeployments,
+    /** Deployment queries deployment details */useDeployment,
+    /** Group queries group details */useGroup
   };
 };

@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgCreateGauge.encode(value).finish()
       };
     },
-
     addToGauge(value: MsgAddToGauge) {
       return {
         typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value: MsgAddToGauge.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createGauge(value: MsgCreateGauge) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     addToGauge(value: MsgAddToGauge) {
       return {
         typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value
       };
     }
-
   },
   toJSON: {
     createGauge(value: MsgCreateGauge) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgCreateGauge.toJSON(value)
       };
     },
-
     addToGauge(value: MsgAddToGauge) {
       return {
         typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value: MsgAddToGauge.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createGauge(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgCreateGauge.fromJSON(value)
       };
     },
-
     addToGauge(value: any) {
       return {
         typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value: MsgAddToGauge.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createGauge(value: MsgCreateGauge) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgCreateGauge.fromPartial(value)
       };
     },
-
     addToGauge(value: MsgAddToGauge) {
       return {
         typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value: MsgAddToGauge.fromPartial(value)
       };
     }
-
   }
 };

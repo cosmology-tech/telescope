@@ -13,7 +13,6 @@ exports[`createScopedGrpcWebFactory 1`] = `
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
   let grpcWeb;
-
   if (typeof document !== "undefined") {
     grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
       transport: grpc.CrossBrowserHttpTransport({
@@ -29,7 +28,6 @@ exports[`createScopedGrpcWebFactory 1`] = `
       transport: NodeHttpTransport()
     });
   }
-
   return {
     cosmos: {
       app: {
@@ -75,7 +73,6 @@ exports[`createScopedGrpcWebMsgFactory 1`] = `
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
   let grpcWeb;
-
   if (typeof document !== "undefined") {
     grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
       transport: grpc.CrossBrowserHttpTransport({
@@ -91,7 +88,6 @@ exports[`createScopedGrpcWebMsgFactory 1`] = `
       transport: NodeHttpTransport()
     });
   }
-
   return {
     cosmos: {
       authz: {

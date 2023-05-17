@@ -236,7 +236,9 @@ const options: TelescopeOptions = {
 
 const input: TelescopeInput = {
   outPath,
-  protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
+  protoDirs: [
+    __dirname + '/../../../__fixtures__/chain1',
+  ],
   options
 };
 

@@ -4,29 +4,22 @@ import { DeepPartial } from "../../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { GetNodeInfoRequest, GetNodeInfoResponse, GetSyncingRequest, GetSyncingResponse, GetLatestBlockRequest, GetLatestBlockResponse, GetBlockByHeightRequest, GetBlockByHeightResponse, GetLatestValidatorSetRequest, GetLatestValidatorSetResponse, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse } from "./query";
 /** Service defines the gRPC querier service for tendermint queries. */
-
 export interface Service {
   /** GetNodeInfo queries the current node info. */
   getNodeInfo(request?: DeepPartial<GetNodeInfoRequest>, metadata?: grpc.Metadata): Promise<GetNodeInfoResponse>;
   /** GetSyncing queries node syncing. */
-
   getSyncing(request?: DeepPartial<GetSyncingRequest>, metadata?: grpc.Metadata): Promise<GetSyncingResponse>;
   /** GetLatestBlock returns the latest block. */
-
   getLatestBlock(request?: DeepPartial<GetLatestBlockRequest>, metadata?: grpc.Metadata): Promise<GetLatestBlockResponse>;
   /** GetBlockByHeight queries block for given height. */
-
   getBlockByHeight(request: DeepPartial<GetBlockByHeightRequest>, metadata?: grpc.Metadata): Promise<GetBlockByHeightResponse>;
   /** GetLatestValidatorSet queries latest validator-set. */
-
   getLatestValidatorSet(request?: DeepPartial<GetLatestValidatorSetRequest>, metadata?: grpc.Metadata): Promise<GetLatestValidatorSetResponse>;
   /** GetValidatorSetByHeight queries validator-set at a given height. */
-
   getValidatorSetByHeight(request: DeepPartial<GetValidatorSetByHeightRequest>, metadata?: grpc.Metadata): Promise<GetValidatorSetByHeightResponse>;
 }
 export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.getNodeInfo = this.getNodeInfo.bind(this);
@@ -36,33 +29,26 @@ export class ServiceClientImpl implements Service {
     this.getLatestValidatorSet = this.getLatestValidatorSet.bind(this);
     this.getValidatorSetByHeight = this.getValidatorSetByHeight.bind(this);
   }
-
   getNodeInfo(request: DeepPartial<GetNodeInfoRequest> = {}, metadata?: grpc.Metadata): Promise<GetNodeInfoResponse> {
     return this.rpc.unary(GetNodeInfoDesc, GetNodeInfoRequest.fromPartial(request), metadata);
   }
-
   getSyncing(request: DeepPartial<GetSyncingRequest> = {}, metadata?: grpc.Metadata): Promise<GetSyncingResponse> {
     return this.rpc.unary(GetSyncingDesc, GetSyncingRequest.fromPartial(request), metadata);
   }
-
   getLatestBlock(request: DeepPartial<GetLatestBlockRequest> = {}, metadata?: grpc.Metadata): Promise<GetLatestBlockResponse> {
     return this.rpc.unary(GetLatestBlockDesc, GetLatestBlockRequest.fromPartial(request), metadata);
   }
-
   getBlockByHeight(request: DeepPartial<GetBlockByHeightRequest>, metadata?: grpc.Metadata): Promise<GetBlockByHeightResponse> {
     return this.rpc.unary(GetBlockByHeightDesc, GetBlockByHeightRequest.fromPartial(request), metadata);
   }
-
   getLatestValidatorSet(request: DeepPartial<GetLatestValidatorSetRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<GetLatestValidatorSetResponse> {
     return this.rpc.unary(GetLatestValidatorSetDesc, GetLatestValidatorSetRequest.fromPartial(request), metadata);
   }
-
   getValidatorSetByHeight(request: DeepPartial<GetValidatorSetByHeightRequest>, metadata?: grpc.Metadata): Promise<GetValidatorSetByHeightResponse> {
     return this.rpc.unary(GetValidatorSetByHeightDesc, GetValidatorSetByHeightRequest.fromPartial(request), metadata);
   }
-
 }
 export const ServiceDesc = {
   serviceName: "cosmos.base.tendermint.v1beta1.Service"
@@ -76,19 +62,16 @@ export const GetNodeInfoDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetNodeInfoRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetNodeInfoResponse.decode(data),
-
+      return {
+        ...GetNodeInfoResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetSyncingDesc: UnaryMethodDefinitionish = {
@@ -100,19 +83,16 @@ export const GetSyncingDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetSyncingRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetSyncingResponse.decode(data),
-
+      return {
+        ...GetSyncingResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetLatestBlockDesc: UnaryMethodDefinitionish = {
@@ -124,19 +104,16 @@ export const GetLatestBlockDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetLatestBlockRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetLatestBlockResponse.decode(data),
-
+      return {
+        ...GetLatestBlockResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetBlockByHeightDesc: UnaryMethodDefinitionish = {
@@ -148,19 +125,16 @@ export const GetBlockByHeightDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetBlockByHeightRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetBlockByHeightResponse.decode(data),
-
+      return {
+        ...GetBlockByHeightResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
@@ -172,19 +146,16 @@ export const GetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetLatestValidatorSetRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetLatestValidatorSetResponse.decode(data),
-
+      return {
+        ...GetLatestValidatorSetResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
@@ -196,19 +167,16 @@ export const GetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetValidatorSetByHeightRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetValidatorSetByHeightResponse.decode(data),
-
+      return {
+        ...GetValidatorSetByHeightResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -221,7 +189,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -230,12 +197,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -258,5 +226,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

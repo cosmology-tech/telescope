@@ -4,10 +4,11 @@ import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesRespons
 export class Query {
   /** Retrieves the unvested, vested and locked tokens for a vesting account */
   static Balances(request: QueryBalancesRequest, initRequest?: fm.InitReq): Promise<QueryBalancesResponse> {
-    return fm.fetchReq(`/evmos/vesting/v1/balances/${request["address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
+    return fm.fetchReq(`/evmos/vesting/v1/balances/${request["address"]}?${fm.renderURLSearchParams({
+      ...request
+    }, ["address"])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

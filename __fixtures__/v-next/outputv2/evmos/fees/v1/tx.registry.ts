@@ -14,21 +14,18 @@ export const MessageComposer = {
         value: MsgRegisterDevFeeInfo.encode(value).finish()
       };
     },
-
     cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value: MsgCancelDevFeeInfo.encode(value).finish()
       };
     },
-
     updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value: MsgUpdateDevFeeInfo.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     registerDevFeeInfo(value: MsgRegisterDevFeeInfo) {
@@ -37,21 +34,18 @@ export const MessageComposer = {
         value
       };
     },
-
     cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value
       };
     },
-
     updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value
       };
     }
-
   },
   toJSON: {
     registerDevFeeInfo(value: MsgRegisterDevFeeInfo) {
@@ -60,21 +54,18 @@ export const MessageComposer = {
         value: MsgRegisterDevFeeInfo.toJSON(value)
       };
     },
-
     cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value: MsgCancelDevFeeInfo.toJSON(value)
       };
     },
-
     updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value: MsgUpdateDevFeeInfo.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     registerDevFeeInfo(value: any) {
@@ -83,21 +74,18 @@ export const MessageComposer = {
         value: MsgRegisterDevFeeInfo.fromJSON(value)
       };
     },
-
     cancelDevFeeInfo(value: any) {
       return {
         typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value: MsgCancelDevFeeInfo.fromJSON(value)
       };
     },
-
     updateDevFeeInfo(value: any) {
       return {
         typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value: MsgUpdateDevFeeInfo.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     registerDevFeeInfo(value: MsgRegisterDevFeeInfo) {
@@ -106,20 +94,17 @@ export const MessageComposer = {
         value: MsgRegisterDevFeeInfo.fromPartial(value)
       };
     },
-
     cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value: MsgCancelDevFeeInfo.fromPartial(value)
       };
     },
-
     updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
       return {
         typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value: MsgUpdateDevFeeInfo.fromPartial(value)
       };
     }
-
   }
 };

@@ -5,15 +5,12 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.v2";
-
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
   /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
   VERSION_FORMAT_UNSPECIFIED = 0,
-
   /** V2 - `LogEntry` version 2 format. */
   V2 = 1,
-
   /** V1 - `LogEntry` version 1 format. */
   V1 = 2,
   UNRECOGNIZED = -1,
@@ -23,15 +20,12 @@ export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionForma
     case 0:
     case "VERSION_FORMAT_UNSPECIFIED":
       return LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED;
-
     case 1:
     case "V2":
       return LogSink_VersionFormat.V2;
-
     case 2:
     case "V1":
       return LogSink_VersionFormat.V1;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -42,19 +36,15 @@ export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): stri
   switch (object) {
     case LogSink_VersionFormat.VERSION_FORMAT_UNSPECIFIED:
       return "VERSION_FORMAT_UNSPECIFIED";
-
     case LogSink_VersionFormat.V2:
       return "V2";
-
     case LogSink_VersionFormat.V1:
       return "V1";
-
     case LogSink_VersionFormat.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /** LogBucket lifecycle states. */
 export enum LifecycleState {
   /**
@@ -62,10 +52,8 @@ export enum LifecycleState {
    * values.
    */
   LIFECYCLE_STATE_UNSPECIFIED = 0,
-
   /** ACTIVE - The normal and active state. */
   ACTIVE = 1,
-
   /**
    * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
    * (e.g. buckets), this can be reversed by an un-delete operation.
@@ -78,15 +66,12 @@ export function lifecycleStateFromJSON(object: any): LifecycleState {
     case 0:
     case "LIFECYCLE_STATE_UNSPECIFIED":
       return LifecycleState.LIFECYCLE_STATE_UNSPECIFIED;
-
     case 1:
     case "ACTIVE":
       return LifecycleState.ACTIVE;
-
     case 2:
     case "DELETE_REQUESTED":
       return LifecycleState.DELETE_REQUESTED;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -97,19 +82,15 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
   switch (object) {
     case LifecycleState.LIFECYCLE_STATE_UNSPECIFIED:
       return "LIFECYCLE_STATE_UNSPECIFIED";
-
     case LifecycleState.ACTIVE:
       return "ACTIVE";
-
     case LifecycleState.DELETE_REQUESTED:
       return "DELETE_REQUESTED";
-
     case LifecycleState.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /**
  * List of different operation states.
  * High level state of the operation. This is used to report the job's
@@ -120,22 +101,16 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
 export enum OperationState {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
-
   /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
   OPERATION_STATE_SCHEDULED = 1,
-
   /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
   OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
-
   /** OPERATION_STATE_RUNNING - The operation is running. */
   OPERATION_STATE_RUNNING = 3,
-
   /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
   OPERATION_STATE_SUCCEEDED = 4,
-
   /** OPERATION_STATE_FAILED - The operation failed. */
   OPERATION_STATE_FAILED = 5,
-
   /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
   OPERATION_STATE_CANCELLED = 6,
   UNRECOGNIZED = -1,
@@ -145,31 +120,24 @@ export function operationStateFromJSON(object: any): OperationState {
     case 0:
     case "OPERATION_STATE_UNSPECIFIED":
       return OperationState.OPERATION_STATE_UNSPECIFIED;
-
     case 1:
     case "OPERATION_STATE_SCHEDULED":
       return OperationState.OPERATION_STATE_SCHEDULED;
-
     case 2:
     case "OPERATION_STATE_WAITING_FOR_PERMISSIONS":
       return OperationState.OPERATION_STATE_WAITING_FOR_PERMISSIONS;
-
     case 3:
     case "OPERATION_STATE_RUNNING":
       return OperationState.OPERATION_STATE_RUNNING;
-
     case 4:
     case "OPERATION_STATE_SUCCEEDED":
       return OperationState.OPERATION_STATE_SUCCEEDED;
-
     case 5:
     case "OPERATION_STATE_FAILED":
       return OperationState.OPERATION_STATE_FAILED;
-
     case 6:
     case "OPERATION_STATE_CANCELLED":
       return OperationState.OPERATION_STATE_CANCELLED;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -180,31 +148,23 @@ export function operationStateToJSON(object: OperationState): string {
   switch (object) {
     case OperationState.OPERATION_STATE_UNSPECIFIED:
       return "OPERATION_STATE_UNSPECIFIED";
-
     case OperationState.OPERATION_STATE_SCHEDULED:
       return "OPERATION_STATE_SCHEDULED";
-
     case OperationState.OPERATION_STATE_WAITING_FOR_PERMISSIONS:
       return "OPERATION_STATE_WAITING_FOR_PERMISSIONS";
-
     case OperationState.OPERATION_STATE_RUNNING:
       return "OPERATION_STATE_RUNNING";
-
     case OperationState.OPERATION_STATE_SUCCEEDED:
       return "OPERATION_STATE_SUCCEEDED";
-
     case OperationState.OPERATION_STATE_FAILED:
       return "OPERATION_STATE_FAILED";
-
     case OperationState.OPERATION_STATE_CANCELLED:
       return "OPERATION_STATE_CANCELLED";
-
     case OperationState.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
-
 /** Describes a repository in which log entries are stored. */
 export interface LogBucket {
   /**
@@ -223,19 +183,15 @@ export interface LogBucket {
    * After a bucket has been created, the location cannot be changed.
    */
   name: string;
-
   /** Describes this bucket. */
   description: string;
-
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
   createTime?: Timestamp;
-
   /** Output only. The last update timestamp of the bucket. */
   updateTime?: Timestamp;
-
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
@@ -243,7 +199,6 @@ export interface LogBucket {
    * days will be used.
    */
   retentionDays: number;
-
   /**
    * Whether the bucket is locked.
    * 
@@ -251,10 +206,8 @@ export interface LogBucket {
    * may only be deleted if they are empty.
    */
   locked: boolean;
-
   /** Output only. The bucket lifecycle state. */
   lifecycleState: LifecycleState;
-
   /**
    * Log entry field paths that are denied access in this bucket.
    * 
@@ -265,7 +218,6 @@ export interface LogBucket {
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
   restrictedFields: string[];
-
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -275,7 +227,6 @@ export interface LogBucket {
    */
   cmekSettings?: CmekSettings;
 }
-
 /** Describes a view over log entries in a bucket. */
 export interface LogView {
   /**
@@ -286,16 +237,12 @@ export interface LogView {
    *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
   name: string;
-
   /** Describes this view. */
   description: string;
-
   /** Output only. The creation timestamp of the view. */
   createTime?: Timestamp;
-
   /** Output only. The last update timestamp of the view. */
   updateTime?: Timestamp;
-
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -314,7 +261,6 @@ export interface LogView {
    */
   filter: string;
 }
-
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -332,7 +278,6 @@ export interface LogSink {
    * First character has to be alphanumeric.
    */
   name: string;
-
   /**
    * Required. The export destination:
    * 
@@ -347,7 +292,6 @@ export interface LogSink {
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
   destination: string;
-
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
@@ -359,20 +303,17 @@ export interface LogSink {
    *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
   filter: string;
-
   /**
    * Optional. A description of this sink.
    * 
    * The maximum length of the description is 8000 characters.
    */
   description: string;
-
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
   disabled: boolean;
-
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
    * 
@@ -380,12 +321,9 @@ export interface LogSink {
    * it will not be exported.
    */
   exclusions: LogExclusion[];
-
   /** Deprecated. This field is unused. */
-
   /** @deprecated */
   outputVersionFormat: LogSink_VersionFormat;
-
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -406,7 +344,6 @@ export interface LogSink {
    * required.
    */
   writerIdentity: string;
-
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -427,17 +364,14 @@ export interface LogSink {
    *   resource.type=gce_instance
    */
   includeChildren: boolean;
-
   /** Optional. Options that affect sinks exporting data to BigQuery. */
   bigqueryOptions?: BigQueryOptions;
-
   /**
    * Output only. The creation timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
   createTime?: Timestamp;
-
   /**
    * Output only. The last update timestamp of the sink.
    * 
@@ -445,7 +379,6 @@ export interface LogSink {
    */
   updateTime?: Timestamp;
 }
-
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptions {
   /**
@@ -459,7 +392,6 @@ export interface BigQueryOptions {
    * timezone.
    */
   usePartitionedTables: boolean;
-
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
@@ -471,7 +403,6 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
-
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequest {
   /**
@@ -487,7 +418,6 @@ export interface ListBucketsRequest {
    * buckets.
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
@@ -495,7 +425,6 @@ export interface ListBucketsRequest {
    * identical to those in the previous call.
    */
   pageToken: string;
-
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
@@ -503,12 +432,10 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
-
 /** The response from ListBuckets. */
 export interface ListBucketsResponse {
   /** A list of buckets. */
   buckets: LogBucket[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -516,7 +443,6 @@ export interface ListBucketsResponse {
    */
   nextPageToken: string;
 }
-
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequest {
   /**
@@ -529,14 +455,12 @@ export interface CreateBucketRequest {
    *   `"projects/my-project/locations/global"`
    */
   parent: string;
-
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
   bucketId: string;
-
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
@@ -544,7 +468,6 @@ export interface CreateBucketRequest {
    */
   bucket?: LogBucket;
 }
-
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequest {
   /**
@@ -560,10 +483,8 @@ export interface UpdateBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-
   /** Required. The updated bucket. */
   bucket?: LogBucket;
-
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
    * bucket field will be overwritten if, and only if, it is in the update mask.
@@ -576,7 +497,6 @@ export interface UpdateBucketRequest {
    */
   updateMask?: FieldMask;
 }
-
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequest {
   /**
@@ -593,7 +513,6 @@ export interface GetBucketRequest {
    */
   name: string;
 }
-
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequest {
   /**
@@ -610,7 +529,6 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
-
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequest {
   /**
@@ -627,7 +545,6 @@ export interface UndeleteBucketRequest {
    */
   name: string;
 }
-
 /** The parameters to `ListViews`. */
 export interface ListViewsRequest {
   /**
@@ -636,7 +553,6 @@ export interface ListViewsRequest {
    *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
@@ -644,7 +560,6 @@ export interface ListViewsRequest {
    * identical to those in the previous call.
    */
   pageToken: string;
-
   /**
    * Optional. The maximum number of results to return from this request.
    * 
@@ -653,12 +568,10 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
-
 /** The response from ListViews. */
 export interface ListViewsResponse {
   /** A list of views. */
   views: LogView[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -666,7 +579,6 @@ export interface ListViewsResponse {
    */
   nextPageToken: string;
 }
-
 /** The parameters to `CreateView`. */
 export interface CreateViewRequest {
   /**
@@ -679,14 +591,11 @@ export interface CreateViewRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   parent: string;
-
   /** Required. The id to use for this view. */
   viewId: string;
-
   /** Required. The new view. */
   view?: LogView;
 }
-
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequest {
   /**
@@ -699,10 +608,8 @@ export interface UpdateViewRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-
   /** Required. The updated view. */
   view?: LogView;
-
   /**
    * Optional. Field mask that specifies the fields in `view` that need
    * an update. A field will be overwritten if, and only if, it is
@@ -715,7 +622,6 @@ export interface UpdateViewRequest {
    */
   updateMask?: FieldMask;
 }
-
 /** The parameters to `GetView`. */
 export interface GetViewRequest {
   /**
@@ -729,7 +635,6 @@ export interface GetViewRequest {
    */
   name: string;
 }
-
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequest {
   /**
@@ -743,7 +648,6 @@ export interface DeleteViewRequest {
    */
   name: string;
 }
-
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequest {
   /**
@@ -755,7 +659,6 @@ export interface ListSinksRequest {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
@@ -763,7 +666,6 @@ export interface ListSinksRequest {
    * parameters should be identical to those in the previous call.
    */
   pageToken: string;
-
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
@@ -771,12 +673,10 @@ export interface ListSinksRequest {
    */
   pageSize: number;
 }
-
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponse {
   /** A list of sinks. */
   sinks: LogSink[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -784,7 +684,6 @@ export interface ListSinksResponse {
    */
   nextPageToken: string;
 }
-
 /** The parameters to `GetSink`. */
 export interface GetSinkRequest {
   /**
@@ -801,7 +700,6 @@ export interface GetSinkRequest {
    */
   sinkName: string;
 }
-
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequest {
   /**
@@ -818,13 +716,11 @@ export interface CreateSinkRequest {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
   sink?: LogSink;
-
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
    * in the new sink. If this value is omitted or set to false, and if the
@@ -840,7 +736,6 @@ export interface CreateSinkRequest {
    */
   uniqueWriterIdentity: boolean;
 }
-
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequest {
   /**
@@ -857,13 +752,11 @@ export interface UpdateSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
-
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
   sink?: LogSink;
-
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
    * for a description of this field. When updating a sink, the effect of this
@@ -878,7 +771,6 @@ export interface UpdateSinkRequest {
    *     set to false or defaulted to false.
    */
   uniqueWriterIdentity: boolean;
-
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
@@ -899,7 +791,6 @@ export interface UpdateSinkRequest {
    */
   updateMask?: FieldMask;
 }
-
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequest {
   /**
@@ -917,7 +808,6 @@ export interface DeleteSinkRequest {
    */
   sinkName: string;
 }
-
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -933,10 +823,8 @@ export interface LogExclusion {
    * alphanumeric.
    */
   name: string;
-
   /** Optional. A description of this exclusion. */
   description: string;
-
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
@@ -950,7 +838,6 @@ export interface LogExclusion {
    *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
   filter: string;
-
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
@@ -958,14 +845,12 @@ export interface LogExclusion {
    * value of this field.
    */
   disabled: boolean;
-
   /**
    * Output only. The creation timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
   createTime?: Timestamp;
-
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
@@ -973,7 +858,6 @@ export interface LogExclusion {
    */
   updateTime?: Timestamp;
 }
-
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequest {
   /**
@@ -985,7 +869,6 @@ export interface ListExclusionsRequest {
    *     "folders/[FOLDER_ID]"
    */
   parent: string;
-
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
@@ -993,7 +876,6 @@ export interface ListExclusionsRequest {
    * parameters should be identical to those in the previous call.
    */
   pageToken: string;
-
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
@@ -1001,12 +883,10 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
-
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponse {
   /** A list of exclusions. */
   exclusions: LogExclusion[];
-
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
@@ -1014,7 +894,6 @@ export interface ListExclusionsResponse {
    */
   nextPageToken: string;
 }
-
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequest {
   /**
@@ -1031,7 +910,6 @@ export interface GetExclusionRequest {
    */
   name: string;
 }
-
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequest {
   /**
@@ -1048,14 +926,12 @@ export interface CreateExclusionRequest {
    *   `"organizations/123456789"`
    */
   parent: string;
-
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
   exclusion?: LogExclusion;
 }
-
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequest {
   /**
@@ -1071,13 +947,11 @@ export interface UpdateExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
   exclusion?: LogExclusion;
-
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
    * for the fields are taken from the corresponding fields in the
@@ -1089,7 +963,6 @@ export interface UpdateExclusionRequest {
    */
   updateMask?: FieldMask;
 }
-
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequest {
   /**
@@ -1106,7 +979,6 @@ export interface DeleteExclusionRequest {
    */
   name: string;
 }
-
 /**
  * The parameters to
  * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
@@ -1135,7 +1007,6 @@ export interface GetCmekSettingsRequest {
    */
   name: string;
 }
-
 /**
  * The parameters to
  * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
@@ -1162,7 +1033,6 @@ export interface UpdateCmekSettingsRequest {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The CMEK settings to update.
    * 
@@ -1171,7 +1041,6 @@ export interface UpdateCmekSettingsRequest {
    * for more information.
    */
   cmekSettings?: CmekSettings;
-
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -1183,7 +1052,6 @@ export interface UpdateCmekSettingsRequest {
    */
   updateMask?: FieldMask;
 }
-
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -1199,7 +1067,6 @@ export interface UpdateCmekSettingsRequest {
 export interface CmekSettings {
   /** Output only. The resource name of the CMEK settings. */
   name: string;
-
   /**
    * The resource name for the configured Cloud KMS key.
    * 
@@ -1231,7 +1098,6 @@ export interface CmekSettings {
    * for more information.
    */
   kmsKeyName: string;
-
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -1248,7 +1114,6 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
-
 /**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
@@ -1277,7 +1142,6 @@ export interface GetSettingsRequest {
    */
   name: string;
 }
-
 /**
  * The parameters to
  * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
@@ -1301,7 +1165,6 @@ export interface UpdateSettingsRequest {
    * folders in the Google Cloud organization.
    */
   name: string;
-
   /**
    * Required. The settings to update.
    * 
@@ -1310,7 +1173,6 @@ export interface UpdateSettingsRequest {
    * for more information.
    */
   settings?: Settings;
-
   /**
    * Optional. Field mask identifying which fields from `settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -1322,7 +1184,6 @@ export interface UpdateSettingsRequest {
    */
   updateMask?: FieldMask;
 }
-
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
@@ -1330,7 +1191,6 @@ export interface UpdateSettingsRequest {
 export interface Settings {
   /** Output only. The resource name of the settings. */
   name: string;
-
   /**
    * Optional. The resource name for the configured Cloud KMS key.
    * 
@@ -1361,7 +1221,6 @@ export interface Settings {
    * for more information.
    */
   kmsKeyName: string;
-
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -1377,14 +1236,12 @@ export interface Settings {
    * for more information.
    */
   kmsServiceAccountId: string;
-
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
   storageLocation: string;
-
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
@@ -1393,7 +1250,6 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
-
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequest {
   /**
@@ -1404,37 +1260,28 @@ export interface CopyLogEntriesRequest {
    *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
   name: string;
-
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
   filter: string;
-
   /** Required. Destination to which to copy log entries. */
   destination: string;
 }
-
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadata {
   /** The create time of an operation. */
   startTime?: Timestamp;
-
   /** The end time of an operation. */
   endTime?: Timestamp;
-
   /** State of an operation. */
   state: OperationState;
-
   /** Identifies whether the user has requested cancellation of the operation. */
   cancellationRequested: boolean;
-
   /** CopyLogEntries RPC request. */
   request?: CopyLogEntriesRequest;
-
   /** Estimated progress of the operation (0 - 100%). */
   progress: number;
-
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
@@ -1446,13 +1293,11 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
-
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
 }
-
 function createBaseLogBucket(): LogBucket {
   return {
     name: "",
@@ -1466,102 +1311,78 @@ function createBaseLogBucket(): LogBucket {
     cmekSettings: undefined
   };
 }
-
 export const LogBucket = {
   encode(message: LogBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-
     if (message.createTime !== undefined) {
       Timestamp.encode(message.createTime, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.updateTime !== undefined) {
       Timestamp.encode(message.updateTime, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.retentionDays !== 0) {
       writer.uint32(88).int32(message.retentionDays);
     }
-
     if (message.locked === true) {
       writer.uint32(72).bool(message.locked);
     }
-
     if (message.lifecycleState !== 0) {
       writer.uint32(96).int32(message.lifecycleState);
     }
-
     for (const v of message.restrictedFields) {
       writer.uint32(122).string(v!);
     }
-
     if (message.cmekSettings !== undefined) {
       CmekSettings.encode(message.cmekSettings, writer.uint32(154).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 3:
           message.description = reader.string();
           break;
-
         case 4:
           message.createTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.updateTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 11:
           message.retentionDays = reader.int32();
           break;
-
         case 9:
           message.locked = reader.bool();
           break;
-
         case 12:
           message.lifecycleState = (reader.int32() as any);
           break;
-
         case 15:
           message.restrictedFields.push(reader.string());
           break;
-
         case 19:
           message.cmekSettings = CmekSettings.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LogBucket {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -1575,7 +1396,6 @@ export const LogBucket = {
       cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
     };
   },
-
   toJSON(message: LogBucket): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -1585,17 +1405,14 @@ export const LogBucket = {
     message.retentionDays !== undefined && (obj.retentionDays = Math.round(message.retentionDays));
     message.locked !== undefined && (obj.locked = message.locked);
     message.lifecycleState !== undefined && (obj.lifecycleState = lifecycleStateToJSON(message.lifecycleState));
-
     if (message.restrictedFields) {
       obj.restrictedFields = message.restrictedFields.map(e => e);
     } else {
       obj.restrictedFields = [];
     }
-
     message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<LogBucket>): LogBucket {
     const message = createBaseLogBucket();
     message.name = object.name ?? "";
@@ -1609,9 +1426,7 @@ export const LogBucket = {
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     return message;
   }
-
 };
-
 function createBaseLogView(): LogView {
   return {
     name: "",
@@ -1621,70 +1436,54 @@ function createBaseLogView(): LogView {
     filter: ""
   };
 }
-
 export const LogView = {
   encode(message: LogView, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-
     if (message.createTime !== undefined) {
       Timestamp.encode(message.createTime, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.updateTime !== undefined) {
       Timestamp.encode(message.updateTime, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.filter !== "") {
       writer.uint32(58).string(message.filter);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LogView {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 3:
           message.description = reader.string();
           break;
-
         case 4:
           message.createTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.updateTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.filter = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LogView {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -1694,7 +1493,6 @@ export const LogView = {
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
-
   toJSON(message: LogView): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -1704,7 +1502,6 @@ export const LogView = {
     message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   },
-
   fromPartial(object: DeepPartial<LogView>): LogView {
     const message = createBaseLogView();
     message.name = object.name ?? "";
@@ -1714,9 +1511,7 @@ export const LogView = {
     message.filter = object.filter ?? "";
     return message;
   }
-
 };
-
 function createBaseLogSink(): LogSink {
   return {
     name: "",
@@ -1733,126 +1528,96 @@ function createBaseLogSink(): LogSink {
     updateTime: undefined
   };
 }
-
 export const LogSink = {
   encode(message: LogSink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.destination !== "") {
       writer.uint32(26).string(message.destination);
     }
-
     if (message.filter !== "") {
       writer.uint32(42).string(message.filter);
     }
-
     if (message.description !== "") {
       writer.uint32(146).string(message.description);
     }
-
     if (message.disabled === true) {
       writer.uint32(152).bool(message.disabled);
     }
-
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(130).fork()).ldelim();
     }
-
     if (message.outputVersionFormat !== 0) {
       writer.uint32(48).int32(message.outputVersionFormat);
     }
-
     if (message.writerIdentity !== "") {
       writer.uint32(66).string(message.writerIdentity);
     }
-
     if (message.includeChildren === true) {
       writer.uint32(72).bool(message.includeChildren);
     }
-
     if (message.bigqueryOptions !== undefined) {
       BigQueryOptions.encode(message.bigqueryOptions, writer.uint32(98).fork()).ldelim();
     }
-
     if (message.createTime !== undefined) {
       Timestamp.encode(message.createTime, writer.uint32(106).fork()).ldelim();
     }
-
     if (message.updateTime !== undefined) {
       Timestamp.encode(message.updateTime, writer.uint32(114).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LogSink {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 3:
           message.destination = reader.string();
           break;
-
         case 5:
           message.filter = reader.string();
           break;
-
         case 18:
           message.description = reader.string();
           break;
-
         case 19:
           message.disabled = reader.bool();
           break;
-
         case 16:
           message.exclusions.push(LogExclusion.decode(reader, reader.uint32()));
           break;
-
         case 6:
           message.outputVersionFormat = (reader.int32() as any);
           break;
-
         case 8:
           message.writerIdentity = reader.string();
           break;
-
         case 9:
           message.includeChildren = reader.bool();
           break;
-
         case 12:
           message.bigqueryOptions = BigQueryOptions.decode(reader, reader.uint32());
           break;
-
         case 13:
           message.createTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 14:
           message.updateTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LogSink {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -1869,7 +1634,6 @@ export const LogSink = {
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
     };
   },
-
   toJSON(message: LogSink): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -1877,13 +1641,11 @@ export const LogSink = {
     message.filter !== undefined && (obj.filter = message.filter);
     message.description !== undefined && (obj.description = message.description);
     message.disabled !== undefined && (obj.disabled = message.disabled);
-
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toJSON(e) : undefined);
     } else {
       obj.exclusions = [];
     }
-
     message.outputVersionFormat !== undefined && (obj.outputVersionFormat = logSink_VersionFormatToJSON(message.outputVersionFormat));
     message.writerIdentity !== undefined && (obj.writerIdentity = message.writerIdentity);
     message.includeChildren !== undefined && (obj.includeChildren = message.includeChildren);
@@ -1892,7 +1654,6 @@ export const LogSink = {
     message.updateTime !== undefined && (obj.updateTime = fromTimestamp(message.updateTime).toISOString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<LogSink>): LogSink {
     const message = createBaseLogSink();
     message.name = object.name ?? "";
@@ -1909,78 +1670,62 @@ export const LogSink = {
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     return message;
   }
-
 };
-
 function createBaseBigQueryOptions(): BigQueryOptions {
   return {
     usePartitionedTables: false,
     usesTimestampColumnPartitioning: false
   };
 }
-
 export const BigQueryOptions = {
   encode(message: BigQueryOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
-
     if (message.usesTimestampColumnPartitioning === true) {
       writer.uint32(24).bool(message.usesTimestampColumnPartitioning);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): BigQueryOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBigQueryOptions();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.usePartitionedTables = reader.bool();
           break;
-
         case 3:
           message.usesTimestampColumnPartitioning = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): BigQueryOptions {
     return {
       usePartitionedTables: isSet(object.usePartitionedTables) ? Boolean(object.usePartitionedTables) : false,
       usesTimestampColumnPartitioning: isSet(object.usesTimestampColumnPartitioning) ? Boolean(object.usesTimestampColumnPartitioning) : false
     };
   },
-
   toJSON(message: BigQueryOptions): unknown {
     const obj: any = {};
     message.usePartitionedTables !== undefined && (obj.usePartitionedTables = message.usePartitionedTables);
     message.usesTimestampColumnPartitioning !== undefined && (obj.usesTimestampColumnPartitioning = message.usesTimestampColumnPartitioning);
     return obj;
   },
-
   fromPartial(object: DeepPartial<BigQueryOptions>): BigQueryOptions {
     const message = createBaseBigQueryOptions();
     message.usePartitionedTables = object.usePartitionedTables ?? false;
     message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
     return message;
   }
-
 };
-
 function createBaseListBucketsRequest(): ListBucketsRequest {
   return {
     parent: "",
@@ -1988,54 +1733,42 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
     pageSize: 0
   };
 }
-
 export const ListBucketsRequest = {
   encode(message: ListBucketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-
     if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.pageToken = reader.string();
           break;
-
         case 3:
           message.pageSize = reader.int32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListBucketsRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -2043,7 +1776,6 @@ export const ListBucketsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-
   toJSON(message: ListBucketsRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -2051,7 +1783,6 @@ export const ListBucketsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListBucketsRequest>): ListBucketsRequest {
     const message = createBaseListBucketsRequest();
     message.parent = object.parent ?? "";
@@ -2059,84 +1790,66 @@ export const ListBucketsRequest = {
     message.pageSize = object.pageSize ?? 0;
     return message;
   }
-
 };
-
 function createBaseListBucketsResponse(): ListBucketsResponse {
   return {
     buckets: [],
     nextPageToken: ""
   };
 }
-
 export const ListBucketsResponse = {
   encode(message: ListBucketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.buckets.push(LogBucket.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.nextPageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListBucketsResponse {
     return {
       buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromJSON(e)) : [],
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-
   toJSON(message: ListBucketsResponse): unknown {
     const obj: any = {};
-
     if (message.buckets) {
       obj.buckets = message.buckets.map(e => e ? LogBucket.toJSON(e) : undefined);
     } else {
       obj.buckets = [];
     }
-
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListBucketsResponse>): ListBucketsResponse {
     const message = createBaseListBucketsResponse();
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseCreateBucketRequest(): CreateBucketRequest {
   return {
     parent: "",
@@ -2144,54 +1857,42 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
     bucket: undefined
   };
 }
-
 export const CreateBucketRequest = {
   encode(message: CreateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.bucketId !== "") {
       writer.uint32(18).string(message.bucketId);
     }
-
     if (message.bucket !== undefined) {
       LogBucket.encode(message.bucket, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateBucketRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.bucketId = reader.string();
           break;
-
         case 3:
           message.bucket = LogBucket.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CreateBucketRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -2199,7 +1900,6 @@ export const CreateBucketRequest = {
       bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined
     };
   },
-
   toJSON(message: CreateBucketRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -2207,7 +1907,6 @@ export const CreateBucketRequest = {
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CreateBucketRequest>): CreateBucketRequest {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
@@ -2215,9 +1914,7 @@ export const CreateBucketRequest = {
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
     return message;
   }
-
 };
-
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   return {
     name: "",
@@ -2225,54 +1922,42 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateBucketRequest = {
   encode(message: UpdateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.bucket !== undefined) {
       LogBucket.encode(message.bucket, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateBucketRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.bucket = LogBucket.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateBucketRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -2280,7 +1965,6 @@ export const UpdateBucketRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateBucketRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -2288,7 +1972,6 @@ export const UpdateBucketRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
@@ -2296,180 +1979,142 @@ export const UpdateBucketRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseGetBucketRequest(): GetBucketRequest {
   return {
     name: ""
   };
 }
-
 export const GetBucketRequest = {
   encode(message: GetBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBucketRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetBucketRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetBucketRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetBucketRequest>): GetBucketRequest {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseDeleteBucketRequest(): DeleteBucketRequest {
   return {
     name: ""
   };
 }
-
 export const DeleteBucketRequest = {
   encode(message: DeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteBucketRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DeleteBucketRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: DeleteBucketRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DeleteBucketRequest>): DeleteBucketRequest {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
   return {
     name: ""
   };
 }
-
 export const UndeleteBucketRequest = {
   encode(message: UndeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UndeleteBucketRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteBucketRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UndeleteBucketRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: UndeleteBucketRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UndeleteBucketRequest>): UndeleteBucketRequest {
     const message = createBaseUndeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseListViewsRequest(): ListViewsRequest {
   return {
     parent: "",
@@ -2477,54 +2122,42 @@ function createBaseListViewsRequest(): ListViewsRequest {
     pageSize: 0
   };
 }
-
 export const ListViewsRequest = {
   encode(message: ListViewsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-
     if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.pageToken = reader.string();
           break;
-
         case 3:
           message.pageSize = reader.int32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListViewsRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -2532,7 +2165,6 @@ export const ListViewsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-
   toJSON(message: ListViewsRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -2540,7 +2172,6 @@ export const ListViewsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListViewsRequest>): ListViewsRequest {
     const message = createBaseListViewsRequest();
     message.parent = object.parent ?? "";
@@ -2548,84 +2179,66 @@ export const ListViewsRequest = {
     message.pageSize = object.pageSize ?? 0;
     return message;
   }
-
 };
-
 function createBaseListViewsResponse(): ListViewsResponse {
   return {
     views: [],
     nextPageToken: ""
   };
 }
-
 export const ListViewsResponse = {
   encode(message: ListViewsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.views.push(LogView.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.nextPageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListViewsResponse {
     return {
       views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromJSON(e)) : [],
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-
   toJSON(message: ListViewsResponse): unknown {
     const obj: any = {};
-
     if (message.views) {
       obj.views = message.views.map(e => e ? LogView.toJSON(e) : undefined);
     } else {
       obj.views = [];
     }
-
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListViewsResponse>): ListViewsResponse {
     const message = createBaseListViewsResponse();
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseCreateViewRequest(): CreateViewRequest {
   return {
     parent: "",
@@ -2633,54 +2246,42 @@ function createBaseCreateViewRequest(): CreateViewRequest {
     view: undefined
   };
 }
-
 export const CreateViewRequest = {
   encode(message: CreateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.viewId !== "") {
       writer.uint32(18).string(message.viewId);
     }
-
     if (message.view !== undefined) {
       LogView.encode(message.view, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateViewRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.viewId = reader.string();
           break;
-
         case 3:
           message.view = LogView.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CreateViewRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -2688,7 +2289,6 @@ export const CreateViewRequest = {
       view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined
     };
   },
-
   toJSON(message: CreateViewRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -2696,7 +2296,6 @@ export const CreateViewRequest = {
     message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CreateViewRequest>): CreateViewRequest {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
@@ -2704,9 +2303,7 @@ export const CreateViewRequest = {
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
     return message;
   }
-
 };
-
 function createBaseUpdateViewRequest(): UpdateViewRequest {
   return {
     name: "",
@@ -2714,54 +2311,42 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateViewRequest = {
   encode(message: UpdateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.view !== undefined) {
       LogView.encode(message.view, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateViewRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.view = LogView.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateViewRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -2769,7 +2354,6 @@ export const UpdateViewRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateViewRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -2777,7 +2361,6 @@ export const UpdateViewRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
@@ -2785,123 +2368,97 @@ export const UpdateViewRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseGetViewRequest(): GetViewRequest {
   return {
     name: ""
   };
 }
-
 export const GetViewRequest = {
   encode(message: GetViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetViewRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetViewRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetViewRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetViewRequest>): GetViewRequest {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseDeleteViewRequest(): DeleteViewRequest {
   return {
     name: ""
   };
 }
-
 export const DeleteViewRequest = {
   encode(message: DeleteViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteViewRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteViewRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DeleteViewRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: DeleteViewRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DeleteViewRequest>): DeleteViewRequest {
     const message = createBaseDeleteViewRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseListSinksRequest(): ListSinksRequest {
   return {
     parent: "",
@@ -2909,54 +2466,42 @@ function createBaseListSinksRequest(): ListSinksRequest {
     pageSize: 0
   };
 }
-
 export const ListSinksRequest = {
   encode(message: ListSinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-
     if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.pageToken = reader.string();
           break;
-
         case 3:
           message.pageSize = reader.int32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListSinksRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -2964,7 +2509,6 @@ export const ListSinksRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-
   toJSON(message: ListSinksRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -2972,7 +2516,6 @@ export const ListSinksRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListSinksRequest>): ListSinksRequest {
     const message = createBaseListSinksRequest();
     message.parent = object.parent ?? "";
@@ -2980,141 +2523,111 @@ export const ListSinksRequest = {
     message.pageSize = object.pageSize ?? 0;
     return message;
   }
-
 };
-
 function createBaseListSinksResponse(): ListSinksResponse {
   return {
     sinks: [],
     nextPageToken: ""
   };
 }
-
 export const ListSinksResponse = {
   encode(message: ListSinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sinks.push(LogSink.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.nextPageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListSinksResponse {
     return {
       sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromJSON(e)) : [],
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-
   toJSON(message: ListSinksResponse): unknown {
     const obj: any = {};
-
     if (message.sinks) {
       obj.sinks = message.sinks.map(e => e ? LogSink.toJSON(e) : undefined);
     } else {
       obj.sinks = [];
     }
-
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListSinksResponse>): ListSinksResponse {
     const message = createBaseListSinksResponse();
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseGetSinkRequest(): GetSinkRequest {
   return {
     sinkName: ""
   };
 }
-
 export const GetSinkRequest = {
   encode(message: GetSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSinkRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sinkName = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetSinkRequest {
     return {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
     };
   },
-
   toJSON(message: GetSinkRequest): unknown {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetSinkRequest>): GetSinkRequest {
     const message = createBaseGetSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
   }
-
 };
-
 function createBaseCreateSinkRequest(): CreateSinkRequest {
   return {
     parent: "",
@@ -3122,54 +2635,42 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
     uniqueWriterIdentity: false
   };
 }
-
 export const CreateSinkRequest = {
   encode(message: CreateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.uniqueWriterIdentity === true) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateSinkRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.sink = LogSink.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.uniqueWriterIdentity = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CreateSinkRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -3177,7 +2678,6 @@ export const CreateSinkRequest = {
       uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false
     };
   },
-
   toJSON(message: CreateSinkRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -3185,7 +2685,6 @@ export const CreateSinkRequest = {
     message.uniqueWriterIdentity !== undefined && (obj.uniqueWriterIdentity = message.uniqueWriterIdentity);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
@@ -3193,9 +2692,7 @@ export const CreateSinkRequest = {
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   }
-
 };
-
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   return {
     sinkName: "",
@@ -3204,62 +2701,48 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateSinkRequest = {
   encode(message: UpdateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
-
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.uniqueWriterIdentity === true) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSinkRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sinkName = reader.string();
           break;
-
         case 2:
           message.sink = LogSink.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.uniqueWriterIdentity = reader.bool();
           break;
-
         case 4:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateSinkRequest {
     return {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : "",
@@ -3268,7 +2751,6 @@ export const UpdateSinkRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateSinkRequest): unknown {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
@@ -3277,7 +2759,6 @@ export const UpdateSinkRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
@@ -3286,66 +2767,52 @@ export const UpdateSinkRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseDeleteSinkRequest(): DeleteSinkRequest {
   return {
     sinkName: ""
   };
 }
-
 export const DeleteSinkRequest = {
   encode(message: DeleteSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSinkRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sinkName = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DeleteSinkRequest {
     return {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
     };
   },
-
   toJSON(message: DeleteSinkRequest): unknown {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DeleteSinkRequest>): DeleteSinkRequest {
     const message = createBaseDeleteSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
   }
-
 };
-
 function createBaseLogExclusion(): LogExclusion {
   return {
     name: "",
@@ -3356,78 +2823,60 @@ function createBaseLogExclusion(): LogExclusion {
     updateTime: undefined
   };
 }
-
 export const LogExclusion = {
   encode(message: LogExclusion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-
     if (message.disabled === true) {
       writer.uint32(32).bool(message.disabled);
     }
-
     if (message.createTime !== undefined) {
       Timestamp.encode(message.createTime, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.updateTime !== undefined) {
       Timestamp.encode(message.updateTime, writer.uint32(50).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.filter = reader.string();
           break;
-
         case 4:
           message.disabled = reader.bool();
           break;
-
         case 5:
           message.createTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.updateTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LogExclusion {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -3438,7 +2887,6 @@ export const LogExclusion = {
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
     };
   },
-
   toJSON(message: LogExclusion): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -3449,7 +2897,6 @@ export const LogExclusion = {
     message.updateTime !== undefined && (obj.updateTime = fromTimestamp(message.updateTime).toISOString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<LogExclusion>): LogExclusion {
     const message = createBaseLogExclusion();
     message.name = object.name ?? "";
@@ -3460,9 +2907,7 @@ export const LogExclusion = {
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     return message;
   }
-
 };
-
 function createBaseListExclusionsRequest(): ListExclusionsRequest {
   return {
     parent: "",
@@ -3470,54 +2915,42 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
     pageSize: 0
   };
 }
-
 export const ListExclusionsRequest = {
   encode(message: ListExclusionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-
     if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.pageToken = reader.string();
           break;
-
         case 3:
           message.pageSize = reader.int32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListExclusionsRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
@@ -3525,7 +2958,6 @@ export const ListExclusionsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-
   toJSON(message: ListExclusionsRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
@@ -3533,7 +2965,6 @@ export const ListExclusionsRequest = {
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListExclusionsRequest>): ListExclusionsRequest {
     const message = createBaseListExclusionsRequest();
     message.parent = object.parent ?? "";
@@ -3541,210 +2972,166 @@ export const ListExclusionsRequest = {
     message.pageSize = object.pageSize ?? 0;
     return message;
   }
-
 };
-
 function createBaseListExclusionsResponse(): ListExclusionsResponse {
   return {
     exclusions: [],
     nextPageToken: ""
   };
 }
-
 export const ListExclusionsResponse = {
   encode(message: ListExclusionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.exclusions.push(LogExclusion.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.nextPageToken = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListExclusionsResponse {
     return {
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-
   toJSON(message: ListExclusionsResponse): unknown {
     const obj: any = {};
-
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toJSON(e) : undefined);
     } else {
       obj.exclusions = [];
     }
-
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListExclusionsResponse>): ListExclusionsResponse {
     const message = createBaseListExclusionsResponse();
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   }
-
 };
-
 function createBaseGetExclusionRequest(): GetExclusionRequest {
   return {
     name: ""
   };
 }
-
 export const GetExclusionRequest = {
   encode(message: GetExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetExclusionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetExclusionRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetExclusionRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetExclusionRequest>): GetExclusionRequest {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   return {
     parent: "",
     exclusion: undefined
   };
 }
-
 export const CreateExclusionRequest = {
   encode(message: CreateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-
     if (message.exclusion !== undefined) {
       LogExclusion.encode(message.exclusion, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateExclusionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.parent = reader.string();
           break;
-
         case 2:
           message.exclusion = LogExclusion.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CreateExclusionRequest {
     return {
       parent: isSet(object.parent) ? String(object.parent) : "",
       exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined
     };
   },
-
   toJSON(message: CreateExclusionRequest): unknown {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
     return message;
   }
-
 };
-
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   return {
     name: "",
@@ -3752,54 +3139,42 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateExclusionRequest = {
   encode(message: UpdateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.exclusion !== undefined) {
       LogExclusion.encode(message.exclusion, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateExclusionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.exclusion = LogExclusion.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateExclusionRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -3807,7 +3182,6 @@ export const UpdateExclusionRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateExclusionRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -3815,7 +3189,6 @@ export const UpdateExclusionRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
@@ -3823,123 +3196,97 @@ export const UpdateExclusionRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
   return {
     name: ""
   };
 }
-
 export const DeleteExclusionRequest = {
   encode(message: DeleteExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteExclusionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteExclusionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DeleteExclusionRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: DeleteExclusionRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<DeleteExclusionRequest>): DeleteExclusionRequest {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
   return {
     name: ""
   };
 }
-
 export const GetCmekSettingsRequest = {
   encode(message: GetCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetCmekSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCmekSettingsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetCmekSettingsRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetCmekSettingsRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
     const message = createBaseGetCmekSettingsRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   return {
     name: "",
@@ -3947,54 +3294,42 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateCmekSettingsRequest = {
   encode(message: UpdateCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.cmekSettings !== undefined) {
       CmekSettings.encode(message.cmekSettings, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateCmekSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateCmekSettingsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.cmekSettings = CmekSettings.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateCmekSettingsRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -4002,7 +3337,6 @@ export const UpdateCmekSettingsRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateCmekSettingsRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -4010,7 +3344,6 @@ export const UpdateCmekSettingsRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
@@ -4018,9 +3351,7 @@ export const UpdateCmekSettingsRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseCmekSettings(): CmekSettings {
   return {
     name: "",
@@ -4028,54 +3359,42 @@ function createBaseCmekSettings(): CmekSettings {
     serviceAccountId: ""
   };
 }
-
 export const CmekSettings = {
   encode(message: CmekSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.kmsKeyName !== "") {
       writer.uint32(18).string(message.kmsKeyName);
     }
-
     if (message.serviceAccountId !== "") {
       writer.uint32(26).string(message.serviceAccountId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.kmsKeyName = reader.string();
           break;
-
         case 3:
           message.serviceAccountId = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CmekSettings {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -4083,7 +3402,6 @@ export const CmekSettings = {
       serviceAccountId: isSet(object.serviceAccountId) ? String(object.serviceAccountId) : ""
     };
   },
-
   toJSON(message: CmekSettings): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -4091,7 +3409,6 @@ export const CmekSettings = {
     message.serviceAccountId !== undefined && (obj.serviceAccountId = message.serviceAccountId);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CmekSettings>): CmekSettings {
     const message = createBaseCmekSettings();
     message.name = object.name ?? "";
@@ -4099,66 +3416,52 @@ export const CmekSettings = {
     message.serviceAccountId = object.serviceAccountId ?? "";
     return message;
   }
-
 };
-
 function createBaseGetSettingsRequest(): GetSettingsRequest {
   return {
     name: ""
   };
 }
-
 export const GetSettingsRequest = {
   encode(message: GetSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GetSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSettingsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GetSettingsRequest {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: GetSettingsRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<GetSettingsRequest>): GetSettingsRequest {
     const message = createBaseGetSettingsRequest();
     message.name = object.name ?? "";
     return message;
   }
-
 };
-
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   return {
     name: "",
@@ -4166,54 +3469,42 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
     updateMask: undefined
   };
 }
-
 export const UpdateSettingsRequest = {
   encode(message: UpdateSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.settings !== undefined) {
       Settings.encode(message.settings, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.updateMask !== undefined) {
       FieldMask.encode(message.updateMask, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateSettingsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSettingsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.settings = Settings.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.updateMask = FieldMask.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UpdateSettingsRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -4221,7 +3512,6 @@ export const UpdateSettingsRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-
   toJSON(message: UpdateSettingsRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -4229,7 +3519,6 @@ export const UpdateSettingsRequest = {
     message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
@@ -4237,9 +3526,7 @@ export const UpdateSettingsRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
   }
-
 };
-
 function createBaseSettings(): Settings {
   return {
     name: "",
@@ -4249,70 +3536,54 @@ function createBaseSettings(): Settings {
     disableDefaultSink: false
   };
 }
-
 export const Settings = {
   encode(message: Settings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.kmsKeyName !== "") {
       writer.uint32(18).string(message.kmsKeyName);
     }
-
     if (message.kmsServiceAccountId !== "") {
       writer.uint32(26).string(message.kmsServiceAccountId);
     }
-
     if (message.storageLocation !== "") {
       writer.uint32(34).string(message.storageLocation);
     }
-
     if (message.disableDefaultSink === true) {
       writer.uint32(40).bool(message.disableDefaultSink);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Settings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.kmsKeyName = reader.string();
           break;
-
         case 3:
           message.kmsServiceAccountId = reader.string();
           break;
-
         case 4:
           message.storageLocation = reader.string();
           break;
-
         case 5:
           message.disableDefaultSink = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Settings {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -4322,7 +3593,6 @@ export const Settings = {
       disableDefaultSink: isSet(object.disableDefaultSink) ? Boolean(object.disableDefaultSink) : false
     };
   },
-
   toJSON(message: Settings): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -4332,7 +3602,6 @@ export const Settings = {
     message.disableDefaultSink !== undefined && (obj.disableDefaultSink = message.disableDefaultSink);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Settings>): Settings {
     const message = createBaseSettings();
     message.name = object.name ?? "";
@@ -4342,9 +3611,7 @@ export const Settings = {
     message.disableDefaultSink = object.disableDefaultSink ?? false;
     return message;
   }
-
 };
-
 function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
   return {
     name: "",
@@ -4352,54 +3619,42 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
     destination: ""
   };
 }
-
 export const CopyLogEntriesRequest = {
   encode(message: CopyLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-
     if (message.destination !== "") {
       writer.uint32(34).string(message.destination);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 3:
           message.filter = reader.string();
           break;
-
         case 4:
           message.destination = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CopyLogEntriesRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -4407,7 +3662,6 @@ export const CopyLogEntriesRequest = {
       destination: isSet(object.destination) ? String(object.destination) : ""
     };
   },
-
   toJSON(message: CopyLogEntriesRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -4415,7 +3669,6 @@ export const CopyLogEntriesRequest = {
     message.destination !== undefined && (obj.destination = message.destination);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
     const message = createBaseCopyLogEntriesRequest();
     message.name = object.name ?? "";
@@ -4423,9 +3676,7 @@ export const CopyLogEntriesRequest = {
     message.destination = object.destination ?? "";
     return message;
   }
-
 };
-
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
     startTime: undefined,
@@ -4437,86 +3688,66 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
     writerIdentity: ""
   };
 }
-
 export const CopyLogEntriesMetadata = {
   encode(message: CopyLogEntriesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) {
       Timestamp.encode(message.startTime, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.endTime !== undefined) {
       Timestamp.encode(message.endTime, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.state !== 0) {
       writer.uint32(24).int32(message.state);
     }
-
     if (message.cancellationRequested === true) {
       writer.uint32(32).bool(message.cancellationRequested);
     }
-
     if (message.request !== undefined) {
       CopyLogEntriesRequest.encode(message.request, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.progress !== 0) {
       writer.uint32(48).int32(message.progress);
     }
-
     if (message.writerIdentity !== "") {
       writer.uint32(58).string(message.writerIdentity);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesMetadata();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.startTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.endTime = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.state = (reader.int32() as any);
           break;
-
         case 4:
           message.cancellationRequested = reader.bool();
           break;
-
         case 5:
           message.request = CopyLogEntriesRequest.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.progress = reader.int32();
           break;
-
         case 7:
           message.writerIdentity = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CopyLogEntriesMetadata {
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
@@ -4528,7 +3759,6 @@ export const CopyLogEntriesMetadata = {
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : ""
     };
   },
-
   toJSON(message: CopyLogEntriesMetadata): unknown {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
@@ -4540,7 +3770,6 @@ export const CopyLogEntriesMetadata = {
     message.writerIdentity !== undefined && (obj.writerIdentity = message.writerIdentity);
     return obj;
   },
-
   fromPartial(object: DeepPartial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
@@ -4552,62 +3781,49 @@ export const CopyLogEntriesMetadata = {
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
   }
-
 };
-
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
   return {
     logEntriesCopiedCount: Long.ZERO
   };
 }
-
 export const CopyLogEntriesResponse = {
   encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.logEntriesCopiedCount.isZero()) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CopyLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.logEntriesCopiedCount = (reader.int64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CopyLogEntriesResponse {
     return {
       logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO
     };
   },
-
   toJSON(message: CopyLogEntriesResponse): unknown {
     const obj: any = {};
     message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
     message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;
   }
-
 };

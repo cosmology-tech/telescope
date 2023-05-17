@@ -5,18 +5,20 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoR
 export class Query {
   /** EpochInfos provide running epochInfos */
   static EpochInfos(request: QueryEpochsInfoRequest, initRequest?: fm.InitReq): Promise<QueryEpochsInfoResponse> {
-    return fm.fetchReq(`/evmos/epochs/v1/epochs?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/evmos/epochs/v1/epochs?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
   /** CurrentEpoch provide current epoch of specified identifier */
   static CurrentEpoch(request: QueryCurrentEpochRequest, initRequest?: fm.InitReq): Promise<QueryCurrentEpochResponse> {
-    return fm.fetchReq(`/evmos/epochs/v1/current_epoch?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/evmos/epochs/v1/current_epoch?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

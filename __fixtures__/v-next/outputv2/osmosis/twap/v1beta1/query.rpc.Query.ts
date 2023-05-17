@@ -10,26 +10,21 @@ export interface Query {
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.params = this.params.bind(this);
     this.arithmeticTwap = this.arithmeticTwap.bind(this);
     this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
-
   params(request: DeepPartial<ParamsRequest> = {}, metadata?: grpc.Metadata): Promise<ParamsResponse> {
     return this.rpc.unary(ParamsDesc, ParamsRequest.fromPartial(request), metadata);
   }
-
   arithmeticTwap(request: DeepPartial<ArithmeticTwapRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapResponse> {
     return this.rpc.unary(ArithmeticTwapDesc, ArithmeticTwapRequest.fromPartial(request), metadata);
   }
-
   arithmeticTwapToNow(request: DeepPartial<ArithmeticTwapToNowRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapToNowResponse> {
     return this.rpc.unary(ArithmeticTwapToNowDesc, ArithmeticTwapToNowRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "osmosis.twap.v1beta1.Query"
@@ -43,19 +38,16 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ParamsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ParamsResponse.decode(data),
-
+      return {
+        ...ParamsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryArithmeticTwapDesc: UnaryMethodDefinitionish = {
@@ -67,19 +59,16 @@ export const QueryArithmeticTwapDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ArithmeticTwapRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ArithmeticTwapResponse.decode(data),
-
+      return {
+        ...ArithmeticTwapResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryArithmeticTwapToNowDesc: UnaryMethodDefinitionish = {
@@ -91,19 +80,16 @@ export const QueryArithmeticTwapToNowDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return ArithmeticTwapToNowRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...ArithmeticTwapToNowResponse.decode(data),
-
+      return {
+        ...ArithmeticTwapToNowResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -116,7 +102,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -125,12 +110,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -153,5 +139,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

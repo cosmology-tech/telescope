@@ -4,7 +4,6 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgSubmitEvidence, MsgSubmitEvidenceResponse } from "./tx";
 /** Msg defines the evidence Msg service. */
-
 export interface Msg {
   /**
    * SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or
@@ -14,16 +13,13 @@ export interface Msg {
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.submitEvidence = this.submitEvidence.bind(this);
   }
-
   submitEvidence(request: DeepPartial<MsgSubmitEvidence>, metadata?: grpc.Metadata): Promise<MsgSubmitEvidenceResponse> {
     return this.rpc.unary(MsgSubmitEvidenceDesc, MsgSubmitEvidence.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "cosmos.evidence.v1beta1.Msg"
@@ -37,19 +33,16 @@ export const MsgSubmitEvidenceDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgSubmitEvidence.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgSubmitEvidenceResponse.decode(data),
-
+      return {
+        ...MsgSubmitEvidenceResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -62,7 +55,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -71,12 +63,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -99,5 +92,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

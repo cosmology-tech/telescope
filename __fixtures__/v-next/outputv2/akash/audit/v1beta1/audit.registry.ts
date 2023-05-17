@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgSignProviderAttributes.encode(value).finish()
       };
     },
-
     deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
       return {
         typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value: MsgDeleteProviderAttributes.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     signProviderAttributes(value: MsgSignProviderAttributes) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
       return {
         typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value
       };
     }
-
   },
   toJSON: {
     signProviderAttributes(value: MsgSignProviderAttributes) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgSignProviderAttributes.toJSON(value)
       };
     },
-
     deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
       return {
         typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value: MsgDeleteProviderAttributes.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     signProviderAttributes(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgSignProviderAttributes.fromJSON(value)
       };
     },
-
     deleteProviderAttributes(value: any) {
       return {
         typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value: MsgDeleteProviderAttributes.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     signProviderAttributes(value: MsgSignProviderAttributes) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgSignProviderAttributes.fromPartial(value)
       };
     },
-
     deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
       return {
         typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value: MsgDeleteProviderAttributes.fromPartial(value)
       };
     }
-
   }
 };

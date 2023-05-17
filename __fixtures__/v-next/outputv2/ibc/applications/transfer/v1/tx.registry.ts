@@ -14,7 +14,6 @@ export const MessageComposer = {
         value: MsgTransfer.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     transfer(value: MsgTransfer) {
@@ -23,7 +22,6 @@ export const MessageComposer = {
         value
       };
     }
-
   },
   toJSON: {
     transfer(value: MsgTransfer) {
@@ -32,7 +30,6 @@ export const MessageComposer = {
         value: MsgTransfer.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     transfer(value: any) {
@@ -41,7 +38,6 @@ export const MessageComposer = {
         value: MsgTransfer.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     transfer(value: MsgTransfer) {
@@ -50,6 +46,5 @@ export const MessageComposer = {
         value: MsgTransfer.fromPartial(value)
       };
     }
-
   }
 };

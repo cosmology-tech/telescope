@@ -1,7 +1,7 @@
 import { GenericParseContext } from '../../encoding';
 import { buildExportCreators } from '../../utils';
 
-const CREATOR_NAME = 'createRpcQueryStores';
+const CREATOR_NAME = 'createRpcQueryMobxStores';
 
 export const createMobxQueryFactory = (context: GenericParseContext, obj: object) => {
     return buildExportCreators(

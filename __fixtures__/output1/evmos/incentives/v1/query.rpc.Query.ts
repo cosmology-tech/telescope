@@ -8,36 +8,28 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesResponse, QueryIncentivesResponseSDKType, QueryIncentiveRequest, QueryIncentiveRequestSDKType, QueryIncentiveResponse, QueryIncentiveResponseSDKType, QueryGasMetersRequest, QueryGasMetersRequestSDKType, QueryGasMetersResponse, QueryGasMetersResponseSDKType, QueryGasMeterRequest, QueryGasMeterRequestSDKType, QueryGasMeterResponse, QueryGasMeterResponseSDKType, QueryAllocationMetersRequest, QueryAllocationMetersRequestSDKType, QueryAllocationMetersResponse, QueryAllocationMetersResponseSDKType, QueryAllocationMeterRequest, QueryAllocationMeterRequestSDKType, QueryAllocationMeterResponse, QueryAllocationMeterResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Incentives retrieves registered incentives */
   incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse>;
-
   /** Incentive retrieves a registered incentive */
   incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse>;
-
   /** GasMeters retrieves active gas meters for a given contract */
   gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse>;
-
   /** GasMeter Retrieves a active gas meter */
   gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse>;
-
   /**
    * AllocationMeters retrieves active allocation meters for a given
    * denomination
    */
   allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse>;
-
   /** AllocationMeter Retrieves a active gas meter */
   allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse>;
-
   /** Params retrieves the incentives module params */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.incentives = this.incentives.bind(this);
@@ -48,7 +40,6 @@ export class QueryClientImpl implements Query {
     this.allocationMeter = this.allocationMeter.bind(this);
     this.params = this.params.bind(this);
   }
-
   incentives(request: QueryIncentivesRequest = {
     pagination: undefined
   }): Promise<QueryIncentivesResponse> {
@@ -56,25 +47,21 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentives", data);
     return promise.then(data => QueryIncentivesResponse.decode(new _m0.Reader(data)));
   }
-
   incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
     const data = QueryIncentiveRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentive", data);
     return promise.then(data => QueryIncentiveResponse.decode(new _m0.Reader(data)));
   }
-
   gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> {
     const data = QueryGasMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeters", data);
     return promise.then(data => QueryGasMetersResponse.decode(new _m0.Reader(data)));
   }
-
   gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
     const data = QueryGasMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeter", data);
     return promise.then(data => QueryGasMeterResponse.decode(new _m0.Reader(data)));
   }
-
   allocationMeters(request: QueryAllocationMetersRequest = {
     pagination: undefined
   }): Promise<QueryAllocationMetersResponse> {
@@ -82,19 +69,16 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeters", data);
     return promise.then(data => QueryAllocationMetersResponse.decode(new _m0.Reader(data)));
   }
-
   allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
     const data = QueryAllocationMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeter", data);
     return promise.then(data => QueryAllocationMeterResponse.decode(new _m0.Reader(data)));
   }
-
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -103,31 +87,24 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse> {
       return queryService.incentives(request);
     },
-
     incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
       return queryService.incentive(request);
     },
-
     gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> {
       return queryService.gasMeters(request);
     },
-
     gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
       return queryService.gasMeter(request);
     },
-
     allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse> {
       return queryService.allocationMeters(request);
     },
-
     allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
       return queryService.allocationMeter(request);
     },
-
     params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
-
   };
 };
 export interface UseIncentivesQuery<TData> extends ReactQueryParams<QueryIncentivesResponse, TData> {
@@ -151,26 +128,18 @@ export interface UseAllocationMeterQuery<TData> extends ReactQueryParams<QueryAl
 export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
   request?: QueryParamsRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useIncentives = <TData = QueryIncentivesResponse,>({
     request,
     options
@@ -180,7 +149,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.incentives(request);
     }, options);
   };
-
   const useIncentive = <TData = QueryIncentiveResponse,>({
     request,
     options
@@ -190,7 +158,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.incentive(request);
     }, options);
   };
-
   const useGasMeters = <TData = QueryGasMetersResponse,>({
     request,
     options
@@ -200,7 +167,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.gasMeters(request);
     }, options);
   };
-
   const useGasMeter = <TData = QueryGasMeterResponse,>({
     request,
     options
@@ -210,7 +176,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.gasMeter(request);
     }, options);
   };
-
   const useAllocationMeters = <TData = QueryAllocationMetersResponse,>({
     request,
     options
@@ -220,7 +185,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.allocationMeters(request);
     }, options);
   };
-
   const useAllocationMeter = <TData = QueryAllocationMeterResponse,>({
     request,
     options
@@ -230,7 +194,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.allocationMeter(request);
     }, options);
   };
-
   const useParams = <TData = QueryParamsResponse,>({
     request,
     options
@@ -240,30 +203,17 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.params(request);
     }, options);
   };
-
   return {
-    /** Incentives retrieves registered incentives */
-    useIncentives,
-
-    /** Incentive retrieves a registered incentive */
-    useIncentive,
-
-    /** GasMeters retrieves active gas meters for a given contract */
-    useGasMeters,
-
-    /** GasMeter Retrieves a active gas meter */
-    useGasMeter,
-
+    /** Incentives retrieves registered incentives */useIncentives,
+    /** Incentive retrieves a registered incentive */useIncentive,
+    /** GasMeters retrieves active gas meters for a given contract */useGasMeters,
+    /** GasMeter Retrieves a active gas meter */useGasMeter,
     /**
      * AllocationMeters retrieves active allocation meters for a given
      * denomination
      */
     useAllocationMeters,
-
-    /** AllocationMeter Retrieves a active gas meter */
-    useAllocationMeter,
-
-    /** Params retrieves the incentives module params */
-    useParams
+    /** AllocationMeter Retrieves a active gas meter */useAllocationMeter,
+    /** Params retrieves the incentives module params */useParams
   };
 };

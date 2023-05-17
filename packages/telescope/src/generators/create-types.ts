@@ -5,8 +5,7 @@ import { buildAllImports } from '../imports';
 import { parse } from '../parse';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
-import { sync as mkdirp } from 'mkdirp';
-import { ProtoRef } from '@osmonauts/types';
+import { mkdirp } from 'mkdirp';
 import { getNestedProto, isRefExcluded } from '@osmonauts/proto-parser';
 import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@osmonauts/ast';
 
@@ -75,7 +74,7 @@ export const plugin = (
         if (context.body.length > 0) {
             bundler.writeAst(prog, filename);
         } else {
-            mkdirp(dirname(filename));
+            mkdirp.sync(dirname(filename));
             writeFileSync(filename, `export {}`);
         }
 

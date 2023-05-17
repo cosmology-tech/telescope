@@ -4,7 +4,6 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgCreateVestingAccount, MsgCreateVestingAccountResponse, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountResponse, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountResponse } from "./tx";
 /** Msg defines the bank Msg service. */
-
 export interface Msg {
   /**
    * CreateVestingAccount defines a method that enables creating a vesting
@@ -15,37 +14,30 @@ export interface Msg {
    * CreatePermanentLockedAccount defines a method that enables creating a permanent
    * locked account.
    */
-
   createPermanentLockedAccount(request: DeepPartial<MsgCreatePermanentLockedAccount>, metadata?: grpc.Metadata): Promise<MsgCreatePermanentLockedAccountResponse>;
   /**
    * CreatePeriodicVestingAccount defines a method that enables creating a
    * periodic vesting account.
    */
-
   createPeriodicVestingAccount(request: DeepPartial<MsgCreatePeriodicVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreatePeriodicVestingAccountResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.createVestingAccount = this.createVestingAccount.bind(this);
     this.createPermanentLockedAccount = this.createPermanentLockedAccount.bind(this);
     this.createPeriodicVestingAccount = this.createPeriodicVestingAccount.bind(this);
   }
-
   createVestingAccount(request: DeepPartial<MsgCreateVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreateVestingAccountResponse> {
     return this.rpc.unary(MsgCreateVestingAccountDesc, MsgCreateVestingAccount.fromPartial(request), metadata);
   }
-
   createPermanentLockedAccount(request: DeepPartial<MsgCreatePermanentLockedAccount>, metadata?: grpc.Metadata): Promise<MsgCreatePermanentLockedAccountResponse> {
     return this.rpc.unary(MsgCreatePermanentLockedAccountDesc, MsgCreatePermanentLockedAccount.fromPartial(request), metadata);
   }
-
   createPeriodicVestingAccount(request: DeepPartial<MsgCreatePeriodicVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreatePeriodicVestingAccountResponse> {
     return this.rpc.unary(MsgCreatePeriodicVestingAccountDesc, MsgCreatePeriodicVestingAccount.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "cosmos.vesting.v1beta1.Msg"
@@ -59,19 +51,16 @@ export const MsgCreateVestingAccountDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreateVestingAccount.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreateVestingAccountResponse.decode(data),
-
+      return {
+        ...MsgCreateVestingAccountResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgCreatePermanentLockedAccountDesc: UnaryMethodDefinitionish = {
@@ -83,19 +72,16 @@ export const MsgCreatePermanentLockedAccountDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreatePermanentLockedAccount.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreatePermanentLockedAccountResponse.decode(data),
-
+      return {
+        ...MsgCreatePermanentLockedAccountResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgCreatePeriodicVestingAccountDesc: UnaryMethodDefinitionish = {
@@ -107,19 +93,16 @@ export const MsgCreatePeriodicVestingAccountDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgCreatePeriodicVestingAccount.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgCreatePeriodicVestingAccountResponse.decode(data),
-
+      return {
+        ...MsgCreatePeriodicVestingAccountResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -132,7 +115,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -141,12 +123,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -169,5 +152,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

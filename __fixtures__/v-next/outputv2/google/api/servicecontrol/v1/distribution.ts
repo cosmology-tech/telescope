@@ -12,7 +12,6 @@ export const protobufPackage = "google.api.servicecontrol.v1";
  * * the sum-squared-deviation of the samples, used to compute variance
  * * a histogram of the values of the sample points
  */
-
 export interface Distribution {
   /** The total number of samples in the distribution. Must be >= 0. */
   count: Long;
@@ -20,13 +19,10 @@ export interface Distribution {
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
-
   mean: number;
   /** The minimum of the population of values. Ignored if `count` is zero. */
-
   minimum: number;
   /** The maximum of the population of values. Ignored if `count` is zero. */
-
   maximum: number;
   /**
    * The sum of squared deviations from the mean:
@@ -34,7 +30,6 @@ export interface Distribution {
    * where each x_i is a sample values. If `count` is zero then this field
    * must be zero, otherwise validation of the request fails.
    */
-
   sumOfSquaredDeviation: number;
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
@@ -49,19 +44,14 @@ export interface Distribution {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-
   bucketCounts: Long[];
   /** Buckets with constant width. */
-
   linearBuckets?: Distribution_LinearBuckets;
   /** Buckets with exponentially growing width. */
-
   exponentialBuckets?: Distribution_ExponentialBuckets;
   /** Buckets with arbitrary user-provided width. */
-
   explicitBuckets?: Distribution_ExplicitBuckets;
   /** Example points. Must be in increasing order of `value` field. */
-
   exemplars: Distribution_Exemplar[];
 }
 export interface DistributionProtoMsg {
@@ -78,7 +68,6 @@ export interface DistributionProtoMsg {
  * * the sum-squared-deviation of the samples, used to compute variance
  * * a histogram of the values of the sample points
  */
-
 export interface DistributionAmino {
   /** The total number of samples in the distribution. Must be >= 0. */
   count: string;
@@ -86,13 +75,10 @@ export interface DistributionAmino {
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
-
   mean: number;
   /** The minimum of the population of values. Ignored if `count` is zero. */
-
   minimum: number;
   /** The maximum of the population of values. Ignored if `count` is zero. */
-
   maximum: number;
   /**
    * The sum of squared deviations from the mean:
@@ -100,7 +86,6 @@ export interface DistributionAmino {
    * where each x_i is a sample values. If `count` is zero then this field
    * must be zero, otherwise validation of the request fails.
    */
-
   sum_of_squared_deviation: number;
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
@@ -115,19 +100,14 @@ export interface DistributionAmino {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-
   bucket_counts: string[];
   /** Buckets with constant width. */
-
   linear_buckets?: Distribution_LinearBucketsAmino;
   /** Buckets with exponentially growing width. */
-
   exponential_buckets?: Distribution_ExponentialBucketsAmino;
   /** Buckets with arbitrary user-provided width. */
-
   explicit_buckets?: Distribution_ExplicitBucketsAmino;
   /** Example points. Must be in increasing order of `value` field. */
-
   exemplars: Distribution_ExemplarAmino[];
 }
 export interface DistributionAminoMsg {
@@ -144,7 +124,6 @@ export interface DistributionAminoMsg {
  * * the sum-squared-deviation of the samples, used to compute variance
  * * a histogram of the values of the sample points
  */
-
 export interface DistributionSDKType {
   count: Long;
   mean: number;
@@ -158,7 +137,6 @@ export interface DistributionSDKType {
   exemplars: Distribution_ExemplarSDKType[];
 }
 /** Describing buckets with constant width. */
-
 export interface Distribution_LinearBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -172,14 +150,12 @@ export interface Distribution_LinearBuckets {
    * where i ranges from 1 to num_finite_buckets, inclusive.
    * Must be strictly positive.
    */
-
   width: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
-
   offset: number;
 }
 export interface Distribution_LinearBucketsProtoMsg {
@@ -187,7 +163,6 @@ export interface Distribution_LinearBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with constant width. */
-
 export interface Distribution_LinearBucketsAmino {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -201,14 +176,12 @@ export interface Distribution_LinearBucketsAmino {
    * where i ranges from 1 to num_finite_buckets, inclusive.
    * Must be strictly positive.
    */
-
   width: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
-
   offset: number;
 }
 export interface Distribution_LinearBucketsAminoMsg {
@@ -216,14 +189,12 @@ export interface Distribution_LinearBucketsAminoMsg {
   value: Distribution_LinearBucketsAmino;
 }
 /** Describing buckets with constant width. */
-
 export interface Distribution_LinearBucketsSDKType {
   num_finite_buckets: number;
   width: number;
   offset: number;
 }
 /** Describing buckets with exponentially growing width. */
-
 export interface Distribution_ExponentialBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -237,7 +208,6 @@ export interface Distribution_ExponentialBuckets {
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be larger than 1.0.
    */
-
   growthFactor: number;
   /**
    * The i'th exponential bucket covers the interval
@@ -245,7 +215,6 @@ export interface Distribution_ExponentialBuckets {
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be > 0.
    */
-
   scale: number;
 }
 export interface Distribution_ExponentialBucketsProtoMsg {
@@ -253,7 +222,6 @@ export interface Distribution_ExponentialBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with exponentially growing width. */
-
 export interface Distribution_ExponentialBucketsAmino {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
@@ -267,7 +235,6 @@ export interface Distribution_ExponentialBucketsAmino {
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be larger than 1.0.
    */
-
   growth_factor: number;
   /**
    * The i'th exponential bucket covers the interval
@@ -275,7 +242,6 @@ export interface Distribution_ExponentialBucketsAmino {
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be > 0.
    */
-
   scale: number;
 }
 export interface Distribution_ExponentialBucketsAminoMsg {
@@ -283,14 +249,12 @@ export interface Distribution_ExponentialBucketsAminoMsg {
   value: Distribution_ExponentialBucketsAmino;
 }
 /** Describing buckets with exponentially growing width. */
-
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
   growth_factor: number;
   scale: number;
 }
 /** Describing buckets with arbitrary user-provided width. */
-
 export interface Distribution_ExplicitBuckets {
   /**
    * 'bound' is a list of strictly increasing boundaries between
@@ -316,7 +280,6 @@ export interface Distribution_ExplicitBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with arbitrary user-provided width. */
-
 export interface Distribution_ExplicitBucketsAmino {
   /**
    * 'bound' is a list of strictly increasing boundaries between
@@ -342,11 +305,9 @@ export interface Distribution_ExplicitBucketsAminoMsg {
   value: Distribution_ExplicitBucketsAmino;
 }
 /** Describing buckets with arbitrary user-provided width. */
-
 export interface Distribution_ExplicitBucketsSDKType {
   bounds: number[];
 }
-
 function createBaseDistribution(): Distribution {
   return {
     count: Long.ZERO,
@@ -361,125 +322,94 @@ function createBaseDistribution(): Distribution {
     exemplars: []
   };
 }
-
 export const Distribution = {
   typeUrl: "/google.api.servicecontrol.v1.Distribution",
-
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
     }
-
     if (message.mean !== 0) {
       writer.uint32(17).double(message.mean);
     }
-
     if (message.minimum !== 0) {
       writer.uint32(25).double(message.minimum);
     }
-
     if (message.maximum !== 0) {
       writer.uint32(33).double(message.maximum);
     }
-
     if (message.sumOfSquaredDeviation !== 0) {
       writer.uint32(41).double(message.sumOfSquaredDeviation);
     }
-
     writer.uint32(50).fork();
-
     for (const v of message.bucketCounts) {
       writer.int64(v);
     }
-
     writer.ldelim();
-
     if (message.linearBuckets !== undefined) {
       Distribution_LinearBuckets.encode(message.linearBuckets, writer.uint32(58).fork()).ldelim();
     }
-
     if (message.exponentialBuckets !== undefined) {
       Distribution_ExponentialBuckets.encode(message.exponentialBuckets, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.explicitBuckets !== undefined) {
       Distribution_ExplicitBuckets.encode(message.explicitBuckets, writer.uint32(74).fork()).ldelim();
     }
-
     for (const v of message.exemplars) {
       Distribution_Exemplar.encode(v!, writer.uint32(82).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.count = (reader.int64() as Long);
           break;
-
         case 2:
           message.mean = reader.double();
           break;
-
         case 3:
           message.minimum = reader.double();
           break;
-
         case 4:
           message.maximum = reader.double();
           break;
-
         case 5:
           message.sumOfSquaredDeviation = reader.double();
           break;
-
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.bucketCounts.push((reader.int64() as Long));
             }
           } else {
             message.bucketCounts.push((reader.int64() as Long));
           }
-
           break;
-
         case 7:
           message.linearBuckets = Distribution_LinearBuckets.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.exponentialBuckets = Distribution_ExponentialBuckets.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.explicitBuckets = Distribution_ExplicitBuckets.decode(reader, reader.uint32());
           break;
-
         case 10:
           message.exemplars.push(Distribution_Exemplar.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution {
     return {
       count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
@@ -494,7 +424,6 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Distribution): unknown {
     const obj: any = {};
     message.count !== undefined && (obj.count = (message.count || Long.ZERO).toString());
@@ -502,26 +431,21 @@ export const Distribution = {
     message.minimum !== undefined && (obj.minimum = message.minimum);
     message.maximum !== undefined && (obj.maximum = message.maximum);
     message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
-
     if (message.bucketCounts) {
       obj.bucketCounts = message.bucketCounts.map(e => (e || Long.ZERO).toString());
     } else {
       obj.bucketCounts = [];
     }
-
     message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_LinearBuckets.toJSON(message.linearBuckets) : undefined);
     message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toJSON(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toJSON(message.explicitBuckets) : undefined);
-
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toJSON(e) : undefined);
     } else {
       obj.exemplars = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
@@ -536,7 +460,6 @@ export const Distribution = {
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: DistributionSDKType): Distribution {
     return {
       count: object?.count,
@@ -551,7 +474,6 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
     };
   },
-
   toSDK(message: Distribution): DistributionSDKType {
     const obj: any = {};
     obj.count = message.count;
@@ -559,26 +481,21 @@ export const Distribution = {
     obj.minimum = message.minimum;
     obj.maximum = message.maximum;
     obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
-
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e);
     } else {
       obj.bucket_counts = [];
     }
-
     message.linearBuckets !== undefined && (obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toSDK(message.linearBuckets) : undefined);
     message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toSDK(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toSDK(message.explicitBuckets) : undefined);
-
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toSDK(e) : undefined);
     } else {
       obj.exemplars = [];
     }
-
     return obj;
   },
-
   fromAmino(object: DistributionAmino): Distribution {
     return {
       count: Long.fromString(object.count),
@@ -593,7 +510,6 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
     };
   },
-
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
     obj.count = message.count ? message.count.toString() : undefined;
@@ -601,47 +517,37 @@ export const Distribution = {
     obj.minimum = message.minimum;
     obj.maximum = message.maximum;
     obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
-
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e);
     } else {
       obj.bucket_counts = [];
     }
-
     obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toAmino(message.linearBuckets) : undefined;
     obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toAmino(message.exponentialBuckets) : undefined;
     obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toAmino(message.explicitBuckets) : undefined;
-
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
     } else {
       obj.exemplars = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: DistributionAminoMsg): Distribution {
     return Distribution.fromAmino(object.value);
   },
-
   fromProtoMsg(message: DistributionProtoMsg): Distribution {
     return Distribution.decode(message.value);
   },
-
   toProto(message: Distribution): Uint8Array {
     return Distribution.encode(message).finish();
   },
-
   toProtoMsg(message: Distribution): DistributionProtoMsg {
     return {
       typeUrl: "/google.api.servicecontrol.v1.Distribution",
       value: Distribution.encode(message).finish()
     };
   }
-
 };
-
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
   return {
     numFiniteBuckets: 0,
@@ -649,56 +555,43 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
     offset: 0
   };
 }
-
 export const Distribution_LinearBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
-
   encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-
     if (message.width !== 0) {
       writer.uint32(17).double(message.width);
     }
-
     if (message.offset !== 0) {
       writer.uint32(25).double(message.offset);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_LinearBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_LinearBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.numFiniteBuckets = reader.int32();
           break;
-
         case 2:
           message.width = reader.double();
           break;
-
         case 3:
           message.offset = reader.double();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_LinearBuckets {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
@@ -706,7 +599,6 @@ export const Distribution_LinearBuckets = {
       offset: isSet(object.offset) ? Number(object.offset) : 0
     };
   },
-
   toJSON(message: Distribution_LinearBuckets): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
@@ -714,7 +606,6 @@ export const Distribution_LinearBuckets = {
     message.offset !== undefined && (obj.offset = message.offset);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_LinearBuckets>): Distribution_LinearBuckets {
     const message = createBaseDistribution_LinearBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -722,7 +613,6 @@ export const Distribution_LinearBuckets = {
     message.offset = object.offset ?? 0;
     return message;
   },
-
   fromSDK(object: Distribution_LinearBucketsSDKType): Distribution_LinearBuckets {
     return {
       numFiniteBuckets: object?.num_finite_buckets,
@@ -730,7 +620,6 @@ export const Distribution_LinearBuckets = {
       offset: object?.offset
     };
   },
-
   toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -738,7 +627,6 @@ export const Distribution_LinearBuckets = {
     obj.offset = message.offset;
     return obj;
   },
-
   fromAmino(object: Distribution_LinearBucketsAmino): Distribution_LinearBuckets {
     return {
       numFiniteBuckets: object.num_finite_buckets,
@@ -746,7 +634,6 @@ export const Distribution_LinearBuckets = {
       offset: object.offset
     };
   },
-
   toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -754,28 +641,22 @@ export const Distribution_LinearBuckets = {
     obj.offset = message.offset;
     return obj;
   },
-
   fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
     return Distribution_LinearBuckets.fromAmino(object.value);
   },
-
   fromProtoMsg(message: Distribution_LinearBucketsProtoMsg): Distribution_LinearBuckets {
     return Distribution_LinearBuckets.decode(message.value);
   },
-
   toProto(message: Distribution_LinearBuckets): Uint8Array {
     return Distribution_LinearBuckets.encode(message).finish();
   },
-
   toProtoMsg(message: Distribution_LinearBuckets): Distribution_LinearBucketsProtoMsg {
     return {
       typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
       value: Distribution_LinearBuckets.encode(message).finish()
     };
   }
-
 };
-
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
   return {
     numFiniteBuckets: 0,
@@ -783,56 +664,43 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
     scale: 0
   };
 }
-
 export const Distribution_ExponentialBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
-
   encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-
     if (message.growthFactor !== 0) {
       writer.uint32(17).double(message.growthFactor);
     }
-
     if (message.scale !== 0) {
       writer.uint32(25).double(message.scale);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExponentialBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExponentialBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.numFiniteBuckets = reader.int32();
           break;
-
         case 2:
           message.growthFactor = reader.double();
           break;
-
         case 3:
           message.scale = reader.double();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_ExponentialBuckets {
     return {
       numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
@@ -840,7 +708,6 @@ export const Distribution_ExponentialBuckets = {
       scale: isSet(object.scale) ? Number(object.scale) : 0
     };
   },
-
   toJSON(message: Distribution_ExponentialBuckets): unknown {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
@@ -848,7 +715,6 @@ export const Distribution_ExponentialBuckets = {
     message.scale !== undefined && (obj.scale = message.scale);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_ExponentialBuckets>): Distribution_ExponentialBuckets {
     const message = createBaseDistribution_ExponentialBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -856,7 +722,6 @@ export const Distribution_ExponentialBuckets = {
     message.scale = object.scale ?? 0;
     return message;
   },
-
   fromSDK(object: Distribution_ExponentialBucketsSDKType): Distribution_ExponentialBuckets {
     return {
       numFiniteBuckets: object?.num_finite_buckets,
@@ -864,7 +729,6 @@ export const Distribution_ExponentialBuckets = {
       scale: object?.scale
     };
   },
-
   toSDK(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsSDKType {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -872,7 +736,6 @@ export const Distribution_ExponentialBuckets = {
     obj.scale = message.scale;
     return obj;
   },
-
   fromAmino(object: Distribution_ExponentialBucketsAmino): Distribution_ExponentialBuckets {
     return {
       numFiniteBuckets: object.num_finite_buckets,
@@ -880,7 +743,6 @@ export const Distribution_ExponentialBuckets = {
       scale: object.scale
     };
   },
-
   toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
@@ -888,156 +750,121 @@ export const Distribution_ExponentialBuckets = {
     obj.scale = message.scale;
     return obj;
   },
-
   fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
     return Distribution_ExponentialBuckets.fromAmino(object.value);
   },
-
   fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg): Distribution_ExponentialBuckets {
     return Distribution_ExponentialBuckets.decode(message.value);
   },
-
   toProto(message: Distribution_ExponentialBuckets): Uint8Array {
     return Distribution_ExponentialBuckets.encode(message).finish();
   },
-
   toProtoMsg(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsProtoMsg {
     return {
       typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
       value: Distribution_ExponentialBuckets.encode(message).finish()
     };
   }
-
 };
-
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
   return {
     bounds: []
   };
 }
-
 export const Distribution_ExplicitBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
-
   encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
-
     for (const v of message.bounds) {
       writer.double(v);
     }
-
     writer.ldelim();
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Distribution_ExplicitBuckets {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExplicitBuckets();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.bounds.push(reader.double());
             }
           } else {
             message.bounds.push(reader.double());
           }
-
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Distribution_ExplicitBuckets {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
-
   toJSON(message: Distribution_ExplicitBuckets): unknown {
     const obj: any = {};
-
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
       obj.bounds = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Distribution_ExplicitBuckets>): Distribution_ExplicitBuckets {
     const message = createBaseDistribution_ExplicitBuckets();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;
   },
-
   fromSDK(object: Distribution_ExplicitBucketsSDKType): Distribution_ExplicitBuckets {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
     };
   },
-
   toSDK(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsSDKType {
     const obj: any = {};
-
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
       obj.bounds = [];
     }
-
     return obj;
   },
-
   fromAmino(object: Distribution_ExplicitBucketsAmino): Distribution_ExplicitBuckets {
     return {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
     };
   },
-
   toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsAmino {
     const obj: any = {};
-
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
       obj.bounds = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: Distribution_ExplicitBucketsAminoMsg): Distribution_ExplicitBuckets {
     return Distribution_ExplicitBuckets.fromAmino(object.value);
   },
-
   fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg): Distribution_ExplicitBuckets {
     return Distribution_ExplicitBuckets.decode(message.value);
   },
-
   toProto(message: Distribution_ExplicitBuckets): Uint8Array {
     return Distribution_ExplicitBuckets.encode(message).finish();
   },
-
   toProtoMsg(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsProtoMsg {
     return {
       typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
       value: Distribution_ExplicitBuckets.encode(message).finish()
     };
   }
-
 };

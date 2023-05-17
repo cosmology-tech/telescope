@@ -13,7 +13,6 @@ export enum TelescopeLogLevel {
 interface TelescopeOpts {
 
     env?: 'default' | 'v-next';
-    experimentalGlobalProtoNamespace?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
@@ -161,6 +160,9 @@ interface TelescopeOpts {
     reactQuery?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -169,6 +171,9 @@ interface TelescopeOpts {
     mobx?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -177,6 +182,9 @@ interface TelescopeOpts {
     pinia?: {
         enabled: boolean;
         include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
             patterns?: string[];
             packages?: string[];
             protos?: string[];
@@ -195,7 +203,6 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
 
     env: 'default',
-    experimentalGlobalProtoNamespace: false,
     removeUnusedImports: true,
     classesUseArrowFunctions: false,
     useSDKTypes: true,

@@ -9,42 +9,30 @@ export const protobufPackage = "google.api.expr.v1alpha1";
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
-
 export interface Value {
   /** Null value. */
   nullValue?: NullValue;
   /** Boolean value. */
-
   boolValue?: boolean;
   /** Signed integer value. */
-
   int64Value?: Long;
   /** Unsigned integer value. */
-
   uint64Value?: Long;
   /** Floating point value. */
-
   doubleValue?: number;
   /** UTF-8 string value. */
-
   stringValue?: string;
   /** Byte string value. */
-
   bytesValue?: Uint8Array;
   /** An enum value. */
-
   enumValue?: EnumValue;
   /** The proto message backing an object value. */
-
   objectValue?: Any;
   /** Map value. */
-
   mapValue?: MapValue;
   /** List value. */
-
   listValue?: ListValue;
   /** Type value. */
-
   typeValue?: string;
 }
 export interface ValueProtoMsg {
@@ -57,42 +45,30 @@ export interface ValueProtoMsg {
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
-
 export interface ValueAmino {
   /** Null value. */
   null_value?: NullValue;
   /** Boolean value. */
-
   bool_value?: boolean;
   /** Signed integer value. */
-
   int64_value?: string;
   /** Unsigned integer value. */
-
   uint64_value?: string;
   /** Floating point value. */
-
   double_value?: number;
   /** UTF-8 string value. */
-
   string_value?: string;
   /** Byte string value. */
-
   bytes_value?: Uint8Array;
   /** An enum value. */
-
   enum_value?: EnumValueAmino;
   /** The proto message backing an object value. */
-
   object_value?: AnyAmino;
   /** Map value. */
-
   map_value?: MapValueAmino;
   /** List value. */
-
   list_value?: ListValueAmino;
   /** Type value. */
-
   type_value?: string;
 }
 export interface ValueAminoMsg {
@@ -105,7 +81,6 @@ export interface ValueAminoMsg {
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
-
 export interface ValueSDKType {
   null_value?: NullValue;
   bool_value?: boolean;
@@ -121,12 +96,10 @@ export interface ValueSDKType {
   type_value?: string;
 }
 /** An enum value. */
-
 export interface EnumValue {
   /** The fully qualified name of the enum type. */
   type: string;
   /** The value of the enum. */
-
   value: number;
 }
 export interface EnumValueProtoMsg {
@@ -134,12 +107,10 @@ export interface EnumValueProtoMsg {
   value: Uint8Array;
 }
 /** An enum value. */
-
 export interface EnumValueAmino {
   /** The fully qualified name of the enum type. */
   type: string;
   /** The value of the enum. */
-
   value: number;
 }
 export interface EnumValueAminoMsg {
@@ -147,7 +118,6 @@ export interface EnumValueAminoMsg {
   value: EnumValueAmino;
 }
 /** An enum value. */
-
 export interface EnumValueSDKType {
   type: string;
   value: number;
@@ -158,7 +128,6 @@ export interface EnumValueSDKType {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
@@ -173,7 +142,6 @@ export interface ListValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface ListValueAmino {
   /** The ordered values in the list. */
   values: ValueAmino[];
@@ -188,7 +156,6 @@ export interface ListValueAminoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface ListValueSDKType {
   values: ValueSDKType[];
 }
@@ -198,7 +165,6 @@ export interface ListValueSDKType {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface MapValue {
   /**
    * The set of map entries.
@@ -218,7 +184,6 @@ export interface MapValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface MapValueAmino {
   /**
    * The set of map entries.
@@ -238,12 +203,10 @@ export interface MapValueAminoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-
 export interface MapValueSDKType {
   entries: MapValue_EntrySDKType[];
 }
 /** An entry in the map. */
-
 export interface MapValue_Entry {
   /**
    * The key.
@@ -253,7 +216,6 @@ export interface MapValue_Entry {
    */
   key?: Value;
   /** The value. */
-
   value?: Value;
 }
 export interface MapValue_EntryProtoMsg {
@@ -261,7 +223,6 @@ export interface MapValue_EntryProtoMsg {
   value: Uint8Array;
 }
 /** An entry in the map. */
-
 export interface MapValue_EntryAmino {
   /**
    * The key.
@@ -271,7 +232,6 @@ export interface MapValue_EntryAmino {
    */
   key?: ValueAmino;
   /** The value. */
-
   value?: ValueAmino;
 }
 export interface MapValue_EntryAminoMsg {
@@ -279,12 +239,10 @@ export interface MapValue_EntryAminoMsg {
   value: MapValue_EntryAmino;
 }
 /** An entry in the map. */
-
 export interface MapValue_EntrySDKType {
   key?: ValueSDKType;
   value?: ValueSDKType;
 }
-
 function createBaseValue(): Value {
   return {
     nullValue: undefined,
@@ -301,128 +259,97 @@ function createBaseValue(): Value {
     typeValue: undefined
   };
 }
-
 export const Value = {
   typeUrl: "/google.api.expr.v1alpha1.Value",
-
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
-
     if (message.boolValue !== undefined) {
       writer.uint32(16).bool(message.boolValue);
     }
-
     if (message.int64Value !== undefined) {
       writer.uint32(24).int64(message.int64Value);
     }
-
     if (message.uint64Value !== undefined) {
       writer.uint32(32).uint64(message.uint64Value);
     }
-
     if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
     }
-
     if (message.stringValue !== undefined) {
       writer.uint32(50).string(message.stringValue);
     }
-
     if (message.bytesValue !== undefined) {
       writer.uint32(58).bytes(message.bytesValue);
     }
-
     if (message.enumValue !== undefined) {
       EnumValue.encode(message.enumValue, writer.uint32(74).fork()).ldelim();
     }
-
     if (message.objectValue !== undefined) {
       Any.encode(message.objectValue, writer.uint32(82).fork()).ldelim();
     }
-
     if (message.mapValue !== undefined) {
       MapValue.encode(message.mapValue, writer.uint32(90).fork()).ldelim();
     }
-
     if (message.listValue !== undefined) {
       ListValue.encode(message.listValue, writer.uint32(98).fork()).ldelim();
     }
-
     if (message.typeValue !== undefined) {
       writer.uint32(122).string(message.typeValue);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Value {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nullValue = (reader.int32() as any);
           break;
-
         case 2:
           message.boolValue = reader.bool();
           break;
-
         case 3:
           message.int64Value = (reader.int64() as Long);
           break;
-
         case 4:
           message.uint64Value = (reader.uint64() as Long);
           break;
-
         case 5:
           message.doubleValue = reader.double();
           break;
-
         case 6:
           message.stringValue = reader.string();
           break;
-
         case 7:
           message.bytesValue = reader.bytes();
           break;
-
         case 9:
           message.enumValue = EnumValue.decode(reader, reader.uint32());
           break;
-
         case 10:
           message.objectValue = Any.decode(reader, reader.uint32());
           break;
-
         case 11:
           message.mapValue = MapValue.decode(reader, reader.uint32());
           break;
-
         case 12:
           message.listValue = ListValue.decode(reader, reader.uint32());
           break;
-
         case 15:
           message.typeValue = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Value {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
@@ -439,7 +366,6 @@ export const Value = {
       typeValue: isSet(object.typeValue) ? String(object.typeValue) : undefined
     };
   },
-
   toJSON(message: Value): unknown {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
@@ -456,7 +382,6 @@ export const Value = {
     message.typeValue !== undefined && (obj.typeValue = message.typeValue);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
@@ -473,7 +398,6 @@ export const Value = {
     message.typeValue = object.typeValue ?? undefined;
     return message;
   },
-
   fromSDK(object: ValueSDKType): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -490,7 +414,6 @@ export const Value = {
       typeValue: object?.type_value
     };
   },
-
   toSDK(message: Value): ValueSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
@@ -507,7 +430,6 @@ export const Value = {
     obj.type_value = message.typeValue;
     return obj;
   },
-
   fromAmino(object: ValueAmino): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -524,7 +446,6 @@ export const Value = {
       typeValue: object?.type_value
     };
   },
-
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
@@ -541,500 +462,395 @@ export const Value = {
     obj.type_value = message.typeValue;
     return obj;
   },
-
   fromAminoMsg(object: ValueAminoMsg): Value {
     return Value.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
-
   toProto(message: Value): Uint8Array {
     return Value.encode(message).finish();
   },
-
   toProtoMsg(message: Value): ValueProtoMsg {
     return {
       typeUrl: "/google.api.expr.v1alpha1.Value",
       value: Value.encode(message).finish()
     };
   }
-
 };
-
 function createBaseEnumValue(): EnumValue {
   return {
     type: "",
     value: 0
   };
 }
-
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1alpha1.EnumValue",
-
   encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-
     if (message.value !== 0) {
       writer.uint32(16).int32(message.value);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): EnumValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.string();
           break;
-
         case 2:
           message.value = reader.int32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): EnumValue {
     return {
       type: isSet(object.type) ? String(object.type) : "",
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-
   toJSON(message: EnumValue): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
-
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.type = object.type ?? "";
     message.value = object.value ?? 0;
     return message;
   },
-
   fromSDK(object: EnumValueSDKType): EnumValue {
     return {
       type: object?.type,
       value: object?.value
     };
   },
-
   toSDK(message: EnumValue): EnumValueSDKType {
     const obj: any = {};
     obj.type = message.type;
     obj.value = message.value;
     return obj;
   },
-
   fromAmino(object: EnumValueAmino): EnumValue {
     return {
       type: object.type,
       value: object.value
     };
   },
-
   toAmino(message: EnumValue): EnumValueAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.value = message.value;
     return obj;
   },
-
   fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
     return EnumValue.fromAmino(object.value);
   },
-
   fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
     return EnumValue.decode(message.value);
   },
-
   toProto(message: EnumValue): Uint8Array {
     return EnumValue.encode(message).finish();
   },
-
   toProtoMsg(message: EnumValue): EnumValueProtoMsg {
     return {
       typeUrl: "/google.api.expr.v1alpha1.EnumValue",
       value: EnumValue.encode(message).finish()
     };
   }
-
 };
-
 function createBaseListValue(): ListValue {
   return {
     values: []
   };
 }
-
 export const ListValue = {
   typeUrl: "/google.api.expr.v1alpha1.ListValue",
-
   encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.values.push(Value.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
     };
   },
-
   toJSON(message: ListValue): unknown {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<ListValue>): ListValue {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: ListValueSDKType): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
     };
   },
-
   toSDK(message: ListValue): ListValueSDKType {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromAmino(object: ListValueAmino): ListValue {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
     };
   },
-
   toAmino(message: ListValue): ListValueAmino {
     const obj: any = {};
-
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
       obj.values = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: ListValueAminoMsg): ListValue {
     return ListValue.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);
   },
-
   toProto(message: ListValue): Uint8Array {
     return ListValue.encode(message).finish();
   },
-
   toProtoMsg(message: ListValue): ListValueProtoMsg {
     return {
       typeUrl: "/google.api.expr.v1alpha1.ListValue",
       value: ListValue.encode(message).finish()
     };
   }
-
 };
-
 function createBaseMapValue(): MapValue {
   return {
     entries: []
   };
 }
-
 export const MapValue = {
   typeUrl: "/google.api.expr.v1alpha1.MapValue",
-
   encode(message: MapValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.entries.push(MapValue_Entry.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MapValue {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
     };
   },
-
   toJSON(message: MapValue): unknown {
     const obj: any = {};
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: MapValueSDKType): MapValue {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDK(e)) : []
     };
   },
-
   toSDK(message: MapValue): MapValueSDKType {
     const obj: any = {};
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   },
-
   fromAmino(object: MapValueAmino): MapValue {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
     };
   },
-
   toAmino(message: MapValue): MapValueAmino {
     const obj: any = {};
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: MapValueAminoMsg): MapValue {
     return MapValue.fromAmino(object.value);
   },
-
   fromProtoMsg(message: MapValueProtoMsg): MapValue {
     return MapValue.decode(message.value);
   },
-
   toProto(message: MapValue): Uint8Array {
     return MapValue.encode(message).finish();
   },
-
   toProtoMsg(message: MapValue): MapValueProtoMsg {
     return {
       typeUrl: "/google.api.expr.v1alpha1.MapValue",
       value: MapValue.encode(message).finish()
     };
   }
-
 };
-
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
     key: undefined,
     value: undefined
   };
 }
-
 export const MapValue_Entry = {
   typeUrl: "/google.api.expr.v1alpha1.Entry",
-
   encode(message: MapValue_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MapValue_Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue_Entry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = Value.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.value = Value.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MapValue_Entry {
     return {
       key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: MapValue_Entry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {
     return {
       key: object.key ? Value.fromSDK(object.key) : undefined,
       value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
-
   toSDK(message: MapValue_Entry): MapValue_EntrySDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
   },
-
   fromAmino(object: MapValue_EntryAmino): MapValue_Entry {
     return {
       key: object?.key ? Value.fromAmino(object.key) : undefined,
       value: object?.value ? Value.fromAmino(object.value) : undefined
     };
   },
-
   toAmino(message: MapValue_Entry): MapValue_EntryAmino {
     const obj: any = {};
     obj.key = message.key ? Value.toAmino(message.key) : undefined;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: MapValue_EntryAminoMsg): MapValue_Entry {
     return MapValue_Entry.fromAmino(object.value);
   },
-
   fromProtoMsg(message: MapValue_EntryProtoMsg): MapValue_Entry {
     return MapValue_Entry.decode(message.value);
   },
-
   toProto(message: MapValue_Entry): Uint8Array {
     return MapValue_Entry.encode(message).finish();
   },
-
   toProtoMsg(message: MapValue_Entry): MapValue_EntryProtoMsg {
     return {
       typeUrl: "/google.api.expr.v1alpha1.Entry",
       value: MapValue_Entry.encode(message).finish()
     };
   }
-
 };

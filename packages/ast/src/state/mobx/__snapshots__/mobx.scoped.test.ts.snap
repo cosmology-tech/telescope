@@ -4,7 +4,7 @@ exports[`builds stores. 1`] = `
 "import * as _ProtoCosmosBankV1beta1A from "./proto/cosmos/bank/v1beta1/a.lcd";
 import * as _ProtoCosmosBankV1beta1B from "./proto/cosmos/bank/v1beta1/b.lcd";
 import * as _ProtoCosmosBankV1beta1C from "./proto/cosmos/bank/v1beta1/c.lcd";
-export const createRpcQueryStores = ({
+export const createRpcQueryMobxStores = ({
   rpc
 }: {
   rpc: ProtobufRpcClient | undefined;
@@ -12,15 +12,15 @@ export const createRpcQueryStores = ({
   return {
     cosmos: {
       bank: {
-        v1beta1: _ProtoCosmosBankV1beta1A.createRpcQueryStores(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1A.createRpcQueryMobxStores(rpc)
       },
       gov: {
-        v1beta1: _ProtoCosmosBankV1beta1B.createRpcQueryStores(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1B.createRpcQueryMobxStores(rpc)
       }
     },
     osmosis: {
       gamm: {
-        v1beta1: _ProtoCosmosBankV1beta1C.createRpcQueryStores(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1C.createRpcQueryMobxStores(rpc)
       }
     }
   };

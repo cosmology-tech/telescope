@@ -11,18 +11,14 @@ export interface Query {
    */
   feeTokens(request?: DeepPartial<QueryFeeTokensRequest>, metadata?: grpc.Metadata): Promise<QueryFeeTokensResponse>;
   /** DenomSpotPrice returns all spot prices by each registered token denom. */
-
   denomSpotPrice(request: DeepPartial<QueryDenomSpotPriceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomSpotPriceResponse>;
   /** Returns the poolID for a specified denom input. */
-
   denomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse>;
   /** Returns a list of all base denom tokens and their corresponding pools. */
-
   baseDenom(request?: DeepPartial<QueryBaseDenomRequest>, metadata?: grpc.Metadata): Promise<QueryBaseDenomResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.feeTokens = this.feeTokens.bind(this);
@@ -30,23 +26,18 @@ export class QueryClientImpl implements Query {
     this.denomPoolId = this.denomPoolId.bind(this);
     this.baseDenom = this.baseDenom.bind(this);
   }
-
   feeTokens(request: DeepPartial<QueryFeeTokensRequest> = {}, metadata?: grpc.Metadata): Promise<QueryFeeTokensResponse> {
     return this.rpc.unary(QueryFeeTokensDesc, QueryFeeTokensRequest.fromPartial(request), metadata);
   }
-
   denomSpotPrice(request: DeepPartial<QueryDenomSpotPriceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomSpotPriceResponse> {
     return this.rpc.unary(QueryDenomSpotPriceDesc, QueryDenomSpotPriceRequest.fromPartial(request), metadata);
   }
-
   denomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse> {
     return this.rpc.unary(QueryDenomPoolIdDesc, QueryDenomPoolIdRequest.fromPartial(request), metadata);
   }
-
   baseDenom(request: DeepPartial<QueryBaseDenomRequest> = {}, metadata?: grpc.Metadata): Promise<QueryBaseDenomResponse> {
     return this.rpc.unary(QueryBaseDenomDesc, QueryBaseDenomRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "osmosis.txfees.v1beta1.Query"
@@ -60,19 +51,16 @@ export const QueryFeeTokensDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryFeeTokensRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryFeeTokensResponse.decode(data),
-
+      return {
+        ...QueryFeeTokensResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDenomSpotPriceDesc: UnaryMethodDefinitionish = {
@@ -84,19 +72,16 @@ export const QueryDenomSpotPriceDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDenomSpotPriceRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDenomSpotPriceResponse.decode(data),
-
+      return {
+        ...QueryDenomSpotPriceResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryDenomPoolIdDesc: UnaryMethodDefinitionish = {
@@ -108,19 +93,16 @@ export const QueryDenomPoolIdDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryDenomPoolIdRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryDenomPoolIdResponse.decode(data),
-
+      return {
+        ...QueryDenomPoolIdResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryBaseDenomDesc: UnaryMethodDefinitionish = {
@@ -132,19 +114,16 @@ export const QueryBaseDenomDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryBaseDenomRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryBaseDenomResponse.decode(data),
-
+      return {
+        ...QueryBaseDenomResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -157,7 +136,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -166,12 +144,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -194,5 +173,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

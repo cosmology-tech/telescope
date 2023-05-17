@@ -3,7 +3,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
-
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -31,11 +30,9 @@ export interface Authentication {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: AuthenticationRule[];
-
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
 }
-
 /**
  * Authentication rules for the service.
  * 
@@ -54,28 +51,22 @@ export interface AuthenticationRule {
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
-
   /** The requirements for OAuth credentials. */
   oauth?: OAuthRequirements;
-
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
   allowWithoutCredential: boolean;
-
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
-
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocation {
   /** Specifies HTTP header name to extract JWT token. */
   header?: string;
-
   /** Specifies URL query parameter name to extract JWT token. */
   query?: string;
-
   /**
    * The value prefix. The value format is "value_prefix{token}"
    * Only applies to "in" header type. Must be empty for "in" query type.
@@ -88,7 +79,6 @@ export interface JwtLocation {
    */
   valuePrefix: string;
 }
-
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
@@ -102,7 +92,6 @@ export interface AuthProvider {
    * Example: "bookstore_auth".
    */
   id: string;
-
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -112,7 +101,6 @@ export interface AuthProvider {
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
   issuer: string;
-
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -128,7 +116,6 @@ export interface AuthProvider {
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
   jwksUri: string;
-
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -149,13 +136,11 @@ export interface AuthProvider {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
-
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
   authorizationUrl: string;
-
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -177,7 +162,6 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
-
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
@@ -210,7 +194,6 @@ export interface OAuthRequirements {
    */
   canonicalScopes: string;
 }
-
 /**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
@@ -225,7 +208,6 @@ export interface AuthRequirement {
    *     provider_id: bookstore_auth
    */
   providerId: string;
-
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -246,87 +228,69 @@ export interface AuthRequirement {
    */
   audiences: string;
 }
-
 function createBaseAuthentication(): Authentication {
   return {
     rules: [],
     providers: []
   };
 }
-
 export const Authentication = {
   encode(message: Authentication, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     for (const v of message.providers) {
       AuthProvider.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Authentication {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthentication();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 3:
           message.rules.push(AuthenticationRule.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.providers.push(AuthProvider.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Authentication {
     return {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromJSON(e)) : [],
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Authentication): unknown {
     const obj: any = {};
-
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toJSON(e) : undefined);
     } else {
       obj.rules = [];
     }
-
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? AuthProvider.toJSON(e) : undefined);
     } else {
       obj.providers = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Authentication>): Authentication {
     const message = createBaseAuthentication();
     message.rules = object.rules?.map(e => AuthenticationRule.fromPartial(e)) || [];
     message.providers = object.providers?.map(e => AuthProvider.fromPartial(e)) || [];
     return message;
   }
-
 };
-
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
@@ -335,62 +299,48 @@ function createBaseAuthenticationRule(): AuthenticationRule {
     requirements: []
   };
 }
-
 export const AuthenticationRule = {
   encode(message: AuthenticationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-
     if (message.oauth !== undefined) {
       OAuthRequirements.encode(message.oauth, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.allowWithoutCredential === true) {
       writer.uint32(40).bool(message.allowWithoutCredential);
     }
-
     for (const v of message.requirements) {
       AuthRequirement.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticationRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthenticationRule();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.selector = reader.string();
           break;
-
         case 2:
           message.oauth = OAuthRequirements.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.allowWithoutCredential = reader.bool();
           break;
-
         case 7:
           message.requirements.push(AuthRequirement.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AuthenticationRule {
     return {
       selector: isSet(object.selector) ? String(object.selector) : "",
@@ -399,22 +349,18 @@ export const AuthenticationRule = {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromJSON(e)) : []
     };
   },
-
   toJSON(message: AuthenticationRule): unknown {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toJSON(message.oauth) : undefined);
     message.allowWithoutCredential !== undefined && (obj.allowWithoutCredential = message.allowWithoutCredential);
-
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e ? AuthRequirement.toJSON(e) : undefined);
     } else {
       obj.requirements = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
     message.selector = object.selector ?? "";
@@ -423,9 +369,7 @@ export const AuthenticationRule = {
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
   }
-
 };
-
 function createBaseJwtLocation(): JwtLocation {
   return {
     header: undefined,
@@ -433,54 +377,42 @@ function createBaseJwtLocation(): JwtLocation {
     valuePrefix: ""
   };
 }
-
 export const JwtLocation = {
   encode(message: JwtLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
     }
-
     if (message.query !== undefined) {
       writer.uint32(18).string(message.query);
     }
-
     if (message.valuePrefix !== "") {
       writer.uint32(26).string(message.valuePrefix);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): JwtLocation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJwtLocation();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.header = reader.string();
           break;
-
         case 2:
           message.query = reader.string();
           break;
-
         case 3:
           message.valuePrefix = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): JwtLocation {
     return {
       header: isSet(object.header) ? String(object.header) : undefined,
@@ -488,7 +420,6 @@ export const JwtLocation = {
       valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : ""
     };
   },
-
   toJSON(message: JwtLocation): unknown {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header);
@@ -496,7 +427,6 @@ export const JwtLocation = {
     message.valuePrefix !== undefined && (obj.valuePrefix = message.valuePrefix);
     return obj;
   },
-
   fromPartial(object: DeepPartial<JwtLocation>): JwtLocation {
     const message = createBaseJwtLocation();
     message.header = object.header ?? undefined;
@@ -504,9 +434,7 @@ export const JwtLocation = {
     message.valuePrefix = object.valuePrefix ?? "";
     return message;
   }
-
 };
-
 function createBaseAuthProvider(): AuthProvider {
   return {
     id: "",
@@ -517,78 +445,60 @@ function createBaseAuthProvider(): AuthProvider {
     jwtLocations: []
   };
 }
-
 export const AuthProvider = {
   encode(message: AuthProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-
     if (message.issuer !== "") {
       writer.uint32(18).string(message.issuer);
     }
-
     if (message.jwksUri !== "") {
       writer.uint32(26).string(message.jwksUri);
     }
-
     if (message.audiences !== "") {
       writer.uint32(34).string(message.audiences);
     }
-
     if (message.authorizationUrl !== "") {
       writer.uint32(42).string(message.authorizationUrl);
     }
-
     for (const v of message.jwtLocations) {
       JwtLocation.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthProvider {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthProvider();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.id = reader.string();
           break;
-
         case 2:
           message.issuer = reader.string();
           break;
-
         case 3:
           message.jwksUri = reader.string();
           break;
-
         case 4:
           message.audiences = reader.string();
           break;
-
         case 5:
           message.authorizationUrl = reader.string();
           break;
-
         case 6:
           message.jwtLocations.push(JwtLocation.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AuthProvider {
     return {
       id: isSet(object.id) ? String(object.id) : "",
@@ -599,7 +509,6 @@ export const AuthProvider = {
       jwtLocations: Array.isArray(object?.jwtLocations) ? object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e)) : []
     };
   },
-
   toJSON(message: AuthProvider): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
@@ -607,16 +516,13 @@ export const AuthProvider = {
     message.jwksUri !== undefined && (obj.jwksUri = message.jwksUri);
     message.audiences !== undefined && (obj.audiences = message.audiences);
     message.authorizationUrl !== undefined && (obj.authorizationUrl = message.authorizationUrl);
-
     if (message.jwtLocations) {
       obj.jwtLocations = message.jwtLocations.map(e => e ? JwtLocation.toJSON(e) : undefined);
     } else {
       obj.jwtLocations = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<AuthProvider>): AuthProvider {
     const message = createBaseAuthProvider();
     message.id = object.id ?? "";
@@ -627,131 +533,104 @@ export const AuthProvider = {
     message.jwtLocations = object.jwtLocations?.map(e => JwtLocation.fromPartial(e)) || [];
     return message;
   }
-
 };
-
 function createBaseOAuthRequirements(): OAuthRequirements {
   return {
     canonicalScopes: ""
   };
 }
-
 export const OAuthRequirements = {
   encode(message: OAuthRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): OAuthRequirements {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOAuthRequirements();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.canonicalScopes = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): OAuthRequirements {
     return {
       canonicalScopes: isSet(object.canonicalScopes) ? String(object.canonicalScopes) : ""
     };
   },
-
   toJSON(message: OAuthRequirements): unknown {
     const obj: any = {};
     message.canonicalScopes !== undefined && (obj.canonicalScopes = message.canonicalScopes);
     return obj;
   },
-
   fromPartial(object: DeepPartial<OAuthRequirements>): OAuthRequirements {
     const message = createBaseOAuthRequirements();
     message.canonicalScopes = object.canonicalScopes ?? "";
     return message;
   }
-
 };
-
 function createBaseAuthRequirement(): AuthRequirement {
   return {
     providerId: "",
     audiences: ""
   };
 }
-
 export const AuthRequirement = {
   encode(message: AuthRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);
     }
-
     if (message.audiences !== "") {
       writer.uint32(18).string(message.audiences);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthRequirement {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthRequirement();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.providerId = reader.string();
           break;
-
         case 2:
           message.audiences = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AuthRequirement {
     return {
       providerId: isSet(object.providerId) ? String(object.providerId) : "",
       audiences: isSet(object.audiences) ? String(object.audiences) : ""
     };
   },
-
   toJSON(message: AuthRequirement): unknown {
     const obj: any = {};
     message.providerId !== undefined && (obj.providerId = message.providerId);
     message.audiences !== undefined && (obj.audiences = message.audiences);
     return obj;
   },
-
   fromPartial(object: DeepPartial<AuthRequirement>): AuthRequirement {
     const message = createBaseAuthRequirement();
     message.providerId = object.providerId ?? "";
     message.audiences = object.audiences ?? "";
     return message;
   }
-
 };

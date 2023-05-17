@@ -4,26 +4,26 @@ import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse,
 export class Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
   static CreateProvider(request: MsgCreateProvider, initRequest?: fm.InitReq): Promise<MsgCreateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta2/CreateProvider`, { ...initRequest,
+    return fm.fetchReq(`/akash.provider.v1beta2/CreateProvider`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
   static UpdateProvider(request: MsgUpdateProvider, initRequest?: fm.InitReq): Promise<MsgUpdateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta2/UpdateProvider`, { ...initRequest,
+    return fm.fetchReq(`/akash.provider.v1beta2/UpdateProvider`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
   static DeleteProvider(request: MsgDeleteProvider, initRequest?: fm.InitReq): Promise<MsgDeleteProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta2/DeleteProvider`, { ...initRequest,
+    return fm.fetchReq(`/akash.provider.v1beta2/DeleteProvider`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
 }

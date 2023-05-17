@@ -4,35 +4,29 @@ import { DeepPartial } from "../../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryConnectionRequest, QueryConnectionResponse, QueryConnectionsRequest, QueryConnectionsResponse, QueryClientConnectionsRequest, QueryClientConnectionsResponse, QueryConnectionClientStateRequest, QueryConnectionClientStateResponse, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse } from "./query";
 /** Query provides defines the gRPC querier service */
-
 export interface Query {
   /** Connection queries an IBC connection end. */
   connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse>;
   /** Connections queries all the IBC connections of a chain. */
-
   connections(request?: DeepPartial<QueryConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse>;
   /**
    * ClientConnections queries the connection paths associated with a client
    * state.
    */
-
   clientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse>;
   /**
    * ConnectionClientState queries the client state associated with the
    * connection.
    */
-
   connectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse>;
   /**
    * ConnectionConsensusState queries the consensus state associated with the
    * connection.
    */
-
   connectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.connection = this.connection.bind(this);
@@ -41,29 +35,23 @@ export class QueryClientImpl implements Query {
     this.connectionClientState = this.connectionClientState.bind(this);
     this.connectionConsensusState = this.connectionConsensusState.bind(this);
   }
-
   connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse> {
     return this.rpc.unary(QueryConnectionDesc, QueryConnectionRequest.fromPartial(request), metadata);
   }
-
   connections(request: DeepPartial<QueryConnectionsRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse> {
     return this.rpc.unary(QueryConnectionsDesc, QueryConnectionsRequest.fromPartial(request), metadata);
   }
-
   clientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse> {
     return this.rpc.unary(QueryClientConnectionsDesc, QueryClientConnectionsRequest.fromPartial(request), metadata);
   }
-
   connectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse> {
     return this.rpc.unary(QueryConnectionClientStateDesc, QueryConnectionClientStateRequest.fromPartial(request), metadata);
   }
-
   connectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse> {
     return this.rpc.unary(QueryConnectionConsensusStateDesc, QueryConnectionConsensusStateRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "ibc.core.connection.v1.Query"
@@ -77,19 +65,16 @@ export const QueryConnectionDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryConnectionRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryConnectionResponse.decode(data),
-
+      return {
+        ...QueryConnectionResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryConnectionsDesc: UnaryMethodDefinitionish = {
@@ -101,19 +86,16 @@ export const QueryConnectionsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryConnectionsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryConnectionsResponse.decode(data),
-
+      return {
+        ...QueryConnectionsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryClientConnectionsDesc: UnaryMethodDefinitionish = {
@@ -125,19 +107,16 @@ export const QueryClientConnectionsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryClientConnectionsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryClientConnectionsResponse.decode(data),
-
+      return {
+        ...QueryClientConnectionsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryConnectionClientStateDesc: UnaryMethodDefinitionish = {
@@ -149,19 +128,16 @@ export const QueryConnectionClientStateDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryConnectionClientStateRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryConnectionClientStateResponse.decode(data),
-
+      return {
+        ...QueryConnectionClientStateResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryConnectionConsensusStateDesc: UnaryMethodDefinitionish = {
@@ -173,19 +149,16 @@ export const QueryConnectionConsensusStateDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryConnectionConsensusStateRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryConnectionConsensusStateResponse.decode(data),
-
+      return {
+        ...QueryConnectionConsensusStateResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -198,7 +171,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -207,12 +179,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -235,5 +208,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

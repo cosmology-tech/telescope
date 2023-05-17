@@ -202,7 +202,6 @@ export const protobufPackage = "google.protobuf";
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
-
 export interface FieldMask {
   /** The set of field mask paths. */
   paths: string[];
@@ -412,7 +411,6 @@ export interface FieldMaskProtoMsg {
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
-
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
   paths: string[];
@@ -622,127 +620,99 @@ export interface FieldMaskAminoMsg {
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
-
 export interface FieldMaskSDKType {
   paths: string[];
 }
-
 function createBaseFieldMask(): FieldMask {
   return {
     paths: []
   };
 }
-
 export const FieldMask = {
   typeUrl: "/google.protobuf.FieldMask",
-
   encode(message: FieldMask, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.paths) {
       writer.uint32(10).string(v!);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): FieldMask {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldMask();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.paths.push(reader.string());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): FieldMask {
     return {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
     };
   },
-
   toJSON(message: FieldMask): unknown {
     const obj: any = {};
-
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
       obj.paths = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<FieldMask>): FieldMask {
     const message = createBaseFieldMask();
     message.paths = object.paths?.map(e => e) || [];
     return message;
   },
-
   fromSDK(object: FieldMaskSDKType): FieldMask {
     return {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
-
   toSDK(message: FieldMask): FieldMaskSDKType {
     const obj: any = {};
-
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
       obj.paths = [];
     }
-
     return obj;
   },
-
   fromAmino(object: FieldMaskAmino): FieldMask {
     return {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
-
   toAmino(message: FieldMask): FieldMaskAmino {
     const obj: any = {};
-
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
       obj.paths = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
     return FieldMask.fromAmino(object.value);
   },
-
   fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
     return FieldMask.decode(message.value);
   },
-
   toProto(message: FieldMask): Uint8Array {
     return FieldMask.encode(message).finish();
   },
-
   toProtoMsg(message: FieldMask): FieldMaskProtoMsg {
     return {
       typeUrl: "/google.protobuf.FieldMask",
       value: FieldMask.encode(message).finish()
     };
   }
-
 };

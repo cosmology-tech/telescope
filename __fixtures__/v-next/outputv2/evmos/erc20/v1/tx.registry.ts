@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgConvertCoin.encode(value).finish()
       };
     },
-
     convertERC20(value: MsgConvertERC20) {
       return {
         typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value: MsgConvertERC20.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     convertCoin(value: MsgConvertCoin) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     convertERC20(value: MsgConvertERC20) {
       return {
         typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value
       };
     }
-
   },
   toJSON: {
     convertCoin(value: MsgConvertCoin) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgConvertCoin.toJSON(value)
       };
     },
-
     convertERC20(value: MsgConvertERC20) {
       return {
         typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value: MsgConvertERC20.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     convertCoin(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgConvertCoin.fromJSON(value)
       };
     },
-
     convertERC20(value: any) {
       return {
         typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value: MsgConvertERC20.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     convertCoin(value: MsgConvertCoin) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgConvertCoin.fromPartial(value)
       };
     },
-
     convertERC20(value: MsgConvertERC20) {
       return {
         typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value: MsgConvertERC20.fromPartial(value)
       };
     }
-
   }
 };

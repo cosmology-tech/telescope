@@ -3,26 +3,21 @@ import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from 
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1beta1";
-
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
   expr?: Expr;
-
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo?: SourceInfo;
-
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
-
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
   expr?: ExprSDKType;
   source_info?: SourceInfoSDKType;
   syntax_version: string;
 }
-
 /**
  * An abstract representation of a common expression.
  * 
@@ -47,29 +42,21 @@ export interface Expr {
    * attributes to a node in the parse tree.
    */
   id: number;
-
   /** A literal expression. */
   literalExpr?: Literal;
-
   /** An identifier expression. */
   identExpr?: Expr_Ident;
-
   /** A field selection expression, e.g. `request.auth`. */
   selectExpr?: Expr_Select;
-
   /** A call expression, including calls to predefined functions and operators. */
   callExpr?: Expr_Call;
-
   /** A list creation expression. */
   listExpr?: Expr_CreateList;
-
   /** A map or object creation expression. */
   structExpr?: Expr_CreateStruct;
-
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
-
 /**
  * An abstract representation of a common expression.
  * 
@@ -97,7 +84,6 @@ export interface ExprSDKType {
   struct_expr?: Expr_CreateStructSDKType;
   comprehension_expr?: Expr_ComprehensionSDKType;
 }
-
 /** An identifier expression. e.g. `request`. */
 export interface Expr_Ident {
   /**
@@ -108,12 +94,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
-
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
   name: string;
 }
-
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_Select {
   /**
@@ -123,7 +107,6 @@ export interface Expr_Select {
    * portion of the expression is the `operand`.
    */
   operand?: Expr;
-
   /**
    * Required. The name of the field to select.
    * 
@@ -131,7 +114,6 @@ export interface Expr_Select {
    * of the expression would be the `field`.
    */
   field: string;
-
   /**
    * Whether the select is to be interpreted as a field presence test.
    * 
@@ -139,14 +121,12 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
-
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
   field: string;
   test_only: boolean;
 }
-
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -158,14 +138,11 @@ export interface Expr_Call {
    * `x.f()`.
    */
   target?: Expr;
-
   /** Required. The name of the function or method being called. */
   function: string;
-
   /** The arguments. */
   args: Expr[];
 }
-
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -176,7 +153,6 @@ export interface Expr_CallSDKType {
   function: string;
   args: ExprSDKType[];
 }
-
 /**
  * A list creation expression.
  * 
@@ -187,7 +163,6 @@ export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
 }
-
 /**
  * A list creation expression.
  * 
@@ -197,7 +172,6 @@ export interface Expr_CreateList {
 export interface Expr_CreateListSDKType {
   elements: ExprSDKType[];
 }
-
 /**
  * A map or message creation expression.
  * 
@@ -211,11 +185,9 @@ export interface Expr_CreateStruct {
    * literals.
    */
   type: string;
-
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
-
 /**
  * A map or message creation expression.
  * 
@@ -227,7 +199,6 @@ export interface Expr_CreateStructSDKType {
   type: string;
   entries: Expr_CreateStruct_EntrySDKType[];
 }
-
 /** Represents an entry. */
 export interface Expr_CreateStruct_Entry {
   /**
@@ -236,17 +207,13 @@ export interface Expr_CreateStruct_Entry {
    * information and other attributes to the node.
    */
   id: number;
-
   /** The field key for a message creator statement. */
   fieldKey?: string;
-
   /** The key expression for a map creation statement. */
   mapKey?: Expr;
-
   /** Required. The value assigned to the key. */
   value?: Expr;
 }
-
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
   id: number;
@@ -254,7 +221,6 @@ export interface Expr_CreateStruct_EntrySDKType {
   map_key?: ExprSDKType;
   value?: ExprSDKType;
 }
-
 /**
  * A comprehension expression applied to a list or map.
  * 
@@ -286,16 +252,12 @@ export interface Expr_CreateStruct_EntrySDKType {
 export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
-
   /** The range over which var iterates. */
   iterRange?: Expr;
-
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
-
   /** The initial value of the accumulator. */
   accuInit?: Expr;
-
   /**
    * An expression which can contain iter_var and accu_var.
    * 
@@ -303,14 +265,12 @@ export interface Expr_Comprehension {
    * a hint to short-circuit the remainder of the comprehension.
    */
   loopCondition?: Expr;
-
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Computes the next value of accu_var.
    */
   loopStep?: Expr;
-
   /**
    * An expression which can contain accu_var.
    * 
@@ -318,7 +278,6 @@ export interface Expr_Comprehension {
    */
   result?: Expr;
 }
-
 /**
  * A comprehension expression applied to a list or map.
  * 
@@ -356,7 +315,6 @@ export interface Expr_ComprehensionSDKType {
   loop_step?: ExprSDKType;
   result?: ExprSDKType;
 }
-
 /**
  * Represents a primitive literal.
  * 
@@ -373,26 +331,19 @@ export interface Expr_ComprehensionSDKType {
 export interface Literal {
   /** null value. */
   nullValue?: NullValue;
-
   /** boolean value. */
   boolValue?: boolean;
-
   /** int64 value. */
   int64Value?: Long;
-
   /** uint64 value. */
   uint64Value?: Long;
-
   /** double value. */
   doubleValue?: number;
-
   /** string value. */
   stringValue?: string;
-
   /** bytes value. */
   bytesValue?: Uint8Array;
 }
-
 /**
  * Represents a primitive literal.
  * 
@@ -415,7 +366,6 @@ export interface LiteralSDKType {
   string_value?: string;
   bytes_value?: Uint8Array;
 }
-
 function createBaseParsedExpr(): ParsedExpr {
   return {
     expr: undefined,
@@ -423,54 +373,42 @@ function createBaseParsedExpr(): ParsedExpr {
     syntaxVersion: ""
   };
 }
-
 export const ParsedExpr = {
   encode(message: ParsedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.syntaxVersion !== "") {
       writer.uint32(34).string(message.syntaxVersion);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ParsedExpr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParsedExpr();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           message.expr = Expr.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.syntaxVersion = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ParsedExpr {
     return {
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
@@ -478,7 +416,6 @@ export const ParsedExpr = {
       syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : ""
     };
   },
-
   toJSON(message: ParsedExpr): unknown {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
@@ -486,7 +423,6 @@ export const ParsedExpr = {
     message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
@@ -494,7 +430,6 @@ export const ParsedExpr = {
     message.syntaxVersion = object.syntaxVersion ?? "";
     return message;
   },
-
   fromSDK(object: ParsedExprSDKType): ParsedExpr {
     return {
       expr: object.expr ? Expr.fromSDK(object.expr) : undefined,
@@ -502,7 +437,6 @@ export const ParsedExpr = {
       syntaxVersion: object?.syntax_version
     };
   },
-
   toSDK(message: ParsedExpr): ParsedExprSDKType {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
@@ -510,9 +444,7 @@ export const ParsedExpr = {
     obj.syntax_version = message.syntaxVersion;
     return obj;
   }
-
 };
-
 function createBaseExpr(): Expr {
   return {
     id: 0,
@@ -525,94 +457,72 @@ function createBaseExpr(): Expr {
     comprehensionExpr: undefined
   };
 }
-
 export const Expr = {
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(16).int32(message.id);
     }
-
     if (message.literalExpr !== undefined) {
       Literal.encode(message.literalExpr, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.identExpr !== undefined) {
       Expr_Ident.encode(message.identExpr, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.selectExpr !== undefined) {
       Expr_Select.encode(message.selectExpr, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.callExpr !== undefined) {
       Expr_Call.encode(message.callExpr, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.listExpr !== undefined) {
       Expr_CreateList.encode(message.listExpr, writer.uint32(58).fork()).ldelim();
     }
-
     if (message.structExpr !== undefined) {
       Expr_CreateStruct.encode(message.structExpr, writer.uint32(66).fork()).ldelim();
     }
-
     if (message.comprehensionExpr !== undefined) {
       Expr_Comprehension.encode(message.comprehensionExpr, writer.uint32(74).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           message.id = reader.int32();
           break;
-
         case 3:
           message.literalExpr = Literal.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.identExpr = Expr_Ident.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.selectExpr = Expr_Select.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.callExpr = Expr_Call.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.listExpr = Expr_CreateList.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.structExpr = Expr_CreateStruct.decode(reader, reader.uint32());
           break;
-
         case 9:
           message.comprehensionExpr = Expr_Comprehension.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
@@ -625,7 +535,6 @@ export const Expr = {
       comprehensionExpr: isSet(object.comprehensionExpr) ? Expr_Comprehension.fromJSON(object.comprehensionExpr) : undefined
     };
   },
-
   toJSON(message: Expr): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
@@ -638,7 +547,6 @@ export const Expr = {
     message.comprehensionExpr !== undefined && (obj.comprehensionExpr = message.comprehensionExpr ? Expr_Comprehension.toJSON(message.comprehensionExpr) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
@@ -651,7 +559,6 @@ export const Expr = {
     message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
   },
-
   fromSDK(object: ExprSDKType): Expr {
     return {
       id: object?.id,
@@ -664,7 +571,6 @@ export const Expr = {
       comprehensionExpr: object.comprehension_expr ? Expr_Comprehension.fromSDK(object.comprehension_expr) : undefined
     };
   },
-
   toSDK(message: Expr): ExprSDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -677,78 +583,62 @@ export const Expr = {
     message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
     return obj;
   }
-
 };
-
 function createBaseExpr_Ident(): Expr_Ident {
   return {
     name: ""
   };
 }
-
 export const Expr_Ident = {
   encode(message: Expr_Ident, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Ident {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Ident();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_Ident {
     return {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-
   toJSON(message: Expr_Ident): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_Ident>): Expr_Ident {
     const message = createBaseExpr_Ident();
     message.name = object.name ?? "";
     return message;
   },
-
   fromSDK(object: Expr_IdentSDKType): Expr_Ident {
     return {
       name: object?.name
     };
   },
-
   toSDK(message: Expr_Ident): Expr_IdentSDKType {
     const obj: any = {};
     obj.name = message.name;
     return obj;
   }
-
 };
-
 function createBaseExpr_Select(): Expr_Select {
   return {
     operand: undefined,
@@ -756,54 +646,42 @@ function createBaseExpr_Select(): Expr_Select {
     testOnly: false
   };
 }
-
 export const Expr_Select = {
   encode(message: Expr_Select, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.field !== "") {
       writer.uint32(18).string(message.field);
     }
-
     if (message.testOnly === true) {
       writer.uint32(24).bool(message.testOnly);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Select {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Select();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.operand = Expr.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.field = reader.string();
           break;
-
         case 3:
           message.testOnly = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_Select {
     return {
       operand: isSet(object.operand) ? Expr.fromJSON(object.operand) : undefined,
@@ -811,7 +689,6 @@ export const Expr_Select = {
       testOnly: isSet(object.testOnly) ? Boolean(object.testOnly) : false
     };
   },
-
   toJSON(message: Expr_Select): unknown {
     const obj: any = {};
     message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
@@ -819,7 +696,6 @@ export const Expr_Select = {
     message.testOnly !== undefined && (obj.testOnly = message.testOnly);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
     const message = createBaseExpr_Select();
     message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : undefined;
@@ -827,7 +703,6 @@ export const Expr_Select = {
     message.testOnly = object.testOnly ?? false;
     return message;
   },
-
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
     return {
       operand: object.operand ? Expr.fromSDK(object.operand) : undefined,
@@ -835,7 +710,6 @@ export const Expr_Select = {
       testOnly: object?.test_only
     };
   },
-
   toSDK(message: Expr_Select): Expr_SelectSDKType {
     const obj: any = {};
     message.operand !== undefined && (obj.operand = message.operand ? Expr.toSDK(message.operand) : undefined);
@@ -843,9 +717,7 @@ export const Expr_Select = {
     obj.test_only = message.testOnly;
     return obj;
   }
-
 };
-
 function createBaseExpr_Call(): Expr_Call {
   return {
     target: undefined,
@@ -853,54 +725,42 @@ function createBaseExpr_Call(): Expr_Call {
     args: []
   };
 }
-
 export const Expr_Call = {
   encode(message: Expr_Call, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.function !== "") {
       writer.uint32(18).string(message.function);
     }
-
     for (const v of message.args) {
       Expr.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Call {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Call();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.target = Expr.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.function = reader.string();
           break;
-
         case 3:
           message.args.push(Expr.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_Call {
     return {
       target: isSet(object.target) ? Expr.fromJSON(object.target) : undefined,
@@ -908,21 +768,17 @@ export const Expr_Call = {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Expr_Call): unknown {
     const obj: any = {};
     message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
     message.function !== undefined && (obj.function = message.function);
-
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toJSON(e) : undefined);
     } else {
       obj.args = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
     message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : undefined;
@@ -930,7 +786,6 @@ export const Expr_Call = {
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Expr_CallSDKType): Expr_Call {
     return {
       target: object.target ? Expr.fromSDK(object.target) : undefined,
@@ -938,199 +793,156 @@ export const Expr_Call = {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
     };
   },
-
   toSDK(message: Expr_Call): Expr_CallSDKType {
     const obj: any = {};
     message.target !== undefined && (obj.target = message.target ? Expr.toSDK(message.target) : undefined);
     obj.function = message.function;
-
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toSDK(e) : undefined);
     } else {
       obj.args = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseExpr_CreateList(): Expr_CreateList {
   return {
     elements: []
   };
 }
-
 export const Expr_CreateList = {
   encode(message: Expr_CreateList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateList {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateList();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.elements.push(Expr.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_CreateList {
     return {
       elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Expr_CreateList): unknown {
     const obj: any = {};
-
     if (message.elements) {
       obj.elements = message.elements.map(e => e ? Expr.toJSON(e) : undefined);
     } else {
       obj.elements = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_CreateList>): Expr_CreateList {
     const message = createBaseExpr_CreateList();
     message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Expr_CreateListSDKType): Expr_CreateList {
     return {
       elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDK(e)) : []
     };
   },
-
   toSDK(message: Expr_CreateList): Expr_CreateListSDKType {
     const obj: any = {};
-
     if (message.elements) {
       obj.elements = message.elements.map(e => e ? Expr.toSDK(e) : undefined);
     } else {
       obj.elements = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
   return {
     type: "",
     entries: []
   };
 }
-
 export const Expr_CreateStruct = {
   encode(message: Expr_CreateStruct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-
     for (const v of message.entries) {
       Expr_CreateStruct_Entry.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.string();
           break;
-
         case 2:
           message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_CreateStruct {
     return {
       type: isSet(object.type) ? String(object.type) : "",
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Expr_CreateStruct): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toJSON(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_CreateStruct>): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
     message.type = object.type ?? "";
     message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
     return {
       type: object?.type,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
     };
   },
-
   toSDK(message: Expr_CreateStruct): Expr_CreateStructSDKType {
     const obj: any = {};
     obj.type = message.type;
-
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toSDK(e) : undefined);
     } else {
       obj.entries = [];
     }
-
     return obj;
   }
-
 };
-
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
     id: 0,
@@ -1139,62 +951,48 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
     value: undefined
   };
 }
-
 export const Expr_CreateStruct_Entry = {
   encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-
     if (message.fieldKey !== undefined) {
       writer.uint32(18).string(message.fieldKey);
     }
-
     if (message.mapKey !== undefined) {
       Expr.encode(message.mapKey, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.value !== undefined) {
       Expr.encode(message.value, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct_Entry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.id = reader.int32();
           break;
-
         case 2:
           message.fieldKey = reader.string();
           break;
-
         case 3:
           message.mapKey = Expr.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.value = Expr.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
@@ -1203,7 +1001,6 @@ export const Expr_CreateStruct_Entry = {
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
-
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
@@ -1212,7 +1009,6 @@ export const Expr_CreateStruct_Entry = {
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id ?? 0;
@@ -1221,7 +1017,6 @@ export const Expr_CreateStruct_Entry = {
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   },
-
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
     return {
       id: object?.id,
@@ -1230,7 +1025,6 @@ export const Expr_CreateStruct_Entry = {
       value: object.value ? Expr.fromSDK(object.value) : undefined
     };
   },
-
   toSDK(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntrySDKType {
     const obj: any = {};
     obj.id = message.id;
@@ -1239,9 +1033,7 @@ export const Expr_CreateStruct_Entry = {
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
   }
-
 };
-
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
     iterVar: "",
@@ -1253,86 +1045,66 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
     result: undefined
   };
 }
-
 export const Expr_Comprehension = {
   encode(message: Expr_Comprehension, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
     }
-
     if (message.iterRange !== undefined) {
       Expr.encode(message.iterRange, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.accuVar !== "") {
       writer.uint32(26).string(message.accuVar);
     }
-
     if (message.accuInit !== undefined) {
       Expr.encode(message.accuInit, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.loopCondition !== undefined) {
       Expr.encode(message.loopCondition, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.loopStep !== undefined) {
       Expr.encode(message.loopStep, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.result !== undefined) {
       Expr.encode(message.result, writer.uint32(58).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Comprehension {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Comprehension();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.iterVar = reader.string();
           break;
-
         case 2:
           message.iterRange = Expr.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.accuVar = reader.string();
           break;
-
         case 4:
           message.accuInit = Expr.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.loopCondition = Expr.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.loopStep = Expr.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.result = Expr.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Expr_Comprehension {
     return {
       iterVar: isSet(object.iterVar) ? String(object.iterVar) : "",
@@ -1344,7 +1116,6 @@ export const Expr_Comprehension = {
       result: isSet(object.result) ? Expr.fromJSON(object.result) : undefined
     };
   },
-
   toJSON(message: Expr_Comprehension): unknown {
     const obj: any = {};
     message.iterVar !== undefined && (obj.iterVar = message.iterVar);
@@ -1356,7 +1127,6 @@ export const Expr_Comprehension = {
     message.result !== undefined && (obj.result = message.result ? Expr.toJSON(message.result) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
     message.iterVar = object.iterVar ?? "";
@@ -1368,7 +1138,6 @@ export const Expr_Comprehension = {
     message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : undefined;
     return message;
   },
-
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
     return {
       iterVar: object?.iter_var,
@@ -1380,7 +1149,6 @@ export const Expr_Comprehension = {
       result: object.result ? Expr.fromSDK(object.result) : undefined
     };
   },
-
   toSDK(message: Expr_Comprehension): Expr_ComprehensionSDKType {
     const obj: any = {};
     obj.iter_var = message.iterVar;
@@ -1392,9 +1160,7 @@ export const Expr_Comprehension = {
     message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
     return obj;
   }
-
 };
-
 function createBaseLiteral(): Literal {
   return {
     nullValue: undefined,
@@ -1406,86 +1172,66 @@ function createBaseLiteral(): Literal {
     bytesValue: undefined
   };
 }
-
 export const Literal = {
   encode(message: Literal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
-
     if (message.boolValue !== undefined) {
       writer.uint32(16).bool(message.boolValue);
     }
-
     if (message.int64Value !== undefined) {
       writer.uint32(24).int64(message.int64Value);
     }
-
     if (message.uint64Value !== undefined) {
       writer.uint32(32).uint64(message.uint64Value);
     }
-
     if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
     }
-
     if (message.stringValue !== undefined) {
       writer.uint32(50).string(message.stringValue);
     }
-
     if (message.bytesValue !== undefined) {
       writer.uint32(58).bytes(message.bytesValue);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Literal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiteral();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nullValue = (reader.int32() as any);
           break;
-
         case 2:
           message.boolValue = reader.bool();
           break;
-
         case 3:
           message.int64Value = (reader.int64() as Long);
           break;
-
         case 4:
           message.uint64Value = (reader.uint64() as Long);
           break;
-
         case 5:
           message.doubleValue = reader.double();
           break;
-
         case 6:
           message.stringValue = reader.string();
           break;
-
         case 7:
           message.bytesValue = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Literal {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
@@ -1497,7 +1243,6 @@ export const Literal = {
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined
     };
   },
-
   toJSON(message: Literal): unknown {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
@@ -1509,7 +1254,6 @@ export const Literal = {
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Literal>): Literal {
     const message = createBaseLiteral();
     message.nullValue = object.nullValue ?? undefined;
@@ -1521,7 +1265,6 @@ export const Literal = {
     message.bytesValue = object.bytesValue ?? undefined;
     return message;
   },
-
   fromSDK(object: LiteralSDKType): Literal {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -1533,7 +1276,6 @@ export const Literal = {
       bytesValue: object?.bytes_value
     };
   },
-
   toSDK(message: Literal): LiteralSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
@@ -1545,5 +1287,4 @@ export const Literal = {
     obj.bytes_value = message.bytesValue;
     return obj;
   }
-
 };

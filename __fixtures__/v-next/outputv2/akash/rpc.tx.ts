@@ -12,7 +12,6 @@ export const createRPCMsgClient = async ({
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
   let grpcWeb;
-
   if (typeof document !== "undefined") {
     grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
       transport: grpc.CrossBrowserHttpTransport({
@@ -28,7 +27,6 @@ export const createRPCMsgClient = async ({
       transport: NodeHttpTransport()
     });
   }
-
   return {
     akash: {
       audit: {

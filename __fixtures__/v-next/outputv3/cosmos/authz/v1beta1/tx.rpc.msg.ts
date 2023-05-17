@@ -10,33 +10,33 @@ export class Msg {
    * will be overwritten.
    */
   static Grant(request: MsgGrant, initRequest?: fm.InitReq): Promise<MsgGrantResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Grant`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.authz.v1beta1/Grant`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /**
    * Exec attempts to execute the provided messages using
    * authorizations granted to the grantee. Each message should have only
    * one signer corresponding to the granter of the authorization.
    */
   static Exec(request: MsgExec, initRequest?: fm.InitReq): Promise<MsgExecResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Exec`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.authz.v1beta1/Exec`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /**
    * Revoke revokes any authorization corresponding to the provided method name on the
    * granter's account that has been granted to the grantee.
    */
   static Revoke(request: MsgRevoke, initRequest?: fm.InitReq): Promise<MsgRevokeResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Revoke`, { ...initRequest,
+    return fm.fetchReq(`/cosmos.authz.v1beta1/Revoke`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
 }

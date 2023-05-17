@@ -152,11 +152,26 @@ export const plugin = (
                             asts.push(createRpcQueryExtension(ctx.generic, svc));
                         }
 
+
                         // see if current file has been reactQuery enabled and included
                         const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
                             c.ref,
                             c.proto.pluginValue('reactQuery.include')
                         )
+
+                        const includeMobxHooks = c.proto.pluginValue('mobx.enabled') && isRefIncluded(
+                          c.ref,
+                          c.proto.pluginValue('mobx.include')
+                        )
+
+                        if (includeReactQueryHooks) {
+                            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+                        }
+
+                        // enable getQueryService for plugins using it.
+                        if (includeReactQueryHooks || includeMobxHooks) {
+                            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                        }
 
                         // react query
                         // generate react query parts if included.
@@ -167,8 +182,6 @@ export const plugin = (
                         // export const createRpcQueryHooks = ...
                         // TODO use the imports and make separate files
                         if (includeReactQueryHooks) {
-                            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
-                            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                             asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
 
                             reactQueryBundlerFiles.push(bundlerFile);

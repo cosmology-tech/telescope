@@ -4,18 +4,18 @@ import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignPro
 export class Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
   static SignProviderAttributes(request: MsgSignProviderAttributes, initRequest?: fm.InitReq): Promise<MsgSignProviderAttributesResponse> {
-    return fm.fetchReq(`/akash.audit.v1beta1/SignProviderAttributes`, { ...initRequest,
+    return fm.fetchReq(`/akash.audit.v1beta1/SignProviderAttributes`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
   static DeleteProviderAttributes(request: MsgDeleteProviderAttributes, initRequest?: fm.InitReq): Promise<MsgDeleteProviderAttributesResponse> {
-    return fm.fetchReq(`/akash.audit.v1beta1/DeleteProviderAttributes`, { ...initRequest,
+    return fm.fetchReq(`/akash.audit.v1beta1/DeleteProviderAttributes`, {
+      ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-
 }

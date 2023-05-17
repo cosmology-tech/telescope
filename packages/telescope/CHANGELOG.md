@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.94.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.94.0...@osmonauts/telescope@0.94.1) (2023-05-16)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.94.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.93.0...@osmonauts/telescope@0.94.0) (2023-04-14)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.93.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.92.2...@osmonauts/telescope@0.93.0) (2023-04-11)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.92.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.92.1...@osmonauts/telescope@0.92.2) (2023-04-11)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.92.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.92.0...@osmonauts/telescope@0.92.1) (2023-04-11)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.92.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.91.0...@osmonauts/telescope@0.92.0) (2023-04-11)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.91.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.90.0...@osmonauts/telescope@0.91.0) (2023-04-10)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
 # [0.90.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.89.0...@osmonauts/telescope@0.90.0) (2023-04-07)
 
 **Note:** Version bump only for package @osmonauts/telescope

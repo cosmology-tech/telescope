@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgCreateClawbackVestingAccount.encode(value).finish()
       };
     },
-
     clawback(value: MsgClawback) {
       return {
         typeUrl: "/evmos.vesting.v1.MsgClawback",
         value: MsgClawback.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createClawbackVestingAccount(value: MsgCreateClawbackVestingAccount) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     clawback(value: MsgClawback) {
       return {
         typeUrl: "/evmos.vesting.v1.MsgClawback",
         value
       };
     }
-
   },
   toJSON: {
     createClawbackVestingAccount(value: MsgCreateClawbackVestingAccount) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgCreateClawbackVestingAccount.toJSON(value)
       };
     },
-
     clawback(value: MsgClawback) {
       return {
         typeUrl: "/evmos.vesting.v1.MsgClawback",
         value: MsgClawback.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createClawbackVestingAccount(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgCreateClawbackVestingAccount.fromJSON(value)
       };
     },
-
     clawback(value: any) {
       return {
         typeUrl: "/evmos.vesting.v1.MsgClawback",
         value: MsgClawback.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createClawbackVestingAccount(value: MsgCreateClawbackVestingAccount) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgCreateClawbackVestingAccount.fromPartial(value)
       };
     },
-
     clawback(value: MsgClawback) {
       return {
         typeUrl: "/evmos.vesting.v1.MsgClawback",
         value: MsgClawback.fromPartial(value)
       };
     }
-
   }
 };

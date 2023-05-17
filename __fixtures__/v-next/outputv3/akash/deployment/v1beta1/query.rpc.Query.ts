@@ -7,26 +7,29 @@ import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymen
 export class Query {
   /** Deployments queries deployments */
   static Deployments(request: QueryDeploymentsRequest, initRequest?: fm.InitReq): Promise<QueryDeploymentsResponse> {
-    return fm.fetchReq(`/akash/deployment/v1beta1/deployments/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/deployment/v1beta1/deployments/list?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
   /** Deployment queries deployment details */
   static Deployment(request: QueryDeploymentRequest, initRequest?: fm.InitReq): Promise<QueryDeploymentResponse> {
-    return fm.fetchReq(`/akash/deployment/v1beta1/deployments/info?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/deployment/v1beta1/deployments/info?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
   /** Group queries group details */
   static Group(request: QueryGroupRequest, initRequest?: fm.InitReq): Promise<QueryGroupResponse> {
-    return fm.fetchReq(`/akash/deployment/v1beta1/groups/info?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/deployment/v1beta1/groups/info?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

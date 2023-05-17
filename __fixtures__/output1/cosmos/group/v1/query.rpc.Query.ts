@@ -6,51 +6,37 @@ import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-
 /** Query is the cosmos.group.v1 Query service. */
 export interface Query {
   /** GroupInfo queries group info based on group id. */
   groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse>;
-
   /** GroupPolicyInfo queries group policy info based on account address of group policy. */
   groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse>;
-
   /** GroupMembers queries members of a group */
   groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse>;
-
   /** GroupsByAdmin queries groups by admin address. */
   groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse>;
-
   /** GroupPoliciesByGroup queries group policies by group id. */
   groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse>;
-
   /** GroupsByAdmin queries group policies by admin address. */
   groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse>;
-
   /** Proposal queries a proposal based on proposal id. */
   proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
-
   /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
   proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse>;
-
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
   voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse>;
-
   /** VotesByProposal queries a vote by proposal. */
   votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse>;
-
   /** VotesByVoter queries a vote by voter. */
   votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse>;
-
   /** GroupsByMember queries groups by member address. */
   groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse>;
-
   /** TallyResult queries the tally of a proposal votes. */
   tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.groupInfo = this.groupInfo.bind(this);
@@ -67,85 +53,71 @@ export class QueryClientImpl implements Query {
     this.groupsByMember = this.groupsByMember.bind(this);
     this.tallyResult = this.tallyResult.bind(this);
   }
-
   groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
     const data = QueryGroupInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupInfo", data);
     return promise.then(data => QueryGroupInfoResponse.decode(new _m0.Reader(data)));
   }
-
   groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
     const data = QueryGroupPolicyInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPolicyInfo", data);
     return promise.then(data => QueryGroupPolicyInfoResponse.decode(new _m0.Reader(data)));
   }
-
   groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse> {
     const data = QueryGroupMembersRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupMembers", data);
     return promise.then(data => QueryGroupMembersResponse.decode(new _m0.Reader(data)));
   }
-
   groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse> {
     const data = QueryGroupsByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupsByAdmin", data);
     return promise.then(data => QueryGroupsByAdminResponse.decode(new _m0.Reader(data)));
   }
-
   groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse> {
     const data = QueryGroupPoliciesByGroupRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPoliciesByGroup", data);
     return promise.then(data => QueryGroupPoliciesByGroupResponse.decode(new _m0.Reader(data)));
   }
-
   groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse> {
     const data = QueryGroupPoliciesByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPoliciesByAdmin", data);
     return promise.then(data => QueryGroupPoliciesByAdminResponse.decode(new _m0.Reader(data)));
   }
-
   proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
     const data = QueryProposalRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "Proposal", data);
     return promise.then(data => QueryProposalResponse.decode(new _m0.Reader(data)));
   }
-
   proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse> {
     const data = QueryProposalsByGroupPolicyRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "ProposalsByGroupPolicy", data);
     return promise.then(data => QueryProposalsByGroupPolicyResponse.decode(new _m0.Reader(data)));
   }
-
   voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
     const data = QueryVoteByProposalVoterRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VoteByProposalVoter", data);
     return promise.then(data => QueryVoteByProposalVoterResponse.decode(new _m0.Reader(data)));
   }
-
   votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse> {
     const data = QueryVotesByProposalRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VotesByProposal", data);
     return promise.then(data => QueryVotesByProposalResponse.decode(new _m0.Reader(data)));
   }
-
   votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse> {
     const data = QueryVotesByVoterRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VotesByVoter", data);
     return promise.then(data => QueryVotesByVoterResponse.decode(new _m0.Reader(data)));
   }
-
   groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse> {
     const data = QueryGroupsByMemberRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupsByMember", data);
     return promise.then(data => QueryGroupsByMemberResponse.decode(new _m0.Reader(data)));
   }
-
   tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
     const data = QueryTallyResultRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "TallyResult", data);
     return promise.then(data => QueryTallyResultResponse.decode(new _m0.Reader(data)));
   }
-
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -154,55 +126,42 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
       return queryService.groupInfo(request);
     },
-
     groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
       return queryService.groupPolicyInfo(request);
     },
-
     groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse> {
       return queryService.groupMembers(request);
     },
-
     groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse> {
       return queryService.groupsByAdmin(request);
     },
-
     groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse> {
       return queryService.groupPoliciesByGroup(request);
     },
-
     groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse> {
       return queryService.groupPoliciesByAdmin(request);
     },
-
     proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
       return queryService.proposal(request);
     },
-
     proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse> {
       return queryService.proposalsByGroupPolicy(request);
     },
-
     voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
       return queryService.voteByProposalVoter(request);
     },
-
     votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse> {
       return queryService.votesByProposal(request);
     },
-
     votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse> {
       return queryService.votesByVoter(request);
     },
-
     groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse> {
       return queryService.groupsByMember(request);
     },
-
     tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
       return queryService.tallyResult(request);
     }
-
   };
 };
 export interface UseGroupInfoQuery<TData> extends ReactQueryParams<QueryGroupInfoResponse, TData> {
@@ -244,26 +203,18 @@ export interface UseGroupsByMemberQuery<TData> extends ReactQueryParams<QueryGro
 export interface UseTallyResultQuery<TData> extends ReactQueryParams<QueryTallyResultResponse, TData> {
   request: QueryTallyResultRequest;
 }
-
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
 const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
   if (!rpc) return;
-
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
-
   const queryService = new QueryClientImpl(rpc);
-
   _queryClients.set(rpc, queryService);
-
   return queryService;
 };
-
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useGroupInfo = <TData = QueryGroupInfoResponse,>({
     request,
     options
@@ -273,7 +224,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupInfo(request);
     }, options);
   };
-
   const useGroupPolicyInfo = <TData = QueryGroupPolicyInfoResponse,>({
     request,
     options
@@ -283,7 +233,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupPolicyInfo(request);
     }, options);
   };
-
   const useGroupMembers = <TData = QueryGroupMembersResponse,>({
     request,
     options
@@ -293,7 +242,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupMembers(request);
     }, options);
   };
-
   const useGroupsByAdmin = <TData = QueryGroupsByAdminResponse,>({
     request,
     options
@@ -303,7 +251,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupsByAdmin(request);
     }, options);
   };
-
   const useGroupPoliciesByGroup = <TData = QueryGroupPoliciesByGroupResponse,>({
     request,
     options
@@ -313,7 +260,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupPoliciesByGroup(request);
     }, options);
   };
-
   const useGroupPoliciesByAdmin = <TData = QueryGroupPoliciesByAdminResponse,>({
     request,
     options
@@ -323,7 +269,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupPoliciesByAdmin(request);
     }, options);
   };
-
   const useProposal = <TData = QueryProposalResponse,>({
     request,
     options
@@ -333,7 +278,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.proposal(request);
     }, options);
   };
-
   const useProposalsByGroupPolicy = <TData = QueryProposalsByGroupPolicyResponse,>({
     request,
     options
@@ -343,7 +287,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.proposalsByGroupPolicy(request);
     }, options);
   };
-
   const useVoteByProposalVoter = <TData = QueryVoteByProposalVoterResponse,>({
     request,
     options
@@ -353,7 +296,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.voteByProposalVoter(request);
     }, options);
   };
-
   const useVotesByProposal = <TData = QueryVotesByProposalResponse,>({
     request,
     options
@@ -363,7 +305,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.votesByProposal(request);
     }, options);
   };
-
   const useVotesByVoter = <TData = QueryVotesByVoterResponse,>({
     request,
     options
@@ -373,7 +314,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.votesByVoter(request);
     }, options);
   };
-
   const useGroupsByMember = <TData = QueryGroupsByMemberResponse,>({
     request,
     options
@@ -383,7 +323,6 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.groupsByMember(request);
     }, options);
   };
-
   const useTallyResult = <TData = QueryTallyResultResponse,>({
     request,
     options
@@ -393,45 +332,19 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
       return queryService.tallyResult(request);
     }, options);
   };
-
   return {
-    /** GroupInfo queries group info based on group id. */
-    useGroupInfo,
-
-    /** GroupPolicyInfo queries group policy info based on account address of group policy. */
-    useGroupPolicyInfo,
-
-    /** GroupMembers queries members of a group */
-    useGroupMembers,
-
-    /** GroupsByAdmin queries groups by admin address. */
-    useGroupsByAdmin,
-
-    /** GroupPoliciesByGroup queries group policies by group id. */
-    useGroupPoliciesByGroup,
-
-    /** GroupsByAdmin queries group policies by admin address. */
-    useGroupPoliciesByAdmin,
-
-    /** Proposal queries a proposal based on proposal id. */
-    useProposal,
-
-    /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
-    useProposalsByGroupPolicy,
-
-    /** VoteByProposalVoter queries a vote by proposal id and voter. */
-    useVoteByProposalVoter,
-
-    /** VotesByProposal queries a vote by proposal. */
-    useVotesByProposal,
-
-    /** VotesByVoter queries a vote by voter. */
-    useVotesByVoter,
-
-    /** GroupsByMember queries groups by member address. */
-    useGroupsByMember,
-
-    /** TallyResult queries the tally of a proposal votes. */
-    useTallyResult
+    /** GroupInfo queries group info based on group id. */useGroupInfo,
+    /** GroupPolicyInfo queries group policy info based on account address of group policy. */useGroupPolicyInfo,
+    /** GroupMembers queries members of a group */useGroupMembers,
+    /** GroupsByAdmin queries groups by admin address. */useGroupsByAdmin,
+    /** GroupPoliciesByGroup queries group policies by group id. */useGroupPoliciesByGroup,
+    /** GroupsByAdmin queries group policies by admin address. */useGroupPoliciesByAdmin,
+    /** Proposal queries a proposal based on proposal id. */useProposal,
+    /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */useProposalsByGroupPolicy,
+    /** VoteByProposalVoter queries a vote by proposal id and voter. */useVoteByProposalVoter,
+    /** VotesByProposal queries a vote by proposal. */useVotesByProposal,
+    /** VotesByVoter queries a vote by voter. */useVotesByVoter,
+    /** GroupsByMember queries groups by member address. */useGroupsByMember,
+    /** TallyResult queries the tally of a proposal votes. */useTallyResult
   };
 };

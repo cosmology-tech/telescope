@@ -14,7 +14,6 @@ export const MessageComposer = {
         value: MsgCreateBalancerPool.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createBalancerPool(value: MsgCreateBalancerPool) {
@@ -23,7 +22,6 @@ export const MessageComposer = {
         value
       };
     }
-
   },
   toJSON: {
     createBalancerPool(value: MsgCreateBalancerPool) {
@@ -32,7 +30,6 @@ export const MessageComposer = {
         value: MsgCreateBalancerPool.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createBalancerPool(value: any) {
@@ -41,7 +38,6 @@ export const MessageComposer = {
         value: MsgCreateBalancerPool.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createBalancerPool(value: MsgCreateBalancerPool) {
@@ -50,6 +46,5 @@ export const MessageComposer = {
         value: MsgCreateBalancerPool.fromPartial(value)
       };
     }
-
   }
 };

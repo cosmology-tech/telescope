@@ -17,7 +17,6 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
  *       (target_pool_weights - initial_pool_weights) / (duration)
  *   t > start_time + duration: w(t) = target_pool_weights
  */
-
 export interface SmoothWeightChangeParams {
   /**
    * The start time for beginning the weight change.
@@ -26,7 +25,6 @@ export interface SmoothWeightChangeParams {
    */
   startTime?: Date;
   /** Duration for the weights to change over */
-
   duration?: Duration;
   /**
    * The initial pool weights. These are copied from the pool's settings
@@ -35,7 +33,6 @@ export interface SmoothWeightChangeParams {
    * future type refactorings should just have a type with the denom & weight
    * here.
    */
-
   initialPoolWeights: PoolAsset[];
   /**
    * The target pool weights. The pool weights will change linearly with respect
@@ -43,7 +40,6 @@ export interface SmoothWeightChangeParams {
    * PoolAsset.token.amount field is ignored if present, future type
    * refactorings should just have a type with the denom & weight here.
    */
-
   targetPoolWeights: PoolAsset[];
 }
 export interface SmoothWeightChangeParamsProtoMsg {
@@ -63,7 +59,6 @@ export interface SmoothWeightChangeParamsProtoMsg {
  *       (target_pool_weights - initial_pool_weights) / (duration)
  *   t > start_time + duration: w(t) = target_pool_weights
  */
-
 export interface SmoothWeightChangeParamsAmino {
   /**
    * The start time for beginning the weight change.
@@ -72,7 +67,6 @@ export interface SmoothWeightChangeParamsAmino {
    */
   start_time?: Date;
   /** Duration for the weights to change over */
-
   duration?: DurationAmino;
   /**
    * The initial pool weights. These are copied from the pool's settings
@@ -81,7 +75,6 @@ export interface SmoothWeightChangeParamsAmino {
    * future type refactorings should just have a type with the denom & weight
    * here.
    */
-
   initial_pool_weights: PoolAssetAmino[];
   /**
    * The target pool weights. The pool weights will change linearly with respect
@@ -89,7 +82,6 @@ export interface SmoothWeightChangeParamsAmino {
    * PoolAsset.token.amount field is ignored if present, future type
    * refactorings should just have a type with the denom & weight here.
    */
-
   target_pool_weights: PoolAssetAmino[];
 }
 export interface SmoothWeightChangeParamsAminoMsg {
@@ -109,7 +101,6 @@ export interface SmoothWeightChangeParamsAminoMsg {
  *       (target_pool_weights - initial_pool_weights) / (duration)
  *   t > start_time + duration: w(t) = target_pool_weights
  */
-
 export interface SmoothWeightChangeParamsSDKType {
   start_time?: Date;
   duration?: DurationSDKType;
@@ -122,7 +113,6 @@ export interface SmoothWeightChangeParamsSDKType {
  * governance. Instead they will be managed by the token holders of the pool.
  * The pool's token holders are specified in future_pool_governor.
  */
-
 export interface PoolParams {
   swapFee: string;
   exitFee: string;
@@ -138,7 +128,6 @@ export interface PoolParamsProtoMsg {
  * governance. Instead they will be managed by the token holders of the pool.
  * The pool's token holders are specified in future_pool_governor.
  */
-
 export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
@@ -154,7 +143,6 @@ export interface PoolParamsAminoMsg {
  * governance. Instead they will be managed by the token holders of the pool.
  * The pool's token holders are specified in future_pool_governor.
  */
-
 export interface PoolParamsSDKType {
   swap_fee: string;
   exit_fee: string;
@@ -166,7 +154,6 @@ export interface PoolParamsSDKType {
  * This is an awkward packaging of data,
  * and should be revisited in a future state migration.
  */
-
 export interface PoolAsset {
   /**
    * Coins we are talking about,
@@ -174,7 +161,6 @@ export interface PoolAsset {
    */
   token?: Coin;
   /** Weight that is not normalized. This weight must be less than 2^50 */
-
   weight: string;
 }
 export interface PoolAssetProtoMsg {
@@ -187,7 +173,6 @@ export interface PoolAssetProtoMsg {
  * This is an awkward packaging of data,
  * and should be revisited in a future state migration.
  */
-
 export interface PoolAssetAmino {
   /**
    * Coins we are talking about,
@@ -195,7 +180,6 @@ export interface PoolAssetAmino {
    */
   token?: CoinAmino;
   /** Weight that is not normalized. This weight must be less than 2^50 */
-
   weight: string;
 }
 export interface PoolAssetAminoMsg {
@@ -208,7 +192,6 @@ export interface PoolAssetAminoMsg {
  * This is an awkward packaging of data,
  * and should be revisited in a future state migration.
  */
-
 export interface PoolAssetSDKType {
   token?: CoinSDKType;
   weight: string;
@@ -228,19 +211,15 @@ export interface Pool {
    * would need to be locked up to count in governance. 0w means no lockup.
    * TODO: Further improve these docs
    */
-
   futurePoolGovernor: string;
   /** sum of all LP tokens sent out */
-
   totalShares?: Coin;
   /**
    * These are assumed to be sorted by denomiation.
    * They contain the pool asset and the information about the weight
    */
-
   poolAssets: PoolAsset[];
   /** sum of all non-normalized pool weights */
-
   totalWeight: string;
 }
 export interface PoolProtoMsg {
@@ -262,19 +241,15 @@ export interface PoolAmino {
    * would need to be locked up to count in governance. 0w means no lockup.
    * TODO: Further improve these docs
    */
-
   future_pool_governor: string;
   /** sum of all LP tokens sent out */
-
   total_shares?: CoinAmino;
   /**
    * These are assumed to be sorted by denomiation.
    * They contain the pool asset and the information about the weight
    */
-
   pool_assets: PoolAssetAmino[];
   /** sum of all non-normalized pool weights */
-
   total_weight: string;
 }
 export interface PoolAminoMsg {
@@ -290,7 +265,6 @@ export interface PoolSDKType {
   pool_assets: PoolAssetSDKType[];
   total_weight: string;
 }
-
 function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   return {
     startTime: undefined,
@@ -299,65 +273,50 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
     targetPoolWeights: []
   };
 }
-
 export const SmoothWeightChangeParams = {
   typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
   aminoType: "osmosis/gamm/smooth-weight-change-params",
-
   encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
     }
-
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.initialPoolWeights) {
       PoolAsset.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     for (const v of message.targetPoolWeights) {
       PoolAsset.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SmoothWeightChangeParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSmoothWeightChangeParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.duration = Duration.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.initialPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.targetPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
@@ -366,27 +325,22 @@ export const SmoothWeightChangeParams = {
       targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
     };
   },
-
   toJSON(message: SmoothWeightChangeParams): unknown {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-
     if (message.initialPoolWeights) {
       obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
     } else {
       obj.initialPoolWeights = [];
     }
-
     if (message.targetPoolWeights) {
       obj.targetPoolWeights = message.targetPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
     } else {
       obj.targetPoolWeights = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
@@ -395,7 +349,6 @@ export const SmoothWeightChangeParams = {
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
     return {
       startTime: object.start_time ?? undefined,
@@ -404,27 +357,22 @@ export const SmoothWeightChangeParams = {
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
     };
   },
-
   toSDK(message: SmoothWeightChangeParams): SmoothWeightChangeParamsSDKType {
     const obj: any = {};
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-
     if (message.initialPoolWeights) {
       obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
       obj.initial_pool_weights = [];
     }
-
     if (message.targetPoolWeights) {
       obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
       obj.target_pool_weights = [];
     }
-
     return obj;
   },
-
   fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
     return {
       startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
@@ -433,55 +381,44 @@ export const SmoothWeightChangeParams = {
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
     };
   },
-
   toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAmino {
     const obj: any = {};
     obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-
     if (message.initialPoolWeights) {
       obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.initial_pool_weights = [];
     }
-
     if (message.targetPoolWeights) {
       obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.target_pool_weights = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
     return SmoothWeightChangeParams.fromAmino(object.value);
   },
-
   toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
     return {
       type: "osmosis/gamm/smooth-weight-change-params",
       value: SmoothWeightChangeParams.toAmino(message)
     };
   },
-
   fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
     return SmoothWeightChangeParams.decode(message.value);
   },
-
   toProto(message: SmoothWeightChangeParams): Uint8Array {
     return SmoothWeightChangeParams.encode(message).finish();
   },
-
   toProtoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsProtoMsg {
     return {
       typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
       value: SmoothWeightChangeParams.encode(message).finish()
     };
   }
-
 };
-
 function createBasePoolParams(): PoolParams {
   return {
     swapFee: "",
@@ -489,57 +426,44 @@ function createBasePoolParams(): PoolParams {
     smoothWeightChangeParams: undefined
   };
 }
-
 export const PoolParams = {
   typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
   aminoType: "osmosis/gamm/pool-params",
-
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
       writer.uint32(10).string(message.swapFee);
     }
-
     if (message.exitFee !== "") {
       writer.uint32(18).string(message.exitFee);
     }
-
     if (message.smoothWeightChangeParams !== undefined) {
       SmoothWeightChangeParams.encode(message.smoothWeightChangeParams, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PoolParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.swapFee = reader.string();
           break;
-
         case 2:
           message.exitFee = reader.string();
           break;
-
         case 3:
           message.smoothWeightChangeParams = SmoothWeightChangeParams.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PoolParams {
     return {
       swapFee: isSet(object.swapFee) ? String(object.swapFee) : "",
@@ -547,7 +471,6 @@ export const PoolParams = {
       smoothWeightChangeParams: isSet(object.smoothWeightChangeParams) ? SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams) : undefined
     };
   },
-
   toJSON(message: PoolParams): unknown {
     const obj: any = {};
     message.swapFee !== undefined && (obj.swapFee = message.swapFee);
@@ -555,7 +478,6 @@ export const PoolParams = {
     message.smoothWeightChangeParams !== undefined && (obj.smoothWeightChangeParams = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toJSON(message.smoothWeightChangeParams) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<PoolParams>): PoolParams {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
@@ -563,7 +485,6 @@ export const PoolParams = {
     message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : undefined;
     return message;
   },
-
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
       swapFee: object?.swap_fee,
@@ -571,7 +492,6 @@ export const PoolParams = {
       smoothWeightChangeParams: object.smooth_weight_change_params ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
     };
   },
-
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
@@ -579,7 +499,6 @@ export const PoolParams = {
     message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
     return obj;
   },
-
   fromAmino(object: PoolParamsAmino): PoolParams {
     return {
       swapFee: object.swap_fee,
@@ -587,7 +506,6 @@ export const PoolParams = {
       smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
     };
   },
-
   toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
@@ -595,161 +513,130 @@ export const PoolParams = {
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
     return PoolParams.fromAmino(object.value);
   },
-
   toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
     return {
       type: "osmosis/gamm/pool-params",
       value: PoolParams.toAmino(message)
     };
   },
-
   fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
     return PoolParams.decode(message.value);
   },
-
   toProto(message: PoolParams): Uint8Array {
     return PoolParams.encode(message).finish();
   },
-
   toProtoMsg(message: PoolParams): PoolParamsProtoMsg {
     return {
       typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
       value: PoolParams.encode(message).finish()
     };
   }
-
 };
-
 function createBasePoolAsset(): PoolAsset {
   return {
     token: undefined,
     weight: ""
   };
 }
-
 export const PoolAsset = {
   typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
   aminoType: "osmosis/gamm/pool-asset",
-
   encode(message: PoolAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.weight !== "") {
       writer.uint32(18).string(message.weight);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PoolAsset {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolAsset();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.token = Coin.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.weight = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PoolAsset {
     return {
       token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
-
   toJSON(message: PoolAsset): unknown {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
-
   fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
     const message = createBasePoolAsset();
     message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
     return message;
   },
-
   fromSDK(object: PoolAssetSDKType): PoolAsset {
     return {
       token: object.token ? Coin.fromSDK(object.token) : undefined,
       weight: object?.weight
     };
   },
-
   toSDK(message: PoolAsset): PoolAssetSDKType {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
     obj.weight = message.weight;
     return obj;
   },
-
   fromAmino(object: PoolAssetAmino): PoolAsset {
     return {
       token: object?.token ? Coin.fromAmino(object.token) : undefined,
       weight: object.weight
     };
   },
-
   toAmino(message: PoolAsset): PoolAssetAmino {
     const obj: any = {};
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
     obj.weight = message.weight;
     return obj;
   },
-
   fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
     return PoolAsset.fromAmino(object.value);
   },
-
   toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
     return {
       type: "osmosis/gamm/pool-asset",
       value: PoolAsset.toAmino(message)
     };
   },
-
   fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
     return PoolAsset.decode(message.value);
   },
-
   toProto(message: PoolAsset): Uint8Array {
     return PoolAsset.encode(message).finish();
   },
-
   toProtoMsg(message: PoolAsset): PoolAssetProtoMsg {
     return {
       typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
       value: PoolAsset.encode(message).finish()
     };
   }
-
 };
-
 function createBasePool(): Pool {
   return {
     address: "",
@@ -761,89 +648,68 @@ function createBasePool(): Pool {
     totalWeight: ""
   };
 }
-
 export const Pool = {
   typeUrl: "/osmosis.gamm.v1beta1.Pool",
   aminoType: "osmosis/gamm/pool",
-
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-
     if (!message.id.isZero()) {
       writer.uint32(16).uint64(message.id);
     }
-
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.futurePoolGovernor !== "") {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
-
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(42).fork()).ldelim();
     }
-
     for (const v of message.poolAssets) {
       PoolAsset.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.totalWeight !== "") {
       writer.uint32(58).string(message.totalWeight);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.address = reader.string();
           break;
-
         case 2:
           message.id = (reader.uint64() as Long);
           break;
-
         case 3:
           message.poolParams = PoolParams.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.futurePoolGovernor = reader.string();
           break;
-
         case 5:
           message.totalShares = Coin.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.poolAssets.push(PoolAsset.decode(reader, reader.uint32()));
           break;
-
         case 7:
           message.totalWeight = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
@@ -855,7 +721,6 @@ export const Pool = {
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : ""
     };
   },
-
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
@@ -863,17 +728,14 @@ export const Pool = {
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
-
     if (message.poolAssets) {
       obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
     } else {
       obj.poolAssets = [];
     }
-
     message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
@@ -885,7 +747,6 @@ export const Pool = {
     message.totalWeight = object.totalWeight ?? "";
     return message;
   },
-
   fromSDK(object: PoolSDKType): Pool {
     return {
       address: object?.address,
@@ -897,7 +758,6 @@ export const Pool = {
       totalWeight: object?.total_weight
     };
   },
-
   toSDK(message: Pool): PoolSDKType {
     const obj: any = {};
     obj.address = message.address;
@@ -905,17 +765,14 @@ export const Pool = {
     message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
     obj.future_pool_governor = message.futurePoolGovernor;
     message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
-
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
       obj.pool_assets = [];
     }
-
     obj.total_weight = message.totalWeight;
     return obj;
   },
-
   fromAmino(object: PoolAmino): Pool {
     return {
       address: object.address,
@@ -927,7 +784,6 @@ export const Pool = {
       totalWeight: object.total_weight
     };
   },
-
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
     obj.address = message.address;
@@ -935,41 +791,33 @@ export const Pool = {
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     obj.future_pool_governor = message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
-
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.pool_assets = [];
     }
-
     obj.total_weight = message.totalWeight;
     return obj;
   },
-
   fromAminoMsg(object: PoolAminoMsg): Pool {
     return Pool.fromAmino(object.value);
   },
-
   toAminoMsg(message: Pool): PoolAminoMsg {
     return {
       type: "osmosis/gamm/pool",
       value: Pool.toAmino(message)
     };
   },
-
   fromProtoMsg(message: PoolProtoMsg): Pool {
     return Pool.decode(message.value);
   },
-
   toProto(message: Pool): Uint8Array {
     return Pool.encode(message).finish();
   },
-
   toProtoMsg(message: Pool): PoolProtoMsg {
     return {
       typeUrl: "/osmosis.gamm.v1beta1.Pool",
       value: Pool.encode(message).finish()
     };
   }
-
 };

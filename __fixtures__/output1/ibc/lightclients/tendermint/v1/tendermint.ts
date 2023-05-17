@@ -8,7 +8,6 @@ import { ValidatorSet, ValidatorSetSDKType } from "../../../../tendermint/types/
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
-
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -16,28 +15,21 @@ export const protobufPackage = "ibc.lightclients.tendermint.v1";
 export interface ClientState {
   chainId: string;
   trustLevel?: Fraction;
-
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
   trustingPeriod?: Duration;
-
   /** duration of the staking unbonding period */
   unbondingPeriod?: Duration;
-
   /** defines how much new (untrusted) header's Time can drift into the future. */
   maxClockDrift?: Duration;
-
   /** Block height when the client was frozen due to a misbehaviour */
   frozenHeight?: Height;
-
   /** Latest height the client was updated to */
   latestHeight?: Height;
-
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
-
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -48,20 +40,17 @@ export interface ClientState {
    * "upgradedIBCState"}`
    */
   upgradePath: string[];
-
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
    */
   allowUpdateAfterExpiry: boolean;
-
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
    * whose chain has experienced a misbehaviour event
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
-
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -79,7 +68,6 @@ export interface ClientStateSDKType {
   allow_update_after_expiry: boolean;
   allow_update_after_misbehaviour: boolean;
 }
-
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusState {
   /**
@@ -87,19 +75,16 @@ export interface ConsensusState {
    * was stored.
    */
   timestamp?: Date;
-
   /** commitment root (i.e app hash) */
   root?: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
-
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
   timestamp?: Date;
   root?: MerkleRootSDKType;
   next_validators_hash: Uint8Array;
 }
-
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
  * that implements Misbehaviour interface expected by ICS-02
@@ -109,7 +94,6 @@ export interface Misbehaviour {
   header1?: Header;
   header2?: Header;
 }
-
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
  * that implements Misbehaviour interface expected by ICS-02
@@ -119,7 +103,6 @@ export interface MisbehaviourSDKType {
   header_1?: HeaderSDKType;
   header_2?: HeaderSDKType;
 }
-
 /**
  * Header defines the Tendermint client consensus Header.
  * It encapsulates all the information necessary to update from a trusted
@@ -140,7 +123,6 @@ export interface Header {
   trustedHeight?: Height;
   trustedValidators?: ValidatorSet;
 }
-
 /**
  * Header defines the Tendermint client consensus Header.
  * It encapsulates all the information necessary to update from a trusted
@@ -161,7 +143,6 @@ export interface HeaderSDKType {
   trusted_height?: HeightSDKType;
   trusted_validators?: ValidatorSetSDKType;
 }
-
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
  * supports positive values.
@@ -170,7 +151,6 @@ export interface Fraction {
   numerator: Long;
   denominator: Long;
 }
-
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
  * supports positive values.
@@ -179,7 +159,6 @@ export interface FractionSDKType {
   numerator: Long;
   denominator: Long;
 }
-
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
@@ -195,118 +174,90 @@ function createBaseClientState(): ClientState {
     allowUpdateAfterMisbehaviour: false
   };
 }
-
 export const ClientState = {
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
-
     if (message.trustLevel !== undefined) {
       Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.trustingPeriod !== undefined) {
       Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.unbondingPeriod !== undefined) {
       Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.maxClockDrift !== undefined) {
       Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
     }
-
     if (message.frozenHeight !== undefined) {
       Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.latestHeight !== undefined) {
       Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
     }
-
     for (const v of message.proofSpecs) {
       ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-
     for (const v of message.upgradePath) {
       writer.uint32(74).string(v!);
     }
-
     if (message.allowUpdateAfterExpiry === true) {
       writer.uint32(80).bool(message.allowUpdateAfterExpiry);
     }
-
     if (message.allowUpdateAfterMisbehaviour === true) {
       writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.chainId = reader.string();
           break;
-
         case 2:
           message.trustLevel = Fraction.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.trustingPeriod = Duration.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.unbondingPeriod = Duration.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.maxClockDrift = Duration.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.frozenHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.latestHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 8:
           message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
           break;
-
         case 9:
           message.upgradePath.push(reader.string());
           break;
-
         case 10:
           message.allowUpdateAfterExpiry = reader.bool();
           break;
-
         case 11:
           message.allowUpdateAfterMisbehaviour = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ClientState {
     return {
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
@@ -322,7 +273,6 @@ export const ClientState = {
       allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour) ? Boolean(object.allowUpdateAfterMisbehaviour) : false
     };
   },
-
   toJSON(message: ClientState): unknown {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
@@ -332,24 +282,20 @@ export const ClientState = {
     message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift ? Duration.toJSON(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proofSpecs = message.proofSpecs.map(e => e ? ProofSpec.toJSON(e) : undefined);
     } else {
       obj.proofSpecs = [];
     }
-
     if (message.upgradePath) {
       obj.upgradePath = message.upgradePath.map(e => e);
     } else {
       obj.upgradePath = [];
     }
-
     message.allowUpdateAfterExpiry !== undefined && (obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry);
     message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
     return obj;
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
@@ -365,7 +311,6 @@ export const ClientState = {
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
   },
-
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
       chainId: object?.chain_id,
@@ -381,7 +326,6 @@ export const ClientState = {
       allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
     };
   },
-
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
     obj.chain_id = message.chainId;
@@ -391,26 +335,21 @@ export const ClientState = {
     message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
-
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
     } else {
       obj.proof_specs = [];
     }
-
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
       obj.upgrade_path = [];
     }
-
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   }
-
 };
-
 function createBaseConsensusState(): ConsensusState {
   return {
     timestamp: undefined,
@@ -418,54 +357,42 @@ function createBaseConsensusState(): ConsensusState {
     nextValidatorsHash: new Uint8Array()
   };
 }
-
 export const ConsensusState = {
   encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).ldelim();
     }
-
     if (message.root !== undefined) {
       MerkleRoot.encode(message.root, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.nextValidatorsHash.length !== 0) {
       writer.uint32(26).bytes(message.nextValidatorsHash);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.root = MerkleRoot.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.nextValidatorsHash = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ConsensusState {
     return {
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
@@ -473,7 +400,6 @@ export const ConsensusState = {
       nextValidatorsHash: isSet(object.nextValidatorsHash) ? bytesFromBase64(object.nextValidatorsHash) : new Uint8Array()
     };
   },
-
   toJSON(message: ConsensusState): unknown {
     const obj: any = {};
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -481,7 +407,6 @@ export const ConsensusState = {
     message.nextValidatorsHash !== undefined && (obj.nextValidatorsHash = base64FromBytes(message.nextValidatorsHash !== undefined ? message.nextValidatorsHash : new Uint8Array()));
     return obj;
   },
-
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.timestamp = object.timestamp ?? undefined;
@@ -489,7 +414,6 @@ export const ConsensusState = {
     message.nextValidatorsHash = object.nextValidatorsHash ?? new Uint8Array();
     return message;
   },
-
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
     return {
       timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
@@ -497,7 +421,6 @@ export const ConsensusState = {
       nextValidatorsHash: object?.next_validators_hash
     };
   },
-
   toSDK(message: ConsensusState): ConsensusStateSDKType {
     const obj: any = {};
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
@@ -505,9 +428,7 @@ export const ConsensusState = {
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
   }
-
 };
-
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
@@ -515,54 +436,42 @@ function createBaseMisbehaviour(): Misbehaviour {
     header2: undefined
   };
 }
-
 export const Misbehaviour = {
   encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
-
     if (message.header1 !== undefined) {
       Header.encode(message.header1, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.header2 !== undefined) {
       Header.encode(message.header2, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Misbehaviour {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMisbehaviour();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.clientId = reader.string();
           break;
-
         case 2:
           message.header1 = Header.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.header2 = Header.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Misbehaviour {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
@@ -570,7 +479,6 @@ export const Misbehaviour = {
       header2: isSet(object.header2) ? Header.fromJSON(object.header2) : undefined
     };
   },
-
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
@@ -578,7 +486,6 @@ export const Misbehaviour = {
     message.header2 !== undefined && (obj.header2 = message.header2 ? Header.toJSON(message.header2) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -586,7 +493,6 @@ export const Misbehaviour = {
     message.header2 = object.header2 !== undefined && object.header2 !== null ? Header.fromPartial(object.header2) : undefined;
     return message;
   },
-
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
       clientId: object?.client_id,
@@ -594,7 +500,6 @@ export const Misbehaviour = {
       header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
     };
   },
-
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -602,9 +507,7 @@ export const Misbehaviour = {
     message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
     return obj;
   }
-
 };
-
 function createBaseHeader(): Header {
   return {
     signedHeader: undefined,
@@ -613,62 +516,48 @@ function createBaseHeader(): Header {
     trustedValidators: undefined
   };
 }
-
 export const Header = {
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedHeader !== undefined) {
       SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.validatorSet !== undefined) {
       ValidatorSet.encode(message.validatorSet, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.trustedHeight !== undefined) {
       Height.encode(message.trustedHeight, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.trustedValidators !== undefined) {
       ValidatorSet.encode(message.trustedValidators, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Header {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.signedHeader = SignedHeader.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.validatorSet = ValidatorSet.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.trustedHeight = Height.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.trustedValidators = ValidatorSet.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Header {
     return {
       signedHeader: isSet(object.signedHeader) ? SignedHeader.fromJSON(object.signedHeader) : undefined,
@@ -677,7 +566,6 @@ export const Header = {
       trustedValidators: isSet(object.trustedValidators) ? ValidatorSet.fromJSON(object.trustedValidators) : undefined
     };
   },
-
   toJSON(message: Header): unknown {
     const obj: any = {};
     message.signedHeader !== undefined && (obj.signedHeader = message.signedHeader ? SignedHeader.toJSON(message.signedHeader) : undefined);
@@ -686,7 +574,6 @@ export const Header = {
     message.trustedValidators !== undefined && (obj.trustedValidators = message.trustedValidators ? ValidatorSet.toJSON(message.trustedValidators) : undefined);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : undefined;
@@ -695,7 +582,6 @@ export const Header = {
     message.trustedValidators = object.trustedValidators !== undefined && object.trustedValidators !== null ? ValidatorSet.fromPartial(object.trustedValidators) : undefined;
     return message;
   },
-
   fromSDK(object: HeaderSDKType): Header {
     return {
       signedHeader: object.signed_header ? SignedHeader.fromSDK(object.signed_header) : undefined,
@@ -704,7 +590,6 @@ export const Header = {
       trustedValidators: object.trusted_validators ? ValidatorSet.fromSDK(object.trusted_validators) : undefined
     };
   },
-
   toSDK(message: Header): HeaderSDKType {
     const obj: any = {};
     message.signedHeader !== undefined && (obj.signed_header = message.signedHeader ? SignedHeader.toSDK(message.signedHeader) : undefined);
@@ -713,88 +598,71 @@ export const Header = {
     message.trustedValidators !== undefined && (obj.trusted_validators = message.trustedValidators ? ValidatorSet.toSDK(message.trustedValidators) : undefined);
     return obj;
   }
-
 };
-
 function createBaseFraction(): Fraction {
   return {
     numerator: Long.UZERO,
     denominator: Long.UZERO
   };
 }
-
 export const Fraction = {
   encode(message: Fraction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.numerator.isZero()) {
       writer.uint32(8).uint64(message.numerator);
     }
-
     if (!message.denominator.isZero()) {
       writer.uint32(16).uint64(message.denominator);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Fraction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFraction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.numerator = (reader.uint64() as Long);
           break;
-
         case 2:
           message.denominator = (reader.uint64() as Long);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Fraction {
     return {
       numerator: isSet(object.numerator) ? Long.fromValue(object.numerator) : Long.UZERO,
       denominator: isSet(object.denominator) ? Long.fromValue(object.denominator) : Long.UZERO
     };
   },
-
   toJSON(message: Fraction): unknown {
     const obj: any = {};
     message.numerator !== undefined && (obj.numerator = (message.numerator || Long.UZERO).toString());
     message.denominator !== undefined && (obj.denominator = (message.denominator || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
     message.numerator = object.numerator !== undefined && object.numerator !== null ? Long.fromValue(object.numerator) : Long.UZERO;
     message.denominator = object.denominator !== undefined && object.denominator !== null ? Long.fromValue(object.denominator) : Long.UZERO;
     return message;
   },
-
   fromSDK(object: FractionSDKType): Fraction {
     return {
       numerator: object?.numerator,
       denominator: object?.denominator
     };
   },
-
   toSDK(message: Fraction): FractionSDKType {
     const obj: any = {};
     obj.numerator = message.numerator;
     obj.denominator = message.denominator;
     return obj;
   }
-
 };

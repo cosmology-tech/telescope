@@ -114,10 +114,6 @@ const options: TelescopeOptions = {
             ]
         }
     },
-    mobx: {
-        enabled: true
-    },
-
 };
 
 const input: TelescopeInput = {

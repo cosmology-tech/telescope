@@ -3,61 +3,71 @@
 exports[`recursiveModuleBundle osmo 1`] = `
 "export namespace osmosis {
   export namespace claim {
-    export const v1beta1 = { ..._177,
+    export const v1beta1 = {
+      ..._177,
       ..._178,
       ..._179,
       ..._180
     };
   }
   export namespace epochs {
-    export const v1beta1 = { ..._181,
+    export const v1beta1 = {
+      ..._181,
       ..._182
     };
   }
   export namespace gamm {
-    export const v1beta1 = { ..._183,
+    export const v1beta1 = {
+      ..._183,
       ..._184,
       ..._185,
       ..._186,
       ..._187
     };
   }
-  export const incentives = { ..._188,
+  export const incentives = {
+    ..._188,
     ..._189,
     ..._190,
     ..._191,
     ..._192
   };
-  export const lockup = { ..._193,
+  export const lockup = {
+    ..._193,
     ..._194,
     ..._195,
     ..._196
   };
   export namespace mint {
-    export const v1beta1 = { ..._197,
+    export const v1beta1 = {
+      ..._197,
       ..._198,
       ..._199
     };
   }
   export namespace poolincentives {
-    export const v1beta1 = { ..._200,
+    export const v1beta1 = {
+      ..._200,
       ..._201,
       ..._202,
       ..._203
     };
   }
   export namespace store {
-    export const v1beta1 = { ..._204
+    export const v1beta1 = {
+      ..._204
     };
   }
-  export const superfluid = { ..._205,
+  export const superfluid = {
+    ..._205,
     ..._206,
     ..._207,
     ..._208,
     ..._209
   };
   export namespace txfees {
-    export const v1beta1 = { ..._210,
+    export const v1beta1 = {
+      ..._210,
       ..._211,
       ..._212,
       ..._213
@@ -67,37 +77,331 @@ exports[`recursiveModuleBundle osmo 1`] = `
 `;
 
 exports[`recursiveModuleBundle root 1`] = `
-"export const osmosis = { ..._0
+"export const osmosis = {
+  ..._0
 };
-export const tendermint = { ..._0
+export const tendermint = {
+  ..._0
 };"
 `;
 
 exports[`recursiveModuleBundle single 1`] = `
-"export const ics23 = { ..._0
+"export const ics23 = {
+  ..._0
 };"
 `;
 
 exports[`recursiveModuleBundle tendermint 1`] = `
 "export namespace tendermint {
-  export const abci = { ..._223
+  export const abci = {
+    ..._223
   };
-  export const crypto = { ..._224,
+  export const crypto = {
+    ..._224,
     ..._225
   };
   export namespace libs {
-    export const bits = { ..._226
+    export const bits = {
+      ..._226
     };
   }
-  export const p2p = { ..._227
+  export const p2p = {
+    ..._227
   };
-  export const types = { ..._228,
+  export const types = {
+    ..._228,
     ..._229,
     ..._230,
     ..._231,
     ..._232
   };
-  export const version = { ..._233
+  export const version = {
+    ..._233
   };
+}"
+`;
+
+exports[`recursiveModuleBundleExperimental osmosis 1`] = `
+"export namespace osmosis {
+  export const ClientFactory = {
+    ..._644,
+    ..._645,
+    ..._646,
+    ..._647
+  };
+  export namespace accum {
+    export const v1beta1 = {
+      ..._328
+    };
+  }
+  export namespace claim {
+    export const v1beta1 = {
+      ..._275,
+      ..._276,
+      ..._277,
+      ..._278,
+      ..._572,
+      ..._591
+    };
+  }
+  export const concentratedliquidity = {
+    ..._329,
+    v1beta1: {
+      ..._557,
+      ..._568,
+      ..._585,
+      ..._604,
+      ..._617
+    }
+  };
+  export namespace cosmwasmpool {
+    export const v1beta1 = {
+      ..._330,
+      ..._331,
+      ..._332,
+      ..._333,
+      ..._334,
+      ..._586,
+      ..._605
+    };
+  }
+  export namespace downtimedetector {
+    export const v1beta1 = {
+      ..._335,
+      ..._336,
+      ..._337,
+      ..._587,
+      ..._606
+    };
+  }
+  export namespace epochs {
+    export const v1beta1 = {
+      ..._279,
+      ..._280,
+      ..._573,
+      ..._592
+    };
+  }
+  export namespace gamm {
+    export namespace poolmodels {
+      export namespace balancer {
+        export const v1beta1 = {
+          ..._286,
+          ..._550,
+          ..._561,
+          ..._610
+        };
+      }
+      export namespace stableswap {
+        export const v1beta1 = {
+          ..._287,
+          ..._288,
+          ..._551,
+          ..._562,
+          ..._611
+        };
+      }
+    }
+    export const v1beta1 = {
+      ..._281,
+      ..._282,
+      ..._283,
+      ..._284,
+      ..._285,
+      ..._552,
+      ..._563,
+      ..._574,
+      ..._593,
+      ..._612,
+      ..._621
+    };
+    export const v2 = {
+      ..._289,
+      ..._575,
+      ..._594,
+      ..._622
+    };
+  }
+  export namespace ibcratelimit {
+    export const v1beta1 = {
+      ..._290,
+      ..._291,
+      ..._292,
+      ..._576,
+      ..._595
+    };
+  }
+  export const incentives = {
+    ..._293,
+    ..._294,
+    ..._295,
+    ..._296,
+    ..._297,
+    ..._553,
+    ..._564,
+    ..._577,
+    ..._596,
+    ..._613
+  };
+  export const lockup = {
+    ..._298,
+    ..._299,
+    ..._300,
+    ..._301,
+    ..._302,
+    ..._554,
+    ..._565,
+    ..._578,
+    ..._597,
+    ..._614
+  };
+  export namespace mint {
+    export const v1beta1 = {
+      ..._303,
+      ..._304,
+      ..._305,
+      ..._579,
+      ..._598
+    };
+  }
+  export namespace poolincentives {
+    export const v1beta1 = {
+      ..._306,
+      ..._307,
+      ..._308,
+      ..._309,
+      ..._580,
+      ..._599
+    };
+  }
+  export namespace poolmanager {
+    export const v1beta1 = {
+      ..._338,
+      ..._339,
+      ..._340,
+      ..._341,
+      ..._342,
+      ..._558,
+      ..._569,
+      ..._588,
+      ..._607,
+      ..._618
+    };
+  }
+  export namespace protorev {
+    export const v1beta1 = {
+      ..._343,
+      ..._344,
+      ..._345,
+      ..._346,
+      ..._347,
+      ..._348,
+      ..._559,
+      ..._570,
+      ..._589,
+      ..._608,
+      ..._619
+    };
+  }
+  export namespace store {
+    export const v1beta1 = {
+      ..._310
+    };
+  }
+  export const superfluid = {
+    ..._311,
+    ..._312,
+    ..._313,
+    ..._314,
+    ..._315,
+    ..._555,
+    ..._566,
+    ..._581,
+    ..._600,
+    ..._615
+  };
+  export namespace tokenfactory {
+    export const v1beta1 = {
+      ..._316,
+      ..._317,
+      ..._318,
+      ..._319,
+      ..._320,
+      ..._556,
+      ..._567,
+      ..._582,
+      ..._601,
+      ..._616
+    };
+  }
+  export namespace twap {
+    export const v1beta1 = {
+      ..._321,
+      ..._322,
+      ..._323,
+      ..._583,
+      ..._602
+    };
+  }
+  export namespace txfees {
+    export const v1beta1 = {
+      ..._324,
+      ..._325,
+      ..._326,
+      ..._327,
+      ..._584,
+      ..._603
+    };
+  }
+  export namespace valsetpref {
+    export const v1beta1 = {
+      ..._349,
+      ..._350,
+      ..._351,
+      ..._560,
+      ..._571,
+      ..._590,
+      ..._609,
+      ..._620
+    };
+  }
+}"
+`;
+
+exports[`recursiveModuleBundleExperimental osmosis_recursive 1`] = `
+"export namespace osmosis {
+  export const concentratedliquidity = {
+    ..._329,
+    v1beta1: {
+      ..._557,
+      ..._568,
+      ..._585,
+      ..._604,
+      ..._617,
+      pool: {
+        ..._629,
+        ..._630
+      }
+    },
+    v1: {
+      ..._757,
+      ..._768,
+      ..._785,
+      ..._786,
+      ..._787
+    }
+  };
+  export namespace valsetpref {
+    export const v1beta1 = {
+      ..._349,
+      ..._350,
+      ..._351,
+      ..._560,
+      ..._571,
+      ..._590,
+      ..._609,
+      ..._620
+    };
+  }
 }"
 `;

@@ -4,10 +4,11 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export class Query {
   /** Params retrieves the total set of recovery parameters. */
   static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/evmos/recovery/v1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`/evmos/recovery/v1/params?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

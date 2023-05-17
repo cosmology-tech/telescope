@@ -1,149 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`builds stores. 1`] = `
-"export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+"export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
-  class QueryAccountsStore extends QueryStore<QueryAccountsRequest, QueryAccountsResponse> {
-    constructor() {
-      super(queryService?.accounts);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryAccountsStore {
+    store = new QueryStore<QueryAccountsRequest, QueryAccountsResponse>(queryService?.accounts);
+    accounts(request: QueryAccountsRequest) {
+      return this.store.getData(request);
     }
-
-    accounts(request?: QueryAccountsRequest): MobxResponse<QueryAccountsResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryAccountStore extends QueryStore<QueryAccountRequest, QueryAccountResponse> {
-    constructor() {
-      super(queryService?.account);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryAccountStore {
+    store = new QueryStore<QueryAccountRequest, QueryAccountResponse>(queryService?.account);
+    account(request: QueryAccountRequest) {
+      return this.store.getData(request);
     }
-
-    account(request: QueryAccountRequest): MobxResponse<QueryAccountResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryParamsStore {
+    store = new QueryStore<QueryParamsRequest, QueryParamsResponse>(queryService?.params);
+    params(request: QueryParamsRequest) {
+      return this.store.getData(request);
     }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryModuleAccountsStore extends QueryStore<QueryModuleAccountsRequest, QueryModuleAccountsResponse> {
-    constructor() {
-      super(queryService?.moduleAccounts);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryModuleAccountsStore {
+    store = new QueryStore<QueryModuleAccountsRequest, QueryModuleAccountsResponse>(queryService?.moduleAccounts);
+    moduleAccounts(request: QueryModuleAccountsRequest) {
+      return this.store.getData(request);
     }
-
-    moduleAccounts(request?: QueryModuleAccountsRequest): MobxResponse<QueryModuleAccountsResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryBech32PrefixStore extends QueryStore<Bech32PrefixRequest, Bech32PrefixResponse> {
-    constructor() {
-      super(queryService?.bech32Prefix);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryBech32PrefixStore {
+    store = new QueryStore<Bech32PrefixRequest, Bech32PrefixResponse>(queryService?.bech32Prefix);
+    bech32Prefix(request: Bech32PrefixRequest) {
+      return this.store.getData(request);
     }
-
-    bech32Prefix(request?: Bech32PrefixRequest): MobxResponse<Bech32PrefixResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryAddressBytesToStringStore extends QueryStore<AddressBytesToStringRequest, AddressBytesToStringResponse> {
-    constructor() {
-      super(queryService?.addressBytesToString);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryAddressBytesToStringStore {
+    store = new QueryStore<AddressBytesToStringRequest, AddressBytesToStringResponse>(queryService?.addressBytesToString);
+    addressBytesToString(request: AddressBytesToStringRequest) {
+      return this.store.getData(request);
     }
-
-    addressBytesToString(request: AddressBytesToStringRequest): MobxResponse<AddressBytesToStringResponse> {
-      return this.getData(request);
-    }
-
   }
-
-  class QueryAddressStringToBytesStore extends QueryStore<AddressStringToBytesRequest, AddressStringToBytesResponse> {
-    constructor() {
-      super(queryService?.addressStringToBytes);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
+  class QueryAddressStringToBytesStore {
+    store = new QueryStore<AddressStringToBytesRequest, AddressStringToBytesResponse>(queryService?.addressStringToBytes);
+    addressStringToBytes(request: AddressStringToBytesRequest) {
+      return this.store.getData(request);
     }
-
-    addressStringToBytes(request: AddressStringToBytesRequest): MobxResponse<AddressStringToBytesResponse> {
-      return this.getData(request);
-    }
-
   }
-
   return {
     /**
      * Accounts returns all the existing accounts
@@ -151,24 +52,12 @@ exports[`builds stores. 1`] = `
      * Since: cosmos-sdk 0.43
      */
     QueryAccountsStore,
-
-    /** Account returns account details based on address. */
-    QueryAccountStore,
-
-    /** Params queries all parameters. */
-    QueryParamsStore,
-
-    /** ModuleAccounts returns all the existing module accounts. */
-    QueryModuleAccountsStore,
-
-    /** Bech32 queries bech32Prefix */
-    QueryBech32PrefixStore,
-
-    /** AddressBytesToString converts Account Address bytes to string */
-    QueryAddressBytesToStringStore,
-
-    /** AddressStringToBytes converts Address string to bytes */
-    QueryAddressStringToBytesStore
+    /** Account returns account details based on address. */QueryAccountStore,
+    /** Params queries all parameters. */QueryParamsStore,
+    /** ModuleAccounts returns all the existing module accounts. */QueryModuleAccountsStore,
+    /** Bech32 queries bech32Prefix */QueryBech32PrefixStore,
+    /** AddressBytesToString converts Account Address bytes to string */QueryAddressBytesToStringStore,
+    /** AddressStringToBytes converts Address string to bytes */QueryAddressStringToBytesStore
   };
 };"
 `;

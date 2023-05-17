@@ -362,7 +362,6 @@ export const protobufPackage = "google.api";
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
-
 export interface RoutingRule {
   /**
    * A collection of Routing Parameter specifications.
@@ -739,7 +738,6 @@ export interface RoutingRuleProtoMsg {
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
-
 export interface RoutingRuleAmino {
   /**
    * A collection of Routing Parameter specifications.
@@ -1116,12 +1114,10 @@ export interface RoutingRuleAminoMsg {
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
-
 export interface RoutingRuleSDKType {
   routing_parameters: RoutingParameterSDKType[];
 }
 /** A projection from an input message to the GRPC or REST header. */
-
 export interface RoutingParameter {
   /** A request field to extract the header key-value pair from. */
   field: string;
@@ -1181,7 +1177,6 @@ export interface RoutingParameter {
    * 
    * See Example 1 for more details.
    */
-
   pathTemplate: string;
 }
 export interface RoutingParameterProtoMsg {
@@ -1189,7 +1184,6 @@ export interface RoutingParameterProtoMsg {
   value: Uint8Array;
 }
 /** A projection from an input message to the GRPC or REST header. */
-
 export interface RoutingParameterAmino {
   /** A request field to extract the header key-value pair from. */
   field: string;
@@ -1249,7 +1243,6 @@ export interface RoutingParameterAmino {
    * 
    * See Example 1 for more details.
    */
-
   path_template: string;
 }
 export interface RoutingParameterAminoMsg {
@@ -1257,246 +1250,195 @@ export interface RoutingParameterAminoMsg {
   value: RoutingParameterAmino;
 }
 /** A projection from an input message to the GRPC or REST header. */
-
 export interface RoutingParameterSDKType {
   field: string;
   path_template: string;
 }
-
 function createBaseRoutingRule(): RoutingRule {
   return {
     routingParameters: []
   };
 }
-
 export const RoutingRule = {
   typeUrl: "/google.api.RoutingRule",
-
   encode(message: RoutingRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.routingParameters) {
       RoutingParameter.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): RoutingRule {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingRule();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           message.routingParameters.push(RoutingParameter.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RoutingRule {
     return {
       routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
     };
   },
-
   toJSON(message: RoutingRule): unknown {
     const obj: any = {};
-
     if (message.routingParameters) {
       obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
     } else {
       obj.routingParameters = [];
     }
-
     return obj;
   },
-
   fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
   },
-
   fromSDK(object: RoutingRuleSDKType): RoutingRule {
     return {
       routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDK(e)) : []
     };
   },
-
   toSDK(message: RoutingRule): RoutingRuleSDKType {
     const obj: any = {};
-
     if (message.routingParameters) {
       obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toSDK(e) : undefined);
     } else {
       obj.routing_parameters = [];
     }
-
     return obj;
   },
-
   fromAmino(object: RoutingRuleAmino): RoutingRule {
     return {
       routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
     };
   },
-
   toAmino(message: RoutingRule): RoutingRuleAmino {
     const obj: any = {};
-
     if (message.routingParameters) {
       obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e) : undefined);
     } else {
       obj.routing_parameters = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
     return RoutingRule.fromAmino(object.value);
   },
-
   fromProtoMsg(message: RoutingRuleProtoMsg): RoutingRule {
     return RoutingRule.decode(message.value);
   },
-
   toProto(message: RoutingRule): Uint8Array {
     return RoutingRule.encode(message).finish();
   },
-
   toProtoMsg(message: RoutingRule): RoutingRuleProtoMsg {
     return {
       typeUrl: "/google.api.RoutingRule",
       value: RoutingRule.encode(message).finish()
     };
   }
-
 };
-
 function createBaseRoutingParameter(): RoutingParameter {
   return {
     field: "",
     pathTemplate: ""
   };
 }
-
 export const RoutingParameter = {
   typeUrl: "/google.api.RoutingParameter",
-
   encode(message: RoutingParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
-
     if (message.pathTemplate !== "") {
       writer.uint32(18).string(message.pathTemplate);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): RoutingParameter {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingParameter();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.field = reader.string();
           break;
-
         case 2:
           message.pathTemplate = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RoutingParameter {
     return {
       field: isSet(object.field) ? String(object.field) : "",
       pathTemplate: isSet(object.pathTemplate) ? String(object.pathTemplate) : ""
     };
   },
-
   toJSON(message: RoutingParameter): unknown {
     const obj: any = {};
     message.field !== undefined && (obj.field = message.field);
     message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);
     return obj;
   },
-
   fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
     const message = createBaseRoutingParameter();
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";
     return message;
   },
-
   fromSDK(object: RoutingParameterSDKType): RoutingParameter {
     return {
       field: object?.field,
       pathTemplate: object?.path_template
     };
   },
-
   toSDK(message: RoutingParameter): RoutingParameterSDKType {
     const obj: any = {};
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
     return obj;
   },
-
   fromAmino(object: RoutingParameterAmino): RoutingParameter {
     return {
       field: object.field,
       pathTemplate: object.path_template
     };
   },
-
   toAmino(message: RoutingParameter): RoutingParameterAmino {
     const obj: any = {};
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
     return obj;
   },
-
   fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
     return RoutingParameter.fromAmino(object.value);
   },
-
   fromProtoMsg(message: RoutingParameterProtoMsg): RoutingParameter {
     return RoutingParameter.decode(message.value);
   },
-
   toProto(message: RoutingParameter): Uint8Array {
     return RoutingParameter.encode(message).finish();
   },
-
   toProtoMsg(message: RoutingParameter): RoutingParameterProtoMsg {
     return {
       typeUrl: "/google.api.RoutingParameter",
       value: RoutingParameter.encode(message).finish()
     };
   }
-
 };

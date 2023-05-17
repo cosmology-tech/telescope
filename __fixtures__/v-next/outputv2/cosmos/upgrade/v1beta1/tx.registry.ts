@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgSoftwareUpgrade.encode(value).finish()
       };
     },
-
     cancelUpgrade(value: MsgCancelUpgrade) {
       return {
         typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value: MsgCancelUpgrade.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     softwareUpgrade(value: MsgSoftwareUpgrade) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     cancelUpgrade(value: MsgCancelUpgrade) {
       return {
         typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value
       };
     }
-
   },
   toJSON: {
     softwareUpgrade(value: MsgSoftwareUpgrade) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgSoftwareUpgrade.toJSON(value)
       };
     },
-
     cancelUpgrade(value: MsgCancelUpgrade) {
       return {
         typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value: MsgCancelUpgrade.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     softwareUpgrade(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgSoftwareUpgrade.fromJSON(value)
       };
     },
-
     cancelUpgrade(value: any) {
       return {
         typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value: MsgCancelUpgrade.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     softwareUpgrade(value: MsgSoftwareUpgrade) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgSoftwareUpgrade.fromPartial(value)
       };
     },
-
     cancelUpgrade(value: MsgCancelUpgrade) {
       return {
         typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value: MsgCancelUpgrade.fromPartial(value)
       };
     }
-
   }
 };

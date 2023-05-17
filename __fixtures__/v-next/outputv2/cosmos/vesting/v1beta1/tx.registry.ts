@@ -14,21 +14,18 @@ export const MessageComposer = {
         value: MsgCreateVestingAccount.encode(value).finish()
       };
     },
-
     createPermanentLockedAccount(value: MsgCreatePermanentLockedAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value: MsgCreatePermanentLockedAccount.encode(value).finish()
       };
     },
-
     createPeriodicVestingAccount(value: MsgCreatePeriodicVestingAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value: MsgCreatePeriodicVestingAccount.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createVestingAccount(value: MsgCreateVestingAccount) {
@@ -37,21 +34,18 @@ export const MessageComposer = {
         value
       };
     },
-
     createPermanentLockedAccount(value: MsgCreatePermanentLockedAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value
       };
     },
-
     createPeriodicVestingAccount(value: MsgCreatePeriodicVestingAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value
       };
     }
-
   },
   toJSON: {
     createVestingAccount(value: MsgCreateVestingAccount) {
@@ -60,21 +54,18 @@ export const MessageComposer = {
         value: MsgCreateVestingAccount.toJSON(value)
       };
     },
-
     createPermanentLockedAccount(value: MsgCreatePermanentLockedAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value: MsgCreatePermanentLockedAccount.toJSON(value)
       };
     },
-
     createPeriodicVestingAccount(value: MsgCreatePeriodicVestingAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value: MsgCreatePeriodicVestingAccount.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createVestingAccount(value: any) {
@@ -83,21 +74,18 @@ export const MessageComposer = {
         value: MsgCreateVestingAccount.fromJSON(value)
       };
     },
-
     createPermanentLockedAccount(value: any) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value: MsgCreatePermanentLockedAccount.fromJSON(value)
       };
     },
-
     createPeriodicVestingAccount(value: any) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value: MsgCreatePeriodicVestingAccount.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createVestingAccount(value: MsgCreateVestingAccount) {
@@ -106,20 +94,17 @@ export const MessageComposer = {
         value: MsgCreateVestingAccount.fromPartial(value)
       };
     },
-
     createPermanentLockedAccount(value: MsgCreatePermanentLockedAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value: MsgCreatePermanentLockedAccount.fromPartial(value)
       };
     },
-
     createPeriodicVestingAccount(value: MsgCreatePeriodicVestingAccount) {
       return {
         typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value: MsgCreatePeriodicVestingAccount.fromPartial(value)
       };
     }
-
   }
 };

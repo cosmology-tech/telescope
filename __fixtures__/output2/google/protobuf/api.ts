@@ -5,7 +5,6 @@ import { SourceContext } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
-
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -23,13 +22,10 @@ export interface Api {
    * followed by the interface's simple name.
    */
   name: string;
-
   /** The methods of this interface, in unspecified order. */
   methods: Method[];
-
   /** Any metadata attached to the interface. */
   options: Option[];
-
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -52,44 +48,33 @@ export interface Api {
    * experimental, non-GA interfaces.
    */
   version: string;
-
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
   sourceContext?: SourceContext;
-
   /** Included interfaces. See [Mixin][]. */
   mixins: Mixin[];
-
   /** The source syntax of the service. */
   syntax: Syntax;
 }
-
 /** Method represents a method of an API interface. */
 export interface Method {
   /** The simple name of this method. */
   name: string;
-
   /** A URL of the input message type. */
   requestTypeUrl: string;
-
   /** If true, the request is streamed. */
   requestStreaming: boolean;
-
   /** The URL of the output message type. */
   responseTypeUrl: string;
-
   /** If true, the response is streamed. */
   responseStreaming: boolean;
-
   /** Any metadata attached to the method. */
   options: Option[];
-
   /** The source syntax of this method. */
   syntax: Syntax;
 }
-
 /**
  * Declares an API Interface to be included in this interface. The including
  * interface must redeclare all the methods from the included interface, but
@@ -173,14 +158,12 @@ export interface Method {
 export interface Mixin {
   /** The fully qualified name of the interface which is included. */
   name: string;
-
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
   root: string;
 }
-
 function createBaseApi(): Api {
   return {
     name: "",
@@ -192,86 +175,66 @@ function createBaseApi(): Api {
     syntax: 0
   };
 }
-
 export const Api = {
   encode(message: Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     for (const v of message.methods) {
       Method.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.version !== "") {
       writer.uint32(34).string(message.version);
     }
-
     if (message.sourceContext !== undefined) {
       SourceContext.encode(message.sourceContext, writer.uint32(42).fork()).ldelim();
     }
-
     for (const v of message.mixins) {
       Mixin.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.syntax !== 0) {
       writer.uint32(56).int32(message.syntax);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Api {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApi();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.methods.push(Method.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.options.push(Option.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.version = reader.string();
           break;
-
         case 5:
           message.sourceContext = SourceContext.decode(reader, reader.uint32());
           break;
-
         case 6:
           message.mixins.push(Mixin.decode(reader, reader.uint32()));
           break;
-
         case 7:
           message.syntax = (reader.int32() as any);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Api {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -283,36 +246,29 @@ export const Api = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
-
   toJSON(message: Api): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? Method.toJSON(e) : undefined);
     } else {
       obj.methods = [];
     }
-
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
     } else {
       obj.options = [];
     }
-
     message.version !== undefined && (obj.version = message.version);
     message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
-
     if (message.mixins) {
       obj.mixins = message.mixins.map(e => e ? Mixin.toJSON(e) : undefined);
     } else {
       obj.mixins = [];
     }
-
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
   },
-
   fromPartial(object: DeepPartial<Api>): Api {
     const message = createBaseApi();
     message.name = object.name ?? "";
@@ -324,9 +280,7 @@ export const Api = {
     message.syntax = object.syntax ?? 0;
     return message;
   }
-
 };
-
 function createBaseMethod(): Method {
   return {
     name: "",
@@ -338,86 +292,66 @@ function createBaseMethod(): Method {
     syntax: 0
   };
 }
-
 export const Method = {
   encode(message: Method, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.requestTypeUrl !== "") {
       writer.uint32(18).string(message.requestTypeUrl);
     }
-
     if (message.requestStreaming === true) {
       writer.uint32(24).bool(message.requestStreaming);
     }
-
     if (message.responseTypeUrl !== "") {
       writer.uint32(34).string(message.responseTypeUrl);
     }
-
     if (message.responseStreaming === true) {
       writer.uint32(40).bool(message.responseStreaming);
     }
-
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.syntax !== 0) {
       writer.uint32(56).int32(message.syntax);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Method {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethod();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.requestTypeUrl = reader.string();
           break;
-
         case 3:
           message.requestStreaming = reader.bool();
           break;
-
         case 4:
           message.responseTypeUrl = reader.string();
           break;
-
         case 5:
           message.responseStreaming = reader.bool();
           break;
-
         case 6:
           message.options.push(Option.decode(reader, reader.uint32()));
           break;
-
         case 7:
           message.syntax = (reader.int32() as any);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Method {
     return {
       name: isSet(object.name) ? String(object.name) : "",
@@ -429,7 +363,6 @@ export const Method = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
-
   toJSON(message: Method): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
@@ -437,17 +370,14 @@ export const Method = {
     message.requestStreaming !== undefined && (obj.requestStreaming = message.requestStreaming);
     message.responseTypeUrl !== undefined && (obj.responseTypeUrl = message.responseTypeUrl);
     message.responseStreaming !== undefined && (obj.responseStreaming = message.responseStreaming);
-
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
     } else {
       obj.options = [];
     }
-
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
   },
-
   fromPartial(object: DeepPartial<Method>): Method {
     const message = createBaseMethod();
     message.name = object.name ?? "";
@@ -459,74 +389,59 @@ export const Method = {
     message.syntax = object.syntax ?? 0;
     return message;
   }
-
 };
-
 function createBaseMixin(): Mixin {
   return {
     name: "",
     root: ""
   };
 }
-
 export const Mixin = {
   encode(message: Mixin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.root !== "") {
       writer.uint32(18).string(message.root);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Mixin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMixin();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.root = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Mixin {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       root: isSet(object.root) ? String(object.root) : ""
     };
   },
-
   toJSON(message: Mixin): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.root !== undefined && (obj.root = message.root);
     return obj;
   },
-
   fromPartial(object: DeepPartial<Mixin>): Mixin {
     const message = createBaseMixin();
     message.name = object.name ?? "";
     message.root = object.root ?? "";
     return message;
   }
-
 };

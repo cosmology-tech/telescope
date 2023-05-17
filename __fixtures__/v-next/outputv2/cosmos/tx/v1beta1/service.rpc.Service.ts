@@ -4,30 +4,24 @@ import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { SimulateRequest, SimulateResponse, GetTxRequest, GetTxResponse, BroadcastTxRequest, BroadcastTxResponse, GetTxsEventRequest, GetTxsEventResponse, GetBlockWithTxsRequest, GetBlockWithTxsResponse } from "./service";
 /** Service defines a gRPC service for interacting with transactions. */
-
 export interface Service {
   /** Simulate simulates executing a transaction for estimating gas usage. */
   simulate(request: DeepPartial<SimulateRequest>, metadata?: grpc.Metadata): Promise<SimulateResponse>;
   /** GetTx fetches a tx by hash. */
-
   getTx(request: DeepPartial<GetTxRequest>, metadata?: grpc.Metadata): Promise<GetTxResponse>;
   /** BroadcastTx broadcast transaction. */
-
   broadcastTx(request: DeepPartial<BroadcastTxRequest>, metadata?: grpc.Metadata): Promise<BroadcastTxResponse>;
   /** GetTxsEvent fetches txs by event. */
-
   getTxsEvent(request: DeepPartial<GetTxsEventRequest>, metadata?: grpc.Metadata): Promise<GetTxsEventResponse>;
   /**
    * GetBlockWithTxs fetches a block with decoded txs.
    * 
    * Since: cosmos-sdk 0.45.2
    */
-
   getBlockWithTxs(request: DeepPartial<GetBlockWithTxsRequest>, metadata?: grpc.Metadata): Promise<GetBlockWithTxsResponse>;
 }
 export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.simulate = this.simulate.bind(this);
@@ -36,27 +30,21 @@ export class ServiceClientImpl implements Service {
     this.getTxsEvent = this.getTxsEvent.bind(this);
     this.getBlockWithTxs = this.getBlockWithTxs.bind(this);
   }
-
   simulate(request: DeepPartial<SimulateRequest>, metadata?: grpc.Metadata): Promise<SimulateResponse> {
     return this.rpc.unary(SimulateDesc, SimulateRequest.fromPartial(request), metadata);
   }
-
   getTx(request: DeepPartial<GetTxRequest>, metadata?: grpc.Metadata): Promise<GetTxResponse> {
     return this.rpc.unary(GetTxDesc, GetTxRequest.fromPartial(request), metadata);
   }
-
   broadcastTx(request: DeepPartial<BroadcastTxRequest>, metadata?: grpc.Metadata): Promise<BroadcastTxResponse> {
     return this.rpc.unary(BroadcastTxDesc, BroadcastTxRequest.fromPartial(request), metadata);
   }
-
   getTxsEvent(request: DeepPartial<GetTxsEventRequest>, metadata?: grpc.Metadata): Promise<GetTxsEventResponse> {
     return this.rpc.unary(GetTxsEventDesc, GetTxsEventRequest.fromPartial(request), metadata);
   }
-
   getBlockWithTxs(request: DeepPartial<GetBlockWithTxsRequest>, metadata?: grpc.Metadata): Promise<GetBlockWithTxsResponse> {
     return this.rpc.unary(GetBlockWithTxsDesc, GetBlockWithTxsRequest.fromPartial(request), metadata);
   }
-
 }
 export const ServiceDesc = {
   serviceName: "cosmos.tx.v1beta1.Service"
@@ -70,19 +58,16 @@ export const SimulateDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return SimulateRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...SimulateResponse.decode(data),
-
+      return {
+        ...SimulateResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetTxDesc: UnaryMethodDefinitionish = {
@@ -94,19 +79,16 @@ export const GetTxDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetTxRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetTxResponse.decode(data),
-
+      return {
+        ...GetTxResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const BroadcastTxDesc: UnaryMethodDefinitionish = {
@@ -118,19 +100,16 @@ export const BroadcastTxDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return BroadcastTxRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...BroadcastTxResponse.decode(data),
-
+      return {
+        ...BroadcastTxResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetTxsEventDesc: UnaryMethodDefinitionish = {
@@ -142,19 +121,16 @@ export const GetTxsEventDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetTxsEventRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetTxsEventResponse.decode(data),
-
+      return {
+        ...GetTxsEventResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const GetBlockWithTxsDesc: UnaryMethodDefinitionish = {
@@ -166,19 +142,16 @@ export const GetBlockWithTxsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return GetBlockWithTxsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...GetBlockWithTxsResponse.decode(data),
-
+      return {
+        ...GetBlockWithTxsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -191,7 +164,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -200,12 +172,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -228,5 +201,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

@@ -92,12 +92,14 @@ import * as _533 from "./rpc.query";
 import * as _534 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
-    export const v1beta1 = { ..._0,
+    export const v1beta1 = {
+      ..._0,
       ..._316,
       ..._323,
       ..._345
     };
-    export const v1beta2 = { ..._1,
+    export const v1beta2 = {
+      ..._1,
       ..._2,
       ..._3,
       ..._317,
@@ -108,12 +110,14 @@ export namespace akash {
     };
   }
   export namespace base {
-    export const v1beta1 = { ..._4,
+    export const v1beta1 = {
+      ..._4,
       ..._5,
       ..._6,
       ..._7
     };
-    export const v1beta2 = { ..._8,
+    export const v1beta2 = {
+      ..._8,
       ..._9,
       ..._10,
       ..._11,
@@ -121,7 +125,8 @@ export namespace akash {
     };
   }
   export namespace cert {
-    export const v1beta2 = { ..._13,
+    export const v1beta2 = {
+      ..._13,
       ..._14,
       ..._15,
       ..._318,
@@ -132,7 +137,8 @@ export namespace akash {
     };
   }
   export namespace deployment {
-    export const v1beta1 = { ..._16,
+    export const v1beta1 = {
+      ..._16,
       ..._17,
       ..._18,
       ..._19,
@@ -140,7 +146,8 @@ export namespace akash {
       ..._21,
       ..._332
     };
-    export const v1beta2 = { ..._22,
+    export const v1beta2 = {
+      ..._22,
       ..._23,
       ..._24,
       ..._25,
@@ -160,13 +167,15 @@ export namespace akash {
     };
   }
   export namespace escrow {
-    export const v1beta1 = { ..._34,
+    export const v1beta1 = {
+      ..._34,
       ..._35,
       ..._36,
       ..._334,
       ..._341
     };
-    export const v1beta2 = { ..._37,
+    export const v1beta2 = {
+      ..._37,
       ..._38,
       ..._39,
       ..._335,
@@ -174,12 +183,14 @@ export namespace akash {
     };
   }
   export namespace inflation {
-    export const v1beta2 = { ..._40,
+    export const v1beta2 = {
+      ..._40,
       ..._41
     };
   }
   export namespace market {
-    export const v1beta2 = { ..._42,
+    export const v1beta2 = {
+      ..._42,
       ..._43,
       ..._44,
       ..._45,
@@ -194,12 +205,14 @@ export namespace akash {
     };
   }
   export namespace provider {
-    export const v1beta1 = { ..._49,
+    export const v1beta1 = {
+      ..._49,
       ..._321,
       ..._328,
       ..._350
     };
-    export const v1beta2 = { ..._50,
+    export const v1beta2 = {
+      ..._50,
       ..._51,
       ..._52,
       ..._322,
@@ -209,7 +222,8 @@ export namespace akash {
       ..._351
     };
   }
-  export const ClientFactory = { ..._532,
+  export const ClientFactory = {
+    ..._532,
     ..._533,
     ..._534
   };

@@ -4,10 +4,11 @@ import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionR
 export class Query {
   /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
   static AppVersion(request: QueryAppVersionRequest, initRequest?: fm.InitReq): Promise<QueryAppVersionResponse> {
-    return fm.fetchReq(`ibc.core.port.v1.AppVersion?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
+    return fm.fetchReq(`ibc.core.port.v1.AppVersion?${fm.renderURLSearchParams({
+      ...request
+    }, [])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

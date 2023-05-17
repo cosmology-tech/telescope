@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgCreateCertificate.encode(value).finish()
       };
     },
-
     revokeCertificate(value: MsgRevokeCertificate) {
       return {
         typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value: MsgRevokeCertificate.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createCertificate(value: MsgCreateCertificate) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     revokeCertificate(value: MsgRevokeCertificate) {
       return {
         typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value
       };
     }
-
   },
   toJSON: {
     createCertificate(value: MsgCreateCertificate) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgCreateCertificate.toJSON(value)
       };
     },
-
     revokeCertificate(value: MsgRevokeCertificate) {
       return {
         typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value: MsgRevokeCertificate.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createCertificate(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgCreateCertificate.fromJSON(value)
       };
     },
-
     revokeCertificate(value: any) {
       return {
         typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value: MsgRevokeCertificate.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createCertificate(value: MsgCreateCertificate) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgCreateCertificate.fromPartial(value)
       };
     },
-
     revokeCertificate(value: MsgRevokeCertificate) {
       return {
         typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value: MsgRevokeCertificate.fromPartial(value)
       };
     }
-
   }
 };

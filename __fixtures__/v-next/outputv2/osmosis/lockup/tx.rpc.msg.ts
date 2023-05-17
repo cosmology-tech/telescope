@@ -4,24 +4,19 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import { MsgLockTokens, MsgLockTokensResponse, MsgBeginUnlockingAll, MsgBeginUnlockingAllResponse, MsgBeginUnlocking, MsgBeginUnlockingResponse, MsgExtendLockup, MsgExtendLockupResponse, MsgForceUnlock, MsgForceUnlockResponse } from "./tx";
 /** Msg defines the Msg service. */
-
 export interface Msg {
   /** LockTokens lock tokens */
   lockTokens(request: DeepPartial<MsgLockTokens>, metadata?: grpc.Metadata): Promise<MsgLockTokensResponse>;
   /** BeginUnlockingAll begin unlocking all tokens */
-
   beginUnlockingAll(request: DeepPartial<MsgBeginUnlockingAll>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingAllResponse>;
   /** MsgBeginUnlocking begins unlocking tokens by lock ID */
-
   beginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse>;
   /** MsgEditLockup edits the existing lockups by lock ID */
-
   extendLockup(request: DeepPartial<MsgExtendLockup>, metadata?: grpc.Metadata): Promise<MsgExtendLockupResponse>;
   forceUnlock(request: DeepPartial<MsgForceUnlock>, metadata?: grpc.Metadata): Promise<MsgForceUnlockResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.lockTokens = this.lockTokens.bind(this);
@@ -30,27 +25,21 @@ export class MsgClientImpl implements Msg {
     this.extendLockup = this.extendLockup.bind(this);
     this.forceUnlock = this.forceUnlock.bind(this);
   }
-
   lockTokens(request: DeepPartial<MsgLockTokens>, metadata?: grpc.Metadata): Promise<MsgLockTokensResponse> {
     return this.rpc.unary(MsgLockTokensDesc, MsgLockTokens.fromPartial(request), metadata);
   }
-
   beginUnlockingAll(request: DeepPartial<MsgBeginUnlockingAll>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingAllResponse> {
     return this.rpc.unary(MsgBeginUnlockingAllDesc, MsgBeginUnlockingAll.fromPartial(request), metadata);
   }
-
   beginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse> {
     return this.rpc.unary(MsgBeginUnlockingDesc, MsgBeginUnlocking.fromPartial(request), metadata);
   }
-
   extendLockup(request: DeepPartial<MsgExtendLockup>, metadata?: grpc.Metadata): Promise<MsgExtendLockupResponse> {
     return this.rpc.unary(MsgExtendLockupDesc, MsgExtendLockup.fromPartial(request), metadata);
   }
-
   forceUnlock(request: DeepPartial<MsgForceUnlock>, metadata?: grpc.Metadata): Promise<MsgForceUnlockResponse> {
     return this.rpc.unary(MsgForceUnlockDesc, MsgForceUnlock.fromPartial(request), metadata);
   }
-
 }
 export const MsgDesc = {
   serviceName: "osmosis.lockup.Msg"
@@ -64,19 +53,16 @@ export const MsgLockTokensDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgLockTokens.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgLockTokensResponse.decode(data),
-
+      return {
+        ...MsgLockTokensResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgBeginUnlockingAllDesc: UnaryMethodDefinitionish = {
@@ -88,19 +74,16 @@ export const MsgBeginUnlockingAllDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgBeginUnlockingAll.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgBeginUnlockingAllResponse.decode(data),
-
+      return {
+        ...MsgBeginUnlockingAllResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgBeginUnlockingDesc: UnaryMethodDefinitionish = {
@@ -112,19 +95,16 @@ export const MsgBeginUnlockingDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgBeginUnlocking.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgBeginUnlockingResponse.decode(data),
-
+      return {
+        ...MsgBeginUnlockingResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgExtendLockupDesc: UnaryMethodDefinitionish = {
@@ -136,19 +116,16 @@ export const MsgExtendLockupDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgExtendLockup.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgExtendLockupResponse.decode(data),
-
+      return {
+        ...MsgExtendLockupResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const MsgForceUnlockDesc: UnaryMethodDefinitionish = {
@@ -160,19 +137,16 @@ export const MsgForceUnlockDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return MsgForceUnlock.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...MsgForceUnlockResponse.decode(data),
-
+      return {
+        ...MsgForceUnlockResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -185,7 +159,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -194,12 +167,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -222,5 +196,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

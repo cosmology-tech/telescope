@@ -27,7 +27,6 @@ export interface UseAddressStringToBytesQuery<TData> extends ReactQueryParams<Ad
 exports[`createRpcQueryHooks 1`] = `
 "export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
-
   const useAccounts = <TData = QueryAccountsResponse,>({
     request,
     options
@@ -37,7 +36,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.accounts(request);
     }, options);
   };
-
   const useAccount = <TData = QueryAccountResponse,>({
     request,
     options
@@ -47,7 +45,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.account(request);
     }, options);
   };
-
   const useParams = <TData = QueryParamsResponse,>({
     request,
     options
@@ -57,7 +54,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.params(request);
     }, options);
   };
-
   const useModuleAccounts = <TData = QueryModuleAccountsResponse,>({
     request,
     options
@@ -67,7 +63,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.moduleAccounts(request);
     }, options);
   };
-
   const useBech32Prefix = <TData = Bech32PrefixResponse,>({
     request,
     options
@@ -77,7 +72,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.bech32Prefix(request);
     }, options);
   };
-
   const useAddressBytesToString = <TData = AddressBytesToStringResponse,>({
     request,
     options
@@ -87,7 +81,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.addressBytesToString(request);
     }, options);
   };
-
   const useAddressStringToBytes = <TData = AddressStringToBytesResponse,>({
     request,
     options
@@ -97,7 +90,6 @@ exports[`createRpcQueryHooks 1`] = `
       return queryService.addressStringToBytes(request);
     }, options);
   };
-
   return {
     /**
      * Accounts returns all the existing accounts
@@ -105,24 +97,12 @@ exports[`createRpcQueryHooks 1`] = `
      * Since: cosmos-sdk 0.43
      */
     useAccounts,
-
-    /** Account returns account details based on address. */
-    useAccount,
-
-    /** Params queries all parameters. */
-    useParams,
-
-    /** ModuleAccounts returns all the existing module accounts. */
-    useModuleAccounts,
-
-    /** Bech32 queries bech32Prefix */
-    useBech32Prefix,
-
-    /** AddressBytesToString converts Account Address bytes to string */
-    useAddressBytesToString,
-
-    /** AddressStringToBytes converts Address string to bytes */
-    useAddressStringToBytes
+    /** Account returns account details based on address. */useAccount,
+    /** Params queries all parameters. */useParams,
+    /** ModuleAccounts returns all the existing module accounts. */useModuleAccounts,
+    /** Bech32 queries bech32Prefix */useBech32Prefix,
+    /** AddressBytesToString converts Account Address bytes to string */useAddressBytesToString,
+    /** AddressStringToBytes converts Address string to bytes */useAddressStringToBytes
   };
 };"
 `;

@@ -8,38 +8,31 @@ export const recursiveModuleBundle = (
 ) => {
     return Object.keys(obj).map(key => {
         if (obj[key]?.__export) {
-            // e.g. abci
-            // 1. create variable for abci
-            // 2. splat ALL _0, parms into abci
-            // 3. export that variable
+            // get exported parts inside the package.
+            const properties: (t.SpreadElement | t.ObjectProperty | t.ObjectMethod)[] = Object.keys(obj[key])
+                .filter(a => a !== '__export')
+                .filter(a => a.startsWith('_'))
+                .map(a => t.spreadElement(t.identifier(a)));
+
+            // see if there's recursive package inside.
+            const others = Object.keys(obj[key])
+                .filter(a => a !== '__export')
+                .filter(a => !a.startsWith('_')).map(otherKey=>( {key: otherKey, value: obj[key][otherKey]} ));
+
+            if (others.length) {
+                // export recursive package through object properties
+                properties.push(...recursiveOtherNameSpaces(others))
+            }
 
             const nmspc = t.variableDeclaration('const',
                 [t.variableDeclarator(
                     t.identifier(key),
-                    t.objectExpression(
-                        Object.keys(obj[key])
-                            .filter(a => a !== '__export')
-                            .filter(a => a.startsWith('_'))
-                            .map(a => t.spreadElement(t.identifier(a)))
-                    )
+                    t.objectExpression(properties)
                 )]
             );
 
-            const others = Object.keys(obj[key])
-                .filter(a => a !== '__export')
-                .filter(a => !a.startsWith('_'));
-
-            if (others.length) {
-                if (!options.experimentalGlobalProtoNamespace) {
-                    throw new Error('namespace and package not supported, yet.')
-                }
-            }
-
             // return nmspc;
             return t.exportNamedDeclaration(nmspc, []);
-
-
-
         } else {
             // you can make a namespace for obj[key]
             // e.g. libs
@@ -51,6 +44,27 @@ export const recursiveModuleBundle = (
             )
         }
     });
+};
+
+export const recursiveOtherNameSpaces = (
+  objs
+): t.ObjectProperty[] => {
+  return objs.map(obj=>{
+    const properties: (t.SpreadElement | t.ObjectProperty | t.ObjectMethod)[] = Object.keys(obj.value)
+        .filter(a => a !== '__export')
+        .filter(a => a.startsWith('_'))
+        .map(a => t.spreadElement(t.identifier(a)));
+
+    const others = Object.keys(obj.value)
+        .filter(a => a !== '__export')
+        .filter(a => !a.startsWith('_')).map(otherKey=>( {key: otherKey, value: obj.value[otherKey]} ));
+
+    if (others.length) {
+        properties.push(...recursiveOtherNameSpaces(others))
+    }
+
+    return t.objectProperty(t.identifier(obj.key), t.objectExpression(properties))
+  })
 };
 
 export const importNamespace = (ident: string, path: string) => t.importDeclaration(

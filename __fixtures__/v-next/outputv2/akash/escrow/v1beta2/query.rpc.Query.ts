@@ -4,7 +4,6 @@ import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
 import { QueryAccountsRequest, QueryAccountsResponse, QueryPaymentsRequest, QueryPaymentsResponse } from "./query";
 /** Query defines the gRPC querier service */
-
 export interface Query {
   /**
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -17,26 +16,21 @@ export interface Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Payments queries all payments
    */
-
   payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.accounts = this.accounts.bind(this);
     this.payments = this.payments.bind(this);
   }
-
   accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse> {
     return this.rpc.unary(QueryAccountsDesc, QueryAccountsRequest.fromPartial(request), metadata);
   }
-
   payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse> {
     return this.rpc.unary(QueryPaymentsDesc, QueryPaymentsRequest.fromPartial(request), metadata);
   }
-
 }
 export const QueryDesc = {
   serviceName: "akash.escrow.v1beta2.Query"
@@ -50,19 +44,16 @@ export const QueryAccountsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryAccountsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryAccountsResponse.decode(data),
-
+      return {
+        ...QueryAccountsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export const QueryPaymentsDesc: UnaryMethodDefinitionish = {
@@ -74,19 +65,16 @@ export const QueryPaymentsDesc: UnaryMethodDefinitionish = {
     serializeBinary() {
       return QueryPaymentsRequest.encode(this).finish();
     }
-
   } as any),
   responseType: ({
     deserializeBinary(data: Uint8Array) {
-      return { ...QueryPaymentsResponse.decode(data),
-
+      return {
+        ...QueryPaymentsResponse.decode(data),
         toObject() {
           return this;
         }
-
       };
     }
-
   } as any)
 };
 export interface Rpc {
@@ -99,7 +87,6 @@ export class GrpcWebImpl {
     debug?: boolean;
     metadata?: grpc.Metadata;
   };
-
   constructor(host: string, options: {
     transport?: grpc.TransportFactory;
     debug?: boolean;
@@ -108,12 +95,13 @@ export class GrpcWebImpl {
     this.host = host;
     this.options = options;
   }
-
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
-    const request = { ..._request,
+    const request = {
+      ..._request,
       ...methodDesc.requestType
     };
-    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.metadata.headersMap,
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -136,5 +124,4 @@ export class GrpcWebImpl {
       });
     });
   }
-
 }

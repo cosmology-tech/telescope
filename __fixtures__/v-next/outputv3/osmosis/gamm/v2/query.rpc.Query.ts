@@ -6,10 +6,11 @@ export class Query {
    * a base denomination and a quote denomination.
    */
   static SpotPrice(request: QuerySpotPriceRequest, initRequest?: fm.InitReq): Promise<QuerySpotPriceResponse> {
-    return fm.fetchReq(`/osmosis/gamm/v2/pools/${request["pool_id"]}/prices?${fm.renderURLSearchParams({ ...request
-    }, ["pool_id"])}`, { ...initRequest,
+    return fm.fetchReq(`/osmosis/gamm/v2/pools/${request["pool_id"]}/prices?${fm.renderURLSearchParams({
+      ...request
+    }, ["pool_id"])}`, {
+      ...initRequest,
       method: "GET"
     });
   }
-
 }

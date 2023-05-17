@@ -38,7 +38,6 @@ exports[`authz 1`] = `
  */
 export interface authz {
   authorization?: Any;
-
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -80,19 +79,14 @@ exports[`oneofs Value 1`] = `
 export interface Value {
   /** Represents a null value. */
   nullValue?: NullValue;
-
   /** Represents a double value. */
   numberValue?: number;
-
   /** Represents a string value. */
   stringValue?: string;
-
   /** Represents a boolean value. */
   boolValue?: boolean;
-
   /** Represents a structured value. */
   structValue?: Struct;
-
   /** Represents a repeated \`Value\`. */
   listValue?: ListValue;
 }"
@@ -130,7 +124,6 @@ export interface ModuleConfig {
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
-
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
@@ -162,7 +155,6 @@ export interface CheckedExpr {
   referenceMap?: {
     [key: Long]: Reference;
   };
-
   /**
    * A map from expression ids to types.
    * 
@@ -173,13 +165,11 @@ export interface CheckedExpr {
   typeMap?: {
     [key: Long]: Type;
   };
-
   /**
    * The source info derived from input that generated the parsed \`expr\` and
    * any optimizations made during the type-checking pass.
    */
   sourceInfo?: SourceInfo;
-
   /**
    * The expr version indicates the major / minor version number of the \`expr\`
    * representation.
@@ -190,7 +180,6 @@ export interface CheckedExpr {
    * the same or similar transformations prior to evaluation.
    */
   exprVersion: string;
-
   /**
    * The checked expression. Semantically equivalent to the parsed \`expr\`, but
    * may have structural differences.
@@ -204,7 +193,6 @@ exports[`traversed google/api/expr/v1alpha1/checked 2`] = `
 export interface Reference {
   /** The fully qualified name of the declaration. */
   name: string;
-
   /**
    * For references to functions, this is a list of \`Overload.overload_id\`
    * values which match according to typing rules.
@@ -216,7 +204,6 @@ export interface Reference {
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
   overloadId: string[];
-
   /**
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
@@ -231,7 +218,6 @@ export interface Params {
   airdropStartTime?: Date;
   durationUntilDecay?: Duration;
   durationOfDecay?: Duration;
-
   /** denom of claimable asset */
   claimDenom: string;
 }"
