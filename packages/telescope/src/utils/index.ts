@@ -20,6 +20,8 @@ export const UTILS = {
   bytesFromBase64: '__helpers__',
   BrowserHeaders: 'browser-headers',
   Decimal: '@cosmjs/math',
+  BinaryReader: '__binary__',
+  BinaryWriter: '__binary__',
   createProtobufRpcClient: '@cosmjs/stargate',
   decodeBech32Pubkey: '@cosmjs/amino',
   DeepPartial: '__helpers__',
@@ -60,18 +62,17 @@ export const UTILS = {
   useRpcEndpoint: '__react-query__',
   useRpcClient: '__react-query__',
   useTendermintClient: '__react-query__',
-  ReactQueryParams: '__react-query__',
+  UnaryMethodDefinitionishR: '__grpc-web__',
+  UnaryMethodDefinitionish: '__grpc-web__',
   UseQueryOptions: '@tanstack/react-query',
+  ReactQueryParams: '__react-query__',
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
   useEndpoint: '__pinia-endpoint__',
   override: 'mobx',
   makeObservable: 'mobx',
   NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',
-  UnaryMethodDefinitionishR: '__grpc-web__',
-  UnaryMethodDefinitionish: '__grpc-web__',
-  BinaryReader: '__binary__',
-  BinaryWriter: '__binary__'
+  WebSocket: 'ws',
 };
 
 export const UTIL_HELPERS = [
