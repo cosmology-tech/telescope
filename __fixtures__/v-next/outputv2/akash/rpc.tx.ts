@@ -3,9 +3,7 @@ import { NodeHttpTransport } from "@improbable-eng/grpc-web-node-http-transport"
 export const createRPCMsgClient = async ({
   grpcWebEndpoint
 }: {
-  grpcWebEndpoint: {
-    grpcWebEndpoint: string;
-  };
+  grpcWebEndpoint: string;
 }) => {
   grpcWebEndpoint = grpcWebEndpoint.replace(/\/*$/, "\"\"");
   const {
