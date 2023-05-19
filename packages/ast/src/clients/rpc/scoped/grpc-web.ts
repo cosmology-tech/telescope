@@ -207,25 +207,20 @@ export const grpcFuncArguments = (): t.ObjectPattern[] => {
                 false,
                 true
             )
-        ], t.tsTypeAnnotation(
-            t.tsTypeLiteral([
-                t.tsPropertySignature(
-                    t.identifier('grpcWebEndpoint'),
-                    t.tsTypeAnnotation(
-                        t.tSTypeLiteral(
-                            [
-                                t.tsPropertySignature(
-                                    t.identifier('grpcWebEndpoint'),
-                                    t.tsTypeAnnotation(
-                                        t.tsStringKeyword()
-                                    )
-                                )
-                            ]
+        ], 
+        t.tsTypeAnnotation(
+            t.tsTypeLiteral(
+                [
+                    t.tsPropertySignature(
+                        t.identifier('grpcWebEndpoint'),
+                        t.tsTypeAnnotation(
+                            t.tsStringKeyword()
                         )
                     )
-                )
-            ])
-        ))
+                ]
+            )
+            )                       
+        )
     ];
 };
 
