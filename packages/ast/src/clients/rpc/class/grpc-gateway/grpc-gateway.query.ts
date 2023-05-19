@@ -467,12 +467,17 @@ export const createGRPCGatewayWrapperClass = (
             null,
             t.classBody(
                 [
-                    t.classProperty(
+                    classProperty(
                         t.identifier('url'),
                         null,
                         t.tsTypeAnnotation(
                             t.tsStringKeyword()
-                        )
+                        ),
+                        [],
+                        false,
+                        false,
+                        true,
+                        "private"
                     ),
                     t.classMethod(
                         'constructor',

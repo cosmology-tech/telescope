@@ -17,10 +17,11 @@ export const grpcGatewayClientScaffold = (): t.Statement[] => {
                     ),
                     [
                         t.regExpLiteral(
-                            "\\/*$"
+                            "\\/*$",
+                            "g"
                         ),
                         t.stringLiteral(
-                            "\"\""
+                            ""
                         )
                     ]
                 )
