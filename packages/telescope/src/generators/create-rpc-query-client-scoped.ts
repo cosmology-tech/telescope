@@ -8,6 +8,7 @@ import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
+import { createScopedGrpcGatewayFactory } from '../../../ast/src/clients/rpc/scoped/grpc-gateway';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -111,7 +112,13 @@ const makeRPC = (
     
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
-          // TODO no working scoped clients for grpc-gateway right now
+            rpcast = createScopedGrpcGatewayFactory(
+                ctx.proto,
+                obj,
+                methodName
+                // 'QueryClientImpl' // make option later
+              );
+              break;
         case "tendermint":
           // TODO add addUtil to generic context
           ctx.proto.addUtil('Rpc');

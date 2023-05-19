@@ -3,7 +3,7 @@ import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
 import { rpcFuncArguments, rpcClassArguments, rpcRecursiveObjectProps } from './rpc';
 
-export const grpcClientScaffold = (): t.Statement[] => {
+export const grpcWebClientScaffold = (): t.Statement[] => {
     return [
         t.expressionStatement(
             t.assignmentExpression(
@@ -304,7 +304,7 @@ export const createScopedGrpcWebFactory = (
                     t.arrowFunctionExpression(
                         grpcFuncArguments(),
                         t.blockStatement(
-                            grpcClientScaffold().concat(
+                            grpcWebClientScaffold().concat(
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
@@ -335,7 +335,7 @@ export const createScopedGrpcWebMsgFactory = (
                         grpcFuncArguments(),
                         //
                         t.blockStatement(
-                            grpcClientScaffold().concat(
+                            grpcWebClientScaffold().concat(
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
