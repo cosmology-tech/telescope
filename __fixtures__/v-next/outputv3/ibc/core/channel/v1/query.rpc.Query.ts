@@ -147,3 +147,124 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Channel queries an IBC Channel. */
+  async Channel(req: QueryChannelRequest, headers?: HeadersInit): Promise<QueryChannelResponse> {
+    return Query.Channel(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Channels queries all the IBC channels of a chain. */
+  async Channels(req: QueryChannelsRequest, headers?: HeadersInit): Promise<QueryChannelsResponse> {
+    return Query.Channels(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ConnectionChannels queries all the channels associated with a connection
+   * end.
+   */
+  async ConnectionChannels(req: QueryConnectionChannelsRequest, headers?: HeadersInit): Promise<QueryConnectionChannelsResponse> {
+    return Query.ConnectionChannels(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ChannelClientState queries for the client state for the channel associated
+   * with the provided channel identifiers.
+   */
+  async ChannelClientState(req: QueryChannelClientStateRequest, headers?: HeadersInit): Promise<QueryChannelClientStateResponse> {
+    return Query.ChannelClientState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ChannelConsensusState queries for the consensus state for the channel
+   * associated with the provided channel identifiers.
+   */
+  async ChannelConsensusState(req: QueryChannelConsensusStateRequest, headers?: HeadersInit): Promise<QueryChannelConsensusStateResponse> {
+    return Query.ChannelConsensusState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** PacketCommitment queries a stored packet commitment hash. */
+  async PacketCommitment(req: QueryPacketCommitmentRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentResponse> {
+    return Query.PacketCommitment(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * PacketCommitments returns all the packet commitments hashes associated
+   * with a channel.
+   */
+  async PacketCommitments(req: QueryPacketCommitmentsRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentsResponse> {
+    return Query.PacketCommitments(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * PacketReceipt queries if a given packet sequence has been received on the
+   * queried chain
+   */
+  async PacketReceipt(req: QueryPacketReceiptRequest, headers?: HeadersInit): Promise<QueryPacketReceiptResponse> {
+    return Query.PacketReceipt(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
+  async PacketAcknowledgement(req: QueryPacketAcknowledgementRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementResponse> {
+    return Query.PacketAcknowledgement(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * PacketAcknowledgements returns all the packet acknowledgements associated
+   * with a channel.
+   */
+  async PacketAcknowledgements(req: QueryPacketAcknowledgementsRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementsResponse> {
+    return Query.PacketAcknowledgements(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * UnreceivedPackets returns all the unreceived IBC packets associated with a
+   * channel and sequences.
+   */
+  async UnreceivedPackets(req: QueryUnreceivedPacketsRequest, headers?: HeadersInit): Promise<QueryUnreceivedPacketsResponse> {
+    return Query.UnreceivedPackets(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+   * with a channel and sequences.
+   */
+  async UnreceivedAcks(req: QueryUnreceivedAcksRequest, headers?: HeadersInit): Promise<QueryUnreceivedAcksResponse> {
+    return Query.UnreceivedAcks(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** NextSequenceReceive returns the next receive sequence for a given channel. */
+  async NextSequenceReceive(req: QueryNextSequenceReceiveRequest, headers?: HeadersInit): Promise<QueryNextSequenceReceiveResponse> {
+    return Query.NextSequenceReceive(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -13,3 +13,16 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Certificates queries certificates */
+  async Certificates(req: QueryCertificatesRequest, headers?: HeadersInit): Promise<QueryCertificatesResponse> {
+    return Query.Certificates(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

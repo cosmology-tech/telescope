@@ -56,3 +56,53 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * AllProvidersAttributes queries all providers
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
+  async AllProvidersAttributes(req: QueryAllProvidersAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.AllProvidersAttributes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ProviderAttributes queries all provider signed attributes
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
+  async ProviderAttributes(req: QueryProviderAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.ProviderAttributes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ProviderAuditorAttributes queries provider signed attributes by specific auditor
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
+  async ProviderAuditorAttributes(req: QueryProviderAuditorRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.ProviderAuditorAttributes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * AuditorAttributes queries all providers signed by this auditor
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
+  async AuditorAttributes(req: QueryAuditorAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.AuditorAttributes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

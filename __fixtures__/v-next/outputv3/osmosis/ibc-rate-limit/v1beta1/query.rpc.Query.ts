@@ -15,3 +15,19 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * Params defines a gRPC query method that returns the ibc-rate-limit module's
+   * parameters.
+   */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

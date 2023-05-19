@@ -149,3 +149,118 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  async Pools(req: QueryPoolsRequest, headers?: HeadersInit): Promise<QueryPoolsResponse> {
+    return Query.Pools(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async NumPools(req: QueryNumPoolsRequest, headers?: HeadersInit): Promise<QueryNumPoolsResponse> {
+    return Query.NumPools(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async TotalLiquidity(req: QueryTotalLiquidityRequest, headers?: HeadersInit): Promise<QueryTotalLiquidityResponse> {
+    return Query.TotalLiquidity(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * PoolsWithFilter allows you to query specific pools with requested
+   * parameters
+   */
+  async PoolsWithFilter(req: QueryPoolsWithFilterRequest, headers?: HeadersInit): Promise<QueryPoolsWithFilterResponse> {
+    return Query.PoolsWithFilter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Per Pool gRPC Endpoints */
+  async Pool(req: QueryPoolRequest, headers?: HeadersInit): Promise<QueryPoolResponse> {
+    return Query.Pool(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * PoolType returns the type of the pool.
+   * Returns "Balancer" as a string literal when the pool is a balancer pool.
+   * Errors if the pool is failed to be type caseted.
+   */
+  async PoolType(req: QueryPoolTypeRequest, headers?: HeadersInit): Promise<QueryPoolTypeResponse> {
+    return Query.PoolType(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Simulates joining pool without a swap. Returns the amount of shares you'd
+   * get and tokens needed to provide
+   */
+  async CalcJoinPoolNoSwapShares(req: QueryCalcJoinPoolNoSwapSharesRequest, headers?: HeadersInit): Promise<QueryCalcJoinPoolNoSwapSharesResponse> {
+    return Query.CalcJoinPoolNoSwapShares(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async CalcJoinPoolShares(req: QueryCalcJoinPoolSharesRequest, headers?: HeadersInit): Promise<QueryCalcJoinPoolSharesResponse> {
+    return Query.CalcJoinPoolShares(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async CalcExitPoolCoinsFromShares(req: QueryCalcExitPoolCoinsFromSharesRequest, headers?: HeadersInit): Promise<QueryCalcExitPoolCoinsFromSharesResponse> {
+    return Query.CalcExitPoolCoinsFromShares(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async PoolParams(req: QueryPoolParamsRequest, headers?: HeadersInit): Promise<QueryPoolParamsResponse> {
+    return Query.PoolParams(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async TotalPoolLiquidity(req: QueryTotalPoolLiquidityRequest, headers?: HeadersInit): Promise<QueryTotalPoolLiquidityResponse> {
+    return Query.TotalPoolLiquidity(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async TotalShares(req: QueryTotalSharesRequest, headers?: HeadersInit): Promise<QueryTotalSharesResponse> {
+    return Query.TotalShares(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * SpotPrice defines a gRPC query handler that returns the spot price given
+   * a base denomination and a quote denomination.
+   */
+  async SpotPrice(req: QuerySpotPriceRequest, headers?: HeadersInit): Promise<QuerySpotPriceResponse> {
+    return Query.SpotPrice(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Estimate the swap. */
+  async EstimateSwapExactAmountIn(req: QuerySwapExactAmountInRequest, headers?: HeadersInit): Promise<QuerySwapExactAmountInResponse> {
+    return Query.EstimateSwapExactAmountIn(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async EstimateSwapExactAmountOut(req: QuerySwapExactAmountOutRequest, headers?: HeadersInit): Promise<QuerySwapExactAmountOutResponse> {
+    return Query.EstimateSwapExactAmountOut(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

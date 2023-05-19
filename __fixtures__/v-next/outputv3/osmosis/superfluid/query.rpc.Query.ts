@@ -159,3 +159,130 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Params returns the total set of superfluid parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns superfluid asset type, whether if it's a native asset or an lp
+   * share.
+   */
+  async AssetType(req: AssetTypeRequest, headers?: HeadersInit): Promise<AssetTypeResponse> {
+    return Query.AssetType(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns all registered superfluid assets. */
+  async AllAssets(req: AllAssetsRequest, headers?: HeadersInit): Promise<AllAssetsResponse> {
+    return Query.AllAssets(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns the osmo equivalent multiplier used in the most recent epoch. */
+  async AssetMultiplier(req: AssetMultiplierRequest, headers?: HeadersInit): Promise<AssetMultiplierResponse> {
+    return Query.AssetMultiplier(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns all superfluid intermediary accounts. */
+  async AllIntermediaryAccounts(req: AllIntermediaryAccountsRequest, headers?: HeadersInit): Promise<AllIntermediaryAccountsResponse> {
+    return Query.AllIntermediaryAccounts(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns intermediary account connected to a superfluid staked lock by id */
+  async ConnectedIntermediaryAccount(req: ConnectedIntermediaryAccountRequest, headers?: HeadersInit): Promise<ConnectedIntermediaryAccountResponse> {
+    return Query.ConnectedIntermediaryAccount(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns the amount of delegations of specific denom for all validators */
+  async TotalDelegationByValidatorForDenom(req: QueryTotalDelegationByValidatorForDenomRequest, headers?: HeadersInit): Promise<QueryTotalDelegationByValidatorForDenomResponse> {
+    return Query.TotalDelegationByValidatorForDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns the total amount of osmo superfluidly staked.
+   * Response is denominated in uosmo.
+   */
+  async TotalSuperfluidDelegations(req: TotalSuperfluidDelegationsRequest, headers?: HeadersInit): Promise<TotalSuperfluidDelegationsResponse> {
+    return Query.TotalSuperfluidDelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns the coins superfluid delegated for the delegator, validator, denom
+   * triplet
+   */
+  async SuperfluidDelegationAmount(req: SuperfluidDelegationAmountRequest, headers?: HeadersInit): Promise<SuperfluidDelegationAmountResponse> {
+    return Query.SuperfluidDelegationAmount(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns all the delegated superfluid poistions for a specific delegator. */
+  async SuperfluidDelegationsByDelegator(req: SuperfluidDelegationsByDelegatorRequest, headers?: HeadersInit): Promise<SuperfluidDelegationsByDelegatorResponse> {
+    return Query.SuperfluidDelegationsByDelegator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns all the undelegating superfluid poistions for a specific delegator. */
+  async SuperfluidUndelegationsByDelegator(req: SuperfluidUndelegationsByDelegatorRequest, headers?: HeadersInit): Promise<SuperfluidUndelegationsByDelegatorResponse> {
+    return Query.SuperfluidUndelegationsByDelegator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns all the superfluid positions of a specific denom delegated to one
+   * validator
+   */
+  async SuperfluidDelegationsByValidatorDenom(req: SuperfluidDelegationsByValidatorDenomRequest, headers?: HeadersInit): Promise<SuperfluidDelegationsByValidatorDenomResponse> {
+    return Query.SuperfluidDelegationsByValidatorDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns the amount of a specific denom delegated to a specific validator
+   * This is labeled an estimate, because the way it calculates the amount can
+   * lead rounding errors from the true delegated amount
+   */
+  async EstimateSuperfluidDelegatedAmountByValidatorDenom(req: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, headers?: HeadersInit): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
+    return Query.EstimateSuperfluidDelegatedAmountByValidatorDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns the specified delegations for a specific delegator */
+  async TotalDelegationByDelegator(req: QueryTotalDelegationByDelegatorRequest, headers?: HeadersInit): Promise<QueryTotalDelegationByDelegatorResponse> {
+    return Query.TotalDelegationByDelegator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns a list of whitelisted pool ids to unpool. */
+  async UnpoolWhitelist(req: QueryUnpoolWhitelistRequest, headers?: HeadersInit): Promise<QueryUnpoolWhitelistResponse> {
+    return Query.UnpoolWhitelist(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

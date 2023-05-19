@@ -142,3 +142,119 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Validators queries all validators that match the given status. */
+  async Validators(req: QueryValidatorsRequest, headers?: HeadersInit): Promise<QueryValidatorsResponse> {
+    return Query.Validators(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Validator queries validator info for given validator address. */
+  async Validator(req: QueryValidatorRequest, headers?: HeadersInit): Promise<QueryValidatorResponse> {
+    return Query.Validator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ValidatorDelegations queries delegate info for given validator. */
+  async ValidatorDelegations(req: QueryValidatorDelegationsRequest, headers?: HeadersInit): Promise<QueryValidatorDelegationsResponse> {
+    return Query.ValidatorDelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ValidatorUnbondingDelegations queries unbonding delegations of a validator. */
+  async ValidatorUnbondingDelegations(req: QueryValidatorUnbondingDelegationsRequest, headers?: HeadersInit): Promise<QueryValidatorUnbondingDelegationsResponse> {
+    return Query.ValidatorUnbondingDelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Delegation queries delegate info for given validator delegator pair. */
+  async Delegation(req: QueryDelegationRequest, headers?: HeadersInit): Promise<QueryDelegationResponse> {
+    return Query.Delegation(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * UnbondingDelegation queries unbonding info for given validator delegator
+   * pair.
+   */
+  async UnbondingDelegation(req: QueryUnbondingDelegationRequest, headers?: HeadersInit): Promise<QueryUnbondingDelegationResponse> {
+    return Query.UnbondingDelegation(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DelegatorDelegations queries all delegations of a given delegator address. */
+  async DelegatorDelegations(req: QueryDelegatorDelegationsRequest, headers?: HeadersInit): Promise<QueryDelegatorDelegationsResponse> {
+    return Query.DelegatorDelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DelegatorUnbondingDelegations queries all unbonding delegations of a given
+   * delegator address.
+   */
+  async DelegatorUnbondingDelegations(req: QueryDelegatorUnbondingDelegationsRequest, headers?: HeadersInit): Promise<QueryDelegatorUnbondingDelegationsResponse> {
+    return Query.DelegatorUnbondingDelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Redelegations queries redelegations of given address. */
+  async Redelegations(req: QueryRedelegationsRequest, headers?: HeadersInit): Promise<QueryRedelegationsResponse> {
+    return Query.Redelegations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DelegatorValidators queries all validators info for given delegator
+   * address.
+   */
+  async DelegatorValidators(req: QueryDelegatorValidatorsRequest, headers?: HeadersInit): Promise<QueryDelegatorValidatorsResponse> {
+    return Query.DelegatorValidators(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DelegatorValidator queries validator info for given delegator validator
+   * pair.
+   */
+  async DelegatorValidator(req: QueryDelegatorValidatorRequest, headers?: HeadersInit): Promise<QueryDelegatorValidatorResponse> {
+    return Query.DelegatorValidator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** HistoricalInfo queries the historical info for given height. */
+  async HistoricalInfo(req: QueryHistoricalInfoRequest, headers?: HeadersInit): Promise<QueryHistoricalInfoResponse> {
+    return Query.HistoricalInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Pool queries the pool info. */
+  async Pool(req: QueryPoolRequest, headers?: HeadersInit): Promise<QueryPoolResponse> {
+    return Query.Pool(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Parameters queries the staking parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -21,3 +21,23 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** EpochInfos provide running epochInfos */
+  async EpochInfos(req: QueryEpochsInfoRequest, headers?: HeadersInit): Promise<QueryEpochsInfoResponse> {
+    return Query.EpochInfos(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** CurrentEpoch provide current epoch of specified identifier */
+  async CurrentEpoch(req: QueryCurrentEpochRequest, headers?: HeadersInit): Promise<QueryCurrentEpochResponse> {
+    return Query.CurrentEpoch(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

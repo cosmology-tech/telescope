@@ -22,3 +22,23 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Providers queries providers */
+  async Providers(req: QueryProvidersRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.Providers(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Provider queries provider details */
+  async Provider(req: QueryProviderRequest, headers?: HeadersInit): Promise<QueryProviderResponse> {
+    return Query.Provider(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

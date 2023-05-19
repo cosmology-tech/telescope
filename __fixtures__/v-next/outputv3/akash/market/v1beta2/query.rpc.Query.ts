@@ -61,3 +61,51 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Orders queries orders with filters */
+  async Orders(req: QueryOrdersRequest, headers?: HeadersInit): Promise<QueryOrdersResponse> {
+    return Query.Orders(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Order queries order details */
+  async Order(req: QueryOrderRequest, headers?: HeadersInit): Promise<QueryOrderResponse> {
+    return Query.Order(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Bids queries bids with filters */
+  async Bids(req: QueryBidsRequest, headers?: HeadersInit): Promise<QueryBidsResponse> {
+    return Query.Bids(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Bid queries bid details */
+  async Bid(req: QueryBidRequest, headers?: HeadersInit): Promise<QueryBidResponse> {
+    return Query.Bid(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Leases queries leases with filters */
+  async Leases(req: QueryLeasesRequest, headers?: HeadersInit): Promise<QueryLeasesResponse> {
+    return Query.Leases(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Lease queries lease details */
+  async Lease(req: QueryLeaseRequest, headers?: HeadersInit): Promise<QueryLeaseResponse> {
+    return Query.Lease(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

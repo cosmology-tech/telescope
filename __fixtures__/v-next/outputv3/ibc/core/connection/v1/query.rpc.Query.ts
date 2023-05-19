@@ -60,3 +60,53 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Connection queries an IBC connection end. */
+  async Connection(req: QueryConnectionRequest, headers?: HeadersInit): Promise<QueryConnectionResponse> {
+    return Query.Connection(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Connections queries all the IBC connections of a chain. */
+  async Connections(req: QueryConnectionsRequest, headers?: HeadersInit): Promise<QueryConnectionsResponse> {
+    return Query.Connections(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ClientConnections queries the connection paths associated with a client
+   * state.
+   */
+  async ClientConnections(req: QueryClientConnectionsRequest, headers?: HeadersInit): Promise<QueryClientConnectionsResponse> {
+    return Query.ClientConnections(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ConnectionClientState queries the client state associated with the
+   * connection.
+   */
+  async ConnectionClientState(req: QueryConnectionClientStateRequest, headers?: HeadersInit): Promise<QueryConnectionClientStateResponse> {
+    return Query.ConnectionClientState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ConnectionConsensusState queries the consensus state associated with the
+   * connection.
+   */
+  async ConnectionConsensusState(req: QueryConnectionConsensusStateRequest, headers?: HeadersInit): Promise<QueryConnectionConsensusStateResponse> {
+    return Query.ConnectionConsensusState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -89,3 +89,75 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Params queries params of the distribution module. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ValidatorOutstandingRewards queries rewards of a validator address. */
+  async ValidatorOutstandingRewards(req: QueryValidatorOutstandingRewardsRequest, headers?: HeadersInit): Promise<QueryValidatorOutstandingRewardsResponse> {
+    return Query.ValidatorOutstandingRewards(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ValidatorCommission queries accumulated commission for a validator. */
+  async ValidatorCommission(req: QueryValidatorCommissionRequest, headers?: HeadersInit): Promise<QueryValidatorCommissionResponse> {
+    return Query.ValidatorCommission(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ValidatorSlashes queries slash events of a validator. */
+  async ValidatorSlashes(req: QueryValidatorSlashesRequest, headers?: HeadersInit): Promise<QueryValidatorSlashesResponse> {
+    return Query.ValidatorSlashes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DelegationRewards queries the total rewards accrued by a delegation. */
+  async DelegationRewards(req: QueryDelegationRewardsRequest, headers?: HeadersInit): Promise<QueryDelegationRewardsResponse> {
+    return Query.DelegationRewards(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DelegationTotalRewards queries the total rewards accrued by a each
+   * validator.
+   */
+  async DelegationTotalRewards(req: QueryDelegationTotalRewardsRequest, headers?: HeadersInit): Promise<QueryDelegationTotalRewardsResponse> {
+    return Query.DelegationTotalRewards(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DelegatorValidators queries the validators of a delegator. */
+  async DelegatorValidators(req: QueryDelegatorValidatorsRequest, headers?: HeadersInit): Promise<QueryDelegatorValidatorsResponse> {
+    return Query.DelegatorValidators(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DelegatorWithdrawAddress queries withdraw address of a delegator. */
+  async DelegatorWithdrawAddress(req: QueryDelegatorWithdrawAddressRequest, headers?: HeadersInit): Promise<QueryDelegatorWithdrawAddressResponse> {
+    return Query.DelegatorWithdrawAddress(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** CommunityPool queries the community pool coins. */
+  async CommunityPool(req: QueryCommunityPoolRequest, headers?: HeadersInit): Promise<QueryCommunityPoolResponse> {
+    return Query.CommunityPool(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

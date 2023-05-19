@@ -45,3 +45,39 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  async ModuleAccountBalance(req: QueryModuleAccountBalanceRequest, headers?: HeadersInit): Promise<QueryModuleAccountBalanceResponse> {
+    return Query.ModuleAccountBalance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async ClaimRecord(req: QueryClaimRecordRequest, headers?: HeadersInit): Promise<QueryClaimRecordResponse> {
+    return Query.ClaimRecord(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async ClaimableForAction(req: QueryClaimableForActionRequest, headers?: HeadersInit): Promise<QueryClaimableForActionResponse> {
+    return Query.ClaimableForAction(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async TotalClaimable(req: QueryTotalClaimableRequest, headers?: HeadersInit): Promise<QueryTotalClaimableResponse> {
+    return Query.TotalClaimable(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

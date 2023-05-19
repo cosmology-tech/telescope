@@ -44,3 +44,40 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** DevFeeInfos retrieves all registered contracts for fee distribution */
+  async DevFeeInfos(req: QueryDevFeeInfosRequest, headers?: HeadersInit): Promise<QueryDevFeeInfosResponse> {
+    return Query.DevFeeInfos(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DevFeeInfo retrieves a registered contract for fee distribution */
+  async DevFeeInfo(req: QueryDevFeeInfoRequest, headers?: HeadersInit): Promise<QueryDevFeeInfoResponse> {
+    return Query.DevFeeInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params retrieves the fees module params */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   * registered for fee distribution
+   */
+  async DevFeeInfosPerDeployer(req: QueryDevFeeInfosPerDeployerRequest, headers?: HeadersInit): Promise<QueryDevFeeInfosPerDeployerResponse> {
+    return Query.DevFeeInfosPerDeployer(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

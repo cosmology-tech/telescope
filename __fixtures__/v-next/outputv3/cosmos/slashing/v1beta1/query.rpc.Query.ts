@@ -31,3 +31,30 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Params queries the parameters of slashing module */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SigningInfo queries the signing info of given cons address */
+  async SigningInfo(req: QuerySigningInfoRequest, headers?: HeadersInit): Promise<QuerySigningInfoResponse> {
+    return Query.SigningInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SigningInfos queries signing info of all validators */
+  async SigningInfos(req: QuerySigningInfosRequest, headers?: HeadersInit): Promise<QuerySigningInfosResponse> {
+    return Query.SigningInfos(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

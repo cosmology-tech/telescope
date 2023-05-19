@@ -22,3 +22,23 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Evidence queries evidence based on evidence hash. */
+  async Evidence(req: QueryEvidenceRequest, headers?: HeadersInit): Promise<QueryEvidenceResponse> {
+    return Query.Evidence(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AllEvidence queries all evidence. */
+  async AllEvidence(req: QueryAllEvidenceRequest, headers?: HeadersInit): Promise<QueryAllEvidenceResponse> {
+    return Query.AllEvidence(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -61,3 +61,54 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Period retrieves current period. */
+  async Period(req: QueryPeriodRequest, headers?: HeadersInit): Promise<QueryPeriodResponse> {
+    return Query.Period(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** EpochMintProvision retrieves current minting epoch provision value. */
+  async EpochMintProvision(req: QueryEpochMintProvisionRequest, headers?: HeadersInit): Promise<QueryEpochMintProvisionResponse> {
+    return Query.EpochMintProvision(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SkippedEpochs retrieves the total number of skipped epochs. */
+  async SkippedEpochs(req: QuerySkippedEpochsRequest, headers?: HeadersInit): Promise<QuerySkippedEpochsResponse> {
+    return Query.SkippedEpochs(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * CirculatingSupply retrieves the total number of tokens that are in
+   * circulation (i.e. excluding unvested tokens).
+   */
+  async CirculatingSupply(req: QueryCirculatingSupplyRequest, headers?: HeadersInit): Promise<QueryCirculatingSupplyResponse> {
+    return Query.CirculatingSupply(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** InflationRate retrieves the inflation rate of the current period. */
+  async InflationRate(req: QueryInflationRateRequest, headers?: HeadersInit): Promise<QueryInflationRateResponse> {
+    return Query.InflationRate(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params retrieves the total set of minting parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

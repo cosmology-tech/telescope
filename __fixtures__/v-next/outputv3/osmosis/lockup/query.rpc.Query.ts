@@ -166,3 +166,134 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Return full balance of the module */
+  async ModuleBalance(req: ModuleBalanceRequest, headers?: HeadersInit): Promise<ModuleBalanceResponse> {
+    return Query.ModuleBalance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Return locked balance of the module */
+  async ModuleLockedAmount(req: ModuleLockedAmountRequest, headers?: HeadersInit): Promise<ModuleLockedAmountResponse> {
+    return Query.ModuleLockedAmount(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns unlockable coins which are not withdrawn yet */
+  async AccountUnlockableCoins(req: AccountUnlockableCoinsRequest, headers?: HeadersInit): Promise<AccountUnlockableCoinsResponse> {
+    return Query.AccountUnlockableCoins(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns unlocking coins */
+  async AccountUnlockingCoins(req: AccountUnlockingCoinsRequest, headers?: HeadersInit): Promise<AccountUnlockingCoinsResponse> {
+    return Query.AccountUnlockingCoins(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Return a locked coins that can't be withdrawn */
+  async AccountLockedCoins(req: AccountLockedCoinsRequest, headers?: HeadersInit): Promise<AccountLockedCoinsResponse> {
+    return Query.AccountLockedCoins(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns locked records of an account with unlock time beyond timestamp */
+  async AccountLockedPastTime(req: AccountLockedPastTimeRequest, headers?: HeadersInit): Promise<AccountLockedPastTimeResponse> {
+    return Query.AccountLockedPastTime(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns locked records of an account with unlock time beyond timestamp
+   * excluding tokens started unlocking
+   */
+  async AccountLockedPastTimeNotUnlockingOnly(req: AccountLockedPastTimeNotUnlockingOnlyRequest, headers?: HeadersInit): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+    return Query.AccountLockedPastTimeNotUnlockingOnly(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns unlocked records with unlock time before timestamp */
+  async AccountUnlockedBeforeTime(req: AccountUnlockedBeforeTimeRequest, headers?: HeadersInit): Promise<AccountUnlockedBeforeTimeResponse> {
+    return Query.AccountUnlockedBeforeTime(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns lock records by address, timestamp, denom */
+  async AccountLockedPastTimeDenom(req: AccountLockedPastTimeDenomRequest, headers?: HeadersInit): Promise<AccountLockedPastTimeDenomResponse> {
+    return Query.AccountLockedPastTimeDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns total locked per denom with longer past given time */
+  async LockedDenom(req: LockedDenomRequest, headers?: HeadersInit): Promise<LockedDenomResponse> {
+    return Query.LockedDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns lock record by id */
+  async LockedByID(req: LockedRequest, headers?: HeadersInit): Promise<LockedResponse> {
+    return Query.LockedByID(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns synthetic lockups by native lockup id */
+  async SyntheticLockupsByLockupID(req: SyntheticLockupsByLockupIDRequest, headers?: HeadersInit): Promise<SyntheticLockupsByLockupIDResponse> {
+    return Query.SyntheticLockupsByLockupID(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns account locked records with longer duration */
+  async AccountLockedLongerDuration(req: AccountLockedLongerDurationRequest, headers?: HeadersInit): Promise<AccountLockedLongerDurationResponse> {
+    return Query.AccountLockedLongerDuration(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns account locked records with a specific duration */
+  async AccountLockedDuration(req: AccountLockedDurationRequest, headers?: HeadersInit): Promise<AccountLockedDurationResponse> {
+    return Query.AccountLockedDuration(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * Returns account locked records with longer duration excluding tokens
+   * started unlocking
+   */
+  async AccountLockedLongerDurationNotUnlockingOnly(req: AccountLockedLongerDurationNotUnlockingOnlyRequest, headers?: HeadersInit): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+    return Query.AccountLockedLongerDurationNotUnlockingOnly(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns account's locked records for a denom with longer duration */
+  async AccountLockedLongerDurationDenom(req: AccountLockedLongerDurationDenomRequest, headers?: HeadersInit): Promise<AccountLockedLongerDurationDenomResponse> {
+    return Query.AccountLockedLongerDurationDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params returns lockup params. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -40,3 +40,39 @@ export class Query {
     });
   }
 }
+export class Querier {
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * Params defines a gRPC query method that returns the tokenfactory module's
+   * parameters.
+   */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomAuthorityMetadata defines a gRPC query method for fetching
+   * DenomAuthorityMetadata for a particular denom.
+   */
+  async DenomAuthorityMetadata(req: QueryDenomAuthorityMetadataRequest, headers?: HeadersInit): Promise<QueryDenomAuthorityMetadataResponse> {
+    return Query.DenomAuthorityMetadata(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomsFromCreator defines a gRPC query method for fetching all
+   * denominations created by a specific admin/creator.
+   */
+  async DenomsFromCreator(req: QueryDenomsFromCreatorRequest, headers?: HeadersInit): Promise<QueryDenomsFromCreatorResponse> {
+    return Query.DenomsFromCreator(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}
