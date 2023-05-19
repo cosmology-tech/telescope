@@ -3,7 +3,7 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { returnReponseType, optionalBool, processRpcComment } from '../utils/rpc';
-import { initRequest } from './utils';
+import { headersInit, initRequest } from './utils';
 
 import * as t from '@babel/types'
 
@@ -279,7 +279,7 @@ const buildFetchReqArgs = (
     return args
 }
 
-// function to define a method of grpc-gateway style
+// function to define a method of grpc-gateway fetch request
 const grpcGatewayMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -331,6 +331,7 @@ const grpcGatewayMethodDefinition = (
         true,   // static 
     )
 }
+
 export const createGRPCGatewayQueryClass = (
     context: GenericParseContext,
     service: ProtoService
@@ -359,6 +360,146 @@ export const createGRPCGatewayQueryClass = (
             null,
             t.classBody(
                 [
+                    ...methods,
+                ]
+            ),
+            []
+        ),
+    )
+}
+
+// function to define a method of grpc-gateway style
+const grpcGatewayQuerierMethodDefinition = (
+    serviceName: string,
+    context: GenericParseContext,
+    name: string,
+    svc: ProtoServiceMethod,
+    leadingComments?: t.CommentBlock[]
+) => {
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+
+    // first parameter in method
+    // ex: static Send(request: MsgSend)
+    // paramRequest is an object representing everything in brackets here
+    const paramRequest = identifier(
+        'req',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType),
+            )
+        ),
+        false
+    ); 
+
+    // class method body (only return statement)
+    const body = t.blockStatement(
+        [
+            t.returnStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier(serviceName),
+                        t.identifier(name),
+                        false
+                    ),
+                    [
+                        t.identifier('req'),
+                        t.objectExpression(
+                            [
+                                t.objectProperty(
+                                    t.identifier('headers'),
+                                    t.identifier('headers'),
+                                    false,
+                                    true
+                                ),
+                                t.objectProperty(
+                                    t.identifier('pathPrefix'),
+                                    t.memberExpression(
+                                        t.thisExpression(),
+                                        t.identifier('url') 
+                                    )
+                                )
+                            ]
+                        )
+                    ]
+                )
+            )
+        ]
+    )
+    return classMethod(
+        'method',
+        t.identifier(name),
+        [paramRequest, headersInit], // params
+        body, 
+        returnReponseType(responseType),
+        leadingComments,
+        false,
+        false,   // static
+        false,
+        true     // async
+    )
+}
+
+export const createGRPCGatewayWrapperClass = (
+    context: GenericParseContext,
+    service: ProtoService
+) => {
+    const serviceName = service.name;
+    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const keys = Object.keys(service.methods ?? {});
+    const methods = keys
+        .map(key => {
+            const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+            return grpcGatewayQuerierMethodDefinition(
+                serviceName,
+                context,
+                name,
+                method,
+                leadingComments
+            )
+        })
+
+    return t.exportNamedDeclaration(
+        t.classDeclaration(
+            t.identifier('Querier'),
+            null,
+            t.classBody(
+                [
+                    t.classProperty(
+                        t.identifier('url'),
+                        null,
+                        t.tsTypeAnnotation(
+                            t.tsStringKeyword()
+                        )
+                    ),
+                    t.classMethod(
+                        'constructor',
+                        t.identifier('constructor'),
+                        [
+                            identifier(
+                                'url',
+                                t.tsTypeAnnotation(
+                                    t.tsStringKeyword()
+                                )
+                            )
+                        ],
+                        t.blockStatement(
+                            [
+                                t.expressionStatement(
+                                    t.assignmentExpression(
+                                        '=',
+                                        t.memberExpression(
+                                            t.thisExpression(),
+                                            t.identifier('url')
+                                        ),
+                                        t.identifier('url')
+                                    )
+                                )
+                            ]
+                        )
+                    ),
                     ...methods,
                 ]
             ),
