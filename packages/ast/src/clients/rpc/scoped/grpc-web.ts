@@ -8,10 +8,10 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
         t.expressionStatement(
             t.assignmentExpression(
                 "=",
-                t.identifier('grpcWebEndpoint'),
+                t.identifier('endpoint'),
                 t.callExpression(
                     t.memberExpression(
-                        t.identifier('grpcWebEndpoint'),
+                        t.identifier('endpoint'),
                         t.identifier('replace')
                     ),
                     [
@@ -82,7 +82,7 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
                             t.newExpression(
                                 t.identifier("GrpcWebImpl"),
                                 [
-                                    t.identifier("grpcWebEndpoint"),
+                                    t.identifier("endpoint"),
                                     t.objectExpression(
                                         [
                                             t.objectProperty(
@@ -148,7 +148,7 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
                                 t.newExpression(
                                     t.identifier("GrpcWebImpl"),
                                     [
-                                        t.identifier("grpcWebEndpoint"),
+                                        t.identifier("endpoint"),
                                         t.objectExpression(
                                             [
                                                 t.objectProperty(
@@ -175,7 +175,7 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
                                 t.newExpression(
                                     t.identifier("GrpcWebImpl"),
                                     [
-                                        t.identifier("grpcWebEndpoint"),
+                                        t.identifier("endpoint"),
                                         t.objectExpression(
                                             [
                                                 t.objectProperty(
@@ -202,8 +202,8 @@ export const grpcFuncArguments = (): t.ObjectPattern[] => {
     return [
         objectPattern([
             t.objectProperty(
-                t.identifier('grpcWebEndpoint'),
-                t.identifier('grpcWebEndpoint'),
+                t.identifier('endpoint'),
+                t.identifier('endpoint'),
                 false,
                 true
             )
@@ -212,7 +212,7 @@ export const grpcFuncArguments = (): t.ObjectPattern[] => {
             t.tsTypeLiteral(
                 [
                     t.tsPropertySignature(
-                        t.identifier('grpcWebEndpoint'),
+                        t.identifier('endpoint'),
                         t.tsTypeAnnotation(
                             t.tsStringKeyword()
                         )
@@ -308,7 +308,7 @@ export const createScopedGrpcWebFactory = (
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
-                                    'GrpcWebImpl'
+                                    'QueryClientImpl'
                                 )
                             ))
                         ),

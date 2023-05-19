@@ -1,34 +1,9 @@
 import * as t from '@babel/types';
 import { objectPattern } from '../../../utils';
 import { GenericParseContext } from '../../../encoding';
+import { grpcFuncArguments } from './grpc-web';
 
-export const grpcFuncArguments = (): t.ObjectPattern[] => {
-    return [
-        objectPattern([
-            t.objectProperty(
-                t.identifier('endpoint'),
-                t.identifier('endpoint'),
-                false,
-                true
-            )
-        ], 
-        t.tsTypeAnnotation(
-            t.tsTypeLiteral(
-                [
-                    t.tsPropertySignature(
-                        t.identifier('endpoint'),
-                        t.tsTypeAnnotation(
-                            t.tsStringKeyword()
-                        )
-                    )
-                ]
-            )
-            )                       
-        )
-    ];
-};
-
-// url = url.replace(/\/*$/g, "");
+// endpoint = endpoint.replace(/\/*$/g, "");
 export const grpcGatewayClientScaffold = (): t.Statement[] => {
     return [
         t.expressionStatement(
@@ -56,7 +31,6 @@ export const grpcGatewayClientScaffold = (): t.Statement[] => {
 
 const grpcGatewayNewAwaitImport = (
     path: string,
-    className: string
 ) => {
     return t.newExpression(
         t.memberExpression(
@@ -70,16 +44,16 @@ const grpcGatewayNewAwaitImport = (
                     ]
                 )
             ),
-            t.identifier(className),
+            t.identifier('Querier'),
             false
         ),
         [
-            t.identifier('url')
+            t.identifier('endpoint')
         ]
     )
 }
 
-export const grpcNestedImportObject = (
+const grpcGatewayNestedImportObject = (
     obj: object,
     className: string
 ) => {
@@ -103,7 +77,7 @@ export const grpcNestedImportObject = (
             default:
               console.log("grpc service error!! This should not happend. Undefined service type");
           }
-        return grpcGatewayNewAwaitImport(obj, className);
+        return grpcGatewayNewAwaitImport(obj);
     }
 
     const keys = Object.keys(obj);
@@ -111,7 +85,7 @@ export const grpcNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            grpcNestedImportObject(obj[name], className)
+            grpcGatewayNestedImportObject(obj[name], className)
         )
     }))
 };
@@ -134,7 +108,7 @@ export const createScopedGrpcGatewayFactory = (
                         t.blockStatement(
                             grpcGatewayClientScaffold().concat(
                             t.returnStatement(
-                                grpcNestedImportObject(
+                                grpcGatewayNestedImportObject(
                                     obj,
                                     'Query' //doesn't really matter here, remove if not prove useful
                                 )

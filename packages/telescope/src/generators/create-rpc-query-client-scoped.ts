@@ -2,13 +2,12 @@ import * as dotty from 'dotty';
 import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcTmFactory, createScopedGrpcWebFactory } from '@osmonauts/ast';
+import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { createScopedGrpcGatewayFactory } from '../../../ast/src/clients/rpc/scoped/grpc-gateway';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -115,7 +114,7 @@ const makeRPC = (
             rpcast = createScopedGrpcGatewayFactory(
                 ctx.proto,
                 obj,
-                methodName
+                "createGrpcGateWayClient"
                 // 'QueryClientImpl' // make option later
               );
               break;
