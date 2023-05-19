@@ -4,7 +4,7 @@ import { expectCode, getGenericParseContext, printCode } from '../../../../test-
 import {
     // rpcRecursiveObjectProps,
     createScopedGrpcWebMsgFactory,
-    createScopedGrpcWebFactory
+    createScopedGrpcWebFactory,
 } from './grpc-web';
 
 it('createScopedGrpcWebFactory', async () => {

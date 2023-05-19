@@ -4,9 +4,7 @@ exports[`createScopedGrpcWebFactory 1`] = `
 "export const createRpcFactorizzle = async ({
   grpcWebEndpoint
 }: {
-  grpcWebEndpoint: {
-    grpcWebEndpoint: string;
-  };
+  grpcWebEndpoint: string;
 }) => {
   grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
   const {
@@ -64,9 +62,7 @@ exports[`createScopedGrpcWebMsgFactory 1`] = `
 "export const createGrpcWebMsgClient = async ({
   grpcWebEndpoint
 }: {
-  grpcWebEndpoint: {
-    grpcWebEndpoint: string;
-  };
+  grpcWebEndpoint: string;
 }) => {
   grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
   const {
