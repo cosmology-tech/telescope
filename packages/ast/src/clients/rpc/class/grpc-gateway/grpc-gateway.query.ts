@@ -445,7 +445,7 @@ export const createGRPCGatewayWrapperClass = (
     service: ProtoService
 ) => {
     const serviceName = service.name;
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map(key => {

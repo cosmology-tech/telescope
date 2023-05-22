@@ -109,7 +109,7 @@ export const createGRPCGatewayMsgClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
