@@ -4,7 +4,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
 export class Query {
   /** Returns list of `Authorization`, granted to the grantee by the granter. */
-  static Grants(request: QueryGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGrantsResponse> {
+  static grants(request: QueryGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGrantsResponse> {
     return fm.fetchReq(`/cosmos/authz/v1beta1/grants?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -17,7 +17,7 @@ export class Query {
    * 
    * Since: cosmos-sdk 0.46
    */
-  static GranterGrants(request: QueryGranterGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranterGrantsResponse> {
+  static granterGrants(request: QueryGranterGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranterGrantsResponse> {
     return fm.fetchReq(`/cosmos/authz/v1beta1/grants/granter/${request["granter"]}?${fm.renderURLSearchParams({
       ...request
     }, ["granter"])}`, {
@@ -30,7 +30,7 @@ export class Query {
    * 
    * Since: cosmos-sdk 0.46
    */
-  static GranteeGrants(request: QueryGranteeGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranteeGrantsResponse> {
+  static granteeGrants(request: QueryGranteeGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranteeGrantsResponse> {
     return fm.fetchReq(`/cosmos/authz/v1beta1/grants/grantee/${request["grantee"]}?${fm.renderURLSearchParams({
       ...request
     }, ["grantee"])}`, {
@@ -45,8 +45,8 @@ export class Querier {
     this.url = url;
   }
   /** Returns list of `Authorization`, granted to the grantee by the granter. */
-  async Grants(req: QueryGrantsRequest, headers?: HeadersInit): Promise<QueryGrantsResponse> {
-    return Query.Grants(req, {
+  async grants(req: QueryGrantsRequest, headers?: HeadersInit): Promise<QueryGrantsResponse> {
+    return Query.grants(req, {
       headers,
       pathPrefix: this.url
     });
@@ -56,8 +56,8 @@ export class Querier {
    * 
    * Since: cosmos-sdk 0.46
    */
-  async GranterGrants(req: QueryGranterGrantsRequest, headers?: HeadersInit): Promise<QueryGranterGrantsResponse> {
-    return Query.GranterGrants(req, {
+  async granterGrants(req: QueryGranterGrantsRequest, headers?: HeadersInit): Promise<QueryGranterGrantsResponse> {
+    return Query.granterGrants(req, {
       headers,
       pathPrefix: this.url
     });
@@ -67,8 +67,8 @@ export class Querier {
    * 
    * Since: cosmos-sdk 0.46
    */
-  async GranteeGrants(req: QueryGranteeGrantsRequest, headers?: HeadersInit): Promise<QueryGranteeGrantsResponse> {
-    return Query.GranteeGrants(req, {
+  async granteeGrants(req: QueryGranteeGrantsRequest, headers?: HeadersInit): Promise<QueryGranteeGrantsResponse> {
+    return Query.granteeGrants(req, {
       headers,
       pathPrefix: this.url
     });

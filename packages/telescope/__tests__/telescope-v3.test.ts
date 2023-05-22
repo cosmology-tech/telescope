@@ -99,7 +99,7 @@ const options: TelescopeOptions = {
     },
 
     reactQuery: {
-        enabled: true,
+        enabled: false,
         include: {
             patterns: [
                 'osmosis/**/gamm/**/query.proto'

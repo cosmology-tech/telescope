@@ -8,7 +8,7 @@ export class Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  static AllProvidersAttributes(request: QueryAllProvidersAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static allProvidersAttributes(request: QueryAllProvidersAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/list?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -21,7 +21,7 @@ export class Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  static ProviderAttributes(request: QueryProviderAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static providerAttributes(request: QueryProviderAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/${request["owner"]}/list?${fm.renderURLSearchParams({
       ...request
     }, ["owner"])}`, {
@@ -34,7 +34,7 @@ export class Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  static ProviderAuditorAttributes(request: QueryProviderAuditorRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static providerAuditorAttributes(request: QueryProviderAuditorRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/${request["auditor"]}/{owner}?${fm.renderURLSearchParams({
       ...request
     }, ["auditor"])}`, {
@@ -47,7 +47,7 @@ export class Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  static AuditorAttributes(request: QueryAuditorAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static auditorAttributes(request: QueryAuditorAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/provider/v1beta2/auditor/${request["auditor"]}/list?${fm.renderURLSearchParams({
       ...request
     }, ["auditor"])}`, {
@@ -66,8 +66,8 @@ export class Querier {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  async AllProvidersAttributes(req: QueryAllProvidersAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
-    return Query.AllProvidersAttributes(req, {
+  async allProvidersAttributes(req: QueryAllProvidersAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.allProvidersAttributes(req, {
       headers,
       pathPrefix: this.url
     });
@@ -77,8 +77,8 @@ export class Querier {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  async ProviderAttributes(req: QueryProviderAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
-    return Query.ProviderAttributes(req, {
+  async providerAttributes(req: QueryProviderAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.providerAttributes(req, {
       headers,
       pathPrefix: this.url
     });
@@ -88,8 +88,8 @@ export class Querier {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  async ProviderAuditorAttributes(req: QueryProviderAuditorRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
-    return Query.ProviderAuditorAttributes(req, {
+  async providerAuditorAttributes(req: QueryProviderAuditorRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.providerAuditorAttributes(req, {
       headers,
       pathPrefix: this.url
     });
@@ -99,8 +99,8 @@ export class Querier {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  async AuditorAttributes(req: QueryAuditorAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
-    return Query.AuditorAttributes(req, {
+  async auditorAttributes(req: QueryAuditorAttributesRequest, headers?: HeadersInit): Promise<QueryProvidersResponse> {
+    return Query.auditorAttributes(req, {
       headers,
       pathPrefix: this.url
     });

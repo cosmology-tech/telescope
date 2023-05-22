@@ -9,7 +9,7 @@ import * as t from '@babel/types'
 
 // fetchArgs will be used in method body's return statement expression.
 // Contains arguments to fm.fetchReq
-const getFetchReqArgs = (
+const getFetchReqArgsPOST = (
     name: string,
     packageImport: string
 ) => {
@@ -43,7 +43,7 @@ const getFetchReqArgs = (
     return fetchArgs
 }
 
-const grpcGatewayMethodDefinition = (
+export const grpcGatewayMsgMethodDefinition = (
     name: string,
     svc: ProtoServiceMethod,
     packageImport: string,
@@ -51,7 +51,6 @@ const grpcGatewayMethodDefinition = (
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
-
 
     const fieldNames = Object.keys(svc.fields ?? {})
     const hasParams = fieldNames.length > 0;
@@ -73,7 +72,7 @@ const grpcGatewayMethodDefinition = (
 
     // fetchArgs will be used in method body's return statement expression.
     // Contains arguments to fm.fetchReq
-    const fetchArgs = getFetchReqArgs(name, packageImport)
+    const fetchArgs = getFetchReqArgsPOST(name, packageImport)
     
     // method's body
     const body = t.blockStatement(
@@ -109,14 +108,14 @@ export const createGRPCGatewayMsgClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
-            return grpcGatewayMethodDefinition(
+            return grpcGatewayMsgMethodDefinition(
                 name,
                 method,
                 context.ref.proto.package,

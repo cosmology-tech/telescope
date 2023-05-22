@@ -6,7 +6,7 @@ export class Query {
    * Params defines a gRPC query method that returns the ibc-rate-limit module's
    * parameters.
    */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/osmosis/ibc-rate-limit/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -24,8 +24,8 @@ export class Querier {
    * Params defines a gRPC query method that returns the ibc-rate-limit module's
    * parameters.
    */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });

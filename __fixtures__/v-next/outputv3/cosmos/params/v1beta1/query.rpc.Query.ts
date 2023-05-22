@@ -6,7 +6,7 @@ export class Query {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/params/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -15,7 +15,7 @@ export class Query {
     });
   }
   /** Subspaces queries for all registered subspaces and all keys for a subspace. */
-  static Subspaces(request: QuerySubspacesRequest, initRequest?: fm.InitReq): Promise<QuerySubspacesResponse> {
+  static subspaces(request: QuerySubspacesRequest, initRequest?: fm.InitReq): Promise<QuerySubspacesResponse> {
     return fm.fetchReq(`/cosmos/params/v1beta1/subspaces?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -33,15 +33,15 @@ export class Querier {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Subspaces queries for all registered subspaces and all keys for a subspace. */
-  async Subspaces(req: QuerySubspacesRequest, headers?: HeadersInit): Promise<QuerySubspacesResponse> {
-    return Query.Subspaces(req, {
+  async subspaces(req: QuerySubspacesRequest, headers?: HeadersInit): Promise<QuerySubspacesResponse> {
+    return Query.subspaces(req, {
       headers,
       pathPrefix: this.url
     });

@@ -5,8 +5,8 @@ export class Msg {
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
-  static RegisterDevFeeInfo(request: MsgRegisterDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgRegisterDevFeeInfoResponse> {
-    return fm.fetchReq(`/evmos.fees.v1/RegisterDevFeeInfo`, {
+  static registerDevFeeInfo(request: MsgRegisterDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgRegisterDevFeeInfoResponse> {
+    return fm.fetchReq(`/evmos.fees.v1/registerDevFeeInfo`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -16,16 +16,16 @@ export class Msg {
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  static CancelDevFeeInfo(request: MsgCancelDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgCancelDevFeeInfoResponse> {
-    return fm.fetchReq(`/evmos.fees.v1/CancelDevFeeInfo`, {
+  static cancelDevFeeInfo(request: MsgCancelDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgCancelDevFeeInfoResponse> {
+    return fm.fetchReq(`/evmos.fees.v1/cancelDevFeeInfo`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  static UpdateDevFeeInfo(request: MsgUpdateDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgUpdateDevFeeInfoResponse> {
-    return fm.fetchReq(`/evmos.fees.v1/UpdateDevFeeInfo`, {
+  static updateDevFeeInfo(request: MsgUpdateDevFeeInfo, initRequest?: fm.InitReq): Promise<MsgUpdateDevFeeInfoResponse> {
+    return fm.fetchReq(`/evmos.fees.v1/updateDevFeeInfo`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

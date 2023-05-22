@@ -3,7 +3,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
 export class Query {
   /** Params returns the total set of minting parameters. */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/osmosis/mint/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -12,7 +12,7 @@ export class Query {
     });
   }
   /** EpochProvisions returns the current minting epoch provisions value. */
-  static EpochProvisions(request: QueryEpochProvisionsRequest, initRequest?: fm.InitReq): Promise<QueryEpochProvisionsResponse> {
+  static epochProvisions(request: QueryEpochProvisionsRequest, initRequest?: fm.InitReq): Promise<QueryEpochProvisionsResponse> {
     return fm.fetchReq(`/osmosis/mint/v1beta1/epoch_provisions?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -27,15 +27,15 @@ export class Querier {
     this.url = url;
   }
   /** Params returns the total set of minting parameters. */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** EpochProvisions returns the current minting epoch provisions value. */
-  async EpochProvisions(req: QueryEpochProvisionsRequest, headers?: HeadersInit): Promise<QueryEpochProvisionsResponse> {
-    return Query.EpochProvisions(req, {
+  async epochProvisions(req: QueryEpochProvisionsRequest, headers?: HeadersInit): Promise<QueryEpochProvisionsResponse> {
+    return Query.epochProvisions(req, {
       headers,
       pathPrefix: this.url
     });

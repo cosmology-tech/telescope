@@ -4,6 +4,7 @@ import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, 
 import { camel } from '@osmonauts/utils';
 import { returnReponseType, optionalBool, processRpcComment } from '../utils/rpc';
 import { headersInit, initRequest } from './utils';
+import { grpcGatewayMsgMethodDefinition } from './grpc-gateway.msg';
 
 import * as t from '@babel/types'
 
@@ -339,9 +340,14 @@ export const createGRPCGatewayQueryClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
-    const methods = keys
+
+    //two different ways to generate methods for Query and Service
+    let methods;
+    //case Query
+    if (service.name === "Query") {
+        methods = keys
         .map(key => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
@@ -353,6 +359,35 @@ export const createGRPCGatewayQueryClass = (
                 leadingComments
             )
         })
+    } else {
+    //case Service
+        methods = keys
+        .map(key => {
+            const isGet = key.substring(0, 3) === "Get";
+            const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+            if (!isGet) {
+                //POST METHOD
+                return grpcGatewayMsgMethodDefinition(
+                    name,
+                    method,
+                    context.ref.proto.package,
+                    leadingComments
+            )}
+            else {
+                const method = service.methods[key];
+                const name = camelRpcMethods ? camel(key) : key;
+                const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+                return grpcGatewayMethodDefinition(
+                    context,
+                    name,
+                    method,
+                    leadingComments
+            )}
+        })
+    }
+    
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
@@ -445,7 +480,7 @@ export const createGRPCGatewayWrapperClass = (
     service: ProtoService
 ) => {
     const serviceName = service.name;
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map(key => {
