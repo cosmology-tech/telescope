@@ -43,3 +43,41 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * FeeTokens returns a list of all the whitelisted fee tokens and their
+   * corresponding pools. It does not include the BaseDenom, which has its own
+   * query endpoint
+   */
+  async FeeTokens(req: QueryFeeTokensRequest, headers?: HeadersInit): Promise<QueryFeeTokensResponse> {
+    return Query.FeeTokens(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DenomSpotPrice returns all spot prices by each registered token denom. */
+  async DenomSpotPrice(req: QueryDenomSpotPriceRequest, headers?: HeadersInit): Promise<QueryDenomSpotPriceResponse> {
+    return Query.DenomSpotPrice(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns the poolID for a specified denom input. */
+  async DenomPoolId(req: QueryDenomPoolIdRequest, headers?: HeadersInit): Promise<QueryDenomPoolIdResponse> {
+    return Query.DenomPoolId(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns a list of all base denom tokens and their corresponding pools. */
+  async BaseDenom(req: QueryBaseDenomRequest, headers?: HeadersInit): Promise<QueryBaseDenomResponse> {
+    return Query.BaseDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

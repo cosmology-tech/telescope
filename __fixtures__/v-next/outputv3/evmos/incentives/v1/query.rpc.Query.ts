@@ -72,3 +72,61 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Incentives retrieves registered incentives */
+  async Incentives(req: QueryIncentivesRequest, headers?: HeadersInit): Promise<QueryIncentivesResponse> {
+    return Query.Incentives(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Incentive retrieves a registered incentive */
+  async Incentive(req: QueryIncentiveRequest, headers?: HeadersInit): Promise<QueryIncentiveResponse> {
+    return Query.Incentive(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GasMeters retrieves active gas meters for a given contract */
+  async GasMeters(req: QueryGasMetersRequest, headers?: HeadersInit): Promise<QueryGasMetersResponse> {
+    return Query.GasMeters(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GasMeter Retrieves a active gas meter */
+  async GasMeter(req: QueryGasMeterRequest, headers?: HeadersInit): Promise<QueryGasMeterResponse> {
+    return Query.GasMeter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * AllocationMeters retrieves active allocation meters for a given
+   * denomination
+   */
+  async AllocationMeters(req: QueryAllocationMetersRequest, headers?: HeadersInit): Promise<QueryAllocationMetersResponse> {
+    return Query.AllocationMeters(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AllocationMeter Retrieves a active gas meter */
+  async AllocationMeter(req: QueryAllocationMeterRequest, headers?: HeadersInit): Promise<QueryAllocationMeterResponse> {
+    return Query.AllocationMeter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params retrieves the incentives module params */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

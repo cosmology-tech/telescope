@@ -39,3 +39,38 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Returns list of `Authorization`, granted to the grantee by the granter. */
+  async Grants(req: QueryGrantsRequest, headers?: HeadersInit): Promise<QueryGrantsResponse> {
+    return Query.Grants(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * GranterGrants returns list of `GrantAuthorization`, granted by granter.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  async GranterGrants(req: QueryGranterGrantsRequest, headers?: HeadersInit): Promise<QueryGranterGrantsResponse> {
+    return Query.GranterGrants(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * GranteeGrants returns a list of `GrantAuthorization` by grantee.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  async GranteeGrants(req: QueryGranteeGrantsRequest, headers?: HeadersInit): Promise<QueryGranteeGrantsResponse> {
+    return Query.GranteeGrants(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

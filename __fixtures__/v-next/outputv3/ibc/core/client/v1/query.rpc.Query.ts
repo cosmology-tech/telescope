@@ -83,3 +83,71 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** ClientState queries an IBC light client. */
+  async ClientState(req: QueryClientStateRequest, headers?: HeadersInit): Promise<QueryClientStateResponse> {
+    return Query.ClientState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ClientStates queries all the IBC light clients of a chain. */
+  async ClientStates(req: QueryClientStatesRequest, headers?: HeadersInit): Promise<QueryClientStatesResponse> {
+    return Query.ClientStates(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ConsensusState queries a consensus state associated with a client state at
+   * a given height.
+   */
+  async ConsensusState(req: QueryConsensusStateRequest, headers?: HeadersInit): Promise<QueryConsensusStateResponse> {
+    return Query.ConsensusState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * ConsensusStates queries all the consensus state associated with a given
+   * client.
+   */
+  async ConsensusStates(req: QueryConsensusStatesRequest, headers?: HeadersInit): Promise<QueryConsensusStatesResponse> {
+    return Query.ConsensusStates(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Status queries the status of an IBC client. */
+  async ClientStatus(req: QueryClientStatusRequest, headers?: HeadersInit): Promise<QueryClientStatusResponse> {
+    return Query.ClientStatus(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ClientParams queries all parameters of the ibc client. */
+  async ClientParams(req: QueryClientParamsRequest, headers?: HeadersInit): Promise<QueryClientParamsResponse> {
+    return Query.ClientParams(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** UpgradedClientState queries an Upgraded IBC light client. */
+  async UpgradedClientState(req: QueryUpgradedClientStateRequest, headers?: HeadersInit): Promise<QueryUpgradedClientStateResponse> {
+    return Query.UpgradedClientState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
+  async UpgradedConsensusState(req: QueryUpgradedConsensusStateRequest, headers?: HeadersInit): Promise<QueryUpgradedConsensusStateResponse> {
+    return Query.UpgradedConsensusState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

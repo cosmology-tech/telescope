@@ -34,3 +34,33 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Allowance returns fee granted to the grantee by the granter. */
+  async Allowance(req: QueryAllowanceRequest, headers?: HeadersInit): Promise<QueryAllowanceResponse> {
+    return Query.Allowance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Allowances returns all the grants for address. */
+  async Allowances(req: QueryAllowancesRequest, headers?: HeadersInit): Promise<QueryAllowancesResponse> {
+    return Query.Allowances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * AllowancesByGranter returns all the grants given by an address
+   * Since v0.46
+   */
+  async AllowancesByGranter(req: QueryAllowancesByGranterRequest, headers?: HeadersInit): Promise<QueryAllowancesByGranterResponse> {
+    return Query.AllowancesByGranter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

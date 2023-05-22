@@ -85,3 +85,72 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** ContractInfo gets the contract meta data */
+  async ContractInfo(req: QueryContractInfoRequest, headers?: HeadersInit): Promise<QueryContractInfoResponse> {
+    return Query.ContractInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ContractHistory gets the contract code history */
+  async ContractHistory(req: QueryContractHistoryRequest, headers?: HeadersInit): Promise<QueryContractHistoryResponse> {
+    return Query.ContractHistory(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ContractsByCode lists all smart contracts for a code id */
+  async ContractsByCode(req: QueryContractsByCodeRequest, headers?: HeadersInit): Promise<QueryContractsByCodeResponse> {
+    return Query.ContractsByCode(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AllContractState gets all raw store data for a single contract */
+  async AllContractState(req: QueryAllContractStateRequest, headers?: HeadersInit): Promise<QueryAllContractStateResponse> {
+    return Query.AllContractState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** RawContractState gets single key from the raw store data of a contract */
+  async RawContractState(req: QueryRawContractStateRequest, headers?: HeadersInit): Promise<QueryRawContractStateResponse> {
+    return Query.RawContractState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SmartContractState get smart query result from the contract */
+  async SmartContractState(req: QuerySmartContractStateRequest, headers?: HeadersInit): Promise<QuerySmartContractStateResponse> {
+    return Query.SmartContractState(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Code gets the binary code and metadata for a singe wasm code */
+  async Code(req: QueryCodeRequest, headers?: HeadersInit): Promise<QueryCodeResponse> {
+    return Query.Code(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Codes gets the metadata for all stored wasm codes */
+  async Codes(req: QueryCodesRequest, headers?: HeadersInit): Promise<QueryCodesResponse> {
+    return Query.Codes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** PinnedCodes gets the pinned code ids */
+  async PinnedCodes(req: QueryPinnedCodesRequest, headers?: HeadersInit): Promise<QueryPinnedCodesResponse> {
+    return Query.PinnedCodes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

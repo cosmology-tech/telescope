@@ -28,3 +28,27 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  async Params(req: ParamsRequest, headers?: HeadersInit): Promise<ParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async ArithmeticTwap(req: ArithmeticTwapRequest, headers?: HeadersInit): Promise<ArithmeticTwapResponse> {
+    return Query.ArithmeticTwap(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  async ArithmeticTwapToNow(req: ArithmeticTwapToNowRequest, headers?: HeadersInit): Promise<ArithmeticTwapToNowResponse> {
+    return Query.ArithmeticTwapToNow(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

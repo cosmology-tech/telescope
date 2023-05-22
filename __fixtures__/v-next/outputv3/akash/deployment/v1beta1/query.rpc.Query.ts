@@ -33,3 +33,30 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Deployments queries deployments */
+  async Deployments(req: QueryDeploymentsRequest, headers?: HeadersInit): Promise<QueryDeploymentsResponse> {
+    return Query.Deployments(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Deployment queries deployment details */
+  async Deployment(req: QueryDeploymentRequest, headers?: HeadersInit): Promise<QueryDeploymentResponse> {
+    return Query.Deployment(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Group queries group details */
+  async Group(req: QueryGroupRequest, headers?: HeadersInit): Promise<QueryGroupResponse> {
+    return Query.Group(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

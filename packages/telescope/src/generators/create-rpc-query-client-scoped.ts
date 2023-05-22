@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcTmFactory, createScopedGrpcWebFactory } from '@osmonauts/ast';
+import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
@@ -111,7 +111,13 @@ const makeRPC = (
     
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
-          // TODO no working scoped clients for grpc-gateway right now
+            rpcast = createScopedGrpcGatewayFactory(
+                ctx.proto,
+                obj,
+                "createGrpcGateWayClient"
+                // 'QueryClientImpl' // make option later
+              );
+              break;
         case "tendermint":
           // TODO add addUtil to generic context
           ctx.proto.addUtil('Rpc');

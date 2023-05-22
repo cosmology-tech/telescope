@@ -12,3 +12,16 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Config returns the current app config. */
+  async Config(req: QueryConfigRequest, headers?: HeadersInit): Promise<QueryConfigResponse> {
+    return Query.Config(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

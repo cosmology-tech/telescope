@@ -70,3 +70,61 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721 */
+  async Balance(req: QueryBalanceRequest, headers?: HeadersInit): Promise<QueryBalanceResponse> {
+    return Query.Balance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721 */
+  async Owner(req: QueryOwnerRequest, headers?: HeadersInit): Promise<QueryOwnerResponse> {
+    return Query.Owner(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Supply queries the number of NFTs from the given class, same as totalSupply of ERC721. */
+  async Supply(req: QuerySupplyRequest, headers?: HeadersInit): Promise<QuerySupplyResponse> {
+    return Query.Supply(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
+   * ERC721Enumerable
+   */
+  async NFTs(req: QueryNFTsRequest, headers?: HeadersInit): Promise<QueryNFTsResponse> {
+    return Query.NFTs(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** NFT queries an NFT based on its class and id. */
+  async NFT(req: QueryNFTRequest, headers?: HeadersInit): Promise<QueryNFTResponse> {
+    return Query.NFT(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Class queries an NFT class based on its id */
+  async Class(req: QueryClassRequest, headers?: HeadersInit): Promise<QueryClassResponse> {
+    return Query.Class(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Classes queries all NFT classes */
+  async Classes(req: QueryClassesRequest, headers?: HeadersInit): Promise<QueryClassesResponse> {
+    return Query.Classes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

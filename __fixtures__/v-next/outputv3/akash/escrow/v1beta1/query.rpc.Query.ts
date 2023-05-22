@@ -30,3 +30,31 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   * Accounts queries all accounts
+   */
+  async Accounts(req: QueryAccountsRequest, headers?: HeadersInit): Promise<QueryAccountsResponse> {
+    return Query.Accounts(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   * Payments queries all payments
+   */
+  async Payments(req: QueryPaymentsRequest, headers?: HeadersInit): Promise<QueryPaymentsResponse> {
+    return Query.Payments(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

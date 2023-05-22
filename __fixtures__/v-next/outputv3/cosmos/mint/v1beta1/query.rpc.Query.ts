@@ -30,3 +30,30 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Params returns the total set of minting parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Inflation returns the current minting inflation value. */
+  async Inflation(req: QueryInflationRequest, headers?: HeadersInit): Promise<QueryInflationResponse> {
+    return Query.Inflation(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AnnualProvisions current minting annual provisions value. */
+  async AnnualProvisions(req: QueryAnnualProvisionsRequest, headers?: HeadersInit): Promise<QueryAnnualProvisionsResponse> {
+    return Query.AnnualProvisions(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -56,3 +56,48 @@ export class Service {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Simulate simulates executing a transaction for estimating gas usage. */
+  async Simulate(req: SimulateRequest, headers?: HeadersInit): Promise<SimulateResponse> {
+    return Service.Simulate(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetTx fetches a tx by hash. */
+  async GetTx(req: GetTxRequest, headers?: HeadersInit): Promise<GetTxResponse> {
+    return Service.GetTx(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** BroadcastTx broadcast transaction. */
+  async BroadcastTx(req: BroadcastTxRequest, headers?: HeadersInit): Promise<BroadcastTxResponse> {
+    return Service.BroadcastTx(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetTxsEvent fetches txs by event. */
+  async GetTxsEvent(req: GetTxsEventRequest, headers?: HeadersInit): Promise<GetTxsEventResponse> {
+    return Service.GetTxsEvent(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * GetBlockWithTxs fetches a block with decoded txs.
+   * 
+   * Since: cosmos-sdk 0.45.2
+   */
+  async GetBlockWithTxs(req: GetBlockWithTxsRequest, headers?: HeadersInit): Promise<GetBlockWithTxsResponse> {
+    return Service.GetBlockWithTxs(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

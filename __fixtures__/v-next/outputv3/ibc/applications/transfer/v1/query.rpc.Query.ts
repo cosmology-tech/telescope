@@ -31,3 +31,30 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** DenomTrace queries a denomination trace information. */
+  async DenomTrace(req: QueryDenomTraceRequest, headers?: HeadersInit): Promise<QueryDenomTraceResponse> {
+    return Query.DenomTrace(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DenomTraces queries all denomination traces. */
+  async DenomTraces(req: QueryDenomTracesRequest, headers?: HeadersInit): Promise<QueryDenomTracesResponse> {
+    return Query.DenomTraces(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries all parameters of the ibc-transfer module. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

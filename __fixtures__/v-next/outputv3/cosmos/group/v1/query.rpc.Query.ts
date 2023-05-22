@@ -121,3 +121,100 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** GroupInfo queries group info based on group id. */
+  async GroupInfo(req: QueryGroupInfoRequest, headers?: HeadersInit): Promise<QueryGroupInfoResponse> {
+    return Query.GroupInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupPolicyInfo queries group policy info based on account address of group policy. */
+  async GroupPolicyInfo(req: QueryGroupPolicyInfoRequest, headers?: HeadersInit): Promise<QueryGroupPolicyInfoResponse> {
+    return Query.GroupPolicyInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupMembers queries members of a group */
+  async GroupMembers(req: QueryGroupMembersRequest, headers?: HeadersInit): Promise<QueryGroupMembersResponse> {
+    return Query.GroupMembers(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupsByAdmin queries groups by admin address. */
+  async GroupsByAdmin(req: QueryGroupsByAdminRequest, headers?: HeadersInit): Promise<QueryGroupsByAdminResponse> {
+    return Query.GroupsByAdmin(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupPoliciesByGroup queries group policies by group id. */
+  async GroupPoliciesByGroup(req: QueryGroupPoliciesByGroupRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByGroupResponse> {
+    return Query.GroupPoliciesByGroup(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupsByAdmin queries group policies by admin address. */
+  async GroupPoliciesByAdmin(req: QueryGroupPoliciesByAdminRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByAdminResponse> {
+    return Query.GroupPoliciesByAdmin(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Proposal queries a proposal based on proposal id. */
+  async Proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
+    return Query.Proposal(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
+  async ProposalsByGroupPolicy(req: QueryProposalsByGroupPolicyRequest, headers?: HeadersInit): Promise<QueryProposalsByGroupPolicyResponse> {
+    return Query.ProposalsByGroupPolicy(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** VoteByProposalVoter queries a vote by proposal id and voter. */
+  async VoteByProposalVoter(req: QueryVoteByProposalVoterRequest, headers?: HeadersInit): Promise<QueryVoteByProposalVoterResponse> {
+    return Query.VoteByProposalVoter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** VotesByProposal queries a vote by proposal. */
+  async VotesByProposal(req: QueryVotesByProposalRequest, headers?: HeadersInit): Promise<QueryVotesByProposalResponse> {
+    return Query.VotesByProposal(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** VotesByVoter queries a vote by voter. */
+  async VotesByVoter(req: QueryVotesByVoterRequest, headers?: HeadersInit): Promise<QueryVotesByVoterResponse> {
+    return Query.VotesByVoter(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GroupsByMember queries groups by member address. */
+  async GroupsByMember(req: QueryGroupsByMemberRequest, headers?: HeadersInit): Promise<QueryGroupsByMemberResponse> {
+    return Query.GroupsByMember(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** TallyResult queries the tally of a proposal votes. */
+  async TallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
+    return Query.TallyResult(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

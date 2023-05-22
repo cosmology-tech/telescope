@@ -14,3 +14,19 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * SpotPrice defines a gRPC query handler that returns the spot price given
+   * a base denomination and a quote denomination.
+   */
+  async SpotPrice(req: QuerySpotPriceRequest, headers?: HeadersInit): Promise<QuerySpotPriceResponse> {
+    return Query.SpotPrice(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

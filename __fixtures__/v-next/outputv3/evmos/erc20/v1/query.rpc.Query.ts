@@ -32,3 +32,30 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** TokenPairs retrieves registered token pairs */
+  async TokenPairs(req: QueryTokenPairsRequest, headers?: HeadersInit): Promise<QueryTokenPairsResponse> {
+    return Query.TokenPairs(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** TokenPair retrieves a registered token pair */
+  async TokenPair(req: QueryTokenPairRequest, headers?: HeadersInit): Promise<QueryTokenPairResponse> {
+    return Query.TokenPair(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params retrieves the erc20 module params */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

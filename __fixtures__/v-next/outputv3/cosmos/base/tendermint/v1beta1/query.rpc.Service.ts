@@ -61,3 +61,51 @@ export class Service {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** GetNodeInfo queries the current node info. */
+  async GetNodeInfo(req: GetNodeInfoRequest, headers?: HeadersInit): Promise<GetNodeInfoResponse> {
+    return Service.GetNodeInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetSyncing queries node syncing. */
+  async GetSyncing(req: GetSyncingRequest, headers?: HeadersInit): Promise<GetSyncingResponse> {
+    return Service.GetSyncing(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetLatestBlock returns the latest block. */
+  async GetLatestBlock(req: GetLatestBlockRequest, headers?: HeadersInit): Promise<GetLatestBlockResponse> {
+    return Service.GetLatestBlock(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetBlockByHeight queries block for given height. */
+  async GetBlockByHeight(req: GetBlockByHeightRequest, headers?: HeadersInit): Promise<GetBlockByHeightResponse> {
+    return Service.GetBlockByHeight(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetLatestValidatorSet queries latest validator-set. */
+  async GetLatestValidatorSet(req: GetLatestValidatorSetRequest, headers?: HeadersInit): Promise<GetLatestValidatorSetResponse> {
+    return Service.GetLatestValidatorSet(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetValidatorSetByHeight queries validator-set at a given height. */
+  async GetValidatorSetByHeight(req: GetValidatorSetByHeightRequest, headers?: HeadersInit): Promise<GetValidatorSetByHeightResponse> {
+    return Service.GetValidatorSetByHeight(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

@@ -76,3 +76,65 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Proposal queries proposal details based on ProposalID. */
+  async Proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
+    return Query.Proposal(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Proposals queries all proposals based on given status. */
+  async Proposals(req: QueryProposalsRequest, headers?: HeadersInit): Promise<QueryProposalsResponse> {
+    return Query.Proposals(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Vote queries voted information based on proposalID, voterAddr. */
+  async Vote(req: QueryVoteRequest, headers?: HeadersInit): Promise<QueryVoteResponse> {
+    return Query.Vote(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Votes queries votes of a given proposal. */
+  async Votes(req: QueryVotesRequest, headers?: HeadersInit): Promise<QueryVotesResponse> {
+    return Query.Votes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries all parameters of the gov module. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Deposit queries single deposit information based proposalID, depositAddr. */
+  async Deposit(req: QueryDepositRequest, headers?: HeadersInit): Promise<QueryDepositResponse> {
+    return Query.Deposit(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Deposits queries all deposits of a single proposal. */
+  async Deposits(req: QueryDepositsRequest, headers?: HeadersInit): Promise<QueryDepositsResponse> {
+    return Query.Deposits(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** TallyResult queries the tally of a proposal vote. */
+  async TallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
+    return Query.TallyResult(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

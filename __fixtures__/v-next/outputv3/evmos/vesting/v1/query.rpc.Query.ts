@@ -12,3 +12,16 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Retrieves the unvested, vested and locked tokens for a vesting account */
+  async Balances(req: QueryBalancesRequest, headers?: HeadersInit): Promise<QueryBalancesResponse> {
+    return Query.Balances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

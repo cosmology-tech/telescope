@@ -42,3 +42,37 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** TotalUnclaimed queries the total unclaimed tokens from the airdrop */
+  async TotalUnclaimed(req: QueryTotalUnclaimedRequest, headers?: HeadersInit): Promise<QueryTotalUnclaimedResponse> {
+    return Query.TotalUnclaimed(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params returns the claims module parameters */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ClaimsRecords returns all claims records */
+  async ClaimsRecords(req: QueryClaimsRecordsRequest, headers?: HeadersInit): Promise<QueryClaimsRecordsResponse> {
+    return Query.ClaimsRecords(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ClaimsRecord returns the claims record for a given address */
+  async ClaimsRecord(req: QueryClaimsRecordRequest, headers?: HeadersInit): Promise<QueryClaimsRecordResponse> {
+    return Query.ClaimsRecord(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

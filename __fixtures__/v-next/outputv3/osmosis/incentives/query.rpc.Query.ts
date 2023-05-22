@@ -97,3 +97,82 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** ModuleToDistributeCoins returns coins that are going to be distributed */
+  async ModuleToDistributeCoins(req: ModuleToDistributeCoinsRequest, headers?: HeadersInit): Promise<ModuleToDistributeCoinsResponse> {
+    return Query.ModuleToDistributeCoins(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GaugeByID returns gauges by their respective ID */
+  async GaugeByID(req: GaugeByIDRequest, headers?: HeadersInit): Promise<GaugeByIDResponse> {
+    return Query.GaugeByID(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Gauges returns both upcoming and active gauges */
+  async Gauges(req: GaugesRequest, headers?: HeadersInit): Promise<GaugesResponse> {
+    return Query.Gauges(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ActiveGauges returns active gauges */
+  async ActiveGauges(req: ActiveGaugesRequest, headers?: HeadersInit): Promise<ActiveGaugesResponse> {
+    return Query.ActiveGauges(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ActiveGaugesPerDenom returns active gauges by denom */
+  async ActiveGaugesPerDenom(req: ActiveGaugesPerDenomRequest, headers?: HeadersInit): Promise<ActiveGaugesPerDenomResponse> {
+    return Query.ActiveGaugesPerDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Returns scheduled gauges that have not yet occured */
+  async UpcomingGauges(req: UpcomingGaugesRequest, headers?: HeadersInit): Promise<UpcomingGaugesResponse> {
+    return Query.UpcomingGauges(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
+   * by denom
+   */
+  async UpcomingGaugesPerDenom(req: UpcomingGaugesPerDenomRequest, headers?: HeadersInit): Promise<UpcomingGaugesPerDenomResponse> {
+    return Query.UpcomingGaugesPerDenom(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * RewardsEst returns an estimate of the rewards from now until a specified
+   * time in the future The querier either provides an address or a set of locks
+   * for which they want to find the associated rewards
+   */
+  async RewardsEst(req: RewardsEstRequest, headers?: HeadersInit): Promise<RewardsEstResponse> {
+    return Query.RewardsEst(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * LockableDurations returns lockable durations that are valid to distribute
+   * incentives for
+   */
+  async LockableDurations(req: QueryLockableDurationsRequest, headers?: HeadersInit): Promise<QueryLockableDurationsResponse> {
+    return Query.LockableDurations(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

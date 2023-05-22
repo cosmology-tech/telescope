@@ -21,3 +21,23 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Params returns the total set of minting parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** EpochProvisions returns the current minting epoch provisions value. */
+  async EpochProvisions(req: QueryEpochProvisionsRequest, headers?: HeadersInit): Promise<QueryEpochProvisionsResponse> {
+    return Query.EpochProvisions(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

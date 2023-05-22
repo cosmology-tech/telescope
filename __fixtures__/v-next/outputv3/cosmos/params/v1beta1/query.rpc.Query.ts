@@ -24,3 +24,26 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * Params queries a specific parameter of a module, given its subspace and
+   * key.
+   */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Subspaces queries for all registered subspaces and all keys for a subspace. */
+  async Subspaces(req: QuerySubspacesRequest, headers?: HeadersInit): Promise<QuerySubspacesResponse> {
+    return Query.Subspaces(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}

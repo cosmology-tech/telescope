@@ -72,3 +72,62 @@ export class Query {
     });
   }
 }
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /**
+   * Accounts returns all the existing accounts
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  async Accounts(req: QueryAccountsRequest, headers?: HeadersInit): Promise<QueryAccountsResponse> {
+    return Query.Accounts(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Account returns account details based on address. */
+  async Account(req: QueryAccountRequest, headers?: HeadersInit): Promise<QueryAccountResponse> {
+    return Query.Account(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries all parameters. */
+  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.Params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** ModuleAccounts returns all the existing module accounts. */
+  async ModuleAccounts(req: QueryModuleAccountsRequest, headers?: HeadersInit): Promise<QueryModuleAccountsResponse> {
+    return Query.ModuleAccounts(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Bech32 queries bech32Prefix */
+  async Bech32Prefix(req: Bech32PrefixRequest, headers?: HeadersInit): Promise<Bech32PrefixResponse> {
+    return Query.Bech32Prefix(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AddressBytesToString converts Account Address bytes to string */
+  async AddressBytesToString(req: AddressBytesToStringRequest, headers?: HeadersInit): Promise<AddressBytesToStringResponse> {
+    return Query.AddressBytesToString(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AddressStringToBytes converts Address string to bytes */
+  async AddressStringToBytes(req: AddressStringToBytesRequest, headers?: HeadersInit): Promise<AddressStringToBytesResponse> {
+    return Query.AddressStringToBytes(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}
