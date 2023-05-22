@@ -7,7 +7,7 @@ export class Query {
    * Params defines a gRPC query method that returns the tokenfactory module's
    * parameters.
    */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/osmosis/tokenfactory/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -19,7 +19,7 @@ export class Query {
    * DenomAuthorityMetadata defines a gRPC query method for fetching
    * DenomAuthorityMetadata for a particular denom.
    */
-  static DenomAuthorityMetadata(request: QueryDenomAuthorityMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomAuthorityMetadataResponse> {
+  static denomAuthorityMetadata(request: QueryDenomAuthorityMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomAuthorityMetadataResponse> {
     return fm.fetchReq(`/osmosis/tokenfactory/v1beta1/denoms/${request["denom"]}/authority_metadata?${fm.renderURLSearchParams({
       ...request
     }, ["denom"])}`, {
@@ -31,7 +31,7 @@ export class Query {
    * DenomsFromCreator defines a gRPC query method for fetching all
    * denominations created by a specific admin/creator.
    */
-  static DenomsFromCreator(request: QueryDenomsFromCreatorRequest, initRequest?: fm.InitReq): Promise<QueryDenomsFromCreatorResponse> {
+  static denomsFromCreator(request: QueryDenomsFromCreatorRequest, initRequest?: fm.InitReq): Promise<QueryDenomsFromCreatorResponse> {
     return fm.fetchReq(`/osmosis/tokenfactory/v1beta1/denoms_from_creator/${request["creator"]}?${fm.renderURLSearchParams({
       ...request
     }, ["creator"])}`, {
@@ -49,8 +49,8 @@ export class Querier {
    * Params defines a gRPC query method that returns the tokenfactory module's
    * parameters.
    */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
@@ -59,8 +59,8 @@ export class Querier {
    * DenomAuthorityMetadata defines a gRPC query method for fetching
    * DenomAuthorityMetadata for a particular denom.
    */
-  async DenomAuthorityMetadata(req: QueryDenomAuthorityMetadataRequest, headers?: HeadersInit): Promise<QueryDenomAuthorityMetadataResponse> {
-    return Query.DenomAuthorityMetadata(req, {
+  async denomAuthorityMetadata(req: QueryDenomAuthorityMetadataRequest, headers?: HeadersInit): Promise<QueryDenomAuthorityMetadataResponse> {
+    return Query.denomAuthorityMetadata(req, {
       headers,
       pathPrefix: this.url
     });
@@ -69,8 +69,8 @@ export class Querier {
    * DenomsFromCreator defines a gRPC query method for fetching all
    * denominations created by a specific admin/creator.
    */
-  async DenomsFromCreator(req: QueryDenomsFromCreatorRequest, headers?: HeadersInit): Promise<QueryDenomsFromCreatorResponse> {
-    return Query.DenomsFromCreator(req, {
+  async denomsFromCreator(req: QueryDenomsFromCreatorRequest, headers?: HeadersInit): Promise<QueryDenomsFromCreatorResponse> {
+    return Query.denomsFromCreator(req, {
       headers,
       pathPrefix: this.url
     });

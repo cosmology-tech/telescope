@@ -6,8 +6,8 @@ export class Msg {
    * SetWithdrawAddress defines a method to change the withdraw address
    * for a delegator (or validator self-delegation).
    */
-  static SetWithdrawAddress(request: MsgSetWithdrawAddress, initRequest?: fm.InitReq): Promise<MsgSetWithdrawAddressResponse> {
-    return fm.fetchReq(`/cosmos.distribution.v1beta1/SetWithdrawAddress`, {
+  static setWithdrawAddress(request: MsgSetWithdrawAddress, initRequest?: fm.InitReq): Promise<MsgSetWithdrawAddressResponse> {
+    return fm.fetchReq(`/cosmos.distribution.v1beta1/setWithdrawAddress`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -17,8 +17,8 @@ export class Msg {
    * WithdrawDelegatorReward defines a method to withdraw rewards of delegator
    * from a single validator.
    */
-  static WithdrawDelegatorReward(request: MsgWithdrawDelegatorReward, initRequest?: fm.InitReq): Promise<MsgWithdrawDelegatorRewardResponse> {
-    return fm.fetchReq(`/cosmos.distribution.v1beta1/WithdrawDelegatorReward`, {
+  static withdrawDelegatorReward(request: MsgWithdrawDelegatorReward, initRequest?: fm.InitReq): Promise<MsgWithdrawDelegatorRewardResponse> {
+    return fm.fetchReq(`/cosmos.distribution.v1beta1/withdrawDelegatorReward`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -28,8 +28,8 @@ export class Msg {
    * WithdrawValidatorCommission defines a method to withdraw the
    * full commission to the validator address.
    */
-  static WithdrawValidatorCommission(request: MsgWithdrawValidatorCommission, initRequest?: fm.InitReq): Promise<MsgWithdrawValidatorCommissionResponse> {
-    return fm.fetchReq(`/cosmos.distribution.v1beta1/WithdrawValidatorCommission`, {
+  static withdrawValidatorCommission(request: MsgWithdrawValidatorCommission, initRequest?: fm.InitReq): Promise<MsgWithdrawValidatorCommissionResponse> {
+    return fm.fetchReq(`/cosmos.distribution.v1beta1/withdrawValidatorCommission`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -39,8 +39,8 @@ export class Msg {
    * FundCommunityPool defines a method to allow an account to directly
    * fund the community pool.
    */
-  static FundCommunityPool(request: MsgFundCommunityPool, initRequest?: fm.InitReq): Promise<MsgFundCommunityPoolResponse> {
-    return fm.fetchReq(`/cosmos.distribution.v1beta1/FundCommunityPool`, {
+  static fundCommunityPool(request: MsgFundCommunityPool, initRequest?: fm.InitReq): Promise<MsgFundCommunityPoolResponse> {
+    return fm.fetchReq(`/cosmos.distribution.v1beta1/fundCommunityPool`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

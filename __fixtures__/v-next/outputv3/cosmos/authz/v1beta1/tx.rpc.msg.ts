@@ -9,8 +9,8 @@ export class Msg {
    * for the given (granter, grantee, Authorization) triple, then the grant
    * will be overwritten.
    */
-  static Grant(request: MsgGrant, initRequest?: fm.InitReq): Promise<MsgGrantResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Grant`, {
+  static grant(request: MsgGrant, initRequest?: fm.InitReq): Promise<MsgGrantResponse> {
+    return fm.fetchReq(`/cosmos.authz.v1beta1/grant`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -21,8 +21,8 @@ export class Msg {
    * authorizations granted to the grantee. Each message should have only
    * one signer corresponding to the granter of the authorization.
    */
-  static Exec(request: MsgExec, initRequest?: fm.InitReq): Promise<MsgExecResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Exec`, {
+  static exec(request: MsgExec, initRequest?: fm.InitReq): Promise<MsgExecResponse> {
+    return fm.fetchReq(`/cosmos.authz.v1beta1/exec`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -32,8 +32,8 @@ export class Msg {
    * Revoke revokes any authorization corresponding to the provided method name on the
    * granter's account that has been granted to the grantee.
    */
-  static Revoke(request: MsgRevoke, initRequest?: fm.InitReq): Promise<MsgRevokeResponse> {
-    return fm.fetchReq(`/cosmos.authz.v1beta1/Revoke`, {
+  static revoke(request: MsgRevoke, initRequest?: fm.InitReq): Promise<MsgRevokeResponse> {
+    return fm.fetchReq(`/cosmos.authz.v1beta1/revoke`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

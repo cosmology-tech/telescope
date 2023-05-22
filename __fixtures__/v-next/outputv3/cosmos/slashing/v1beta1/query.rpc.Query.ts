@@ -4,7 +4,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
 export class Query {
   /** Params queries the parameters of slashing module */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/slashing/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -13,7 +13,7 @@ export class Query {
     });
   }
   /** SigningInfo queries the signing info of given cons address */
-  static SigningInfo(request: QuerySigningInfoRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfoResponse> {
+  static signingInfo(request: QuerySigningInfoRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfoResponse> {
     return fm.fetchReq(`/cosmos/slashing/v1beta1/signing_infos/${request["cons_address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["cons_address"])}`, {
@@ -22,7 +22,7 @@ export class Query {
     });
   }
   /** SigningInfos queries signing info of all validators */
-  static SigningInfos(request: QuerySigningInfosRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfosResponse> {
+  static signingInfos(request: QuerySigningInfosRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfosResponse> {
     return fm.fetchReq(`/cosmos/slashing/v1beta1/signing_infos?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -37,22 +37,22 @@ export class Querier {
     this.url = url;
   }
   /** Params queries the parameters of slashing module */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** SigningInfo queries the signing info of given cons address */
-  async SigningInfo(req: QuerySigningInfoRequest, headers?: HeadersInit): Promise<QuerySigningInfoResponse> {
-    return Query.SigningInfo(req, {
+  async signingInfo(req: QuerySigningInfoRequest, headers?: HeadersInit): Promise<QuerySigningInfoResponse> {
+    return Query.signingInfo(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** SigningInfos queries signing info of all validators */
-  async SigningInfos(req: QuerySigningInfosRequest, headers?: HeadersInit): Promise<QuerySigningInfosResponse> {
-    return Query.SigningInfos(req, {
+  async signingInfos(req: QuerySigningInfosRequest, headers?: HeadersInit): Promise<QuerySigningInfosResponse> {
+    return Query.signingInfos(req, {
       headers,
       pathPrefix: this.url
     });

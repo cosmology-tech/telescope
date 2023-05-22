@@ -3,7 +3,7 @@ import * as fm from "../../../../grpc-gateway";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 export class Query {
   /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
-  static AppVersion(request: QueryAppVersionRequest, initRequest?: fm.InitReq): Promise<QueryAppVersionResponse> {
+  static appVersion(request: QueryAppVersionRequest, initRequest?: fm.InitReq): Promise<QueryAppVersionResponse> {
     return fm.fetchReq(`ibc.core.port.v1.AppVersion?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -18,8 +18,8 @@ export class Querier {
     this.url = url;
   }
   /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
-  async AppVersion(req: QueryAppVersionRequest, headers?: HeadersInit): Promise<QueryAppVersionResponse> {
-    return Query.AppVersion(req, {
+  async appVersion(req: QueryAppVersionRequest, headers?: HeadersInit): Promise<QueryAppVersionResponse> {
+    return Query.appVersion(req, {
       headers,
       pathPrefix: this.url
     });

@@ -4,7 +4,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsRequest, QueryProposalsRequestSDKType, QueryProposalsResponse, QueryProposalsResponseSDKType, QueryVoteRequest, QueryVoteRequestSDKType, QueryVoteResponse, QueryVoteResponseSDKType, QueryVotesRequest, QueryVotesRequestSDKType, QueryVotesResponse, QueryVotesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDepositRequest, QueryDepositRequestSDKType, QueryDepositResponse, QueryDepositResponseSDKType, QueryDepositsRequest, QueryDepositsRequestSDKType, QueryDepositsResponse, QueryDepositsResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
 export class Query {
   /** Proposal queries proposal details based on ProposalID. */
-  static Proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
+  static proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -13,7 +13,7 @@ export class Query {
     });
   }
   /** Proposals queries all proposals based on given status. */
-  static Proposals(request: QueryProposalsRequest, initRequest?: fm.InitReq): Promise<QueryProposalsResponse> {
+  static proposals(request: QueryProposalsRequest, initRequest?: fm.InitReq): Promise<QueryProposalsResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -22,7 +22,7 @@ export class Query {
     });
   }
   /** Vote queries voted information based on proposalID, voterAddr. */
-  static Vote(request: QueryVoteRequest, initRequest?: fm.InitReq): Promise<QueryVoteResponse> {
+  static vote(request: QueryVoteRequest, initRequest?: fm.InitReq): Promise<QueryVoteResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/votes/{voter}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -31,7 +31,7 @@ export class Query {
     });
   }
   /** Votes queries votes of a given proposal. */
-  static Votes(request: QueryVotesRequest, initRequest?: fm.InitReq): Promise<QueryVotesResponse> {
+  static votes(request: QueryVotesRequest, initRequest?: fm.InitReq): Promise<QueryVotesResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/votes?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -40,7 +40,7 @@ export class Query {
     });
   }
   /** Params queries all parameters of the gov module. */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/params/${request["params_type"]}?${fm.renderURLSearchParams({
       ...request
     }, ["params_type"])}`, {
@@ -49,7 +49,7 @@ export class Query {
     });
   }
   /** Deposit queries single deposit information based proposalID, depositAddr. */
-  static Deposit(request: QueryDepositRequest, initRequest?: fm.InitReq): Promise<QueryDepositResponse> {
+  static deposit(request: QueryDepositRequest, initRequest?: fm.InitReq): Promise<QueryDepositResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/deposits/{depositor}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -58,7 +58,7 @@ export class Query {
     });
   }
   /** Deposits queries all deposits of a single proposal. */
-  static Deposits(request: QueryDepositsRequest, initRequest?: fm.InitReq): Promise<QueryDepositsResponse> {
+  static deposits(request: QueryDepositsRequest, initRequest?: fm.InitReq): Promise<QueryDepositsResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/deposits?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -67,7 +67,7 @@ export class Query {
     });
   }
   /** TallyResult queries the tally of a proposal vote. */
-  static TallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
+  static tallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
     return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/tally?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -82,57 +82,57 @@ export class Querier {
     this.url = url;
   }
   /** Proposal queries proposal details based on ProposalID. */
-  async Proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
-    return Query.Proposal(req, {
+  async proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
+    return Query.proposal(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Proposals queries all proposals based on given status. */
-  async Proposals(req: QueryProposalsRequest, headers?: HeadersInit): Promise<QueryProposalsResponse> {
-    return Query.Proposals(req, {
+  async proposals(req: QueryProposalsRequest, headers?: HeadersInit): Promise<QueryProposalsResponse> {
+    return Query.proposals(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Vote queries voted information based on proposalID, voterAddr. */
-  async Vote(req: QueryVoteRequest, headers?: HeadersInit): Promise<QueryVoteResponse> {
-    return Query.Vote(req, {
+  async vote(req: QueryVoteRequest, headers?: HeadersInit): Promise<QueryVoteResponse> {
+    return Query.vote(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Votes queries votes of a given proposal. */
-  async Votes(req: QueryVotesRequest, headers?: HeadersInit): Promise<QueryVotesResponse> {
-    return Query.Votes(req, {
+  async votes(req: QueryVotesRequest, headers?: HeadersInit): Promise<QueryVotesResponse> {
+    return Query.votes(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Params queries all parameters of the gov module. */
-  async Params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
-    return Query.Params(req, {
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Deposit queries single deposit information based proposalID, depositAddr. */
-  async Deposit(req: QueryDepositRequest, headers?: HeadersInit): Promise<QueryDepositResponse> {
-    return Query.Deposit(req, {
+  async deposit(req: QueryDepositRequest, headers?: HeadersInit): Promise<QueryDepositResponse> {
+    return Query.deposit(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Deposits queries all deposits of a single proposal. */
-  async Deposits(req: QueryDepositsRequest, headers?: HeadersInit): Promise<QueryDepositsResponse> {
-    return Query.Deposits(req, {
+  async deposits(req: QueryDepositsRequest, headers?: HeadersInit): Promise<QueryDepositsResponse> {
+    return Query.deposits(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** TallyResult queries the tally of a proposal vote. */
-  async TallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
-    return Query.TallyResult(req, {
+  async tallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
+    return Query.tallyResult(req, {
       headers,
       pathPrefix: this.url
     });

@@ -340,11 +340,12 @@ export const createGRPCGatewayQueryClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
 
     //two different ways to generate methods for Query and Service
     let methods;
+    //case Query
     if (service.name === "Query") {
         methods = keys
         .map(key => {
@@ -359,17 +360,31 @@ export const createGRPCGatewayQueryClass = (
             )
         })
     } else {
+    //case Service
         methods = keys
         .map(key => {
+            const isGet = key.substring(0, 3) === "Get";
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
-            return grpcGatewayMsgMethodDefinition(
-                name,
-                method,
-                context.ref.proto.package,
-                leadingComments
-            )
+            if (!isGet) {
+                //POST METHOD
+                return grpcGatewayMsgMethodDefinition(
+                    name,
+                    method,
+                    context.ref.proto.package,
+                    leadingComments
+            )}
+            else {
+                const method = service.methods[key];
+                const name = camelRpcMethods ? camel(key) : key;
+                const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+                return grpcGatewayMethodDefinition(
+                    context,
+                    name,
+                    method,
+                    leadingComments
+            )}
         })
     }
     

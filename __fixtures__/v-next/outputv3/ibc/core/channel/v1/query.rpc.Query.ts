@@ -6,7 +6,7 @@ import * as fm from "../../../../grpc-gateway";
 import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, QueryChannelResponseSDKType, QueryChannelsRequest, QueryChannelsRequestSDKType, QueryChannelsResponse, QueryChannelsResponseSDKType, QueryConnectionChannelsRequest, QueryConnectionChannelsRequestSDKType, QueryConnectionChannelsResponse, QueryConnectionChannelsResponseSDKType, QueryChannelClientStateRequest, QueryChannelClientStateRequestSDKType, QueryChannelClientStateResponse, QueryChannelClientStateResponseSDKType, QueryChannelConsensusStateRequest, QueryChannelConsensusStateRequestSDKType, QueryChannelConsensusStateResponse, QueryChannelConsensusStateResponseSDKType, QueryPacketCommitmentRequest, QueryPacketCommitmentRequestSDKType, QueryPacketCommitmentResponse, QueryPacketCommitmentResponseSDKType, QueryPacketCommitmentsRequest, QueryPacketCommitmentsRequestSDKType, QueryPacketCommitmentsResponse, QueryPacketCommitmentsResponseSDKType, QueryPacketReceiptRequest, QueryPacketReceiptRequestSDKType, QueryPacketReceiptResponse, QueryPacketReceiptResponseSDKType, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementRequestSDKType, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementResponseSDKType, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsRequestSDKType, QueryPacketAcknowledgementsResponse, QueryPacketAcknowledgementsResponseSDKType, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsRequestSDKType, QueryUnreceivedPacketsResponse, QueryUnreceivedPacketsResponseSDKType, QueryUnreceivedAcksRequest, QueryUnreceivedAcksRequestSDKType, QueryUnreceivedAcksResponse, QueryUnreceivedAcksResponseSDKType, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveRequestSDKType, QueryNextSequenceReceiveResponse, QueryNextSequenceReceiveResponseSDKType } from "./query";
 export class Query {
   /** Channel queries an IBC Channel. */
-  static Channel(request: QueryChannelRequest, initRequest?: fm.InitReq): Promise<QueryChannelResponse> {
+  static channel(request: QueryChannelRequest, initRequest?: fm.InitReq): Promise<QueryChannelResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -15,7 +15,7 @@ export class Query {
     });
   }
   /** Channels queries all the IBC channels of a chain. */
-  static Channels(request: QueryChannelsRequest, initRequest?: fm.InitReq): Promise<QueryChannelsResponse> {
+  static channels(request: QueryChannelsRequest, initRequest?: fm.InitReq): Promise<QueryChannelsResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -27,7 +27,7 @@ export class Query {
    * ConnectionChannels queries all the channels associated with a connection
    * end.
    */
-  static ConnectionChannels(request: QueryConnectionChannelsRequest, initRequest?: fm.InitReq): Promise<QueryConnectionChannelsResponse> {
+  static connectionChannels(request: QueryConnectionChannelsRequest, initRequest?: fm.InitReq): Promise<QueryConnectionChannelsResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/connections/${request["connection"]}/channels?${fm.renderURLSearchParams({
       ...request
     }, ["connection"])}`, {
@@ -39,7 +39,7 @@ export class Query {
    * ChannelClientState queries for the client state for the channel associated
    * with the provided channel identifiers.
    */
-  static ChannelClientState(request: QueryChannelClientStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelClientStateResponse> {
+  static channelClientState(request: QueryChannelClientStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelClientStateResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/client_state?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -51,7 +51,7 @@ export class Query {
    * ChannelConsensusState queries for the consensus state for the channel
    * associated with the provided channel identifiers.
    */
-  static ChannelConsensusState(request: QueryChannelConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelConsensusStateResponse> {
+  static channelConsensusState(request: QueryChannelConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelConsensusStateResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -60,7 +60,7 @@ export class Query {
     });
   }
   /** PacketCommitment queries a stored packet commitment hash. */
-  static PacketCommitment(request: QueryPacketCommitmentRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentResponse> {
+  static packetCommitment(request: QueryPacketCommitmentRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{sequence}?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -72,7 +72,7 @@ export class Query {
    * PacketCommitments returns all the packet commitments hashes associated
    * with a channel.
    */
-  static PacketCommitments(request: QueryPacketCommitmentsRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentsResponse> {
+  static packetCommitments(request: QueryPacketCommitmentsRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentsResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -84,7 +84,7 @@ export class Query {
    * PacketReceipt queries if a given packet sequence has been received on the
    * queried chain
    */
-  static PacketReceipt(request: QueryPacketReceiptRequest, initRequest?: fm.InitReq): Promise<QueryPacketReceiptResponse> {
+  static packetReceipt(request: QueryPacketReceiptRequest, initRequest?: fm.InitReq): Promise<QueryPacketReceiptResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_receipts/{sequence}?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -93,7 +93,7 @@ export class Query {
     });
   }
   /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
-  static PacketAcknowledgement(request: QueryPacketAcknowledgementRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementResponse> {
+  static packetAcknowledgement(request: QueryPacketAcknowledgementRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_acks/{sequence}?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -105,7 +105,7 @@ export class Query {
    * PacketAcknowledgements returns all the packet acknowledgements associated
    * with a channel.
    */
-  static PacketAcknowledgements(request: QueryPacketAcknowledgementsRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementsResponse> {
+  static packetAcknowledgements(request: QueryPacketAcknowledgementsRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementsResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_acknowledgements?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -117,7 +117,7 @@ export class Query {
    * UnreceivedPackets returns all the unreceived IBC packets associated with a
    * channel and sequences.
    */
-  static UnreceivedPackets(request: QueryUnreceivedPacketsRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedPacketsResponse> {
+  static unreceivedPackets(request: QueryUnreceivedPacketsRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedPacketsResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -129,7 +129,7 @@ export class Query {
    * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
    * with a channel and sequences.
    */
-  static UnreceivedAcks(request: QueryUnreceivedAcksRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedAcksResponse> {
+  static unreceivedAcks(request: QueryUnreceivedAcksRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedAcksResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -138,7 +138,7 @@ export class Query {
     });
   }
   /** NextSequenceReceive returns the next receive sequence for a given channel. */
-  static NextSequenceReceive(request: QueryNextSequenceReceiveRequest, initRequest?: fm.InitReq): Promise<QueryNextSequenceReceiveResponse> {
+  static nextSequenceReceive(request: QueryNextSequenceReceiveRequest, initRequest?: fm.InitReq): Promise<QueryNextSequenceReceiveResponse> {
     return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/next_sequence?${fm.renderURLSearchParams({
       ...request
     }, ["channel_id"])}`, {
@@ -153,15 +153,15 @@ export class Querier {
     this.url = url;
   }
   /** Channel queries an IBC Channel. */
-  async Channel(req: QueryChannelRequest, headers?: HeadersInit): Promise<QueryChannelResponse> {
-    return Query.Channel(req, {
+  async channel(req: QueryChannelRequest, headers?: HeadersInit): Promise<QueryChannelResponse> {
+    return Query.channel(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Channels queries all the IBC channels of a chain. */
-  async Channels(req: QueryChannelsRequest, headers?: HeadersInit): Promise<QueryChannelsResponse> {
-    return Query.Channels(req, {
+  async channels(req: QueryChannelsRequest, headers?: HeadersInit): Promise<QueryChannelsResponse> {
+    return Query.channels(req, {
       headers,
       pathPrefix: this.url
     });
@@ -170,8 +170,8 @@ export class Querier {
    * ConnectionChannels queries all the channels associated with a connection
    * end.
    */
-  async ConnectionChannels(req: QueryConnectionChannelsRequest, headers?: HeadersInit): Promise<QueryConnectionChannelsResponse> {
-    return Query.ConnectionChannels(req, {
+  async connectionChannels(req: QueryConnectionChannelsRequest, headers?: HeadersInit): Promise<QueryConnectionChannelsResponse> {
+    return Query.connectionChannels(req, {
       headers,
       pathPrefix: this.url
     });
@@ -180,8 +180,8 @@ export class Querier {
    * ChannelClientState queries for the client state for the channel associated
    * with the provided channel identifiers.
    */
-  async ChannelClientState(req: QueryChannelClientStateRequest, headers?: HeadersInit): Promise<QueryChannelClientStateResponse> {
-    return Query.ChannelClientState(req, {
+  async channelClientState(req: QueryChannelClientStateRequest, headers?: HeadersInit): Promise<QueryChannelClientStateResponse> {
+    return Query.channelClientState(req, {
       headers,
       pathPrefix: this.url
     });
@@ -190,15 +190,15 @@ export class Querier {
    * ChannelConsensusState queries for the consensus state for the channel
    * associated with the provided channel identifiers.
    */
-  async ChannelConsensusState(req: QueryChannelConsensusStateRequest, headers?: HeadersInit): Promise<QueryChannelConsensusStateResponse> {
-    return Query.ChannelConsensusState(req, {
+  async channelConsensusState(req: QueryChannelConsensusStateRequest, headers?: HeadersInit): Promise<QueryChannelConsensusStateResponse> {
+    return Query.channelConsensusState(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** PacketCommitment queries a stored packet commitment hash. */
-  async PacketCommitment(req: QueryPacketCommitmentRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentResponse> {
-    return Query.PacketCommitment(req, {
+  async packetCommitment(req: QueryPacketCommitmentRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentResponse> {
+    return Query.packetCommitment(req, {
       headers,
       pathPrefix: this.url
     });
@@ -207,8 +207,8 @@ export class Querier {
    * PacketCommitments returns all the packet commitments hashes associated
    * with a channel.
    */
-  async PacketCommitments(req: QueryPacketCommitmentsRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentsResponse> {
-    return Query.PacketCommitments(req, {
+  async packetCommitments(req: QueryPacketCommitmentsRequest, headers?: HeadersInit): Promise<QueryPacketCommitmentsResponse> {
+    return Query.packetCommitments(req, {
       headers,
       pathPrefix: this.url
     });
@@ -217,15 +217,15 @@ export class Querier {
    * PacketReceipt queries if a given packet sequence has been received on the
    * queried chain
    */
-  async PacketReceipt(req: QueryPacketReceiptRequest, headers?: HeadersInit): Promise<QueryPacketReceiptResponse> {
-    return Query.PacketReceipt(req, {
+  async packetReceipt(req: QueryPacketReceiptRequest, headers?: HeadersInit): Promise<QueryPacketReceiptResponse> {
+    return Query.packetReceipt(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
-  async PacketAcknowledgement(req: QueryPacketAcknowledgementRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementResponse> {
-    return Query.PacketAcknowledgement(req, {
+  async packetAcknowledgement(req: QueryPacketAcknowledgementRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementResponse> {
+    return Query.packetAcknowledgement(req, {
       headers,
       pathPrefix: this.url
     });
@@ -234,8 +234,8 @@ export class Querier {
    * PacketAcknowledgements returns all the packet acknowledgements associated
    * with a channel.
    */
-  async PacketAcknowledgements(req: QueryPacketAcknowledgementsRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementsResponse> {
-    return Query.PacketAcknowledgements(req, {
+  async packetAcknowledgements(req: QueryPacketAcknowledgementsRequest, headers?: HeadersInit): Promise<QueryPacketAcknowledgementsResponse> {
+    return Query.packetAcknowledgements(req, {
       headers,
       pathPrefix: this.url
     });
@@ -244,8 +244,8 @@ export class Querier {
    * UnreceivedPackets returns all the unreceived IBC packets associated with a
    * channel and sequences.
    */
-  async UnreceivedPackets(req: QueryUnreceivedPacketsRequest, headers?: HeadersInit): Promise<QueryUnreceivedPacketsResponse> {
-    return Query.UnreceivedPackets(req, {
+  async unreceivedPackets(req: QueryUnreceivedPacketsRequest, headers?: HeadersInit): Promise<QueryUnreceivedPacketsResponse> {
+    return Query.unreceivedPackets(req, {
       headers,
       pathPrefix: this.url
     });
@@ -254,15 +254,15 @@ export class Querier {
    * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
    * with a channel and sequences.
    */
-  async UnreceivedAcks(req: QueryUnreceivedAcksRequest, headers?: HeadersInit): Promise<QueryUnreceivedAcksResponse> {
-    return Query.UnreceivedAcks(req, {
+  async unreceivedAcks(req: QueryUnreceivedAcksRequest, headers?: HeadersInit): Promise<QueryUnreceivedAcksResponse> {
+    return Query.unreceivedAcks(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** NextSequenceReceive returns the next receive sequence for a given channel. */
-  async NextSequenceReceive(req: QueryNextSequenceReceiveRequest, headers?: HeadersInit): Promise<QueryNextSequenceReceiveResponse> {
-    return Query.NextSequenceReceive(req, {
+  async nextSequenceReceive(req: QueryNextSequenceReceiveRequest, headers?: HeadersInit): Promise<QueryNextSequenceReceiveResponse> {
+    return Query.nextSequenceReceive(req, {
       headers,
       pathPrefix: this.url
     });

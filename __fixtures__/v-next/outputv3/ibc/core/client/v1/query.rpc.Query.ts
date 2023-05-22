@@ -5,7 +5,7 @@ import * as fm from "../../../../grpc-gateway";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
 export class Query {
   /** ClientState queries an IBC light client. */
-  static ClientState(request: QueryClientStateRequest, initRequest?: fm.InitReq): Promise<QueryClientStateResponse> {
+  static clientState(request: QueryClientStateRequest, initRequest?: fm.InitReq): Promise<QueryClientStateResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/client_states/${request["client_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["client_id"])}`, {
@@ -14,7 +14,7 @@ export class Query {
     });
   }
   /** ClientStates queries all the IBC light clients of a chain. */
-  static ClientStates(request: QueryClientStatesRequest, initRequest?: fm.InitReq): Promise<QueryClientStatesResponse> {
+  static clientStates(request: QueryClientStatesRequest, initRequest?: fm.InitReq): Promise<QueryClientStatesResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/client_states?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -26,7 +26,7 @@ export class Query {
    * ConsensusState queries a consensus state associated with a client state at
    * a given height.
    */
-  static ConsensusState(request: QueryConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryConsensusStateResponse> {
+  static consensusState(request: QueryConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryConsensusStateResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/consensus_states/${request["client_id"]}/revision/{revision_number}/height/{revision_height}?${fm.renderURLSearchParams({
       ...request
     }, ["client_id"])}`, {
@@ -38,7 +38,7 @@ export class Query {
    * ConsensusStates queries all the consensus state associated with a given
    * client.
    */
-  static ConsensusStates(request: QueryConsensusStatesRequest, initRequest?: fm.InitReq): Promise<QueryConsensusStatesResponse> {
+  static consensusStates(request: QueryConsensusStatesRequest, initRequest?: fm.InitReq): Promise<QueryConsensusStatesResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/consensus_states/${request["client_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["client_id"])}`, {
@@ -47,7 +47,7 @@ export class Query {
     });
   }
   /** Status queries the status of an IBC client. */
-  static ClientStatus(request: QueryClientStatusRequest, initRequest?: fm.InitReq): Promise<QueryClientStatusResponse> {
+  static clientStatus(request: QueryClientStatusRequest, initRequest?: fm.InitReq): Promise<QueryClientStatusResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/client_status/${request["client_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["client_id"])}`, {
@@ -56,7 +56,7 @@ export class Query {
     });
   }
   /** ClientParams queries all parameters of the ibc client. */
-  static ClientParams(request: QueryClientParamsRequest, initRequest?: fm.InitReq): Promise<QueryClientParamsResponse> {
+  static clientParams(request: QueryClientParamsRequest, initRequest?: fm.InitReq): Promise<QueryClientParamsResponse> {
     return fm.fetchReq(`/ibc/client/v1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -65,7 +65,7 @@ export class Query {
     });
   }
   /** UpgradedClientState queries an Upgraded IBC light client. */
-  static UpgradedClientState(request: QueryUpgradedClientStateRequest, initRequest?: fm.InitReq): Promise<QueryUpgradedClientStateResponse> {
+  static upgradedClientState(request: QueryUpgradedClientStateRequest, initRequest?: fm.InitReq): Promise<QueryUpgradedClientStateResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/upgraded_client_states?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -74,7 +74,7 @@ export class Query {
     });
   }
   /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
-  static UpgradedConsensusState(request: QueryUpgradedConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryUpgradedConsensusStateResponse> {
+  static upgradedConsensusState(request: QueryUpgradedConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryUpgradedConsensusStateResponse> {
     return fm.fetchReq(`/ibc/core/client/v1/upgraded_consensus_states?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -89,15 +89,15 @@ export class Querier {
     this.url = url;
   }
   /** ClientState queries an IBC light client. */
-  async ClientState(req: QueryClientStateRequest, headers?: HeadersInit): Promise<QueryClientStateResponse> {
-    return Query.ClientState(req, {
+  async clientState(req: QueryClientStateRequest, headers?: HeadersInit): Promise<QueryClientStateResponse> {
+    return Query.clientState(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** ClientStates queries all the IBC light clients of a chain. */
-  async ClientStates(req: QueryClientStatesRequest, headers?: HeadersInit): Promise<QueryClientStatesResponse> {
-    return Query.ClientStates(req, {
+  async clientStates(req: QueryClientStatesRequest, headers?: HeadersInit): Promise<QueryClientStatesResponse> {
+    return Query.clientStates(req, {
       headers,
       pathPrefix: this.url
     });
@@ -106,8 +106,8 @@ export class Querier {
    * ConsensusState queries a consensus state associated with a client state at
    * a given height.
    */
-  async ConsensusState(req: QueryConsensusStateRequest, headers?: HeadersInit): Promise<QueryConsensusStateResponse> {
-    return Query.ConsensusState(req, {
+  async consensusState(req: QueryConsensusStateRequest, headers?: HeadersInit): Promise<QueryConsensusStateResponse> {
+    return Query.consensusState(req, {
       headers,
       pathPrefix: this.url
     });
@@ -116,36 +116,36 @@ export class Querier {
    * ConsensusStates queries all the consensus state associated with a given
    * client.
    */
-  async ConsensusStates(req: QueryConsensusStatesRequest, headers?: HeadersInit): Promise<QueryConsensusStatesResponse> {
-    return Query.ConsensusStates(req, {
+  async consensusStates(req: QueryConsensusStatesRequest, headers?: HeadersInit): Promise<QueryConsensusStatesResponse> {
+    return Query.consensusStates(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Status queries the status of an IBC client. */
-  async ClientStatus(req: QueryClientStatusRequest, headers?: HeadersInit): Promise<QueryClientStatusResponse> {
-    return Query.ClientStatus(req, {
+  async clientStatus(req: QueryClientStatusRequest, headers?: HeadersInit): Promise<QueryClientStatusResponse> {
+    return Query.clientStatus(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** ClientParams queries all parameters of the ibc client. */
-  async ClientParams(req: QueryClientParamsRequest, headers?: HeadersInit): Promise<QueryClientParamsResponse> {
-    return Query.ClientParams(req, {
+  async clientParams(req: QueryClientParamsRequest, headers?: HeadersInit): Promise<QueryClientParamsResponse> {
+    return Query.clientParams(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** UpgradedClientState queries an Upgraded IBC light client. */
-  async UpgradedClientState(req: QueryUpgradedClientStateRequest, headers?: HeadersInit): Promise<QueryUpgradedClientStateResponse> {
-    return Query.UpgradedClientState(req, {
+  async upgradedClientState(req: QueryUpgradedClientStateRequest, headers?: HeadersInit): Promise<QueryUpgradedClientStateResponse> {
+    return Query.upgradedClientState(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
-  async UpgradedConsensusState(req: QueryUpgradedConsensusStateRequest, headers?: HeadersInit): Promise<QueryUpgradedConsensusStateResponse> {
-    return Query.UpgradedConsensusState(req, {
+  async upgradedConsensusState(req: QueryUpgradedConsensusStateRequest, headers?: HeadersInit): Promise<QueryUpgradedConsensusStateResponse> {
+    return Query.upgradedConsensusState(req, {
       headers,
       pathPrefix: this.url
     });

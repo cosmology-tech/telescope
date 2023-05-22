@@ -4,7 +4,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
 export class Query {
   /** GroupInfo queries group info based on group id. */
-  static GroupInfo(request: QueryGroupInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupInfoResponse> {
+  static groupInfo(request: QueryGroupInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupInfoResponse> {
     return fm.fetchReq(`/cosmos/group/v1/group_info/${request["group_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["group_id"])}`, {
@@ -13,7 +13,7 @@ export class Query {
     });
   }
   /** GroupPolicyInfo queries group policy info based on account address of group policy. */
-  static GroupPolicyInfo(request: QueryGroupPolicyInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupPolicyInfoResponse> {
+  static groupPolicyInfo(request: QueryGroupPolicyInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupPolicyInfoResponse> {
     return fm.fetchReq(`/cosmos/group/v1/group_policy_info/${request["address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -22,7 +22,7 @@ export class Query {
     });
   }
   /** GroupMembers queries members of a group */
-  static GroupMembers(request: QueryGroupMembersRequest, initRequest?: fm.InitReq): Promise<QueryGroupMembersResponse> {
+  static groupMembers(request: QueryGroupMembersRequest, initRequest?: fm.InitReq): Promise<QueryGroupMembersResponse> {
     return fm.fetchReq(`/cosmos/group/v1/group_members/${request["group_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["group_id"])}`, {
@@ -31,7 +31,7 @@ export class Query {
     });
   }
   /** GroupsByAdmin queries groups by admin address. */
-  static GroupsByAdmin(request: QueryGroupsByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByAdminResponse> {
+  static groupsByAdmin(request: QueryGroupsByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByAdminResponse> {
     return fm.fetchReq(`/cosmos/group/v1/groups_by_admin/${request["admin"]}?${fm.renderURLSearchParams({
       ...request
     }, ["admin"])}`, {
@@ -40,7 +40,7 @@ export class Query {
     });
   }
   /** GroupPoliciesByGroup queries group policies by group id. */
-  static GroupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByGroupResponse> {
+  static groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByGroupResponse> {
     return fm.fetchReq(`/cosmos/group/v1/group_policies_by_group/${request["group_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["group_id"])}`, {
@@ -49,7 +49,7 @@ export class Query {
     });
   }
   /** GroupsByAdmin queries group policies by admin address. */
-  static GroupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByAdminResponse> {
+  static groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByAdminResponse> {
     return fm.fetchReq(`/cosmos/group/v1/group_policies_by_admin/${request["admin"]}?${fm.renderURLSearchParams({
       ...request
     }, ["admin"])}`, {
@@ -58,7 +58,7 @@ export class Query {
     });
   }
   /** Proposal queries a proposal based on proposal id. */
-  static Proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
+  static proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
     return fm.fetchReq(`/cosmos/group/v1/proposal/${request["proposal_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -67,7 +67,7 @@ export class Query {
     });
   }
   /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
-  static ProposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest, initRequest?: fm.InitReq): Promise<QueryProposalsByGroupPolicyResponse> {
+  static proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest, initRequest?: fm.InitReq): Promise<QueryProposalsByGroupPolicyResponse> {
     return fm.fetchReq(`/cosmos/group/v1/proposals_by_group_policy/${request["address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -76,7 +76,7 @@ export class Query {
     });
   }
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
-  static VoteByProposalVoter(request: QueryVoteByProposalVoterRequest, initRequest?: fm.InitReq): Promise<QueryVoteByProposalVoterResponse> {
+  static voteByProposalVoter(request: QueryVoteByProposalVoterRequest, initRequest?: fm.InitReq): Promise<QueryVoteByProposalVoterResponse> {
     return fm.fetchReq(`/cosmos/group/v1/vote_by_proposal_voter/${request["proposal_id"]}/{voter}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -85,7 +85,7 @@ export class Query {
     });
   }
   /** VotesByProposal queries a vote by proposal. */
-  static VotesByProposal(request: QueryVotesByProposalRequest, initRequest?: fm.InitReq): Promise<QueryVotesByProposalResponse> {
+  static votesByProposal(request: QueryVotesByProposalRequest, initRequest?: fm.InitReq): Promise<QueryVotesByProposalResponse> {
     return fm.fetchReq(`/cosmos/group/v1/votes_by_proposal/${request["proposal_id"]}?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -94,7 +94,7 @@ export class Query {
     });
   }
   /** VotesByVoter queries a vote by voter. */
-  static VotesByVoter(request: QueryVotesByVoterRequest, initRequest?: fm.InitReq): Promise<QueryVotesByVoterResponse> {
+  static votesByVoter(request: QueryVotesByVoterRequest, initRequest?: fm.InitReq): Promise<QueryVotesByVoterResponse> {
     return fm.fetchReq(`/cosmos/group/v1/votes_by_voter/${request["voter"]}?${fm.renderURLSearchParams({
       ...request
     }, ["voter"])}`, {
@@ -103,7 +103,7 @@ export class Query {
     });
   }
   /** GroupsByMember queries groups by member address. */
-  static GroupsByMember(request: QueryGroupsByMemberRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByMemberResponse> {
+  static groupsByMember(request: QueryGroupsByMemberRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByMemberResponse> {
     return fm.fetchReq(`/cosmos/group/v1/groups_by_member/${request["address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -112,7 +112,7 @@ export class Query {
     });
   }
   /** TallyResult queries the tally of a proposal votes. */
-  static TallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
+  static tallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
     return fm.fetchReq(`/cosmos/group/v1/proposals/${request["proposal_id"]}/tally?${fm.renderURLSearchParams({
       ...request
     }, ["proposal_id"])}`, {
@@ -127,92 +127,92 @@ export class Querier {
     this.url = url;
   }
   /** GroupInfo queries group info based on group id. */
-  async GroupInfo(req: QueryGroupInfoRequest, headers?: HeadersInit): Promise<QueryGroupInfoResponse> {
-    return Query.GroupInfo(req, {
+  async groupInfo(req: QueryGroupInfoRequest, headers?: HeadersInit): Promise<QueryGroupInfoResponse> {
+    return Query.groupInfo(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupPolicyInfo queries group policy info based on account address of group policy. */
-  async GroupPolicyInfo(req: QueryGroupPolicyInfoRequest, headers?: HeadersInit): Promise<QueryGroupPolicyInfoResponse> {
-    return Query.GroupPolicyInfo(req, {
+  async groupPolicyInfo(req: QueryGroupPolicyInfoRequest, headers?: HeadersInit): Promise<QueryGroupPolicyInfoResponse> {
+    return Query.groupPolicyInfo(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupMembers queries members of a group */
-  async GroupMembers(req: QueryGroupMembersRequest, headers?: HeadersInit): Promise<QueryGroupMembersResponse> {
-    return Query.GroupMembers(req, {
+  async groupMembers(req: QueryGroupMembersRequest, headers?: HeadersInit): Promise<QueryGroupMembersResponse> {
+    return Query.groupMembers(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupsByAdmin queries groups by admin address. */
-  async GroupsByAdmin(req: QueryGroupsByAdminRequest, headers?: HeadersInit): Promise<QueryGroupsByAdminResponse> {
-    return Query.GroupsByAdmin(req, {
+  async groupsByAdmin(req: QueryGroupsByAdminRequest, headers?: HeadersInit): Promise<QueryGroupsByAdminResponse> {
+    return Query.groupsByAdmin(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupPoliciesByGroup queries group policies by group id. */
-  async GroupPoliciesByGroup(req: QueryGroupPoliciesByGroupRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByGroupResponse> {
-    return Query.GroupPoliciesByGroup(req, {
+  async groupPoliciesByGroup(req: QueryGroupPoliciesByGroupRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByGroupResponse> {
+    return Query.groupPoliciesByGroup(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupsByAdmin queries group policies by admin address. */
-  async GroupPoliciesByAdmin(req: QueryGroupPoliciesByAdminRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByAdminResponse> {
-    return Query.GroupPoliciesByAdmin(req, {
+  async groupPoliciesByAdmin(req: QueryGroupPoliciesByAdminRequest, headers?: HeadersInit): Promise<QueryGroupPoliciesByAdminResponse> {
+    return Query.groupPoliciesByAdmin(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** Proposal queries a proposal based on proposal id. */
-  async Proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
-    return Query.Proposal(req, {
+  async proposal(req: QueryProposalRequest, headers?: HeadersInit): Promise<QueryProposalResponse> {
+    return Query.proposal(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
-  async ProposalsByGroupPolicy(req: QueryProposalsByGroupPolicyRequest, headers?: HeadersInit): Promise<QueryProposalsByGroupPolicyResponse> {
-    return Query.ProposalsByGroupPolicy(req, {
+  async proposalsByGroupPolicy(req: QueryProposalsByGroupPolicyRequest, headers?: HeadersInit): Promise<QueryProposalsByGroupPolicyResponse> {
+    return Query.proposalsByGroupPolicy(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
-  async VoteByProposalVoter(req: QueryVoteByProposalVoterRequest, headers?: HeadersInit): Promise<QueryVoteByProposalVoterResponse> {
-    return Query.VoteByProposalVoter(req, {
+  async voteByProposalVoter(req: QueryVoteByProposalVoterRequest, headers?: HeadersInit): Promise<QueryVoteByProposalVoterResponse> {
+    return Query.voteByProposalVoter(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** VotesByProposal queries a vote by proposal. */
-  async VotesByProposal(req: QueryVotesByProposalRequest, headers?: HeadersInit): Promise<QueryVotesByProposalResponse> {
-    return Query.VotesByProposal(req, {
+  async votesByProposal(req: QueryVotesByProposalRequest, headers?: HeadersInit): Promise<QueryVotesByProposalResponse> {
+    return Query.votesByProposal(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** VotesByVoter queries a vote by voter. */
-  async VotesByVoter(req: QueryVotesByVoterRequest, headers?: HeadersInit): Promise<QueryVotesByVoterResponse> {
-    return Query.VotesByVoter(req, {
+  async votesByVoter(req: QueryVotesByVoterRequest, headers?: HeadersInit): Promise<QueryVotesByVoterResponse> {
+    return Query.votesByVoter(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** GroupsByMember queries groups by member address. */
-  async GroupsByMember(req: QueryGroupsByMemberRequest, headers?: HeadersInit): Promise<QueryGroupsByMemberResponse> {
-    return Query.GroupsByMember(req, {
+  async groupsByMember(req: QueryGroupsByMemberRequest, headers?: HeadersInit): Promise<QueryGroupsByMemberResponse> {
+    return Query.groupsByMember(req, {
       headers,
       pathPrefix: this.url
     });
   }
   /** TallyResult queries the tally of a proposal votes. */
-  async TallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
-    return Query.TallyResult(req, {
+  async tallyResult(req: QueryTallyResultRequest, headers?: HeadersInit): Promise<QueryTallyResultResponse> {
+    return Query.tallyResult(req, {
       headers,
       pathPrefix: this.url
     });

@@ -8,7 +8,7 @@ export class Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Accounts queries all accounts
    */
-  static Accounts(request: QueryAccountsRequest, initRequest?: fm.InitReq): Promise<QueryAccountsResponse> {
+  static accounts(request: QueryAccountsRequest, initRequest?: fm.InitReq): Promise<QueryAccountsResponse> {
     return fm.fetchReq(`/akash/escrow/v1beta1/types/accounts/list?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -21,7 +21,7 @@ export class Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Payments queries all payments
    */
-  static Payments(request: QueryPaymentsRequest, initRequest?: fm.InitReq): Promise<QueryPaymentsResponse> {
+  static payments(request: QueryPaymentsRequest, initRequest?: fm.InitReq): Promise<QueryPaymentsResponse> {
     return fm.fetchReq(`/akash/escrow/v1beta1/types/payments/list?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -40,8 +40,8 @@ export class Querier {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Accounts queries all accounts
    */
-  async Accounts(req: QueryAccountsRequest, headers?: HeadersInit): Promise<QueryAccountsResponse> {
-    return Query.Accounts(req, {
+  async accounts(req: QueryAccountsRequest, headers?: HeadersInit): Promise<QueryAccountsResponse> {
+    return Query.accounts(req, {
       headers,
       pathPrefix: this.url
     });
@@ -51,8 +51,8 @@ export class Querier {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Payments queries all payments
    */
-  async Payments(req: QueryPaymentsRequest, headers?: HeadersInit): Promise<QueryPaymentsResponse> {
-    return Query.Payments(req, {
+  async payments(req: QueryPaymentsRequest, headers?: HeadersInit): Promise<QueryPaymentsResponse> {
+    return Query.payments(req, {
       headers,
       pathPrefix: this.url
     });

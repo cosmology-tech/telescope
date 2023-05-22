@@ -3,7 +3,7 @@ import { Params, ParamsSDKType } from "./genesis";
 import * as fm from "../../../grpc-gateway";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
 export class Query {
-  static Params(request: ParamsRequest, initRequest?: fm.InitReq): Promise<ParamsResponse> {
+  static params(request: ParamsRequest, initRequest?: fm.InitReq): Promise<ParamsResponse> {
     return fm.fetchReq(`/osmosis/twap/v1beta1/Params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -11,7 +11,7 @@ export class Query {
       method: "GET"
     });
   }
-  static ArithmeticTwap(request: ArithmeticTwapRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapResponse> {
+  static arithmeticTwap(request: ArithmeticTwapRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapResponse> {
     return fm.fetchReq(`/osmosis/twap/v1beta1/ArithmeticTwap?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -19,7 +19,7 @@ export class Query {
       method: "GET"
     });
   }
-  static ArithmeticTwapToNow(request: ArithmeticTwapToNowRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapToNowResponse> {
+  static arithmeticTwapToNow(request: ArithmeticTwapToNowRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapToNowResponse> {
     return fm.fetchReq(`/osmosis/twap/v1beta1/ArithmeticTwapToNow?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -33,20 +33,20 @@ export class Querier {
   constructor(url: string) {
     this.url = url;
   }
-  async Params(req: ParamsRequest, headers?: HeadersInit): Promise<ParamsResponse> {
-    return Query.Params(req, {
+  async params(req: ParamsRequest, headers?: HeadersInit): Promise<ParamsResponse> {
+    return Query.params(req, {
       headers,
       pathPrefix: this.url
     });
   }
-  async ArithmeticTwap(req: ArithmeticTwapRequest, headers?: HeadersInit): Promise<ArithmeticTwapResponse> {
-    return Query.ArithmeticTwap(req, {
+  async arithmeticTwap(req: ArithmeticTwapRequest, headers?: HeadersInit): Promise<ArithmeticTwapResponse> {
+    return Query.arithmeticTwap(req, {
       headers,
       pathPrefix: this.url
     });
   }
-  async ArithmeticTwapToNow(req: ArithmeticTwapToNowRequest, headers?: HeadersInit): Promise<ArithmeticTwapToNowResponse> {
-    return Query.ArithmeticTwapToNow(req, {
+  async arithmeticTwapToNow(req: ArithmeticTwapToNowRequest, headers?: HeadersInit): Promise<ArithmeticTwapToNowResponse> {
+    return Query.arithmeticTwapToNow(req, {
       headers,
       pathPrefix: this.url
     });

@@ -7,8 +7,8 @@ export class Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  static SoftwareUpgrade(request: MsgSoftwareUpgrade, initRequest?: fm.InitReq): Promise<MsgSoftwareUpgradeResponse> {
-    return fm.fetchReq(`/cosmos.upgrade.v1beta1/SoftwareUpgrade`, {
+  static softwareUpgrade(request: MsgSoftwareUpgrade, initRequest?: fm.InitReq): Promise<MsgSoftwareUpgradeResponse> {
+    return fm.fetchReq(`/cosmos.upgrade.v1beta1/softwareUpgrade`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -20,8 +20,8 @@ export class Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  static CancelUpgrade(request: MsgCancelUpgrade, initRequest?: fm.InitReq): Promise<MsgCancelUpgradeResponse> {
-    return fm.fetchReq(`/cosmos.upgrade.v1beta1/CancelUpgrade`, {
+  static cancelUpgrade(request: MsgCancelUpgrade, initRequest?: fm.InitReq): Promise<MsgCancelUpgradeResponse> {
+    return fm.fetchReq(`/cosmos.upgrade.v1beta1/cancelUpgrade`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

@@ -116,7 +116,7 @@ export function replacer(key: any, value: any): any {
 export function fetchReq<I, O>(path: string, init?: InitReq): Promise<O> {
   const {pathPrefix, ...req} = init || {}
 
-  const url = pathPrefix ? `${pathPrefix}${path}` : path
+  const url = pathPrefix ? \`\${pathPrefix}\${path}\` : path
 
   return fetch(url, req).then(r => r.json().then((body: O) => {
     if (!r.ok) { throw body; }
@@ -134,7 +134,7 @@ export type NotifyStreamEntityArrival<T> = (resp: T) => void
  **/
 export async function fetchStreamingRequest<S, R>(path: string, callback?: NotifyStreamEntityArrival<R>, init?: InitReq) {
   const {pathPrefix, ...req} = init || {}
-  const url = pathPrefix ?`${pathPrefix}${path}` : path
+  const url = pathPrefix ? \`\${pathPrefix}\${path}\` : path
   const result = await fetch(url, req)
   // needs to use the .ok to check the status of HTTP status code
   // http other than 200 will not throw an error, instead the .ok will become false.
