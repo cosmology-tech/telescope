@@ -3,36 +3,36 @@ import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import * as fm from "../../../grpc-gateway";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
 export class Msg {
-  static CreateDenom(request: MsgCreateDenom, initRequest?: fm.InitReq): Promise<MsgCreateDenomResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/CreateDenom`, {
+  static createDenom(request: MsgCreateDenom, initRequest?: fm.InitReq): Promise<MsgCreateDenomResponse> {
+    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/createDenom`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-  static Mint(request: MsgMint, initRequest?: fm.InitReq): Promise<MsgMintResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Mint`, {
+  static mint(request: MsgMint, initRequest?: fm.InitReq): Promise<MsgMintResponse> {
+    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/mint`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-  static Burn(request: MsgBurn, initRequest?: fm.InitReq): Promise<MsgBurnResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Burn`, {
+  static burn(request: MsgBurn, initRequest?: fm.InitReq): Promise<MsgBurnResponse> {
+    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/burn`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-  static ChangeAdmin(request: MsgChangeAdmin, initRequest?: fm.InitReq): Promise<MsgChangeAdminResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/ChangeAdmin`, {
+  static changeAdmin(request: MsgChangeAdmin, initRequest?: fm.InitReq): Promise<MsgChangeAdminResponse> {
+    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/changeAdmin`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
-  static SetDenomMetadata(request: MsgSetDenomMetadata, initRequest?: fm.InitReq): Promise<MsgSetDenomMetadataResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/SetDenomMetadata`, {
+  static setDenomMetadata(request: MsgSetDenomMetadata, initRequest?: fm.InitReq): Promise<MsgSetDenomMetadataResponse> {
+    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/setDenomMetadata`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

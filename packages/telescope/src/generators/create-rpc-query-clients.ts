@@ -9,6 +9,7 @@ import {
     createRpcQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
+    createGRPCGatewayWrapperClass,
     //grpc-web:
     createGrpcWebQueryClass,
     createGrpcWebQueryInterface,
@@ -90,6 +91,7 @@ export const plugin = (
                     if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                        asts.push(createGRPCGatewayWrapperClass(ctx.generic, svc));
                     }
                 })
                 break;

@@ -7,8 +7,8 @@ export class Msg {
    * CreateVestingAccount defines a method that enables creating a vesting
    * account.
    */
-  static CreateVestingAccount(request: MsgCreateVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreateVestingAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreateVestingAccount`, {
+  static createVestingAccount(request: MsgCreateVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreateVestingAccountResponse> {
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/createVestingAccount`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -18,8 +18,8 @@ export class Msg {
    * CreatePermanentLockedAccount defines a method that enables creating a permanent
    * locked account.
    */
-  static CreatePermanentLockedAccount(request: MsgCreatePermanentLockedAccount, initRequest?: fm.InitReq): Promise<MsgCreatePermanentLockedAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePermanentLockedAccount`, {
+  static createPermanentLockedAccount(request: MsgCreatePermanentLockedAccount, initRequest?: fm.InitReq): Promise<MsgCreatePermanentLockedAccountResponse> {
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/createPermanentLockedAccount`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -29,8 +29,8 @@ export class Msg {
    * CreatePeriodicVestingAccount defines a method that enables creating a
    * periodic vesting account.
    */
-  static CreatePeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreatePeriodicVestingAccountResponse> {
-    return fm.fetchReq(`/cosmos.vesting.v1beta1/CreatePeriodicVestingAccount`, {
+  static createPeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount, initRequest?: fm.InitReq): Promise<MsgCreatePeriodicVestingAccountResponse> {
+    return fm.fetchReq(`/cosmos.vesting.v1beta1/createPeriodicVestingAccount`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

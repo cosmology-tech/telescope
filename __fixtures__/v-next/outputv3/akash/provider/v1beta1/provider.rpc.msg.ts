@@ -3,24 +3,24 @@ import * as fm from "../../../grpc-gateway";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 export class Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
-  static CreateProvider(request: MsgCreateProvider, initRequest?: fm.InitReq): Promise<MsgCreateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1/CreateProvider`, {
+  static createProvider(request: MsgCreateProvider, initRequest?: fm.InitReq): Promise<MsgCreateProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/createProvider`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  static UpdateProvider(request: MsgUpdateProvider, initRequest?: fm.InitReq): Promise<MsgUpdateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1/UpdateProvider`, {
+  static updateProvider(request: MsgUpdateProvider, initRequest?: fm.InitReq): Promise<MsgUpdateProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/updateProvider`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  static DeleteProvider(request: MsgDeleteProvider, initRequest?: fm.InitReq): Promise<MsgDeleteProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1/DeleteProvider`, {
+  static deleteProvider(request: MsgDeleteProvider, initRequest?: fm.InitReq): Promise<MsgDeleteProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/deleteProvider`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

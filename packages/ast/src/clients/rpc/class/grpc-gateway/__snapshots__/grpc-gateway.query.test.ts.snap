@@ -3,7 +3,7 @@
 exports[`GRPC-Gateway Query Client 1`] = `
 "export class Query {
   /** Balance queries the balance of a single coin for a single account. */
-  static Balance(request: QueryBalanceRequest, initRequest?: fm.InitReq): Promise<QueryBalanceResponse> {
+  static balance(request: QueryBalanceRequest, initRequest?: fm.InitReq): Promise<QueryBalanceResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/balances/\${request["address"]}/by_denom?\${fm.renderURLSearchParams({
       ...request
     }, ["address"])}\`, {
@@ -12,7 +12,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
     });
   }
   /** AllBalances queries the balance of all coins for a single account. */
-  static AllBalances(request: QueryAllBalancesRequest, initRequest?: fm.InitReq): Promise<QueryAllBalancesResponse> {
+  static allBalances(request: QueryAllBalancesRequest, initRequest?: fm.InitReq): Promise<QueryAllBalancesResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/balances/\${request["address"]}?\${fm.renderURLSearchParams({
       ...request
     }, ["address"])}\`, {
@@ -24,7 +24,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
    * SpendableBalances queries the spenable balance of all coins for a single
    * account.
    */
-  static SpendableBalances(request: QuerySpendableBalancesRequest, initRequest?: fm.InitReq): Promise<QuerySpendableBalancesResponse> {
+  static spendableBalances(request: QuerySpendableBalancesRequest, initRequest?: fm.InitReq): Promise<QuerySpendableBalancesResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/spendable_balances/\${request["address"]}?\${fm.renderURLSearchParams({
       ...request
     }, ["address"])}\`, {
@@ -33,7 +33,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
     });
   }
   /** TotalSupply queries the total supply of all coins. */
-  static TotalSupply(request: QueryTotalSupplyRequest, initRequest?: fm.InitReq): Promise<QueryTotalSupplyResponse> {
+  static totalSupply(request: QueryTotalSupplyRequest, initRequest?: fm.InitReq): Promise<QueryTotalSupplyResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/supply?\${fm.renderURLSearchParams({
       ...request
     }, [])}\`, {
@@ -42,7 +42,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
     });
   }
   /** SupplyOf queries the supply of a single coin. */
-  static SupplyOf(request: QuerySupplyOfRequest, initRequest?: fm.InitReq): Promise<QuerySupplyOfResponse> {
+  static supplyOf(request: QuerySupplyOfRequest, initRequest?: fm.InitReq): Promise<QuerySupplyOfResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/supply/by_denom?\${fm.renderURLSearchParams({
       ...request
     }, [])}\`, {
@@ -51,7 +51,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
     });
   }
   /** Params queries the parameters of x/bank module. */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/params?\${fm.renderURLSearchParams({
       ...request
     }, [])}\`, {
@@ -60,7 +60,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
     });
   }
   /** DenomsMetadata queries the client metadata of a given coin denomination. */
-  static DenomMetadata(request: QueryDenomMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomMetadataResponse> {
+  static denomMetadata(request: QueryDenomMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomMetadataResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/denoms_metadata/\${request["denom"]}?\${fm.renderURLSearchParams({
       ...request
     }, ["denom"])}\`, {
@@ -72,7 +72,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
    * DenomsMetadata queries the client metadata for all registered coin
    * denominations.
    */
-  static DenomsMetadata(request: QueryDenomsMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomsMetadataResponse> {
+  static denomsMetadata(request: QueryDenomsMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomsMetadataResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/denoms_metadata?\${fm.renderURLSearchParams({
       ...request
     }, [])}\`, {
@@ -84,12 +84,193 @@ exports[`GRPC-Gateway Query Client 1`] = `
    * DenomOwners queries for all account addresses that own a particular token
    * denomination.
    */
-  static DenomOwners(request: QueryDenomOwnersRequest, initRequest?: fm.InitReq): Promise<QueryDenomOwnersResponse> {
+  static denomOwners(request: QueryDenomOwnersRequest, initRequest?: fm.InitReq): Promise<QueryDenomOwnersResponse> {
     return fm.fetchReq(\`/cosmos/bank/v1beta1/denom_owners/\${request["denom"]}?\${fm.renderURLSearchParams({
       ...request
     }, ["denom"])}\`, {
       ...initRequest,
       method: "GET"
+    });
+  }
+}"
+`;
+
+exports[`GRPC-Gateway Query Client 2`] = `
+"export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Balance queries the balance of a single coin for a single account. */
+  async balance(req: QueryBalanceRequest, headers?: HeadersInit): Promise<QueryBalanceResponse> {
+    return Query.balance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AllBalances queries the balance of all coins for a single account. */
+  async allBalances(req: QueryAllBalancesRequest, headers?: HeadersInit): Promise<QueryAllBalancesResponse> {
+    return Query.allBalances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * SpendableBalances queries the spenable balance of all coins for a single
+   * account.
+   */
+  async spendableBalances(req: QuerySpendableBalancesRequest, headers?: HeadersInit): Promise<QuerySpendableBalancesResponse> {
+    return Query.spendableBalances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** TotalSupply queries the total supply of all coins. */
+  async totalSupply(req: QueryTotalSupplyRequest, headers?: HeadersInit): Promise<QueryTotalSupplyResponse> {
+    return Query.totalSupply(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SupplyOf queries the supply of a single coin. */
+  async supplyOf(req: QuerySupplyOfRequest, headers?: HeadersInit): Promise<QuerySupplyOfResponse> {
+    return Query.supplyOf(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries the parameters of x/bank module. */
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DenomsMetadata queries the client metadata of a given coin denomination. */
+  async denomMetadata(req: QueryDenomMetadataRequest, headers?: HeadersInit): Promise<QueryDenomMetadataResponse> {
+    return Query.denomMetadata(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomsMetadata queries the client metadata for all registered coin
+   * denominations.
+   */
+  async denomsMetadata(req: QueryDenomsMetadataRequest, headers?: HeadersInit): Promise<QueryDenomsMetadataResponse> {
+    return Query.denomsMetadata(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomOwners queries for all account addresses that own a particular token
+   * denomination.
+   */
+  async denomOwners(req: QueryDenomOwnersRequest, headers?: HeadersInit): Promise<QueryDenomOwnersResponse> {
+    return Query.denomOwners(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+}"
+`;
+
+exports[`GRPC-Gateway Service Client 1`] = `
+"export class Service {
+  /** Simulate simulates executing a transaction for estimating gas usage. */
+  static simulate(request: SimulateRequest, initRequest?: fm.InitReq): Promise<SimulateResponse> {
+    return fm.fetchReq(\`/cosmos/tx/v1beta1/simulate\`, {
+      ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
+  }
+  /** GetTx fetches a tx by hash. */
+  static getTx(request: GetTxRequest, initRequest?: fm.InitReq): Promise<GetTxResponse> {
+    return fm.fetchReq(\`/cosmos/tx/v1beta1/txs/\${request["hash"]}?\${fm.renderURLSearchParams({
+      ...request
+    }, ["hash"])}\`, {
+      ...initRequest,
+      method: "GET"
+    });
+  }
+  /** BroadcastTx broadcast transaction. */
+  static broadcastTx(request: BroadcastTxRequest, initRequest?: fm.InitReq): Promise<BroadcastTxResponse> {
+    return fm.fetchReq(\`/cosmos/tx/v1beta1/txs\`, {
+      ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
+  }
+  /** GetTxsEvent fetches txs by event. */
+  static getTxsEvent(request: GetTxsEventRequest, initRequest?: fm.InitReq): Promise<GetTxsEventResponse> {
+    return fm.fetchReq(\`/cosmos/tx/v1beta1/txs?\${fm.renderURLSearchParams({
+      ...request
+    }, [])}\`, {
+      ...initRequest,
+      method: "GET"
+    });
+  }
+  /**
+   * GetBlockWithTxs fetches a block with decoded txs.
+   * 
+   * Since: cosmos-sdk 0.45.2
+   */
+  static getBlockWithTxs(request: GetBlockWithTxsRequest, initRequest?: fm.InitReq): Promise<GetBlockWithTxsResponse> {
+    return fm.fetchReq(\`/cosmos/tx/v1beta1/txs/block/\${request["height"]}?\${fm.renderURLSearchParams({
+      ...request
+    }, ["height"])}\`, {
+      ...initRequest,
+      method: "GET"
+    });
+  }
+}"
+`;
+
+exports[`GRPC-Gateway Service Client 2`] = `
+"export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Simulate simulates executing a transaction for estimating gas usage. */
+  async simulate(req: SimulateRequest, headers?: HeadersInit): Promise<SimulateResponse> {
+    return Service.simulate(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetTx fetches a tx by hash. */
+  async getTx(req: GetTxRequest, headers?: HeadersInit): Promise<GetTxResponse> {
+    return Service.getTx(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** BroadcastTx broadcast transaction. */
+  async broadcastTx(req: BroadcastTxRequest, headers?: HeadersInit): Promise<BroadcastTxResponse> {
+    return Service.broadcastTx(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** GetTxsEvent fetches txs by event. */
+  async getTxsEvent(req: GetTxsEventRequest, headers?: HeadersInit): Promise<GetTxsEventResponse> {
+    return Service.getTxsEvent(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * GetBlockWithTxs fetches a block with decoded txs.
+   * 
+   * Since: cosmos-sdk 0.45.2
+   */
+  async getBlockWithTxs(req: GetBlockWithTxsRequest, headers?: HeadersInit): Promise<GetBlockWithTxsResponse> {
+    return Service.getBlockWithTxs(req, {
+      headers,
+      pathPrefix: this.url
     });
   }
 }"

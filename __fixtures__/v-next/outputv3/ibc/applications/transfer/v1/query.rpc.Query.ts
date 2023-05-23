@@ -4,7 +4,7 @@ import * as fm from "../../../../grpc-gateway";
 import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export class Query {
   /** DenomTrace queries a denomination trace information. */
-  static DenomTrace(request: QueryDenomTraceRequest, initRequest?: fm.InitReq): Promise<QueryDenomTraceResponse> {
+  static denomTrace(request: QueryDenomTraceRequest, initRequest?: fm.InitReq): Promise<QueryDenomTraceResponse> {
     return fm.fetchReq(`/ibc/apps/transfer/v1/denom_traces/${request["hash"]}?${fm.renderURLSearchParams({
       ...request
     }, ["hash"])}`, {
@@ -13,7 +13,7 @@ export class Query {
     });
   }
   /** DenomTraces queries all denomination traces. */
-  static DenomTraces(request: QueryDenomTracesRequest, initRequest?: fm.InitReq): Promise<QueryDenomTracesResponse> {
+  static denomTraces(request: QueryDenomTracesRequest, initRequest?: fm.InitReq): Promise<QueryDenomTracesResponse> {
     return fm.fetchReq(`/ibc/apps/transfer/v1/denom_traces?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -22,12 +22,39 @@ export class Query {
     });
   }
   /** Params queries all parameters of the ibc-transfer module. */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/ibc/apps/transfer/v1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
       ...initRequest,
       method: "GET"
+    });
+  }
+}
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** DenomTrace queries a denomination trace information. */
+  async denomTrace(req: QueryDenomTraceRequest, headers?: HeadersInit): Promise<QueryDenomTraceResponse> {
+    return Query.denomTrace(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DenomTraces queries all denomination traces. */
+  async denomTraces(req: QueryDenomTracesRequest, headers?: HeadersInit): Promise<QueryDenomTracesResponse> {
+    return Query.denomTraces(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries all parameters of the ibc-transfer module. */
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
+      headers,
+      pathPrefix: this.url
     });
   }
 }
