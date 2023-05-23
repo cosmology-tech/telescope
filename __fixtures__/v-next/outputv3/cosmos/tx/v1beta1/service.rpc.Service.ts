@@ -8,7 +8,7 @@ import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResp
 export class Service {
   /** Simulate simulates executing a transaction for estimating gas usage. */
   static simulate(request: SimulateRequest, initRequest?: fm.InitReq): Promise<SimulateResponse> {
-    return fm.fetchReq(`/cosmos.tx.v1beta1/simulate`, {
+    return fm.fetchReq(`/cosmos/tx/v1beta1/simulate`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -25,7 +25,7 @@ export class Service {
   }
   /** BroadcastTx broadcast transaction. */
   static broadcastTx(request: BroadcastTxRequest, initRequest?: fm.InitReq): Promise<BroadcastTxResponse> {
-    return fm.fetchReq(`/cosmos.tx.v1beta1/broadcastTx`, {
+    return fm.fetchReq(`/cosmos/tx/v1beta1/txs`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

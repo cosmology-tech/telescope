@@ -9,7 +9,7 @@ import * as t from '@babel/types'
 
 // fetchArgs will be used in method body's return statement expression.
 // Contains arguments to fm.fetchReq
-const getFetchReqArgsPOST = (
+const getFetchReqArgs = (
     name: string,
     packageImport: string
 ) => {
@@ -43,7 +43,7 @@ const getFetchReqArgsPOST = (
     return fetchArgs
 }
 
-export const grpcGatewayMsgMethodDefinition = (
+const grpcGatewayMethodDefinition = (
     name: string,
     svc: ProtoServiceMethod,
     packageImport: string,
@@ -72,7 +72,7 @@ export const grpcGatewayMsgMethodDefinition = (
 
     // fetchArgs will be used in method body's return statement expression.
     // Contains arguments to fm.fetchReq
-    const fetchArgs = getFetchReqArgsPOST(name, packageImport)
+    const fetchArgs = getFetchReqArgs(name, packageImport)
     
     // method's body
     const body = t.blockStatement(
@@ -115,7 +115,7 @@ export const createGRPCGatewayMsgClass = (
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
-            return grpcGatewayMsgMethodDefinition(
+            return grpcGatewayMethodDefinition(
                 name,
                 method,
                 context.ref.proto.package,
