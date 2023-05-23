@@ -165,6 +165,9 @@ interface TelescopeOpts {
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
+export type TelescopeIncludes = {
+    protoDirs?: Array<string>;
+};
 export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
 export type TelescopeOption = keyof TelescopeOpts;
 export declare const defaultTelescopeOptions: TelescopeOptions;

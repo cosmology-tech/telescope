@@ -2,10 +2,9 @@ import { prompt } from '../prompt';
 import telescope from '../index';
 import path from 'path';
 import { writeFileSync } from 'fs';
-import { defaultTelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions, defaultTelescopeOptions, TelescopeIncludes } from '@osmonauts/types';
 
-
-export default async (argv) => {  
+export default async (argv) => {
   if (argv.useDefaults) {
     const SKIP = ['aminoEncoding', 'packages'];
     Object.keys(defaultTelescopeOptions)
@@ -64,9 +63,9 @@ export default async (argv) => {
   let { config } = await prompt(configQ, argv);
   let configFullPath = path.resolve(...config.split('/'));
   // Create empy config object
-  let conf = {};
+  let conf: TelescopeOptions & TelescopeIncludes = {};
   // Extract provided protoDirs from argv
-  const { protoDirs: extraProtoDirs, ...args } = argv;
+  let { protoDirs: extraProtoDirs, ...args } = argv;
   if (!Array.isArray(extraProtoDirs)) {
     extraProtoDirs = [extraProtoDirs];
   }
