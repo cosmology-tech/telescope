@@ -26,7 +26,7 @@ const write = (
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
-  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.longLibrary === 'bigint' ? internalForBigInt : internal);
+  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? internalForBigInt : internal);
 
   // should be exported
   if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
@@ -60,7 +60,7 @@ export const plugin = (
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  if (builder.options.prototypes.typingsFormat.longLibrary === "bigint") {
+  if (builder.options.prototypes.typingsFormat.num64 === "bigint") {
     builder.files.push("varint.ts");
     write(builder, "varint.ts", varint);
 

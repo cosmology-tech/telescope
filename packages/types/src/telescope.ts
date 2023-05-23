@@ -66,7 +66,7 @@ interface TelescopeOpts {
             customTypes?:{
               useCosmosSDKDec?: boolean;
             },
-            longLibrary?: 'long' | 'bigint';
+            num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
@@ -251,7 +251,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             customTypes: {
               useCosmosSDKDec: false
             },
-            longLibrary: 'long',
+            num64: 'long',
             useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
