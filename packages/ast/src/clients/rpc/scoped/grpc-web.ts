@@ -19,7 +19,7 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
                             "\\/*$"
                         ),
                         t.stringLiteral(
-                            "\"\""
+                            ""
                         )
                     ]
                 )

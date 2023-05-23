@@ -5,7 +5,7 @@ export const createGrpcWebClient = async ({
 }: {
   endpoint: string;
 }) => {
-  endpoint = endpoint.replace(/\/*$/, "\"\"");
+  endpoint = endpoint.replace(/\/*$/, "");
   const {
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
