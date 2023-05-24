@@ -6,8 +6,8 @@ export class Msg {
    * them into the bonded validator set, so they can begin receiving provisions
    * and rewards again.
    */
-  static Unjail(request: MsgUnjail, initRequest?: fm.InitReq): Promise<MsgUnjailResponse> {
-    return fm.fetchReq(`/cosmos.slashing.v1beta1/Unjail`, {
+  static unjail(request: MsgUnjail, initRequest?: fm.InitReq): Promise<MsgUnjailResponse> {
+    return fm.fetchReq(`/cosmos.slashing.v1beta1/unjail`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

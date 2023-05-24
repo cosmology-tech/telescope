@@ -7,7 +7,7 @@ export const BinaryCoder = {
       return;
     }
 
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.longLibrary');
+    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
     type = type?.trim().toLowerCase();
 
     switch (longLib) {
@@ -26,7 +26,7 @@ export const BinaryCoder = {
   },
 
   getNode: (ctx: GenericParseContext, mappings) => {
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.longLibrary');
+    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
 
     return mappings[longLib] ?? mappings['long'];
   },

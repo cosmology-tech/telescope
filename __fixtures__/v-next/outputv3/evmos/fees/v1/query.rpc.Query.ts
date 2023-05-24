@@ -5,7 +5,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 export class Query {
   /** DevFeeInfos retrieves all registered contracts for fee distribution */
-  static DevFeeInfos(request: QueryDevFeeInfosRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosResponse> {
+  static devFeeInfos(request: QueryDevFeeInfosRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosResponse> {
     return fm.fetchReq(`/evmos/fees/v1/fees?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -14,7 +14,7 @@ export class Query {
     });
   }
   /** DevFeeInfo retrieves a registered contract for fee distribution */
-  static DevFeeInfo(request: QueryDevFeeInfoRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfoResponse> {
+  static devFeeInfo(request: QueryDevFeeInfoRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfoResponse> {
     return fm.fetchReq(`/evmos/fees/v1/fees/${request["contract_address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["contract_address"])}`, {
@@ -23,7 +23,7 @@ export class Query {
     });
   }
   /** Params retrieves the fees module params */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/evmos/fees/v1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -35,12 +35,49 @@ export class Query {
    * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
    * registered for fee distribution
    */
-  static DevFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosPerDeployerResponse> {
+  static devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosPerDeployerResponse> {
     return fm.fetchReq(`/evmos/fees/v1/fees/${request["deployer_address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["deployer_address"])}`, {
       ...initRequest,
       method: "GET"
+    });
+  }
+}
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** DevFeeInfos retrieves all registered contracts for fee distribution */
+  async devFeeInfos(req: QueryDevFeeInfosRequest, headers?: HeadersInit): Promise<QueryDevFeeInfosResponse> {
+    return Query.devFeeInfos(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DevFeeInfo retrieves a registered contract for fee distribution */
+  async devFeeInfo(req: QueryDevFeeInfoRequest, headers?: HeadersInit): Promise<QueryDevFeeInfoResponse> {
+    return Query.devFeeInfo(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params retrieves the fees module params */
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   * registered for fee distribution
+   */
+  async devFeeInfosPerDeployer(req: QueryDevFeeInfosPerDeployerRequest, headers?: HeadersInit): Promise<QueryDevFeeInfosPerDeployerResponse> {
+    return Query.devFeeInfosPerDeployer(req, {
+      headers,
+      pathPrefix: this.url
     });
   }
 }

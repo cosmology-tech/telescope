@@ -2,13 +2,12 @@ import { expectCode, getGenericParseContext, printCode } from '../../../../test-
 
 
 import {
-    createScopedGrpcWebMsgFactory,
-    createScopedGrpcWebFactory,
-} from './grpc-web';
+    createScopedGrpcGatewayFactory,
+} from './grpc-gateway';
 
 it('createScopedGrpcWebFactory', async () => {
     const context = getGenericParseContext();
-    expectCode(createScopedGrpcWebFactory(context, {
+    expectCode(createScopedGrpcGatewayFactory(context, {
         cosmos: {
           app: {
             v1alpha1: "../cosmos/app/v1alpha1/query.rpc.Query"
@@ -40,33 +39,3 @@ it('createScopedGrpcWebFactory', async () => {
         'createRpcFactorizzle',
     ))
 });
-
-it('createScopedGrpcWebMsgFactory', async () => {
-    expectCode(createScopedGrpcWebMsgFactory({
-        cosmos: {
-            authz: {
-              v1beta1: "../cosmos/authz/v1beta1/tx.rpc.msg"
-            },
-            bank: {
-              v1beta1: "../cosmos/bank/v1beta1/tx.rpc.msg"
-            },
-        },
-        osmosis: {
-            gamm: {
-              poolmodels: {
-                balancer: {
-                  v1beta1: "./gamm/pool-models/balancer/tx/tx.rpc.msg"
-                },
-                stableswap: {
-                  v1beta1: "./gamm/pool-models/stableswap/tx.rpc.msg"
-                }
-              },
-              v1beta1: "./gamm/v1beta1/tx.rpc.msg"
-            }
-        }
-    },
-        'createGrpcWebMsgClient',
-        'MsgClientImpl'
-    ))
-});
-

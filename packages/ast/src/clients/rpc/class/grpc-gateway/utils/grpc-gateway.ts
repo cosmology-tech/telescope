@@ -23,6 +23,23 @@ export const initRequest = identifier(
     true,
 )
 
+// second params of grpc-gateway wrapper class 
+/**
+ * async account(
+    req: QueryAccountRequest,
+    headers?: HeadersInit,
+   )
+ */
+export const headersInit = identifier(
+    'headers',
+    t.tSTypeAnnotation(
+        t.tsTypeReference(
+                t.identifier('HeadersInit')
+        ),
+    ),
+    true,
+)
+
 // initReqProperties contains information for initReq parameter in fetchReq arguments
 export const getInitReqProperties = () => {
     const initReqProperties = [];

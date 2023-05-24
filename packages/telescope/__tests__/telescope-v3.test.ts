@@ -95,11 +95,11 @@ const options: TelescopeOptions = {
     rpcClients: {
         type: 'grpc-gateway',
         enabled: true,
-        camelCase: false
+        camelCase: true
     },
 
     reactQuery: {
-        enabled: true,
+        enabled: false,
         include: {
             patterns: [
                 'osmosis/**/gamm/**/query.proto'

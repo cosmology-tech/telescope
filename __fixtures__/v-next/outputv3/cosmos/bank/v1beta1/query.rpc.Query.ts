@@ -5,7 +5,7 @@ import * as fm from "../../../grpc-gateway";
 import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesRequestSDKType, QueryAllBalancesResponse, QueryAllBalancesResponseSDKType, QuerySpendableBalancesRequest, QuerySpendableBalancesRequestSDKType, QuerySpendableBalancesResponse, QuerySpendableBalancesResponseSDKType, QueryTotalSupplyRequest, QueryTotalSupplyRequestSDKType, QueryTotalSupplyResponse, QueryTotalSupplyResponseSDKType, QuerySupplyOfRequest, QuerySupplyOfRequestSDKType, QuerySupplyOfResponse, QuerySupplyOfResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomMetadataRequest, QueryDenomMetadataRequestSDKType, QueryDenomMetadataResponse, QueryDenomMetadataResponseSDKType, QueryDenomsMetadataRequest, QueryDenomsMetadataRequestSDKType, QueryDenomsMetadataResponse, QueryDenomsMetadataResponseSDKType, QueryDenomOwnersRequest, QueryDenomOwnersRequestSDKType, QueryDenomOwnersResponse, QueryDenomOwnersResponseSDKType } from "./query";
 export class Query {
   /** Balance queries the balance of a single coin for a single account. */
-  static Balance(request: QueryBalanceRequest, initRequest?: fm.InitReq): Promise<QueryBalanceResponse> {
+  static balance(request: QueryBalanceRequest, initRequest?: fm.InitReq): Promise<QueryBalanceResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/balances/${request["address"]}/by_denom?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -14,7 +14,7 @@ export class Query {
     });
   }
   /** AllBalances queries the balance of all coins for a single account. */
-  static AllBalances(request: QueryAllBalancesRequest, initRequest?: fm.InitReq): Promise<QueryAllBalancesResponse> {
+  static allBalances(request: QueryAllBalancesRequest, initRequest?: fm.InitReq): Promise<QueryAllBalancesResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/balances/${request["address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -26,7 +26,7 @@ export class Query {
    * SpendableBalances queries the spenable balance of all coins for a single
    * account.
    */
-  static SpendableBalances(request: QuerySpendableBalancesRequest, initRequest?: fm.InitReq): Promise<QuerySpendableBalancesResponse> {
+  static spendableBalances(request: QuerySpendableBalancesRequest, initRequest?: fm.InitReq): Promise<QuerySpendableBalancesResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/spendable_balances/${request["address"]}?${fm.renderURLSearchParams({
       ...request
     }, ["address"])}`, {
@@ -35,7 +35,7 @@ export class Query {
     });
   }
   /** TotalSupply queries the total supply of all coins. */
-  static TotalSupply(request: QueryTotalSupplyRequest, initRequest?: fm.InitReq): Promise<QueryTotalSupplyResponse> {
+  static totalSupply(request: QueryTotalSupplyRequest, initRequest?: fm.InitReq): Promise<QueryTotalSupplyResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/supply?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -44,7 +44,7 @@ export class Query {
     });
   }
   /** SupplyOf queries the supply of a single coin. */
-  static SupplyOf(request: QuerySupplyOfRequest, initRequest?: fm.InitReq): Promise<QuerySupplyOfResponse> {
+  static supplyOf(request: QuerySupplyOfRequest, initRequest?: fm.InitReq): Promise<QuerySupplyOfResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/supply/by_denom?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -53,7 +53,7 @@ export class Query {
     });
   }
   /** Params queries the parameters of x/bank module. */
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/params?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -62,7 +62,7 @@ export class Query {
     });
   }
   /** DenomsMetadata queries the client metadata of a given coin denomination. */
-  static DenomMetadata(request: QueryDenomMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomMetadataResponse> {
+  static denomMetadata(request: QueryDenomMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomMetadataResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/denoms_metadata/${request["denom"]}?${fm.renderURLSearchParams({
       ...request
     }, ["denom"])}`, {
@@ -74,7 +74,7 @@ export class Query {
    * DenomsMetadata queries the client metadata for all registered coin
    * denominations.
    */
-  static DenomsMetadata(request: QueryDenomsMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomsMetadataResponse> {
+  static denomsMetadata(request: QueryDenomsMetadataRequest, initRequest?: fm.InitReq): Promise<QueryDenomsMetadataResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/denoms_metadata?${fm.renderURLSearchParams({
       ...request
     }, [])}`, {
@@ -86,12 +86,90 @@ export class Query {
    * DenomOwners queries for all account addresses that own a particular token
    * denomination.
    */
-  static DenomOwners(request: QueryDenomOwnersRequest, initRequest?: fm.InitReq): Promise<QueryDenomOwnersResponse> {
+  static denomOwners(request: QueryDenomOwnersRequest, initRequest?: fm.InitReq): Promise<QueryDenomOwnersResponse> {
     return fm.fetchReq(`/cosmos/bank/v1beta1/denom_owners/${request["denom"]}?${fm.renderURLSearchParams({
       ...request
     }, ["denom"])}`, {
       ...initRequest,
       method: "GET"
+    });
+  }
+}
+export class Querier {
+  private readonly url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+  /** Balance queries the balance of a single coin for a single account. */
+  async balance(req: QueryBalanceRequest, headers?: HeadersInit): Promise<QueryBalanceResponse> {
+    return Query.balance(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** AllBalances queries the balance of all coins for a single account. */
+  async allBalances(req: QueryAllBalancesRequest, headers?: HeadersInit): Promise<QueryAllBalancesResponse> {
+    return Query.allBalances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * SpendableBalances queries the spenable balance of all coins for a single
+   * account.
+   */
+  async spendableBalances(req: QuerySpendableBalancesRequest, headers?: HeadersInit): Promise<QuerySpendableBalancesResponse> {
+    return Query.spendableBalances(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** TotalSupply queries the total supply of all coins. */
+  async totalSupply(req: QueryTotalSupplyRequest, headers?: HeadersInit): Promise<QueryTotalSupplyResponse> {
+    return Query.totalSupply(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** SupplyOf queries the supply of a single coin. */
+  async supplyOf(req: QuerySupplyOfRequest, headers?: HeadersInit): Promise<QuerySupplyOfResponse> {
+    return Query.supplyOf(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** Params queries the parameters of x/bank module. */
+  async params(req: QueryParamsRequest, headers?: HeadersInit): Promise<QueryParamsResponse> {
+    return Query.params(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /** DenomsMetadata queries the client metadata of a given coin denomination. */
+  async denomMetadata(req: QueryDenomMetadataRequest, headers?: HeadersInit): Promise<QueryDenomMetadataResponse> {
+    return Query.denomMetadata(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomsMetadata queries the client metadata for all registered coin
+   * denominations.
+   */
+  async denomsMetadata(req: QueryDenomsMetadataRequest, headers?: HeadersInit): Promise<QueryDenomsMetadataResponse> {
+    return Query.denomsMetadata(req, {
+      headers,
+      pathPrefix: this.url
+    });
+  }
+  /**
+   * DenomOwners queries for all account addresses that own a particular token
+   * denomination.
+   */
+  async denomOwners(req: QueryDenomOwnersRequest, headers?: HeadersInit): Promise<QueryDenomOwnersResponse> {
+    return Query.denomOwners(req, {
+      headers,
+      pathPrefix: this.url
     });
   }
 }

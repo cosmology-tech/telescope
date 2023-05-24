@@ -3,9 +3,106 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { returnReponseType, optionalBool, processRpcComment } from '../utils/rpc';
-import { initRequest } from './utils';
-
+import { headersInit, initRequest, getInitReqProperties } from './utils';
 import * as t from '@babel/types'
+
+
+const getFetchReqArgsService = (
+    name: string,
+    packageImport: string
+) => {
+    // this hack around shouldn't exist, contact sdk team to modify the path for broadcastTx
+    if (name === 'broadcastTx') {
+        name = 'txs'
+    }
+
+    const fetchArgs = [];
+    // first argument of fetchReq
+    const argTemplateLiteral = t.templateLiteral(
+        [
+            t.templateElement(
+                {
+                    raw: '/' + packageImport.replace(/\./g, "/") + '/' + name,
+                    cooked: '/' + packageImport.replace(/\./g, "/") + '/' + name
+                },
+                true,
+            )
+        ], // quasis
+        [], // empty expressions
+    )
+
+    // adds proto path to fetchReq
+    fetchArgs.push(argTemplateLiteral);
+
+    // initReqProperties (contains information for initReq parameter in fetchReq) arguments: 
+    const initReqProperties = getInitReqProperties()
+    
+    const fetchArgsInitReqObj = t.objectExpression(
+        initReqProperties
+    )
+    // adds initReq parameter to fetchReq
+    fetchArgs.push(fetchArgsInitReqObj)
+
+    return fetchArgs
+}
+
+const grpcGatewayPOSTServiceMethodDefinition = (
+    name: string,
+    svc: ProtoServiceMethod,
+    packageImport: string,
+    leadingComments?: t.CommentBlock[]
+) => {
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    const optional = optionalBool(hasParams, fieldNames);
+
+    // first parameter in method
+    // ex: static Send(request: MsgSend)
+    // paramRequest is an object representing everything in brackets here
+    const paramRequest = identifier(
+        'request',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType),
+            )
+        ),
+        optional
+    ); 
+
+    // fetchArgs will be used in method body's return statement expression.
+    // Contains arguments to fm.fetchReq
+    // this one is different from the Msg, especially the package name
+    const fetchArgs = getFetchReqArgsService(name, packageImport)
+    
+    // method's body
+    const body = t.blockStatement(
+        [
+            t.returnStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('fm'),
+                        t.identifier('fetchReq'),
+                    ),
+                    fetchArgs,
+                )
+            )
+        ]
+    )
+    return classMethod(
+        'method',
+        t.identifier(name),
+        [paramRequest, initRequest], // params
+        body, 
+        returnReponseType(responseType),
+        leadingComments,
+        false,
+        true,   // static 
+    )
+}
 
 const staticExpressionsNoUnwrappable = t.callExpression(
     t.memberExpression(
@@ -279,7 +376,7 @@ const buildFetchReqArgs = (
     return args
 }
 
-// function to define a method of grpc-gateway style
+// function to define a method of grpc-gateway fetch request
 const grpcGatewayMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -331,6 +428,7 @@ const grpcGatewayMethodDefinition = (
         true,   // static 
     )
 }
+
 export const createGRPCGatewayQueryClass = (
     context: GenericParseContext,
     service: ProtoService
@@ -338,9 +436,14 @@ export const createGRPCGatewayQueryClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
-    const methods = keys
+
+    //two different ways to generate methods for Query and Service
+    let methods;
+    //case Query
+    if (service.name === "Query") {
+        methods = keys
         .map(key => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
@@ -352,6 +455,32 @@ export const createGRPCGatewayQueryClass = (
                 leadingComments
             )
         })
+    } else {
+    //case Service
+        methods = keys
+        .map(key => {
+            const isGet = key.substring(0, 3) === "Get";
+            const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+            if (!isGet) {
+                //POST METHOD
+                return grpcGatewayPOSTServiceMethodDefinition(
+                    name,
+                    method,
+                    context.ref.proto.package,
+                    leadingComments
+            )}
+            else {
+                return grpcGatewayMethodDefinition(
+                    context,
+                    name,
+                    method,
+                    leadingComments
+            )}
+        })
+    }
+    
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
@@ -359,6 +488,151 @@ export const createGRPCGatewayQueryClass = (
             null,
             t.classBody(
                 [
+                    ...methods,
+                ]
+            ),
+            []
+        ),
+    )
+}
+
+// function to define a method of grpc-gateway style
+const grpcGatewayQuerierMethodDefinition = (
+    serviceName: string,
+    context: GenericParseContext,
+    name: string,
+    svc: ProtoServiceMethod,
+    leadingComments?: t.CommentBlock[]
+) => {
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+
+    // first parameter in method
+    // ex: static Send(request: MsgSend)
+    // paramRequest is an object representing everything in brackets here
+    const paramRequest = identifier(
+        'req',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType),
+            )
+        ),
+        false
+    ); 
+
+    // class method body (only return statement)
+    const body = t.blockStatement(
+        [
+            t.returnStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier(serviceName),
+                        t.identifier(name),
+                        false
+                    ),
+                    [
+                        t.identifier('req'),
+                        t.objectExpression(
+                            [
+                                t.objectProperty(
+                                    t.identifier('headers'),
+                                    t.identifier('headers'),
+                                    false,
+                                    true
+                                ),
+                                t.objectProperty(
+                                    t.identifier('pathPrefix'),
+                                    t.memberExpression(
+                                        t.thisExpression(),
+                                        t.identifier('url') 
+                                    )
+                                )
+                            ]
+                        )
+                    ]
+                )
+            )
+        ]
+    )
+    return classMethod(
+        'method',
+        t.identifier(name),
+        [paramRequest, headersInit], // params
+        body, 
+        returnReponseType(responseType),
+        leadingComments,
+        false,
+        false,   // static
+        false,
+        true     // async
+    )
+}
+
+export const createGRPCGatewayWrapperClass = (
+    context: GenericParseContext,
+    service: ProtoService
+) => {
+    const serviceName = service.name;
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
+    const keys = Object.keys(service.methods ?? {});
+    const methods = keys
+        .map(key => {
+            const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+            return grpcGatewayQuerierMethodDefinition(
+                serviceName,
+                context,
+                name,
+                method,
+                leadingComments
+            )
+        })
+
+    return t.exportNamedDeclaration(
+        t.classDeclaration(
+            t.identifier('Querier'),
+            null,
+            t.classBody(
+                [
+                    classProperty(
+                        t.identifier('url'),
+                        null,
+                        t.tsTypeAnnotation(
+                            t.tsStringKeyword()
+                        ),
+                        [],
+                        false,
+                        false,
+                        true,
+                        "private"
+                    ),
+                    t.classMethod(
+                        'constructor',
+                        t.identifier('constructor'),
+                        [
+                            identifier(
+                                'url',
+                                t.tsTypeAnnotation(
+                                    t.tsStringKeyword()
+                                )
+                            )
+                        ],
+                        t.blockStatement(
+                            [
+                                t.expressionStatement(
+                                    t.assignmentExpression(
+                                        '=',
+                                        t.memberExpression(
+                                            t.thisExpression(),
+                                            t.identifier('url')
+                                        ),
+                                        t.identifier('url')
+                                    )
+                                )
+                            ]
+                        )
+                    ),
                     ...methods,
                 ]
             ),

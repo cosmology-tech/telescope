@@ -52,7 +52,6 @@ const grpcGatewayMethodDefinition = (
     const requestType = svc.requestType;
     const responseType = svc.responseType;
 
-
     const fieldNames = Object.keys(svc.fields ?? {})
     const hasParams = fieldNames.length > 0;
 
@@ -109,7 +108,7 @@ export const createGRPCGatewayMsgClass = (
     // adds import 
     context.addUtil('fm');
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {

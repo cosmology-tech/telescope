@@ -2,45 +2,43 @@
 
 exports[`createScopedGrpcWebFactory 1`] = `
 "export const createRpcFactorizzle = async ({
-  grpcWebEndpoint
+  endpoint
 }: {
-  grpcWebEndpoint: {
-    grpcWebEndpoint: string;
-  };
+  endpoint: string;
 }) => {
-  grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
+  endpoint = endpoint.replace(/\\/*$/, "");
   const {
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
   let grpcWeb;
   if (typeof document !== "undefined") {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: grpc.CrossBrowserHttpTransport({
         withCredentials: false
       })
     });
   } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: NodeHttpTransport()
     });
   } else {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: NodeHttpTransport()
     });
   }
   return {
     cosmos: {
       app: {
-        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).QueryClientImpl(grpcWeb)
       },
       auth: {
-        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
       },
       authz: {
-        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
       },
       bank: {
-        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
       },
       base: {
         tendermint: {
@@ -53,7 +51,7 @@ exports[`createScopedGrpcWebFactory 1`] = `
     },
     cosmwasm: {
       wasm: {
-        v1: new (await import("./wasm/v1/query.rpc.Query")).GrpcWebImpl(grpcWeb)
+        v1: new (await import("./wasm/v1/query.rpc.Query")).QueryClientImpl(grpcWeb)
       }
     }
   };
@@ -62,29 +60,27 @@ exports[`createScopedGrpcWebFactory 1`] = `
 
 exports[`createScopedGrpcWebMsgFactory 1`] = `
 "export const createGrpcWebMsgClient = async ({
-  grpcWebEndpoint
+  endpoint
 }: {
-  grpcWebEndpoint: {
-    grpcWebEndpoint: string;
-  };
+  endpoint: string;
 }) => {
-  grpcWebEndpoint = grpcWebEndpoint.replace(/\\/*$/, "\\"\\"");
+  endpoint = endpoint.replace(/\\/*$/, "");
   const {
     GrpcWebImpl
   } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
   let grpcWeb;
   if (typeof document !== "undefined") {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: grpc.CrossBrowserHttpTransport({
         withCredentials: false
       })
     });
   } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: NodeHttpTransport()
     });
   } else {
-    grpcWeb = new GrpcWebImpl(grpcWebEndpoint, {
+    grpcWeb = new GrpcWebImpl(endpoint, {
       transport: NodeHttpTransport()
     });
   }
