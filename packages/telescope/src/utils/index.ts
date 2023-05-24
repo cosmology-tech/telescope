@@ -72,7 +72,7 @@ export const UTILS = {
   override: 'mobx',
   makeObservable: 'mobx',
   NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',
-  WebSocket: 'ws',
+  WebSocket: 'isomorphic-ws',
 };
 
 export const UTIL_HELPERS = [
