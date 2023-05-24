@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GRPC-Gateway Msg Client 1`] = `
+"export const createWebSocketClient = (wsUrl: string) => {
+  return new WebSocket(wsUrl);
+};"
+`;
