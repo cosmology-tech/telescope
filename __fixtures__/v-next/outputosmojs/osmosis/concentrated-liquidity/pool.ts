@@ -47,13 +47,13 @@ function createBasePool(): Pool {
   return {
     address: "",
     incentivesAddress: "",
-    id: BigInt("0"),
+    id: BigInt(0),
     currentTickLiquidity: "",
     token0: "",
     token1: "",
     currentSqrtPrice: "",
     currentTick: "",
-    tickSpacing: BigInt("0"),
+    tickSpacing: BigInt(0),
     exponentAtPriceOne: "",
     swapFee: "",
     lastLiquidityUpdate: undefined
@@ -113,7 +113,7 @@ export const Pool = {
           message.incentivesAddress = reader.string();
           break;
         case 3:
-          message.id = BigInt(reader.uint64().toString());
+          message.id = reader.uint64();
           break;
         case 4:
           message.currentTickLiquidity = Decimal.fromAtomics(reader.string(), 18).toString();
@@ -131,7 +131,7 @@ export const Pool = {
           message.currentTick = reader.string();
           break;
         case 9:
-          message.tickSpacing = BigInt(reader.uint64().toString());
+          message.tickSpacing = reader.uint64();
           break;
         case 10:
           message.exponentAtPriceOne = reader.string();
@@ -153,13 +153,13 @@ export const Pool = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       incentivesAddress: isSet(object.incentivesAddress) ? String(object.incentivesAddress) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       currentTickLiquidity: isSet(object.currentTickLiquidity) ? String(object.currentTickLiquidity) : "",
       token0: isSet(object.token0) ? String(object.token0) : "",
       token1: isSet(object.token1) ? String(object.token1) : "",
       currentSqrtPrice: isSet(object.currentSqrtPrice) ? String(object.currentSqrtPrice) : "",
       currentTick: isSet(object.currentTick) ? String(object.currentTick) : "",
-      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt("0"),
+      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt(0),
       exponentAtPriceOne: isSet(object.exponentAtPriceOne) ? String(object.exponentAtPriceOne) : "",
       swapFee: isSet(object.swapFee) ? String(object.swapFee) : "",
       lastLiquidityUpdate: isSet(object.lastLiquidityUpdate) ? new Date(object.lastLiquidityUpdate) : undefined
@@ -169,13 +169,13 @@ export const Pool = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.incentivesAddress !== undefined && (obj.incentivesAddress = message.incentivesAddress);
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.currentTickLiquidity !== undefined && (obj.currentTickLiquidity = message.currentTickLiquidity);
     message.token0 !== undefined && (obj.token0 = message.token0);
     message.token1 !== undefined && (obj.token1 = message.token1);
     message.currentSqrtPrice !== undefined && (obj.currentSqrtPrice = message.currentSqrtPrice);
     message.currentTick !== undefined && (obj.currentTick = message.currentTick);
-    message.tickSpacing !== undefined && (obj.tickSpacing = (message.tickSpacing || BigInt("0")).toString());
+    message.tickSpacing !== undefined && (obj.tickSpacing = (message.tickSpacing || BigInt(0)).toString());
     message.exponentAtPriceOne !== undefined && (obj.exponentAtPriceOne = message.exponentAtPriceOne);
     message.swapFee !== undefined && (obj.swapFee = message.swapFee);
     message.lastLiquidityUpdate !== undefined && (obj.lastLiquidityUpdate = message.lastLiquidityUpdate.toISOString());
@@ -185,13 +185,13 @@ export const Pool = {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.incentivesAddress = object.incentivesAddress ?? "";
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.currentTickLiquidity = object.currentTickLiquidity ?? "";
     message.token0 = object.token0 ?? "";
     message.token1 = object.token1 ?? "";
     message.currentSqrtPrice = object.currentSqrtPrice ?? "";
     message.currentTick = object.currentTick ?? "";
-    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt("0");
+    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt(0);
     message.exponentAtPriceOne = object.exponentAtPriceOne ?? "";
     message.swapFee = object.swapFee ?? "";
     message.lastLiquidityUpdate = object.lastLiquidityUpdate ?? undefined;
@@ -217,13 +217,13 @@ export const Pool = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       incentives_address: isSet(object.incentives_address) ? String(object.incentives_address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       current_tick_liquidity: isSet(object.current_tick_liquidity) ? String(object.current_tick_liquidity) : "",
       token0: isSet(object.token0) ? String(object.token0) : "",
       token1: isSet(object.token1) ? String(object.token1) : "",
       current_sqrt_price: isSet(object.current_sqrt_price) ? String(object.current_sqrt_price) : "",
       current_tick: isSet(object.current_tick) ? String(object.current_tick) : "",
-      tick_spacing: isSet(object.tick_spacing) ? BigInt(object.tick_spacing.toString()) : BigInt("0"),
+      tick_spacing: isSet(object.tick_spacing) ? BigInt(object.tick_spacing.toString()) : BigInt(0),
       exponent_at_price_one: isSet(object.exponent_at_price_one) ? String(object.exponent_at_price_one) : "",
       swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
       last_liquidity_update: isSet(object.last_liquidity_update) ? new Date(object.last_liquidity_update) : undefined

@@ -22,12 +22,12 @@ export const TypeLong = {
   },
 
   uzeroExpressions: {
-    bigint: t.callExpression(t.identifier('BigInt'), [t.stringLiteral('0')]),
+    bigint: t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)]),
     long: t.memberExpression(t.identifier('Long'), t.identifier('UZERO'))
   },
 
   zeroExpressions: {
-    bigint: t.callExpression(t.identifier('BigInt'), [t.stringLiteral('0')]),
+    bigint: t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)]),
     long: t.memberExpression(t.identifier('Long'), t.identifier('ZERO'))
   },
 

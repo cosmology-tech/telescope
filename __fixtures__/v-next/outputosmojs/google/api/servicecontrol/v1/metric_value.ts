@@ -219,7 +219,7 @@ export const MetricValue = {
           message.boolValue = reader.bool();
           break;
         case 5:
-          message.int64Value = BigInt(reader.int64().toString());
+          message.int64Value = reader.int64();
           break;
         case 6:
           message.doubleValue = reader.double();

@@ -145,10 +145,10 @@ export interface MsgFungifyChargedPositionsResponseSDKType {
 }
 function createBaseMsgCreatePosition(): MsgCreatePosition {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     sender: "",
-    lowerTick: BigInt("0"),
-    upperTick: BigInt("0"),
+    lowerTick: BigInt(0),
+    upperTick: BigInt(0),
     tokenDesired0: undefined,
     tokenDesired1: undefined,
     tokenMinAmount0: "",
@@ -191,16 +191,16 @@ export const MsgCreatePosition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.sender = reader.string();
           break;
         case 3:
-          message.lowerTick = BigInt(reader.int64().toString());
+          message.lowerTick = reader.int64();
           break;
         case 4:
-          message.upperTick = BigInt(reader.int64().toString());
+          message.upperTick = reader.int64();
           break;
         case 5:
           message.tokenDesired0 = Coin.decode(reader, reader.uint32());
@@ -223,10 +223,10 @@ export const MsgCreatePosition = {
   },
   fromJSON(object: any): MsgCreatePosition {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lowerTick: isSet(object.lowerTick) ? BigInt(object.lowerTick.toString()) : BigInt("0"),
-      upperTick: isSet(object.upperTick) ? BigInt(object.upperTick.toString()) : BigInt("0"),
+      lowerTick: isSet(object.lowerTick) ? BigInt(object.lowerTick.toString()) : BigInt(0),
+      upperTick: isSet(object.upperTick) ? BigInt(object.upperTick.toString()) : BigInt(0),
       tokenDesired0: isSet(object.tokenDesired0) ? Coin.fromJSON(object.tokenDesired0) : undefined,
       tokenDesired1: isSet(object.tokenDesired1) ? Coin.fromJSON(object.tokenDesired1) : undefined,
       tokenMinAmount0: isSet(object.tokenMinAmount0) ? String(object.tokenMinAmount0) : "",
@@ -235,10 +235,10 @@ export const MsgCreatePosition = {
   },
   toJSON(message: MsgCreatePosition): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lowerTick !== undefined && (obj.lowerTick = (message.lowerTick || BigInt("0")).toString());
-    message.upperTick !== undefined && (obj.upperTick = (message.upperTick || BigInt("0")).toString());
+    message.lowerTick !== undefined && (obj.lowerTick = (message.lowerTick || BigInt(0)).toString());
+    message.upperTick !== undefined && (obj.upperTick = (message.upperTick || BigInt(0)).toString());
     message.tokenDesired0 !== undefined && (obj.tokenDesired0 = message.tokenDesired0 ? Coin.toJSON(message.tokenDesired0) : undefined);
     message.tokenDesired1 !== undefined && (obj.tokenDesired1 = message.tokenDesired1 ? Coin.toJSON(message.tokenDesired1) : undefined);
     message.tokenMinAmount0 !== undefined && (obj.tokenMinAmount0 = message.tokenMinAmount0);
@@ -247,10 +247,10 @@ export const MsgCreatePosition = {
   },
   fromPartial(object: DeepPartial<MsgCreatePosition>): MsgCreatePosition {
     const message = createBaseMsgCreatePosition();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
-    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt("0");
-    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt("0");
+    message.lowerTick = object.lowerTick !== undefined && object.lowerTick !== null ? BigInt(object.lowerTick.toString()) : BigInt(0);
+    message.upperTick = object.upperTick !== undefined && object.upperTick !== null ? BigInt(object.upperTick.toString()) : BigInt(0);
     message.tokenDesired0 = object.tokenDesired0 !== undefined && object.tokenDesired0 !== null ? Coin.fromPartial(object.tokenDesired0) : undefined;
     message.tokenDesired1 = object.tokenDesired1 !== undefined && object.tokenDesired1 !== null ? Coin.fromPartial(object.tokenDesired1) : undefined;
     message.tokenMinAmount0 = object.tokenMinAmount0 ?? "";
@@ -271,10 +271,10 @@ export const MsgCreatePosition = {
   },
   fromSDKJSON(object: any): MsgCreatePositionSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lower_tick: isSet(object.lower_tick) ? BigInt(object.lower_tick.toString()) : BigInt("0"),
-      upper_tick: isSet(object.upper_tick) ? BigInt(object.upper_tick.toString()) : BigInt("0"),
+      lower_tick: isSet(object.lower_tick) ? BigInt(object.lower_tick.toString()) : BigInt(0),
+      upper_tick: isSet(object.upper_tick) ? BigInt(object.upper_tick.toString()) : BigInt(0),
       token_desired0: isSet(object.token_desired0) ? Coin.fromSDKJSON(object.token_desired0) : undefined,
       token_desired1: isSet(object.token_desired1) ? Coin.fromSDKJSON(object.token_desired1) : undefined,
       token_min_amount0: isSet(object.token_min_amount0) ? String(object.token_min_amount0) : "",
@@ -296,7 +296,7 @@ export const MsgCreatePosition = {
 };
 function createBaseMsgCreatePositionResponse(): MsgCreatePositionResponse {
   return {
-    positionId: BigInt("0"),
+    positionId: BigInt(0),
     amount0: "",
     amount1: "",
     joinTime: undefined,
@@ -330,7 +330,7 @@ export const MsgCreatePositionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.positionId = BigInt(reader.uint64().toString());
+          message.positionId = reader.uint64();
           break;
         case 2:
           message.amount0 = reader.string();
@@ -353,7 +353,7 @@ export const MsgCreatePositionResponse = {
   },
   fromJSON(object: any): MsgCreatePositionResponse {
     return {
-      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt("0"),
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0),
       amount0: isSet(object.amount0) ? String(object.amount0) : "",
       amount1: isSet(object.amount1) ? String(object.amount1) : "",
       joinTime: isSet(object.joinTime) ? new Date(object.joinTime) : undefined,
@@ -362,7 +362,7 @@ export const MsgCreatePositionResponse = {
   },
   toJSON(message: MsgCreatePositionResponse): unknown {
     const obj: any = {};
-    message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt("0")).toString());
+    message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     message.amount0 !== undefined && (obj.amount0 = message.amount0);
     message.amount1 !== undefined && (obj.amount1 = message.amount1);
     message.joinTime !== undefined && (obj.joinTime = message.joinTime.toISOString());
@@ -371,7 +371,7 @@ export const MsgCreatePositionResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreatePositionResponse>): MsgCreatePositionResponse {
     const message = createBaseMsgCreatePositionResponse();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt("0");
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     message.amount0 = object.amount0 ?? "";
     message.amount1 = object.amount1 ?? "";
     message.joinTime = object.joinTime ?? undefined;
@@ -389,7 +389,7 @@ export const MsgCreatePositionResponse = {
   },
   fromSDKJSON(object: any): MsgCreatePositionResponseSDKType {
     return {
-      position_id: isSet(object.position_id) ? BigInt(object.position_id.toString()) : BigInt("0"),
+      position_id: isSet(object.position_id) ? BigInt(object.position_id.toString()) : BigInt(0),
       amount0: isSet(object.amount0) ? String(object.amount0) : "",
       amount1: isSet(object.amount1) ? String(object.amount1) : "",
       join_time: isSet(object.join_time) ? new Date(object.join_time) : undefined,
@@ -408,7 +408,7 @@ export const MsgCreatePositionResponse = {
 };
 function createBaseMsgWithdrawPosition(): MsgWithdrawPosition {
   return {
-    positionId: BigInt("0"),
+    positionId: BigInt(0),
     sender: "",
     liquidityAmount: ""
   };
@@ -434,7 +434,7 @@ export const MsgWithdrawPosition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.positionId = BigInt(reader.uint64().toString());
+          message.positionId = reader.uint64();
           break;
         case 2:
           message.sender = reader.string();
@@ -451,21 +451,21 @@ export const MsgWithdrawPosition = {
   },
   fromJSON(object: any): MsgWithdrawPosition {
     return {
-      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt("0"),
+      positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
       liquidityAmount: isSet(object.liquidityAmount) ? String(object.liquidityAmount) : ""
     };
   },
   toJSON(message: MsgWithdrawPosition): unknown {
     const obj: any = {};
-    message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt("0")).toString());
+    message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
     message.liquidityAmount !== undefined && (obj.liquidityAmount = message.liquidityAmount);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgWithdrawPosition>): MsgWithdrawPosition {
     const message = createBaseMsgWithdrawPosition();
-    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt("0");
+    message.positionId = object.positionId !== undefined && object.positionId !== null ? BigInt(object.positionId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
     message.liquidityAmount = object.liquidityAmount ?? "";
     return message;
@@ -479,7 +479,7 @@ export const MsgWithdrawPosition = {
   },
   fromSDKJSON(object: any): MsgWithdrawPositionSDKType {
     return {
-      position_id: isSet(object.position_id) ? BigInt(object.position_id.toString()) : BigInt("0"),
+      position_id: isSet(object.position_id) ? BigInt(object.position_id.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
       liquidity_amount: isSet(object.liquidity_amount) ? String(object.liquidity_amount) : ""
     };
@@ -594,10 +594,10 @@ export const MsgCollectFees = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.positionIds.push(BigInt(reader.uint64().toString()));
+              message.positionIds.push(reader.uint64());
             }
           } else {
-            message.positionIds.push(BigInt(reader.uint64().toString()));
+            message.positionIds.push(reader.uint64());
           }
           break;
         case 2:
@@ -619,7 +619,7 @@ export const MsgCollectFees = {
   toJSON(message: MsgCollectFees): unknown {
     const obj: any = {};
     if (message.positionIds) {
-      obj.positionIds = message.positionIds.map(e => (e || BigInt("0")).toString());
+      obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.positionIds = [];
     }
@@ -752,10 +752,10 @@ export const MsgCollectIncentives = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.positionIds.push(BigInt(reader.uint64().toString()));
+              message.positionIds.push(reader.uint64());
             }
           } else {
-            message.positionIds.push(BigInt(reader.uint64().toString()));
+            message.positionIds.push(reader.uint64());
           }
           break;
         case 2:
@@ -777,7 +777,7 @@ export const MsgCollectIncentives = {
   toJSON(message: MsgCollectIncentives): unknown {
     const obj: any = {};
     if (message.positionIds) {
-      obj.positionIds = message.positionIds.map(e => (e || BigInt("0")).toString());
+      obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.positionIds = [];
     }
@@ -883,7 +883,7 @@ export const MsgCollectIncentivesResponse = {
 };
 function createBaseMsgCreateIncentive(): MsgCreateIncentive {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     sender: "",
     incentiveDenom: "",
     incentiveAmount: "",
@@ -925,7 +925,7 @@ export const MsgCreateIncentive = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.sender = reader.string();
@@ -954,7 +954,7 @@ export const MsgCreateIncentive = {
   },
   fromJSON(object: any): MsgCreateIncentive {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
       incentiveDenom: isSet(object.incentiveDenom) ? String(object.incentiveDenom) : "",
       incentiveAmount: isSet(object.incentiveAmount) ? String(object.incentiveAmount) : "",
@@ -965,7 +965,7 @@ export const MsgCreateIncentive = {
   },
   toJSON(message: MsgCreateIncentive): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
     message.incentiveDenom !== undefined && (obj.incentiveDenom = message.incentiveDenom);
     message.incentiveAmount !== undefined && (obj.incentiveAmount = message.incentiveAmount);
@@ -976,7 +976,7 @@ export const MsgCreateIncentive = {
   },
   fromPartial(object: DeepPartial<MsgCreateIncentive>): MsgCreateIncentive {
     const message = createBaseMsgCreateIncentive();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.sender = object.sender ?? "";
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveAmount = object.incentiveAmount ?? "";
@@ -998,7 +998,7 @@ export const MsgCreateIncentive = {
   },
   fromSDKJSON(object: any): MsgCreateIncentiveSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       sender: isSet(object.sender) ? String(object.sender) : "",
       incentive_denom: isSet(object.incentive_denom) ? String(object.incentive_denom) : "",
       incentive_amount: isSet(object.incentive_amount) ? String(object.incentive_amount) : "",
@@ -1160,10 +1160,10 @@ export const MsgFungifyChargedPositions = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.positionIds.push(BigInt(reader.uint64().toString()));
+              message.positionIds.push(reader.uint64());
             }
           } else {
-            message.positionIds.push(BigInt(reader.uint64().toString()));
+            message.positionIds.push(reader.uint64());
           }
           break;
         case 2:
@@ -1185,7 +1185,7 @@ export const MsgFungifyChargedPositions = {
   toJSON(message: MsgFungifyChargedPositions): unknown {
     const obj: any = {};
     if (message.positionIds) {
-      obj.positionIds = message.positionIds.map(e => (e || BigInt("0")).toString());
+      obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.positionIds = [];
     }
@@ -1223,7 +1223,7 @@ export const MsgFungifyChargedPositions = {
 };
 function createBaseMsgFungifyChargedPositionsResponse(): MsgFungifyChargedPositionsResponse {
   return {
-    newPositionId: BigInt("0")
+    newPositionId: BigInt(0)
   };
 }
 export const MsgFungifyChargedPositionsResponse = {
@@ -1241,7 +1241,7 @@ export const MsgFungifyChargedPositionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.newPositionId = BigInt(reader.uint64().toString());
+          message.newPositionId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1252,17 +1252,17 @@ export const MsgFungifyChargedPositionsResponse = {
   },
   fromJSON(object: any): MsgFungifyChargedPositionsResponse {
     return {
-      newPositionId: isSet(object.newPositionId) ? BigInt(object.newPositionId.toString()) : BigInt("0")
+      newPositionId: isSet(object.newPositionId) ? BigInt(object.newPositionId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgFungifyChargedPositionsResponse): unknown {
     const obj: any = {};
-    message.newPositionId !== undefined && (obj.newPositionId = (message.newPositionId || BigInt("0")).toString());
+    message.newPositionId !== undefined && (obj.newPositionId = (message.newPositionId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgFungifyChargedPositionsResponse>): MsgFungifyChargedPositionsResponse {
     const message = createBaseMsgFungifyChargedPositionsResponse();
-    message.newPositionId = object.newPositionId !== undefined && object.newPositionId !== null ? BigInt(object.newPositionId.toString()) : BigInt("0");
+    message.newPositionId = object.newPositionId !== undefined && object.newPositionId !== null ? BigInt(object.newPositionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgFungifyChargedPositionsResponseSDKType): MsgFungifyChargedPositionsResponse {
@@ -1272,7 +1272,7 @@ export const MsgFungifyChargedPositionsResponse = {
   },
   fromSDKJSON(object: any): MsgFungifyChargedPositionsResponseSDKType {
     return {
-      new_position_id: isSet(object.new_position_id) ? BigInt(object.new_position_id.toString()) : BigInt("0")
+      new_position_id: isSet(object.new_position_id) ? BigInt(object.new_position_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgFungifyChargedPositionsResponse): MsgFungifyChargedPositionsResponseSDKType {

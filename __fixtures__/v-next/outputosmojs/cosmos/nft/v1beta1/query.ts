@@ -205,7 +205,7 @@ export const QueryBalanceRequest = {
 };
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   return {
-    amount: BigInt("0")
+    amount: BigInt(0)
   };
 }
 export const QueryBalanceResponse = {
@@ -223,7 +223,7 @@ export const QueryBalanceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.amount = BigInt(reader.uint64().toString());
+          message.amount = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -234,17 +234,17 @@ export const QueryBalanceResponse = {
   },
   fromJSON(object: any): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = (message.amount || BigInt("0")).toString());
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt("0");
+    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
@@ -254,7 +254,7 @@ export const QueryBalanceResponse = {
   },
   fromSDKJSON(object: any): QueryBalanceResponseSDKType {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
@@ -458,7 +458,7 @@ export const QuerySupplyRequest = {
 };
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
-    amount: BigInt("0")
+    amount: BigInt(0)
   };
 }
 export const QuerySupplyResponse = {
@@ -476,7 +476,7 @@ export const QuerySupplyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.amount = BigInt(reader.uint64().toString());
+          message.amount = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -487,17 +487,17 @@ export const QuerySupplyResponse = {
   },
   fromJSON(object: any): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = (message.amount || BigInt("0")).toString());
+    message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt("0");
+    message.amount = object.amount !== undefined && object.amount !== null ? BigInt(object.amount.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QuerySupplyResponseSDKType): QuerySupplyResponse {
@@ -507,7 +507,7 @@ export const QuerySupplyResponse = {
   },
   fromSDKJSON(object: any): QuerySupplyResponseSDKType {
     return {
-      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt("0")
+      amount: isSet(object.amount) ? BigInt(object.amount.toString()) : BigInt(0)
     };
   },
   toSDK(message: QuerySupplyResponse): QuerySupplyResponseSDKType {

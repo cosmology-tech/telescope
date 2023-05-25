@@ -224,7 +224,7 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
   return {
     denom: "",
     valAddr: "",
-    gaugeId: BigInt("0")
+    gaugeId: BigInt(0)
   };
 }
 export const SuperfluidIntermediaryAccount = {
@@ -254,7 +254,7 @@ export const SuperfluidIntermediaryAccount = {
           message.valAddr = reader.string();
           break;
         case 3:
-          message.gaugeId = BigInt(reader.uint64().toString());
+          message.gaugeId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -267,21 +267,21 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0")
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0)
     };
   },
   toJSON(message: SuperfluidIntermediaryAccount): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<SuperfluidIntermediaryAccount>): SuperfluidIntermediaryAccount {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
@@ -295,7 +295,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0")
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountSDKType {
@@ -308,7 +308,7 @@ export const SuperfluidIntermediaryAccount = {
 };
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
   return {
-    epochNumber: BigInt("0"),
+    epochNumber: BigInt(0),
     denom: "",
     multiplier: ""
   };
@@ -334,7 +334,7 @@ export const OsmoEquivalentMultiplierRecord = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epochNumber = BigInt(reader.int64().toString());
+          message.epochNumber = reader.int64();
           break;
         case 2:
           message.denom = reader.string();
@@ -351,21 +351,21 @@ export const OsmoEquivalentMultiplierRecord = {
   },
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epochNumber) ? BigInt(object.epochNumber.toString()) : BigInt("0"),
+      epochNumber: isSet(object.epochNumber) ? BigInt(object.epochNumber.toString()) : BigInt(0),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
   },
   toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
     const obj: any = {};
-    message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || BigInt("0")).toString());
+    message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || BigInt(0)).toString());
     message.denom !== undefined && (obj.denom = message.denom);
     message.multiplier !== undefined && (obj.multiplier = message.multiplier);
     return obj;
   },
   fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
-    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? BigInt(object.epochNumber.toString()) : BigInt("0");
+    message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? BigInt(object.epochNumber.toString()) : BigInt(0);
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
@@ -379,7 +379,7 @@ export const OsmoEquivalentMultiplierRecord = {
   },
   fromSDKJSON(object: any): OsmoEquivalentMultiplierRecordSDKType {
     return {
-      epoch_number: isSet(object.epoch_number) ? BigInt(object.epoch_number.toString()) : BigInt("0"),
+      epoch_number: isSet(object.epoch_number) ? BigInt(object.epoch_number.toString()) : BigInt(0),
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -493,7 +493,7 @@ export const SuperfluidDelegationRecord = {
 };
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {
   return {
-    lockId: BigInt("0"),
+    lockId: BigInt(0),
     intermediaryAccount: ""
   };
 }
@@ -515,7 +515,7 @@ export const LockIdIntermediaryAccountConnection = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         case 2:
           message.intermediaryAccount = reader.string();
@@ -529,19 +529,19 @@ export const LockIdIntermediaryAccountConnection = {
   },
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0"),
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0),
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
   toJSON(message: LockIdIntermediaryAccountConnection): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     message.intermediaryAccount !== undefined && (obj.intermediaryAccount = message.intermediaryAccount);
     return obj;
   },
   fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
   },
@@ -553,7 +553,7 @@ export const LockIdIntermediaryAccountConnection = {
   },
   fromSDKJSON(object: any): LockIdIntermediaryAccountConnectionSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0"),
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0),
       intermediary_account: isSet(object.intermediary_account) ? String(object.intermediary_account) : ""
     };
   },
@@ -589,10 +589,10 @@ export const UnpoolWhitelistedPools = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.ids.push(BigInt(reader.uint64().toString()));
+              message.ids.push(reader.uint64());
             }
           } else {
-            message.ids.push(BigInt(reader.uint64().toString()));
+            message.ids.push(reader.uint64());
           }
           break;
         default:
@@ -610,7 +610,7 @@ export const UnpoolWhitelistedPools = {
   toJSON(message: UnpoolWhitelistedPools): unknown {
     const obj: any = {};
     if (message.ids) {
-      obj.ids = message.ids.map(e => (e || BigInt("0")).toString());
+      obj.ids = message.ids.map(e => (e || BigInt(0)).toString());
     } else {
       obj.ids = [];
     }

@@ -131,7 +131,7 @@ function createBaseParams(): Params {
     enableFees: false,
     developerShares: "",
     validatorShares: "",
-    addrDerivationCostCreate: BigInt("0"),
+    addrDerivationCostCreate: BigInt(0),
     minGasPrice: ""
   };
 }
@@ -171,7 +171,7 @@ export const Params = {
           message.validatorShares = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 4:
-          message.addrDerivationCostCreate = BigInt(reader.uint64().toString());
+          message.addrDerivationCostCreate = reader.uint64();
           break;
         case 5:
           message.minGasPrice = Decimal.fromAtomics(reader.string(), 18).toString();
@@ -188,7 +188,7 @@ export const Params = {
       enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
       developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
       validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt("0"),
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0),
       minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
     };
   },
@@ -197,7 +197,7 @@ export const Params = {
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);
     message.validatorShares !== undefined && (obj.validatorShares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt("0")).toString());
+    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt(0)).toString());
     message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
@@ -206,7 +206,7 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt("0");
+    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0);
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },
@@ -224,7 +224,7 @@ export const Params = {
       enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
       developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
       validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
-      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? BigInt(object.addr_derivation_cost_create.toString()) : BigInt("0"),
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? BigInt(object.addr_derivation_cost_create.toString()) : BigInt(0),
       min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
     };
   },

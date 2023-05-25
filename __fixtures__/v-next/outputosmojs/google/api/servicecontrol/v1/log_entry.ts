@@ -577,7 +577,7 @@ export const LogEntryOperation = {
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
     file: "",
-    line: BigInt("0"),
+    line: BigInt(0),
     function: ""
   };
 }
@@ -605,7 +605,7 @@ export const LogEntrySourceLocation = {
           message.file = reader.string();
           break;
         case 2:
-          message.line = BigInt(reader.int64().toString());
+          message.line = reader.int64();
           break;
         case 3:
           message.function = reader.string();
@@ -620,21 +620,21 @@ export const LogEntrySourceLocation = {
   fromJSON(object: any): LogEntrySourceLocation {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt("0"),
+      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
   toJSON(message: LogEntrySourceLocation): unknown {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = (message.line || BigInt("0")).toString());
+    message.line !== undefined && (obj.line = (message.line || BigInt(0)).toString());
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt("0");
+    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
     message.function = object.function ?? "";
     return message;
   },
@@ -648,7 +648,7 @@ export const LogEntrySourceLocation = {
   fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt("0"),
+      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
       function: isSet(object.function) ? String(object.function) : ""
     };
   },

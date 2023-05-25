@@ -66,7 +66,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
     distributeTo: undefined,
     coins: [],
     startTime: undefined,
-    numEpochsPaidOver: BigInt("0")
+    numEpochsPaidOver: BigInt(0)
   };
 }
 export const MsgCreateGauge = {
@@ -114,7 +114,7 @@ export const MsgCreateGauge = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.numEpochsPaidOver = BigInt(reader.uint64().toString());
+          message.numEpochsPaidOver = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -130,7 +130,7 @@ export const MsgCreateGauge = {
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0")
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgCreateGauge): unknown {
@@ -144,7 +144,7 @@ export const MsgCreateGauge = {
       obj.coins = [];
     }
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt("0")).toString());
+    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateGauge>): MsgCreateGauge {
@@ -154,7 +154,7 @@ export const MsgCreateGauge = {
     message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0");
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
@@ -174,7 +174,7 @@ export const MsgCreateGauge = {
       distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt("0")
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
@@ -238,7 +238,7 @@ export const MsgCreateGaugeResponse = {
 function createBaseMsgAddToGauge(): MsgAddToGauge {
   return {
     owner: "",
-    gaugeId: BigInt("0"),
+    gaugeId: BigInt(0),
     rewards: []
   };
 }
@@ -266,7 +266,7 @@ export const MsgAddToGauge = {
           message.owner = reader.string();
           break;
         case 2:
-          message.gaugeId = BigInt(reader.uint64().toString());
+          message.gaugeId = reader.uint64();
           break;
         case 3:
           message.rewards.push(Coin.decode(reader, reader.uint32()));
@@ -281,14 +281,14 @@ export const MsgAddToGauge = {
   fromJSON(object: any): MsgAddToGauge {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
   toJSON(message: MsgAddToGauge): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -299,7 +299,7 @@ export const MsgAddToGauge = {
   fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
     message.owner = object.owner ?? "";
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -313,7 +313,7 @@ export const MsgAddToGauge = {
   fromSDKJSON(object: any): MsgAddToGaugeSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },

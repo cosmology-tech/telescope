@@ -553,9 +553,9 @@ export const CheckResponse_CheckInfo = {
 };
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   return {
-    projectNumber: BigInt("0"),
+    projectNumber: BigInt(0),
     type: 0,
-    consumerNumber: BigInt("0")
+    consumerNumber: BigInt(0)
   };
 }
 export const CheckResponse_ConsumerInfo = {
@@ -579,13 +579,13 @@ export const CheckResponse_ConsumerInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.projectNumber = BigInt(reader.int64().toString());
+          message.projectNumber = reader.int64();
           break;
         case 2:
           message.type = (reader.int32() as any);
           break;
         case 3:
-          message.consumerNumber = BigInt(reader.int64().toString());
+          message.consumerNumber = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -596,23 +596,23 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.projectNumber) ? BigInt(object.projectNumber.toString()) : BigInt("0"),
+      projectNumber: isSet(object.projectNumber) ? BigInt(object.projectNumber.toString()) : BigInt(0),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumerNumber) ? BigInt(object.consumerNumber.toString()) : BigInt("0")
+      consumerNumber: isSet(object.consumerNumber) ? BigInt(object.consumerNumber.toString()) : BigInt(0)
     };
   },
   toJSON(message: CheckResponse_ConsumerInfo): unknown {
     const obj: any = {};
-    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt("0")).toString());
+    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt(0)).toString());
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt("0")).toString());
+    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
-    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? BigInt(object.projectNumber.toString()) : BigInt("0");
+    message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? BigInt(object.projectNumber.toString()) : BigInt(0);
     message.type = object.type ?? 0;
-    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? BigInt(object.consumerNumber.toString()) : BigInt("0");
+    message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? BigInt(object.consumerNumber.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
@@ -624,9 +624,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
     return {
-      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt("0"),
+      project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt(0),
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt("0")
+      consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt(0)
     };
   },
   toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {

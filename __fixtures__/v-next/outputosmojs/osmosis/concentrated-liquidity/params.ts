@@ -45,10 +45,10 @@ export const Params = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.authorizedTickSpacing.push(BigInt(reader.uint64().toString()));
+              message.authorizedTickSpacing.push(reader.uint64());
             }
           } else {
-            message.authorizedTickSpacing.push(BigInt(reader.uint64().toString()));
+            message.authorizedTickSpacing.push(reader.uint64());
           }
           break;
         case 2:
@@ -70,7 +70,7 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     if (message.authorizedTickSpacing) {
-      obj.authorizedTickSpacing = message.authorizedTickSpacing.map(e => (e || BigInt("0")).toString());
+      obj.authorizedTickSpacing = message.authorizedTickSpacing.map(e => (e || BigInt(0)).toString());
     } else {
       obj.authorizedTickSpacing = [];
     }

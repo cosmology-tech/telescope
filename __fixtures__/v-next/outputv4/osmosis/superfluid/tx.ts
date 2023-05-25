@@ -97,7 +97,7 @@ export interface MsgUnPoolWhitelistedPoolResponseSDKType {
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
   return {
     sender: "",
-    lockId: BigInt("0"),
+    lockId: BigInt(0),
     valAddr: ""
   };
 }
@@ -125,7 +125,7 @@ export const MsgSuperfluidDelegate = {
           message.sender = reader.string();
           break;
         case 2:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         case 3:
           message.valAddr = reader.string();
@@ -140,21 +140,21 @@ export const MsgSuperfluidDelegate = {
   fromJSON(object: any): MsgSuperfluidDelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0"),
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0),
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
   toJSON(message: MsgSuperfluidDelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSuperfluidDelegate>): MsgSuperfluidDelegate {
     const message = createBaseMsgSuperfluidDelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     message.valAddr = object.valAddr ?? "";
     return message;
   },
@@ -168,7 +168,7 @@ export const MsgSuperfluidDelegate = {
   fromSDKJSON(object: any): MsgSuperfluidDelegateSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0"),
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0),
       val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
     };
   },
@@ -226,7 +226,7 @@ export const MsgSuperfluidDelegateResponse = {
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   return {
     sender: "",
-    lockId: BigInt("0")
+    lockId: BigInt(0)
   };
 }
 export const MsgSuperfluidUndelegate = {
@@ -250,7 +250,7 @@ export const MsgSuperfluidUndelegate = {
           message.sender = reader.string();
           break;
         case 2:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -262,19 +262,19 @@ export const MsgSuperfluidUndelegate = {
   fromJSON(object: any): MsgSuperfluidUndelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSuperfluidUndelegate): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSuperfluidUndelegate>): MsgSuperfluidUndelegate {
     const message = createBaseMsgSuperfluidUndelegate();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSuperfluidUndelegateSDKType): MsgSuperfluidUndelegate {
@@ -286,7 +286,7 @@ export const MsgSuperfluidUndelegate = {
   fromSDKJSON(object: any): MsgSuperfluidUndelegateSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateSDKType {
@@ -342,7 +342,7 @@ export const MsgSuperfluidUndelegateResponse = {
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   return {
     sender: "",
-    lockId: BigInt("0")
+    lockId: BigInt(0)
   };
 }
 export const MsgSuperfluidUnbondLock = {
@@ -366,7 +366,7 @@ export const MsgSuperfluidUnbondLock = {
           message.sender = reader.string();
           break;
         case 2:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -378,19 +378,19 @@ export const MsgSuperfluidUnbondLock = {
   fromJSON(object: any): MsgSuperfluidUnbondLock {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSuperfluidUnbondLock): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSuperfluidUnbondLock>): MsgSuperfluidUnbondLock {
     const message = createBaseMsgSuperfluidUnbondLock();
     message.sender = object.sender ?? "";
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSuperfluidUnbondLockSDKType): MsgSuperfluidUnbondLock {
@@ -402,7 +402,7 @@ export const MsgSuperfluidUnbondLock = {
   fromSDKJSON(object: any): MsgSuperfluidUnbondLockSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockSDKType {
@@ -551,7 +551,7 @@ export const MsgLockAndSuperfluidDelegate = {
 };
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {
-    ID: BigInt("0")
+    ID: BigInt(0)
   };
 }
 export const MsgLockAndSuperfluidDelegateResponse = {
@@ -569,7 +569,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.ID = BigInt(reader.uint64().toString());
+          message.ID = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -580,17 +580,17 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0")
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgLockAndSuperfluidDelegateResponse): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-    message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt("0");
+    message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
@@ -600,7 +600,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateResponseSDKType {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0")
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
@@ -612,7 +612,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
   return {
     sender: "",
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const MsgUnPoolWhitelistedPool = {
@@ -636,7 +636,7 @@ export const MsgUnPoolWhitelistedPool = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -648,19 +648,19 @@ export const MsgUnPoolWhitelistedPool = {
   fromJSON(object: any): MsgUnPoolWhitelistedPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgUnPoolWhitelistedPool): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPool>): MsgUnPoolWhitelistedPool {
     const message = createBaseMsgUnPoolWhitelistedPool();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgUnPoolWhitelistedPoolSDKType): MsgUnPoolWhitelistedPool {
@@ -672,7 +672,7 @@ export const MsgUnPoolWhitelistedPool = {
   fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolSDKType {
@@ -707,10 +707,10 @@ export const MsgUnPoolWhitelistedPoolResponse = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.exitedLockIds.push(BigInt(reader.uint64().toString()));
+              message.exitedLockIds.push(reader.uint64());
             }
           } else {
-            message.exitedLockIds.push(BigInt(reader.uint64().toString()));
+            message.exitedLockIds.push(reader.uint64());
           }
           break;
         default:
@@ -728,7 +728,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
   toJSON(message: MsgUnPoolWhitelistedPoolResponse): unknown {
     const obj: any = {};
     if (message.exitedLockIds) {
-      obj.exitedLockIds = message.exitedLockIds.map(e => (e || BigInt("0")).toString());
+      obj.exitedLockIds = message.exitedLockIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.exitedLockIds = [];
     }

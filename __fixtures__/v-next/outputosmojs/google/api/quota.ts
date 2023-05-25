@@ -373,7 +373,7 @@ export const Quota = {
 function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
   return {
     key: "",
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const MetricRule_MetricCostsEntry = {
@@ -397,7 +397,7 @@ export const MetricRule_MetricCostsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -409,19 +409,19 @@ export const MetricRule_MetricCostsEntry = {
   fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: MetricRule_MetricCostsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
@@ -433,7 +433,7 @@ export const MetricRule_MetricCostsEntry = {
   fromSDKJSON(object: any): MetricRule_MetricCostsEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
@@ -557,7 +557,7 @@ export const MetricRule = {
 function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
   return {
     key: "",
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const QuotaLimit_ValuesEntry = {
@@ -581,7 +581,7 @@ export const QuotaLimit_ValuesEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -593,19 +593,19 @@ export const QuotaLimit_ValuesEntry = {
   fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: QuotaLimit_ValuesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
@@ -617,7 +617,7 @@ export const QuotaLimit_ValuesEntry = {
   fromSDKJSON(object: any): QuotaLimit_ValuesEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
@@ -631,9 +631,9 @@ function createBaseQuotaLimit(): QuotaLimit {
   return {
     name: "",
     description: "",
-    defaultLimit: BigInt("0"),
-    maxLimit: BigInt("0"),
-    freeTier: BigInt("0"),
+    defaultLimit: BigInt(0),
+    maxLimit: BigInt(0),
+    freeTier: BigInt(0),
     duration: "",
     metric: "",
     unit: "",
@@ -692,13 +692,13 @@ export const QuotaLimit = {
           message.description = reader.string();
           break;
         case 3:
-          message.defaultLimit = BigInt(reader.int64().toString());
+          message.defaultLimit = reader.int64();
           break;
         case 4:
-          message.maxLimit = BigInt(reader.int64().toString());
+          message.maxLimit = reader.int64();
           break;
         case 7:
-          message.freeTier = BigInt(reader.int64().toString());
+          message.freeTier = reader.int64();
           break;
         case 5:
           message.duration = reader.string();
@@ -729,9 +729,9 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      defaultLimit: isSet(object.defaultLimit) ? BigInt(object.defaultLimit.toString()) : BigInt("0"),
-      maxLimit: isSet(object.maxLimit) ? BigInt(object.maxLimit.toString()) : BigInt("0"),
-      freeTier: isSet(object.freeTier) ? BigInt(object.freeTier.toString()) : BigInt("0"),
+      defaultLimit: isSet(object.defaultLimit) ? BigInt(object.defaultLimit.toString()) : BigInt(0),
+      maxLimit: isSet(object.maxLimit) ? BigInt(object.maxLimit.toString()) : BigInt(0),
+      freeTier: isSet(object.freeTier) ? BigInt(object.freeTier.toString()) : BigInt(0),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",
@@ -748,9 +748,9 @@ export const QuotaLimit = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt("0")).toString());
-    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt("0")).toString());
-    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt("0")).toString());
+    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
+    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt(0)).toString());
+    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration);
     message.metric !== undefined && (obj.metric = message.metric);
     message.unit !== undefined && (obj.unit = message.unit);
@@ -767,9 +767,9 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt("0");
-    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt("0");
-    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt("0");
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt(0);
+    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt(0);
+    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt(0);
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";
@@ -807,9 +807,9 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt("0"),
-      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt("0"),
-      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt("0"),
+      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
+      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt(0),
+      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt(0),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",

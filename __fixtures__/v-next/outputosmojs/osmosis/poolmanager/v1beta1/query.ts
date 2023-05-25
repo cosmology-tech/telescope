@@ -246,7 +246,7 @@ export const ParamsResponse = {
 };
 function createBaseEstimateSwapExactAmountInRequest(): EstimateSwapExactAmountInRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenIn: "",
     routes: []
   };
@@ -272,7 +272,7 @@ export const EstimateSwapExactAmountInRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.tokenIn = reader.string();
@@ -289,14 +289,14 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromJSON(object: any): EstimateSwapExactAmountInRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
   },
   toJSON(message: EstimateSwapExactAmountInRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
@@ -307,7 +307,7 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountInRequest>): EstimateSwapExactAmountInRequest {
     const message = createBaseEstimateSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -321,7 +321,7 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromSDKJSON(object: any): EstimateSwapExactAmountInRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
     };
@@ -340,7 +340,7 @@ export const EstimateSwapExactAmountInRequest = {
 };
 function createBaseEstimateSinglePoolSwapExactAmountInRequest(): EstimateSinglePoolSwapExactAmountInRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenIn: "",
     tokenOutDenom: ""
   };
@@ -366,7 +366,7 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokenIn = reader.string();
@@ -383,21 +383,21 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountInRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountInRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountInRequest>): EstimateSinglePoolSwapExactAmountInRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOutDenom = object.tokenOutDenom ?? "";
     return message;
@@ -411,7 +411,7 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   fromSDKJSON(object: any): EstimateSinglePoolSwapExactAmountInRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       token_out_denom: isSet(object.token_out_denom) ? String(object.token_out_denom) : ""
     };
@@ -486,7 +486,7 @@ export const EstimateSwapExactAmountInResponse = {
 };
 function createBaseEstimateSwapExactAmountOutRequest(): EstimateSwapExactAmountOutRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     routes: [],
     tokenOut: ""
   };
@@ -512,7 +512,7 @@ export const EstimateSwapExactAmountOutRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
@@ -529,14 +529,14 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromJSON(object: any): EstimateSwapExactAmountOutRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: EstimateSwapExactAmountOutRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
     } else {
@@ -547,7 +547,7 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountOutRequest>): EstimateSwapExactAmountOutRequest {
     const message = createBaseEstimateSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -561,7 +561,7 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromSDKJSON(object: any): EstimateSwapExactAmountOutRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -580,7 +580,7 @@ export const EstimateSwapExactAmountOutRequest = {
 };
 function createBaseEstimateSinglePoolSwapExactAmountOutRequest(): EstimateSinglePoolSwapExactAmountOutRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenInDenom: "",
     tokenOut: ""
   };
@@ -606,7 +606,7 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokenInDenom = reader.string();
@@ -623,21 +623,21 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountOutRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountOutRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut);
     return obj;
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountOutRequest>): EstimateSinglePoolSwapExactAmountOutRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenInDenom = object.tokenInDenom ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -651,7 +651,7 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   fromSDKJSON(object: any): EstimateSinglePoolSwapExactAmountOutRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in_denom: isSet(object.token_in_denom) ? String(object.token_in_denom) : "",
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -769,7 +769,7 @@ export const NumPoolsRequest = {
 };
 function createBaseNumPoolsResponse(): NumPoolsResponse {
   return {
-    numPools: BigInt("0")
+    numPools: BigInt(0)
   };
 }
 export const NumPoolsResponse = {
@@ -787,7 +787,7 @@ export const NumPoolsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numPools = BigInt(reader.uint64().toString());
+          message.numPools = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -798,17 +798,17 @@ export const NumPoolsResponse = {
   },
   fromJSON(object: any): NumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt("0")
+      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
     };
   },
   toJSON(message: NumPoolsResponse): unknown {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt("0")).toString());
+    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<NumPoolsResponse>): NumPoolsResponse {
     const message = createBaseNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt("0");
+    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: NumPoolsResponseSDKType): NumPoolsResponse {
@@ -818,7 +818,7 @@ export const NumPoolsResponse = {
   },
   fromSDKJSON(object: any): NumPoolsResponseSDKType {
     return {
-      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt("0")
+      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt(0)
     };
   },
   toSDK(message: NumPoolsResponse): NumPoolsResponseSDKType {
@@ -829,7 +829,7 @@ export const NumPoolsResponse = {
 };
 function createBasePoolRequest(): PoolRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const PoolRequest = {
@@ -847,7 +847,7 @@ export const PoolRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -858,17 +858,17 @@ export const PoolRequest = {
   },
   fromJSON(object: any): PoolRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: PoolRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PoolRequest>): PoolRequest {
     const message = createBasePoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PoolRequestSDKType): PoolRequest {
@@ -878,7 +878,7 @@ export const PoolRequest = {
   },
   fromSDKJSON(object: any): PoolRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: PoolRequest): PoolRequestSDKType {
@@ -949,7 +949,7 @@ export const PoolResponse = {
 };
 function createBaseAllPoolsRequest(): AllPoolsRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const AllPoolsRequest = {
@@ -967,7 +967,7 @@ export const AllPoolsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -978,17 +978,17 @@ export const AllPoolsRequest = {
   },
   fromJSON(object: any): AllPoolsRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: AllPoolsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<AllPoolsRequest>): AllPoolsRequest {
     const message = createBaseAllPoolsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AllPoolsRequestSDKType): AllPoolsRequest {
@@ -998,7 +998,7 @@ export const AllPoolsRequest = {
   },
   fromSDKJSON(object: any): AllPoolsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: AllPoolsRequest): AllPoolsRequestSDKType {
@@ -1077,7 +1077,7 @@ export const AllPoolsResponse = {
 };
 function createBaseSpotPriceRequest(): SpotPriceRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     baseAssetDenom: "",
     quoteAssetDenom: ""
   };
@@ -1103,7 +1103,7 @@ export const SpotPriceRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.baseAssetDenom = reader.string();
@@ -1120,21 +1120,21 @@ export const SpotPriceRequest = {
   },
   fromJSON(object: any): SpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
   toJSON(message: SpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<SpotPriceRequest>): SpotPriceRequest {
     const message = createBaseSpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -1148,7 +1148,7 @@ export const SpotPriceRequest = {
   },
   fromSDKJSON(object: any): SpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
       quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
     };

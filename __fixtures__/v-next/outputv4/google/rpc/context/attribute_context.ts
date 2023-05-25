@@ -764,7 +764,7 @@ export const AttributeContext_Peer_LabelsEntry = {
 function createBaseAttributeContext_Peer(): AttributeContext_Peer {
   return {
     ip: "",
-    port: BigInt("0"),
+    port: BigInt(0),
     labels: {},
     principal: "",
     regionCode: ""
@@ -803,7 +803,7 @@ export const AttributeContext_Peer = {
           message.ip = reader.string();
           break;
         case 2:
-          message.port = BigInt(reader.int64().toString());
+          message.port = reader.int64();
           break;
         case 6:
           const entry6 = AttributeContext_Peer_LabelsEntry.decode(reader, reader.uint32());
@@ -827,7 +827,7 @@ export const AttributeContext_Peer = {
   fromJSON(object: any): AttributeContext_Peer {
     return {
       ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt("0"),
+      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt(0),
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -841,7 +841,7 @@ export const AttributeContext_Peer = {
   toJSON(message: AttributeContext_Peer): unknown {
     const obj: any = {};
     message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = (message.port || BigInt("0")).toString());
+    message.port !== undefined && (obj.port = (message.port || BigInt(0)).toString());
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -855,7 +855,7 @@ export const AttributeContext_Peer = {
   fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
-    message.port = object.port !== undefined && object.port !== null ? BigInt(object.port.toString()) : BigInt("0");
+    message.port = object.port !== undefined && object.port !== null ? BigInt(object.port.toString()) : BigInt(0);
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -885,7 +885,7 @@ export const AttributeContext_Peer = {
   fromSDKJSON(object: any): AttributeContext_PeerSDKType {
     return {
       ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt("0"),
+      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt(0),
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1221,7 +1221,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     scheme: "",
     query: "",
     time: undefined,
-    size: BigInt("0"),
+    size: BigInt(0),
     protocol: "",
     reason: "",
     auth: undefined
@@ -1305,7 +1305,7 @@ export const AttributeContext_Request = {
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 10:
-          message.size = BigInt(reader.int64().toString());
+          message.size = reader.int64();
           break;
         case 11:
           message.protocol = reader.string();
@@ -1338,7 +1338,7 @@ export const AttributeContext_Request = {
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt("0"),
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
       auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
@@ -1359,7 +1359,7 @@ export const AttributeContext_Request = {
     message.scheme !== undefined && (obj.scheme = message.scheme);
     message.query !== undefined && (obj.query = message.query);
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.size !== undefined && (obj.size = (message.size || BigInt("0")).toString());
+    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
     message.protocol !== undefined && (obj.protocol = message.protocol);
     message.reason !== undefined && (obj.reason = message.reason);
     message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toJSON(message.auth) : undefined);
@@ -1382,7 +1382,7 @@ export const AttributeContext_Request = {
     message.scheme = object.scheme ?? "";
     message.query = object.query ?? "";
     message.time = object.time ?? undefined;
-    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt("0");
+    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
     message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : undefined;
@@ -1424,7 +1424,7 @@ export const AttributeContext_Request = {
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
       time: isSet(object.time) ? new Date(object.time) : undefined,
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt("0"),
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
       auth: isSet(object.auth) ? AttributeContext_Auth.fromSDKJSON(object.auth) : undefined
@@ -1527,8 +1527,8 @@ export const AttributeContext_Response_HeadersEntry = {
 };
 function createBaseAttributeContext_Response(): AttributeContext_Response {
   return {
-    code: BigInt("0"),
-    size: BigInt("0"),
+    code: BigInt(0),
+    size: BigInt(0),
     headers: {},
     time: undefined,
     backendLatency: undefined
@@ -1564,10 +1564,10 @@ export const AttributeContext_Response = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.code = BigInt(reader.int64().toString());
+          message.code = reader.int64();
           break;
         case 2:
-          message.size = BigInt(reader.int64().toString());
+          message.size = reader.int64();
           break;
         case 3:
           const entry3 = AttributeContext_Response_HeadersEntry.decode(reader, reader.uint32());
@@ -1590,8 +1590,8 @@ export const AttributeContext_Response = {
   },
   fromJSON(object: any): AttributeContext_Response {
     return {
-      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt("0"),
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt("0"),
+      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt(0),
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1604,8 +1604,8 @@ export const AttributeContext_Response = {
   },
   toJSON(message: AttributeContext_Response): unknown {
     const obj: any = {};
-    message.code !== undefined && (obj.code = (message.code || BigInt("0")).toString());
-    message.size !== undefined && (obj.size = (message.size || BigInt("0")).toString());
+    message.code !== undefined && (obj.code = (message.code || BigInt(0)).toString());
+    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
@@ -1618,8 +1618,8 @@ export const AttributeContext_Response = {
   },
   fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
-    message.code = object.code !== undefined && object.code !== null ? BigInt(object.code.toString()) : BigInt("0");
-    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt("0");
+    message.code = object.code !== undefined && object.code !== null ? BigInt(object.code.toString()) : BigInt(0);
+    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1648,8 +1648,8 @@ export const AttributeContext_Response = {
   },
   fromSDKJSON(object: any): AttributeContext_ResponseSDKType {
     return {
-      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt("0"),
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt("0"),
+      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt(0),
+      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

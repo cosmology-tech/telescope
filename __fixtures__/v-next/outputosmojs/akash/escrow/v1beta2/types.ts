@@ -245,7 +245,7 @@ function createBaseAccount(): Account {
     state: 0,
     balance: undefined,
     transferred: undefined,
-    settledAt: BigInt("0"),
+    settledAt: BigInt(0),
     depositor: "",
     funds: undefined
   };
@@ -301,7 +301,7 @@ export const Account = {
           message.transferred = DecCoin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.settledAt = BigInt(reader.int64().toString());
+          message.settledAt = reader.int64();
           break;
         case 7:
           message.depositor = reader.string();
@@ -323,7 +323,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt("0"),
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0),
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromJSON(object.funds) : undefined
     };
@@ -335,7 +335,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt("0")).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toJSON(message.funds) : undefined);
     return obj;
@@ -347,7 +347,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt("0");
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
     message.depositor = object.depositor ?? "";
     message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
     return message;
@@ -371,7 +371,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt("0"),
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0),
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromSDKJSON(object.funds) : undefined
     };

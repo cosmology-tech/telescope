@@ -106,7 +106,7 @@ export const ModuleRoute = {
           message.poolType = (reader.int32() as any);
           break;
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);

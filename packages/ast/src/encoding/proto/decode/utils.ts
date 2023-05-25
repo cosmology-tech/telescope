@@ -301,21 +301,10 @@ export const baseTypes = {
 
       switch (TypeLong.getType(args.context)) {
         case 'BigInt':
-          return t.callExpression(t.identifier('BigInt'), [
-            t.callExpression(
-              t.memberExpression(
-                t.callExpression(
-                  t.memberExpression(
-                    t.identifier('reader'),
-                    t.identifier(type),
-                  ),
-                  []
-                ),
-                t.identifier('toString'),
-              ),
-              []
-            )
-          ]);
+          return t.callExpression(
+            t.memberExpression(t.identifier('reader'), t.identifier(type)),
+            []
+          );
 
         case 'Long':
         default:

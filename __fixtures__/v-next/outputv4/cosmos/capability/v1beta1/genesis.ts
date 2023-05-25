@@ -31,7 +31,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisOwners(): GenesisOwners {
   return {
-    index: BigInt("0"),
+    index: BigInt(0),
     indexOwners: undefined
   };
 }
@@ -53,7 +53,7 @@ export const GenesisOwners = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = BigInt(reader.uint64().toString());
+          message.index = reader.uint64();
           break;
         case 2:
           message.indexOwners = CapabilityOwners.decode(reader, reader.uint32());
@@ -67,19 +67,19 @@ export const GenesisOwners = {
   },
   fromJSON(object: any): GenesisOwners {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined
     };
   },
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : undefined;
     return message;
   },
@@ -91,7 +91,7 @@ export const GenesisOwners = {
   },
   fromSDKJSON(object: any): GenesisOwnersSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
     };
   },
@@ -104,7 +104,7 @@ export const GenesisOwners = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    index: BigInt("0"),
+    index: BigInt(0),
     owners: []
   };
 }
@@ -126,7 +126,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = BigInt(reader.uint64().toString());
+          message.index = reader.uint64();
           break;
         case 2:
           message.owners.push(GenesisOwners.decode(reader, reader.uint32()));
@@ -140,13 +140,13 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : []
     };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toJSON(e) : undefined);
     } else {
@@ -156,7 +156,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.owners = object.owners?.map(e => GenesisOwners.fromPartial(e)) || [];
     return message;
   },
@@ -168,7 +168,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
     };
   },

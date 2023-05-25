@@ -232,7 +232,7 @@ export const QueryCurrentEpochRequest = {
 };
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {
-    currentEpoch: BigInt("0")
+    currentEpoch: BigInt(0)
   };
 }
 export const QueryCurrentEpochResponse = {
@@ -250,7 +250,7 @@ export const QueryCurrentEpochResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.currentEpoch = BigInt(reader.int64().toString());
+          message.currentEpoch = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -261,17 +261,17 @@ export const QueryCurrentEpochResponse = {
   },
   fromJSON(object: any): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt("0")
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryCurrentEpochResponse): unknown {
     const obj: any = {};
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt("0")).toString());
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt("0");
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
@@ -281,7 +281,7 @@ export const QueryCurrentEpochResponse = {
   },
   fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
     return {
-      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt("0")
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {

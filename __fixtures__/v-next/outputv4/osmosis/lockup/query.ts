@@ -1538,7 +1538,7 @@ export const LockedDenomResponse = {
 };
 function createBaseLockedRequest(): LockedRequest {
   return {
-    lockId: BigInt("0")
+    lockId: BigInt(0)
   };
 }
 export const LockedRequest = {
@@ -1556,7 +1556,7 @@ export const LockedRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1567,17 +1567,17 @@ export const LockedRequest = {
   },
   fromJSON(object: any): LockedRequest {
     return {
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
   toJSON(message: LockedRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: LockedRequestSDKType): LockedRequest {
@@ -1587,7 +1587,7 @@ export const LockedRequest = {
   },
   fromSDKJSON(object: any): LockedRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: LockedRequest): LockedRequestSDKType {
@@ -1658,7 +1658,7 @@ export const LockedResponse = {
 };
 function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockupIDRequest {
   return {
-    lockId: BigInt("0")
+    lockId: BigInt(0)
   };
 }
 export const SyntheticLockupsByLockupIDRequest = {
@@ -1676,7 +1676,7 @@ export const SyntheticLockupsByLockupIDRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockId = BigInt(reader.uint64().toString());
+          message.lockId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1687,17 +1687,17 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt("0")
+      lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
   toJSON(message: SyntheticLockupsByLockupIDRequest): unknown {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt("0")).toString());
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt("0");
+    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
@@ -1707,7 +1707,7 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
   fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
     return {
-      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt("0")
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {

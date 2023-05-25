@@ -96,7 +96,7 @@ export const Params = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    nextPoolId: BigInt("0"),
+    nextPoolId: BigInt(0),
     params: undefined,
     poolRoutes: []
   };
@@ -122,7 +122,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.nextPoolId = BigInt(reader.uint64().toString());
+          message.nextPoolId = reader.uint64();
           break;
         case 2:
           message.params = Params.decode(reader, reader.uint32());
@@ -139,14 +139,14 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     return {
-      nextPoolId: isSet(object.nextPoolId) ? BigInt(object.nextPoolId.toString()) : BigInt("0"),
+      nextPoolId: isSet(object.nextPoolId) ? BigInt(object.nextPoolId.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       poolRoutes: Array.isArray(object?.poolRoutes) ? object.poolRoutes.map((e: any) => ModuleRoute.fromJSON(e)) : []
     };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.nextPoolId !== undefined && (obj.nextPoolId = (message.nextPoolId || BigInt("0")).toString());
+    message.nextPoolId !== undefined && (obj.nextPoolId = (message.nextPoolId || BigInt(0)).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.poolRoutes) {
       obj.poolRoutes = message.poolRoutes.map(e => e ? ModuleRoute.toJSON(e) : undefined);
@@ -157,7 +157,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.nextPoolId = object.nextPoolId !== undefined && object.nextPoolId !== null ? BigInt(object.nextPoolId.toString()) : BigInt("0");
+    message.nextPoolId = object.nextPoolId !== undefined && object.nextPoolId !== null ? BigInt(object.nextPoolId.toString()) : BigInt(0);
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.poolRoutes = object.poolRoutes?.map(e => ModuleRoute.fromPartial(e)) || [];
     return message;
@@ -171,7 +171,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      next_pool_id: isSet(object.next_pool_id) ? BigInt(object.next_pool_id.toString()) : BigInt("0"),
+      next_pool_id: isSet(object.next_pool_id) ? BigInt(object.next_pool_id.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       pool_routes: Array.isArray(object?.pool_routes) ? object.pool_routes.map((e: any) => ModuleRoute.fromSDKJSON(e)) : []
     };

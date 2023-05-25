@@ -276,7 +276,7 @@ export const FloatValue = {
 };
 function createBaseInt64Value(): Int64Value {
   return {
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const Int64Value = {
@@ -294,7 +294,7 @@ export const Int64Value = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -305,17 +305,17 @@ export const Int64Value = {
   },
   fromJSON(object: any): Int64Value {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: Int64ValueSDKType): Int64Value {
@@ -325,7 +325,7 @@ export const Int64Value = {
   },
   fromSDKJSON(object: any): Int64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: Int64Value): Int64ValueSDKType {
@@ -336,7 +336,7 @@ export const Int64Value = {
 };
 function createBaseUInt64Value(): UInt64Value {
   return {
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const UInt64Value = {
@@ -354,7 +354,7 @@ export const UInt64Value = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = BigInt(reader.uint64().toString());
+          message.value = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -365,17 +365,17 @@ export const UInt64Value = {
   },
   fromJSON(object: any): UInt64Value {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
@@ -385,7 +385,7 @@ export const UInt64Value = {
   },
   fromSDKJSON(object: any): UInt64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: UInt64Value): UInt64ValueSDKType {

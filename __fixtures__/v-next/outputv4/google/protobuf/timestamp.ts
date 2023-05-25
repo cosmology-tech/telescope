@@ -190,7 +190,7 @@ export interface TimestampSDKType {
 }
 function createBaseTimestamp(): Timestamp {
   return {
-    seconds: BigInt("0"),
+    seconds: BigInt(0),
     nanos: 0
   };
 }
@@ -212,7 +212,7 @@ export const Timestamp = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = BigInt(reader.int64().toString());
+          message.seconds = reader.int64();
           break;
         case 2:
           message.nanos = reader.int32();
@@ -226,19 +226,19 @@ export const Timestamp = {
   },
   fromJSON(object: any): Timestamp {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt("0")).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt("0");
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -250,7 +250,7 @@ export const Timestamp = {
   },
   fromSDKJSON(object: any): TimestampSDKType {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
