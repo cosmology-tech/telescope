@@ -161,6 +161,9 @@ interface TelescopeOpts {
             protos?: string[];
         };
     };
+    websocket?: {
+        enabled: boolean;
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;

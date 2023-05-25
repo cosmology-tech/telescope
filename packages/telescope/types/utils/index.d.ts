@@ -14,6 +14,8 @@ export declare const UTILS: {
     bytesFromBase64: string;
     BrowserHeaders: string;
     Decimal: string;
+    BinaryReader: string;
+    BinaryWriter: string;
     createProtobufRpcClient: string;
     decodeBech32Pubkey: string;
     DeepPartial: string;
@@ -58,18 +60,21 @@ export declare const UTILS: {
     useRpcEndpoint: string;
     useRpcClient: string;
     useTendermintClient: string;
-    ReactQueryParams: string;
+    UnaryMethodDefinitionishR: string;
+    UnaryMethodDefinitionish: string;
     UseQueryOptions: string;
+    ReactQueryParams: string;
     QueryStore: string;
     MobxResponse: string;
     useEndpoint: string;
     override: string;
     makeObservable: string;
     NodeHttpTransport: string;
-    UnaryMethodDefinitionishR: string;
-    UnaryMethodDefinitionish: string;
-    BinaryReader: string;
-    BinaryWriter: string;
+    WebSocket: string;
+    send: string;
+    onOpen: string;
+    onClose: string;
+    onMessage: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

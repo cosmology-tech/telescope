@@ -174,6 +174,10 @@ const options: TelescopeOptions = {
     }
   },
 
+  websocket: {
+    enabled: true,
+  },
+
   pinia: {
     enabled: true,
     include: {

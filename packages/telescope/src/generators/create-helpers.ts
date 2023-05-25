@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary } from '../helpers';
+import { webSocket, external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -48,6 +48,11 @@ export const plugin = (
   if (builder.options.pinia?.enabled) {
     builder.files.push('pinia-endpoint.ts');
     write(builder, 'pinia-endpoint.ts', pinia);
+  }
+
+  if (builder.options.websocket?.enabled) {
+    builder.files.push('ws.ts');
+    write(builder, 'ws.ts', webSocket);
   }
 
   if (builder.options.rpcClients?.type === 'grpc-gateway') {

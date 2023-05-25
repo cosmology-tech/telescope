@@ -53,7 +53,7 @@ export declare const defaultTelescopeOptions: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
             };
-            longLibrary?: "bigint" | "long";
+            num64?: "bigint" | "long";
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: "date" | "timestamp";
@@ -148,6 +148,9 @@ export declare const defaultTelescopeOptions: {
             packages?: string[];
             protos?: string[];
         };
+    };
+    websocket: {
+        enabled: boolean;
     };
     packages: Record<string, any>;
 } & {

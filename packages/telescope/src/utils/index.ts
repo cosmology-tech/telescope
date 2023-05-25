@@ -73,6 +73,10 @@ export const UTILS = {
   makeObservable: 'mobx',
   NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',
   WebSocket: 'isomorphic-ws',
+  send: '__websocket__',
+  onOpen: '__websocket__',
+  onClose: '__websocket__',
+  onMessage: '__websocket__',
 };
 
 export const UTIL_HELPERS = [
@@ -80,6 +84,7 @@ export const UTIL_HELPERS = [
   '__extern__',
   '__react-query__',
   '__mobx__',
+  '__websocket__',
   '__binary__',
   '__pinia-endpoint__',
   '__grpc-gateway__',

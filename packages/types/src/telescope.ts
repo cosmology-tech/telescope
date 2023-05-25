@@ -190,6 +190,9 @@ interface TelescopeOpts {
             protos?: string[];
         }
     };
+    websocket?: {
+      enabled: boolean;
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
@@ -334,6 +337,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             packages: [],
             protos: []
         }
+    },
+
+    websocket: {
+      enabled: false
     },
 
     // packages

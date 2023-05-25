@@ -19,6 +19,7 @@ import { plugin as createRPCQueryClients } from './generators/create-rpc-query-c
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
 import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
+import { plugin as createWebSocketClients } from './generators/create-websocket-client';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
@@ -150,6 +151,7 @@ export class TelescopeBuilder {
     createMobxBundle(this);
     createAggregatedLCDClient(this);
     await createCosmWasmBundle(this);
+    createWebSocketClients(this);
 
     createHelpers(this);
     createPiniaStoreBundle(this)
