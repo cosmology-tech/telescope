@@ -694,7 +694,7 @@ export const QueryGasMeterRequest = {
 };
 function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
   return {
-    gasMeter: BigInt("0")
+    gasMeter: BigInt(0)
   };
 }
 export const QueryGasMeterResponse = {
@@ -712,7 +712,7 @@ export const QueryGasMeterResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gasMeter = BigInt(reader.uint64().toString());
+          message.gasMeter = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -723,17 +723,17 @@ export const QueryGasMeterResponse = {
   },
   fromJSON(object: any): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gasMeter) ? BigInt(object.gasMeter.toString()) : BigInt("0")
+      gasMeter: isSet(object.gasMeter) ? BigInt(object.gasMeter.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryGasMeterResponse): unknown {
     const obj: any = {};
-    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || BigInt("0")).toString());
+    message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? BigInt(object.gasMeter.toString()) : BigInt("0");
+    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? BigInt(object.gasMeter.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
@@ -743,7 +743,7 @@ export const QueryGasMeterResponse = {
   },
   fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
     return {
-      gas_meter: isSet(object.gas_meter) ? BigInt(object.gas_meter.toString()) : BigInt("0")
+      gas_meter: isSet(object.gas_meter) ? BigInt(object.gas_meter.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryGasMeterResponse): QueryGasMeterResponseSDKType {

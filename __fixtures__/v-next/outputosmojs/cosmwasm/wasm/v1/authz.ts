@@ -381,7 +381,7 @@ export const ContractGrant = {
 };
 function createBaseMaxCallsLimit(): MaxCallsLimit {
   return {
-    remaining: BigInt("0")
+    remaining: BigInt(0)
   };
 }
 export const MaxCallsLimit = {
@@ -399,7 +399,7 @@ export const MaxCallsLimit = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.remaining = BigInt(reader.uint64().toString());
+          message.remaining = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -410,17 +410,17 @@ export const MaxCallsLimit = {
   },
   fromJSON(object: any): MaxCallsLimit {
     return {
-      remaining: isSet(object.remaining) ? BigInt(object.remaining.toString()) : BigInt("0")
+      remaining: isSet(object.remaining) ? BigInt(object.remaining.toString()) : BigInt(0)
     };
   },
   toJSON(message: MaxCallsLimit): unknown {
     const obj: any = {};
-    message.remaining !== undefined && (obj.remaining = (message.remaining || BigInt("0")).toString());
+    message.remaining !== undefined && (obj.remaining = (message.remaining || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MaxCallsLimit>): MaxCallsLimit {
     const message = createBaseMaxCallsLimit();
-    message.remaining = object.remaining !== undefined && object.remaining !== null ? BigInt(object.remaining.toString()) : BigInt("0");
+    message.remaining = object.remaining !== undefined && object.remaining !== null ? BigInt(object.remaining.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MaxCallsLimitSDKType): MaxCallsLimit {
@@ -430,7 +430,7 @@ export const MaxCallsLimit = {
   },
   fromSDKJSON(object: any): MaxCallsLimitSDKType {
     return {
-      remaining: isSet(object.remaining) ? BigInt(object.remaining.toString()) : BigInt("0")
+      remaining: isSet(object.remaining) ? BigInt(object.remaining.toString()) : BigInt(0)
     };
   },
   toSDK(message: MaxCallsLimit): MaxCallsLimitSDKType {
@@ -509,7 +509,7 @@ export const MaxFundsLimit = {
 };
 function createBaseCombinedLimit(): CombinedLimit {
   return {
-    callsRemaining: BigInt("0"),
+    callsRemaining: BigInt(0),
     amounts: []
   };
 }
@@ -531,7 +531,7 @@ export const CombinedLimit = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.callsRemaining = BigInt(reader.uint64().toString());
+          message.callsRemaining = reader.uint64();
           break;
         case 2:
           message.amounts.push(Coin.decode(reader, reader.uint32()));
@@ -545,13 +545,13 @@ export const CombinedLimit = {
   },
   fromJSON(object: any): CombinedLimit {
     return {
-      callsRemaining: isSet(object.callsRemaining) ? BigInt(object.callsRemaining.toString()) : BigInt("0"),
+      callsRemaining: isSet(object.callsRemaining) ? BigInt(object.callsRemaining.toString()) : BigInt(0),
       amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
   toJSON(message: CombinedLimit): unknown {
     const obj: any = {};
-    message.callsRemaining !== undefined && (obj.callsRemaining = (message.callsRemaining || BigInt("0")).toString());
+    message.callsRemaining !== undefined && (obj.callsRemaining = (message.callsRemaining || BigInt(0)).toString());
     if (message.amounts) {
       obj.amounts = message.amounts.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -561,7 +561,7 @@ export const CombinedLimit = {
   },
   fromPartial(object: DeepPartial<CombinedLimit>): CombinedLimit {
     const message = createBaseCombinedLimit();
-    message.callsRemaining = object.callsRemaining !== undefined && object.callsRemaining !== null ? BigInt(object.callsRemaining.toString()) : BigInt("0");
+    message.callsRemaining = object.callsRemaining !== undefined && object.callsRemaining !== null ? BigInt(object.callsRemaining.toString()) : BigInt(0);
     message.amounts = object.amounts?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -573,7 +573,7 @@ export const CombinedLimit = {
   },
   fromSDKJSON(object: any): CombinedLimitSDKType {
     return {
-      calls_remaining: isSet(object.calls_remaining) ? BigInt(object.calls_remaining.toString()) : BigInt("0"),
+      calls_remaining: isSet(object.calls_remaining) ? BigInt(object.calls_remaining.toString()) : BigInt(0),
       amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },

@@ -61,13 +61,13 @@ function createBaseGenesisState(): GenesisState {
     tokenPairArbRoutes: [],
     baseDenoms: [],
     poolWeights: undefined,
-    daysSinceModuleGenesis: BigInt("0"),
+    daysSinceModuleGenesis: BigInt(0),
     developerFees: [],
-    latestBlockHeight: BigInt("0"),
+    latestBlockHeight: BigInt(0),
     developerAddress: "",
-    maxPoolPointsPerBlock: BigInt("0"),
-    maxPoolPointsPerTx: BigInt("0"),
-    pointCountForBlock: BigInt("0")
+    maxPoolPointsPerBlock: BigInt(0),
+    maxPoolPointsPerTx: BigInt(0),
+    pointCountForBlock: BigInt(0)
   };
 }
 export const GenesisState = {
@@ -127,25 +127,25 @@ export const GenesisState = {
           message.poolWeights = PoolWeights.decode(reader, reader.uint32());
           break;
         case 5:
-          message.daysSinceModuleGenesis = BigInt(reader.uint64().toString());
+          message.daysSinceModuleGenesis = reader.uint64();
           break;
         case 6:
           message.developerFees.push(Coin.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.latestBlockHeight = BigInt(reader.uint64().toString());
+          message.latestBlockHeight = reader.uint64();
           break;
         case 8:
           message.developerAddress = reader.string();
           break;
         case 9:
-          message.maxPoolPointsPerBlock = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerBlock = reader.uint64();
           break;
         case 10:
-          message.maxPoolPointsPerTx = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerTx = reader.uint64();
           break;
         case 11:
-          message.pointCountForBlock = BigInt(reader.uint64().toString());
+          message.pointCountForBlock = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -160,13 +160,13 @@ export const GenesisState = {
       tokenPairArbRoutes: Array.isArray(object?.tokenPairArbRoutes) ? object.tokenPairArbRoutes.map((e: any) => TokenPairArbRoutes.fromJSON(e)) : [],
       baseDenoms: Array.isArray(object?.baseDenoms) ? object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e)) : [],
       poolWeights: isSet(object.poolWeights) ? PoolWeights.fromJSON(object.poolWeights) : undefined,
-      daysSinceModuleGenesis: isSet(object.daysSinceModuleGenesis) ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt("0"),
+      daysSinceModuleGenesis: isSet(object.daysSinceModuleGenesis) ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt(0),
       developerFees: Array.isArray(object?.developerFees) ? object.developerFees.map((e: any) => Coin.fromJSON(e)) : [],
-      latestBlockHeight: isSet(object.latestBlockHeight) ? BigInt(object.latestBlockHeight.toString()) : BigInt("0"),
+      latestBlockHeight: isSet(object.latestBlockHeight) ? BigInt(object.latestBlockHeight.toString()) : BigInt(0),
       developerAddress: isSet(object.developerAddress) ? String(object.developerAddress) : "",
-      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0"),
-      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0"),
-      pointCountForBlock: isSet(object.pointCountForBlock) ? BigInt(object.pointCountForBlock.toString()) : BigInt("0")
+      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0),
+      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0),
+      pointCountForBlock: isSet(object.pointCountForBlock) ? BigInt(object.pointCountForBlock.toString()) : BigInt(0)
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -183,17 +183,17 @@ export const GenesisState = {
       obj.baseDenoms = [];
     }
     message.poolWeights !== undefined && (obj.poolWeights = message.poolWeights ? PoolWeights.toJSON(message.poolWeights) : undefined);
-    message.daysSinceModuleGenesis !== undefined && (obj.daysSinceModuleGenesis = (message.daysSinceModuleGenesis || BigInt("0")).toString());
+    message.daysSinceModuleGenesis !== undefined && (obj.daysSinceModuleGenesis = (message.daysSinceModuleGenesis || BigInt(0)).toString());
     if (message.developerFees) {
       obj.developerFees = message.developerFees.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.developerFees = [];
     }
-    message.latestBlockHeight !== undefined && (obj.latestBlockHeight = (message.latestBlockHeight || BigInt("0")).toString());
+    message.latestBlockHeight !== undefined && (obj.latestBlockHeight = (message.latestBlockHeight || BigInt(0)).toString());
     message.developerAddress !== undefined && (obj.developerAddress = message.developerAddress);
-    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt("0")).toString());
-    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt("0")).toString());
-    message.pointCountForBlock !== undefined && (obj.pointCountForBlock = (message.pointCountForBlock || BigInt("0")).toString());
+    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
+    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
+    message.pointCountForBlock !== undefined && (obj.pointCountForBlock = (message.pointCountForBlock || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -202,13 +202,13 @@ export const GenesisState = {
     message.tokenPairArbRoutes = object.tokenPairArbRoutes?.map(e => TokenPairArbRoutes.fromPartial(e)) || [];
     message.baseDenoms = object.baseDenoms?.map(e => BaseDenom.fromPartial(e)) || [];
     message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : undefined;
-    message.daysSinceModuleGenesis = object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt("0");
+    message.daysSinceModuleGenesis = object.daysSinceModuleGenesis !== undefined && object.daysSinceModuleGenesis !== null ? BigInt(object.daysSinceModuleGenesis.toString()) : BigInt(0);
     message.developerFees = object.developerFees?.map(e => Coin.fromPartial(e)) || [];
-    message.latestBlockHeight = object.latestBlockHeight !== undefined && object.latestBlockHeight !== null ? BigInt(object.latestBlockHeight.toString()) : BigInt("0");
+    message.latestBlockHeight = object.latestBlockHeight !== undefined && object.latestBlockHeight !== null ? BigInt(object.latestBlockHeight.toString()) : BigInt(0);
     message.developerAddress = object.developerAddress ?? "";
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0");
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0");
-    message.pointCountForBlock = object.pointCountForBlock !== undefined && object.pointCountForBlock !== null ? BigInt(object.pointCountForBlock.toString()) : BigInt("0");
+    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
+    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
+    message.pointCountForBlock = object.pointCountForBlock !== undefined && object.pointCountForBlock !== null ? BigInt(object.pointCountForBlock.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -232,13 +232,13 @@ export const GenesisState = {
       token_pair_arb_routes: Array.isArray(object?.token_pair_arb_routes) ? object.token_pair_arb_routes.map((e: any) => TokenPairArbRoutes.fromSDKJSON(e)) : [],
       base_denoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromSDKJSON(e)) : [],
       pool_weights: isSet(object.pool_weights) ? PoolWeights.fromSDKJSON(object.pool_weights) : undefined,
-      days_since_module_genesis: isSet(object.days_since_module_genesis) ? BigInt(object.days_since_module_genesis.toString()) : BigInt("0"),
+      days_since_module_genesis: isSet(object.days_since_module_genesis) ? BigInt(object.days_since_module_genesis.toString()) : BigInt(0),
       developer_fees: Array.isArray(object?.developer_fees) ? object.developer_fees.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      latest_block_height: isSet(object.latest_block_height) ? BigInt(object.latest_block_height.toString()) : BigInt("0"),
+      latest_block_height: isSet(object.latest_block_height) ? BigInt(object.latest_block_height.toString()) : BigInt(0),
       developer_address: isSet(object.developer_address) ? String(object.developer_address) : "",
-      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt("0"),
-      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt("0"),
-      point_count_for_block: isSet(object.point_count_for_block) ? BigInt(object.point_count_for_block.toString()) : BigInt("0")
+      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt(0),
+      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt(0),
+      point_count_for_block: isSet(object.point_count_for_block) ? BigInt(object.point_count_for_block.toString()) : BigInt(0)
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {

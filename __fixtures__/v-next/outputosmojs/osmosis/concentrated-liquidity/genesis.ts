@@ -80,8 +80,8 @@ export interface AccumObjectSDKType {
 }
 function createBaseFullTick(): FullTick {
   return {
-    poolId: BigInt("0"),
-    tickIndex: BigInt("0"),
+    poolId: BigInt(0),
+    tickIndex: BigInt(0),
     info: undefined
   };
 }
@@ -106,10 +106,10 @@ export const FullTick = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
-          message.tickIndex = BigInt(reader.int64().toString());
+          message.tickIndex = reader.int64();
           break;
         case 3:
           message.info = TickInfo.decode(reader, reader.uint32());
@@ -123,22 +123,22 @@ export const FullTick = {
   },
   fromJSON(object: any): FullTick {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
-      tickIndex: isSet(object.tickIndex) ? BigInt(object.tickIndex.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tickIndex: isSet(object.tickIndex) ? BigInt(object.tickIndex.toString()) : BigInt(0),
       info: isSet(object.info) ? TickInfo.fromJSON(object.info) : undefined
     };
   },
   toJSON(message: FullTick): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
-    message.tickIndex !== undefined && (obj.tickIndex = (message.tickIndex || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.tickIndex !== undefined && (obj.tickIndex = (message.tickIndex || BigInt(0)).toString());
     message.info !== undefined && (obj.info = message.info ? TickInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<FullTick>): FullTick {
     const message = createBaseFullTick();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
-    message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt(0);
     message.info = object.info !== undefined && object.info !== null ? TickInfo.fromPartial(object.info) : undefined;
     return message;
   },
@@ -151,8 +151,8 @@ export const FullTick = {
   },
   fromSDKJSON(object: any): FullTickSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
-      tick_index: isSet(object.tick_index) ? BigInt(object.tick_index.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
+      tick_index: isSet(object.tick_index) ? BigInt(object.tick_index.toString()) : BigInt(0),
       info: isSet(object.info) ? TickInfo.fromSDKJSON(object.info) : undefined
     };
   },
@@ -305,7 +305,7 @@ function createBaseGenesisState(): GenesisState {
     params: undefined,
     poolData: [],
     positions: [],
-    nextPositionId: BigInt("0")
+    nextPositionId: BigInt(0)
   };
 }
 export const GenesisState = {
@@ -341,7 +341,7 @@ export const GenesisState = {
           message.positions.push(Position.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.nextPositionId = BigInt(reader.uint64().toString());
+          message.nextPositionId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -355,7 +355,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       poolData: Array.isArray(object?.poolData) ? object.poolData.map((e: any) => PoolData.fromJSON(e)) : [],
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromJSON(e)) : [],
-      nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt("0")
+      nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt(0)
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -371,7 +371,7 @@ export const GenesisState = {
     } else {
       obj.positions = [];
     }
-    message.nextPositionId !== undefined && (obj.nextPositionId = (message.nextPositionId || BigInt("0")).toString());
+    message.nextPositionId !== undefined && (obj.nextPositionId = (message.nextPositionId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -379,7 +379,7 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.poolData = object.poolData?.map(e => PoolData.fromPartial(e)) || [];
     message.positions = object.positions?.map(e => Position.fromPartial(e)) || [];
-    message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt("0");
+    message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -395,7 +395,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       pool_data: Array.isArray(object?.pool_data) ? object.pool_data.map((e: any) => PoolData.fromSDKJSON(e)) : [],
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromSDKJSON(e)) : [],
-      next_position_id: isSet(object.next_position_id) ? BigInt(object.next_position_id.toString()) : BigInt("0")
+      next_position_id: isSet(object.next_position_id) ? BigInt(object.next_position_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {

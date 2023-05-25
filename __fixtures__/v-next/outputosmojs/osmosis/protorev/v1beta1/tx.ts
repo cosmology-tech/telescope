@@ -493,7 +493,7 @@ export const MsgSetPoolWeightsResponse = {
 function createBaseMsgSetMaxPoolPointsPerTx(): MsgSetMaxPoolPointsPerTx {
   return {
     admin: "",
-    maxPoolPointsPerTx: BigInt("0")
+    maxPoolPointsPerTx: BigInt(0)
   };
 }
 export const MsgSetMaxPoolPointsPerTx = {
@@ -517,7 +517,7 @@ export const MsgSetMaxPoolPointsPerTx = {
           message.admin = reader.string();
           break;
         case 2:
-          message.maxPoolPointsPerTx = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerTx = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -529,19 +529,19 @@ export const MsgSetMaxPoolPointsPerTx = {
   fromJSON(object: any): MsgSetMaxPoolPointsPerTx {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0")
+      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSetMaxPoolPointsPerTx): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt("0")).toString());
+    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerTx>): MsgSetMaxPoolPointsPerTx {
     const message = createBaseMsgSetMaxPoolPointsPerTx();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0");
+    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerTxSDKType): MsgSetMaxPoolPointsPerTx {
@@ -553,7 +553,7 @@ export const MsgSetMaxPoolPointsPerTx = {
   fromSDKJSON(object: any): MsgSetMaxPoolPointsPerTxSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt("0")
+      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxSDKType {
@@ -609,7 +609,7 @@ export const MsgSetMaxPoolPointsPerTxResponse = {
 function createBaseMsgSetMaxPoolPointsPerBlock(): MsgSetMaxPoolPointsPerBlock {
   return {
     admin: "",
-    maxPoolPointsPerBlock: BigInt("0")
+    maxPoolPointsPerBlock: BigInt(0)
   };
 }
 export const MsgSetMaxPoolPointsPerBlock = {
@@ -633,7 +633,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
           message.admin = reader.string();
           break;
         case 2:
-          message.maxPoolPointsPerBlock = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerBlock = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -645,19 +645,19 @@ export const MsgSetMaxPoolPointsPerBlock = {
   fromJSON(object: any): MsgSetMaxPoolPointsPerBlock {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0")
+      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSetMaxPoolPointsPerBlock): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt("0")).toString());
+    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerBlock>): MsgSetMaxPoolPointsPerBlock {
     const message = createBaseMsgSetMaxPoolPointsPerBlock();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0");
+    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerBlockSDKType): MsgSetMaxPoolPointsPerBlock {
@@ -669,7 +669,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
   fromSDKJSON(object: any): MsgSetMaxPoolPointsPerBlockSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt("0")
+      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockSDKType {

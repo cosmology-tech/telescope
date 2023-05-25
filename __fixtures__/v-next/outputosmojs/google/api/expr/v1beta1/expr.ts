@@ -1279,10 +1279,10 @@ export const Literal = {
           message.boolValue = reader.bool();
           break;
         case 3:
-          message.int64Value = BigInt(reader.int64().toString());
+          message.int64Value = reader.int64();
           break;
         case 4:
-          message.uint64Value = BigInt(reader.uint64().toString());
+          message.uint64Value = reader.uint64();
           break;
         case 5:
           message.doubleValue = reader.double();

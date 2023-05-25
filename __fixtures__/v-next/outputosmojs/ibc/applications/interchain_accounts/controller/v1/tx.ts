@@ -214,7 +214,7 @@ function createBaseMsgSendTx(): MsgSendTx {
     owner: "",
     connectionId: "",
     packetData: undefined,
-    relativeTimeout: BigInt("0")
+    relativeTimeout: BigInt(0)
   };
 }
 export const MsgSendTx = {
@@ -250,7 +250,7 @@ export const MsgSendTx = {
           message.packetData = InterchainAccountPacketData.decode(reader, reader.uint32());
           break;
         case 4:
-          message.relativeTimeout = BigInt(reader.uint64().toString());
+          message.relativeTimeout = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -264,7 +264,7 @@ export const MsgSendTx = {
       owner: isSet(object.owner) ? String(object.owner) : "",
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
       packetData: isSet(object.packetData) ? InterchainAccountPacketData.fromJSON(object.packetData) : undefined,
-      relativeTimeout: isSet(object.relativeTimeout) ? BigInt(object.relativeTimeout.toString()) : BigInt("0")
+      relativeTimeout: isSet(object.relativeTimeout) ? BigInt(object.relativeTimeout.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSendTx): unknown {
@@ -272,7 +272,7 @@ export const MsgSendTx = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.packetData !== undefined && (obj.packetData = message.packetData ? InterchainAccountPacketData.toJSON(message.packetData) : undefined);
-    message.relativeTimeout !== undefined && (obj.relativeTimeout = (message.relativeTimeout || BigInt("0")).toString());
+    message.relativeTimeout !== undefined && (obj.relativeTimeout = (message.relativeTimeout || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSendTx>): MsgSendTx {
@@ -280,7 +280,7 @@ export const MsgSendTx = {
     message.owner = object.owner ?? "";
     message.connectionId = object.connectionId ?? "";
     message.packetData = object.packetData !== undefined && object.packetData !== null ? InterchainAccountPacketData.fromPartial(object.packetData) : undefined;
-    message.relativeTimeout = object.relativeTimeout !== undefined && object.relativeTimeout !== null ? BigInt(object.relativeTimeout.toString()) : BigInt("0");
+    message.relativeTimeout = object.relativeTimeout !== undefined && object.relativeTimeout !== null ? BigInt(object.relativeTimeout.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSendTxSDKType): MsgSendTx {
@@ -296,7 +296,7 @@ export const MsgSendTx = {
       owner: isSet(object.owner) ? String(object.owner) : "",
       connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
       packet_data: isSet(object.packet_data) ? InterchainAccountPacketData.fromSDKJSON(object.packet_data) : undefined,
-      relative_timeout: isSet(object.relative_timeout) ? BigInt(object.relative_timeout.toString()) : BigInt("0")
+      relative_timeout: isSet(object.relative_timeout) ? BigInt(object.relative_timeout.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSendTx): MsgSendTxSDKType {
@@ -310,7 +310,7 @@ export const MsgSendTx = {
 };
 function createBaseMsgSendTxResponse(): MsgSendTxResponse {
   return {
-    sequence: BigInt("0")
+    sequence: BigInt(0)
   };
 }
 export const MsgSendTxResponse = {
@@ -328,7 +328,7 @@ export const MsgSendTxResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sequence = BigInt(reader.uint64().toString());
+          message.sequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -339,17 +339,17 @@ export const MsgSendTxResponse = {
   },
   fromJSON(object: any): MsgSendTxResponse {
     return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSendTxResponse): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt("0")).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSendTxResponse>): MsgSendTxResponse {
     const message = createBaseMsgSendTxResponse();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSendTxResponseSDKType): MsgSendTxResponse {
@@ -359,7 +359,7 @@ export const MsgSendTxResponse = {
   },
   fromSDKJSON(object: any): MsgSendTxResponseSDKType {
     return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSendTxResponse): MsgSendTxResponseSDKType {

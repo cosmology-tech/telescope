@@ -210,7 +210,7 @@ export interface QueryFeeEnabledChannelResponseSDKType {
 function createBaseQueryIncentivizedPacketsRequest(): QueryIncentivizedPacketsRequest {
   return {
     pagination: undefined,
-    queryHeight: BigInt("0")
+    queryHeight: BigInt(0)
   };
 }
 export const QueryIncentivizedPacketsRequest = {
@@ -234,7 +234,7 @@ export const QueryIncentivizedPacketsRequest = {
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         case 2:
-          message.queryHeight = BigInt(reader.uint64().toString());
+          message.queryHeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -246,19 +246,19 @@ export const QueryIncentivizedPacketsRequest = {
   fromJSON(object: any): QueryIncentivizedPacketsRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt("0")
+      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryIncentivizedPacketsRequest): unknown {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt("0")).toString());
+    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsRequest>): QueryIncentivizedPacketsRequest {
     const message = createBaseQueryIncentivizedPacketsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
-    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt("0");
+    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketsRequestSDKType): QueryIncentivizedPacketsRequest {
@@ -270,7 +270,7 @@ export const QueryIncentivizedPacketsRequest = {
   fromSDKJSON(object: any): QueryIncentivizedPacketsRequestSDKType {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
-      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt("0")
+      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestSDKType {
@@ -363,7 +363,7 @@ export const QueryIncentivizedPacketsResponse = {
 };
 function createBaseQueryIncentivizedPacketRequest(): QueryIncentivizedPacketRequest {
   return {
-    queryHeight: BigInt("0")
+    queryHeight: BigInt(0)
   };
 }
 export const QueryIncentivizedPacketRequest = {
@@ -381,7 +381,7 @@ export const QueryIncentivizedPacketRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.queryHeight = BigInt(reader.uint64().toString());
+          message.queryHeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -392,17 +392,17 @@ export const QueryIncentivizedPacketRequest = {
   },
   fromJSON(object: any): QueryIncentivizedPacketRequest {
     return {
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt("0")
+      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryIncentivizedPacketRequest): unknown {
     const obj: any = {};
-    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt("0")).toString());
+    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketRequest>): QueryIncentivizedPacketRequest {
     const message = createBaseQueryIncentivizedPacketRequest();
-    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt("0");
+    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketRequestSDKType): QueryIncentivizedPacketRequest {
@@ -412,7 +412,7 @@ export const QueryIncentivizedPacketRequest = {
   },
   fromSDKJSON(object: any): QueryIncentivizedPacketRequestSDKType {
     return {
-      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt("0")
+      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestSDKType {
@@ -486,7 +486,7 @@ function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivize
     pagination: undefined,
     portId: "",
     channelId: "",
-    queryHeight: BigInt("0")
+    queryHeight: BigInt(0)
   };
 }
 export const QueryIncentivizedPacketsForChannelRequest = {
@@ -522,7 +522,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
           message.channelId = reader.string();
           break;
         case 4:
-          message.queryHeight = BigInt(reader.uint64().toString());
+          message.queryHeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -536,7 +536,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt("0")
+      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryIncentivizedPacketsForChannelRequest): unknown {
@@ -544,7 +544,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt("0")).toString());
+    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsForChannelRequest>): QueryIncentivizedPacketsForChannelRequest {
@@ -552,7 +552,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt("0");
+    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketsForChannelRequestSDKType): QueryIncentivizedPacketsForChannelRequest {
@@ -568,7 +568,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt("0")
+      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryIncentivizedPacketsForChannelRequest): QueryIncentivizedPacketsForChannelRequestSDKType {
@@ -1263,7 +1263,7 @@ export const QueryCounterpartyPayeeResponse = {
 function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequest {
   return {
     pagination: undefined,
-    queryHeight: BigInt("0")
+    queryHeight: BigInt(0)
   };
 }
 export const QueryFeeEnabledChannelsRequest = {
@@ -1287,7 +1287,7 @@ export const QueryFeeEnabledChannelsRequest = {
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         case 2:
-          message.queryHeight = BigInt(reader.uint64().toString());
+          message.queryHeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1299,19 +1299,19 @@ export const QueryFeeEnabledChannelsRequest = {
   fromJSON(object: any): QueryFeeEnabledChannelsRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt("0")
+      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryFeeEnabledChannelsRequest): unknown {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt("0")).toString());
+    message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelsRequest>): QueryFeeEnabledChannelsRequest {
     const message = createBaseQueryFeeEnabledChannelsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
-    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt("0");
+    message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryFeeEnabledChannelsRequestSDKType): QueryFeeEnabledChannelsRequest {
@@ -1323,7 +1323,7 @@ export const QueryFeeEnabledChannelsRequest = {
   fromSDKJSON(object: any): QueryFeeEnabledChannelsRequestSDKType {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
-      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt("0")
+      query_height: isSet(object.query_height) ? BigInt(object.query_height.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestSDKType {

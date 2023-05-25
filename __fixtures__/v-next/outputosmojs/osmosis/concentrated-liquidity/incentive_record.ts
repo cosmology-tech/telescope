@@ -68,7 +68,7 @@ export interface IncentiveRecordBodySDKType {
 }
 function createBaseIncentiveRecord(): IncentiveRecord {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     incentiveDenom: "",
     incentiveCreatorAddr: "",
     incentiveRecordBody: undefined,
@@ -102,7 +102,7 @@ export const IncentiveRecord = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.incentiveDenom = reader.string();
@@ -125,7 +125,7 @@ export const IncentiveRecord = {
   },
   fromJSON(object: any): IncentiveRecord {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       incentiveDenom: isSet(object.incentiveDenom) ? String(object.incentiveDenom) : "",
       incentiveCreatorAddr: isSet(object.incentiveCreatorAddr) ? String(object.incentiveCreatorAddr) : "",
       incentiveRecordBody: isSet(object.incentiveRecordBody) ? IncentiveRecordBody.fromJSON(object.incentiveRecordBody) : undefined,
@@ -134,7 +134,7 @@ export const IncentiveRecord = {
   },
   toJSON(message: IncentiveRecord): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.incentiveDenom !== undefined && (obj.incentiveDenom = message.incentiveDenom);
     message.incentiveCreatorAddr !== undefined && (obj.incentiveCreatorAddr = message.incentiveCreatorAddr);
     message.incentiveRecordBody !== undefined && (obj.incentiveRecordBody = message.incentiveRecordBody ? IncentiveRecordBody.toJSON(message.incentiveRecordBody) : undefined);
@@ -143,7 +143,7 @@ export const IncentiveRecord = {
   },
   fromPartial(object: DeepPartial<IncentiveRecord>): IncentiveRecord {
     const message = createBaseIncentiveRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.incentiveDenom = object.incentiveDenom ?? "";
     message.incentiveCreatorAddr = object.incentiveCreatorAddr ?? "";
     message.incentiveRecordBody = object.incentiveRecordBody !== undefined && object.incentiveRecordBody !== null ? IncentiveRecordBody.fromPartial(object.incentiveRecordBody) : undefined;
@@ -161,7 +161,7 @@ export const IncentiveRecord = {
   },
   fromSDKJSON(object: any): IncentiveRecordSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       incentive_denom: isSet(object.incentive_denom) ? String(object.incentive_denom) : "",
       incentive_creator_addr: isSet(object.incentive_creator_addr) ? String(object.incentive_creator_addr) : "",
       incentive_record_body: isSet(object.incentive_record_body) ? IncentiveRecordBody.fromSDKJSON(object.incentive_record_body) : undefined,

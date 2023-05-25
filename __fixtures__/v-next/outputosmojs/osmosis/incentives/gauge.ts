@@ -70,13 +70,13 @@ export interface LockableDurationsInfoSDKType {
 }
 function createBaseGauge(): Gauge {
   return {
-    id: BigInt("0"),
+    id: BigInt(0),
     isPerpetual: false,
     distributeTo: undefined,
     coins: [],
     startTime: undefined,
-    numEpochsPaidOver: BigInt("0"),
-    filledEpochs: BigInt("0"),
+    numEpochsPaidOver: BigInt(0),
+    filledEpochs: BigInt(0),
     distributedCoins: []
   };
 }
@@ -116,7 +116,7 @@ export const Gauge = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = BigInt(reader.uint64().toString());
+          message.id = reader.uint64();
           break;
         case 2:
           message.isPerpetual = reader.bool();
@@ -131,10 +131,10 @@ export const Gauge = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.numEpochsPaidOver = BigInt(reader.uint64().toString());
+          message.numEpochsPaidOver = reader.uint64();
           break;
         case 7:
-          message.filledEpochs = BigInt(reader.uint64().toString());
+          message.filledEpochs = reader.uint64();
           break;
         case 8:
           message.distributedCoins.push(Coin.decode(reader, reader.uint32()));
@@ -148,19 +148,19 @@ export const Gauge = {
   },
   fromJSON(object: any): Gauge {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0"),
-      filledEpochs: isSet(object.filledEpochs) ? BigInt(object.filledEpochs.toString()) : BigInt("0"),
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0),
+      filledEpochs: isSet(object.filledEpochs) ? BigInt(object.filledEpochs.toString()) : BigInt(0),
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
   toJSON(message: Gauge): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
     message.distributeTo !== undefined && (obj.distributeTo = message.distributeTo ? QueryCondition.toJSON(message.distributeTo) : undefined);
     if (message.coins) {
@@ -169,8 +169,8 @@ export const Gauge = {
       obj.coins = [];
     }
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt("0")).toString());
-    message.filledEpochs !== undefined && (obj.filledEpochs = (message.filledEpochs || BigInt("0")).toString());
+    message.numEpochsPaidOver !== undefined && (obj.numEpochsPaidOver = (message.numEpochsPaidOver || BigInt(0)).toString());
+    message.filledEpochs !== undefined && (obj.filledEpochs = (message.filledEpochs || BigInt(0)).toString());
     if (message.distributedCoins) {
       obj.distributedCoins = message.distributedCoins.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -180,13 +180,13 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.isPerpetual = object.isPerpetual ?? false;
     message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt("0");
-    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt("0");
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
+    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt(0);
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -204,13 +204,13 @@ export const Gauge = {
   },
   fromSDKJSON(object: any): GaugeSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
       distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt("0"),
-      filled_epochs: isSet(object.filled_epochs) ? BigInt(object.filled_epochs.toString()) : BigInt("0"),
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? BigInt(object.num_epochs_paid_over.toString()) : BigInt(0),
+      filled_epochs: isSet(object.filled_epochs) ? BigInt(object.filled_epochs.toString()) : BigInt(0),
       distributed_coins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },

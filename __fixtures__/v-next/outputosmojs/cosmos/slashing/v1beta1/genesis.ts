@@ -323,7 +323,7 @@ export const ValidatorMissedBlocks = {
 };
 function createBaseMissedBlock(): MissedBlock {
   return {
-    index: BigInt("0"),
+    index: BigInt(0),
     missed: false
   };
 }
@@ -345,7 +345,7 @@ export const MissedBlock = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = BigInt(reader.int64().toString());
+          message.index = reader.int64();
           break;
         case 2:
           message.missed = reader.bool();
@@ -359,19 +359,19 @@ export const MissedBlock = {
   },
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.missed = object.missed ?? false;
     return message;
   },
@@ -383,7 +383,7 @@ export const MissedBlock = {
   },
   fromSDKJSON(object: any): MissedBlockSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },

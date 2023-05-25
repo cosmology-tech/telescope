@@ -615,8 +615,8 @@ export const QueryValidatorCommissionResponse = {
 function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest {
   return {
     validatorAddress: "",
-    startingHeight: BigInt("0"),
-    endingHeight: BigInt("0"),
+    startingHeight: BigInt(0),
+    endingHeight: BigInt(0),
     pagination: undefined
   };
 }
@@ -647,10 +647,10 @@ export const QueryValidatorSlashesRequest = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.startingHeight = BigInt(reader.uint64().toString());
+          message.startingHeight = reader.uint64();
           break;
         case 3:
-          message.endingHeight = BigInt(reader.uint64().toString());
+          message.endingHeight = reader.uint64();
           break;
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -665,24 +665,24 @@ export const QueryValidatorSlashesRequest = {
   fromJSON(object: any): QueryValidatorSlashesRequest {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      startingHeight: isSet(object.startingHeight) ? BigInt(object.startingHeight.toString()) : BigInt("0"),
-      endingHeight: isSet(object.endingHeight) ? BigInt(object.endingHeight.toString()) : BigInt("0"),
+      startingHeight: isSet(object.startingHeight) ? BigInt(object.startingHeight.toString()) : BigInt(0),
+      endingHeight: isSet(object.endingHeight) ? BigInt(object.endingHeight.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: QueryValidatorSlashesRequest): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.startingHeight = (message.startingHeight || BigInt("0")).toString());
-    message.endingHeight !== undefined && (obj.endingHeight = (message.endingHeight || BigInt("0")).toString());
+    message.startingHeight !== undefined && (obj.startingHeight = (message.startingHeight || BigInt(0)).toString());
+    message.endingHeight !== undefined && (obj.endingHeight = (message.endingHeight || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
     const message = createBaseQueryValidatorSlashesRequest();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? BigInt(object.startingHeight.toString()) : BigInt("0");
-    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? BigInt(object.endingHeight.toString()) : BigInt("0");
+    message.startingHeight = object.startingHeight !== undefined && object.startingHeight !== null ? BigInt(object.startingHeight.toString()) : BigInt(0);
+    message.endingHeight = object.endingHeight !== undefined && object.endingHeight !== null ? BigInt(object.endingHeight.toString()) : BigInt(0);
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -697,8 +697,8 @@ export const QueryValidatorSlashesRequest = {
   fromSDKJSON(object: any): QueryValidatorSlashesRequestSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      starting_height: isSet(object.starting_height) ? BigInt(object.starting_height.toString()) : BigInt("0"),
-      ending_height: isSet(object.ending_height) ? BigInt(object.ending_height.toString()) : BigInt("0"),
+      starting_height: isSet(object.starting_height) ? BigInt(object.starting_height.toString()) : BigInt(0),
+      ending_height: isSet(object.ending_height) ? BigInt(object.ending_height.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },

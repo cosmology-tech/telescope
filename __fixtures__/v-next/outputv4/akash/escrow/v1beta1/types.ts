@@ -232,7 +232,7 @@ function createBaseAccount(): Account {
     state: 0,
     balance: undefined,
     transferred: undefined,
-    settledAt: BigInt("0")
+    settledAt: BigInt(0)
   };
 }
 export const Account = {
@@ -280,7 +280,7 @@ export const Account = {
           message.transferred = Coin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.settledAt = BigInt(reader.int64().toString());
+          message.settledAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -296,7 +296,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt("0")
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0)
     };
   },
   toJSON(message: Account): unknown {
@@ -306,7 +306,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt("0")).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
@@ -316,7 +316,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt("0");
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AccountSDKType): Account {
@@ -336,7 +336,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt("0")
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Account): AccountSDKType {

@@ -555,8 +555,8 @@ export const QueryClientStatesResponse = {
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   return {
     clientId: "",
-    revisionNumber: BigInt("0"),
-    revisionHeight: BigInt("0"),
+    revisionNumber: BigInt(0),
+    revisionHeight: BigInt(0),
     latestHeight: false
   };
 }
@@ -587,10 +587,10 @@ export const QueryConsensusStateRequest = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.revisionNumber = BigInt(reader.uint64().toString());
+          message.revisionNumber = reader.uint64();
           break;
         case 3:
-          message.revisionHeight = BigInt(reader.uint64().toString());
+          message.revisionHeight = reader.uint64();
           break;
         case 4:
           message.latestHeight = reader.bool();
@@ -605,24 +605,24 @@ export const QueryConsensusStateRequest = {
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt("0"),
-      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt("0"),
+      revisionNumber: isSet(object.revisionNumber) ? BigInt(object.revisionNumber.toString()) : BigInt(0),
+      revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0),
       latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
     };
   },
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt("0")).toString());
-    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt("0")).toString());
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt("0");
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt("0");
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
     message.latestHeight = object.latestHeight ?? false;
     return message;
   },
@@ -637,8 +637,8 @@ export const QueryConsensusStateRequest = {
   fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
     return {
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt("0"),
-      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt("0"),
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0),
       latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
     };
   },

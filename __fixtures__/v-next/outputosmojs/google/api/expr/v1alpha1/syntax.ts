@@ -555,7 +555,7 @@ export const ParsedExpr = {
 };
 function createBaseExpr(): Expr {
   return {
-    id: BigInt("0"),
+    id: BigInt(0),
     constExpr: undefined,
     identExpr: undefined,
     selectExpr: undefined,
@@ -601,7 +601,7 @@ export const Expr = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.id = BigInt(reader.int64().toString());
+          message.id = reader.int64();
           break;
         case 3:
           message.constExpr = Constant.decode(reader, reader.uint32());
@@ -633,7 +633,7 @@ export const Expr = {
   },
   fromJSON(object: any): Expr {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       constExpr: isSet(object.constExpr) ? Constant.fromJSON(object.constExpr) : undefined,
       identExpr: isSet(object.identExpr) ? Expr_Ident.fromJSON(object.identExpr) : undefined,
       selectExpr: isSet(object.selectExpr) ? Expr_Select.fromJSON(object.selectExpr) : undefined,
@@ -645,7 +645,7 @@ export const Expr = {
   },
   toJSON(message: Expr): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.constExpr !== undefined && (obj.constExpr = message.constExpr ? Constant.toJSON(message.constExpr) : undefined);
     message.identExpr !== undefined && (obj.identExpr = message.identExpr ? Expr_Ident.toJSON(message.identExpr) : undefined);
     message.selectExpr !== undefined && (obj.selectExpr = message.selectExpr ? Expr_Select.toJSON(message.selectExpr) : undefined);
@@ -657,7 +657,7 @@ export const Expr = {
   },
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.constExpr = object.constExpr !== undefined && object.constExpr !== null ? Constant.fromPartial(object.constExpr) : undefined;
     message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
     message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
@@ -681,7 +681,7 @@ export const Expr = {
   },
   fromSDKJSON(object: any): ExprSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       const_expr: isSet(object.const_expr) ? Constant.fromSDKJSON(object.const_expr) : undefined,
       ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
       select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
@@ -1095,7 +1095,7 @@ export const Expr_CreateStruct = {
 };
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
-    id: BigInt("0"),
+    id: BigInt(0),
     fieldKey: undefined,
     mapKey: undefined,
     value: undefined
@@ -1125,7 +1125,7 @@ export const Expr_CreateStruct_Entry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = BigInt(reader.int64().toString());
+          message.id = reader.int64();
           break;
         case 2:
           message.fieldKey = reader.string();
@@ -1145,7 +1145,7 @@ export const Expr_CreateStruct_Entry = {
   },
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
@@ -1153,7 +1153,7 @@ export const Expr_CreateStruct_Entry = {
   },
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
     message.mapKey !== undefined && (obj.mapKey = message.mapKey ? Expr.toJSON(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -1161,7 +1161,7 @@ export const Expr_CreateStruct_Entry = {
   },
   fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.fieldKey = object.fieldKey ?? undefined;
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
@@ -1177,7 +1177,7 @@ export const Expr_CreateStruct_Entry = {
   },
   fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
       map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
@@ -1388,10 +1388,10 @@ export const Constant = {
           message.boolValue = reader.bool();
           break;
         case 3:
-          message.int64Value = BigInt(reader.int64().toString());
+          message.int64Value = reader.int64();
           break;
         case 4:
-          message.uint64Value = BigInt(reader.uint64().toString());
+          message.uint64Value = reader.uint64();
           break;
         case 5:
           message.doubleValue = reader.double();
@@ -1496,7 +1496,7 @@ export const Constant = {
 };
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
   return {
-    key: BigInt("0"),
+    key: BigInt(0),
     value: 0
   };
 }
@@ -1518,7 +1518,7 @@ export const SourceInfo_PositionsEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = BigInt(reader.int64().toString());
+          message.key = reader.int64();
           break;
         case 2:
           message.value = reader.int32();
@@ -1532,19 +1532,19 @@ export const SourceInfo_PositionsEntry = {
   },
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
   toJSON(message: SourceInfo_PositionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
   fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
     message.value = object.value ?? 0;
     return message;
   },
@@ -1556,7 +1556,7 @@ export const SourceInfo_PositionsEntry = {
   },
   fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
     return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
@@ -1569,7 +1569,7 @@ export const SourceInfo_PositionsEntry = {
 };
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
   return {
-    key: BigInt("0"),
+    key: BigInt(0),
     value: undefined
   };
 }
@@ -1591,7 +1591,7 @@ export const SourceInfo_MacroCallsEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = BigInt(reader.int64().toString());
+          message.key = reader.int64();
           break;
         case 2:
           message.value = Expr.decode(reader, reader.uint32());
@@ -1605,19 +1605,19 @@ export const SourceInfo_MacroCallsEntry = {
   },
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
   toJSON(message: SourceInfo_MacroCallsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt("0")).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<SourceInfo_MacroCallsEntry>): SourceInfo_MacroCallsEntry {
     const message = createBaseSourceInfo_MacroCallsEntry();
-    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt("0");
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   },
@@ -1629,7 +1629,7 @@ export const SourceInfo_MacroCallsEntry = {
   },
   fromSDKJSON(object: any): SourceInfo_MacroCallsEntrySDKType {
     return {
-      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt("0"),
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
     };
   },

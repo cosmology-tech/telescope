@@ -64,9 +64,9 @@ export interface PeerAddressInfoSDKType {
 }
 function createBaseProtocolVersion(): ProtocolVersion {
   return {
-    p2p: BigInt("0"),
-    block: BigInt("0"),
-    app: BigInt("0")
+    p2p: BigInt(0),
+    block: BigInt(0),
+    app: BigInt(0)
   };
 }
 export const ProtocolVersion = {
@@ -90,13 +90,13 @@ export const ProtocolVersion = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.p2p = BigInt(reader.uint64().toString());
+          message.p2p = reader.uint64();
           break;
         case 2:
-          message.block = BigInt(reader.uint64().toString());
+          message.block = reader.uint64();
           break;
         case 3:
-          message.app = BigInt(reader.uint64().toString());
+          message.app = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -107,23 +107,23 @@ export const ProtocolVersion = {
   },
   fromJSON(object: any): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt(0),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toJSON(message: ProtocolVersion): unknown {
     const obj: any = {};
-    message.p2p !== undefined && (obj.p2p = (message.p2p || BigInt("0")).toString());
-    message.block !== undefined && (obj.block = (message.block || BigInt("0")).toString());
-    message.app !== undefined && (obj.app = (message.app || BigInt("0")).toString());
+    message.p2p !== undefined && (obj.p2p = (message.p2p || BigInt(0)).toString());
+    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
+    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
-    message.p2p = object.p2p !== undefined && object.p2p !== null ? BigInt(object.p2p.toString()) : BigInt("0");
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt("0");
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt("0");
+    message.p2p = object.p2p !== undefined && object.p2p !== null ? BigInt(object.p2p.toString()) : BigInt(0);
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ProtocolVersionSDKType): ProtocolVersion {
@@ -135,9 +135,9 @@ export const ProtocolVersion = {
   },
   fromSDKJSON(object: any): ProtocolVersionSDKType {
     return {
-      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt(0),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toSDK(message: ProtocolVersion): ProtocolVersionSDKType {

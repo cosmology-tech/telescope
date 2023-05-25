@@ -87,7 +87,7 @@ function createBaseIncentive(): Incentive {
     allocations: [],
     epochs: 0,
     startTime: undefined,
-    totalGas: BigInt("0")
+    totalGas: BigInt(0)
   };
 }
 export const Incentive = {
@@ -129,7 +129,7 @@ export const Incentive = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.totalGas = BigInt(reader.uint64().toString());
+          message.totalGas = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -144,7 +144,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      totalGas: isSet(object.totalGas) ? BigInt(object.totalGas.toString()) : BigInt("0")
+      totalGas: isSet(object.totalGas) ? BigInt(object.totalGas.toString()) : BigInt(0)
     };
   },
   toJSON(message: Incentive): unknown {
@@ -157,7 +157,7 @@ export const Incentive = {
     }
     message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || BigInt("0")).toString());
+    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Incentive>): Incentive {
@@ -166,7 +166,7 @@ export const Incentive = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     message.startTime = object.startTime ?? undefined;
-    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? BigInt(object.totalGas.toString()) : BigInt("0");
+    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? BigInt(object.totalGas.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: IncentiveSDKType): Incentive {
@@ -184,7 +184,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
-      total_gas: isSet(object.total_gas) ? BigInt(object.total_gas.toString()) : BigInt("0")
+      total_gas: isSet(object.total_gas) ? BigInt(object.total_gas.toString()) : BigInt(0)
     };
   },
   toSDK(message: Incentive): IncentiveSDKType {
@@ -205,7 +205,7 @@ function createBaseGasMeter(): GasMeter {
   return {
     contract: "",
     participant: "",
-    cumulativeGas: BigInt("0")
+    cumulativeGas: BigInt(0)
   };
 }
 export const GasMeter = {
@@ -235,7 +235,7 @@ export const GasMeter = {
           message.participant = reader.string();
           break;
         case 3:
-          message.cumulativeGas = BigInt(reader.uint64().toString());
+          message.cumulativeGas = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -248,21 +248,21 @@ export const GasMeter = {
     return {
       contract: isSet(object.contract) ? String(object.contract) : "",
       participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulativeGas: isSet(object.cumulativeGas) ? BigInt(object.cumulativeGas.toString()) : BigInt("0")
+      cumulativeGas: isSet(object.cumulativeGas) ? BigInt(object.cumulativeGas.toString()) : BigInt(0)
     };
   },
   toJSON(message: GasMeter): unknown {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.participant !== undefined && (obj.participant = message.participant);
-    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || BigInt("0")).toString());
+    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GasMeter>): GasMeter {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? BigInt(object.cumulativeGas.toString()) : BigInt("0");
+    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? BigInt(object.cumulativeGas.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GasMeterSDKType): GasMeter {
@@ -276,7 +276,7 @@ export const GasMeter = {
     return {
       contract: isSet(object.contract) ? String(object.contract) : "",
       participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulative_gas: isSet(object.cumulative_gas) ? BigInt(object.cumulative_gas.toString()) : BigInt("0")
+      cumulative_gas: isSet(object.cumulative_gas) ? BigInt(object.cumulative_gas.toString()) : BigInt(0)
     };
   },
   toSDK(message: GasMeter): GasMeterSDKType {

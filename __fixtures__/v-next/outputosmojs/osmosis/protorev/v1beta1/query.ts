@@ -829,10 +829,10 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.route.push(BigInt(reader.uint64().toString()));
+              message.route.push(reader.uint64());
             }
           } else {
-            message.route.push(BigInt(reader.uint64().toString()));
+            message.route.push(reader.uint64());
           }
           break;
         default:
@@ -850,7 +850,7 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
   toJSON(message: QueryGetProtoRevStatisticsByRouteRequest): unknown {
     const obj: any = {};
     if (message.route) {
-      obj.route = message.route.map(e => (e || BigInt("0")).toString());
+      obj.route = message.route.map(e => (e || BigInt(0)).toString());
     } else {
       obj.route = [];
     }
@@ -1517,7 +1517,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockRequest = {
 };
 function createBaseQueryGetProtoRevMaxPoolPointsPerBlockResponse(): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
   return {
-    maxPoolPointsPerBlock: BigInt("0")
+    maxPoolPointsPerBlock: BigInt(0)
   };
 }
 export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
@@ -1535,7 +1535,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxPoolPointsPerBlock = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerBlock = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1546,17 +1546,17 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
   },
   fromJSON(object: any): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
     return {
-      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0")
+      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): unknown {
     const obj: any = {};
-    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt("0")).toString());
+    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevMaxPoolPointsPerBlockResponse>): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
     const message = createBaseQueryGetProtoRevMaxPoolPointsPerBlockResponse();
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0");
+    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGetProtoRevMaxPoolPointsPerBlockResponseSDKType): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
@@ -1566,7 +1566,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
   },
   fromSDKJSON(object: any): QueryGetProtoRevMaxPoolPointsPerBlockResponseSDKType {
     return {
-      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt("0")
+      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): QueryGetProtoRevMaxPoolPointsPerBlockResponseSDKType {
@@ -1620,7 +1620,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxRequest = {
 };
 function createBaseQueryGetProtoRevMaxPoolPointsPerTxResponse(): QueryGetProtoRevMaxPoolPointsPerTxResponse {
   return {
-    maxPoolPointsPerTx: BigInt("0")
+    maxPoolPointsPerTx: BigInt(0)
   };
 }
 export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
@@ -1638,7 +1638,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxPoolPointsPerTx = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerTx = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1649,17 +1649,17 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
   },
   fromJSON(object: any): QueryGetProtoRevMaxPoolPointsPerTxResponse {
     return {
-      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0")
+      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): unknown {
     const obj: any = {};
-    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt("0")).toString());
+    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevMaxPoolPointsPerTxResponse>): QueryGetProtoRevMaxPoolPointsPerTxResponse {
     const message = createBaseQueryGetProtoRevMaxPoolPointsPerTxResponse();
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0");
+    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGetProtoRevMaxPoolPointsPerTxResponseSDKType): QueryGetProtoRevMaxPoolPointsPerTxResponse {
@@ -1669,7 +1669,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
   },
   fromSDKJSON(object: any): QueryGetProtoRevMaxPoolPointsPerTxResponseSDKType {
     return {
-      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt("0")
+      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): QueryGetProtoRevMaxPoolPointsPerTxResponseSDKType {

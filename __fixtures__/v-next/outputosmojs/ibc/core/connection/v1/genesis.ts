@@ -21,7 +21,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     connections: [],
     clientConnectionPaths: [],
-    nextConnectionSequence: BigInt("0"),
+    nextConnectionSequence: BigInt(0),
     params: undefined
   };
 }
@@ -55,7 +55,7 @@ export const GenesisState = {
           message.clientConnectionPaths.push(ConnectionPaths.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.nextConnectionSequence = BigInt(reader.uint64().toString());
+          message.nextConnectionSequence = reader.uint64();
           break;
         case 4:
           message.params = Params.decode(reader, reader.uint32());
@@ -71,7 +71,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e)) : [],
       clientConnectionPaths: Array.isArray(object?.clientConnectionPaths) ? object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e)) : [],
-      nextConnectionSequence: isSet(object.nextConnectionSequence) ? BigInt(object.nextConnectionSequence.toString()) : BigInt("0"),
+      nextConnectionSequence: isSet(object.nextConnectionSequence) ? BigInt(object.nextConnectionSequence.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -87,7 +87,7 @@ export const GenesisState = {
     } else {
       obj.clientConnectionPaths = [];
     }
-    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = (message.nextConnectionSequence || BigInt("0")).toString());
+    message.nextConnectionSequence !== undefined && (obj.nextConnectionSequence = (message.nextConnectionSequence || BigInt(0)).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
@@ -95,7 +95,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];
-    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? BigInt(object.nextConnectionSequence.toString()) : BigInt("0");
+    message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? BigInt(object.nextConnectionSequence.toString()) : BigInt(0);
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
@@ -111,7 +111,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDKJSON(e)) : [],
       client_connection_paths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromSDKJSON(e)) : [],
-      next_connection_sequence: isSet(object.next_connection_sequence) ? BigInt(object.next_connection_sequence.toString()) : BigInt("0"),
+      next_connection_sequence: isSet(object.next_connection_sequence) ? BigInt(object.next_connection_sequence.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },

@@ -95,7 +95,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     pools: [],
-    nextPoolNumber: BigInt("0"),
+    nextPoolNumber: BigInt(0),
     params: undefined
   };
 }
@@ -123,7 +123,7 @@ export const GenesisState = {
           message.pools.push(Any.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.nextPoolNumber = BigInt(reader.uint64().toString());
+          message.nextPoolNumber = reader.uint64();
           break;
         case 3:
           message.params = Params.decode(reader, reader.uint32());
@@ -138,7 +138,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? BigInt(object.nextPoolNumber.toString()) : BigInt("0"),
+      nextPoolNumber: isSet(object.nextPoolNumber) ? BigInt(object.nextPoolNumber.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
@@ -149,14 +149,14 @@ export const GenesisState = {
     } else {
       obj.pools = [];
     }
-    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || BigInt("0")).toString());
+    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || BigInt(0)).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? BigInt(object.nextPoolNumber.toString()) : BigInt("0");
+    message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? BigInt(object.nextPoolNumber.toString()) : BigInt(0);
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
@@ -170,7 +170,7 @@ export const GenesisState = {
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
-      next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : BigInt("0"),
+      next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
   },
