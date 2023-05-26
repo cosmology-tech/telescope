@@ -48,6 +48,7 @@ export const parseProto = (content, options?: ParseProtoOptions) => {
 };
 export class ProtoStore {
     files: string[];
+    includeDirs: string[];
     protoDirs: string[];
     deps: ProtoDep[];
     protos: ProtoRef[];
@@ -60,8 +61,11 @@ export class ProtoStore {
     _traversed: boolean = false;
     _symbols: TraversalSymbol[] = [];
 
-    constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
-        this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
+    constructor(protoDirs: string[] = [], includeDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
+        this.protoDirs = protoDirs.map((protoDir) => pathResolve(protoDir));
+        this.includeDirs = includeDirs.map((includeDir) =>
+            pathResolve(includeDir)
+        );
         this.options = options;
     }
 
@@ -111,7 +115,7 @@ export class ProtoStore {
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
-        const contents = this.protoDirs.reduce((m, protoDir) => {
+        const allcontents = this.includeDirs.reduce((m, protoDir) => {
             const protoSplat = join(protoDir, '/**/*.proto');
             const protoFiles = glob(protoSplat);
             const contents = protoFiles.map(filename => ({
@@ -121,9 +125,23 @@ export class ProtoStore {
             }));
             return [...m, ...contents];
         }, []);
-
+        const buildcontents = this.protoDirs.map((filename) => ({
+            absolute: filename,
+            filename: filename,
+            content: readFileSync(filename, "utf-8"),
+        }));
         const registeredProtos = [];
-        const protos = this.processProtos(contents).filter(proto => {
+        const buildprotos = this.processProtos(buildcontents).filter(proto => {
+            if (registeredProtos.includes(proto.filename)) {
+                if (this.options.logLevel >= TelescopeLogLevel.Warn) {
+                    console.warn(`${proto.filename} already included!`);
+                }
+                return false;
+            }
+            registeredProtos.push(proto.filename);
+            return true;
+        });
+        const allprotos = this.processProtos(allcontents).filter((proto) => {
             if (registeredProtos.includes(proto.filename)) {
                 if (this.options.logLevel >= TelescopeLogLevel.Warn) {
                     console.warn(`${proto.filename} already included!`);
@@ -134,33 +152,64 @@ export class ProtoStore {
             return true;
         });
         const neededFromGoogle = [];
-        this.getDependencies(protos).map(dep => {
-            const google = dep.imports?.filter(imp => imp.startsWith('google/protobuf')) ?? []
+        const neededDeps = [];
+        this.getDependencies(buildprotos).map((dep) => {
+            const google =
+                dep.imports?.filter((imp) => imp.startsWith("google/protobuf")) ?? [];
             if (google.length) {
-                google.forEach(goog => {
+                google.forEach((goog) => {
                     // if they don't got it, let's give it to 'em!
-                    const found = contents.find(file => file.filename === goog);
+                    const found = buildcontents.find((file) => file.filename === goog);
                     if (found) return;
 
                     // NOT FOUND
-                    const filler = GOOGLE_PROTOS.find(([f, v]) => { return f === goog });
-                    if (!filler) return; // technically an error should be thrown 
+                    const filler = GOOGLE_PROTOS.find(([f, v]) => {
+                        return f === goog;
+                    });
+                    if (!filler) return; // technically an error should be thrown
 
                     // we have the filler
-                    if (!neededFromGoogle.find(file => file.filename === goog)) {
+                    if (!neededFromGoogle.find((file) => file.filename === goog)) {
                         neededFromGoogle.push({
                             absolute: filler[0],
                             filename: filler[0],
-                            content: filler[1]
+                            content: filler[1],
+                        });
+                    }
+                });
+            }
+            const otherdeps =
+                dep.imports?.filter((imp) => !imp.startsWith("google/protobuf")) ?? [];
+            if (otherdeps.length) {
+                otherdeps.forEach((otherdep) => {
+                    // if they don't got it, let's give it to 'em!
+                    const found = buildcontents.find(
+                        (file) => file.filename === otherdep
+                    );
+                    if (found) return;
+
+                    // we have the filler
+                    if (!neededDeps.find((file) => file.filename === otherdep)) {
+                        const found = allcontents.find(
+                            (file) => file.filename === otherdep
+                        );
+                        neededDeps.push({
+                            absolute: found.absolute,
+                            filename: found.filename,
+                            content: found.content,
                         });
                     }
                 });
             }
         });
-        const missingProtos = this.processProtos(neededFromGoogle);
-        this.protos = [...protos, ...missingProtos];
+        const missingProtos = [
+            ...this.processProtos(neededFromGoogle),
+            ...this.processProtos(neededDeps),
+        ];
 
+        this.protos = [...buildprotos, ...missingProtos];
         return this.protos;
+
     }
 
     getPackages(): string[] {

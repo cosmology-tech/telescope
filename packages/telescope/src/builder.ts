@@ -47,6 +47,7 @@ const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
 export class TelescopeBuilder {
   store: ProtoStore;
   protoDirs: string[];
+  includeDirs: string[];
   outPath: string;
   options: TelescopeOptions;
   contexts: TelescopeParseContext[] = [];
@@ -61,11 +62,13 @@ export class TelescopeBuilder {
 
   constructor({
     protoDirs,
+    includeDirs,
     outPath,
     store,
     options
   }: TelescopeInput & { store?: ProtoStore }) {
     this.protoDirs = protoDirs;
+    this.includeDirs = includeDirs;
     this.outPath = resolve(outPath);
     this.options = sanitizeOptions(options);
     this.store = store ?? new ProtoStore(protoDirs, this.options);
@@ -81,7 +84,7 @@ export class TelescopeBuilder {
   addStateManagers(type: string, files: BundlerFile[]) {
     const state = this.stateManagers[type];
 
-    if(!state){
+    if (!state) {
       this.stateManagers[type] = [];
     }
 

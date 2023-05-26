@@ -28,6 +28,7 @@ export interface ImportHash {
 
 export interface TelescopeInput {
     protoDirs: string[];
+    includeDirs: string[];
     outPath: string;
     options: TelescopeOptions;
 }
