@@ -35,6 +35,13 @@ export default async (argv) => {
     {
       _: true,
       type: 'path',
+      name: 'includeDirs',
+      message: 'where is the include directory?',
+      default: './proto'
+    },
+    {
+      _: true,
+      type: 'path',
       name: 'outPath',
       message: 'where is the output directory?',
       default: './src/codegen'
@@ -93,6 +100,7 @@ export default async (argv) => {
   // Get missing options interactively.
   let {
     protoDirs,
+    includeDirs,
     outPath,
     includeAminos,
     includeLCDClients,
@@ -102,8 +110,12 @@ export default async (argv) => {
   if (!Array.isArray(protoDirs)) {
     protoDirs = [protoDirs];
   }
+  if (!Array.isArray(includeDirs)) {
+    includeDirs = [includeDirs];
+  }
   // remove any duplicate protodirs
   protoDirs = [...new Set(protoDirs)];
+  includeDirs = [...new Set(includeDirs)];
   const options = {
     aminoEncoding: {
       enabled: includeAminos
@@ -121,6 +133,7 @@ export default async (argv) => {
     JSON.stringify(
       {
         protoDirs,
+        includeDirs,
         outPath,
         includeAminos,
         includeLCDClients,
@@ -131,6 +144,7 @@ export default async (argv) => {
 
   await telescope({
     protoDirs,
+    includeDirs,
     outPath,
     options
   });
