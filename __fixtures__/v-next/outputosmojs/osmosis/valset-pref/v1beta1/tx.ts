@@ -697,7 +697,7 @@ export const MsgWithdrawDelegationRewardsResponse = {
 function createBaseMsgDelegateBondedTokens(): MsgDelegateBondedTokens {
   return {
     delegator: "",
-    lockID: BigInt("0")
+    lockID: BigInt(0)
   };
 }
 export const MsgDelegateBondedTokens = {
@@ -721,7 +721,7 @@ export const MsgDelegateBondedTokens = {
           message.delegator = reader.string();
           break;
         case 2:
-          message.lockID = BigInt(reader.uint64().toString());
+          message.lockID = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -733,19 +733,19 @@ export const MsgDelegateBondedTokens = {
   fromJSON(object: any): MsgDelegateBondedTokens {
     return {
       delegator: isSet(object.delegator) ? String(object.delegator) : "",
-      lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt("0")
+      lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgDelegateBondedTokens): unknown {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
-    message.lockID !== undefined && (obj.lockID = (message.lockID || BigInt("0")).toString());
+    message.lockID !== undefined && (obj.lockID = (message.lockID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgDelegateBondedTokens>): MsgDelegateBondedTokens {
     const message = createBaseMsgDelegateBondedTokens();
     message.delegator = object.delegator ?? "";
-    message.lockID = object.lockID !== undefined && object.lockID !== null ? BigInt(object.lockID.toString()) : BigInt("0");
+    message.lockID = object.lockID !== undefined && object.lockID !== null ? BigInt(object.lockID.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgDelegateBondedTokensSDKType): MsgDelegateBondedTokens {
@@ -757,7 +757,7 @@ export const MsgDelegateBondedTokens = {
   fromSDKJSON(object: any): MsgDelegateBondedTokensSDKType {
     return {
       delegator: isSet(object.delegator) ? String(object.delegator) : "",
-      lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt("0")
+      lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgDelegateBondedTokens): MsgDelegateBondedTokensSDKType {

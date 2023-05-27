@@ -97,7 +97,7 @@ export interface OrderFiltersSDKType {
 function createBaseOrderID(): OrderID {
   return {
     owner: "",
-    dseq: BigInt("0"),
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0
   };
@@ -129,7 +129,7 @@ export const OrderID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = BigInt(reader.uint64().toString());
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -147,7 +147,7 @@ export const OrderID = {
   fromJSON(object: any): OrderID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
@@ -155,7 +155,7 @@ export const OrderID = {
   toJSON(message: OrderID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     return obj;
@@ -163,7 +163,7 @@ export const OrderID = {
   fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     return message;
@@ -179,7 +179,7 @@ export const OrderID = {
   fromSDKJSON(object: any): OrderIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
@@ -198,7 +198,7 @@ function createBaseOrder(): Order {
     orderId: undefined,
     state: 0,
     spec: undefined,
-    createdAt: BigInt("0")
+    createdAt: BigInt(0)
   };
 }
 export const Order = {
@@ -234,7 +234,7 @@ export const Order = {
           message.spec = GroupSpec.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = BigInt(reader.int64().toString());
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -248,7 +248,7 @@ export const Order = {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
   },
   toJSON(message: Order): unknown {
@@ -256,7 +256,7 @@ export const Order = {
     message.orderId !== undefined && (obj.orderId = message.orderId ? OrderID.toJSON(message.orderId) : undefined);
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toJSON(message.spec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt("0")).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
@@ -264,7 +264,7 @@ export const Order = {
     message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : undefined;
     message.state = object.state ?? 0;
     message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: OrderSDKType): Order {
@@ -280,7 +280,7 @@ export const Order = {
       order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Order): OrderSDKType {
@@ -295,7 +295,7 @@ export const Order = {
 function createBaseOrderFilters(): OrderFilters {
   return {
     owner: "",
-    dseq: BigInt("0"),
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     state: ""
@@ -331,7 +331,7 @@ export const OrderFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = BigInt(reader.uint64().toString());
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -352,7 +352,7 @@ export const OrderFilters = {
   fromJSON(object: any): OrderFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       state: isSet(object.state) ? String(object.state) : ""
@@ -361,7 +361,7 @@ export const OrderFilters = {
   toJSON(message: OrderFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.state !== undefined && (obj.state = message.state);
@@ -370,7 +370,7 @@ export const OrderFilters = {
   fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.state = object.state ?? "";
@@ -388,7 +388,7 @@ export const OrderFilters = {
   fromSDKJSON(object: any): OrderFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       state: isSet(object.state) ? String(object.state) : ""

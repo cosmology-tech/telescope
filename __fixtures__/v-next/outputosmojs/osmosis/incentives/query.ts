@@ -267,7 +267,7 @@ export const ModuleToDistributeCoinsResponse = {
 };
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
   return {
-    id: BigInt("0")
+    id: BigInt(0)
   };
 }
 export const GaugeByIDRequest = {
@@ -285,7 +285,7 @@ export const GaugeByIDRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = BigInt(reader.uint64().toString());
+          message.id = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -296,17 +296,17 @@ export const GaugeByIDRequest = {
   },
   fromJSON(object: any): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toJSON(message: GaugeByIDRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GaugeByIDRequestSDKType): GaugeByIDRequest {
@@ -316,7 +316,7 @@ export const GaugeByIDRequest = {
   },
   fromSDKJSON(object: any): GaugeByIDRequestSDKType {
     return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toSDK(message: GaugeByIDRequest): GaugeByIDRequestSDKType {
@@ -1120,7 +1120,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
   return {
     owner: "",
     lockIds: [],
-    endEpoch: BigInt("0")
+    endEpoch: BigInt(0)
   };
 }
 export const RewardsEstRequest = {
@@ -1152,14 +1152,14 @@ export const RewardsEstRequest = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.lockIds.push(BigInt(reader.uint64().toString()));
+              message.lockIds.push(reader.uint64());
             }
           } else {
-            message.lockIds.push(BigInt(reader.uint64().toString()));
+            message.lockIds.push(reader.uint64());
           }
           break;
         case 3:
-          message.endEpoch = BigInt(reader.int64().toString());
+          message.endEpoch = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1172,25 +1172,25 @@ export const RewardsEstRequest = {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
       lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => BigInt(e.toString())) : [],
-      endEpoch: isSet(object.endEpoch) ? BigInt(object.endEpoch.toString()) : BigInt("0")
+      endEpoch: isSet(object.endEpoch) ? BigInt(object.endEpoch.toString()) : BigInt(0)
     };
   },
   toJSON(message: RewardsEstRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     if (message.lockIds) {
-      obj.lockIds = message.lockIds.map(e => (e || BigInt("0")).toString());
+      obj.lockIds = message.lockIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.lockIds = [];
     }
-    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || BigInt("0")).toString());
+    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
     message.lockIds = object.lockIds?.map(e => BigInt(e.toString())) || [];
-    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? BigInt(object.endEpoch.toString()) : BigInt("0");
+    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? BigInt(object.endEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: RewardsEstRequestSDKType): RewardsEstRequest {
@@ -1204,7 +1204,7 @@ export const RewardsEstRequest = {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
       lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => BigInt(e.toString())) : [],
-      end_epoch: isSet(object.end_epoch) ? BigInt(object.end_epoch.toString()) : BigInt("0")
+      end_epoch: isSet(object.end_epoch) ? BigInt(object.end_epoch.toString()) : BigInt(0)
     };
   },
   toSDK(message: RewardsEstRequest): RewardsEstRequestSDKType {

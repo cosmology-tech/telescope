@@ -16,7 +16,7 @@ export interface GroupIDSDKType {
 function createBaseGroupID(): GroupID {
   return {
     owner: "",
-    dseq: BigInt("0"),
+    dseq: BigInt(0),
     gseq: 0
   };
 }
@@ -44,7 +44,7 @@ export const GroupID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = BigInt(reader.uint64().toString());
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -59,21 +59,21 @@ export const GroupID = {
   fromJSON(object: any): GroupID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
   toJSON(message: GroupID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     return message;
   },
@@ -87,7 +87,7 @@ export const GroupID = {
   fromSDKJSON(object: any): GroupIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },

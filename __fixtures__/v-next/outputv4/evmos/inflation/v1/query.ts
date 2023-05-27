@@ -175,7 +175,7 @@ export const QueryPeriodRequest = {
 };
 function createBaseQueryPeriodResponse(): QueryPeriodResponse {
   return {
-    period: BigInt("0")
+    period: BigInt(0)
   };
 }
 export const QueryPeriodResponse = {
@@ -193,7 +193,7 @@ export const QueryPeriodResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.period = BigInt(reader.uint64().toString());
+          message.period = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -204,17 +204,17 @@ export const QueryPeriodResponse = {
   },
   fromJSON(object: any): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryPeriodResponse): unknown {
     const obj: any = {};
-    message.period !== undefined && (obj.period = (message.period || BigInt("0")).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
@@ -224,7 +224,7 @@ export const QueryPeriodResponse = {
   },
   fromSDKJSON(object: any): QueryPeriodResponseSDKType {
     return {
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0")
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
@@ -381,7 +381,7 @@ export const QuerySkippedEpochsRequest = {
 };
 function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
   return {
-    skippedEpochs: BigInt("0")
+    skippedEpochs: BigInt(0)
   };
 }
 export const QuerySkippedEpochsResponse = {
@@ -399,7 +399,7 @@ export const QuerySkippedEpochsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.skippedEpochs = BigInt(reader.uint64().toString());
+          message.skippedEpochs = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -410,17 +410,17 @@ export const QuerySkippedEpochsResponse = {
   },
   fromJSON(object: any): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt("0")
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
     };
   },
   toJSON(message: QuerySkippedEpochsResponse): unknown {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt("0")).toString());
+    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt("0");
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
@@ -430,7 +430,7 @@ export const QuerySkippedEpochsResponse = {
   },
   fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
     return {
-      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt("0")
+      skipped_epochs: isSet(object.skipped_epochs) ? BigInt(object.skipped_epochs.toString()) : BigInt(0)
     };
   },
   toSDK(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {

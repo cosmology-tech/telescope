@@ -243,7 +243,7 @@ export const GenesisState = {
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
     address: "",
-    power: BigInt("0")
+    power: BigInt(0)
   };
 }
 export const LastValidatorPower = {
@@ -267,7 +267,7 @@ export const LastValidatorPower = {
           message.address = reader.string();
           break;
         case 2:
-          message.power = BigInt(reader.int64().toString());
+          message.power = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -279,19 +279,19 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
     };
   },
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {
@@ -303,7 +303,7 @@ export const LastValidatorPower = {
   fromSDKJSON(object: any): LastValidatorPowerSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
     };
   },
   toSDK(message: LastValidatorPower): LastValidatorPowerSDKType {

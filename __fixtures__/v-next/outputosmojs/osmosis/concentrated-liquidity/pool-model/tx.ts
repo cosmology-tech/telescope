@@ -33,7 +33,7 @@ function createBaseMsgCreateConcentratedPool(): MsgCreateConcentratedPool {
     sender: "",
     denom0: "",
     denom1: "",
-    tickSpacing: BigInt("0"),
+    tickSpacing: BigInt(0),
     exponentAtPriceOne: "",
     swapFee: ""
   };
@@ -77,7 +77,7 @@ export const MsgCreateConcentratedPool = {
           message.denom1 = reader.string();
           break;
         case 4:
-          message.tickSpacing = BigInt(reader.uint64().toString());
+          message.tickSpacing = reader.uint64();
           break;
         case 5:
           message.exponentAtPriceOne = reader.string();
@@ -97,7 +97,7 @@ export const MsgCreateConcentratedPool = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       denom0: isSet(object.denom0) ? String(object.denom0) : "",
       denom1: isSet(object.denom1) ? String(object.denom1) : "",
-      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt("0"),
+      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt(0),
       exponentAtPriceOne: isSet(object.exponentAtPriceOne) ? String(object.exponentAtPriceOne) : "",
       swapFee: isSet(object.swapFee) ? String(object.swapFee) : ""
     };
@@ -107,7 +107,7 @@ export const MsgCreateConcentratedPool = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.denom0 !== undefined && (obj.denom0 = message.denom0);
     message.denom1 !== undefined && (obj.denom1 = message.denom1);
-    message.tickSpacing !== undefined && (obj.tickSpacing = (message.tickSpacing || BigInt("0")).toString());
+    message.tickSpacing !== undefined && (obj.tickSpacing = (message.tickSpacing || BigInt(0)).toString());
     message.exponentAtPriceOne !== undefined && (obj.exponentAtPriceOne = message.exponentAtPriceOne);
     message.swapFee !== undefined && (obj.swapFee = message.swapFee);
     return obj;
@@ -117,7 +117,7 @@ export const MsgCreateConcentratedPool = {
     message.sender = object.sender ?? "";
     message.denom0 = object.denom0 ?? "";
     message.denom1 = object.denom1 ?? "";
-    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt("0");
+    message.tickSpacing = object.tickSpacing !== undefined && object.tickSpacing !== null ? BigInt(object.tickSpacing.toString()) : BigInt(0);
     message.exponentAtPriceOne = object.exponentAtPriceOne ?? "";
     message.swapFee = object.swapFee ?? "";
     return message;
@@ -137,7 +137,7 @@ export const MsgCreateConcentratedPool = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       denom0: isSet(object.denom0) ? String(object.denom0) : "",
       denom1: isSet(object.denom1) ? String(object.denom1) : "",
-      tick_spacing: isSet(object.tick_spacing) ? BigInt(object.tick_spacing.toString()) : BigInt("0"),
+      tick_spacing: isSet(object.tick_spacing) ? BigInt(object.tick_spacing.toString()) : BigInt(0),
       exponent_at_price_one: isSet(object.exponent_at_price_one) ? String(object.exponent_at_price_one) : "",
       swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : ""
     };
@@ -155,7 +155,7 @@ export const MsgCreateConcentratedPool = {
 };
 function createBaseMsgCreateConcentratedPoolResponse(): MsgCreateConcentratedPoolResponse {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const MsgCreateConcentratedPoolResponse = {
@@ -173,7 +173,7 @@ export const MsgCreateConcentratedPoolResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -184,17 +184,17 @@ export const MsgCreateConcentratedPoolResponse = {
   },
   fromJSON(object: any): MsgCreateConcentratedPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgCreateConcentratedPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateConcentratedPoolResponse>): MsgCreateConcentratedPoolResponse {
     const message = createBaseMsgCreateConcentratedPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateConcentratedPoolResponseSDKType): MsgCreateConcentratedPoolResponse {
@@ -204,7 +204,7 @@ export const MsgCreateConcentratedPoolResponse = {
   },
   fromSDKJSON(object: any): MsgCreateConcentratedPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseSDKType {

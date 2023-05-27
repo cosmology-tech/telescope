@@ -301,7 +301,7 @@ export const Route = {
 };
 function createBaseTrade(): Trade {
   return {
-    pool: BigInt("0"),
+    pool: BigInt(0),
     tokenIn: "",
     tokenOut: ""
   };
@@ -327,7 +327,7 @@ export const Trade = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pool = BigInt(reader.uint64().toString());
+          message.pool = reader.uint64();
           break;
         case 2:
           message.tokenIn = reader.string();
@@ -344,21 +344,21 @@ export const Trade = {
   },
   fromJSON(object: any): Trade {
     return {
-      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt("0"),
+      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: Trade): unknown {
     const obj: any = {};
-    message.pool !== undefined && (obj.pool = (message.pool || BigInt("0")).toString());
+    message.pool !== undefined && (obj.pool = (message.pool || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut);
     return obj;
   },
   fromPartial(object: DeepPartial<Trade>): Trade {
     const message = createBaseTrade();
-    message.pool = object.pool !== undefined && object.pool !== null ? BigInt(object.pool.toString()) : BigInt("0");
+    message.pool = object.pool !== undefined && object.pool !== null ? BigInt(object.pool.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -372,7 +372,7 @@ export const Trade = {
   },
   fromSDKJSON(object: any): TradeSDKType {
     return {
-      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt("0"),
+      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -424,10 +424,10 @@ export const RouteStatistics = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.route.push(BigInt(reader.uint64().toString()));
+              message.route.push(reader.uint64());
             }
           } else {
-            message.route.push(BigInt(reader.uint64().toString()));
+            message.route.push(reader.uint64());
           }
           break;
         default:
@@ -453,7 +453,7 @@ export const RouteStatistics = {
     }
     message.numberOfTrades !== undefined && (obj.numberOfTrades = message.numberOfTrades);
     if (message.route) {
-      obj.route = message.route.map(e => (e || BigInt("0")).toString());
+      obj.route = message.route.map(e => (e || BigInt(0)).toString());
     } else {
       obj.route = [];
     }
@@ -498,9 +498,9 @@ export const RouteStatistics = {
 };
 function createBasePoolWeights(): PoolWeights {
   return {
-    stableWeight: BigInt("0"),
-    balancerWeight: BigInt("0"),
-    concentratedWeight: BigInt("0")
+    stableWeight: BigInt(0),
+    balancerWeight: BigInt(0),
+    concentratedWeight: BigInt(0)
   };
 }
 export const PoolWeights = {
@@ -524,13 +524,13 @@ export const PoolWeights = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.stableWeight = BigInt(reader.uint64().toString());
+          message.stableWeight = reader.uint64();
           break;
         case 2:
-          message.balancerWeight = BigInt(reader.uint64().toString());
+          message.balancerWeight = reader.uint64();
           break;
         case 3:
-          message.concentratedWeight = BigInt(reader.uint64().toString());
+          message.concentratedWeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -541,23 +541,23 @@ export const PoolWeights = {
   },
   fromJSON(object: any): PoolWeights {
     return {
-      stableWeight: isSet(object.stableWeight) ? BigInt(object.stableWeight.toString()) : BigInt("0"),
-      balancerWeight: isSet(object.balancerWeight) ? BigInt(object.balancerWeight.toString()) : BigInt("0"),
-      concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt("0")
+      stableWeight: isSet(object.stableWeight) ? BigInt(object.stableWeight.toString()) : BigInt(0),
+      balancerWeight: isSet(object.balancerWeight) ? BigInt(object.balancerWeight.toString()) : BigInt(0),
+      concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: PoolWeights): unknown {
     const obj: any = {};
-    message.stableWeight !== undefined && (obj.stableWeight = (message.stableWeight || BigInt("0")).toString());
-    message.balancerWeight !== undefined && (obj.balancerWeight = (message.balancerWeight || BigInt("0")).toString());
-    message.concentratedWeight !== undefined && (obj.concentratedWeight = (message.concentratedWeight || BigInt("0")).toString());
+    message.stableWeight !== undefined && (obj.stableWeight = (message.stableWeight || BigInt(0)).toString());
+    message.balancerWeight !== undefined && (obj.balancerWeight = (message.balancerWeight || BigInt(0)).toString());
+    message.concentratedWeight !== undefined && (obj.concentratedWeight = (message.concentratedWeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PoolWeights>): PoolWeights {
     const message = createBasePoolWeights();
-    message.stableWeight = object.stableWeight !== undefined && object.stableWeight !== null ? BigInt(object.stableWeight.toString()) : BigInt("0");
-    message.balancerWeight = object.balancerWeight !== undefined && object.balancerWeight !== null ? BigInt(object.balancerWeight.toString()) : BigInt("0");
-    message.concentratedWeight = object.concentratedWeight !== undefined && object.concentratedWeight !== null ? BigInt(object.concentratedWeight.toString()) : BigInt("0");
+    message.stableWeight = object.stableWeight !== undefined && object.stableWeight !== null ? BigInt(object.stableWeight.toString()) : BigInt(0);
+    message.balancerWeight = object.balancerWeight !== undefined && object.balancerWeight !== null ? BigInt(object.balancerWeight.toString()) : BigInt(0);
+    message.concentratedWeight = object.concentratedWeight !== undefined && object.concentratedWeight !== null ? BigInt(object.concentratedWeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PoolWeightsSDKType): PoolWeights {
@@ -569,9 +569,9 @@ export const PoolWeights = {
   },
   fromSDKJSON(object: any): PoolWeightsSDKType {
     return {
-      stable_weight: isSet(object.stable_weight) ? BigInt(object.stable_weight.toString()) : BigInt("0"),
-      balancer_weight: isSet(object.balancer_weight) ? BigInt(object.balancer_weight.toString()) : BigInt("0"),
-      concentrated_weight: isSet(object.concentrated_weight) ? BigInt(object.concentrated_weight.toString()) : BigInt("0")
+      stable_weight: isSet(object.stable_weight) ? BigInt(object.stable_weight.toString()) : BigInt(0),
+      balancer_weight: isSet(object.balancer_weight) ? BigInt(object.balancer_weight.toString()) : BigInt(0),
+      concentrated_weight: isSet(object.concentrated_weight) ? BigInt(object.concentrated_weight.toString()) : BigInt(0)
     };
   },
   toSDK(message: PoolWeights): PoolWeightsSDKType {

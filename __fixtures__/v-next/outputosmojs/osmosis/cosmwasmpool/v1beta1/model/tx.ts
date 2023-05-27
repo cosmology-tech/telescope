@@ -23,7 +23,7 @@ export interface MsgCreateCosmWasmPoolResponseSDKType {
 }
 function createBaseMsgCreateCosmWasmPool(): MsgCreateCosmWasmPool {
   return {
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     instantiateMsg: new Uint8Array(),
     sender: ""
   };
@@ -49,7 +49,7 @@ export const MsgCreateCosmWasmPool = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 2:
           message.instantiateMsg = reader.bytes();
@@ -66,21 +66,21 @@ export const MsgCreateCosmWasmPool = {
   },
   fromJSON(object: any): MsgCreateCosmWasmPool {
     return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       instantiateMsg: isSet(object.instantiateMsg) ? bytesFromBase64(object.instantiateMsg) : new Uint8Array(),
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
   toJSON(message: MsgCreateCosmWasmPool): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.instantiateMsg !== undefined && (obj.instantiateMsg = base64FromBytes(message.instantiateMsg !== undefined ? message.instantiateMsg : new Uint8Array()));
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateCosmWasmPool>): MsgCreateCosmWasmPool {
     const message = createBaseMsgCreateCosmWasmPool();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.instantiateMsg = object.instantiateMsg ?? new Uint8Array();
     message.sender = object.sender ?? "";
     return message;
@@ -94,7 +94,7 @@ export const MsgCreateCosmWasmPool = {
   },
   fromSDKJSON(object: any): MsgCreateCosmWasmPoolSDKType {
     return {
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       instantiate_msg: isSet(object.instantiate_msg) ? bytesFromBase64(object.instantiate_msg) : new Uint8Array(),
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
@@ -109,7 +109,7 @@ export const MsgCreateCosmWasmPool = {
 };
 function createBaseMsgCreateCosmWasmPoolResponse(): MsgCreateCosmWasmPoolResponse {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const MsgCreateCosmWasmPoolResponse = {
@@ -127,7 +127,7 @@ export const MsgCreateCosmWasmPoolResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -138,17 +138,17 @@ export const MsgCreateCosmWasmPoolResponse = {
   },
   fromJSON(object: any): MsgCreateCosmWasmPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgCreateCosmWasmPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateCosmWasmPoolResponse>): MsgCreateCosmWasmPoolResponse {
     const message = createBaseMsgCreateCosmWasmPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateCosmWasmPoolResponseSDKType): MsgCreateCosmWasmPoolResponse {
@@ -158,7 +158,7 @@ export const MsgCreateCosmWasmPoolResponse = {
   },
   fromSDKJSON(object: any): MsgCreateCosmWasmPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgCreateCosmWasmPoolResponse): MsgCreateCosmWasmPoolResponseSDKType {

@@ -86,7 +86,7 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
     fromAddress: "",
     toAddress: "",
     amount: [],
-    endTime: BigInt("0"),
+    endTime: BigInt(0),
     delayed: false
   };
 }
@@ -126,7 +126,7 @@ export const MsgCreateVestingAccount = {
           message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.endTime = BigInt(reader.int64().toString());
+          message.endTime = reader.int64();
           break;
         case 5:
           message.delayed = reader.bool();
@@ -143,7 +143,7 @@ export const MsgCreateVestingAccount = {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? BigInt(object.endTime.toString()) : BigInt("0"),
+      endTime: isSet(object.endTime) ? BigInt(object.endTime.toString()) : BigInt(0),
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -156,7 +156,7 @@ export const MsgCreateVestingAccount = {
     } else {
       obj.amount = [];
     }
-    message.endTime !== undefined && (obj.endTime = (message.endTime || BigInt("0")).toString());
+    message.endTime !== undefined && (obj.endTime = (message.endTime || BigInt(0)).toString());
     message.delayed !== undefined && (obj.delayed = message.delayed);
     return obj;
   },
@@ -165,7 +165,7 @@ export const MsgCreateVestingAccount = {
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? BigInt(object.endTime.toString()) : BigInt("0");
+    message.endTime = object.endTime !== undefined && object.endTime !== null ? BigInt(object.endTime.toString()) : BigInt(0);
     message.delayed = object.delayed ?? false;
     return message;
   },
@@ -183,7 +183,7 @@ export const MsgCreateVestingAccount = {
       from_address: isSet(object.from_address) ? String(object.from_address) : "",
       to_address: isSet(object.to_address) ? String(object.to_address) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      end_time: isSet(object.end_time) ? BigInt(object.end_time.toString()) : BigInt("0"),
+      end_time: isSet(object.end_time) ? BigInt(object.end_time.toString()) : BigInt(0),
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -385,7 +385,7 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: BigInt("0"),
+    startTime: BigInt(0),
     vestingPeriods: []
   };
 }
@@ -419,7 +419,7 @@ export const MsgCreatePeriodicVestingAccount = {
           message.toAddress = reader.string();
           break;
         case 3:
-          message.startTime = BigInt(reader.int64().toString());
+          message.startTime = reader.int64();
           break;
         case 4:
           message.vestingPeriods.push(Period.decode(reader, reader.uint32()));
@@ -435,7 +435,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? BigInt(object.startTime.toString()) : BigInt("0"),
+      startTime: isSet(object.startTime) ? BigInt(object.startTime.toString()) : BigInt(0),
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },
@@ -443,7 +443,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt("0")).toString());
+    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt(0)).toString());
     if (message.vestingPeriods) {
       obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
     } else {
@@ -455,7 +455,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? BigInt(object.startTime.toString()) : BigInt("0");
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? BigInt(object.startTime.toString()) : BigInt(0);
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
   },
@@ -471,7 +471,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       from_address: isSet(object.from_address) ? String(object.from_address) : "",
       to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : BigInt("0"),
+      start_time: isSet(object.start_time) ? BigInt(object.start_time.toString()) : BigInt(0),
       vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
     };
   },

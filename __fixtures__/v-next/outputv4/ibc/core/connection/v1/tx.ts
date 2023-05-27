@@ -164,7 +164,7 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
     clientId: "",
     counterparty: undefined,
     version: undefined,
-    delayPeriod: BigInt("0"),
+    delayPeriod: BigInt(0),
     signer: ""
   };
 }
@@ -204,7 +204,7 @@ export const MsgConnectionOpenInit = {
           message.version = Version.decode(reader, reader.uint32());
           break;
         case 4:
-          message.delayPeriod = BigInt(reader.uint64().toString());
+          message.delayPeriod = reader.uint64();
           break;
         case 5:
           message.signer = reader.string();
@@ -221,7 +221,7 @@ export const MsgConnectionOpenInit = {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0"),
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -230,7 +230,7 @@ export const MsgConnectionOpenInit = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
     message.version !== undefined && (obj.version = message.version ? Version.toJSON(message.version) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -239,7 +239,7 @@ export const MsgConnectionOpenInit = {
     message.clientId = object.clientId ?? "";
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.version = object.version !== undefined && object.version !== null ? Version.fromPartial(object.version) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt(0);
     message.signer = object.signer ?? "";
     return message;
   },
@@ -257,7 +257,7 @@ export const MsgConnectionOpenInit = {
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromSDKJSON(object.version) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0"),
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -320,7 +320,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
     previousConnectionId: "",
     clientState: undefined,
     counterparty: undefined,
-    delayPeriod: BigInt("0"),
+    delayPeriod: BigInt(0),
     counterpartyVersions: [],
     proofHeight: undefined,
     proofInit: new Uint8Array(),
@@ -390,7 +390,7 @@ export const MsgConnectionOpenTry = {
           message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 5:
-          message.delayPeriod = BigInt(reader.uint64().toString());
+          message.delayPeriod = reader.uint64();
           break;
         case 6:
           message.counterpartyVersions.push(Version.decode(reader, reader.uint32()));
@@ -426,7 +426,7 @@ export const MsgConnectionOpenTry = {
       previousConnectionId: isSet(object.previousConnectionId) ? String(object.previousConnectionId) : "",
       clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0"),
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0),
       counterpartyVersions: Array.isArray(object?.counterpartyVersions) ? object.counterpartyVersions.map((e: any) => Version.fromJSON(e)) : [],
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
       proofInit: isSet(object.proofInit) ? bytesFromBase64(object.proofInit) : new Uint8Array(),
@@ -442,7 +442,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId !== undefined && (obj.previousConnectionId = message.previousConnectionId);
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
     if (message.counterpartyVersions) {
       obj.counterpartyVersions = message.counterpartyVersions.map(e => e ? Version.toJSON(e) : undefined);
     } else {
@@ -462,7 +462,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId = object.previousConnectionId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt(0);
     message.counterpartyVersions = object.counterpartyVersions?.map(e => Version.fromPartial(e)) || [];
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.proofInit = object.proofInit ?? new Uint8Array();
@@ -494,7 +494,7 @@ export const MsgConnectionOpenTry = {
       previous_connection_id: isSet(object.previous_connection_id) ? String(object.previous_connection_id) : "",
       client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0"),
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0),
       counterparty_versions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
       proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),

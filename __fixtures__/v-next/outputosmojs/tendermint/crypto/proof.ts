@@ -63,8 +63,8 @@ export interface ProofOpsSDKType {
 }
 function createBaseProof(): Proof {
   return {
-    total: BigInt("0"),
-    index: BigInt("0"),
+    total: BigInt(0),
+    index: BigInt(0),
     leafHash: new Uint8Array(),
     aunts: []
   };
@@ -93,10 +93,10 @@ export const Proof = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.total = BigInt(reader.int64().toString());
+          message.total = reader.int64();
           break;
         case 2:
-          message.index = BigInt(reader.int64().toString());
+          message.index = reader.int64();
           break;
         case 3:
           message.leafHash = reader.bytes();
@@ -113,16 +113,16 @@ export const Proof = {
   },
   fromJSON(object: any): Proof {
     return {
-      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0"),
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       leafHash: isSet(object.leafHash) ? bytesFromBase64(object.leafHash) : new Uint8Array(),
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    message.total !== undefined && (obj.total = (message.total || BigInt("0")).toString());
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.total !== undefined && (obj.total = (message.total || BigInt(0)).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.leafHash !== undefined && (obj.leafHash = base64FromBytes(message.leafHash !== undefined ? message.leafHash : new Uint8Array()));
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
@@ -133,8 +133,8 @@ export const Proof = {
   },
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
-    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt("0");
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.total = object.total !== undefined && object.total !== null ? BigInt(object.total.toString()) : BigInt(0);
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
@@ -149,8 +149,8 @@ export const Proof = {
   },
   fromSDKJSON(object: any): ProofSDKType {
     return {
-      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt("0"),
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      total: isSet(object.total) ? BigInt(object.total.toString()) : BigInt(0),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };

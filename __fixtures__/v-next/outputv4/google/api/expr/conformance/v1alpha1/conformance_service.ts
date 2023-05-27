@@ -863,7 +863,7 @@ function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
     position: undefined,
-    id: BigInt("0")
+    id: BigInt(0)
   };
 }
 export const IssueDetails = {
@@ -893,7 +893,7 @@ export const IssueDetails = {
           message.position = SourcePosition.decode(reader, reader.uint32());
           break;
         case 3:
-          message.id = BigInt(reader.int64().toString());
+          message.id = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -906,21 +906,21 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toJSON(message: IssueDetails): unknown {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {
@@ -934,7 +934,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0")
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toSDK(message: IssueDetails): IssueDetailsSDKType {

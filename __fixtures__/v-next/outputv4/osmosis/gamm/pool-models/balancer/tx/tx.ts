@@ -133,7 +133,7 @@ export const MsgCreateBalancerPool = {
 };
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const MsgCreateBalancerPoolResponse = {
@@ -151,7 +151,7 @@ export const MsgCreateBalancerPoolResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -162,17 +162,17 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgCreateBalancerPoolResponse): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {
@@ -182,7 +182,7 @@ export const MsgCreateBalancerPoolResponse = {
   },
   fromSDKJSON(object: any): MsgCreateBalancerPoolResponseSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseSDKType {

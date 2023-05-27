@@ -289,10 +289,10 @@ export const UpdateUnpoolWhiteListProposal = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.ids.push(BigInt(reader.uint64().toString()));
+              message.ids.push(reader.uint64());
             }
           } else {
-            message.ids.push(BigInt(reader.uint64().toString()));
+            message.ids.push(reader.uint64());
           }
           break;
         case 4:
@@ -318,7 +318,7 @@ export const UpdateUnpoolWhiteListProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.ids) {
-      obj.ids = message.ids.map(e => (e || BigInt("0")).toString());
+      obj.ids = message.ids.map(e => (e || BigInt(0)).toString());
     } else {
       obj.ids = [];
     }

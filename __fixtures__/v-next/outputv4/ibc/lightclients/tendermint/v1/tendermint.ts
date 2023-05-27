@@ -638,8 +638,8 @@ export const Header = {
 };
 function createBaseFraction(): Fraction {
   return {
-    numerator: BigInt("0"),
-    denominator: BigInt("0")
+    numerator: BigInt(0),
+    denominator: BigInt(0)
   };
 }
 export const Fraction = {
@@ -660,10 +660,10 @@ export const Fraction = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numerator = BigInt(reader.uint64().toString());
+          message.numerator = reader.uint64();
           break;
         case 2:
-          message.denominator = BigInt(reader.uint64().toString());
+          message.denominator = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -674,20 +674,20 @@ export const Fraction = {
   },
   fromJSON(object: any): Fraction {
     return {
-      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt("0"),
-      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt("0")
+      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt(0),
+      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt(0)
     };
   },
   toJSON(message: Fraction): unknown {
     const obj: any = {};
-    message.numerator !== undefined && (obj.numerator = (message.numerator || BigInt("0")).toString());
-    message.denominator !== undefined && (obj.denominator = (message.denominator || BigInt("0")).toString());
+    message.numerator !== undefined && (obj.numerator = (message.numerator || BigInt(0)).toString());
+    message.denominator !== undefined && (obj.denominator = (message.denominator || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
-    message.numerator = object.numerator !== undefined && object.numerator !== null ? BigInt(object.numerator.toString()) : BigInt("0");
-    message.denominator = object.denominator !== undefined && object.denominator !== null ? BigInt(object.denominator.toString()) : BigInt("0");
+    message.numerator = object.numerator !== undefined && object.numerator !== null ? BigInt(object.numerator.toString()) : BigInt(0);
+    message.denominator = object.denominator !== undefined && object.denominator !== null ? BigInt(object.denominator.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: FractionSDKType): Fraction {
@@ -698,8 +698,8 @@ export const Fraction = {
   },
   fromSDKJSON(object: any): FractionSDKType {
     return {
-      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt("0"),
-      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt("0")
+      numerator: isSet(object.numerator) ? BigInt(object.numerator.toString()) : BigInt(0),
+      denominator: isSet(object.denominator) ? BigInt(object.denominator.toString()) : BigInt(0)
     };
   },
   toSDK(message: Fraction): FractionSDKType {

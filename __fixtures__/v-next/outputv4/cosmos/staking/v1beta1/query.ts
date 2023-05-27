@@ -2031,7 +2031,7 @@ export const QueryDelegatorValidatorResponse = {
 };
 function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
   return {
-    height: BigInt("0")
+    height: BigInt(0)
   };
 }
 export const QueryHistoricalInfoRequest = {
@@ -2049,7 +2049,7 @@ export const QueryHistoricalInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = BigInt(reader.int64().toString());
+          message.height = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -2060,17 +2060,17 @@ export const QueryHistoricalInfoRequest = {
   },
   fromJSON(object: any): QueryHistoricalInfoRequest {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryHistoricalInfoRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = createBaseQueryHistoricalInfoRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryHistoricalInfoRequestSDKType): QueryHistoricalInfoRequest {
@@ -2080,7 +2080,7 @@ export const QueryHistoricalInfoRequest = {
   },
   fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestSDKType {

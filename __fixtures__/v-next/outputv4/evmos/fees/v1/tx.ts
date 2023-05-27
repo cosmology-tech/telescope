@@ -129,10 +129,10 @@ export const MsgRegisterDevFeeInfo = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.nonces.push(BigInt(reader.uint64().toString()));
+              message.nonces.push(reader.uint64());
             }
           } else {
-            message.nonces.push(BigInt(reader.uint64().toString()));
+            message.nonces.push(reader.uint64());
           }
           break;
         default:
@@ -156,7 +156,7 @@ export const MsgRegisterDevFeeInfo = {
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || BigInt("0")).toString());
+      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
     } else {
       obj.nonces = [];
     }

@@ -24,7 +24,7 @@ export interface FeeTokenSDKType {
 function createBaseFeeToken(): FeeToken {
   return {
     denom: "",
-    poolID: BigInt("0")
+    poolID: BigInt(0)
   };
 }
 export const FeeToken = {
@@ -48,7 +48,7 @@ export const FeeToken = {
           message.denom = reader.string();
           break;
         case 2:
-          message.poolID = BigInt(reader.uint64().toString());
+          message.poolID = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -60,19 +60,19 @@ export const FeeToken = {
   fromJSON(object: any): FeeToken {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
     };
   },
   toJSON(message: FeeToken): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt("0")).toString());
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt("0");
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: FeeTokenSDKType): FeeToken {
@@ -84,7 +84,7 @@ export const FeeToken = {
   fromSDKJSON(object: any): FeeTokenSDKType {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt("0")
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
     };
   },
   toSDK(message: FeeToken): FeeTokenSDKType {
