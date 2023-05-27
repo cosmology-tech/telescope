@@ -1,6 +1,6 @@
 {
   "name": "telescope",
-  "version": "1.22.19",
+  "version": "0.0.1",
   "publishConfig": {
     "access": "restricted"
   },
