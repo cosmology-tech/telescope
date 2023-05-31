@@ -99,7 +99,7 @@ const options: TelescopeOptions = {
     },
 
     websocket: {
-        enabled: false,
+        enabled: true,
     },
 
     reactQuery: {

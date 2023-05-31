@@ -201,6 +201,10 @@ const options: TelescopeOptions = {
     ]
   },
 
+  websocket: {
+    enabled: false,
+  },
+
   reactQuery: {
     enabled: true,
     // include: {

@@ -2,39 +2,70 @@ export const webSocket = `
 
 import WebSocket from 'isomorphic-ws';
 
-const send = (ws: WebSocket, method: string, params: string[]) => {
-    ws.send(JSON.stringify({
+export class defaultWebSocket {
+  private ws: WebSocket;
+  private method: string;
+  private params: string[];
+  private url: string;
+  private id: number;
+  private reconnect: boolean;
+
+  constructor(url: string, method: string, params: string[], id: number, reconnect?: boolean) {
+    this.url = url;
+    this.method = method;
+    this.params = params;
+    this.id = id
+    this.reconnect = reconnect ?? true;
+
+    this.ws = new WebSocket(this.url);
+    this.initWebSocket();
+  }
+
+  private initWebSocket() {
+    this.ws.on('open', this.handleOpen);
+    this.ws.on('close', this.handleClose);
+    this.ws.on('message', this.handleMessage);
+  }
+
+  private handleOpen = () => {
+      console.log('Connected to WebSocket');
+      this.send(this.method, this.params, this.id);
+  };
+
+  private handleClose = () => {
+    console.log('disconnected');
+    if (this.reconnect) {
+        console.log('trying to reconnect...');
+        this.ws = new WebSocket(this.url);
+        this.initWebSocket();
+    }
+  };
+
+  private handleMessage = (data: WebSocket.Data) => {
+    const finalData = JSON.parse(data.toString());
+    if (finalData.result?.data) {
+      console.log(finalData.result);
+    }
+  };
+
+  private send = (method: string, params: string[], id: number) => {
+    this.ws.send(JSON.stringify({
       "method": method,
       "params": params,
-      "id": "1",
+      "id": id.toString(),
       "jsonrpc": "2.0"
     }));
+  };
 }
 
-const onOpen = (ws: WebSocket) => {
-    ws.on('open', function open() {
-        let timeout = setTimeout(function () {
-            console.log('Connection timed out! Please check your endpoint');
-        }, 5000);
-  
-        // if the connection is not timed out
-        if (!timeout) {
-            console.log('Connected to WebSocket');
-        }
-    });
-}
-
-const onClose = (ws: WebSocket) => {
-    ws.on('close', function close() {
-        console.log('disconnected');
-    });
-}
-
-const onMessage = (ws: WebSocket) => {
-    let finalData = JSON.parse(data.toString('utf-8'));
-        if (finalData.result.data)
-            console.log("------------------------------------------------------");
-            console.log(finalData.result);
+/** This describe the main kind of tx events */
+export enum Tx_Event {
+  /** NewBlock - Contains Events triggered during BeginBlock and EndBlock */
+  NewBlock = 'NewBlock',
+  /** Tx - Contains Events triggered during DeliverTx (i.e. transaction processing) */
+  Tx = 'Tx',
+  /** ValidatorSetUpdates - Contains validator set updates for the block */
+  ValidatorSetUpdates = 'ValidatorSetUpdates',
 }
 
 `
