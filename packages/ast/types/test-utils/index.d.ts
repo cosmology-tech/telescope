@@ -53,7 +53,7 @@ export declare const defaultTelescopeOptions: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
             };
-            longLibrary?: "bigint" | "long";
+            num64?: "bigint" | "long";
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: "date" | "timestamp";

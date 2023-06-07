@@ -48,7 +48,7 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QueryProviderAttributesDesc, QueryProviderAttributesRequest.fromPartial(request), metadata);
   }
   providerAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
-    return this.rpc.unary(QueryProviderAuditorDesc, QueryProviderAuditorRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryProviderAuditorAttributesDesc, QueryProviderAuditorRequest.fromPartial(request), metadata);
   }
   auditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
     return this.rpc.unary(QueryAuditorAttributesDesc, QueryAuditorAttributesRequest.fromPartial(request), metadata);

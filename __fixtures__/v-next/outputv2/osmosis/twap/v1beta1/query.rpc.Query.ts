@@ -17,13 +17,13 @@ export class QueryClientImpl implements Query {
     this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
   params(request: DeepPartial<ParamsRequest> = {}, metadata?: grpc.Metadata): Promise<ParamsResponse> {
-    return this.rpc.unary(ParamsDesc, ParamsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryParamsDesc, ParamsRequest.fromPartial(request), metadata);
   }
   arithmeticTwap(request: DeepPartial<ArithmeticTwapRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapResponse> {
-    return this.rpc.unary(ArithmeticTwapDesc, ArithmeticTwapRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryArithmeticTwapDesc, ArithmeticTwapRequest.fromPartial(request), metadata);
   }
   arithmeticTwapToNow(request: DeepPartial<ArithmeticTwapToNowRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapToNowResponse> {
-    return this.rpc.unary(ArithmeticTwapToNowDesc, ArithmeticTwapToNowRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryArithmeticTwapToNowDesc, ArithmeticTwapToNowRequest.fromPartial(request), metadata);
   }
 }
 export const QueryDesc = {

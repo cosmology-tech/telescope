@@ -49,34 +49,34 @@ export class QueryClientImpl implements Query {
     this.lockableDurations = this.lockableDurations.bind(this);
   }
   moduleToDistributeCoins(request: DeepPartial<ModuleToDistributeCoinsRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse> {
-    return this.rpc.unary(ModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
   }
   gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse> {
-    return this.rpc.unary(GaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryGaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
   }
   gauges(request: DeepPartial<GaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<GaugesResponse> {
-    return this.rpc.unary(GaugesDesc, GaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryGaugesDesc, GaugesRequest.fromPartial(request), metadata);
   }
   activeGauges(request: DeepPartial<ActiveGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse> {
-    return this.rpc.unary(ActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
   }
   activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse> {
-    return this.rpc.unary(ActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
   }
   upcomingGauges(request: DeepPartial<UpcomingGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse> {
-    return this.rpc.unary(UpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryUpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
   }
   upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse> {
-    return this.rpc.unary(UpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryUpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
   }
   rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse> {
-    return this.rpc.unary(RewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryRewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
   }
   lockableDurations(request: DeepPartial<QueryLockableDurationsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse> {
     return this.rpc.unary(QueryLockableDurationsDesc, QueryLockableDurationsRequest.fromPartial(request), metadata);

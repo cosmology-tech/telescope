@@ -6,6 +6,10 @@ import { processRpcComment, returnReponseType } from '../utils/rpc';
 import { metadata, bindThis, makeComment, getRpcClassName } from './utils'
 import * as t from '@babel/types'
 
+function capitalizeFirstLetter(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 const gRPCWebMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -153,9 +157,10 @@ const rpcClassConstructor = (
 const GrpcWebClassMethod = (
     context: GenericParseContext,
     name: string,
-    msg: string,
+    // msg: string,
     svc: ProtoServiceMethod,
-    packageImport: string
+    // packageImport: string,
+    implementsName: string
 ) => {
 
     let partialName = 'DeepPartial';
@@ -211,6 +216,15 @@ const GrpcWebClassMethod = (
         )
     }
 
+    // method from service do not have prefix
+    let serviceName: string;
+    if (implementsName === 'Service') {
+        serviceName = ''
+    }
+    else {
+        serviceName = implementsName
+    }
+
     /* 
     return this.rpc.unary(
       QueryParamsDesc,
@@ -230,7 +244,7 @@ const GrpcWebClassMethod = (
                 ),
                 [
                     //No Desc field so we need to modify it
-                    t.identifier(requestType.replace('Request', 'Desc')),
+                    t.identifier(serviceName + capitalizeFirstLetter(name) +  'Desc'),
                     t.callExpression(
                         t.memberExpression(
                             t.identifier(requestType),
@@ -303,9 +317,10 @@ export const createGrpcWebQueryClass = (
             return GrpcWebClassMethod(
                 context,
                 name,
-                key,
+                // key,
                 method,
-                context.ref.proto.package + '.' + service.name
+                // context.ref.proto.package + '.' + service.name,
+                implementsName
             )
         });
 
