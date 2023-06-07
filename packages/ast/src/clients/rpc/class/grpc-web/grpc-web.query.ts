@@ -157,9 +157,7 @@ const rpcClassConstructor = (
 const GrpcWebClassMethod = (
     context: GenericParseContext,
     name: string,
-    // msg: string,
     svc: ProtoServiceMethod,
-    // packageImport: string,
     implementsName: string
 ) => {
 
@@ -317,9 +315,7 @@ export const createGrpcWebQueryClass = (
             return GrpcWebClassMethod(
                 context,
                 name,
-                // key,
                 method,
-                // context.ref.proto.package + '.' + service.name,
                 implementsName
             )
         });
