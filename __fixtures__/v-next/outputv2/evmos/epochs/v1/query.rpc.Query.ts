@@ -20,7 +20,7 @@ export class QueryClientImpl implements Query {
   epochInfos(request: DeepPartial<QueryEpochsInfoRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<QueryEpochsInfoResponse> {
-    return this.rpc.unary(QueryEpochsInfoDesc, QueryEpochsInfoRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryEpochInfosDesc, QueryEpochsInfoRequest.fromPartial(request), metadata);
   }
   currentEpoch(request: DeepPartial<QueryCurrentEpochRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentEpochResponse> {
     return this.rpc.unary(QueryCurrentEpochDesc, QueryCurrentEpochRequest.fromPartial(request), metadata);

@@ -69,52 +69,52 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
   moduleBalance(request: DeepPartial<ModuleBalanceRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse> {
-    return this.rpc.unary(ModuleBalanceDesc, ModuleBalanceRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryModuleBalanceDesc, ModuleBalanceRequest.fromPartial(request), metadata);
   }
   moduleLockedAmount(request: DeepPartial<ModuleLockedAmountRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse> {
-    return this.rpc.unary(ModuleLockedAmountDesc, ModuleLockedAmountRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryModuleLockedAmountDesc, ModuleLockedAmountRequest.fromPartial(request), metadata);
   }
   accountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse> {
-    return this.rpc.unary(AccountUnlockableCoinsDesc, AccountUnlockableCoinsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountUnlockableCoinsDesc, AccountUnlockableCoinsRequest.fromPartial(request), metadata);
   }
   accountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse> {
-    return this.rpc.unary(AccountUnlockingCoinsDesc, AccountUnlockingCoinsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountUnlockingCoinsDesc, AccountUnlockingCoinsRequest.fromPartial(request), metadata);
   }
   accountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse> {
-    return this.rpc.unary(AccountLockedCoinsDesc, AccountLockedCoinsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedCoinsDesc, AccountLockedCoinsRequest.fromPartial(request), metadata);
   }
   accountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse> {
-    return this.rpc.unary(AccountLockedPastTimeDesc, AccountLockedPastTimeRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedPastTimeDesc, AccountLockedPastTimeRequest.fromPartial(request), metadata);
   }
   accountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
-    return this.rpc.unary(AccountLockedPastTimeNotUnlockingOnlyDesc, AccountLockedPastTimeNotUnlockingOnlyRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedPastTimeNotUnlockingOnlyDesc, AccountLockedPastTimeNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
   accountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse> {
-    return this.rpc.unary(AccountUnlockedBeforeTimeDesc, AccountUnlockedBeforeTimeRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountUnlockedBeforeTimeDesc, AccountUnlockedBeforeTimeRequest.fromPartial(request), metadata);
   }
   accountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse> {
-    return this.rpc.unary(AccountLockedPastTimeDenomDesc, AccountLockedPastTimeDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedPastTimeDenomDesc, AccountLockedPastTimeDenomRequest.fromPartial(request), metadata);
   }
   lockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse> {
-    return this.rpc.unary(LockedDenomDesc, LockedDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryLockedDenomDesc, LockedDenomRequest.fromPartial(request), metadata);
   }
   lockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse> {
-    return this.rpc.unary(LockedDesc, LockedRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryLockedByIDDesc, LockedRequest.fromPartial(request), metadata);
   }
   syntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse> {
-    return this.rpc.unary(SyntheticLockupsByLockupIDDesc, SyntheticLockupsByLockupIDRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QuerySyntheticLockupsByLockupIDDesc, SyntheticLockupsByLockupIDRequest.fromPartial(request), metadata);
   }
   accountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse> {
-    return this.rpc.unary(AccountLockedLongerDurationDesc, AccountLockedLongerDurationRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedLongerDurationDesc, AccountLockedLongerDurationRequest.fromPartial(request), metadata);
   }
   accountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse> {
-    return this.rpc.unary(AccountLockedDurationDesc, AccountLockedDurationRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedDurationDesc, AccountLockedDurationRequest.fromPartial(request), metadata);
   }
   accountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
-    return this.rpc.unary(AccountLockedLongerDurationNotUnlockingOnlyDesc, AccountLockedLongerDurationNotUnlockingOnlyRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedLongerDurationNotUnlockingOnlyDesc, AccountLockedLongerDurationNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
   accountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse> {
-    return this.rpc.unary(AccountLockedLongerDurationDenomDesc, AccountLockedLongerDurationDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryAccountLockedLongerDurationDenomDesc, AccountLockedLongerDurationDenomRequest.fromPartial(request), metadata);
   }
   params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
     return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);

@@ -101,10 +101,10 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QuerySpotPriceDesc, QuerySpotPriceRequest.fromPartial(request), metadata);
   }
   estimateSwapExactAmountIn(request: DeepPartial<QuerySwapExactAmountInRequest>, metadata?: grpc.Metadata): Promise<QuerySwapExactAmountInResponse> {
-    return this.rpc.unary(QuerySwapExactAmountInDesc, QuerySwapExactAmountInRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryEstimateSwapExactAmountInDesc, QuerySwapExactAmountInRequest.fromPartial(request), metadata);
   }
   estimateSwapExactAmountOut(request: DeepPartial<QuerySwapExactAmountOutRequest>, metadata?: grpc.Metadata): Promise<QuerySwapExactAmountOutResponse> {
-    return this.rpc.unary(QuerySwapExactAmountOutDesc, QuerySwapExactAmountOutRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryEstimateSwapExactAmountOutDesc, QuerySwapExactAmountOutRequest.fromPartial(request), metadata);
   }
 }
 export const QueryDesc = {
