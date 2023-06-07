@@ -5,7 +5,7 @@ import dargs from 'dargs';
 const glob = require('glob').sync;
 const fs = require('fs');
 const path = require('path');
-const repo = 'https://github.com/cosmology-tech/telescope-boilerplate.git';
+const repo = 'https://github.com/cosmology-tech/telescope-module-boilerplate.git';
 
 export default async argv => {
     if (!shell.which('git')) {
