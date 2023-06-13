@@ -114,7 +114,7 @@ interface TelescopeOpts {
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
         // temporary field for backwards compat
 
-        useRecursiveV2encoding?: boolean;
+        useLegacyInlineEncoding?: boolean;
 
     };
 
@@ -287,7 +287,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
         },
-        useRecursiveV2encoding: false
+        useLegacyInlineEncoding: false
     },
     lcdClients: {
         bundle: true,

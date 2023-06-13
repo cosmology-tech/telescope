@@ -12,6 +12,7 @@ store.traverseAll();
 describe('Any', () => {
     const ref = store.findProto('google/protobuf/any.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     it('interface', () => {
         expectCode(createProtoType(context, 'Any',
             getNestedProto(ref.traversed).Any

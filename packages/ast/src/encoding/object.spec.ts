@@ -11,6 +11,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     const res = traverse(store, ref);
     it('MsgJoinPool', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'MsgJoinPool', getNestedProto(res).MsgJoinPool
@@ -18,6 +19,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     })
     it('MsgSwapExactAmountOut', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'MsgSwapExactAmountOut', getNestedProto(res).MsgSwapExactAmountOut
@@ -25,6 +27,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     })
     it('MsgSwapExactAmountIn', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'MsgSwapExactAmountIn', getNestedProto(res).MsgSwapExactAmountIn
@@ -38,6 +41,7 @@ describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
     const res = traverse(store, ref);
     it('ParseRequest', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'ParseRequest', getNestedProto(res).ParseRequest
@@ -50,6 +54,7 @@ describe('google/api/servicecontrol/v1/log_entry', () => {
     const res = traverse(store, ref);
     it('LogEntry', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'LogEntry', getNestedProto(res).LogEntry
@@ -62,6 +67,7 @@ describe('google/api/expr/v1alpha1/syntax', () => {
     const res = traverse(store, ref);
     it('Constant', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'Constant', getNestedProto(res).Constant
@@ -74,6 +80,7 @@ describe('google/api/expr/v1alpha1/value', () => {
     const res = traverse(store, ref);
     it('MapValue', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'MapValue',
@@ -83,6 +90,7 @@ describe('google/api/expr/v1alpha1/value', () => {
     })
     it('Entry', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'Entry',
@@ -98,6 +106,7 @@ describe('cosmos/tx/signing/v1beta1/signing', () => {
     const res = traverse(store, ref);
     it('SignatureDescriptors', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
@@ -105,6 +114,7 @@ describe('cosmos/tx/signing/v1beta1/signing', () => {
     })
     it('SignatureDescriptor', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'SignatureDescriptor', getNestedProto(res).SignatureDescriptor
@@ -117,6 +127,7 @@ describe('cosmos/tx/v1beta1/tx', () => {
     const res = traverse(store, ref);
     it('AuxSignerData', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'AuxSignerData', getNestedProto(res).AuxSignerData
@@ -124,6 +135,7 @@ describe('cosmos/tx/v1beta1/tx', () => {
     })
     it('ModeInfo_Multi', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'ModeInfo_Multi', getNestedProto(res).ModeInfo
@@ -136,6 +148,7 @@ describe('cosmos/staking/v1beta1', () => {
   const res = traverse(store, ref);
   it('Delegation', () => {
       const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+      context.options.aminoEncoding.useLegacyInlineEncoding = true;
       context.options.prototypes!.typingsFormat!.customTypes!.useCosmosSDKDec = true;
       expectCode(createObjectWithMethods(
           context,
@@ -149,6 +162,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     const res = traverse(store, ref);
     it('Type', () => {
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'Type', getNestedProto(res).Type
@@ -157,6 +171,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     describe('nested', () => {
         it('MapType', () => {
             const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+            context.options.aminoEncoding.useLegacyInlineEncoding = true;
             expectCode(createObjectWithMethods(
                 context,
                 'Type_MapType', getNestedProto(res).Type.nested.MapType
@@ -166,6 +181,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     describe('Decl_FunctionDecl_Overload', () => {
         it('MapType', () => {
             const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+            context.options.aminoEncoding.useLegacyInlineEncoding = true;
             expectCode(createObjectWithMethods(
                 context,
                 'Decl_FunctionDecl_Overload', getNestedProto(res).Decl.nested.FunctionDecl.nested.Overload
@@ -175,6 +191,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     describe('typeHash (Long)', () => {
         it('CheckedExpr', () => {
             const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+            context.options.aminoEncoding.useLegacyInlineEncoding = true;
             expectCode(createObjectWithMethods(
                 context,
                 'CheckedExpr', getNestedProto(res).CheckedExpr
@@ -187,6 +204,7 @@ it('google/api/expr/v1beta1/source', () => {
     const ref = store.findProto('google/api/expr/v1beta1/source.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     expectCode(createObjectWithMethods(
         context,
@@ -198,6 +216,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     expectCode(createObjectWithMethods(
         context,
@@ -209,6 +228,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     expectCode(createObjectWithMethods(
         context,
@@ -220,6 +240,7 @@ it('cosmwasm/wasm/v1/query', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/query.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     expectCode(createObjectWithMethods(
         context,
         'QueryRawContractStateRequest', getNestedProto(res).QueryRawContractStateRequest
@@ -230,6 +251,7 @@ it('ibc/core/port/v1/query', () => {
     const ref = store.findProto('ibc/core/port/v1/query.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
     expectCode(createObjectWithMethods(
         context,
         'QueryAppVersionRequest',
@@ -244,6 +266,7 @@ describe('google/api/quota', () => {
         const ref = store.findProto('google/api/quota.proto');
         const res = traverse(store, ref);
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createObjectWithMethods(
             context,
             'MetricRule',
@@ -260,6 +283,7 @@ describe('ibc/core/types/v1/genesis', () => {
         const ref = store.findProto('ibc/core/types/v1/genesis.proto');
         const res = traverse(store, ref);
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         const ast = createProtoType(
             context,
             'GenesisState',
@@ -281,6 +305,7 @@ describe('google/rpc/error_details', () => {
         const ref = store.findProto('google/rpc/error_details.proto');
         const res = traverse(store, ref);
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         const ast = createProtoType(
             context,
             'PreconditionFailure',
@@ -299,6 +324,7 @@ it('evmos/fees/v1/tx', () => {
     const ref = store.findProto('evmos/fees/v1/tx.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     expectCode(createObjectWithMethods(
         context,
@@ -310,6 +336,7 @@ it('osmosis/gamm/v1beta1/query', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
     const res = traverse(store, ref);
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
     expectCode(createObjectWithMethods(
         context,

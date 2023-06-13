@@ -17,10 +17,10 @@ addRef({
     filename: 'cosmology/example/a.proto',
     content: `
   syntax = "proto3";
-  
+
   package cosmology.finance;
   option go_package = "github.com/cosmology-finance/go";
-  
+
   message MsgTypePackageA {
       enum EnumPackageA {
           NO_HASH = 0;
@@ -30,31 +30,31 @@ addRef({
           RIPEMD160 = 4;
           BITCOIN = 5;
       }
-  
-      
+
+
       enum EnumDuplicateName {
         A = 0;
         B = 1;
         C = 2;
       }
-      
+
       string address = 1;
       EnumPackageA someCoolField    = 2;
       EnumDuplicateName otherField  = 3;
-  
+
     }
-  
+
   `});
 addRef({
     filename: 'cosmology/example/b.proto',
     content: `
   syntax = "proto3";
-  
+
   package cosmology.finance;
   option go_package = "github.com/cosmology-finance/go";
-  
+
   import "cosmology/example/a.proto";
-  
+
   message MsgTypePackageB {
       enum EnumTypePackageB {
           NO_HASH = 0;
@@ -64,26 +64,26 @@ addRef({
           RIPEMD160 = 4;
           BITCOIN = 5;
       }
-  
+
       string address = 1;
       EnumTypePackageB myYolo0 = 2;
-  
+
       message AnotherType {
           MsgTypePackageA myType = 3;
       }
-  
+
       AnotherType anotherField = 4;
-  
+
       enum EnumDuplicateName {
         D = 0;
         E = 1;
         F = 2;
       }
-  
+
       EnumDuplicateName otherField  = 5;
-  
+
   }
-  
+
   `});
 addRef({
     filename: 'cosmology/example/c.proto',
@@ -91,19 +91,19 @@ addRef({
   syntax = "proto3";
   package cosmology.finance;
   option go_package = "github.com/cosmology-finance/go";
-  
+
   import "cosmology/example/b.proto";
-  
+
   message MsgTypePackageC {
       string                                address    = 1;
       cosmology.finance.MsgTypePackageB     awesome    = 2;
   }
-  
+
   service Msg {
       rpc JoinPool(MsgTypePackageC) returns (MsgTypePackageCResponse);
   }
   message MsgTypePackageCResponse {}
-  
+
   `});
 
 store.traverseAll();
@@ -115,6 +115,7 @@ describe('cosmology/example/c', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = camel;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(createAminoConverter({
             context,
             root,

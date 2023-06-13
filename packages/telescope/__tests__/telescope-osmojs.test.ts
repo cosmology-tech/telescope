@@ -204,7 +204,7 @@ const options: TelescopeOptions = {
         }
       }
     },
-    useRecursiveV2encoding: false
+    useLegacyInlineEncoding: true
   },
   packages: {
     akash: {

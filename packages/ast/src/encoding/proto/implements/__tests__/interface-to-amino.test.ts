@@ -6,7 +6,7 @@ import { createInterfaceToAmino, createInterfaceToAminoHelper } from '../to-amin
 const store = getTestProtoStore();
 store.options.interfaces.enabled = true;
 store.options.aminoEncoding.enabled = true;
-store.options.aminoEncoding.useRecursiveV2encoding = true;
+store.options.aminoEncoding.useLegacyInlineEncoding = false;
 store.traverseAll();
 
 const typeMap: InterfaceTypeUrlMap = {
