@@ -210,7 +210,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     logLevel: TelescopeLogLevel.None,
 
     interfaces: {
-        enabled: false,
+        enabled: true,
         useUnionTypes: false,
     },
 
@@ -230,29 +230,29 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toSDK: false,
             fromSDK: false,
             fromSDKJSON: false,
-            toAmino: false,
-            fromAmino: false,
-            toProto: false,
-            fromProto: false,
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
-        addTypeUrlToObjects: false,
+        addTypeUrlToObjects: true,
         addAminoTypeToObjects: false,
-        addTypeUrlToDecoders: false,
+        addTypeUrlToDecoders: true,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: false
+              useCosmosSDKDec: true
             },
-            num64: 'long',
-            useDeepPartial: true,
+            num64: 'bigint',
+            useDeepPartial: false,
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
