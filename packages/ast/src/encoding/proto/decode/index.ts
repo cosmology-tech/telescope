@@ -5,6 +5,7 @@ import { ProtoParseContext } from '../../context';
 import { getBaseCreateTypeFuncName } from '../types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { baseTypes, decode } from './utils';
+import { BinaryCoder } from '../../../utils/binary-coder-expression';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement decode (${field.type} rules[${field.rule}] name[${name}])`);
@@ -134,7 +135,7 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
 };
 
 export const decodeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    context.addUtil('_m0');
+    BinaryCoder.addUtil(context);
 
     let returnType = name;
     // decode can be coupled to API requests
@@ -151,13 +152,7 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                 t.tsTypeAnnotation(
                     t.tsUnionType(
                         [
-                            t.tsTypeReference(
-                                t.tsQualifiedName(
-                                    t.identifier('_m0'),
-                                    t.identifier('Reader')
-                                ),
-                                null
-                            ),
+                            BinaryCoder.getReaderTypeRef(context),
                             t.tsTypeReference(
                                 t.identifier('Uint8Array')
                             )
@@ -184,17 +179,11 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                             t.binaryExpression(
                                 'instanceof',
                                 t.identifier('input'),
-                                t.memberExpression(
-                                    t.identifier('_m0'),
-                                    t.identifier('Reader')
-                                )
+                                BinaryCoder.getReaderMemberExp(context)
                             ),
                             t.identifier('input'),
                             t.newExpression(
-                                t.memberExpression(
-                                    t.identifier('_m0'),
-                                    t.identifier('Reader')
-                                ),
+                                BinaryCoder.getReaderMemberExp(context),
                                 [
                                     t.identifier('input')
                                 ]
@@ -236,7 +225,7 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
             ),
 
             /*
-            
+
     const message = createBaseMsgJoinPool();
 
             */
@@ -248,7 +237,7 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                         t.identifier('message'),
                         t.callExpression(
 
-                            // 
+                            //
                             t.identifier(getBaseCreateTypeFuncName(name)),
                             []
                         )

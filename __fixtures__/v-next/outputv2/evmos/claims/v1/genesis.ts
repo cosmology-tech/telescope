@@ -1,5 +1,5 @@
 import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType } from "./claims";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";

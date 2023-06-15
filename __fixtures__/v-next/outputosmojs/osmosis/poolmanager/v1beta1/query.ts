@@ -1,8 +1,8 @@
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./swap_route";
 import { Params, ParamsSDKType } from "./genesis";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** =============================== Params */
 export interface ParamsRequest {}
@@ -145,11 +145,11 @@ function createBaseParamsRequest(): ParamsRequest {
   return {};
 }
 export const ParamsRequest = {
-  encode(_: ParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsRequest();
     while (reader.pos < end) {
@@ -190,14 +190,14 @@ function createBaseParamsResponse(): ParamsResponse {
   };
 }
 export const ParamsResponse = {
-  encode(message: ParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsResponse();
     while (reader.pos < end) {
@@ -246,15 +246,15 @@ export const ParamsResponse = {
 };
 function createBaseEstimateSwapExactAmountInRequest(): EstimateSwapExactAmountInRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenIn: "",
     routes: []
   };
 }
 export const EstimateSwapExactAmountInRequest = {
-  encode(message: EstimateSwapExactAmountInRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     if (message.tokenIn !== "") {
       writer.uint32(26).string(message.tokenIn);
@@ -264,15 +264,15 @@ export const EstimateSwapExactAmountInRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSwapExactAmountInRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSwapExactAmountInRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSwapExactAmountInRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.tokenIn = reader.string();
@@ -289,14 +289,14 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromJSON(object: any): EstimateSwapExactAmountInRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
   },
   toJSON(message: EstimateSwapExactAmountInRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
@@ -307,7 +307,7 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountInRequest>): EstimateSwapExactAmountInRequest {
     const message = createBaseEstimateSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -321,7 +321,7 @@ export const EstimateSwapExactAmountInRequest = {
   },
   fromSDKJSON(object: any): EstimateSwapExactAmountInRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
     };
@@ -340,15 +340,15 @@ export const EstimateSwapExactAmountInRequest = {
 };
 function createBaseEstimateSinglePoolSwapExactAmountInRequest(): EstimateSinglePoolSwapExactAmountInRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenIn: "",
     tokenOutDenom: ""
   };
 }
 export const EstimateSinglePoolSwapExactAmountInRequest = {
-  encode(message: EstimateSinglePoolSwapExactAmountInRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSinglePoolSwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tokenIn !== "") {
       writer.uint32(18).string(message.tokenIn);
@@ -358,15 +358,15 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSinglePoolSwapExactAmountInRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSinglePoolSwapExactAmountInRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSinglePoolSwapExactAmountInRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokenIn = reader.string();
@@ -383,21 +383,21 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountInRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountInRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountInRequest>): EstimateSinglePoolSwapExactAmountInRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountInRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOutDenom = object.tokenOutDenom ?? "";
     return message;
@@ -411,7 +411,7 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   fromSDKJSON(object: any): EstimateSinglePoolSwapExactAmountInRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       token_out_denom: isSet(object.token_out_denom) ? String(object.token_out_denom) : ""
     };
@@ -430,14 +430,14 @@ function createBaseEstimateSwapExactAmountInResponse(): EstimateSwapExactAmountI
   };
 }
 export const EstimateSwapExactAmountInResponse = {
-  encode(message: EstimateSwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSwapExactAmountInResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSwapExactAmountInResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSwapExactAmountInResponse();
     while (reader.pos < end) {
@@ -486,15 +486,15 @@ export const EstimateSwapExactAmountInResponse = {
 };
 function createBaseEstimateSwapExactAmountOutRequest(): EstimateSwapExactAmountOutRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     routes: [],
     tokenOut: ""
   };
 }
 export const EstimateSwapExactAmountOutRequest = {
-  encode(message: EstimateSwapExactAmountOutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     for (const v of message.routes) {
       SwapAmountOutRoute.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -504,15 +504,15 @@ export const EstimateSwapExactAmountOutRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSwapExactAmountOutRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSwapExactAmountOutRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSwapExactAmountOutRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
@@ -529,14 +529,14 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromJSON(object: any): EstimateSwapExactAmountOutRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: EstimateSwapExactAmountOutRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
     } else {
@@ -547,7 +547,7 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromPartial(object: DeepPartial<EstimateSwapExactAmountOutRequest>): EstimateSwapExactAmountOutRequest {
     const message = createBaseEstimateSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -561,7 +561,7 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   fromSDKJSON(object: any): EstimateSwapExactAmountOutRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -580,15 +580,15 @@ export const EstimateSwapExactAmountOutRequest = {
 };
 function createBaseEstimateSinglePoolSwapExactAmountOutRequest(): EstimateSinglePoolSwapExactAmountOutRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenInDenom: "",
     tokenOut: ""
   };
 }
 export const EstimateSinglePoolSwapExactAmountOutRequest = {
-  encode(message: EstimateSinglePoolSwapExactAmountOutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSinglePoolSwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tokenInDenom !== "") {
       writer.uint32(18).string(message.tokenInDenom);
@@ -598,15 +598,15 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSinglePoolSwapExactAmountOutRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSinglePoolSwapExactAmountOutRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokenInDenom = reader.string();
@@ -623,21 +623,21 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountOutRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountOutRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut);
     return obj;
   },
   fromPartial(object: DeepPartial<EstimateSinglePoolSwapExactAmountOutRequest>): EstimateSinglePoolSwapExactAmountOutRequest {
     const message = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenInDenom = object.tokenInDenom ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -651,7 +651,7 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   fromSDKJSON(object: any): EstimateSinglePoolSwapExactAmountOutRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in_denom: isSet(object.token_in_denom) ? String(object.token_in_denom) : "",
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -670,14 +670,14 @@ function createBaseEstimateSwapExactAmountOutResponse(): EstimateSwapExactAmount
   };
 }
 export const EstimateSwapExactAmountOutResponse = {
-  encode(message: EstimateSwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EstimateSwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EstimateSwapExactAmountOutResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSwapExactAmountOutResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSwapExactAmountOutResponse();
     while (reader.pos < end) {
@@ -728,11 +728,11 @@ function createBaseNumPoolsRequest(): NumPoolsRequest {
   return {};
 }
 export const NumPoolsRequest = {
-  encode(_: NumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: NumPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): NumPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): NumPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNumPoolsRequest();
     while (reader.pos < end) {
@@ -769,25 +769,25 @@ export const NumPoolsRequest = {
 };
 function createBaseNumPoolsResponse(): NumPoolsResponse {
   return {
-    numPools: BigInt("0")
+    numPools: BigInt(0)
   };
 }
 export const NumPoolsResponse = {
-  encode(message: NumPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NumPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numPools !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.numPools.toString()));
+      writer.uint32(8).uint64(message.numPools);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): NumPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): NumPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNumPoolsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numPools = BigInt(reader.uint64().toString());
+          message.numPools = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -798,17 +798,17 @@ export const NumPoolsResponse = {
   },
   fromJSON(object: any): NumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt("0")
+      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
     };
   },
   toJSON(message: NumPoolsResponse): unknown {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt("0")).toString());
+    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<NumPoolsResponse>): NumPoolsResponse {
     const message = createBaseNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt("0");
+    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: NumPoolsResponseSDKType): NumPoolsResponse {
@@ -818,7 +818,7 @@ export const NumPoolsResponse = {
   },
   fromSDKJSON(object: any): NumPoolsResponseSDKType {
     return {
-      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt("0")
+      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt(0)
     };
   },
   toSDK(message: NumPoolsResponse): NumPoolsResponseSDKType {
@@ -829,25 +829,25 @@ export const NumPoolsResponse = {
 };
 function createBasePoolRequest(): PoolRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const PoolRequest = {
-  encode(message: PoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -858,17 +858,17 @@ export const PoolRequest = {
   },
   fromJSON(object: any): PoolRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: PoolRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PoolRequest>): PoolRequest {
     const message = createBasePoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PoolRequestSDKType): PoolRequest {
@@ -878,7 +878,7 @@ export const PoolRequest = {
   },
   fromSDKJSON(object: any): PoolRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: PoolRequest): PoolRequestSDKType {
@@ -893,14 +893,14 @@ function createBasePoolResponse(): PoolResponse {
   };
 }
 export const PoolResponse = {
-  encode(message: PoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolResponse();
     while (reader.pos < end) {
@@ -949,25 +949,25 @@ export const PoolResponse = {
 };
 function createBaseAllPoolsRequest(): AllPoolsRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const AllPoolsRequest = {
-  encode(message: AllPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AllPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllPoolsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -978,17 +978,17 @@ export const AllPoolsRequest = {
   },
   fromJSON(object: any): AllPoolsRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: AllPoolsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<AllPoolsRequest>): AllPoolsRequest {
     const message = createBaseAllPoolsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AllPoolsRequestSDKType): AllPoolsRequest {
@@ -998,7 +998,7 @@ export const AllPoolsRequest = {
   },
   fromSDKJSON(object: any): AllPoolsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: AllPoolsRequest): AllPoolsRequestSDKType {
@@ -1013,14 +1013,14 @@ function createBaseAllPoolsResponse(): AllPoolsResponse {
   };
 }
 export const AllPoolsResponse = {
-  encode(message: AllPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AllPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AllPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllPoolsResponse();
     while (reader.pos < end) {
@@ -1077,15 +1077,15 @@ export const AllPoolsResponse = {
 };
 function createBaseSpotPriceRequest(): SpotPriceRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     baseAssetDenom: "",
     quoteAssetDenom: ""
   };
 }
 export const SpotPriceRequest = {
-  encode(message: SpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAssetDenom !== "") {
       writer.uint32(18).string(message.baseAssetDenom);
@@ -1095,15 +1095,15 @@ export const SpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SpotPriceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SpotPriceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotPriceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.baseAssetDenom = reader.string();
@@ -1120,21 +1120,21 @@ export const SpotPriceRequest = {
   },
   fromJSON(object: any): SpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
   toJSON(message: SpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<SpotPriceRequest>): SpotPriceRequest {
     const message = createBaseSpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -1148,7 +1148,7 @@ export const SpotPriceRequest = {
   },
   fromSDKJSON(object: any): SpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
       quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
     };
@@ -1167,14 +1167,14 @@ function createBaseSpotPriceResponse(): SpotPriceResponse {
   };
 }
 export const SpotPriceResponse = {
-  encode(message: SpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SpotPriceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SpotPriceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotPriceResponse();
     while (reader.pos < end) {

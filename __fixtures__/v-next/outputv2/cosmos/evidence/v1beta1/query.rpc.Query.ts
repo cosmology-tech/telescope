@@ -1,11 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
+import { QueryEvidenceRequest, QueryEvidenceResponse, QueryAllEvidenceRequest, QueryAllEvidenceResponse } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */
@@ -36,7 +33,7 @@ export const QueryEvidenceDesc: UnaryMethodDefinitionish = {
   methodName: "Evidence",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryEvidenceRequest.encode(this).finish();
@@ -57,7 +54,7 @@ export const QueryAllEvidenceDesc: UnaryMethodDefinitionish = {
   methodName: "AllEvidence",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllEvidenceRequest.encode(this).finish();
@@ -75,30 +72,30 @@ export const QueryAllEvidenceDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -114,8 +111,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
@@ -71,77 +71,77 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryPoolsResponse> {
     const data = QueryPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pools", data);
-    return promise.then(data => QueryPoolsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolsResponse.decode(new BinaryReader(data)));
   }
   numPools(request: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const data = QueryNumPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "NumPools", data);
-    return promise.then(data => QueryNumPoolsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryNumPoolsResponse.decode(new BinaryReader(data)));
   }
   totalLiquidity(request: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const data = QueryTotalLiquidityRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalLiquidity", data);
-    return promise.then(data => QueryTotalLiquidityResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTotalLiquidityResponse.decode(new BinaryReader(data)));
   }
   poolsWithFilter(request: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponse> {
     const data = QueryPoolsWithFilterRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolsWithFilter", data);
-    return promise.then(data => QueryPoolsWithFilterResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolsWithFilterResponse.decode(new BinaryReader(data)));
   }
   pool(request: QueryPoolRequest): Promise<QueryPoolResponse> {
     const data = QueryPoolRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pool", data);
-    return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolResponse.decode(new BinaryReader(data)));
   }
   poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse> {
     const data = QueryPoolTypeRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolType", data);
-    return promise.then(data => QueryPoolTypeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolTypeResponse.decode(new BinaryReader(data)));
   }
   calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): Promise<QueryCalcJoinPoolNoSwapSharesResponse> {
     const data = QueryCalcJoinPoolNoSwapSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcJoinPoolNoSwapShares", data);
-    return promise.then(data => QueryCalcJoinPoolNoSwapSharesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCalcJoinPoolNoSwapSharesResponse.decode(new BinaryReader(data)));
   }
   calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponse> {
     const data = QueryCalcJoinPoolSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcJoinPoolShares", data);
-    return promise.then(data => QueryCalcJoinPoolSharesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCalcJoinPoolSharesResponse.decode(new BinaryReader(data)));
   }
   calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponse> {
     const data = QueryCalcExitPoolCoinsFromSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "CalcExitPoolCoinsFromShares", data);
-    return promise.then(data => QueryCalcExitPoolCoinsFromSharesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCalcExitPoolCoinsFromSharesResponse.decode(new BinaryReader(data)));
   }
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const data = QueryPoolParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolParams", data);
-    return promise.then(data => QueryPoolParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPoolParamsResponse.decode(new BinaryReader(data)));
   }
   totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const data = QueryTotalPoolLiquidityRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalPoolLiquidity", data);
-    return promise.then(data => QueryTotalPoolLiquidityResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTotalPoolLiquidityResponse.decode(new BinaryReader(data)));
   }
   totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const data = QueryTotalSharesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalShares", data);
-    return promise.then(data => QueryTotalSharesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTotalSharesResponse.decode(new BinaryReader(data)));
   }
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
     const data = QuerySpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "SpotPrice", data);
-    return promise.then(data => QuerySpotPriceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySpotPriceResponse.decode(new BinaryReader(data)));
   }
   estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
     const data = QuerySwapExactAmountInRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "EstimateSwapExactAmountIn", data);
-    return promise.then(data => QuerySwapExactAmountInResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySwapExactAmountInResponse.decode(new BinaryReader(data)));
   }
   estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
     const data = QuerySwapExactAmountOutRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "EstimateSwapExactAmountOut", data);
-    return promise.then(data => QuerySwapExactAmountOutResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySwapExactAmountOutResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

@@ -1,12 +1,8 @@
-import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightSDKType } from "../../client/v1/client";
 import { UnaryMethodDefinitionish } from "../../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
+import { MsgConnectionOpenInit, MsgConnectionOpenInitResponse, MsgConnectionOpenTry, MsgConnectionOpenTryResponse, MsgConnectionOpenAck, MsgConnectionOpenAckResponse, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmResponse } from "./tx";
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {
   /** ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
@@ -50,7 +46,7 @@ export const MsgConnectionOpenInitDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenInit.encode(this).finish();
@@ -71,7 +67,7 @@ export const MsgConnectionOpenTryDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenTry",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenTry.encode(this).finish();
@@ -92,7 +88,7 @@ export const MsgConnectionOpenAckDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenAck",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenAck.encode(this).finish();
@@ -113,7 +109,7 @@ export const MsgConnectionOpenConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionOpenConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgConnectionOpenConfirm.encode(this).finish();
@@ -131,30 +127,30 @@ export const MsgConnectionOpenConfirmDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -170,8 +166,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

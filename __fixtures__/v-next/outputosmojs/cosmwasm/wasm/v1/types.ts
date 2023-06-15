@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
 export enum AccessType {
@@ -231,14 +231,14 @@ function createBaseAccessTypeParam(): AccessTypeParam {
   };
 }
 export const AccessTypeParam = {
-  encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccessTypeParam, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccessTypeParam {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessTypeParam {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessTypeParam();
     while (reader.pos < end) {
@@ -292,7 +292,7 @@ function createBaseAccessConfig(): AccessConfig {
   };
 }
 export const AccessConfig = {
-  encode(message: AccessConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccessConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.permission !== 0) {
       writer.uint32(8).int32(message.permission);
     }
@@ -301,8 +301,8 @@ export const AccessConfig = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccessConfig {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessConfig();
     while (reader.pos < end) {
@@ -362,11 +362,11 @@ function createBaseParams(): Params {
   return {
     codeUploadAccess: undefined,
     instantiateDefaultPermission: 0,
-    maxWasmCodeSize: BigInt("0")
+    maxWasmCodeSize: BigInt(0)
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeUploadAccess !== undefined) {
       AccessConfig.encode(message.codeUploadAccess, writer.uint32(10).fork()).ldelim();
     }
@@ -374,12 +374,12 @@ export const Params = {
       writer.uint32(16).int32(message.instantiateDefaultPermission);
     }
     if (message.maxWasmCodeSize !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.maxWasmCodeSize.toString()));
+      writer.uint32(24).uint64(message.maxWasmCodeSize);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -392,7 +392,7 @@ export const Params = {
           message.instantiateDefaultPermission = (reader.int32() as any);
           break;
         case 3:
-          message.maxWasmCodeSize = BigInt(reader.uint64().toString());
+          message.maxWasmCodeSize = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -405,21 +405,21 @@ export const Params = {
     return {
       codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
       instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : 0,
-      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? BigInt(object.maxWasmCodeSize.toString()) : BigInt("0")
+      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0)
     };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.codeUploadAccess !== undefined && (obj.codeUploadAccess = message.codeUploadAccess ? AccessConfig.toJSON(message.codeUploadAccess) : undefined);
     message.instantiateDefaultPermission !== undefined && (obj.instantiateDefaultPermission = accessTypeToJSON(message.instantiateDefaultPermission));
-    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || BigInt("0")).toString());
+    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
-    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt("0");
+    message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -433,7 +433,7 @@ export const Params = {
     return {
       code_upload_access: isSet(object.code_upload_access) ? AccessConfig.fromSDKJSON(object.code_upload_access) : undefined,
       instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
-      max_wasm_code_size: isSet(object.max_wasm_code_size) ? BigInt(object.max_wasm_code_size.toString()) : BigInt("0")
+      max_wasm_code_size: isSet(object.max_wasm_code_size) ? BigInt(object.max_wasm_code_size.toString()) : BigInt(0)
     };
   },
   toSDK(message: Params): ParamsSDKType {
@@ -452,7 +452,7 @@ function createBaseCodeInfo(): CodeInfo {
   };
 }
 export const CodeInfo = {
-  encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CodeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
     }
@@ -464,8 +464,8 @@ export const CodeInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CodeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CodeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeInfo();
     while (reader.pos < end) {
@@ -532,7 +532,7 @@ export const CodeInfo = {
 };
 function createBaseContractInfo(): ContractInfo {
   return {
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     creator: "",
     admin: "",
     label: "",
@@ -542,9 +542,9 @@ function createBaseContractInfo(): ContractInfo {
   };
 }
 export const ContractInfo = {
-  encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(8).uint64(message.codeId);
     }
     if (message.creator !== "") {
       writer.uint32(18).string(message.creator);
@@ -566,15 +566,15 @@ export const ContractInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContractInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContractInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 2:
           message.creator = reader.string();
@@ -603,7 +603,7 @@ export const ContractInfo = {
   },
   fromJSON(object: any): ContractInfo {
     return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -614,7 +614,7 @@ export const ContractInfo = {
   },
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.creator !== undefined && (obj.creator = message.creator);
     message.admin !== undefined && (obj.admin = message.admin);
     message.label !== undefined && (obj.label = message.label);
@@ -625,7 +625,7 @@ export const ContractInfo = {
   },
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.creator = object.creator ?? "";
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
@@ -647,7 +647,7 @@ export const ContractInfo = {
   },
   fromSDKJSON(object: any): ContractInfoSDKType {
     return {
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -671,18 +671,18 @@ export const ContractInfo = {
 function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     updated: undefined,
     msg: new Uint8Array()
   };
 }
 export const ContractCodeHistoryEntry = {
-  encode(message: ContractCodeHistoryEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ContractCodeHistoryEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operation !== 0) {
       writer.uint32(8).int32(message.operation);
     }
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(16).uint64(message.codeId);
     }
     if (message.updated !== undefined) {
       AbsoluteTxPosition.encode(message.updated, writer.uint32(26).fork()).ldelim();
@@ -692,8 +692,8 @@ export const ContractCodeHistoryEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContractCodeHistoryEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContractCodeHistoryEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractCodeHistoryEntry();
     while (reader.pos < end) {
@@ -703,7 +703,7 @@ export const ContractCodeHistoryEntry = {
           message.operation = (reader.int32() as any);
           break;
         case 2:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 3:
           message.updated = AbsoluteTxPosition.decode(reader, reader.uint32());
@@ -721,7 +721,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -729,7 +729,7 @@ export const ContractCodeHistoryEntry = {
   toJSON(message: ContractCodeHistoryEntry): unknown {
     const obj: any = {};
     message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toJSON(message.updated) : undefined);
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
@@ -737,7 +737,7 @@ export const ContractCodeHistoryEntry = {
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
@@ -753,7 +753,7 @@ export const ContractCodeHistoryEntry = {
   fromSDKJSON(object: any): ContractCodeHistoryEntrySDKType {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDKJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -769,32 +769,32 @@ export const ContractCodeHistoryEntry = {
 };
 function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
   return {
-    blockHeight: BigInt("0"),
-    txIndex: BigInt("0")
+    blockHeight: BigInt(0),
+    txIndex: BigInt(0)
   };
 }
 export const AbsoluteTxPosition = {
-  encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AbsoluteTxPosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockHeight !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.blockHeight.toString()));
+      writer.uint32(8).uint64(message.blockHeight);
     }
     if (message.txIndex !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.txIndex.toString()));
+      writer.uint32(16).uint64(message.txIndex);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AbsoluteTxPosition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AbsoluteTxPosition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAbsoluteTxPosition();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = BigInt(reader.uint64().toString());
+          message.blockHeight = reader.uint64();
           break;
         case 2:
-          message.txIndex = BigInt(reader.uint64().toString());
+          message.txIndex = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -805,20 +805,20 @@ export const AbsoluteTxPosition = {
   },
   fromJSON(object: any): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
-      txIndex: isSet(object.txIndex) ? BigInt(object.txIndex.toString()) : BigInt("0")
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
+      txIndex: isSet(object.txIndex) ? BigInt(object.txIndex.toString()) : BigInt(0)
     };
   },
   toJSON(message: AbsoluteTxPosition): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt("0")).toString());
-    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || BigInt("0")).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
+    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
-    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? BigInt(object.txIndex.toString()) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
+    message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? BigInt(object.txIndex.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
@@ -829,8 +829,8 @@ export const AbsoluteTxPosition = {
   },
   fromSDKJSON(object: any): AbsoluteTxPositionSDKType {
     return {
-      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
-      tx_index: isSet(object.tx_index) ? BigInt(object.tx_index.toString()) : BigInt("0")
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt(0),
+      tx_index: isSet(object.tx_index) ? BigInt(object.tx_index.toString()) : BigInt(0)
     };
   },
   toSDK(message: AbsoluteTxPosition): AbsoluteTxPositionSDKType {
@@ -847,7 +847,7 @@ function createBaseModel(): Model {
   };
 }
 export const Model = {
-  encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Model, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -856,8 +856,8 @@ export const Model = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Model {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Model {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModel();
     while (reader.pos < end) {

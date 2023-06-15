@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 /**
  * EpochInfo is a struct that describes the data going into
@@ -87,14 +87,14 @@ function createBaseEpochInfo(): EpochInfo {
     identifier: "",
     startTime: undefined,
     duration: undefined,
-    currentEpoch: BigInt("0"),
+    currentEpoch: BigInt(0),
     currentEpochStartTime: undefined,
     epochCountingStarted: false,
-    currentEpochStartHeight: BigInt("0")
+    currentEpochStartHeight: BigInt(0)
   };
 }
 export const EpochInfo = {
-  encode(message: EpochInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
@@ -105,7 +105,7 @@ export const EpochInfo = {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
     if (message.currentEpoch !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.currentEpoch.toString()));
+      writer.uint32(32).int64(message.currentEpoch);
     }
     if (message.currentEpochStartTime !== undefined) {
       Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
@@ -114,12 +114,12 @@ export const EpochInfo = {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
     if (message.currentEpochStartHeight !== BigInt(0)) {
-      writer.uint32(64).int64(Long.fromString(message.currentEpochStartHeight.toString()));
+      writer.uint32(64).int64(message.currentEpochStartHeight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EpochInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EpochInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEpochInfo();
     while (reader.pos < end) {
@@ -135,7 +135,7 @@ export const EpochInfo = {
           message.duration = Duration.decode(reader, reader.uint32());
           break;
         case 4:
-          message.currentEpoch = BigInt(reader.int64().toString());
+          message.currentEpoch = reader.int64();
           break;
         case 5:
           message.currentEpochStartTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -144,7 +144,7 @@ export const EpochInfo = {
           message.epochCountingStarted = reader.bool();
           break;
         case 8:
-          message.currentEpochStartHeight = BigInt(reader.int64().toString());
+          message.currentEpochStartHeight = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -158,10 +158,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt("0"),
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0),
       currentEpochStartTime: isSet(object.currentEpochStartTime) ? new Date(object.currentEpochStartTime) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0")
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? BigInt(object.currentEpochStartHeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: EpochInfo): unknown {
@@ -169,10 +169,10 @@ export const EpochInfo = {
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt("0")).toString());
+    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
     message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
     message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt("0")).toString());
+    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
@@ -180,10 +180,10 @@ export const EpochInfo = {
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
-    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt("0");
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt("0");
+    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: EpochInfoSDKType): EpochInfo {
@@ -202,10 +202,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
-      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt("0"),
+      current_epoch: isSet(object.current_epoch) ? BigInt(object.current_epoch.toString()) : BigInt(0),
       current_epoch_start_time: isSet(object.current_epoch_start_time) ? new Date(object.current_epoch_start_time) : undefined,
       epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
-      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt("0")
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? BigInt(object.current_epoch_start_height.toString()) : BigInt(0)
     };
   },
   toSDK(message: EpochInfo): EpochInfoSDKType {
@@ -226,14 +226,14 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {

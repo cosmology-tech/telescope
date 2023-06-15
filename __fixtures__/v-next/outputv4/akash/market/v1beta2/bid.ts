@@ -1,7 +1,7 @@
 import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -151,7 +151,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
   };
 }
 export const MsgCreateBid = {
-  encode(message: MsgCreateBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       OrderID.encode(message.order, writer.uint32(10).fork()).ldelim();
     }
@@ -166,8 +166,8 @@ export const MsgCreateBid = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBid();
     while (reader.pos < end) {
@@ -245,11 +245,11 @@ function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
   return {};
 }
 export const MsgCreateBidResponse = {
-  encode(_: MsgCreateBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBidResponse();
     while (reader.pos < end) {
@@ -290,14 +290,14 @@ function createBaseMsgCloseBid(): MsgCloseBid {
   };
 }
 export const MsgCloseBid = {
-  encode(message: MsgCloseBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBid();
     while (reader.pos < end) {
@@ -348,11 +348,11 @@ function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
   return {};
 }
 export const MsgCloseBidResponse = {
-  encode(_: MsgCloseBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBidResponse();
     while (reader.pos < end) {
@@ -390,19 +390,19 @@ export const MsgCloseBidResponse = {
 function createBaseBidID(): BidID {
   return {
     owner: "",
-    dseq: BigInt("0"),
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: ""
   };
 }
 export const BidID = {
-  encode(message: BidID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -415,8 +415,8 @@ export const BidID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidID();
     while (reader.pos < end) {
@@ -426,7 +426,7 @@ export const BidID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = BigInt(reader.uint64().toString());
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -447,7 +447,7 @@ export const BidID = {
   fromJSON(object: any): BidID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -456,7 +456,7 @@ export const BidID = {
   toJSON(message: BidID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -465,7 +465,7 @@ export const BidID = {
   fromPartial<I extends Exact<DeepPartial<BidID>, I>>(object: I): BidID {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -483,7 +483,7 @@ export const BidID = {
   fromSDKJSON(object: any): BidIDSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -504,11 +504,11 @@ function createBaseBid(): Bid {
     bidId: undefined,
     state: 0,
     price: undefined,
-    createdAt: BigInt("0")
+    createdAt: BigInt(0)
   };
 }
 export const Bid = {
-  encode(message: Bid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Bid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
@@ -519,12 +519,12 @@ export const Bid = {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Bid {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Bid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBid();
     while (reader.pos < end) {
@@ -540,7 +540,7 @@ export const Bid = {
           message.price = DecCoin.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = BigInt(reader.int64().toString());
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -554,7 +554,7 @@ export const Bid = {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
   },
   toJSON(message: Bid): unknown {
@@ -562,7 +562,7 @@ export const Bid = {
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
     message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt("0")).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Bid>, I>>(object: I): Bid {
@@ -570,7 +570,7 @@ export const Bid = {
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     message.state = object.state ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: BidSDKType): Bid {
@@ -586,7 +586,7 @@ export const Bid = {
       bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Bid): BidSDKType {
@@ -601,7 +601,7 @@ export const Bid = {
 function createBaseBidFilters(): BidFilters {
   return {
     owner: "",
-    dseq: BigInt("0"),
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: "",
@@ -609,12 +609,12 @@ function createBaseBidFilters(): BidFilters {
   };
 }
 export const BidFilters = {
-  encode(message: BidFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BidFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     if (message.dseq !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.dseq.toString()));
+      writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
       writer.uint32(24).uint32(message.gseq);
@@ -630,8 +630,8 @@ export const BidFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BidFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BidFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidFilters();
     while (reader.pos < end) {
@@ -641,7 +641,7 @@ export const BidFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = BigInt(reader.uint64().toString());
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -665,7 +665,7 @@ export const BidFilters = {
   fromJSON(object: any): BidFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",
@@ -675,7 +675,7 @@ export const BidFilters = {
   toJSON(message: BidFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt("0")).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -685,7 +685,7 @@ export const BidFilters = {
   fromPartial<I extends Exact<DeepPartial<BidFilters>, I>>(object: I): BidFilters {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt("0");
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -705,7 +705,7 @@ export const BidFilters = {
   fromSDKJSON(object: any): BidFiltersSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt("0"),
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",

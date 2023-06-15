@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
@@ -556,7 +556,7 @@ function createBaseManagedService(): ManagedService {
   };
 }
 export const ManagedService = {
-  encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ManagedService, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
     }
@@ -565,8 +565,8 @@ export const ManagedService = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ManagedService {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseManagedService();
     while (reader.pos < end) {
@@ -631,7 +631,7 @@ function createBaseOperationMetadata(): OperationMetadata {
   };
 }
 export const OperationMetadata = {
-  encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
     }
@@ -646,8 +646,8 @@ export const OperationMetadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
     while (reader.pos < end) {
@@ -744,7 +744,7 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
   };
 }
 export const OperationMetadata_Step = {
-  encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: OperationMetadata_Step, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
@@ -753,8 +753,8 @@ export const OperationMetadata_Step = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationMetadata_Step {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata_Step {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata_Step();
     while (reader.pos < end) {
@@ -818,7 +818,7 @@ function createBaseDiagnostic(): Diagnostic {
   };
 }
 export const Diagnostic = {
-  encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Diagnostic, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }
@@ -830,8 +830,8 @@ export const Diagnostic = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Diagnostic {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Diagnostic {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDiagnostic();
     while (reader.pos < end) {
@@ -903,7 +903,7 @@ function createBaseConfigSource(): ConfigSource {
   };
 }
 export const ConfigSource = {
-  encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(42).string(message.id);
     }
@@ -912,8 +912,8 @@ export const ConfigSource = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigSource {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConfigSource {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigSource();
     while (reader.pos < end) {
@@ -985,7 +985,7 @@ function createBaseConfigFile(): ConfigFile {
   };
 }
 export const ConfigFile = {
-  encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigFile, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
     }
@@ -997,8 +997,8 @@ export const ConfigFile = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigFile {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConfigFile {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigFile();
     while (reader.pos < end) {
@@ -1069,14 +1069,14 @@ function createBaseConfigRef(): ConfigRef {
   };
 }
 export const ConfigRef = {
-  encode(message: ConfigRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ConfigRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRef {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConfigRef {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigRef();
     while (reader.pos < end) {
@@ -1129,14 +1129,14 @@ function createBaseChangeReport(): ChangeReport {
   };
 }
 export const ChangeReport = {
-  encode(message: ChangeReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ChangeReport, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.configChanges) {
       ConfigChange.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ChangeReport {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ChangeReport {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangeReport();
     while (reader.pos < end) {
@@ -1203,7 +1203,7 @@ function createBaseRollout(): Rollout {
   };
 }
 export const Rollout = {
-  encode(message: Rollout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Rollout, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
     }
@@ -1227,8 +1227,8 @@ export const Rollout = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Rollout {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout();
     while (reader.pos < end) {
@@ -1336,7 +1336,7 @@ function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_Tr
   };
 }
 export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
-  encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1345,8 +1345,8 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
     while (reader.pos < end) {
@@ -1408,7 +1408,7 @@ function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrat
   };
 }
 export const Rollout_TrafficPercentStrategy = {
-  encode(message: Rollout_TrafficPercentStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Rollout_TrafficPercentStrategy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.percentages).forEach(([key, value]) => {
       Rollout_TrafficPercentStrategy_PercentagesEntry.encode({
         key: (key as any),
@@ -1417,8 +1417,8 @@ export const Rollout_TrafficPercentStrategy = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_TrafficPercentStrategy();
     while (reader.pos < end) {
@@ -1504,11 +1504,11 @@ function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrateg
   return {};
 }
 export const Rollout_DeleteServiceStrategy = {
-  encode(_: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: Rollout_DeleteServiceStrategy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_DeleteServiceStrategy();
     while (reader.pos < end) {

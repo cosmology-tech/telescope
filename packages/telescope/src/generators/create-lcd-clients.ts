@@ -17,8 +17,6 @@ export const plugin = (
         return;
     }
 
-
-
     const queryContexts = bundler
         .contexts
         .filter(context =>

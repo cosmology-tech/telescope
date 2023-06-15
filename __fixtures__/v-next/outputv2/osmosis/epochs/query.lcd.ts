@@ -1,6 +1,5 @@
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
+import { QueryEpochsInfoRequest, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

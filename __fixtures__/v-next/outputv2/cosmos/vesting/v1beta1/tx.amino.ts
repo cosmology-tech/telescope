@@ -1,6 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Period, PeriodSDKType } from "./vesting";
-import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType } from "./tx";
+import { MsgCreateVestingAccount, MsgCreatePermanentLockedAccount, MsgCreatePeriodicVestingAccount } from "./tx";
 export const AminoConverter = {
   "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": {
     aminoType: "cosmos-sdk/MsgCreateVestingAccount",

@@ -1,12 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank";
-import * as _m0 from "protobufjs/minimal";
+import { Metadata } from "./bank";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesRequestSDKType, QueryAllBalancesResponse, QueryAllBalancesResponseSDKType, QuerySpendableBalancesRequest, QuerySpendableBalancesRequestSDKType, QuerySpendableBalancesResponse, QuerySpendableBalancesResponseSDKType, QueryTotalSupplyRequest, QueryTotalSupplyRequestSDKType, QueryTotalSupplyResponse, QueryTotalSupplyResponseSDKType, QuerySupplyOfRequest, QuerySupplyOfRequestSDKType, QuerySupplyOfResponse, QuerySupplyOfResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomMetadataRequest, QueryDenomMetadataRequestSDKType, QueryDenomMetadataResponse, QueryDenomMetadataResponseSDKType, QueryDenomsMetadataRequest, QueryDenomsMetadataRequestSDKType, QueryDenomsMetadataResponse, QueryDenomsMetadataResponseSDKType, QueryDenomOwnersRequest, QueryDenomOwnersRequestSDKType, QueryDenomOwnersResponse, QueryDenomOwnersResponseSDKType } from "./query";
+import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the balance of a single coin for a single account. */
@@ -90,7 +87,7 @@ export const QueryBalanceDesc: UnaryMethodDefinitionish = {
   methodName: "Balance",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryBalanceRequest.encode(this).finish();
@@ -111,7 +108,7 @@ export const QueryAllBalancesDesc: UnaryMethodDefinitionish = {
   methodName: "AllBalances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryAllBalancesRequest.encode(this).finish();
@@ -132,7 +129,7 @@ export const QuerySpendableBalancesDesc: UnaryMethodDefinitionish = {
   methodName: "SpendableBalances",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySpendableBalancesRequest.encode(this).finish();
@@ -153,7 +150,7 @@ export const QueryTotalSupplyDesc: UnaryMethodDefinitionish = {
   methodName: "TotalSupply",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalSupplyRequest.encode(this).finish();
@@ -174,7 +171,7 @@ export const QuerySupplyOfDesc: UnaryMethodDefinitionish = {
   methodName: "SupplyOf",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySupplyOfRequest.encode(this).finish();
@@ -195,7 +192,7 @@ export const QueryParamsDesc: UnaryMethodDefinitionish = {
   methodName: "Params",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryParamsRequest.encode(this).finish();
@@ -216,7 +213,7 @@ export const QueryDenomMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "DenomMetadata",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomMetadataRequest.encode(this).finish();
@@ -237,7 +234,7 @@ export const QueryDenomsMetadataDesc: UnaryMethodDefinitionish = {
   methodName: "DenomsMetadata",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomsMetadataRequest.encode(this).finish();
@@ -258,7 +255,7 @@ export const QueryDenomOwnersDesc: UnaryMethodDefinitionish = {
   methodName: "DenomOwners",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryDenomOwnersRequest.encode(this).finish();
@@ -276,30 +273,30 @@ export const QueryDenomOwnersDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -315,8 +312,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
 import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventSDKType, Params, ParamsSDKType, FeePool, FeePoolSDKType } from "./distribution";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -162,7 +162,7 @@ function createBaseDelegatorWithdrawInfo(): DelegatorWithdrawInfo {
   };
 }
 export const DelegatorWithdrawInfo = {
-  encode(message: DelegatorWithdrawInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelegatorWithdrawInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -171,8 +171,8 @@ export const DelegatorWithdrawInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorWithdrawInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorWithdrawInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorWithdrawInfo();
     while (reader.pos < end) {
@@ -235,7 +235,7 @@ function createBaseValidatorOutstandingRewardsRecord(): ValidatorOutstandingRewa
   };
 }
 export const ValidatorOutstandingRewardsRecord = {
-  encode(message: ValidatorOutstandingRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorOutstandingRewardsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -244,8 +244,8 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewardsRecord();
     while (reader.pos < end) {
@@ -316,7 +316,7 @@ function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedC
   };
 }
 export const ValidatorAccumulatedCommissionRecord = {
-  encode(message: ValidatorAccumulatedCommissionRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorAccumulatedCommissionRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -325,8 +325,8 @@ export const ValidatorAccumulatedCommissionRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommissionRecord();
     while (reader.pos < end) {
@@ -385,25 +385,25 @@ export const ValidatorAccumulatedCommissionRecord = {
 function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalRewardsRecord {
   return {
     validatorAddress: "",
-    period: BigInt("0"),
+    period: BigInt(0),
     rewards: undefined
   };
 }
 export const ValidatorHistoricalRewardsRecord = {
-  encode(message: ValidatorHistoricalRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorHistoricalRewardsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
     if (message.period !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.period.toString()));
+      writer.uint32(16).uint64(message.period);
     }
     if (message.rewards !== undefined) {
       ValidatorHistoricalRewards.encode(message.rewards, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewardsRecord();
     while (reader.pos < end) {
@@ -413,7 +413,7 @@ export const ValidatorHistoricalRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.period = BigInt(reader.uint64().toString());
+          message.period = reader.uint64();
           break;
         case 3:
           message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32());
@@ -428,21 +428,21 @@ export const ValidatorHistoricalRewardsRecord = {
   fromJSON(object: any): ValidatorHistoricalRewardsRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined
     };
   },
   toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.period !== undefined && (obj.period = (message.period || BigInt("0")).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toJSON(message.rewards) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorHistoricalRewardsRecord>): ValidatorHistoricalRewardsRecord {
     const message = createBaseValidatorHistoricalRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     message.rewards = object.rewards !== undefined && object.rewards !== null ? ValidatorHistoricalRewards.fromPartial(object.rewards) : undefined;
     return message;
   },
@@ -456,7 +456,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromSDKJSON(object: any): ValidatorHistoricalRewardsRecordSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDKJSON(object.rewards) : undefined
     };
   },
@@ -475,7 +475,7 @@ function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecor
   };
 }
 export const ValidatorCurrentRewardsRecord = {
-  encode(message: ValidatorCurrentRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorCurrentRewardsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
@@ -484,8 +484,8 @@ export const ValidatorCurrentRewardsRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewardsRecord();
     while (reader.pos < end) {
@@ -549,7 +549,7 @@ function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
   };
 }
 export const DelegatorStartingInfoRecord = {
-  encode(message: DelegatorStartingInfoRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DelegatorStartingInfoRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
@@ -561,8 +561,8 @@ export const DelegatorStartingInfoRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorStartingInfoRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfoRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfoRecord();
     while (reader.pos < end) {
@@ -630,29 +630,29 @@ export const DelegatorStartingInfoRecord = {
 function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
   return {
     validatorAddress: "",
-    height: BigInt("0"),
-    period: BigInt("0"),
+    height: BigInt(0),
+    period: BigInt(0),
     validatorSlashEvent: undefined
   };
 }
 export const ValidatorSlashEventRecord = {
-  encode(message: ValidatorSlashEventRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorSlashEventRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
     }
     if (message.height !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.height.toString()));
+      writer.uint32(16).uint64(message.height);
     }
     if (message.period !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.period.toString()));
+      writer.uint32(24).uint64(message.period);
     }
     if (message.validatorSlashEvent !== undefined) {
       ValidatorSlashEvent.encode(message.validatorSlashEvent, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSlashEventRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEventRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEventRecord();
     while (reader.pos < end) {
@@ -662,10 +662,10 @@ export const ValidatorSlashEventRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.height = BigInt(reader.uint64().toString());
+          message.height = reader.uint64();
           break;
         case 3:
-          message.period = BigInt(reader.uint64().toString());
+          message.period = reader.uint64();
           break;
         case 4:
           message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32());
@@ -680,24 +680,24 @@ export const ValidatorSlashEventRecord = {
   fromJSON(object: any): ValidatorSlashEventRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
       validatorSlashEvent: isSet(object.validatorSlashEvent) ? ValidatorSlashEvent.fromJSON(object.validatorSlashEvent) : undefined
     };
   },
   toJSON(message: ValidatorSlashEventRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
-    message.period !== undefined && (obj.period = (message.period || BigInt("0")).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     message.validatorSlashEvent !== undefined && (obj.validatorSlashEvent = message.validatorSlashEvent ? ValidatorSlashEvent.toJSON(message.validatorSlashEvent) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorSlashEventRecord>): ValidatorSlashEventRecord {
     const message = createBaseValidatorSlashEventRecord();
     message.validatorAddress = object.validatorAddress ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
-    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     message.validatorSlashEvent = object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null ? ValidatorSlashEvent.fromPartial(object.validatorSlashEvent) : undefined;
     return message;
   },
@@ -712,8 +712,8 @@ export const ValidatorSlashEventRecord = {
   fromSDKJSON(object: any): ValidatorSlashEventRecordSDKType {
     return {
       validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
-      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0),
       validator_slash_event: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDKJSON(object.validator_slash_event) : undefined
     };
   },
@@ -741,7 +741,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -774,8 +774,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {

@@ -1,6 +1,6 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity";
 export interface Params {
   /**
@@ -23,10 +23,10 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.authorizedTickSpacing) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     for (const v of message.authorizedSwapFees) {
@@ -34,8 +34,8 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -45,10 +45,10 @@ export const Params = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.authorizedTickSpacing.push(BigInt(reader.uint64().toString()));
+              message.authorizedTickSpacing.push(reader.uint64());
             }
           } else {
-            message.authorizedTickSpacing.push(BigInt(reader.uint64().toString()));
+            message.authorizedTickSpacing.push(reader.uint64());
           }
           break;
         case 2:
@@ -70,7 +70,7 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     if (message.authorizedTickSpacing) {
-      obj.authorizedTickSpacing = message.authorizedTickSpacing.map(e => (e || BigInt("0")).toString());
+      obj.authorizedTickSpacing = message.authorizedTickSpacing.map(e => (e || BigInt(0)).toString());
     } else {
       obj.authorizedTickSpacing = [];
     }

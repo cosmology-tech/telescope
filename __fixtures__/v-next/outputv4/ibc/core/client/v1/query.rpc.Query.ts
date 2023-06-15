@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
 /** Query provides defines the gRPC querier service */
@@ -46,44 +46,44 @@ export class QueryClientImpl implements Query {
   clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse> {
     const data = QueryClientStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientState", data);
-    return promise.then(data => QueryClientStateResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClientStateResponse.decode(new BinaryReader(data)));
   }
   clientStates(request: QueryClientStatesRequest = {
     pagination: undefined
   }): Promise<QueryClientStatesResponse> {
     const data = QueryClientStatesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientStates", data);
-    return promise.then(data => QueryClientStatesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClientStatesResponse.decode(new BinaryReader(data)));
   }
   consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse> {
     const data = QueryConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ConsensusState", data);
-    return promise.then(data => QueryConsensusStateResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryConsensusStateResponse.decode(new BinaryReader(data)));
   }
   consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse> {
     const data = QueryConsensusStatesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ConsensusStates", data);
-    return promise.then(data => QueryConsensusStatesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryConsensusStatesResponse.decode(new BinaryReader(data)));
   }
   clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse> {
     const data = QueryClientStatusRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientStatus", data);
-    return promise.then(data => QueryClientStatusResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClientStatusResponse.decode(new BinaryReader(data)));
   }
   clientParams(request: QueryClientParamsRequest = {}): Promise<QueryClientParamsResponse> {
     const data = QueryClientParamsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientParams", data);
-    return promise.then(data => QueryClientParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClientParamsResponse.decode(new BinaryReader(data)));
   }
   upgradedClientState(request: QueryUpgradedClientStateRequest = {}): Promise<QueryUpgradedClientStateResponse> {
     const data = QueryUpgradedClientStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "UpgradedClientState", data);
-    return promise.then(data => QueryUpgradedClientStateResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryUpgradedClientStateResponse.decode(new BinaryReader(data)));
   }
   upgradedConsensusState(request: QueryUpgradedConsensusStateRequest = {}): Promise<QueryUpgradedConsensusStateResponse> {
     const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.client.v1.Query", "UpgradedConsensusState", data);
-    return promise.then(data => QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryUpgradedConsensusStateResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

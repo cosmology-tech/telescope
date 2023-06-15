@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
 /** Msg defines the evidence Msg service. */
 export interface Msg {
@@ -19,6 +19,6 @@ export class MsgClientImpl implements Msg {
   submitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse> {
     const data = MsgSubmitEvidence.encode(request).finish();
     const promise = this.rpc.request("cosmos.evidence.v1beta1.Msg", "SubmitEvidence", data);
-    return promise.then(data => MsgSubmitEvidenceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSubmitEvidenceResponse.decode(new BinaryReader(data)));
   }
 }

@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -56,12 +56,12 @@ function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
     pubKey: undefined,
-    accountNumber: BigInt("0"),
-    sequence: BigInt("0")
+    accountNumber: BigInt(0),
+    sequence: BigInt(0)
   };
 }
 export const BaseAccount = {
-  encode(message: BaseAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BaseAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -69,15 +69,15 @@ export const BaseAccount = {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
     if (message.accountNumber !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.accountNumber.toString()));
+      writer.uint32(24).uint64(message.accountNumber);
     }
     if (message.sequence !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.sequence.toString()));
+      writer.uint32(32).uint64(message.sequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BaseAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
     while (reader.pos < end) {
@@ -90,10 +90,10 @@ export const BaseAccount = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.accountNumber = BigInt(reader.uint64().toString());
+          message.accountNumber = reader.uint64();
           break;
         case 4:
-          message.sequence = BigInt(reader.uint64().toString());
+          message.sequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -106,24 +106,24 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt("0"),
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
+      accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt(0),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: BaseAccount): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || BigInt("0")).toString());
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt("0")).toString());
+    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || BigInt(0)).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt("0");
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
+    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt(0);
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: BaseAccountSDKType): BaseAccount {
@@ -138,8 +138,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt("0"),
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0")
+      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt(0),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
   toSDK(message: BaseAccount): BaseAccountSDKType {
@@ -159,7 +159,7 @@ function createBaseModuleAccount(): ModuleAccount {
   };
 }
 export const ModuleAccount = {
-  encode(message: ModuleAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
     }
@@ -171,8 +171,8 @@ export const ModuleAccount = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
     while (reader.pos < end) {
@@ -247,53 +247,53 @@ export const ModuleAccount = {
 };
 function createBaseParams(): Params {
   return {
-    maxMemoCharacters: BigInt("0"),
-    txSigLimit: BigInt("0"),
-    txSizeCostPerByte: BigInt("0"),
-    sigVerifyCostEd25519: BigInt("0"),
-    sigVerifyCostSecp256k1: BigInt("0")
+    maxMemoCharacters: BigInt(0),
+    txSigLimit: BigInt(0),
+    txSizeCostPerByte: BigInt(0),
+    sigVerifyCostEd25519: BigInt(0),
+    sigVerifyCostSecp256k1: BigInt(0)
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.maxMemoCharacters !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.maxMemoCharacters.toString()));
+      writer.uint32(8).uint64(message.maxMemoCharacters);
     }
     if (message.txSigLimit !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.txSigLimit.toString()));
+      writer.uint32(16).uint64(message.txSigLimit);
     }
     if (message.txSizeCostPerByte !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.txSizeCostPerByte.toString()));
+      writer.uint32(24).uint64(message.txSizeCostPerByte);
     }
     if (message.sigVerifyCostEd25519 !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.sigVerifyCostEd25519.toString()));
+      writer.uint32(32).uint64(message.sigVerifyCostEd25519);
     }
     if (message.sigVerifyCostSecp256k1 !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.sigVerifyCostSecp256k1.toString()));
+      writer.uint32(40).uint64(message.sigVerifyCostSecp256k1);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxMemoCharacters = BigInt(reader.uint64().toString());
+          message.maxMemoCharacters = reader.uint64();
           break;
         case 2:
-          message.txSigLimit = BigInt(reader.uint64().toString());
+          message.txSigLimit = reader.uint64();
           break;
         case 3:
-          message.txSizeCostPerByte = BigInt(reader.uint64().toString());
+          message.txSizeCostPerByte = reader.uint64();
           break;
         case 4:
-          message.sigVerifyCostEd25519 = BigInt(reader.uint64().toString());
+          message.sigVerifyCostEd25519 = reader.uint64();
           break;
         case 5:
-          message.sigVerifyCostSecp256k1 = BigInt(reader.uint64().toString());
+          message.sigVerifyCostSecp256k1 = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -304,29 +304,29 @@ export const Params = {
   },
   fromJSON(object: any): Params {
     return {
-      maxMemoCharacters: isSet(object.maxMemoCharacters) ? BigInt(object.maxMemoCharacters.toString()) : BigInt("0"),
-      txSigLimit: isSet(object.txSigLimit) ? BigInt(object.txSigLimit.toString()) : BigInt("0"),
-      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? BigInt(object.txSizeCostPerByte.toString()) : BigInt("0"),
-      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt("0"),
-      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt("0")
+      maxMemoCharacters: isSet(object.maxMemoCharacters) ? BigInt(object.maxMemoCharacters.toString()) : BigInt(0),
+      txSigLimit: isSet(object.txSigLimit) ? BigInt(object.txSigLimit.toString()) : BigInt(0),
+      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? BigInt(object.txSizeCostPerByte.toString()) : BigInt(0),
+      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt(0),
+      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt(0)
     };
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || BigInt("0")).toString());
-    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || BigInt("0")).toString());
-    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || BigInt("0")).toString());
-    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || BigInt("0")).toString());
-    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || BigInt("0")).toString());
+    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || BigInt(0)).toString());
+    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || BigInt(0)).toString());
+    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || BigInt(0)).toString());
+    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || BigInt(0)).toString());
+    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? BigInt(object.maxMemoCharacters.toString()) : BigInt("0");
-    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? BigInt(object.txSigLimit.toString()) : BigInt("0");
-    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? BigInt(object.txSizeCostPerByte.toString()) : BigInt("0");
-    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt("0");
-    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt("0");
+    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? BigInt(object.maxMemoCharacters.toString()) : BigInt(0);
+    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? BigInt(object.txSigLimit.toString()) : BigInt(0);
+    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? BigInt(object.txSizeCostPerByte.toString()) : BigInt(0);
+    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt(0);
+    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -340,11 +340,11 @@ export const Params = {
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
-      max_memo_characters: isSet(object.max_memo_characters) ? BigInt(object.max_memo_characters.toString()) : BigInt("0"),
-      tx_sig_limit: isSet(object.tx_sig_limit) ? BigInt(object.tx_sig_limit.toString()) : BigInt("0"),
-      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? BigInt(object.tx_size_cost_per_byte.toString()) : BigInt("0"),
-      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? BigInt(object.sig_verify_cost_ed25519.toString()) : BigInt("0"),
-      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? BigInt(object.sig_verify_cost_secp256k1.toString()) : BigInt("0")
+      max_memo_characters: isSet(object.max_memo_characters) ? BigInt(object.max_memo_characters.toString()) : BigInt(0),
+      tx_sig_limit: isSet(object.tx_sig_limit) ? BigInt(object.tx_sig_limit.toString()) : BigInt(0),
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? BigInt(object.tx_size_cost_per_byte.toString()) : BigInt(0),
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? BigInt(object.sig_verify_cost_ed25519.toString()) : BigInt(0),
+      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? BigInt(object.sig_verify_cost_secp256k1.toString()) : BigInt(0)
     };
   },
   toSDK(message: Params): ParamsSDKType {

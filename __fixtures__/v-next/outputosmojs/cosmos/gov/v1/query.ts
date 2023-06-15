@@ -1,7 +1,7 @@
 import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, VotingParams, VotingParamsSDKType, DepositParams, DepositParamsSDKType, TallyParams, TallyParamsSDKType, Deposit, DepositSDKType, TallyResult, TallyResultSDKType, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1";
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
@@ -191,25 +191,25 @@ export interface QueryTallyResultResponseSDKType {
 }
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return {
-    proposalId: BigInt("0")
+    proposalId: BigInt(0)
   };
 }
 export const QueryProposalRequest = {
-  encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProposalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -220,17 +220,17 @@ export const QueryProposalRequest = {
   },
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
@@ -240,7 +240,7 @@ export const QueryProposalRequest = {
   },
   fromSDKJSON(object: any): QueryProposalRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
@@ -255,14 +255,14 @@ function createBaseQueryProposalResponse(): QueryProposalResponse {
   };
 }
 export const QueryProposalResponse = {
-  encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProposalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
     while (reader.pos < end) {
@@ -318,7 +318,7 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
   };
 }
 export const QueryProposalsRequest = {
-  encode(message: QueryProposalsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProposalsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalStatus !== 0) {
       writer.uint32(8).int32(message.proposalStatus);
     }
@@ -333,8 +333,8 @@ export const QueryProposalsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsRequest();
     while (reader.pos < end) {
@@ -415,7 +415,7 @@ function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   };
 }
 export const QueryProposalsResponse = {
-  encode(message: QueryProposalsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryProposalsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -424,8 +424,8 @@ export const QueryProposalsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsResponse();
     while (reader.pos < end) {
@@ -491,29 +491,29 @@ export const QueryProposalsResponse = {
 };
 function createBaseQueryVoteRequest(): QueryVoteRequest {
   return {
-    proposalId: BigInt("0"),
+    proposalId: BigInt(0),
     voter: ""
   };
 }
 export const QueryVoteRequest = {
-  encode(message: QueryVoteRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryVoteRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         case 2:
           message.voter = reader.string();
@@ -527,19 +527,19 @@ export const QueryVoteRequest = {
   },
   fromJSON(object: any): QueryVoteRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
   toJSON(message: QueryVoteRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     const message = createBaseQueryVoteRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.voter = object.voter ?? "";
     return message;
   },
@@ -551,7 +551,7 @@ export const QueryVoteRequest = {
   },
   fromSDKJSON(object: any): QueryVoteRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -568,14 +568,14 @@ function createBaseQueryVoteResponse(): QueryVoteResponse {
   };
 }
 export const QueryVoteResponse = {
-  encode(message: QueryVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryVoteResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteResponse();
     while (reader.pos < end) {
@@ -624,29 +624,29 @@ export const QueryVoteResponse = {
 };
 function createBaseQueryVotesRequest(): QueryVotesRequest {
   return {
-    proposalId: BigInt("0"),
+    proposalId: BigInt(0),
     pagination: undefined
   };
 }
 export const QueryVotesRequest = {
-  encode(message: QueryVotesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryVotesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -660,19 +660,19 @@ export const QueryVotesRequest = {
   },
   fromJSON(object: any): QueryVotesRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: QueryVotesRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = createBaseQueryVotesRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -684,7 +684,7 @@ export const QueryVotesRequest = {
   },
   fromSDKJSON(object: any): QueryVotesRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -702,7 +702,7 @@ function createBaseQueryVotesResponse(): QueryVotesResponse {
   };
 }
 export const QueryVotesResponse = {
-  encode(message: QueryVotesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryVotesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -711,8 +711,8 @@ export const QueryVotesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesResponse();
     while (reader.pos < end) {
@@ -782,14 +782,14 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   };
 }
 export const QueryParamsRequest = {
-  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.paramsType !== "") {
       writer.uint32(10).string(message.paramsType);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -844,7 +844,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.votingParams !== undefined) {
       VotingParams.encode(message.votingParams, writer.uint32(10).fork()).ldelim();
     }
@@ -856,8 +856,8 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -924,29 +924,29 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDepositRequest(): QueryDepositRequest {
   return {
-    proposalId: BigInt("0"),
+    proposalId: BigInt(0),
     depositor: ""
   };
 }
 export const QueryDepositRequest = {
-  encode(message: QueryDepositRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDepositRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         case 2:
           message.depositor = reader.string();
@@ -960,19 +960,19 @@ export const QueryDepositRequest = {
   },
   fromJSON(object: any): QueryDepositRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
   toJSON(message: QueryDepositRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     const message = createBaseQueryDepositRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.depositor = object.depositor ?? "";
     return message;
   },
@@ -984,7 +984,7 @@ export const QueryDepositRequest = {
   },
   fromSDKJSON(object: any): QueryDepositRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       depositor: isSet(object.depositor) ? String(object.depositor) : ""
     };
   },
@@ -1001,14 +1001,14 @@ function createBaseQueryDepositResponse(): QueryDepositResponse {
   };
 }
 export const QueryDepositResponse = {
-  encode(message: QueryDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDepositResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deposit !== undefined) {
       Deposit.encode(message.deposit, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositResponse();
     while (reader.pos < end) {
@@ -1057,29 +1057,29 @@ export const QueryDepositResponse = {
 };
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return {
-    proposalId: BigInt("0"),
+    proposalId: BigInt(0),
     pagination: undefined
   };
 }
 export const QueryDepositsRequest = {
-  encode(message: QueryDepositsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDepositsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -1093,19 +1093,19 @@ export const QueryDepositsRequest = {
   },
   fromJSON(object: any): QueryDepositsRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0"),
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: QueryDepositsRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = createBaseQueryDepositsRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -1117,7 +1117,7 @@ export const QueryDepositsRequest = {
   },
   fromSDKJSON(object: any): QueryDepositsRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0"),
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -1135,7 +1135,7 @@ function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   };
 }
 export const QueryDepositsResponse = {
-  encode(message: QueryDepositsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDepositsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.deposits) {
       Deposit.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1144,8 +1144,8 @@ export const QueryDepositsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositsResponse();
     while (reader.pos < end) {
@@ -1211,25 +1211,25 @@ export const QueryDepositsResponse = {
 };
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
   return {
-    proposalId: BigInt("0")
+    proposalId: BigInt(0)
   };
 }
 export const QueryTallyResultRequest = {
-  encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTallyResultRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.proposalId.toString()));
+      writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = BigInt(reader.uint64().toString());
+          message.proposalId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1240,17 +1240,17 @@ export const QueryTallyResultRequest = {
   },
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt("0")
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt("0")).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt("0");
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
@@ -1260,7 +1260,7 @@ export const QueryTallyResultRequest = {
   },
   fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
     return {
-      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt("0")
+      proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
@@ -1275,14 +1275,14 @@ function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   };
 }
 export const QueryTallyResultResponse = {
-  encode(message: QueryTallyResultResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTallyResultResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tally !== undefined) {
       TallyResult.encode(message.tally, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultResponse();
     while (reader.pos < end) {

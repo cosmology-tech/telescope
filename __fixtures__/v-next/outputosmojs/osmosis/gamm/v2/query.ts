@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -36,15 +36,15 @@ export interface QuerySpotPriceResponseSDKType {
 }
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     baseAssetDenom: "",
     quoteAssetDenom: ""
   };
 }
 export const QuerySpotPriceRequest = {
-  encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAssetDenom !== "") {
       writer.uint32(18).string(message.baseAssetDenom);
@@ -54,15 +54,15 @@ export const QuerySpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.baseAssetDenom = reader.string();
@@ -79,21 +79,21 @@ export const QuerySpotPriceRequest = {
   },
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -107,7 +107,7 @@ export const QuerySpotPriceRequest = {
   },
   fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
       quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
     };
@@ -126,14 +126,14 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
   };
 }
 export const QuerySpotPriceResponse = {
-  encode(message: QuerySpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceResponse();
     while (reader.pos < end) {

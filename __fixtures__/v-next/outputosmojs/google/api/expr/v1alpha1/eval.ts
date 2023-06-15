@@ -1,7 +1,7 @@
 import { Value, ValueSDKType } from "./value";
 import { Status, StatusSDKType } from "../../../rpc/status";
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -138,7 +138,7 @@ function createBaseEvalState(): EvalState {
   };
 }
 export const EvalState = {
-  encode(message: EvalState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       ExprValue.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -147,8 +147,8 @@ export const EvalState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState();
     while (reader.pos < end) {
@@ -222,32 +222,32 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: BigInt("0"),
-    value: BigInt("0")
+    expr: BigInt(0),
+    value: BigInt(0)
   };
 }
 export const EvalState_Result = {
-  encode(message: EvalState_Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.expr !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.expr.toString()));
+      writer.uint32(8).int64(message.expr);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.value.toString()));
+      writer.uint32(16).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState_Result {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalState_Result {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState_Result();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.expr = BigInt(reader.int64().toString());
+          message.expr = reader.int64();
           break;
         case 2:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -258,20 +258,20 @@ export const EvalState_Result = {
   },
   fromJSON(object: any): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt("0"),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: EvalState_Result): unknown {
     const obj: any = {};
-    message.expr !== undefined && (obj.expr = (message.expr || BigInt("0")).toString());
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? BigInt(object.expr.toString()) : BigInt("0");
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.expr = object.expr !== undefined && object.expr !== null ? BigInt(object.expr.toString()) : BigInt(0);
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
@@ -282,8 +282,8 @@ export const EvalState_Result = {
   },
   fromSDKJSON(object: any): EvalState_ResultSDKType {
     return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt("0"),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
@@ -301,7 +301,7 @@ function createBaseExprValue(): ExprValue {
   };
 }
 export const ExprValue = {
-  encode(message: ExprValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExprValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(10).fork()).ldelim();
     }
@@ -313,8 +313,8 @@ export const ExprValue = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ExprValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ExprValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExprValue();
     while (reader.pos < end) {
@@ -385,14 +385,14 @@ function createBaseErrorSet(): ErrorSet {
   };
 }
 export const ErrorSet = {
-  encode(message: ErrorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.errors) {
       Status.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ErrorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorSet();
     while (reader.pos < end) {
@@ -453,16 +453,16 @@ function createBaseUnknownSet(): UnknownSet {
   };
 }
 export const UnknownSet = {
-  encode(message: UnknownSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnknownSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.exprs) {
-      writer.int64(Long.fromString(v.toString()));
+      writer.int64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UnknownSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UnknownSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnknownSet();
     while (reader.pos < end) {
@@ -472,10 +472,10 @@ export const UnknownSet = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.exprs.push(BigInt(reader.int64().toString()));
+              message.exprs.push(reader.int64());
             }
           } else {
-            message.exprs.push(BigInt(reader.int64().toString()));
+            message.exprs.push(reader.int64());
           }
           break;
         default:
@@ -493,7 +493,7 @@ export const UnknownSet = {
   toJSON(message: UnknownSet): unknown {
     const obj: any = {};
     if (message.exprs) {
-      obj.exprs = message.exprs.map(e => (e || BigInt("0")).toString());
+      obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());
     } else {
       obj.exprs = [];
     }

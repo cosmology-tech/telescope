@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt } from '../helpers';
+import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -26,7 +26,7 @@ const write = (
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
-  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.longLibrary === 'bigint' ? internalForBigInt : internal);
+  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? internalForBigInt : internal);
 
   // should be exported
   if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
@@ -58,6 +58,17 @@ export const plugin = (
   if (builder.options.rpcClients?.type === 'grpc-web') {
     builder.files.push('grpc-web.ts');
     write(builder, 'grpc-web.ts', grpcWeb);
+  }
+
+  if (builder.options.prototypes.typingsFormat.num64 === "bigint") {
+    builder.files.push("varint.ts");
+    write(builder, "varint.ts", varint);
+
+    builder.files.push("utf8.ts");
+    write(builder, "utf8.ts", utf8);
+
+    builder.files.push("binary.ts");
+    write(builder, "binary.ts", binary);
   }
 
 };

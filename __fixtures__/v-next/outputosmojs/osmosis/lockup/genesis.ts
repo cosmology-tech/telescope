@@ -1,6 +1,6 @@
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
@@ -16,15 +16,15 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    lastLockId: BigInt("0"),
+    lastLockId: BigInt(0),
     locks: [],
     syntheticLocks: []
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lastLockId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.lastLockId.toString()));
+      writer.uint32(8).uint64(message.lastLockId);
     }
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -34,15 +34,15 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lastLockId = BigInt(reader.uint64().toString());
+          message.lastLockId = reader.uint64();
           break;
         case 2:
           message.locks.push(PeriodLock.decode(reader, reader.uint32()));
@@ -59,14 +59,14 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     return {
-      lastLockId: isSet(object.lastLockId) ? BigInt(object.lastLockId.toString()) : BigInt("0"),
+      lastLockId: isSet(object.lastLockId) ? BigInt(object.lastLockId.toString()) : BigInt(0),
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : [],
       syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
     };
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || BigInt("0")).toString());
+    message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || BigInt(0)).toString());
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
     } else {
@@ -81,7 +81,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? BigInt(object.lastLockId.toString()) : BigInt("0");
+    message.lastLockId = object.lastLockId !== undefined && object.lastLockId !== null ? BigInt(object.lastLockId.toString()) : BigInt(0);
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
@@ -95,7 +95,7 @@ export const GenesisState = {
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      last_lock_id: isSet(object.last_lock_id) ? BigInt(object.last_lock_id.toString()) : BigInt("0"),
+      last_lock_id: isSet(object.last_lock_id) ? BigInt(object.last_lock_id.toString()) : BigInt(0),
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : [],
       synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
     };

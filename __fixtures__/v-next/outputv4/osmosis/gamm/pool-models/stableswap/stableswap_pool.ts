@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -66,7 +66,7 @@ function createBasePoolParams(): PoolParams {
   };
 }
 export const PoolParams = {
-  encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.swapFee !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
@@ -75,8 +75,8 @@ export const PoolParams = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolParams {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
     while (reader.pos < end) {
@@ -135,7 +135,7 @@ export const PoolParams = {
 function createBasePool(): Pool {
   return {
     address: "",
-    id: BigInt("0"),
+    id: BigInt(0),
     poolParams: undefined,
     futurePoolGovernor: "",
     totalShares: undefined,
@@ -145,12 +145,12 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
-  encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.id !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.id.toString()));
+      writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
@@ -166,7 +166,7 @@ export const Pool = {
     }
     writer.uint32(58).fork();
     for (const v of message.scalingFactors) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     if (message.scalingFactorController !== "") {
@@ -174,8 +174,8 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Pool {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Pool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
     while (reader.pos < end) {
@@ -185,7 +185,7 @@ export const Pool = {
           message.address = reader.string();
           break;
         case 2:
-          message.id = BigInt(reader.uint64().toString());
+          message.id = reader.uint64();
           break;
         case 3:
           message.poolParams = PoolParams.decode(reader, reader.uint32());
@@ -203,10 +203,10 @@ export const Pool = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.scalingFactors.push(BigInt(reader.uint64().toString()));
+              message.scalingFactors.push(reader.uint64());
             }
           } else {
-            message.scalingFactors.push(BigInt(reader.uint64().toString()));
+            message.scalingFactors.push(reader.uint64());
           }
           break;
         case 8:
@@ -222,7 +222,7 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
@@ -234,7 +234,7 @@ export const Pool = {
   toJSON(message: Pool): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt("0")).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
@@ -244,7 +244,7 @@ export const Pool = {
       obj.poolLiquidity = [];
     }
     if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt("0")).toString());
+      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
     } else {
       obj.scalingFactors = [];
     }
@@ -254,7 +254,7 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt("0");
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
@@ -278,7 +278,7 @@ export const Pool = {
   fromSDKJSON(object: any): PoolSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt("0"),
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
       future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
       total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,

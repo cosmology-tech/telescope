@@ -1,7 +1,7 @@
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./swap_route";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountInResponse, MsgSwapExactAmountInResponseSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgSwapExactAmountOutResponse, MsgSwapExactAmountOutResponseSDKType } from "./tx";
 export interface Msg {
   swapExactAmountIn(request: MsgSwapExactAmountIn): Promise<MsgSwapExactAmountInResponse>;
@@ -17,11 +17,11 @@ export class MsgClientImpl implements Msg {
   swapExactAmountIn(request: MsgSwapExactAmountIn): Promise<MsgSwapExactAmountInResponse> {
     const data = MsgSwapExactAmountIn.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolmanager.v1beta1.Msg", "SwapExactAmountIn", data);
-    return promise.then(data => MsgSwapExactAmountInResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSwapExactAmountInResponse.decode(new BinaryReader(data)));
   }
   swapExactAmountOut(request: MsgSwapExactAmountOut): Promise<MsgSwapExactAmountOutResponse> {
     const data = MsgSwapExactAmountOut.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolmanager.v1beta1.Msg", "SwapExactAmountOut", data);
-    return promise.then(data => MsgSwapExactAmountOutResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSwapExactAmountOutResponse.decode(new BinaryReader(data)));
   }
 }

@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
@@ -64,39 +64,39 @@ export interface PeerAddressInfoSDKType {
 }
 function createBaseProtocolVersion(): ProtocolVersion {
   return {
-    p2p: BigInt("0"),
-    block: BigInt("0"),
-    app: BigInt("0")
+    p2p: BigInt(0),
+    block: BigInt(0),
+    app: BigInt(0)
   };
 }
 export const ProtocolVersion = {
-  encode(message: ProtocolVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ProtocolVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.p2p !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.p2p.toString()));
+      writer.uint32(8).uint64(message.p2p);
     }
     if (message.block !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.block.toString()));
+      writer.uint32(16).uint64(message.block);
     }
     if (message.app !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.app.toString()));
+      writer.uint32(24).uint64(message.app);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProtocolVersion {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ProtocolVersion {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProtocolVersion();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.p2p = BigInt(reader.uint64().toString());
+          message.p2p = reader.uint64();
           break;
         case 2:
-          message.block = BigInt(reader.uint64().toString());
+          message.block = reader.uint64();
           break;
         case 3:
-          message.app = BigInt(reader.uint64().toString());
+          message.app = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -107,23 +107,23 @@ export const ProtocolVersion = {
   },
   fromJSON(object: any): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt(0),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toJSON(message: ProtocolVersion): unknown {
     const obj: any = {};
-    message.p2p !== undefined && (obj.p2p = (message.p2p || BigInt("0")).toString());
-    message.block !== undefined && (obj.block = (message.block || BigInt("0")).toString());
-    message.app !== undefined && (obj.app = (message.app || BigInt("0")).toString());
+    message.p2p !== undefined && (obj.p2p = (message.p2p || BigInt(0)).toString());
+    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
+    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
-    message.p2p = object.p2p !== undefined && object.p2p !== null ? BigInt(object.p2p.toString()) : BigInt("0");
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt("0");
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt("0");
+    message.p2p = object.p2p !== undefined && object.p2p !== null ? BigInt(object.p2p.toString()) : BigInt(0);
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ProtocolVersionSDKType): ProtocolVersion {
@@ -135,9 +135,9 @@ export const ProtocolVersion = {
   },
   fromSDKJSON(object: any): ProtocolVersionSDKType {
     return {
-      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt("0"),
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt(0),
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toSDK(message: ProtocolVersion): ProtocolVersionSDKType {
@@ -161,7 +161,7 @@ function createBaseNodeInfo(): NodeInfo {
   };
 }
 export const NodeInfo = {
-  encode(message: NodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NodeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.protocolVersion !== undefined) {
       ProtocolVersion.encode(message.protocolVersion, writer.uint32(10).fork()).ldelim();
     }
@@ -188,8 +188,8 @@ export const NodeInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): NodeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): NodeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfo();
     while (reader.pos < end) {
@@ -306,7 +306,7 @@ function createBaseNodeInfoOther(): NodeInfoOther {
   };
 }
 export const NodeInfoOther = {
-  encode(message: NodeInfoOther, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: NodeInfoOther, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.txIndex !== "") {
       writer.uint32(10).string(message.txIndex);
     }
@@ -315,8 +315,8 @@ export const NodeInfoOther = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): NodeInfoOther {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): NodeInfoOther {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfoOther();
     while (reader.pos < end) {
@@ -380,7 +380,7 @@ function createBasePeerInfo(): PeerInfo {
   };
 }
 export const PeerInfo = {
-  encode(message: PeerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeerInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -392,8 +392,8 @@ export const PeerInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PeerInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PeerInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerInfo();
     while (reader.pos < end) {
@@ -475,7 +475,7 @@ function createBasePeerAddressInfo(): PeerAddressInfo {
   };
 }
 export const PeerAddressInfo = {
-  encode(message: PeerAddressInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeerAddressInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -490,8 +490,8 @@ export const PeerAddressInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PeerAddressInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PeerAddressInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerAddressInfo();
     while (reader.pos < end) {

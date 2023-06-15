@@ -1,13 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Channel, ChannelSDKType, IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
-import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType } from "../../client/v1/client";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../../grpc-web";
 import { DeepPartial } from "../../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, QueryChannelResponseSDKType, QueryChannelsRequest, QueryChannelsRequestSDKType, QueryChannelsResponse, QueryChannelsResponseSDKType, QueryConnectionChannelsRequest, QueryConnectionChannelsRequestSDKType, QueryConnectionChannelsResponse, QueryConnectionChannelsResponseSDKType, QueryChannelClientStateRequest, QueryChannelClientStateRequestSDKType, QueryChannelClientStateResponse, QueryChannelClientStateResponseSDKType, QueryChannelConsensusStateRequest, QueryChannelConsensusStateRequestSDKType, QueryChannelConsensusStateResponse, QueryChannelConsensusStateResponseSDKType, QueryPacketCommitmentRequest, QueryPacketCommitmentRequestSDKType, QueryPacketCommitmentResponse, QueryPacketCommitmentResponseSDKType, QueryPacketCommitmentsRequest, QueryPacketCommitmentsRequestSDKType, QueryPacketCommitmentsResponse, QueryPacketCommitmentsResponseSDKType, QueryPacketReceiptRequest, QueryPacketReceiptRequestSDKType, QueryPacketReceiptResponse, QueryPacketReceiptResponseSDKType, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementRequestSDKType, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementResponseSDKType, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsRequestSDKType, QueryPacketAcknowledgementsResponse, QueryPacketAcknowledgementsResponseSDKType, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsRequestSDKType, QueryUnreceivedPacketsResponse, QueryUnreceivedPacketsResponseSDKType, QueryUnreceivedAcksRequest, QueryUnreceivedAcksRequestSDKType, QueryUnreceivedAcksResponse, QueryUnreceivedAcksResponseSDKType, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveRequestSDKType, QueryNextSequenceReceiveResponse, QueryNextSequenceReceiveResponseSDKType } from "./query";
+import { QueryChannelRequest, QueryChannelResponse, QueryChannelsRequest, QueryChannelsResponse, QueryConnectionChannelsRequest, QueryConnectionChannelsResponse, QueryChannelClientStateRequest, QueryChannelClientStateResponse, QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse, QueryPacketCommitmentRequest, QueryPacketCommitmentResponse, QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse, QueryPacketReceiptRequest, QueryPacketReceiptResponse, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse, QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse } from "./query";
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Channel queries an IBC Channel. */
@@ -128,7 +123,7 @@ export const QueryChannelDesc: UnaryMethodDefinitionish = {
   methodName: "Channel",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelRequest.encode(this).finish();
@@ -149,7 +144,7 @@ export const QueryChannelsDesc: UnaryMethodDefinitionish = {
   methodName: "Channels",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelsRequest.encode(this).finish();
@@ -170,7 +165,7 @@ export const QueryConnectionChannelsDesc: UnaryMethodDefinitionish = {
   methodName: "ConnectionChannels",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryConnectionChannelsRequest.encode(this).finish();
@@ -191,7 +186,7 @@ export const QueryChannelClientStateDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelClientState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelClientStateRequest.encode(this).finish();
@@ -212,7 +207,7 @@ export const QueryChannelConsensusStateDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelConsensusState",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryChannelConsensusStateRequest.encode(this).finish();
@@ -233,7 +228,7 @@ export const QueryPacketCommitmentDesc: UnaryMethodDefinitionish = {
   methodName: "PacketCommitment",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketCommitmentRequest.encode(this).finish();
@@ -254,7 +249,7 @@ export const QueryPacketCommitmentsDesc: UnaryMethodDefinitionish = {
   methodName: "PacketCommitments",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketCommitmentsRequest.encode(this).finish();
@@ -275,7 +270,7 @@ export const QueryPacketReceiptDesc: UnaryMethodDefinitionish = {
   methodName: "PacketReceipt",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketReceiptRequest.encode(this).finish();
@@ -296,7 +291,7 @@ export const QueryPacketAcknowledgementDesc: UnaryMethodDefinitionish = {
   methodName: "PacketAcknowledgement",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketAcknowledgementRequest.encode(this).finish();
@@ -317,7 +312,7 @@ export const QueryPacketAcknowledgementsDesc: UnaryMethodDefinitionish = {
   methodName: "PacketAcknowledgements",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPacketAcknowledgementsRequest.encode(this).finish();
@@ -338,7 +333,7 @@ export const QueryUnreceivedPacketsDesc: UnaryMethodDefinitionish = {
   methodName: "UnreceivedPackets",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUnreceivedPacketsRequest.encode(this).finish();
@@ -359,7 +354,7 @@ export const QueryUnreceivedAcksDesc: UnaryMethodDefinitionish = {
   methodName: "UnreceivedAcks",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryUnreceivedAcksRequest.encode(this).finish();
@@ -380,7 +375,7 @@ export const QueryNextSequenceReceiveDesc: UnaryMethodDefinitionish = {
   methodName: "NextSequenceReceive",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNextSequenceReceiveRequest.encode(this).finish();
@@ -398,30 +393,30 @@ export const QueryNextSequenceReceiveDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -437,8 +432,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

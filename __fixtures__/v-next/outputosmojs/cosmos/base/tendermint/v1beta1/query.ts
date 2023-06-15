@@ -3,8 +3,8 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
@@ -164,29 +164,29 @@ export interface ModuleSDKType {
 }
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
-    height: BigInt("0"),
+    height: BigInt(0),
     pagination: undefined
   };
 }
 export const GetValidatorSetByHeightRequest = {
-  encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetValidatorSetByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.height.toString()));
+      writer.uint32(8).int64(message.height);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = BigInt(reader.int64().toString());
+          message.height = reader.int64();
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -200,19 +200,19 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetValidatorSetByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
@@ -224,7 +224,7 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromSDKJSON(object: any): GetValidatorSetByHeightRequestSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
     };
   },
@@ -237,15 +237,15 @@ export const GetValidatorSetByHeightRequest = {
 };
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
-    blockHeight: BigInt("0"),
+    blockHeight: BigInt(0),
     validators: [],
     pagination: undefined
   };
 }
 export const GetValidatorSetByHeightResponse = {
-  encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetValidatorSetByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockHeight !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.blockHeight.toString()));
+      writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -255,15 +255,15 @@ export const GetValidatorSetByHeightResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = BigInt(reader.int64().toString());
+          message.blockHeight = reader.int64();
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -280,14 +280,14 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetValidatorSetByHeightResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt("0")).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -298,7 +298,7 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
@@ -312,7 +312,7 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromSDKJSON(object: any): GetValidatorSetByHeightResponseSDKType {
     return {
-      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
@@ -335,14 +335,14 @@ function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest 
   };
 }
 export const GetLatestValidatorSetRequest = {
-  encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestValidatorSetRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetRequest();
     while (reader.pos < end) {
@@ -391,15 +391,15 @@ export const GetLatestValidatorSetRequest = {
 };
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
-    blockHeight: BigInt("0"),
+    blockHeight: BigInt(0),
     validators: [],
     pagination: undefined
   };
 }
 export const GetLatestValidatorSetResponse = {
-  encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockHeight !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.blockHeight.toString()));
+      writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -409,15 +409,15 @@ export const GetLatestValidatorSetResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = BigInt(reader.int64().toString());
+          message.blockHeight = reader.int64();
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -434,14 +434,14 @@ export const GetLatestValidatorSetResponse = {
   },
   fromJSON(object: any): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt("0"),
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetLatestValidatorSetResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt("0")).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -452,7 +452,7 @@ export const GetLatestValidatorSetResponse = {
   },
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt("0");
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
@@ -466,7 +466,7 @@ export const GetLatestValidatorSetResponse = {
   },
   fromSDKJSON(object: any): GetLatestValidatorSetResponseSDKType {
     return {
-      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt("0"),
+      block_height: isSet(object.block_height) ? BigInt(object.block_height.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
@@ -487,12 +487,12 @@ function createBaseValidator(): Validator {
   return {
     address: "",
     pubKey: undefined,
-    votingPower: BigInt("0"),
-    proposerPriority: BigInt("0")
+    votingPower: BigInt(0),
+    proposerPriority: BigInt(0)
   };
 }
 export const Validator = {
-  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -500,15 +500,15 @@ export const Validator = {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
     if (message.votingPower !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.votingPower.toString()));
+      writer.uint32(24).int64(message.votingPower);
     }
     if (message.proposerPriority !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.proposerPriority.toString()));
+      writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Validator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
     while (reader.pos < end) {
@@ -521,10 +521,10 @@ export const Validator = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.votingPower = BigInt(reader.int64().toString());
+          message.votingPower = reader.int64();
           break;
         case 4:
-          message.proposerPriority = BigInt(reader.int64().toString());
+          message.proposerPriority = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -537,24 +537,24 @@ export const Validator = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt("0"),
-      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt("0")
+      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt(0),
+      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt(0)
     };
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt("0")).toString());
-    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt("0")).toString());
+    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
+    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt("0");
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt("0");
+    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
+    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ValidatorSDKType): Validator {
@@ -569,8 +569,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt("0"),
-      proposer_priority: isSet(object.proposer_priority) ? BigInt(object.proposer_priority.toString()) : BigInt("0")
+      voting_power: isSet(object.voting_power) ? BigInt(object.voting_power.toString()) : BigInt(0),
+      proposer_priority: isSet(object.proposer_priority) ? BigInt(object.proposer_priority.toString()) : BigInt(0)
     };
   },
   toSDK(message: Validator): ValidatorSDKType {
@@ -584,25 +584,25 @@ export const Validator = {
 };
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return {
-    height: BigInt("0")
+    height: BigInt(0)
   };
 }
 export const GetBlockByHeightRequest = {
-  encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBlockByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.height.toString()));
+      writer.uint32(8).int64(message.height);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = BigInt(reader.int64().toString());
+          message.height = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -613,17 +613,17 @@ export const GetBlockByHeightRequest = {
   },
   fromJSON(object: any): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toJSON(message: GetBlockByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
@@ -633,7 +633,7 @@ export const GetBlockByHeightRequest = {
   },
   fromSDKJSON(object: any): GetBlockByHeightRequestSDKType {
     return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0")
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toSDK(message: GetBlockByHeightRequest): GetBlockByHeightRequestSDKType {
@@ -649,7 +649,7 @@ function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   };
 }
 export const GetBlockByHeightResponse = {
-  encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetBlockByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -658,8 +658,8 @@ export const GetBlockByHeightResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightResponse();
     while (reader.pos < end) {
@@ -719,11 +719,11 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
   return {};
 }
 export const GetLatestBlockRequest = {
-  encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetLatestBlockRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockRequest();
     while (reader.pos < end) {
@@ -765,7 +765,7 @@ function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   };
 }
 export const GetLatestBlockResponse = {
-  encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetLatestBlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -774,8 +774,8 @@ export const GetLatestBlockResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockResponse();
     while (reader.pos < end) {
@@ -835,11 +835,11 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
   return {};
 }
 export const GetSyncingRequest = {
-  encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetSyncingRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingRequest();
     while (reader.pos < end) {
@@ -880,14 +880,14 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
   };
 }
 export const GetSyncingResponse = {
-  encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetSyncingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingResponse();
     while (reader.pos < end) {
@@ -938,11 +938,11 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
   return {};
 }
 export const GetNodeInfoRequest = {
-  encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: GetNodeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoRequest();
     while (reader.pos < end) {
@@ -984,7 +984,7 @@ function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   };
 }
 export const GetNodeInfoResponse = {
-  encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GetNodeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nodeInfo !== undefined) {
       NodeInfo.encode(message.nodeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -993,8 +993,8 @@ export const GetNodeInfoResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoResponse();
     while (reader.pos < end) {
@@ -1063,7 +1063,7 @@ function createBaseVersionInfo(): VersionInfo {
   };
 }
 export const VersionInfo = {
-  encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: VersionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1090,8 +1090,8 @@ export const VersionInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): VersionInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): VersionInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionInfo();
     while (reader.pos < end) {
@@ -1217,7 +1217,7 @@ function createBaseModule(): Module {
   };
 }
 export const Module = {
-  encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -1229,8 +1229,8 @@ export const Module = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Module {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Module {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
     while (reader.pos < end) {

@@ -1,5 +1,5 @@
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";

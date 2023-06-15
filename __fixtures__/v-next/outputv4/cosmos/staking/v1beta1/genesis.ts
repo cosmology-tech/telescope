@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -62,7 +62,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -89,8 +89,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -243,21 +243,21 @@ export const GenesisState = {
 function createBaseLastValidatorPower(): LastValidatorPower {
   return {
     address: "",
-    power: BigInt("0")
+    power: BigInt(0)
   };
 }
 export const LastValidatorPower = {
-  encode(message: LastValidatorPower, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LastValidatorPower, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.power !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.power.toString()));
+      writer.uint32(16).int64(message.power);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LastValidatorPower {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LastValidatorPower {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLastValidatorPower();
     while (reader.pos < end) {
@@ -267,7 +267,7 @@ export const LastValidatorPower = {
           message.address = reader.string();
           break;
         case 2:
-          message.power = BigInt(reader.int64().toString());
+          message.power = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -279,19 +279,19 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
     };
   },
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = (message.power || BigInt("0")).toString());
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt("0");
+    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {
@@ -303,7 +303,7 @@ export const LastValidatorPower = {
   fromSDKJSON(object: any): LastValidatorPowerSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt("0")
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
     };
   },
   toSDK(message: LastValidatorPower): LastValidatorPowerSDKType {

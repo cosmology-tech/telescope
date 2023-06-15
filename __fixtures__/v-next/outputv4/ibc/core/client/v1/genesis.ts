@@ -1,6 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -66,11 +66,11 @@ function createBaseGenesisState(): GenesisState {
     clientsMetadata: [],
     params: undefined,
     createLocalhost: false,
-    nextClientSequence: BigInt("0")
+    nextClientSequence: BigInt(0)
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.clients) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -87,12 +87,12 @@ export const GenesisState = {
       writer.uint32(40).bool(message.createLocalhost);
     }
     if (message.nextClientSequence !== BigInt(0)) {
-      writer.uint32(48).uint64(Long.fromString(message.nextClientSequence.toString()));
+      writer.uint32(48).uint64(message.nextClientSequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -114,7 +114,7 @@ export const GenesisState = {
           message.createLocalhost = reader.bool();
           break;
         case 6:
-          message.nextClientSequence = BigInt(reader.uint64().toString());
+          message.nextClientSequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -130,7 +130,7 @@ export const GenesisState = {
       clientsMetadata: Array.isArray(object?.clientsMetadata) ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? BigInt(object.nextClientSequence.toString()) : BigInt("0")
+      nextClientSequence: isSet(object.nextClientSequence) ? BigInt(object.nextClientSequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -152,7 +152,7 @@ export const GenesisState = {
     }
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.createLocalhost !== undefined && (obj.createLocalhost = message.createLocalhost);
-    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || BigInt("0")).toString());
+    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -162,7 +162,7 @@ export const GenesisState = {
     message.clientsMetadata = object.clientsMetadata?.map(e => IdentifiedGenesisMetadata.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? BigInt(object.nextClientSequence.toString()) : BigInt("0");
+    message.nextClientSequence = object.nextClientSequence !== undefined && object.nextClientSequence !== null ? BigInt(object.nextClientSequence.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -182,7 +182,7 @@ export const GenesisState = {
       clients_metadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDKJSON(e)) : [],
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
-      next_client_sequence: isSet(object.next_client_sequence) ? BigInt(object.next_client_sequence.toString()) : BigInt("0")
+      next_client_sequence: isSet(object.next_client_sequence) ? BigInt(object.next_client_sequence.toString()) : BigInt(0)
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -215,7 +215,7 @@ function createBaseGenesisMetadata(): GenesisMetadata {
   };
 }
 export const GenesisMetadata = {
-  encode(message: GenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -224,8 +224,8 @@ export const GenesisMetadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisMetadata();
     while (reader.pos < end) {
@@ -288,7 +288,7 @@ function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
   };
 }
 export const IdentifiedGenesisMetadata = {
-  encode(message: IdentifiedGenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedGenesisMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -297,8 +297,8 @@ export const IdentifiedGenesisMetadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedGenesisMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedGenesisMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedGenesisMetadata();
     while (reader.pos < end) {

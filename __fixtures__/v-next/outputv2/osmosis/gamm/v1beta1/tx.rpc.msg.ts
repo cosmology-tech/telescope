@@ -1,10 +1,8 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgJoinPool, MsgJoinPoolSDKType, MsgJoinPoolResponse, MsgJoinPoolResponseSDKType, MsgExitPool, MsgExitPoolSDKType, MsgExitPoolResponse, MsgExitPoolResponseSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountInResponse, MsgSwapExactAmountInResponseSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgSwapExactAmountOutResponse, MsgSwapExactAmountOutResponseSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapExternAmountInResponse, MsgJoinSwapExternAmountInResponseSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgJoinSwapShareAmountOutResponse, MsgJoinSwapShareAmountOutResponseSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapExternAmountOutResponse, MsgExitSwapExternAmountOutResponseSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType, MsgExitSwapShareAmountInResponse, MsgExitSwapShareAmountInResponseSDKType } from "./tx";
+import { MsgJoinPool, MsgJoinPoolResponse, MsgExitPool, MsgExitPoolResponse, MsgSwapExactAmountIn, MsgSwapExactAmountInResponse, MsgSwapExactAmountOut, MsgSwapExactAmountOutResponse, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInResponse, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutResponse, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutResponse, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInResponse } from "./tx";
 export interface Msg {
   joinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse>;
   exitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse>;
@@ -60,7 +58,7 @@ export const MsgJoinPoolDesc: UnaryMethodDefinitionish = {
   methodName: "JoinPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinPool.encode(this).finish();
@@ -81,7 +79,7 @@ export const MsgExitPoolDesc: UnaryMethodDefinitionish = {
   methodName: "ExitPool",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitPool.encode(this).finish();
@@ -102,7 +100,7 @@ export const MsgSwapExactAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "SwapExactAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSwapExactAmountIn.encode(this).finish();
@@ -123,7 +121,7 @@ export const MsgSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "SwapExactAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgSwapExactAmountOut.encode(this).finish();
@@ -144,7 +142,7 @@ export const MsgJoinSwapExternAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "JoinSwapExternAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinSwapExternAmountIn.encode(this).finish();
@@ -165,7 +163,7 @@ export const MsgJoinSwapShareAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "JoinSwapShareAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgJoinSwapShareAmountOut.encode(this).finish();
@@ -186,7 +184,7 @@ export const MsgExitSwapExternAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "ExitSwapExternAmountOut",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitSwapExternAmountOut.encode(this).finish();
@@ -207,7 +205,7 @@ export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "ExitSwapShareAmountIn",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgExitSwapShareAmountIn.encode(this).finish();
@@ -225,30 +223,30 @@ export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -264,8 +262,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

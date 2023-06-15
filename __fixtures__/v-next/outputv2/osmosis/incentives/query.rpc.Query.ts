@@ -1,13 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Gauge, GaugeSDKType } from "./gauge";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
+import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse, GaugeByIDRequest, GaugeByIDResponse, GaugesRequest, GaugesResponse, ActiveGaugesRequest, ActiveGaugesResponse, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse, UpcomingGaugesRequest, UpcomingGaugesResponse, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse, RewardsEstRequest, RewardsEstResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse } from "./query";
 /** Query defines the gRPC querier service */
 export interface Query {
   /** ModuleToDistributeCoins returns coins that are going to be distributed */
@@ -54,34 +49,34 @@ export class QueryClientImpl implements Query {
     this.lockableDurations = this.lockableDurations.bind(this);
   }
   moduleToDistributeCoins(request: DeepPartial<ModuleToDistributeCoinsRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse> {
-    return this.rpc.unary(ModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
   }
   gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse> {
-    return this.rpc.unary(GaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryGaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
   }
   gauges(request: DeepPartial<GaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<GaugesResponse> {
-    return this.rpc.unary(GaugesDesc, GaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryGaugesDesc, GaugesRequest.fromPartial(request), metadata);
   }
   activeGauges(request: DeepPartial<ActiveGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse> {
-    return this.rpc.unary(ActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
   }
   activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse> {
-    return this.rpc.unary(ActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
   }
   upcomingGauges(request: DeepPartial<UpcomingGaugesRequest> = {
     pagination: undefined
   }, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse> {
-    return this.rpc.unary(UpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryUpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
   }
   upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse> {
-    return this.rpc.unary(UpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryUpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
   }
   rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse> {
-    return this.rpc.unary(RewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryRewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
   }
   lockableDurations(request: DeepPartial<QueryLockableDurationsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse> {
     return this.rpc.unary(QueryLockableDurationsDesc, QueryLockableDurationsRequest.fromPartial(request), metadata);
@@ -94,7 +89,7 @@ export const QueryModuleToDistributeCoinsDesc: UnaryMethodDefinitionish = {
   methodName: "ModuleToDistributeCoins",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ModuleToDistributeCoinsRequest.encode(this).finish();
@@ -115,7 +110,7 @@ export const QueryGaugeByIDDesc: UnaryMethodDefinitionish = {
   methodName: "GaugeByID",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GaugeByIDRequest.encode(this).finish();
@@ -136,7 +131,7 @@ export const QueryGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "Gauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GaugesRequest.encode(this).finish();
@@ -157,7 +152,7 @@ export const QueryActiveGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "ActiveGauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ActiveGaugesRequest.encode(this).finish();
@@ -178,7 +173,7 @@ export const QueryActiveGaugesPerDenomDesc: UnaryMethodDefinitionish = {
   methodName: "ActiveGaugesPerDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return ActiveGaugesPerDenomRequest.encode(this).finish();
@@ -199,7 +194,7 @@ export const QueryUpcomingGaugesDesc: UnaryMethodDefinitionish = {
   methodName: "UpcomingGauges",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return UpcomingGaugesRequest.encode(this).finish();
@@ -220,7 +215,7 @@ export const QueryUpcomingGaugesPerDenomDesc: UnaryMethodDefinitionish = {
   methodName: "UpcomingGaugesPerDenom",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return UpcomingGaugesPerDenomRequest.encode(this).finish();
@@ -241,7 +236,7 @@ export const QueryRewardsEstDesc: UnaryMethodDefinitionish = {
   methodName: "RewardsEst",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return RewardsEstRequest.encode(this).finish();
@@ -262,7 +257,7 @@ export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
   methodName: "LockableDurations",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryLockableDurationsRequest.encode(this).finish();
@@ -280,30 +275,30 @@ export const QueryLockableDurationsDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -319,8 +314,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

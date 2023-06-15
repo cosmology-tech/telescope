@@ -4,8 +4,8 @@ import { IncentiveRecord, IncentiveRecordSDKType } from "./incentive_record";
 import { Params, ParamsSDKType } from "./params";
 import { Position, PositionSDKType } from "./position";
 import { AccumulatorContent, AccumulatorContentSDKType } from "../accum/v1beta1/accum";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
  * FullTick contains tick index and pool id along with other tick model
@@ -80,36 +80,36 @@ export interface AccumObjectSDKType {
 }
 function createBaseFullTick(): FullTick {
   return {
-    poolId: BigInt("0"),
-    tickIndex: BigInt("0"),
+    poolId: BigInt(0),
+    tickIndex: BigInt(0),
     info: undefined
   };
 }
 export const FullTick = {
-  encode(message: FullTick, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FullTick, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.tickIndex !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.tickIndex.toString()));
+      writer.uint32(16).int64(message.tickIndex);
     }
     if (message.info !== undefined) {
       TickInfo.encode(message.info, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FullTick {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FullTick {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFullTick();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
-          message.tickIndex = BigInt(reader.int64().toString());
+          message.tickIndex = reader.int64();
           break;
         case 3:
           message.info = TickInfo.decode(reader, reader.uint32());
@@ -123,22 +123,22 @@ export const FullTick = {
   },
   fromJSON(object: any): FullTick {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
-      tickIndex: isSet(object.tickIndex) ? BigInt(object.tickIndex.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      tickIndex: isSet(object.tickIndex) ? BigInt(object.tickIndex.toString()) : BigInt(0),
       info: isSet(object.info) ? TickInfo.fromJSON(object.info) : undefined
     };
   },
   toJSON(message: FullTick): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
-    message.tickIndex !== undefined && (obj.tickIndex = (message.tickIndex || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.tickIndex !== undefined && (obj.tickIndex = (message.tickIndex || BigInt(0)).toString());
     message.info !== undefined && (obj.info = message.info ? TickInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<FullTick>): FullTick {
     const message = createBaseFullTick();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
-    message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    message.tickIndex = object.tickIndex !== undefined && object.tickIndex !== null ? BigInt(object.tickIndex.toString()) : BigInt(0);
     message.info = object.info !== undefined && object.info !== null ? TickInfo.fromPartial(object.info) : undefined;
     return message;
   },
@@ -151,8 +151,8 @@ export const FullTick = {
   },
   fromSDKJSON(object: any): FullTickSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
-      tick_index: isSet(object.tick_index) ? BigInt(object.tick_index.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
+      tick_index: isSet(object.tick_index) ? BigInt(object.tick_index.toString()) : BigInt(0),
       info: isSet(object.info) ? TickInfo.fromSDKJSON(object.info) : undefined
     };
   },
@@ -174,7 +174,7 @@ function createBasePoolData(): PoolData {
   };
 }
 export const PoolData = {
-  encode(message: PoolData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
@@ -192,8 +192,8 @@ export const PoolData = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolData {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolData();
     while (reader.pos < end) {
@@ -305,11 +305,11 @@ function createBaseGenesisState(): GenesisState {
     params: undefined,
     poolData: [],
     positions: [],
-    nextPositionId: BigInt("0")
+    nextPositionId: BigInt(0)
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -320,12 +320,12 @@ export const GenesisState = {
       Position.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.nextPositionId !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.nextPositionId.toString()));
+      writer.uint32(32).uint64(message.nextPositionId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -341,7 +341,7 @@ export const GenesisState = {
           message.positions.push(Position.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.nextPositionId = BigInt(reader.uint64().toString());
+          message.nextPositionId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -355,7 +355,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       poolData: Array.isArray(object?.poolData) ? object.poolData.map((e: any) => PoolData.fromJSON(e)) : [],
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromJSON(e)) : [],
-      nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt("0")
+      nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt(0)
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -371,7 +371,7 @@ export const GenesisState = {
     } else {
       obj.positions = [];
     }
-    message.nextPositionId !== undefined && (obj.nextPositionId = (message.nextPositionId || BigInt("0")).toString());
+    message.nextPositionId !== undefined && (obj.nextPositionId = (message.nextPositionId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -379,7 +379,7 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.poolData = object.poolData?.map(e => PoolData.fromPartial(e)) || [];
     message.positions = object.positions?.map(e => Position.fromPartial(e)) || [];
-    message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt("0");
+    message.nextPositionId = object.nextPositionId !== undefined && object.nextPositionId !== null ? BigInt(object.nextPositionId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -395,7 +395,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
       pool_data: Array.isArray(object?.pool_data) ? object.pool_data.map((e: any) => PoolData.fromSDKJSON(e)) : [],
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromSDKJSON(e)) : [],
-      next_position_id: isSet(object.next_position_id) ? BigInt(object.next_position_id.toString()) : BigInt("0")
+      next_position_id: isSet(object.next_position_id) ? BigInt(object.next_position_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: GenesisState): GenesisStateSDKType {
@@ -422,7 +422,7 @@ function createBaseAccumObject(): AccumObject {
   };
 }
 export const AccumObject = {
-  encode(message: AccumObject, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccumObject, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -431,8 +431,8 @@ export const AccumObject = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccumObject {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccumObject {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccumObject();
     while (reader.pos < end) {

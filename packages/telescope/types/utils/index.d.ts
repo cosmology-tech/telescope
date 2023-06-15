@@ -65,8 +65,11 @@ export declare const UTILS: {
     useEndpoint: string;
     override: string;
     makeObservable: string;
+    NodeHttpTransport: string;
     UnaryMethodDefinitionishR: string;
     UnaryMethodDefinitionish: string;
+    BinaryReader: string;
+    BinaryWriter: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -56,11 +56,11 @@ function createBaseMsgTransfer(): MsgTransfer {
     sender: "",
     receiver: "",
     timeoutHeight: undefined,
-    timeoutTimestamp: BigInt("0")
+    timeoutTimestamp: BigInt(0)
   };
 }
 export const MsgTransfer = {
-  encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgTransfer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
     }
@@ -80,12 +80,12 @@ export const MsgTransfer = {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
     if (message.timeoutTimestamp !== BigInt(0)) {
-      writer.uint32(56).uint64(Long.fromString(message.timeoutTimestamp.toString()));
+      writer.uint32(56).uint64(message.timeoutTimestamp);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransfer {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransfer {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
     while (reader.pos < end) {
@@ -110,7 +110,7 @@ export const MsgTransfer = {
           message.timeoutHeight = Height.decode(reader, reader.uint32());
           break;
         case 7:
-          message.timeoutTimestamp = BigInt(reader.uint64().toString());
+          message.timeoutTimestamp = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -127,7 +127,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0")
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgTransfer): unknown {
@@ -138,7 +138,7 @@ export const MsgTransfer = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt("0")).toString());
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
@@ -149,7 +149,7 @@ export const MsgTransfer = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0");
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgTransferSDKType): MsgTransfer {
@@ -171,7 +171,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt("0")
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgTransfer): MsgTransferSDKType {
@@ -190,11 +190,11 @@ function createBaseMsgTransferResponse(): MsgTransferResponse {
   return {};
 }
 export const MsgTransferResponse = {
-  encode(_: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgTransferResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransferResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransferResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -84,7 +84,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -102,8 +102,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -226,7 +226,7 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
   };
 }
 export const GenesisState_GenMsgs = {
-  encode(message: GenesisState_GenMsgs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState_GenMsgs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
     }
@@ -238,8 +238,8 @@ export const GenesisState_GenMsgs = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState_GenMsgs {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState_GenMsgs {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState_GenMsgs();
     while (reader.pos < end) {
@@ -306,16 +306,16 @@ export const GenesisState_GenMsgs = {
 };
 function createBaseCode(): Code {
   return {
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     codeInfo: undefined,
     codeBytes: new Uint8Array(),
     pinned: false
   };
 }
 export const Code = {
-  encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
       CodeInfo.encode(message.codeInfo, writer.uint32(18).fork()).ldelim();
@@ -328,15 +328,15 @@ export const Code = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Code {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Code {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 2:
           message.codeInfo = CodeInfo.decode(reader, reader.uint32());
@@ -356,7 +356,7 @@ export const Code = {
   },
   fromJSON(object: any): Code {
     return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
       codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -364,7 +364,7 @@ export const Code = {
   },
   toJSON(message: Code): unknown {
     const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
     message.codeBytes !== undefined && (obj.codeBytes = base64FromBytes(message.codeBytes !== undefined ? message.codeBytes : new Uint8Array()));
     message.pinned !== undefined && (obj.pinned = message.pinned);
@@ -372,7 +372,7 @@ export const Code = {
   },
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
@@ -388,7 +388,7 @@ export const Code = {
   },
   fromSDKJSON(object: any): CodeSDKType {
     return {
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
       code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -411,7 +411,7 @@ function createBaseContract(): Contract {
   };
 }
 export const Contract = {
-  encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -423,8 +423,8 @@ export const Contract = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Contract {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Contract {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
     while (reader.pos < end) {
@@ -500,21 +500,21 @@ export const Contract = {
 function createBaseSequence(): Sequence {
   return {
     idKey: new Uint8Array(),
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const Sequence = {
-  encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.value.toString()));
+      writer.uint32(16).uint64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Sequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Sequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();
     while (reader.pos < end) {
@@ -524,7 +524,7 @@ export const Sequence = {
           message.idKey = reader.bytes();
           break;
         case 2:
-          message.value = BigInt(reader.uint64().toString());
+          message.value = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -536,19 +536,19 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     return {
       idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: Sequence): unknown {
     const obj: any = {};
     message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: SequenceSDKType): Sequence {
@@ -560,7 +560,7 @@ export const Sequence = {
   fromSDKJSON(object: any): SequenceSDKType {
     return {
       id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: Sequence): SequenceSDKType {

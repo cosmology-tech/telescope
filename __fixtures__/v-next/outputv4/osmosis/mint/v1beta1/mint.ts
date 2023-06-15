@@ -1,6 +1,6 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -121,14 +121,14 @@ function createBaseMinter(): Minter {
   };
 }
 export const Minter = {
-  encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochProvisions !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Minter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
     while (reader.pos < end) {
@@ -182,7 +182,7 @@ function createBaseWeightedAddress(): WeightedAddress {
   };
 }
 export const WeightedAddress = {
-  encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -191,8 +191,8 @@ export const WeightedAddress = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): WeightedAddress {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
     while (reader.pos < end) {
@@ -257,7 +257,7 @@ function createBaseDistributionProportions(): DistributionProportions {
   };
 }
 export const DistributionProportions = {
-  encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistributionProportions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.staking !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
     }
@@ -272,8 +272,8 @@ export const DistributionProportions = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DistributionProportions {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
     while (reader.pos < end) {
@@ -352,15 +352,15 @@ function createBaseParams(): Params {
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
-    reductionPeriodInEpochs: BigInt("0"),
+    reductionPeriodInEpochs: BigInt(0),
     reductionFactor: "",
     distributionProportions: undefined,
     weightedDeveloperRewardsReceivers: [],
-    mintingRewardsDistributionStartEpoch: BigInt("0")
+    mintingRewardsDistributionStartEpoch: BigInt(0)
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
@@ -371,7 +371,7 @@ export const Params = {
       writer.uint32(26).string(message.epochIdentifier);
     }
     if (message.reductionPeriodInEpochs !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.reductionPeriodInEpochs.toString()));
+      writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
     if (message.reductionFactor !== "") {
       writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
@@ -383,12 +383,12 @@ export const Params = {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
-      writer.uint32(64).int64(Long.fromString(message.mintingRewardsDistributionStartEpoch.toString()));
+      writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -404,7 +404,7 @@ export const Params = {
           message.epochIdentifier = reader.string();
           break;
         case 4:
-          message.reductionPeriodInEpochs = BigInt(reader.int64().toString());
+          message.reductionPeriodInEpochs = reader.int64();
           break;
         case 5:
           message.reductionFactor = Decimal.fromAtomics(reader.string(), 18).toString();
@@ -416,7 +416,7 @@ export const Params = {
           message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.mintingRewardsDistributionStartEpoch = BigInt(reader.int64().toString());
+          message.mintingRewardsDistributionStartEpoch = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -430,11 +430,11 @@ export const Params = {
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt("0"),
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0),
       reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
       distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt("0")
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0)
     };
   },
   toJSON(message: Params): unknown {
@@ -442,7 +442,7 @@ export const Params = {
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
     message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt("0")).toString());
+    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt(0)).toString());
     message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
     message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
     if (message.weightedDeveloperRewardsReceivers) {
@@ -450,7 +450,7 @@ export const Params = {
     } else {
       obj.weightedDeveloperRewardsReceivers = [];
     }
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt("0")).toString());
+    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -458,11 +458,11 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt("0");
+    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0);
     message.reductionFactor = object.reductionFactor ?? "";
     message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : undefined;
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt("0");
+    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {
@@ -482,11 +482,11 @@ export const Params = {
       mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
       genesis_epoch_provisions: isSet(object.genesis_epoch_provisions) ? String(object.genesis_epoch_provisions) : "",
       epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
-      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? BigInt(object.reduction_period_in_epochs.toString()) : BigInt("0"),
+      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? BigInt(object.reduction_period_in_epochs.toString()) : BigInt(0),
       reduction_factor: isSet(object.reduction_factor) ? String(object.reduction_factor) : "",
       distribution_proportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDKJSON(object.distribution_proportions) : undefined,
       weighted_developer_rewards_receivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDKJSON(e)) : [],
-      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? BigInt(object.minting_rewards_distribution_start_epoch.toString()) : BigInt("0")
+      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? BigInt(object.minting_rewards_distribution_start_epoch.toString()) : BigInt(0)
     };
   },
   toSDK(message: Params): ParamsSDKType {

@@ -7,8 +7,8 @@ export class Msg {
    * GrantAllowance grants fee allowance to the grantee on the granter's
    * account with the provided expiration time.
    */
-  static GrantAllowance(request: MsgGrantAllowance, initRequest?: fm.InitReq): Promise<MsgGrantAllowanceResponse> {
-    return fm.fetchReq(`/cosmos.feegrant.v1beta1/GrantAllowance`, {
+  static grantAllowance(request: MsgGrantAllowance, initRequest?: fm.InitReq): Promise<MsgGrantAllowanceResponse> {
+    return fm.fetchReq(`/cosmos.feegrant.v1beta1/grantAllowance`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
@@ -18,8 +18,8 @@ export class Msg {
    * RevokeAllowance revokes any fee allowance of granter's account that
    * has been granted to the grantee.
    */
-  static RevokeAllowance(request: MsgRevokeAllowance, initRequest?: fm.InitReq): Promise<MsgRevokeAllowanceResponse> {
-    return fm.fetchReq(`/cosmos.feegrant.v1beta1/RevokeAllowance`, {
+  static revokeAllowance(request: MsgRevokeAllowance, initRequest?: fm.InitReq): Promise<MsgRevokeAllowanceResponse> {
+    return fm.fetchReq(`/cosmos.feegrant.v1beta1/revokeAllowance`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

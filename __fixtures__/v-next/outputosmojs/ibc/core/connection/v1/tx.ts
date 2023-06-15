@@ -1,8 +1,8 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -164,12 +164,12 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
     clientId: "",
     counterparty: undefined,
     version: undefined,
-    delayPeriod: BigInt("0"),
+    delayPeriod: BigInt(0),
     signer: ""
   };
 }
 export const MsgConnectionOpenInit = {
-  encode(message: MsgConnectionOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenInit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -180,15 +180,15 @@ export const MsgConnectionOpenInit = {
       Version.encode(message.version, writer.uint32(26).fork()).ldelim();
     }
     if (message.delayPeriod !== BigInt(0)) {
-      writer.uint32(32).uint64(Long.fromString(message.delayPeriod.toString()));
+      writer.uint32(32).uint64(message.delayPeriod);
     }
     if (message.signer !== "") {
       writer.uint32(42).string(message.signer);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenInit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInit();
     while (reader.pos < end) {
@@ -204,7 +204,7 @@ export const MsgConnectionOpenInit = {
           message.version = Version.decode(reader, reader.uint32());
           break;
         case 4:
-          message.delayPeriod = BigInt(reader.uint64().toString());
+          message.delayPeriod = reader.uint64();
           break;
         case 5:
           message.signer = reader.string();
@@ -221,7 +221,7 @@ export const MsgConnectionOpenInit = {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0"),
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -230,7 +230,7 @@ export const MsgConnectionOpenInit = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
     message.version !== undefined && (obj.version = message.version ? Version.toJSON(message.version) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -239,7 +239,7 @@ export const MsgConnectionOpenInit = {
     message.clientId = object.clientId ?? "";
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.version = object.version !== undefined && object.version !== null ? Version.fromPartial(object.version) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt(0);
     message.signer = object.signer ?? "";
     return message;
   },
@@ -257,7 +257,7 @@ export const MsgConnectionOpenInit = {
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromSDKJSON(object.version) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0"),
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0),
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -275,11 +275,11 @@ function createBaseMsgConnectionOpenInitResponse(): MsgConnectionOpenInitRespons
   return {};
 }
 export const MsgConnectionOpenInitResponse = {
-  encode(_: MsgConnectionOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgConnectionOpenInitResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInitResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenInitResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInitResponse();
     while (reader.pos < end) {
@@ -320,7 +320,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
     previousConnectionId: "",
     clientState: undefined,
     counterparty: undefined,
-    delayPeriod: BigInt("0"),
+    delayPeriod: BigInt(0),
     counterpartyVersions: [],
     proofHeight: undefined,
     proofInit: new Uint8Array(),
@@ -331,7 +331,7 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
   };
 }
 export const MsgConnectionOpenTry = {
-  encode(message: MsgConnectionOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenTry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -345,7 +345,7 @@ export const MsgConnectionOpenTry = {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
     if (message.delayPeriod !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.delayPeriod.toString()));
+      writer.uint32(40).uint64(message.delayPeriod);
     }
     for (const v of message.counterpartyVersions) {
       Version.encode(v!, writer.uint32(50).fork()).ldelim();
@@ -370,8 +370,8 @@ export const MsgConnectionOpenTry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenTry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTry();
     while (reader.pos < end) {
@@ -390,7 +390,7 @@ export const MsgConnectionOpenTry = {
           message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 5:
-          message.delayPeriod = BigInt(reader.uint64().toString());
+          message.delayPeriod = reader.uint64();
           break;
         case 6:
           message.counterpartyVersions.push(Version.decode(reader, reader.uint32()));
@@ -426,7 +426,7 @@ export const MsgConnectionOpenTry = {
       previousConnectionId: isSet(object.previousConnectionId) ? String(object.previousConnectionId) : "",
       clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt("0"),
+      delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0),
       counterpartyVersions: Array.isArray(object?.counterpartyVersions) ? object.counterpartyVersions.map((e: any) => Version.fromJSON(e)) : [],
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
       proofInit: isSet(object.proofInit) ? bytesFromBase64(object.proofInit) : new Uint8Array(),
@@ -442,7 +442,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId !== undefined && (obj.previousConnectionId = message.previousConnectionId);
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt("0")).toString());
+    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
     if (message.counterpartyVersions) {
       obj.counterpartyVersions = message.counterpartyVersions.map(e => e ? Version.toJSON(e) : undefined);
     } else {
@@ -462,7 +462,7 @@ export const MsgConnectionOpenTry = {
     message.previousConnectionId = object.previousConnectionId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
-    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt("0");
+    message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? BigInt(object.delayPeriod.toString()) : BigInt(0);
     message.counterpartyVersions = object.counterpartyVersions?.map(e => Version.fromPartial(e)) || [];
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.proofInit = object.proofInit ?? new Uint8Array();
@@ -494,7 +494,7 @@ export const MsgConnectionOpenTry = {
       previous_connection_id: isSet(object.previous_connection_id) ? String(object.previous_connection_id) : "",
       client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt("0"),
+      delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0),
       counterparty_versions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromSDKJSON(e)) : [],
       proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined,
       proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),
@@ -529,11 +529,11 @@ function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse 
   return {};
 }
 export const MsgConnectionOpenTryResponse = {
-  encode(_: MsgConnectionOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgConnectionOpenTryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTryResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenTryResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTryResponse();
     while (reader.pos < end) {
@@ -583,7 +583,7 @@ function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
   };
 }
 export const MsgConnectionOpenAck = {
-  encode(message: MsgConnectionOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenAck, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
@@ -616,8 +616,8 @@ export const MsgConnectionOpenAck = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAck {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenAck {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAck();
     while (reader.pos < end) {
@@ -749,11 +749,11 @@ function createBaseMsgConnectionOpenAckResponse(): MsgConnectionOpenAckResponse 
   return {};
 }
 export const MsgConnectionOpenAckResponse = {
-  encode(_: MsgConnectionOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgConnectionOpenAckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAckResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenAckResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAckResponse();
     while (reader.pos < end) {
@@ -797,7 +797,7 @@ function createBaseMsgConnectionOpenConfirm(): MsgConnectionOpenConfirm {
   };
 }
 export const MsgConnectionOpenConfirm = {
-  encode(message: MsgConnectionOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgConnectionOpenConfirm, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
     }
@@ -812,8 +812,8 @@ export const MsgConnectionOpenConfirm = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirm {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenConfirm {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirm();
     while (reader.pos < end) {
@@ -891,11 +891,11 @@ function createBaseMsgConnectionOpenConfirmResponse(): MsgConnectionOpenConfirmR
   return {};
 }
 export const MsgConnectionOpenConfirmResponse = {
-  encode(_: MsgConnectionOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgConnectionOpenConfirmResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirmResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenConfirmResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirmResponse();
     while (reader.pos < end) {

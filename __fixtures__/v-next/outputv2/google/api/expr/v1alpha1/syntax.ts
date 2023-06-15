@@ -1,6 +1,6 @@
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";

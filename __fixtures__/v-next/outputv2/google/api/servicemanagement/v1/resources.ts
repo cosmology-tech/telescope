@@ -1,4 +1,4 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";

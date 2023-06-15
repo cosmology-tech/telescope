@@ -1,7 +1,7 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
 import { ProofSpec, ProofSpecAmino, ProofSpecSDKType } from "../../../../confio/proofs";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
 import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";

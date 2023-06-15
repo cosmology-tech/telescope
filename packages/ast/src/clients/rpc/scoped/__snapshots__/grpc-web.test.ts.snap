@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createScopedGrpcWebFactory 1`] = `
+"export const createRpcFactorizzle = async ({
+  endpoint
+}: {
+  endpoint: string;
+}) => {
+  endpoint = endpoint.replace(/\\/*$/, "");
+  const {
+    GrpcWebImpl
+  } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
+  let grpcWeb;
+  if (typeof document !== "undefined") {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: grpc.CrossBrowserHttpTransport({
+        withCredentials: false
+      })
+    });
+  } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: NodeHttpTransport()
+    });
+  } else {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: NodeHttpTransport()
+    });
+  }
+  return {
+    cosmos: {
+      app: {
+        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).QueryClientImpl(grpcWeb)
+      },
+      auth: {
+        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
+      },
+      authz: {
+        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
+      },
+      bank: {
+        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).QueryClientImpl(grpcWeb)
+      },
+      base: {
+        tendermint: {
+          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).ServiceClientImpl(grpcWeb)
+        }
+      },
+      tx: {
+        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).ServiceClientImpl(grpcWeb)
+      }
+    },
+    cosmwasm: {
+      wasm: {
+        v1: new (await import("./wasm/v1/query.rpc.Query")).QueryClientImpl(grpcWeb)
+      }
+    }
+  };
+};"
+`;
+
+exports[`createScopedGrpcWebMsgFactory 1`] = `
+"export const createGrpcWebMsgClient = async ({
+  endpoint
+}: {
+  endpoint: string;
+}) => {
+  endpoint = endpoint.replace(/\\/*$/, "");
+  const {
+    GrpcWebImpl
+  } = await import("../cosmos/app/v1alpha1/query.rpc.Query");
+  let grpcWeb;
+  if (typeof document !== "undefined") {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: grpc.CrossBrowserHttpTransport({
+        withCredentials: false
+      })
+    });
+  } else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: NodeHttpTransport()
+    });
+  } else {
+    grpcWeb = new GrpcWebImpl(endpoint, {
+      transport: NodeHttpTransport()
+    });
+  }
+  return {
+    cosmos: {
+      authz: {
+        v1beta1: new (await import("../cosmos/authz/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      },
+      bank: {
+        v1beta1: new (await import("../cosmos/bank/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      }
+    },
+    osmosis: {
+      gamm: {
+        poolmodels: {
+          balancer: {
+            v1beta1: new (await import("./gamm/pool-models/balancer/tx/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+          },
+          stableswap: {
+            v1beta1: new (await import("./gamm/pool-models/stableswap/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+          }
+        },
+        v1beta1: new (await import("./gamm/v1beta1/tx.rpc.msg")).MsgClientImpl(grpcWeb)
+      }
+    }
+  };
+};"
+`;

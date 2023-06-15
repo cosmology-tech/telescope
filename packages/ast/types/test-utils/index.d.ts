@@ -6,7 +6,6 @@ export declare const expectCode: (ast: any) => void;
 export declare const printCode: (ast: any) => void;
 export declare const defaultTelescopeOptions: {
     env: "default" | "v-next";
-    experimentalGlobalProtoNamespace: boolean;
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
     useSDKTypes: boolean;
@@ -54,7 +53,7 @@ export declare const defaultTelescopeOptions: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
             };
-            longLibrary?: "bigint" | "long";
+            num64?: "bigint" | "long";
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: "date" | "timestamp";

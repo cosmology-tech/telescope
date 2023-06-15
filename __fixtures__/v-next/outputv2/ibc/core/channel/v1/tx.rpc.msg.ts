@@ -1,11 +1,8 @@
-import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
-import { Height, HeightSDKType } from "../../client/v1/client";
 import { UnaryMethodDefinitionish } from "../../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenInitResponse, MsgChannelOpenInitResponseSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenTryResponse, MsgChannelOpenTryResponseSDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenAckResponse, MsgChannelOpenAckResponseSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelOpenConfirmResponse, MsgChannelOpenConfirmResponseSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseInitResponse, MsgChannelCloseInitResponseSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgChannelCloseConfirmResponse, MsgChannelCloseConfirmResponseSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgRecvPacketResponse, MsgRecvPacketResponseSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutResponse, MsgTimeoutResponseSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgTimeoutOnCloseResponse, MsgTimeoutOnCloseResponseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType, MsgAcknowledgementResponse, MsgAcknowledgementResponseSDKType } from "./tx";
+import { MsgChannelOpenInit, MsgChannelOpenInitResponse, MsgChannelOpenTry, MsgChannelOpenTryResponse, MsgChannelOpenAck, MsgChannelOpenAckResponse, MsgChannelOpenConfirm, MsgChannelOpenConfirmResponse, MsgChannelCloseInit, MsgChannelCloseInitResponse, MsgChannelCloseConfirm, MsgChannelCloseConfirmResponse, MsgRecvPacket, MsgRecvPacketResponse, MsgTimeout, MsgTimeoutResponse, MsgTimeoutOnClose, MsgTimeoutOnCloseResponse, MsgAcknowledgement, MsgAcknowledgementResponse } from "./tx";
 /** Msg defines the ibc/channel Msg service. */
 export interface Msg {
   /** ChannelOpenInit defines a rpc handler method for MsgChannelOpenInit. */
@@ -85,7 +82,7 @@ export const MsgChannelOpenInitDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenInit.encode(this).finish();
@@ -106,7 +103,7 @@ export const MsgChannelOpenTryDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenTry",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenTry.encode(this).finish();
@@ -127,7 +124,7 @@ export const MsgChannelOpenAckDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenAck",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenAck.encode(this).finish();
@@ -148,7 +145,7 @@ export const MsgChannelOpenConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelOpenConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelOpenConfirm.encode(this).finish();
@@ -169,7 +166,7 @@ export const MsgChannelCloseInitDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelCloseInit",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelCloseInit.encode(this).finish();
@@ -190,7 +187,7 @@ export const MsgChannelCloseConfirmDesc: UnaryMethodDefinitionish = {
   methodName: "ChannelCloseConfirm",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgChannelCloseConfirm.encode(this).finish();
@@ -211,7 +208,7 @@ export const MsgRecvPacketDesc: UnaryMethodDefinitionish = {
   methodName: "RecvPacket",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgRecvPacket.encode(this).finish();
@@ -232,7 +229,7 @@ export const MsgTimeoutDesc: UnaryMethodDefinitionish = {
   methodName: "Timeout",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgTimeout.encode(this).finish();
@@ -253,7 +250,7 @@ export const MsgTimeoutOnCloseDesc: UnaryMethodDefinitionish = {
   methodName: "TimeoutOnClose",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgTimeoutOnClose.encode(this).finish();
@@ -274,7 +271,7 @@ export const MsgAcknowledgementDesc: UnaryMethodDefinitionish = {
   methodName: "Acknowledgement",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgAcknowledgement.encode(this).finish();
@@ -292,30 +289,30 @@ export const MsgAcknowledgementDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -331,8 +328,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

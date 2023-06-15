@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -159,7 +159,7 @@ function createBaseAccountID(): AccountID {
   };
 }
 export const AccountID = {
-  encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
     }
@@ -168,8 +168,8 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
     while (reader.pos < end) {
@@ -232,11 +232,11 @@ function createBaseAccount(): Account {
     state: 0,
     balance: undefined,
     transferred: undefined,
-    settledAt: BigInt("0")
+    settledAt: BigInt(0)
   };
 }
 export const Account = {
-  encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -253,12 +253,12 @@ export const Account = {
       Coin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
     if (message.settledAt !== BigInt(0)) {
-      writer.uint32(48).int64(Long.fromString(message.settledAt.toString()));
+      writer.uint32(48).int64(message.settledAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Account {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Account {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
     while (reader.pos < end) {
@@ -280,7 +280,7 @@ export const Account = {
           message.transferred = Coin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.settledAt = BigInt(reader.int64().toString());
+          message.settledAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -296,7 +296,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt("0")
+      settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0)
     };
   },
   toJSON(message: Account): unknown {
@@ -306,7 +306,7 @@ export const Account = {
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt("0")).toString());
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
@@ -316,7 +316,7 @@ export const Account = {
     message.state = object.state ?? 0;
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt("0");
+    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: AccountSDKType): Account {
@@ -336,7 +336,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
-      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt("0")
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Account): AccountSDKType {
@@ -362,7 +362,7 @@ function createBasePayment(): Payment {
   };
 }
 export const Payment = {
-  encode(message: Payment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Payment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
@@ -386,8 +386,8 @@ export const Payment = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Payment {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Payment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePayment();
     while (reader.pos < end) {

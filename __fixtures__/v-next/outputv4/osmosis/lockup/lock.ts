@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -162,7 +162,7 @@ export interface SyntheticLockSDKType {
 }
 function createBasePeriodLock(): PeriodLock {
   return {
-    ID: BigInt("0"),
+    ID: BigInt(0),
     owner: "",
     duration: undefined,
     endTime: undefined,
@@ -170,9 +170,9 @@ function createBasePeriodLock(): PeriodLock {
   };
 }
 export const PeriodLock = {
-  encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PeriodLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ID !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.ID.toString()));
+      writer.uint32(8).uint64(message.ID);
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
@@ -188,15 +188,15 @@ export const PeriodLock = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PeriodLock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PeriodLock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodLock();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.ID = BigInt(reader.uint64().toString());
+          message.ID = reader.uint64();
           break;
         case 2:
           message.owner = reader.string();
@@ -219,7 +219,7 @@ export const PeriodLock = {
   },
   fromJSON(object: any): PeriodLock {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0"),
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
@@ -228,7 +228,7 @@ export const PeriodLock = {
   },
   toJSON(message: PeriodLock): unknown {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt("0")).toString());
+    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
@@ -241,7 +241,7 @@ export const PeriodLock = {
   },
   fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
-    message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt("0");
+    message.ID = object.ID !== undefined && object.ID !== null ? BigInt(object.ID.toString()) : BigInt(0);
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.endTime = object.endTime ?? undefined;
@@ -259,7 +259,7 @@ export const PeriodLock = {
   },
   fromSDKJSON(object: any): PeriodLockSDKType {
     return {
-      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt("0"),
+      ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0),
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
@@ -289,7 +289,7 @@ function createBaseQueryCondition(): QueryCondition {
   };
 }
 export const QueryCondition = {
-  encode(message: QueryCondition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCondition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
     }
@@ -304,8 +304,8 @@ export const QueryCondition = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCondition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCondition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCondition();
     while (reader.pos < end) {
@@ -381,16 +381,16 @@ export const QueryCondition = {
 };
 function createBaseSyntheticLock(): SyntheticLock {
   return {
-    underlyingLockId: BigInt("0"),
+    underlyingLockId: BigInt(0),
     synthDenom: "",
     endTime: undefined,
     duration: undefined
   };
 }
 export const SyntheticLock = {
-  encode(message: SyntheticLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SyntheticLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.underlyingLockId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.underlyingLockId.toString()));
+      writer.uint32(8).uint64(message.underlyingLockId);
     }
     if (message.synthDenom !== "") {
       writer.uint32(18).string(message.synthDenom);
@@ -403,15 +403,15 @@ export const SyntheticLock = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SyntheticLock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLock();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.underlyingLockId = BigInt(reader.uint64().toString());
+          message.underlyingLockId = reader.uint64();
           break;
         case 2:
           message.synthDenom = reader.string();
@@ -431,7 +431,7 @@ export const SyntheticLock = {
   },
   fromJSON(object: any): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlyingLockId) ? BigInt(object.underlyingLockId.toString()) : BigInt("0"),
+      underlyingLockId: isSet(object.underlyingLockId) ? BigInt(object.underlyingLockId.toString()) : BigInt(0),
       synthDenom: isSet(object.synthDenom) ? String(object.synthDenom) : "",
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
@@ -439,7 +439,7 @@ export const SyntheticLock = {
   },
   toJSON(message: SyntheticLock): unknown {
     const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || BigInt("0")).toString());
+    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || BigInt(0)).toString());
     message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -447,7 +447,7 @@ export const SyntheticLock = {
   },
   fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
     const message = createBaseSyntheticLock();
-    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? BigInt(object.underlyingLockId.toString()) : BigInt("0");
+    message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? BigInt(object.underlyingLockId.toString()) : BigInt(0);
     message.synthDenom = object.synthDenom ?? "";
     message.endTime = object.endTime ?? undefined;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
@@ -463,7 +463,7 @@ export const SyntheticLock = {
   },
   fromSDKJSON(object: any): SyntheticLockSDKType {
     return {
-      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : BigInt("0"),
+      underlying_lock_id: isSet(object.underlying_lock_id) ? BigInt(object.underlying_lock_id.toString()) : BigInt(0),
       synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
       end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined

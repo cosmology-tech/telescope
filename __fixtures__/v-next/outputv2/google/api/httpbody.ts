@@ -1,4 +1,4 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";

@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -160,14 +160,14 @@ function createBaseDoubleValue(): DoubleValue {
   };
 }
 export const DoubleValue = {
-  encode(message: DoubleValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DoubleValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DoubleValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DoubleValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleValue();
     while (reader.pos < end) {
@@ -220,14 +220,14 @@ function createBaseFloatValue(): FloatValue {
   };
 }
 export const FloatValue = {
-  encode(message: FloatValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FloatValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(13).float(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FloatValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FloatValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatValue();
     while (reader.pos < end) {
@@ -276,25 +276,25 @@ export const FloatValue = {
 };
 function createBaseInt64Value(): Int64Value {
   return {
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const Int64Value = {
-  encode(message: Int64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Int64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.value.toString()));
+      writer.uint32(8).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Int64Value {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Int64Value {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Value();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -305,17 +305,17 @@ export const Int64Value = {
   },
   fromJSON(object: any): Int64Value {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: Int64ValueSDKType): Int64Value {
@@ -325,7 +325,7 @@ export const Int64Value = {
   },
   fromSDKJSON(object: any): Int64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: Int64Value): Int64ValueSDKType {
@@ -336,25 +336,25 @@ export const Int64Value = {
 };
 function createBaseUInt64Value(): UInt64Value {
   return {
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const UInt64Value = {
-  encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UInt64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.value.toString()));
+      writer.uint32(8).uint64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Value {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UInt64Value {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Value();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = BigInt(reader.uint64().toString());
+          message.value = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -365,17 +365,17 @@ export const UInt64Value = {
   },
   fromJSON(object: any): UInt64Value {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
@@ -385,7 +385,7 @@ export const UInt64Value = {
   },
   fromSDKJSON(object: any): UInt64ValueSDKType {
     return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: UInt64Value): UInt64ValueSDKType {
@@ -400,14 +400,14 @@ function createBaseInt32Value(): Int32Value {
   };
 }
 export const Int32Value = {
-  encode(message: Int32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Int32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Int32Value {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Int32Value {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Value();
     while (reader.pos < end) {
@@ -460,14 +460,14 @@ function createBaseUInt32Value(): UInt32Value {
   };
 }
 export const UInt32Value = {
-  encode(message: UInt32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UInt32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== 0) {
       writer.uint32(8).uint32(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UInt32Value {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UInt32Value {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Value();
     while (reader.pos < end) {
@@ -520,14 +520,14 @@ function createBaseBoolValue(): BoolValue {
   };
 }
 export const BoolValue = {
-  encode(message: BoolValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BoolValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value === true) {
       writer.uint32(8).bool(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BoolValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BoolValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolValue();
     while (reader.pos < end) {
@@ -580,14 +580,14 @@ function createBaseStringValue(): StringValue {
   };
 }
 export const StringValue = {
-  encode(message: StringValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StringValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): StringValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): StringValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringValue();
     while (reader.pos < end) {
@@ -640,14 +640,14 @@ function createBaseBytesValue(): BytesValue {
   };
 }
 export const BytesValue = {
-  encode(message: BytesValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BytesValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value.length !== 0) {
       writer.uint32(10).bytes(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BytesValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BytesValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesValue();
     while (reader.pos < end) {

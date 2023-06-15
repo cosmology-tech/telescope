@@ -1,7 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any, AnySDKType } from "../../../protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
@@ -144,7 +144,7 @@ function createBaseValue(): Value {
   };
 }
 export const Value = {
-  encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
     }
@@ -152,10 +152,10 @@ export const Value = {
       writer.uint32(16).bool(message.boolValue);
     }
     if (message.int64Value !== undefined) {
-      writer.uint32(24).int64(Long.fromString(message.int64Value.toString()));
+      writer.uint32(24).int64(message.int64Value);
     }
     if (message.uint64Value !== undefined) {
-      writer.uint32(32).uint64(Long.fromString(message.uint64Value.toString()));
+      writer.uint32(32).uint64(message.uint64Value);
     }
     if (message.doubleValue !== undefined) {
       writer.uint32(41).double(message.doubleValue);
@@ -183,8 +183,8 @@ export const Value = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Value {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Value {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
     while (reader.pos < end) {
@@ -197,10 +197,10 @@ export const Value = {
           message.boolValue = reader.bool();
           break;
         case 3:
-          message.int64Value = BigInt(reader.int64().toString());
+          message.int64Value = reader.int64();
           break;
         case 4:
-          message.uint64Value = BigInt(reader.uint64().toString());
+          message.uint64Value = reader.uint64();
           break;
         case 5:
           message.doubleValue = reader.double();
@@ -337,7 +337,7 @@ function createBaseEnumValue(): EnumValue {
   };
 }
 export const EnumValue = {
-  encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -346,8 +346,8 @@ export const EnumValue = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EnumValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
     while (reader.pos < end) {
@@ -409,14 +409,14 @@ function createBaseListValue(): ListValue {
   };
 }
 export const ListValue = {
-  encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
     while (reader.pos < end) {
@@ -477,14 +477,14 @@ function createBaseMapValue(): MapValue {
   };
 }
 export const MapValue = {
-  encode(message: MapValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MapValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MapValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
     while (reader.pos < end) {
@@ -546,7 +546,7 @@ function createBaseMapValue_Entry(): MapValue_Entry {
   };
 }
 export const MapValue_Entry = {
-  encode(message: MapValue_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MapValue_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
     }
@@ -555,8 +555,8 @@ export const MapValue_Entry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MapValue_Entry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MapValue_Entry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue_Entry();
     while (reader.pos < end) {

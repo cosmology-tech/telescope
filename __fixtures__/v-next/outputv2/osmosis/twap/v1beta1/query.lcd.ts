@@ -1,7 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Params, ParamsSDKType } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
-import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
+import { ParamsRequest, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

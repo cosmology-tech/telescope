@@ -3,7 +3,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
 import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
@@ -125,7 +125,7 @@ function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   };
 }
 export const QueryOrdersRequest = {
-  encode(message: QueryOrdersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOrdersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       OrderFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
     }
@@ -134,8 +134,8 @@ export const QueryOrdersRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrdersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryOrdersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrdersRequest();
     while (reader.pos < end) {
@@ -198,7 +198,7 @@ function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   };
 }
 export const QueryOrdersResponse = {
-  encode(message: QueryOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOrdersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.orders) {
       Order.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -207,8 +207,8 @@ export const QueryOrdersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrdersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryOrdersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrdersResponse();
     while (reader.pos < end) {
@@ -278,14 +278,14 @@ function createBaseQueryOrderRequest(): QueryOrderRequest {
   };
 }
 export const QueryOrderRequest = {
-  encode(message: QueryOrderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOrderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       OrderID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrderRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryOrderRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrderRequest();
     while (reader.pos < end) {
@@ -338,14 +338,14 @@ function createBaseQueryOrderResponse(): QueryOrderResponse {
   };
 }
 export const QueryOrderResponse = {
-  encode(message: QueryOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryOrderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       Order.encode(message.order, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryOrderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrderResponse();
     while (reader.pos < end) {
@@ -399,7 +399,7 @@ function createBaseQueryBidsRequest(): QueryBidsRequest {
   };
 }
 export const QueryBidsRequest = {
-  encode(message: QueryBidsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBidsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       BidFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
     }
@@ -408,8 +408,8 @@ export const QueryBidsRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBidsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidsRequest();
     while (reader.pos < end) {
@@ -472,7 +472,7 @@ function createBaseQueryBidsResponse(): QueryBidsResponse {
   };
 }
 export const QueryBidsResponse = {
-  encode(message: QueryBidsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBidsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.bids) {
       QueryBidResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -481,8 +481,8 @@ export const QueryBidsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBidsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidsResponse();
     while (reader.pos < end) {
@@ -552,14 +552,14 @@ function createBaseQueryBidRequest(): QueryBidRequest {
   };
 }
 export const QueryBidRequest = {
-  encode(message: QueryBidRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBidRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       BidID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBidRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidRequest();
     while (reader.pos < end) {
@@ -613,7 +613,7 @@ function createBaseQueryBidResponse(): QueryBidResponse {
   };
 }
 export const QueryBidResponse = {
-  encode(message: QueryBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bid !== undefined) {
       Bid.encode(message.bid, writer.uint32(10).fork()).ldelim();
     }
@@ -622,8 +622,8 @@ export const QueryBidResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidResponse();
     while (reader.pos < end) {
@@ -686,7 +686,7 @@ function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   };
 }
 export const QueryLeasesRequest = {
-  encode(message: QueryLeasesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLeasesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       LeaseFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
     }
@@ -695,8 +695,8 @@ export const QueryLeasesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeasesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLeasesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeasesRequest();
     while (reader.pos < end) {
@@ -759,7 +759,7 @@ function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   };
 }
 export const QueryLeasesResponse = {
-  encode(message: QueryLeasesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLeasesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.leases) {
       QueryLeaseResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -768,8 +768,8 @@ export const QueryLeasesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeasesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLeasesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeasesResponse();
     while (reader.pos < end) {
@@ -839,14 +839,14 @@ function createBaseQueryLeaseRequest(): QueryLeaseRequest {
   };
 }
 export const QueryLeaseRequest = {
-  encode(message: QueryLeaseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLeaseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       LeaseID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeaseRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLeaseRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeaseRequest();
     while (reader.pos < end) {
@@ -900,7 +900,7 @@ function createBaseQueryLeaseResponse(): QueryLeaseResponse {
   };
 }
 export const QueryLeaseResponse = {
-  encode(message: QueryLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lease !== undefined) {
       Lease.encode(message.lease, writer.uint32(10).fork()).ldelim();
     }
@@ -909,8 +909,8 @@ export const QueryLeaseResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeaseResponse();
     while (reader.pos < end) {

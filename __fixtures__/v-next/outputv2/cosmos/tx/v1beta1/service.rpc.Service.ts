@@ -1,14 +1,8 @@
-import { Tx, TxSDKType } from "./tx";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci";
-import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../tendermint/types/block";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
+import { SimulateRequest, SimulateResponse, GetTxRequest, GetTxResponse, BroadcastTxRequest, BroadcastTxResponse, GetTxsEventRequest, GetTxsEventResponse, GetBlockWithTxsRequest, GetBlockWithTxsResponse } from "./service";
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {
   /** Simulate simulates executing a transaction for estimating gas usage. */
@@ -55,11 +49,11 @@ export class ServiceClientImpl implements Service {
 export const ServiceDesc = {
   serviceName: "cosmos.tx.v1beta1.Service"
 };
-export const ServiceSimulateDesc: UnaryMethodDefinitionish = {
+export const SimulateDesc: UnaryMethodDefinitionish = {
   methodName: "Simulate",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return SimulateRequest.encode(this).finish();
@@ -76,11 +70,11 @@ export const ServiceSimulateDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetTxDesc: UnaryMethodDefinitionish = {
+export const GetTxDesc: UnaryMethodDefinitionish = {
   methodName: "GetTx",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetTxRequest.encode(this).finish();
@@ -97,11 +91,11 @@ export const ServiceGetTxDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceBroadcastTxDesc: UnaryMethodDefinitionish = {
+export const BroadcastTxDesc: UnaryMethodDefinitionish = {
   methodName: "BroadcastTx",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return BroadcastTxRequest.encode(this).finish();
@@ -118,11 +112,11 @@ export const ServiceBroadcastTxDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetTxsEventDesc: UnaryMethodDefinitionish = {
+export const GetTxsEventDesc: UnaryMethodDefinitionish = {
   methodName: "GetTxsEvent",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetTxsEventRequest.encode(this).finish();
@@ -139,11 +133,11 @@ export const ServiceGetTxsEventDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetBlockWithTxsDesc: UnaryMethodDefinitionish = {
+export const GetBlockWithTxsDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlockWithTxs",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetBlockWithTxsRequest.encode(this).finish();
@@ -161,30 +155,30 @@ export const ServiceGetBlockWithTxsDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -200,8 +194,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

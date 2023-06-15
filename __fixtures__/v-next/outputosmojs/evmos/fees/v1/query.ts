@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsSDKType } from "./genesis";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
@@ -124,14 +124,14 @@ function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   };
 }
 export const QueryDevFeeInfosRequest = {
-  encode(message: QueryDevFeeInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfosRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfosRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosRequest();
     while (reader.pos < end) {
@@ -185,7 +185,7 @@ function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
   };
 }
 export const QueryDevFeeInfosResponse = {
-  encode(message: QueryDevFeeInfosResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfosResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -194,8 +194,8 @@ export const QueryDevFeeInfosResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfosResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosResponse();
     while (reader.pos < end) {
@@ -265,14 +265,14 @@ function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
   };
 }
 export const QueryDevFeeInfoRequest = {
-  encode(message: QueryDevFeeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfoRequest();
     while (reader.pos < end) {
@@ -325,14 +325,14 @@ function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
   };
 }
 export const QueryDevFeeInfoResponse = {
-  encode(message: QueryDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       DevFeeInfo.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfoResponse();
     while (reader.pos < end) {
@@ -383,11 +383,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -428,14 +428,14 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -489,7 +489,7 @@ function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDepl
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
-  encode(message: QueryDevFeeInfosPerDeployerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfosPerDeployerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployerAddress !== "") {
       writer.uint32(10).string(message.deployerAddress);
     }
@@ -498,8 +498,8 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
     while (reader.pos < end) {
@@ -562,7 +562,7 @@ function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDep
   };
 }
 export const QueryDevFeeInfosPerDeployerResponse = {
-  encode(message: QueryDevFeeInfosPerDeployerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryDevFeeInfosPerDeployerResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -571,8 +571,8 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosPerDeployerResponse();
     while (reader.pos < end) {

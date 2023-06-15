@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
@@ -73,7 +73,7 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -85,8 +85,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -174,7 +174,7 @@ function createBaseSigningInfo(): SigningInfo {
   };
 }
 export const SigningInfo = {
-  encode(message: SigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -183,8 +183,8 @@ export const SigningInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SigningInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SigningInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningInfo();
     while (reader.pos < end) {
@@ -247,7 +247,7 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
   };
 }
 export const ValidatorMissedBlocks = {
-  encode(message: ValidatorMissedBlocks, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ValidatorMissedBlocks, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -256,8 +256,8 @@ export const ValidatorMissedBlocks = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorMissedBlocks {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorMissedBlocks {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorMissedBlocks();
     while (reader.pos < end) {
@@ -323,29 +323,29 @@ export const ValidatorMissedBlocks = {
 };
 function createBaseMissedBlock(): MissedBlock {
   return {
-    index: BigInt("0"),
+    index: BigInt(0),
     missed: false
   };
 }
 export const MissedBlock = {
-  encode(message: MissedBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MissedBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.index !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.index.toString()));
+      writer.uint32(8).int64(message.index);
     }
     if (message.missed === true) {
       writer.uint32(16).bool(message.missed);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MissedBlock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MissedBlock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMissedBlock();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = BigInt(reader.int64().toString());
+          message.index = reader.int64();
           break;
         case 2:
           message.missed = reader.bool();
@@ -359,19 +359,19 @@ export const MissedBlock = {
   },
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.missed = object.missed ?? false;
     return message;
   },
@@ -383,7 +383,7 @@ export const MissedBlock = {
   },
   fromSDKJSON(object: any): MissedBlockSDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0"),
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },

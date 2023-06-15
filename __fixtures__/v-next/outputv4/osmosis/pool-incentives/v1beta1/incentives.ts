@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -58,14 +58,14 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintedDenom !== "") {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -118,14 +118,14 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
   };
 }
 export const LockableDurationsInfo = {
-  encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LockableDurationsInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockableDurationsInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LockableDurationsInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
     while (reader.pos < end) {
@@ -187,7 +187,7 @@ function createBaseDistrInfo(): DistrInfo {
   };
 }
 export const DistrInfo = {
-  encode(message: DistrInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistrInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.totalWeight !== "") {
       writer.uint32(10).string(message.totalWeight);
     }
@@ -196,8 +196,8 @@ export const DistrInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DistrInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DistrInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrInfo();
     while (reader.pos < end) {
@@ -263,29 +263,29 @@ export const DistrInfo = {
 };
 function createBaseDistrRecord(): DistrRecord {
   return {
-    gaugeId: BigInt("0"),
+    gaugeId: BigInt(0),
     weight: ""
   };
 }
 export const DistrRecord = {
-  encode(message: DistrRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.gaugeId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.gaugeId.toString()));
+      writer.uint32(8).uint64(message.gaugeId);
     }
     if (message.weight !== "") {
       writer.uint32(18).string(message.weight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DistrRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DistrRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrRecord();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gaugeId = BigInt(reader.uint64().toString());
+          message.gaugeId = reader.uint64();
           break;
         case 2:
           message.weight = reader.string();
@@ -299,19 +299,19 @@ export const DistrRecord = {
   },
   fromJSON(object: any): DistrRecord {
     return {
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     message.weight = object.weight ?? "";
     return message;
   },
@@ -323,7 +323,7 @@ export const DistrRecord = {
   },
   fromSDKJSON(object: any): DistrRecordSDKType {
     return {
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -336,36 +336,36 @@ export const DistrRecord = {
 };
 function createBasePoolToGauge(): PoolToGauge {
   return {
-    poolId: BigInt("0"),
-    gaugeId: BigInt("0"),
+    poolId: BigInt(0),
+    gaugeId: BigInt(0),
     duration: undefined
   };
 }
 export const PoolToGauge = {
-  encode(message: PoolToGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.gaugeId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.gaugeId.toString()));
+      writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolToGauge {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolToGauge {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauge();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
-          message.gaugeId = BigInt(reader.uint64().toString());
+          message.gaugeId = reader.uint64();
           break;
         case 3:
           message.duration = Duration.decode(reader, reader.uint32());
@@ -379,22 +379,22 @@ export const PoolToGauge = {
   },
   fromJSON(object: any): PoolToGauge {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
   },
@@ -407,8 +407,8 @@ export const PoolToGauge = {
   },
   fromSDKJSON(object: any): PoolToGaugeSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
-      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
     };
   },
@@ -426,14 +426,14 @@ function createBasePoolToGauges(): PoolToGauges {
   };
 }
 export const PoolToGauges = {
-  encode(message: PoolToGauges, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolToGauges, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.poolToGauge) {
       PoolToGauge.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolToGauges {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolToGauges {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauges();
     while (reader.pos < end) {

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionSDKType } from "./distribution";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, Long, fromTimestamp, isObject } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -87,7 +87,7 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   };
 }
 export const MetricValue_LabelsEntry = {
-  encode(message: MetricValue_LabelsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValue_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -96,8 +96,8 @@ export const MetricValue_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue_LabelsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue_LabelsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue_LabelsEntry();
     while (reader.pos < end) {
@@ -166,7 +166,7 @@ function createBaseMetricValue(): MetricValue {
   };
 }
 export const MetricValue = {
-  encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
         key: (key as any),
@@ -183,7 +183,7 @@ export const MetricValue = {
       writer.uint32(32).bool(message.boolValue);
     }
     if (message.int64Value !== undefined) {
-      writer.uint32(40).int64(Long.fromString(message.int64Value.toString()));
+      writer.uint32(40).int64(message.int64Value);
     }
     if (message.doubleValue !== undefined) {
       writer.uint32(49).double(message.doubleValue);
@@ -196,8 +196,8 @@ export const MetricValue = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue();
     while (reader.pos < end) {
@@ -219,7 +219,7 @@ export const MetricValue = {
           message.boolValue = reader.bool();
           break;
         case 5:
-          message.int64Value = BigInt(reader.int64().toString());
+          message.int64Value = reader.int64();
           break;
         case 6:
           message.doubleValue = reader.double();
@@ -349,7 +349,7 @@ function createBaseMetricValueSet(): MetricValueSet {
   };
 }
 export const MetricValueSet = {
-  encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
@@ -358,8 +358,8 @@ export const MetricValueSet = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricValueSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValueSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValueSet();
     while (reader.pos < end) {

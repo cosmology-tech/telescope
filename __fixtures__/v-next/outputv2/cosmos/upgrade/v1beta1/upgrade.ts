@@ -1,5 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.upgrade.v1beta1";

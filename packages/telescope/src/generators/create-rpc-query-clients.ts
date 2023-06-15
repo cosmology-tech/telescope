@@ -9,6 +9,7 @@ import {
     createRpcQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
+    createGRPCGatewayWrapperClass,
     //grpc-web:
     createGrpcWebQueryClass,
     createGrpcWebQueryInterface,
@@ -90,6 +91,7 @@ export const plugin = (
                     if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                        asts.push(createGRPCGatewayWrapperClass(ctx.generic, svc));
                     }
                 })
                 break;
@@ -97,8 +99,11 @@ export const plugin = (
                 allowedRpcServices.forEach(svcKey => {
                     if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
+
                         asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
                         asts.push(createGrpcWebQueryClass(ctx.generic, svc));
+
+                        // add descriptor for grpc-web
                         asts.push(GetDesc(ctx.generic, proto[svcKey]))
                         const Desces = getMethodDesc(ctx.generic, proto[svcKey]);
                         for (let i = 0; i < Desces.length; i++) {
@@ -107,6 +112,32 @@ export const plugin = (
                         }
                         asts.push(grpcWebRpcInterface())
                         asts.push(getGrpcWebImpl(ctx.generic))
+
+                        /* Added the sameway as Tendermint implement, if modify below then modify this one too */
+                        // see if current file has been reactQuery enabled and included
+                        const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('reactQuery.include')
+                        )
+
+                        if (includeReactQueryHooks) {
+                            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+                            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                            asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+
+                            reactQueryBundlerFiles.push(bundlerFile);
+                        }
+
+                        // whether mobx plugin is enabled has been dealt with inside createMobxQueryStores
+                        const mobxQueryStoreAst = createMobxQueryStores(
+                            ctx.generic,
+                            proto[svcKey]
+                        );
+
+                        if (mobxQueryStoreAst) {
+                            asts.push(mobxQueryStoreAst);
+                            mobxBundlerFiles.push(bundlerFile);
+                        }
                     }
                 })
                 break;

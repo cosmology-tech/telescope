@@ -5,40 +5,40 @@ import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, Msg
 import * as fm from "../../../grpc-gateway";
 export class Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */
-  static CreateBid(request: MsgCreateBid, initRequest?: fm.InitReq): Promise<MsgCreateBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CreateBid`, {
+  static createBid(request: MsgCreateBid, initRequest?: fm.InitReq): Promise<MsgCreateBidResponse> {
+    return fm.fetchReq(`/akash.market.v1beta2/createBid`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** CloseBid defines a method to close a bid given proper inputs. */
-  static CloseBid(request: MsgCloseBid, initRequest?: fm.InitReq): Promise<MsgCloseBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CloseBid`, {
+  static closeBid(request: MsgCloseBid, initRequest?: fm.InitReq): Promise<MsgCloseBidResponse> {
+    return fm.fetchReq(`/akash.market.v1beta2/closeBid`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** WithdrawLease withdraws accrued funds from the lease payment */
-  static WithdrawLease(request: MsgWithdrawLease, initRequest?: fm.InitReq): Promise<MsgWithdrawLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/WithdrawLease`, {
+  static withdrawLease(request: MsgWithdrawLease, initRequest?: fm.InitReq): Promise<MsgWithdrawLeaseResponse> {
+    return fm.fetchReq(`/akash.market.v1beta2/withdrawLease`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** CreateLease creates a new lease */
-  static CreateLease(request: MsgCreateLease, initRequest?: fm.InitReq): Promise<MsgCreateLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CreateLease`, {
+  static createLease(request: MsgCreateLease, initRequest?: fm.InitReq): Promise<MsgCreateLeaseResponse> {
+    return fm.fetchReq(`/akash.market.v1beta2/createLease`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)
     });
   }
   /** CloseLease defines a method to close an order given proper inputs. */
-  static CloseLease(request: MsgCloseLease, initRequest?: fm.InitReq): Promise<MsgCloseLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CloseLease`, {
+  static closeLease(request: MsgCloseLease, initRequest?: fm.InitReq): Promise<MsgCloseLeaseResponse> {
+    return fm.fetchReq(`/akash.market.v1beta2/closeLease`, {
       ...initRequest,
       method: "POST",
       body: JSON.stringify(request, fm.replacer)

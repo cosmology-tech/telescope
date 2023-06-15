@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -144,29 +144,29 @@ export interface DurationSDKType {
 }
 function createBaseDuration(): Duration {
   return {
-    seconds: BigInt("0"),
+    seconds: BigInt(0),
     nanos: 0
   };
 }
 export const Duration = {
-  encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Duration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seconds !== BigInt(0)) {
-      writer.uint32(8).int64(Long.fromString(message.seconds.toString()));
+      writer.uint32(8).int64(message.seconds);
     }
     if (message.nanos !== 0) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Duration {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Duration {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = BigInt(reader.int64().toString());
+          message.seconds = reader.int64();
           break;
         case 2:
           message.nanos = reader.int32();
@@ -180,19 +180,19 @@ export const Duration = {
   },
   fromJSON(object: any): Duration {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt("0")).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt("0");
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -204,7 +204,7 @@ export const Duration = {
   },
   fromSDKJSON(object: any): DurationSDKType {
     return {
-      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt("0"),
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },

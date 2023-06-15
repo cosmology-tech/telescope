@@ -2,8 +2,8 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {
@@ -263,25 +263,25 @@ export interface QueryTotalLiquidityResponseSDKType {
 }
 function createBaseQueryPoolRequest(): QueryPoolRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const QueryPoolRequest = {
-  encode(message: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -292,17 +292,17 @@ export const QueryPoolRequest = {
   },
   fromJSON(object: any): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryPoolRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPoolRequestSDKType): QueryPoolRequest {
@@ -312,7 +312,7 @@ export const QueryPoolRequest = {
   },
   fromSDKJSON(object: any): QueryPoolRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryPoolRequest): QueryPoolRequestSDKType {
@@ -327,14 +327,14 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
   };
 }
 export const QueryPoolResponse = {
-  encode(message: QueryPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolResponse();
     while (reader.pos < end) {
@@ -387,14 +387,14 @@ function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   };
 }
 export const QueryPoolsRequest = {
-  encode(message: QueryPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsRequest();
     while (reader.pos < end) {
@@ -448,7 +448,7 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   };
 }
 export const QueryPoolsResponse = {
-  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -457,8 +457,8 @@ export const QueryPoolsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
     while (reader.pos < end) {
@@ -526,11 +526,11 @@ function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
   return {};
 }
 export const QueryNumPoolsRequest = {
-  encode(_: QueryNumPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryNumPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNumPoolsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryNumPoolsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNumPoolsRequest();
     while (reader.pos < end) {
@@ -567,25 +567,25 @@ export const QueryNumPoolsRequest = {
 };
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
   return {
-    numPools: BigInt("0")
+    numPools: BigInt(0)
   };
 }
 export const QueryNumPoolsResponse = {
-  encode(message: QueryNumPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNumPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numPools !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.numPools.toString()));
+      writer.uint32(8).uint64(message.numPools);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNumPoolsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryNumPoolsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNumPoolsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.numPools = BigInt(reader.uint64().toString());
+          message.numPools = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -596,17 +596,17 @@ export const QueryNumPoolsResponse = {
   },
   fromJSON(object: any): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt("0")
+      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryNumPoolsResponse): unknown {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt("0")).toString());
+    message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryNumPoolsResponse>): QueryNumPoolsResponse {
     const message = createBaseQueryNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt("0");
+    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryNumPoolsResponseSDKType): QueryNumPoolsResponse {
@@ -616,7 +616,7 @@ export const QueryNumPoolsResponse = {
   },
   fromSDKJSON(object: any): QueryNumPoolsResponseSDKType {
     return {
-      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt("0")
+      num_pools: isSet(object.num_pools) ? BigInt(object.num_pools.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryNumPoolsResponse): QueryNumPoolsResponseSDKType {
@@ -627,25 +627,25 @@ export const QueryNumPoolsResponse = {
 };
 function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const QueryPoolTypeRequest = {
-  encode(message: QueryPoolTypeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolTypeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolTypeRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolTypeRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -656,17 +656,17 @@ export const QueryPoolTypeRequest = {
   },
   fromJSON(object: any): QueryPoolTypeRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryPoolTypeRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolTypeRequest>): QueryPoolTypeRequest {
     const message = createBaseQueryPoolTypeRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPoolTypeRequestSDKType): QueryPoolTypeRequest {
@@ -676,7 +676,7 @@ export const QueryPoolTypeRequest = {
   },
   fromSDKJSON(object: any): QueryPoolTypeRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryPoolTypeRequest): QueryPoolTypeRequestSDKType {
@@ -691,14 +691,14 @@ function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
   };
 }
 export const QueryPoolTypeResponse = {
-  encode(message: QueryPoolTypeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolTypeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolType !== "") {
       writer.uint32(10).string(message.poolType);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolTypeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolTypeResponse();
     while (reader.pos < end) {
@@ -747,29 +747,29 @@ export const QueryPoolTypeResponse = {
 };
 function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokensIn: []
   };
 }
 export const QueryCalcJoinPoolSharesRequest = {
-  encode(message: QueryCalcJoinPoolSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcJoinPoolSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolSharesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokensIn.push(Coin.decode(reader, reader.uint32()));
@@ -783,13 +783,13 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
   toJSON(message: QueryCalcJoinPoolSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.tokensIn) {
       obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -799,7 +799,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesRequest>): QueryCalcJoinPoolSharesRequest {
     const message = createBaseQueryCalcJoinPoolSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -811,7 +811,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromSDKJSON(object: any): QueryCalcJoinPoolSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -833,7 +833,7 @@ function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesRes
   };
 }
 export const QueryCalcJoinPoolSharesResponse = {
-  encode(message: QueryCalcJoinPoolSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcJoinPoolSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.shareOutAmount !== "") {
       writer.uint32(10).string(message.shareOutAmount);
     }
@@ -842,8 +842,8 @@ export const QueryCalcJoinPoolSharesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolSharesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolSharesResponse();
     while (reader.pos < end) {
@@ -909,29 +909,29 @@ export const QueryCalcJoinPoolSharesResponse = {
 };
 function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolCoinsFromSharesRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     shareInAmount: ""
   };
 }
 export const QueryCalcExitPoolCoinsFromSharesRequest = {
-  encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.shareInAmount !== "") {
       writer.uint32(18).string(message.shareInAmount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.shareInAmount = reader.string();
@@ -945,19 +945,19 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
     };
   },
   toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.shareInAmount !== undefined && (obj.shareInAmount = message.shareInAmount);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesRequest>): QueryCalcExitPoolCoinsFromSharesRequest {
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.shareInAmount = object.shareInAmount ?? "";
     return message;
   },
@@ -969,7 +969,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       share_in_amount: isSet(object.share_in_amount) ? String(object.share_in_amount) : ""
     };
   },
@@ -986,14 +986,14 @@ function createBaseQueryCalcExitPoolCoinsFromSharesResponse(): QueryCalcExitPool
   };
 }
 export const QueryCalcExitPoolCoinsFromSharesResponse = {
-  encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
     while (reader.pos < end) {
@@ -1050,25 +1050,25 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
 };
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const QueryPoolParamsRequest = {
-  encode(message: QueryPoolParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolParamsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1079,17 +1079,17 @@ export const QueryPoolParamsRequest = {
   },
   fromJSON(object: any): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryPoolParamsRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolParamsRequest>): QueryPoolParamsRequest {
     const message = createBaseQueryPoolParamsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPoolParamsRequestSDKType): QueryPoolParamsRequest {
@@ -1099,7 +1099,7 @@ export const QueryPoolParamsRequest = {
   },
   fromSDKJSON(object: any): QueryPoolParamsRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryPoolParamsRequest): QueryPoolParamsRequestSDKType {
@@ -1114,14 +1114,14 @@ function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   };
 }
 export const QueryPoolParamsResponse = {
-  encode(message: QueryPoolParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Any.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolParamsResponse();
     while (reader.pos < end) {
@@ -1170,25 +1170,25 @@ export const QueryPoolParamsResponse = {
 };
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const QueryTotalPoolLiquidityRequest = {
-  encode(message: QueryTotalPoolLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalPoolLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalPoolLiquidityRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalPoolLiquidityRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalPoolLiquidityRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1199,17 +1199,17 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryTotalPoolLiquidityRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalPoolLiquidityRequest>): QueryTotalPoolLiquidityRequest {
     const message = createBaseQueryTotalPoolLiquidityRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryTotalPoolLiquidityRequestSDKType): QueryTotalPoolLiquidityRequest {
@@ -1219,7 +1219,7 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   fromSDKJSON(object: any): QueryTotalPoolLiquidityRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestSDKType {
@@ -1234,14 +1234,14 @@ function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityRes
   };
 }
 export const QueryTotalPoolLiquidityResponse = {
-  encode(message: QueryTotalPoolLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalPoolLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalPoolLiquidityResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalPoolLiquidityResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalPoolLiquidityResponse();
     while (reader.pos < end) {
@@ -1298,25 +1298,25 @@ export const QueryTotalPoolLiquidityResponse = {
 };
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
   return {
-    poolId: BigInt("0")
+    poolId: BigInt(0)
   };
 }
 export const QueryTotalSharesRequest = {
-  encode(message: QueryTotalSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSharesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSharesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1327,17 +1327,17 @@ export const QueryTotalSharesRequest = {
   },
   fromJSON(object: any): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0")
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryTotalSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalSharesRequest>): QueryTotalSharesRequest {
     const message = createBaseQueryTotalSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryTotalSharesRequestSDKType): QueryTotalSharesRequest {
@@ -1347,7 +1347,7 @@ export const QueryTotalSharesRequest = {
   },
   fromSDKJSON(object: any): QueryTotalSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0")
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
     };
   },
   toSDK(message: QueryTotalSharesRequest): QueryTotalSharesRequestSDKType {
@@ -1362,14 +1362,14 @@ function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   };
 }
 export const QueryTotalSharesResponse = {
-  encode(message: QueryTotalSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSharesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSharesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSharesResponse();
     while (reader.pos < end) {
@@ -1418,29 +1418,29 @@ export const QueryTotalSharesResponse = {
 };
 function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSwapSharesRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokensIn: []
   };
 }
 export const QueryCalcJoinPoolNoSwapSharesRequest = {
-  encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.tokensIn.push(Coin.decode(reader, reader.uint32()));
@@ -1454,13 +1454,13 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
   toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.tokensIn) {
       obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
@@ -1470,7 +1470,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesRequest>): QueryCalcJoinPoolNoSwapSharesRequest {
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -1482,7 +1482,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
     };
   },
@@ -1504,7 +1504,7 @@ function createBaseQueryCalcJoinPoolNoSwapSharesResponse(): QueryCalcJoinPoolNoS
   };
 }
 export const QueryCalcJoinPoolNoSwapSharesResponse = {
-  encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1513,8 +1513,8 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
     while (reader.pos < end) {
@@ -1580,15 +1580,15 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
 };
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     baseAssetDenom: "",
     quoteAssetDenom: ""
   };
 }
 export const QuerySpotPriceRequest = {
-  encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.baseAssetDenom !== "") {
       writer.uint32(18).string(message.baseAssetDenom);
@@ -1598,15 +1598,15 @@ export const QuerySpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.baseAssetDenom = reader.string();
@@ -1623,21 +1623,21 @@ export const QuerySpotPriceRequest = {
   },
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -1651,7 +1651,7 @@ export const QuerySpotPriceRequest = {
   },
   fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
       quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
     };
@@ -1672,7 +1672,7 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
   };
 }
 export const QueryPoolsWithFilterRequest = {
-  encode(message: QueryPoolsWithFilterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsWithFilterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.minLiquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1684,8 +1684,8 @@ export const QueryPoolsWithFilterRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsWithFilterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsWithFilterRequest();
     while (reader.pos < end) {
@@ -1765,7 +1765,7 @@ function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse 
   };
 }
 export const QueryPoolsWithFilterResponse = {
-  encode(message: QueryPoolsWithFilterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryPoolsWithFilterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1774,8 +1774,8 @@ export const QueryPoolsWithFilterResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsWithFilterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsWithFilterResponse();
     while (reader.pos < end) {
@@ -1845,14 +1845,14 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
   };
 }
 export const QuerySpotPriceResponse = {
-  encode(message: QuerySpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpotPriceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceResponse();
     while (reader.pos < end) {
@@ -1902,18 +1902,18 @@ export const QuerySpotPriceResponse = {
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
   return {
     sender: "",
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     tokenIn: "",
     routes: []
   };
 }
 export const QuerySwapExactAmountInRequest = {
-  encode(message: QuerySwapExactAmountInRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     if (message.tokenIn !== "") {
       writer.uint32(26).string(message.tokenIn);
@@ -1923,8 +1923,8 @@ export const QuerySwapExactAmountInRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountInRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountInRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountInRequest();
     while (reader.pos < end) {
@@ -1934,7 +1934,7 @@ export const QuerySwapExactAmountInRequest = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.tokenIn = reader.string();
@@ -1952,7 +1952,7 @@ export const QuerySwapExactAmountInRequest = {
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
@@ -1960,7 +1960,7 @@ export const QuerySwapExactAmountInRequest = {
   toJSON(message: QuerySwapExactAmountInRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toJSON(e) : undefined);
@@ -1972,7 +1972,7 @@ export const QuerySwapExactAmountInRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountInRequest>): QuerySwapExactAmountInRequest {
     const message = createBaseQuerySwapExactAmountInRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -1988,7 +1988,7 @@ export const QuerySwapExactAmountInRequest = {
   fromSDKJSON(object: any): QuerySwapExactAmountInRequestSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
     };
@@ -2012,14 +2012,14 @@ function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInRespo
   };
 }
 export const QuerySwapExactAmountInResponse = {
-  encode(message: QuerySwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountInResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountInResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountInResponse();
     while (reader.pos < end) {
@@ -2069,18 +2069,18 @@ export const QuerySwapExactAmountInResponse = {
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
   return {
     sender: "",
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     routes: [],
     tokenOut: ""
   };
 }
 export const QuerySwapExactAmountOutRequest = {
-  encode(message: QuerySwapExactAmountOutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     for (const v of message.routes) {
       SwapAmountOutRoute.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -2090,8 +2090,8 @@ export const QuerySwapExactAmountOutRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountOutRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountOutRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountOutRequest();
     while (reader.pos < end) {
@@ -2101,7 +2101,7 @@ export const QuerySwapExactAmountOutRequest = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 3:
           message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
@@ -2119,7 +2119,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
@@ -2127,7 +2127,7 @@ export const QuerySwapExactAmountOutRequest = {
   toJSON(message: QuerySwapExactAmountOutRequest): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toJSON(e) : undefined);
     } else {
@@ -2139,7 +2139,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountOutRequest>): QuerySwapExactAmountOutRequest {
     const message = createBaseQuerySwapExactAmountOutRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -2155,7 +2155,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromSDKJSON(object: any): QuerySwapExactAmountOutRequestSDKType {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -2179,14 +2179,14 @@ function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutRes
   };
 }
 export const QuerySwapExactAmountOutResponse = {
-  encode(message: QuerySwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuerySwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySwapExactAmountOutResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySwapExactAmountOutResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySwapExactAmountOutResponse();
     while (reader.pos < end) {
@@ -2237,11 +2237,11 @@ function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
   return {};
 }
 export const QueryTotalLiquidityRequest = {
-  encode(_: QueryTotalLiquidityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryTotalLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityRequest();
     while (reader.pos < end) {
@@ -2282,14 +2282,14 @@ function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
   };
 }
 export const QueryTotalLiquidityResponse = {
-  encode(message: QueryTotalLiquidityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryTotalLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalLiquidityResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalLiquidityResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalLiquidityResponse();
     while (reader.pos < end) {

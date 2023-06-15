@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** PoolType is an enumeration of all supported pool types. */
 export enum PoolType {
@@ -86,17 +86,17 @@ function createBaseModuleRoute(): ModuleRoute {
   };
 }
 export const ModuleRoute = {
-  encode(message: ModuleRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ModuleRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolType !== 0) {
       writer.uint32(8).int32(message.poolType);
     }
     if (message.poolId !== undefined) {
-      writer.uint32(16).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(16).uint64(message.poolId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleRoute {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleRoute {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleRoute();
     while (reader.pos < end) {
@@ -106,7 +106,7 @@ export const ModuleRoute = {
           message.poolType = (reader.int32() as any);
           break;
         case 2:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);

@@ -1,6 +1,6 @@
 import { Height, HeightSDKType } from "../../client/v1/client";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -288,7 +288,7 @@ function createBaseChannel(): Channel {
   };
 }
 export const Channel = {
-  encode(message: Channel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Channel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
     }
@@ -306,8 +306,8 @@ export const Channel = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Channel {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Channel {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChannel();
     while (reader.pos < end) {
@@ -410,7 +410,7 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
   };
 }
 export const IdentifiedChannel = {
-  encode(message: IdentifiedChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdentifiedChannel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
     }
@@ -434,8 +434,8 @@ export const IdentifiedChannel = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedChannel {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedChannel {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedChannel();
     while (reader.pos < end) {
@@ -551,7 +551,7 @@ function createBaseCounterparty(): Counterparty {
   };
 }
 export const Counterparty = {
-  encode(message: Counterparty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -560,8 +560,8 @@ export const Counterparty = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Counterparty {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
     while (reader.pos < end) {
@@ -619,20 +619,20 @@ export const Counterparty = {
 };
 function createBasePacket(): Packet {
   return {
-    sequence: BigInt("0"),
+    sequence: BigInt(0),
     sourcePort: "",
     sourceChannel: "",
     destinationPort: "",
     destinationChannel: "",
     data: new Uint8Array(),
     timeoutHeight: undefined,
-    timeoutTimestamp: BigInt("0")
+    timeoutTimestamp: BigInt(0)
   };
 }
 export const Packet = {
-  encode(message: Packet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Packet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sequence !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.sequence.toString()));
+      writer.uint32(8).uint64(message.sequence);
     }
     if (message.sourcePort !== "") {
       writer.uint32(18).string(message.sourcePort);
@@ -653,19 +653,19 @@ export const Packet = {
       Height.encode(message.timeoutHeight, writer.uint32(58).fork()).ldelim();
     }
     if (message.timeoutTimestamp !== BigInt(0)) {
-      writer.uint32(64).uint64(Long.fromString(message.timeoutTimestamp.toString()));
+      writer.uint32(64).uint64(message.timeoutTimestamp);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Packet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Packet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacket();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sequence = BigInt(reader.uint64().toString());
+          message.sequence = reader.uint64();
           break;
         case 2:
           message.sourcePort = reader.string();
@@ -686,7 +686,7 @@ export const Packet = {
           message.timeoutHeight = Height.decode(reader, reader.uint32());
           break;
         case 8:
-          message.timeoutTimestamp = BigInt(reader.uint64().toString());
+          message.timeoutTimestamp = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -697,38 +697,38 @@ export const Packet = {
   },
   fromJSON(object: any): Packet {
     return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
       sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
       destinationPort: isSet(object.destinationPort) ? String(object.destinationPort) : "",
       destinationChannel: isSet(object.destinationChannel) ? String(object.destinationChannel) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0")
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
     };
   },
   toJSON(message: Packet): unknown {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt("0")).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
     message.destinationPort !== undefined && (obj.destinationPort = message.destinationPort);
     message.destinationChannel !== undefined && (obj.destinationChannel = message.destinationChannel);
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt("0")).toString());
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt("0");
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PacketSDKType): Packet {
@@ -745,14 +745,14 @@ export const Packet = {
   },
   fromSDKJSON(object: any): PacketSDKType {
     return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       source_port: isSet(object.source_port) ? String(object.source_port) : "",
       source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
       destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
       destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt("0")
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt(0)
     };
   },
   toSDK(message: Packet): PacketSDKType {
@@ -772,12 +772,12 @@ function createBasePacketState(): PacketState {
   return {
     portId: "",
     channelId: "",
-    sequence: BigInt("0"),
+    sequence: BigInt(0),
     data: new Uint8Array()
   };
 }
 export const PacketState = {
-  encode(message: PacketState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PacketState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
@@ -785,15 +785,15 @@ export const PacketState = {
       writer.uint32(18).string(message.channelId);
     }
     if (message.sequence !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.sequence.toString()));
+      writer.uint32(24).uint64(message.sequence);
     }
     if (message.data.length !== 0) {
       writer.uint32(34).bytes(message.data);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PacketState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PacketState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketState();
     while (reader.pos < end) {
@@ -806,7 +806,7 @@ export const PacketState = {
           message.channelId = reader.string();
           break;
         case 3:
-          message.sequence = BigInt(reader.uint64().toString());
+          message.sequence = reader.uint64();
           break;
         case 4:
           message.data = reader.bytes();
@@ -822,7 +822,7 @@ export const PacketState = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -830,7 +830,7 @@ export const PacketState = {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt("0")).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
@@ -838,7 +838,7 @@ export const PacketState = {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt("0");
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.data = object.data ?? new Uint8Array();
     return message;
   },
@@ -854,7 +854,7 @@ export const PacketState = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt("0"),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -874,7 +874,7 @@ function createBaseAcknowledgement(): Acknowledgement {
   };
 }
 export const Acknowledgement = {
-  encode(message: Acknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Acknowledgement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.result !== undefined) {
       writer.uint32(170).bytes(message.result);
     }
@@ -883,8 +883,8 @@ export const Acknowledgement = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Acknowledgement {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Acknowledgement {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAcknowledgement();
     while (reader.pos < end) {

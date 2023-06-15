@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcTmFactory } from '@osmonauts/ast';
+import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
@@ -106,16 +106,40 @@ const makeRPC = (
         builder.store,
         builder.options
     );
-
-    // TODO add addUtil to generic context
-    ctx.proto.addUtil('Rpc');
-
-    const rpcast = createScopedRpcTmFactory(
-        ctx.proto,
-        obj,
-        methodName
-        // 'QueryClientImpl' // make option later
-    );
+    //based on rpc type to generate client from client factory
+    let rpcast;
+    
+    switch (builder.options?.rpcClients?.type) {
+        case "grpc-gateway":
+            rpcast = createScopedGrpcGatewayFactory(
+                ctx.proto,
+                obj,
+                "createGrpcGateWayClient"
+                // 'QueryClientImpl' // make option later
+              );
+              break;
+        case "tendermint":
+          // TODO add addUtil to generic context
+          ctx.proto.addUtil('Rpc');
+          
+          rpcast = createScopedRpcTmFactory(
+            ctx.proto,
+            obj,
+            methodName
+            // 'QueryClientImpl' // make option later
+          );
+          break;
+        case "grpc-web":
+          rpcast = createScopedGrpcWebFactory(
+            ctx.proto,
+            obj,
+            "createGrpcWebClient"
+          );
+          break;
+        default:
+          break;
+    }
+ 
 
     const serviceImports = getDepsFromQueries(
         ctx.queries,

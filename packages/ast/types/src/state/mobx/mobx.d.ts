@@ -10,33 +10,15 @@ export declare const createMobxQueryStores: (context: GenericParseContext, servi
 /**
  * Create an AST to generate creating store functions.
  * eg:
- * export const createRpcStores = (rpc: ProtobufRpcClient | undefined) => {
+ * export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
  *   const queryService = getQueryService(rpc);
  *
- *   class BalanceStoreInherited extends QueryStore<
- *     QueryBalanceRequest,
- *     QueryBalanceResponse
- *   > {
- *     constructor() {
- *       super(queryService?.balance);
- *       makeObservable(this, {
- *         state: override,
- *         request: override,
- *         response: override,
- *         isLoading: override,
- *         isSuccess: override,
- *         refetch: override,
- *         getData: override
- *       });
- *     }
- *
- *     balance(request: QueryBalanceRequest): MobxResponse<QueryBalanceResponse> {
- *       return this.getData(request);
- *     }
+ *   class QueryCertificatesStore {
+ *    ...
  *   }
  *
  *   return {
- *     BalanceStoreInherited
+ *     QueryCertificatesStore
  *   };
  * };
  * @param {Object=} context - context of generating the file

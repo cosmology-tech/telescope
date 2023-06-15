@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "capability.v1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -47,25 +47,25 @@ export interface CapabilityOwnersSDKType {
 }
 function createBaseCapability(): Capability {
   return {
-    index: BigInt("0")
+    index: BigInt(0)
   };
 }
 export const Capability = {
-  encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.index !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.index.toString()));
+      writer.uint32(8).uint64(message.index);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Capability {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Capability {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapability();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = BigInt(reader.uint64().toString());
+          message.index = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -76,17 +76,17 @@ export const Capability = {
   },
   fromJSON(object: any): Capability {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0")
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
     };
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt("0")).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt("0");
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: CapabilitySDKType): Capability {
@@ -96,7 +96,7 @@ export const Capability = {
   },
   fromSDKJSON(object: any): CapabilitySDKType {
     return {
-      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt("0")
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0)
     };
   },
   toSDK(message: Capability): CapabilitySDKType {
@@ -112,7 +112,7 @@ function createBaseOwner(): Owner {
   };
 }
 export const Owner = {
-  encode(message: Owner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
     }
@@ -121,8 +121,8 @@ export const Owner = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Owner {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Owner {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOwner();
     while (reader.pos < end) {
@@ -184,14 +184,14 @@ function createBaseCapabilityOwners(): CapabilityOwners {
   };
 }
 export const CapabilityOwners = {
-  encode(message: CapabilityOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: CapabilityOwners, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CapabilityOwners {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CapabilityOwners {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapabilityOwners();
     while (reader.pos < end) {

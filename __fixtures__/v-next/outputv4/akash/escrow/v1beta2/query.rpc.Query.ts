@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 /** Query defines the gRPC querier service */
@@ -30,7 +30,7 @@ export class QueryClientImpl implements Query {
   accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponse> => {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta2.Query", "Accounts", data);
-    return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAccountsResponse.decode(new BinaryReader(data)));
   };
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
@@ -38,7 +38,7 @@ export class QueryClientImpl implements Query {
   payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> => {
     const data = QueryPaymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta2.Query", "Payments", data);
-    return promise.then(data => QueryPaymentsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryPaymentsResponse.decode(new BinaryReader(data)));
   };
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

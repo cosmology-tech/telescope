@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -39,29 +39,29 @@ export interface ConsensusSDKType {
 }
 function createBaseApp(): App {
   return {
-    protocol: BigInt("0"),
+    protocol: BigInt(0),
     software: ""
   };
 }
 export const App = {
-  encode(message: App, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.protocol !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.protocol.toString()));
+      writer.uint32(8).uint64(message.protocol);
     }
     if (message.software !== "") {
       writer.uint32(18).string(message.software);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): App {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): App {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.protocol = BigInt(reader.uint64().toString());
+          message.protocol = reader.uint64();
           break;
         case 2:
           message.software = reader.string();
@@ -75,19 +75,19 @@ export const App = {
   },
   fromJSON(object: any): App {
     return {
-      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt("0"),
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
   toJSON(message: App): unknown {
     const obj: any = {};
-    message.protocol !== undefined && (obj.protocol = (message.protocol || BigInt("0")).toString());
+    message.protocol !== undefined && (obj.protocol = (message.protocol || BigInt(0)).toString());
     message.software !== undefined && (obj.software = message.software);
     return obj;
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt("0");
+    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt(0);
     message.software = object.software ?? "";
     return message;
   },
@@ -99,7 +99,7 @@ export const App = {
   },
   fromSDKJSON(object: any): AppSDKType {
     return {
-      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt("0"),
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
@@ -112,32 +112,32 @@ export const App = {
 };
 function createBaseConsensus(): Consensus {
   return {
-    block: BigInt("0"),
-    app: BigInt("0")
+    block: BigInt(0),
+    app: BigInt(0)
   };
 }
 export const Consensus = {
-  encode(message: Consensus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.block !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.block.toString()));
+      writer.uint32(8).uint64(message.block);
     }
     if (message.app !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.app.toString()));
+      writer.uint32(16).uint64(message.app);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Consensus {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Consensus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.block = BigInt(reader.uint64().toString());
+          message.block = reader.uint64();
           break;
         case 2:
-          message.app = BigInt(reader.uint64().toString());
+          message.app = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -148,20 +148,20 @@ export const Consensus = {
   },
   fromJSON(object: any): Consensus {
     return {
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};
-    message.block !== undefined && (obj.block = (message.block || BigInt("0")).toString());
-    message.app !== undefined && (obj.app = (message.app || BigInt("0")).toString());
+    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
+    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt("0");
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt("0");
+    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
+    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {
@@ -172,8 +172,8 @@ export const Consensus = {
   },
   fromSDKJSON(object: any): ConsensusSDKType {
     return {
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt("0"),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt("0")
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
   toSDK(message: Consensus): ConsensusSDKType {

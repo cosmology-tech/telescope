@@ -1,14 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../query/v1beta1/pagination";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../../tendermint/types/block";
-import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../../grpc-web";
 import { DeepPartial } from "../../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseSDKType } from "./query";
+import { GetNodeInfoRequest, GetNodeInfoResponse, GetSyncingRequest, GetSyncingResponse, GetLatestBlockRequest, GetLatestBlockResponse, GetBlockByHeightRequest, GetBlockByHeightResponse, GetLatestValidatorSetRequest, GetLatestValidatorSetResponse, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse } from "./query";
 /** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {
   /** GetNodeInfo queries the current node info. */
@@ -59,11 +53,11 @@ export class ServiceClientImpl implements Service {
 export const ServiceDesc = {
   serviceName: "cosmos.base.tendermint.v1beta1.Service"
 };
-export const ServiceGetNodeInfoDesc: UnaryMethodDefinitionish = {
+export const GetNodeInfoDesc: UnaryMethodDefinitionish = {
   methodName: "GetNodeInfo",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetNodeInfoRequest.encode(this).finish();
@@ -80,11 +74,11 @@ export const ServiceGetNodeInfoDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetSyncingDesc: UnaryMethodDefinitionish = {
+export const GetSyncingDesc: UnaryMethodDefinitionish = {
   methodName: "GetSyncing",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetSyncingRequest.encode(this).finish();
@@ -101,11 +95,11 @@ export const ServiceGetSyncingDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetLatestBlockDesc: UnaryMethodDefinitionish = {
+export const GetLatestBlockDesc: UnaryMethodDefinitionish = {
   methodName: "GetLatestBlock",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetLatestBlockRequest.encode(this).finish();
@@ -122,11 +116,11 @@ export const ServiceGetLatestBlockDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetBlockByHeightDesc: UnaryMethodDefinitionish = {
+export const GetBlockByHeightDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlockByHeight",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetBlockByHeightRequest.encode(this).finish();
@@ -143,11 +137,11 @@ export const ServiceGetBlockByHeightDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
+export const GetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
   methodName: "GetLatestValidatorSet",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetLatestValidatorSetRequest.encode(this).finish();
@@ -164,11 +158,11 @@ export const ServiceGetLatestValidatorSetDesc: UnaryMethodDefinitionish = {
     }
   } as any)
 };
-export const ServiceGetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
+export const GetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
   methodName: "GetValidatorSetByHeight",
   service: ServiceDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return GetValidatorSetByHeightRequest.encode(this).finish();
@@ -186,30 +180,30 @@ export const ServiceGetValidatorSetByHeightDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -225,8 +219,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 /** Query defines the gRPC querier service. */
@@ -29,24 +29,24 @@ export class QueryClientImpl implements Query {
   totalUnclaimed(request: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
     const data = QueryTotalUnclaimedRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "TotalUnclaimed", data);
-    return promise.then(data => QueryTotalUnclaimedResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryTotalUnclaimedResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
   claimsRecords(request: QueryClaimsRecordsRequest = {
     pagination: undefined
   }): Promise<QueryClaimsRecordsResponse> {
     const data = QueryClaimsRecordsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecords", data);
-    return promise.then(data => QueryClaimsRecordsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClaimsRecordsResponse.decode(new BinaryReader(data)));
   }
   claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
     const data = QueryClaimsRecordRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecord", data);
-    return promise.then(data => QueryClaimsRecordResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClaimsRecordResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

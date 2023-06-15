@@ -1,7 +1,7 @@
 import { AccessConfig, AccessConfigSDKType } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposal {
@@ -220,7 +220,7 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
   };
 }
 export const StoreCodeProposal = {
-  encode(message: StoreCodeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: StoreCodeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -238,8 +238,8 @@ export const StoreCodeProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): StoreCodeProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): StoreCodeProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreCodeProposal();
     while (reader.pos < end) {
@@ -328,14 +328,14 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
     description: "",
     runAs: "",
     admin: "",
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     label: "",
     msg: new Uint8Array(),
     funds: []
   };
 }
 export const InstantiateContractProposal = {
-  encode(message: InstantiateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: InstantiateContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -349,7 +349,7 @@ export const InstantiateContractProposal = {
       writer.uint32(34).string(message.admin);
     }
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(40).uint64(message.codeId);
     }
     if (message.label !== "") {
       writer.uint32(50).string(message.label);
@@ -362,8 +362,8 @@ export const InstantiateContractProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): InstantiateContractProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): InstantiateContractProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstantiateContractProposal();
     while (reader.pos < end) {
@@ -382,7 +382,7 @@ export const InstantiateContractProposal = {
           message.admin = reader.string();
           break;
         case 5:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 6:
           message.label = reader.string();
@@ -406,7 +406,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       runAs: isSet(object.runAs) ? String(object.runAs) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
@@ -418,7 +418,7 @@ export const InstantiateContractProposal = {
     message.description !== undefined && (obj.description = message.description);
     message.runAs !== undefined && (obj.runAs = message.runAs);
     message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.label !== undefined && (obj.label = message.label);
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     if (message.funds) {
@@ -434,7 +434,7 @@ export const InstantiateContractProposal = {
     message.description = object.description ?? "";
     message.runAs = object.runAs ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
@@ -458,7 +458,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       run_as: isSet(object.run_as) ? String(object.run_as) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
@@ -486,12 +486,12 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
     title: "",
     description: "",
     contract: "",
-    codeId: BigInt("0"),
+    codeId: BigInt(0),
     msg: new Uint8Array()
   };
 }
 export const MigrateContractProposal = {
-  encode(message: MigrateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MigrateContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -502,15 +502,15 @@ export const MigrateContractProposal = {
       writer.uint32(34).string(message.contract);
     }
     if (message.codeId !== BigInt(0)) {
-      writer.uint32(40).uint64(Long.fromString(message.codeId.toString()));
+      writer.uint32(40).uint64(message.codeId);
     }
     if (message.msg.length !== 0) {
       writer.uint32(50).bytes(message.msg);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MigrateContractProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MigrateContractProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateContractProposal();
     while (reader.pos < end) {
@@ -526,7 +526,7 @@ export const MigrateContractProposal = {
           message.contract = reader.string();
           break;
         case 5:
-          message.codeId = BigInt(reader.uint64().toString());
+          message.codeId = reader.uint64();
           break;
         case 6:
           message.msg = reader.bytes();
@@ -543,7 +543,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt("0"),
+      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -552,7 +552,7 @@ export const MigrateContractProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt("0")).toString());
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
@@ -561,7 +561,7 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt("0");
+    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
     message.msg = object.msg ?? new Uint8Array();
     return message;
   },
@@ -579,7 +579,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt("0"),
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -602,7 +602,7 @@ function createBaseSudoContractProposal(): SudoContractProposal {
   };
 }
 export const SudoContractProposal = {
-  encode(message: SudoContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: SudoContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -617,8 +617,8 @@ export const SudoContractProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SudoContractProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SudoContractProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSudoContractProposal();
     while (reader.pos < end) {
@@ -703,7 +703,7 @@ function createBaseExecuteContractProposal(): ExecuteContractProposal {
   };
 }
 export const ExecuteContractProposal = {
-  encode(message: ExecuteContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExecuteContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -724,8 +724,8 @@ export const ExecuteContractProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ExecuteContractProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ExecuteContractProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExecuteContractProposal();
     while (reader.pos < end) {
@@ -834,7 +834,7 @@ function createBaseUpdateAdminProposal(): UpdateAdminProposal {
   };
 }
 export const UpdateAdminProposal = {
-  encode(message: UpdateAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UpdateAdminProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -849,8 +849,8 @@ export const UpdateAdminProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateAdminProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminProposal();
     while (reader.pos < end) {
@@ -932,7 +932,7 @@ function createBaseClearAdminProposal(): ClearAdminProposal {
   };
 }
 export const ClearAdminProposal = {
-  encode(message: ClearAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ClearAdminProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -944,8 +944,8 @@ export const ClearAdminProposal = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClearAdminProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClearAdminProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearAdminProposal();
     while (reader.pos < end) {
@@ -1018,7 +1018,7 @@ function createBasePinCodesProposal(): PinCodesProposal {
   };
 }
 export const PinCodesProposal = {
-  encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -1027,13 +1027,13 @@ export const PinCodesProposal = {
     }
     writer.uint32(26).fork();
     for (const v of message.codeIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PinCodesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
     while (reader.pos < end) {
@@ -1049,10 +1049,10 @@ export const PinCodesProposal = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(BigInt(reader.uint64().toString()));
+              message.codeIds.push(reader.uint64());
             }
           } else {
-            message.codeIds.push(BigInt(reader.uint64().toString()));
+            message.codeIds.push(reader.uint64());
           }
           break;
         default:
@@ -1074,7 +1074,7 @@ export const PinCodesProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || BigInt("0")).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.codeIds = [];
     }
@@ -1121,7 +1121,7 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
   };
 }
 export const UnpinCodesProposal = {
-  encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnpinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -1130,13 +1130,13 @@ export const UnpinCodesProposal = {
     }
     writer.uint32(26).fork();
     for (const v of message.codeIds) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UnpinCodesProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
     while (reader.pos < end) {
@@ -1152,10 +1152,10 @@ export const UnpinCodesProposal = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(BigInt(reader.uint64().toString()));
+              message.codeIds.push(reader.uint64());
             }
           } else {
-            message.codeIds.push(BigInt(reader.uint64().toString()));
+            message.codeIds.push(reader.uint64());
           }
           break;
         default:
@@ -1177,7 +1177,7 @@ export const UnpinCodesProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || BigInt("0")).toString());
+      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.codeIds = [];
     }

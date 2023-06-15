@@ -1,4 +1,4 @@
-import { expectCode, getGenericParseContext, printCode } from '../../../../test-utils'
+import { expectCode, getGenericParseContext } from '../../../../test-utils'
 
 import {
     rpcRecursiveObjectProps,

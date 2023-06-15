@@ -1,6 +1,6 @@
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** MsgSetHotRoutes defines the Msg/SetHotRoutes request type. */
 export interface MsgSetHotRoutes {
@@ -141,7 +141,7 @@ function createBaseMsgSetHotRoutes(): MsgSetHotRoutes {
   };
 }
 export const MsgSetHotRoutes = {
-  encode(message: MsgSetHotRoutes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetHotRoutes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -150,8 +150,8 @@ export const MsgSetHotRoutes = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetHotRoutes {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetHotRoutes {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetHotRoutes();
     while (reader.pos < end) {
@@ -219,11 +219,11 @@ function createBaseMsgSetHotRoutesResponse(): MsgSetHotRoutesResponse {
   return {};
 }
 export const MsgSetHotRoutesResponse = {
-  encode(_: MsgSetHotRoutesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetHotRoutesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetHotRoutesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetHotRoutesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetHotRoutesResponse();
     while (reader.pos < end) {
@@ -265,7 +265,7 @@ function createBaseMsgSetDeveloperAccount(): MsgSetDeveloperAccount {
   };
 }
 export const MsgSetDeveloperAccount = {
-  encode(message: MsgSetDeveloperAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetDeveloperAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -274,8 +274,8 @@ export const MsgSetDeveloperAccount = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetDeveloperAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDeveloperAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDeveloperAccount();
     while (reader.pos < end) {
@@ -335,11 +335,11 @@ function createBaseMsgSetDeveloperAccountResponse(): MsgSetDeveloperAccountRespo
   return {};
 }
 export const MsgSetDeveloperAccountResponse = {
-  encode(_: MsgSetDeveloperAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetDeveloperAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetDeveloperAccountResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDeveloperAccountResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDeveloperAccountResponse();
     while (reader.pos < end) {
@@ -381,7 +381,7 @@ function createBaseMsgSetPoolWeights(): MsgSetPoolWeights {
   };
 }
 export const MsgSetPoolWeights = {
-  encode(message: MsgSetPoolWeights, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetPoolWeights, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -390,8 +390,8 @@ export const MsgSetPoolWeights = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetPoolWeights {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetPoolWeights {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetPoolWeights();
     while (reader.pos < end) {
@@ -451,11 +451,11 @@ function createBaseMsgSetPoolWeightsResponse(): MsgSetPoolWeightsResponse {
   return {};
 }
 export const MsgSetPoolWeightsResponse = {
-  encode(_: MsgSetPoolWeightsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetPoolWeightsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetPoolWeightsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetPoolWeightsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetPoolWeightsResponse();
     while (reader.pos < end) {
@@ -493,21 +493,21 @@ export const MsgSetPoolWeightsResponse = {
 function createBaseMsgSetMaxPoolPointsPerTx(): MsgSetMaxPoolPointsPerTx {
   return {
     admin: "",
-    maxPoolPointsPerTx: BigInt("0")
+    maxPoolPointsPerTx: BigInt(0)
   };
 }
 export const MsgSetMaxPoolPointsPerTx = {
-  encode(message: MsgSetMaxPoolPointsPerTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetMaxPoolPointsPerTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (message.maxPoolPointsPerTx !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.maxPoolPointsPerTx.toString()));
+      writer.uint32(16).uint64(message.maxPoolPointsPerTx);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerTx {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerTx {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetMaxPoolPointsPerTx();
     while (reader.pos < end) {
@@ -517,7 +517,7 @@ export const MsgSetMaxPoolPointsPerTx = {
           message.admin = reader.string();
           break;
         case 2:
-          message.maxPoolPointsPerTx = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerTx = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -529,19 +529,19 @@ export const MsgSetMaxPoolPointsPerTx = {
   fromJSON(object: any): MsgSetMaxPoolPointsPerTx {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0")
+      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSetMaxPoolPointsPerTx): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt("0")).toString());
+    message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerTx>): MsgSetMaxPoolPointsPerTx {
     const message = createBaseMsgSetMaxPoolPointsPerTx();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt("0");
+    message.maxPoolPointsPerTx = object.maxPoolPointsPerTx !== undefined && object.maxPoolPointsPerTx !== null ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerTxSDKType): MsgSetMaxPoolPointsPerTx {
@@ -553,7 +553,7 @@ export const MsgSetMaxPoolPointsPerTx = {
   fromSDKJSON(object: any): MsgSetMaxPoolPointsPerTxSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt("0")
+      max_pool_points_per_tx: isSet(object.max_pool_points_per_tx) ? BigInt(object.max_pool_points_per_tx.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxSDKType {
@@ -567,11 +567,11 @@ function createBaseMsgSetMaxPoolPointsPerTxResponse(): MsgSetMaxPoolPointsPerTxR
   return {};
 }
 export const MsgSetMaxPoolPointsPerTxResponse = {
-  encode(_: MsgSetMaxPoolPointsPerTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetMaxPoolPointsPerTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerTxResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerTxResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetMaxPoolPointsPerTxResponse();
     while (reader.pos < end) {
@@ -609,21 +609,21 @@ export const MsgSetMaxPoolPointsPerTxResponse = {
 function createBaseMsgSetMaxPoolPointsPerBlock(): MsgSetMaxPoolPointsPerBlock {
   return {
     admin: "",
-    maxPoolPointsPerBlock: BigInt("0")
+    maxPoolPointsPerBlock: BigInt(0)
   };
 }
 export const MsgSetMaxPoolPointsPerBlock = {
-  encode(message: MsgSetMaxPoolPointsPerBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetMaxPoolPointsPerBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (message.maxPoolPointsPerBlock !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.maxPoolPointsPerBlock.toString()));
+      writer.uint32(16).uint64(message.maxPoolPointsPerBlock);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerBlock {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerBlock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetMaxPoolPointsPerBlock();
     while (reader.pos < end) {
@@ -633,7 +633,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
           message.admin = reader.string();
           break;
         case 2:
-          message.maxPoolPointsPerBlock = BigInt(reader.uint64().toString());
+          message.maxPoolPointsPerBlock = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -645,19 +645,19 @@ export const MsgSetMaxPoolPointsPerBlock = {
   fromJSON(object: any): MsgSetMaxPoolPointsPerBlock {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0")
+      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgSetMaxPoolPointsPerBlock): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt("0")).toString());
+    message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSetMaxPoolPointsPerBlock>): MsgSetMaxPoolPointsPerBlock {
     const message = createBaseMsgSetMaxPoolPointsPerBlock();
     message.admin = object.admin ?? "";
-    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt("0");
+    message.maxPoolPointsPerBlock = object.maxPoolPointsPerBlock !== undefined && object.maxPoolPointsPerBlock !== null ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSetMaxPoolPointsPerBlockSDKType): MsgSetMaxPoolPointsPerBlock {
@@ -669,7 +669,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
   fromSDKJSON(object: any): MsgSetMaxPoolPointsPerBlockSDKType {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt("0")
+      max_pool_points_per_block: isSet(object.max_pool_points_per_block) ? BigInt(object.max_pool_points_per_block.toString()) : BigInt(0)
     };
   },
   toSDK(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockSDKType {
@@ -683,11 +683,11 @@ function createBaseMsgSetMaxPoolPointsPerBlockResponse(): MsgSetMaxPoolPointsPer
   return {};
 }
 export const MsgSetMaxPoolPointsPerBlockResponse = {
-  encode(_: MsgSetMaxPoolPointsPerBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetMaxPoolPointsPerBlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerBlockResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetMaxPoolPointsPerBlockResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetMaxPoolPointsPerBlockResponse();
     while (reader.pos < end) {
@@ -729,7 +729,7 @@ function createBaseMsgSetBaseDenoms(): MsgSetBaseDenoms {
   };
 }
 export const MsgSetBaseDenoms = {
-  encode(message: MsgSetBaseDenoms, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgSetBaseDenoms, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -738,8 +738,8 @@ export const MsgSetBaseDenoms = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetBaseDenoms {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetBaseDenoms {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetBaseDenoms();
     while (reader.pos < end) {
@@ -807,11 +807,11 @@ function createBaseMsgSetBaseDenomsResponse(): MsgSetBaseDenomsResponse {
   return {};
 }
 export const MsgSetBaseDenomsResponse = {
-  encode(_: MsgSetBaseDenomsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgSetBaseDenomsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetBaseDenomsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetBaseDenomsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetBaseDenomsResponse();
     while (reader.pos < end) {

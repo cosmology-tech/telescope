@@ -1,6 +1,5 @@
-import { Params, ParamsSDKType } from "./mint";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

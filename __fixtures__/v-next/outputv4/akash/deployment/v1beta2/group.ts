@@ -1,7 +1,7 @@
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -77,11 +77,11 @@ function createBaseGroup(): Group {
     groupId: undefined,
     state: 0,
     groupSpec: undefined,
-    createdAt: BigInt("0")
+    createdAt: BigInt(0)
   };
 }
 export const Group = {
-  encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Group, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
     }
@@ -92,12 +92,12 @@ export const Group = {
       GroupSpec.encode(message.groupSpec, writer.uint32(26).fork()).ldelim();
     }
     if (message.createdAt !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.createdAt.toString()));
+      writer.uint32(32).int64(message.createdAt);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Group {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Group {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroup();
     while (reader.pos < end) {
@@ -113,7 +113,7 @@ export const Group = {
           message.groupSpec = GroupSpec.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = BigInt(reader.int64().toString());
+          message.createdAt = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -127,7 +127,7 @@ export const Group = {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt("0")
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
   },
   toJSON(message: Group): unknown {
@@ -135,7 +135,7 @@ export const Group = {
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
     message.groupSpec !== undefined && (obj.groupSpec = message.groupSpec ? GroupSpec.toJSON(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt("0")).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
@@ -143,7 +143,7 @@ export const Group = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
     message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt("0");
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GroupSDKType): Group {
@@ -159,7 +159,7 @@ export const Group = {
       group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
-      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt("0")
+      created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };
   },
   toSDK(message: Group): GroupSDKType {

@@ -1,6 +1,6 @@
 import { Value, ValueSDKType } from "./value";
 import { Status, StatusSDKType } from "../../../rpc/status";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
@@ -147,7 +147,7 @@ function createBaseEvalState(): EvalState {
   };
 }
 export const EvalState = {
-  encode(message: EvalState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       ExprValue.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -156,8 +156,8 @@ export const EvalState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState();
     while (reader.pos < end) {
@@ -236,7 +236,7 @@ function createBaseEvalState_Result(): EvalState_Result {
   };
 }
 export const EvalState_Result = {
-  encode(message: EvalState_Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.expr !== undefined) {
       IdRef.encode(message.expr, writer.uint32(10).fork()).ldelim();
     }
@@ -245,8 +245,8 @@ export const EvalState_Result = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EvalState_Result {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalState_Result {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState_Result();
     while (reader.pos < end) {
@@ -310,7 +310,7 @@ function createBaseExprValue(): ExprValue {
   };
 }
 export const ExprValue = {
-  encode(message: ExprValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ExprValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(10).fork()).ldelim();
     }
@@ -322,8 +322,8 @@ export const ExprValue = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ExprValue {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ExprValue {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExprValue();
     while (reader.pos < end) {
@@ -394,14 +394,14 @@ function createBaseErrorSet(): ErrorSet {
   };
 }
 export const ErrorSet = {
-  encode(message: ErrorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ErrorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.errors) {
       Status.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ErrorSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ErrorSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorSet();
     while (reader.pos < end) {
@@ -462,14 +462,14 @@ function createBaseUnknownSet(): UnknownSet {
   };
 }
 export const UnknownSet = {
-  encode(message: UnknownSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UnknownSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.exprs) {
       IdRef.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UnknownSet {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UnknownSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnknownSet();
     while (reader.pos < end) {
@@ -530,14 +530,14 @@ function createBaseIdRef(): IdRef {
   };
 }
 export const IdRef = {
-  encode(message: IdRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): IdRef {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): IdRef {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdRef();
     while (reader.pos < end) {

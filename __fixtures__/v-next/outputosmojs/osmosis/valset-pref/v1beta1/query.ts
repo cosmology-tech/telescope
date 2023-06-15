@@ -1,5 +1,5 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** Request type for UserValidatorPreferences. */
@@ -25,14 +25,14 @@ function createBaseUserValidatorPreferencesRequest(): UserValidatorPreferencesRe
   };
 }
 export const UserValidatorPreferencesRequest = {
-  encode(message: UserValidatorPreferencesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UserValidatorPreferencesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UserValidatorPreferencesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UserValidatorPreferencesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUserValidatorPreferencesRequest();
     while (reader.pos < end) {
@@ -85,14 +85,14 @@ function createBaseUserValidatorPreferencesResponse(): UserValidatorPreferencesR
   };
 }
 export const UserValidatorPreferencesResponse = {
-  encode(message: UserValidatorPreferencesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: UserValidatorPreferencesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.preferences) {
       ValidatorPreference.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): UserValidatorPreferencesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): UserValidatorPreferencesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUserValidatorPreferencesResponse();
     while (reader.pos < end) {

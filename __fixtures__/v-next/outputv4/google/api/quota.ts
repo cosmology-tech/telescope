@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet, isObject } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -288,7 +288,7 @@ function createBaseQuota(): Quota {
   };
 }
 export const Quota = {
-  encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Quota, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
     }
@@ -297,8 +297,8 @@ export const Quota = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Quota {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Quota {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuota();
     while (reader.pos < end) {
@@ -373,21 +373,21 @@ export const Quota = {
 function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
   return {
     key: "",
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const MetricRule_MetricCostsEntry = {
-  encode(message: MetricRule_MetricCostsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule_MetricCostsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.value.toString()));
+      writer.uint32(16).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule_MetricCostsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule_MetricCostsEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule_MetricCostsEntry();
     while (reader.pos < end) {
@@ -397,7 +397,7 @@ export const MetricRule_MetricCostsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -409,19 +409,19 @@ export const MetricRule_MetricCostsEntry = {
   fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: MetricRule_MetricCostsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
@@ -433,7 +433,7 @@ export const MetricRule_MetricCostsEntry = {
   fromSDKJSON(object: any): MetricRule_MetricCostsEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
@@ -450,7 +450,7 @@ function createBaseMetricRule(): MetricRule {
   };
 }
 export const MetricRule = {
-  encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MetricRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -462,8 +462,8 @@ export const MetricRule = {
     });
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetricRule {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
     while (reader.pos < end) {
@@ -557,21 +557,21 @@ export const MetricRule = {
 function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
   return {
     key: "",
-    value: BigInt("0")
+    value: BigInt(0)
   };
 }
 export const QuotaLimit_ValuesEntry = {
-  encode(message: QuotaLimit_ValuesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit_ValuesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== BigInt(0)) {
-      writer.uint32(16).int64(Long.fromString(message.value.toString()));
+      writer.uint32(16).int64(message.value);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit_ValuesEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaLimit_ValuesEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit_ValuesEntry();
     while (reader.pos < end) {
@@ -581,7 +581,7 @@ export const QuotaLimit_ValuesEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = BigInt(reader.int64().toString());
+          message.value = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -593,19 +593,19 @@ export const QuotaLimit_ValuesEntry = {
   fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toJSON(message: QuotaLimit_ValuesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt("0")).toString());
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt("0");
+    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
@@ -617,7 +617,7 @@ export const QuotaLimit_ValuesEntry = {
   fromSDKJSON(object: any): QuotaLimit_ValuesEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt("0")
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
     };
   },
   toSDK(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
@@ -631,9 +631,9 @@ function createBaseQuotaLimit(): QuotaLimit {
   return {
     name: "",
     description: "",
-    defaultLimit: BigInt("0"),
-    maxLimit: BigInt("0"),
-    freeTier: BigInt("0"),
+    defaultLimit: BigInt(0),
+    maxLimit: BigInt(0),
+    freeTier: BigInt(0),
     duration: "",
     metric: "",
     unit: "",
@@ -642,7 +642,7 @@ function createBaseQuotaLimit(): QuotaLimit {
   };
 }
 export const QuotaLimit = {
-  encode(message: QuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(50).string(message.name);
     }
@@ -650,13 +650,13 @@ export const QuotaLimit = {
       writer.uint32(18).string(message.description);
     }
     if (message.defaultLimit !== BigInt(0)) {
-      writer.uint32(24).int64(Long.fromString(message.defaultLimit.toString()));
+      writer.uint32(24).int64(message.defaultLimit);
     }
     if (message.maxLimit !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.maxLimit.toString()));
+      writer.uint32(32).int64(message.maxLimit);
     }
     if (message.freeTier !== BigInt(0)) {
-      writer.uint32(56).int64(Long.fromString(message.freeTier.toString()));
+      writer.uint32(56).int64(message.freeTier);
     }
     if (message.duration !== "") {
       writer.uint32(42).string(message.duration);
@@ -678,8 +678,8 @@ export const QuotaLimit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuotaLimit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuotaLimit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit();
     while (reader.pos < end) {
@@ -692,13 +692,13 @@ export const QuotaLimit = {
           message.description = reader.string();
           break;
         case 3:
-          message.defaultLimit = BigInt(reader.int64().toString());
+          message.defaultLimit = reader.int64();
           break;
         case 4:
-          message.maxLimit = BigInt(reader.int64().toString());
+          message.maxLimit = reader.int64();
           break;
         case 7:
-          message.freeTier = BigInt(reader.int64().toString());
+          message.freeTier = reader.int64();
           break;
         case 5:
           message.duration = reader.string();
@@ -729,9 +729,9 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      defaultLimit: isSet(object.defaultLimit) ? BigInt(object.defaultLimit.toString()) : BigInt("0"),
-      maxLimit: isSet(object.maxLimit) ? BigInt(object.maxLimit.toString()) : BigInt("0"),
-      freeTier: isSet(object.freeTier) ? BigInt(object.freeTier.toString()) : BigInt("0"),
+      defaultLimit: isSet(object.defaultLimit) ? BigInt(object.defaultLimit.toString()) : BigInt(0),
+      maxLimit: isSet(object.maxLimit) ? BigInt(object.maxLimit.toString()) : BigInt(0),
+      freeTier: isSet(object.freeTier) ? BigInt(object.freeTier.toString()) : BigInt(0),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",
@@ -748,9 +748,9 @@ export const QuotaLimit = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt("0")).toString());
-    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt("0")).toString());
-    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt("0")).toString());
+    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
+    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt(0)).toString());
+    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration);
     message.metric !== undefined && (obj.metric = message.metric);
     message.unit !== undefined && (obj.unit = message.unit);
@@ -767,9 +767,9 @@ export const QuotaLimit = {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt("0");
-    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt("0");
-    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt("0");
+    message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? BigInt(object.defaultLimit.toString()) : BigInt(0);
+    message.maxLimit = object.maxLimit !== undefined && object.maxLimit !== null ? BigInt(object.maxLimit.toString()) : BigInt(0);
+    message.freeTier = object.freeTier !== undefined && object.freeTier !== null ? BigInt(object.freeTier.toString()) : BigInt(0);
     message.duration = object.duration ?? "";
     message.metric = object.metric ?? "";
     message.unit = object.unit ?? "";
@@ -807,9 +807,9 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt("0"),
-      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt("0"),
-      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt("0"),
+      default_limit: isSet(object.default_limit) ? BigInt(object.default_limit.toString()) : BigInt(0),
+      max_limit: isSet(object.max_limit) ? BigInt(object.max_limit.toString()) : BigInt(0),
+      free_tier: isSet(object.free_tier) ? BigInt(object.free_tier.toString()) : BigInt(0),
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",

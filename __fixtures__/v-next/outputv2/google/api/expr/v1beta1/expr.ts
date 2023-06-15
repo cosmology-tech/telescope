@@ -1,5 +1,5 @@
 import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1beta1";

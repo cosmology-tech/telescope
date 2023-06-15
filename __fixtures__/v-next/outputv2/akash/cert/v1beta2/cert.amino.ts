@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
+import { MsgCreateCertificate, MsgRevokeCertificate } from "./cert";
 export const AminoConverter = {
   "/akash.cert.v1beta2.MsgCreateCertificate": {
     aminoType: "/akash.cert.v1beta2.MsgCreateCertificate",

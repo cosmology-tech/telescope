@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutes {
@@ -132,7 +132,7 @@ function createBaseTokenPairArbRoutes(): TokenPairArbRoutes {
   };
 }
 export const TokenPairArbRoutes = {
-  encode(message: TokenPairArbRoutes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TokenPairArbRoutes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.arbRoutes) {
       Route.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -144,8 +144,8 @@ export const TokenPairArbRoutes = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TokenPairArbRoutes {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TokenPairArbRoutes {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenPairArbRoutes();
     while (reader.pos < end) {
@@ -225,7 +225,7 @@ function createBaseRoute(): Route {
   };
 }
 export const Route = {
-  encode(message: Route, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Route, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.trades) {
       Trade.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -234,8 +234,8 @@ export const Route = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Route {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Route {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoute();
     while (reader.pos < end) {
@@ -301,15 +301,15 @@ export const Route = {
 };
 function createBaseTrade(): Trade {
   return {
-    pool: BigInt("0"),
+    pool: BigInt(0),
     tokenIn: "",
     tokenOut: ""
   };
 }
 export const Trade = {
-  encode(message: Trade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Trade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.pool.toString()));
+      writer.uint32(8).uint64(message.pool);
     }
     if (message.tokenIn !== "") {
       writer.uint32(18).string(message.tokenIn);
@@ -319,15 +319,15 @@ export const Trade = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Trade {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Trade {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrade();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pool = BigInt(reader.uint64().toString());
+          message.pool = reader.uint64();
           break;
         case 2:
           message.tokenIn = reader.string();
@@ -344,21 +344,21 @@ export const Trade = {
   },
   fromJSON(object: any): Trade {
     return {
-      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt("0"),
+      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt(0),
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
   toJSON(message: Trade): unknown {
     const obj: any = {};
-    message.pool !== undefined && (obj.pool = (message.pool || BigInt("0")).toString());
+    message.pool !== undefined && (obj.pool = (message.pool || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
     message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut);
     return obj;
   },
   fromPartial(object: DeepPartial<Trade>): Trade {
     const message = createBaseTrade();
-    message.pool = object.pool !== undefined && object.pool !== null ? BigInt(object.pool.toString()) : BigInt("0");
+    message.pool = object.pool !== undefined && object.pool !== null ? BigInt(object.pool.toString()) : BigInt(0);
     message.tokenIn = object.tokenIn ?? "";
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -372,7 +372,7 @@ export const Trade = {
   },
   fromSDKJSON(object: any): TradeSDKType {
     return {
-      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt("0"),
+      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt(0),
       token_in: isSet(object.token_in) ? String(object.token_in) : "",
       token_out: isSet(object.token_out) ? String(object.token_out) : ""
     };
@@ -393,7 +393,7 @@ function createBaseRouteStatistics(): RouteStatistics {
   };
 }
 export const RouteStatistics = {
-  encode(message: RouteStatistics, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RouteStatistics, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.profits) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -402,13 +402,13 @@ export const RouteStatistics = {
     }
     writer.uint32(26).fork();
     for (const v of message.route) {
-      writer.uint64(Long.fromString(v.toString()));
+      writer.uint64(v);
     }
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): RouteStatistics {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): RouteStatistics {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRouteStatistics();
     while (reader.pos < end) {
@@ -424,10 +424,10 @@ export const RouteStatistics = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.route.push(BigInt(reader.uint64().toString()));
+              message.route.push(reader.uint64());
             }
           } else {
-            message.route.push(BigInt(reader.uint64().toString()));
+            message.route.push(reader.uint64());
           }
           break;
         default:
@@ -453,7 +453,7 @@ export const RouteStatistics = {
     }
     message.numberOfTrades !== undefined && (obj.numberOfTrades = message.numberOfTrades);
     if (message.route) {
-      obj.route = message.route.map(e => (e || BigInt("0")).toString());
+      obj.route = message.route.map(e => (e || BigInt(0)).toString());
     } else {
       obj.route = [];
     }
@@ -498,39 +498,39 @@ export const RouteStatistics = {
 };
 function createBasePoolWeights(): PoolWeights {
   return {
-    stableWeight: BigInt("0"),
-    balancerWeight: BigInt("0"),
-    concentratedWeight: BigInt("0")
+    stableWeight: BigInt(0),
+    balancerWeight: BigInt(0),
+    concentratedWeight: BigInt(0)
   };
 }
 export const PoolWeights = {
-  encode(message: PoolWeights, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: PoolWeights, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.stableWeight !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.stableWeight.toString()));
+      writer.uint32(8).uint64(message.stableWeight);
     }
     if (message.balancerWeight !== BigInt(0)) {
-      writer.uint32(16).uint64(Long.fromString(message.balancerWeight.toString()));
+      writer.uint32(16).uint64(message.balancerWeight);
     }
     if (message.concentratedWeight !== BigInt(0)) {
-      writer.uint32(24).uint64(Long.fromString(message.concentratedWeight.toString()));
+      writer.uint32(24).uint64(message.concentratedWeight);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): PoolWeights {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolWeights {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolWeights();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.stableWeight = BigInt(reader.uint64().toString());
+          message.stableWeight = reader.uint64();
           break;
         case 2:
-          message.balancerWeight = BigInt(reader.uint64().toString());
+          message.balancerWeight = reader.uint64();
           break;
         case 3:
-          message.concentratedWeight = BigInt(reader.uint64().toString());
+          message.concentratedWeight = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -541,23 +541,23 @@ export const PoolWeights = {
   },
   fromJSON(object: any): PoolWeights {
     return {
-      stableWeight: isSet(object.stableWeight) ? BigInt(object.stableWeight.toString()) : BigInt("0"),
-      balancerWeight: isSet(object.balancerWeight) ? BigInt(object.balancerWeight.toString()) : BigInt("0"),
-      concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt("0")
+      stableWeight: isSet(object.stableWeight) ? BigInt(object.stableWeight.toString()) : BigInt(0),
+      balancerWeight: isSet(object.balancerWeight) ? BigInt(object.balancerWeight.toString()) : BigInt(0),
+      concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt(0)
     };
   },
   toJSON(message: PoolWeights): unknown {
     const obj: any = {};
-    message.stableWeight !== undefined && (obj.stableWeight = (message.stableWeight || BigInt("0")).toString());
-    message.balancerWeight !== undefined && (obj.balancerWeight = (message.balancerWeight || BigInt("0")).toString());
-    message.concentratedWeight !== undefined && (obj.concentratedWeight = (message.concentratedWeight || BigInt("0")).toString());
+    message.stableWeight !== undefined && (obj.stableWeight = (message.stableWeight || BigInt(0)).toString());
+    message.balancerWeight !== undefined && (obj.balancerWeight = (message.balancerWeight || BigInt(0)).toString());
+    message.concentratedWeight !== undefined && (obj.concentratedWeight = (message.concentratedWeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PoolWeights>): PoolWeights {
     const message = createBasePoolWeights();
-    message.stableWeight = object.stableWeight !== undefined && object.stableWeight !== null ? BigInt(object.stableWeight.toString()) : BigInt("0");
-    message.balancerWeight = object.balancerWeight !== undefined && object.balancerWeight !== null ? BigInt(object.balancerWeight.toString()) : BigInt("0");
-    message.concentratedWeight = object.concentratedWeight !== undefined && object.concentratedWeight !== null ? BigInt(object.concentratedWeight.toString()) : BigInt("0");
+    message.stableWeight = object.stableWeight !== undefined && object.stableWeight !== null ? BigInt(object.stableWeight.toString()) : BigInt(0);
+    message.balancerWeight = object.balancerWeight !== undefined && object.balancerWeight !== null ? BigInt(object.balancerWeight.toString()) : BigInt(0);
+    message.concentratedWeight = object.concentratedWeight !== undefined && object.concentratedWeight !== null ? BigInt(object.concentratedWeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PoolWeightsSDKType): PoolWeights {
@@ -569,9 +569,9 @@ export const PoolWeights = {
   },
   fromSDKJSON(object: any): PoolWeightsSDKType {
     return {
-      stable_weight: isSet(object.stable_weight) ? BigInt(object.stable_weight.toString()) : BigInt("0"),
-      balancer_weight: isSet(object.balancer_weight) ? BigInt(object.balancer_weight.toString()) : BigInt("0"),
-      concentrated_weight: isSet(object.concentrated_weight) ? BigInt(object.concentrated_weight.toString()) : BigInt("0")
+      stable_weight: isSet(object.stable_weight) ? BigInt(object.stable_weight.toString()) : BigInt(0),
+      balancer_weight: isSet(object.balancer_weight) ? BigInt(object.balancer_weight.toString()) : BigInt(0),
+      concentrated_weight: isSet(object.concentrated_weight) ? BigInt(object.concentrated_weight.toString()) : BigInt(0)
     };
   },
   toSDK(message: PoolWeights): PoolWeightsSDKType {
@@ -589,7 +589,7 @@ function createBaseBaseDenom(): BaseDenom {
   };
 }
 export const BaseDenom = {
-  encode(message: BaseDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: BaseDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -598,8 +598,8 @@ export const BaseDenom = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BaseDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BaseDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseDenom();
     while (reader.pos < end) {

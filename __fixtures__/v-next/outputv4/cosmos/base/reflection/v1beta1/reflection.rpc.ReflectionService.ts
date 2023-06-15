@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
 /** ReflectionService defines a service for interface reflection. */
@@ -25,12 +25,12 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   listAllInterfaces(request: ListAllInterfacesRequest = {}): Promise<ListAllInterfacesResponse> {
     const data = ListAllInterfacesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v1beta1.ReflectionService", "ListAllInterfaces", data);
-    return promise.then(data => ListAllInterfacesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ListAllInterfacesResponse.decode(new BinaryReader(data)));
   }
   listImplementations(request: ListImplementationsRequest): Promise<ListImplementationsResponse> {
     const data = ListImplementationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.reflection.v1beta1.ReflectionService", "ListImplementations", data);
-    return promise.then(data => ListImplementationsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ListImplementationsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

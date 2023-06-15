@@ -1,4 +1,4 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";

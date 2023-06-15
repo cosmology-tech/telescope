@@ -1,6 +1,6 @@
 import { SourceInfo, SourceInfoAmino, SourceInfoSDKType, Expr, ExprAmino, ExprSDKType, Constant, ConstantAmino, ConstantSDKType } from "./syntax";
 import { Empty, EmptyAmino, EmptySDKType } from "../../../protobuf/empty";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.expr.v1alpha1";

@@ -1,11 +1,9 @@
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { MsgCloseGroup, MsgCloseGroupResponse, MsgPauseGroup, MsgPauseGroupResponse, MsgStartGroup, MsgStartGroupResponse } from "./group";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
-import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deployment";
+import { MsgCreateDeployment, MsgCreateDeploymentResponse, MsgDepositDeployment, MsgDepositDeploymentResponse, MsgUpdateDeployment, MsgUpdateDeploymentResponse, MsgCloseDeployment, MsgCloseDeploymentResponse } from "./deployment";
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
@@ -64,7 +62,7 @@ export const MsgCreateDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "CreateDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCreateDeployment.encode(this).finish();
@@ -85,7 +83,7 @@ export const MsgDepositDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "DepositDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgDepositDeployment.encode(this).finish();
@@ -106,7 +104,7 @@ export const MsgUpdateDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgUpdateDeployment.encode(this).finish();
@@ -127,7 +125,7 @@ export const MsgCloseDeploymentDesc: UnaryMethodDefinitionish = {
   methodName: "CloseDeployment",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseDeployment.encode(this).finish();
@@ -148,7 +146,7 @@ export const MsgCloseGroupDesc: UnaryMethodDefinitionish = {
   methodName: "CloseGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgCloseGroup.encode(this).finish();
@@ -169,7 +167,7 @@ export const MsgPauseGroupDesc: UnaryMethodDefinitionish = {
   methodName: "PauseGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgPauseGroup.encode(this).finish();
@@ -190,7 +188,7 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
   methodName: "StartGroup",
   service: MsgDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return MsgStartGroup.encode(this).finish();
@@ -208,30 +206,30 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -247,8 +245,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

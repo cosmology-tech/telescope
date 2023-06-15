@@ -1,17 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
-import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
-import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
-import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
-import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolsWithFilterRequest, QueryPoolsWithFilterRequestSDKType, QueryPoolsWithFilterResponse, QueryPoolsWithFilterResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesRequestSDKType, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolNoSwapSharesResponseSDKType, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesRequestSDKType, QueryCalcJoinPoolSharesResponse, QueryCalcJoinPoolSharesResponseSDKType, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesRequestSDKType, QueryCalcExitPoolCoinsFromSharesResponse, QueryCalcExitPoolCoinsFromSharesResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
+import { QueryPoolsRequest, QueryPoolsResponse, QueryNumPoolsRequest, QueryNumPoolsResponse, QueryTotalLiquidityRequest, QueryTotalLiquidityResponse, QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse, QueryPoolRequest, QueryPoolResponse, QueryPoolTypeRequest, QueryPoolTypeResponse, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse, QueryPoolParamsRequest, QueryPoolParamsResponse, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse, QueryTotalSharesRequest, QueryTotalSharesResponse, QuerySpotPriceRequest, QuerySpotPriceResponse, QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse } from "./query";
 export interface Query {
   pools(request?: DeepPartial<QueryPoolsRequest>, metadata?: grpc.Metadata): Promise<QueryPoolsResponse>;
   numPools(request?: DeepPartial<QueryNumPoolsRequest>, metadata?: grpc.Metadata): Promise<QueryNumPoolsResponse>;
@@ -110,10 +101,10 @@ export class QueryClientImpl implements Query {
     return this.rpc.unary(QuerySpotPriceDesc, QuerySpotPriceRequest.fromPartial(request), metadata);
   }
   estimateSwapExactAmountIn(request: DeepPartial<QuerySwapExactAmountInRequest>, metadata?: grpc.Metadata): Promise<QuerySwapExactAmountInResponse> {
-    return this.rpc.unary(QuerySwapExactAmountInDesc, QuerySwapExactAmountInRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryEstimateSwapExactAmountInDesc, QuerySwapExactAmountInRequest.fromPartial(request), metadata);
   }
   estimateSwapExactAmountOut(request: DeepPartial<QuerySwapExactAmountOutRequest>, metadata?: grpc.Metadata): Promise<QuerySwapExactAmountOutResponse> {
-    return this.rpc.unary(QuerySwapExactAmountOutDesc, QuerySwapExactAmountOutRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryEstimateSwapExactAmountOutDesc, QuerySwapExactAmountOutRequest.fromPartial(request), metadata);
   }
 }
 export const QueryDesc = {
@@ -123,7 +114,7 @@ export const QueryPoolsDesc: UnaryMethodDefinitionish = {
   methodName: "Pools",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolsRequest.encode(this).finish();
@@ -144,7 +135,7 @@ export const QueryNumPoolsDesc: UnaryMethodDefinitionish = {
   methodName: "NumPools",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryNumPoolsRequest.encode(this).finish();
@@ -165,7 +156,7 @@ export const QueryTotalLiquidityDesc: UnaryMethodDefinitionish = {
   methodName: "TotalLiquidity",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalLiquidityRequest.encode(this).finish();
@@ -186,7 +177,7 @@ export const QueryPoolsWithFilterDesc: UnaryMethodDefinitionish = {
   methodName: "PoolsWithFilter",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolsWithFilterRequest.encode(this).finish();
@@ -207,7 +198,7 @@ export const QueryPoolDesc: UnaryMethodDefinitionish = {
   methodName: "Pool",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolRequest.encode(this).finish();
@@ -228,7 +219,7 @@ export const QueryPoolTypeDesc: UnaryMethodDefinitionish = {
   methodName: "PoolType",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolTypeRequest.encode(this).finish();
@@ -249,7 +240,7 @@ export const QueryCalcJoinPoolNoSwapSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcJoinPoolNoSwapShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcJoinPoolNoSwapSharesRequest.encode(this).finish();
@@ -270,7 +261,7 @@ export const QueryCalcJoinPoolSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcJoinPoolShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcJoinPoolSharesRequest.encode(this).finish();
@@ -291,7 +282,7 @@ export const QueryCalcExitPoolCoinsFromSharesDesc: UnaryMethodDefinitionish = {
   methodName: "CalcExitPoolCoinsFromShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryCalcExitPoolCoinsFromSharesRequest.encode(this).finish();
@@ -312,7 +303,7 @@ export const QueryPoolParamsDesc: UnaryMethodDefinitionish = {
   methodName: "PoolParams",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryPoolParamsRequest.encode(this).finish();
@@ -333,7 +324,7 @@ export const QueryTotalPoolLiquidityDesc: UnaryMethodDefinitionish = {
   methodName: "TotalPoolLiquidity",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalPoolLiquidityRequest.encode(this).finish();
@@ -354,7 +345,7 @@ export const QueryTotalSharesDesc: UnaryMethodDefinitionish = {
   methodName: "TotalShares",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QueryTotalSharesRequest.encode(this).finish();
@@ -375,7 +366,7 @@ export const QuerySpotPriceDesc: UnaryMethodDefinitionish = {
   methodName: "SpotPrice",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySpotPriceRequest.encode(this).finish();
@@ -396,7 +387,7 @@ export const QueryEstimateSwapExactAmountInDesc: UnaryMethodDefinitionish = {
   methodName: "EstimateSwapExactAmountIn",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySwapExactAmountInRequest.encode(this).finish();
@@ -417,7 +408,7 @@ export const QueryEstimateSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
   methodName: "EstimateSwapExactAmountOut",
   service: QueryDesc,
   requestStream: false,
-  reponseStream: false,
+  responseStream: false,
   requestType: ({
     serializeBinary() {
       return QuerySwapExactAmountOutRequest.encode(this).finish();
@@ -435,30 +426,30 @@ export const QueryEstimateSwapExactAmountOutDesc: UnaryMethodDefinitionish = {
   } as any)
 };
 export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined): Promise<any>;
 }
 export class GrpcWebImpl {
   host: string;
   options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   };
   constructor(host: string, options: {
-    transport: grpc.TransportFactory;
-    debug: boolean;
-    metadata: grpc.Metadata;
+    transport?: grpc.TransportFactory;
+    debug?: boolean;
+    metadata?: grpc.Metadata;
   }) {
     this.host = host;
     this.options = options;
   }
-  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, _request: any, metadata: grpc.Metadata | undefined) {
     const request = {
       ..._request,
       ...methodDesc.requestType
     };
     const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({
-      ...this.metadata?.options.headersMap,
+      ...this.options?.metadata.headersMap,
       ...metadata?.headersMap
     }) : metadata || this.options.metadata;
     return new Promise((resolve, reject) => {
@@ -474,8 +465,7 @@ export class GrpcWebImpl {
           } else {
             const err = (new Error(response.statusMessage) as any);
             err.code = response.status;
-            err.code = response.metadata;
-            err.response = response.trailers;
+            err.metadata = response.trailers;
             reject(err);
           }
         }

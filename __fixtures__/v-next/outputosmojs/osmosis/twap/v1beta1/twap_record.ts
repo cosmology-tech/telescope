@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
-import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
@@ -63,10 +63,10 @@ export interface TwapRecordSDKType {
 }
 function createBaseTwapRecord(): TwapRecord {
   return {
-    poolId: BigInt("0"),
+    poolId: BigInt(0),
     asset0Denom: "",
     asset1Denom: "",
-    height: BigInt("0"),
+    height: BigInt(0),
     time: undefined,
     p0LastSpotPrice: "",
     p1LastSpotPrice: "",
@@ -76,9 +76,9 @@ function createBaseTwapRecord(): TwapRecord {
   };
 }
 export const TwapRecord = {
-  encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
-      writer.uint32(8).uint64(Long.fromString(message.poolId.toString()));
+      writer.uint32(8).uint64(message.poolId);
     }
     if (message.asset0Denom !== "") {
       writer.uint32(18).string(message.asset0Denom);
@@ -87,7 +87,7 @@ export const TwapRecord = {
       writer.uint32(26).string(message.asset1Denom);
     }
     if (message.height !== BigInt(0)) {
-      writer.uint32(32).int64(Long.fromString(message.height.toString()));
+      writer.uint32(32).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
@@ -109,15 +109,15 @@ export const TwapRecord = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): TwapRecord {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): TwapRecord {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTwapRecord();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolId = BigInt(reader.uint64().toString());
+          message.poolId = reader.uint64();
           break;
         case 2:
           message.asset0Denom = reader.string();
@@ -126,7 +126,7 @@ export const TwapRecord = {
           message.asset1Denom = reader.string();
           break;
         case 4:
-          message.height = BigInt(reader.int64().toString());
+          message.height = reader.int64();
           break;
         case 5:
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -155,10 +155,10 @@ export const TwapRecord = {
   },
   fromJSON(object: any): TwapRecord {
     return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt("0"),
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
       asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
       asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
       p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
@@ -169,10 +169,10 @@ export const TwapRecord = {
   },
   toJSON(message: TwapRecord): unknown {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt("0")).toString());
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);
     message.asset1Denom !== undefined && (obj.asset1Denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = (message.height || BigInt("0")).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
     message.p0LastSpotPrice !== undefined && (obj.p0LastSpotPrice = message.p0LastSpotPrice);
     message.p1LastSpotPrice !== undefined && (obj.p1LastSpotPrice = message.p1LastSpotPrice);
@@ -183,10 +183,10 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt("0");
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt("0");
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";
@@ -211,10 +211,10 @@ export const TwapRecord = {
   },
   fromSDKJSON(object: any): TwapRecordSDKType {
     return {
-      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt("0"),
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
       asset0_denom: isSet(object.asset0_denom) ? String(object.asset0_denom) : "",
       asset1_denom: isSet(object.asset1_denom) ? String(object.asset1_denom) : "",
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt("0"),
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       time: isSet(object.time) ? new Date(object.time) : undefined,
       p0_last_spot_price: isSet(object.p0_last_spot_price) ? String(object.p0_last_spot_price) : "",
       p1_last_spot_price: isSet(object.p1_last_spot_price) ? String(object.p1_last_spot_price) : "",
