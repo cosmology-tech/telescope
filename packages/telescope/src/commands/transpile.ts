@@ -54,9 +54,10 @@ export default async (argv) => {
 
   // Create empy config object
   let conf: TelescopeOptions & TelescopeIncludes = {};
+  let configFullPath = path.resolve(".telescope.json");
   if (argv.config) {
     let { config } = argv;
-    let configFullPath = path.resolve(...config.split("/"));
+    configFullPath = path.resolve(...config.split("/"));
     // Extract provided protoDirs from argv
     let { protoDirs: extraProtoDirs, ...args } = argv;
     if (!Array.isArray(extraProtoDirs)) {
