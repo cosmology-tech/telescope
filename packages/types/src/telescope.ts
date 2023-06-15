@@ -63,8 +63,8 @@ interface TelescopeOpts {
             protos?: string[];
         };
         typingsFormat?: {
-            customTypes?:{
-              useCosmosSDKDec?: boolean;
+            customTypes?: {
+                useCosmosSDKDec?: boolean;
             },
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
@@ -195,6 +195,10 @@ interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
 
+export type TelescopeIncludes = {
+    protoDirs?: Array<string>;
+}
+
 export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
 
 export type TelescopeOption = keyof TelescopeOpts;
@@ -249,7 +253,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: false
+                useCosmosSDKDec: false
             },
             num64: 'long',
             useDeepPartial: true,

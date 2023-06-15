@@ -7,7 +7,8 @@
         "declaration": true,
         "declarationDir": "./types",
         "emitDeclarationOnly": true,
-        "isolatedModules": true
+        "isolatedModules": true,
+        "resolveJsonModule": true
     },
     "include": [
         "src/**/*"
