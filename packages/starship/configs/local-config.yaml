@@ -1,0 +1,94 @@
+chains:
+  - name: osmosis-1
+    type: osmosis
+    numValidators: 1
+    ports:
+      rest: 1317
+      rpc: 26657
+      faucet: 8007
+    resources:
+      limits:
+        cpu: "0.2"
+        memory: "200M"
+      requests:
+        cpu: "0.2"
+        memory: "200M"
+  - name: cosmos-2
+    type: cosmos
+    numValidators: 1
+    ports:
+      rest: 1313
+      rpc: 26653
+      faucet: 8003
+    resources:
+      limits:
+        cpu: "0.2"
+        memory: "200M"
+      requests:
+        cpu: "0.2"
+        memory: "200M"
+
+relayers:
+  - name: osmos-cosmos
+    type: hermes
+    replicas: 1
+    chains:
+      - osmosis-1
+      - cosmos-2
+    resources:
+      limits:
+        cpu: "0.1"
+        memory: "100M"
+      requests:
+        cpu: "0.1"
+        memory: "100M"
+
+explorer:
+  enabled: false
+
+registry:
+  enabled: true
+  ports:
+    rest: 8081
+    grpc: 9091
+  resources:
+    limits:
+      cpu: "0.1"
+      memory: "100M"
+    requests:
+      cpu: "0.1"
+      memory: "100M"
+
+exposer:
+  resources:
+    limits:
+      cpu: "0.1"
+      memory: "100M"
+    requests:
+      cpu: "0.1"
+      memory: "100M"
+
+faucet:
+  resources:
+    limits:
+      cpu: "0.1"
+      memory: "100M"
+    requests:
+      cpu: "0.1"
+      memory: "100M"
+
+resources:
+  node:
+    limits:
+      cpu: "0.2"
+      memory: "200M"
+    requests:
+      cpu: "0.2"
+      memory: "200M"
+  wait:
+    limits:
+      cpu: "0.1"
+      memory: "100M"
+    requests:
+      cpu: "0.1"
+      memory: "100M"
