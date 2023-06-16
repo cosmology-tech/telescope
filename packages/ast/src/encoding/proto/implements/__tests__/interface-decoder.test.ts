@@ -6,7 +6,7 @@ import { createObjectWithMethods } from '../../../object';
 import { createInterfaceDecoder, createInterfaceDecoderHelper } from '../decoder';
 
 const store = getTestProtoStore();
-store.options.aminoEncoding.useRecursiveV2encoding = true;
+store.options.aminoEncoding.useLegacyInlineEncoding = false;
 store.options.interfaces.enabled = true;
 store.traverseAll();
 

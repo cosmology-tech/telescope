@@ -72,7 +72,8 @@ const options: TelescopeOptions = {
         ]
     },
     aminoEncoding: {
-        enabled: false
+        enabled: false,
+        useLegacyInlineEncoding: true
     }
 };
 

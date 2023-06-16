@@ -15,6 +15,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
     it('Interfaces', () => {
         context.options.aminoEncoding.casingFn = camel;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
         expectCode(makeAminoTypeInterface(
             {
                 context,

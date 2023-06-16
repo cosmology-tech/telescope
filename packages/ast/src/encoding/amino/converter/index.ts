@@ -21,7 +21,7 @@ export const createAminoConverterItem = (
     const typeUrl = getTypeUrl(root, proto);
     const aminoType = getAminoTypeName(context, root, proto);
 
-    const toAmino = context.options.aminoEncoding.useRecursiveV2encoding ?
+    const toAmino = !context.options.aminoEncoding.useLegacyInlineEncoding ?
         t.memberExpression(
             t.identifier(proto.name),
             t.identifier('toAmino')
@@ -30,7 +30,7 @@ export const createAminoConverterItem = (
             proto
         });
 
-    const fromAmino = context.options.aminoEncoding.useRecursiveV2encoding ?
+    const fromAmino = !context.options.aminoEncoding.useLegacyInlineEncoding ?
         t.memberExpression(
             t.identifier(proto.name),
             t.identifier('fromAmino')

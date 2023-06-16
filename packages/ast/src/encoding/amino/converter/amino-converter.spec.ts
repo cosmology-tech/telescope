@@ -13,6 +13,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = camel;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
         expectCode(createAminoConverter({
             context,
@@ -30,6 +31,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = snake;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
         expectCode(createAminoConverter({
             context,
@@ -48,6 +50,7 @@ describe('evmos/fees/v1/tx', () => {
 
     it('AminoConverter', () => {
         context.options.aminoEncoding.casingFn = snake;
+        context.options.aminoEncoding.useLegacyInlineEncoding = true;
 
         expectCode(createAminoConverter({
             context,
