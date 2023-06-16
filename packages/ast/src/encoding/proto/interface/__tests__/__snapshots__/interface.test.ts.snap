@@ -10,6 +10,18 @@ export interface GenesisState {
 }"
 `;
 
+exports[`MsgDelegate interface 1`] = `
+"/**
+ * MsgDelegate defines a SDK message for performing a delegation of coins
+ * from a delegator to a validator.
+ */
+export interface MsgDelegate {
+  delegatorAddress: string;
+  validatorAddress: string;
+  amount: Coin;
+}"
+`;
+
 exports[`MsgSend amino interface 1`] = `
 "/** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
