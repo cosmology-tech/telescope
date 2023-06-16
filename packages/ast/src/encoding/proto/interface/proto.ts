@@ -6,6 +6,7 @@ import { ProtoParseContext } from '../../context';
 import {
     getBaseCreateTypeFuncName,
     getFieldOptionality,
+    getFieldOptionalityForDefaults,
     getOneOfs
 } from '../types';
 
@@ -140,6 +141,7 @@ export const createProtoType = (
     [].push.apply(fields, Object.keys(proto.fields).reduce((m, fieldName) => {
         const isOneOf = oneOfs.includes(fieldName);
         const field = proto.fields[fieldName];
+        const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
         // optionalityMap is coupled to API requests
         const orig = field.options?.['(telescope:orig)'] ?? fieldName;
@@ -158,7 +160,8 @@ export const createProtoType = (
             t.tsTypeAnnotation(
                 protoField
             ),
-            optional || getFieldOptionality(context, field, isOneOf)
+            // optional || getFieldOptionality(context, field, isOneOf)
+            isOptional || optional
         );
 
         const comments = [];
