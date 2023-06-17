@@ -8,9 +8,9 @@ export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr?: Expr;
+  expr: Expr;
   /** The source info derived from input that generated the parsed `expr`. */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
@@ -71,7 +71,7 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand?: Expr;
+  operand: Expr;
   /**
    * Required. The name of the field to select.
    * 
@@ -96,7 +96,7 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target?: Expr;
+  target: Expr;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -141,7 +141,7 @@ export interface Expr_CreateStruct_Entry {
   /** The key expression for a map creation statement. */
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
-  value?: Expr;
+  value: Expr;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -175,30 +175,30 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange?: Expr;
+  iterRange: Expr;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit?: Expr;
+  accuInit: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition?: Expr;
+  loopCondition: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Computes the next value of accu_var.
    */
-  loopStep?: Expr;
+  loopStep: Expr;
   /**
    * An expression which can contain accu_var.
    * 
    * Computes the result.
    */
-  result?: Expr;
+  result: Expr;
 }
 /**
  * Represents a primitive literal.

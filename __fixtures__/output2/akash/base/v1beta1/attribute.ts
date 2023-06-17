@@ -23,7 +23,7 @@ export interface SignedBy {
 /** PlacementRequirements */
 export interface PlacementRequirements {
   /** SignedBy list of keys that tenants expect to have signatures from */
-  signedBy?: SignedBy;
+  signedBy: SignedBy;
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
 }

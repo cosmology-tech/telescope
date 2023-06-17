@@ -29,9 +29,9 @@ export class Query {
     });
   }
   static claimableForAction(request: QueryClaimableForActionRequest, initRequest?: fm.InitReq): Promise<QueryClaimableForActionResponse> {
-    return fm.fetchReq(`/osmosis/claim/v1beta1/claimable_for_action/${request["address"]}/{action}?${fm.renderURLSearchParams({
+    return fm.fetchReq(`/osmosis/claim/v1beta1/claimable_for_action/${request["address"]}/${request["action"]}?${fm.renderURLSearchParams({
       ...request
-    }, ["address"])}`, {
+    }, ["address", "action"])}`, {
       ...initRequest,
       method: "GET"
     });

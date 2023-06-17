@@ -36,7 +36,7 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config?: Any;
+  config: Any;
 }
 function createBaseConfig(): Config {
   return {

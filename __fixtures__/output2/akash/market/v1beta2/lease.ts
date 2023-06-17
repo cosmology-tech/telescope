@@ -62,9 +62,9 @@ export interface LeaseID {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface Lease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
   state: Lease_State;
-  price?: DecCoin;
+  price: DecCoin;
   createdAt: Long;
   closedOn: Long;
 }
@@ -79,19 +79,19 @@ export interface LeaseFilters {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLease {
-  bidId?: BidID;
+  bidId: BidID;
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
-  bidId?: LeaseID;
+  bidId: LeaseID;
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}

@@ -7,9 +7,9 @@ import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../h
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
-  airdropStartTime?: Timestamp;
-  durationUntilDecay?: Duration;
-  durationOfDecay?: Duration;
+  airdropStartTime: Timestamp;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
 }

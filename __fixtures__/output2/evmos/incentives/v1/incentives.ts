@@ -17,7 +17,7 @@ export interface Incentive {
   /** number of remaining epochs */
   epochs: number;
   /** distribution start time */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
 }

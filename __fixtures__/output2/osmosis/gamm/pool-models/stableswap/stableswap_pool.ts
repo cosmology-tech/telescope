@@ -18,7 +18,7 @@ export interface PoolParams {
 export interface Pool {
   address: string;
   id: Long;
-  poolParams?: PoolParams;
+  poolParams: PoolParams;
   /**
    * This string specifies who will govern the pool in the future.
    * Valid forms of this are:
@@ -31,7 +31,7 @@ export interface Pool {
    */
   futurePoolGovernor: string;
   /** sum of all LP shares */
-  totalShares?: Coin;
+  totalShares: Coin;
   /** assets in the pool */
   poolLiquidity: Coin[];
   /** for calculation amognst assets with different precisions */

@@ -7,7 +7,7 @@ export interface Snapshot {
   format: number;
   chunks: number;
   hash: Uint8Array;
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotSDKType {
@@ -15,7 +15,7 @@ export interface SnapshotSDKType {
   format: number;
   chunks: number;
   hash: Uint8Array;
-  metadata?: MetadataSDKType;
+  metadata: MetadataSDKType;
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {

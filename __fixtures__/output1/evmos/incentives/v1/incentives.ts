@@ -15,7 +15,7 @@ export interface Incentive {
   /** number of remaining epochs */
   epochs: number;
   /** distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
 }
@@ -27,7 +27,7 @@ export interface IncentiveSDKType {
   contract: string;
   allocations: DecCoinSDKType[];
   epochs: number;
-  start_time?: Date;
+  start_time: Date;
   total_gas: Long;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */

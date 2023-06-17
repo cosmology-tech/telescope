@@ -170,7 +170,7 @@ export function lengthOpToJSON(object: LengthOp): string {
 export interface ExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf?: LeafOp;
+  leaf: LeafOp;
   path: InnerOp[];
 }
 /**
@@ -181,8 +181,8 @@ export interface ExistenceProof {
 export interface NonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left?: ExistenceProof;
-  right?: ExistenceProof;
+  left: ExistenceProof;
+  right: ExistenceProof;
 }
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProof {
@@ -257,8 +257,8 @@ export interface ProofSpec {
    * any field in the ExistenceProof must be the same as in this spec.
    * except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
-  leafSpec?: LeafOp;
-  innerSpec?: InnerSpec;
+  leafSpec: LeafOp;
+  innerSpec: InnerSpec;
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   maxDepth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
@@ -310,15 +310,15 @@ export interface CompressedBatchEntry {
 export interface CompressedExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf?: LeafOp;
+  leaf: LeafOp;
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
 export interface CompressedNonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left?: CompressedExistenceProof;
-  right?: CompressedExistenceProof;
+  left: CompressedExistenceProof;
+  right: CompressedExistenceProof;
 }
 function createBaseExistenceProof(): ExistenceProof {
   return {

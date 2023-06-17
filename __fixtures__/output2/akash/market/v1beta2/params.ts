@@ -6,7 +6,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
-  bidMinDeposit?: Coin;
+  bidMinDeposit: Coin;
   orderMaxBids: number;
 }
 function createBaseParams(): Params {

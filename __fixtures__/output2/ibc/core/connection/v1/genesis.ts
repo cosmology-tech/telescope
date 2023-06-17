@@ -10,7 +10,7 @@ export interface GenesisState {
   clientConnectionPaths: ConnectionPaths[];
   /** the sequence for the next generated connection identifier */
   nextConnectionSequence: Long;
-  params?: Params;
+  params: Params;
 }
 function createBaseGenesisState(): GenesisState {
   return {

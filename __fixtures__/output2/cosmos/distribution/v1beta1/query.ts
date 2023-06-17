@@ -11,7 +11,7 @@ export interface QueryParamsRequest {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
@@ -26,7 +26,7 @@ export interface QueryValidatorOutstandingRewardsRequest {
  * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponse {
-  rewards?: ValidatorOutstandingRewards;
+  rewards: ValidatorOutstandingRewards;
 }
 /**
  * QueryValidatorCommissionRequest is the request type for the
@@ -42,7 +42,7 @@ export interface QueryValidatorCommissionRequest {
  */
 export interface QueryValidatorCommissionResponse {
   /** commission defines the commision the validator received. */
-  commission?: ValidatorAccumulatedCommission;
+  commission: ValidatorAccumulatedCommission;
 }
 /**
  * QueryValidatorSlashesRequest is the request type for the
@@ -56,7 +56,7 @@ export interface QueryValidatorSlashesRequest {
   /** starting_height defines the optional ending height to query the slashes. */
   endingHeight: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the
@@ -66,7 +66,7 @@ export interface QueryValidatorSlashesResponse {
   /** slashes defines the slashes the validator received. */
   slashes: ValidatorSlashEvent[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QueryDelegationRewardsRequest is the request type for the

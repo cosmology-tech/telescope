@@ -4,7 +4,7 @@ import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
@@ -18,11 +18,11 @@ export interface QueryEpochsInfoRequestAminoMsg {
   value: QueryEpochsInfoRequestAmino;
 }
 export interface QueryEpochsInfoRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
@@ -38,7 +38,7 @@ export interface QueryEpochsInfoResponseAminoMsg {
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 export interface QueryCurrentEpochRequest {
   identifier: string;

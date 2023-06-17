@@ -110,7 +110,7 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource?: MonitoredResource;
+  resource: MonitoredResource;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
@@ -166,7 +166,7 @@ export interface WriteLogEntriesRequest {
 export interface WriteLogEntriesResponse {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
-  value?: Status;
+  value: Status;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrors {
@@ -178,7 +178,7 @@ export interface WriteLogEntriesPartialErrors {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  logEntryErrors?: {
+  logEntryErrors: {
     [key: number]: Status;
   };
 }
@@ -376,7 +376,7 @@ export interface TailLogEntriesRequest {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow?: Duration;
+  bufferWindow: Duration;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {

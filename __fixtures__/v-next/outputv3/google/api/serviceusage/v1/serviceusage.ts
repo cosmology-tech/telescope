@@ -104,7 +104,7 @@ export interface EnableServiceRequestSDKType {
  */
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
-  service?: Service;
+  service: Service;
 }
 export interface EnableServiceResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse";
@@ -129,7 +129,7 @@ export interface EnableServiceResponseAminoMsg {
  * Operation when that operation is done.
  */
 export interface EnableServiceResponseSDKType {
-  service?: ServiceSDKType;
+  service: ServiceSDKType;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequest {
@@ -198,7 +198,7 @@ export interface DisableServiceRequestSDKType {
  */
 export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
-  service?: Service;
+  service: Service;
 }
 export interface DisableServiceResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse";
@@ -223,7 +223,7 @@ export interface DisableServiceResponseAminoMsg {
  * Operation when that operation is done.
  */
 export interface DisableServiceResponseSDKType {
-  service?: ServiceSDKType;
+  service: ServiceSDKType;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequest {

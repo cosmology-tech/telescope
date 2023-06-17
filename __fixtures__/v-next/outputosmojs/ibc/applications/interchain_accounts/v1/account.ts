@@ -4,12 +4,12 @@ import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccount {
-  baseAccount?: BaseAccount;
+  baseAccount: BaseAccount;
   accountOwner: string;
 }
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccountSDKType {
-  base_account?: BaseAccountSDKType;
+  base_account: BaseAccountSDKType;
   account_owner: string;
 }
 function createBaseInterchainAccount(): InterchainAccount {

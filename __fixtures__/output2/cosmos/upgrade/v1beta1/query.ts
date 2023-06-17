@@ -15,7 +15,7 @@ export interface QueryCurrentPlanRequest {}
  */
 export interface QueryCurrentPlanResponse {
   /** plan is the current upgrade plan. */
-  plan?: Plan;
+  plan: Plan;
 }
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC

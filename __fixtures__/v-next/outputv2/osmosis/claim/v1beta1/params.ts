@@ -5,9 +5,9 @@ import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
-  airdropStartTime?: Date;
-  durationUntilDecay?: Duration;
-  durationOfDecay?: Duration;
+  airdropStartTime: Date;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
 }
@@ -29,9 +29,9 @@ export interface ParamsAminoMsg {
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
-  airdrop_start_time?: Date;
-  duration_until_decay?: DurationSDKType;
-  duration_of_decay?: DurationSDKType;
+  airdrop_start_time: Date;
+  duration_until_decay: DurationSDKType;
+  duration_of_decay: DurationSDKType;
   claim_denom: string;
 }
 function createBaseParams(): Params {

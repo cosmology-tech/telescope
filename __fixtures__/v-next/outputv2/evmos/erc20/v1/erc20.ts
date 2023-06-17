@@ -100,7 +100,7 @@ export interface RegisterCoinProposal {
   /** proposal description */
   description: string;
   /** metadata of the native Cosmos coin */
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 export interface RegisterCoinProposalProtoMsg {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
@@ -129,7 +129,7 @@ export interface RegisterCoinProposalAminoMsg {
 export interface RegisterCoinProposalSDKType {
   title: string;
   description: string;
-  metadata?: MetadataSDKType;
+  metadata: MetadataSDKType;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an

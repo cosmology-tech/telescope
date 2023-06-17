@@ -146,7 +146,7 @@ export interface AccessConfigSDKType {
 }
 /** Params defines the set of wasm parameters. */
 export interface Params {
-  codeUploadAccess?: AccessConfig;
+  codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
 }
@@ -166,7 +166,7 @@ export interface ParamsAminoMsg {
 }
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
-  code_upload_access?: AccessConfigSDKType;
+  code_upload_access: AccessConfigSDKType;
   instantiate_default_permission: AccessType;
   max_wasm_code_size: Long;
 }
@@ -177,7 +177,7 @@ export interface CodeInfo {
   /** Creator address who initially stored the code */
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
-  instantiateConfig?: AccessConfig;
+  instantiateConfig: AccessConfig;
 }
 export interface CodeInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
@@ -200,7 +200,7 @@ export interface CodeInfoAminoMsg {
 export interface CodeInfoSDKType {
   code_hash: Uint8Array;
   creator: string;
-  instantiate_config?: AccessConfigSDKType;
+  instantiate_config: AccessConfigSDKType;
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
@@ -217,13 +217,13 @@ export interface ContractInfo {
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
-  created?: AbsoluteTxPosition;
+  created: AbsoluteTxPosition;
   ibcPortId: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension?: (Any) | undefined;
+  extension: (Any) | undefined;
 }
 export interface ContractInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
@@ -269,9 +269,9 @@ export interface ContractInfoSDKType {
   creator: string;
   admin: string;
   label: string;
-  created?: AbsoluteTxPositionSDKType;
+  created: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
-  extension?: AnySDKType | undefined;
+  extension: AnySDKType | undefined;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
@@ -279,7 +279,7 @@ export interface ContractCodeHistoryEntry {
   /** CodeID is the reference to the stored WASM code */
   codeId: Long;
   /** Updated Tx position when the operation was executed. */
-  updated?: AbsoluteTxPosition;
+  updated: AbsoluteTxPosition;
   msg: Uint8Array;
 }
 export interface ContractCodeHistoryEntryProtoMsg {
@@ -303,7 +303,7 @@ export interface ContractCodeHistoryEntryAminoMsg {
 export interface ContractCodeHistoryEntrySDKType {
   operation: ContractCodeHistoryOperationType;
   code_id: Long;
-  updated?: AbsoluteTxPositionSDKType;
+  updated: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
 /**

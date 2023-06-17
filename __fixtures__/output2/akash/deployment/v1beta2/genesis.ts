@@ -8,13 +8,13 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
-  deployment?: Deployment;
+  deployment: Deployment;
   groups: Group[];
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
   deployments: GenesisDeployment[];
-  params?: Params;
+  params: Params;
 }
 function createBaseGenesisDeployment(): GenesisDeployment {
   return {

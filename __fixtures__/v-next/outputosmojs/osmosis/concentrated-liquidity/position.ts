@@ -14,7 +14,7 @@ export interface Position {
   poolId: bigint;
   lowerTick: bigint;
   upperTick: bigint;
-  joinTime?: Date;
+  joinTime: Date;
   liquidity: string;
 }
 /**
@@ -27,18 +27,18 @@ export interface PositionSDKType {
   pool_id: bigint;
   lower_tick: bigint;
   upper_tick: bigint;
-  join_time?: Date;
+  join_time: Date;
   liquidity: string;
 }
 export interface PositionWithUnderlyingAssetBreakdown {
-  position?: Position;
-  asset0?: Coin;
-  asset1?: Coin;
+  position: Position;
+  asset0: Coin;
+  asset1: Coin;
 }
 export interface PositionWithUnderlyingAssetBreakdownSDKType {
-  position?: PositionSDKType;
-  asset0?: CoinSDKType;
-  asset1?: CoinSDKType;
+  position: PositionSDKType;
+  asset0: CoinSDKType;
+  asset1: CoinSDKType;
 }
 function createBasePosition(): Position {
   return {

@@ -7,14 +7,14 @@ export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface MsgSwapExactAmountIn {
   sender: string;
   routes: SwapAmountInRoute[];
-  tokenIn?: Coin;
+  tokenIn: Coin;
   tokenOutMinAmount: string;
 }
 /** ===================== MsgSwapExactAmountIn */
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
   routes: SwapAmountInRouteSDKType[];
-  token_in?: CoinSDKType;
+  token_in: CoinSDKType;
   token_out_min_amount: string;
 }
 export interface MsgSwapExactAmountInResponse {
@@ -28,14 +28,14 @@ export interface MsgSwapExactAmountOut {
   sender: string;
   routes: SwapAmountOutRoute[];
   tokenInMaxAmount: string;
-  tokenOut?: Coin;
+  tokenOut: Coin;
 }
 /** ===================== MsgSwapExactAmountOut */
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
   routes: SwapAmountOutRouteSDKType[];
   token_in_max_amount: string;
-  token_out?: CoinSDKType;
+  token_out: CoinSDKType;
 }
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;

@@ -12,19 +12,19 @@ export interface Evidence {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
-  voteA?: Vote;
-  voteB?: Vote;
+  voteA: Vote;
+  voteB: Vote;
   totalVotingPower: Long;
   validatorPower: Long;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
-  conflictingBlock?: LightBlock;
+  conflictingBlock: LightBlock;
   commonHeight: Long;
   byzantineValidators: Validator[];
   totalVotingPower: Long;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 export interface EvidenceList {
   evidence: Evidence[];

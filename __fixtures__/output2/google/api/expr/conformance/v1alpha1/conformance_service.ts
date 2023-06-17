@@ -71,14 +71,14 @@ export interface ParseRequest {
 /** Response message for the Parse method. */
 export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
-  parsedExpr?: ParsedExpr;
+  parsedExpr: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
 /** Request message for the Check method. */
 export interface CheckRequest {
   /** Required. The parsed representation of the CEL program. */
-  parsedExpr?: ParsedExpr;
+  parsedExpr: ParsedExpr;
   /**
    * Declarations of types for external variables and functions.
    * Required if program uses external variables or functions
@@ -100,13 +100,13 @@ export interface CheckRequest {
 /** Response message for the Check method. */
 export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
-  checkedExpr?: CheckedExpr;
+  checkedExpr: CheckedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
 export interface EvalRequest_BindingsEntry {
   key: string;
-  value?: ExprValue;
+  value: ExprValue;
 }
 /** Request message for the Eval method. */
 export interface EvalRequest {
@@ -118,7 +118,7 @@ export interface EvalRequest {
    * Bindings for the external variables.  The types SHOULD be compatible
    * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
-  bindings?: {
+  bindings: {
     [key: string]: ExprValue;
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
@@ -127,7 +127,7 @@ export interface EvalRequest {
 /** Response message for the Eval method. */
 export interface EvalResponse {
   /** The execution result, or unset if execution couldn't start. */
-  result?: ExprValue;
+  result: ExprValue;
   /**
    * Any number of issues with [StatusDetails][] as the details.
    * Note that CEL execution errors are reified into [ExprValue][].
@@ -145,7 +145,7 @@ export interface IssueDetails {
   /** The severity of the issue. */
   severity: IssueDetails_Severity;
   /** Position in the source, if known. */
-  position?: SourcePosition;
+  position: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: Long;
 }

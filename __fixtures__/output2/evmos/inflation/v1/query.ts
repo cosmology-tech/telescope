@@ -23,7 +23,7 @@ export interface QueryEpochMintProvisionRequest {}
  */
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
-  epochMintProvision?: DecCoin;
+  epochMintProvision: DecCoin;
 }
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
@@ -49,7 +49,7 @@ export interface QueryCirculatingSupplyRequest {}
  */
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
-  circulatingSupply?: DecCoin;
+  circulatingSupply: DecCoin;
 }
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
@@ -69,7 +69,7 @@ export interface QueryParamsRequest {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 function createBaseQueryPeriodRequest(): QueryPeriodRequest {
   return {};

@@ -48,17 +48,17 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin | undefined;
+  deposit: Coin | undefined;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit?: CoinSDKType | undefined;
+  deposit: CoinSDKType | undefined;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
@@ -66,13 +66,13 @@ export interface MsgCreateDeploymentResponse {}
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID | undefined;
-  amount?: Coin | undefined;
+  id: DeploymentID | undefined;
+  amount: Coin | undefined;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
-  amount?: CoinSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
+  amount: CoinSDKType | undefined;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
@@ -80,13 +80,13 @@ export interface MsgDepositDeploymentResponse {}
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
 }
@@ -96,11 +96,11 @@ export interface MsgUpdateDeploymentResponse {}
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
@@ -118,14 +118,14 @@ export interface DeploymentIDSDKType {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID | undefined;
+  deploymentId: DeploymentID | undefined;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: bigint;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType | undefined;
+  deployment_id: DeploymentIDSDKType | undefined;
   state: Deployment_State;
   version: Uint8Array;
   created_at: bigint;

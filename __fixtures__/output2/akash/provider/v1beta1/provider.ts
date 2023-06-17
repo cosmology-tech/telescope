@@ -14,7 +14,7 @@ export interface MsgCreateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
@@ -23,7 +23,7 @@ export interface MsgUpdateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
@@ -38,7 +38,7 @@ export interface Provider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 function createBaseProviderInfo(): ProviderInfo {
   return {

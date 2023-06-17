@@ -8,7 +8,7 @@ export interface GenesisState {
   clientConnectionPaths: ConnectionPaths[];
   /** the sequence for the next generated connection identifier */
   nextConnectionSequence: Long;
-  params?: Params;
+  params: Params;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.connection.v1.GenesisState";
@@ -31,7 +31,7 @@ export interface GenesisStateSDKType {
   connections: IdentifiedConnectionSDKType[];
   client_connection_paths: ConnectionPathsSDKType[];
   next_connection_sequence: Long;
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {

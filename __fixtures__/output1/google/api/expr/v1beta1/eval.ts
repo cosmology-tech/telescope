@@ -31,13 +31,13 @@ export interface EvalStateSDKType {
 /** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
-  expr?: IdRef;
+  expr: IdRef;
   /** The index in `values` of the resulting value. */
   value: number;
 }
 /** A single evaluation result. */
 export interface EvalState_ResultSDKType {
-  expr?: IdRefSDKType;
+  expr: IdRefSDKType;
   value: number;
 }
 /** The value of an evaluated expression. */

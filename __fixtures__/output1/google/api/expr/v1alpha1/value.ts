@@ -118,14 +118,14 @@ export interface MapValue_Entry {
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key?: Value;
+  key: Value;
   /** The value. */
-  value?: Value;
+  value: Value;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
-  key?: ValueSDKType;
-  value?: ValueSDKType;
+  key: ValueSDKType;
+  value: ValueSDKType;
 }
 function createBaseValue(): Value {
   return {

@@ -7,7 +7,7 @@ export interface GenesisOwners {
   /** index is the index of the capability owner. */
   index: Long;
   /** index_owners are the owners at the given index. */
-  indexOwners?: CapabilityOwners;
+  indexOwners: CapabilityOwners;
 }
 export interface GenesisOwnersProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
@@ -27,7 +27,7 @@ export interface GenesisOwnersAminoMsg {
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: Long;
-  index_owners?: CapabilityOwnersSDKType;
+  index_owners: CapabilityOwnersSDKType;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisState {

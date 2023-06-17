@@ -11,11 +11,11 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
-  params?: Params;
+  params: Params;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /**
  * QueryGetProtoRevNumberOfTradesRequest is request type for the
@@ -63,14 +63,14 @@ export interface QueryGetProtoRevProfitsByDenomRequestSDKType {
  */
 export interface QueryGetProtoRevProfitsByDenomResponse {
   /** profit is the profits of the module by the selected denom */
-  profit?: Coin;
+  profit: Coin;
 }
 /**
  * QueryGetProtoRevProfitsByDenomResponse is response type for the
  * Query/GetProtoRevProfitsByDenom RPC method.
  */
 export interface QueryGetProtoRevProfitsByDenomResponseSDKType {
-  profit?: CoinSDKType;
+  profit: CoinSDKType;
 }
 /**
  * QueryGetProtoRevAllProfitsRequest is request type for the
@@ -121,14 +121,14 @@ export interface QueryGetProtoRevStatisticsByRouteResponse {
    * statistics contains the number of trades the module has executed after a
    * swap on a given pool and the profits from the trades
    */
-  statistics?: RouteStatistics;
+  statistics: RouteStatistics;
 }
 /**
  * QueryGetProtoRevStatisticsByRouteResponse is response type for the
  * Query/GetProtoRevStatisticsByRoute RPC method.
  */
 export interface QueryGetProtoRevStatisticsByRouteResponseSDKType {
-  statistics?: RouteStatisticsSDKType;
+  statistics: RouteStatisticsSDKType;
 }
 /**
  * QueryGetProtoRevAllRouteStatisticsRequest is request type for the
@@ -252,14 +252,14 @@ export interface QueryGetProtoRevPoolWeightsRequestSDKType {}
  */
 export interface QueryGetProtoRevPoolWeightsResponse {
   /** pool_weights is a list of all of the pool weights */
-  poolWeights?: PoolWeights;
+  poolWeights: PoolWeights;
 }
 /**
  * QueryGetProtoRevPoolWeightsResponse is response type for the
  * Query/GetProtoRevPoolWeights RPC method.
  */
 export interface QueryGetProtoRevPoolWeightsResponseSDKType {
-  pool_weights?: PoolWeightsSDKType;
+  pool_weights: PoolWeightsSDKType;
 }
 /**
  * QueryGetProtoRevMaxPoolPointsPerBlockRequest is request type for the

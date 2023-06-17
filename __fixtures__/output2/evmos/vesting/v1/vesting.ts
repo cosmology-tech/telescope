@@ -16,11 +16,11 @@ export interface ClawbackVestingAccount {
    * base_vesting_account implements the VestingAccount interface. It contains
    * all the necessary fields needed for any vesting account implementation
    */
-  baseVestingAccount?: BaseVestingAccount;
+  baseVestingAccount: BaseVestingAccount;
   /** funder_address specifies the account which can perform clawback */
   funderAddress: string;
   /** start_time defines the time at which the vesting period begins */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockupPeriods: Period[];
   /** vesting_periods defines the vesting schedule relative to the start_time */

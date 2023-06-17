@@ -18,61 +18,61 @@ export interface GaugeByIDRequest {
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
-  gauge?: Gauge;
+  gauge: Gauge;
 }
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface GaugesResponse {
   /** Upcoming and active gauges */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface ActiveGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface ActiveGaugesResponse {
   /** Active gagues only */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface ActiveGaugesPerDenomResponse {
   /** Active gagues that match denom in query */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface UpcomingGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface UpcomingGaugesResponse {
   /** Gauges whose distribution is upcoming */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface UpcomingGaugesPerDenomResponse {
   /** Upcoming gagues that match denom in query */
   upcomingGauges: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */

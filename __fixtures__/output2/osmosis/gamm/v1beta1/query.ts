@@ -12,17 +12,17 @@ export interface QueryPoolRequest {
   poolId: Long;
 }
 export interface QueryPoolResponse {
-  pool?: Any;
+  pool: Any;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
@@ -58,7 +58,7 @@ export interface QueryPoolParamsRequest {
   poolId: Long;
 }
 export interface QueryPoolParamsResponse {
-  params?: Any;
+  params: Any;
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
@@ -72,7 +72,7 @@ export interface QueryTotalSharesRequest {
   poolId: Long;
 }
 export interface QueryTotalSharesResponse {
-  totalShares?: Coin;
+  totalShares: Coin;
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
@@ -96,12 +96,12 @@ export interface QuerySpotPriceRequest {
 export interface QueryPoolsWithFilterRequest {
   minLiquidity: Coin[];
   poolType: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPoolsWithFilterResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice

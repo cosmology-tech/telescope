@@ -39,12 +39,12 @@ export interface DistrRecordSDKType {
 export interface PoolToGauge {
   poolId: Long;
   gaugeId: Long;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface PoolToGaugeSDKType {
   pool_id: Long;
   gauge_id: Long;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];

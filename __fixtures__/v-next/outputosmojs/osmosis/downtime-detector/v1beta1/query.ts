@@ -9,7 +9,7 @@ export const protobufPackage = "osmosis.downtimedetector.v1beta1";
  */
 export interface RecoveredSinceDowntimeOfLengthRequest {
   downtime: Downtime;
-  recovery?: Duration;
+  recovery: Duration;
 }
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -17,7 +17,7 @@ export interface RecoveredSinceDowntimeOfLengthRequest {
  */
 export interface RecoveredSinceDowntimeOfLengthRequestSDKType {
   downtime: Downtime;
-  recovery?: DurationSDKType;
+  recovery: DurationSDKType;
 }
 export interface RecoveredSinceDowntimeOfLengthResponse {
   succesfullyRecovered: boolean;

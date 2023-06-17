@@ -74,7 +74,7 @@ export interface ConnectionEnd {
   /** current state of the connection end. */
   state: State;
   /** counterparty chain associated with this connection. */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /**
    * delay period that must pass before a consensus state can be used for
    * packet-verification NOTE: delay period logic is only implemented by some
@@ -99,7 +99,7 @@ export interface IdentifiedConnection {
   /** current state of the connection end. */
   state: State;
   /** counterparty chain associated with this connection. */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /** delay period associated with this connection. */
   delayPeriod: Long;
 }
@@ -116,7 +116,7 @@ export interface Counterparty {
    */
   connectionId: string;
   /** commitment merkle prefix of the counterparty chain. */
-  prefix?: MerklePrefix;
+  prefix: MerklePrefix;
 }
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {

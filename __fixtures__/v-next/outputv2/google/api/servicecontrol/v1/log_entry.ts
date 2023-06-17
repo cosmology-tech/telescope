@@ -37,7 +37,7 @@ export interface LogEntry {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp?: Date;
+  timestamp: Date;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
@@ -47,7 +47,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest?: HttpRequest;
+  httpRequest: HttpRequest;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
@@ -84,12 +84,12 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperation;
+  operation: LogEntryOperation;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  sourceLocation?: LogEntrySourceLocation;
+  sourceLocation: LogEntrySourceLocation;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry";
@@ -167,9 +167,9 @@ export interface LogEntryAminoMsg {
 /** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
-  timestamp?: Date;
+  timestamp: Date;
   severity: LogSeverity;
-  http_request?: HttpRequestSDKType;
+  http_request: HttpRequestSDKType;
   trace: string;
   insert_id: string;
   labels: {
@@ -178,8 +178,8 @@ export interface LogEntrySDKType {
   proto_payload?: AnySDKType;
   text_payload?: string;
   struct_payload?: StructSDKType;
-  operation?: LogEntryOperationSDKType;
-  source_location?: LogEntrySourceLocationSDKType;
+  operation: LogEntryOperationSDKType;
+  source_location: LogEntrySourceLocationSDKType;
 }
 /**
  * Additional information about a potentially long-running operation with which

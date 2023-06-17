@@ -23,7 +23,7 @@ export interface TwapRecord {
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time?: Date;
+  time: Date;
   /**
    * We store the last spot prices in the struct, so that we can interpolate
    * accumulator values for times between when accumulator records are stored.
@@ -37,7 +37,7 @@ export interface TwapRecord {
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
-  lastErrorTime?: Date;
+  lastErrorTime: Date;
 }
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -53,12 +53,12 @@ export interface TwapRecordSDKType {
   asset0_denom: string;
   asset1_denom: string;
   height: Long;
-  time?: Date;
+  time: Date;
   p0_last_spot_price: string;
   p1_last_spot_price: string;
   p0_arithmetic_twap_accumulator: string;
   p1_arithmetic_twap_accumulator: string;
-  last_error_time?: Date;
+  last_error_time: Date;
 }
 function createBaseTwapRecord(): TwapRecord {
   return {

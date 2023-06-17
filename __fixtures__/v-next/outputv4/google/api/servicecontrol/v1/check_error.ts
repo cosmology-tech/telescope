@@ -213,7 +213,7 @@ export interface CheckError {
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status?: Status;
+  status: Status;
 }
 /**
  * Defines the errors to be returned in
@@ -223,7 +223,7 @@ export interface CheckErrorSDKType {
   code: CheckError_Code;
   subject: string;
   detail: string;
-  status?: StatusSDKType;
+  status: StatusSDKType;
 }
 function createBaseCheckError(): CheckError {
   return {

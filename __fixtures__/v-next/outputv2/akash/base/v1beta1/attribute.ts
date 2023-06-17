@@ -69,7 +69,7 @@ export interface SignedBySDKType {
 /** PlacementRequirements */
 export interface PlacementRequirements {
   /** SignedBy list of keys that tenants expect to have signatures from */
-  signedBy?: SignedBy;
+  signedBy: SignedBy;
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
 }
@@ -90,7 +90,7 @@ export interface PlacementRequirementsAminoMsg {
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
-  signed_by?: SignedBySDKType;
+  signed_by: SignedBySDKType;
   attributes: AttributeSDKType[];
 }
 function createBaseAttribute(): Attribute {

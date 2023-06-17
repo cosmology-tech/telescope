@@ -14,14 +14,14 @@ export interface ProtocolVersion {
   app: Long;
 }
 export interface DefaultNodeInfo {
-  protocolVersion?: ProtocolVersion;
+  protocolVersion: ProtocolVersion;
   defaultNodeId: string;
   listenAddr: string;
   network: string;
   version: string;
   channels: Uint8Array;
   moniker: string;
-  other?: DefaultNodeInfoOther;
+  other: DefaultNodeInfoOther;
 }
 export interface DefaultNodeInfoOther {
   txIndex: string;
