@@ -3,7 +3,7 @@
 exports[`osmosis/lockup/tx duration 1`] = `
 "export interface MsgLockTokens {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   coins: Coin[];
 }"
 `;
@@ -150,7 +150,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
 exports[`osmosis/lockup/tx string 1`] = `
 "export interface MsgLockTokens {
   owner: string;
-  duration?: string;
+  duration: string;
   coins: Coin[];
 }"
 `;

@@ -4,9 +4,21 @@ exports[`GenesisState interface 1`] = `
 "/** GenesisState defines the auth module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** accounts are the accounts present at genesis. */
   accounts: Any[];
+}"
+`;
+
+exports[`MsgDelegate interface 1`] = `
+"/**
+ * MsgDelegate defines a SDK message for performing a delegation of coins
+ * from a delegator to a validator.
+ */
+export interface MsgDelegate {
+  delegatorAddress: string;
+  validatorAddress: string;
+  amount: Coin;
 }"
 `;
 
@@ -173,7 +185,7 @@ exports[`confio/proofs.proto ExistenceProof 1`] = `
 export interface ExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf?: LeafOp;
+  leaf: LeafOp;
   path: InnerOp[];
 }"
 `;
@@ -186,7 +198,7 @@ exports[`cosmos/auth/v1beta1/auth.proto BaseAccount 1`] = `
  */
 export interface BaseAccount {
   address: string;
-  pubKey?: Any;
+  pubKey: Any;
   accountNumber: Long;
   sequence: Long;
 }"
@@ -195,7 +207,7 @@ export interface BaseAccount {
 exports[`cosmos/auth/v1beta1/auth.proto ModuleAccount 1`] = `
 "/** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  baseAccount?: BaseAccount;
+  baseAccount: BaseAccount;
   name: string;
   permissions: string[];
 }"
@@ -207,7 +219,7 @@ exports[`cosmos/authz/v1beta1/authz.proto Grant 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: Any;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -232,8 +244,8 @@ exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization 1`] = `
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization?: Any;
-  expiration?: Date;
+  authorization: Any;
+  expiration: Date;
 }"
 `;
 
@@ -252,6 +264,6 @@ export interface QueryGrantsRequest {
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
   msgTypeUrl: string;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }"
 `;
