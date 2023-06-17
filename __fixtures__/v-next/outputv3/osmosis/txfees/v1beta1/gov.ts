@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
-  feetoken?: FeeToken;
+  feetoken: FeeToken;
 }
 export interface UpdateFeeTokenProposalProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
@@ -44,7 +44,7 @@ export interface UpdateFeeTokenProposalAminoMsg {
 export interface UpdateFeeTokenProposalSDKType {
   title: string;
   description: string;
-  feetoken?: FeeTokenSDKType;
+  feetoken: FeeTokenSDKType;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {

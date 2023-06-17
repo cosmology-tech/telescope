@@ -5,21 +5,21 @@ import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 export interface GenesisDowntimeEntry {
   duration: Downtime;
-  lastDowntime?: Date;
+  lastDowntime: Date;
 }
 export interface GenesisDowntimeEntrySDKType {
   duration: Downtime;
-  last_downtime?: Date;
+  last_downtime: Date;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisState {
   downtimes: GenesisDowntimeEntry[];
-  lastBlockTime?: Date;
+  lastBlockTime: Date;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {
   downtimes: GenesisDowntimeEntrySDKType[];
-  last_block_time?: Date;
+  last_block_time: Date;
 }
 function createBaseGenesisDowntimeEntry(): GenesisDowntimeEntry {
   return {

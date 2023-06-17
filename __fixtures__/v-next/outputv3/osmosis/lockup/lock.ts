@@ -63,13 +63,13 @@ export interface PeriodLock {
    * Duration is the time needed for a lock to mature after unlocking has
    * started.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * EndTime refers to the time at which the lock would mature and get deleted.
    * This value is first initialized when an unlock has started for the lock,
    * end time being block time + duration.
    */
-  endTime?: Date;
+  endTime: Date;
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
@@ -124,8 +124,8 @@ export interface PeriodLockAminoMsg {
 export interface PeriodLockSDKType {
   ID: Long;
   owner: string;
-  duration?: DurationSDKType;
-  end_time?: Date;
+  duration: DurationSDKType;
+  end_time: Date;
   coins: CoinSDKType[];
 }
 /**
@@ -143,13 +143,13 @@ export interface QueryCondition {
    * duration. Duration field must not be nil when the lock query type is
    * `ByLockDuration`.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * Timestamp is used by locks started before the specified duration.
    * Timestamp field must not be nil when the lock query type is `ByLockTime`.
    * Querying locks with timestamp is currently not implemented.
    */
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface QueryConditionProtoMsg {
   typeUrl: "/osmosis.lockup.QueryCondition";
@@ -190,8 +190,8 @@ export interface QueryConditionAminoMsg {
 export interface QueryConditionSDKType {
   lock_query_type: LockQueryType;
   denom: string;
-  duration?: DurationSDKType;
-  timestamp?: Date;
+  duration: DurationSDKType;
+  timestamp: Date;
 }
 /**
  * SyntheticLock is creating virtual lockup where new denom is combination of
@@ -214,12 +214,12 @@ export interface SyntheticLock {
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
    */
-  endTime?: Date;
+  endTime: Date;
   /**
    * Duration is the duration for a synthetic lock to mature
    * at the point of unbonding has started.
    */
-  duration?: Duration;
+  duration: Duration;
 }
 export interface SyntheticLockProtoMsg {
   typeUrl: "/osmosis.lockup.SyntheticLock";
@@ -266,8 +266,8 @@ export interface SyntheticLockAminoMsg {
 export interface SyntheticLockSDKType {
   underlying_lock_id: Long;
   synth_denom: string;
-  end_time?: Date;
-  duration?: DurationSDKType;
+  end_time: Date;
+  duration: DurationSDKType;
 }
 function createBasePeriodLock(): PeriodLock {
   return {

@@ -61,11 +61,11 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID | undefined;
+  id: GroupID | undefined;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id: GroupIDSDKType | undefined;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
@@ -73,11 +73,11 @@ export interface MsgCloseGroupResponse {}
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID | undefined;
+  id: GroupID | undefined;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id: GroupIDSDKType | undefined;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
@@ -85,11 +85,11 @@ export interface MsgPauseGroupResponse {}
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID | undefined;
+  id: GroupID | undefined;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id: GroupIDSDKType | undefined;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -110,40 +110,40 @@ export interface GroupIDSDKType {
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements | undefined;
+  requirements: PlacementRequirements | undefined;
   resources: Resource[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements?: PlacementRequirementsSDKType | undefined;
+  requirements: PlacementRequirementsSDKType | undefined;
   resources: ResourceSDKType[];
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID | undefined;
+  groupId: GroupID | undefined;
   state: Group_State;
-  groupSpec?: GroupSpec | undefined;
+  groupSpec: GroupSpec | undefined;
   createdAt: bigint;
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
-  group_id?: GroupIDSDKType | undefined;
+  group_id: GroupIDSDKType | undefined;
   state: Group_State;
-  group_spec?: GroupSpecSDKType | undefined;
+  group_spec: GroupSpecSDKType | undefined;
   created_at: bigint;
 }
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits | undefined;
+  resources: ResourceUnits | undefined;
   count: number;
-  price?: Coin | undefined;
+  price: Coin | undefined;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
-  resources?: ResourceUnitsSDKType | undefined;
+  resources: ResourceUnitsSDKType | undefined;
   count: number;
-  price?: CoinSDKType | undefined;
+  price: CoinSDKType | undefined;
 }
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {

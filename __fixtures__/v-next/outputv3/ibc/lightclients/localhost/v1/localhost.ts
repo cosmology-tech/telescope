@@ -10,7 +10,7 @@ export interface ClientState {
   /** self chain ID */
   chainId: string;
   /** self latest block height */
-  height?: Height;
+  height: Height;
 }
 export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
@@ -36,7 +36,7 @@ export interface ClientStateAminoMsg {
  */
 export interface ClientStateSDKType {
   chain_id: string;
-  height?: HeightSDKType;
+  height: HeightSDKType;
 }
 function createBaseClientState(): ClientState {
   return {

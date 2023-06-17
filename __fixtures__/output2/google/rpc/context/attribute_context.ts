@@ -32,31 +32,31 @@ export interface AttributeContext {
    * the origin represents the sender of the first hop. For the first hop,
    * the `source` and the `origin` must have the same content.
    */
-  origin?: AttributeContext_Peer;
+  origin: AttributeContext_Peer;
   /**
    * The source of a network activity, such as starting a TCP connection.
    * In a multi hop network activity, the source represents the sender of the
    * last hop.
    */
-  source?: AttributeContext_Peer;
+  source: AttributeContext_Peer;
   /**
    * The destination of a network activity, such as accepting a TCP connection.
    * In a multi hop network activity, the destination represents the receiver of
    * the last hop.
    */
-  destination?: AttributeContext_Peer;
+  destination: AttributeContext_Peer;
   /** Represents a network request, such as an HTTP request. */
-  request?: AttributeContext_Request;
+  request: AttributeContext_Request;
   /** Represents a network response, such as an HTTP response. */
-  response?: AttributeContext_Response;
+  response: AttributeContext_Response;
   /**
    * Represents a target resource that is involved with a network activity.
    * If multiple resources are involved with an activity, this must be the
    * primary one.
    */
-  resource?: AttributeContext_Resource;
+  resource: AttributeContext_Resource;
   /** Represents an API operation that is involved to a network activity. */
-  api?: AttributeContext_Api;
+  api: AttributeContext_Api;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
@@ -176,7 +176,7 @@ export interface AttributeContext_Auth {
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
-  claims?: Struct;
+  claims: Struct;
   /**
    * A list of access level resource names that allow resources to be
    * accessed by authenticated requester. It is part of Secure GCP processing
@@ -229,7 +229,7 @@ export interface AttributeContext_Request {
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
-  time?: Timestamp;
+  time: Timestamp;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
   size: Long;
   /**
@@ -248,7 +248,7 @@ export interface AttributeContext_Request {
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
-  auth?: AttributeContext_Auth;
+  auth: AttributeContext_Auth;
 }
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
@@ -275,14 +275,14 @@ export interface AttributeContext_Response {
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time?: Timestamp;
+  time: Timestamp;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backendLatency?: Duration;
+  backendLatency: Duration;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;
@@ -357,18 +357,18 @@ export interface AttributeContext_Resource {
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  createTime?: Timestamp;
+  createTime: Timestamp;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  updateTime?: Timestamp;
+  updateTime: Timestamp;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  deleteTime?: Timestamp;
+  deleteTime: Timestamp;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client

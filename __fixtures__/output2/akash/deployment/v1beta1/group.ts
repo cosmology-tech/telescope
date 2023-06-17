@@ -62,19 +62,19 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -87,21 +87,21 @@ export interface GroupID {
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements;
+  requirements: PlacementRequirements;
   resources: Resource[];
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID;
+  groupId: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec;
+  groupSpec: GroupSpec;
   createdAt: Long;
 }
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits;
+  resources: ResourceUnits;
   count: number;
-  price?: Coin;
+  price: Coin;
 }
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {

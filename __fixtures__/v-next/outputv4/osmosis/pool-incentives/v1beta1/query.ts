@@ -18,29 +18,29 @@ export interface QueryGaugeIdsResponseSDKType {
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId: bigint;
-  duration?: Duration;
+  duration: Duration;
   gaugeIncentivePercentage: string;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
   gauge_id: bigint;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
   gauge_incentive_percentage: string;
 }
 export interface QueryDistrInfoRequest {}
 export interface QueryDistrInfoRequestSDKType {}
 export interface QueryDistrInfoResponse {
-  distrInfo?: DistrInfo;
+  distrInfo: DistrInfo;
 }
 export interface QueryDistrInfoResponseSDKType {
-  distr_info?: DistrInfoSDKType;
+  distr_info: DistrInfoSDKType;
 }
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 export interface QueryLockableDurationsRequest {}
 export interface QueryLockableDurationsRequestSDKType {}
@@ -54,12 +54,12 @@ export interface QueryIncentivizedPoolsRequest {}
 export interface QueryIncentivizedPoolsRequestSDKType {}
 export interface IncentivizedPool {
   poolId: bigint;
-  lockableDuration?: Duration;
+  lockableDuration: Duration;
   gaugeId: bigint;
 }
 export interface IncentivizedPoolSDKType {
   pool_id: bigint;
-  lockable_duration?: DurationSDKType;
+  lockable_duration: DurationSDKType;
   gauge_id: bigint;
 }
 export interface QueryIncentivizedPoolsResponse {

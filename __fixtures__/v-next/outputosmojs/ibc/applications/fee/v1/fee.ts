@@ -20,7 +20,7 @@ export interface FeeSDKType {
 /** PacketFee contains ICS29 relayer fees, refund address and optional list of permitted relayers */
 export interface PacketFee {
   /** fee encapsulates the recv, ack and timeout fees associated with an IBC packet */
-  fee?: Fee;
+  fee: Fee;
   /** the refund address for unspent fees */
   refundAddress: string;
   /** optional list of relayers permitted to receive fees */
@@ -28,7 +28,7 @@ export interface PacketFee {
 }
 /** PacketFee contains ICS29 relayer fees, refund address and optional list of permitted relayers */
 export interface PacketFeeSDKType {
-  fee?: FeeSDKType;
+  fee: FeeSDKType;
   refund_address: string;
   relayers: string[];
 }

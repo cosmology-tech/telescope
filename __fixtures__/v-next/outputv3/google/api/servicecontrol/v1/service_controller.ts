@@ -79,7 +79,7 @@ export interface CheckRequest {
    */
   serviceName: string;
   /** The operation to be checked. */
-  operation?: Operation;
+  operation: Operation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request.
@@ -122,7 +122,7 @@ export interface CheckRequestAminoMsg {
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
-  operation?: OperationSDKType;
+  operation: OperationSDKType;
   service_config_id: string;
 }
 /** Response message for the Check method. */
@@ -146,7 +146,7 @@ export interface CheckResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
   /** Feedback data returned from the server during processing a Check request. */
-  checkInfo?: CheckResponse_CheckInfo;
+  checkInfo: CheckResponse_CheckInfo;
 }
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
@@ -185,7 +185,7 @@ export interface CheckResponseSDKType {
   check_errors: CheckErrorSDKType[];
   service_config_id: string;
   service_rollout_id: string;
-  check_info?: CheckResponse_CheckInfoSDKType;
+  check_info: CheckResponse_CheckInfoSDKType;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfo {
@@ -196,7 +196,7 @@ export interface CheckResponse_CheckInfo {
    */
   unusedArguments: string[];
   /** Consumer info of this check. */
-  consumerInfo?: CheckResponse_ConsumerInfo;
+  consumerInfo: CheckResponse_ConsumerInfo;
 }
 export interface CheckResponse_CheckInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
@@ -220,7 +220,7 @@ export interface CheckResponse_CheckInfoAminoMsg {
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoSDKType {
   unused_arguments: string[];
-  consumer_info?: CheckResponse_ConsumerInfoSDKType;
+  consumer_info: CheckResponse_ConsumerInfoSDKType;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfo {
@@ -439,7 +439,7 @@ export interface ReportResponse_ReportError {
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
-  status?: Status;
+  status: Status;
 }
 export interface ReportResponse_ReportErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportError";
@@ -472,7 +472,7 @@ export interface ReportResponse_ReportErrorAminoMsg {
  */
 export interface ReportResponse_ReportErrorSDKType {
   operation_id: string;
-  status?: StatusSDKType;
+  status: StatusSDKType;
 }
 function createBaseCheckRequest(): CheckRequest {
   return {

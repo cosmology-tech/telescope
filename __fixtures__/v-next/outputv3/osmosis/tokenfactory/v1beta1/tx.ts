@@ -93,7 +93,7 @@ export interface MsgCreateDenomResponseSDKType {
  */
 export interface MsgMint {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 export interface MsgMintProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint";
@@ -117,7 +117,7 @@ export interface MsgMintAminoMsg {
  */
 export interface MsgMintSDKType {
   sender: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 export interface MsgMintResponse {}
 export interface MsgMintResponseProtoMsg {
@@ -136,7 +136,7 @@ export interface MsgMintResponseSDKType {}
  */
 export interface MsgBurn {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 export interface MsgBurnProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn";
@@ -160,7 +160,7 @@ export interface MsgBurnAminoMsg {
  */
 export interface MsgBurnSDKType {
   sender: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 export interface MsgBurnResponse {}
 export interface MsgBurnResponseProtoMsg {
@@ -237,7 +237,7 @@ export interface MsgChangeAdminResponseSDKType {}
  */
 export interface MsgSetDenomMetadata {
   sender: string;
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 export interface MsgSetDenomMetadataProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata";
@@ -261,7 +261,7 @@ export interface MsgSetDenomMetadataAminoMsg {
  */
 export interface MsgSetDenomMetadataSDKType {
   sender: string;
-  metadata?: MetadataSDKType;
+  metadata: MetadataSDKType;
 }
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed

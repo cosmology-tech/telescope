@@ -12,7 +12,7 @@ export interface ClientState {
   /** self chain ID */
   chainId: string;
   /** self latest block height */
-  height?: Height;
+  height: Height;
 }
 function createBaseClientState(): ClientState {
   return {

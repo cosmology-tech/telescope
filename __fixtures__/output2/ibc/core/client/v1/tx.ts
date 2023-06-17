@@ -7,12 +7,12 @@ export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
   /** light client state */
-  clientState?: Any;
+  clientState: Any;
   /**
    * consensus state associated with the client that corresponds to a given
    * height.
    */
-  consensusState?: Any;
+  consensusState: Any;
   /** signer address */
   signer: string;
 }
@@ -26,7 +26,7 @@ export interface MsgUpdateClient {
   /** client unique identifier */
   clientId: string;
   /** header to update the light client */
-  header?: Any;
+  header: Any;
   /** signer address */
   signer: string;
 }
@@ -40,12 +40,12 @@ export interface MsgUpgradeClient {
   /** client unique identifier */
   clientId: string;
   /** upgraded client state */
-  clientState?: Any;
+  clientState: Any;
   /**
    * upgraded consensus state, only contains enough information to serve as a
    * basis of trust in update logic
    */
-  consensusState?: Any;
+  consensusState: Any;
   /** proof that old chain committed to new client */
   proofUpgradeClient: Uint8Array;
   /** proof that old chain committed to new consensus state */
@@ -63,7 +63,7 @@ export interface MsgSubmitMisbehaviour {
   /** client unique identifier */
   clientId: string;
   /** misbehaviour used for freezing the light client */
-  misbehaviour?: Any;
+  misbehaviour: Any;
   /** signer address */
   signer: string;
 }

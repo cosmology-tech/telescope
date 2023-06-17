@@ -16,7 +16,7 @@ export interface StoreCodeProposal {
   /** WASMByteCode can be raw or gzip compressed */
   wasmByteCode: Uint8Array;
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission?: AccessConfig;
+  instantiatePermission: AccessConfig;
 }
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
@@ -137,7 +137,7 @@ export interface AccessConfigUpdate {
   /** CodeID is the reference to the stored WASM code to be updated */
   codeId: Long;
   /** InstantiatePermission to apply to the set of code ids */
-  instantiatePermission?: AccessConfig;
+  instantiatePermission: AccessConfig;
 }
 /**
  * UpdateInstantiateConfigProposal gov proposal content type to update

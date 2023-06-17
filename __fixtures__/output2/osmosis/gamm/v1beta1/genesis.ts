@@ -14,7 +14,7 @@ export interface GenesisState {
   pools: Any[];
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: Long;
-  params?: Params;
+  params: Params;
 }
 function createBaseParams(): Params {
   return {

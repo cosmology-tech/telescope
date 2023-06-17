@@ -248,7 +248,7 @@ export interface Type {
   /** The protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -290,7 +290,7 @@ export interface Enum {
   /** Protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -321,7 +321,7 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value?: Any;
+  value: Any;
 }
 function createBaseType(): Type {
   return {

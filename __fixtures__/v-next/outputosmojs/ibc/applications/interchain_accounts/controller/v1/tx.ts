@@ -28,7 +28,7 @@ export interface MsgRegisterInterchainAccountResponseSDKType {
 export interface MsgSendTx {
   owner: string;
   connectionId: string;
-  packetData?: InterchainAccountPacketData;
+  packetData: InterchainAccountPacketData;
   /**
    * Relative timeout timestamp provided will be added to the current block time during transaction execution.
    * The timeout timestamp must be non-zero.
@@ -39,7 +39,7 @@ export interface MsgSendTx {
 export interface MsgSendTxSDKType {
   owner: string;
   connection_id: string;
-  packet_data?: InterchainAccountPacketDataSDKType;
+  packet_data: InterchainAccountPacketDataSDKType;
   relative_timeout: bigint;
 }
 /** MsgSendTxResponse defines the response for MsgSendTx */

@@ -82,9 +82,9 @@ export interface OrderIDSDKType {
 }
 /** Order stores orderID, state of order and other details */
 export interface Order {
-  orderId?: OrderID;
+  orderId: OrderID;
   state: Order_State;
-  spec?: GroupSpec;
+  spec: GroupSpec;
   createdAt: Long;
 }
 export interface OrderProtoMsg {
@@ -104,9 +104,9 @@ export interface OrderAminoMsg {
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
-  order_id?: OrderIDSDKType;
+  order_id: OrderIDSDKType;
   state: Order_State;
-  spec?: GroupSpecSDKType;
+  spec: GroupSpecSDKType;
   created_at: Long;
 }
 /** OrderFilters defines flags for order list filter */

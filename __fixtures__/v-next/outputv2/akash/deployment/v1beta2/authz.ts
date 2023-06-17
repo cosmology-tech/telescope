@@ -11,7 +11,7 @@ export interface DepositDeploymentAuthorization {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spendLimit?: Coin;
+  spendLimit: Coin;
 }
 export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
@@ -37,7 +37,7 @@ export interface DepositDeploymentAuthorizationAminoMsg {
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
-  spend_limit?: CoinSDKType;
+  spend_limit: CoinSDKType;
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {

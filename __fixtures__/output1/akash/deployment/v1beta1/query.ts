@@ -8,59 +8,59 @@ import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters?: DeploymentFilters | undefined;
-  pagination?: PageRequest | undefined;
+  filters: DeploymentFilters | undefined;
+  pagination: PageRequest | undefined;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
-  filters?: DeploymentFiltersSDKType | undefined;
-  pagination?: PageRequestSDKType | undefined;
+  filters: DeploymentFiltersSDKType | undefined;
+  pagination: PageRequestSDKType | undefined;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination?: PageResponse | undefined;
+  pagination: PageResponse | undefined;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination?: PageResponseSDKType | undefined;
+  pagination: PageResponseSDKType | undefined;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment?: Deployment | undefined;
+  deployment: Deployment | undefined;
   groups: Group[];
-  escrowAccount?: Account | undefined;
+  escrowAccount: Account | undefined;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
-  deployment?: DeploymentSDKType | undefined;
+  deployment: DeploymentSDKType | undefined;
   groups: GroupSDKType[];
-  escrow_account?: AccountSDKType | undefined;
+  escrow_account: AccountSDKType | undefined;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id?: GroupID | undefined;
+  id: GroupID | undefined;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
-  id?: GroupIDSDKType | undefined;
+  id: GroupIDSDKType | undefined;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group?: Group | undefined;
+  group: Group | undefined;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
-  group?: GroupSDKType | undefined;
+  group: GroupSDKType | undefined;
 }
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {

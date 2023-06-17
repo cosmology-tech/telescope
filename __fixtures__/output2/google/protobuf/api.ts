@@ -52,7 +52,7 @@ export interface Api {
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** Included interfaces. See [Mixin][]. */
   mixins: Mixin[];
   /** The source syntax of the service. */

@@ -67,7 +67,7 @@ export function poolTypeToJSON(object: PoolType): string {
 export interface ModuleRoute {
   /** pool_type specifies the type of the pool */
   poolType: PoolType;
-  poolId: bigint;
+  poolId?: bigint;
 }
 /**
  * ModuleRouter defines a route encapsulating pool type.
@@ -77,7 +77,7 @@ export interface ModuleRoute {
  */
 export interface ModuleRouteSDKType {
   pool_type: PoolType;
-  pool_id: bigint;
+  pool_id?: bigint;
 }
 function createBaseModuleRoute(): ModuleRoute {
   return {

@@ -5,14 +5,14 @@ export const protobufPackage = "cosmos.mint.v1beta1";
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
   /** minter is a space for holding current inflation information. */
-  minter?: Minter;
+  minter: Minter;
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
 }
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
-  minter?: MinterSDKType;
-  params?: ParamsSDKType;
+  minter: MinterSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {

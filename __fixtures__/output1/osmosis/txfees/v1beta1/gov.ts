@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
-  feetoken?: FeeToken;
+  feetoken: FeeToken;
 }
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -24,7 +24,7 @@ export interface UpdateFeeTokenProposal {
 export interface UpdateFeeTokenProposalSDKType {
   title: string;
   description: string;
-  feetoken?: FeeTokenSDKType;
+  feetoken: FeeTokenSDKType;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {

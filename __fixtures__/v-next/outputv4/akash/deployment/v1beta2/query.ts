@@ -8,59 +8,59 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters?: DeploymentFilters;
-  pagination?: PageRequest;
+  filters: DeploymentFilters;
+  pagination: PageRequest;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
-  filters?: DeploymentFiltersSDKType;
-  pagination?: PageRequestSDKType;
+  filters: DeploymentFiltersSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id?: DeploymentID;
+  id: DeploymentID;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment?: Deployment;
+  deployment: Deployment;
   groups: Group[];
-  escrowAccount?: Account;
+  escrowAccount: Account;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
-  deployment?: DeploymentSDKType;
+  deployment: DeploymentSDKType;
   groups: GroupSDKType[];
-  escrow_account?: AccountSDKType;
+  escrow_account: AccountSDKType;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id?: GroupID;
+  id: GroupID;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group?: Group;
+  group: Group;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
-  group?: GroupSDKType;
+  group: GroupSDKType;
 }
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {

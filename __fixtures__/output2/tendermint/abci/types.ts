@@ -226,9 +226,9 @@ export interface RequestSetOption {
   value: string;
 }
 export interface RequestInitChain {
-  time?: Timestamp;
+  time: Timestamp;
   chainId: string;
-  consensusParams?: ConsensusParams;
+  consensusParams: ConsensusParams;
   validators: ValidatorUpdate[];
   appStateBytes: Uint8Array;
   initialHeight: Long;
@@ -241,8 +241,8 @@ export interface RequestQuery {
 }
 export interface RequestBeginBlock {
   hash: Uint8Array;
-  header?: Header;
-  lastCommitInfo?: LastCommitInfo;
+  header: Header;
+  lastCommitInfo: LastCommitInfo;
   byzantineValidators: Evidence[];
 }
 export interface RequestCheckTx {
@@ -261,7 +261,7 @@ export interface RequestListSnapshots {}
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
   /** snapshot offered by peers */
-  snapshot?: Snapshot;
+  snapshot: Snapshot;
   /** light client-verified app hash for snapshot height */
   appHash: Uint8Array;
 }
@@ -318,7 +318,7 @@ export interface ResponseSetOption {
   info: string;
 }
 export interface ResponseInitChain {
-  consensusParams?: ConsensusParams;
+  consensusParams: ConsensusParams;
   validators: ValidatorUpdate[];
   appHash: Uint8Array;
 }
@@ -331,7 +331,7 @@ export interface ResponseQuery {
   index: Long;
   key: Uint8Array;
   value: Uint8Array;
-  proofOps?: ProofOps;
+  proofOps: ProofOps;
   height: Long;
   codespace: string;
 }
@@ -364,7 +364,7 @@ export interface ResponseDeliverTx {
 }
 export interface ResponseEndBlock {
   validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates?: ConsensusParams;
+  consensusParamUpdates: ConsensusParams;
   events: Event[];
 }
 export interface ResponseCommit {
@@ -393,10 +393,10 @@ export interface ResponseApplySnapshotChunk {
  * that can be adjusted by the abci app
  */
 export interface ConsensusParams {
-  block?: BlockParams;
-  evidence?: EvidenceParams;
-  validator?: ValidatorParams;
-  version?: VersionParams;
+  block: BlockParams;
+  evidence: EvidenceParams;
+  validator: ValidatorParams;
+  version: VersionParams;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
@@ -434,7 +434,7 @@ export interface TxResult {
   height: Long;
   index: number;
   tx: Uint8Array;
-  result?: ResponseDeliverTx;
+  result: ResponseDeliverTx;
 }
 /** Validator */
 export interface Validator {
@@ -448,22 +448,22 @@ export interface Validator {
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
-  pubKey?: PublicKey;
+  pubKey: PublicKey;
   power: Long;
 }
 /** VoteInfo */
 export interface VoteInfo {
-  validator?: Validator;
+  validator: Validator;
   signedLastBlock: boolean;
 }
 export interface Evidence {
   type: EvidenceType;
   /** The offending validator */
-  validator?: Validator;
+  validator: Validator;
   /** The height when the offense occurred */
   height: Long;
   /** The corresponding time where the offense occurred */
-  time?: Timestamp;
+  time: Timestamp;
   /**
    * Total voting power of the validator set in case the ABCI application does
    * not store historical validators.

@@ -265,7 +265,7 @@ export interface CreateAdminOverrideRequest {
    */
   parent: string;
   /** The admin override to create. */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -283,7 +283,7 @@ export interface CreateAdminOverrideRequest {
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequestSDKType {
   parent: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
   force_only: QuotaSafetyCheck[];
 }
@@ -300,7 +300,7 @@ export interface UpdateAdminOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -311,7 +311,7 @@ export interface UpdateAdminOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -323,9 +323,9 @@ export interface UpdateAdminOverrideRequest {
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestSDKType {
   name: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
-  update_mask?: FieldMaskSDKType;
+  update_mask: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteAdminOverride. */
@@ -469,7 +469,7 @@ export interface CreateConsumerOverrideRequest {
    */
   parent: string;
   /** The override to create. */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -487,7 +487,7 @@ export interface CreateConsumerOverrideRequest {
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequestSDKType {
   parent: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
   force_only: QuotaSafetyCheck[];
 }
@@ -504,7 +504,7 @@ export interface UpdateConsumerOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -515,7 +515,7 @@ export interface UpdateConsumerOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -527,9 +527,9 @@ export interface UpdateConsumerOverrideRequest {
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestSDKType {
   name: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
-  update_mask?: FieldMaskSDKType;
+  update_mask: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteConsumerOverride. */
@@ -743,13 +743,13 @@ export interface GetServiceIdentityResponse {
    * resources. If exists is true, it contains email and unique_id. If exists is
    * false, it contains pre-constructed email and empty unique_id.
    */
-  identity?: ServiceIdentity;
+  identity: ServiceIdentity;
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponseSDKType {
-  identity?: ServiceIdentitySDKType;
+  identity: ServiceIdentitySDKType;
   state: GetServiceIdentityResponse_IdentityState;
 }
 /** Metadata for the `GetServiceIdentity` method. */

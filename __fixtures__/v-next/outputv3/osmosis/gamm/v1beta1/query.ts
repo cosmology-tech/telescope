@@ -32,7 +32,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool?: (Pool1 & Pool2 & Any) | undefined;
+  pool: (Pool1 & Pool2 & Any) | undefined;
 }
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
@@ -49,12 +49,12 @@ export interface QueryPoolResponseAminoMsg {
   value: QueryPoolResponseAmino;
 }
 export interface QueryPoolResponseSDKType {
-  pool?: Pool1SDKType | Pool2SDKType | AnySDKType | undefined;
+  pool: Pool1SDKType | Pool2SDKType | AnySDKType | undefined;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
@@ -71,12 +71,12 @@ export interface QueryPoolsRequestAminoMsg {
 }
 /** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
@@ -96,7 +96,7 @@ export interface QueryPoolsResponseAminoMsg {
 }
 export interface QueryPoolsResponseSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
@@ -270,7 +270,7 @@ export interface QueryPoolParamsRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolParamsResponse {
-  params?: Any;
+  params: Any;
 }
 export interface QueryPoolParamsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
@@ -284,7 +284,7 @@ export interface QueryPoolParamsResponseAminoMsg {
   value: QueryPoolParamsResponseAmino;
 }
 export interface QueryPoolParamsResponseSDKType {
-  params?: AnySDKType;
+  params: AnySDKType;
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
@@ -344,7 +344,7 @@ export interface QueryTotalSharesRequestSDKType {
   pool_id: Long;
 }
 export interface QueryTotalSharesResponse {
-  totalShares?: Coin;
+  totalShares: Coin;
 }
 export interface QueryTotalSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
@@ -358,7 +358,7 @@ export interface QueryTotalSharesResponseAminoMsg {
   value: QueryTotalSharesResponseAmino;
 }
 export interface QueryTotalSharesResponseSDKType {
-  total_shares?: CoinSDKType;
+  total_shares: CoinSDKType;
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
@@ -444,7 +444,7 @@ export interface QuerySpotPriceRequestSDKType {
 export interface QueryPoolsWithFilterRequest {
   minLiquidity: Coin[];
   poolType: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPoolsWithFilterRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
@@ -462,12 +462,12 @@ export interface QueryPoolsWithFilterRequestAminoMsg {
 export interface QueryPoolsWithFilterRequestSDKType {
   min_liquidity: CoinSDKType[];
   pool_type: string;
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
@@ -487,7 +487,7 @@ export interface QueryPoolsWithFilterResponseAminoMsg {
 }
 export interface QueryPoolsWithFilterResponseSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice

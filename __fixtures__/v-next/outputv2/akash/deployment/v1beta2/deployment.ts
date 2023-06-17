@@ -68,7 +68,7 @@ export interface DeploymentIDSDKType {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID;
+  deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
@@ -90,7 +90,7 @@ export interface DeploymentAminoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType;
+  deployment_id: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
   created_at: Long;

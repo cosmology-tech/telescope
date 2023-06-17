@@ -214,7 +214,7 @@ export interface CheckError {
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status?: Status;
+  status: Status;
 }
 function createBaseCheckError(): CheckError {
   return {

@@ -81,8 +81,8 @@ export interface OsmoEquivalentMultiplierRecord {
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
-  delegationAmount?: Coin;
-  equivalentStakedAmount?: Coin;
+  delegationAmount: Coin;
+  equivalentStakedAmount: Coin;
 }
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the

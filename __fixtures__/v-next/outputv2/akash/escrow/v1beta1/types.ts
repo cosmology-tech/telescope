@@ -126,15 +126,15 @@ export interface AccountIDSDKType {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id?: AccountID;
+  id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
   /** current state of this escrow account */
   state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: Coin;
+  balance: Coin;
   /** total coins spent by this account */
-  transferred?: Coin;
+  transferred: Coin;
   /** block height at which this account was last settled */
   settledAt: Long;
 }
@@ -163,22 +163,22 @@ export interface AccountAminoMsg {
 }
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
-  id?: AccountIDSDKType;
+  id: AccountIDSDKType;
   owner: string;
   state: Account_State;
-  balance?: CoinSDKType;
-  transferred?: CoinSDKType;
+  balance: CoinSDKType;
+  transferred: CoinSDKType;
   settled_at: Long;
 }
 /** Payment stores state for a payment */
 export interface Payment {
-  accountId?: AccountID;
+  accountId: AccountID;
   paymentId: string;
   owner: string;
   state: Payment_State;
-  rate?: Coin;
-  balance?: Coin;
-  withdrawn?: Coin;
+  rate: Coin;
+  balance: Coin;
+  withdrawn: Coin;
 }
 export interface PaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Payment";
@@ -200,13 +200,13 @@ export interface PaymentAminoMsg {
 }
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
-  account_id?: AccountIDSDKType;
+  account_id: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: Payment_State;
-  rate?: CoinSDKType;
-  balance?: CoinSDKType;
-  withdrawn?: CoinSDKType;
+  rate: CoinSDKType;
+  balance: CoinSDKType;
+  withdrawn: CoinSDKType;
 }
 function createBaseAccountID(): AccountID {
   return {

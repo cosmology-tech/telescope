@@ -20,7 +20,7 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsResponse";
@@ -37,7 +37,7 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
@@ -73,7 +73,7 @@ export interface QueryDenomAuthorityMetadataRequestSDKType {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataResponse {
-  authorityMetadata?: DenomAuthorityMetadata;
+  authorityMetadata: DenomAuthorityMetadata;
 }
 export interface QueryDenomAuthorityMetadataResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse";
@@ -95,7 +95,7 @@ export interface QueryDenomAuthorityMetadataResponseAminoMsg {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataResponseSDKType {
-  authority_metadata?: DenomAuthorityMetadataSDKType;
+  authority_metadata: DenomAuthorityMetadataSDKType;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the

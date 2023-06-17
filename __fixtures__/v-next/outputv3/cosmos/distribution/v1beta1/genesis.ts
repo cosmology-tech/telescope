@@ -77,7 +77,7 @@ export interface ValidatorAccumulatedCommissionRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** accumulated is the accumulated commission of a validator. */
-  accumulated?: ValidatorAccumulatedCommission;
+  accumulated: ValidatorAccumulatedCommission;
 }
 export interface ValidatorAccumulatedCommissionRecordProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord";
@@ -103,7 +103,7 @@ export interface ValidatorAccumulatedCommissionRecordAminoMsg {
  */
 export interface ValidatorAccumulatedCommissionRecordSDKType {
   validator_address: string;
-  accumulated?: ValidatorAccumulatedCommissionSDKType;
+  accumulated: ValidatorAccumulatedCommissionSDKType;
 }
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -115,7 +115,7 @@ export interface ValidatorHistoricalRewardsRecord {
   /** period defines the period the historical rewards apply to. */
   period: Long;
   /** rewards defines the historical rewards of a validator. */
-  rewards?: ValidatorHistoricalRewards;
+  rewards: ValidatorHistoricalRewards;
 }
 export interface ValidatorHistoricalRewardsRecordProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord";
@@ -144,14 +144,14 @@ export interface ValidatorHistoricalRewardsRecordAminoMsg {
 export interface ValidatorHistoricalRewardsRecordSDKType {
   validator_address: string;
   period: Long;
-  rewards?: ValidatorHistoricalRewardsSDKType;
+  rewards: ValidatorHistoricalRewardsSDKType;
 }
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** rewards defines the current rewards of a validator. */
-  rewards?: ValidatorCurrentRewards;
+  rewards: ValidatorCurrentRewards;
 }
 export interface ValidatorCurrentRewardsRecordProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord";
@@ -171,7 +171,7 @@ export interface ValidatorCurrentRewardsRecordAminoMsg {
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordSDKType {
   validator_address: string;
-  rewards?: ValidatorCurrentRewardsSDKType;
+  rewards: ValidatorCurrentRewardsSDKType;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecord {
@@ -180,7 +180,7 @@ export interface DelegatorStartingInfoRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** starting_info defines the starting info of a delegator. */
-  startingInfo?: DelegatorStartingInfo;
+  startingInfo: DelegatorStartingInfo;
 }
 export interface DelegatorStartingInfoRecordProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord";
@@ -203,7 +203,7 @@ export interface DelegatorStartingInfoRecordAminoMsg {
 export interface DelegatorStartingInfoRecordSDKType {
   delegator_address: string;
   validator_address: string;
-  starting_info?: DelegatorStartingInfoSDKType;
+  starting_info: DelegatorStartingInfoSDKType;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecord {
@@ -214,7 +214,7 @@ export interface ValidatorSlashEventRecord {
   /** period is the period of the slash event. */
   period: Long;
   /** validator_slash_event describes the slash event. */
-  validatorSlashEvent?: ValidatorSlashEvent;
+  validatorSlashEvent: ValidatorSlashEvent;
 }
 export interface ValidatorSlashEventRecordProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord";
@@ -240,14 +240,14 @@ export interface ValidatorSlashEventRecordSDKType {
   validator_address: string;
   height: Long;
   period: Long;
-  validator_slash_event?: ValidatorSlashEventSDKType;
+  validator_slash_event: ValidatorSlashEventSDKType;
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** fee_pool defines the fee pool at genesis. */
-  feePool?: FeePool;
+  feePool: FeePool;
   /** fee_pool defines the delegator withdraw infos at genesis. */
   delegatorWithdrawInfos: DelegatorWithdrawInfo[];
   /** fee_pool defines the previous proposer at genesis. */
@@ -298,8 +298,8 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
-  fee_pool?: FeePoolSDKType;
+  params: ParamsSDKType;
+  fee_pool: FeePoolSDKType;
   delegator_withdraw_infos: DelegatorWithdrawInfoSDKType[];
   previous_proposer: string;
   outstanding_rewards: ValidatorOutstandingRewardsRecordSDKType[];

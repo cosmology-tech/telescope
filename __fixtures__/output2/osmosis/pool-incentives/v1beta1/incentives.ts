@@ -27,7 +27,7 @@ export interface DistrRecord {
 export interface PoolToGauge {
   poolId: Long;
   gaugeId: Long;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];

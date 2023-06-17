@@ -6,17 +6,17 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
-  proposer?: Validator;
+  proposer: Validator;
   totalVotingPower: Long;
 }
 export interface Validator {
   address: Uint8Array;
-  pubKey?: PublicKey;
+  pubKey: PublicKey;
   votingPower: Long;
   proposerPriority: Long;
 }
 export interface SimpleValidator {
-  pubKey?: PublicKey;
+  pubKey: PublicKey;
   votingPower: Long;
 }
 function createBaseValidatorSet(): ValidatorSet {

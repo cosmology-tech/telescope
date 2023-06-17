@@ -67,7 +67,7 @@ export interface Params {
    * denom. In other words, defines which stakeholders will receive the minted
    * denoms and how much.
    */
-  distributionProportions?: DistributionProportions;
+  distributionProportions: DistributionProportions;
   /**
    * weighted_developer_rewards_receivers is the address to receive developer
    * rewards with weights assignedt to each address. The final amount that each

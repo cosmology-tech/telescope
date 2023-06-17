@@ -9,19 +9,19 @@ import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp, Rpc } from "../..
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
 export interface MsgCreateValidator {
-  description?: Description;
-  commission?: CommissionRates;
+  description: Description;
+  commission: CommissionRates;
   minSelfDelegation: string;
   delegatorAddress: string;
   validatorAddress: string;
-  pubkey?: Any;
-  value?: Coin;
+  pubkey: Any;
+  value: Coin;
 }
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponse {}
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidator {
-  description?: Description;
+  description: Description;
   validatorAddress: string;
   /**
    * We pass a reference to the new commission rate and min self delegation as
@@ -41,7 +41,7 @@ export interface MsgEditValidatorResponse {}
 export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponse {}
@@ -53,11 +53,11 @@ export interface MsgBeginRedelegate {
   delegatorAddress: string;
   validatorSrcAddress: string;
   validatorDstAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponse {
-  completionTime?: Timestamp;
+  completionTime: Timestamp;
 }
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
@@ -66,11 +66,11 @@ export interface MsgBeginRedelegateResponse {
 export interface MsgUndelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
-  completionTime?: Timestamp;
+  completionTime: Timestamp;
 }
 function createBaseMsgCreateValidator(): MsgCreateValidator {
   return {

@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of related to deposit. */
-  params?: Params;
+  params: Params;
   /**
    * signing_infos represents a map between validator addresses and their
    * signing infos.
@@ -42,7 +42,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   signing_infos: SigningInfoSDKType[];
   missed_blocks: ValidatorMissedBlocksSDKType[];
 }
@@ -51,7 +51,7 @@ export interface SigningInfo {
   /** address is the validator address. */
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
-  validatorSigningInfo?: ValidatorSigningInfo;
+  validatorSigningInfo: ValidatorSigningInfo;
 }
 export interface SigningInfoProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.SigningInfo";
@@ -71,7 +71,7 @@ export interface SigningInfoAminoMsg {
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoSDKType {
   address: string;
-  validator_signing_info?: ValidatorSigningInfoSDKType;
+  validator_signing_info: ValidatorSigningInfoSDKType;
 }
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding

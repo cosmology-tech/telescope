@@ -32,7 +32,7 @@ export interface TxResponse {
   /** Amount of gas consumed by transaction. */
   gasUsed: Long;
   /** The request transaction bytes. */
-  tx?: Any;
+  tx: Any;
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
@@ -118,7 +118,7 @@ export interface TxResponseSDKType {
   info: string;
   gas_wanted: Long;
   gas_used: Long;
-  tx?: AnySDKType;
+  tx: AnySDKType;
   timestamp: string;
   events: EventSDKType[];
 }
@@ -316,8 +316,8 @@ export interface ResultSDKType {
  * successfully simulated.
  */
 export interface SimulationResponse {
-  gasInfo?: GasInfo;
-  result?: Result;
+  gasInfo: GasInfo;
+  result: Result;
 }
 export interface SimulationResponseProtoMsg {
   typeUrl: "/cosmos.base.abci.v1beta1.SimulationResponse";
@@ -340,8 +340,8 @@ export interface SimulationResponseAminoMsg {
  * successfully simulated.
  */
 export interface SimulationResponseSDKType {
-  gas_info?: GasInfoSDKType;
-  result?: ResultSDKType;
+  gas_info: GasInfoSDKType;
+  result: ResultSDKType;
 }
 /**
  * MsgData defines the data returned in a Result object during message

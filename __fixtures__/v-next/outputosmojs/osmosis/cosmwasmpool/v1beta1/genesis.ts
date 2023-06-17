@@ -8,11 +8,11 @@ export interface ParamsSDKType {}
 /** GenesisState defines the cosmwasmpool module's genesis state. */
 export interface GenesisState {
   /** params is the container of cosmwasmpool parameters. */
-  params?: Params;
+  params: Params;
 }
 /** GenesisState defines the cosmwasmpool module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseParams(): Params {
   return {};
