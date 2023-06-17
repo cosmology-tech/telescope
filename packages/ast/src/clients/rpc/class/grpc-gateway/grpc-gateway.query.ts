@@ -177,6 +177,7 @@ const getQuasisParams = (
 ) => {
     let quasis: any[] = [];
     
+    // add left path element to quasis (path before Params element)
     const firstPath = path.slice(0, indicesLeft[0]);
     quasis.push(
         t.templateElement(
@@ -187,26 +188,22 @@ const getQuasisParams = (
             false
         )
     )  
-    let tempPath = [];
-    let lastPath = '';
+
     // check if path end with param or quasis, get that quasis if any
+    let lastPath = '';
     if (indicesRight[indicesRight.length -1] != path.length -1) {
         lastPath = path.slice(indicesRight[indicesRight.length -1] + 1, path.length);
         // console.log(lastPath);  
     }
 
-    // get path in between params
+    // get paths in between params
     for (let i = 0; i < indicesLeft.length - 1; i++) {
-        tempPath.push(path.slice(indicesRight[i] + 1, indicesLeft[i + 1]))
-    }
-    
-    for (let i = 0; i < tempPath.length; i++) {
-        // add left path element to quasis (path before Params element)
+        const tempPath = path.slice(indicesRight[i] + 1, indicesLeft[i + 1]);
         quasis.push(
             t.templateElement(
                 {
-                    raw: tempPath[i],
-                    cooked: tempPath[i],
+                    raw: tempPath,
+                    cooked: tempPath,
                 },
                 false
             )
