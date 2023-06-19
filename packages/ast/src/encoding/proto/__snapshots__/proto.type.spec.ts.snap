@@ -60,7 +60,7 @@ exports[`createCreateProtoType MsgJoinPool 1`] = `
 "function createBaseMsgJoinPool(): MsgJoinPool {
   return {
     sender: "",
-    poolId: Long.UZERO,
+    poolId: BigInt(0),
     shareOutAmount: "",
     tokenInMaxs: []
   };
@@ -153,7 +153,7 @@ export interface CheckedExpr {
    *   the message.
    */
   referenceMap?: {
-    [key: Long]: Reference;
+    [key: bigint]: Reference;
   };
   /**
    * A map from expression ids to types.
@@ -163,7 +163,7 @@ export interface CheckedExpr {
    * space.
    */
   typeMap?: {
-    [key: Long]: Type;
+    [key: bigint]: Type;
   };
   /**
    * The source info derived from input that generated the parsed \`expr\` and
