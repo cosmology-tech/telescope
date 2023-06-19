@@ -9,11 +9,11 @@ export const protobufPackage = "ibc.core.types.v1";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
   /** ICS002 - Clients genesis state */
-  clientGenesis?: GenesisState1;
+  clientGenesis: GenesisState1;
   /** ICS003 - Connections genesis state */
-  connectionGenesis?: GenesisState2;
+  connectionGenesis: GenesisState2;
   /** ICS004 - Channel genesis state */
-  channelGenesis?: GenesisState3;
+  channelGenesis: GenesisState3;
 }
 function createBaseGenesisState(): GenesisState {
   return {

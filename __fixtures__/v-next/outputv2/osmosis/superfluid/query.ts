@@ -20,7 +20,7 @@ export interface QueryParamsRequestAminoMsg {
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryParamsResponse";
@@ -35,7 +35,7 @@ export interface QueryParamsResponseAminoMsg {
   value: QueryParamsResponseAmino;
 }
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 export interface AssetTypeRequest {
   denom: string;
@@ -117,7 +117,7 @@ export interface AssetMultiplierRequestSDKType {
   denom: string;
 }
 export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
+  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
 }
 export interface AssetMultiplierResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AssetMultiplierResponse";
@@ -131,7 +131,7 @@ export interface AssetMultiplierResponseAminoMsg {
   value: AssetMultiplierResponseAmino;
 }
 export interface AssetMultiplierResponseSDKType {
-  osmo_equivalent_multiplier?: OsmoEquivalentMultiplierRecordSDKType;
+  osmo_equivalent_multiplier: OsmoEquivalentMultiplierRecordSDKType;
 }
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
@@ -160,7 +160,7 @@ export interface SuperfluidIntermediaryAccountInfoSDKType {
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface AllIntermediaryAccountsRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsRequest";
@@ -174,11 +174,11 @@ export interface AllIntermediaryAccountsRequestAminoMsg {
   value: AllIntermediaryAccountsRequestAmino;
 }
 export interface AllIntermediaryAccountsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface AllIntermediaryAccountsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsResponse";
@@ -194,7 +194,7 @@ export interface AllIntermediaryAccountsResponseAminoMsg {
 }
 export interface AllIntermediaryAccountsResponseSDKType {
   accounts: SuperfluidIntermediaryAccountInfoSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 export interface ConnectedIntermediaryAccountRequest {
   lockId: Long;
@@ -214,7 +214,7 @@ export interface ConnectedIntermediaryAccountRequestSDKType {
   lock_id: Long;
 }
 export interface ConnectedIntermediaryAccountResponse {
-  account?: SuperfluidIntermediaryAccountInfo;
+  account: SuperfluidIntermediaryAccountInfo;
 }
 export interface ConnectedIntermediaryAccountResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountResponse";
@@ -228,7 +228,7 @@ export interface ConnectedIntermediaryAccountResponseAminoMsg {
   value: ConnectedIntermediaryAccountResponseAmino;
 }
 export interface ConnectedIntermediaryAccountResponseSDKType {
-  account?: SuperfluidIntermediaryAccountInfoSDKType;
+  account: SuperfluidIntermediaryAccountInfoSDKType;
 }
 export interface QueryTotalDelegationByValidatorForDenomRequest {
   denom: string;
@@ -375,7 +375,7 @@ export interface SuperfluidDelegationsByDelegatorRequestSDKType {
 export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount?: Coin;
+  totalEquivalentStakedAmount: Coin;
 }
 export interface SuperfluidDelegationsByDelegatorResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse";
@@ -393,7 +393,7 @@ export interface SuperfluidDelegationsByDelegatorResponseAminoMsg {
 export interface SuperfluidDelegationsByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
   total_delegated_coins: CoinSDKType[];
-  total_equivalent_staked_amount?: CoinSDKType;
+  total_equivalent_staked_amount: CoinSDKType;
 }
 export interface SuperfluidUndelegationsByDelegatorRequest {
   delegatorAddress: string;
@@ -533,7 +533,7 @@ export interface QueryTotalDelegationByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   delegationResponse: DelegationResponse[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount?: Coin;
+  totalEquivalentStakedAmount: Coin;
 }
 export interface QueryTotalDelegationByDelegatorResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorResponse";
@@ -553,7 +553,7 @@ export interface QueryTotalDelegationByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
   delegation_response: DelegationResponseSDKType[];
   total_delegated_coins: CoinSDKType[];
-  total_equivalent_staked_amount?: CoinSDKType;
+  total_equivalent_staked_amount: CoinSDKType;
 }
 export interface QueryUnpoolWhitelistRequest {}
 export interface QueryUnpoolWhitelistRequestProtoMsg {

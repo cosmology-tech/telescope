@@ -12,7 +12,7 @@ export const protobufPackage = "evmos.erc20.v1";
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -21,7 +21,7 @@ export interface QueryTokenPairsRequest {
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
@@ -36,7 +36,7 @@ export interface QueryTokenPairRequest {
  * method.
  */
 export interface QueryTokenPairResponse {
-  tokenPair?: TokenPair;
+  tokenPair: TokenPair;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -45,7 +45,7 @@ export interface QueryParamsRequest {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {

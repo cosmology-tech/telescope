@@ -17,14 +17,14 @@ export interface EpochInfo {
    * If start_time is in the future, the epoch will not begin until the start
    * time.
    */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
    * be greater than the chains expected block time.
    * Duration must be non-zero.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
@@ -51,7 +51,7 @@ export interface EpochInfo {
    * * The t=34 block will start the epoch for (30, 35]
    * * The **t=36** block will start the epoch for (35, 40]
    */
-  currentEpochStartTime?: Timestamp;
+  currentEpochStartTime: Timestamp;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.

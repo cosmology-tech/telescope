@@ -7,7 +7,7 @@ export interface ArithmeticTwapRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
   endTime?: Date;
 }
 export interface ArithmeticTwapRequestProtoMsg {
@@ -29,7 +29,7 @@ export interface ArithmeticTwapRequestSDKType {
   pool_id: Long;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
   end_time?: Date;
 }
 export interface ArithmeticTwapResponse {
@@ -53,7 +53,7 @@ export interface ArithmeticTwapToNowRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
 }
 export interface ArithmeticTwapToNowRequestProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest";
@@ -73,7 +73,7 @@ export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: Long;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
 }
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
@@ -104,7 +104,7 @@ export interface ParamsRequestAminoMsg {
 }
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface ParamsResponseProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ParamsResponse";
@@ -118,7 +118,7 @@ export interface ParamsResponseAminoMsg {
   value: ParamsResponseAmino;
 }
 export interface ParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   return {

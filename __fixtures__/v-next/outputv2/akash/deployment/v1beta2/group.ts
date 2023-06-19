@@ -61,9 +61,9 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID;
+  groupId: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec;
+  groupSpec: GroupSpec;
   createdAt: Long;
 }
 export interface GroupProtoMsg {
@@ -83,9 +83,9 @@ export interface GroupAminoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
-  group_id?: GroupIDSDKType;
+  group_id: GroupIDSDKType;
   state: Group_State;
-  group_spec?: GroupSpecSDKType;
+  group_spec: GroupSpecSDKType;
   created_at: Long;
 }
 function createBaseGroup(): Group {

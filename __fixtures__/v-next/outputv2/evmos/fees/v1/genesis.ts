@@ -5,7 +5,7 @@ export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
   /** module parameters */
-  params?: Params;
+  params: Params;
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
 }
@@ -26,7 +26,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   dev_fee_infos: DevFeeInfoSDKType[];
 }
 /** Params defines the fees module params */

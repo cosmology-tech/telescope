@@ -181,7 +181,7 @@ export interface AllocateQuotaRequest {
    */
   serviceName: string;
   /** Operation that describes the quota allocation. */
-  allocateOperation?: QuotaOperation;
+  allocateOperation: QuotaOperation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request. If unspecified or no matching version can be found, the latest
@@ -293,7 +293,7 @@ export interface QuotaError {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status?: Status;
+  status: Status;
 }
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {

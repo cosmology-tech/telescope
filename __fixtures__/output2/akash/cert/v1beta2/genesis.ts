@@ -7,7 +7,7 @@ export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
   owner: string;
-  certificate?: Certificate;
+  certificate: Certificate;
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisState {

@@ -9,10 +9,10 @@ export interface ParamsRequest {}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface ParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /** =============================== EstimateSwapExactAmountIn */
 export interface EstimateSwapExactAmountInRequest {
@@ -89,10 +89,10 @@ export interface PoolRequestSDKType {
   pool_id: bigint;
 }
 export interface PoolResponse {
-  pool?: Any;
+  pool: Any;
 }
 export interface PoolResponseSDKType {
-  pool?: AnySDKType;
+  pool: AnySDKType;
 }
 /** =============================== AllPools */
 export interface AllPoolsRequest {

@@ -27,13 +27,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime?: Timestamp;
+  endTime: Timestamp;
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */

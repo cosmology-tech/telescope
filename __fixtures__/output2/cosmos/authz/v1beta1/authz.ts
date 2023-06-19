@@ -18,8 +18,8 @@ export interface GenericAuthorization {
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: Any;
-  expiration?: Timestamp;
+  authorization: Any;
+  expiration: Timestamp;
 }
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
@@ -30,8 +30,8 @@ export interface Grant {
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization?: Any;
-  expiration?: Timestamp;
+  authorization: Any;
+  expiration: Timestamp;
 }
 function createBaseGenericAuthorization(): GenericAuthorization {
   return {

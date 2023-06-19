@@ -5,15 +5,15 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits;
+  resources: ResourceUnits;
   count: number;
-  price?: DecCoin;
+  price: DecCoin;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
-  resources?: ResourceUnitsSDKType;
+  resources: ResourceUnitsSDKType;
   count: number;
-  price?: DecCoinSDKType;
+  price: DecCoinSDKType;
 }
 function createBaseResource(): Resource {
   return {

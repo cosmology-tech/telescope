@@ -27,7 +27,7 @@ export interface Pool {
    * last_liquidity_update is the last time either the pool liquidity or the
    * active tick changed
    */
-  lastLiquidityUpdate?: Date;
+  lastLiquidityUpdate: Date;
 }
 export interface PoolSDKType {
   address: string;
@@ -41,7 +41,7 @@ export interface PoolSDKType {
   tick_spacing: bigint;
   exponent_at_price_one: string;
   swap_fee: string;
-  last_liquidity_update?: Date;
+  last_liquidity_update: Date;
 }
 function createBasePool(): Pool {
   return {

@@ -30,7 +30,7 @@ export interface MsgDelegateToValidatorSet {
    * -> 0.2} our staking logic would attempt to delegate 5osmo to A , 3osmo to
    * B, 2osmo to C.
    */
-  coin?: Coin;
+  coin: Coin;
 }
 /**
  * MsgDelegateToValidatorSet allows users to delegate to an existing
@@ -38,7 +38,7 @@ export interface MsgDelegateToValidatorSet {
  */
 export interface MsgDelegateToValidatorSetSDKType {
   delegator: string;
-  coin?: CoinSDKType;
+  coin: CoinSDKType;
 }
 export interface MsgDelegateToValidatorSetResponse {}
 export interface MsgDelegateToValidatorSetResponseSDKType {}
@@ -52,11 +52,11 @@ export interface MsgUndelegateFromValidatorSet {
    * -> 0.2} our undelegate logic would attempt to undelegate 5osmo from A ,
    * 3osmo from B, 2osmo from C
    */
-  coin?: Coin;
+  coin: Coin;
 }
 export interface MsgUndelegateFromValidatorSetSDKType {
   delegator: string;
-  coin?: CoinSDKType;
+  coin: CoinSDKType;
 }
 export interface MsgUndelegateFromValidatorSetResponse {}
 export interface MsgUndelegateFromValidatorSetResponseSDKType {}

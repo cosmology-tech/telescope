@@ -79,7 +79,7 @@ export interface CheckRequest {
    */
   serviceName: string;
   /** The operation to be checked. */
-  operation?: Operation;
+  operation: Operation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request.
@@ -110,7 +110,7 @@ export interface CheckResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
   /** Feedback data returned from the server during processing a Check request. */
-  checkInfo?: CheckResponse_CheckInfo;
+  checkInfo: CheckResponse_CheckInfo;
 }
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfo {
@@ -121,7 +121,7 @@ export interface CheckResponse_CheckInfo {
    */
   unusedArguments: string[];
   /** Consumer info of this check. */
-  consumerInfo?: CheckResponse_ConsumerInfo;
+  consumerInfo: CheckResponse_ConsumerInfo;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfo {
@@ -218,7 +218,7 @@ export interface ReportResponse_ReportError {
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
-  status?: Status;
+  status: Status;
 }
 function createBaseCheckRequest(): CheckRequest {
   return {

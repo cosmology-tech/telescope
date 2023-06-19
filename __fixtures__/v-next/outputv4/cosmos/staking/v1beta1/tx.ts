@@ -8,23 +8,23 @@ import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
 export interface MsgCreateValidator {
-  description?: Description;
-  commission?: CommissionRates;
+  description: Description;
+  commission: CommissionRates;
   minSelfDelegation: string;
   delegatorAddress: string;
   validatorAddress: string;
-  pubkey?: Any;
-  value?: Coin;
+  pubkey: Any;
+  value: Coin;
 }
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
 export interface MsgCreateValidatorSDKType {
-  description?: DescriptionSDKType;
-  commission?: CommissionRatesSDKType;
+  description: DescriptionSDKType;
+  commission: CommissionRatesSDKType;
   min_self_delegation: string;
   delegator_address: string;
   validator_address: string;
-  pubkey?: AnySDKType;
-  value?: CoinSDKType;
+  pubkey: AnySDKType;
+  value: CoinSDKType;
 }
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponse {}
@@ -32,7 +32,7 @@ export interface MsgCreateValidatorResponse {}
 export interface MsgCreateValidatorResponseSDKType {}
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidator {
-  description?: Description;
+  description: Description;
   validatorAddress: string;
   /**
    * We pass a reference to the new commission rate and min self delegation as
@@ -45,7 +45,7 @@ export interface MsgEditValidator {
 }
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidatorSDKType {
-  description?: DescriptionSDKType;
+  description: DescriptionSDKType;
   validator_address: string;
   commission_rate: string;
   min_self_delegation: string;
@@ -61,7 +61,7 @@ export interface MsgEditValidatorResponseSDKType {}
 export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /**
  * MsgDelegate defines a SDK message for performing a delegation of coins
@@ -70,7 +70,7 @@ export interface MsgDelegate {
 export interface MsgDelegateSDKType {
   delegator_address: string;
   validator_address: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponse {}
@@ -84,7 +84,7 @@ export interface MsgBeginRedelegate {
   delegatorAddress: string;
   validatorSrcAddress: string;
   validatorDstAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /**
  * MsgBeginRedelegate defines a SDK message for performing a redelegation
@@ -94,15 +94,15 @@ export interface MsgBeginRedelegateSDKType {
   delegator_address: string;
   validator_src_address: string;
   validator_dst_address: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponse {
-  completionTime?: Date;
+  completionTime: Date;
 }
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponseSDKType {
-  completion_time?: Date;
+  completion_time: Date;
 }
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
@@ -111,7 +111,7 @@ export interface MsgBeginRedelegateResponseSDKType {
 export interface MsgUndelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
@@ -120,15 +120,15 @@ export interface MsgUndelegate {
 export interface MsgUndelegateSDKType {
   delegator_address: string;
   validator_address: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
-  completionTime?: Date;
+  completionTime: Date;
 }
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponseSDKType {
-  completion_time?: Date;
+  completion_time: Date;
 }
 function createBaseMsgCreateValidator(): MsgCreateValidator {
   return {

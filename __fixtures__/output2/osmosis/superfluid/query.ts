@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface AssetTypeRequest {
   denom: string;
@@ -28,7 +28,7 @@ export interface AssetMultiplierRequest {
   denom: string;
 }
 export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
+  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
 }
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
@@ -37,17 +37,17 @@ export interface SuperfluidIntermediaryAccountInfo {
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface ConnectedIntermediaryAccountRequest {
   lockId: Long;
 }
 export interface ConnectedIntermediaryAccountResponse {
-  account?: SuperfluidIntermediaryAccountInfo;
+  account: SuperfluidIntermediaryAccountInfo;
 }
 export interface QueryTotalDelegationByValidatorForDenomRequest {
   denom: string;
@@ -78,7 +78,7 @@ export interface SuperfluidDelegationsByDelegatorRequest {
 export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount?: Coin;
+  totalEquivalentStakedAmount: Coin;
 }
 export interface SuperfluidUndelegationsByDelegatorRequest {
   delegatorAddress: string;
@@ -110,7 +110,7 @@ export interface QueryTotalDelegationByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   delegationResponse: DelegationResponse[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount?: Coin;
+  totalEquivalentStakedAmount: Coin;
 }
 export interface QueryUnpoolWhitelistRequest {}
 export interface QueryUnpoolWhitelistResponse {

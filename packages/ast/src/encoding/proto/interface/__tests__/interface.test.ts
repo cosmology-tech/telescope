@@ -1,11 +1,21 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
+import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createSDKType, createProtoType, createProtoTypeType } from '..';
 import { createAminoType } from '../amino';
 
 const store = getTestProtoStore();
 store.traverseAll();
+
+describe('MsgDelegate', () => {
+    const ref = store.findProto('cosmos/staking/v1beta1/tx.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    it('interface', () => {
+        expectCode(createProtoType(context, 'MsgDelegate',
+            getNestedProto(ref.traversed).MsgDelegate
+        ));
+    });
+})
 
 describe('MsgSend', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/tx.proto');

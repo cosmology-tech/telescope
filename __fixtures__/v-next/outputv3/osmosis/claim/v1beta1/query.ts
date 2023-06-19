@@ -57,7 +57,7 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse";
@@ -74,7 +74,7 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 export interface QueryClaimRecordRequest {
   address: string;
@@ -94,7 +94,7 @@ export interface QueryClaimRecordRequestSDKType {
   address: string;
 }
 export interface QueryClaimRecordResponse {
-  claimRecord?: ClaimRecord;
+  claimRecord: ClaimRecord;
 }
 export interface QueryClaimRecordResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse";
@@ -108,7 +108,7 @@ export interface QueryClaimRecordResponseAminoMsg {
   value: QueryClaimRecordResponseAmino;
 }
 export interface QueryClaimRecordResponseSDKType {
-  claim_record?: ClaimRecordSDKType;
+  claim_record: ClaimRecordSDKType;
 }
 export interface QueryClaimableForActionRequest {
   address: string;

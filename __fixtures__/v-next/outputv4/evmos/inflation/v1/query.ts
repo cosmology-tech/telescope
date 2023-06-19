@@ -33,14 +33,14 @@ export interface QueryEpochMintProvisionRequestSDKType {}
  */
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
-  epochMintProvision?: DecCoin;
+  epochMintProvision: DecCoin;
 }
 /**
  * QueryEpochMintProvisionResponse is the response type for the
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionResponseSDKType {
-  epoch_mint_provision?: DecCoinSDKType;
+  epoch_mint_provision: DecCoinSDKType;
 }
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
@@ -83,14 +83,14 @@ export interface QueryCirculatingSupplyRequestSDKType {}
  */
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
-  circulatingSupply?: DecCoin;
+  circulatingSupply: DecCoin;
 }
 /**
  * QueryCirculatingSupplyResponse is the response type for the
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyResponseSDKType {
-  circulating_supply?: DecCoinSDKType;
+  circulating_supply: DecCoinSDKType;
 }
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
@@ -124,11 +124,11 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseQueryPeriodRequest(): QueryPeriodRequest {
   return {};

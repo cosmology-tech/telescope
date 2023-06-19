@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface Equivocation {
   height: bigint;
-  time?: Date;
+  time: Date;
   power: bigint;
   consensusAddress: string;
 }
@@ -18,7 +18,7 @@ export interface Equivocation {
  */
 export interface EquivocationSDKType {
   height: bigint;
-  time?: Date;
+  time: Date;
   power: bigint;
   consensus_address: string;
 }

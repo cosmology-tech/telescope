@@ -83,7 +83,7 @@ export interface Operation {
    */
   consumerId: string;
   /** Required. Start time of the operation. */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -91,7 +91,7 @@ export interface Operation {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  endTime?: Timestamp;
+  endTime: Timestamp;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 

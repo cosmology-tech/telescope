@@ -35,12 +35,12 @@ export interface QuerySupplyResponse {
 export interface QueryNFTsRequest {
   classId: string;
   owner: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
   nfts: NFT[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
@@ -49,7 +49,7 @@ export interface QueryNFTRequest {
 }
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
-  nft?: NFT;
+  nft: NFT;
 }
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
@@ -57,17 +57,17 @@ export interface QueryClassRequest {
 }
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
-  class?: Class;
+  class: Class;
 }
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
   classes: Class[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   return {

@@ -5,19 +5,19 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
-  startTime?: Date;
-  duration?: Duration;
+  startTime: Date;
+  duration: Duration;
   currentEpoch: Long;
-  currentEpochStartTime?: Date;
+  currentEpochStartTime: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: Long;
 }
 export interface EpochInfoSDKType {
   identifier: string;
-  start_time?: Date;
-  duration?: DurationSDKType;
+  start_time: Date;
+  duration: DurationSDKType;
   current_epoch: Long;
-  current_epoch_start_time?: Date;
+  current_epoch_start_time: Date;
   epoch_counting_started: boolean;
   current_epoch_start_height: Long;
 }

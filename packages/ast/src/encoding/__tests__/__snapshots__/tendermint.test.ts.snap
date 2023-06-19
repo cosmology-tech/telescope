@@ -7,20 +7,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 1`] = `
  */
 export interface ClientState {
   chainId: string;
-  trustLevel?: Fraction;
+  trustLevel: Fraction;
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trustingPeriod?: Duration;
+  trustingPeriod: Duration;
   /** duration of the staking unbonding period */
-  unbondingPeriod?: Duration;
+  unbondingPeriod: Duration;
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  maxClockDrift?: Duration;
+  maxClockDrift: Duration;
   /** Block height when the client was frozen due to a misbehaviour */
-  frozenHeight?: Height;
+  frozenHeight: Height;
   /** Latest height the client was updated to */
-  latestHeight?: Height;
+  latestHeight: Height;
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
   /**
@@ -466,20 +466,20 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 1`] = `
  */
 export interface ClientState {
   chainId: string;
-  trustLevel?: Fraction;
+  trustLevel: Fraction;
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trustingPeriod?: string;
+  trustingPeriod: string;
   /** duration of the staking unbonding period */
-  unbondingPeriod?: string;
+  unbondingPeriod: string;
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  maxClockDrift?: string;
+  maxClockDrift: string;
   /** Block height when the client was frozen due to a misbehaviour */
-  frozenHeight?: Height;
+  frozenHeight: Height;
   /** Latest height the client was updated to */
-  latestHeight?: Height;
+  latestHeight: Height;
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
   /**

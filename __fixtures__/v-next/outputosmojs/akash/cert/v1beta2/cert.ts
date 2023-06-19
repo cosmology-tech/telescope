@@ -94,11 +94,11 @@ export interface MsgCreateCertificateResponse {}
 export interface MsgCreateCertificateResponseSDKType {}
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
-  id?: CertificateID;
+  id: CertificateID;
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
-  id?: CertificateIDSDKType;
+  id: CertificateIDSDKType;
 }
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponse {}

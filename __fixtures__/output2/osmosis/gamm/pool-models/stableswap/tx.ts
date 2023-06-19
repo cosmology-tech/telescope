@@ -8,7 +8,7 @@ export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
   sender: string;
-  poolParams?: PoolParams;
+  poolParams: PoolParams;
   initialPoolLiquidity: Coin[];
   scalingFactors: Long[];
   futurePoolGovernor: string;

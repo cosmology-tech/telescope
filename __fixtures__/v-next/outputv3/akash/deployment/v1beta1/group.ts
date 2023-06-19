@@ -62,7 +62,7 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgCloseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
@@ -78,7 +78,7 @@ export interface MsgCloseGroupAminoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
@@ -96,7 +96,7 @@ export interface MsgCloseGroupResponseAminoMsg {
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgPauseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
@@ -112,7 +112,7 @@ export interface MsgPauseGroupAminoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
@@ -130,7 +130,7 @@ export interface MsgPauseGroupResponseAminoMsg {
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgStartGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
@@ -146,7 +146,7 @@ export interface MsgStartGroupAminoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -191,7 +191,7 @@ export interface GroupIDSDKType {
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements;
+  requirements: PlacementRequirements;
   resources: Resource[];
 }
 export interface GroupSpecProtoMsg {
@@ -211,14 +211,14 @@ export interface GroupSpecAminoMsg {
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements?: PlacementRequirementsSDKType;
+  requirements: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID;
+  groupId: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec;
+  groupSpec: GroupSpec;
   createdAt: Long;
 }
 export interface GroupProtoMsg {
@@ -238,16 +238,16 @@ export interface GroupAminoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
-  group_id?: GroupIDSDKType;
+  group_id: GroupIDSDKType;
   state: Group_State;
-  group_spec?: GroupSpecSDKType;
+  group_spec: GroupSpecSDKType;
   created_at: Long;
 }
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits;
+  resources: ResourceUnits;
   count: number;
-  price?: Coin;
+  price: Coin;
 }
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Resource";
@@ -265,9 +265,9 @@ export interface ResourceAminoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
-  resources?: ResourceUnitsSDKType;
+  resources: ResourceUnitsSDKType;
   count: number;
-  price?: CoinSDKType;
+  price: CoinSDKType;
 }
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {

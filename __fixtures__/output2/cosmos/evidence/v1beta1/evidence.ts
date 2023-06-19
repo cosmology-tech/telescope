@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface Equivocation {
   height: Long;
-  time?: Timestamp;
+  time: Timestamp;
   power: Long;
   consensusAddress: string;
 }

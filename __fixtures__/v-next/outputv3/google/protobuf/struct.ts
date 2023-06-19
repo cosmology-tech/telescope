@@ -36,7 +36,7 @@ export function nullValueToJSON(object: NullValue): string {
 }
 export interface Struct_FieldsEntry {
   key: string;
-  value?: Value;
+  value: Value;
 }
 export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
@@ -52,7 +52,7 @@ export interface Struct_FieldsEntryAminoMsg {
 }
 export interface Struct_FieldsEntrySDKType {
   key: string;
-  value?: ValueSDKType;
+  value: ValueSDKType;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -66,7 +66,7 @@ export interface Struct_FieldsEntrySDKType {
  */
 export interface Struct {
   /** Unordered map of dynamically typed values. */
-  fields?: {
+  fields: {
     [key: string]: Value;
   };
 }
@@ -105,7 +105,7 @@ export interface StructAminoMsg {
  * The JSON representation for `Struct` is JSON object.
  */
 export interface StructSDKType {
-  fields?: {
+  fields: {
     [key: string]: ValueSDKType;
   };
 }

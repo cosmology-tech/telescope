@@ -9,7 +9,7 @@ export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
   /** params defines all the parameters of the module. */
-  params?: Params;
+  params: Params;
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
 }
@@ -18,11 +18,11 @@ export interface Params {
   /** enable claiming process */
   enableClaims: boolean;
   /** timestamp of the airdrop start */
-  airdropStartTime?: Timestamp;
+  airdropStartTime: Timestamp;
   /** duration until decay of claimable tokens begin */
-  durationUntilDecay?: Duration;
+  durationUntilDecay: Duration;
   /** duration of the token claim decay period */
-  durationOfDecay?: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable coin */
   claimsDenom: string;
   /**

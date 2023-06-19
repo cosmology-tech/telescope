@@ -7,10 +7,10 @@ export interface ParamsRequest {}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface ParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseParamsRequest(): ParamsRequest {
   return {};

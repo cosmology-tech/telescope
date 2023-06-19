@@ -9,7 +9,7 @@ export interface ArithmeticTwapRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Timestamp;
+  startTime: Timestamp;
   endTime?: Timestamp;
 }
 export interface ArithmeticTwapResponse {
@@ -19,14 +19,14 @@ export interface ArithmeticTwapToNowRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Timestamp;
+  startTime: Timestamp;
 }
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
 }
 export interface ParamsRequest {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   return {

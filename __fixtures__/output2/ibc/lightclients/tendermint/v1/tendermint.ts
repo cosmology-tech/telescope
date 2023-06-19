@@ -16,20 +16,20 @@ export const protobufPackage = "ibc.lightclients.tendermint.v1";
  */
 export interface ClientState {
   chainId: string;
-  trustLevel?: Fraction;
+  trustLevel: Fraction;
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trustingPeriod?: Duration;
+  trustingPeriod: Duration;
   /** duration of the staking unbonding period */
-  unbondingPeriod?: Duration;
+  unbondingPeriod: Duration;
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  maxClockDrift?: Duration;
+  maxClockDrift: Duration;
   /** Block height when the client was frozen due to a misbehaviour */
-  frozenHeight?: Height;
+  frozenHeight: Height;
   /** Latest height the client was updated to */
-  latestHeight?: Height;
+  latestHeight: Height;
   /** Proof specifications used in verifying counterparty state */
   proofSpecs: ProofSpec[];
   /**
@@ -59,9 +59,9 @@ export interface ConsensusState {
    * timestamp that corresponds to the block height in which the ConsensusState
    * was stored.
    */
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
   /** commitment root (i.e app hash) */
-  root?: MerkleRoot;
+  root: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
 /**
@@ -70,8 +70,8 @@ export interface ConsensusState {
  */
 export interface Misbehaviour {
   clientId: string;
-  header1?: Header;
-  header2?: Header;
+  header1: Header;
+  header2: Header;
 }
 /**
  * Header defines the Tendermint client consensus Header.
@@ -88,10 +88,10 @@ export interface Misbehaviour {
  * trusted validator set at the TrustedHeight.
  */
 export interface Header {
-  signedHeader?: SignedHeader;
-  validatorSet?: ValidatorSet;
-  trustedHeight?: Height;
-  trustedValidators?: ValidatorSet;
+  signedHeader: SignedHeader;
+  validatorSet: ValidatorSet;
+  trustedHeight: Height;
+  trustedValidators: ValidatorSet;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only

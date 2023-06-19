@@ -17,11 +17,11 @@ export interface ValueOp {
   /** Encoded in ProofOp.Key. */
   key: Uint8Array;
   /** To encode in ProofOp.Data */
-  proof?: Proof;
+  proof: Proof;
 }
 export interface ValueOpSDKType {
   key: Uint8Array;
-  proof?: ProofSDKType;
+  proof: ProofSDKType;
 }
 export interface DominoOp {
   key: string;

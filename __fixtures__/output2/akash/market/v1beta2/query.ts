@@ -10,59 +10,59 @@ import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
-  filters?: OrderFilters;
-  pagination?: PageRequest;
+  filters: OrderFilters;
+  pagination: PageRequest;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponse {
   orders: Order[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
-  id?: OrderID;
+  id: OrderID;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponse {
-  order?: Order;
+  order: Order;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
-  filters?: BidFilters;
-  pagination?: PageRequest;
+  filters: BidFilters;
+  pagination: PageRequest;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponse {
   bids: QueryBidResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
-  id?: BidID;
+  id: BidID;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponse {
-  bid?: Bid;
-  escrowAccount?: Account;
+  bid: Bid;
+  escrowAccount: Account;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
-  filters?: LeaseFilters;
-  pagination?: PageRequest;
+  filters: LeaseFilters;
+  pagination: PageRequest;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
-  id?: LeaseID;
+  id: LeaseID;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponse {
-  lease?: Lease;
-  escrowPayment?: FractionalPayment;
+  lease: Lease;
+  escrowPayment: FractionalPayment;
 }
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {

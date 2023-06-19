@@ -63,13 +63,13 @@ export interface SwapAmountInRouteSDKType {
 export interface MsgSwapExactAmountIn {
   sender: string;
   routes: SwapAmountInRoute[];
-  tokenIn?: Coin;
+  tokenIn: Coin;
   tokenOutMinAmount: string;
 }
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
   routes: SwapAmountInRouteSDKType[];
-  token_in?: CoinSDKType;
+  token_in: CoinSDKType;
   token_out_min_amount: string;
 }
 export interface MsgSwapExactAmountInResponse {
@@ -92,13 +92,13 @@ export interface MsgSwapExactAmountOut {
   sender: string;
   routes: SwapAmountOutRoute[];
   tokenInMaxAmount: string;
-  tokenOut?: Coin;
+  tokenOut: Coin;
 }
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
   routes: SwapAmountOutRouteSDKType[];
   token_in_max_amount: string;
-  token_out?: CoinSDKType;
+  token_out: CoinSDKType;
 }
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;
@@ -113,7 +113,7 @@ export interface MsgSwapExactAmountOutResponseSDKType {
 export interface MsgJoinSwapExternAmountIn {
   sender: string;
   poolId: Long;
-  tokenIn?: Coin;
+  tokenIn: Coin;
   shareOutMinAmount: string;
 }
 /**
@@ -123,7 +123,7 @@ export interface MsgJoinSwapExternAmountIn {
 export interface MsgJoinSwapExternAmountInSDKType {
   sender: string;
   pool_id: Long;
-  token_in?: CoinSDKType;
+  token_in: CoinSDKType;
   share_out_min_amount: string;
 }
 export interface MsgJoinSwapExternAmountInResponse {
@@ -180,14 +180,14 @@ export interface MsgExitSwapShareAmountInResponseSDKType {
 export interface MsgExitSwapExternAmountOut {
   sender: string;
   poolId: Long;
-  tokenOut?: Coin;
+  tokenOut: Coin;
   shareInMaxAmount: string;
 }
 /** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOutSDKType {
   sender: string;
   pool_id: Long;
-  token_out?: CoinSDKType;
+  token_out: CoinSDKType;
   share_in_max_amount: string;
 }
 export interface MsgExitSwapExternAmountOutResponse {

@@ -4,13 +4,13 @@ exports[`Any repeated 1`] = `
 "export interface QueryPoolsResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }"
 `;
 
 exports[`Any standard 1`] = `
 "export interface QueryPoolResponse {
-  pool?: Any;
+  pool: Any;
 }"
 `;
 
@@ -18,12 +18,12 @@ exports[`Cast repeated 1`] = `
 "export interface QueryPoolsResponse {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }"
 `;
 
 exports[`Cast standard 1`] = `
 "export interface QueryPoolResponse {
-  pool?: (Pool1 & Pool2 & Any) | undefined;
+  pool: (Pool1 & Pool2 & Any) | undefined;
 }"
 `;

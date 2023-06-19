@@ -49,10 +49,10 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin;
+  deposit: Coin;
 }
 export interface MsgCreateDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
@@ -71,10 +71,10 @@ export interface MsgCreateDeploymentAminoMsg {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit?: CoinSDKType;
+  deposit: CoinSDKType;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
@@ -92,8 +92,8 @@ export interface MsgCreateDeploymentResponseAminoMsg {
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID;
-  amount?: Coin;
+  id: DeploymentID;
+  amount: Coin;
 }
 export interface MsgDepositDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
@@ -110,8 +110,8 @@ export interface MsgDepositDeploymentAminoMsg {
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id?: DeploymentIDSDKType;
-  amount?: CoinSDKType;
+  id: DeploymentIDSDKType;
+  amount: CoinSDKType;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
@@ -129,7 +129,7 @@ export interface MsgDepositDeploymentResponseAminoMsg {
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
 }
@@ -149,7 +149,7 @@ export interface MsgUpdateDeploymentAminoMsg {
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface MsgUpdateDeploymentResponseAminoMsg {
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
 }
 export interface MsgCloseDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
@@ -185,7 +185,7 @@ export interface MsgCloseDeploymentAminoMsg {
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
@@ -226,7 +226,7 @@ export interface DeploymentIDSDKType {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID;
+  deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
@@ -248,7 +248,7 @@ export interface DeploymentAminoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType;
+  deployment_id: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
   created_at: Long;

@@ -34,7 +34,7 @@ export interface GenesisState {
   pools: (Pool1 & Pool2 & Any)[] | Any[];
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: Long;
-  params?: Params;
+  params: Params;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
@@ -58,7 +58,7 @@ export interface GenesisStateAminoMsg {
 export interface GenesisStateSDKType {
   pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   next_pool_number: Long;
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseParams(): Params {
   return {

@@ -22,11 +22,11 @@ export interface MsgCreateGauge {
    * distribute_to show which lock the gauge should distribute to by time
    * duration or by timestamp
    */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /** coins are coin(s) to be distributed by the gauge */
   coins: Coin[];
   /** start_time is the distribution start time */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /**
    * num_epochs_paid_over is the number of epochs distribution will be completed
    * over

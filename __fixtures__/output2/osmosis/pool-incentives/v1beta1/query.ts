@@ -14,16 +14,16 @@ export interface QueryGaugeIdsResponse {
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId: Long;
-  duration?: Duration;
+  duration: Duration;
   gaugeIncentivePercentage: string;
 }
 export interface QueryDistrInfoRequest {}
 export interface QueryDistrInfoResponse {
-  distrInfo?: DistrInfo;
+  distrInfo: DistrInfo;
 }
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryLockableDurationsRequest {}
 export interface QueryLockableDurationsResponse {
@@ -32,7 +32,7 @@ export interface QueryLockableDurationsResponse {
 export interface QueryIncentivizedPoolsRequest {}
 export interface IncentivizedPool {
   poolId: Long;
-  lockableDuration?: Duration;
+  lockableDuration: Duration;
   gaugeId: Long;
 }
 export interface QueryIncentivizedPoolsResponse {

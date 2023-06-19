@@ -32,38 +32,38 @@ export interface QueryPositionByIdRequestSDKType {
   position_id: bigint;
 }
 export interface QueryPositionByIdResponse {
-  position?: PositionWithUnderlyingAssetBreakdown;
+  position: PositionWithUnderlyingAssetBreakdown;
 }
 export interface QueryPositionByIdResponseSDKType {
-  position?: PositionWithUnderlyingAssetBreakdownSDKType;
+  position: PositionWithUnderlyingAssetBreakdownSDKType;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPoolsResponseSDKType {
   pools: AnySDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** =============================== ModuleParams */
 export interface QueryParamsRequest {}
 /** =============================== ModuleParams */
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 export interface TickLiquidityNet {
   liquidityNet: string;
@@ -87,15 +87,15 @@ export interface LiquidityDepthWithRangeSDKType {
 export interface QueryLiquidityNetInDirectionRequest {
   poolId: bigint;
   tokenIn: string;
-  startTick: string;
-  boundTick: string;
+  startTick?: string;
+  boundTick?: string;
 }
 /** =============================== LiquidityNetInDirection */
 export interface QueryLiquidityNetInDirectionRequestSDKType {
   pool_id: bigint;
   token_in: string;
-  start_tick: string;
-  bound_tick: string;
+  start_tick?: string;
+  bound_tick?: string;
 }
 export interface QueryLiquidityNetInDirectionResponse {
   liquidityDepths: TickLiquidityNet[];

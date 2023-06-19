@@ -141,11 +141,11 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
 }
 export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
-  value?: Reference;
+  value: Reference;
 }
 export interface CheckedExpr_TypeMapEntry {
   key: Long;
-  value?: Type;
+  value: Type;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExpr {
@@ -166,7 +166,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap?: {
+  referenceMap: {
     [key: Long]: Reference;
   };
   /**
@@ -176,14 +176,14 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap?: {
+  typeMap: {
     [key: Long]: Type;
   };
   /**
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -198,7 +198,7 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
-  expr?: Expr;
+  expr: Expr;
 }
 /** Represents a CEL type. */
 export interface Type {
@@ -254,19 +254,19 @@ export interface Type {
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
   /** The element type. */
-  elemType?: Type;
+  elemType: Type;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType?: Type;
+  keyType: Type;
   /** The type of the value. */
-  valueType?: Type;
+  valueType: Type;
 }
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType?: Type;
+  resultType: Type;
   /** Argument types of the function. */
   argTypes: Type[];
 }
@@ -310,12 +310,12 @@ export interface Decl {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type?: Type;
+  type: Type;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value?: Constant;
+  value: Constant;
   /** Documentation string for the identifier. */
   doc: string;
 }
@@ -375,7 +375,7 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType?: Type;
+  resultType: Type;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -406,7 +406,7 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value?: Constant;
+  value: Constant;
 }
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {

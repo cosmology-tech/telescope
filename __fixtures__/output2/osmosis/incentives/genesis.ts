@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.incentives";
  */
 export interface GenesisState {
   /** params are all the parameters of the module */
-  params?: Params;
+  params: Params;
   /** gauges are all gauges that should exist at genesis */
   gauges: Gauge[];
   /**

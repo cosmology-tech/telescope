@@ -12,7 +12,7 @@ export const protobufPackage = "evmos.fees.v1";
  */
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -21,7 +21,7 @@ export interface QueryDevFeeInfosRequest {
 export interface QueryDevFeeInfosResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -36,7 +36,7 @@ export interface QueryDevFeeInfoRequest {
  * method.
  */
 export interface QueryDevFeeInfoResponse {
-  fee?: DevFeeInfo;
+  fee: DevFeeInfo;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -45,7 +45,7 @@ export interface QueryParamsRequest {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
@@ -55,7 +55,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
   deployerAddress: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -64,7 +64,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
 export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   return {

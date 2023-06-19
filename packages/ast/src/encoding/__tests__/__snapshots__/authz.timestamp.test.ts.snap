@@ -6,7 +6,7 @@ exports[`cosmos/authz/v1beta1/authz date 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -168,7 +168,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 1`] = `
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`

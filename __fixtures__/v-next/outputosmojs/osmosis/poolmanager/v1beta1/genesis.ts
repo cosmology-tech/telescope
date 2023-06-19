@@ -16,14 +16,14 @@ export interface GenesisState {
   /** the next_pool_id */
   nextPoolId: bigint;
   /** params is the container of poolmanager parameters. */
-  params?: Params;
+  params: Params;
   /** pool_routes is the container of the mappings from pool id to pool type. */
   poolRoutes: ModuleRoute[];
 }
 /** GenesisState defines the poolmanager module's genesis state. */
 export interface GenesisStateSDKType {
   next_pool_id: bigint;
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   pool_routes: ModuleRouteSDKType[];
 }
 function createBaseParams(): Params {

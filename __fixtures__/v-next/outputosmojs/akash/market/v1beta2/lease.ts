@@ -69,17 +69,17 @@ export interface LeaseIDSDKType {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface Lease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
   state: Lease_State;
-  price?: DecCoin;
+  price: DecCoin;
   createdAt: bigint;
   closedOn: bigint;
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
-  lease_id?: LeaseIDSDKType;
+  lease_id: LeaseIDSDKType;
   state: Lease_State;
-  price?: DecCoinSDKType;
+  price: DecCoinSDKType;
   created_at: bigint;
   closed_on: bigint;
 }
@@ -103,11 +103,11 @@ export interface LeaseFiltersSDKType {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLease {
-  bidId?: BidID;
+  bidId: BidID;
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
-  bid_id?: BidIDSDKType;
+  bid_id: BidIDSDKType;
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
@@ -115,11 +115,11 @@ export interface MsgCreateLeaseResponse {}
 export interface MsgCreateLeaseResponseSDKType {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
-  bidId?: LeaseID;
+  bidId: LeaseID;
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
-  bid_id?: LeaseIDSDKType;
+  bid_id: LeaseIDSDKType;
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
@@ -127,11 +127,11 @@ export interface MsgWithdrawLeaseResponse {}
 export interface MsgWithdrawLeaseResponseSDKType {}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
-  lease_id?: LeaseIDSDKType;
+  lease_id: LeaseIDSDKType;
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}

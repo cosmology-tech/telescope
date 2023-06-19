@@ -25,14 +25,14 @@ export interface Gauge {
    * distribute_to is where the gauge rewards are distributed to.
    * This is queried via lock duration or by timestamp
    */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /**
    * coins is the total amount of coins that have been in the gauge
    * Can distribute multiple coin denoms
    */
   coins: Coin[];
   /** start_time is the distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /**
    * num_epochs_paid_over is the number of total epochs distribution will be
    * completed over
@@ -103,9 +103,9 @@ export interface GaugeAminoMsg {
 export interface GaugeSDKType {
   id: Long;
   is_perpetual: boolean;
-  distribute_to?: QueryConditionSDKType;
+  distribute_to: QueryConditionSDKType;
   coins: CoinSDKType[];
-  start_time?: Date;
+  start_time: Date;
   num_epochs_paid_over: Long;
   filled_epochs: Long;
   distributed_coins: CoinSDKType[];

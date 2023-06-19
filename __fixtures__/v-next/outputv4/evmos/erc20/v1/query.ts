@@ -10,14 +10,14 @@ export const protobufPackage = "evmos.erc20.v1";
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
  * method.
  */
 export interface QueryTokenPairsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -26,7 +26,7 @@ export interface QueryTokenPairsRequestSDKType {
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -34,7 +34,7 @@ export interface QueryTokenPairsResponse {
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
@@ -53,14 +53,14 @@ export interface QueryTokenPairRequestSDKType {
  * method.
  */
 export interface QueryTokenPairResponse {
-  tokenPair?: TokenPair;
+  tokenPair: TokenPair;
 }
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
  * method.
  */
 export interface QueryTokenPairResponseSDKType {
-  token_pair?: TokenPairSDKType;
+  token_pair: TokenPairSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -71,14 +71,14 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {

@@ -11,8 +11,8 @@ export interface MsgCreatePosition {
   sender: string;
   lowerTick: bigint;
   upperTick: bigint;
-  tokenDesired0?: Coin;
-  tokenDesired1?: Coin;
+  tokenDesired0: Coin;
+  tokenDesired1: Coin;
   tokenMinAmount0: string;
   tokenMinAmount1: string;
 }
@@ -22,8 +22,8 @@ export interface MsgCreatePositionSDKType {
   sender: string;
   lower_tick: bigint;
   upper_tick: bigint;
-  token_desired0?: CoinSDKType;
-  token_desired1?: CoinSDKType;
+  token_desired0: CoinSDKType;
+  token_desired1: CoinSDKType;
   token_min_amount0: string;
   token_min_amount1: string;
 }
@@ -31,14 +31,14 @@ export interface MsgCreatePositionResponse {
   positionId: bigint;
   amount0: string;
   amount1: string;
-  joinTime?: Date;
+  joinTime: Date;
   liquidityCreated: string;
 }
 export interface MsgCreatePositionResponseSDKType {
   position_id: bigint;
   amount0: string;
   amount1: string;
-  join_time?: Date;
+  join_time: Date;
   liquidity_created: string;
 }
 /** ===================== MsgWithdrawPosition */
@@ -100,8 +100,8 @@ export interface MsgCreateIncentive {
   incentiveDenom: string;
   incentiveAmount: string;
   emissionRate: string;
-  startTime?: Date;
-  minUptime?: Duration;
+  startTime: Date;
+  minUptime: Duration;
 }
 /** ===================== MsgCreateIncentive */
 export interface MsgCreateIncentiveSDKType {
@@ -110,22 +110,22 @@ export interface MsgCreateIncentiveSDKType {
   incentive_denom: string;
   incentive_amount: string;
   emission_rate: string;
-  start_time?: Date;
-  min_uptime?: DurationSDKType;
+  start_time: Date;
+  min_uptime: DurationSDKType;
 }
 export interface MsgCreateIncentiveResponse {
   incentiveDenom: string;
   incentiveAmount: string;
   emissionRate: string;
-  startTime?: Date;
-  minUptime?: Duration;
+  startTime: Date;
+  minUptime: Duration;
 }
 export interface MsgCreateIncentiveResponseSDKType {
   incentive_denom: string;
   incentive_amount: string;
   emission_rate: string;
-  start_time?: Date;
-  min_uptime?: DurationSDKType;
+  start_time: Date;
+  min_uptime: DurationSDKType;
 }
 /** ===================== MsgFungifyChargedPositions */
 export interface MsgFungifyChargedPositions {

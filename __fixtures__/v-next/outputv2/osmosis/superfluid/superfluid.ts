@@ -170,8 +170,8 @@ export interface OsmoEquivalentMultiplierRecordSDKType {
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
-  delegationAmount?: Coin;
-  equivalentStakedAmount?: Coin;
+  delegationAmount: Coin;
+  equivalentStakedAmount: Coin;
 }
 export interface SuperfluidDelegationRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
@@ -198,8 +198,8 @@ export interface SuperfluidDelegationRecordAminoMsg {
 export interface SuperfluidDelegationRecordSDKType {
   delegator_address: string;
   validator_address: string;
-  delegation_amount?: CoinSDKType;
-  equivalent_staked_amount?: CoinSDKType;
+  delegation_amount: CoinSDKType;
+  equivalent_staked_amount: CoinSDKType;
 }
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the

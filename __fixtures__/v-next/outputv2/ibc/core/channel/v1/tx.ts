@@ -9,7 +9,7 @@ export const protobufPackage = "ibc.core.channel.v1";
  */
 export interface MsgChannelOpenInit {
   portId: string;
-  channel?: Channel;
+  channel: Channel;
   signer: string;
 }
 export interface MsgChannelOpenInitProtoMsg {
@@ -35,7 +35,7 @@ export interface MsgChannelOpenInitAminoMsg {
  */
 export interface MsgChannelOpenInitSDKType {
   port_id: string;
-  channel?: ChannelSDKType;
+  channel: ChannelSDKType;
   signer: string;
 }
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
@@ -63,10 +63,10 @@ export interface MsgChannelOpenTry {
    * the channel identifier of the previous channel in state INIT
    */
   previousChannelId: string;
-  channel?: Channel;
+  channel: Channel;
   counterpartyVersion: string;
   proofInit: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgChannelOpenTryProtoMsg {
@@ -101,10 +101,10 @@ export interface MsgChannelOpenTryAminoMsg {
 export interface MsgChannelOpenTrySDKType {
   port_id: string;
   previous_channel_id: string;
-  channel?: ChannelSDKType;
+  channel: ChannelSDKType;
   counterparty_version: string;
   proof_init: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
@@ -131,7 +131,7 @@ export interface MsgChannelOpenAck {
   counterpartyChannelId: string;
   counterpartyVersion: string;
   proofTry: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgChannelOpenAckProtoMsg {
@@ -165,7 +165,7 @@ export interface MsgChannelOpenAckSDKType {
   counterparty_channel_id: string;
   counterparty_version: string;
   proof_try: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
@@ -190,7 +190,7 @@ export interface MsgChannelOpenConfirm {
   portId: string;
   channelId: string;
   proofAck: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgChannelOpenConfirmProtoMsg {
@@ -220,7 +220,7 @@ export interface MsgChannelOpenConfirmSDKType {
   port_id: string;
   channel_id: string;
   proof_ack: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /**
@@ -303,7 +303,7 @@ export interface MsgChannelCloseConfirm {
   portId: string;
   channelId: string;
   proofInit: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgChannelCloseConfirmProtoMsg {
@@ -333,7 +333,7 @@ export interface MsgChannelCloseConfirmSDKType {
   port_id: string;
   channel_id: string;
   proof_init: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /**
@@ -361,9 +361,9 @@ export interface MsgChannelCloseConfirmResponseAminoMsg {
 export interface MsgChannelCloseConfirmResponseSDKType {}
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacket {
-  packet?: Packet;
+  packet: Packet;
   proofCommitment: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgRecvPacketProtoMsg {
@@ -383,9 +383,9 @@ export interface MsgRecvPacketAminoMsg {
 }
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketSDKType {
-  packet?: PacketSDKType;
+  packet: PacketSDKType;
   proof_commitment: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
@@ -404,9 +404,9 @@ export interface MsgRecvPacketResponseAminoMsg {
 export interface MsgRecvPacketResponseSDKType {}
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeout {
-  packet?: Packet;
+  packet: Packet;
   proofUnreceived: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   nextSequenceRecv: Long;
   signer: string;
 }
@@ -428,9 +428,9 @@ export interface MsgTimeoutAminoMsg {
 }
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutSDKType {
-  packet?: PacketSDKType;
+  packet: PacketSDKType;
   proof_unreceived: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   next_sequence_recv: Long;
   signer: string;
 }
@@ -450,10 +450,10 @@ export interface MsgTimeoutResponseAminoMsg {
 export interface MsgTimeoutResponseSDKType {}
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnClose {
-  packet?: Packet;
+  packet: Packet;
   proofUnreceived: Uint8Array;
   proofClose: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   nextSequenceRecv: Long;
   signer: string;
 }
@@ -476,10 +476,10 @@ export interface MsgTimeoutOnCloseAminoMsg {
 }
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseSDKType {
-  packet?: PacketSDKType;
+  packet: PacketSDKType;
   proof_unreceived: Uint8Array;
   proof_close: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   next_sequence_recv: Long;
   signer: string;
 }
@@ -499,10 +499,10 @@ export interface MsgTimeoutOnCloseResponseAminoMsg {
 export interface MsgTimeoutOnCloseResponseSDKType {}
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgement {
-  packet?: Packet;
+  packet: Packet;
   acknowledgement: Uint8Array;
   proofAcked: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 export interface MsgAcknowledgementProtoMsg {
@@ -523,10 +523,10 @@ export interface MsgAcknowledgementAminoMsg {
 }
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementSDKType {
-  packet?: PacketSDKType;
+  packet: PacketSDKType;
   acknowledgement: Uint8Array;
   proof_acked: Uint8Array;
-  proof_height?: HeightSDKType;
+  proof_height: HeightSDKType;
   signer: string;
 }
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */

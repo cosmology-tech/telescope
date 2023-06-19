@@ -48,12 +48,12 @@ export interface MsgSetPoolWeights {
   /** admin is the account that is authorized to set the pool weights. */
   admin: string;
   /** pool_weights is the list of pool weights to set. */
-  poolWeights?: PoolWeights;
+  poolWeights: PoolWeights;
 }
 /** MsgSetPoolWeights defines the Msg/SetPoolWeights request type. */
 export interface MsgSetPoolWeightsSDKType {
   admin: string;
-  pool_weights?: PoolWeightsSDKType;
+  pool_weights: PoolWeightsSDKType;
 }
 /** MsgSetPoolWeightsResponse defines the Msg/SetPoolWeights response type. */
 export interface MsgSetPoolWeightsResponse {}

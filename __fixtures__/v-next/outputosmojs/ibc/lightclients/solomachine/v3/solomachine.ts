@@ -11,7 +11,7 @@ export interface ClientState {
   sequence: bigint;
   /** frozen sequence of the solo machine */
   isFrozen: boolean;
-  consensusState?: ConsensusState;
+  consensusState: ConsensusState;
 }
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -20,7 +20,7 @@ export interface ClientState {
 export interface ClientStateSDKType {
   sequence: bigint;
   is_frozen: boolean;
-  consensus_state?: ConsensusStateSDKType;
+  consensus_state: ConsensusStateSDKType;
 }
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -29,7 +29,7 @@ export interface ClientStateSDKType {
  */
 export interface ConsensusState {
   /** public key of the solo machine */
-  publicKey?: Any;
+  publicKey: Any;
   /**
    * diversifier allows the same public key to be re-used across different solo
    * machine clients (potentially on different chains) without being considered
@@ -44,7 +44,7 @@ export interface ConsensusState {
  * consensus state.
  */
 export interface ConsensusStateSDKType {
-  public_key?: AnySDKType;
+  public_key: AnySDKType;
   diversifier: string;
   timestamp: bigint;
 }
@@ -52,14 +52,14 @@ export interface ConsensusStateSDKType {
 export interface Header {
   timestamp: bigint;
   signature: Uint8Array;
-  newPublicKey?: Any;
+  newPublicKey: Any;
   newDiversifier: string;
 }
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
   timestamp: bigint;
   signature: Uint8Array;
-  new_public_key?: AnySDKType;
+  new_public_key: AnySDKType;
   new_diversifier: string;
 }
 /**
@@ -68,8 +68,8 @@ export interface HeaderSDKType {
  */
 export interface Misbehaviour {
   sequence: bigint;
-  signatureOne?: SignatureAndData;
-  signatureTwo?: SignatureAndData;
+  signatureOne: SignatureAndData;
+  signatureTwo: SignatureAndData;
 }
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
@@ -77,8 +77,8 @@ export interface Misbehaviour {
  */
 export interface MisbehaviourSDKType {
   sequence: bigint;
-  signature_one?: SignatureAndDataSDKType;
-  signature_two?: SignatureAndDataSDKType;
+  signature_one: SignatureAndDataSDKType;
+  signature_two: SignatureAndDataSDKType;
 }
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -140,13 +140,13 @@ export interface SignBytesSDKType {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
-  newPubKey?: Any;
+  newPubKey: Any;
   /** header diversifier */
   newDiversifier: string;
 }
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
-  new_pub_key?: AnySDKType;
+  new_pub_key: AnySDKType;
   new_diversifier: string;
 }
 function createBaseClientState(): ClientState {
