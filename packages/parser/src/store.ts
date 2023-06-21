@@ -1,5 +1,5 @@
 import { sync as glob } from 'glob';
-import { parse } from '@pyramation/protobufjs';
+import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
@@ -144,7 +144,7 @@ export class ProtoStore {
 
                     // NOT FOUND
                     const filler = GOOGLE_PROTOS.find(([f, v]) => { return f === goog });
-                    if (!filler) return; // technically an error should be thrown 
+                    if (!filler) return; // technically an error should be thrown
 
                     // we have the filler
                     if (!neededFromGoogle.find(file => file.filename === goog)) {
