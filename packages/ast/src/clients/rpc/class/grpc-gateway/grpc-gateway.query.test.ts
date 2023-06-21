@@ -24,3 +24,12 @@ it('GRPC-Gateway Service Client', () => {
     expectCode(createGRPCGatewayQueryClass(context, service));
     expectCode(createGRPCGatewayWrapperClass(context, service));
 });
+
+it('GRPC-Gateway Query Client with 2 params', () => {
+    const ref = store.findProto('cosmos/staking/v1beta1/query.proto');
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store, store.options);
+    expectCode(createGRPCGatewayQueryClass(context, service));
+    expectCode(createGRPCGatewayWrapperClass(context, service));
+});
