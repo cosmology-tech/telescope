@@ -5,7 +5,7 @@ interface ParseProtoOptions {
     alternateCommentMode?: boolean;
     preferTrailingComment?: boolean;
 }
-export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@pyramation/protobufjs").IParserResult;
+export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@cosmology/protobufjs").IParserResult;
 export declare class ProtoStore {
     files: string[];
     protoDirs: string[];
@@ -30,7 +30,7 @@ export declare class ProtoStore {
     }[]): {
         absolute: string;
         filename: string;
-        proto: import("@pyramation/protobufjs").IParserResult;
+        proto: import("@cosmology/protobufjs").IParserResult;
     }[];
     getProtos(): ProtoRef[];
     getPackages(): string[];
