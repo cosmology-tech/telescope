@@ -7,8 +7,7 @@
 In the root directory:
 
 ```
-yarn 
-yarn bootstrap  ## this links the local packages instead of the versions that live on npm
+yarn bootstrap  ## this installs dependencies and links the local packages instead of the versions that live on npm
 yarn build      ## this recursively builds all packages (this command also exists inside each package)
 ```
 
