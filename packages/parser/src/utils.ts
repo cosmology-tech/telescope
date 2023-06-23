@@ -1,5 +1,5 @@
 import dotty from 'dotty';
-import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
+import { Service, Type, Enum, Root, Namespace } from '@cosmology/protobufjs';
 import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@osmonauts/types';
 import { ProtoStore } from './store';
 import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@osmonauts/ast';

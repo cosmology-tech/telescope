@@ -19,7 +19,7 @@ import {
     getPluginValue
 } from '@osmonauts/ast';
 
-import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
+import { Service, Type, Field, Enum, Root, Namespace } from '@cosmology/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
 import { ProtoStore } from './store';
