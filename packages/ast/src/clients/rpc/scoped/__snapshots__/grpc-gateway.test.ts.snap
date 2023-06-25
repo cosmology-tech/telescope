@@ -23,11 +23,11 @@ exports[`createScopedGrpcWebFactory 1`] = `
       },
       base: {
         tendermint: {
-          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).QueryClientImpl(endpoint)
+          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).ServiceClientImpl(endpoint)
         }
       },
       tx: {
-        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).QueryClientImpl(endpoint)
+        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).ServiceClientImpl(endpoint)
       }
     },
     cosmwasm: {
