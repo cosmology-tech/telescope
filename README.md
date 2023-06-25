@@ -656,7 +656,7 @@ const options: TelescopeOptions = {
 };
 ```
 
-This will generate helpers `createGrpcWebClient` and `createGrpcMsgClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object:
+This will generate helpers `createGrpcWebClient` and `createGrpcMsgClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object, if you need an example with scaffold and broadcast msg you can refer to the example below in `grpc-gateway`:
 
 ```js
 import { osmosis } from './codegen';
@@ -699,7 +699,37 @@ const main = async () => {
 };
 ```
 
+Below will be an example of scaffold a `grant` Proto Msg for grpc-web and grpc-gateway and then broadcast it.
 
+```js
+  const { grant } = cosmos.authz.v1beta1.MessageComposer.withTypeUrl;
+  const msg = grant({
+      granter: 'granter_address',
+      grantee: 'grantee_address',
+      grant: {
+        authorization: StakeAuthorization.toProtoMsg({
+          maxTokens: {
+                  denom: 'uosmo',
+                  amount: '100000000'
+                },
+                authorizationType: AuthorizationType.AUTHORIZATION_TYPE_DELEGATE
+              }),
+            expiration: new Date(Date.now() + 60 * 60 * 24 * 7)
+  }})
+
+    const signed_tx = await signClient.sign('granter_address', [msg], fee, 'telescope: grant', signerData);
+    const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
+
+    const res = await client.cosmos.tx.v1beta1.broadcastTx(  
+      {
+        txBytes: txRawBytes,
+        mode: BroadcastMode.BROADCAST_MODE_BLOCK
+      }
+    )
+
+    console.log(res);
+
+```
 
 ## RPC Client Classes
 
