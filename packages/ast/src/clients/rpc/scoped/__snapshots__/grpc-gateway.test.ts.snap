@@ -10,29 +10,29 @@ exports[`createScopedGrpcWebFactory 1`] = `
   return {
     cosmos: {
       app: {
-        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).Querier(endpoint)
+        v1alpha1: new (await import("../cosmos/app/v1alpha1/query.rpc.Query")).QueryClientImpl(endpoint)
       },
       auth: {
-        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).Querier(endpoint)
+        v1beta1: new (await import("../cosmos/auth/v1beta1/query.rpc.Query")).QueryClientImpl(endpoint)
       },
       authz: {
-        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).Querier(endpoint)
+        v1beta1: new (await import("../cosmos/authz/v1beta1/query.rpc.Query")).QueryClientImpl(endpoint)
       },
       bank: {
-        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).Querier(endpoint)
+        v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.Query")).QueryClientImpl(endpoint)
       },
       base: {
         tendermint: {
-          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).Querier(endpoint)
+          v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).QueryClientImpl(endpoint)
         }
       },
       tx: {
-        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).Querier(endpoint)
+        v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.Service")).QueryClientImpl(endpoint)
       }
     },
     cosmwasm: {
       wasm: {
-        v1: new (await import("./wasm/v1/query.rpc.Query")).Querier(endpoint)
+        v1: new (await import("./wasm/v1/query.rpc.Query")).QueryClientImpl(endpoint)
       }
     }
   };

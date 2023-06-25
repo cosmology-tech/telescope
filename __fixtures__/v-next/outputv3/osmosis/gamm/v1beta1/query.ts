@@ -32,7 +32,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool: (Pool1 & Pool2 & Any) | undefined;
+  pool: Pool1 | Pool2 | Any | undefined;
 }
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
@@ -74,7 +74,7 @@ export interface QueryPoolsRequestSDKType {
   pagination: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -465,7 +465,7 @@ export interface QueryPoolsWithFilterRequestSDKType {
   pagination: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }

@@ -583,6 +583,14 @@ export const createGRPCGatewayWrapperClass = (
     service: ProtoService
 ) => {
     const serviceName = service.name;
+    let className: string;
+    if (serviceName === 'Query') {
+        // QueryClientImp for wrapper class
+        className = 'QueryClientImpl'
+    } else {
+        className = 'ServiceClientImpl'
+    }
+    
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
@@ -601,7 +609,7 @@ export const createGRPCGatewayWrapperClass = (
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
-            t.identifier('Querier'),
+            t.identifier(className),
             null,
             t.classBody(
                 [

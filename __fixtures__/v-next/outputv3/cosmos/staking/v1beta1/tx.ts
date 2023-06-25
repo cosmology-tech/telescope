@@ -14,7 +14,7 @@ export interface MsgCreateValidator {
   minSelfDelegation: string;
   delegatorAddress: string;
   validatorAddress: string;
-  pubkey: (Any) | undefined;
+  pubkey: Any | undefined;
   value: Coin;
 }
 export interface MsgCreateValidatorProtoMsg {

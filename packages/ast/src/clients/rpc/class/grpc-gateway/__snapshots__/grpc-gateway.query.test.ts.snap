@@ -96,7 +96,7 @@ exports[`GRPC-Gateway Query Client 1`] = `
 `;
 
 exports[`GRPC-Gateway Query Client 2`] = `
-"export class Querier {
+"export class QueryClientImpl {
   private readonly url: string;
   constructor(url: string) {
     this.url = url;
@@ -320,7 +320,7 @@ exports[`GRPC-Gateway Query Client with 2 params 1`] = `
 `;
 
 exports[`GRPC-Gateway Query Client with 2 params 2`] = `
-"export class Querier {
+"export class QueryClientImpl {
   private readonly url: string;
   constructor(url: string) {
     this.url = url;
@@ -491,7 +491,7 @@ exports[`GRPC-Gateway Service Client 1`] = `
 `;
 
 exports[`GRPC-Gateway Service Client 2`] = `
-"export class Querier {
+"export class ServiceClientImpl {
   private readonly url: string;
   constructor(url: string) {
     this.url = url;
