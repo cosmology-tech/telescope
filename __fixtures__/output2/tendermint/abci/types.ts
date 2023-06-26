@@ -3258,7 +3258,7 @@ export const Validator = {
 };
 function createBaseValidatorUpdate(): ValidatorUpdate {
   return {
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     power: Long.ZERO
   };
 }

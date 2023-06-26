@@ -129,7 +129,7 @@ export const ValidatorSet = {
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: BigInt(0),
     proposerPriority: BigInt(0)
   };
@@ -227,7 +227,7 @@ export const Validator = {
 };
 function createBaseSimpleValidator(): SimpleValidator {
   return {
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: BigInt(0)
   };
 }
