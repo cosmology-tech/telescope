@@ -246,7 +246,7 @@ export const QueryProposalRequest = {
 };
 function createBaseQueryProposalResponse(): QueryProposalResponse {
   return {
-    proposal: undefined
+    proposal: Proposal.fromPartial({})
   };
 }
 export const QueryProposalResponse = {
@@ -304,7 +304,7 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
     proposalStatus: 0,
     voter: "",
     depositor: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProposalsRequest = {
@@ -393,7 +393,7 @@ export const QueryProposalsRequest = {
 function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   return {
     proposals: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProposalsResponse = {
@@ -534,7 +534,7 @@ export const QueryVoteRequest = {
 };
 function createBaseQueryVoteResponse(): QueryVoteResponse {
   return {
-    vote: undefined
+    vote: Vote.fromPartial({})
   };
 }
 export const QueryVoteResponse = {
@@ -590,7 +590,7 @@ export const QueryVoteResponse = {
 function createBaseQueryVotesRequest(): QueryVotesRequest {
   return {
     proposalId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryVotesRequest = {
@@ -657,7 +657,7 @@ export const QueryVotesRequest = {
 function createBaseQueryVotesResponse(): QueryVotesResponse {
   return {
     votes: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryVotesResponse = {
@@ -786,9 +786,9 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    votingParams: undefined,
-    depositParams: undefined,
-    tallyParams: undefined
+    votingParams: VotingParams.fromPartial({}),
+    depositParams: DepositParams.fromPartial({}),
+    tallyParams: TallyParams.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -932,7 +932,7 @@ export const QueryDepositRequest = {
 };
 function createBaseQueryDepositResponse(): QueryDepositResponse {
   return {
-    deposit: undefined
+    deposit: Deposit.fromPartial({})
   };
 }
 export const QueryDepositResponse = {
@@ -988,7 +988,7 @@ export const QueryDepositResponse = {
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return {
     proposalId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDepositsRequest = {
@@ -1055,7 +1055,7 @@ export const QueryDepositsRequest = {
 function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   return {
     deposits: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDepositsResponse = {
@@ -1184,7 +1184,7 @@ export const QueryTallyResultRequest = {
 };
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return {
-    tally: undefined
+    tally: TallyResult.fromPartial({})
   };
 }
 export const QueryTallyResultResponse = {

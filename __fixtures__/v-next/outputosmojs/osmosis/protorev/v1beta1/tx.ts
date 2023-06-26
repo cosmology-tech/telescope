@@ -377,7 +377,7 @@ export const MsgSetDeveloperAccountResponse = {
 function createBaseMsgSetPoolWeights(): MsgSetPoolWeights {
   return {
     admin: "",
-    poolWeights: undefined
+    poolWeights: PoolWeights.fromPartial({})
   };
 }
 export const MsgSetPoolWeights = {

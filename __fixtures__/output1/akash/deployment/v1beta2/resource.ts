@@ -17,9 +17,9 @@ export interface ResourceSDKType {
 }
 function createBaseResource(): Resource {
   return {
-    resources: undefined,
+    resources: ResourceUnits.fromPartial({}),
     count: 0,
-    price: undefined
+    price: DecCoin.fromPartial({})
   };
 }
 export const Resource = {

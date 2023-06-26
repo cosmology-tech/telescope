@@ -96,7 +96,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     pools: [],
     nextPoolNumber: BigInt(0),
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

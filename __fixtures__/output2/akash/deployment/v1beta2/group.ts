@@ -68,9 +68,9 @@ export interface Group {
 }
 function createBaseGroup(): Group {
   return {
-    groupId: undefined,
+    groupId: GroupID.fromPartial({}),
     state: 0,
-    groupSpec: undefined,
+    groupSpec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

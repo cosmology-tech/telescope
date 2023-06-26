@@ -22,7 +22,7 @@ export interface SimpleValidator {
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: undefined,
+    proposer: Validator.fromPartial({}),
     totalVotingPower: Long.ZERO
   };
 }

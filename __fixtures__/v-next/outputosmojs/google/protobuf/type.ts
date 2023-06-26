@@ -374,7 +374,7 @@ function createBaseType(): Type {
     fields: [],
     oneofs: [],
     options: [],
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     syntax: 0
   };
 }
@@ -707,7 +707,7 @@ function createBaseEnum(): Enum {
     name: "",
     enumvalue: [],
     options: [],
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     syntax: 0
   };
 }
@@ -927,7 +927,7 @@ export const EnumValue = {
 function createBaseOption(): Option {
   return {
     name: "",
-    value: undefined
+    value: Any.fromPartial({})
   };
 }
 export const Option = {

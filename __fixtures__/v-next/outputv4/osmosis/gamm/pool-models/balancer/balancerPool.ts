@@ -422,7 +422,7 @@ function createBasePool(): Pool {
   return {
     address: "",
     id: BigInt(0),
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
     totalShares: undefined,
     poolAssets: [],

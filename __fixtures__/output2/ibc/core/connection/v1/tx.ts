@@ -95,8 +95,8 @@ export interface MsgConnectionOpenConfirmResponse {}
 function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
   return {
     clientId: "",
-    counterparty: undefined,
-    version: undefined,
+    counterparty: Counterparty.fromPartial({}),
+    version: Version.fromPartial({}),
     delayPeriod: Long.UZERO,
     signer: ""
   };
@@ -215,14 +215,14 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
     clientId: "",
     previousConnectionId: "",
     clientState: undefined,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     delayPeriod: Long.UZERO,
     counterpartyVersions: [],
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     proofInit: new Uint8Array(),
     proofClient: new Uint8Array(),
     proofConsensus: new Uint8Array(),
-    consensusHeight: undefined,
+    consensusHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -406,13 +406,13 @@ function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
   return {
     connectionId: "",
     counterpartyConnectionId: "",
-    version: undefined,
+    version: Version.fromPartial({}),
     clientState: undefined,
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     proofTry: new Uint8Array(),
     proofClient: new Uint8Array(),
     proofConsensus: new Uint8Array(),
-    consensusHeight: undefined,
+    consensusHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -574,7 +574,7 @@ function createBaseMsgConnectionOpenConfirm(): MsgConnectionOpenConfirm {
   return {
     connectionId: "",
     proofAck: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }

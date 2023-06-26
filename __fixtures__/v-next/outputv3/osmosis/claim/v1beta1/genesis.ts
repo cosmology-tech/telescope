@@ -39,7 +39,7 @@ export interface GenesisStateSDKType {
 function createBaseGenesisState(): GenesisState {
   return {
     moduleAccountBalance: undefined,
-    params: undefined,
+    params: Params.fromPartial({}),
     claimRecords: []
   };
 }

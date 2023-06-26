@@ -345,7 +345,7 @@ export const QueryGroupInfoRequest = {
 };
 function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
   return {
-    info: undefined
+    info: GroupInfo.fromPartial({})
   };
 }
 export const QueryGroupInfoResponse = {
@@ -455,7 +455,7 @@ export const QueryGroupPolicyInfoRequest = {
 };
 function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse {
   return {
-    info: undefined
+    info: GroupPolicyInfo.fromPartial({})
   };
 }
 export const QueryGroupPolicyInfoResponse = {
@@ -511,7 +511,7 @@ export const QueryGroupPolicyInfoResponse = {
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
   return {
     groupId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGroupMembersRequest = {
@@ -578,7 +578,7 @@ export const QueryGroupMembersRequest = {
 function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
   return {
     members: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGroupMembersResponse = {
@@ -653,7 +653,7 @@ export const QueryGroupMembersResponse = {
 function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
   return {
     admin: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGroupsByAdminRequest = {
@@ -720,7 +720,7 @@ export const QueryGroupsByAdminRequest = {
 function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
   return {
     groups: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGroupsByAdminResponse = {
@@ -795,7 +795,7 @@ export const QueryGroupsByAdminResponse = {
 function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
   return {
     groupId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGroupPoliciesByGroupRequest = {
@@ -862,7 +862,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
   return {
     groupPolicies: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGroupPoliciesByGroupResponse = {
@@ -937,7 +937,7 @@ export const QueryGroupPoliciesByGroupResponse = {
 function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdminRequest {
   return {
     admin: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGroupPoliciesByAdminRequest = {
@@ -1004,7 +1004,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
   return {
     groupPolicies: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGroupPoliciesByAdminResponse = {
@@ -1133,7 +1133,7 @@ export const QueryProposalRequest = {
 };
 function createBaseQueryProposalResponse(): QueryProposalResponse {
   return {
-    proposal: undefined
+    proposal: Proposal.fromPartial({})
   };
 }
 export const QueryProposalResponse = {
@@ -1189,7 +1189,7 @@ export const QueryProposalResponse = {
 function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPolicyRequest {
   return {
     address: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProposalsByGroupPolicyRequest = {
@@ -1256,7 +1256,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupPolicyResponse {
   return {
     proposals: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProposalsByGroupPolicyResponse = {
@@ -1397,7 +1397,7 @@ export const QueryVoteByProposalVoterRequest = {
 };
 function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterResponse {
   return {
-    vote: undefined
+    vote: Vote.fromPartial({})
   };
 }
 export const QueryVoteByProposalVoterResponse = {
@@ -1453,7 +1453,7 @@ export const QueryVoteByProposalVoterResponse = {
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
   return {
     proposalId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryVotesByProposalRequest = {
@@ -1520,7 +1520,7 @@ export const QueryVotesByProposalRequest = {
 function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
   return {
     votes: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryVotesByProposalResponse = {
@@ -1595,7 +1595,7 @@ export const QueryVotesByProposalResponse = {
 function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
   return {
     voter: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryVotesByVoterRequest = {
@@ -1662,7 +1662,7 @@ export const QueryVotesByVoterRequest = {
 function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
   return {
     votes: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryVotesByVoterResponse = {
@@ -1737,7 +1737,7 @@ export const QueryVotesByVoterResponse = {
 function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
   return {
     address: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGroupsByMemberRequest = {
@@ -1804,7 +1804,7 @@ export const QueryGroupsByMemberRequest = {
 function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
   return {
     groups: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGroupsByMemberResponse = {
@@ -1933,7 +1933,7 @@ export const QueryTallyResultRequest = {
 };
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return {
-    tally: undefined
+    tally: TallyResult.fromPartial({})
   };
 }
 export const QueryTallyResultResponse = {

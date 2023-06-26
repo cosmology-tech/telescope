@@ -210,7 +210,7 @@ export const QueryContractInfoRequest = {
 function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
   return {
     address: "",
-    contractInfo: undefined
+    contractInfo: ContractInfo.fromPartial({})
   };
 }
 export const QueryContractInfoResponse = {
@@ -265,7 +265,7 @@ export const QueryContractInfoResponse = {
 function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
   return {
     address: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryContractHistoryRequest = {
@@ -320,7 +320,7 @@ export const QueryContractHistoryRequest = {
 function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse {
   return {
     entries: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryContractHistoryResponse = {
@@ -379,7 +379,7 @@ export const QueryContractHistoryResponse = {
 function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
   return {
     codeId: Long.UZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryContractsByCodeRequest = {
@@ -434,7 +434,7 @@ export const QueryContractsByCodeRequest = {
 function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse {
   return {
     contracts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryContractsByCodeResponse = {
@@ -493,7 +493,7 @@ export const QueryContractsByCodeResponse = {
 function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest {
   return {
     address: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllContractStateRequest = {
@@ -548,7 +548,7 @@ export const QueryAllContractStateRequest = {
 function createBaseQueryAllContractStateResponse(): QueryAllContractStateResponse {
   return {
     models: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllContractStateResponse = {
@@ -854,7 +854,7 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
     codeId: Long.UZERO,
     creator: "",
     dataHash: new Uint8Array(),
-    instantiatePermission: undefined
+    instantiatePermission: AccessConfig.fromPartial({})
   };
 }
 export const CodeInfoResponse = {
@@ -926,7 +926,7 @@ export const CodeInfoResponse = {
 };
 function createBaseQueryCodeResponse(): QueryCodeResponse {
   return {
-    codeInfo: undefined,
+    codeInfo: CodeInfoResponse.fromPartial({}),
     data: new Uint8Array()
   };
 }
@@ -981,7 +981,7 @@ export const QueryCodeResponse = {
 };
 function createBaseQueryCodesRequest(): QueryCodesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryCodesRequest = {
@@ -1027,7 +1027,7 @@ export const QueryCodesRequest = {
 function createBaseQueryCodesResponse(): QueryCodesResponse {
   return {
     codeInfos: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryCodesResponse = {
@@ -1085,7 +1085,7 @@ export const QueryCodesResponse = {
 };
 function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPinnedCodesRequest = {
@@ -1131,7 +1131,7 @@ export const QueryPinnedCodesRequest = {
 function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
   return {
     codeIds: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPinnedCodesResponse = {

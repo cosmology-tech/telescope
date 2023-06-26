@@ -37,7 +37,7 @@ export interface LastValidatorPower {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     lastTotalPower: new Uint8Array(),
     lastValidatorPowers: [],
     validators: [],

@@ -160,7 +160,7 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
     description: "",
     runAs: "",
     wasmByteCode: new Uint8Array(),
-    instantiatePermission: undefined
+    instantiatePermission: AccessConfig.fromPartial({})
   };
 }
 export const StoreCodeProposal = {
@@ -916,7 +916,7 @@ export const UnpinCodesProposal = {
 function createBaseAccessConfigUpdate(): AccessConfigUpdate {
   return {
     codeId: Long.UZERO,
-    instantiatePermission: undefined
+    instantiatePermission: AccessConfig.fromPartial({})
   };
 }
 export const AccessConfigUpdate = {

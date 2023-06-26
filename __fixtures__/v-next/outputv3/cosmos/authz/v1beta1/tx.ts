@@ -178,7 +178,7 @@ function createBaseMsgGrant(): MsgGrant {
   return {
     granter: "",
     grantee: "",
-    grant: undefined
+    grant: Grant.fromPartial({})
   };
 }
 export const MsgGrant = {

@@ -64,7 +64,7 @@ export interface QueryAuditorAttributesRequestSDKType {
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProvidersResponse = {
@@ -205,7 +205,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttributesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllProvidersAttributesRequest = {
@@ -261,7 +261,7 @@ export const QueryAllProvidersAttributesRequest = {
 function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequest {
   return {
     owner: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProviderAttributesRequest = {
@@ -395,7 +395,7 @@ export const QueryProviderAuditorRequest = {
 function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesRequest {
   return {
     auditor: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAuditorAttributesRequest = {

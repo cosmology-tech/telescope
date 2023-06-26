@@ -1595,7 +1595,7 @@ function createBaseLogBucket(): LogBucket {
     locked: false,
     lifecycleState: 0,
     restrictedFields: [],
-    cmekSettings: undefined
+    cmekSettings: CmekSettings.fromPartial({})
   };
 }
 export const LogBucket = {
@@ -2324,7 +2324,7 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
   return {
     parent: "",
     bucketId: "",
-    bucket: undefined
+    bucket: LogBucket.fromPartial({})
   };
 }
 export const CreateBucketRequest = {
@@ -2409,8 +2409,8 @@ export const CreateBucketRequest = {
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   return {
     name: "",
-    bucket: undefined,
-    updateMask: undefined
+    bucket: LogBucket.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateBucketRequest = {
@@ -2843,7 +2843,7 @@ function createBaseCreateViewRequest(): CreateViewRequest {
   return {
     parent: "",
     viewId: "",
-    view: undefined
+    view: LogView.fromPartial({})
   };
 }
 export const CreateViewRequest = {
@@ -2928,8 +2928,8 @@ export const CreateViewRequest = {
 function createBaseUpdateViewRequest(): UpdateViewRequest {
   return {
     name: "",
-    view: undefined,
-    updateMask: undefined
+    view: LogView.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateViewRequest = {
@@ -3361,7 +3361,7 @@ export const GetSinkRequest = {
 function createBaseCreateSinkRequest(): CreateSinkRequest {
   return {
     parent: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false
   };
 }
@@ -3447,9 +3447,9 @@ export const CreateSinkRequest = {
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   return {
     sinkName: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false,
-    updateMask: undefined
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSinkRequest = {
@@ -3958,7 +3958,7 @@ export const GetExclusionRequest = {
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   return {
     parent: "",
-    exclusion: undefined
+    exclusion: LogExclusion.fromPartial({})
   };
 }
 export const CreateExclusionRequest = {
@@ -4031,8 +4031,8 @@ export const CreateExclusionRequest = {
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   return {
     name: "",
-    exclusion: undefined,
-    updateMask: undefined
+    exclusion: LogExclusion.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateExclusionRequest = {
@@ -4237,8 +4237,8 @@ export const GetCmekSettingsRequest = {
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   return {
     name: "",
-    cmekSettings: undefined,
-    updateMask: undefined
+    cmekSettings: CmekSettings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateCmekSettingsRequest = {
@@ -4469,8 +4469,8 @@ export const GetSettingsRequest = {
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   return {
     name: "",
-    settings: undefined,
-    updateMask: undefined
+    settings: Settings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSettingsRequest = {
@@ -4756,7 +4756,7 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
     endTime: undefined,
     state: 0,
     cancellationRequested: false,
-    request: undefined,
+    request: CopyLogEntriesRequest.fromPartial({}),
     progress: 0,
     writerIdentity: ""
   };

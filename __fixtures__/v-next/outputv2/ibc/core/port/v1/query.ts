@@ -76,7 +76,7 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
     portId: "",
     connectionId: "",
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     proposedVersion: ""
   };
 }

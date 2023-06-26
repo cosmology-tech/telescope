@@ -80,10 +80,10 @@ export interface HashedParams {
 }
 function createBaseConsensusParams(): ConsensusParams {
   return {
-    block: undefined,
-    evidence: undefined,
-    validator: undefined,
-    version: undefined
+    block: BlockParams.fromPartial({}),
+    evidence: EvidenceParams.fromPartial({}),
+    validator: ValidatorParams.fromPartial({}),
+    version: VersionParams.fromPartial({})
   };
 }
 export const ConsensusParams = {

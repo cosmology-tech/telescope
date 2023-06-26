@@ -20,7 +20,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     lockableDurations: [],
     distrInfo: undefined,
     poolToGauges: undefined

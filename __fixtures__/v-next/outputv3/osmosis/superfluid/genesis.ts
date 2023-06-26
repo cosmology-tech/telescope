@@ -61,7 +61,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     superfluidAssets: [],
     osmoEquivalentMultipliers: [],
     intermediaryAccounts: [],

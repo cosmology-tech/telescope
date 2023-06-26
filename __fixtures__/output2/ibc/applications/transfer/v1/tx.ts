@@ -41,7 +41,7 @@ function createBaseMsgTransfer(): MsgTransfer {
     token: undefined,
     sender: "",
     receiver: "",
-    timeoutHeight: undefined,
+    timeoutHeight: Height.fromPartial({}),
     timeoutTimestamp: Long.UZERO
   };
 }

@@ -73,7 +73,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    param: undefined
+    param: ParamChange.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

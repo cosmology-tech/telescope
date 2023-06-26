@@ -74,7 +74,7 @@ export interface SimpleValidatorSDKType {
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: undefined,
+    proposer: Validator.fromPartial({}),
     totalVotingPower: Long.ZERO
   };
 }

@@ -162,7 +162,7 @@ export const Fee = {
 };
 function createBasePacketFee(): PacketFee {
   return {
-    fee: undefined,
+    fee: Fee.fromPartial({}),
     refundAddress: "",
     relayers: []
   };

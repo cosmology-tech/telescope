@@ -154,7 +154,7 @@ function createBaseRecord(): Record {
     numShares: "",
     initAccumValue: [],
     unclaimedRewards: [],
-    options: undefined
+    options: Options.fromPartial({})
   };
 }
 export const Record = {

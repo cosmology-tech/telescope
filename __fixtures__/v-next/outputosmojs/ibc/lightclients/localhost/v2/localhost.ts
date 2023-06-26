@@ -13,7 +13,7 @@ export interface ClientStateSDKType {
 }
 function createBaseClientState(): ClientState {
   return {
-    latestHeight: undefined
+    latestHeight: Height.fromPartial({})
   };
 }
 export const ClientState = {

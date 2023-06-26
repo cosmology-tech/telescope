@@ -505,7 +505,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     labels: {},
     entries: [],
     partialSuccess: false,
@@ -660,7 +660,7 @@ export const WriteLogEntriesResponse = {
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
     key: 0,
-    value: undefined
+    value: Status.fromPartial({})
   };
 }
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {

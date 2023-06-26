@@ -2568,7 +2568,7 @@ export const GetConsumerQuotaLimitRequest = {
 function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -2712,9 +2712,9 @@ export const CreateAdminOverrideRequest = {
 function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -3609,7 +3609,7 @@ export const ImportAdminOverridesMetadata = {
 function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -3753,9 +3753,9 @@ export const CreateConsumerOverrideRequest = {
 function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -5075,7 +5075,7 @@ export const GenerateServiceIdentityRequest = {
 };
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   return {
-    identity: undefined,
+    identity: ServiceIdentity.fromPartial({}),
     state: 0
   };
 }

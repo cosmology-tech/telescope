@@ -205,7 +205,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
     clientId: "",
     versions: [],
     state: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     delayPeriod: Long.UZERO
   };
 }
@@ -317,7 +317,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
     clientId: "",
     versions: [],
     state: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     delayPeriod: Long.UZERO
   };
 }
@@ -438,7 +438,7 @@ function createBaseCounterparty(): Counterparty {
   return {
     clientId: "",
     connectionId: "",
-    prefix: undefined
+    prefix: MerklePrefix.fromPartial({})
   };
 }
 export const Counterparty = {

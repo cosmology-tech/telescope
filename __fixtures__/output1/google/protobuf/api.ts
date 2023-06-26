@@ -282,7 +282,7 @@ function createBaseApi(): Api {
     methods: [],
     options: [],
     version: "",
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     mixins: [],
     syntax: 0
   };

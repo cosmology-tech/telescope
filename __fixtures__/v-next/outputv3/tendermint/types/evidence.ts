@@ -202,8 +202,8 @@ export const Evidence = {
 };
 function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
-    voteA: undefined,
-    voteB: undefined,
+    voteA: Vote.fromPartial({}),
+    voteB: Vote.fromPartial({}),
     totalVotingPower: Long.ZERO,
     validatorPower: Long.ZERO,
     timestamp: undefined
@@ -339,7 +339,7 @@ export const DuplicateVoteEvidence = {
 };
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
-    conflictingBlock: undefined,
+    conflictingBlock: LightBlock.fromPartial({}),
     commonHeight: Long.ZERO,
     byzantineValidators: [],
     totalVotingPower: Long.ZERO,

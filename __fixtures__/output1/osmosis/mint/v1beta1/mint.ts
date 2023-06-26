@@ -334,7 +334,7 @@ function createBaseParams(): Params {
     epochIdentifier: "",
     reductionPeriodInEpochs: Long.ZERO,
     reductionFactor: "",
-    distributionProportions: undefined,
+    distributionProportions: DistributionProportions.fromPartial({}),
     weightedDeveloperRewardsReceivers: [],
     mintingRewardsDistributionStartEpoch: Long.ZERO
   };

@@ -259,7 +259,7 @@ export const Child = {
 };
 function createBaseLeaf(): Leaf {
   return {
-    leaf: undefined
+    leaf: Child.fromPartial({})
   };
 }
 export const Leaf = {

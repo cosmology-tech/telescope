@@ -267,7 +267,7 @@ export interface ReportResponse_ReportErrorSDKType {
 function createBaseCheckRequest(): CheckRequest {
   return {
     serviceName: "",
-    operation: undefined,
+    operation: Operation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -356,7 +356,7 @@ function createBaseCheckResponse(): CheckResponse {
     checkErrors: [],
     serviceConfigId: "",
     serviceRolloutId: "",
-    checkInfo: undefined
+    checkInfo: CheckInfo.fromPartial({})
   };
 }
 export const CheckResponse = {
@@ -473,7 +473,7 @@ export const CheckResponse = {
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   return {
     unusedArguments: [],
-    consumerInfo: undefined
+    consumerInfo: ConsumerInfo.fromPartial({})
   };
 }
 export const CheckResponse_CheckInfo = {
@@ -828,7 +828,7 @@ export const ReportResponse = {
 function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
   return {
     operationId: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const ReportResponse_ReportError = {

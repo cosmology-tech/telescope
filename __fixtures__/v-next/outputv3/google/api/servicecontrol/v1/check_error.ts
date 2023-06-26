@@ -264,7 +264,7 @@ function createBaseCheckError(): CheckError {
     code: 0,
     subject: "",
     detail: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const CheckError = {

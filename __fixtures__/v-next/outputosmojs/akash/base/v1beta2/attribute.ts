@@ -209,7 +209,7 @@ export const SignedBy = {
 };
 function createBasePlacementRequirements(): PlacementRequirements {
   return {
-    signedBy: undefined,
+    signedBy: SignedBy.fromPartial({}),
     attributes: []
   };
 }

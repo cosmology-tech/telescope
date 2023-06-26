@@ -113,7 +113,7 @@ export const QueryCurrentPlanRequest = {
 };
 function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
   return {
-    plan: undefined
+    plan: Plan.fromPartial({})
   };
 }
 export const QueryCurrentPlanResponse = {

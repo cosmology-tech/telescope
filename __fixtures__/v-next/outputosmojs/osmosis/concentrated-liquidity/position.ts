@@ -180,7 +180,7 @@ export const Position = {
 };
 function createBasePositionWithUnderlyingAssetBreakdown(): PositionWithUnderlyingAssetBreakdown {
   return {
-    position: undefined,
+    position: Position.fromPartial({}),
     asset0: undefined,
     asset1: undefined
   };

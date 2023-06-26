@@ -258,7 +258,7 @@ export interface MsgAcknowledgementResponseSDKType {}
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
   return {
     portId: "",
-    channel: undefined,
+    channel: Channel.fromPartial({}),
     signer: ""
   };
 }
@@ -388,10 +388,10 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
   return {
     portId: "",
     previousChannelId: "",
-    channel: undefined,
+    channel: Channel.fromPartial({}),
     counterpartyVersion: "",
     proofInit: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -572,7 +572,7 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
     counterpartyChannelId: "",
     counterpartyVersion: "",
     proofTry: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -751,7 +751,7 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
     portId: "",
     channelId: "",
     proofAck: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -1035,7 +1035,7 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
     portId: "",
     channelId: "",
     proofInit: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -1187,9 +1187,9 @@ export const MsgChannelCloseConfirmResponse = {
 };
 function createBaseMsgRecvPacket(): MsgRecvPacket {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofCommitment: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -1329,9 +1329,9 @@ export const MsgRecvPacketResponse = {
 };
 function createBaseMsgTimeout(): MsgTimeout {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofUnreceived: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     nextSequenceRecv: BigInt(0),
     signer: ""
   };
@@ -1484,10 +1484,10 @@ export const MsgTimeoutResponse = {
 };
 function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofUnreceived: new Uint8Array(),
     proofClose: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     nextSequenceRecv: BigInt(0),
     signer: ""
   };
@@ -1652,10 +1652,10 @@ export const MsgTimeoutOnCloseResponse = {
 };
 function createBaseMsgAcknowledgement(): MsgAcknowledgement {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     acknowledgement: new Uint8Array(),
     proofAcked: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }

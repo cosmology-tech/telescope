@@ -461,17 +461,22 @@ export const getDefaultTSTypeFromProtoType = (
             return t.arrayExpression([]);
         case 'cosmos.base.v1beta1.Coin':
             return t.identifier('undefined');
-        case 'tendermint.crypto.PublicKey':
-            return t.callExpression(
-                t.memberExpression(
-                    t.identifier('PublicKey'),
-                    t.identifier('fromPartial')
-                ),
-                [t.objectExpression([])]
-            )
-
         default:
-            // console.warn('getDefaultTSTypeFromProtoType() type not found: ' + type);
-            return t.identifier('undefined');
+            // console.warn('getDefaultTSTypeFromProtoType() type not found, it\'ll probably still work but need review: ' + field.type);
+            // return t.identifier('undefined');
+            if (!field.type) {
+                console.warn('Undefined! Can\'t get field of type:', field);
+                return t.identifier('undefined');
+            } else {
+                const temp = field.type.split(".");
+                const fieldName = temp[temp.length -1];
+                return t.callExpression(
+                            t.memberExpression(
+                                t.identifier(fieldName),
+                                t.identifier('fromPartial')
+                            ),
+                        [t.objectExpression([])]
+                    )
+            }
     };
 };

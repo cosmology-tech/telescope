@@ -18,7 +18,7 @@ export interface GroupSpecSDKType {
 function createBaseGroupSpec(): GroupSpec {
   return {
     name: "",
-    requirements: undefined,
+    requirements: PlacementRequirements.fromPartial({}),
     resources: []
   };
 }

@@ -196,14 +196,14 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: DecCoin.fromPartial({}),
+    transferred: DecCoin.fromPartial({}),
     settledAt: Long.ZERO,
     depositor: "",
-    funds: undefined
+    funds: DecCoin.fromPartial({})
   };
 }
 export const Account = {
@@ -311,12 +311,12 @@ export const Account = {
 };
 function createBaseFractionalPayment(): FractionalPayment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
+    rate: DecCoin.fromPartial({}),
+    balance: DecCoin.fromPartial({}),
     withdrawn: undefined
   };
 }

@@ -38,7 +38,7 @@ function createBaseGenesisState(): GenesisState {
     connections: [],
     clientConnectionPaths: [],
     nextConnectionSequence: Long.UZERO,
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

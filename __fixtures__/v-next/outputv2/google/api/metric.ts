@@ -632,7 +632,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     unit: "",
     description: "",
     displayName: "",
-    metadata: undefined,
+    metadata: MetricDescriptorMetadata.fromPartial({}),
     launchStage: 0,
     monitoredResourceTypes: []
   };

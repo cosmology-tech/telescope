@@ -2015,7 +2015,7 @@ function createBaseRequestInitChain(): RequestInitChain {
   return {
     time: undefined,
     chainId: "",
-    consensusParams: undefined,
+    consensusParams: ConsensusParams.fromPartial({}),
     validators: [],
     appStateBytes: new Uint8Array(),
     initialHeight: Long.ZERO
@@ -2300,8 +2300,8 @@ export const RequestQuery = {
 function createBaseRequestBeginBlock(): RequestBeginBlock {
   return {
     hash: new Uint8Array(),
-    header: undefined,
-    lastCommitInfo: undefined,
+    header: Header.fromPartial({}),
+    lastCommitInfo: LastCommitInfo.fromPartial({}),
     byzantineValidators: []
   };
 }
@@ -2817,7 +2817,7 @@ export const RequestListSnapshots = {
 };
 function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
   return {
-    snapshot: undefined,
+    snapshot: Snapshot.fromPartial({}),
     appHash: new Uint8Array()
   };
 }
@@ -3892,7 +3892,7 @@ export const ResponseSetOption = {
 };
 function createBaseResponseInitChain(): ResponseInitChain {
   return {
-    consensusParams: undefined,
+    consensusParams: ConsensusParams.fromPartial({}),
     validators: [],
     appHash: new Uint8Array()
   };
@@ -4019,7 +4019,7 @@ function createBaseResponseQuery(): ResponseQuery {
     index: Long.ZERO,
     key: new Uint8Array(),
     value: new Uint8Array(),
-    proofOps: undefined,
+    proofOps: ProofOps.fromPartial({}),
     height: Long.ZERO,
     codespace: ""
   };
@@ -4682,7 +4682,7 @@ export const ResponseDeliverTx = {
 function createBaseResponseEndBlock(): ResponseEndBlock {
   return {
     validatorUpdates: [],
-    consensusParamUpdates: undefined,
+    consensusParamUpdates: ConsensusParams.fromPartial({}),
     events: []
   };
 }
@@ -5306,10 +5306,10 @@ export const ResponseApplySnapshotChunk = {
 };
 function createBaseConsensusParams(): ConsensusParams {
   return {
-    block: undefined,
-    evidence: undefined,
-    validator: undefined,
-    version: undefined
+    block: BlockParams.fromPartial({}),
+    evidence: EvidenceParams.fromPartial({}),
+    validator: ValidatorParams.fromPartial({}),
+    version: VersionParams.fromPartial({})
   };
 }
 export const ConsensusParams = {
@@ -5850,7 +5850,7 @@ function createBaseTxResult(): TxResult {
     height: Long.ZERO,
     index: 0,
     tx: new Uint8Array(),
-    result: undefined
+    result: ResponseDeliverTx.fromPartial({})
   };
 }
 export const TxResult = {
@@ -6160,7 +6160,7 @@ export const ValidatorUpdate = {
 };
 function createBaseVoteInfo(): VoteInfo {
   return {
-    validator: undefined,
+    validator: Validator.fromPartial({}),
     signedLastBlock: false
   };
 }
@@ -6256,7 +6256,7 @@ export const VoteInfo = {
 function createBaseEvidence(): Evidence {
   return {
     type: 0,
-    validator: undefined,
+    validator: Validator.fromPartial({}),
     height: Long.ZERO,
     time: undefined,
     totalVotingPower: Long.ZERO

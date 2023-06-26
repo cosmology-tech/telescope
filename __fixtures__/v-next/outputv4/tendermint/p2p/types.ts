@@ -150,14 +150,14 @@ export const ProtocolVersion = {
 };
 function createBaseNodeInfo(): NodeInfo {
   return {
-    protocolVersion: undefined,
+    protocolVersion: ProtocolVersion.fromPartial({}),
     nodeId: "",
     listenAddr: "",
     network: "",
     version: "",
     channels: new Uint8Array(),
     moniker: "",
-    other: undefined
+    other: NodeInfoOther.fromPartial({})
   };
 }
 export const NodeInfo = {

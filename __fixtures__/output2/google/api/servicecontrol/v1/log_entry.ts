@@ -183,15 +183,15 @@ function createBaseLogEntry(): LogEntry {
     name: "",
     timestamp: undefined,
     severity: 0,
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     trace: "",
     insertId: "",
     labels: {},
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,
-    operation: undefined,
-    sourceLocation: undefined
+    operation: LogEntryOperation.fromPartial({}),
+    sourceLocation: LogEntrySourceLocation.fromPartial({})
   };
 }
 export const LogEntry = {

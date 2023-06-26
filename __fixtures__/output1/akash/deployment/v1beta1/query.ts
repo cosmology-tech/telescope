@@ -64,8 +64,8 @@ export interface QueryGroupResponseSDKType {
 }
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: DeploymentFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDeploymentsRequest = {
@@ -132,7 +132,7 @@ export const QueryDeploymentsRequest = {
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   return {
     deployments: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDeploymentsResponse = {
@@ -206,7 +206,7 @@ export const QueryDeploymentsResponse = {
 };
 function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const QueryDeploymentRequest = {
@@ -261,9 +261,9 @@ export const QueryDeploymentRequest = {
 };
 function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
   return {
-    deployment: undefined,
+    deployment: Deployment.fromPartial({}),
     groups: [],
-    escrowAccount: undefined
+    escrowAccount: Account.fromPartial({})
   };
 }
 export const QueryDeploymentResponse = {
@@ -348,7 +348,7 @@ export const QueryDeploymentResponse = {
 };
 function createBaseQueryGroupRequest(): QueryGroupRequest {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const QueryGroupRequest = {
@@ -403,7 +403,7 @@ export const QueryGroupRequest = {
 };
 function createBaseQueryGroupResponse(): QueryGroupResponse {
   return {
-    group: undefined
+    group: Group.fromPartial({})
   };
 }
 export const QueryGroupResponse = {

@@ -153,7 +153,7 @@ function createBaseClientState(): ClientState {
   return {
     sequence: BigInt(0),
     isFrozen: false,
-    consensusState: undefined
+    consensusState: ConsensusState.fromPartial({})
   };
 }
 export const ClientState = {
@@ -423,8 +423,8 @@ export const Header = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     sequence: BigInt(0),
-    signatureOne: undefined,
-    signatureTwo: undefined
+    signatureOne: SignatureAndData.fromPartial({}),
+    signatureTwo: SignatureAndData.fromPartial({})
   };
 }
 export const Misbehaviour = {

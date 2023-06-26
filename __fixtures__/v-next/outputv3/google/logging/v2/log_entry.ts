@@ -631,7 +631,7 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
@@ -639,14 +639,14 @@ function createBaseLogEntry(): LogEntry {
     receiveTimestamp: undefined,
     severity: 0,
     insertId: "",
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     labels: {},
-    operation: undefined,
+    operation: LogEntryOperation.fromPartial({}),
     trace: "",
     spanId: "",
     traceSampled: false,
-    sourceLocation: undefined,
-    split: undefined
+    sourceLocation: LogEntrySourceLocation.fromPartial({}),
+    split: LogSplit.fromPartial({})
   };
 }
 export const LogEntry = {

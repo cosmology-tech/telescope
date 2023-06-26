@@ -14,7 +14,7 @@ export interface InterchainAccountSDKType {
 }
 function createBaseInterchainAccount(): InterchainAccount {
   return {
-    baseAccount: undefined,
+    baseAccount: BaseAccount.fromPartial({}),
     accountOwner: ""
   };
 }

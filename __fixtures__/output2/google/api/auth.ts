@@ -294,7 +294,7 @@ export const Authentication = {
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
-    oauth: undefined,
+    oauth: OAuthRequirements.fromPartial({}),
     allowWithoutCredential: false,
     requirements: []
   };

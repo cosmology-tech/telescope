@@ -22,7 +22,7 @@ function createBaseGenesisState(): GenesisState {
     connections: [],
     clientConnectionPaths: [],
     nextConnectionSequence: BigInt(0),
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {
