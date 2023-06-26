@@ -496,15 +496,15 @@ export const Misbehaviour = {
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
       clientId: object?.client_id,
-      header_1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
-      header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
+      header1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
+      header2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
     };
   },
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
-    message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
-    message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
+    message.header1 !== undefined && (obj.header_1 = message.header1 ? Header.toSDK(message.header1) : undefined);
+    message.header2 !== undefined && (obj.header_2 = message.header2 ? Header.toSDK(message.header2) : undefined);
     return obj;
   }
 };
