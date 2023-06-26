@@ -461,6 +461,14 @@ export const getDefaultTSTypeFromProtoType = (
             return t.arrayExpression([]);
         case 'cosmos.base.v1beta1.Coin':
             return t.identifier('undefined');
+        case 'tendermint.crypto.PublicKey':
+            return t.callExpression(
+                t.memberExpression(
+                    t.identifier('PublicKey'),
+                    t.identifier('fromPartial')
+                ),
+                [t.objectExpression([])]
+            )
 
         default:
             // console.warn('getDefaultTSTypeFromProtoType() type not found: ' + type);
