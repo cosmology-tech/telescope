@@ -100,7 +100,7 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const MsgCreateProvider = {
@@ -212,7 +212,7 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const MsgUpdateProvider = {
@@ -402,7 +402,7 @@ function createBaseProvider(): Provider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const Provider = {

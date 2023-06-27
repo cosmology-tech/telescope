@@ -209,7 +209,7 @@ export interface QueryFeeEnabledChannelResponseSDKType {
 }
 function createBaseQueryIncentivizedPacketsRequest(): QueryIncentivizedPacketsRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     queryHeight: BigInt(0)
   };
 }
@@ -283,7 +283,7 @@ export const QueryIncentivizedPacketsRequest = {
 function createBaseQueryIncentivizedPacketsResponse(): QueryIncentivizedPacketsResponse {
   return {
     incentivizedPackets: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketsResponse = {
@@ -423,7 +423,7 @@ export const QueryIncentivizedPacketRequest = {
 };
 function createBaseQueryIncentivizedPacketResponse(): QueryIncentivizedPacketResponse {
   return {
-    incentivizedPacket: undefined
+    incentivizedPacket: IdentifiedPacketFees.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketResponse = {
@@ -483,7 +483,7 @@ export const QueryIncentivizedPacketResponse = {
 };
 function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivizedPacketsForChannelRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     portId: "",
     channelId: "",
     queryHeight: BigInt(0)
@@ -583,7 +583,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
 function createBaseQueryIncentivizedPacketsForChannelResponse(): QueryIncentivizedPacketsForChannelResponse {
   return {
     incentivizedPackets: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketsForChannelResponse = {
@@ -1262,7 +1262,7 @@ export const QueryCounterpartyPayeeResponse = {
 };
 function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     queryHeight: BigInt(0)
   };
 }
@@ -1336,7 +1336,7 @@ export const QueryFeeEnabledChannelsRequest = {
 function createBaseQueryFeeEnabledChannelsResponse(): QueryFeeEnabledChannelsResponse {
   return {
     feeEnabledChannels: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryFeeEnabledChannelsResponse = {

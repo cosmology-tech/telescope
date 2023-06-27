@@ -35,7 +35,7 @@ export interface Params {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     claimsRecords: []
   };
 }

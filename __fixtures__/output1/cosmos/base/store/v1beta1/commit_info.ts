@@ -127,7 +127,7 @@ export const CommitInfo = {
 function createBaseStoreInfo(): StoreInfo {
   return {
     name: "",
-    commitId: undefined
+    commitId: CommitID.fromPartial({})
   };
 }
 export const StoreInfo = {

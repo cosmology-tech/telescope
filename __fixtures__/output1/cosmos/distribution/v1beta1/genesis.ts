@@ -300,7 +300,7 @@ export const ValidatorOutstandingRewardsRecord = {
 function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedCommissionRecord {
   return {
     validatorAddress: "",
-    accumulated: undefined
+    accumulated: ValidatorAccumulatedCommission.fromPartial({})
   };
 }
 export const ValidatorAccumulatedCommissionRecord = {
@@ -368,7 +368,7 @@ function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalReward
   return {
     validatorAddress: "",
     period: Long.UZERO,
-    rewards: undefined
+    rewards: ValidatorHistoricalRewards.fromPartial({})
   };
 }
 export const ValidatorHistoricalRewardsRecord = {
@@ -446,7 +446,7 @@ export const ValidatorHistoricalRewardsRecord = {
 function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecord {
   return {
     validatorAddress: "",
-    rewards: undefined
+    rewards: ValidatorCurrentRewards.fromPartial({})
   };
 }
 export const ValidatorCurrentRewardsRecord = {
@@ -514,7 +514,7 @@ function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    startingInfo: undefined
+    startingInfo: DelegatorStartingInfo.fromPartial({})
   };
 }
 export const DelegatorStartingInfoRecord = {
@@ -594,7 +594,7 @@ function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
     validatorAddress: "",
     height: Long.UZERO,
     period: Long.UZERO,
-    validatorSlashEvent: undefined
+    validatorSlashEvent: ValidatorSlashEvent.fromPartial({})
   };
 }
 export const ValidatorSlashEventRecord = {
@@ -682,8 +682,8 @@ export const ValidatorSlashEventRecord = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
-    feePool: undefined,
+    params: Params.fromPartial({}),
+    feePool: FeePool.fromPartial({}),
     delegatorWithdrawInfos: [],
     previousProposer: "",
     outstandingRewards: [],

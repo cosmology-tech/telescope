@@ -409,7 +409,7 @@ export const IdentifiedClientState = {
 };
 function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
   return {
-    height: undefined,
+    height: Height.fromPartial({}),
     consensusState: undefined
   };
 }
@@ -757,7 +757,7 @@ function createBaseUpgradeProposal(): UpgradeProposal {
   return {
     title: "",
     description: "",
-    plan: undefined,
+    plan: Plan.fromPartial({}),
     upgradedClientState: undefined
   };
 }

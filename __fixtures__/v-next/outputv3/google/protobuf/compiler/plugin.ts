@@ -417,7 +417,7 @@ function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
     fileToGenerate: [],
     parameter: "",
     protoFile: [],
-    compilerVersion: undefined
+    compilerVersion: Version.fromPartial({})
   };
 }
 export const CodeGeneratorRequest = {

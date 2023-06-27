@@ -57,10 +57,10 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     tokenPairArbRoutes: [],
     baseDenoms: [],
-    poolWeights: undefined,
+    poolWeights: PoolWeights.fromPartial({}),
     daysSinceModuleGenesis: BigInt(0),
     developerFees: [],
     latestBlockHeight: BigInt(0),

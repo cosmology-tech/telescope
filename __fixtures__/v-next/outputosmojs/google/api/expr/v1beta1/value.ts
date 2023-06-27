@@ -541,8 +541,8 @@ export const MapValue = {
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
-    key: undefined,
-    value: undefined
+    key: Value.fromPartial({}),
+    value: Value.fromPartial({})
   };
 }
 export const MapValue_Entry = {

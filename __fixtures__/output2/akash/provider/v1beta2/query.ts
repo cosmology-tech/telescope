@@ -24,7 +24,7 @@ export interface QueryProviderResponse {
 }
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProvidersRequest = {
@@ -70,7 +70,7 @@ export const QueryProvidersRequest = {
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProvidersResponse = {
@@ -173,7 +173,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryProviderResponse(): QueryProviderResponse {
   return {
-    provider: undefined
+    provider: Provider.fromPartial({})
   };
 }
 export const QueryProviderResponse = {

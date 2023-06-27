@@ -531,13 +531,13 @@ export interface AttributeContext_ResourceSDKType {
 }
 function createBaseAttributeContext(): AttributeContext {
   return {
-    origin: undefined,
-    source: undefined,
-    destination: undefined,
-    request: undefined,
-    response: undefined,
-    resource: undefined,
-    api: undefined,
+    origin: Peer.fromPartial({}),
+    source: Peer.fromPartial({}),
+    destination: Peer.fromPartial({}),
+    request: Request.fromPartial({}),
+    response: Response.fromPartial({}),
+    resource: Resource.fromPartial({}),
+    api: Api.fromPartial({}),
     extensions: []
   };
 }
@@ -975,7 +975,7 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
     principal: "",
     audiences: [],
     presenter: "",
-    claims: undefined,
+    claims: Struct.fromPartial({}),
     accessLevels: []
   };
 }
@@ -1169,7 +1169,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     size: Long.ZERO,
     protocol: "",
     reason: "",
-    auth: undefined
+    auth: Auth.fromPartial({})
   };
 }
 export const AttributeContext_Request = {

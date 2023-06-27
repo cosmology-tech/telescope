@@ -97,7 +97,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     nextPoolId: BigInt(0),
-    params: undefined,
+    params: Params.fromPartial({}),
     poolRoutes: []
   };
 }

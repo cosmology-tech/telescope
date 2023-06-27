@@ -354,7 +354,7 @@ export const EnableServiceRequest = {
 };
 function createBaseEnableServiceResponse(): EnableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const EnableServiceResponse = {
@@ -488,7 +488,7 @@ export const DisableServiceRequest = {
 };
 function createBaseDisableServiceResponse(): DisableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const DisableServiceResponse = {

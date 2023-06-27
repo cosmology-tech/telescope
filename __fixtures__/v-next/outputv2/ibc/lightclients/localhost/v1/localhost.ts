@@ -41,7 +41,7 @@ export interface ClientStateSDKType {
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
-    height: undefined
+    height: Height.fromPartial({})
   };
 }
 export const ClientState = {

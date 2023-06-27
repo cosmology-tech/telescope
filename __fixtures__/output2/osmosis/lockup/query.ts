@@ -1134,7 +1134,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: undefined
+    lock: PeriodLock.fromPartial({})
   };
 }
 export const LockedResponse = {
@@ -1732,7 +1732,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

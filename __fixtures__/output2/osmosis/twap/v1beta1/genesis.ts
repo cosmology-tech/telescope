@@ -75,7 +75,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     twaps: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

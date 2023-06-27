@@ -271,7 +271,7 @@ export interface ResourceSDKType {
 }
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgCloseGroup = {
@@ -415,7 +415,7 @@ export const MsgCloseGroupResponse = {
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgPauseGroup = {
@@ -559,7 +559,7 @@ export const MsgPauseGroupResponse = {
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgStartGroup = {
@@ -813,7 +813,7 @@ export const GroupID = {
 function createBaseGroupSpec(): GroupSpec {
   return {
     name: "",
-    requirements: undefined,
+    requirements: PlacementRequirements.fromPartial({}),
     resources: []
   };
 }
@@ -933,9 +933,9 @@ export const GroupSpec = {
 };
 function createBaseGroup(): Group {
   return {
-    groupId: undefined,
+    groupId: GroupID.fromPartial({}),
     state: 0,
-    groupSpec: undefined,
+    groupSpec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }
@@ -1056,7 +1056,7 @@ export const Group = {
 };
 function createBaseResource(): Resource {
   return {
-    resources: undefined,
+    resources: ResourceUnits.fromPartial({}),
     count: 0,
     price: undefined
   };

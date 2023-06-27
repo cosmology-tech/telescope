@@ -635,7 +635,7 @@ export const MsgChangeAdminResponse = {
 function createBaseMsgSetDenomMetadata(): MsgSetDenomMetadata {
   return {
     sender: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const MsgSetDenomMetadata = {

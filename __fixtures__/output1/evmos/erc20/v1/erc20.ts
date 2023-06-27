@@ -228,7 +228,7 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
   return {
     title: "",
     description: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const RegisterCoinProposal = {

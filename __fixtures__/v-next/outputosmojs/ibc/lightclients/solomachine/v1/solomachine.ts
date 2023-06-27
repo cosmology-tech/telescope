@@ -376,7 +376,7 @@ function createBaseClientState(): ClientState {
   return {
     sequence: BigInt(0),
     frozenSequence: BigInt(0),
-    consensusState: undefined,
+    consensusState: ConsensusState.fromPartial({}),
     allowUpdateAfterProposal: false
   };
 }
@@ -673,8 +673,8 @@ function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
     sequence: BigInt(0),
-    signatureOne: undefined,
-    signatureTwo: undefined
+    signatureOne: SignatureAndData.fromPartial({}),
+    signatureTwo: SignatureAndData.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -1274,7 +1274,7 @@ export const ConsensusStateData = {
 function createBaseConnectionStateData(): ConnectionStateData {
   return {
     path: new Uint8Array(),
-    connection: undefined
+    connection: ConnectionEnd.fromPartial({})
   };
 }
 export const ConnectionStateData = {
@@ -1347,7 +1347,7 @@ export const ConnectionStateData = {
 function createBaseChannelStateData(): ChannelStateData {
   return {
     path: new Uint8Array(),
-    channel: undefined
+    channel: Channel.fromPartial({})
   };
 }
 export const ChannelStateData = {

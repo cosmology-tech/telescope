@@ -298,7 +298,7 @@ export interface GetBlockWithTxsResponseSDKType {
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
     events: [],
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     orderBy: 0
   };
 }
@@ -393,7 +393,7 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
   return {
     txs: [],
     txResponses: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetTxsEventResponse = {
@@ -566,7 +566,7 @@ export const BroadcastTxRequest = {
 };
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
   return {
-    txResponse: undefined
+    txResponse: TxResponse.fromPartial({})
   };
 }
 export const BroadcastTxResponse = {
@@ -626,7 +626,7 @@ export const BroadcastTxResponse = {
 };
 function createBaseSimulateRequest(): SimulateRequest {
   return {
-    tx: undefined,
+    tx: Tx.fromPartial({}),
     txBytes: new Uint8Array()
   };
 }
@@ -699,8 +699,8 @@ export const SimulateRequest = {
 };
 function createBaseSimulateResponse(): SimulateResponse {
   return {
-    gasInfo: undefined,
-    result: undefined
+    gasInfo: GasInfo.fromPartial({}),
+    result: Result.fromPartial({})
   };
 }
 export const SimulateResponse = {
@@ -832,8 +832,8 @@ export const GetTxRequest = {
 };
 function createBaseGetTxResponse(): GetTxResponse {
   return {
-    tx: undefined,
-    txResponse: undefined
+    tx: Tx.fromPartial({}),
+    txResponse: TxResponse.fromPartial({})
   };
 }
 export const GetTxResponse = {
@@ -906,7 +906,7 @@ export const GetTxResponse = {
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return {
     height: BigInt(0),
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const GetBlockWithTxsRequest = {
@@ -979,9 +979,9 @@ export const GetBlockWithTxsRequest = {
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return {
     txs: [],
-    blockId: undefined,
-    block: undefined,
-    pagination: undefined
+    blockId: BlockID.fromPartial({}),
+    block: Block.fromPartial({}),
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetBlockWithTxsResponse = {

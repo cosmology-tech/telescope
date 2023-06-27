@@ -67,6 +67,15 @@ exports[`createCreateProtoType MsgJoinPool 1`] = `
 }"
 `;
 
+exports[`createCreateProtoType ValidatorUpdate 1`] = `
+"function createBaseValidatorUpdate(): ValidatorUpdate {
+  return {
+    pubKey: PublicKey.fromPartial({}),
+    power: Long.ZERO
+  };
+}"
+`;
+
 exports[`oneofs Value 1`] = `
 "/**
  * \`Value\` represents a dynamically typed value which can be either

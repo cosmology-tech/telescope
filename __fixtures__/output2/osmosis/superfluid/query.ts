@@ -151,7 +151,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -413,7 +413,7 @@ export const AssetMultiplierRequest = {
 };
 function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
   return {
-    osmoEquivalentMultiplier: undefined
+    osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord.fromPartial({})
   };
 }
 export const AssetMultiplierResponse = {
@@ -533,7 +533,7 @@ export const SuperfluidIntermediaryAccountInfo = {
 };
 function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const AllIntermediaryAccountsRequest = {
@@ -579,7 +579,7 @@ export const AllIntermediaryAccountsRequest = {
 function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsResponse {
   return {
     accounts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const AllIntermediaryAccountsResponse = {
@@ -682,7 +682,7 @@ export const ConnectedIntermediaryAccountRequest = {
 };
 function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediaryAccountResponse {
   return {
-    account: undefined
+    account: SuperfluidIntermediaryAccountInfo.fromPartial({})
   };
 }
 export const ConnectedIntermediaryAccountResponse = {

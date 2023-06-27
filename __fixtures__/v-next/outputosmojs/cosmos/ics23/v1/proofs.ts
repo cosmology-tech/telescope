@@ -484,7 +484,7 @@ function createBaseExistenceProof(): ExistenceProof {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    leaf: undefined,
+    leaf: LeafOp.fromPartial({}),
     path: []
   };
 }
@@ -590,8 +590,8 @@ export const ExistenceProof = {
 function createBaseNonExistenceProof(): NonExistenceProof {
   return {
     key: new Uint8Array(),
-    left: undefined,
-    right: undefined
+    left: ExistenceProof.fromPartial({}),
+    right: ExistenceProof.fromPartial({})
   };
 }
 export const NonExistenceProof = {
@@ -972,8 +972,8 @@ export const InnerOp = {
 };
 function createBaseProofSpec(): ProofSpec {
   return {
-    leafSpec: undefined,
-    innerSpec: undefined,
+    leafSpec: LeafOp.fromPartial({}),
+    innerSpec: InnerSpec.fromPartial({}),
     maxDepth: 0,
     minDepth: 0
   };
@@ -1518,7 +1518,7 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    leaf: undefined,
+    leaf: LeafOp.fromPartial({}),
     path: []
   };
 }
@@ -1633,8 +1633,8 @@ export const CompressedExistenceProof = {
 function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
   return {
     key: new Uint8Array(),
-    left: undefined,
-    right: undefined
+    left: CompressedExistenceProof.fromPartial({}),
+    right: CompressedExistenceProof.fromPartial({})
   };
 }
 export const CompressedNonExistenceProof = {

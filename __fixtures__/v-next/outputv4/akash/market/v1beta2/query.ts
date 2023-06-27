@@ -120,8 +120,8 @@ export interface QueryLeaseResponseSDKType {
 }
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: OrderFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryOrdersRequest = {
@@ -194,7 +194,7 @@ export const QueryOrdersRequest = {
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   return {
     orders: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryOrdersResponse = {
@@ -274,7 +274,7 @@ export const QueryOrdersResponse = {
 };
 function createBaseQueryOrderRequest(): QueryOrderRequest {
   return {
-    id: undefined
+    id: OrderID.fromPartial({})
   };
 }
 export const QueryOrderRequest = {
@@ -334,7 +334,7 @@ export const QueryOrderRequest = {
 };
 function createBaseQueryOrderResponse(): QueryOrderResponse {
   return {
-    order: undefined
+    order: Order.fromPartial({})
   };
 }
 export const QueryOrderResponse = {
@@ -394,8 +394,8 @@ export const QueryOrderResponse = {
 };
 function createBaseQueryBidsRequest(): QueryBidsRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: BidFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryBidsRequest = {
@@ -468,7 +468,7 @@ export const QueryBidsRequest = {
 function createBaseQueryBidsResponse(): QueryBidsResponse {
   return {
     bids: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryBidsResponse = {
@@ -548,7 +548,7 @@ export const QueryBidsResponse = {
 };
 function createBaseQueryBidRequest(): QueryBidRequest {
   return {
-    id: undefined
+    id: BidID.fromPartial({})
   };
 }
 export const QueryBidRequest = {
@@ -608,8 +608,8 @@ export const QueryBidRequest = {
 };
 function createBaseQueryBidResponse(): QueryBidResponse {
   return {
-    bid: undefined,
-    escrowAccount: undefined
+    bid: Bid.fromPartial({}),
+    escrowAccount: Account.fromPartial({})
   };
 }
 export const QueryBidResponse = {
@@ -681,8 +681,8 @@ export const QueryBidResponse = {
 };
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: LeaseFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryLeasesRequest = {
@@ -755,7 +755,7 @@ export const QueryLeasesRequest = {
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   return {
     leases: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryLeasesResponse = {
@@ -835,7 +835,7 @@ export const QueryLeasesResponse = {
 };
 function createBaseQueryLeaseRequest(): QueryLeaseRequest {
   return {
-    id: undefined
+    id: LeaseID.fromPartial({})
   };
 }
 export const QueryLeaseRequest = {
@@ -895,8 +895,8 @@ export const QueryLeaseRequest = {
 };
 function createBaseQueryLeaseResponse(): QueryLeaseResponse {
   return {
-    lease: undefined,
-    escrowPayment: undefined
+    lease: Lease.fromPartial({}),
+    escrowPayment: FractionalPayment.fromPartial({})
   };
 }
 export const QueryLeaseResponse = {

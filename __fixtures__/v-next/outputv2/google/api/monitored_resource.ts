@@ -811,7 +811,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 };
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {
-    systemLabels: undefined,
+    systemLabels: Struct.fromPartial({}),
     userLabels: {}
   };
 }

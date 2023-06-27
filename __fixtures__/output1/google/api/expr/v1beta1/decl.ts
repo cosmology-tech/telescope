@@ -270,8 +270,8 @@ export const DeclType = {
 };
 function createBaseIdentDecl(): IdentDecl {
   return {
-    type: undefined,
-    value: undefined
+    type: DeclType.fromPartial({}),
+    value: Expr.fromPartial({})
   };
 }
 export const IdentDecl = {
@@ -338,7 +338,7 @@ export const IdentDecl = {
 function createBaseFunctionDecl(): FunctionDecl {
   return {
     args: [],
-    returnType: undefined,
+    returnType: DeclType.fromPartial({}),
     receiverFunction: false
   };
 }

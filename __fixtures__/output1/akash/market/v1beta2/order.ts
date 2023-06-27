@@ -187,9 +187,9 @@ export const OrderID = {
 };
 function createBaseOrder(): Order {
   return {
-    orderId: undefined,
+    orderId: OrderID.fromPartial({}),
     state: 0,
-    spec: undefined,
+    spec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

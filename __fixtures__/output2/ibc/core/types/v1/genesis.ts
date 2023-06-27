@@ -17,9 +17,9 @@ export interface GenesisState {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    clientGenesis: undefined,
-    connectionGenesis: undefined,
-    channelGenesis: undefined
+    clientGenesis: GenesisState.fromPartial({}),
+    connectionGenesis: GenesisState.fromPartial({}),
+    channelGenesis: GenesisState.fromPartial({})
   };
 }
 export const GenesisState = {

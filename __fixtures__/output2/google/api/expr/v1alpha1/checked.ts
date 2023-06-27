@@ -411,7 +411,7 @@ export interface Reference {
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
     key: Long.ZERO,
-    value: undefined
+    value: Reference.fromPartial({})
   };
 }
 export const CheckedExpr_ReferenceMapEntry = {
@@ -466,7 +466,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
     key: Long.ZERO,
-    value: undefined
+    value: Type.fromPartial({})
   };
 }
 export const CheckedExpr_TypeMapEntry = {
@@ -522,9 +522,9 @@ function createBaseCheckedExpr(): CheckedExpr {
   return {
     referenceMap: {},
     typeMap: {},
-    sourceInfo: undefined,
+    sourceInfo: SourceInfo.fromPartial({}),
     exprVersion: "",
-    expr: undefined
+    expr: Expr.fromPartial({})
   };
 }
 export const CheckedExpr = {
@@ -816,7 +816,7 @@ export const Type = {
 };
 function createBaseType_ListType(): Type_ListType {
   return {
-    elemType: undefined
+    elemType: Type.fromPartial({})
   };
 }
 export const Type_ListType = {
@@ -861,8 +861,8 @@ export const Type_ListType = {
 };
 function createBaseType_MapType(): Type_MapType {
   return {
-    keyType: undefined,
-    valueType: undefined
+    keyType: Type.fromPartial({}),
+    valueType: Type.fromPartial({})
   };
 }
 export const Type_MapType = {
@@ -916,7 +916,7 @@ export const Type_MapType = {
 };
 function createBaseType_FunctionType(): Type_FunctionType {
   return {
-    resultType: undefined,
+    resultType: Type.fromPartial({}),
     argTypes: []
   };
 }
@@ -1099,8 +1099,8 @@ export const Decl = {
 };
 function createBaseDecl_IdentDecl(): Decl_IdentDecl {
   return {
-    type: undefined,
-    value: undefined,
+    type: Type.fromPartial({}),
+    value: Constant.fromPartial({}),
     doc: ""
   };
 }
@@ -1216,7 +1216,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
     overloadId: "",
     params: [],
     typeParams: [],
-    resultType: undefined,
+    resultType: Type.fromPartial({}),
     isInstanceFunction: false,
     doc: ""
   };
@@ -1318,7 +1318,7 @@ function createBaseReference(): Reference {
   return {
     name: "",
     overloadId: [],
-    value: undefined
+    value: Constant.fromPartial({})
   };
 }
 export const Reference = {

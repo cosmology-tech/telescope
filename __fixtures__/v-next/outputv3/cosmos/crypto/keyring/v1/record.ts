@@ -392,7 +392,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: undefined
+    path: BIP44Params.fromPartial({})
   };
 }
 export const Record_Ledger = {

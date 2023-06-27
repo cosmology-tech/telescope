@@ -56,7 +56,7 @@ function createBaseGauge(): Gauge {
   return {
     id: Long.UZERO,
     isPerpetual: false,
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
     startTime: undefined,
     numEpochsPaidOver: Long.UZERO,

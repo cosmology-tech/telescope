@@ -482,7 +482,7 @@ export const ParseRequest = {
 };
 function createBaseParseResponse(): ParseResponse {
   return {
-    parsedExpr: undefined,
+    parsedExpr: ParsedExpr.fromPartial({}),
     issues: []
   };
 }
@@ -589,7 +589,7 @@ export const ParseResponse = {
 };
 function createBaseCheckRequest(): CheckRequest {
   return {
-    parsedExpr: undefined,
+    parsedExpr: ParsedExpr.fromPartial({}),
     typeEnv: [],
     container: "",
     noStdEnv: false
@@ -724,7 +724,7 @@ export const CheckRequest = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    checkedExpr: undefined,
+    checkedExpr: CheckedExpr.fromPartial({}),
     issues: []
   };
 }
@@ -832,7 +832,7 @@ export const CheckResponse = {
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
-    value: undefined
+    value: ExprValue.fromPartial({})
   };
 }
 export const EvalRequest_BindingsEntry = {
@@ -1085,7 +1085,7 @@ export const EvalRequest = {
 };
 function createBaseEvalResponse(): EvalResponse {
   return {
-    result: undefined,
+    result: ExprValue.fromPartial({}),
     issues: []
   };
 }
@@ -1193,7 +1193,7 @@ export const EvalResponse = {
 function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
-    position: undefined,
+    position: SourcePosition.fromPartial({}),
     id: Long.ZERO
   };
 }

@@ -26,7 +26,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisDeployment(): GenesisDeployment {
   return {
-    deployment: undefined,
+    deployment: Deployment.fromPartial({}),
     groups: []
   };
 }
@@ -102,7 +102,7 @@ export const GenesisDeployment = {
 function createBaseGenesisState(): GenesisState {
   return {
     deployments: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

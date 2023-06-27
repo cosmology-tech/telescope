@@ -71,7 +71,7 @@ function createBaseIncentiveRecord(): IncentiveRecord {
     poolId: BigInt(0),
     incentiveDenom: "",
     incentiveCreatorAddr: "",
-    incentiveRecordBody: undefined,
+    incentiveRecordBody: IncentiveRecordBody.fromPartial({}),
     minUptime: undefined
   };
 }

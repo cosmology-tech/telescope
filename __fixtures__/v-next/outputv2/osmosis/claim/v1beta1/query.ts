@@ -423,7 +423,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -599,7 +599,7 @@ export const QueryClaimRecordRequest = {
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
-    claimRecord: undefined
+    claimRecord: ClaimRecord.fromPartial({})
   };
 }
 export const QueryClaimRecordResponse = {

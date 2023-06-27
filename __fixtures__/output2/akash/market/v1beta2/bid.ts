@@ -103,9 +103,9 @@ export interface BidFilters {
 }
 function createBaseMsgCreateBid(): MsgCreateBid {
   return {
-    order: undefined,
+    order: OrderID.fromPartial({}),
     provider: "",
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     deposit: undefined
   };
 }
@@ -211,7 +211,7 @@ export const MsgCreateBidResponse = {
 };
 function createBaseMsgCloseBid(): MsgCloseBid {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCloseBid = {
@@ -374,9 +374,9 @@ export const BidID = {
 };
 function createBaseBid(): Bid {
   return {
-    bidId: undefined,
+    bidId: BidID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

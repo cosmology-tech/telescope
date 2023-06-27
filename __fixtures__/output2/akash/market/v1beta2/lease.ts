@@ -182,9 +182,9 @@ export const LeaseID = {
 };
 function createBaseLease(): Lease {
   return {
-    leaseId: undefined,
+    leaseId: LeaseID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: Long.ZERO,
     closedOn: Long.ZERO
   };
@@ -362,7 +362,7 @@ export const LeaseFilters = {
 };
 function createBaseMsgCreateLease(): MsgCreateLease {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCreateLease = {
@@ -440,7 +440,7 @@ export const MsgCreateLeaseResponse = {
 };
 function createBaseMsgWithdrawLease(): MsgWithdrawLease {
   return {
-    bidId: undefined
+    bidId: LeaseID.fromPartial({})
   };
 }
 export const MsgWithdrawLease = {
@@ -518,7 +518,7 @@ export const MsgWithdrawLeaseResponse = {
 };
 function createBaseMsgCloseLease(): MsgCloseLease {
   return {
-    leaseId: undefined
+    leaseId: LeaseID.fromPartial({})
   };
 }
 export const MsgCloseLease = {

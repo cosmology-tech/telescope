@@ -2301,8 +2301,8 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
     enumType: [],
     service: [],
     extension: [],
-    options: undefined,
-    sourceCodeInfo: undefined,
+    options: FileOptions.fromPartial({}),
+    sourceCodeInfo: SourceCodeInfo.fromPartial({}),
     syntax: ""
   };
 }
@@ -2636,7 +2636,7 @@ function createBaseDescriptorProto(): DescriptorProto {
     enumType: [],
     extensionRange: [],
     oneofDecl: [],
-    options: undefined,
+    options: MessageOptions.fromPartial({}),
     reservedRange: [],
     reservedName: []
   };
@@ -2934,7 +2934,7 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
   return {
     start: 0,
     end: 0,
-    options: undefined
+    options: ExtensionRangeOptions.fromPartial({})
   };
 }
 export const DescriptorProto_ExtensionRange = {
@@ -3238,7 +3238,7 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
     defaultValue: "",
     oneofIndex: 0,
     jsonName: "",
-    options: undefined
+    options: FieldOptions.fromPartial({})
   };
 }
 export const FieldDescriptorProto = {
@@ -3437,7 +3437,7 @@ export const FieldDescriptorProto = {
 function createBaseOneofDescriptorProto(): OneofDescriptorProto {
   return {
     name: "",
-    options: undefined
+    options: OneofOptions.fromPartial({})
   };
 }
 export const OneofDescriptorProto = {
@@ -3533,7 +3533,7 @@ function createBaseEnumDescriptorProto(): EnumDescriptorProto {
   return {
     name: "",
     value: [],
-    options: undefined,
+    options: EnumOptions.fromPartial({}),
     reservedRange: [],
     reservedName: []
   };
@@ -3801,7 +3801,7 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
   return {
     name: "",
     number: 0,
-    options: undefined
+    options: EnumValueOptions.fromPartial({})
   };
 }
 export const EnumValueDescriptorProto = {
@@ -3910,7 +3910,7 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
   return {
     name: "",
     method: [],
-    options: undefined
+    options: ServiceOptions.fromPartial({})
   };
 }
 export const ServiceDescriptorProto = {
@@ -4032,7 +4032,7 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
     name: "",
     inputType: "",
     outputType: "",
-    options: undefined,
+    options: MethodOptions.fromPartial({}),
     clientStreaming: false,
     serverStreaming: false
   };

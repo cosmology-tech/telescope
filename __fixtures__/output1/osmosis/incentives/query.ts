@@ -314,7 +314,7 @@ export const GaugeByIDRequest = {
 };
 function createBaseGaugeByIDResponse(): GaugeByIDResponse {
   return {
-    gauge: undefined
+    gauge: Gauge.fromPartial({})
   };
 }
 export const GaugeByIDResponse = {
@@ -369,7 +369,7 @@ export const GaugeByIDResponse = {
 };
 function createBaseGaugesRequest(): GaugesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const GaugesRequest = {
@@ -425,7 +425,7 @@ export const GaugesRequest = {
 function createBaseGaugesResponse(): GaugesResponse {
   return {
     data: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GaugesResponse = {
@@ -499,7 +499,7 @@ export const GaugesResponse = {
 };
 function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const ActiveGaugesRequest = {
@@ -555,7 +555,7 @@ export const ActiveGaugesRequest = {
 function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
   return {
     data: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const ActiveGaugesResponse = {
@@ -630,7 +630,7 @@ export const ActiveGaugesResponse = {
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const ActiveGaugesPerDenomRequest = {
@@ -697,7 +697,7 @@ export const ActiveGaugesPerDenomRequest = {
 function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse {
   return {
     data: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const ActiveGaugesPerDenomResponse = {
@@ -771,7 +771,7 @@ export const ActiveGaugesPerDenomResponse = {
 };
 function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const UpcomingGaugesRequest = {
@@ -827,7 +827,7 @@ export const UpcomingGaugesRequest = {
 function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
   return {
     data: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const UpcomingGaugesResponse = {
@@ -902,7 +902,7 @@ export const UpcomingGaugesResponse = {
 function createBaseUpcomingGaugesPerDenomRequest(): UpcomingGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const UpcomingGaugesPerDenomRequest = {
@@ -969,7 +969,7 @@ export const UpcomingGaugesPerDenomRequest = {
 function createBaseUpcomingGaugesPerDenomResponse(): UpcomingGaugesPerDenomResponse {
   return {
     upcomingGauges: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const UpcomingGaugesPerDenomResponse = {

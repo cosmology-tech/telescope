@@ -24,7 +24,7 @@ export interface GenesisState {
 function createBaseGenesisOwners(): GenesisOwners {
   return {
     index: Long.UZERO,
-    indexOwners: undefined
+    indexOwners: CapabilityOwners.fromPartial({})
   };
 }
 export const GenesisOwners = {

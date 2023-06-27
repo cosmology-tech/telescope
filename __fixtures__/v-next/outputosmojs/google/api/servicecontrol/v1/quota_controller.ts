@@ -333,7 +333,7 @@ export interface QuotaErrorSDKType {
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
-    allocateOperation: undefined,
+    allocateOperation: QuotaOperation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -780,7 +780,7 @@ function createBaseQuotaError(): QuotaError {
     code: 0,
     subject: "",
     description: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const QuotaError = {

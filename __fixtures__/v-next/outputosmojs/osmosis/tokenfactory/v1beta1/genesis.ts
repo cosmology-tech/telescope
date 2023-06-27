@@ -34,7 +34,7 @@ export interface GenesisDenomSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     factoryDenoms: []
   };
 }
@@ -116,7 +116,7 @@ export const GenesisState = {
 function createBaseGenesisDenom(): GenesisDenom {
   return {
     denom: "",
-    authorityMetadata: undefined
+    authorityMetadata: DenomAuthorityMetadata.fromPartial({})
   };
 }
 export const GenesisDenom = {

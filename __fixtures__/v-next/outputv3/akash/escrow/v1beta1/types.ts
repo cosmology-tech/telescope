@@ -305,7 +305,7 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
     balance: undefined,
@@ -456,7 +456,7 @@ export const Account = {
 };
 function createBasePayment(): Payment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,

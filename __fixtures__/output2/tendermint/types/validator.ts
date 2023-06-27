@@ -22,7 +22,7 @@ export interface SimpleValidator {
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: undefined,
+    proposer: Validator.fromPartial({}),
     totalVotingPower: Long.ZERO
   };
 }
@@ -91,7 +91,7 @@ export const ValidatorSet = {
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: Long.ZERO,
     proposerPriority: Long.ZERO
   };
@@ -165,7 +165,7 @@ export const Validator = {
 };
 function createBaseSimpleValidator(): SimpleValidator {
   return {
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: Long.ZERO
   };
 }

@@ -616,7 +616,7 @@ function createBaseService(): Service {
   return {
     name: "",
     parent: "",
-    config: undefined,
+    config: ServiceConfig.fromPartial({}),
     state: 0
   };
 }
@@ -708,13 +708,13 @@ function createBaseServiceConfig(): ServiceConfig {
     name: "",
     title: "",
     apis: [],
-    documentation: undefined,
-    quota: undefined,
-    authentication: undefined,
-    usage: undefined,
+    documentation: Documentation.fromPartial({}),
+    quota: Quota.fromPartial({}),
+    authentication: Authentication.fromPartial({}),
+    usage: Usage.fromPartial({}),
     endpoints: [],
     monitoredResources: [],
-    monitoring: undefined
+    monitoring: Monitoring.fromPartial({})
   };
 }
 export const ServiceConfig = {
@@ -1278,9 +1278,9 @@ function createBaseQuotaBucket(): QuotaBucket {
   return {
     effectiveLimit: Long.ZERO,
     defaultLimit: Long.ZERO,
-    producerOverride: undefined,
-    consumerOverride: undefined,
-    adminOverride: undefined,
+    producerOverride: QuotaOverride.fromPartial({}),
+    consumerOverride: QuotaOverride.fromPartial({}),
+    adminOverride: QuotaOverride.fromPartial({}),
     dimensions: {}
   };
 }

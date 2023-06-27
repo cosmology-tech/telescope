@@ -67,7 +67,7 @@ export interface MissedBlockSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     signingInfos: [],
     missedBlocks: []
   };
@@ -170,7 +170,7 @@ export const GenesisState = {
 function createBaseSigningInfo(): SigningInfo {
   return {
     address: "",
-    validatorSigningInfo: undefined
+    validatorSigningInfo: ValidatorSigningInfo.fromPartial({})
   };
 }
 export const SigningInfo = {

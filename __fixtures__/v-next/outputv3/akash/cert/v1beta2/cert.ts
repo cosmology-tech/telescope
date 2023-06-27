@@ -679,7 +679,7 @@ export const MsgCreateCertificateResponse = {
 };
 function createBaseMsgRevokeCertificate(): MsgRevokeCertificate {
   return {
-    id: undefined
+    id: CertificateID.fromPartial({})
   };
 }
 export const MsgRevokeCertificate = {

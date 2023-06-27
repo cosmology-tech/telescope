@@ -360,7 +360,7 @@ export const AccessConfig = {
 };
 function createBaseParams(): Params {
   return {
-    codeUploadAccess: undefined,
+    codeUploadAccess: AccessConfig.fromPartial({}),
     instantiateDefaultPermission: 0,
     maxWasmCodeSize: BigInt(0)
   };
@@ -448,7 +448,7 @@ function createBaseCodeInfo(): CodeInfo {
   return {
     codeHash: new Uint8Array(),
     creator: "",
-    instantiateConfig: undefined
+    instantiateConfig: AccessConfig.fromPartial({})
   };
 }
 export const CodeInfo = {
@@ -536,7 +536,7 @@ function createBaseContractInfo(): ContractInfo {
     creator: "",
     admin: "",
     label: "",
-    created: undefined,
+    created: AbsoluteTxPosition.fromPartial({}),
     ibcPortId: "",
     extension: undefined
   };
@@ -672,7 +672,7 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
     codeId: BigInt(0),
-    updated: undefined,
+    updated: AbsoluteTxPosition.fromPartial({}),
     msg: new Uint8Array()
   };
 }

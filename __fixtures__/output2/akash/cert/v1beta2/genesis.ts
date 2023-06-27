@@ -16,7 +16,7 @@ export interface GenesisState {
 function createBaseGenesisCertificate(): GenesisCertificate {
   return {
     owner: "",
-    certificate: undefined
+    certificate: Certificate.fromPartial({})
   };
 }
 export const GenesisCertificate = {

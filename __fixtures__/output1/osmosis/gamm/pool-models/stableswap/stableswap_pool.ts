@@ -129,7 +129,7 @@ function createBasePool(): Pool {
   return {
     address: "",
     id: Long.UZERO,
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
     totalShares: undefined,
     poolLiquidity: [],

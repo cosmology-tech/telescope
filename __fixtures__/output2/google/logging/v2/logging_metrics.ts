@@ -322,10 +322,10 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: undefined,
+    metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: undefined,
+    bucketOptions: BucketOptions.fromPartial({}),
     createTime: undefined,
     updateTime: undefined,
     version: 0
@@ -656,7 +656,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const CreateLogMetricRequest = {
@@ -711,7 +711,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const UpdateLogMetricRequest = {

@@ -130,7 +130,7 @@ export interface ListValueSDKType {
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
-    value: undefined
+    value: Value.fromPartial({})
   };
 }
 export const Struct_FieldsEntry = {

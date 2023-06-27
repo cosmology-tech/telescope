@@ -68,7 +68,7 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 }
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDevFeeInfosRequest = {
@@ -114,7 +114,7 @@ export const QueryDevFeeInfosRequest = {
 function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
   return {
     fees: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDevFeeInfosResponse = {
@@ -217,7 +217,7 @@ export const QueryDevFeeInfoRequest = {
 };
 function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
   return {
-    fee: undefined
+    fee: DevFeeInfo.fromPartial({})
   };
 }
 export const QueryDevFeeInfoResponse = {
@@ -295,7 +295,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -341,7 +341,7 @@ export const QueryParamsResponse = {
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
   return {
     deployerAddress: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
@@ -396,7 +396,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDeployerResponse {
   return {
     fees: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDevFeeInfosPerDeployerResponse = {

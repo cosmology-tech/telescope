@@ -308,8 +308,8 @@ function createBaseDistribution(): Distribution {
     count: BigInt(0),
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: undefined,
-    bucketOptions: undefined,
+    range: Range.fromPartial({}),
+    bucketOptions: BucketOptions.fromPartial({}),
     bucketCounts: [],
     exemplars: []
   };

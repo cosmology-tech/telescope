@@ -315,7 +315,7 @@ export const QueryDistrInfoRequest = {
 };
 function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
   return {
-    distrInfo: undefined
+    distrInfo: DistrInfo.fromPartial({})
   };
 }
 export const QueryDistrInfoResponse = {
@@ -410,7 +410,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

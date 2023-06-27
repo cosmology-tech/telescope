@@ -104,12 +104,12 @@ export interface Fraction {
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
-    trustLevel: undefined,
+    trustLevel: Fraction.fromPartial({}),
     trustingPeriod: undefined,
     unbondingPeriod: undefined,
     maxClockDrift: undefined,
-    frozenHeight: undefined,
-    latestHeight: undefined,
+    frozenHeight: Height.fromPartial({}),
+    latestHeight: Height.fromPartial({}),
     proofSpecs: [],
     upgradePath: [],
     allowUpdateAfterExpiry: false,
@@ -257,7 +257,7 @@ export const ClientState = {
 function createBaseConsensusState(): ConsensusState {
   return {
     timestamp: undefined,
-    root: undefined,
+    root: MerkleRoot.fromPartial({}),
     nextValidatorsHash: new Uint8Array()
   };
 }
@@ -322,8 +322,8 @@ export const ConsensusState = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
-    header1: undefined,
-    header2: undefined
+    header1: Header.fromPartial({}),
+    header2: Header.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -386,10 +386,10 @@ export const Misbehaviour = {
 };
 function createBaseHeader(): Header {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined,
-    trustedHeight: undefined,
-    trustedValidators: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({}),
+    trustedHeight: Height.fromPartial({}),
+    trustedValidators: ValidatorSet.fromPartial({})
   };
 }
 export const Header = {

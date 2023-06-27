@@ -18,7 +18,7 @@ export interface MsgCreateBalancerPoolResponse {
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
     sender: "",
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     poolAssets: [],
     futurePoolGovernor: ""
   };

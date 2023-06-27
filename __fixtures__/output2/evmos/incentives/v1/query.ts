@@ -116,7 +116,7 @@ export interface QueryParamsResponse {
 }
 function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryIncentivesRequest = {
@@ -162,7 +162,7 @@ export const QueryIncentivesRequest = {
 function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
   return {
     incentives: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivesResponse = {
@@ -265,7 +265,7 @@ export const QueryIncentiveRequest = {
 };
 function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
   return {
-    incentive: undefined
+    incentive: Incentive.fromPartial({})
   };
 }
 export const QueryIncentiveResponse = {
@@ -311,7 +311,7 @@ export const QueryIncentiveResponse = {
 function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
   return {
     contract: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGasMetersRequest = {
@@ -366,7 +366,7 @@ export const QueryGasMetersRequest = {
 function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
   return {
     gasMeters: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGasMetersResponse = {
@@ -524,7 +524,7 @@ export const QueryGasMeterResponse = {
 };
 function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllocationMetersRequest = {
@@ -570,7 +570,7 @@ export const QueryAllocationMetersRequest = {
 function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersResponse {
   return {
     allocationMeters: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllocationMetersResponse = {
@@ -673,7 +673,7 @@ export const QueryAllocationMeterRequest = {
 };
 function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse {
   return {
-    allocationMeter: undefined
+    allocationMeter: DecCoin.fromPartial({})
   };
 }
 export const QueryAllocationMeterResponse = {
@@ -751,7 +751,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

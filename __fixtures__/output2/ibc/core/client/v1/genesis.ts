@@ -41,7 +41,7 @@ function createBaseGenesisState(): GenesisState {
     clients: [],
     clientsConsensus: [],
     clientsMetadata: [],
-    params: undefined,
+    params: Params.fromPartial({}),
     createLocalhost: false,
     nextClientSequence: Long.UZERO
   };
