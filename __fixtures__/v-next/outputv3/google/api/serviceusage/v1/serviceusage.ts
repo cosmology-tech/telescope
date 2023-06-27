@@ -781,7 +781,7 @@ export const DisableServiceRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
-      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : 0
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
     };
   },
   toJSON(message: DisableServiceRequest): unknown {
@@ -802,7 +802,7 @@ export const DisableServiceRequest = {
     return {
       name: object?.name,
       disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
@@ -816,7 +816,7 @@ export const DisableServiceRequest = {
     return {
       name: object.name,
       disableDependentServices: object.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {

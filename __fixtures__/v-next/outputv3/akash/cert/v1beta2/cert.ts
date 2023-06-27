@@ -333,7 +333,7 @@ export const Certificate = {
   },
   fromJSON(object: any): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
       pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
@@ -354,7 +354,7 @@ export const Certificate = {
   },
   fromSDK(object: CertificateSDKType): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: object?.cert,
       pubkey: object?.pubkey
     };
@@ -368,7 +368,7 @@ export const Certificate = {
   },
   fromAmino(object: CertificateAmino): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: object.cert,
       pubkey: object.pubkey
     };

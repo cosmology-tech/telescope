@@ -134,7 +134,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
     };
@@ -161,7 +161,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: object?.port_id,
       connectionId: object?.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };
@@ -179,7 +179,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: object.port_id,
       connectionId: object.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       proposedVersion: object.proposed_version
     };

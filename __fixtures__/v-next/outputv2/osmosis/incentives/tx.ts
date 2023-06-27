@@ -259,7 +259,7 @@ export const MsgCreateGauge = {
       owner: object.owner,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       numEpochsPaidOver: Long.fromString(object.num_epochs_paid_over)
     };
   },
@@ -273,7 +273,7 @@ export const MsgCreateGauge = {
     } else {
       obj.coins = [];
     }
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     return obj;
   },

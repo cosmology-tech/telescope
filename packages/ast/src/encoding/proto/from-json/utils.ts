@@ -239,7 +239,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
             )
         );
     },

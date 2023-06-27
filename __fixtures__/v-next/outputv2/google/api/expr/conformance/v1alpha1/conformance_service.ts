@@ -1236,7 +1236,7 @@ export const IssueDetails = {
   },
   fromJSON(object: any): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
       id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
     };
@@ -1257,7 +1257,7 @@ export const IssueDetails = {
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
       id: object?.id
     };
@@ -1271,7 +1271,7 @@ export const IssueDetails = {
   },
   fromAmino(object: IssueDetailsAmino): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
       id: Long.fromString(object.id)
     };

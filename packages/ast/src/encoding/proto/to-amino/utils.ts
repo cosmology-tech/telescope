@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType } from '@osmonauts/types';
-import { BILLION } from '../../../utils';
+import { BILLION, TypeLong } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
 import { getInterfaceToAminoName } from '../implements';
@@ -238,7 +238,7 @@ export const toAminoJSON = {
     },
 
     timestamp(args: ToAminoJSONMethod) {
-        return toAminoJSON.type(args);
+        return toAminoJSON.scalar(args);
     },
 
     pubkey(args: ToAminoJSONMethod) {
@@ -661,35 +661,90 @@ export const arrayTypes = {
 
 
 export const toAminoMessages = {
-    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
-        return t.returnStatement(
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
+      context.addUtil('fromTimestamp');
+
+      return t.returnStatement(
+        t.callExpression(
+          t.memberExpression(
             t.callExpression(
+              t.identifier('fromTimestamp'),
+              [t.identifier('message')]
+            ),
+            t.identifier('toString')
+          ),
+          []
+        )
+      )
+    },
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        const longType = TypeLong.getType(context);
+
+        switch (longType) {
+          case 'BigInt':
+            return t.returnStatement(
+              t.callExpression(
                 t.memberExpression(
+                  t.parenthesizedExpression(
                     t.binaryExpression(
-                        '+',
-                        t.binaryExpression(
-                            '*',
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier('seconds')
-                                    ),
-                                    t.identifier('toInt')
-                                ),
-                                []
-                            ),
-                            BILLION
-                        ),
+                      '+',
+                      t.binaryExpression(
+                        '*',
                         t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier('nanos')
-                        )
+                          t.identifier('message'),
+                          t.identifier('seconds'),
+                        ),
+                        t.callExpression(
+                          t.identifier('BigInt'),
+                          [t.stringLiteral("1000000000")],
+                        ),
+                      ),
+                      t.callExpression(
+                        t.identifier('BigInt'),
+                        [t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier('nanos'),
+                        )],
+                      ),
                     ),
-                    t.identifier('toString')
+                  ),
+                  t.identifier('toString'),
+                ),
+                [],
+              )
+            )
+          case 'Long':
+          default:
+            return t.returnStatement(
+              t.callExpression(
+                t.memberExpression(
+                  t.binaryExpression(
+                    '+',
+                    t.binaryExpression(
+                      '*',
+                      t.callExpression(
+                        t.memberExpression(
+                          t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('seconds')
+                          ),
+                          t.identifier('toInt')
+                        ),
+                        []
+                      ),
+                      BILLION
+                    ),
+                    t.memberExpression(
+                      t.identifier('message'),
+                      t.identifier('nanos')
+                    )
+                  ),
+                  t.identifier('toString')
                 ),
                 []
-            )
-        )
+              )
+            );
+        }
+
     }
 }

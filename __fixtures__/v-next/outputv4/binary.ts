@@ -189,11 +189,11 @@ export class BinaryReader {
     return BigInt(int64ToString(lo, hi));
   }
 
-  float() {
+  float(): number {
     throw new Error("float not supported");
   }
 
-  double() {
+  double(): number {
     throw new Error("double not supported");
   }
 

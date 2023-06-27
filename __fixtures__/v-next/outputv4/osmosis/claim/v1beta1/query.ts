@@ -441,7 +441,7 @@ export const QueryClaimableForActionRequest = {
   fromJSON(object: any): QueryClaimableForActionRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toJSON(message: QueryClaimableForActionRequest): unknown {
@@ -459,13 +459,13 @@ export const QueryClaimableForActionRequest = {
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
       address: object?.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {

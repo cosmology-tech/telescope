@@ -1359,14 +1359,14 @@ export const Distribution_Exemplar = {
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
     return {
       value: object.value,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
     const obj: any = {};
     obj.value = message.value;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
     } else {

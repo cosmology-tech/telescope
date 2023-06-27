@@ -904,7 +904,7 @@ export const IssueDetails = {
   },
   fromJSON(object: any): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
       id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
@@ -925,14 +925,14 @@ export const IssueDetails = {
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
       id: object?.id
     };
   },
   fromSDKJSON(object: any): IssueDetailsSDKType {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
       id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };

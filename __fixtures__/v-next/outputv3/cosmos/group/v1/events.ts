@@ -867,7 +867,7 @@ export const EventExec = {
   fromJSON(object: any): EventExec {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
   toJSON(message: EventExec): unknown {
@@ -885,7 +885,7 @@ export const EventExec = {
   fromSDK(object: EventExecSDKType): EventExec {
     return {
       proposalId: object?.proposal_id,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
   toSDK(message: EventExec): EventExecSDKType {
@@ -897,7 +897,7 @@ export const EventExec = {
   fromAmino(object: EventExecAmino): EventExec {
     return {
       proposalId: Long.fromString(object.proposal_id),
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
   toAmino(message: EventExec): EventExecAmino {

@@ -1765,7 +1765,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromJSON(object: any): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: isSet(object.suppressedCount) ? Number(object.suppressedCount) : 0
     };
   },
@@ -1783,13 +1783,13 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: object?.suppressed_count
     };
   },
   fromSDKJSON(object: any): TailLogEntriesResponse_SuppressionInfoSDKType {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : 0
     };
   },

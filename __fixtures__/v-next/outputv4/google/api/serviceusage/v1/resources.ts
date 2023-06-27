@@ -213,7 +213,7 @@ export const Service = {
       name: isSet(object.name) ? String(object.name) : "",
       parent: isSet(object.parent) ? String(object.parent) : "",
       config: isSet(object.config) ? ServiceConfig.fromJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toJSON(message: Service): unknown {
@@ -237,7 +237,7 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   fromSDKJSON(object: any): ServiceSDKType {
@@ -245,7 +245,7 @@ export const Service = {
       name: isSet(object.name) ? String(object.name) : "",
       parent: isSet(object.parent) ? String(object.parent) : "",
       config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toSDK(message: Service): ServiceSDKType {
