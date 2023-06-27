@@ -15,7 +15,7 @@ export const protobufPackage = "cosmos.gov.v1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  messages: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any)[] | Any[];
+  messages: (TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any)[] | Any[];
   initialDeposit: Coin[];
   proposer: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
@@ -79,7 +79,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
+  content: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
   /** authority must be the gov module address. */
   authority: string;
 }

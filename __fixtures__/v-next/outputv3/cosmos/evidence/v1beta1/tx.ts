@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: (Any) | undefined;
+  evidence: Any | undefined;
 }
 export interface MsgSubmitEvidenceProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";

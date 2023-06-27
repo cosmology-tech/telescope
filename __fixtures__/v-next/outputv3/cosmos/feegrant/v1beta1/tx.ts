@@ -13,7 +13,7 @@ export interface MsgGrantAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
+  allowance: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
 }
 export interface MsgGrantAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";

@@ -84,7 +84,7 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "typescript": "5.0.4"
   },
   "dependencies": {
     "@babel/parser": "^7.21.4",

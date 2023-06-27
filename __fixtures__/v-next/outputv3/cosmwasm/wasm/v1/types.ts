@@ -223,7 +223,7 @@ export interface ContractInfo {
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension: (Any) | undefined;
+  extension: Any | undefined;
 }
 export interface ContractInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
