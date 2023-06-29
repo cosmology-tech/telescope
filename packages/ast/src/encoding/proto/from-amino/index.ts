@@ -198,6 +198,11 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
             case 'google.protobuf.Timestamp':
                 [].push.apply(body, fromAminoMessages.timestamp(context, name, proto));
                 break;
+            case 'google.protobuf.Any':
+            case 'Any':
+                [].push.apply(body, fromAminoMessages.anyType());
+                break;
+
             default:
         }
     }

@@ -704,6 +704,28 @@ export const arrayTypes = {
 
 
 export const fromAminoMessages = {
+    anyType() {
+      return [
+        t.returnStatement(
+          t.objectExpression([
+            t.objectProperty(
+              t.identifier('typeUrl'),
+              t.memberExpression(
+                t.identifier('object'),
+                t.identifier('type')
+              )
+            ),
+            t.objectProperty(
+              t.identifier('value'),
+              t.memberExpression(
+                t.identifier('object'),
+                t.identifier('value')
+              )
+            )
+          ])
+        )
+      ]
+    },
     timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
       context.addUtil('fromJsonTimestamp');
 

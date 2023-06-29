@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType } from '@osmonauts/types';
-import { BILLION, TypeLong } from '../../../utils';
+import { BILLION, TypeLong, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
 import { getInterfaceToAminoName } from '../implements';
@@ -661,6 +661,48 @@ export const arrayTypes = {
 
 
 export const toAminoMessages = {
+    anyType(){
+      return [
+        t.variableDeclaration(
+          'const',
+          [
+              t.variableDeclarator(
+                  identifier('obj', t.tsTypeAnnotation(t.tsAnyKeyword())),
+                  t.objectExpression([])
+              )
+          ]
+        ),
+        t.expressionStatement(
+          t.assignmentExpression(
+            '=',
+            t.memberExpression(
+              t.identifier('obj'),
+              t.identifier('type')
+            ),
+            t.memberExpression(
+              t.identifier('message'),
+              t.identifier('typeUrl')
+            )
+          )
+        ),
+        t.expressionStatement(
+          t.assignmentExpression(
+            '=',
+            t.memberExpression(
+              t.identifier('obj'),
+              t.identifier('value')
+            ),
+            t.memberExpression(
+              t.identifier('message'),
+              t.identifier('value')
+            )
+          )
+        ),
+        t.returnStatement(
+          t.identifier('obj')
+        )
+      ]
+    },
     timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
       context.addUtil('fromTimestamp');
 
