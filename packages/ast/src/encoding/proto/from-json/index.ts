@@ -15,7 +15,7 @@ export interface FromJSONMethod {
     isOptional: boolean;
 }
 
-export const fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+export const _fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     const oneOfs = getOneOfs(proto);
     const fields = Object.keys(proto.fields ?? {}).map(fieldName => {
         const field = {
@@ -145,6 +145,42 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
     return fields;
 };
 
+export const fromJSONMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    // const oneOfs = getOneOfs(proto);
+    let fields: t.IfStatement[];
+    fields = Object.keys(proto.fields ?? {}).map(fieldName => 
+        t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(fieldName)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(fieldName)
+                    ),
+                    t.callExpression(
+                        t.identifier('fromJSON'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(fieldName)
+                            )
+                        ],
+
+            ))),
+        ));
+
+    return fields;
+}
+
 export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     const fields = fromJSONMethodFields(context, name, proto);
     let varName = 'object';
@@ -152,7 +188,37 @@ export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: 
         varName = '_';
     }
 
-    return objectMethod('method',
+    //scaffold block statement
+    let statements: t.Statement[] = [
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                    t.identifier('obj'),
+                    t.callExpression(
+                        t.identifier('createBase' + name),
+                        []
+                    )
+                )
+            ]
+        ),
+        // fields,
+        // t.returnStatement(
+        //     t.identifier('obj')
+        // )
+    ]
+
+    for (let i = 0; i < fields.length; i++) {
+        statements.push(fields[i]);
+    }
+
+    statements.push(
+        t.returnStatement(
+        t.identifier('obj')
+    ));
+
+    return objectMethod(
+        'method',
         t.identifier('fromJSON'),
         [
             identifier(varName,
@@ -164,15 +230,30 @@ export const fromJSONMethod = (context: ProtoParseContext, name: string, proto: 
 
         ],
         t.blockStatement(
-            [
-                t.returnStatement(
-                    t.objectExpression(fields)
-                )
-            ]
+            // [
+            //     t.variableDeclaration(
+            //         'const',
+            //         [
+            //             t.variableDeclarator(
+            //                 t.identifier('obj'),
+            //                 t.callExpression(
+            //                     t.identifier('createBase' + name),
+            //                     []
+            //                 )
+            //             )
+            //         ]
+            //     ),
+            //     fields,
+            //     t.returnStatement(
+            //         t.identifier('obj')
+            //     )
+            // ]
+            statements
         ),
         false,
         false,
         false,
+        // returnType
         t.tsTypeAnnotation(
             t.tsTypeReference(
                 t.identifier(name)
