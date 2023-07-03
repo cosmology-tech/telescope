@@ -3,7 +3,7 @@ import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr } from './utils';
+import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './utils';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@osmonauts/types';
@@ -165,6 +165,7 @@ export class ProtoStore {
 
     getPackages(): string[] {
         if (this.packages) return this.packages;
+
         this.packages = this.getProtos().reduce((m, ref) => {
             return [...new Set([...m, ref.proto.package])];
         }, []);
@@ -207,8 +208,21 @@ export class ProtoStore {
     }
 
     traverseAll(): void {
+        let actualFiles = new Set();
+
         if (this._traversed) return;
         this.protos = this.getProtos().map((ref: ProtoRef) => {
+            // get included imported files
+            const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
+            const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
+
+            if(isIncluded && !isExcluded){
+              actualFiles.add(ref.filename);
+              if(ref.proto.imports && ref.proto.imports.length){
+                actualFiles = new Set([...actualFiles, ...ref.proto.imports])
+              }
+            }
+
             return {
                 absolute: ref.absolute,
                 filename: ref.filename,
@@ -220,6 +234,10 @@ export class ProtoStore {
 
         // process import names
         this.protos = this.protos.map((ref: ProtoRef) => {
+            if(!actualFiles.has(ref.filename)){
+              return null
+            }
+
             const traversed = ref.traversed;
             const symbs = this._symbols
                 .filter(f => f.ref === ref.filename);
@@ -237,7 +255,11 @@ export class ProtoStore {
                 ...ref,
                 traversed
             };
-        });
+        }).filter(Boolean);
+
+        //reset and recalculate pkgs and deps later
+        this.packages = null;
+        this.deps = null;
 
         this._traversed = true;
     }

@@ -62,6 +62,11 @@ interface TelescopeOpts {
             packages?: string[];
             protos?: string[];
         };
+        includes?: {
+          packages?: string[];
+          protos?: string[];
+        };
+
         typingsFormat?: {
             customTypes?:{
               useCosmosSDKDec?: boolean;

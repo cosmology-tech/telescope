@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cosmos/gov/v1beta1/gov.proto 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "cosmos.gov.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.protobuf",
+]
+`;
+
+exports[`cosmos/gov/v1beta1/gov.proto excluded 1`] = `[]`;
+
+exports[`cosmos/gov/v1beta1/gov.proto excluded dep 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "cosmos.gov.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.protobuf",
+]
+`;
+
+exports[`get all packages 1`] = `
+[
+  "akash.audit.v1beta1",
+  "akash.audit.v1beta2",
+  "akash.base.v1beta1",
+  "akash.base.v1beta2",
+  "akash.cert.v1beta2",
+  "akash.deployment.v1beta1",
+  "akash.deployment.v1beta2",
+  "akash.escrow.v1beta1",
+  "akash.escrow.v1beta2",
+  "akash.inflation.v1beta2",
+  "akash.market.v1beta2",
+  "akash.provider.v1beta1",
+  "akash.provider.v1beta2",
+  "cosmos.app.v1alpha1",
+  "cosmos.auth.v1beta1",
+  "cosmos.authz.v1beta1",
+  "cosmos.bank.v1beta1",
+  "cosmos.base.abci.v1beta1",
+  "cosmos.base.kv.v1beta1",
+  "cosmos.base.query.v1beta1",
+  "cosmos.base.reflection.v1beta1",
+  "cosmos.base.reflection.v2alpha1",
+  "cosmos.base.snapshots.v1beta1",
+  "cosmos.base.store.v1beta1",
+  "cosmos.base.tendermint.v1beta1",
+  "cosmos.base.v1beta1",
+  "cosmos.capability.v1beta1",
+  "cosmos.crisis.v1beta1",
+  "cosmos.crypto.ed25519",
+  "cosmos.crypto.hd.v1",
+  "cosmos.crypto.keyring.v1",
+  "cosmos.crypto.multisig",
+  "cosmos.crypto.multisig.v1beta1",
+  "cosmos.crypto.secp256k1",
+  "cosmos.crypto.secp256r1",
+  "cosmos.distribution.v1beta1",
+  "cosmos.evidence.v1beta1",
+  "cosmos.feegrant.v1beta1",
+  "cosmos.genutil.v1beta1",
+  "cosmos.gov.v1",
+  "cosmos.gov.v1beta1",
+  "cosmos.group.v1",
+  "cosmos.mint.v1beta1",
+  "cosmos.msg.v1",
+  "cosmos.nft.v1beta1",
+  "cosmos.orm.module.v1alpha1",
+  "cosmos.orm.v1",
+  "cosmos.orm.v1alpha1",
+  "cosmos.params.v1beta1",
+  "cosmos.slashing.v1beta1",
+  "cosmos.staking.v1beta1",
+  "cosmos.tx.signing.v1beta1",
+  "cosmos.tx.v1beta1",
+  "cosmos.upgrade.v1beta1",
+  "cosmos.vesting.v1beta1",
+  "cosmos_proto",
+  "cosmwasm.wasm.v1",
+  "evmos.claims.v1",
+  "evmos.epochs.v1",
+  "evmos.erc20.v1",
+  "evmos.fees.v1",
+  "evmos.incentives.v1",
+  "evmos.inflation.v1",
+  "evmos.recovery.v1",
+  "evmos.vesting.v1",
+  "gogoproto",
+  "google.api",
+  "google.api.expr.conformance.v1alpha1",
+  "google.api.expr.v1alpha1",
+  "google.api.expr.v1beta1",
+  "google.api.servicecontrol.v1",
+  "google.api.servicecontrol.v2",
+  "google.api.servicemanagement.v1",
+  "google.api.serviceusage.v1",
+  "google.api.serviceusage.v1beta1",
+  "google.logging.type",
+  "google.logging.v2",
+  "google.longrunning",
+  "google.protobuf",
+  "google.protobuf.compiler",
+  "google.rpc",
+  "google.rpc.context",
+  "ibc.applications.transfer.v1",
+  "ibc.applications.transfer.v2",
+  "ibc.core.channel.v1",
+  "ibc.core.client.v1",
+  "ibc.core.commitment.v1",
+  "ibc.core.connection.v1",
+  "ibc.core.port.v1",
+  "ibc.core.types.v1",
+  "ibc.lightclients.localhost.v1",
+  "ibc.lightclients.solomachine.v1",
+  "ibc.lightclients.solomachine.v2",
+  "ibc.lightclients.tendermint.v1",
+  "ics23",
+  "osmosis.claim.v1beta1",
+  "osmosis.epochs.v1beta1",
+  "osmosis.gamm.poolmodels.balancer.v1beta1",
+  "osmosis.gamm.poolmodels.stableswap.v1beta1",
+  "osmosis.gamm.v1beta1",
+  "osmosis.gamm.v2",
+  "osmosis.ibcratelimit.v1beta1",
+  "osmosis.incentives",
+  "osmosis.lockup",
+  "osmosis.mint.v1beta1",
+  "osmosis.poolincentives.v1beta1",
+  "osmosis.store.v1beta1",
+  "osmosis.superfluid",
+  "osmosis.superfluid.v1beta1",
+  "osmosis.tokenfactory.v1beta1",
+  "osmosis.twap.v1beta1",
+  "osmosis.txfees.v1beta1",
+  "tendermint.abci",
+  "tendermint.crypto",
+  "tendermint.libs.bits",
+  "tendermint.p2p",
+  "tendermint.types",
+  "tendermint.version",
+]
+`;
+
+exports[`gov.proto & tx.proto & signing.proto 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "cosmos.crypto.multisig.v1beta1",
+  "cosmos.gov.v1beta1",
+  "cosmos.tx.signing.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.protobuf",
+  "osmosis.gamm.v1beta1",
+]
+`;
+
+exports[`gov.proto & tx.proto & signing.proto excluded 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "cosmos.crypto.multisig.v1beta1",
+  "cosmos.gov.v1beta1",
+  "cosmos.tx.signing.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.protobuf",
+]
+`;
+
+exports[`gov.proto & tx.proto 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "cosmos.gov.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.protobuf",
+  "osmosis.gamm.v1beta1",
+]
+`;
+
+exports[`osmosis excluded gamm 1`] = `
+[
+  "cosmos.bank.v1beta1",
+  "cosmos.base.query.v1beta1",
+  "cosmos.base.v1beta1",
+  "cosmos.staking.v1beta1",
+  "cosmos_proto",
+  "gogoproto",
+  "google.api",
+  "google.protobuf",
+  "osmosis.claim.v1beta1",
+  "osmosis.epochs.v1beta1",
+  "osmosis.ibcratelimit.v1beta1",
+  "osmosis.incentives",
+  "osmosis.lockup",
+  "osmosis.mint.v1beta1",
+  "osmosis.poolincentives.v1beta1",
+  "osmosis.store.v1beta1",
+  "osmosis.superfluid",
+  "osmosis.superfluid.v1beta1",
+  "osmosis.tokenfactory.v1beta1",
+  "osmosis.twap.v1beta1",
+  "osmosis.txfees.v1beta1",
+]
+`;
+
+exports[`osmosis/gamm/v1beta1/tx.proto 1`] = `
+[
+  "cosmos.base.v1beta1",
+  "gogoproto",
+  "osmosis.gamm.v1beta1",
+]
+`;
