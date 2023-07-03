@@ -111,26 +111,26 @@ export const isRefIncluded = (
     }
 
     // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
-    if (include?.patterns?.some(pattern => Boolean(ref.filename) && minimatch(ref.filename, pattern))) {
+    if (Boolean(ref.filename) && include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
         return true;
     }
 
-    const pkgMatched = include?.packages?.some(pkgName => {
+    const pkgMatched = Boolean(ref.proto?.package) && include?.packages?.some(pkgName => {
         if (!globPattern.test(pkgName)) {
             return ref.proto.package === pkgName;
         }
-        return Boolean(ref.proto?.package) && minimatch(ref.proto.package, pkgName)
+        return minimatch(ref.proto.package, pkgName)
     });
 
     if (pkgMatched) {
         return true;
     }
 
-    const protoMatched = include?.protos?.some(protoName => {
+    const protoMatched = Boolean(ref.filename) && include?.protos?.some(protoName => {
         if (!globPattern.test(protoName)) {
             return ref.filename === protoName;
         }
-        return Boolean(ref.filename) && minimatch(ref.filename, protoName)
+        return minimatch(ref.filename, protoName)
     });
 
     if (protoMatched) {
