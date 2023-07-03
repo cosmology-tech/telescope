@@ -30,6 +30,18 @@ export default async (argv) => {
       default: './src/codegen'
     },
     {
+      _: true,
+      type: 'path',
+      name: 'build',
+      message: 'which files to include. ex: osmosis/**/gamm/**/*.proto or cosmos/bank/v1beta1/bank.proto',
+    },
+    {
+      _: true,
+      type: 'path',
+      name: 'nobuild',
+      message: 'which files to exclude. ex: osmosis/**/gamm/**/*.proto or cosmos/bank/v1beta1/bank.proto',
+    },
+    {
       type: 'confirm',
       name: 'includeAminos',
       message: 'output amino messages?',
@@ -52,6 +64,8 @@ export default async (argv) => {
   let {
     protoDirs,
     outPath,
+    build,
+    nobuild,
     includeAminos,
     includeLCDClients,
     includeRPCClients,
@@ -61,7 +75,7 @@ export default async (argv) => {
     protoDirs = [protoDirs];
   }
 
-  const options = {
+  const options: any = {
     aminoEncoding: {
       enabled: includeAminos
     },
@@ -72,6 +86,37 @@ export default async (argv) => {
       enabled: includeRPCClients,
     }
   };
+
+  if(build || nobuild){
+    if(!options.prototypes){
+      options.prototypes = {}
+    }
+
+  }
+
+  if(build){
+    if (!Array.isArray(build)) {
+      build = [build];
+    }
+
+    if(!options.prototypes.includes){
+      options.prototypes.includes = {}
+    }
+
+    options.prototypes.includes.protos = build;
+  }
+
+  if(nobuild){
+    if (!Array.isArray(nobuild)) {
+      nobuild = [nobuild];
+    }
+
+    if(!options.prototypes.excluded){
+      options.prototypes.excluded = {}
+    }
+
+    options.prototypes.excluded.protos = nobuild;
+  }
 
   writeFileSync(
     process.cwd() + '/.telescope.json',
