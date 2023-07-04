@@ -16,6 +16,7 @@ import google_empty from './native/empty';
 import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
+import { ProtoResolver } from './resolver';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -208,18 +209,23 @@ export class ProtoStore {
     }
 
     traverseAll(): void {
-        let actualFiles = new Set();
-
         if (this._traversed) return;
-        this.protos = this.getProtos().map((ref: ProtoRef) => {
-            // get included imported files
-            const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
-            const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
 
-            if(isIncluded && !isExcluded){
-              actualFiles.add(ref.filename);
-              if(ref.proto.imports && ref.proto.imports.length){
-                actualFiles = new Set([...actualFiles, ...ref.proto.imports])
+        let actualFiles = new Set();
+        let resolver = new ProtoResolver(this.getDeps());
+
+        this.protos = this.getProtos().map((ref: ProtoRef) => {
+            if( !actualFiles.has(ref.filename) ){
+              // get included imported files
+              const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
+              const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
+
+              if(isIncluded && !isExcluded){
+                const deps = resolver.resolve(ref.filename);
+
+                for (const dep of deps) {
+                  actualFiles.add(dep);
+                }
               }
             }
 

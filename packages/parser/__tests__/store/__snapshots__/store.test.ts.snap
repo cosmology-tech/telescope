@@ -186,6 +186,7 @@ exports[`osmosis excluded gamm 1`] = `
   "cosmos.bank.v1beta1",
   "cosmos.base.query.v1beta1",
   "cosmos.base.v1beta1",
+  "cosmos.msg.v1",
   "cosmos.staking.v1beta1",
   "cosmos_proto",
   "gogoproto",
@@ -204,13 +205,18 @@ exports[`osmosis excluded gamm 1`] = `
   "osmosis.tokenfactory.v1beta1",
   "osmosis.twap.v1beta1",
   "osmosis.txfees.v1beta1",
+  "tendermint.crypto",
+  "tendermint.types",
+  "tendermint.version",
 ]
 `;
 
 exports[`osmosis/gamm/v1beta1/tx.proto 1`] = `
 [
   "cosmos.base.v1beta1",
+  "cosmos_proto",
   "gogoproto",
+  "google.protobuf",
   "osmosis.gamm.v1beta1",
 ]
 `;
