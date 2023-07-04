@@ -218,7 +218,7 @@ telescope({
 ### Amino Encoding
 
 | option                         | description                                                     | defaults   |
-| -----------------------------* | -------------------------------------------------------------*  | ---------* |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `aminoEncoding.enabled`        | generate amino types and amino converters                       | `true`     |
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
@@ -227,7 +227,7 @@ telescope({
 ### Prototypes Options
 
 | option                                    | description                                                     | defaults   |
-| ----------------------------------------* | -------------------------------------------------------------*  | ---------* |
+| ----------------------------------------- | --------------------------------------------------------------  | ---------- |
 | `prototypes.enabled`                      | enables the generation of proto encoding methods                | `true`     |
 | `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
 | `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
@@ -241,7 +241,7 @@ telescope({
 ### Prototypes Methods
 
 | option                             | description                                                        | defaults|
-| ---------------------------------* | ----------------------------------------------------------------*  | ------* |
+| ---------------------------------- | -----------------------------------------------------------------  | ------- |
 | `prototypes.methods.encode`        | boolean to enable `encode` method on proto objects                 | `true`  |
 | `prototypes.methods.decode`        | boolean to enable `decode` method on proto objects                 | `true`  |
 | `prototypes.methods.fromJSON`      | boolean to enable `fromJSON` method on proto objects               | `true`  |
@@ -253,7 +253,7 @@ telescope({
 ### LCD Client Options
 
 | option                         | description                                                     | defaults   |
-| -----------------------------* | -------------------------------------------------------------*  | ---------* |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `lcdClients.enabled`           | generate LCD clients that can query proto `Query` messages      | `true`     |
 | `lcdClients.bundle`            | will generate factory bundle aggregate of all LCD Clients       | `true`     |
 | `lcdClients.scoped`            | will generate factory of scoped LCD Clients                     | `undefined`|
@@ -264,7 +264,7 @@ See [LCD Clients](#lcd-clients) for more info.
 ### RPC Client Options
 
 | option                         | description                                                             | defaults                      |
-| -----------------------------* | ---------------------------------------------------------------------*  | ----------------------------* |
+| ------------------------------ | ----------------------------------------------------------------------  | ----------------------------- |
 | `rpcClients.type`              | will generate this type of RPC client (`tendermint`, `gRPC-web`, `gRPC`)| `tendermint`                  |
 | `rpcClients.enabled`           | generate RPC clients that can interact with proto messages              | `true`                        |
 | `rpcClients.bundle`            | will generate factory bundle aggregate of all RPC Clients               | `true`                        |
@@ -278,7 +278,7 @@ See [RPC Clients](#rpc-clients) for more info.
 ### Stargate Client Options
 
 | option                                       | description                                                     | defaults |
-| -------------------------------------------* | -------------------------------------------------------------*  | ---------|
+| -------------------------------------------- | --------------------------------------------------------------  | ---------|
 | `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients | `true` (except cosmos package) |
 
 ### State Management
@@ -286,16 +286,16 @@ See [RPC Clients](#rpc-clients) for more info.
 #### React Query
 
 | option                           | description                                                             | defaults |
-| -------------------------------* | ---------------------------------------------------------------------*  | ---------|
+| -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
-| `reactQuery.include.protos`                            | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
-| `reactQuery.include.packages`                            | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
-| `reactQuery.include.patterns`                            | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+| `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
+| `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
+| `reactQuery.include.patterns`    | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
 
 #### Mobx
 
 | option                           | description                                                             | defaults |
-| -------------------------------* | ---------------------------------------------------------------------*  | ---------|
+| -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `mobx.enabled`                   | if true, will create mobx stores that use `mobx`                        | `false`  |
 | `mobx.include.protos`                            | if set, will create the mobx stores on matched proto filenames or patterns using minimatch           | `[]`     |
 | `mobx.include.packages`                            | if set, will create the mobx stores on matched packages files using minimatch           | `[]`     |
@@ -304,16 +304,16 @@ See [RPC Clients](#rpc-clients) for more info.
 #### Pinia
 
 | option                           | description                                                             | defaults |
-| -------------------------------* | ---------------------------------------------------------------------*  | ---------|
+| -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `pinia.enabled`                  | if true, will create pinia stores that use `pinia`                      | `false`  |
-| `mobx.include.protos`                            | if set, will create the pinia stores on matched proto filenames or patterns using minimatch           | `[]`     |
-| `mobx.include.packages`                            | if set, will create the pinia stores on matched packages files using minimatch           | `[]`     |
-| `mobx.include.patterns`                            | if set, will create the pinia stores on matched patterns of proto files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+| `mobx.include.protos`            | if set, will create the pinia stores on matched proto filenames or patterns using minimatch           | `[]`     |
+| `mobx.include.packages`          | if set, will create the pinia stores on matched packages files using minimatch           | `[]`     |
+| `mobx.include.patterns`          | if set, will create the pinia stores on matched patterns of proto files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
 
 ### Typings and Formating
 
 | option                                    | description                                                     | defaults  |
-| ----------------------------------------* | -------------------------------------------------------------*  | --------* |
+| ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.typingsFormat.customTypes.useCosmosSDKDec` | enable handling "prototypes.typingsFormat.customTypes.useCosmosSDKDec" proto custom type. Used to show decimal fields with the custom type correctly. Highly recommend set to true.    | `false`    |
 | `prototypes.typingsFormat.num64` | 'long' or 'bigint', the way of generating int64 proto types, set to 'bigint' to enable using more stable built-in type   | `long`    |
 | `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `true`    |
@@ -324,7 +324,7 @@ See [RPC Clients](#rpc-clients) for more info.
 ### Protobuf parser
 
 | option                                    | description                                                     | defaults  |
-| ----------------------------------------* | -------------------------------------------------------------*  | --------* |
+| ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.parser.keepCase`              | passes `keepCase` to protobuf `parse()` to keep original casing | `true`   |
 | `prototypes.parser.alternateCommentMode`  | passes `alternateCommentMode` to protobuf `parse()` method      | `true`    |
 | `prototypes.parser.preferTrailingComment` | passes `preferTrailingComment` to protobuf `parse()` method     | `false`   |
@@ -332,7 +332,7 @@ See [RPC Clients](#rpc-clients) for more info.
 ### Typescript Disabling
 
 | option                                       | description                                                     | defaults |
-| -------------------------------------------* | -------------------------------------------------------------*  | ---------|
+| -------------------------------------------- | --------------------------------------------------------------  | ---------|
 | `tsDisable.disableAll`                       | if true, will include `//@ts-nocheck` on every output file      | `false`  |
 | `tsDisable.patterns`                         | if set, will include `//@ts-nocheck` on matched patterns        | `[]`     |
 | `tsDisable.files`                            | if set, will include `//@ts-nocheck` on matched files           | `[]`     |
@@ -340,7 +340,7 @@ See [RPC Clients](#rpc-clients) for more info.
 ### ESLint Disabling
 
 | option                                       | description                                                       | defaults |
-| -------------------------------------------* | ---------------------------------------------------------------*  | ---------|
+| -------------------------------------------- | ----------------------------------------------------------------  | ---------|
 | `eslintDisable.disableAll`                   | if true, will include `/* eslint-disable */` on every output file | `false`  |
 | `eslintDisable.patterns`                     | if set, will include `/* eslint-disable */` on matched patterns   | `[]`     |
 | `eslintDisable.files`                        | if set, will include `/* eslint-disable */` on matched files      | `[]`     |
@@ -348,13 +348,13 @@ See [RPC Clients](#rpc-clients) for more info.
 ### Bundle
 
 | option                         | description                                                     | defaults   |
-| -----------------------------* | -------------------------------------------------------------*  | ---------* |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `bundle.enabled`               | bundle all files into a scoped index file                       | `true`     |
 
 ### Output
 
 | option                         | description                                                        | defaults   |
-| -----------------------------* | ----------------------------------------------------------------*  | ---------* |
+| ------------------------------ | -----------------------------------------------------------------  | ---------- |
 | `env`          | 'default' or 'v-next', set to 'v-next' to enable yet to release features                                             | `default`     |
 | `removeUnusedImports`          | removes unused imports                                             | `true`     |
 | `classesUseArrowFunctions`     | classes use arrow functions instead of `bind()`ing in constructors | `false`    |
@@ -367,7 +367,7 @@ See [RPC Clients](#rpc-clients) for more info.
 The representation of `google.protobuf.Timestamp` is configurable by the `prototypes.typingsFormat.timestamp` option.
 
 | Protobuf type    | Default/`date='date'` | `date='timestamp'`                      |
-| --------------------------* | ---------------------* | ----------------------------------|
+| --------------------------- | ---------------------- | ----------------------------------|
 | `google.protobuf.Timestamp` | `Date`                 | `{ seconds: Long, nanos: number }`|
 
 TODO
@@ -379,7 +379,7 @@ TODO
 The representation of `google.protobuf.Duration` is configurable by the `prototypes.typingsFormat.duration` option.
 
 | Protobuf type    | Default/`duration='duration'` | `duration='string'`                      |  |
-| --------------------------* | ---------------------* | -----------------------------------* | ---------------* |
+| --------------------------- | ---------------------- | ------------------------------------ | ---------------- |
 | `google.protobuf.Duration` | `{ seconds: Long, nanos: number }`                 | `string` |  |
 
 ## Composing Messages
