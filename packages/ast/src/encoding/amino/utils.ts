@@ -24,16 +24,14 @@ export const getAminoTypeName = (
     proto: ProtoType
 ) => {
 
-    if (proto.options?.['(amino.name)']) {
-        return proto.options['(amino.name)'];
-    }
-
     if (!proto.name) {
         // seems to only happen for 
         //  SourceInfo_PositionsEntry  (in hash map inside google.api.expr.v1beta1)
         return;
     }
 
+
+    // 1. first check exceptions 
     const typeUrl: string = getTypeUrl(root, proto);
 
     const exceptionsToCheck = {
@@ -43,6 +41,13 @@ export const getAminoTypeName = (
     const exceptionAminoName = exceptionsToCheck?.[typeUrl]?.aminoType;
     if (exceptionAminoName) return exceptionAminoName;
 
+
+    // 2. if animo name defined, use this
+    if (proto.options?.['(amino.name)']) {
+        return proto.options['(amino.name)'];
+    }
+
+    // 3. if a function was defined, use this
     const modTypeUrlToAmino = context.pluginValue('aminoEncoding.typeUrlToAmino');
     if (typeof modTypeUrlToAmino === 'function') {
         const result = modTypeUrlToAmino(typeUrl);
@@ -107,8 +112,9 @@ export const getAminoTypeName = (
             n[n.length - 1] = kebab(n[n.length - 1]);
             n[n.length - 1] = n[n.length - 1].replace(/^msg-/, '');
             return n.join('/');
-        } default:
+        } default: {
             return typeUrl;
+        }
     }
 }
 
