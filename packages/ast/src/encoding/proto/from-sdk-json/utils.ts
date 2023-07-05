@@ -160,7 +160,7 @@ export const fromSDKJSON = {
         t.callExpression(t.identifier(fromSDKJSONFuncName), [
           t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
-        args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+        args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
       )
     );
   },

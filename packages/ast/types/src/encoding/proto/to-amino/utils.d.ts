@@ -58,5 +58,7 @@ export declare const arrayTypes: {
     type(args: ToAminoJSONMethod): t.ConditionalExpression;
 };
 export declare const toAminoMessages: {
+    anyType(): (t.ExpressionStatement | t.ReturnStatement | t.VariableDeclaration)[];
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement;
     duration(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement;
 };

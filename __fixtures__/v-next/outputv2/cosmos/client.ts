@@ -71,7 +71,7 @@ export const getSigningCosmosClient = async ({
     aminoTypes
   } = getSigningCosmosClientOptions();
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
-    registry,
+    registry: (registry as any),
     aminoTypes
   });
   return client;

@@ -821,7 +821,7 @@ export const SignatureAndData = {
   fromJSON(object: any): SignatureAndData {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
@@ -845,7 +845,7 @@ export const SignatureAndData = {
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
     return {
       signature: object?.signature,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data,
       timestamp: object?.timestamp
     };
@@ -853,7 +853,7 @@ export const SignatureAndData = {
   fromSDKJSON(object: any): SignatureAndDataSDKType {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
@@ -1002,7 +1002,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0),
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -1029,7 +1029,7 @@ export const SignBytes = {
       sequence: object?.sequence,
       timestamp: object?.timestamp,
       diversifier: object?.diversifier,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data
     };
   },
@@ -1038,7 +1038,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0),
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },

@@ -90,7 +90,7 @@ export const Endpoint = {
   },
   fromJSON(object: any): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
       sequenceNumber: isSet(object.sequenceNumber) ? Number(object.sequenceNumber) : 0
     };
   },
@@ -108,13 +108,13 @@ export const Endpoint = {
   },
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
       sequenceNumber: object?.sequence_number
     };
   },
   fromSDKJSON(object: any): EndpointSDKType {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
       sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
     };
   },

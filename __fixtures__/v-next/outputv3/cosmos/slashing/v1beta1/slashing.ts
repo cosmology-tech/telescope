@@ -230,7 +230,7 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: Long.fromString(object.start_height),
       indexOffset: Long.fromString(object.index_offset),
-      jailedUntil: object?.jailed_until ? Timestamp.fromAmino(object.jailed_until) : undefined,
+      jailedUntil: object.jailed_until,
       tombstoned: object.tombstoned,
       missedBlocksCounter: Long.fromString(object.missed_blocks_counter)
     };
@@ -240,7 +240,7 @@ export const ValidatorSigningInfo = {
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
     obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
-    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(message.jailedUntil) : undefined;
+    obj.jailed_until = message.jailedUntil;
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;

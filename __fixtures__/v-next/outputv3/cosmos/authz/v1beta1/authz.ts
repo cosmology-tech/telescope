@@ -309,13 +309,13 @@ export const Grant = {
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+      expiration: object?.expiration
     };
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
-    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.expiration = message.expiration;
     return obj;
   },
   fromAminoMsg(object: GrantAminoMsg): Grant {
@@ -437,7 +437,7 @@ export const GrantAuthorization = {
       granter: object.granter,
       grantee: object.grantee,
       authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+      expiration: object.expiration
     };
   },
   toAmino(message: GrantAuthorization): GrantAuthorizationAmino {
@@ -445,7 +445,7 @@ export const GrantAuthorization = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
-    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.expiration = message.expiration;
     return obj;
   },
   fromAminoMsg(object: GrantAuthorizationAminoMsg): GrantAuthorization {

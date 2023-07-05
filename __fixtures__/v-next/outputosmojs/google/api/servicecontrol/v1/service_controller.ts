@@ -597,7 +597,7 @@ export const CheckResponse_ConsumerInfo = {
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
       projectNumber: isSet(object.projectNumber) ? BigInt(object.projectNumber.toString()) : BigInt(0),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: isSet(object.consumerNumber) ? BigInt(object.consumerNumber.toString()) : BigInt(0)
     };
   },
@@ -618,14 +618,14 @@ export const CheckResponse_ConsumerInfo = {
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
       projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: object?.consumer_number
     };
   },
   fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
     return {
       project_number: isSet(object.project_number) ? BigInt(object.project_number.toString()) : BigInt(0),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumer_number: isSet(object.consumer_number) ? BigInt(object.consumer_number.toString()) : BigInt(0)
     };
   },

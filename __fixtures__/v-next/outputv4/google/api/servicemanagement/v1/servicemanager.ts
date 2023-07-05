@@ -896,7 +896,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
       configId: isSet(object.configId) ? String(object.configId) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetServiceConfigRequest): unknown {
@@ -917,14 +917,14 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: object?.service_name,
       configId: object?.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetServiceConfigRequestSDKType {
     return {
       service_name: isSet(object.service_name) ? String(object.service_name) : "",
       config_id: isSet(object.config_id) ? String(object.config_id) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {

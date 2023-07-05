@@ -58,6 +58,8 @@ export declare const arrayTypes: {
     type(args: FromAminoJSONMethod): t.CallExpression;
 };
 export declare const fromAminoMessages: {
+    anyType(): t.ReturnStatement[];
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement[];
     height(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement[];
     duration(context: ProtoParseContext, name: string, proto: ProtoType): (t.ReturnStatement | t.VariableDeclaration)[];
 };

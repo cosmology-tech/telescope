@@ -854,7 +854,7 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: object?.added_at ? Timestamp.fromAmino(object.added_at) : undefined
+      addedAt: object.added_at
     };
   },
   toAmino(message: Member): MemberAmino {
@@ -862,7 +862,7 @@ export const Member = {
     obj.address = message.address;
     obj.weight = message.weight;
     obj.metadata = message.metadata;
-    obj.added_at = message.addedAt ? Timestamp.toAmino(message.addedAt) : undefined;
+    obj.added_at = message.addedAt;
     return obj;
   },
   fromAminoMsg(object: MemberAminoMsg): Member {
@@ -1416,7 +1416,7 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: Long.fromString(object.version),
       totalWeight: object.total_weight,
-      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
+      createdAt: object.created_at
     };
   },
   toAmino(message: GroupInfo): GroupInfoAmino {
@@ -1426,7 +1426,7 @@ export const GroupInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.total_weight = message.totalWeight;
-    obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined;
+    obj.created_at = message.createdAt;
     return obj;
   },
   fromAminoMsg(object: GroupInfoAminoMsg): GroupInfo {
@@ -1689,7 +1689,7 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: Long.fromString(object.version),
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
-      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
+      createdAt: object.created_at
     };
   },
   toAmino(message: GroupPolicyInfo): GroupPolicyInfoAmino {
@@ -1700,7 +1700,7 @@ export const GroupPolicyInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
-    obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined;
+    obj.created_at = message.createdAt;
     return obj;
   },
   fromAminoMsg(object: GroupPolicyInfoAminoMsg): GroupPolicyInfo {
@@ -1849,11 +1849,11 @@ export const Proposal = {
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
       groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
       votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
-      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : 0,
+      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -1908,11 +1908,11 @@ export const Proposal = {
       submitTime: object.submit_time ?? undefined,
       groupVersion: object?.group_version,
       groupPolicyVersion: object?.group_policy_version,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       votingPeriodEnd: object.voting_period_end ?? undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1947,14 +1947,14 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined,
+      submitTime: object.submit_time,
       groupVersion: Long.fromString(object.group_version),
       groupPolicyVersion: Long.fromString(object.group_policy_version),
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: object?.voting_period_end ? Timestamp.fromAmino(object.voting_period_end) : undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      votingPeriodEnd: object.voting_period_end,
+      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },
@@ -1968,13 +1968,13 @@ export const Proposal = {
     } else {
       obj.proposers = [];
     }
-    obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined;
+    obj.submit_time = message.submitTime;
     obj.group_version = message.groupVersion ? message.groupVersion.toString() : undefined;
     obj.group_policy_version = message.groupPolicyVersion ? message.groupPolicyVersion.toString() : undefined;
     obj.status = message.status;
     obj.result = message.result;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
-    obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toAmino(message.votingPeriodEnd) : undefined;
+    obj.voting_period_end = message.votingPeriodEnd;
     obj.executor_result = message.executorResult;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
@@ -2198,7 +2198,7 @@ export const Vote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
     };
@@ -2225,7 +2225,7 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata,
       submitTime: object.submit_time ?? undefined
     };
@@ -2243,9 +2243,9 @@ export const Vote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined
+      submitTime: object.submit_time
     };
   },
   toAmino(message: Vote): VoteAmino {
@@ -2254,7 +2254,7 @@ export const Vote = {
     obj.voter = message.voter;
     obj.option = message.option;
     obj.metadata = message.metadata;
-    obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined;
+    obj.submit_time = message.submitTime;
     return obj;
   },
   fromAminoMsg(object: VoteAminoMsg): Vote {

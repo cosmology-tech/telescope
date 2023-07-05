@@ -275,7 +275,7 @@ export const TokenPair = {
       erc20Address: isSet(object.erc20Address) ? String(object.erc20Address) : "",
       denom: isSet(object.denom) ? String(object.denom) : "",
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      contractOwner: isSet(object.contractOwner) ? ownerFromJSON(object.contractOwner) : 0
+      contractOwner: isSet(object.contractOwner) ? ownerFromJSON(object.contractOwner) : -1
     };
   },
   toJSON(message: TokenPair): unknown {
@@ -299,7 +299,7 @@ export const TokenPair = {
       erc20Address: object?.erc20_address,
       denom: object?.denom,
       enabled: object?.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   toSDK(message: TokenPair): TokenPairSDKType {
@@ -315,7 +315,7 @@ export const TokenPair = {
       erc20Address: object.erc20_address,
       denom: object.denom,
       enabled: object.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   toAmino(message: TokenPair): TokenPairAmino {

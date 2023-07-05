@@ -624,14 +624,14 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
       nextValidatorsHash: object.next_validators_hash
     };
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;

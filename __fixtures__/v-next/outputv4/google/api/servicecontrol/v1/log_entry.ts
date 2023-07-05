@@ -350,7 +350,7 @@ export const LogEntry = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
@@ -415,7 +415,7 @@ export const LogEntry = {
     return {
       name: object?.name,
       timestamp: object.timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
@@ -436,7 +436,7 @@ export const LogEntry = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
       insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",

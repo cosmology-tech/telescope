@@ -332,7 +332,7 @@ export const QueryCondition = {
   },
   fromJSON(object: any): QueryCondition {
     return {
-      lockQueryType: isSet(object.lockQueryType) ? lockQueryTypeFromJSON(object.lockQueryType) : 0,
+      lockQueryType: isSet(object.lockQueryType) ? lockQueryTypeFromJSON(object.lockQueryType) : -1,
       denom: isSet(object.denom) ? String(object.denom) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
@@ -356,7 +356,7 @@ export const QueryCondition = {
   },
   fromSDK(object: QueryConditionSDKType): QueryCondition {
     return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object?.denom,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       timestamp: object.timestamp ?? undefined
@@ -364,7 +364,7 @@ export const QueryCondition = {
   },
   fromSDKJSON(object: any): QueryConditionSDKType {
     return {
-      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: isSet(object.denom) ? String(object.denom) : "",
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined

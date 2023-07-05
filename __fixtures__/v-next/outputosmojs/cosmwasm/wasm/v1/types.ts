@@ -256,7 +256,7 @@ export const AccessTypeParam = {
   },
   fromJSON(object: any): AccessTypeParam {
     return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
   toJSON(message: AccessTypeParam): unknown {
@@ -271,12 +271,12 @@ export const AccessTypeParam = {
   },
   fromSDK(object: AccessTypeParamSDKType): AccessTypeParam {
     return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
   fromSDKJSON(object: any): AccessTypeParamSDKType {
     return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
   toSDK(message: AccessTypeParam): AccessTypeParamSDKType {
@@ -323,7 +323,7 @@ export const AccessConfig = {
   },
   fromJSON(object: any): AccessConfig {
     return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -341,13 +341,13 @@ export const AccessConfig = {
   },
   fromSDK(object: AccessConfigSDKType): AccessConfig {
     return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
       address: object?.address
     };
   },
   fromSDKJSON(object: any): AccessConfigSDKType {
     return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -404,7 +404,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : 0,
+      instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : -1,
       maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? BigInt(object.maxWasmCodeSize.toString()) : BigInt(0)
     };
   },
@@ -425,14 +425,14 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       codeUploadAccess: object.code_upload_access ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
       maxWasmCodeSize: object?.max_wasm_code_size
     };
   },
   fromSDKJSON(object: any): ParamsSDKType {
     return {
       code_upload_access: isSet(object.code_upload_access) ? AccessConfig.fromSDKJSON(object.code_upload_access) : undefined,
-      instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
       max_wasm_code_size: isSet(object.max_wasm_code_size) ? BigInt(object.max_wasm_code_size.toString()) : BigInt(0)
     };
   },
@@ -720,7 +720,7 @@ export const ContractCodeHistoryEntry = {
   },
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
       codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
@@ -744,7 +744,7 @@ export const ContractCodeHistoryEntry = {
   },
   fromSDK(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
     return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
       codeId: object?.code_id,
       updated: object.updated ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
       msg: object?.msg
@@ -752,7 +752,7 @@ export const ContractCodeHistoryEntry = {
   },
   fromSDKJSON(object: any): ContractCodeHistoryEntrySDKType {
     return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
       code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDKJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
