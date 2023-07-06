@@ -720,7 +720,7 @@ Below will be an example of scaffold a `grant` Proto Msg for grpc-web and grpc-g
     const signed_tx = await signClient.sign('granter_address', [msg], fee, 'telescope: grant', signerData);
     const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
 
-    const res = await client.cosmos.tx.v1beta1.broadcastTx(  
+    const res = await client.cosmos.tx.v1beta1.broadcastTx(
       {
         txBytes: txRawBytes,
         mode: BroadcastMode.BROADCAST_MODE_BLOCK
