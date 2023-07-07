@@ -24,7 +24,6 @@ export const main = async () => {
   const accounts = await authClient.accounts({
     pagination: PageRequest.fromPartial({})
   });
-
   console.log(accounts)
 };
 

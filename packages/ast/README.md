@@ -33,5 +33,4 @@ export namespace osmosis {
     }
   }
 }
-
 ```
