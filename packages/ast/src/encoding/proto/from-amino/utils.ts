@@ -610,23 +610,23 @@ export const arrayTypes = {
         return arrayTypes.scalar();
     },
 
-    long() {
-        return arrayTypes.scalar();
+    long(args: FromAminoJSONMethod) {
+      return TypeLong.getFromStringArray(args.context);
     },
-    uint64() {
-        return arrayTypes.scalar();
+    uint64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    int64() {
-        return arrayTypes.scalar();
+    int64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sint64() {
-        return arrayTypes.scalar();
+    sint64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    fixed64() {
-        return arrayTypes.scalar();
+    fixed64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sfixed64() {
-        return arrayTypes.scalar();
+    sfixed64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
     number() {
         return arrayTypes.scalar();

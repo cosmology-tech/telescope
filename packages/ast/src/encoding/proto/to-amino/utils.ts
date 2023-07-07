@@ -577,7 +577,7 @@ export const arrayTypes = {
         return arrayTypes.number();
     },
     long(args: ToAminoJSONMethod) {
-        return arrayTypes.scalar();
+        return TypeLong.getToStringArray(args.context);
     },
     int64(args: ToAminoJSONMethod) {
         return arrayTypes.long(args);

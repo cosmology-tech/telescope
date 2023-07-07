@@ -21,6 +21,19 @@ export const TypeLong = {
     long: t.identifier('Long')
   },
 
+  fromStringArray: {
+    bigint: t.callExpression(t.identifier('BigInt'), [t.identifier('e')]),
+    long: t.identifier('e')
+  },
+
+  toStringArray: {
+    bigint: t.callExpression(
+      t.memberExpression(t.identifier('e'), t.identifier('toString')),
+      []
+    ),
+    long: t.identifier('e')
+  },
+
   uzeroExpressions: {
     bigint: t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)]),
     long: t.memberExpression(t.identifier('Long'), t.identifier('UZERO'))
@@ -68,6 +81,14 @@ export const TypeLong = {
     return TypeLong.getNode(ctx, TypeLong.types);
   },
 
+  getFromStringArray: (ctx: GenericParseContext): t.Expression => {
+    return TypeLong.getNode(ctx, TypeLong.fromStringArray);
+  },
+
+  getToStringArray: (ctx: GenericParseContext): t.Expression => {
+    return TypeLong.getNode(ctx, TypeLong.toStringArray);
+  },
+
   getPropIdentifier: (ctx: GenericParseContext): t.Identifier => {
     return TypeLong.getNode(ctx, TypeLong.propIdentifiers);
   },
@@ -103,7 +124,7 @@ export const TypeLong = {
             []
           )
         );
-      break;
+        break;
 
       case 'long':
         args.push(arg);
