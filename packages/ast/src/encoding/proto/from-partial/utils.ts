@@ -174,7 +174,13 @@ export const fromPartial = {
                     )
                 ]
             ),
-            t.identifier('undefined')
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(name),
+                    t.identifier('fromPartial')
+                ),
+                [t.objectExpression([])]
+            ),
         );
     },
 
