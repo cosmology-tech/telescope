@@ -15,33 +15,39 @@ const getPropNames = (field: ProtoField) => {
 
 export const fromJSON = {
 
-    // sender: isSet(object.sender) ? String(object.sender) : ""
+    // OLD: sender: isSet(object.sender) ? String(object.sender) : ""
+    // NEW: if (isSet(object.sender)) { obj.sender = String(object.sender) }
     string(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('String'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('String'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
         )
     },
@@ -50,28 +56,33 @@ export const fromJSON = {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('Number'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('Number'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
         )
     },
@@ -98,71 +109,84 @@ export const fromJSON = {
         return fromJSON.number(args);
     },
 
-    // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
+    // OLD disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
+    // NEW if (isSet(object.disableMacros)) { obj.disableMacros = Boolean(object.disableMacros) }
     bool(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('Boolean'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('Boolean'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
         )
     },
 
-    // int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : Long.UZERO,
+    // OLD int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : Long.UZERO,
+    // NEW if (isSet(object.int64Value)) { obj.int64Value = Long.fromValue(object.int64Value) }
     long(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         TypeLong.addUtil(args.context);
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    TypeLong.getFromValueWithArgs(args.context,
                         t.memberExpression(
                             t.identifier('object'),
                             t.identifier(objProp)
                         )
-                    ]
-                ),
-                TypeLong.getFromValueWithArgs(args.context,
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+                    )
+                )
             )
-        );
+        )
     },
 
     int64(args: FromJSONMethod) {
         return fromJSON.long(args);
     },
 
-    // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
+    // OLD uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
+    // NEW if (isSet(object.uint64Value)) { obj.uint64Value = Long.fromString(object.uint64Value) }
     uint64(args: FromJSONMethod) {
         return fromJSON.long(args);
     },
@@ -183,97 +207,115 @@ export const fromJSON = {
         const name = args.context.getTypeName(args.field);
         args.context.addUtil('isSet');
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
                     t.memberExpression(
-                        t.identifier(name),
-                        t.identifier('fromJSON')
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
                     ),
-                    [
+                    t.callExpression(
                         t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.identifier('undefined')
+                            t.identifier(name),
+                            t.identifier('fromJSON')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
-        );
+        )
     },
 
-    // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+    // OLD mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+    // NEW if (isSet(object.mode)) { obj.mode = signModeFromJSON(object.mode) }
     enum(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         const fromJSONFuncName = args.context.getFromEnum(args.field);
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier(fromJSONFuncName),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier(fromJSONFuncName),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
-        );
+        )
     },
 
-    // queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
+    // OLD queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
+    // NEW if (isSet(object.queryData)) { obj.queryData = bytesFromBase64(object.queryData) }
     bytes(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         args.context.addUtil('bytesFromBase64');
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('bytesFromBase64'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('bytesFromBase64'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
-        );
+        )
     },
 
 
@@ -290,35 +332,41 @@ export const fromJSON = {
         }
     },
 
-    // period: isSet(object.period) ? String(object.period) : undefined,
-
+    // OLD period: isSet(object.period) ? String(object.period) : undefined,
+    // NEW if (isSet(object.period)) { obj.period = String(object.period) }
     durationString(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.callExpression(
-                    t.identifier('String'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                t.identifier('undefined')
+
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('String'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
             )
-        );
+        )
     },
 
     // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
@@ -348,36 +396,70 @@ export const fromJSON = {
       args.context.addUtil('isSet');
       args.context.addUtil('fromJsonTimestamp');
 
-      return t.objectProperty(
-        t.identifier(messageProp),
-        t.conditionalExpression(
-          t.callExpression(t.identifier('isSet'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.callExpression(t.identifier('fromJsonTimestamp'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.identifier('undefined')
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.callExpression(
+                        t.identifier('fromJsonTimestamp'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
+            )
         )
-      );
     },
 
     timestampDate(args: FromJSONMethod) {
       const { messageProp, objProp } = getPropNames(args.field);
       args.context.addUtil('isSet');
 
-      return t.objectProperty(
-        t.identifier(messageProp),
-        t.conditionalExpression(
-          t.callExpression(t.identifier('isSet'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.newExpression(t.identifier('Date'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.identifier('undefined')
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isSet'),
+                [
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
+                    ),
+                    t.newExpression(
+                        t.identifier('Date'),
+                        [
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(objProp)
+                            )
+                        ]
+                    )
+                )
+            )
         )
-      );
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -496,100 +578,104 @@ export const fromJSON = {
                 throw new Error('keyHash requires new type. Ask maintainers.');
         }
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isObject'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
-                    ]
-                ),
-                callExpression(
+        return t.ifStatement(
+            t.callExpression(
+                t.identifier('isObject'),
+                [
                     t.memberExpression(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.identifier('Object'),
-                                t.identifier('entries')
-                            ),
-                            [
-                                t.memberExpression(
-                                    t.identifier('object'),
-                                    t.identifier(objProp)
-                                )
-                            ]
-                        ),
-                        t.identifier('reduce')
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier(messageProp)
                     ),
-                    [
-                        t.arrowFunctionExpression(
-                            [
-                                t.identifier('acc'),
-                                t.arrayPattern(
-                                    [
-                                        t.identifier('key'),
-                                        t.identifier('value')
-                                    ]
-                                )
-                            ],
-                            t.blockStatement([
-                                t.expressionStatement(
-                                    t.assignmentExpression(
-                                        '=',
-                                        t.memberExpression(
-                                            t.identifier('acc'),
-                                            wrapKey(t.identifier('key')),
-                                            true
-                                        ),
-                                        fromJSON
-                                    )
+                    callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('Object'),
+                                    t.identifier('entries')
                                 ),
-                                t.returnStatement(
-                                    t.identifier('acc')
-                                )
-                            ])
-                        ),
-                        t.objectExpression(
-                            []
-                        )
-                    ],
-                    t.tsTypeParameterInstantiation(
-                        [
-                            t.tsTypeLiteral(
                                 [
-                                    t.tsIndexSignature(
-                                        [
-                                            identifier('key', t.tsTypeAnnotation(
-                                                keyTypeType
-                                            ))
-                                        ],
-                                        t.tsTypeAnnotation(
-                                            t.tsTypeReference(
-                                                t.identifier(valueTypeType)
-                                            )
-                                        )
+                                    t.memberExpression(
+                                        t.identifier('object'),
+                                        t.identifier(objProp)
                                     )
                                 ]
+                            ),
+                            t.identifier('reduce')
+                        ),
+                        [
+                            t.arrowFunctionExpression(
+                                [
+                                    t.identifier('acc'),
+                                    t.arrayPattern(
+                                        [
+                                            t.identifier('key'),
+                                            t.identifier('value')
+                                        ]
+                                    )
+                                ],
+                                t.blockStatement([
+                                    t.expressionStatement(
+                                        t.assignmentExpression(
+                                            '=',
+                                            t.memberExpression(
+                                                t.identifier('acc'),
+                                                wrapKey(t.identifier('key')),
+                                                true
+                                            ),
+                                            fromJSON
+                                        )
+                                    ),
+                                    t.returnStatement(
+                                        t.identifier('acc')
+                                    )
+                                ])
+                            ),
+                            t.objectExpression(
+                                []
                             )
-                        ]
+                        ],
+                        t.tsTypeParameterInstantiation(
+                            [
+                                t.tsTypeLiteral(
+                                    [
+                                        t.tsIndexSignature(
+                                            [
+                                                identifier('key', t.tsTypeAnnotation(
+                                                    keyTypeType
+                                                ))
+                                            ],
+                                            t.tsTypeAnnotation(
+                                                t.tsTypeReference(
+                                                    t.identifier(valueTypeType)
+                                                )
+                                            )
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
                     )
-                ),
-                t.objectExpression([])
+                )
             )
         )
     },
 
-    // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+    //OLD: codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+    //NEW: if (Array.isArray(object?.codeIds)) { object.codeIds.map((e: any) => Long.fromString(e)) }
     array(args: FromJSONMethod, expr: t.Expression) {
         const { messageProp, objProp } = getPropNames(args.field);
 
-        return t.objectProperty(
-            t.identifier(messageProp),
-            t.conditionalExpression(
-                t.callExpression(
+        return t.ifStatement(
+            t.callExpression(
                     t.memberExpression(
                         t.identifier('Array'),
                         t.identifier('isArray')
@@ -602,7 +688,8 @@ export const fromJSON = {
                             true
                         )
                     ]
-                ),
+            ),
+            t.expressionStatement(
                 t.callExpression(
                     t.memberExpression(
                         t.memberExpression(
@@ -622,8 +709,7 @@ export const fromJSON = {
                             false
                         )
                     ]
-                ),
-                t.arrayExpression([])
+                )
             )
         )
     }
