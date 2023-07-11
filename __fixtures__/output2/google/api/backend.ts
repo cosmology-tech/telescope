@@ -218,9 +218,9 @@ export const Backend = {
     return message;
   },
   fromJSON(object: any): Backend {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromJSON(e)) : []
-    };
+    const obj = createBaseBackend();
+    if (Array.isArray(object?.rules)) object.rules.map((e: any) => BackendRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: Backend): unknown {
     const obj: any = {};
@@ -323,17 +323,17 @@ export const BackendRule = {
     return message;
   },
   fromJSON(object: any): BackendRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      address: isSet(object.address) ? String(object.address) : "",
-      deadline: isSet(object.deadline) ? Number(object.deadline) : 0,
-      minDeadline: isSet(object.minDeadline) ? Number(object.minDeadline) : 0,
-      operationDeadline: isSet(object.operationDeadline) ? Number(object.operationDeadline) : 0,
-      pathTranslation: isSet(object.pathTranslation) ? backendRule_PathTranslationFromJSON(object.pathTranslation) : 0,
-      jwtAudience: isSet(object.jwtAudience) ? String(object.jwtAudience) : undefined,
-      disableAuth: isSet(object.disableAuth) ? Boolean(object.disableAuth) : undefined,
-      protocol: isSet(object.protocol) ? String(object.protocol) : ""
-    };
+    const obj = createBaseBackendRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.deadline)) obj.deadline = Number(object.deadline);
+    if (isSet(object.minDeadline)) obj.minDeadline = Number(object.minDeadline);
+    if (isSet(object.operationDeadline)) obj.operationDeadline = Number(object.operationDeadline);
+    if (isSet(object.pathTranslation)) obj.pathTranslation = backendRule_PathTranslationFromJSON(object.pathTranslation);
+    if (isSet(object.jwtAudience)) obj.jwtAudience = String(object.jwtAudience);
+    if (isSet(object.disableAuth)) obj.disableAuth = Boolean(object.disableAuth);
+    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
+    return obj;
   },
   toJSON(message: BackendRule): unknown {
     const obj: any = {};

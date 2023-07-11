@@ -55,10 +55,10 @@ export const BitArray = {
     return message;
   },
   fromJSON(object: any): BitArray {
-    return {
-      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseBitArray();
+    if (isSet(object.bits)) obj.bits = BigInt(object.bits.toString());
+    if (Array.isArray(object?.elems)) object.elems.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: BitArray): unknown {
     const obj: any = {};

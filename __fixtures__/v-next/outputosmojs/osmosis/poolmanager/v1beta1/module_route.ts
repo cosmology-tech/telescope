@@ -116,10 +116,10 @@ export const ModuleRoute = {
     return message;
   },
   fromJSON(object: any): ModuleRoute {
-    return {
-      poolType: isSet(object.poolType) ? poolTypeFromJSON(object.poolType) : 0,
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : undefined
-    };
+    const obj = createBaseModuleRoute();
+    if (isSet(object.poolType)) obj.poolType = poolTypeFromJSON(object.poolType);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: ModuleRoute): unknown {
     const obj: any = {};

@@ -152,12 +152,12 @@ export const MsgCreateBid = {
     return message;
   },
   fromJSON(object: any): MsgCreateBid {
-    return {
-      order: isSet(object.order) ? OrderID.fromJSON(object.order) : undefined,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromJSON(object.deposit) : undefined
-    };
+    const obj = createBaseMsgCreateBid();
+    if (isSet(object.order)) obj.order = OrderID.fromJSON(object.order);
+    if (isSet(object.provider)) obj.provider = String(object.provider);
+    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
+    if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
+    return obj;
   },
   toJSON(message: MsgCreateBid): unknown {
     const obj: any = {};
@@ -169,10 +169,10 @@ export const MsgCreateBid = {
   },
   fromPartial(object: DeepPartial<MsgCreateBid>): MsgCreateBid {
     const message = createBaseMsgCreateBid();
-    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : undefined;
+    message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : OrderID.fromPartial({});
     message.provider = object.provider ?? "";
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
     return message;
   }
 };
@@ -198,7 +198,8 @@ export const MsgCreateBidResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateBidResponse {
-    return {};
+    const obj = createBaseMsgCreateBidResponse();
+    return obj;
   },
   toJSON(_: MsgCreateBidResponse): unknown {
     const obj: any = {};
@@ -239,9 +240,9 @@ export const MsgCloseBid = {
     return message;
   },
   fromJSON(object: any): MsgCloseBid {
-    return {
-      bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined
-    };
+    const obj = createBaseMsgCloseBid();
+    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
+    return obj;
   },
   toJSON(message: MsgCloseBid): unknown {
     const obj: any = {};
@@ -250,7 +251,7 @@ export const MsgCloseBid = {
   },
   fromPartial(object: DeepPartial<MsgCloseBid>): MsgCloseBid {
     const message = createBaseMsgCloseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
     return message;
   }
 };
@@ -276,7 +277,8 @@ export const MsgCloseBidResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseBidResponse {
-    return {};
+    const obj = createBaseMsgCloseBidResponse();
+    return obj;
   },
   toJSON(_: MsgCloseBidResponse): unknown {
     const obj: any = {};
@@ -345,13 +347,13 @@ export const BidID = {
     return message;
   },
   fromJSON(object: any): BidID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : ""
-    };
+    const obj = createBaseBidID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
+    if (isSet(object.provider)) obj.provider = String(object.provider);
+    return obj;
   },
   toJSON(message: BidID): unknown {
     const obj: any = {};
@@ -423,12 +425,12 @@ export const Bid = {
     return message;
   },
   fromJSON(object: any): Bid {
-    return {
-      bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
-    };
+    const obj = createBaseBid();
+    if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
+    if (isSet(object.state)) obj.state = bid_StateFromJSON(object.state);
+    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
+    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    return obj;
   },
   toJSON(message: Bid): unknown {
     const obj: any = {};
@@ -440,9 +442,9 @@ export const Bid = {
   },
   fromPartial(object: DeepPartial<Bid>): Bid {
     const message = createBaseBid();
-    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
+    message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : BidID.fromPartial({});
     message.state = object.state ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   }
@@ -512,14 +514,14 @@ export const BidFilters = {
     return message;
   },
   fromJSON(object: any): BidFilters {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
-      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
-      provider: isSet(object.provider) ? String(object.provider) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
+    const obj = createBaseBidFilters();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
+    if (isSet(object.provider)) obj.provider = String(object.provider);
+    if (isSet(object.state)) obj.state = String(object.state);
+    return obj;
   },
   toJSON(message: BidFilters): unknown {
     const obj: any = {};

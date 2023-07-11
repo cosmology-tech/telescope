@@ -94,11 +94,11 @@ export const MsgSuperfluidDelegate = {
     return message;
   },
   fromJSON(object: any): MsgSuperfluidDelegate {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO,
-      valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
-    };
+    const obj = createBaseMsgSuperfluidDelegate();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.lockId)) obj.lockId = Long.fromValue(object.lockId);
+    if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
+    return obj;
   },
   toJSON(message: MsgSuperfluidDelegate): unknown {
     const obj: any = {};
@@ -137,7 +137,8 @@ export const MsgSuperfluidDelegateResponse = {
     return message;
   },
   fromJSON(_: any): MsgSuperfluidDelegateResponse {
-    return {};
+    const obj = createBaseMsgSuperfluidDelegateResponse();
+    return obj;
   },
   toJSON(_: MsgSuperfluidDelegateResponse): unknown {
     const obj: any = {};
@@ -185,10 +186,10 @@ export const MsgSuperfluidUndelegate = {
     return message;
   },
   fromJSON(object: any): MsgSuperfluidUndelegate {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
-    };
+    const obj = createBaseMsgSuperfluidUndelegate();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.lockId)) obj.lockId = Long.fromValue(object.lockId);
+    return obj;
   },
   toJSON(message: MsgSuperfluidUndelegate): unknown {
     const obj: any = {};
@@ -225,7 +226,8 @@ export const MsgSuperfluidUndelegateResponse = {
     return message;
   },
   fromJSON(_: any): MsgSuperfluidUndelegateResponse {
-    return {};
+    const obj = createBaseMsgSuperfluidUndelegateResponse();
+    return obj;
   },
   toJSON(_: MsgSuperfluidUndelegateResponse): unknown {
     const obj: any = {};
@@ -273,10 +275,10 @@ export const MsgSuperfluidUnbondLock = {
     return message;
   },
   fromJSON(object: any): MsgSuperfluidUnbondLock {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
-    };
+    const obj = createBaseMsgSuperfluidUnbondLock();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.lockId)) obj.lockId = Long.fromValue(object.lockId);
+    return obj;
   },
   toJSON(message: MsgSuperfluidUnbondLock): unknown {
     const obj: any = {};
@@ -313,7 +315,8 @@ export const MsgSuperfluidUnbondLockResponse = {
     return message;
   },
   fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
-    return {};
+    const obj = createBaseMsgSuperfluidUnbondLockResponse();
+    return obj;
   },
   toJSON(_: MsgSuperfluidUnbondLockResponse): unknown {
     const obj: any = {};
@@ -368,11 +371,11 @@ export const MsgLockAndSuperfluidDelegate = {
     return message;
   },
   fromJSON(object: any): MsgLockAndSuperfluidDelegate {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
-      valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
-    };
+    const obj = createBaseMsgLockAndSuperfluidDelegate();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
+    return obj;
   },
   toJSON(message: MsgLockAndSuperfluidDelegate): unknown {
     const obj: any = {};
@@ -423,9 +426,9 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     return message;
   },
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
-    return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
-    };
+    const obj = createBaseMsgLockAndSuperfluidDelegateResponse();
+    if (isSet(object.ID)) obj.ID = Long.fromValue(object.ID);
+    return obj;
   },
   toJSON(message: MsgLockAndSuperfluidDelegateResponse): unknown {
     const obj: any = {};
@@ -475,10 +478,10 @@ export const MsgUnPoolWhitelistedPool = {
     return message;
   },
   fromJSON(object: any): MsgUnPoolWhitelistedPool {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
-    };
+    const obj = createBaseMsgUnPoolWhitelistedPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
+    return obj;
   },
   toJSON(message: MsgUnPoolWhitelistedPool): unknown {
     const obj: any = {};
@@ -532,9 +535,9 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgUnPoolWhitelistedPoolResponse {
-    return {
-      exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => Long.fromValue(e)) : []
-    };
+    const obj = createBaseMsgUnPoolWhitelistedPoolResponse();
+    if (Array.isArray(object?.exitedLockIds)) object.exitedLockIds.map((e: any) => Long.fromValue(e));
+    return obj;
   },
   toJSON(message: MsgUnPoolWhitelistedPoolResponse): unknown {
     const obj: any = {};

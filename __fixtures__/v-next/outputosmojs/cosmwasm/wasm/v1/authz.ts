@@ -187,9 +187,9 @@ export const ContractExecutionAuthorization = {
     return message;
   },
   fromJSON(object: any): ContractExecutionAuthorization {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : []
-    };
+    const obj = createBaseContractExecutionAuthorization();
+    if (Array.isArray(object?.grants)) object.grants.map((e: any) => ContractGrant.fromJSON(e));
+    return obj;
   },
   toJSON(message: ContractExecutionAuthorization): unknown {
     const obj: any = {};
@@ -255,9 +255,9 @@ export const ContractMigrationAuthorization = {
     return message;
   },
   fromJSON(object: any): ContractMigrationAuthorization {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : []
-    };
+    const obj = createBaseContractMigrationAuthorization();
+    if (Array.isArray(object?.grants)) object.grants.map((e: any) => ContractGrant.fromJSON(e));
+    return obj;
   },
   toJSON(message: ContractMigrationAuthorization): unknown {
     const obj: any = {};
@@ -337,11 +337,11 @@ export const ContractGrant = {
     return message;
   },
   fromJSON(object: any): ContractGrant {
-    return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      limit: isSet(object.limit) ? Any.fromJSON(object.limit) : undefined,
-      filter: isSet(object.filter) ? Any.fromJSON(object.filter) : undefined
-    };
+    const obj = createBaseContractGrant();
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (isSet(object.limit)) obj.limit = Any.fromJSON(object.limit);
+    if (isSet(object.filter)) obj.filter = Any.fromJSON(object.filter);
+    return obj;
   },
   toJSON(message: ContractGrant): unknown {
     const obj: any = {};
@@ -353,8 +353,8 @@ export const ContractGrant = {
   fromPartial(object: DeepPartial<ContractGrant>): ContractGrant {
     const message = createBaseContractGrant();
     message.contract = object.contract ?? "";
-    message.limit = object.limit !== undefined && object.limit !== null ? Any.fromPartial(object.limit) : undefined;
-    message.filter = object.filter !== undefined && object.filter !== null ? Any.fromPartial(object.filter) : undefined;
+    message.limit = object.limit !== undefined && object.limit !== null ? Any.fromPartial(object.limit) : Any.fromPartial({});
+    message.filter = object.filter !== undefined && object.filter !== null ? Any.fromPartial(object.filter) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: ContractGrantSDKType): ContractGrant {
@@ -409,9 +409,9 @@ export const MaxCallsLimit = {
     return message;
   },
   fromJSON(object: any): MaxCallsLimit {
-    return {
-      remaining: isSet(object.remaining) ? BigInt(object.remaining.toString()) : BigInt(0)
-    };
+    const obj = createBaseMaxCallsLimit();
+    if (isSet(object.remaining)) obj.remaining = BigInt(object.remaining.toString());
+    return obj;
   },
   toJSON(message: MaxCallsLimit): unknown {
     const obj: any = {};
@@ -469,9 +469,9 @@ export const MaxFundsLimit = {
     return message;
   },
   fromJSON(object: any): MaxFundsLimit {
-    return {
-      amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseMaxFundsLimit();
+    if (Array.isArray(object?.amounts)) object.amounts.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: MaxFundsLimit): unknown {
     const obj: any = {};
@@ -544,10 +544,10 @@ export const CombinedLimit = {
     return message;
   },
   fromJSON(object: any): CombinedLimit {
-    return {
-      callsRemaining: isSet(object.callsRemaining) ? BigInt(object.callsRemaining.toString()) : BigInt(0),
-      amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseCombinedLimit();
+    if (isSet(object.callsRemaining)) obj.callsRemaining = BigInt(object.callsRemaining.toString());
+    if (Array.isArray(object?.amounts)) object.amounts.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: CombinedLimit): unknown {
     const obj: any = {};
@@ -610,7 +610,8 @@ export const AllowAllMessagesFilter = {
     return message;
   },
   fromJSON(_: any): AllowAllMessagesFilter {
-    return {};
+    const obj = createBaseAllowAllMessagesFilter();
+    return obj;
   },
   toJSON(_: AllowAllMessagesFilter): unknown {
     const obj: any = {};
@@ -661,9 +662,9 @@ export const AcceptedMessageKeysFilter = {
     return message;
   },
   fromJSON(object: any): AcceptedMessageKeysFilter {
-    return {
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseAcceptedMessageKeysFilter();
+    if (Array.isArray(object?.keys)) object.keys.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: AcceptedMessageKeysFilter): unknown {
     const obj: any = {};
@@ -729,9 +730,9 @@ export const AcceptedMessagesFilter = {
     return message;
   },
   fromJSON(object: any): AcceptedMessagesFilter {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const obj = createBaseAcceptedMessagesFilter();
+    if (Array.isArray(object?.messages)) object.messages.map((e: any) => bytesFromBase64(e));
+    return obj;
   },
   toJSON(message: AcceptedMessagesFilter): unknown {
     const obj: any = {};

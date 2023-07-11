@@ -687,10 +687,10 @@ export const Http = {
     return message;
   },
   fromJSON(object: any): Http {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
-      fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion) ? Boolean(object.fullyDecodeReservedExpansion) : false
-    };
+    const obj = createBaseHttp();
+    if (Array.isArray(object?.rules)) object.rules.map((e: any) => HttpRule.fromJSON(e));
+    if (isSet(object.fullyDecodeReservedExpansion)) obj.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
+    return obj;
   },
   toJSON(message: Http): unknown {
     const obj: any = {};
@@ -818,18 +818,18 @@ export const HttpRule = {
     return message;
   },
   fromJSON(object: any): HttpRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      get: isSet(object.get) ? String(object.get) : undefined,
-      put: isSet(object.put) ? String(object.put) : undefined,
-      post: isSet(object.post) ? String(object.post) : undefined,
-      delete: isSet(object.delete) ? String(object.delete) : undefined,
-      patch: isSet(object.patch) ? String(object.patch) : undefined,
-      custom: isSet(object.custom) ? CustomHttpPattern.fromJSON(object.custom) : undefined,
-      body: isSet(object.body) ? String(object.body) : "",
-      responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
-      additionalBindings: Array.isArray(object?.additionalBindings) ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e)) : []
-    };
+    const obj = createBaseHttpRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.get)) obj.get = String(object.get);
+    if (isSet(object.put)) obj.put = String(object.put);
+    if (isSet(object.post)) obj.post = String(object.post);
+    if (isSet(object.delete)) obj.delete = String(object.delete);
+    if (isSet(object.patch)) obj.patch = String(object.patch);
+    if (isSet(object.custom)) obj.custom = CustomHttpPattern.fromJSON(object.custom);
+    if (isSet(object.body)) obj.body = String(object.body);
+    if (isSet(object.responseBody)) obj.responseBody = String(object.responseBody);
+    if (Array.isArray(object?.additionalBindings)) object.additionalBindings.map((e: any) => HttpRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: HttpRule): unknown {
     const obj: any = {};
@@ -857,7 +857,7 @@ export const HttpRule = {
     message.post = object.post ?? undefined;
     message.delete = object.delete ?? undefined;
     message.patch = object.patch ?? undefined;
-    message.custom = object.custom !== undefined && object.custom !== null ? CustomHttpPattern.fromPartial(object.custom) : undefined;
+    message.custom = object.custom !== undefined && object.custom !== null ? CustomHttpPattern.fromPartial(object.custom) : CustomHttpPattern.fromPartial({});
     message.body = object.body ?? "";
     message.responseBody = object.responseBody ?? "";
     message.additionalBindings = object.additionalBindings?.map(e => HttpRule.fromPartial(e)) || [];
@@ -933,10 +933,10 @@ export const CustomHttpPattern = {
     return message;
   },
   fromJSON(object: any): CustomHttpPattern {
-    return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
-      path: isSet(object.path) ? String(object.path) : ""
-    };
+    const obj = createBaseCustomHttpPattern();
+    if (isSet(object.kind)) obj.kind = String(object.kind);
+    if (isSet(object.path)) obj.path = String(object.path);
+    return obj;
   },
   toJSON(message: CustomHttpPattern): unknown {
     const obj: any = {};

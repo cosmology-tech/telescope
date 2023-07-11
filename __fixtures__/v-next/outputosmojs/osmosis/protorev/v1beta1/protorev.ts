@@ -168,11 +168,11 @@ export const TokenPairArbRoutes = {
     return message;
   },
   fromJSON(object: any): TokenPairArbRoutes {
-    return {
-      arbRoutes: Array.isArray(object?.arbRoutes) ? object.arbRoutes.map((e: any) => Route.fromJSON(e)) : [],
-      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
-      tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
-    };
+    const obj = createBaseTokenPairArbRoutes();
+    if (Array.isArray(object?.arbRoutes)) object.arbRoutes.map((e: any) => Route.fromJSON(e));
+    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
+    if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
+    return obj;
   },
   toJSON(message: TokenPairArbRoutes): unknown {
     const obj: any = {};
@@ -255,10 +255,10 @@ export const Route = {
     return message;
   },
   fromJSON(object: any): Route {
-    return {
-      trades: Array.isArray(object?.trades) ? object.trades.map((e: any) => Trade.fromJSON(e)) : [],
-      stepSize: isSet(object.stepSize) ? String(object.stepSize) : ""
-    };
+    const obj = createBaseRoute();
+    if (Array.isArray(object?.trades)) object.trades.map((e: any) => Trade.fromJSON(e));
+    if (isSet(object.stepSize)) obj.stepSize = String(object.stepSize);
+    return obj;
   },
   toJSON(message: Route): unknown {
     const obj: any = {};
@@ -343,11 +343,11 @@ export const Trade = {
     return message;
   },
   fromJSON(object: any): Trade {
-    return {
-      pool: isSet(object.pool) ? BigInt(object.pool.toString()) : BigInt(0),
-      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
-      tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
-    };
+    const obj = createBaseTrade();
+    if (isSet(object.pool)) obj.pool = BigInt(object.pool.toString());
+    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
+    if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
+    return obj;
   },
   toJSON(message: Trade): unknown {
     const obj: any = {};
@@ -438,11 +438,11 @@ export const RouteStatistics = {
     return message;
   },
   fromJSON(object: any): RouteStatistics {
-    return {
-      profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromJSON(e)) : [],
-      numberOfTrades: isSet(object.numberOfTrades) ? String(object.numberOfTrades) : "",
-      route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseRouteStatistics();
+    if (Array.isArray(object?.profits)) object.profits.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.numberOfTrades)) obj.numberOfTrades = String(object.numberOfTrades);
+    if (Array.isArray(object?.route)) object.route.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: RouteStatistics): unknown {
     const obj: any = {};
@@ -540,11 +540,11 @@ export const PoolWeights = {
     return message;
   },
   fromJSON(object: any): PoolWeights {
-    return {
-      stableWeight: isSet(object.stableWeight) ? BigInt(object.stableWeight.toString()) : BigInt(0),
-      balancerWeight: isSet(object.balancerWeight) ? BigInt(object.balancerWeight.toString()) : BigInt(0),
-      concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt(0)
-    };
+    const obj = createBasePoolWeights();
+    if (isSet(object.stableWeight)) obj.stableWeight = BigInt(object.stableWeight.toString());
+    if (isSet(object.balancerWeight)) obj.balancerWeight = BigInt(object.balancerWeight.toString());
+    if (isSet(object.concentratedWeight)) obj.concentratedWeight = BigInt(object.concentratedWeight.toString());
+    return obj;
   },
   toJSON(message: PoolWeights): unknown {
     const obj: any = {};
@@ -619,10 +619,10 @@ export const BaseDenom = {
     return message;
   },
   fromJSON(object: any): BaseDenom {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      stepSize: isSet(object.stepSize) ? String(object.stepSize) : ""
-    };
+    const obj = createBaseBaseDenom();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.stepSize)) obj.stepSize = String(object.stepSize);
+    return obj;
   },
   toJSON(message: BaseDenom): unknown {
     const obj: any = {};

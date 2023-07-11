@@ -355,10 +355,10 @@ export const Authentication = {
     return message;
   },
   fromJSON(object: any): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromJSON(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthentication();
+    if (Array.isArray(object?.rules)) object.rules.map((e: any) => AuthenticationRule.fromJSON(e));
+    if (Array.isArray(object?.providers)) object.providers.map((e: any) => AuthProvider.fromJSON(e));
+    return obj;
   },
   toJSON(message: Authentication): unknown {
     const obj: any = {};
@@ -458,12 +458,12 @@ export const AuthenticationRule = {
     return message;
   },
   fromJSON(object: any): AuthenticationRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromJSON(object.oauth) : undefined,
-      allowWithoutCredential: isSet(object.allowWithoutCredential) ? Boolean(object.allowWithoutCredential) : false,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthenticationRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.oauth)) obj.oauth = OAuthRequirements.fromJSON(object.oauth);
+    if (isSet(object.allowWithoutCredential)) obj.allowWithoutCredential = Boolean(object.allowWithoutCredential);
+    if (Array.isArray(object?.requirements)) object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
+    return obj;
   },
   toJSON(message: AuthenticationRule): unknown {
     const obj: any = {};
@@ -480,7 +480,7 @@ export const AuthenticationRule = {
   fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
     message.selector = object.selector ?? "";
-    message.oauth = object.oauth !== undefined && object.oauth !== null ? OAuthRequirements.fromPartial(object.oauth) : undefined;
+    message.oauth = object.oauth !== undefined && object.oauth !== null ? OAuthRequirements.fromPartial(object.oauth) : OAuthRequirements.fromPartial({});
     message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
@@ -558,11 +558,11 @@ export const JwtLocation = {
     return message;
   },
   fromJSON(object: any): JwtLocation {
-    return {
-      header: isSet(object.header) ? String(object.header) : undefined,
-      query: isSet(object.query) ? String(object.query) : undefined,
-      valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : ""
-    };
+    const obj = createBaseJwtLocation();
+    if (isSet(object.header)) obj.header = String(object.header);
+    if (isSet(object.query)) obj.query = String(object.query);
+    if (isSet(object.valuePrefix)) obj.valuePrefix = String(object.valuePrefix);
+    return obj;
   },
   toJSON(message: JwtLocation): unknown {
     const obj: any = {};
@@ -665,14 +665,14 @@ export const AuthProvider = {
     return message;
   },
   fromJSON(object: any): AuthProvider {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      issuer: isSet(object.issuer) ? String(object.issuer) : "",
-      jwksUri: isSet(object.jwksUri) ? String(object.jwksUri) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : "",
-      authorizationUrl: isSet(object.authorizationUrl) ? String(object.authorizationUrl) : "",
-      jwtLocations: Array.isArray(object?.jwtLocations) ? object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthProvider();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.issuer)) obj.issuer = String(object.issuer);
+    if (isSet(object.jwksUri)) obj.jwksUri = String(object.jwksUri);
+    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
+    if (isSet(object.authorizationUrl)) obj.authorizationUrl = String(object.authorizationUrl);
+    if (Array.isArray(object?.jwtLocations)) object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
+    return obj;
   },
   toJSON(message: AuthProvider): unknown {
     const obj: any = {};
@@ -763,9 +763,9 @@ export const OAuthRequirements = {
     return message;
   },
   fromJSON(object: any): OAuthRequirements {
-    return {
-      canonicalScopes: isSet(object.canonicalScopes) ? String(object.canonicalScopes) : ""
-    };
+    const obj = createBaseOAuthRequirements();
+    if (isSet(object.canonicalScopes)) obj.canonicalScopes = String(object.canonicalScopes);
+    return obj;
   },
   toJSON(message: OAuthRequirements): unknown {
     const obj: any = {};
@@ -830,10 +830,10 @@ export const AuthRequirement = {
     return message;
   },
   fromJSON(object: any): AuthRequirement {
-    return {
-      providerId: isSet(object.providerId) ? String(object.providerId) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : ""
-    };
+    const obj = createBaseAuthRequirement();
+    if (isSet(object.providerId)) obj.providerId = String(object.providerId);
+    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
+    return obj;
   },
   toJSON(message: AuthRequirement): unknown {
     const obj: any = {};

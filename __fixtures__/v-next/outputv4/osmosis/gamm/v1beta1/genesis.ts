@@ -54,9 +54,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      poolCreationFee: Array.isArray(object?.poolCreationFee) ? object.poolCreationFee.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.poolCreationFee)) object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -136,11 +136,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? BigInt(object.nextPoolNumber.toString()) : BigInt(0),
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -157,7 +157,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? BigInt(object.nextPoolNumber.toString()) : BigInt(0);
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

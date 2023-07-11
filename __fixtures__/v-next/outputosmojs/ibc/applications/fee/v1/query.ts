@@ -244,10 +244,10 @@ export const QueryIncentivizedPacketsRequest = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryIncentivizedPacketsRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    if (isSet(object.queryHeight)) obj.queryHeight = BigInt(object.queryHeight.toString());
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketsRequest): unknown {
     const obj: any = {};
@@ -257,7 +257,7 @@ export const QueryIncentivizedPacketsRequest = {
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsRequest>): QueryIncentivizedPacketsRequest {
     const message = createBaseQueryIncentivizedPacketsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
@@ -317,10 +317,10 @@ export const QueryIncentivizedPacketsResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketsResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivizedPackets) ? object.incentivizedPackets.map((e: any) => IdentifiedPacketFees.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryIncentivizedPacketsResponse();
+    if (Array.isArray(object?.incentivizedPackets)) object.incentivizedPackets.map((e: any) => IdentifiedPacketFees.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketsResponse): unknown {
     const obj: any = {};
@@ -335,7 +335,7 @@ export const QueryIncentivizedPacketsResponse = {
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsResponse>): QueryIncentivizedPacketsResponse {
     const message = createBaseQueryIncentivizedPacketsResponse();
     message.incentivizedPackets = object.incentivizedPackets?.map(e => IdentifiedPacketFees.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketsResponseSDKType): QueryIncentivizedPacketsResponse {
@@ -391,9 +391,9 @@ export const QueryIncentivizedPacketRequest = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketRequest {
-    return {
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryIncentivizedPacketRequest();
+    if (isSet(object.queryHeight)) obj.queryHeight = BigInt(object.queryHeight.toString());
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketRequest): unknown {
     const obj: any = {};
@@ -451,9 +451,9 @@ export const QueryIncentivizedPacketResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketResponse {
-    return {
-      incentivizedPacket: isSet(object.incentivizedPacket) ? IdentifiedPacketFees.fromJSON(object.incentivizedPacket) : undefined
-    };
+    const obj = createBaseQueryIncentivizedPacketResponse();
+    if (isSet(object.incentivizedPacket)) obj.incentivizedPacket = IdentifiedPacketFees.fromJSON(object.incentivizedPacket);
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketResponse): unknown {
     const obj: any = {};
@@ -462,7 +462,7 @@ export const QueryIncentivizedPacketResponse = {
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketResponse>): QueryIncentivizedPacketResponse {
     const message = createBaseQueryIncentivizedPacketResponse();
-    message.incentivizedPacket = object.incentivizedPacket !== undefined && object.incentivizedPacket !== null ? IdentifiedPacketFees.fromPartial(object.incentivizedPacket) : undefined;
+    message.incentivizedPacket = object.incentivizedPacket !== undefined && object.incentivizedPacket !== null ? IdentifiedPacketFees.fromPartial(object.incentivizedPacket) : IdentifiedPacketFees.fromPartial({});
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketResponseSDKType): QueryIncentivizedPacketResponse {
@@ -532,12 +532,12 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketsForChannelRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryIncentivizedPacketsForChannelRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.queryHeight)) obj.queryHeight = BigInt(object.queryHeight.toString());
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketsForChannelRequest): unknown {
     const obj: any = {};
@@ -549,7 +549,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
   },
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsForChannelRequest>): QueryIncentivizedPacketsForChannelRequest {
     const message = createBaseQueryIncentivizedPacketsForChannelRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
@@ -617,10 +617,10 @@ export const QueryIncentivizedPacketsForChannelResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPacketsForChannelResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivizedPackets) ? object.incentivizedPackets.map((e: any) => IdentifiedPacketFees.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryIncentivizedPacketsForChannelResponse();
+    if (Array.isArray(object?.incentivizedPackets)) object.incentivizedPackets.map((e: any) => IdentifiedPacketFees.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryIncentivizedPacketsForChannelResponse): unknown {
     const obj: any = {};
@@ -635,7 +635,7 @@ export const QueryIncentivizedPacketsForChannelResponse = {
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsForChannelResponse>): QueryIncentivizedPacketsForChannelResponse {
     const message = createBaseQueryIncentivizedPacketsForChannelResponse();
     message.incentivizedPackets = object.incentivizedPackets?.map(e => IdentifiedPacketFees.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryIncentivizedPacketsForChannelResponseSDKType): QueryIncentivizedPacketsForChannelResponse {
@@ -683,7 +683,8 @@ export const QueryTotalRecvFeesRequest = {
     return message;
   },
   fromJSON(_: any): QueryTotalRecvFeesRequest {
-    return {};
+    const obj = createBaseQueryTotalRecvFeesRequest();
+    return obj;
   },
   toJSON(_: QueryTotalRecvFeesRequest): unknown {
     const obj: any = {};
@@ -734,9 +735,9 @@ export const QueryTotalRecvFeesResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalRecvFeesResponse {
-    return {
-      recvFees: Array.isArray(object?.recvFees) ? object.recvFees.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryTotalRecvFeesResponse();
+    if (Array.isArray(object?.recvFees)) object.recvFees.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryTotalRecvFeesResponse): unknown {
     const obj: any = {};
@@ -794,7 +795,8 @@ export const QueryTotalAckFeesRequest = {
     return message;
   },
   fromJSON(_: any): QueryTotalAckFeesRequest {
-    return {};
+    const obj = createBaseQueryTotalAckFeesRequest();
+    return obj;
   },
   toJSON(_: QueryTotalAckFeesRequest): unknown {
     const obj: any = {};
@@ -845,9 +847,9 @@ export const QueryTotalAckFeesResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalAckFeesResponse {
-    return {
-      ackFees: Array.isArray(object?.ackFees) ? object.ackFees.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryTotalAckFeesResponse();
+    if (Array.isArray(object?.ackFees)) object.ackFees.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryTotalAckFeesResponse): unknown {
     const obj: any = {};
@@ -905,7 +907,8 @@ export const QueryTotalTimeoutFeesRequest = {
     return message;
   },
   fromJSON(_: any): QueryTotalTimeoutFeesRequest {
-    return {};
+    const obj = createBaseQueryTotalTimeoutFeesRequest();
+    return obj;
   },
   toJSON(_: QueryTotalTimeoutFeesRequest): unknown {
     const obj: any = {};
@@ -956,9 +959,9 @@ export const QueryTotalTimeoutFeesResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalTimeoutFeesResponse {
-    return {
-      timeoutFees: Array.isArray(object?.timeoutFees) ? object.timeoutFees.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryTotalTimeoutFeesResponse();
+    if (Array.isArray(object?.timeoutFees)) object.timeoutFees.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryTotalTimeoutFeesResponse): unknown {
     const obj: any = {};
@@ -1031,10 +1034,10 @@ export const QueryPayeeRequest = {
     return message;
   },
   fromJSON(object: any): QueryPayeeRequest {
-    return {
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : ""
-    };
+    const obj = createBaseQueryPayeeRequest();
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
+    return obj;
   },
   toJSON(message: QueryPayeeRequest): unknown {
     const obj: any = {};
@@ -1097,9 +1100,9 @@ export const QueryPayeeResponse = {
     return message;
   },
   fromJSON(object: any): QueryPayeeResponse {
-    return {
-      payeeAddress: isSet(object.payeeAddress) ? String(object.payeeAddress) : ""
-    };
+    const obj = createBaseQueryPayeeResponse();
+    if (isSet(object.payeeAddress)) obj.payeeAddress = String(object.payeeAddress);
+    return obj;
   },
   toJSON(message: QueryPayeeResponse): unknown {
     const obj: any = {};
@@ -1164,10 +1167,10 @@ export const QueryCounterpartyPayeeRequest = {
     return message;
   },
   fromJSON(object: any): QueryCounterpartyPayeeRequest {
-    return {
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : ""
-    };
+    const obj = createBaseQueryCounterpartyPayeeRequest();
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
+    return obj;
   },
   toJSON(message: QueryCounterpartyPayeeRequest): unknown {
     const obj: any = {};
@@ -1230,9 +1233,9 @@ export const QueryCounterpartyPayeeResponse = {
     return message;
   },
   fromJSON(object: any): QueryCounterpartyPayeeResponse {
-    return {
-      counterpartyPayee: isSet(object.counterpartyPayee) ? String(object.counterpartyPayee) : ""
-    };
+    const obj = createBaseQueryCounterpartyPayeeResponse();
+    if (isSet(object.counterpartyPayee)) obj.counterpartyPayee = String(object.counterpartyPayee);
+    return obj;
   },
   toJSON(message: QueryCounterpartyPayeeResponse): unknown {
     const obj: any = {};
@@ -1297,10 +1300,10 @@ export const QueryFeeEnabledChannelsRequest = {
     return message;
   },
   fromJSON(object: any): QueryFeeEnabledChannelsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryFeeEnabledChannelsRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    if (isSet(object.queryHeight)) obj.queryHeight = BigInt(object.queryHeight.toString());
+    return obj;
   },
   toJSON(message: QueryFeeEnabledChannelsRequest): unknown {
     const obj: any = {};
@@ -1310,7 +1313,7 @@ export const QueryFeeEnabledChannelsRequest = {
   },
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelsRequest>): QueryFeeEnabledChannelsRequest {
     const message = createBaseQueryFeeEnabledChannelsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     message.queryHeight = object.queryHeight !== undefined && object.queryHeight !== null ? BigInt(object.queryHeight.toString()) : BigInt(0);
     return message;
   },
@@ -1370,10 +1373,10 @@ export const QueryFeeEnabledChannelsResponse = {
     return message;
   },
   fromJSON(object: any): QueryFeeEnabledChannelsResponse {
-    return {
-      feeEnabledChannels: Array.isArray(object?.feeEnabledChannels) ? object.feeEnabledChannels.map((e: any) => FeeEnabledChannel.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryFeeEnabledChannelsResponse();
+    if (Array.isArray(object?.feeEnabledChannels)) object.feeEnabledChannels.map((e: any) => FeeEnabledChannel.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryFeeEnabledChannelsResponse): unknown {
     const obj: any = {};
@@ -1388,7 +1391,7 @@ export const QueryFeeEnabledChannelsResponse = {
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelsResponse>): QueryFeeEnabledChannelsResponse {
     const message = createBaseQueryFeeEnabledChannelsResponse();
     message.feeEnabledChannels = object.feeEnabledChannels?.map(e => FeeEnabledChannel.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryFeeEnabledChannelsResponseSDKType): QueryFeeEnabledChannelsResponse {
@@ -1451,10 +1454,10 @@ export const QueryFeeEnabledChannelRequest = {
     return message;
   },
   fromJSON(object: any): QueryFeeEnabledChannelRequest {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : ""
-    };
+    const obj = createBaseQueryFeeEnabledChannelRequest();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
   },
   toJSON(message: QueryFeeEnabledChannelRequest): unknown {
     const obj: any = {};
@@ -1517,9 +1520,9 @@ export const QueryFeeEnabledChannelResponse = {
     return message;
   },
   fromJSON(object: any): QueryFeeEnabledChannelResponse {
-    return {
-      feeEnabled: isSet(object.feeEnabled) ? Boolean(object.feeEnabled) : false
-    };
+    const obj = createBaseQueryFeeEnabledChannelResponse();
+    if (isSet(object.feeEnabled)) obj.feeEnabled = Boolean(object.feeEnabled);
+    return obj;
   },
   toJSON(message: QueryFeeEnabledChannelResponse): unknown {
     const obj: any = {};

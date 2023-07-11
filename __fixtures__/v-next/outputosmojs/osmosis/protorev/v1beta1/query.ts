@@ -389,7 +389,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -440,9 +441,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -451,7 +452,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -492,7 +493,8 @@ export const QueryGetProtoRevNumberOfTradesRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevNumberOfTradesRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevNumberOfTradesRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevNumberOfTradesRequest): unknown {
     const obj: any = {};
@@ -543,9 +545,9 @@ export const QueryGetProtoRevNumberOfTradesResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevNumberOfTradesResponse {
-    return {
-      numberOfTrades: isSet(object.numberOfTrades) ? String(object.numberOfTrades) : ""
-    };
+    const obj = createBaseQueryGetProtoRevNumberOfTradesResponse();
+    if (isSet(object.numberOfTrades)) obj.numberOfTrades = String(object.numberOfTrades);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevNumberOfTradesResponse): unknown {
     const obj: any = {};
@@ -603,9 +605,9 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevProfitsByDenomRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryGetProtoRevProfitsByDenomRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevProfitsByDenomRequest): unknown {
     const obj: any = {};
@@ -663,9 +665,9 @@ export const QueryGetProtoRevProfitsByDenomResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevProfitsByDenomResponse {
-    return {
-      profit: isSet(object.profit) ? Coin.fromJSON(object.profit) : undefined
-    };
+    const obj = createBaseQueryGetProtoRevProfitsByDenomResponse();
+    if (isSet(object.profit)) obj.profit = Coin.fromJSON(object.profit);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevProfitsByDenomResponse): unknown {
     const obj: any = {};
@@ -674,7 +676,7 @@ export const QueryGetProtoRevProfitsByDenomResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevProfitsByDenomResponse>): QueryGetProtoRevProfitsByDenomResponse {
     const message = createBaseQueryGetProtoRevProfitsByDenomResponse();
-    message.profit = object.profit !== undefined && object.profit !== null ? Coin.fromPartial(object.profit) : undefined;
+    message.profit = object.profit !== undefined && object.profit !== null ? Coin.fromPartial(object.profit) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGetProtoRevProfitsByDenomResponseSDKType): QueryGetProtoRevProfitsByDenomResponse {
@@ -715,7 +717,8 @@ export const QueryGetProtoRevAllProfitsRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevAllProfitsRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevAllProfitsRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevAllProfitsRequest): unknown {
     const obj: any = {};
@@ -766,9 +769,9 @@ export const QueryGetProtoRevAllProfitsResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevAllProfitsResponse {
-    return {
-      profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryGetProtoRevAllProfitsResponse();
+    if (Array.isArray(object?.profits)) object.profits.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryGetProtoRevAllProfitsResponse): unknown {
     const obj: any = {};
@@ -843,9 +846,9 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevStatisticsByRouteRequest {
-    return {
-      route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseQueryGetProtoRevStatisticsByRouteRequest();
+    if (Array.isArray(object?.route)) object.route.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: QueryGetProtoRevStatisticsByRouteRequest): unknown {
     const obj: any = {};
@@ -911,9 +914,9 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevStatisticsByRouteResponse {
-    return {
-      statistics: isSet(object.statistics) ? RouteStatistics.fromJSON(object.statistics) : undefined
-    };
+    const obj = createBaseQueryGetProtoRevStatisticsByRouteResponse();
+    if (isSet(object.statistics)) obj.statistics = RouteStatistics.fromJSON(object.statistics);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevStatisticsByRouteResponse): unknown {
     const obj: any = {};
@@ -922,7 +925,7 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevStatisticsByRouteResponse>): QueryGetProtoRevStatisticsByRouteResponse {
     const message = createBaseQueryGetProtoRevStatisticsByRouteResponse();
-    message.statistics = object.statistics !== undefined && object.statistics !== null ? RouteStatistics.fromPartial(object.statistics) : undefined;
+    message.statistics = object.statistics !== undefined && object.statistics !== null ? RouteStatistics.fromPartial(object.statistics) : RouteStatistics.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGetProtoRevStatisticsByRouteResponseSDKType): QueryGetProtoRevStatisticsByRouteResponse {
@@ -963,7 +966,8 @@ export const QueryGetProtoRevAllRouteStatisticsRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevAllRouteStatisticsRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevAllRouteStatisticsRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevAllRouteStatisticsRequest): unknown {
     const obj: any = {};
@@ -1014,9 +1018,9 @@ export const QueryGetProtoRevAllRouteStatisticsResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevAllRouteStatisticsResponse {
-    return {
-      statistics: Array.isArray(object?.statistics) ? object.statistics.map((e: any) => RouteStatistics.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryGetProtoRevAllRouteStatisticsResponse();
+    if (Array.isArray(object?.statistics)) object.statistics.map((e: any) => RouteStatistics.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryGetProtoRevAllRouteStatisticsResponse): unknown {
     const obj: any = {};
@@ -1074,7 +1078,8 @@ export const QueryGetProtoRevTokenPairArbRoutesRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevTokenPairArbRoutesRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevTokenPairArbRoutesRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevTokenPairArbRoutesRequest): unknown {
     const obj: any = {};
@@ -1125,9 +1130,9 @@ export const QueryGetProtoRevTokenPairArbRoutesResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevTokenPairArbRoutesResponse {
-    return {
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => TokenPairArbRoutes.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryGetProtoRevTokenPairArbRoutesResponse();
+    if (Array.isArray(object?.routes)) object.routes.map((e: any) => TokenPairArbRoutes.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryGetProtoRevTokenPairArbRoutesResponse): unknown {
     const obj: any = {};
@@ -1185,7 +1190,8 @@ export const QueryGetProtoRevAdminAccountRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevAdminAccountRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevAdminAccountRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevAdminAccountRequest): unknown {
     const obj: any = {};
@@ -1236,9 +1242,9 @@ export const QueryGetProtoRevAdminAccountResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevAdminAccountResponse {
-    return {
-      adminAccount: isSet(object.adminAccount) ? String(object.adminAccount) : ""
-    };
+    const obj = createBaseQueryGetProtoRevAdminAccountResponse();
+    if (isSet(object.adminAccount)) obj.adminAccount = String(object.adminAccount);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevAdminAccountResponse): unknown {
     const obj: any = {};
@@ -1288,7 +1294,8 @@ export const QueryGetProtoRevDeveloperAccountRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevDeveloperAccountRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevDeveloperAccountRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevDeveloperAccountRequest): unknown {
     const obj: any = {};
@@ -1339,9 +1346,9 @@ export const QueryGetProtoRevDeveloperAccountResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevDeveloperAccountResponse {
-    return {
-      developerAccount: isSet(object.developerAccount) ? String(object.developerAccount) : ""
-    };
+    const obj = createBaseQueryGetProtoRevDeveloperAccountResponse();
+    if (isSet(object.developerAccount)) obj.developerAccount = String(object.developerAccount);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevDeveloperAccountResponse): unknown {
     const obj: any = {};
@@ -1391,7 +1398,8 @@ export const QueryGetProtoRevPoolWeightsRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevPoolWeightsRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevPoolWeightsRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevPoolWeightsRequest): unknown {
     const obj: any = {};
@@ -1442,9 +1450,9 @@ export const QueryGetProtoRevPoolWeightsResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevPoolWeightsResponse {
-    return {
-      poolWeights: isSet(object.poolWeights) ? PoolWeights.fromJSON(object.poolWeights) : undefined
-    };
+    const obj = createBaseQueryGetProtoRevPoolWeightsResponse();
+    if (isSet(object.poolWeights)) obj.poolWeights = PoolWeights.fromJSON(object.poolWeights);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevPoolWeightsResponse): unknown {
     const obj: any = {};
@@ -1453,7 +1461,7 @@ export const QueryGetProtoRevPoolWeightsResponse = {
   },
   fromPartial(object: DeepPartial<QueryGetProtoRevPoolWeightsResponse>): QueryGetProtoRevPoolWeightsResponse {
     const message = createBaseQueryGetProtoRevPoolWeightsResponse();
-    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : undefined;
+    message.poolWeights = object.poolWeights !== undefined && object.poolWeights !== null ? PoolWeights.fromPartial(object.poolWeights) : PoolWeights.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGetProtoRevPoolWeightsResponseSDKType): QueryGetProtoRevPoolWeightsResponse {
@@ -1494,7 +1502,8 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevMaxPoolPointsPerBlockRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevMaxPoolPointsPerBlockRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevMaxPoolPointsPerBlockRequest): unknown {
     const obj: any = {};
@@ -1545,9 +1554,9 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
-    return {
-      maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryGetProtoRevMaxPoolPointsPerBlockResponse();
+    if (isSet(object.maxPoolPointsPerBlock)) obj.maxPoolPointsPerBlock = BigInt(object.maxPoolPointsPerBlock.toString());
+    return obj;
   },
   toJSON(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): unknown {
     const obj: any = {};
@@ -1597,7 +1606,8 @@ export const QueryGetProtoRevMaxPoolPointsPerTxRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevMaxPoolPointsPerTxRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevMaxPoolPointsPerTxRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevMaxPoolPointsPerTxRequest): unknown {
     const obj: any = {};
@@ -1648,9 +1658,9 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevMaxPoolPointsPerTxResponse {
-    return {
-      maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryGetProtoRevMaxPoolPointsPerTxResponse();
+    if (isSet(object.maxPoolPointsPerTx)) obj.maxPoolPointsPerTx = BigInt(object.maxPoolPointsPerTx.toString());
+    return obj;
   },
   toJSON(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): unknown {
     const obj: any = {};
@@ -1700,7 +1710,8 @@ export const QueryGetProtoRevBaseDenomsRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevBaseDenomsRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevBaseDenomsRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevBaseDenomsRequest): unknown {
     const obj: any = {};
@@ -1751,9 +1762,9 @@ export const QueryGetProtoRevBaseDenomsResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevBaseDenomsResponse {
-    return {
-      baseDenoms: Array.isArray(object?.baseDenoms) ? object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryGetProtoRevBaseDenomsResponse();
+    if (Array.isArray(object?.baseDenoms)) object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryGetProtoRevBaseDenomsResponse): unknown {
     const obj: any = {};
@@ -1811,7 +1822,8 @@ export const QueryGetProtoRevEnabledRequest = {
     return message;
   },
   fromJSON(_: any): QueryGetProtoRevEnabledRequest {
-    return {};
+    const obj = createBaseQueryGetProtoRevEnabledRequest();
+    return obj;
   },
   toJSON(_: QueryGetProtoRevEnabledRequest): unknown {
     const obj: any = {};
@@ -1862,9 +1874,9 @@ export const QueryGetProtoRevEnabledResponse = {
     return message;
   },
   fromJSON(object: any): QueryGetProtoRevEnabledResponse {
-    return {
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
-    };
+    const obj = createBaseQueryGetProtoRevEnabledResponse();
+    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
+    return obj;
   },
   toJSON(message: QueryGetProtoRevEnabledResponse): unknown {
     const obj: any = {};

@@ -63,11 +63,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      moduleAccountBalance: isSet(object.moduleAccountBalance) ? Coin.fromJSON(object.moduleAccountBalance) : undefined,
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      claimRecords: Array.isArray(object?.claimRecords) ? object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.moduleAccountBalance)) obj.moduleAccountBalance = Coin.fromJSON(object.moduleAccountBalance);
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.claimRecords)) object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -82,8 +82,8 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.moduleAccountBalance = object.moduleAccountBalance !== undefined && object.moduleAccountBalance !== null ? Coin.fromPartial(object.moduleAccountBalance) : undefined;
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.moduleAccountBalance = object.moduleAccountBalance !== undefined && object.moduleAccountBalance !== null ? Coin.fromPartial(object.moduleAccountBalance) : Coin.fromPartial({});
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.claimRecords = object.claimRecords?.map(e => ClaimRecord.fromPartial(e)) || [];
     return message;
   },

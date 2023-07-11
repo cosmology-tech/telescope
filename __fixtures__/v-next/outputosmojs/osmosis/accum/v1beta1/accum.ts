@@ -62,10 +62,10 @@ export const AccumulatorContent = {
     return message;
   },
   fromJSON(object: any): AccumulatorContent {
-    return {
-      accumValue: Array.isArray(object?.accumValue) ? object.accumValue.map((e: any) => DecCoin.fromJSON(e)) : [],
-      totalShares: isSet(object.totalShares) ? String(object.totalShares) : ""
-    };
+    const obj = createBaseAccumulatorContent();
+    if (Array.isArray(object?.accumValue)) object.accumValue.map((e: any) => DecCoin.fromJSON(e));
+    if (isSet(object.totalShares)) obj.totalShares = String(object.totalShares);
+    return obj;
   },
   toJSON(message: AccumulatorContent): unknown {
     const obj: any = {};
@@ -128,7 +128,8 @@ export const Options = {
     return message;
   },
   fromJSON(_: any): Options {
-    return {};
+    const obj = createBaseOptions();
+    return obj;
   },
   toJSON(_: Options): unknown {
     const obj: any = {};
@@ -200,12 +201,12 @@ export const Record = {
     return message;
   },
   fromJSON(object: any): Record {
-    return {
-      numShares: isSet(object.numShares) ? String(object.numShares) : "",
-      initAccumValue: Array.isArray(object?.initAccumValue) ? object.initAccumValue.map((e: any) => DecCoin.fromJSON(e)) : [],
-      unclaimedRewards: Array.isArray(object?.unclaimedRewards) ? object.unclaimedRewards.map((e: any) => DecCoin.fromJSON(e)) : [],
-      options: isSet(object.options) ? Options.fromJSON(object.options) : undefined
-    };
+    const obj = createBaseRecord();
+    if (isSet(object.numShares)) obj.numShares = String(object.numShares);
+    if (Array.isArray(object?.initAccumValue)) object.initAccumValue.map((e: any) => DecCoin.fromJSON(e));
+    if (Array.isArray(object?.unclaimedRewards)) object.unclaimedRewards.map((e: any) => DecCoin.fromJSON(e));
+    if (isSet(object.options)) obj.options = Options.fromJSON(object.options);
+    return obj;
   },
   toJSON(message: Record): unknown {
     const obj: any = {};
@@ -228,7 +229,7 @@ export const Record = {
     message.numShares = object.numShares ?? "";
     message.initAccumValue = object.initAccumValue?.map(e => DecCoin.fromPartial(e)) || [];
     message.unclaimedRewards = object.unclaimedRewards?.map(e => DecCoin.fromPartial(e)) || [];
-    message.options = object.options !== undefined && object.options !== null ? Options.fromPartial(object.options) : undefined;
+    message.options = object.options !== undefined && object.options !== null ? Options.fromPartial(object.options) : Options.fromPartial({});
     return message;
   },
   fromSDK(object: RecordSDKType): Record {

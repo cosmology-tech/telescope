@@ -139,15 +139,15 @@ export const EpochInfo = {
     return message;
   },
   fromJSON(object: any): EpochInfo {
-    return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO,
-      currentEpochStartTime: isSet(object.currentEpochStartTime) ? fromJsonTimestamp(object.currentEpochStartTime) : undefined,
-      epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
-    };
+    const obj = createBaseEpochInfo();
+    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
+    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    if (isSet(object.currentEpoch)) obj.currentEpoch = Long.fromValue(object.currentEpoch);
+    if (isSet(object.currentEpochStartTime)) obj.currentEpochStartTime = fromJsonTimestamp(object.currentEpochStartTime);
+    if (isSet(object.epochCountingStarted)) obj.epochCountingStarted = Boolean(object.epochCountingStarted);
+    if (isSet(object.currentEpochStartHeight)) obj.currentEpochStartHeight = Long.fromValue(object.currentEpochStartHeight);
+    return obj;
   },
   toJSON(message: EpochInfo): unknown {
     const obj: any = {};
@@ -163,10 +163,10 @@ export const EpochInfo = {
   fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
-    message.currentEpochStartTime = object.currentEpochStartTime !== undefined && object.currentEpochStartTime !== null ? Timestamp.fromPartial(object.currentEpochStartTime) : undefined;
+    message.currentEpochStartTime = object.currentEpochStartTime !== undefined && object.currentEpochStartTime !== null ? Timestamp.fromPartial(object.currentEpochStartTime) : Timestamp.fromPartial({});
     message.epochCountingStarted = object.epochCountingStarted ?? false;
     message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO;
     return message;
@@ -202,9 +202,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.epochs)) object.epochs.map((e: any) => EpochInfo.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

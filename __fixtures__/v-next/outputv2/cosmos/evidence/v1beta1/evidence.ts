@@ -93,12 +93,12 @@ export const Equivocation = {
     return message;
   },
   fromJSON(object: any): Equivocation {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
-      consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
-    };
+    const obj = createBaseEquivocation();
+    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.power)) obj.power = Long.fromValue(object.power);
+    if (isSet(object.consensusAddress)) obj.consensusAddress = String(object.consensusAddress);
+    return obj;
   },
   toJSON(message: Equivocation): unknown {
     const obj: any = {};

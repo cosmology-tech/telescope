@@ -31,7 +31,8 @@ export const Module = {
     return message;
   },
   fromJSON(_: any): Module {
-    return {};
+    const obj = createBaseModule();
+    return obj;
   },
   toJSON(_: Module): unknown {
     const obj: any = {};

@@ -61,10 +61,10 @@ export const GenesisDeployment = {
     return message;
   },
   fromJSON(object: any): GenesisDeployment {
-    return {
-      deployment: isSet(object.deployment) ? Deployment.fromJSON(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisDeployment();
+    if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => Group.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisDeployment): unknown {
     const obj: any = {};
@@ -78,7 +78,7 @@ export const GenesisDeployment = {
   },
   fromPartial<I extends Exact<DeepPartial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
     const message = createBaseGenesisDeployment();
-    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
+    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : Deployment.fromPartial({});
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
   },
@@ -142,10 +142,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromJSON(e)) : [],
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.deployments)) object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -160,7 +160,7 @@ export const GenesisState = {
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

@@ -139,10 +139,10 @@ export const EvalState = {
     return message;
   },
   fromJSON(object: any): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromJSON(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromJSON(e)) : []
-    };
+    const obj = createBaseEvalState();
+    if (Array.isArray(object?.values)) object.values.map((e: any) => ExprValue.fromJSON(e));
+    if (Array.isArray(object?.results)) object.results.map((e: any) => EvalState_Result.fromJSON(e));
+    return obj;
   },
   toJSON(message: EvalState): unknown {
     const obj: any = {};
@@ -202,10 +202,10 @@ export const EvalState_Result = {
     return message;
   },
   fromJSON(object: any): EvalState_Result {
-    return {
-      expr: isSet(object.expr) ? IdRef.fromJSON(object.expr) : undefined,
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseEvalState_Result();
+    if (isSet(object.expr)) obj.expr = IdRef.fromJSON(object.expr);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: EvalState_Result): unknown {
     const obj: any = {};
@@ -215,7 +215,7 @@ export const EvalState_Result = {
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? IdRef.fromPartial(object.expr) : undefined;
+    message.expr = object.expr !== undefined && object.expr !== null ? IdRef.fromPartial(object.expr) : IdRef.fromPartial({});
     message.value = object.value ?? 0;
     return message;
   }
@@ -264,11 +264,11 @@ export const ExprValue = {
     return message;
   },
   fromJSON(object: any): ExprValue {
-    return {
-      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromJSON(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromJSON(object.unknown) : undefined
-    };
+    const obj = createBaseExprValue();
+    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
+    if (isSet(object.error)) obj.error = ErrorSet.fromJSON(object.error);
+    if (isSet(object.unknown)) obj.unknown = UnknownSet.fromJSON(object.unknown);
+    return obj;
   },
   toJSON(message: ExprValue): unknown {
     const obj: any = {};
@@ -279,9 +279,9 @@ export const ExprValue = {
   },
   fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
-    message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
-    message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : ErrorSet.fromPartial({});
+    message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : UnknownSet.fromPartial({});
     return message;
   }
 };
@@ -315,9 +315,9 @@ export const ErrorSet = {
     return message;
   },
   fromJSON(object: any): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseErrorSet();
+    if (Array.isArray(object?.errors)) object.errors.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: ErrorSet): unknown {
     const obj: any = {};
@@ -364,9 +364,9 @@ export const UnknownSet = {
     return message;
   },
   fromJSON(object: any): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromJSON(e)) : []
-    };
+    const obj = createBaseUnknownSet();
+    if (Array.isArray(object?.exprs)) object.exprs.map((e: any) => IdRef.fromJSON(e));
+    return obj;
   },
   toJSON(message: UnknownSet): unknown {
     const obj: any = {};
@@ -413,9 +413,9 @@ export const IdRef = {
     return message;
   },
   fromJSON(object: any): IdRef {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0
-    };
+    const obj = createBaseIdRef();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    return obj;
   },
   toJSON(message: IdRef): unknown {
     const obj: any = {};

@@ -63,10 +63,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      bidMinDeposit: isSet(object.bidMinDeposit) ? Coin.fromJSON(object.bidMinDeposit) : undefined,
-      orderMaxBids: isSet(object.orderMaxBids) ? Number(object.orderMaxBids) : 0
-    };
+    const obj = createBaseParams();
+    if (isSet(object.bidMinDeposit)) obj.bidMinDeposit = Coin.fromJSON(object.bidMinDeposit);
+    if (isSet(object.orderMaxBids)) obj.orderMaxBids = Number(object.orderMaxBids);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -76,7 +76,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : undefined;
+    message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : Coin.fromPartial({});
     message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
   },

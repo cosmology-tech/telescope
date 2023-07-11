@@ -57,10 +57,10 @@ export const GenesisCertificate = {
     return message;
   },
   fromJSON(object: any): GenesisCertificate {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      certificate: isSet(object.certificate) ? Certificate.fromJSON(object.certificate) : undefined
-    };
+    const obj = createBaseGenesisCertificate();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.certificate)) obj.certificate = Certificate.fromJSON(object.certificate);
+    return obj;
   },
   toJSON(message: GenesisCertificate): unknown {
     const obj: any = {};
@@ -71,7 +71,7 @@ export const GenesisCertificate = {
   fromPartial<I extends Exact<DeepPartial<GenesisCertificate>, I>>(object: I): GenesisCertificate {
     const message = createBaseGenesisCertificate();
     message.owner = object.owner ?? "";
-    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
+    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : Certificate.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisCertificateSDKType): GenesisCertificate {
@@ -123,9 +123,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.certificates)) object.certificates.map((e: any) => GenesisCertificate.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

@@ -70,9 +70,9 @@ export const DepositDeploymentAuthorization = {
     return message;
   },
   fromJSON(object: any): DepositDeploymentAuthorization {
-    return {
-      spendLimit: isSet(object.spendLimit) ? Coin.fromJSON(object.spendLimit) : undefined
-    };
+    const obj = createBaseDepositDeploymentAuthorization();
+    if (isSet(object.spendLimit)) obj.spendLimit = Coin.fromJSON(object.spendLimit);
+    return obj;
   },
   toJSON(message: DepositDeploymentAuthorization): unknown {
     const obj: any = {};
@@ -81,7 +81,7 @@ export const DepositDeploymentAuthorization = {
   },
   fromPartial(object: DeepPartial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
     const message = createBaseDepositDeploymentAuthorization();
-    message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : undefined;
+    message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: DepositDeploymentAuthorizationSDKType): DepositDeploymentAuthorization {

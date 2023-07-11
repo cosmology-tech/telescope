@@ -64,12 +64,12 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      distrInfo: isSet(object.distrInfo) ? DistrInfo.fromJSON(object.distrInfo) : undefined,
-      poolToGauges: isSet(object.poolToGauges) ? PoolToGauges.fromJSON(object.poolToGauges) : undefined
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (isSet(object.distrInfo)) obj.distrInfo = DistrInfo.fromJSON(object.distrInfo);
+    if (isSet(object.poolToGauges)) obj.poolToGauges = PoolToGauges.fromJSON(object.poolToGauges);
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -85,10 +85,10 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
-    message.poolToGauges = object.poolToGauges !== undefined && object.poolToGauges !== null ? PoolToGauges.fromPartial(object.poolToGauges) : undefined;
+    message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : DistrInfo.fromPartial({});
+    message.poolToGauges = object.poolToGauges !== undefined && object.poolToGauges !== null ? PoolToGauges.fromPartial(object.poolToGauges) : PoolToGauges.fromPartial({});
     return message;
   }
 };

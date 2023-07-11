@@ -86,12 +86,12 @@ export const Allocation = {
     return message;
   },
   fromJSON(object: any): Allocation {
-    return {
-      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
-      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
-      spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : [],
-      allowList: Array.isArray(object?.allowList) ? object.allowList.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseAllocation();
+    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
+    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
+    if (Array.isArray(object?.spendLimit)) object.spendLimit.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.allowList)) object.allowList.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Allocation): unknown {
     const obj: any = {};
@@ -180,9 +180,9 @@ export const TransferAuthorization = {
     return message;
   },
   fromJSON(object: any): TransferAuthorization {
-    return {
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => Allocation.fromJSON(e)) : []
-    };
+    const obj = createBaseTransferAuthorization();
+    if (Array.isArray(object?.allocations)) object.allocations.map((e: any) => Allocation.fromJSON(e));
+    return obj;
   },
   toJSON(message: TransferAuthorization): unknown {
     const obj: any = {};

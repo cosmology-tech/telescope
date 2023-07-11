@@ -123,14 +123,14 @@ export const MsgCreateStableswapPool = {
     return message;
   },
   fromJSON(object: any): MsgCreateStableswapPool {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
-      initialPoolLiquidity: Array.isArray(object?.initialPoolLiquidity) ? object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : [],
-      futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
-      scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
-    };
+    const obj = createBaseMsgCreateStableswapPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
+    if (Array.isArray(object?.initialPoolLiquidity)) object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.scalingFactors)) object.scalingFactors.map((e: any) => Long.fromValue(e));
+    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
+    if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
+    return obj;
   },
   toJSON(message: MsgCreateStableswapPool): unknown {
     const obj: any = {};
@@ -153,7 +153,7 @@ export const MsgCreateStableswapPool = {
   fromPartial(object: DeepPartial<MsgCreateStableswapPool>): MsgCreateStableswapPool {
     const message = createBaseMsgCreateStableswapPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : PoolParams.fromPartial({});
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
@@ -219,9 +219,9 @@ export const MsgCreateStableswapPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateStableswapPoolResponse {
-    return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
-    };
+    const obj = createBaseMsgCreateStableswapPoolResponse();
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
+    return obj;
   },
   toJSON(message: MsgCreateStableswapPoolResponse): unknown {
     const obj: any = {};
@@ -297,11 +297,11 @@ export const MsgStableSwapAdjustScalingFactors = {
     return message;
   },
   fromJSON(object: any): MsgStableSwapAdjustScalingFactors {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : []
-    };
+    const obj = createBaseMsgStableSwapAdjustScalingFactors();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
+    if (Array.isArray(object?.scalingFactors)) object.scalingFactors.map((e: any) => Long.fromValue(e));
+    return obj;
   },
   toJSON(message: MsgStableSwapAdjustScalingFactors): unknown {
     const obj: any = {};
@@ -362,7 +362,8 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
     return message;
   },
   fromJSON(_: any): MsgStableSwapAdjustScalingFactorsResponse {
-    return {};
+    const obj = createBaseMsgStableSwapAdjustScalingFactorsResponse();
+    return obj;
   },
   toJSON(_: MsgStableSwapAdjustScalingFactorsResponse): unknown {
     const obj: any = {};

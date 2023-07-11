@@ -176,10 +176,10 @@ export const AccountID = {
     return message;
   },
   fromJSON(object: any): AccountID {
-    return {
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      xid: isSet(object.xid) ? String(object.xid) : ""
-    };
+    const obj = createBaseAccountID();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    return obj;
   },
   toJSON(message: AccountID): unknown {
     const obj: any = {};
@@ -273,16 +273,16 @@ export const Account = {
     return message;
   },
   fromJSON(object: any): Account {
-    return {
-      id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      funds: isSet(object.funds) ? DecCoin.fromJSON(object.funds) : undefined
-    };
+    const obj = createBaseAccount();
+    if (isSet(object.id)) obj.id = AccountID.fromJSON(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = account_StateFromJSON(object.state);
+    if (isSet(object.balance)) obj.balance = DecCoin.fromJSON(object.balance);
+    if (isSet(object.transferred)) obj.transferred = DecCoin.fromJSON(object.transferred);
+    if (isSet(object.settledAt)) obj.settledAt = Long.fromValue(object.settledAt);
+    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
+    if (isSet(object.funds)) obj.funds = DecCoin.fromJSON(object.funds);
+    return obj;
   },
   toJSON(message: Account): unknown {
     const obj: any = {};
@@ -298,14 +298,14 @@ export const Account = {
   },
   fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
-    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : AccountID.fromPartial({});
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : undefined;
+    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
+    message.transferred = object.transferred !== undefined && object.transferred !== null ? DecCoin.fromPartial(object.transferred) : DecCoin.fromPartial({});
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
     message.depositor = object.depositor ?? "";
-    message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
+    message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : DecCoin.fromPartial({});
     return message;
   }
 };
@@ -381,15 +381,15 @@ export const FractionalPayment = {
     return message;
   },
   fromJSON(object: any): FractionalPayment {
-    return {
-      accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
-      paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? DecCoin.fromJSON(object.rate) : undefined,
-      balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined
-    };
+    const obj = createBaseFractionalPayment();
+    if (isSet(object.accountId)) obj.accountId = AccountID.fromJSON(object.accountId);
+    if (isSet(object.paymentId)) obj.paymentId = String(object.paymentId);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = fractionalPayment_StateFromJSON(object.state);
+    if (isSet(object.rate)) obj.rate = DecCoin.fromJSON(object.rate);
+    if (isSet(object.balance)) obj.balance = DecCoin.fromJSON(object.balance);
+    if (isSet(object.withdrawn)) obj.withdrawn = Coin.fromJSON(object.withdrawn);
+    return obj;
   },
   toJSON(message: FractionalPayment): unknown {
     const obj: any = {};
@@ -404,13 +404,13 @@ export const FractionalPayment = {
   },
   fromPartial(object: DeepPartial<FractionalPayment>): FractionalPayment {
     const message = createBaseFractionalPayment();
-    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
+    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : AccountID.fromPartial({});
     message.paymentId = object.paymentId ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.rate = object.rate !== undefined && object.rate !== null ? DecCoin.fromPartial(object.rate) : undefined;
-    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
-    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
+    message.rate = object.rate !== undefined && object.rate !== null ? DecCoin.fromPartial(object.rate) : DecCoin.fromPartial({});
+    message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : DecCoin.fromPartial({});
+    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : Coin.fromPartial({});
     return message;
   }
 };

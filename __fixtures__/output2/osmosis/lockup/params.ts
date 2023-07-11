@@ -36,9 +36,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      forceUnlockAllowedAddresses: Array.isArray(object?.forceUnlockAllowedAddresses) ? object.forceUnlockAllowedAddresses.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.forceUnlockAllowedAddresses)) object.forceUnlockAllowedAddresses.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

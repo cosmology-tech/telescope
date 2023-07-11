@@ -114,10 +114,10 @@ export const Minter = {
     return message;
   },
   fromJSON(object: any): Minter {
-    return {
-      inflation: isSet(object.inflation) ? String(object.inflation) : "",
-      annualProvisions: isSet(object.annualProvisions) ? String(object.annualProvisions) : ""
-    };
+    const obj = createBaseMinter();
+    if (isSet(object.inflation)) obj.inflation = String(object.inflation);
+    if (isSet(object.annualProvisions)) obj.annualProvisions = String(object.annualProvisions);
+    return obj;
   },
   toJSON(message: Minter): unknown {
     const obj: any = {};
@@ -244,14 +244,14 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
-      inflationRateChange: isSet(object.inflationRateChange) ? String(object.inflationRateChange) : "",
-      inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
-      inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
-      goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? Long.fromValue(object.blocksPerYear) : Long.UZERO
-    };
+    const obj = createBaseParams();
+    if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
+    if (isSet(object.inflationRateChange)) obj.inflationRateChange = String(object.inflationRateChange);
+    if (isSet(object.inflationMax)) obj.inflationMax = String(object.inflationMax);
+    if (isSet(object.inflationMin)) obj.inflationMin = String(object.inflationMin);
+    if (isSet(object.goalBonded)) obj.goalBonded = String(object.goalBonded);
+    if (isSet(object.blocksPerYear)) obj.blocksPerYear = Long.fromValue(object.blocksPerYear);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

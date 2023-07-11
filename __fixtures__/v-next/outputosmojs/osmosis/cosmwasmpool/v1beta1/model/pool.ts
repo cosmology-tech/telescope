@@ -64,12 +64,12 @@ export const CosmWasmPool = {
     return message;
   },
   fromJSON(object: any): CosmWasmPool {
-    return {
-      poolAddress: isSet(object.poolAddress) ? String(object.poolAddress) : "",
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0)
-    };
+    const obj = createBaseCosmWasmPool();
+    if (isSet(object.poolAddress)) obj.poolAddress = String(object.poolAddress);
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    return obj;
   },
   toJSON(message: CosmWasmPool): unknown {
     const obj: any = {};

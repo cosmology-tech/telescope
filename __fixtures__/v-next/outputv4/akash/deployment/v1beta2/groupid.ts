@@ -57,11 +57,11 @@ export const GroupID = {
     return message;
   },
   fromJSON(object: any): GroupID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
-    };
+    const obj = createBaseGroupID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    return obj;
   },
   toJSON(message: GroupID): unknown {
     const obj: any = {};

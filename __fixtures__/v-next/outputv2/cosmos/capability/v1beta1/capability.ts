@@ -123,9 +123,9 @@ export const Capability = {
     return message;
   },
   fromJSON(object: any): Capability {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
-    };
+    const obj = createBaseCapability();
+    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    return obj;
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
@@ -218,10 +218,10 @@ export const Owner = {
     return message;
   },
   fromJSON(object: any): Owner {
-    return {
-      module: isSet(object.module) ? String(object.module) : "",
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseOwner();
+    if (isSet(object.module)) obj.module = String(object.module);
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: Owner): unknown {
     const obj: any = {};
@@ -313,9 +313,9 @@ export const CapabilityOwners = {
     return message;
   },
   fromJSON(object: any): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : []
-    };
+    const obj = createBaseCapabilityOwners();
+    if (Array.isArray(object?.owners)) object.owners.map((e: any) => Owner.fromJSON(e));
+    return obj;
   },
   toJSON(message: CapabilityOwners): unknown {
     const obj: any = {};

@@ -83,11 +83,11 @@ export const SetProtoRevEnabledProposal = {
     return message;
   },
   fromJSON(object: any): SetProtoRevEnabledProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
-    };
+    const obj = createBaseSetProtoRevEnabledProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
+    return obj;
   },
   toJSON(message: SetProtoRevEnabledProposal): unknown {
     const obj: any = {};
@@ -169,11 +169,11 @@ export const SetProtoRevAdminAccountProposal = {
     return message;
   },
   fromJSON(object: any): SetProtoRevAdminAccountProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      account: isSet(object.account) ? String(object.account) : ""
-    };
+    const obj = createBaseSetProtoRevAdminAccountProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.account)) obj.account = String(object.account);
+    return obj;
   },
   toJSON(message: SetProtoRevAdminAccountProposal): unknown {
     const obj: any = {};

@@ -809,9 +809,9 @@ export const RetryInfo = {
     return message;
   },
   fromJSON(object: any): RetryInfo {
-    return {
-      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
-    };
+    const obj = createBaseRetryInfo();
+    if (isSet(object.retryDelay)) obj.retryDelay = Duration.fromJSON(object.retryDelay);
+    return obj;
   },
   toJSON(message: RetryInfo): unknown {
     const obj: any = {};
@@ -820,7 +820,7 @@ export const RetryInfo = {
   },
   fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
-    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
+    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: RetryInfoSDKType): RetryInfo {
@@ -897,10 +897,10 @@ export const DebugInfo = {
     return message;
   },
   fromJSON(object: any): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stackEntries) ? object.stackEntries.map((e: any) => String(e)) : [],
-      detail: isSet(object.detail) ? String(object.detail) : ""
-    };
+    const obj = createBaseDebugInfo();
+    if (Array.isArray(object?.stackEntries)) object.stackEntries.map((e: any) => String(e));
+    if (isSet(object.detail)) obj.detail = String(object.detail);
+    return obj;
   },
   toJSON(message: DebugInfo): unknown {
     const obj: any = {};
@@ -997,9 +997,9 @@ export const QuotaFailure = {
     return message;
   },
   fromJSON(object: any): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e)) : []
-    };
+    const obj = createBaseQuotaFailure();
+    if (Array.isArray(object?.violations)) object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
+    return obj;
   },
   toJSON(message: QuotaFailure): unknown {
     const obj: any = {};
@@ -1097,10 +1097,10 @@ export const QuotaFailure_Violation = {
     return message;
   },
   fromJSON(object: any): QuotaFailure_Violation {
-    return {
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseQuotaFailure_Violation();
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: QuotaFailure_Violation): unknown {
     const obj: any = {};
@@ -1191,10 +1191,10 @@ export const ErrorInfo_MetadataEntry = {
     return message;
   },
   fromJSON(object: any): ErrorInfo_MetadataEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseErrorInfo_MetadataEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: ErrorInfo_MetadataEntry): unknown {
     const obj: any = {};
@@ -1293,16 +1293,16 @@ export const ErrorInfo = {
     return message;
   },
   fromJSON(object: any): ErrorInfo {
-    return {
-      reason: isSet(object.reason) ? String(object.reason) : "",
-      domain: isSet(object.domain) ? String(object.domain) : "",
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseErrorInfo();
+    if (isSet(object.reason)) obj.reason = String(object.reason);
+    if (isSet(object.domain)) obj.domain = String(object.domain);
+    if (isObject(object.metadata)) obj.metadata = Object.entries(object.metadata).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: ErrorInfo): unknown {
     const obj: any = {};
@@ -1425,9 +1425,9 @@ export const PreconditionFailure = {
     return message;
   },
   fromJSON(object: any): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
-    };
+    const obj = createBasePreconditionFailure();
+    if (Array.isArray(object?.violations)) object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
+    return obj;
   },
   toJSON(message: PreconditionFailure): unknown {
     const obj: any = {};
@@ -1532,11 +1532,11 @@ export const PreconditionFailure_Violation = {
     return message;
   },
   fromJSON(object: any): PreconditionFailure_Violation {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBasePreconditionFailure_Violation();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: PreconditionFailure_Violation): unknown {
     const obj: any = {};
@@ -1627,9 +1627,9 @@ export const BadRequest = {
     return message;
   },
   fromJSON(object: any): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.fieldViolations) ? object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e)) : []
-    };
+    const obj = createBaseBadRequest();
+    if (Array.isArray(object?.fieldViolations)) object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
+    return obj;
   },
   toJSON(message: BadRequest): unknown {
     const obj: any = {};
@@ -1727,10 +1727,10 @@ export const BadRequest_FieldViolation = {
     return message;
   },
   fromJSON(object: any): BadRequest_FieldViolation {
-    return {
-      field: isSet(object.field) ? String(object.field) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseBadRequest_FieldViolation();
+    if (isSet(object.field)) obj.field = String(object.field);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: BadRequest_FieldViolation): unknown {
     const obj: any = {};
@@ -1822,10 +1822,10 @@ export const RequestInfo = {
     return message;
   },
   fromJSON(object: any): RequestInfo {
-    return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      servingData: isSet(object.servingData) ? String(object.servingData) : ""
-    };
+    const obj = createBaseRequestInfo();
+    if (isSet(object.requestId)) obj.requestId = String(object.requestId);
+    if (isSet(object.servingData)) obj.servingData = String(object.servingData);
+    return obj;
   },
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
@@ -1931,12 +1931,12 @@ export const ResourceInfo = {
     return message;
   },
   fromJSON(object: any): ResourceInfo {
-    return {
-      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
-      resourceName: isSet(object.resourceName) ? String(object.resourceName) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseResourceInfo();
+    if (isSet(object.resourceType)) obj.resourceType = String(object.resourceType);
+    if (isSet(object.resourceName)) obj.resourceName = String(object.resourceName);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: ResourceInfo): unknown {
     const obj: any = {};
@@ -2033,9 +2033,9 @@ export const Help = {
     return message;
   },
   fromJSON(object: any): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromJSON(e)) : []
-    };
+    const obj = createBaseHelp();
+    if (Array.isArray(object?.links)) object.links.map((e: any) => Help_Link.fromJSON(e));
+    return obj;
   },
   toJSON(message: Help): unknown {
     const obj: any = {};
@@ -2133,10 +2133,10 @@ export const Help_Link = {
     return message;
   },
   fromJSON(object: any): Help_Link {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      url: isSet(object.url) ? String(object.url) : ""
-    };
+    const obj = createBaseHelp_Link();
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.url)) obj.url = String(object.url);
+    return obj;
   },
   toJSON(message: Help_Link): unknown {
     const obj: any = {};
@@ -2228,10 +2228,10 @@ export const LocalizedMessage = {
     return message;
   },
   fromJSON(object: any): LocalizedMessage {
-    return {
-      locale: isSet(object.locale) ? String(object.locale) : "",
-      message: isSet(object.message) ? String(object.message) : ""
-    };
+    const obj = createBaseLocalizedMessage();
+    if (isSet(object.locale)) obj.locale = String(object.locale);
+    if (isSet(object.message)) obj.message = String(object.message);
+    return obj;
   },
   toJSON(message: LocalizedMessage): unknown {
     const obj: any = {};

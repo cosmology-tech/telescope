@@ -76,11 +76,11 @@ export const ValidatorSet = {
     return message;
   },
   fromJSON(object: any): ValidatorSet {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
-      proposer: isSet(object.proposer) ? Validator.fromJSON(object.proposer) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? BigInt(object.totalVotingPower.toString()) : BigInt(0)
-    };
+    const obj = createBaseValidatorSet();
+    if (Array.isArray(object?.validators)) object.validators.map((e: any) => Validator.fromJSON(e));
+    if (isSet(object.proposer)) obj.proposer = Validator.fromJSON(object.proposer);
+    if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    return obj;
   },
   toJSON(message: ValidatorSet): unknown {
     const obj: any = {};
@@ -96,7 +96,7 @@ export const ValidatorSet = {
   fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
-    message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : undefined;
+    message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : Validator.fromPartial({});
     message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
     return message;
   },
@@ -177,12 +177,12 @@ export const Validator = {
     return message;
   },
   fromJSON(object: any): Validator {
-    return {
-      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
-      pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt(0),
-      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt(0)
-    };
+    const obj = createBaseValidator();
+    if (isSet(object.address)) obj.address = bytesFromBase64(object.address);
+    if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
+    if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
+    if (isSet(object.proposerPriority)) obj.proposerPriority = BigInt(object.proposerPriority.toString());
+    return obj;
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
@@ -195,7 +195,7 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
+    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
     message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt(0);
     return message;
@@ -262,10 +262,10 @@ export const SimpleValidator = {
     return message;
   },
   fromJSON(object: any): SimpleValidator {
-    return {
-      pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt(0)
-    };
+    const obj = createBaseSimpleValidator();
+    if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
+    if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
+    return obj;
   },
   toJSON(message: SimpleValidator): unknown {
     const obj: any = {};
@@ -275,7 +275,7 @@ export const SimpleValidator = {
   },
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
+    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : PublicKey.fromPartial({});
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
     return message;
   },

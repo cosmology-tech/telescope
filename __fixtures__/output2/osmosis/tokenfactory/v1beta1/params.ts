@@ -38,9 +38,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      denomCreationFee: Array.isArray(object?.denomCreationFee) ? object.denomCreationFee.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.denomCreationFee)) object.denomCreationFee.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

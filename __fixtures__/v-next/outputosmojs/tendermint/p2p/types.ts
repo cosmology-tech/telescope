@@ -106,11 +106,11 @@ export const ProtocolVersion = {
     return message;
   },
   fromJSON(object: any): ProtocolVersion {
-    return {
-      p2p: isSet(object.p2p) ? BigInt(object.p2p.toString()) : BigInt(0),
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
-    };
+    const obj = createBaseProtocolVersion();
+    if (isSet(object.p2p)) obj.p2p = BigInt(object.p2p.toString());
+    if (isSet(object.block)) obj.block = BigInt(object.block.toString());
+    if (isSet(object.app)) obj.app = BigInt(object.app.toString());
+    return obj;
   },
   toJSON(message: ProtocolVersion): unknown {
     const obj: any = {};
@@ -227,16 +227,16 @@ export const NodeInfo = {
     return message;
   },
   fromJSON(object: any): NodeInfo {
-    return {
-      protocolVersion: isSet(object.protocolVersion) ? ProtocolVersion.fromJSON(object.protocolVersion) : undefined,
-      nodeId: isSet(object.nodeId) ? String(object.nodeId) : "",
-      listenAddr: isSet(object.listenAddr) ? String(object.listenAddr) : "",
-      network: isSet(object.network) ? String(object.network) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(),
-      moniker: isSet(object.moniker) ? String(object.moniker) : "",
-      other: isSet(object.other) ? NodeInfoOther.fromJSON(object.other) : undefined
-    };
+    const obj = createBaseNodeInfo();
+    if (isSet(object.protocolVersion)) obj.protocolVersion = ProtocolVersion.fromJSON(object.protocolVersion);
+    if (isSet(object.nodeId)) obj.nodeId = String(object.nodeId);
+    if (isSet(object.listenAddr)) obj.listenAddr = String(object.listenAddr);
+    if (isSet(object.network)) obj.network = String(object.network);
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.channels)) obj.channels = bytesFromBase64(object.channels);
+    if (isSet(object.moniker)) obj.moniker = String(object.moniker);
+    if (isSet(object.other)) obj.other = NodeInfoOther.fromJSON(object.other);
+    return obj;
   },
   toJSON(message: NodeInfo): unknown {
     const obj: any = {};
@@ -252,14 +252,14 @@ export const NodeInfo = {
   },
   fromPartial(object: DeepPartial<NodeInfo>): NodeInfo {
     const message = createBaseNodeInfo();
-    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : undefined;
+    message.protocolVersion = object.protocolVersion !== undefined && object.protocolVersion !== null ? ProtocolVersion.fromPartial(object.protocolVersion) : ProtocolVersion.fromPartial({});
     message.nodeId = object.nodeId ?? "";
     message.listenAddr = object.listenAddr ?? "";
     message.network = object.network ?? "";
     message.version = object.version ?? "";
     message.channels = object.channels ?? new Uint8Array();
     message.moniker = object.moniker ?? "";
-    message.other = object.other !== undefined && object.other !== null ? NodeInfoOther.fromPartial(object.other) : undefined;
+    message.other = object.other !== undefined && object.other !== null ? NodeInfoOther.fromPartial(object.other) : NodeInfoOther.fromPartial({});
     return message;
   },
   fromSDK(object: NodeInfoSDKType): NodeInfo {
@@ -336,10 +336,10 @@ export const NodeInfoOther = {
     return message;
   },
   fromJSON(object: any): NodeInfoOther {
-    return {
-      txIndex: isSet(object.txIndex) ? String(object.txIndex) : "",
-      rpcAddress: isSet(object.rpcAddress) ? String(object.rpcAddress) : ""
-    };
+    const obj = createBaseNodeInfoOther();
+    if (isSet(object.txIndex)) obj.txIndex = String(object.txIndex);
+    if (isSet(object.rpcAddress)) obj.rpcAddress = String(object.rpcAddress);
+    return obj;
   },
   toJSON(message: NodeInfoOther): unknown {
     const obj: any = {};
@@ -416,11 +416,11 @@ export const PeerInfo = {
     return message;
   },
   fromJSON(object: any): PeerInfo {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      addressInfo: Array.isArray(object?.addressInfo) ? object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e)) : [],
-      lastConnected: isSet(object.lastConnected) ? new Date(object.lastConnected) : undefined
-    };
+    const obj = createBasePeerInfo();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (Array.isArray(object?.addressInfo)) object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e));
+    if (isSet(object.lastConnected)) obj.lastConnected = new Date(object.lastConnected);
+    return obj;
   },
   toJSON(message: PeerInfo): unknown {
     const obj: any = {};
@@ -517,12 +517,12 @@ export const PeerAddressInfo = {
     return message;
   },
   fromJSON(object: any): PeerAddressInfo {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      lastDialSuccess: isSet(object.lastDialSuccess) ? new Date(object.lastDialSuccess) : undefined,
-      lastDialFailure: isSet(object.lastDialFailure) ? new Date(object.lastDialFailure) : undefined,
-      dialFailures: isSet(object.dialFailures) ? Number(object.dialFailures) : 0
-    };
+    const obj = createBasePeerAddressInfo();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.lastDialSuccess)) obj.lastDialSuccess = new Date(object.lastDialSuccess);
+    if (isSet(object.lastDialFailure)) obj.lastDialFailure = new Date(object.lastDialFailure);
+    if (isSet(object.dialFailures)) obj.dialFailures = Number(object.dialFailures);
+    return obj;
   },
   toJSON(message: PeerAddressInfo): unknown {
     const obj: any = {};

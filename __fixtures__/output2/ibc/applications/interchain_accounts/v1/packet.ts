@@ -94,11 +94,11 @@ export const InterchainAccountPacketData = {
     return message;
   },
   fromJSON(object: any): InterchainAccountPacketData {
-    return {
-      type: isSet(object.type) ? typeFromJSON(object.type) : 0,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      memo: isSet(object.memo) ? String(object.memo) : ""
-    };
+    const obj = createBaseInterchainAccountPacketData();
+    if (isSet(object.type)) obj.type = typeFromJSON(object.type);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.memo)) obj.memo = String(object.memo);
+    return obj;
   },
   toJSON(message: InterchainAccountPacketData): unknown {
     const obj: any = {};
@@ -145,9 +145,9 @@ export const CosmosTx = {
     return message;
   },
   fromJSON(object: any): CosmosTx {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseCosmosTx();
+    if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: CosmosTx): unknown {
     const obj: any = {};

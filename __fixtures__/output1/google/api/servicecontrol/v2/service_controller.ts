@@ -198,13 +198,13 @@ export const CheckRequest = {
     return message;
   },
   fromJSON(object: any): CheckRequest {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
-      attributes: isSet(object.attributes) ? AttributeContext.fromJSON(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromJSON(e)) : [],
-      flags: isSet(object.flags) ? String(object.flags) : ""
-    };
+    const obj = createBaseCheckRequest();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    if (isSet(object.attributes)) obj.attributes = AttributeContext.fromJSON(object.attributes);
+    if (Array.isArray(object?.resources)) object.resources.map((e: any) => ResourceInfo.fromJSON(e));
+    if (isSet(object.flags)) obj.flags = String(object.flags);
+    return obj;
   },
   toJSON(message: CheckRequest): unknown {
     const obj: any = {};
@@ -223,7 +223,7 @@ export const CheckRequest = {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
-    message.attributes = object.attributes !== undefined && object.attributes !== null ? AttributeContext.fromPartial(object.attributes) : undefined;
+    message.attributes = object.attributes !== undefined && object.attributes !== null ? AttributeContext.fromPartial(object.attributes) : AttributeContext.fromPartial({});
     message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
     message.flags = object.flags ?? "";
     return message;
@@ -309,13 +309,13 @@ export const ResourceInfo = {
     return message;
   },
   fromJSON(object: any): ResourceInfo {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      permission: isSet(object.permission) ? String(object.permission) : "",
-      container: isSet(object.container) ? String(object.container) : "",
-      location: isSet(object.location) ? String(object.location) : ""
-    };
+    const obj = createBaseResourceInfo();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.permission)) obj.permission = String(object.permission);
+    if (isSet(object.container)) obj.container = String(object.container);
+    if (isSet(object.location)) obj.location = String(object.location);
+    return obj;
   },
   toJSON(message: ResourceInfo): unknown {
     const obj: any = {};
@@ -391,10 +391,10 @@ export const CheckResponse_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): CheckResponse_HeadersEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseCheckResponse_HeadersEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: CheckResponse_HeadersEntry): unknown {
     const obj: any = {};
@@ -464,15 +464,15 @@ export const CheckResponse = {
     return message;
   },
   fromJSON(object: any): CheckResponse {
-    return {
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseCheckResponse();
+    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
+    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: CheckResponse): unknown {
     const obj: any = {};
@@ -487,7 +487,7 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -565,11 +565,11 @@ export const ReportRequest = {
     return message;
   },
   fromJSON(object: any): ReportRequest {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromJSON(e)) : []
-    };
+    const obj = createBaseReportRequest();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    if (Array.isArray(object?.operations)) object.operations.map((e: any) => AttributeContext.fromJSON(e));
+    return obj;
   },
   toJSON(message: ReportRequest): unknown {
     const obj: any = {};
@@ -630,7 +630,8 @@ export const ReportResponse = {
     return message;
   },
   fromJSON(_: any): ReportResponse {
-    return {};
+    const obj = createBaseReportResponse();
+    return obj;
   },
   toJSON(_: ReportResponse): unknown {
     const obj: any = {};

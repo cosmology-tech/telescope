@@ -57,10 +57,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      factoryDenoms: Array.isArray(object?.factoryDenoms) ? object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.factoryDenoms)) object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -74,7 +74,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
     return message;
   }
@@ -116,10 +116,10 @@ export const GenesisDenom = {
     return message;
   },
   fromJSON(object: any): GenesisDenom {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      authorityMetadata: isSet(object.authorityMetadata) ? DenomAuthorityMetadata.fromJSON(object.authorityMetadata) : undefined
-    };
+    const obj = createBaseGenesisDenom();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
+    return obj;
   },
   toJSON(message: GenesisDenom): unknown {
     const obj: any = {};
@@ -130,7 +130,7 @@ export const GenesisDenom = {
   fromPartial(object: DeepPartial<GenesisDenom>): GenesisDenom {
     const message = createBaseGenesisDenom();
     message.denom = object.denom ?? "";
-    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
+    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : DenomAuthorityMetadata.fromPartial({});
     return message;
   }
 };

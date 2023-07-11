@@ -52,9 +52,9 @@ export const ResourceValue = {
     return message;
   },
   fromJSON(object: any): ResourceValue {
-    return {
-      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
-    };
+    const obj = createBaseResourceValue();
+    if (isSet(object.val)) obj.val = bytesFromBase64(object.val);
+    return obj;
   },
   toJSON(message: ResourceValue): unknown {
     const obj: any = {};

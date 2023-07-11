@@ -41,9 +41,9 @@ export const ClientState = {
     return message;
   },
   fromJSON(object: any): ClientState {
-    return {
-      latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined
-    };
+    const obj = createBaseClientState();
+    if (isSet(object.latestHeight)) obj.latestHeight = Height.fromJSON(object.latestHeight);
+    return obj;
   },
   toJSON(message: ClientState): unknown {
     const obj: any = {};
@@ -52,7 +52,7 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : undefined;
+    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : Height.fromPartial({});
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {

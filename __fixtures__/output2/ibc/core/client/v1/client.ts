@@ -132,10 +132,10 @@ export const IdentifiedClientState = {
     return message;
   },
   fromJSON(object: any): IdentifiedClientState {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined
-    };
+    const obj = createBaseIdentifiedClientState();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
+    return obj;
   },
   toJSON(message: IdentifiedClientState): unknown {
     const obj: any = {};
@@ -146,7 +146,7 @@ export const IdentifiedClientState = {
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
+    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : Any.fromPartial({});
     return message;
   }
 };
@@ -187,10 +187,10 @@ export const ConsensusStateWithHeight = {
     return message;
   },
   fromJSON(object: any): ConsensusStateWithHeight {
-    return {
-      height: isSet(object.height) ? Height.fromJSON(object.height) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined
-    };
+    const obj = createBaseConsensusStateWithHeight();
+    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
+    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
+    return obj;
   },
   toJSON(message: ConsensusStateWithHeight): unknown {
     const obj: any = {};
@@ -200,8 +200,8 @@ export const ConsensusStateWithHeight = {
   },
   fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
+    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : Height.fromPartial({});
+    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : Any.fromPartial({});
     return message;
   }
 };
@@ -242,10 +242,10 @@ export const ClientConsensusStates = {
     return message;
   },
   fromJSON(object: any): ClientConsensusStates {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      consensusStates: Array.isArray(object?.consensusStates) ? object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e)) : []
-    };
+    const obj = createBaseClientConsensusStates();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (Array.isArray(object?.consensusStates)) object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
+    return obj;
   },
   toJSON(message: ClientConsensusStates): unknown {
     const obj: any = {};
@@ -315,12 +315,12 @@ export const ClientUpdateProposal = {
     return message;
   },
   fromJSON(object: any): ClientUpdateProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      subjectClientId: isSet(object.subjectClientId) ? String(object.subjectClientId) : "",
-      substituteClientId: isSet(object.substituteClientId) ? String(object.substituteClientId) : ""
-    };
+    const obj = createBaseClientUpdateProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.subjectClientId)) obj.subjectClientId = String(object.subjectClientId);
+    if (isSet(object.substituteClientId)) obj.substituteClientId = String(object.substituteClientId);
+    return obj;
   },
   toJSON(message: ClientUpdateProposal): unknown {
     const obj: any = {};
@@ -390,12 +390,12 @@ export const UpgradeProposal = {
     return message;
   },
   fromJSON(object: any): UpgradeProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
-      upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
-    };
+    const obj = createBaseUpgradeProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
+    if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
+    return obj;
   },
   toJSON(message: UpgradeProposal): unknown {
     const obj: any = {};
@@ -409,8 +409,8 @@ export const UpgradeProposal = {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
+    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : Plan.fromPartial({});
+    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : Any.fromPartial({});
     return message;
   }
 };
@@ -451,10 +451,10 @@ export const Height = {
     return message;
   },
   fromJSON(object: any): Height {
-    return {
-      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
-      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO
-    };
+    const obj = createBaseHeight();
+    if (isSet(object.revisionNumber)) obj.revisionNumber = Long.fromValue(object.revisionNumber);
+    if (isSet(object.revisionHeight)) obj.revisionHeight = Long.fromValue(object.revisionHeight);
+    return obj;
   },
   toJSON(message: Height): unknown {
     const obj: any = {};
@@ -499,9 +499,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowedClients) ? object.allowedClients.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.allowedClients)) object.allowedClients.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

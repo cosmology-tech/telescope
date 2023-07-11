@@ -104,10 +104,10 @@ export const SourceInfo_PositionsEntry = {
     return message;
   },
   fromJSON(object: any): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseSourceInfo_PositionsEntry();
+    if (isSet(object.key)) obj.key = Number(object.key);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: SourceInfo_PositionsEntry): unknown {
     const obj: any = {};
@@ -199,16 +199,16 @@ export const SourceInfo = {
     return message;
   },
   fromJSON(object: any): SourceInfo {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      lineOffsets: Array.isArray(object?.lineOffsets) ? object.lineOffsets.map((e: any) => Number(e)) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseSourceInfo();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (Array.isArray(object?.lineOffsets)) object.lineOffsets.map((e: any) => Number(e));
+    if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
+      [key: number]: number;
+    }>((acc, [key, value]) => {
+      acc[Number(key)] = Number(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: SourceInfo): unknown {
     const obj: any = {};
@@ -332,12 +332,12 @@ export const SourcePosition = {
     return message;
   },
   fromJSON(object: any): SourcePosition {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      offset: isSet(object.offset) ? Number(object.offset) : 0,
-      line: isSet(object.line) ? Number(object.line) : 0,
-      column: isSet(object.column) ? Number(object.column) : 0
-    };
+    const obj = createBaseSourcePosition();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (isSet(object.offset)) obj.offset = Number(object.offset);
+    if (isSet(object.line)) obj.line = Number(object.line);
+    if (isSet(object.column)) obj.column = Number(object.column);
+    return obj;
   },
   toJSON(message: SourcePosition): unknown {
     const obj: any = {};

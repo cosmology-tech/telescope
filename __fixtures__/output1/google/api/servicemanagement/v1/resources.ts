@@ -586,10 +586,10 @@ export const ManagedService = {
     return message;
   },
   fromJSON(object: any): ManagedService {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : ""
-    };
+    const obj = createBaseManagedService();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
+    return obj;
   },
   toJSON(message: ManagedService): unknown {
     const obj: any = {};
@@ -667,12 +667,12 @@ export const OperationMetadata = {
     return message;
   },
   fromJSON(object: any): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
-      progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
-    };
+    const obj = createBaseOperationMetadata();
+    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.steps)) object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e));
+    if (isSet(object.progressPercentage)) obj.progressPercentage = Number(object.progressPercentage);
+    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
+    return obj;
   },
   toJSON(message: OperationMetadata): unknown {
     const obj: any = {};
@@ -760,10 +760,10 @@ export const OperationMetadata_Step = {
     return message;
   },
   fromJSON(object: any): OperationMetadata_Step {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
-    };
+    const obj = createBaseOperationMetadata_Step();
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.status)) obj.status = operationMetadata_StatusFromJSON(object.status);
+    return obj;
   },
   toJSON(message: OperationMetadata_Step): unknown {
     const obj: any = {};
@@ -834,11 +834,11 @@ export const Diagnostic = {
     return message;
   },
   fromJSON(object: any): Diagnostic {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
-      message: isSet(object.message) ? String(object.message) : ""
-    };
+    const obj = createBaseDiagnostic();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (isSet(object.kind)) obj.kind = diagnostic_KindFromJSON(object.kind);
+    if (isSet(object.message)) obj.message = String(object.message);
+    return obj;
   },
   toJSON(message: Diagnostic): unknown {
     const obj: any = {};
@@ -906,10 +906,10 @@ export const ConfigSource = {
     return message;
   },
   fromJSON(object: any): ConfigSource {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromJSON(e)) : []
-    };
+    const obj = createBaseConfigSource();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (Array.isArray(object?.files)) object.files.map((e: any) => ConfigFile.fromJSON(e));
+    return obj;
   },
   toJSON(message: ConfigSource): unknown {
     const obj: any = {};
@@ -988,11 +988,11 @@ export const ConfigFile = {
     return message;
   },
   fromJSON(object: any): ConfigFile {
-    return {
-      filePath: isSet(object.filePath) ? String(object.filePath) : "",
-      fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
-    };
+    const obj = createBaseConfigFile();
+    if (isSet(object.filePath)) obj.filePath = String(object.filePath);
+    if (isSet(object.fileContents)) obj.fileContents = bytesFromBase64(object.fileContents);
+    if (isSet(object.fileType)) obj.fileType = configFile_FileTypeFromJSON(object.fileType);
+    return obj;
   },
   toJSON(message: ConfigFile): unknown {
     const obj: any = {};
@@ -1053,9 +1053,9 @@ export const ConfigRef = {
     return message;
   },
   fromJSON(object: any): ConfigRef {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseConfigRef();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: ConfigRef): unknown {
     const obj: any = {};
@@ -1108,9 +1108,9 @@ export const ChangeReport = {
     return message;
   },
   fromJSON(object: any): ChangeReport {
-    return {
-      configChanges: Array.isArray(object?.configChanges) ? object.configChanges.map((e: any) => ConfigChange.fromJSON(e)) : []
-    };
+    const obj = createBaseChangeReport();
+    if (Array.isArray(object?.configChanges)) object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
+    return obj;
   },
   toJSON(message: ChangeReport): unknown {
     const obj: any = {};
@@ -1213,15 +1213,15 @@ export const Rollout = {
     return message;
   },
   fromJSON(object: any): Rollout {
-    return {
-      rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
-      trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
-      deleteServiceStrategy: isSet(object.deleteServiceStrategy) ? Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy) : undefined,
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
-    };
+    const obj = createBaseRollout();
+    if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
+    if (isSet(object.createTime)) obj.createTime = fromJsonTimestamp(object.createTime);
+    if (isSet(object.createdBy)) obj.createdBy = String(object.createdBy);
+    if (isSet(object.status)) obj.status = rollout_RolloutStatusFromJSON(object.status);
+    if (isSet(object.trafficPercentStrategy)) obj.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy);
+    if (isSet(object.deleteServiceStrategy)) obj.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy);
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    return obj;
   },
   toJSON(message: Rollout): unknown {
     const obj: any = {};
@@ -1240,8 +1240,8 @@ export const Rollout = {
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
+    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : Rollout_TrafficPercentStrategy.fromPartial({});
+    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : Rollout_DeleteServiceStrategy.fromPartial({});
     message.serviceName = object.serviceName ?? "";
     return message;
   },
@@ -1305,10 +1305,10 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     return message;
   },
   fromJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): unknown {
     const obj: any = {};
@@ -1371,14 +1371,14 @@ export const Rollout_TrafficPercentStrategy = {
     return message;
   },
   fromJSON(object: any): Rollout_TrafficPercentStrategy {
-    return {
-      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
-        [key: string]: double;
-      }>((acc, [key, value]) => {
-        acc[key] = double.fromJSON(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseRollout_TrafficPercentStrategy();
+    if (isObject(object.percentages)) obj.percentages = Object.entries(object.percentages).reduce<{
+      [key: string]: double;
+    }>((acc, [key, value]) => {
+      acc[key] = double.fromJSON(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: Rollout_TrafficPercentStrategy): unknown {
     const obj: any = {};
@@ -1445,7 +1445,8 @@ export const Rollout_DeleteServiceStrategy = {
     return message;
   },
   fromJSON(_: any): Rollout_DeleteServiceStrategy {
-    return {};
+    const obj = createBaseRollout_DeleteServiceStrategy();
+    return obj;
   },
   toJSON(_: Rollout_DeleteServiceStrategy): unknown {
     const obj: any = {};

@@ -136,10 +136,10 @@ export const CommitInfo = {
     return message;
   },
   fromJSON(object: any): CommitInfo {
-    return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
-      storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
-    };
+    const obj = createBaseCommitInfo();
+    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
+    if (Array.isArray(object?.storeInfos)) object.storeInfos.map((e: any) => StoreInfo.fromJSON(e));
+    return obj;
   },
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
@@ -250,10 +250,10 @@ export const StoreInfo = {
     return message;
   },
   fromJSON(object: any): StoreInfo {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      commitId: isSet(object.commitId) ? CommitID.fromJSON(object.commitId) : undefined
-    };
+    const obj = createBaseStoreInfo();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.commitId)) obj.commitId = CommitID.fromJSON(object.commitId);
+    return obj;
   },
   toJSON(message: StoreInfo): unknown {
     const obj: any = {};
@@ -264,7 +264,7 @@ export const StoreInfo = {
   fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
-    message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : undefined;
+    message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : CommitID.fromPartial({});
     return message;
   },
   fromSDK(object: StoreInfoSDKType): StoreInfo {
@@ -352,10 +352,10 @@ export const CommitID = {
     return message;
   },
   fromJSON(object: any): CommitID {
-    return {
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
+    const obj = createBaseCommitID();
+    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
+    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
+    return obj;
   },
   toJSON(message: CommitID): unknown {
     const obj: any = {};

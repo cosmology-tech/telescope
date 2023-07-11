@@ -65,11 +65,11 @@ export const MsgCreateCosmWasmPool = {
     return message;
   },
   fromJSON(object: any): MsgCreateCosmWasmPool {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      instantiateMsg: isSet(object.instantiateMsg) ? bytesFromBase64(object.instantiateMsg) : new Uint8Array(),
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
+    const obj = createBaseMsgCreateCosmWasmPool();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.instantiateMsg)) obj.instantiateMsg = bytesFromBase64(object.instantiateMsg);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    return obj;
   },
   toJSON(message: MsgCreateCosmWasmPool): unknown {
     const obj: any = {};
@@ -137,9 +137,9 @@ export const MsgCreateCosmWasmPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateCosmWasmPoolResponse {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseMsgCreateCosmWasmPoolResponse();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: MsgCreateCosmWasmPoolResponse): unknown {
     const obj: any = {};

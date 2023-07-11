@@ -86,12 +86,12 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e)) : [],
-      clientConnectionPaths: Array.isArray(object?.clientConnectionPaths) ? object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e)) : [],
-      nextConnectionSequence: isSet(object.nextConnectionSequence) ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO,
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.connections)) object.connections.map((e: any) => IdentifiedConnection.fromJSON(e));
+    if (Array.isArray(object?.clientConnectionPaths)) object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e));
+    if (isSet(object.nextConnectionSequence)) obj.nextConnectionSequence = Long.fromValue(object.nextConnectionSequence);
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -114,7 +114,7 @@ export const GenesisState = {
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];
     message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO;
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

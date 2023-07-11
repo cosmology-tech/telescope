@@ -64,10 +64,10 @@ export const Attribute = {
     return message;
   },
   fromJSON(object: any): Attribute {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttribute();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: Attribute): unknown {
     const obj: any = {};
@@ -119,10 +119,10 @@ export const SignedBy = {
     return message;
   },
   fromJSON(object: any): SignedBy {
-    return {
-      allOf: Array.isArray(object?.allOf) ? object.allOf.map((e: any) => String(e)) : [],
-      anyOf: Array.isArray(object?.anyOf) ? object.anyOf.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseSignedBy();
+    if (Array.isArray(object?.allOf)) object.allOf.map((e: any) => String(e));
+    if (Array.isArray(object?.anyOf)) object.anyOf.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: SignedBy): unknown {
     const obj: any = {};
@@ -182,10 +182,10 @@ export const PlacementRequirements = {
     return message;
   },
   fromJSON(object: any): PlacementRequirements {
-    return {
-      signedBy: isSet(object.signedBy) ? SignedBy.fromJSON(object.signedBy) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
-    };
+    const obj = createBasePlacementRequirements();
+    if (isSet(object.signedBy)) obj.signedBy = SignedBy.fromJSON(object.signedBy);
+    if (Array.isArray(object?.attributes)) object.attributes.map((e: any) => Attribute.fromJSON(e));
+    return obj;
   },
   toJSON(message: PlacementRequirements): unknown {
     const obj: any = {};
@@ -199,7 +199,7 @@ export const PlacementRequirements = {
   },
   fromPartial(object: DeepPartial<PlacementRequirements>): PlacementRequirements {
     const message = createBasePlacementRequirements();
-    message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : undefined;
+    message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : SignedBy.fromPartial({});
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
   }

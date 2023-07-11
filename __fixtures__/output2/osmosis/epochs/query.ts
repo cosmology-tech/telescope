@@ -36,7 +36,8 @@ export const QueryEpochsInfoRequest = {
     return message;
   },
   fromJSON(_: any): QueryEpochsInfoRequest {
-    return {};
+    const obj = createBaseQueryEpochsInfoRequest();
+    return obj;
   },
   toJSON(_: QueryEpochsInfoRequest): unknown {
     const obj: any = {};
@@ -77,9 +78,9 @@ export const QueryEpochsInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochsInfoResponse {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryEpochsInfoResponse();
+    if (Array.isArray(object?.epochs)) object.epochs.map((e: any) => EpochInfo.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryEpochsInfoResponse): unknown {
     const obj: any = {};
@@ -126,9 +127,9 @@ export const QueryCurrentEpochRequest = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochRequest {
-    return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : ""
-    };
+    const obj = createBaseQueryCurrentEpochRequest();
+    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
+    return obj;
   },
   toJSON(message: QueryCurrentEpochRequest): unknown {
     const obj: any = {};
@@ -171,9 +172,9 @@ export const QueryCurrentEpochResponse = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochResponse {
-    return {
-      currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO
-    };
+    const obj = createBaseQueryCurrentEpochResponse();
+    if (isSet(object.currentEpoch)) obj.currentEpoch = Long.fromValue(object.currentEpoch);
+    return obj;
   },
   toJSON(message: QueryCurrentEpochResponse): unknown {
     const obj: any = {};

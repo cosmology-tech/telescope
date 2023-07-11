@@ -398,14 +398,14 @@ export const MonitoredResourceDescriptor = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      displayName: isSet(object.displayName) ? String(object.displayName) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0
-    };
+    const obj = createBaseMonitoredResourceDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.labels)) object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
+    return obj;
   },
   toJSON(message: MonitoredResourceDescriptor): unknown {
     const obj: any = {};
@@ -532,10 +532,10 @@ export const MonitoredResource_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): MonitoredResource_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseMonitoredResource_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: MonitoredResource_LabelsEntry): unknown {
     const obj: any = {};
@@ -627,15 +627,15 @@ export const MonitoredResource = {
     return message;
   },
   fromJSON(object: any): MonitoredResource {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseMonitoredResource();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: MonitoredResource): unknown {
     const obj: any = {};
@@ -758,10 +758,10 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseMonitoredResourceMetadata_UserLabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): unknown {
     const obj: any = {};
@@ -853,15 +853,15 @@ export const MonitoredResourceMetadata = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceMetadata {
-    return {
-      systemLabels: isSet(object.systemLabels) ? Struct.fromJSON(object.systemLabels) : undefined,
-      userLabels: isObject(object.userLabels) ? Object.entries(object.userLabels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseMonitoredResourceMetadata();
+    if (isSet(object.systemLabels)) obj.systemLabels = Struct.fromJSON(object.systemLabels);
+    if (isObject(object.userLabels)) obj.userLabels = Object.entries(object.userLabels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: MonitoredResourceMetadata): unknown {
     const obj: any = {};
@@ -876,7 +876,7 @@ export const MonitoredResourceMetadata = {
   },
   fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
     const message = createBaseMonitoredResourceMetadata();
-    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
+    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : Struct.fromPartial({});
     message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

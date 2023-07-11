@@ -109,10 +109,10 @@ export const App = {
     return message;
   },
   fromJSON(object: any): App {
-    return {
-      protocol: isSet(object.protocol) ? Long.fromValue(object.protocol) : Long.UZERO,
-      software: isSet(object.software) ? String(object.software) : ""
-    };
+    const obj = createBaseApp();
+    if (isSet(object.protocol)) obj.protocol = Long.fromValue(object.protocol);
+    if (isSet(object.software)) obj.software = String(object.software);
+    return obj;
   },
   toJSON(message: App): unknown {
     const obj: any = {};
@@ -204,10 +204,10 @@ export const Consensus = {
     return message;
   },
   fromJSON(object: any): Consensus {
-    return {
-      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
-      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
-    };
+    const obj = createBaseConsensus();
+    if (isSet(object.block)) obj.block = Long.fromValue(object.block);
+    if (isSet(object.app)) obj.app = Long.fromValue(object.app);
+    return obj;
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};

@@ -170,10 +170,10 @@ export const Operation_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): Operation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseOperation_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: Operation_LabelsEntry): unknown {
     const obj: any = {};
@@ -287,23 +287,23 @@ export const Operation = {
     return message;
   },
   fromJSON(object: any): Operation {
-    return {
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      operationName: isSet(object.operationName) ? String(object.operationName) : "",
-      consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metricValueSets: Array.isArray(object?.metricValueSets) ? object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      logEntries: Array.isArray(object?.logEntries) ? object.logEntries.map((e: any) => LogEntry.fromJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseOperation();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (isSet(object.operationName)) obj.operationName = String(object.operationName);
+    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
+    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = fromJsonTimestamp(object.endTime);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (Array.isArray(object?.metricValueSets)) object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e));
+    if (Array.isArray(object?.logEntries)) object.logEntries.map((e: any) => LogEntry.fromJSON(e));
+    if (isSet(object.importance)) obj.importance = operation_ImportanceFromJSON(object.importance);
+    if (Array.isArray(object?.extensions)) object.extensions.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: Operation): unknown {
     const obj: any = {};
@@ -341,8 +341,8 @@ export const Operation = {
     message.operationId = object.operationId ?? "";
     message.operationName = object.operationName ?? "";
     message.consumerId = object.consumerId ?? "";
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
-    message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : undefined;
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
+    message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : Timestamp.fromPartial({});
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

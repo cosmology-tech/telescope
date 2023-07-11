@@ -98,10 +98,10 @@ export const QueryProvidersResponse = {
     return message;
   },
   fromJSON(object: any): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryProvidersResponse();
+    if (Array.isArray(object?.providers)) object.providers.map((e: any) => Provider.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryProvidersResponse): unknown {
     const obj: any = {};
@@ -116,7 +116,7 @@ export const QueryProvidersResponse = {
   fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
@@ -173,10 +173,10 @@ export const QueryProviderRequest = {
     return message;
   },
   fromJSON(object: any): QueryProviderRequest {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseQueryProviderRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: QueryProviderRequest): unknown {
     const obj: any = {};
@@ -233,9 +233,9 @@ export const QueryAllProvidersAttributesRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllProvidersAttributesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllProvidersAttributesRequest): unknown {
     const obj: any = {};
@@ -244,7 +244,7 @@ export const QueryAllProvidersAttributesRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<QueryAllProvidersAttributesRequest>, I>>(object: I): QueryAllProvidersAttributesRequest {
     const message = createBaseQueryAllProvidersAttributesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
@@ -295,10 +295,10 @@ export const QueryProviderAttributesRequest = {
     return message;
   },
   fromJSON(object: any): QueryProviderAttributesRequest {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryProviderAttributesRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryProviderAttributesRequest): unknown {
     const obj: any = {};
@@ -309,7 +309,7 @@ export const QueryProviderAttributesRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryProviderAttributesRequest>, I>>(object: I): QueryProviderAttributesRequest {
     const message = createBaseQueryProviderAttributesRequest();
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
@@ -362,10 +362,10 @@ export const QueryProviderAuditorRequest = {
     return message;
   },
   fromJSON(object: any): QueryProviderAuditorRequest {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseQueryProviderAuditorRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: QueryProviderAuditorRequest): unknown {
     const obj: any = {};
@@ -429,10 +429,10 @@ export const QueryAuditorAttributesRequest = {
     return message;
   },
   fromJSON(object: any): QueryAuditorAttributesRequest {
-    return {
-      auditor: isSet(object.auditor) ? String(object.auditor) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAuditorAttributesRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAuditorAttributesRequest): unknown {
     const obj: any = {};
@@ -443,7 +443,7 @@ export const QueryAuditorAttributesRequest = {
   fromPartial<I extends Exact<DeepPartial<QueryAuditorAttributesRequest>, I>>(object: I): QueryAuditorAttributesRequest {
     const message = createBaseQueryAuditorAttributesRequest();
     message.auditor = object.auditor ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {

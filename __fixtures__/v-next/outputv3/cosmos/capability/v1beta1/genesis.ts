@@ -101,10 +101,10 @@ export const GenesisOwners = {
     return message;
   },
   fromJSON(object: any): GenesisOwners {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
-      indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined
-    };
+    const obj = createBaseGenesisOwners();
+    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    if (isSet(object.indexOwners)) obj.indexOwners = CapabilityOwners.fromJSON(object.indexOwners);
+    return obj;
   },
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
@@ -115,7 +115,7 @@ export const GenesisOwners = {
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
-    message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : undefined;
+    message.indexOwners = object.indexOwners !== undefined && object.indexOwners !== null ? CapabilityOwners.fromPartial(object.indexOwners) : CapabilityOwners.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisOwnersSDKType): GenesisOwners {
@@ -203,10 +203,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.index)) obj.index = Long.fromValue(object.index);
+    if (Array.isArray(object?.owners)) object.owners.map((e: any) => GenesisOwners.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

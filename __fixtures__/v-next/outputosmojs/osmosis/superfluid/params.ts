@@ -46,9 +46,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      minimumRiskFactor: isSet(object.minimumRiskFactor) ? String(object.minimumRiskFactor) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.minimumRiskFactor)) obj.minimumRiskFactor = String(object.minimumRiskFactor);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

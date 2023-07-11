@@ -266,10 +266,10 @@ export const WeightedVoteOption = {
     return message;
   },
   fromJSON(object: any): WeightedVoteOption {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
+    const obj = createBaseWeightedVoteOption();
+    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
   },
   toJSON(message: WeightedVoteOption): unknown {
     const obj: any = {};
@@ -321,10 +321,10 @@ export const TextProposal = {
     return message;
   },
   fromJSON(object: any): TextProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseTextProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: TextProposal): unknown {
     const obj: any = {};
@@ -383,11 +383,11 @@ export const Deposit = {
     return message;
   },
   fromJSON(object: any): Deposit {
-    return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseDeposit();
+    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.depositor)) obj.depositor = String(object.depositor);
+    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: Deposit): unknown {
     const obj: any = {};
@@ -494,17 +494,17 @@ export const Proposal = {
     return message;
   },
   fromJSON(object: any): Proposal {
-    return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
-      content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined,
-      depositEndTime: isSet(object.depositEndTime) ? fromJsonTimestamp(object.depositEndTime) : undefined,
-      totalDeposit: Array.isArray(object?.totalDeposit) ? object.totalDeposit.map((e: any) => Coin.fromJSON(e)) : [],
-      votingStartTime: isSet(object.votingStartTime) ? fromJsonTimestamp(object.votingStartTime) : undefined,
-      votingEndTime: isSet(object.votingEndTime) ? fromJsonTimestamp(object.votingEndTime) : undefined
-    };
+    const obj = createBaseProposal();
+    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.content)) obj.content = Any.fromJSON(object.content);
+    if (isSet(object.status)) obj.status = proposalStatusFromJSON(object.status);
+    if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
+    if (isSet(object.submitTime)) obj.submitTime = fromJsonTimestamp(object.submitTime);
+    if (isSet(object.depositEndTime)) obj.depositEndTime = fromJsonTimestamp(object.depositEndTime);
+    if (Array.isArray(object?.totalDeposit)) object.totalDeposit.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.votingStartTime)) obj.votingStartTime = fromJsonTimestamp(object.votingStartTime);
+    if (isSet(object.votingEndTime)) obj.votingEndTime = fromJsonTimestamp(object.votingEndTime);
+    return obj;
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
@@ -526,14 +526,14 @@ export const Proposal = {
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
-    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : Any.fromPartial({});
     message.status = object.status ?? 0;
-    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
-    message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : undefined;
-    message.depositEndTime = object.depositEndTime !== undefined && object.depositEndTime !== null ? Timestamp.fromPartial(object.depositEndTime) : undefined;
+    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : TallyResult.fromPartial({});
+    message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : Timestamp.fromPartial({});
+    message.depositEndTime = object.depositEndTime !== undefined && object.depositEndTime !== null ? Timestamp.fromPartial(object.depositEndTime) : Timestamp.fromPartial({});
     message.totalDeposit = object.totalDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.votingStartTime = object.votingStartTime !== undefined && object.votingStartTime !== null ? Timestamp.fromPartial(object.votingStartTime) : undefined;
-    message.votingEndTime = object.votingEndTime !== undefined && object.votingEndTime !== null ? Timestamp.fromPartial(object.votingEndTime) : undefined;
+    message.votingStartTime = object.votingStartTime !== undefined && object.votingStartTime !== null ? Timestamp.fromPartial(object.votingStartTime) : Timestamp.fromPartial({});
+    message.votingEndTime = object.votingEndTime !== undefined && object.votingEndTime !== null ? Timestamp.fromPartial(object.votingEndTime) : Timestamp.fromPartial({});
     return message;
   }
 };
@@ -588,12 +588,12 @@ export const TallyResult = {
     return message;
   },
   fromJSON(object: any): TallyResult {
-    return {
-      yes: isSet(object.yes) ? String(object.yes) : "",
-      abstain: isSet(object.abstain) ? String(object.abstain) : "",
-      no: isSet(object.no) ? String(object.no) : "",
-      noWithVeto: isSet(object.noWithVeto) ? String(object.noWithVeto) : ""
-    };
+    const obj = createBaseTallyResult();
+    if (isSet(object.yes)) obj.yes = String(object.yes);
+    if (isSet(object.abstain)) obj.abstain = String(object.abstain);
+    if (isSet(object.no)) obj.no = String(object.no);
+    if (isSet(object.noWithVeto)) obj.noWithVeto = String(object.noWithVeto);
+    return obj;
   },
   toJSON(message: TallyResult): unknown {
     const obj: any = {};
@@ -663,12 +663,12 @@ export const Vote = {
     return message;
   },
   fromJSON(object: any): Vote {
-    return {
-      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : []
-    };
+    const obj = createBaseVote();
+    if (isSet(object.proposalId)) obj.proposalId = Long.fromValue(object.proposalId);
+    if (isSet(object.voter)) obj.voter = String(object.voter);
+    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
+    if (Array.isArray(object?.options)) object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
+    return obj;
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
@@ -728,10 +728,10 @@ export const DepositParams = {
     return message;
   },
   fromJSON(object: any): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.minDeposit) ? object.minDeposit.map((e: any) => Coin.fromJSON(e)) : [],
-      maxDepositPeriod: isSet(object.maxDepositPeriod) ? Duration.fromJSON(object.maxDepositPeriod) : undefined
-    };
+    const obj = createBaseDepositParams();
+    if (Array.isArray(object?.minDeposit)) object.minDeposit.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.maxDepositPeriod)) obj.maxDepositPeriod = Duration.fromJSON(object.maxDepositPeriod);
+    return obj;
   },
   toJSON(message: DepositParams): unknown {
     const obj: any = {};
@@ -746,7 +746,7 @@ export const DepositParams = {
   fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : undefined;
+    message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : Duration.fromPartial({});
     return message;
   }
 };
@@ -780,9 +780,9 @@ export const VotingParams = {
     return message;
   },
   fromJSON(object: any): VotingParams {
-    return {
-      votingPeriod: isSet(object.votingPeriod) ? Duration.fromJSON(object.votingPeriod) : undefined
-    };
+    const obj = createBaseVotingParams();
+    if (isSet(object.votingPeriod)) obj.votingPeriod = Duration.fromJSON(object.votingPeriod);
+    return obj;
   },
   toJSON(message: VotingParams): unknown {
     const obj: any = {};
@@ -791,7 +791,7 @@ export const VotingParams = {
   },
   fromPartial(object: DeepPartial<VotingParams>): VotingParams {
     const message = createBaseVotingParams();
-    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
+    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : Duration.fromPartial({});
     return message;
   }
 };
@@ -839,11 +839,11 @@ export const TallyParams = {
     return message;
   },
   fromJSON(object: any): TallyParams {
-    return {
-      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
-      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
-      vetoThreshold: isSet(object.vetoThreshold) ? bytesFromBase64(object.vetoThreshold) : new Uint8Array()
-    };
+    const obj = createBaseTallyParams();
+    if (isSet(object.quorum)) obj.quorum = bytesFromBase64(object.quorum);
+    if (isSet(object.threshold)) obj.threshold = bytesFromBase64(object.threshold);
+    if (isSet(object.vetoThreshold)) obj.vetoThreshold = bytesFromBase64(object.vetoThreshold);
+    return obj;
   },
   toJSON(message: TallyParams): unknown {
     const obj: any = {};

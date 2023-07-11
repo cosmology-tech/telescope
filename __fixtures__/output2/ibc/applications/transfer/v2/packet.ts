@@ -69,12 +69,12 @@ export const FungibleTokenPacketData = {
     return message;
   },
   fromJSON(object: any): FungibleTokenPacketData {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : ""
-    };
+    const obj = createBaseFungibleTokenPacketData();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.amount)) obj.amount = String(object.amount);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    return obj;
   },
   toJSON(message: FungibleTokenPacketData): unknown {
     const obj: any = {};

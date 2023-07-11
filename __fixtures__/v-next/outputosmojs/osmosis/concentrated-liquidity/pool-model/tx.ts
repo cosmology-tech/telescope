@@ -93,14 +93,14 @@ export const MsgCreateConcentratedPool = {
     return message;
   },
   fromJSON(object: any): MsgCreateConcentratedPool {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      denom0: isSet(object.denom0) ? String(object.denom0) : "",
-      denom1: isSet(object.denom1) ? String(object.denom1) : "",
-      tickSpacing: isSet(object.tickSpacing) ? BigInt(object.tickSpacing.toString()) : BigInt(0),
-      exponentAtPriceOne: isSet(object.exponentAtPriceOne) ? String(object.exponentAtPriceOne) : "",
-      swapFee: isSet(object.swapFee) ? String(object.swapFee) : ""
-    };
+    const obj = createBaseMsgCreateConcentratedPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.denom0)) obj.denom0 = String(object.denom0);
+    if (isSet(object.denom1)) obj.denom1 = String(object.denom1);
+    if (isSet(object.tickSpacing)) obj.tickSpacing = BigInt(object.tickSpacing.toString());
+    if (isSet(object.exponentAtPriceOne)) obj.exponentAtPriceOne = String(object.exponentAtPriceOne);
+    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
+    return obj;
   },
   toJSON(message: MsgCreateConcentratedPool): unknown {
     const obj: any = {};
@@ -183,9 +183,9 @@ export const MsgCreateConcentratedPoolResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateConcentratedPoolResponse {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseMsgCreateConcentratedPoolResponse();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: MsgCreateConcentratedPoolResponse): unknown {
     const obj: any = {};

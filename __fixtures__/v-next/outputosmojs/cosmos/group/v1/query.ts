@@ -318,9 +318,9 @@ export const QueryGroupInfoRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupInfoRequest {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryGroupInfoRequest();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    return obj;
   },
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
@@ -378,9 +378,9 @@ export const QueryGroupInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupInfoResponse {
-    return {
-      info: isSet(object.info) ? GroupInfo.fromJSON(object.info) : undefined
-    };
+    const obj = createBaseQueryGroupInfoResponse();
+    if (isSet(object.info)) obj.info = GroupInfo.fromJSON(object.info);
+    return obj;
   },
   toJSON(message: QueryGroupInfoResponse): unknown {
     const obj: any = {};
@@ -389,7 +389,7 @@ export const QueryGroupInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
     const message = createBaseQueryGroupInfoResponse();
-    message.info = object.info !== undefined && object.info !== null ? GroupInfo.fromPartial(object.info) : undefined;
+    message.info = object.info !== undefined && object.info !== null ? GroupInfo.fromPartial(object.info) : GroupInfo.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupInfoResponseSDKType): QueryGroupInfoResponse {
@@ -438,9 +438,9 @@ export const QueryGroupPolicyInfoRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupPolicyInfoRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseQueryGroupPolicyInfoRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: QueryGroupPolicyInfoRequest): unknown {
     const obj: any = {};
@@ -498,9 +498,9 @@ export const QueryGroupPolicyInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupPolicyInfoResponse {
-    return {
-      info: isSet(object.info) ? GroupPolicyInfo.fromJSON(object.info) : undefined
-    };
+    const obj = createBaseQueryGroupPolicyInfoResponse();
+    if (isSet(object.info)) obj.info = GroupPolicyInfo.fromJSON(object.info);
+    return obj;
   },
   toJSON(message: QueryGroupPolicyInfoResponse): unknown {
     const obj: any = {};
@@ -509,7 +509,7 @@ export const QueryGroupPolicyInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoResponse>): QueryGroupPolicyInfoResponse {
     const message = createBaseQueryGroupPolicyInfoResponse();
-    message.info = object.info !== undefined && object.info !== null ? GroupPolicyInfo.fromPartial(object.info) : undefined;
+    message.info = object.info !== undefined && object.info !== null ? GroupPolicyInfo.fromPartial(object.info) : GroupPolicyInfo.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupPolicyInfoResponseSDKType): QueryGroupPolicyInfoResponse {
@@ -565,10 +565,10 @@ export const QueryGroupMembersRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupMembersRequest {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupMembersRequest();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
@@ -579,7 +579,7 @@ export const QueryGroupMembersRequest = {
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
@@ -638,10 +638,10 @@ export const QueryGroupMembersResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupMembersResponse {
-    return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupMembersResponse();
+    if (Array.isArray(object?.members)) object.members.map((e: any) => GroupMember.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupMembersResponse): unknown {
     const obj: any = {};
@@ -656,7 +656,7 @@ export const QueryGroupMembersResponse = {
   fromPartial(object: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
     const message = createBaseQueryGroupMembersResponse();
     message.members = object.members?.map(e => GroupMember.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupMembersResponseSDKType): QueryGroupMembersResponse {
@@ -719,10 +719,10 @@ export const QueryGroupsByAdminRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupsByAdminRequest {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupsByAdminRequest();
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupsByAdminRequest): unknown {
     const obj: any = {};
@@ -733,7 +733,7 @@ export const QueryGroupsByAdminRequest = {
   fromPartial(object: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     const message = createBaseQueryGroupsByAdminRequest();
     message.admin = object.admin ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
@@ -792,10 +792,10 @@ export const QueryGroupsByAdminResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupsByAdminResponse {
-    return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupsByAdminResponse();
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupsByAdminResponse): unknown {
     const obj: any = {};
@@ -810,7 +810,7 @@ export const QueryGroupsByAdminResponse = {
   fromPartial(object: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
     const message = createBaseQueryGroupsByAdminResponse();
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupsByAdminResponseSDKType): QueryGroupsByAdminResponse {
@@ -873,10 +873,10 @@ export const QueryGroupPoliciesByGroupRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupPoliciesByGroupRequest();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
     const obj: any = {};
@@ -887,7 +887,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
@@ -946,10 +946,10 @@ export const QueryGroupPoliciesByGroupResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupPoliciesByGroupResponse {
-    return {
-      groupPolicies: Array.isArray(object?.groupPolicies) ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupPoliciesByGroupResponse();
+    if (Array.isArray(object?.groupPolicies)) object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupPoliciesByGroupResponse): unknown {
     const obj: any = {};
@@ -964,7 +964,7 @@ export const QueryGroupPoliciesByGroupResponse = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
     const message = createBaseQueryGroupPoliciesByGroupResponse();
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupPoliciesByGroupResponseSDKType): QueryGroupPoliciesByGroupResponse {
@@ -1027,10 +1027,10 @@ export const QueryGroupPoliciesByAdminRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupPoliciesByAdminRequest {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupPoliciesByAdminRequest();
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupPoliciesByAdminRequest): unknown {
     const obj: any = {};
@@ -1041,7 +1041,7 @@ export const QueryGroupPoliciesByAdminRequest = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminRequest>): QueryGroupPoliciesByAdminRequest {
     const message = createBaseQueryGroupPoliciesByAdminRequest();
     message.admin = object.admin ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
@@ -1100,10 +1100,10 @@ export const QueryGroupPoliciesByAdminResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupPoliciesByAdminResponse {
-    return {
-      groupPolicies: Array.isArray(object?.groupPolicies) ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupPoliciesByAdminResponse();
+    if (Array.isArray(object?.groupPolicies)) object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupPoliciesByAdminResponse): unknown {
     const obj: any = {};
@@ -1118,7 +1118,7 @@ export const QueryGroupPoliciesByAdminResponse = {
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     const message = createBaseQueryGroupPoliciesByAdminResponse();
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupPoliciesByAdminResponseSDKType): QueryGroupPoliciesByAdminResponse {
@@ -1174,9 +1174,9 @@ export const QueryProposalRequest = {
     return message;
   },
   fromJSON(object: any): QueryProposalRequest {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryProposalRequest();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    return obj;
   },
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
@@ -1234,9 +1234,9 @@ export const QueryProposalResponse = {
     return message;
   },
   fromJSON(object: any): QueryProposalResponse {
-    return {
-      proposal: isSet(object.proposal) ? Proposal.fromJSON(object.proposal) : undefined
-    };
+    const obj = createBaseQueryProposalResponse();
+    if (isSet(object.proposal)) obj.proposal = Proposal.fromJSON(object.proposal);
+    return obj;
   },
   toJSON(message: QueryProposalResponse): unknown {
     const obj: any = {};
@@ -1245,7 +1245,7 @@ export const QueryProposalResponse = {
   },
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
-    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : undefined;
+    message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : Proposal.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
@@ -1301,10 +1301,10 @@ export const QueryProposalsByGroupPolicyRequest = {
     return message;
   },
   fromJSON(object: any): QueryProposalsByGroupPolicyRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryProposalsByGroupPolicyRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryProposalsByGroupPolicyRequest): unknown {
     const obj: any = {};
@@ -1315,7 +1315,7 @@ export const QueryProposalsByGroupPolicyRequest = {
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyRequest>): QueryProposalsByGroupPolicyRequest {
     const message = createBaseQueryProposalsByGroupPolicyRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
@@ -1374,10 +1374,10 @@ export const QueryProposalsByGroupPolicyResponse = {
     return message;
   },
   fromJSON(object: any): QueryProposalsByGroupPolicyResponse {
-    return {
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryProposalsByGroupPolicyResponse();
+    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryProposalsByGroupPolicyResponse): unknown {
     const obj: any = {};
@@ -1392,7 +1392,7 @@ export const QueryProposalsByGroupPolicyResponse = {
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyResponse>): QueryProposalsByGroupPolicyResponse {
     const message = createBaseQueryProposalsByGroupPolicyResponse();
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryProposalsByGroupPolicyResponseSDKType): QueryProposalsByGroupPolicyResponse {
@@ -1455,10 +1455,10 @@ export const QueryVoteByProposalVoterRequest = {
     return message;
   },
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      voter: isSet(object.voter) ? String(object.voter) : ""
-    };
+    const obj = createBaseQueryVoteByProposalVoterRequest();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    if (isSet(object.voter)) obj.voter = String(object.voter);
+    return obj;
   },
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
@@ -1521,9 +1521,9 @@ export const QueryVoteByProposalVoterResponse = {
     return message;
   },
   fromJSON(object: any): QueryVoteByProposalVoterResponse {
-    return {
-      vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined
-    };
+    const obj = createBaseQueryVoteByProposalVoterResponse();
+    if (isSet(object.vote)) obj.vote = Vote.fromJSON(object.vote);
+    return obj;
   },
   toJSON(message: QueryVoteByProposalVoterResponse): unknown {
     const obj: any = {};
@@ -1532,7 +1532,7 @@ export const QueryVoteByProposalVoterResponse = {
   },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
     const message = createBaseQueryVoteByProposalVoterResponse();
-    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : undefined;
+    message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : Vote.fromPartial({});
     return message;
   },
   fromSDK(object: QueryVoteByProposalVoterResponseSDKType): QueryVoteByProposalVoterResponse {
@@ -1588,10 +1588,10 @@ export const QueryVotesByProposalRequest = {
     return message;
   },
   fromJSON(object: any): QueryVotesByProposalRequest {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryVotesByProposalRequest();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
@@ -1602,7 +1602,7 @@ export const QueryVotesByProposalRequest = {
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
@@ -1661,10 +1661,10 @@ export const QueryVotesByProposalResponse = {
     return message;
   },
   fromJSON(object: any): QueryVotesByProposalResponse {
-    return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryVotesByProposalResponse();
+    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryVotesByProposalResponse): unknown {
     const obj: any = {};
@@ -1679,7 +1679,7 @@ export const QueryVotesByProposalResponse = {
   fromPartial(object: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
     const message = createBaseQueryVotesByProposalResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryVotesByProposalResponseSDKType): QueryVotesByProposalResponse {
@@ -1742,10 +1742,10 @@ export const QueryVotesByVoterRequest = {
     return message;
   },
   fromJSON(object: any): QueryVotesByVoterRequest {
-    return {
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryVotesByVoterRequest();
+    if (isSet(object.voter)) obj.voter = String(object.voter);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryVotesByVoterRequest): unknown {
     const obj: any = {};
@@ -1756,7 +1756,7 @@ export const QueryVotesByVoterRequest = {
   fromPartial(object: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     const message = createBaseQueryVotesByVoterRequest();
     message.voter = object.voter ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
@@ -1815,10 +1815,10 @@ export const QueryVotesByVoterResponse = {
     return message;
   },
   fromJSON(object: any): QueryVotesByVoterResponse {
-    return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryVotesByVoterResponse();
+    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryVotesByVoterResponse): unknown {
     const obj: any = {};
@@ -1833,7 +1833,7 @@ export const QueryVotesByVoterResponse = {
   fromPartial(object: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
     const message = createBaseQueryVotesByVoterResponse();
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryVotesByVoterResponseSDKType): QueryVotesByVoterResponse {
@@ -1896,10 +1896,10 @@ export const QueryGroupsByMemberRequest = {
     return message;
   },
   fromJSON(object: any): QueryGroupsByMemberRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupsByMemberRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupsByMemberRequest): unknown {
     const obj: any = {};
@@ -1910,7 +1910,7 @@ export const QueryGroupsByMemberRequest = {
   fromPartial(object: DeepPartial<QueryGroupsByMemberRequest>): QueryGroupsByMemberRequest {
     const message = createBaseQueryGroupsByMemberRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
@@ -1969,10 +1969,10 @@ export const QueryGroupsByMemberResponse = {
     return message;
   },
   fromJSON(object: any): QueryGroupsByMemberResponse {
-    return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryGroupsByMemberResponse();
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryGroupsByMemberResponse): unknown {
     const obj: any = {};
@@ -1987,7 +1987,7 @@ export const QueryGroupsByMemberResponse = {
   fromPartial(object: DeepPartial<QueryGroupsByMemberResponse>): QueryGroupsByMemberResponse {
     const message = createBaseQueryGroupsByMemberResponse();
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryGroupsByMemberResponseSDKType): QueryGroupsByMemberResponse {
@@ -2043,9 +2043,9 @@ export const QueryTallyResultRequest = {
     return message;
   },
   fromJSON(object: any): QueryTallyResultRequest {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryTallyResultRequest();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    return obj;
   },
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
@@ -2103,9 +2103,9 @@ export const QueryTallyResultResponse = {
     return message;
   },
   fromJSON(object: any): QueryTallyResultResponse {
-    return {
-      tally: isSet(object.tally) ? TallyResult.fromJSON(object.tally) : undefined
-    };
+    const obj = createBaseQueryTallyResultResponse();
+    if (isSet(object.tally)) obj.tally = TallyResult.fromJSON(object.tally);
+    return obj;
   },
   toJSON(message: QueryTallyResultResponse): unknown {
     const obj: any = {};
@@ -2114,7 +2114,7 @@ export const QueryTallyResultResponse = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
-    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : undefined;
+    message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : TallyResult.fromPartial({});
     return message;
   },
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {

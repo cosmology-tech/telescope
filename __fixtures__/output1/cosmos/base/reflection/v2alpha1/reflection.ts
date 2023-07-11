@@ -373,14 +373,14 @@ export const AppDescriptor = {
     return message;
   },
   fromJSON(object: any): AppDescriptor {
-    return {
-      authn: isSet(object.authn) ? AuthnDescriptor.fromJSON(object.authn) : undefined,
-      chain: isSet(object.chain) ? ChainDescriptor.fromJSON(object.chain) : undefined,
-      codec: isSet(object.codec) ? CodecDescriptor.fromJSON(object.codec) : undefined,
-      configuration: isSet(object.configuration) ? ConfigurationDescriptor.fromJSON(object.configuration) : undefined,
-      queryServices: isSet(object.queryServices) ? QueryServicesDescriptor.fromJSON(object.queryServices) : undefined,
-      tx: isSet(object.tx) ? TxDescriptor.fromJSON(object.tx) : undefined
-    };
+    const obj = createBaseAppDescriptor();
+    if (isSet(object.authn)) obj.authn = AuthnDescriptor.fromJSON(object.authn);
+    if (isSet(object.chain)) obj.chain = ChainDescriptor.fromJSON(object.chain);
+    if (isSet(object.codec)) obj.codec = CodecDescriptor.fromJSON(object.codec);
+    if (isSet(object.configuration)) obj.configuration = ConfigurationDescriptor.fromJSON(object.configuration);
+    if (isSet(object.queryServices)) obj.queryServices = QueryServicesDescriptor.fromJSON(object.queryServices);
+    if (isSet(object.tx)) obj.tx = TxDescriptor.fromJSON(object.tx);
+    return obj;
   },
   toJSON(message: AppDescriptor): unknown {
     const obj: any = {};
@@ -394,12 +394,12 @@ export const AppDescriptor = {
   },
   fromPartial(object: DeepPartial<AppDescriptor>): AppDescriptor {
     const message = createBaseAppDescriptor();
-    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : undefined;
-    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : undefined;
-    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : undefined;
-    message.configuration = object.configuration !== undefined && object.configuration !== null ? ConfigurationDescriptor.fromPartial(object.configuration) : undefined;
-    message.queryServices = object.queryServices !== undefined && object.queryServices !== null ? QueryServicesDescriptor.fromPartial(object.queryServices) : undefined;
-    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : undefined;
+    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : AuthnDescriptor.fromPartial({});
+    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : ChainDescriptor.fromPartial({});
+    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : CodecDescriptor.fromPartial({});
+    message.configuration = object.configuration !== undefined && object.configuration !== null ? ConfigurationDescriptor.fromPartial(object.configuration) : ConfigurationDescriptor.fromPartial({});
+    message.queryServices = object.queryServices !== undefined && object.queryServices !== null ? QueryServicesDescriptor.fromPartial(object.queryServices) : QueryServicesDescriptor.fromPartial({});
+    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : TxDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: AppDescriptorSDKType): AppDescriptor {
@@ -460,10 +460,10 @@ export const TxDescriptor = {
     return message;
   },
   fromJSON(object: any): TxDescriptor {
-    return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseTxDescriptor();
+    if (isSet(object.fullname)) obj.fullname = String(object.fullname);
+    if (Array.isArray(object?.msgs)) object.msgs.map((e: any) => MsgDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: TxDescriptor): unknown {
     const obj: any = {};
@@ -528,9 +528,9 @@ export const AuthnDescriptor = {
     return message;
   },
   fromJSON(object: any): AuthnDescriptor {
-    return {
-      signModes: Array.isArray(object?.signModes) ? object.signModes.map((e: any) => SigningModeDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthnDescriptor();
+    if (Array.isArray(object?.signModes)) object.signModes.map((e: any) => SigningModeDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: AuthnDescriptor): unknown {
     const obj: any = {};
@@ -605,11 +605,11 @@ export const SigningModeDescriptor = {
     return message;
   },
   fromJSON(object: any): SigningModeDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
-      authnInfoProviderMethodFullname: isSet(object.authnInfoProviderMethodFullname) ? String(object.authnInfoProviderMethodFullname) : ""
-    };
+    const obj = createBaseSigningModeDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.number)) obj.number = Number(object.number);
+    if (isSet(object.authnInfoProviderMethodFullname)) obj.authnInfoProviderMethodFullname = String(object.authnInfoProviderMethodFullname);
+    return obj;
   },
   toJSON(message: SigningModeDescriptor): unknown {
     const obj: any = {};
@@ -670,9 +670,9 @@ export const ChainDescriptor = {
     return message;
   },
   fromJSON(object: any): ChainDescriptor {
-    return {
-      id: isSet(object.id) ? String(object.id) : ""
-    };
+    const obj = createBaseChainDescriptor();
+    if (isSet(object.id)) obj.id = String(object.id);
+    return obj;
   },
   toJSON(message: ChainDescriptor): unknown {
     const obj: any = {};
@@ -725,9 +725,9 @@ export const CodecDescriptor = {
     return message;
   },
   fromJSON(object: any): CodecDescriptor {
-    return {
-      interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseCodecDescriptor();
+    if (Array.isArray(object?.interfaces)) object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: CodecDescriptor): unknown {
     const obj: any = {};
@@ -802,11 +802,11 @@ export const InterfaceDescriptor = {
     return message;
   },
   fromJSON(object: any): InterfaceDescriptor {
-    return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      interfaceAcceptingMessages: Array.isArray(object?.interfaceAcceptingMessages) ? object.interfaceAcceptingMessages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e)) : [],
-      interfaceImplementers: Array.isArray(object?.interfaceImplementers) ? object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseInterfaceDescriptor();
+    if (isSet(object.fullname)) obj.fullname = String(object.fullname);
+    if (Array.isArray(object?.interfaceAcceptingMessages)) object.interfaceAcceptingMessages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e));
+    if (Array.isArray(object?.interfaceImplementers)) object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
@@ -890,10 +890,10 @@ export const InterfaceImplementerDescriptor = {
     return message;
   },
   fromJSON(object: any): InterfaceImplementerDescriptor {
-    return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : ""
-    };
+    const obj = createBaseInterfaceImplementerDescriptor();
+    if (isSet(object.fullname)) obj.fullname = String(object.fullname);
+    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
+    return obj;
   },
   toJSON(message: InterfaceImplementerDescriptor): unknown {
     const obj: any = {};
@@ -957,10 +957,10 @@ export const InterfaceAcceptingMessageDescriptor = {
     return message;
   },
   fromJSON(object: any): InterfaceAcceptingMessageDescriptor {
-    return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      fieldDescriptorNames: Array.isArray(object?.fieldDescriptorNames) ? object.fieldDescriptorNames.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseInterfaceAcceptingMessageDescriptor();
+    if (isSet(object.fullname)) obj.fullname = String(object.fullname);
+    if (Array.isArray(object?.fieldDescriptorNames)) object.fieldDescriptorNames.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: InterfaceAcceptingMessageDescriptor): unknown {
     const obj: any = {};
@@ -1025,9 +1025,9 @@ export const ConfigurationDescriptor = {
     return message;
   },
   fromJSON(object: any): ConfigurationDescriptor {
-    return {
-      bech32AccountAddressPrefix: isSet(object.bech32AccountAddressPrefix) ? String(object.bech32AccountAddressPrefix) : ""
-    };
+    const obj = createBaseConfigurationDescriptor();
+    if (isSet(object.bech32AccountAddressPrefix)) obj.bech32AccountAddressPrefix = String(object.bech32AccountAddressPrefix);
+    return obj;
   },
   toJSON(message: ConfigurationDescriptor): unknown {
     const obj: any = {};
@@ -1080,9 +1080,9 @@ export const MsgDescriptor = {
     return message;
   },
   fromJSON(object: any): MsgDescriptor {
-    return {
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : ""
-    };
+    const obj = createBaseMsgDescriptor();
+    if (isSet(object.msgTypeUrl)) obj.msgTypeUrl = String(object.msgTypeUrl);
+    return obj;
   },
   toJSON(message: MsgDescriptor): unknown {
     const obj: any = {};
@@ -1127,7 +1127,8 @@ export const GetAuthnDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetAuthnDescriptorRequest {
-    return {};
+    const obj = createBaseGetAuthnDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetAuthnDescriptorRequest): unknown {
     const obj: any = {};
@@ -1175,9 +1176,9 @@ export const GetAuthnDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetAuthnDescriptorResponse {
-    return {
-      authn: isSet(object.authn) ? AuthnDescriptor.fromJSON(object.authn) : undefined
-    };
+    const obj = createBaseGetAuthnDescriptorResponse();
+    if (isSet(object.authn)) obj.authn = AuthnDescriptor.fromJSON(object.authn);
+    return obj;
   },
   toJSON(message: GetAuthnDescriptorResponse): unknown {
     const obj: any = {};
@@ -1186,7 +1187,7 @@ export const GetAuthnDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetAuthnDescriptorResponse>): GetAuthnDescriptorResponse {
     const message = createBaseGetAuthnDescriptorResponse();
-    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : undefined;
+    message.authn = object.authn !== undefined && object.authn !== null ? AuthnDescriptor.fromPartial(object.authn) : AuthnDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetAuthnDescriptorResponseSDKType): GetAuthnDescriptorResponse {
@@ -1222,7 +1223,8 @@ export const GetChainDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetChainDescriptorRequest {
-    return {};
+    const obj = createBaseGetChainDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetChainDescriptorRequest): unknown {
     const obj: any = {};
@@ -1270,9 +1272,9 @@ export const GetChainDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetChainDescriptorResponse {
-    return {
-      chain: isSet(object.chain) ? ChainDescriptor.fromJSON(object.chain) : undefined
-    };
+    const obj = createBaseGetChainDescriptorResponse();
+    if (isSet(object.chain)) obj.chain = ChainDescriptor.fromJSON(object.chain);
+    return obj;
   },
   toJSON(message: GetChainDescriptorResponse): unknown {
     const obj: any = {};
@@ -1281,7 +1283,7 @@ export const GetChainDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetChainDescriptorResponse>): GetChainDescriptorResponse {
     const message = createBaseGetChainDescriptorResponse();
-    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : undefined;
+    message.chain = object.chain !== undefined && object.chain !== null ? ChainDescriptor.fromPartial(object.chain) : ChainDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetChainDescriptorResponseSDKType): GetChainDescriptorResponse {
@@ -1317,7 +1319,8 @@ export const GetCodecDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetCodecDescriptorRequest {
-    return {};
+    const obj = createBaseGetCodecDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetCodecDescriptorRequest): unknown {
     const obj: any = {};
@@ -1365,9 +1368,9 @@ export const GetCodecDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetCodecDescriptorResponse {
-    return {
-      codec: isSet(object.codec) ? CodecDescriptor.fromJSON(object.codec) : undefined
-    };
+    const obj = createBaseGetCodecDescriptorResponse();
+    if (isSet(object.codec)) obj.codec = CodecDescriptor.fromJSON(object.codec);
+    return obj;
   },
   toJSON(message: GetCodecDescriptorResponse): unknown {
     const obj: any = {};
@@ -1376,7 +1379,7 @@ export const GetCodecDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetCodecDescriptorResponse>): GetCodecDescriptorResponse {
     const message = createBaseGetCodecDescriptorResponse();
-    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : undefined;
+    message.codec = object.codec !== undefined && object.codec !== null ? CodecDescriptor.fromPartial(object.codec) : CodecDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetCodecDescriptorResponseSDKType): GetCodecDescriptorResponse {
@@ -1412,7 +1415,8 @@ export const GetConfigurationDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetConfigurationDescriptorRequest {
-    return {};
+    const obj = createBaseGetConfigurationDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetConfigurationDescriptorRequest): unknown {
     const obj: any = {};
@@ -1460,9 +1464,9 @@ export const GetConfigurationDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetConfigurationDescriptorResponse {
-    return {
-      config: isSet(object.config) ? ConfigurationDescriptor.fromJSON(object.config) : undefined
-    };
+    const obj = createBaseGetConfigurationDescriptorResponse();
+    if (isSet(object.config)) obj.config = ConfigurationDescriptor.fromJSON(object.config);
+    return obj;
   },
   toJSON(message: GetConfigurationDescriptorResponse): unknown {
     const obj: any = {};
@@ -1471,7 +1475,7 @@ export const GetConfigurationDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetConfigurationDescriptorResponse>): GetConfigurationDescriptorResponse {
     const message = createBaseGetConfigurationDescriptorResponse();
-    message.config = object.config !== undefined && object.config !== null ? ConfigurationDescriptor.fromPartial(object.config) : undefined;
+    message.config = object.config !== undefined && object.config !== null ? ConfigurationDescriptor.fromPartial(object.config) : ConfigurationDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetConfigurationDescriptorResponseSDKType): GetConfigurationDescriptorResponse {
@@ -1507,7 +1511,8 @@ export const GetQueryServicesDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetQueryServicesDescriptorRequest {
-    return {};
+    const obj = createBaseGetQueryServicesDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetQueryServicesDescriptorRequest): unknown {
     const obj: any = {};
@@ -1555,9 +1560,9 @@ export const GetQueryServicesDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetQueryServicesDescriptorResponse {
-    return {
-      queries: isSet(object.queries) ? QueryServicesDescriptor.fromJSON(object.queries) : undefined
-    };
+    const obj = createBaseGetQueryServicesDescriptorResponse();
+    if (isSet(object.queries)) obj.queries = QueryServicesDescriptor.fromJSON(object.queries);
+    return obj;
   },
   toJSON(message: GetQueryServicesDescriptorResponse): unknown {
     const obj: any = {};
@@ -1566,7 +1571,7 @@ export const GetQueryServicesDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetQueryServicesDescriptorResponse>): GetQueryServicesDescriptorResponse {
     const message = createBaseGetQueryServicesDescriptorResponse();
-    message.queries = object.queries !== undefined && object.queries !== null ? QueryServicesDescriptor.fromPartial(object.queries) : undefined;
+    message.queries = object.queries !== undefined && object.queries !== null ? QueryServicesDescriptor.fromPartial(object.queries) : QueryServicesDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetQueryServicesDescriptorResponseSDKType): GetQueryServicesDescriptorResponse {
@@ -1602,7 +1607,8 @@ export const GetTxDescriptorRequest = {
     return message;
   },
   fromJSON(_: any): GetTxDescriptorRequest {
-    return {};
+    const obj = createBaseGetTxDescriptorRequest();
+    return obj;
   },
   toJSON(_: GetTxDescriptorRequest): unknown {
     const obj: any = {};
@@ -1650,9 +1656,9 @@ export const GetTxDescriptorResponse = {
     return message;
   },
   fromJSON(object: any): GetTxDescriptorResponse {
-    return {
-      tx: isSet(object.tx) ? TxDescriptor.fromJSON(object.tx) : undefined
-    };
+    const obj = createBaseGetTxDescriptorResponse();
+    if (isSet(object.tx)) obj.tx = TxDescriptor.fromJSON(object.tx);
+    return obj;
   },
   toJSON(message: GetTxDescriptorResponse): unknown {
     const obj: any = {};
@@ -1661,7 +1667,7 @@ export const GetTxDescriptorResponse = {
   },
   fromPartial(object: DeepPartial<GetTxDescriptorResponse>): GetTxDescriptorResponse {
     const message = createBaseGetTxDescriptorResponse();
-    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : undefined;
+    message.tx = object.tx !== undefined && object.tx !== null ? TxDescriptor.fromPartial(object.tx) : TxDescriptor.fromPartial({});
     return message;
   },
   fromSDK(object: GetTxDescriptorResponseSDKType): GetTxDescriptorResponse {
@@ -1705,9 +1711,9 @@ export const QueryServicesDescriptor = {
     return message;
   },
   fromJSON(object: any): QueryServicesDescriptor {
-    return {
-      queryServices: Array.isArray(object?.queryServices) ? object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryServicesDescriptor();
+    if (Array.isArray(object?.queryServices)) object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryServicesDescriptor): unknown {
     const obj: any = {};
@@ -1782,11 +1788,11 @@ export const QueryServiceDescriptor = {
     return message;
   },
   fromJSON(object: any): QueryServiceDescriptor {
-    return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      isModule: isSet(object.isModule) ? Boolean(object.isModule) : false,
-      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryServiceDescriptor();
+    if (isSet(object.fullname)) obj.fullname = String(object.fullname);
+    if (isSet(object.isModule)) obj.isModule = Boolean(object.isModule);
+    if (Array.isArray(object?.methods)) object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryServiceDescriptor): unknown {
     const obj: any = {};
@@ -1862,10 +1868,10 @@ export const QueryMethodDescriptor = {
     return message;
   },
   fromJSON(object: any): QueryMethodDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      fullQueryPath: isSet(object.fullQueryPath) ? String(object.fullQueryPath) : ""
-    };
+    const obj = createBaseQueryMethodDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.fullQueryPath)) obj.fullQueryPath = String(object.fullQueryPath);
+    return obj;
   },
   toJSON(message: QueryMethodDescriptor): unknown {
     const obj: any = {};

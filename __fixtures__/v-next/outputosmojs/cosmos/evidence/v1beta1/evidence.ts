@@ -73,12 +73,12 @@ export const Equivocation = {
     return message;
   },
   fromJSON(object: any): Equivocation {
-    return {
-      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0),
-      consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
-    };
+    const obj = createBaseEquivocation();
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
+    if (isSet(object.consensusAddress)) obj.consensusAddress = String(object.consensusAddress);
+    return obj;
   },
   toJSON(message: Equivocation): unknown {
     const obj: any = {};

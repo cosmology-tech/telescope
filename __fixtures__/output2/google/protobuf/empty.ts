@@ -37,7 +37,8 @@ export const Empty = {
     return message;
   },
   fromJSON(_: any): Empty {
-    return {};
+    const obj = createBaseEmpty();
+    return obj;
   },
   toJSON(_: Empty): unknown {
     const obj: any = {};

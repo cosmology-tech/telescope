@@ -336,13 +336,13 @@ export const Channel = {
     return message;
   },
   fromJSON(object: any): Channel {
-    return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
-      version: isSet(object.version) ? String(object.version) : ""
-    };
+    const obj = createBaseChannel();
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (Array.isArray(object?.connectionHops)) object.connectionHops.map((e: any) => String(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    return obj;
   },
   toJSON(message: Channel): unknown {
     const obj: any = {};
@@ -361,7 +361,7 @@ export const Channel = {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
@@ -470,15 +470,15 @@ export const IdentifiedChannel = {
     return message;
   },
   fromJSON(object: any): IdentifiedChannel {
-    return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
-      version: isSet(object.version) ? String(object.version) : "",
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : ""
-    };
+    const obj = createBaseIdentifiedChannel();
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (Array.isArray(object?.connectionHops)) object.connectionHops.map((e: any) => String(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
   },
   toJSON(message: IdentifiedChannel): unknown {
     const obj: any = {};
@@ -499,7 +499,7 @@ export const IdentifiedChannel = {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     message.portId = object.portId ?? "";
@@ -581,10 +581,10 @@ export const Counterparty = {
     return message;
   },
   fromJSON(object: any): Counterparty {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : ""
-    };
+    const obj = createBaseCounterparty();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
   },
   toJSON(message: Counterparty): unknown {
     const obj: any = {};
@@ -696,16 +696,16 @@ export const Packet = {
     return message;
   },
   fromJSON(object: any): Packet {
-    return {
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
-      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
-      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
-      destinationPort: isSet(object.destinationPort) ? String(object.destinationPort) : "",
-      destinationChannel: isSet(object.destinationChannel) ? String(object.destinationChannel) : "",
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
-    };
+    const obj = createBasePacket();
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
+    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
+    if (isSet(object.destinationPort)) obj.destinationPort = String(object.destinationPort);
+    if (isSet(object.destinationChannel)) obj.destinationChannel = String(object.destinationChannel);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
+    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    return obj;
   },
   toJSON(message: Packet): unknown {
     const obj: any = {};
@@ -727,7 +727,7 @@ export const Packet = {
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : Height.fromPartial({});
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
@@ -819,12 +819,12 @@ export const PacketState = {
     return message;
   },
   fromJSON(object: any): PacketState {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBasePacketState();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: PacketState): unknown {
     const obj: any = {};
@@ -904,10 +904,10 @@ export const Acknowledgement = {
     return message;
   },
   fromJSON(object: any): Acknowledgement {
-    return {
-      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
-      error: isSet(object.error) ? String(object.error) : undefined
-    };
+    const obj = createBaseAcknowledgement();
+    if (isSet(object.result)) obj.result = bytesFromBase64(object.result);
+    if (isSet(object.error)) obj.error = String(object.error);
+    return obj;
   },
   toJSON(message: Acknowledgement): unknown {
     const obj: any = {};

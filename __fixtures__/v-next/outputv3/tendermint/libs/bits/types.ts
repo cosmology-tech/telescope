@@ -68,10 +68,10 @@ export const BitArray = {
     return message;
   },
   fromJSON(object: any): BitArray {
-    return {
-      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
-    };
+    const obj = createBaseBitArray();
+    if (isSet(object.bits)) obj.bits = Long.fromValue(object.bits);
+    if (Array.isArray(object?.elems)) object.elems.map((e: any) => Long.fromValue(e));
+    return obj;
   },
   toJSON(message: BitArray): unknown {
     const obj: any = {};

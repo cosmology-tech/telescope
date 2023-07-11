@@ -75,11 +75,11 @@ export const ParameterChangeProposal = {
     return message;
   },
   fromJSON(object: any): ParameterChangeProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromJSON(e)) : []
-    };
+    const obj = createBaseParameterChangeProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.changes)) object.changes.map((e: any) => ParamChange.fromJSON(e));
+    return obj;
   },
   toJSON(message: ParameterChangeProposal): unknown {
     const obj: any = {};
@@ -169,11 +169,11 @@ export const ParamChange = {
     return message;
   },
   fromJSON(object: any): ParamChange {
-    return {
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseParamChange();
+    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: ParamChange): unknown {
     const obj: any = {};

@@ -75,13 +75,13 @@ export const MsgCreateVestingAccount = {
     return message;
   },
   fromJSON(object: any): MsgCreateVestingAccount {
-    return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO,
-      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
-    };
+    const obj = createBaseMsgCreateVestingAccount();
+    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
+    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
+    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.endTime)) obj.endTime = Long.fromValue(object.endTime);
+    if (isSet(object.delayed)) obj.delayed = Boolean(object.delayed);
+    return obj;
   },
   toJSON(message: MsgCreateVestingAccount): unknown {
     const obj: any = {};
@@ -128,7 +128,8 @@ export const MsgCreateVestingAccountResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateVestingAccountResponse {
-    return {};
+    const obj = createBaseMsgCreateVestingAccountResponse();
+    return obj;
   },
   toJSON(_: MsgCreateVestingAccountResponse): unknown {
     const obj: any = {};

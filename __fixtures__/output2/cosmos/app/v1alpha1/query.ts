@@ -33,7 +33,8 @@ export const QueryConfigRequest = {
     return message;
   },
   fromJSON(_: any): QueryConfigRequest {
-    return {};
+    const obj = createBaseQueryConfigRequest();
+    return obj;
   },
   toJSON(_: QueryConfigRequest): unknown {
     const obj: any = {};
@@ -74,9 +75,9 @@ export const QueryConfigResponse = {
     return message;
   },
   fromJSON(object: any): QueryConfigResponse {
-    return {
-      config: isSet(object.config) ? Config.fromJSON(object.config) : undefined
-    };
+    const obj = createBaseQueryConfigResponse();
+    if (isSet(object.config)) obj.config = Config.fromJSON(object.config);
+    return obj;
   },
   toJSON(message: QueryConfigResponse): unknown {
     const obj: any = {};
@@ -85,7 +86,7 @@ export const QueryConfigResponse = {
   },
   fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
-    message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : undefined;
+    message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : Config.fromPartial({});
     return message;
   }
 };

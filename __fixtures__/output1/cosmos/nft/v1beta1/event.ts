@@ -90,12 +90,12 @@ export const EventSend = {
     return message;
   },
   fromJSON(object: any): EventSend {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : ""
-    };
+    const obj = createBaseEventSend();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    return obj;
   },
   toJSON(message: EventSend): unknown {
     const obj: any = {};
@@ -174,11 +174,11 @@ export const EventMint = {
     return message;
   },
   fromJSON(object: any): EventMint {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseEventMint();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: EventMint): unknown {
     const obj: any = {};
@@ -253,11 +253,11 @@ export const EventBurn = {
     return message;
   },
   fromJSON(object: any): EventBurn {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseEventBurn();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: EventBurn): unknown {
     const obj: any = {};

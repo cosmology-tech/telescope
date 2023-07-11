@@ -374,11 +374,11 @@ export const AllocateQuotaRequest = {
     return message;
   },
   fromJSON(object: any): AllocateQuotaRequest {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      allocateOperation: isSet(object.allocateOperation) ? QuotaOperation.fromJSON(object.allocateOperation) : undefined,
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
-    };
+    const obj = createBaseAllocateQuotaRequest();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.allocateOperation)) obj.allocateOperation = QuotaOperation.fromJSON(object.allocateOperation);
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    return obj;
   },
   toJSON(message: AllocateQuotaRequest): unknown {
     const obj: any = {};
@@ -390,7 +390,7 @@ export const AllocateQuotaRequest = {
   fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
     const message = createBaseAllocateQuotaRequest();
     message.serviceName = object.serviceName ?? "";
-    message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
+    message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : QuotaOperation.fromPartial({});
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
@@ -446,10 +446,10 @@ export const QuotaOperation_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): QuotaOperation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseQuotaOperation_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: QuotaOperation_LabelsEntry): unknown {
     const obj: any = {};
@@ -547,19 +547,19 @@ export const QuotaOperation = {
     return message;
   },
   fromJSON(object: any): QuotaOperation {
-    return {
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      methodName: isSet(object.methodName) ? String(object.methodName) : "",
-      consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : 0
-    };
+    const obj = createBaseQuotaOperation();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (isSet(object.methodName)) obj.methodName = String(object.methodName);
+    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (Array.isArray(object?.quotaMetrics)) object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
+    return obj;
   },
   toJSON(message: QuotaOperation): unknown {
     const obj: any = {};
@@ -683,12 +683,12 @@ export const AllocateQuotaResponse = {
     return message;
   },
   fromJSON(object: any): AllocateQuotaResponse {
-    return {
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      allocateErrors: Array.isArray(object?.allocateErrors) ? object.allocateErrors.map((e: any) => QuotaError.fromJSON(e)) : [],
-      quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
-    };
+    const obj = createBaseAllocateQuotaResponse();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (Array.isArray(object?.allocateErrors)) object.allocateErrors.map((e: any) => QuotaError.fromJSON(e));
+    if (Array.isArray(object?.quotaMetrics)) object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    return obj;
   },
   toJSON(message: AllocateQuotaResponse): unknown {
     const obj: any = {};
@@ -790,12 +790,12 @@ export const QuotaError = {
     return message;
   },
   fromJSON(object: any): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
-    };
+    const obj = createBaseQuotaError();
+    if (isSet(object.code)) obj.code = quotaError_CodeFromJSON(object.code);
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
+    return obj;
   },
   toJSON(message: QuotaError): unknown {
     const obj: any = {};
@@ -810,7 +810,7 @@ export const QuotaError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : Status.fromPartial({});
     return message;
   },
   fromSDK(object: QuotaErrorSDKType): QuotaError {

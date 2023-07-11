@@ -136,10 +136,10 @@ export const DenomTrace = {
     return message;
   },
   fromJSON(object: any): DenomTrace {
-    return {
-      path: isSet(object.path) ? String(object.path) : "",
-      baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : ""
-    };
+    const obj = createBaseDenomTrace();
+    if (isSet(object.path)) obj.path = String(object.path);
+    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
+    return obj;
   },
   toJSON(message: DenomTrace): unknown {
     const obj: any = {};
@@ -238,10 +238,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      sendEnabled: isSet(object.sendEnabled) ? Boolean(object.sendEnabled) : false,
-      receiveEnabled: isSet(object.receiveEnabled) ? Boolean(object.receiveEnabled) : false
-    };
+    const obj = createBaseParams();
+    if (isSet(object.sendEnabled)) obj.sendEnabled = Boolean(object.sendEnabled);
+    if (isSet(object.receiveEnabled)) obj.receiveEnabled = Boolean(object.receiveEnabled);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

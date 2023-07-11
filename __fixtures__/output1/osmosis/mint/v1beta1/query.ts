@@ -62,7 +62,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -110,9 +111,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -121,7 +122,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -157,7 +158,8 @@ export const QueryEpochProvisionsRequest = {
     return message;
   },
   fromJSON(_: any): QueryEpochProvisionsRequest {
-    return {};
+    const obj = createBaseQueryEpochProvisionsRequest();
+    return obj;
   },
   toJSON(_: QueryEpochProvisionsRequest): unknown {
     const obj: any = {};
@@ -205,9 +207,9 @@ export const QueryEpochProvisionsResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochProvisionsResponse {
-    return {
-      epochProvisions: isSet(object.epochProvisions) ? bytesFromBase64(object.epochProvisions) : new Uint8Array()
-    };
+    const obj = createBaseQueryEpochProvisionsResponse();
+    if (isSet(object.epochProvisions)) obj.epochProvisions = bytesFromBase64(object.epochProvisions);
+    return obj;
   },
   toJSON(message: QueryEpochProvisionsResponse): unknown {
     const obj: any = {};

@@ -345,10 +345,10 @@ export const QueryBalanceRequest = {
     return message;
   },
   fromJSON(object: any): QueryBalanceRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseQueryBalanceRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
@@ -440,9 +440,9 @@ export const QueryBalanceResponse = {
     return message;
   },
   fromJSON(object: any): QueryBalanceResponse {
-    return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
-    };
+    const obj = createBaseQueryBalanceResponse();
+    if (isSet(object.amount)) obj.amount = Long.fromValue(object.amount);
+    return obj;
   },
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
@@ -535,10 +535,10 @@ export const QueryOwnerRequest = {
     return message;
   },
   fromJSON(object: any): QueryOwnerRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : ""
-    };
+    const obj = createBaseQueryOwnerRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    return obj;
   },
   toJSON(message: QueryOwnerRequest): unknown {
     const obj: any = {};
@@ -630,9 +630,9 @@ export const QueryOwnerResponse = {
     return message;
   },
   fromJSON(object: any): QueryOwnerResponse {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseQueryOwnerResponse();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: QueryOwnerResponse): unknown {
     const obj: any = {};
@@ -718,9 +718,9 @@ export const QuerySupplyRequest = {
     return message;
   },
   fromJSON(object: any): QuerySupplyRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : ""
-    };
+    const obj = createBaseQuerySupplyRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    return obj;
   },
   toJSON(message: QuerySupplyRequest): unknown {
     const obj: any = {};
@@ -806,9 +806,9 @@ export const QuerySupplyResponse = {
     return message;
   },
   fromJSON(object: any): QuerySupplyResponse {
-    return {
-      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
-    };
+    const obj = createBaseQuerySupplyResponse();
+    if (isSet(object.amount)) obj.amount = Long.fromValue(object.amount);
+    return obj;
   },
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
@@ -908,11 +908,11 @@ export const QueryNFTsRequest = {
     return message;
   },
   fromJSON(object: any): QueryNFTsRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryNFTsRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryNFTsRequest): unknown {
     const obj: any = {};
@@ -925,7 +925,7 @@ export const QueryNFTsRequest = {
     const message = createBaseQueryNFTsRequest();
     message.classId = object.classId ?? "";
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryNFTsRequestSDKType): QueryNFTsRequest {
@@ -1017,10 +1017,10 @@ export const QueryNFTsResponse = {
     return message;
   },
   fromJSON(object: any): QueryNFTsResponse {
-    return {
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryNFTsResponse();
+    if (Array.isArray(object?.nfts)) object.nfts.map((e: any) => NFT.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryNFTsResponse): unknown {
     const obj: any = {};
@@ -1035,7 +1035,7 @@ export const QueryNFTsResponse = {
   fromPartial(object: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse {
     const message = createBaseQueryNFTsResponse();
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryNFTsResponseSDKType): QueryNFTsResponse {
@@ -1131,10 +1131,10 @@ export const QueryNFTRequest = {
     return message;
   },
   fromJSON(object: any): QueryNFTRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : ""
-    };
+    const obj = createBaseQueryNFTRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    return obj;
   },
   toJSON(message: QueryNFTRequest): unknown {
     const obj: any = {};
@@ -1226,9 +1226,9 @@ export const QueryNFTResponse = {
     return message;
   },
   fromJSON(object: any): QueryNFTResponse {
-    return {
-      nft: isSet(object.nft) ? NFT.fromJSON(object.nft) : undefined
-    };
+    const obj = createBaseQueryNFTResponse();
+    if (isSet(object.nft)) obj.nft = NFT.fromJSON(object.nft);
+    return obj;
   },
   toJSON(message: QueryNFTResponse): unknown {
     const obj: any = {};
@@ -1237,7 +1237,7 @@ export const QueryNFTResponse = {
   },
   fromPartial(object: DeepPartial<QueryNFTResponse>): QueryNFTResponse {
     const message = createBaseQueryNFTResponse();
-    message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : undefined;
+    message.nft = object.nft !== undefined && object.nft !== null ? NFT.fromPartial(object.nft) : NFT.fromPartial({});
     return message;
   },
   fromSDK(object: QueryNFTResponseSDKType): QueryNFTResponse {
@@ -1314,9 +1314,9 @@ export const QueryClassRequest = {
     return message;
   },
   fromJSON(object: any): QueryClassRequest {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : ""
-    };
+    const obj = createBaseQueryClassRequest();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    return obj;
   },
   toJSON(message: QueryClassRequest): unknown {
     const obj: any = {};
@@ -1402,9 +1402,9 @@ export const QueryClassResponse = {
     return message;
   },
   fromJSON(object: any): QueryClassResponse {
-    return {
-      class: isSet(object.class) ? Class.fromJSON(object.class) : undefined
-    };
+    const obj = createBaseQueryClassResponse();
+    if (isSet(object.class)) obj.class = Class.fromJSON(object.class);
+    return obj;
   },
   toJSON(message: QueryClassResponse): unknown {
     const obj: any = {};
@@ -1413,7 +1413,7 @@ export const QueryClassResponse = {
   },
   fromPartial(object: DeepPartial<QueryClassResponse>): QueryClassResponse {
     const message = createBaseQueryClassResponse();
-    message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : undefined;
+    message.class = object.class !== undefined && object.class !== null ? Class.fromPartial(object.class) : Class.fromPartial({});
     return message;
   },
   fromSDK(object: QueryClassResponseSDKType): QueryClassResponse {
@@ -1490,9 +1490,9 @@ export const QueryClassesRequest = {
     return message;
   },
   fromJSON(object: any): QueryClassesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryClassesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryClassesRequest): unknown {
     const obj: any = {};
@@ -1501,7 +1501,7 @@ export const QueryClassesRequest = {
   },
   fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     const message = createBaseQueryClassesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : PageRequest.fromPartial({});
     return message;
   },
   fromSDK(object: QueryClassesRequestSDKType): QueryClassesRequest {
@@ -1585,10 +1585,10 @@ export const QueryClassesResponse = {
     return message;
   },
   fromJSON(object: any): QueryClassesResponse {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryClassesResponse();
+    if (Array.isArray(object?.classes)) object.classes.map((e: any) => Class.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryClassesResponse): unknown {
     const obj: any = {};
@@ -1603,7 +1603,7 @@ export const QueryClassesResponse = {
   fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     const message = createBaseQueryClassesResponse();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
     return message;
   },
   fromSDK(object: QueryClassesResponseSDKType): QueryClassesResponse {

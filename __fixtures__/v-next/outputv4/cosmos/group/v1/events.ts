@@ -119,9 +119,9 @@ export const EventCreateGroup = {
     return message;
   },
   fromJSON(object: any): EventCreateGroup {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0)
-    };
+    const obj = createBaseEventCreateGroup();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    return obj;
   },
   toJSON(message: EventCreateGroup): unknown {
     const obj: any = {};
@@ -179,9 +179,9 @@ export const EventUpdateGroup = {
     return message;
   },
   fromJSON(object: any): EventUpdateGroup {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0)
-    };
+    const obj = createBaseEventUpdateGroup();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    return obj;
   },
   toJSON(message: EventUpdateGroup): unknown {
     const obj: any = {};
@@ -239,9 +239,9 @@ export const EventCreateGroupPolicy = {
     return message;
   },
   fromJSON(object: any): EventCreateGroupPolicy {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseEventCreateGroupPolicy();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: EventCreateGroupPolicy): unknown {
     const obj: any = {};
@@ -299,9 +299,9 @@ export const EventUpdateGroupPolicy = {
     return message;
   },
   fromJSON(object: any): EventUpdateGroupPolicy {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseEventUpdateGroupPolicy();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: EventUpdateGroupPolicy): unknown {
     const obj: any = {};
@@ -359,9 +359,9 @@ export const EventSubmitProposal = {
     return message;
   },
   fromJSON(object: any): EventSubmitProposal {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
-    };
+    const obj = createBaseEventSubmitProposal();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    return obj;
   },
   toJSON(message: EventSubmitProposal): unknown {
     const obj: any = {};
@@ -419,9 +419,9 @@ export const EventWithdrawProposal = {
     return message;
   },
   fromJSON(object: any): EventWithdrawProposal {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
-    };
+    const obj = createBaseEventWithdrawProposal();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    return obj;
   },
   toJSON(message: EventWithdrawProposal): unknown {
     const obj: any = {};
@@ -479,9 +479,9 @@ export const EventVote = {
     return message;
   },
   fromJSON(object: any): EventVote {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
-    };
+    const obj = createBaseEventVote();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    return obj;
   },
   toJSON(message: EventVote): unknown {
     const obj: any = {};
@@ -546,10 +546,10 @@ export const EventExec = {
     return message;
   },
   fromJSON(object: any): EventExec {
-    return {
-      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
-    };
+    const obj = createBaseEventExec();
+    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
+    if (isSet(object.result)) obj.result = proposalExecutorResultFromJSON(object.result);
+    return obj;
   },
   toJSON(message: EventExec): unknown {
     const obj: any = {};
@@ -619,10 +619,10 @@ export const EventLeaveGroup = {
     return message;
   },
   fromJSON(object: any): EventLeaveGroup {
-    return {
-      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseEventLeaveGroup();
+    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: EventLeaveGroup): unknown {
     const obj: any = {};

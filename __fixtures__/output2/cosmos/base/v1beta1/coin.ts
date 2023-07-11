@@ -68,10 +68,10 @@ export const Coin = {
     return message;
   },
   fromJSON(object: any): Coin {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      amount: isSet(object.amount) ? String(object.amount) : ""
-    };
+    const obj = createBaseCoin();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.amount)) obj.amount = String(object.amount);
+    return obj;
   },
   toJSON(message: Coin): unknown {
     const obj: any = {};
@@ -123,10 +123,10 @@ export const DecCoin = {
     return message;
   },
   fromJSON(object: any): DecCoin {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      amount: isSet(object.amount) ? String(object.amount) : ""
-    };
+    const obj = createBaseDecCoin();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.amount)) obj.amount = String(object.amount);
+    return obj;
   },
   toJSON(message: DecCoin): unknown {
     const obj: any = {};
@@ -171,9 +171,9 @@ export const IntProto = {
     return message;
   },
   fromJSON(object: any): IntProto {
-    return {
-      int: isSet(object.int) ? String(object.int) : ""
-    };
+    const obj = createBaseIntProto();
+    if (isSet(object.int)) obj.int = String(object.int);
+    return obj;
   },
   toJSON(message: IntProto): unknown {
     const obj: any = {};
@@ -216,9 +216,9 @@ export const DecProto = {
     return message;
   },
   fromJSON(object: any): DecProto {
-    return {
-      dec: isSet(object.dec) ? String(object.dec) : ""
-    };
+    const obj = createBaseDecProto();
+    if (isSet(object.dec)) obj.dec = String(object.dec);
+    return obj;
   },
   toJSON(message: DecProto): unknown {
     const obj: any = {};

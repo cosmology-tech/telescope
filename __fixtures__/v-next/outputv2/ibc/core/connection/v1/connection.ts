@@ -409,13 +409,13 @@ export const ConnectionEnd = {
     return message;
   },
   fromJSON(object: any): ConnectionEnd {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
-    };
+    const obj = createBaseConnectionEnd();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (Array.isArray(object?.versions)) object.versions.map((e: any) => Version.fromJSON(e));
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (isSet(object.delayPeriod)) obj.delayPeriod = Long.fromValue(object.delayPeriod);
+    return obj;
   },
   toJSON(message: ConnectionEnd): unknown {
     const obj: any = {};
@@ -435,7 +435,7 @@ export const ConnectionEnd = {
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
   },
@@ -572,14 +572,14 @@ export const IdentifiedConnection = {
     return message;
   },
   fromJSON(object: any): IdentifiedConnection {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
-    };
+    const obj = createBaseIdentifiedConnection();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (Array.isArray(object?.versions)) object.versions.map((e: any) => Version.fromJSON(e));
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (isSet(object.delayPeriod)) obj.delayPeriod = Long.fromValue(object.delayPeriod);
+    return obj;
   },
   toJSON(message: IdentifiedConnection): unknown {
     const obj: any = {};
@@ -601,7 +601,7 @@ export const IdentifiedConnection = {
     message.clientId = object.clientId ?? "";
     message.versions = object.versions?.map(e => Version.fromPartial(e)) || [];
     message.state = object.state ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
   },
@@ -721,11 +721,11 @@ export const Counterparty = {
     return message;
   },
   fromJSON(object: any): Counterparty {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      prefix: isSet(object.prefix) ? MerklePrefix.fromJSON(object.prefix) : undefined
-    };
+    const obj = createBaseCounterparty();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
+    if (isSet(object.prefix)) obj.prefix = MerklePrefix.fromJSON(object.prefix);
+    return obj;
   },
   toJSON(message: Counterparty): unknown {
     const obj: any = {};
@@ -738,7 +738,7 @@ export const Counterparty = {
     const message = createBaseCounterparty();
     message.clientId = object.clientId ?? "";
     message.connectionId = object.connectionId ?? "";
-    message.prefix = object.prefix !== undefined && object.prefix !== null ? MerklePrefix.fromPartial(object.prefix) : undefined;
+    message.prefix = object.prefix !== undefined && object.prefix !== null ? MerklePrefix.fromPartial(object.prefix) : MerklePrefix.fromPartial({});
     return message;
   },
   fromSDK(object: CounterpartySDKType): Counterparty {
@@ -823,9 +823,9 @@ export const ClientPaths = {
     return message;
   },
   fromJSON(object: any): ClientPaths {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseClientPaths();
+    if (Array.isArray(object?.paths)) object.paths.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: ClientPaths): unknown {
     const obj: any = {};
@@ -930,10 +930,10 @@ export const ConnectionPaths = {
     return message;
   },
   fromJSON(object: any): ConnectionPaths {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseConnectionPaths();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (Array.isArray(object?.paths)) object.paths.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: ConnectionPaths): unknown {
     const obj: any = {};
@@ -1044,10 +1044,10 @@ export const Version = {
     return message;
   },
   fromJSON(object: any): Version {
-    return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseVersion();
+    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
+    if (Array.isArray(object?.features)) object.features.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Version): unknown {
     const obj: any = {};
@@ -1151,9 +1151,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO
-    };
+    const obj = createBaseParams();
+    if (isSet(object.maxExpectedTimePerBlock)) obj.maxExpectedTimePerBlock = Long.fromValue(object.maxExpectedTimePerBlock);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

@@ -230,10 +230,10 @@ export const CertificateID = {
     return message;
   },
   fromJSON(object: any): CertificateID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      serial: isSet(object.serial) ? String(object.serial) : ""
-    };
+    const obj = createBaseCertificateID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.serial)) obj.serial = String(object.serial);
+    return obj;
   },
   toJSON(message: CertificateID): unknown {
     const obj: any = {};
@@ -332,11 +332,11 @@ export const Certificate = {
     return message;
   },
   fromJSON(object: any): Certificate {
-    return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
-    };
+    const obj = createBaseCertificate();
+    if (isSet(object.state)) obj.state = certificate_StateFromJSON(object.state);
+    if (isSet(object.cert)) obj.cert = bytesFromBase64(object.cert);
+    if (isSet(object.pubkey)) obj.pubkey = bytesFromBase64(object.pubkey);
+    return obj;
   },
   toJSON(message: Certificate): unknown {
     const obj: any = {};
@@ -441,11 +441,11 @@ export const CertificateFilter = {
     return message;
   },
   fromJSON(object: any): CertificateFilter {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      serial: isSet(object.serial) ? String(object.serial) : "",
-      state: isSet(object.state) ? String(object.state) : ""
-    };
+    const obj = createBaseCertificateFilter();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.serial)) obj.serial = String(object.serial);
+    if (isSet(object.state)) obj.state = String(object.state);
+    return obj;
   },
   toJSON(message: CertificateFilter): unknown {
     const obj: any = {};
@@ -550,11 +550,11 @@ export const MsgCreateCertificate = {
     return message;
   },
   fromJSON(object: any): MsgCreateCertificate {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
-    };
+    const obj = createBaseMsgCreateCertificate();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.cert)) obj.cert = bytesFromBase64(object.cert);
+    if (isSet(object.pubkey)) obj.pubkey = bytesFromBase64(object.pubkey);
+    return obj;
   },
   toJSON(message: MsgCreateCertificate): unknown {
     const obj: any = {};
@@ -637,7 +637,8 @@ export const MsgCreateCertificateResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateCertificateResponse {
-    return {};
+    const obj = createBaseMsgCreateCertificateResponse();
+    return obj;
   },
   toJSON(_: MsgCreateCertificateResponse): unknown {
     const obj: any = {};
@@ -708,9 +709,9 @@ export const MsgRevokeCertificate = {
     return message;
   },
   fromJSON(object: any): MsgRevokeCertificate {
-    return {
-      id: isSet(object.id) ? CertificateID.fromJSON(object.id) : undefined
-    };
+    const obj = createBaseMsgRevokeCertificate();
+    if (isSet(object.id)) obj.id = CertificateID.fromJSON(object.id);
+    return obj;
   },
   toJSON(message: MsgRevokeCertificate): unknown {
     const obj: any = {};
@@ -719,7 +720,7 @@ export const MsgRevokeCertificate = {
   },
   fromPartial(object: DeepPartial<MsgRevokeCertificate>): MsgRevokeCertificate {
     const message = createBaseMsgRevokeCertificate();
-    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : CertificateID.fromPartial({});
     return message;
   },
   fromSDK(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {
@@ -781,7 +782,8 @@ export const MsgRevokeCertificateResponse = {
     return message;
   },
   fromJSON(_: any): MsgRevokeCertificateResponse {
-    return {};
+    const obj = createBaseMsgRevokeCertificateResponse();
+    return obj;
   },
   toJSON(_: MsgRevokeCertificateResponse): unknown {
     const obj: any = {};

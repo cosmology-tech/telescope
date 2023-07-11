@@ -85,10 +85,10 @@ export const ValidatorPreference = {
     return message;
   },
   fromJSON(object: any): ValidatorPreference {
-    return {
-      valOperAddress: isSet(object.valOperAddress) ? String(object.valOperAddress) : "",
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
+    const obj = createBaseValidatorPreference();
+    if (isSet(object.valOperAddress)) obj.valOperAddress = String(object.valOperAddress);
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
   },
   toJSON(message: ValidatorPreference): unknown {
     const obj: any = {};
@@ -151,9 +151,9 @@ export const ValidatorSetPreferences = {
     return message;
   },
   fromJSON(object: any): ValidatorSetPreferences {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
-    };
+    const obj = createBaseValidatorSetPreferences();
+    if (Array.isArray(object?.preferences)) object.preferences.map((e: any) => ValidatorPreference.fromJSON(e));
+    return obj;
   },
   toJSON(message: ValidatorSetPreferences): unknown {
     const obj: any = {};

@@ -74,10 +74,10 @@ export const App = {
     return message;
   },
   fromJSON(object: any): App {
-    return {
-      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
-      software: isSet(object.software) ? String(object.software) : ""
-    };
+    const obj = createBaseApp();
+    if (isSet(object.protocol)) obj.protocol = BigInt(object.protocol.toString());
+    if (isSet(object.software)) obj.software = String(object.software);
+    return obj;
   },
   toJSON(message: App): unknown {
     const obj: any = {};
@@ -147,10 +147,10 @@ export const Consensus = {
     return message;
   },
   fromJSON(object: any): Consensus {
-    return {
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
-    };
+    const obj = createBaseConsensus();
+    if (isSet(object.block)) obj.block = BigInt(object.block.toString());
+    if (isSet(object.app)) obj.app = BigInt(object.app.toString());
+    return obj;
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};

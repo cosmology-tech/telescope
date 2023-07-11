@@ -66,12 +66,12 @@ export const ResourceUnits = {
     return message;
   },
   fromJSON(object: any): ResourceUnits {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromJSON(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromJSON(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromJSON(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : []
-    };
+    const obj = createBaseResourceUnits();
+    if (isSet(object.cpu)) obj.cpu = CPU.fromJSON(object.cpu);
+    if (isSet(object.memory)) obj.memory = Memory.fromJSON(object.memory);
+    if (Array.isArray(object?.storage)) object.storage.map((e: any) => Storage.fromJSON(e));
+    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    return obj;
   },
   toJSON(message: ResourceUnits): unknown {
     const obj: any = {};
@@ -91,8 +91,8 @@ export const ResourceUnits = {
   },
   fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
     const message = createBaseResourceUnits();
-    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
-    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;
+    message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : CPU.fromPartial({});
+    message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : Memory.fromPartial({});
     message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;

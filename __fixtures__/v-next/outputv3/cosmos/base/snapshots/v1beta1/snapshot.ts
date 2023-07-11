@@ -289,13 +289,13 @@ export const Snapshot = {
     return message;
   },
   fromJSON(object: any): Snapshot {
-    return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
-    };
+    const obj = createBaseSnapshot();
+    if (isSet(object.height)) obj.height = Long.fromValue(object.height);
+    if (isSet(object.format)) obj.format = Number(object.format);
+    if (isSet(object.chunks)) obj.chunks = Number(object.chunks);
+    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
+    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
+    return obj;
   },
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
@@ -312,7 +312,7 @@ export const Snapshot = {
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : Metadata.fromPartial({});
     return message;
   },
   fromSDK(object: SnapshotSDKType): Snapshot {
@@ -405,9 +405,9 @@ export const Metadata = {
     return message;
   },
   fromJSON(object: any): Metadata {
-    return {
-      chunkHashes: Array.isArray(object?.chunkHashes) ? object.chunkHashes.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const obj = createBaseMetadata();
+    if (Array.isArray(object?.chunkHashes)) object.chunkHashes.map((e: any) => bytesFromBase64(e));
+    return obj;
   },
   toJSON(message: Metadata): unknown {
     const obj: any = {};
@@ -540,14 +540,14 @@ export const SnapshotItem = {
     return message;
   },
   fromJSON(object: any): SnapshotItem {
-    return {
-      store: isSet(object.store) ? SnapshotStoreItem.fromJSON(object.store) : undefined,
-      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromJSON(object.iavl) : undefined,
-      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromJSON(object.extension) : undefined,
-      extensionPayload: isSet(object.extensionPayload) ? SnapshotExtensionPayload.fromJSON(object.extensionPayload) : undefined,
-      kv: isSet(object.kv) ? SnapshotKVItem.fromJSON(object.kv) : undefined,
-      schema: isSet(object.schema) ? SnapshotSchema.fromJSON(object.schema) : undefined
-    };
+    const obj = createBaseSnapshotItem();
+    if (isSet(object.store)) obj.store = SnapshotStoreItem.fromJSON(object.store);
+    if (isSet(object.iavl)) obj.iavl = SnapshotIAVLItem.fromJSON(object.iavl);
+    if (isSet(object.extension)) obj.extension = SnapshotExtensionMeta.fromJSON(object.extension);
+    if (isSet(object.extensionPayload)) obj.extensionPayload = SnapshotExtensionPayload.fromJSON(object.extensionPayload);
+    if (isSet(object.kv)) obj.kv = SnapshotKVItem.fromJSON(object.kv);
+    if (isSet(object.schema)) obj.schema = SnapshotSchema.fromJSON(object.schema);
+    return obj;
   },
   toJSON(message: SnapshotItem): unknown {
     const obj: any = {};
@@ -561,12 +561,12 @@ export const SnapshotItem = {
   },
   fromPartial(object: DeepPartial<SnapshotItem>): SnapshotItem {
     const message = createBaseSnapshotItem();
-    message.store = object.store !== undefined && object.store !== null ? SnapshotStoreItem.fromPartial(object.store) : undefined;
-    message.iavl = object.iavl !== undefined && object.iavl !== null ? SnapshotIAVLItem.fromPartial(object.iavl) : undefined;
-    message.extension = object.extension !== undefined && object.extension !== null ? SnapshotExtensionMeta.fromPartial(object.extension) : undefined;
-    message.extensionPayload = object.extensionPayload !== undefined && object.extensionPayload !== null ? SnapshotExtensionPayload.fromPartial(object.extensionPayload) : undefined;
-    message.kv = object.kv !== undefined && object.kv !== null ? SnapshotKVItem.fromPartial(object.kv) : undefined;
-    message.schema = object.schema !== undefined && object.schema !== null ? SnapshotSchema.fromPartial(object.schema) : undefined;
+    message.store = object.store !== undefined && object.store !== null ? SnapshotStoreItem.fromPartial(object.store) : SnapshotStoreItem.fromPartial({});
+    message.iavl = object.iavl !== undefined && object.iavl !== null ? SnapshotIAVLItem.fromPartial(object.iavl) : SnapshotIAVLItem.fromPartial({});
+    message.extension = object.extension !== undefined && object.extension !== null ? SnapshotExtensionMeta.fromPartial(object.extension) : SnapshotExtensionMeta.fromPartial({});
+    message.extensionPayload = object.extensionPayload !== undefined && object.extensionPayload !== null ? SnapshotExtensionPayload.fromPartial(object.extensionPayload) : SnapshotExtensionPayload.fromPartial({});
+    message.kv = object.kv !== undefined && object.kv !== null ? SnapshotKVItem.fromPartial(object.kv) : SnapshotKVItem.fromPartial({});
+    message.schema = object.schema !== undefined && object.schema !== null ? SnapshotSchema.fromPartial(object.schema) : SnapshotSchema.fromPartial({});
     return message;
   },
   fromSDK(object: SnapshotItemSDKType): SnapshotItem {
@@ -663,9 +663,9 @@ export const SnapshotStoreItem = {
     return message;
   },
   fromJSON(object: any): SnapshotStoreItem {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseSnapshotStoreItem();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: SnapshotStoreItem): unknown {
     const obj: any = {};
@@ -772,12 +772,12 @@ export const SnapshotIAVLItem = {
     return message;
   },
   fromJSON(object: any): SnapshotIAVLItem {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
-      height: isSet(object.height) ? Number(object.height) : 0
-    };
+    const obj = createBaseSnapshotIAVLItem();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    if (isSet(object.version)) obj.version = Long.fromValue(object.version);
+    if (isSet(object.height)) obj.height = Number(object.height);
+    return obj;
   },
   toJSON(message: SnapshotIAVLItem): unknown {
     const obj: any = {};
@@ -888,10 +888,10 @@ export const SnapshotExtensionMeta = {
     return message;
   },
   fromJSON(object: any): SnapshotExtensionMeta {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      format: isSet(object.format) ? Number(object.format) : 0
-    };
+    const obj = createBaseSnapshotExtensionMeta();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.format)) obj.format = Number(object.format);
+    return obj;
   },
   toJSON(message: SnapshotExtensionMeta): unknown {
     const obj: any = {};
@@ -983,9 +983,9 @@ export const SnapshotExtensionPayload = {
     return message;
   },
   fromJSON(object: any): SnapshotExtensionPayload {
-    return {
-      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
-    };
+    const obj = createBaseSnapshotExtensionPayload();
+    if (isSet(object.payload)) obj.payload = bytesFromBase64(object.payload);
+    return obj;
   },
   toJSON(message: SnapshotExtensionPayload): unknown {
     const obj: any = {};
@@ -1078,10 +1078,10 @@ export const SnapshotKVItem = {
     return message;
   },
   fromJSON(object: any): SnapshotKVItem {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
+    const obj = createBaseSnapshotKVItem();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    return obj;
   },
   toJSON(message: SnapshotKVItem): unknown {
     const obj: any = {};
@@ -1173,9 +1173,9 @@ export const SnapshotSchema = {
     return message;
   },
   fromJSON(object: any): SnapshotSchema {
-    return {
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const obj = createBaseSnapshotSchema();
+    if (Array.isArray(object?.keys)) object.keys.map((e: any) => bytesFromBase64(e));
+    return obj;
   },
   toJSON(message: SnapshotSchema): unknown {
     const obj: any = {};

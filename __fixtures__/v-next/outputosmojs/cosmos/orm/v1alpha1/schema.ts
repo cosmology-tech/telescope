@@ -162,10 +162,10 @@ export const ModuleSchemaDescriptor = {
     return message;
   },
   fromJSON(object: any): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schemaFile) ? object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e)) : [],
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
-    };
+    const obj = createBaseModuleSchemaDescriptor();
+    if (Array.isArray(object?.schemaFile)) object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e));
+    if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
+    return obj;
   },
   toJSON(message: ModuleSchemaDescriptor): unknown {
     const obj: any = {};
@@ -250,11 +250,11 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return message;
   },
   fromJSON(object: any): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      protoFileName: isSet(object.protoFileName) ? String(object.protoFileName) : "",
-      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : 0
-    };
+    const obj = createBaseModuleSchemaDescriptor_FileEntry();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.protoFileName)) obj.protoFileName = String(object.protoFileName);
+    if (isSet(object.storageType)) obj.storageType = storageTypeFromJSON(object.storageType);
+    return obj;
   },
   toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown {
     const obj: any = {};

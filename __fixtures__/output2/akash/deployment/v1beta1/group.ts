@@ -133,9 +133,9 @@ export const MsgCloseGroup = {
     return message;
   },
   fromJSON(object: any): MsgCloseGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
-    };
+    const obj = createBaseMsgCloseGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
   },
   toJSON(message: MsgCloseGroup): unknown {
     const obj: any = {};
@@ -144,7 +144,7 @@ export const MsgCloseGroup = {
   },
   fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -170,7 +170,8 @@ export const MsgCloseGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseGroupResponse {
-    return {};
+    const obj = createBaseMsgCloseGroupResponse();
+    return obj;
   },
   toJSON(_: MsgCloseGroupResponse): unknown {
     const obj: any = {};
@@ -211,9 +212,9 @@ export const MsgPauseGroup = {
     return message;
   },
   fromJSON(object: any): MsgPauseGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
-    };
+    const obj = createBaseMsgPauseGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
   },
   toJSON(message: MsgPauseGroup): unknown {
     const obj: any = {};
@@ -222,7 +223,7 @@ export const MsgPauseGroup = {
   },
   fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -248,7 +249,8 @@ export const MsgPauseGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgPauseGroupResponse {
-    return {};
+    const obj = createBaseMsgPauseGroupResponse();
+    return obj;
   },
   toJSON(_: MsgPauseGroupResponse): unknown {
     const obj: any = {};
@@ -289,9 +291,9 @@ export const MsgStartGroup = {
     return message;
   },
   fromJSON(object: any): MsgStartGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
-    };
+    const obj = createBaseMsgStartGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
   },
   toJSON(message: MsgStartGroup): unknown {
     const obj: any = {};
@@ -300,7 +302,7 @@ export const MsgStartGroup = {
   },
   fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : GroupID.fromPartial({});
     return message;
   }
 };
@@ -326,7 +328,8 @@ export const MsgStartGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgStartGroupResponse {
-    return {};
+    const obj = createBaseMsgStartGroupResponse();
+    return obj;
   },
   toJSON(_: MsgStartGroupResponse): unknown {
     const obj: any = {};
@@ -381,11 +384,11 @@ export const GroupID = {
     return message;
   },
   fromJSON(object: any): GroupID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
-    };
+    const obj = createBaseGroupID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    return obj;
   },
   toJSON(message: GroupID): unknown {
     const obj: any = {};
@@ -446,11 +449,11 @@ export const GroupSpec = {
     return message;
   },
   fromJSON(object: any): GroupSpec {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      requirements: isSet(object.requirements) ? PlacementRequirements.fromJSON(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromJSON(e)) : []
-    };
+    const obj = createBaseGroupSpec();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
+    if (Array.isArray(object?.resources)) object.resources.map((e: any) => Resource.fromJSON(e));
+    return obj;
   },
   toJSON(message: GroupSpec): unknown {
     const obj: any = {};
@@ -466,7 +469,7 @@ export const GroupSpec = {
   fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
+    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : PlacementRequirements.fromPartial({});
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   }
@@ -522,12 +525,12 @@ export const Group = {
     return message;
   },
   fromJSON(object: any): Group {
-    return {
-      groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
-    };
+    const obj = createBaseGroup();
+    if (isSet(object.groupId)) obj.groupId = GroupID.fromJSON(object.groupId);
+    if (isSet(object.state)) obj.state = group_StateFromJSON(object.state);
+    if (isSet(object.groupSpec)) obj.groupSpec = GroupSpec.fromJSON(object.groupSpec);
+    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    return obj;
   },
   toJSON(message: Group): unknown {
     const obj: any = {};
@@ -539,9 +542,9 @@ export const Group = {
   },
   fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
     message.state = object.state ?? 0;
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
+    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   }
@@ -590,11 +593,11 @@ export const Resource = {
     return message;
   },
   fromJSON(object: any): Resource {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
-      price: isSet(object.price) ? Coin.fromJSON(object.price) : undefined
-    };
+    const obj = createBaseResource();
+    if (isSet(object.resources)) obj.resources = ResourceUnits.fromJSON(object.resources);
+    if (isSet(object.count)) obj.count = Number(object.count);
+    if (isSet(object.price)) obj.price = Coin.fromJSON(object.price);
+    return obj;
   },
   toJSON(message: Resource): unknown {
     const obj: any = {};
@@ -605,9 +608,9 @@ export const Resource = {
   },
   fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
+    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : undefined;
+    message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : Coin.fromPartial({});
     return message;
   }
 };

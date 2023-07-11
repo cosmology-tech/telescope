@@ -70,10 +70,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      devFeeInfos: Array.isArray(object?.devFeeInfos) ? object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.devFeeInfos)) object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -87,7 +87,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
   }
@@ -150,13 +150,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
-      developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
-      validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO,
-      minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableFees)) obj.enableFees = Boolean(object.enableFees);
+    if (isSet(object.developerShares)) obj.developerShares = String(object.developerShares);
+    if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
+    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = Long.fromValue(object.addrDerivationCostCreate);
+    if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

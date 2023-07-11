@@ -41,9 +41,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      distrEpochIdentifier: isSet(object.distrEpochIdentifier) ? String(object.distrEpochIdentifier) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.distrEpochIdentifier)) obj.distrEpochIdentifier = String(object.distrEpochIdentifier);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

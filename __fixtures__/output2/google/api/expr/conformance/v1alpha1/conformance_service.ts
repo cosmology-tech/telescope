@@ -200,12 +200,12 @@ export const ParseRequest = {
     return message;
   },
   fromJSON(object: any): ParseRequest {
-    return {
-      celSource: isSet(object.celSource) ? String(object.celSource) : "",
-      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : "",
-      sourceLocation: isSet(object.sourceLocation) ? String(object.sourceLocation) : "",
-      disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
-    };
+    const obj = createBaseParseRequest();
+    if (isSet(object.celSource)) obj.celSource = String(object.celSource);
+    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
+    if (isSet(object.sourceLocation)) obj.sourceLocation = String(object.sourceLocation);
+    if (isSet(object.disableMacros)) obj.disableMacros = Boolean(object.disableMacros);
+    return obj;
   },
   toJSON(message: ParseRequest): unknown {
     const obj: any = {};
@@ -261,10 +261,10 @@ export const ParseResponse = {
     return message;
   },
   fromJSON(object: any): ParseResponse {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseParseResponse();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: ParseResponse): unknown {
     const obj: any = {};
@@ -278,7 +278,7 @@ export const ParseResponse = {
   },
   fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
     const message = createBaseParseResponse();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   }
@@ -334,12 +334,12 @@ export const CheckRequest = {
     return message;
   },
   fromJSON(object: any): CheckRequest {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      typeEnv: Array.isArray(object?.typeEnv) ? object.typeEnv.map((e: any) => Decl.fromJSON(e)) : [],
-      container: isSet(object.container) ? String(object.container) : "",
-      noStdEnv: isSet(object.noStdEnv) ? Boolean(object.noStdEnv) : false
-    };
+    const obj = createBaseCheckRequest();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (Array.isArray(object?.typeEnv)) object.typeEnv.map((e: any) => Decl.fromJSON(e));
+    if (isSet(object.container)) obj.container = String(object.container);
+    if (isSet(object.noStdEnv)) obj.noStdEnv = Boolean(object.noStdEnv);
+    return obj;
   },
   toJSON(message: CheckRequest): unknown {
     const obj: any = {};
@@ -355,7 +355,7 @@ export const CheckRequest = {
   },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
     message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
     message.container = object.container ?? "";
     message.noStdEnv = object.noStdEnv ?? false;
@@ -399,10 +399,10 @@ export const CheckResponse = {
     return message;
   },
   fromJSON(object: any): CheckResponse {
-    return {
-      checkedExpr: isSet(object.checkedExpr) ? CheckedExpr.fromJSON(object.checkedExpr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseCheckResponse();
+    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
+    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: CheckResponse): unknown {
     const obj: any = {};
@@ -416,7 +416,7 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
+    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : CheckedExpr.fromPartial({});
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   }
@@ -458,10 +458,10 @@ export const EvalRequest_BindingsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_BindingsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseEvalRequest_BindingsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = google.api.expr.v1alpha1.ExprValue.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: EvalRequest_BindingsEntry): unknown {
     const obj: any = {};
@@ -472,7 +472,7 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : google.api.expr.v1alpha1.ExprValue.fromPartial({});
     return message;
   }
 };
@@ -533,17 +533,17 @@ export const EvalRequest = {
     return message;
   },
   fromJSON(object: any): EvalRequest {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      checkedExpr: isSet(object.checkedExpr) ? CheckedExpr.fromJSON(object.checkedExpr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      container: isSet(object.container) ? String(object.container) : ""
-    };
+    const obj = createBaseEvalRequest();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
+    if (isObject(object.bindings)) obj.bindings = Object.entries(object.bindings).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      acc[key] = ExprValue.fromJSON(value);
+      return acc;
+    }, {});
+    if (isSet(object.container)) obj.container = String(object.container);
+    return obj;
   },
   toJSON(message: EvalRequest): unknown {
     const obj: any = {};
@@ -560,8 +560,8 @@ export const EvalRequest = {
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
     const message = createBaseEvalRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
+    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : ParsedExpr.fromPartial({});
+    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : CheckedExpr.fromPartial({});
     message.bindings = Object.entries(object.bindings ?? {}).reduce<{
       [key: string]: ExprValue;
     }>((acc, [key, value]) => {
@@ -611,10 +611,10 @@ export const EvalResponse = {
     return message;
   },
   fromJSON(object: any): EvalResponse {
-    return {
-      result: isSet(object.result) ? ExprValue.fromJSON(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseEvalResponse();
+    if (isSet(object.result)) obj.result = ExprValue.fromJSON(object.result);
+    if (Array.isArray(object?.issues)) object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: EvalResponse): unknown {
     const obj: any = {};
@@ -628,7 +628,7 @@ export const EvalResponse = {
   },
   fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
     const message = createBaseEvalResponse();
-    message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : undefined;
+    message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : ExprValue.fromPartial({});
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   }
@@ -677,11 +677,11 @@ export const IssueDetails = {
     return message;
   },
   fromJSON(object: any): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
-      position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
-    };
+    const obj = createBaseIssueDetails();
+    if (isSet(object.severity)) obj.severity = issueDetails_SeverityFromJSON(object.severity);
+    if (isSet(object.position)) obj.position = SourcePosition.fromJSON(object.position);
+    if (isSet(object.id)) obj.id = Long.fromValue(object.id);
+    return obj;
   },
   toJSON(message: IssueDetails): unknown {
     const obj: any = {};
@@ -693,7 +693,7 @@ export const IssueDetails = {
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
-    message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
+    message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : SourcePosition.fromPartial({});
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;
   }

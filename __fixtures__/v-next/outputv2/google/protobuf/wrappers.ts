@@ -338,9 +338,9 @@ export const DoubleValue = {
     return message;
   },
   fromJSON(object: any): DoubleValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseDoubleValue();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: DoubleValue): unknown {
     const obj: any = {};
@@ -419,9 +419,9 @@ export const FloatValue = {
     return message;
   },
   fromJSON(object: any): FloatValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseFloatValue();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: FloatValue): unknown {
     const obj: any = {};
@@ -500,9 +500,9 @@ export const Int64Value = {
     return message;
   },
   fromJSON(object: any): Int64Value {
-    return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
-    };
+    const obj = createBaseInt64Value();
+    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
+    return obj;
   },
   toJSON(message: Int64Value): unknown {
     const obj: any = {};
@@ -581,9 +581,9 @@ export const UInt64Value = {
     return message;
   },
   fromJSON(object: any): UInt64Value {
-    return {
-      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
-    };
+    const obj = createBaseUInt64Value();
+    if (isSet(object.value)) obj.value = Long.fromValue(object.value);
+    return obj;
   },
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
@@ -662,9 +662,9 @@ export const Int32Value = {
     return message;
   },
   fromJSON(object: any): Int32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseInt32Value();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: Int32Value): unknown {
     const obj: any = {};
@@ -743,9 +743,9 @@ export const UInt32Value = {
     return message;
   },
   fromJSON(object: any): UInt32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseUInt32Value();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: UInt32Value): unknown {
     const obj: any = {};
@@ -824,9 +824,9 @@ export const BoolValue = {
     return message;
   },
   fromJSON(object: any): BoolValue {
-    return {
-      value: isSet(object.value) ? Boolean(object.value) : false
-    };
+    const obj = createBaseBoolValue();
+    if (isSet(object.value)) obj.value = Boolean(object.value);
+    return obj;
   },
   toJSON(message: BoolValue): unknown {
     const obj: any = {};
@@ -905,9 +905,9 @@ export const StringValue = {
     return message;
   },
   fromJSON(object: any): StringValue {
-    return {
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseStringValue();
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: StringValue): unknown {
     const obj: any = {};
@@ -986,9 +986,9 @@ export const BytesValue = {
     return message;
   },
   fromJSON(object: any): BytesValue {
-    return {
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
+    const obj = createBaseBytesValue();
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    return obj;
   },
   toJSON(message: BytesValue): unknown {
     const obj: any = {};

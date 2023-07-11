@@ -160,9 +160,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      mintedDenom: isSet(object.mintedDenom) ? String(object.mintedDenom) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -248,9 +248,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
-    };
+    const obj = createBaseLockableDurationsInfo();
+    if (Array.isArray(object?.lockableDurations)) object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    return obj;
   },
   toJSON(message: LockableDurationsInfo): unknown {
     const obj: any = {};
@@ -355,10 +355,10 @@ export const DistrInfo = {
     return message;
   },
   fromJSON(object: any): DistrInfo {
-    return {
-      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
-    };
+    const obj = createBaseDistrInfo();
+    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
+    if (Array.isArray(object?.records)) object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
   },
   toJSON(message: DistrInfo): unknown {
     const obj: any = {};
@@ -469,10 +469,10 @@ export const DistrRecord = {
     return message;
   },
   fromJSON(object: any): DistrRecord {
-    return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
+    const obj = createBaseDistrRecord();
+    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
   },
   toJSON(message: DistrRecord): unknown {
     const obj: any = {};
@@ -578,11 +578,11 @@ export const PoolToGauge = {
     return message;
   },
   fromJSON(object: any): PoolToGauge {
-    return {
-      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
-    };
+    const obj = createBasePoolToGauge();
+    if (isSet(object.poolId)) obj.poolId = Long.fromValue(object.poolId);
+    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
   },
   toJSON(message: PoolToGauge): unknown {
     const obj: any = {};
@@ -595,7 +595,7 @@ export const PoolToGauge = {
     const message = createBasePoolToGauge();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
@@ -680,9 +680,9 @@ export const PoolToGauges = {
     return message;
   },
   fromJSON(object: any): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.poolToGauge) ? object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e)) : []
-    };
+    const obj = createBasePoolToGauges();
+    if (Array.isArray(object?.poolToGauge)) object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
+    return obj;
   },
   toJSON(message: PoolToGauges): unknown {
     const obj: any = {};

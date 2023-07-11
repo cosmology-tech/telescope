@@ -123,12 +123,12 @@ export const Group = {
     return message;
   },
   fromJSON(object: any): Group {
-    return {
-      groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
-    };
+    const obj = createBaseGroup();
+    if (isSet(object.groupId)) obj.groupId = GroupID.fromJSON(object.groupId);
+    if (isSet(object.state)) obj.state = group_StateFromJSON(object.state);
+    if (isSet(object.groupSpec)) obj.groupSpec = GroupSpec.fromJSON(object.groupSpec);
+    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    return obj;
   },
   toJSON(message: Group): unknown {
     const obj: any = {};
@@ -140,9 +140,9 @@ export const Group = {
   },
   fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
-    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : GroupID.fromPartial({});
     message.state = object.state ?? 0;
-    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
+    message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : GroupSpec.fromPartial({});
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
   },

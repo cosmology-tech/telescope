@@ -105,12 +105,12 @@ export const StoreKVPair = {
     return message;
   },
   fromJSON(object: any): StoreKVPair {
-    return {
-      storeKey: isSet(object.storeKey) ? String(object.storeKey) : "",
-      delete: isSet(object.delete) ? Boolean(object.delete) : false,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
+    const obj = createBaseStoreKVPair();
+    if (isSet(object.storeKey)) obj.storeKey = String(object.storeKey);
+    if (isSet(object.delete)) obj.delete = Boolean(object.delete);
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    return obj;
   },
   toJSON(message: StoreKVPair): unknown {
     const obj: any = {};

@@ -120,16 +120,16 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      groupSeq: isSet(object.groupSeq) ? BigInt(object.groupSeq.toString()) : BigInt(0),
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
-      groupMembers: Array.isArray(object?.groupMembers) ? object.groupMembers.map((e: any) => GroupMember.fromJSON(e)) : [],
-      groupPolicySeq: isSet(object.groupPolicySeq) ? BigInt(object.groupPolicySeq.toString()) : BigInt(0),
-      groupPolicies: Array.isArray(object?.groupPolicies) ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e)) : [],
-      proposalSeq: isSet(object.proposalSeq) ? BigInt(object.proposalSeq.toString()) : BigInt(0),
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.groupSeq)) obj.groupSeq = BigInt(object.groupSeq.toString());
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (Array.isArray(object?.groupMembers)) object.groupMembers.map((e: any) => GroupMember.fromJSON(e));
+    if (isSet(object.groupPolicySeq)) obj.groupPolicySeq = BigInt(object.groupPolicySeq.toString());
+    if (Array.isArray(object?.groupPolicies)) object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (isSet(object.proposalSeq)) obj.proposalSeq = BigInt(object.proposalSeq.toString());
+    if (Array.isArray(object?.proposals)) object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (Array.isArray(object?.votes)) object.votes.map((e: any) => Vote.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};

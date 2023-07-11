@@ -231,23 +231,23 @@ export const HttpRequest = {
     return message;
   },
   fromJSON(object: any): HttpRequest {
-    return {
-      requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
-      requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
-      requestSize: isSet(object.requestSize) ? BigInt(object.requestSize.toString()) : BigInt(0),
-      status: isSet(object.status) ? Number(object.status) : 0,
-      responseSize: isSet(object.responseSize) ? BigInt(object.responseSize.toString()) : BigInt(0),
-      userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
-      remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
-      serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
-      referer: isSet(object.referer) ? String(object.referer) : "",
-      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
-      cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
-      cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
-      cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
-      cacheFillBytes: isSet(object.cacheFillBytes) ? BigInt(object.cacheFillBytes.toString()) : BigInt(0),
-      protocol: isSet(object.protocol) ? String(object.protocol) : ""
-    };
+    const obj = createBaseHttpRequest();
+    if (isSet(object.requestMethod)) obj.requestMethod = String(object.requestMethod);
+    if (isSet(object.requestUrl)) obj.requestUrl = String(object.requestUrl);
+    if (isSet(object.requestSize)) obj.requestSize = BigInt(object.requestSize.toString());
+    if (isSet(object.status)) obj.status = Number(object.status);
+    if (isSet(object.responseSize)) obj.responseSize = BigInt(object.responseSize.toString());
+    if (isSet(object.userAgent)) obj.userAgent = String(object.userAgent);
+    if (isSet(object.remoteIp)) obj.remoteIp = String(object.remoteIp);
+    if (isSet(object.serverIp)) obj.serverIp = String(object.serverIp);
+    if (isSet(object.referer)) obj.referer = String(object.referer);
+    if (isSet(object.latency)) obj.latency = Duration.fromJSON(object.latency);
+    if (isSet(object.cacheLookup)) obj.cacheLookup = Boolean(object.cacheLookup);
+    if (isSet(object.cacheHit)) obj.cacheHit = Boolean(object.cacheHit);
+    if (isSet(object.cacheValidatedWithOriginServer)) obj.cacheValidatedWithOriginServer = Boolean(object.cacheValidatedWithOriginServer);
+    if (isSet(object.cacheFillBytes)) obj.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
+    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
+    return obj;
   },
   toJSON(message: HttpRequest): unknown {
     const obj: any = {};
@@ -279,7 +279,7 @@ export const HttpRequest = {
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : undefined;
+    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : Duration.fromPartial({});
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;

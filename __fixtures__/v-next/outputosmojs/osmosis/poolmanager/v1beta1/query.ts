@@ -163,7 +163,8 @@ export const ParamsRequest = {
     return message;
   },
   fromJSON(_: any): ParamsRequest {
-    return {};
+    const obj = createBaseParamsRequest();
+    return obj;
   },
   toJSON(_: ParamsRequest): unknown {
     const obj: any = {};
@@ -214,9 +215,9 @@ export const ParamsResponse = {
     return message;
   },
   fromJSON(object: any): ParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: ParamsResponse): unknown {
     const obj: any = {};
@@ -225,7 +226,7 @@ export const ParamsResponse = {
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {
@@ -288,11 +289,11 @@ export const EstimateSwapExactAmountInRequest = {
     return message;
   },
   fromJSON(object: any): EstimateSwapExactAmountInRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
-    };
+    const obj = createBaseEstimateSwapExactAmountInRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
+    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
+    return obj;
   },
   toJSON(message: EstimateSwapExactAmountInRequest): unknown {
     const obj: any = {};
@@ -382,11 +383,11 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
     return message;
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountInRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
-      tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
-    };
+    const obj = createBaseEstimateSinglePoolSwapExactAmountInRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
+    if (isSet(object.tokenOutDenom)) obj.tokenOutDenom = String(object.tokenOutDenom);
+    return obj;
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountInRequest): unknown {
     const obj: any = {};
@@ -454,9 +455,9 @@ export const EstimateSwapExactAmountInResponse = {
     return message;
   },
   fromJSON(object: any): EstimateSwapExactAmountInResponse {
-    return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
-    };
+    const obj = createBaseEstimateSwapExactAmountInResponse();
+    if (isSet(object.tokenOutAmount)) obj.tokenOutAmount = String(object.tokenOutAmount);
+    return obj;
   },
   toJSON(message: EstimateSwapExactAmountInResponse): unknown {
     const obj: any = {};
@@ -528,11 +529,11 @@ export const EstimateSwapExactAmountOutRequest = {
     return message;
   },
   fromJSON(object: any): EstimateSwapExactAmountOutRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
-      tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
-    };
+    const obj = createBaseEstimateSwapExactAmountOutRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (Array.isArray(object?.routes)) object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
+    if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
+    return obj;
   },
   toJSON(message: EstimateSwapExactAmountOutRequest): unknown {
     const obj: any = {};
@@ -622,11 +623,11 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
     return message;
   },
   fromJSON(object: any): EstimateSinglePoolSwapExactAmountOutRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
-      tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
-    };
+    const obj = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenInDenom)) obj.tokenInDenom = String(object.tokenInDenom);
+    if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
+    return obj;
   },
   toJSON(message: EstimateSinglePoolSwapExactAmountOutRequest): unknown {
     const obj: any = {};
@@ -694,9 +695,9 @@ export const EstimateSwapExactAmountOutResponse = {
     return message;
   },
   fromJSON(object: any): EstimateSwapExactAmountOutResponse {
-    return {
-      tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
-    };
+    const obj = createBaseEstimateSwapExactAmountOutResponse();
+    if (isSet(object.tokenInAmount)) obj.tokenInAmount = String(object.tokenInAmount);
+    return obj;
   },
   toJSON(message: EstimateSwapExactAmountOutResponse): unknown {
     const obj: any = {};
@@ -746,7 +747,8 @@ export const NumPoolsRequest = {
     return message;
   },
   fromJSON(_: any): NumPoolsRequest {
-    return {};
+    const obj = createBaseNumPoolsRequest();
+    return obj;
   },
   toJSON(_: NumPoolsRequest): unknown {
     const obj: any = {};
@@ -797,9 +799,9 @@ export const NumPoolsResponse = {
     return message;
   },
   fromJSON(object: any): NumPoolsResponse {
-    return {
-      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
-    };
+    const obj = createBaseNumPoolsResponse();
+    if (isSet(object.numPools)) obj.numPools = BigInt(object.numPools.toString());
+    return obj;
   },
   toJSON(message: NumPoolsResponse): unknown {
     const obj: any = {};
@@ -857,9 +859,9 @@ export const PoolRequest = {
     return message;
   },
   fromJSON(object: any): PoolRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBasePoolRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: PoolRequest): unknown {
     const obj: any = {};
@@ -917,9 +919,9 @@ export const PoolResponse = {
     return message;
   },
   fromJSON(object: any): PoolResponse {
-    return {
-      pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined
-    };
+    const obj = createBasePoolResponse();
+    if (isSet(object.pool)) obj.pool = Any.fromJSON(object.pool);
+    return obj;
   },
   toJSON(message: PoolResponse): unknown {
     const obj: any = {};
@@ -928,7 +930,7 @@ export const PoolResponse = {
   },
   fromPartial(object: DeepPartial<PoolResponse>): PoolResponse {
     const message = createBasePoolResponse();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
+    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : Any.fromPartial({});
     return message;
   },
   fromSDK(object: PoolResponseSDKType): PoolResponse {
@@ -977,9 +979,9 @@ export const AllPoolsRequest = {
     return message;
   },
   fromJSON(object: any): AllPoolsRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseAllPoolsRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: AllPoolsRequest): unknown {
     const obj: any = {};
@@ -1037,9 +1039,9 @@ export const AllPoolsResponse = {
     return message;
   },
   fromJSON(object: any): AllPoolsResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseAllPoolsResponse();
+    if (Array.isArray(object?.pools)) object.pools.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: AllPoolsResponse): unknown {
     const obj: any = {};
@@ -1119,11 +1121,11 @@ export const SpotPriceRequest = {
     return message;
   },
   fromJSON(object: any): SpotPriceRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
-      quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
-    };
+    const obj = createBaseSpotPriceRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.baseAssetDenom)) obj.baseAssetDenom = String(object.baseAssetDenom);
+    if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
+    return obj;
   },
   toJSON(message: SpotPriceRequest): unknown {
     const obj: any = {};
@@ -1191,9 +1193,9 @@ export const SpotPriceResponse = {
     return message;
   },
   fromJSON(object: any): SpotPriceResponse {
-    return {
-      spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
-    };
+    const obj = createBaseSpotPriceResponse();
+    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
+    return obj;
   },
   toJSON(message: SpotPriceResponse): unknown {
     const obj: any = {};

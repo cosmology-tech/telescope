@@ -209,12 +209,12 @@ export const Service = {
     return message;
   },
   fromJSON(object: any): Service {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      config: isSet(object.config) ? ServiceConfig.fromJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
-    };
+    const obj = createBaseService();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.config)) obj.config = ServiceConfig.fromJSON(object.config);
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    return obj;
   },
   toJSON(message: Service): unknown {
     const obj: any = {};
@@ -228,7 +228,7 @@ export const Service = {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
-    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
+    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : ServiceConfig.fromPartial({});
     message.state = object.state ?? 0;
     return message;
   },
@@ -342,18 +342,18 @@ export const ServiceConfig = {
     return message;
   },
   fromJSON(object: any): ServiceConfig {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromJSON(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromJSON(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromJSON(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromJSON(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromJSON(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : [],
-      monitoredResources: Array.isArray(object?.monitoredResources) ? object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined
-    };
+    const obj = createBaseServiceConfig();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (Array.isArray(object?.apis)) object.apis.map((e: any) => Api.fromJSON(e));
+    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
+    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
+    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
+    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
+    if (Array.isArray(object?.endpoints)) object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    if (Array.isArray(object?.monitoredResources)) object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
+    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
+    return obj;
   },
   toJSON(message: ServiceConfig): unknown {
     const obj: any = {};
@@ -386,13 +386,13 @@ export const ServiceConfig = {
     message.name = object.name ?? "";
     message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : undefined;
-    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : undefined;
-    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : undefined;
-    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : undefined;
+    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : Documentation.fromPartial({});
+    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : Quota.fromPartial({});
+    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : Authentication.fromPartial({});
+    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : Usage.fromPartial({});
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
+    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : Monitoring.fromPartial({});
     return message;
   },
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
@@ -466,9 +466,9 @@ export const OperationMetadata = {
     return message;
   },
   fromJSON(object: any): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseOperationMetadata();
+    if (Array.isArray(object?.resourceNames)) object.resourceNames.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: OperationMetadata): unknown {
     const obj: any = {};

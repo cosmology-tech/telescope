@@ -109,14 +109,14 @@ export const MsgCreateGauge = {
     return message;
   },
   fromJSON(object: any): MsgCreateGauge {
-    return {
-      isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO
-    };
+    const obj = createBaseMsgCreateGauge();
+    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
+    if (Array.isArray(object?.coins)) object.coins.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.startTime)) obj.startTime = fromJsonTimestamp(object.startTime);
+    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = Long.fromValue(object.numEpochsPaidOver);
+    return obj;
   },
   toJSON(message: MsgCreateGauge): unknown {
     const obj: any = {};
@@ -136,9 +136,9 @@ export const MsgCreateGauge = {
     const message = createBaseMsgCreateGauge();
     message.isPerpetual = object.isPerpetual ?? false;
     message.owner = object.owner ?? "";
-    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
+    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : QueryCondition.fromPartial({});
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
+    message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : Timestamp.fromPartial({});
     message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
     return message;
   }
@@ -165,7 +165,8 @@ export const MsgCreateGaugeResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateGaugeResponse {
-    return {};
+    const obj = createBaseMsgCreateGaugeResponse();
+    return obj;
   },
   toJSON(_: MsgCreateGaugeResponse): unknown {
     const obj: any = {};
@@ -220,11 +221,11 @@ export const MsgAddToGauge = {
     return message;
   },
   fromJSON(object: any): MsgAddToGauge {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseMsgAddToGauge();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    if (Array.isArray(object?.rewards)) object.rewards.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: MsgAddToGauge): unknown {
     const obj: any = {};
@@ -267,7 +268,8 @@ export const MsgAddToGaugeResponse = {
     return message;
   },
   fromJSON(_: any): MsgAddToGaugeResponse {
-    return {};
+    const obj = createBaseMsgAddToGaugeResponse();
+    return obj;
   },
   toJSON(_: MsgAddToGaugeResponse): unknown {
     const obj: any = {};

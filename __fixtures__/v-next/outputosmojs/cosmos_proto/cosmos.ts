@@ -146,10 +146,10 @@ export const InterfaceDescriptor = {
     return message;
   },
   fromJSON(object: any): InterfaceDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseInterfaceDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
@@ -235,11 +235,11 @@ export const ScalarDescriptor = {
     return message;
   },
   fromJSON(object: any): ScalarDescriptor {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      fieldType: Array.isArray(object?.fieldType) ? object.fieldType.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
+    const obj = createBaseScalarDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.fieldType)) object.fieldType.map((e: any) => scalarTypeFromJSON(e));
+    return obj;
   },
   toJSON(message: ScalarDescriptor): unknown {
     const obj: any = {};

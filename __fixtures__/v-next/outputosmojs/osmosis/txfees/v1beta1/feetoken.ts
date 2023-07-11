@@ -58,10 +58,10 @@ export const FeeToken = {
     return message;
   },
   fromJSON(object: any): FeeToken {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
-    };
+    const obj = createBaseFeeToken();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    return obj;
   },
   toJSON(message: FeeToken): unknown {
     const obj: any = {};

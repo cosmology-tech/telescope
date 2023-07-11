@@ -232,13 +232,13 @@ export const PageRequest = {
     return message;
   },
   fromJSON(object: any): PageRequest {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
-      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
-      countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
-      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
-    };
+    const obj = createBasePageRequest();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.offset)) obj.offset = Long.fromValue(object.offset);
+    if (isSet(object.limit)) obj.limit = Long.fromValue(object.limit);
+    if (isSet(object.countTotal)) obj.countTotal = Boolean(object.countTotal);
+    if (isSet(object.reverse)) obj.reverse = Boolean(object.reverse);
+    return obj;
   },
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
@@ -355,10 +355,10 @@ export const PageResponse = {
     return message;
   },
   fromJSON(object: any): PageResponse {
-    return {
-      nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(),
-      total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
-    };
+    const obj = createBasePageResponse();
+    if (isSet(object.nextKey)) obj.nextKey = bytesFromBase64(object.nextKey);
+    if (isSet(object.total)) obj.total = Long.fromValue(object.total);
+    return obj;
   },
   toJSON(message: PageResponse): unknown {
     const obj: any = {};

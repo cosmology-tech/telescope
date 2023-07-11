@@ -194,10 +194,10 @@ export const Monitoring = {
     return message;
   },
   fromJSON(object: any): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producerDestinations) ? object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e)) : []
-    };
+    const obj = createBaseMonitoring();
+    if (Array.isArray(object?.producerDestinations)) object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    return obj;
   },
   toJSON(message: Monitoring): unknown {
     const obj: any = {};
@@ -283,10 +283,10 @@ export const Monitoring_MonitoringDestination = {
     return message;
   },
   fromJSON(object: any): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseMonitoring_MonitoringDestination();
+    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
+    if (Array.isArray(object?.metrics)) object.metrics.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Monitoring_MonitoringDestination): unknown {
     const obj: any = {};

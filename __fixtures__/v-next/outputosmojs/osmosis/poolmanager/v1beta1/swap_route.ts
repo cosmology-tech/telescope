@@ -54,10 +54,10 @@ export const SwapAmountInRoute = {
     return message;
   },
   fromJSON(object: any): SwapAmountInRoute {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
-    };
+    const obj = createBaseSwapAmountInRoute();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenOutDenom)) obj.tokenOutDenom = String(object.tokenOutDenom);
+    return obj;
   },
   toJSON(message: SwapAmountInRoute): unknown {
     const obj: any = {};
@@ -127,10 +127,10 @@ export const SwapAmountOutRoute = {
     return message;
   },
   fromJSON(object: any): SwapAmountOutRoute {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : ""
-    };
+    const obj = createBaseSwapAmountOutRoute();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenInDenom)) obj.tokenInDenom = String(object.tokenInDenom);
+    return obj;
   },
   toJSON(message: SwapAmountOutRoute): unknown {
     const obj: any = {};

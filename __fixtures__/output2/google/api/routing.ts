@@ -467,9 +467,9 @@ export const RoutingRule = {
     return message;
   },
   fromJSON(object: any): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
-    };
+    const obj = createBaseRoutingRule();
+    if (Array.isArray(object?.routingParameters)) object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
+    return obj;
   },
   toJSON(message: RoutingRule): unknown {
     const obj: any = {};
@@ -523,10 +523,10 @@ export const RoutingParameter = {
     return message;
   },
   fromJSON(object: any): RoutingParameter {
-    return {
-      field: isSet(object.field) ? String(object.field) : "",
-      pathTemplate: isSet(object.pathTemplate) ? String(object.pathTemplate) : ""
-    };
+    const obj = createBaseRoutingParameter();
+    if (isSet(object.field)) obj.field = String(object.field);
+    if (isSet(object.pathTemplate)) obj.pathTemplate = String(object.pathTemplate);
+    return obj;
   },
   toJSON(message: RoutingParameter): unknown {
     const obj: any = {};

@@ -39,9 +39,9 @@ export const MsgUnjail = {
     return message;
   },
   fromJSON(object: any): MsgUnjail {
-    return {
-      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
-    };
+    const obj = createBaseMsgUnjail();
+    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
+    return obj;
   },
   toJSON(message: MsgUnjail): unknown {
     const obj: any = {};
@@ -76,7 +76,8 @@ export const MsgUnjailResponse = {
     return message;
   },
   fromJSON(_: any): MsgUnjailResponse {
-    return {};
+    const obj = createBaseMsgUnjailResponse();
+    return obj;
   },
   toJSON(_: MsgUnjailResponse): unknown {
     const obj: any = {};

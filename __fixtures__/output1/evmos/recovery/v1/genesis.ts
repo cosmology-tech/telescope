@@ -53,9 +53,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -64,7 +64,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -115,10 +115,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableRecovery: isSet(object.enableRecovery) ? Boolean(object.enableRecovery) : false,
-      packetTimeoutDuration: isSet(object.packetTimeoutDuration) ? Duration.fromJSON(object.packetTimeoutDuration) : undefined
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableRecovery)) obj.enableRecovery = Boolean(object.enableRecovery);
+    if (isSet(object.packetTimeoutDuration)) obj.packetTimeoutDuration = Duration.fromJSON(object.packetTimeoutDuration);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -129,7 +129,7 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableRecovery = object.enableRecovery ?? false;
-    message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : undefined;
+    message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : Duration.fromPartial({});
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

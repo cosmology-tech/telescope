@@ -170,13 +170,13 @@ export const ConfigChange = {
     return message;
   },
   fromJSON(object: any): ConfigChange {
-    return {
-      element: isSet(object.element) ? String(object.element) : "",
-      oldValue: isSet(object.oldValue) ? String(object.oldValue) : "",
-      newValue: isSet(object.newValue) ? String(object.newValue) : "",
-      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : 0,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromJSON(e)) : []
-    };
+    const obj = createBaseConfigChange();
+    if (isSet(object.element)) obj.element = String(object.element);
+    if (isSet(object.oldValue)) obj.oldValue = String(object.oldValue);
+    if (isSet(object.newValue)) obj.newValue = String(object.newValue);
+    if (isSet(object.changeType)) obj.changeType = changeTypeFromJSON(object.changeType);
+    if (Array.isArray(object?.advices)) object.advices.map((e: any) => Advice.fromJSON(e));
+    return obj;
   },
   toJSON(message: ConfigChange): unknown {
     const obj: any = {};
@@ -231,9 +231,9 @@ export const Advice = {
     return message;
   },
   fromJSON(object: any): Advice {
-    return {
-      description: isSet(object.description) ? String(object.description) : ""
-    };
+    const obj = createBaseAdvice();
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
   },
   toJSON(message: Advice): unknown {
     const obj: any = {};

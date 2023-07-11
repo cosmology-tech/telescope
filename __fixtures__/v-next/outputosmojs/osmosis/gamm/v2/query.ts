@@ -78,11 +78,11 @@ export const QuerySpotPriceRequest = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
-      quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
-    };
+    const obj = createBaseQuerySpotPriceRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.baseAssetDenom)) obj.baseAssetDenom = String(object.baseAssetDenom);
+    if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
+    return obj;
   },
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
@@ -150,9 +150,9 @@ export const QuerySpotPriceResponse = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceResponse {
-    return {
-      spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
-    };
+    const obj = createBaseQuerySpotPriceResponse();
+    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
+    return obj;
   },
   toJSON(message: QuerySpotPriceResponse): unknown {
     const obj: any = {};

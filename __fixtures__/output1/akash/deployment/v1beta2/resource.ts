@@ -59,11 +59,11 @@ export const Resource = {
     return message;
   },
   fromJSON(object: any): Resource {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromJSON(object.resources) : undefined,
-      count: isSet(object.count) ? Number(object.count) : 0,
-      price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined
-    };
+    const obj = createBaseResource();
+    if (isSet(object.resources)) obj.resources = ResourceUnits.fromJSON(object.resources);
+    if (isSet(object.count)) obj.count = Number(object.count);
+    if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
+    return obj;
   },
   toJSON(message: Resource): unknown {
     const obj: any = {};
@@ -74,9 +74,9 @@ export const Resource = {
   },
   fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
     const message = createBaseResource();
-    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
+    message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : ResourceUnits.fromPartial({});
     message.count = object.count ?? 0;
-    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
+    message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : DecCoin.fromPartial({});
     return message;
   },
   fromSDK(object: ResourceSDKType): Resource {

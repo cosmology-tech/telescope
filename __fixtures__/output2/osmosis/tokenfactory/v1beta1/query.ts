@@ -62,7 +62,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): unknown {
     const obj: any = {};
@@ -103,9 +104,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
@@ -114,7 +115,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : Params.fromPartial({});
     return message;
   }
 };
@@ -148,9 +149,9 @@ export const QueryDenomAuthorityMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomAuthorityMetadataRequest {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : ""
-    };
+    const obj = createBaseQueryDenomAuthorityMetadataRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
   },
   toJSON(message: QueryDenomAuthorityMetadataRequest): unknown {
     const obj: any = {};
@@ -193,9 +194,9 @@ export const QueryDenomAuthorityMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomAuthorityMetadataResponse {
-    return {
-      authorityMetadata: isSet(object.authorityMetadata) ? DenomAuthorityMetadata.fromJSON(object.authorityMetadata) : undefined
-    };
+    const obj = createBaseQueryDenomAuthorityMetadataResponse();
+    if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
+    return obj;
   },
   toJSON(message: QueryDenomAuthorityMetadataResponse): unknown {
     const obj: any = {};
@@ -204,7 +205,7 @@ export const QueryDenomAuthorityMetadataResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataResponse>): QueryDenomAuthorityMetadataResponse {
     const message = createBaseQueryDenomAuthorityMetadataResponse();
-    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
+    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : DenomAuthorityMetadata.fromPartial({});
     return message;
   }
 };
@@ -238,9 +239,9 @@ export const QueryDenomsFromCreatorRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomsFromCreatorRequest {
-    return {
-      creator: isSet(object.creator) ? String(object.creator) : ""
-    };
+    const obj = createBaseQueryDenomsFromCreatorRequest();
+    if (isSet(object.creator)) obj.creator = String(object.creator);
+    return obj;
   },
   toJSON(message: QueryDenomsFromCreatorRequest): unknown {
     const obj: any = {};
@@ -283,9 +284,9 @@ export const QueryDenomsFromCreatorResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomsFromCreatorResponse {
-    return {
-      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseQueryDenomsFromCreatorResponse();
+    if (Array.isArray(object?.denoms)) object.denoms.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: QueryDenomsFromCreatorResponse): unknown {
     const obj: any = {};

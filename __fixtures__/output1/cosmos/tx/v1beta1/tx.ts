@@ -432,11 +432,11 @@ export const Tx = {
     return message;
   },
   fromJSON(object: any): Tx {
-    return {
-      body: isSet(object.body) ? TxBody.fromJSON(object.body) : undefined,
-      authInfo: isSet(object.authInfo) ? AuthInfo.fromJSON(object.authInfo) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const obj = createBaseTx();
+    if (isSet(object.body)) obj.body = TxBody.fromJSON(object.body);
+    if (isSet(object.authInfo)) obj.authInfo = AuthInfo.fromJSON(object.authInfo);
+    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
+    return obj;
   },
   toJSON(message: Tx): unknown {
     const obj: any = {};
@@ -451,8 +451,8 @@ export const Tx = {
   },
   fromPartial(object: DeepPartial<Tx>): Tx {
     const message = createBaseTx();
-    message.body = object.body !== undefined && object.body !== null ? TxBody.fromPartial(object.body) : undefined;
-    message.authInfo = object.authInfo !== undefined && object.authInfo !== null ? AuthInfo.fromPartial(object.authInfo) : undefined;
+    message.body = object.body !== undefined && object.body !== null ? TxBody.fromPartial(object.body) : TxBody.fromPartial({});
+    message.authInfo = object.authInfo !== undefined && object.authInfo !== null ? AuthInfo.fromPartial(object.authInfo) : AuthInfo.fromPartial({});
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
   },
@@ -519,11 +519,11 @@ export const TxRaw = {
     return message;
   },
   fromJSON(object: any): TxRaw {
-    return {
-      bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
-      authInfoBytes: isSet(object.authInfoBytes) ? bytesFromBase64(object.authInfoBytes) : new Uint8Array(),
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const obj = createBaseTxRaw();
+    if (isSet(object.bodyBytes)) obj.bodyBytes = bytesFromBase64(object.bodyBytes);
+    if (isSet(object.authInfoBytes)) obj.authInfoBytes = bytesFromBase64(object.authInfoBytes);
+    if (Array.isArray(object?.signatures)) object.signatures.map((e: any) => bytesFromBase64(e));
+    return obj;
   },
   toJSON(message: TxRaw): unknown {
     const obj: any = {};
@@ -613,12 +613,12 @@ export const SignDoc = {
     return message;
   },
   fromJSON(object: any): SignDoc {
-    return {
-      bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
-      authInfoBytes: isSet(object.authInfoBytes) ? bytesFromBase64(object.authInfoBytes) : new Uint8Array(),
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO
-    };
+    const obj = createBaseSignDoc();
+    if (isSet(object.bodyBytes)) obj.bodyBytes = bytesFromBase64(object.bodyBytes);
+    if (isSet(object.authInfoBytes)) obj.authInfoBytes = bytesFromBase64(object.authInfoBytes);
+    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
+    if (isSet(object.accountNumber)) obj.accountNumber = Long.fromValue(object.accountNumber);
+    return obj;
   },
   toJSON(message: SignDoc): unknown {
     const obj: any = {};
@@ -718,14 +718,14 @@ export const SignDocDirectAux = {
     return message;
   },
   fromJSON(object: any): SignDocDirectAux {
-    return {
-      bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
-      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
-      tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
-    };
+    const obj = createBaseSignDocDirectAux();
+    if (isSet(object.bodyBytes)) obj.bodyBytes = bytesFromBase64(object.bodyBytes);
+    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
+    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
+    if (isSet(object.accountNumber)) obj.accountNumber = Long.fromValue(object.accountNumber);
+    if (isSet(object.sequence)) obj.sequence = Long.fromValue(object.sequence);
+    if (isSet(object.tip)) obj.tip = Tip.fromJSON(object.tip);
+    return obj;
   },
   toJSON(message: SignDocDirectAux): unknown {
     const obj: any = {};
@@ -740,11 +740,11 @@ export const SignDocDirectAux = {
   fromPartial(object: DeepPartial<SignDocDirectAux>): SignDocDirectAux {
     const message = createBaseSignDocDirectAux();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
     message.chainId = object.chainId ?? "";
     message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
-    message.tip = object.tip !== undefined && object.tip !== null ? Tip.fromPartial(object.tip) : undefined;
+    message.tip = object.tip !== undefined && object.tip !== null ? Tip.fromPartial(object.tip) : Tip.fromPartial({});
     return message;
   },
   fromSDK(object: SignDocDirectAuxSDKType): SignDocDirectAux {
@@ -826,13 +826,13 @@ export const TxBody = {
     return message;
   },
   fromJSON(object: any): TxBody {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      memo: isSet(object.memo) ? String(object.memo) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromValue(object.timeoutHeight) : Long.UZERO,
-      extensionOptions: Array.isArray(object?.extensionOptions) ? object.extensionOptions.map((e: any) => Any.fromJSON(e)) : [],
-      nonCriticalExtensionOptions: Array.isArray(object?.nonCriticalExtensionOptions) ? object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseTxBody();
+    if (Array.isArray(object?.messages)) object.messages.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.memo)) obj.memo = String(object.memo);
+    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Long.fromValue(object.timeoutHeight);
+    if (Array.isArray(object?.extensionOptions)) object.extensionOptions.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.nonCriticalExtensionOptions)) object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: TxBody): unknown {
     const obj: any = {};
@@ -939,11 +939,11 @@ export const AuthInfo = {
     return message;
   },
   fromJSON(object: any): AuthInfo {
-    return {
-      signerInfos: Array.isArray(object?.signerInfos) ? object.signerInfos.map((e: any) => SignerInfo.fromJSON(e)) : [],
-      fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
-      tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
-    };
+    const obj = createBaseAuthInfo();
+    if (Array.isArray(object?.signerInfos)) object.signerInfos.map((e: any) => SignerInfo.fromJSON(e));
+    if (isSet(object.fee)) obj.fee = Fee.fromJSON(object.fee);
+    if (isSet(object.tip)) obj.tip = Tip.fromJSON(object.tip);
+    return obj;
   },
   toJSON(message: AuthInfo): unknown {
     const obj: any = {};
@@ -959,8 +959,8 @@ export const AuthInfo = {
   fromPartial(object: DeepPartial<AuthInfo>): AuthInfo {
     const message = createBaseAuthInfo();
     message.signerInfos = object.signerInfos?.map(e => SignerInfo.fromPartial(e)) || [];
-    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : undefined;
-    message.tip = object.tip !== undefined && object.tip !== null ? Tip.fromPartial(object.tip) : undefined;
+    message.fee = object.fee !== undefined && object.fee !== null ? Fee.fromPartial(object.fee) : Fee.fromPartial({});
+    message.tip = object.tip !== undefined && object.tip !== null ? Tip.fromPartial(object.tip) : Tip.fromPartial({});
     return message;
   },
   fromSDK(object: AuthInfoSDKType): AuthInfo {
@@ -1026,11 +1026,11 @@ export const SignerInfo = {
     return message;
   },
   fromJSON(object: any): SignerInfo {
-    return {
-      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
-      modeInfo: isSet(object.modeInfo) ? ModeInfo.fromJSON(object.modeInfo) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
-    };
+    const obj = createBaseSignerInfo();
+    if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
+    if (isSet(object.modeInfo)) obj.modeInfo = ModeInfo.fromJSON(object.modeInfo);
+    if (isSet(object.sequence)) obj.sequence = Long.fromValue(object.sequence);
+    return obj;
   },
   toJSON(message: SignerInfo): unknown {
     const obj: any = {};
@@ -1041,8 +1041,8 @@ export const SignerInfo = {
   },
   fromPartial(object: DeepPartial<SignerInfo>): SignerInfo {
     const message = createBaseSignerInfo();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
-    message.modeInfo = object.modeInfo !== undefined && object.modeInfo !== null ? ModeInfo.fromPartial(object.modeInfo) : undefined;
+    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
+    message.modeInfo = object.modeInfo !== undefined && object.modeInfo !== null ? ModeInfo.fromPartial(object.modeInfo) : ModeInfo.fromPartial({});
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
   },
@@ -1098,10 +1098,10 @@ export const ModeInfo = {
     return message;
   },
   fromJSON(object: any): ModeInfo {
-    return {
-      single: isSet(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
-      multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
-    };
+    const obj = createBaseModeInfo();
+    if (isSet(object.single)) obj.single = ModeInfo_Single.fromJSON(object.single);
+    if (isSet(object.multi)) obj.multi = ModeInfo_Multi.fromJSON(object.multi);
+    return obj;
   },
   toJSON(message: ModeInfo): unknown {
     const obj: any = {};
@@ -1111,8 +1111,8 @@ export const ModeInfo = {
   },
   fromPartial(object: DeepPartial<ModeInfo>): ModeInfo {
     const message = createBaseModeInfo();
-    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
-    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
+    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : ModeInfo_Single.fromPartial({});
+    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : ModeInfo_Multi.fromPartial({});
     return message;
   },
   fromSDK(object: ModeInfoSDKType): ModeInfo {
@@ -1158,9 +1158,9 @@ export const ModeInfo_Single = {
     return message;
   },
   fromJSON(object: any): ModeInfo_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
-    };
+    const obj = createBaseModeInfo_Single();
+    if (isSet(object.mode)) obj.mode = signModeFromJSON(object.mode);
+    return obj;
   },
   toJSON(message: ModeInfo_Single): unknown {
     const obj: any = {};
@@ -1220,10 +1220,10 @@ export const ModeInfo_Multi = {
     return message;
   },
   fromJSON(object: any): ModeInfo_Multi {
-    return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromJSON(object.bitarray) : undefined,
-      modeInfos: Array.isArray(object?.modeInfos) ? object.modeInfos.map((e: any) => ModeInfo.fromJSON(e)) : []
-    };
+    const obj = createBaseModeInfo_Multi();
+    if (isSet(object.bitarray)) obj.bitarray = CompactBitArray.fromJSON(object.bitarray);
+    if (Array.isArray(object?.modeInfos)) object.modeInfos.map((e: any) => ModeInfo.fromJSON(e));
+    return obj;
   },
   toJSON(message: ModeInfo_Multi): unknown {
     const obj: any = {};
@@ -1237,7 +1237,7 @@ export const ModeInfo_Multi = {
   },
   fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
-    message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
+    message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : CompactBitArray.fromPartial({});
     message.modeInfos = object.modeInfos?.map(e => ModeInfo.fromPartial(e)) || [];
     return message;
   },
@@ -1309,12 +1309,12 @@ export const Fee = {
     return message;
   },
   fromJSON(object: any): Fee {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      gasLimit: isSet(object.gasLimit) ? Long.fromValue(object.gasLimit) : Long.UZERO,
-      payer: isSet(object.payer) ? String(object.payer) : "",
-      granter: isSet(object.granter) ? String(object.granter) : ""
-    };
+    const obj = createBaseFee();
+    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.gasLimit)) obj.gasLimit = Long.fromValue(object.gasLimit);
+    if (isSet(object.payer)) obj.payer = String(object.payer);
+    if (isSet(object.granter)) obj.granter = String(object.granter);
+    return obj;
   },
   toJSON(message: Fee): unknown {
     const obj: any = {};
@@ -1394,10 +1394,10 @@ export const Tip = {
     return message;
   },
   fromJSON(object: any): Tip {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      tipper: isSet(object.tipper) ? String(object.tipper) : ""
-    };
+    const obj = createBaseTip();
+    if (Array.isArray(object?.amount)) object.amount.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.tipper)) obj.tipper = String(object.tipper);
+    return obj;
   },
   toJSON(message: Tip): unknown {
     const obj: any = {};
@@ -1483,12 +1483,12 @@ export const AuxSignerData = {
     return message;
   },
   fromJSON(object: any): AuxSignerData {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
-    };
+    const obj = createBaseAuxSignerData();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.signDoc)) obj.signDoc = SignDocDirectAux.fromJSON(object.signDoc);
+    if (isSet(object.mode)) obj.mode = signModeFromJSON(object.mode);
+    if (isSet(object.sig)) obj.sig = bytesFromBase64(object.sig);
+    return obj;
   },
   toJSON(message: AuxSignerData): unknown {
     const obj: any = {};
@@ -1501,7 +1501,7 @@ export const AuxSignerData = {
   fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
     message.mode = object.mode ?? 0;
     message.sig = object.sig ?? new Uint8Array();
     return message;

@@ -133,10 +133,10 @@ export const SuperfluidAsset = {
     return message;
   },
   fromJSON(object: any): SuperfluidAsset {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
-    };
+    const obj = createBaseSuperfluidAsset();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.assetType)) obj.assetType = superfluidAssetTypeFromJSON(object.assetType);
+    return obj;
   },
   toJSON(message: SuperfluidAsset): unknown {
     const obj: any = {};
@@ -195,11 +195,11 @@ export const SuperfluidIntermediaryAccount = {
     return message;
   },
   fromJSON(object: any): SuperfluidIntermediaryAccount {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
-    };
+    const obj = createBaseSuperfluidIntermediaryAccount();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
+    if (isSet(object.gaugeId)) obj.gaugeId = Long.fromValue(object.gaugeId);
+    return obj;
   },
   toJSON(message: SuperfluidIntermediaryAccount): unknown {
     const obj: any = {};
@@ -260,11 +260,11 @@ export const OsmoEquivalentMultiplierRecord = {
     return message;
   },
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
-    return {
-      epochNumber: isSet(object.epochNumber) ? Long.fromValue(object.epochNumber) : Long.ZERO,
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
-    };
+    const obj = createBaseOsmoEquivalentMultiplierRecord();
+    if (isSet(object.epochNumber)) obj.epochNumber = Long.fromValue(object.epochNumber);
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.multiplier)) obj.multiplier = String(object.multiplier);
+    return obj;
   },
   toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
     const obj: any = {};
@@ -332,12 +332,12 @@ export const SuperfluidDelegationRecord = {
     return message;
   },
   fromJSON(object: any): SuperfluidDelegationRecord {
-    return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      delegationAmount: isSet(object.delegationAmount) ? Coin.fromJSON(object.delegationAmount) : undefined,
-      equivalentStakedAmount: isSet(object.equivalentStakedAmount) ? Coin.fromJSON(object.equivalentStakedAmount) : undefined
-    };
+    const obj = createBaseSuperfluidDelegationRecord();
+    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
+    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
+    if (isSet(object.delegationAmount)) obj.delegationAmount = Coin.fromJSON(object.delegationAmount);
+    if (isSet(object.equivalentStakedAmount)) obj.equivalentStakedAmount = Coin.fromJSON(object.equivalentStakedAmount);
+    return obj;
   },
   toJSON(message: SuperfluidDelegationRecord): unknown {
     const obj: any = {};
@@ -351,8 +351,8 @@ export const SuperfluidDelegationRecord = {
     const message = createBaseSuperfluidDelegationRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
-    message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : undefined;
-    message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : undefined;
+    message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : Coin.fromPartial({});
+    message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : Coin.fromPartial({});
     return message;
   }
 };
@@ -393,10 +393,10 @@ export const LockIdIntermediaryAccountConnection = {
     return message;
   },
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
-    return {
-      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO,
-      intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
-    };
+    const obj = createBaseLockIdIntermediaryAccountConnection();
+    if (isSet(object.lockId)) obj.lockId = Long.fromValue(object.lockId);
+    if (isSet(object.intermediaryAccount)) obj.intermediaryAccount = String(object.intermediaryAccount);
+    return obj;
   },
   toJSON(message: LockIdIntermediaryAccountConnection): unknown {
     const obj: any = {};
@@ -450,9 +450,9 @@ export const UnpoolWhitelistedPools = {
     return message;
   },
   fromJSON(object: any): UnpoolWhitelistedPools {
-    return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
-    };
+    const obj = createBaseUnpoolWhitelistedPools();
+    if (Array.isArray(object?.ids)) object.ids.map((e: any) => Long.fromValue(e));
+    return obj;
   },
   toJSON(message: UnpoolWhitelistedPools): unknown {
     const obj: any = {};

@@ -193,12 +193,12 @@ export const MsgCreateDeployment = {
     return message;
   },
   fromJSON(object: any): MsgCreateDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      deposit: isSet(object.deposit) ? Coin.fromJSON(object.deposit) : undefined
-    };
+    const obj = createBaseMsgCreateDeployment();
+    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
+    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
+    if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
+    return obj;
   },
   toJSON(message: MsgCreateDeployment): unknown {
     const obj: any = {};
@@ -214,10 +214,10 @@ export const MsgCreateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
-    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
+    message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
@@ -263,7 +263,8 @@ export const MsgCreateDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateDeploymentResponse {
-    return {};
+    const obj = createBaseMsgCreateDeploymentResponse();
+    return obj;
   },
   toJSON(_: MsgCreateDeploymentResponse): unknown {
     const obj: any = {};
@@ -318,10 +319,10 @@ export const MsgDepositDeployment = {
     return message;
   },
   fromJSON(object: any): MsgDepositDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
-    };
+    const obj = createBaseMsgDepositDeployment();
+    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
+    if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
+    return obj;
   },
   toJSON(message: MsgDepositDeployment): unknown {
     const obj: any = {};
@@ -331,8 +332,8 @@ export const MsgDepositDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
-    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : Coin.fromPartial({});
     return message;
   },
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
@@ -370,7 +371,8 @@ export const MsgDepositDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgDepositDeploymentResponse {
-    return {};
+    const obj = createBaseMsgDepositDeploymentResponse();
+    return obj;
   },
   toJSON(_: MsgDepositDeploymentResponse): unknown {
     const obj: any = {};
@@ -432,11 +434,11 @@ export const MsgUpdateDeployment = {
     return message;
   },
   fromJSON(object: any): MsgUpdateDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromJSON(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
-    };
+    const obj = createBaseMsgUpdateDeployment();
+    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
+    if (Array.isArray(object?.groups)) object.groups.map((e: any) => GroupSpec.fromJSON(e));
+    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
+    return obj;
   },
   toJSON(message: MsgUpdateDeployment): unknown {
     const obj: any = {};
@@ -451,7 +453,7 @@ export const MsgUpdateDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
     return message;
@@ -497,7 +499,8 @@ export const MsgUpdateDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateDeploymentResponse {
-    return {};
+    const obj = createBaseMsgUpdateDeploymentResponse();
+    return obj;
   },
   toJSON(_: MsgUpdateDeploymentResponse): unknown {
     const obj: any = {};
@@ -545,9 +548,9 @@ export const MsgCloseDeployment = {
     return message;
   },
   fromJSON(object: any): MsgCloseDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined
-    };
+    const obj = createBaseMsgCloseDeployment();
+    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
+    return obj;
   },
   toJSON(message: MsgCloseDeployment): unknown {
     const obj: any = {};
@@ -556,7 +559,7 @@ export const MsgCloseDeployment = {
   },
   fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : DeploymentID.fromPartial({});
     return message;
   },
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
@@ -592,7 +595,8 @@ export const MsgCloseDeploymentResponse = {
     return message;
   },
   fromJSON(_: any): MsgCloseDeploymentResponse {
-    return {};
+    const obj = createBaseMsgCloseDeploymentResponse();
+    return obj;
   },
   toJSON(_: MsgCloseDeploymentResponse): unknown {
     const obj: any = {};
@@ -647,10 +651,10 @@ export const DeploymentID = {
     return message;
   },
   fromJSON(object: any): DeploymentID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
-    };
+    const obj = createBaseDeploymentID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    return obj;
   },
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
@@ -728,12 +732,12 @@ export const Deployment = {
     return message;
   },
   fromJSON(object: any): Deployment {
-    return {
-      deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
-    };
+    const obj = createBaseDeployment();
+    if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
+    if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
+    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
+    if (isSet(object.createdAt)) obj.createdAt = Long.fromValue(object.createdAt);
+    return obj;
   },
   toJSON(message: Deployment): unknown {
     const obj: any = {};
@@ -745,7 +749,7 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
+    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
@@ -812,11 +816,11 @@ export const DeploymentFilters = {
     return message;
   },
   fromJSON(object: any): DeploymentFilters {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
-      state: isSet(object.state) ? String(object.state) : ""
-    };
+    const obj = createBaseDeploymentFilters();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = Long.fromValue(object.dseq);
+    if (isSet(object.state)) obj.state = String(object.state);
+    return obj;
   },
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};

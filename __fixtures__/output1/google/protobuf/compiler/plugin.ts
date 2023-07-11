@@ -193,12 +193,12 @@ export const Version = {
     return message;
   },
   fromJSON(object: any): Version {
-    return {
-      major: isSet(object.major) ? Number(object.major) : 0,
-      minor: isSet(object.minor) ? Number(object.minor) : 0,
-      patch: isSet(object.patch) ? Number(object.patch) : 0,
-      suffix: isSet(object.suffix) ? String(object.suffix) : ""
-    };
+    const obj = createBaseVersion();
+    if (isSet(object.major)) obj.major = Number(object.major);
+    if (isSet(object.minor)) obj.minor = Number(object.minor);
+    if (isSet(object.patch)) obj.patch = Number(object.patch);
+    if (isSet(object.suffix)) obj.suffix = String(object.suffix);
+    return obj;
   },
   toJSON(message: Version): unknown {
     const obj: any = {};
@@ -284,12 +284,12 @@ export const CodeGeneratorRequest = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorRequest {
-    return {
-      fileToGenerate: Array.isArray(object?.fileToGenerate) ? object.fileToGenerate.map((e: any) => String(e)) : [],
-      parameter: isSet(object.parameter) ? String(object.parameter) : "",
-      protoFile: Array.isArray(object?.protoFile) ? object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e)) : [],
-      compilerVersion: isSet(object.compilerVersion) ? Version.fromJSON(object.compilerVersion) : undefined
-    };
+    const obj = createBaseCodeGeneratorRequest();
+    if (Array.isArray(object?.fileToGenerate)) object.fileToGenerate.map((e: any) => String(e));
+    if (isSet(object.parameter)) obj.parameter = String(object.parameter);
+    if (Array.isArray(object?.protoFile)) object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e));
+    if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
+    return obj;
   },
   toJSON(message: CodeGeneratorRequest): unknown {
     const obj: any = {};
@@ -312,7 +312,7 @@ export const CodeGeneratorRequest = {
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
-    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : undefined;
+    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : Version.fromPartial({});
     return message;
   },
   fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
@@ -377,10 +377,10 @@ export const CodeGeneratorResponse = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorResponse {
-    return {
-      error: isSet(object.error) ? String(object.error) : "",
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e)) : []
-    };
+    const obj = createBaseCodeGeneratorResponse();
+    if (isSet(object.error)) obj.error = String(object.error);
+    if (Array.isArray(object?.file)) object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
+    return obj;
   },
   toJSON(message: CodeGeneratorResponse): unknown {
     const obj: any = {};
@@ -459,11 +459,11 @@ export const CodeGeneratorResponse_File = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorResponse_File {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      insertionPoint: isSet(object.insertionPoint) ? String(object.insertionPoint) : "",
-      content: isSet(object.content) ? String(object.content) : ""
-    };
+    const obj = createBaseCodeGeneratorResponse_File();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.insertionPoint)) obj.insertionPoint = String(object.insertionPoint);
+    if (isSet(object.content)) obj.content = String(object.content);
+    return obj;
   },
   toJSON(message: CodeGeneratorResponse_File): unknown {
     const obj: any = {};

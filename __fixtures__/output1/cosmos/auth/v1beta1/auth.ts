@@ -103,12 +103,12 @@ export const BaseAccount = {
     return message;
   },
   fromJSON(object: any): BaseAccount {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
-    };
+    const obj = createBaseBaseAccount();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pubKey)) obj.pubKey = Any.fromJSON(object.pubKey);
+    if (isSet(object.accountNumber)) obj.accountNumber = Long.fromValue(object.accountNumber);
+    if (isSet(object.sequence)) obj.sequence = Long.fromValue(object.sequence);
+    return obj;
   },
   toJSON(message: BaseAccount): unknown {
     const obj: any = {};
@@ -121,7 +121,7 @@ export const BaseAccount = {
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
+    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : Any.fromPartial({});
     message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
@@ -187,11 +187,11 @@ export const ModuleAccount = {
     return message;
   },
   fromJSON(object: any): ModuleAccount {
-    return {
-      baseAccount: isSet(object.baseAccount) ? BaseAccount.fromJSON(object.baseAccount) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseModuleAccount();
+    if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.permissions)) object.permissions.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: ModuleAccount): unknown {
     const obj: any = {};
@@ -206,7 +206,7 @@ export const ModuleAccount = {
   },
   fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
     const message = createBaseModuleAccount();
-    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
+    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : BaseAccount.fromPartial({});
     message.name = object.name ?? "";
     message.permissions = object.permissions?.map(e => e) || [];
     return message;
@@ -288,13 +288,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      maxMemoCharacters: isSet(object.maxMemoCharacters) ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO,
-      txSigLimit: isSet(object.txSigLimit) ? Long.fromValue(object.txSigLimit) : Long.UZERO,
-      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? Long.fromValue(object.txSizeCostPerByte) : Long.UZERO,
-      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO,
-      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO
-    };
+    const obj = createBaseParams();
+    if (isSet(object.maxMemoCharacters)) obj.maxMemoCharacters = Long.fromValue(object.maxMemoCharacters);
+    if (isSet(object.txSigLimit)) obj.txSigLimit = Long.fromValue(object.txSigLimit);
+    if (isSet(object.txSizeCostPerByte)) obj.txSizeCostPerByte = Long.fromValue(object.txSizeCostPerByte);
+    if (isSet(object.sigVerifyCostEd25519)) obj.sigVerifyCostEd25519 = Long.fromValue(object.sigVerifyCostEd25519);
+    if (isSet(object.sigVerifyCostSecp256k1)) obj.sigVerifyCostSecp256k1 = Long.fromValue(object.sigVerifyCostSecp256k1);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

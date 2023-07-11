@@ -159,11 +159,11 @@ export const MsgConvertCoin = {
     return message;
   },
   fromJSON(object: any): MsgConvertCoin {
-    return {
-      coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined,
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
+    const obj = createBaseMsgConvertCoin();
+    if (isSet(object.coin)) obj.coin = Coin.fromJSON(object.coin);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    return obj;
   },
   toJSON(message: MsgConvertCoin): unknown {
     const obj: any = {};
@@ -174,7 +174,7 @@ export const MsgConvertCoin = {
   },
   fromPartial(object: DeepPartial<MsgConvertCoin>): MsgConvertCoin {
     const message = createBaseMsgConvertCoin();
-    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : undefined;
+    message.coin = object.coin !== undefined && object.coin !== null ? Coin.fromPartial(object.coin) : Coin.fromPartial({});
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;
@@ -246,7 +246,8 @@ export const MsgConvertCoinResponse = {
     return message;
   },
   fromJSON(_: any): MsgConvertCoinResponse {
-    return {};
+    const obj = createBaseMsgConvertCoinResponse();
+    return obj;
   },
   toJSON(_: MsgConvertCoinResponse): unknown {
     const obj: any = {};
@@ -338,12 +339,12 @@ export const MsgConvertERC20 = {
     return message;
   },
   fromJSON(object: any): MsgConvertERC20 {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      sender: isSet(object.sender) ? String(object.sender) : ""
-    };
+    const obj = createBaseMsgConvertERC20();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.amount)) obj.amount = String(object.amount);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    return obj;
   },
   toJSON(message: MsgConvertERC20): unknown {
     const obj: any = {};
@@ -432,7 +433,8 @@ export const MsgConvertERC20Response = {
     return message;
   },
   fromJSON(_: any): MsgConvertERC20Response {
-    return {};
+    const obj = createBaseMsgConvertERC20Response();
+    return obj;
   },
   toJSON(_: MsgConvertERC20Response): unknown {
     const obj: any = {};

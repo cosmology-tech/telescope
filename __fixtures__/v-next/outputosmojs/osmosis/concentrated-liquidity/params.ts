@@ -62,10 +62,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      authorizedTickSpacing: Array.isArray(object?.authorizedTickSpacing) ? object.authorizedTickSpacing.map((e: any) => BigInt(e.toString())) : [],
-      authorizedSwapFees: Array.isArray(object?.authorizedSwapFees) ? object.authorizedSwapFees.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.authorizedTickSpacing)) object.authorizedTickSpacing.map((e: any) => BigInt(e.toString()));
+    if (Array.isArray(object?.authorizedSwapFees)) object.authorizedSwapFees.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};

@@ -115,10 +115,10 @@ export const DeploymentID = {
     return message;
   },
   fromJSON(object: any): DeploymentID {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0)
-    };
+    const obj = createBaseDeploymentID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    return obj;
   },
   toJSON(message: DeploymentID): unknown {
     const obj: any = {};
@@ -202,12 +202,12 @@ export const Deployment = {
     return message;
   },
   fromJSON(object: any): Deployment {
-    return {
-      deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
-    };
+    const obj = createBaseDeployment();
+    if (isSet(object.deploymentId)) obj.deploymentId = DeploymentID.fromJSON(object.deploymentId);
+    if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
+    if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
+    if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
+    return obj;
   },
   toJSON(message: Deployment): unknown {
     const obj: any = {};
@@ -219,7 +219,7 @@ export const Deployment = {
   },
   fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
-    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
+    message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : DeploymentID.fromPartial({});
     message.state = object.state ?? 0;
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
@@ -294,11 +294,11 @@ export const DeploymentFilters = {
     return message;
   },
   fromJSON(object: any): DeploymentFilters {
-    return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
-      state: isSet(object.state) ? String(object.state) : ""
-    };
+    const obj = createBaseDeploymentFilters();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.state)) obj.state = String(object.state);
+    return obj;
   },
   toJSON(message: DeploymentFilters): unknown {
     const obj: any = {};

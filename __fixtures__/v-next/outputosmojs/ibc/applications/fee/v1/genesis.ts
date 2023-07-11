@@ -138,13 +138,13 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      identifiedFees: Array.isArray(object?.identifiedFees) ? object.identifiedFees.map((e: any) => IdentifiedPacketFees.fromJSON(e)) : [],
-      feeEnabledChannels: Array.isArray(object?.feeEnabledChannels) ? object.feeEnabledChannels.map((e: any) => FeeEnabledChannel.fromJSON(e)) : [],
-      registeredPayees: Array.isArray(object?.registeredPayees) ? object.registeredPayees.map((e: any) => RegisteredPayee.fromJSON(e)) : [],
-      registeredCounterpartyPayees: Array.isArray(object?.registeredCounterpartyPayees) ? object.registeredCounterpartyPayees.map((e: any) => RegisteredCounterpartyPayee.fromJSON(e)) : [],
-      forwardRelayers: Array.isArray(object?.forwardRelayers) ? object.forwardRelayers.map((e: any) => ForwardRelayerAddress.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.identifiedFees)) object.identifiedFees.map((e: any) => IdentifiedPacketFees.fromJSON(e));
+    if (Array.isArray(object?.feeEnabledChannels)) object.feeEnabledChannels.map((e: any) => FeeEnabledChannel.fromJSON(e));
+    if (Array.isArray(object?.registeredPayees)) object.registeredPayees.map((e: any) => RegisteredPayee.fromJSON(e));
+    if (Array.isArray(object?.registeredCounterpartyPayees)) object.registeredCounterpartyPayees.map((e: any) => RegisteredCounterpartyPayee.fromJSON(e));
+    if (Array.isArray(object?.forwardRelayers)) object.forwardRelayers.map((e: any) => ForwardRelayerAddress.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
@@ -269,10 +269,10 @@ export const FeeEnabledChannel = {
     return message;
   },
   fromJSON(object: any): FeeEnabledChannel {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : ""
-    };
+    const obj = createBaseFeeEnabledChannel();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
   },
   toJSON(message: FeeEnabledChannel): unknown {
     const obj: any = {};
@@ -349,11 +349,11 @@ export const RegisteredPayee = {
     return message;
   },
   fromJSON(object: any): RegisteredPayee {
-    return {
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      payee: isSet(object.payee) ? String(object.payee) : ""
-    };
+    const obj = createBaseRegisteredPayee();
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
+    if (isSet(object.payee)) obj.payee = String(object.payee);
+    return obj;
   },
   toJSON(message: RegisteredPayee): unknown {
     const obj: any = {};
@@ -435,11 +435,11 @@ export const RegisteredCounterpartyPayee = {
     return message;
   },
   fromJSON(object: any): RegisteredCounterpartyPayee {
-    return {
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      counterpartyPayee: isSet(object.counterpartyPayee) ? String(object.counterpartyPayee) : ""
-    };
+    const obj = createBaseRegisteredCounterpartyPayee();
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.relayer)) obj.relayer = String(object.relayer);
+    if (isSet(object.counterpartyPayee)) obj.counterpartyPayee = String(object.counterpartyPayee);
+    return obj;
   },
   toJSON(message: RegisteredCounterpartyPayee): unknown {
     const obj: any = {};
@@ -507,9 +507,9 @@ export const ForwardRelayerAddress = {
     return message;
   },
   fromJSON(object: any): ForwardRelayerAddress {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseForwardRelayerAddress();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: ForwardRelayerAddress): unknown {
     const obj: any = {};

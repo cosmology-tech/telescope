@@ -105,14 +105,14 @@ export const ValidatorSigningInfo = {
     return message;
   },
   fromJSON(object: any): ValidatorSigningInfo {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      startHeight: isSet(object.startHeight) ? Long.fromValue(object.startHeight) : Long.ZERO,
-      indexOffset: isSet(object.indexOffset) ? Long.fromValue(object.indexOffset) : Long.ZERO,
-      jailedUntil: isSet(object.jailedUntil) ? fromJsonTimestamp(object.jailedUntil) : undefined,
-      tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missedBlocksCounter: isSet(object.missedBlocksCounter) ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO
-    };
+    const obj = createBaseValidatorSigningInfo();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.startHeight)) obj.startHeight = Long.fromValue(object.startHeight);
+    if (isSet(object.indexOffset)) obj.indexOffset = Long.fromValue(object.indexOffset);
+    if (isSet(object.jailedUntil)) obj.jailedUntil = fromJsonTimestamp(object.jailedUntil);
+    if (isSet(object.tombstoned)) obj.tombstoned = Boolean(object.tombstoned);
+    if (isSet(object.missedBlocksCounter)) obj.missedBlocksCounter = Long.fromValue(object.missedBlocksCounter);
+    return obj;
   },
   toJSON(message: ValidatorSigningInfo): unknown {
     const obj: any = {};
@@ -129,7 +129,7 @@ export const ValidatorSigningInfo = {
     message.address = object.address ?? "";
     message.startHeight = object.startHeight !== undefined && object.startHeight !== null ? Long.fromValue(object.startHeight) : Long.ZERO;
     message.indexOffset = object.indexOffset !== undefined && object.indexOffset !== null ? Long.fromValue(object.indexOffset) : Long.ZERO;
-    message.jailedUntil = object.jailedUntil !== undefined && object.jailedUntil !== null ? Timestamp.fromPartial(object.jailedUntil) : undefined;
+    message.jailedUntil = object.jailedUntil !== undefined && object.jailedUntil !== null ? Timestamp.fromPartial(object.jailedUntil) : Timestamp.fromPartial({});
     message.tombstoned = object.tombstoned ?? false;
     message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO;
     return message;
@@ -193,13 +193,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      signedBlocksWindow: isSet(object.signedBlocksWindow) ? Long.fromValue(object.signedBlocksWindow) : Long.ZERO,
-      minSignedPerWindow: isSet(object.minSignedPerWindow) ? bytesFromBase64(object.minSignedPerWindow) : new Uint8Array(),
-      downtimeJailDuration: isSet(object.downtimeJailDuration) ? Duration.fromJSON(object.downtimeJailDuration) : undefined,
-      slashFractionDoubleSign: isSet(object.slashFractionDoubleSign) ? bytesFromBase64(object.slashFractionDoubleSign) : new Uint8Array(),
-      slashFractionDowntime: isSet(object.slashFractionDowntime) ? bytesFromBase64(object.slashFractionDowntime) : new Uint8Array()
-    };
+    const obj = createBaseParams();
+    if (isSet(object.signedBlocksWindow)) obj.signedBlocksWindow = Long.fromValue(object.signedBlocksWindow);
+    if (isSet(object.minSignedPerWindow)) obj.minSignedPerWindow = bytesFromBase64(object.minSignedPerWindow);
+    if (isSet(object.downtimeJailDuration)) obj.downtimeJailDuration = Duration.fromJSON(object.downtimeJailDuration);
+    if (isSet(object.slashFractionDoubleSign)) obj.slashFractionDoubleSign = bytesFromBase64(object.slashFractionDoubleSign);
+    if (isSet(object.slashFractionDowntime)) obj.slashFractionDowntime = bytesFromBase64(object.slashFractionDowntime);
+    return obj;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
@@ -214,7 +214,7 @@ export const Params = {
     const message = createBaseParams();
     message.signedBlocksWindow = object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null ? Long.fromValue(object.signedBlocksWindow) : Long.ZERO;
     message.minSignedPerWindow = object.minSignedPerWindow ?? new Uint8Array();
-    message.downtimeJailDuration = object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null ? Duration.fromPartial(object.downtimeJailDuration) : undefined;
+    message.downtimeJailDuration = object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null ? Duration.fromPartial(object.downtimeJailDuration) : Duration.fromPartial({});
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
     message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;

@@ -49,9 +49,9 @@ export const UserValidatorPreferencesRequest = {
     return message;
   },
   fromJSON(object: any): UserValidatorPreferencesRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseUserValidatorPreferencesRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: UserValidatorPreferencesRequest): unknown {
     const obj: any = {};
@@ -109,9 +109,9 @@ export const UserValidatorPreferencesResponse = {
     return message;
   },
   fromJSON(object: any): UserValidatorPreferencesResponse {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
-    };
+    const obj = createBaseUserValidatorPreferencesResponse();
+    if (Array.isArray(object?.preferences)) object.preferences.map((e: any) => ValidatorPreference.fromJSON(e));
+    return obj;
   },
   toJSON(message: UserValidatorPreferencesResponse): unknown {
     const obj: any = {};
