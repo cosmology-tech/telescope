@@ -156,7 +156,7 @@ export const fromPartial = {
         return fromPartial.long(args);
     },
 
-    // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
+    // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
     type(args: FromPartialMethod) {
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
