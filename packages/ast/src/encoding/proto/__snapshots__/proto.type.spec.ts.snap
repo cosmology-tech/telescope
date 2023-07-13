@@ -56,6 +56,27 @@ exports[`createCreateProtoType Grant 1`] = `
 }"
 `;
 
+exports[`createCreateProtoType Header 1`] = `
+"function createBaseHeader(): Header {
+  return {
+    version: Consensus.fromPartial({}),
+    chainId: "",
+    height: Long.ZERO,
+    time: new Date(),
+    lastBlockId: BlockID.fromPartial({}),
+    lastCommitHash: new Uint8Array(),
+    dataHash: new Uint8Array(),
+    validatorsHash: new Uint8Array(),
+    nextValidatorsHash: new Uint8Array(),
+    consensusHash: new Uint8Array(),
+    appHash: new Uint8Array(),
+    lastResultsHash: new Uint8Array(),
+    evidenceHash: new Uint8Array(),
+    proposerAddress: new Uint8Array()
+  };
+}"
+`;
+
 exports[`createCreateProtoType MsgJoinPool 1`] = `
 "function createBaseMsgJoinPool(): MsgJoinPool {
   return {
