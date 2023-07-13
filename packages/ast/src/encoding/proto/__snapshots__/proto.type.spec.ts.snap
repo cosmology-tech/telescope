@@ -50,7 +50,7 @@ export interface authz {
 exports[`createCreateProtoType Grant 1`] = `
 "function createBaseGrant(): Grant {
   return {
-    authorization: undefined,
+    authorization: Any.fromPartial({}),
     expiration: undefined
   };
 }"
