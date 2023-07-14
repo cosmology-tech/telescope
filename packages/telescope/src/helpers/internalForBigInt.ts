@@ -249,4 +249,9 @@ export function fromJsonTimestamp(o: any): Timestamp {
 function numberToLong(number: number) {
   return BigInt(number);
 }
+
+// @ts-ignore
+BigInt.prototype["toJSON"] = function () {
+  return this.toString();
+};
 `;
