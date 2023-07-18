@@ -451,19 +451,29 @@ export const getDefaultTSTypeFromProtoType = (
 
         // OTHER TYPES
         case 'google.protobuf.Timestamp':
-            return t.identifier('undefined');
-        case 'google.protobuf.Duration':
-            return t.identifier('undefined');
-        case 'google.protobuf.Any':
-            return t.identifier('undefined');
+            if(context.pluginValue('prototypes.typingsFormat.timestamp') === 'timestamp') {
+                return t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Timestamp'),
+                        t.identifier('fromPartial')
+                    ),
+                [t.objectExpression([])]
+                )
+            }
+            if(context.pluginValue('prototypes.typingsFormat.timestamp') === 'date') {
+                return t.newExpression(
+                    t.identifier('Date'),
+                    []
+                );
+            }
+        // TODO: add cases for this later on
+        // case 'google.protobuf.Duration':
+        //     return t.identifier('undefined');
+
 
         case 'cosmos.base.v1beta1.Coins':
             return t.arrayExpression([]);
-        case 'cosmos.base.v1beta1.Coin':
-            return t.identifier('undefined');
         default:
-            // console.warn('getDefaultTSTypeFromProtoType() type not found, it\'ll probably still work but need review: ' + field.type);
-            // return t.identifier('undefined');
             if (!field.type) {
                 console.warn('Undefined! Can\'t get field of type:', field);
                 return t.identifier('undefined');

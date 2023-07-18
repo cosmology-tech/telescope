@@ -2,6 +2,7 @@ import { createProtoType, createCreateProtoType } from './interface';
 import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
 import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
 import types from '../../../../../__fixtures__/proto-json/tendermint/abci/types.json';
+import types_tendermint from '../../../../../__fixtures__/proto-json/tendermint/types/types.json'
 
 import { traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions } from '@osmonauts/types'
@@ -69,6 +70,19 @@ describe('createCreateProtoType', () => {
             context,
             'ValidatorUpdate',
             getNestedProto(types).ValidatorUpdate
+        ));
+    });
+});
+//create type for Tendermint block header
+describe('createCreateProtoType', () => {
+    const ref = store.findProto('tendermint/types/types.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+       
+    it('Header', () => {
+        expectCode(createCreateProtoType(
+            context,
+            'Header',
+            getNestedProto(types_tendermint).Header
         ));
     });
 });
