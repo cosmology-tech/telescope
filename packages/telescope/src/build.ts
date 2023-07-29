@@ -21,6 +21,7 @@ import {
     ProtoParseContext,
     createTypeRegistry,
     createRegistryLoader,
+
     // helper
     createHelperObject,
     createInterfaceDecoder,
