@@ -5,14 +5,6 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 import * as path from 'path'
 import * as dotty from 'dotty';
 
-const OPTIONS_FIELD_MAPPINGS = {
-  build: "prototypes.includes.protos",
-  nobuild: "prototypes.excluded.protos",
-  includeAminos: "aminoEncoding.enabled",
-  includeLCDClients: "lcdClients.enabled",
-  includeRPCClients: "rpcClients.enabled",
-};
-
 export default async (argv: {
   [key: string]: string | string[]
 }) => {
@@ -26,6 +18,71 @@ export default async (argv: {
     dotty.remove(defaultOptions, "packages");
 
     options = defaultOptions;
+  } else {
+    options = {
+      // global options (can be overridden through plugins)
+
+
+      interfaces: {
+        enabled: false,
+        useUnionTypes: false,
+      },
+
+      prototypes: {
+        enabled: true,
+        parser: {
+          keepCase: false
+        },
+        methods: {
+          fromJSON: false,
+          toJSON: false,
+          encode: true,
+          decode: true,
+          fromPartial: true,
+          toAmino: true,
+          fromAmino: true,
+          fromProto: true,
+          toProto: true
+        },
+        addTypeUrlToDecoders: true,
+        addTypeUrlToObjects: true,
+
+        typingsFormat: {
+          duration: 'duration',
+          timestamp: 'date',
+          useExact: false,
+          useDeepPartial: false,
+          num64: 'bigint',
+          customTypes: {
+            useCosmosSDKDec: true
+          }
+        },
+      },
+
+      bundle: {
+        enabled: true
+      },
+
+      stargateClients: {
+        enabled: true,
+        includeCosmosDefaultTypes: true
+      },
+
+      aminoEncoding: {
+        enabled: true,
+        useRecursiveV2encoding: false
+      },
+
+      lcdClients: {
+        enabled: true
+      },
+
+      rpcClients: {
+        enabled: true,
+        camelCase: true
+      }
+    }
+
   }
 
   const questions = [
@@ -42,36 +99,6 @@ export default async (argv: {
       name: 'outPath',
       message: 'where is the output directory?',
       default: './src/codegen'
-    },
-    {
-      _: true,
-      type: 'path',
-      name: 'build',
-      message: 'which files to include. ex: osmosis/**/gamm/**/*.proto or cosmos/bank/v1beta1/bank.proto',
-    },
-    {
-      _: true,
-      type: 'path',
-      name: 'nobuild',
-      message: 'which files to exclude. ex: osmosis/**/gamm/**/*.proto or cosmos/bank/v1beta1/bank.proto',
-    },
-    {
-      type: 'confirm',
-      name: 'includeAminos',
-      message: 'output amino messages?',
-      default: true
-    },
-    {
-      type: 'confirm',
-      name: 'includeLCDClients',
-      message: 'output LCD Clients?',
-      default: true
-    },
-    {
-      type: 'confirm',
-      name: 'includeRPCClients',
-      message: 'output RPC clients?',
-      default: true
     }
   ];
 
@@ -100,23 +127,20 @@ export default async (argv: {
       ...(configJson.protoDirs ?? []),
     ];
 
-    if(configJson.outPath) {
+    if (configJson.outPath) {
       argv.outPath = configJson.outPath;
     }
 
     // For now, useDefaults will be override by --config
-    if(configJson.options){
+    if (configJson.options) {
       options = configJson.options;
     }
   }
 
-  // map options to argv
-  mapOptionsToArgv(options, argv, OPTIONS_FIELD_MAPPINGS);
 
   let {
     protoDirs,
     outPath,
-    ...answers
   } = await prompt(questions, argv);
 
   if (!Array.isArray(protoDirs)) {
@@ -125,9 +149,6 @@ export default async (argv: {
 
   // remove any duplicate protodirs
   protoDirs = [...new Set(protoDirs)];
-
-  // map argv back to configs
-  mapArgvToOptions(answers, options, OPTIONS_FIELD_MAPPINGS);
 
   writeFileSync(
     process.cwd() + '/.telescope.json',
@@ -147,51 +168,3 @@ export default async (argv: {
 
   console.log(`✨ transpilation successful!`);
 };
-
-function mapOptionsToArgv(
-  options: {
-    [key: string]: unknown;
-  },
-  argv: {
-    [key: string]: string | string[];
-  },
-  mappings: {
-    [key: string]: string;
-  }
-) {
-  for (const argvKey in mappings) {
-    if (Object.prototype.hasOwnProperty.call(mappings, argvKey)) {
-      const optionKey = mappings[argvKey];
-
-      const value = dotty.get(options, optionKey);
-
-      if(value){
-        dotty.put(argv, argvKey, value)
-      }
-    }
-  }
-}
-
-function mapArgvToOptions(
-  argv: {
-    [key: string]: string | string[];
-  },
-  options: {
-    [key: string]: unknown;
-  },
-  mappings: {
-    [key: string]: string;
-  }
-) {
-  for (const argvKey in mappings) {
-    if (Object.prototype.hasOwnProperty.call(mappings, argvKey)) {
-      const optionKey = mappings[argvKey];
-
-      const value = dotty.get(argv, argvKey);
-
-      if(value){
-        dotty.put(options, optionKey, value)
-      }
-    }
-  }
-}
