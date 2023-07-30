@@ -1,5 +1,5 @@
 import { join } from 'path';
-import telescope from '@osmonauts/telescope';
+import telescope from '@cosmology/telescope';
 import { rimrafSync as rimraf } from 'rimraf';
 
 const protoDirs = [join(__dirname, '/../../../__fixtures__/chain1')];

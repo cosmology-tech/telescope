@@ -5,4 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # 0.93.0 (2023-07-30)
 
-**Note:** Version bump only for package @osmonauts/starship-test
+**Note:** Version bump only for package @cosmology/starship-test
