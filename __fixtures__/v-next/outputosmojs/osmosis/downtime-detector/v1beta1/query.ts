@@ -28,7 +28,7 @@ export interface RecoveredSinceDowntimeOfLengthResponseSDKType {
 function createBaseRecoveredSinceDowntimeOfLengthRequest(): RecoveredSinceDowntimeOfLengthRequest {
   return {
     downtime: 0,
-    recovery: undefined
+    recovery: Duration.fromPartial({})
   };
 }
 export const RecoveredSinceDowntimeOfLengthRequest = {

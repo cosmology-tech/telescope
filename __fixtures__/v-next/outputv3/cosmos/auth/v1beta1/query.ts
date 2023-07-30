@@ -764,7 +764,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryAccountResponse(): QueryAccountResponse {
   return {
-    account: undefined
+    account: Any.fromPartial({})
   };
 }
 export const QueryAccountResponse = {

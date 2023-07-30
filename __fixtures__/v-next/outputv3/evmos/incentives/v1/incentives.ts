@@ -165,7 +165,7 @@ function createBaseIncentive(): Incentive {
     contract: "",
     allocations: [],
     epochs: 0,
-    startTime: undefined,
+    startTime: new Date(),
     totalGas: Long.UZERO
   };
 }

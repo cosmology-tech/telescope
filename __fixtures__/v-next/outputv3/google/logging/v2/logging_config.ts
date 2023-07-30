@@ -3037,8 +3037,8 @@ function createBaseLogBucket(): LogBucket {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: new Date(),
+    updateTime: new Date(),
     retentionDays: 0,
     locked: false,
     lifecycleState: 0,
@@ -3242,8 +3242,8 @@ function createBaseLogView(): LogView {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: new Date(),
+    updateTime: new Date(),
     filter: ""
   };
 }
@@ -3387,8 +3387,8 @@ function createBaseLogSink(): LogSink {
     writerIdentity: "",
     includeChildren: false,
     bigqueryOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: new Date(),
+    updateTime: new Date()
   };
 }
 export const LogSink = {
@@ -5606,8 +5606,8 @@ function createBaseLogExclusion(): LogExclusion {
     description: "",
     filter: "",
     disabled: false,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: new Date(),
+    updateTime: new Date()
   };
 }
 export const LogExclusion = {
@@ -7070,8 +7070,8 @@ export const CopyLogEntriesRequest = {
 };
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
-    startTime: undefined,
-    endTime: undefined,
+    startTime: new Date(),
+    endTime: new Date(),
     state: 0,
     cancellationRequested: false,
     request: CopyLogEntriesRequest.fromPartial({}),

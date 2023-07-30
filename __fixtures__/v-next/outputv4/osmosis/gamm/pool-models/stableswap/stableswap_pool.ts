@@ -138,7 +138,7 @@ function createBasePool(): Pool {
     id: BigInt(0),
     poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
-    totalShares: undefined,
+    totalShares: Coin.fromPartial({}),
     poolLiquidity: [],
     scalingFactors: [],
     scalingFactorController: ""

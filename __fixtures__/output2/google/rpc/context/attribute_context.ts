@@ -901,7 +901,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     host: "",
     scheme: "",
     query: "",
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     size: Long.ZERO,
     protocol: "",
     reason: "",
@@ -1130,8 +1130,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
     code: Long.ZERO,
     size: Long.ZERO,
     headers: {},
-    time: undefined,
-    backendLatency: undefined
+    time: Timestamp.fromPartial({}),
+    backendLatency: Duration.fromPartial({})
   };
 }
 export const AttributeContext_Response = {
@@ -1352,9 +1352,9 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
     uid: "",
     annotations: {},
     displayName: "",
-    createTime: undefined,
-    updateTime: undefined,
-    deleteTime: undefined,
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
+    deleteTime: Timestamp.fromPartial({}),
     etag: "",
     location: ""
   };

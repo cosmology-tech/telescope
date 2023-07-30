@@ -397,7 +397,7 @@ function createBaseFractionalPayment(): FractionalPayment {
     state: 0,
     rate: DecCoin.fromPartial({}),
     balance: DecCoin.fromPartial({}),
-    withdrawn: undefined
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const FractionalPayment = {

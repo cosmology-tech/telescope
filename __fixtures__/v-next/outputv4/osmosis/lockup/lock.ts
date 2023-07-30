@@ -164,8 +164,8 @@ function createBasePeriodLock(): PeriodLock {
   return {
     ID: BigInt(0),
     owner: "",
-    duration: undefined,
-    endTime: undefined,
+    duration: Duration.fromPartial({}),
+    endTime: new Date(),
     coins: []
   };
 }
@@ -284,8 +284,8 @@ function createBaseQueryCondition(): QueryCondition {
   return {
     lockQueryType: 0,
     denom: "",
-    duration: undefined,
-    timestamp: undefined
+    duration: Duration.fromPartial({}),
+    timestamp: new Date()
   };
 }
 export const QueryCondition = {
@@ -383,8 +383,8 @@ function createBaseSyntheticLock(): SyntheticLock {
   return {
     underlyingLockId: BigInt(0),
     synthDenom: "",
-    endTime: undefined,
-    duration: undefined
+    endTime: new Date(),
+    duration: Duration.fromPartial({})
   };
 }
 export const SyntheticLock = {

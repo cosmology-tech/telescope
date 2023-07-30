@@ -147,7 +147,7 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
     id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array(),
-    deposit: undefined
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateDeployment = {
@@ -295,7 +295,7 @@ export const MsgCreateDeploymentResponse = {
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
     id: DeploymentID.fromPartial({}),
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgDepositDeployment = {

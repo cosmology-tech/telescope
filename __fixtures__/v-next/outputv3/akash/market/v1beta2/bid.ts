@@ -246,7 +246,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
     order: OrderID.fromPartial({}),
     provider: "",
     price: DecCoin.fromPartial({}),
-    deposit: undefined
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateBid = {

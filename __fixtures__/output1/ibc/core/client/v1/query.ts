@@ -322,7 +322,7 @@ export const QueryClientStateRequest = {
 };
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   return {
-    clientState: undefined,
+    clientState: Any.fromPartial({}),
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
@@ -622,7 +622,7 @@ export const QueryConsensusStateRequest = {
 };
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   return {
-    consensusState: undefined,
+    consensusState: Any.fromPartial({}),
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
@@ -1088,7 +1088,7 @@ export const QueryUpgradedClientStateRequest = {
 };
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
   return {
-    upgradedClientState: undefined
+    upgradedClientState: Any.fromPartial({})
   };
 }
 export const QueryUpgradedClientStateResponse = {
@@ -1183,7 +1183,7 @@ export const QueryUpgradedConsensusStateRequest = {
 };
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return {
-    upgradedConsensusState: undefined
+    upgradedConsensusState: Any.fromPartial({})
   };
 }
 export const QueryUpgradedConsensusStateResponse = {

@@ -11,7 +11,7 @@ export interface Params {
 }
 function createBaseParams(): Params {
   return {
-    bidMinDeposit: undefined,
+    bidMinDeposit: Coin.fromPartial({}),
     orderMaxBids: 0
   };
 }

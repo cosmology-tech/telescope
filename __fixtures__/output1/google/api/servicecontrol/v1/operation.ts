@@ -223,8 +223,8 @@ function createBaseOperation(): Operation {
     operationId: "",
     operationName: "",
     consumerId: "",
-    startTime: undefined,
-    endTime: undefined,
+    startTime: new Date(),
+    endTime: new Date(),
     labels: {},
     metricValueSets: [],
     logEntries: [],
@@ -331,7 +331,7 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metricValueSets) ? object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e)) : [],
       logEntries: Array.isArray(object?.logEntries) ? object.logEntries.map((e: any) => LogEntry.fromJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -402,7 +402,7 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDK(e)) : [],
       logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },

@@ -677,7 +677,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
       configId: isSet(object.configId) ? String(object.configId) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetServiceConfigRequest): unknown {
@@ -1230,8 +1230,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: undefined,
-    oldConfig: undefined
+    newConfig: Any.fromPartial({}),
+    oldConfig: Any.fromPartial({})
   };
 }
 export const GenerateConfigReportRequest = {

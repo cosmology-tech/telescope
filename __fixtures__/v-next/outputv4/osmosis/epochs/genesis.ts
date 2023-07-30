@@ -85,10 +85,10 @@ export interface GenesisStateSDKType {
 function createBaseEpochInfo(): EpochInfo {
   return {
     identifier: "",
-    startTime: undefined,
-    duration: undefined,
+    startTime: new Date(),
+    duration: Duration.fromPartial({}),
     currentEpoch: BigInt(0),
-    currentEpochStartTime: undefined,
+    currentEpochStartTime: new Date(),
     epochCountingStarted: false,
     currentEpochStartHeight: BigInt(0)
   };

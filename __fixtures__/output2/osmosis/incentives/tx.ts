@@ -50,7 +50,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
     owner: "",
     distributeTo: QueryCondition.fromPartial({}),
     coins: [],
-    startTime: undefined,
+    startTime: Timestamp.fromPartial({}),
     numEpochsPaidOver: Long.UZERO
   };
 }
