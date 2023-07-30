@@ -7,7 +7,7 @@ export interface ArithmeticTwapRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
   endTime?: Date;
 }
 export interface ArithmeticTwapRequestProtoMsg {
@@ -29,7 +29,7 @@ export interface ArithmeticTwapRequestSDKType {
   pool_id: Long;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
   end_time?: Date;
 }
 export interface ArithmeticTwapResponse {
@@ -53,7 +53,7 @@ export interface ArithmeticTwapToNowRequest {
   poolId: Long;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
 }
 export interface ArithmeticTwapToNowRequestProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest";
@@ -73,7 +73,7 @@ export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: Long;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
 }
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
@@ -104,7 +104,7 @@ export interface ParamsRequestAminoMsg {
 }
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface ParamsResponseProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.ParamsResponse";
@@ -118,7 +118,7 @@ export interface ParamsResponseAminoMsg {
   value: ParamsResponseAmino;
 }
 export interface ParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   return {
@@ -229,8 +229,8 @@ export const ArithmeticTwapRequest = {
       poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined
+      startTime: object.start_time,
+      endTime: object?.end_time
     };
   },
   toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
@@ -238,8 +238,8 @@ export const ArithmeticTwapRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
-    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
@@ -449,7 +449,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
+      startTime: object.start_time
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
@@ -457,7 +457,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
@@ -642,7 +642,7 @@ export const ParamsRequest = {
 };
 function createBaseParamsResponse(): ParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ParamsResponse = {

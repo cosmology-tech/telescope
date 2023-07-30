@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 export interface MsgGrant {
   granter: string;
   grantee: string;
-  grant?: Grant;
+  grant: Grant;
 }
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -19,7 +19,7 @@ export interface MsgGrant {
 export interface MsgGrantSDKType {
   granter: string;
   grantee: string;
-  grant?: GrantSDKType;
+  grant: GrantSDKType;
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
@@ -82,7 +82,7 @@ function createBaseMsgGrant(): MsgGrant {
   return {
     granter: "",
     grantee: "",
-    grant: undefined
+    grant: Grant.fromPartial({})
   };
 }
 export const MsgGrant = {

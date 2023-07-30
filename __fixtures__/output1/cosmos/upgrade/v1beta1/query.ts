@@ -18,14 +18,14 @@ export interface QueryCurrentPlanRequestSDKType {}
  */
 export interface QueryCurrentPlanResponse {
   /** plan is the current upgrade plan. */
-  plan?: Plan;
+  plan: Plan;
 }
 /**
  * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
  * method.
  */
 export interface QueryCurrentPlanResponseSDKType {
-  plan?: PlanSDKType;
+  plan: PlanSDKType;
 }
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
@@ -206,7 +206,7 @@ export const QueryCurrentPlanRequest = {
 };
 function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
   return {
-    plan: undefined
+    plan: Plan.fromPartial({})
   };
 }
 export const QueryCurrentPlanResponse = {

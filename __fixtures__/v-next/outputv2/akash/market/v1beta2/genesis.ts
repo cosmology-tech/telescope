@@ -8,7 +8,7 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface GenesisState {
   orders: Order[];
   leases: Lease[];
-  params?: Params;
+  params: Params;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.market.v1beta2.GenesisState";
@@ -28,13 +28,13 @@ export interface GenesisStateAminoMsg {
 export interface GenesisStateSDKType {
   orders: OrderSDKType[];
   leases: LeaseSDKType[];
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
     orders: [],
     leases: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

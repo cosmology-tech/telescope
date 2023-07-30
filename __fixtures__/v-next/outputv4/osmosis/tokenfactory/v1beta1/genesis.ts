@@ -6,12 +6,12 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisState {
   /** params defines the paramaters of the module. */
-  params?: Params;
+  params: Params;
   factoryDenoms: GenesisDenom[];
 }
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   factory_denoms: GenesisDenomSDKType[];
 }
 /**
@@ -21,7 +21,7 @@ export interface GenesisStateSDKType {
  */
 export interface GenesisDenom {
   denom: string;
-  authorityMetadata?: DenomAuthorityMetadata;
+  authorityMetadata: DenomAuthorityMetadata;
 }
 /**
  * GenesisDenom defines a tokenfactory denom that is defined within genesis
@@ -30,11 +30,11 @@ export interface GenesisDenom {
  */
 export interface GenesisDenomSDKType {
   denom: string;
-  authority_metadata?: DenomAuthorityMetadataSDKType;
+  authority_metadata: DenomAuthorityMetadataSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     factoryDenoms: []
   };
 }
@@ -116,7 +116,7 @@ export const GenesisState = {
 function createBaseGenesisDenom(): GenesisDenom {
   return {
     denom: "",
-    authorityMetadata: undefined
+    authorityMetadata: DenomAuthorityMetadata.fromPartial({})
   };
 }
 export const GenesisDenom = {

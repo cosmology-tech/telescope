@@ -50,7 +50,7 @@ export interface DeploymentID {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID;
+  deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
@@ -118,7 +118,7 @@ export const DeploymentID = {
 };
 function createBaseDeployment(): Deployment {
   return {
-    deploymentId: undefined,
+    deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
     createdAt: Long.ZERO

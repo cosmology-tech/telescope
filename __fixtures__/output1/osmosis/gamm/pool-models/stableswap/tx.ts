@@ -6,7 +6,7 @@ export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
   sender: string;
-  poolParams?: PoolParams;
+  poolParams: PoolParams;
   initialPoolLiquidity: Coin[];
   scalingFactors: Long[];
   futurePoolGovernor: string;
@@ -15,7 +15,7 @@ export interface MsgCreateStableswapPool {
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
-  pool_params?: PoolParamsSDKType;
+  pool_params: PoolParamsSDKType;
   initial_pool_liquidity: CoinSDKType[];
   scaling_factors: Long[];
   future_pool_governor: string;
@@ -52,7 +52,7 @@ export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {
     sender: "",
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     initialPoolLiquidity: [],
     scalingFactors: [],
     futurePoolGovernor: "",

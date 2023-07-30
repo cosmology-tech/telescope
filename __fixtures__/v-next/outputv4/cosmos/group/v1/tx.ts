@@ -138,14 +138,14 @@ export interface MsgCreateGroupPolicy {
   /** metadata is any arbitrary metadata attached to the group policy. */
   metadata: string;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
 export interface MsgCreateGroupPolicySDKType {
   admin: string;
   group_id: bigint;
   metadata: string;
-  decision_policy?: AnySDKType;
+  decision_policy: AnySDKType;
 }
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
 export interface MsgCreateGroupPolicyResponse {
@@ -184,7 +184,7 @@ export interface MsgCreateGroupWithPolicy {
   /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
   groupPolicyAsAdmin: boolean;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
 export interface MsgCreateGroupWithPolicySDKType {
@@ -193,7 +193,7 @@ export interface MsgCreateGroupWithPolicySDKType {
   group_metadata: string;
   group_policy_metadata: string;
   group_policy_as_admin: boolean;
-  decision_policy?: AnySDKType;
+  decision_policy: AnySDKType;
 }
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponse {
@@ -218,13 +218,13 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   /** address is the account address of group policy. */
   address: string;
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
 export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
   admin: string;
   address: string;
-  decision_policy?: AnySDKType;
+  decision_policy: AnySDKType;
 }
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
@@ -1726,7 +1726,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgSubmitProposal): unknown {
@@ -1761,7 +1761,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
       metadata: object?.metadata,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   fromSDKJSON(object: any): MsgSubmitProposalSDKType {
@@ -1770,7 +1770,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
@@ -2028,9 +2028,9 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgVote): unknown {
@@ -2055,18 +2055,18 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata,
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   fromSDKJSON(object: any): MsgVoteSDKType {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {

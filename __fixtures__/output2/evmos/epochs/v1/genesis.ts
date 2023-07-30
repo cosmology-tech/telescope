@@ -7,10 +7,10 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
-  startTime?: Timestamp;
-  duration?: Duration;
+  startTime: Timestamp;
+  duration: Duration;
   currentEpoch: Long;
-  currentEpochStartTime?: Timestamp;
+  currentEpochStartTime: Timestamp;
   epochCountingStarted: boolean;
   currentEpochStartHeight: Long;
 }

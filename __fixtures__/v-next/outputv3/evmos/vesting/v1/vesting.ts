@@ -14,11 +14,11 @@ export interface ClawbackVestingAccount {
    * base_vesting_account implements the VestingAccount interface. It contains
    * all the necessary fields needed for any vesting account implementation
    */
-  baseVestingAccount?: BaseVestingAccount;
+  baseVestingAccount: BaseVestingAccount;
   /** funder_address specifies the account which can perform clawback */
   funderAddress: string;
   /** start_time defines the time at which the vesting period begins */
-  startTime?: Date;
+  startTime: Date;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockupPeriods: Period[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
@@ -60,15 +60,15 @@ export interface ClawbackVestingAccountAminoMsg {
  * of unvested tokens, or a combination (tokens vest, but are still locked).
  */
 export interface ClawbackVestingAccountSDKType {
-  base_vesting_account?: BaseVestingAccountSDKType;
+  base_vesting_account: BaseVestingAccountSDKType;
   funder_address: string;
-  start_time?: Date;
+  start_time: Date;
   lockup_periods: PeriodSDKType[];
   vesting_periods: PeriodSDKType[];
 }
 function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
   return {
-    baseVestingAccount: undefined,
+    baseVestingAccount: BaseVestingAccount.fromPartial({}),
     funderAddress: "",
     startTime: undefined,
     lockupPeriods: [],
@@ -189,7 +189,7 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
       funderAddress: object.funder_address,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
@@ -198,7 +198,7 @@ export const ClawbackVestingAccount = {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
     obj.funder_address = message.funderAddress;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {

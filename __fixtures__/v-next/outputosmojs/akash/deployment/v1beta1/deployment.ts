@@ -48,17 +48,17 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin | undefined;
+  deposit: Coin | undefined;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit?: CoinSDKType | undefined;
+  deposit: CoinSDKType | undefined;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
@@ -66,13 +66,13 @@ export interface MsgCreateDeploymentResponse {}
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID | undefined;
-  amount?: Coin | undefined;
+  id: DeploymentID | undefined;
+  amount: Coin | undefined;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
-  amount?: CoinSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
+  amount: CoinSDKType | undefined;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
@@ -80,13 +80,13 @@ export interface MsgDepositDeploymentResponse {}
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
 }
@@ -96,11 +96,11 @@ export interface MsgUpdateDeploymentResponse {}
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID | undefined;
+  id: DeploymentID | undefined;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id: DeploymentIDSDKType | undefined;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
@@ -118,14 +118,14 @@ export interface DeploymentIDSDKType {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID | undefined;
+  deploymentId: DeploymentID | undefined;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: bigint;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType | undefined;
+  deployment_id: DeploymentIDSDKType | undefined;
   state: Deployment_State;
   version: Uint8Array;
   created_at: bigint;
@@ -144,7 +144,7 @@ export interface DeploymentFiltersSDKType {
 }
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array(),
     deposit: undefined
@@ -294,7 +294,7 @@ export const MsgCreateDeploymentResponse = {
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     amount: undefined
   };
 }
@@ -410,7 +410,7 @@ export const MsgDepositDeploymentResponse = {
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array()
   };
@@ -547,7 +547,7 @@ export const MsgUpdateDeploymentResponse = {
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const MsgCloseDeployment = {
@@ -723,7 +723,7 @@ export const DeploymentID = {
 };
 function createBaseDeployment(): Deployment {
   return {
-    deploymentId: undefined,
+    deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
     createdAt: BigInt(0)
@@ -774,7 +774,7 @@ export const Deployment = {
   fromJSON(object: any): Deployment {
     return {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
@@ -798,7 +798,7 @@ export const Deployment = {
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
       deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object?.version,
       createdAt: object?.created_at
     };
@@ -806,7 +806,7 @@ export const Deployment = {
   fromSDKJSON(object: any): DeploymentSDKType {
     return {
       deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };

@@ -5,10 +5,10 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
-  startTime?: Date;
-  duration?: Duration;
+  startTime: Date;
+  duration: Duration;
   currentEpoch: Long;
-  currentEpochStartTime?: Date;
+  currentEpochStartTime: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: Long;
 }
@@ -31,10 +31,10 @@ export interface EpochInfoAminoMsg {
 }
 export interface EpochInfoSDKType {
   identifier: string;
-  start_time?: Date;
-  duration?: DurationSDKType;
+  start_time: Date;
+  duration: DurationSDKType;
   current_epoch: Long;
-  current_epoch_start_time?: Date;
+  current_epoch_start_time: Date;
   epoch_counting_started: boolean;
   current_epoch_start_height: Long;
 }
@@ -188,10 +188,10 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       currentEpoch: Long.fromString(object.current_epoch),
-      currentEpochStartTime: object?.current_epoch_start_time ? Timestamp.fromAmino(object.current_epoch_start_time) : undefined,
+      currentEpochStartTime: object.current_epoch_start_time,
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: Long.fromString(object.current_epoch_start_height)
     };
@@ -199,10 +199,10 @@ export const EpochInfo = {
   toAmino(message: EpochInfo): EpochInfoAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(message.currentEpochStartTime) : undefined;
+    obj.current_epoch_start_time = message.currentEpochStartTime;
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;

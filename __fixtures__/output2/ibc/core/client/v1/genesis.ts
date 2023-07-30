@@ -12,7 +12,7 @@ export interface GenesisState {
   clientsConsensus: ClientConsensusStates[];
   /** metadata from each client */
   clientsMetadata: IdentifiedGenesisMetadata[];
-  params?: Params;
+  params: Params;
   /** create localhost on initialization */
   createLocalhost: boolean;
   /** the sequence for the next generated client identifier */
@@ -41,7 +41,7 @@ function createBaseGenesisState(): GenesisState {
     clients: [],
     clientsConsensus: [],
     clientsMetadata: [],
-    params: undefined,
+    params: Params.fromPartial({}),
     createLocalhost: false,
     nextClientSequence: Long.UZERO
   };

@@ -4,7 +4,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgCloseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup";
@@ -20,7 +20,7 @@ export interface MsgCloseGroupAminoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
@@ -38,7 +38,7 @@ export interface MsgCloseGroupResponseAminoMsg {
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgPauseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup";
@@ -54,7 +54,7 @@ export interface MsgPauseGroupAminoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
@@ -72,7 +72,7 @@ export interface MsgPauseGroupResponseAminoMsg {
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgStartGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgStartGroup";
@@ -88,7 +88,7 @@ export interface MsgStartGroupAminoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -106,7 +106,7 @@ export interface MsgStartGroupResponseAminoMsg {
 export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgCloseGroup = {
@@ -250,7 +250,7 @@ export const MsgCloseGroupResponse = {
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgPauseGroup = {
@@ -394,7 +394,7 @@ export const MsgPauseGroupResponse = {
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgStartGroup = {

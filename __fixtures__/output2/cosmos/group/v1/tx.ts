@@ -105,7 +105,7 @@ export interface MsgCreateGroupPolicy {
   /** metadata is any arbitrary metadata attached to the group policy. */
   metadata: string;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
 export interface MsgCreateGroupPolicyResponse {
@@ -134,7 +134,7 @@ export interface MsgCreateGroupWithPolicy {
   /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
   groupPolicyAsAdmin: boolean;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponse {
@@ -152,7 +152,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   /** address is the account address of group policy. */
   address: string;
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}

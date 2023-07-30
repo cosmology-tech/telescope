@@ -6,7 +6,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
-  deploymentMinDeposit?: Coin;
+  deploymentMinDeposit: Coin;
 }
 function createBaseParams(): Params {
   return {

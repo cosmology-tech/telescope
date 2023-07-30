@@ -5,15 +5,15 @@ export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** GenesisState defines the ibc-rate-limit module's genesis state. */
 export interface GenesisState {
   /** params are all the parameters of the module */
-  params?: Params;
+  params: Params;
 }
 /** GenesisState defines the ibc-rate-limit module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

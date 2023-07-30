@@ -22,7 +22,6 @@ export const getPluginValue = (optionName: TelescopeOption | string, currentPkg:
             }
         }
     });
-
     if (value === undefined) {
         const defaultValue = dotty.exists(options, optionName) ? dotty.get(options, optionName) : undefined;
         value = defaultValue;

@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
-  proposer?: Validator;
+  proposer: Validator;
   totalVotingPower: Long;
 }
 export interface ValidatorSetProtoMsg {
@@ -22,12 +22,12 @@ export interface ValidatorSetAminoMsg {
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
-  proposer?: ValidatorSDKType;
+  proposer: ValidatorSDKType;
   total_voting_power: Long;
 }
 export interface Validator {
   address: Uint8Array;
-  pubKey?: PublicKey;
+  pubKey: PublicKey;
   votingPower: Long;
   proposerPriority: Long;
 }
@@ -47,12 +47,12 @@ export interface ValidatorAminoMsg {
 }
 export interface ValidatorSDKType {
   address: Uint8Array;
-  pub_key?: PublicKeySDKType;
+  pub_key: PublicKeySDKType;
   voting_power: Long;
   proposer_priority: Long;
 }
 export interface SimpleValidator {
-  pubKey?: PublicKey;
+  pubKey: PublicKey;
   votingPower: Long;
 }
 export interface SimpleValidatorProtoMsg {
@@ -68,13 +68,13 @@ export interface SimpleValidatorAminoMsg {
   value: SimpleValidatorAmino;
 }
 export interface SimpleValidatorSDKType {
-  pub_key?: PublicKeySDKType;
+  pub_key: PublicKeySDKType;
   voting_power: Long;
 }
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: undefined,
+    proposer: Validator.fromPartial({}),
     totalVotingPower: Long.ZERO
   };
 }
@@ -195,7 +195,7 @@ export const ValidatorSet = {
 function createBaseValidator(): Validator {
   return {
     address: new Uint8Array(),
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: Long.ZERO,
     proposerPriority: Long.ZERO
   };
@@ -317,7 +317,7 @@ export const Validator = {
 };
 function createBaseSimpleValidator(): SimpleValidator {
   return {
-    pubKey: undefined,
+    pubKey: PublicKey.fromPartial({}),
     votingPower: Long.ZERO
   };
 }

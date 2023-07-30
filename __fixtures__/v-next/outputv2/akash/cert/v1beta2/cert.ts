@@ -160,7 +160,7 @@ export interface MsgCreateCertificateResponseAminoMsg {
 export interface MsgCreateCertificateResponseSDKType {}
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
-  id?: CertificateID;
+  id: CertificateID;
 }
 export interface MsgRevokeCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate";
@@ -176,7 +176,7 @@ export interface MsgRevokeCertificateAminoMsg {
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
-  id?: CertificateIDSDKType;
+  id: CertificateIDSDKType;
 }
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponse {}
@@ -333,7 +333,7 @@ export const Certificate = {
   },
   fromJSON(object: any): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
       pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
@@ -354,7 +354,7 @@ export const Certificate = {
   },
   fromSDK(object: CertificateSDKType): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: object?.cert,
       pubkey: object?.pubkey
     };
@@ -368,7 +368,7 @@ export const Certificate = {
   },
   fromAmino(object: CertificateAmino): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
       cert: object.cert,
       pubkey: object.pubkey
     };
@@ -679,7 +679,7 @@ export const MsgCreateCertificateResponse = {
 };
 function createBaseMsgRevokeCertificate(): MsgRevokeCertificate {
   return {
-    id: undefined
+    id: CertificateID.fromPartial({})
   };
 }
 export const MsgRevokeCertificate = {

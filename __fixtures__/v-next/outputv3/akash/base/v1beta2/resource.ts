@@ -5,7 +5,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
-  units?: ResourceValue;
+  units: ResourceValue;
   attributes: Attribute[];
 }
 export interface CPUProtoMsg {
@@ -23,12 +23,12 @@ export interface CPUAminoMsg {
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
-  units?: ResourceValueSDKType;
+  units: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
 /** Memory stores resource quantity and memory attributes */
 export interface Memory {
-  quantity?: ResourceValue;
+  quantity: ResourceValue;
   attributes: Attribute[];
 }
 export interface MemoryProtoMsg {
@@ -46,13 +46,13 @@ export interface MemoryAminoMsg {
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
-  quantity?: ResourceValueSDKType;
+  quantity: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
 /** Storage stores resource quantity and storage attributes */
 export interface Storage {
   name: string;
-  quantity?: ResourceValue;
+  quantity: ResourceValue;
   attributes: Attribute[];
 }
 export interface StorageProtoMsg {
@@ -72,12 +72,12 @@ export interface StorageAminoMsg {
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
   name: string;
-  quantity?: ResourceValueSDKType;
+  quantity: ResourceValueSDKType;
   attributes: AttributeSDKType[];
 }
 function createBaseCPU(): CPU {
   return {
-    units: undefined,
+    units: ResourceValue.fromPartial({}),
     attributes: []
   };
 }
@@ -184,7 +184,7 @@ export const CPU = {
 };
 function createBaseMemory(): Memory {
   return {
-    quantity: undefined,
+    quantity: ResourceValue.fromPartial({}),
     attributes: []
   };
 }
@@ -292,7 +292,7 @@ export const Memory = {
 function createBaseStorage(): Storage {
   return {
     name: "",
-    quantity: undefined,
+    quantity: ResourceValue.fromPartial({}),
     attributes: []
   };
 }

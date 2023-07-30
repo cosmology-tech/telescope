@@ -52,7 +52,7 @@ export interface AuthenticationRule {
    */
   selector: string;
   /** The requirements for OAuth credentials. */
-  oauth?: OAuthRequirements;
+  oauth: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
@@ -294,7 +294,7 @@ export const Authentication = {
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
-    oauth: undefined,
+    oauth: OAuthRequirements.fromPartial({}),
     allowWithoutCredential: false,
     requirements: []
   };

@@ -24,11 +24,11 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 export interface QueryClaimRecordRequest {
   address: string;
@@ -37,10 +37,10 @@ export interface QueryClaimRecordRequestSDKType {
   address: string;
 }
 export interface QueryClaimRecordResponse {
-  claimRecord?: ClaimRecord;
+  claimRecord: ClaimRecord;
 }
 export interface QueryClaimRecordResponseSDKType {
-  claim_record?: ClaimRecordSDKType;
+  claim_record: ClaimRecordSDKType;
 }
 export interface QueryClaimableForActionRequest {
   address: string;
@@ -224,7 +224,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -344,7 +344,7 @@ export const QueryClaimRecordRequest = {
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
-    claimRecord: undefined
+    claimRecord: ClaimRecord.fromPartial({})
   };
 }
 export const QueryClaimRecordResponse = {
@@ -441,7 +441,7 @@ export const QueryClaimableForActionRequest = {
   fromJSON(object: any): QueryClaimableForActionRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toJSON(message: QueryClaimableForActionRequest): unknown {
@@ -459,13 +459,13 @@ export const QueryClaimableForActionRequest = {
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
       address: object?.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {

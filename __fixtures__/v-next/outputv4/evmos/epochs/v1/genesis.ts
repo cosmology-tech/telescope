@@ -5,19 +5,19 @@ import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
-  startTime?: Date;
-  duration?: Duration;
+  startTime: Date;
+  duration: Duration;
   currentEpoch: bigint;
-  currentEpochStartTime?: Date;
+  currentEpochStartTime: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: bigint;
 }
 export interface EpochInfoSDKType {
   identifier: string;
-  start_time?: Date;
-  duration?: DurationSDKType;
+  start_time: Date;
+  duration: DurationSDKType;
   current_epoch: bigint;
-  current_epoch_start_time?: Date;
+  current_epoch_start_time: Date;
   epoch_counting_started: boolean;
   current_epoch_start_height: bigint;
 }

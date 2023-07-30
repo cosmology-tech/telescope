@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.gov.v1beta1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  content?: Any;
+  content: Any;
   initialDeposit: Coin[];
   proposer: string;
 }
@@ -18,7 +18,7 @@ export interface MsgSubmitProposal {
  * proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
-  content?: AnySDKType;
+  content: AnySDKType;
   initial_deposit: CoinSDKType[];
   proposer: string;
 }
@@ -295,7 +295,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toJSON(message: MsgVote): unknown {
@@ -316,14 +316,14 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   fromSDKJSON(object: any): MsgVoteSDKType {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {

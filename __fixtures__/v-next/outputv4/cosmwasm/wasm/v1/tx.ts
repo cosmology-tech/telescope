@@ -13,13 +13,13 @@ export interface MsgStoreCode {
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-  instantiatePermission?: AccessConfig;
+  instantiatePermission: AccessConfig;
 }
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeSDKType {
   sender: string;
   wasm_byte_code: Uint8Array;
-  instantiate_permission?: AccessConfigSDKType;
+  instantiate_permission: AccessConfigSDKType;
 }
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
@@ -168,7 +168,7 @@ function createBaseMsgStoreCode(): MsgStoreCode {
   return {
     sender: "",
     wasmByteCode: new Uint8Array(),
-    instantiatePermission: undefined
+    instantiatePermission: AccessConfig.fromPartial({})
   };
 }
 export const MsgStoreCode = {

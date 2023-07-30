@@ -5,7 +5,7 @@ import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
-  params?: Params;
+  params: Params;
   /**
    * superfluid_assets defines the registered superfluid assets that have been
    * registered via governance.
@@ -53,7 +53,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   superfluid_assets: SuperfluidAssetSDKType[];
   osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordSDKType[];
   intermediary_accounts: SuperfluidIntermediaryAccountSDKType[];
@@ -61,7 +61,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     superfluidAssets: [],
     osmoEquivalentMultipliers: [],
     intermediaryAccounts: [],

@@ -13,7 +13,7 @@ export interface QueryEvidenceRequest {
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
   /** evidence returns the requested evidence. */
-  evidence?: Any;
+  evidence: Any;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -21,7 +21,7 @@ export interface QueryEvidenceResponse {
  */
 export interface QueryAllEvidenceRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -31,7 +31,7 @@ export interface QueryAllEvidenceResponse {
   /** evidence returns all evidences. */
   evidence: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   return {
@@ -125,7 +125,7 @@ export const QueryEvidenceResponse = {
 };
 function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllEvidenceRequest = {
@@ -171,7 +171,7 @@ export const QueryAllEvidenceRequest = {
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   return {
     evidence: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllEvidenceResponse = {

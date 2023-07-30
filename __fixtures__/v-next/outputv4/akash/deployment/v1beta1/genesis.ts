@@ -6,27 +6,27 @@ import { isSet, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
-  deployment?: Deployment | undefined;
+  deployment: Deployment | undefined;
   groups: Group[];
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
-  deployment?: DeploymentSDKType | undefined;
+  deployment: DeploymentSDKType | undefined;
   groups: GroupSDKType[];
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
   deployments: GenesisDeployment[];
-  params?: Params | undefined;
+  params: Params | undefined;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
   deployments: GenesisDeploymentSDKType[];
-  params?: ParamsSDKType | undefined;
+  params: ParamsSDKType | undefined;
 }
 function createBaseGenesisDeployment(): GenesisDeployment {
   return {
-    deployment: undefined,
+    deployment: Deployment.fromPartial({}),
     groups: []
   };
 }
@@ -108,7 +108,7 @@ export const GenesisDeployment = {
 function createBaseGenesisState(): GenesisState {
   return {
     deployments: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

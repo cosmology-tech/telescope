@@ -50,7 +50,7 @@ export interface LogEntry {
    * the monitored resource designating the particular database that reported
    * the error.
    */
-  resource?: MonitoredResource;
+  resource: MonitoredResource;
   /**
    * The log entry payload, represented as a protocol buffer. Some Google
    * Cloud Platform services use this field for their log entry payloads.
@@ -82,9 +82,9 @@ export interface LogEntry {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
-  timestamp?: Date;
+  timestamp: Date;
   /** Output only. The time the log entry was received by Logging. */
-  receiveTimestamp?: Date;
+  receiveTimestamp: Date;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
   severity: LogSeverity;
   /**
@@ -105,7 +105,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
    */
-  httpRequest?: HttpRequest;
+  httpRequest: HttpRequest;
   /**
    * Optional. A map of key, value pairs that provides additional information about the
    * log entry. The labels can be user-defined or system-defined.
@@ -129,7 +129,7 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperation;
+  operation: LogEntryOperation;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any. If it
    * contains a relative resource name, the name is assumed to be relative to
@@ -156,34 +156,34 @@ export interface LogEntry {
    */
   traceSampled: boolean;
   /** Optional. Source code location information associated with the log entry, if any. */
-  sourceLocation?: LogEntrySourceLocation;
+  sourceLocation: LogEntrySourceLocation;
   /**
    * Optional. Information indicating this LogEntry is part of a sequence of multiple log
    * entries split from a single LogEntry.
    */
-  split?: LogSplit;
+  split: LogSplit;
 }
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
   log_name: string;
-  resource?: MonitoredResourceSDKType;
+  resource: MonitoredResourceSDKType;
   proto_payload?: AnySDKType;
   text_payload?: string;
   json_payload?: StructSDKType;
-  timestamp?: Date;
-  receive_timestamp?: Date;
+  timestamp: Date;
+  receive_timestamp: Date;
   severity: LogSeverity;
   insert_id: string;
-  http_request?: HttpRequestSDKType;
+  http_request: HttpRequestSDKType;
   labels: {
     [key: string]: string;
   };
-  operation?: LogEntryOperationSDKType;
+  operation: LogEntryOperationSDKType;
   trace: string;
   span_id: string;
   trace_sampled: boolean;
-  source_location?: LogEntrySourceLocationSDKType;
-  split?: LogSplitSDKType;
+  source_location: LogEntrySourceLocationSDKType;
+  split: LogSplitSDKType;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -357,7 +357,7 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
@@ -365,14 +365,14 @@ function createBaseLogEntry(): LogEntry {
     receiveTimestamp: undefined,
     severity: 0,
     insertId: "",
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     labels: {},
-    operation: undefined,
+    operation: LogEntryOperation.fromPartial({}),
     trace: "",
     spanId: "",
     traceSampled: false,
-    sourceLocation: undefined,
-    split: undefined
+    sourceLocation: LogEntrySourceLocation.fromPartial({}),
+    split: LogSplit.fromPartial({})
   };
 }
 export const LogEntry = {
@@ -510,7 +510,7 @@ export const LogEntry = {
       jsonPayload: isSet(object.jsonPayload) ? Struct.fromJSON(object.jsonPayload) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       receiveTimestamp: isSet(object.receiveTimestamp) ? new Date(object.receiveTimestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -590,7 +590,7 @@ export const LogEntry = {
       jsonPayload: object.json_payload ? Struct.fromSDK(object.json_payload) : undefined,
       timestamp: object.timestamp ?? undefined,
       receiveTimestamp: object.receive_timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: object?.insert_id,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -616,7 +616,7 @@ export const LogEntry = {
       json_payload: isSet(object.json_payload) ? Struct.fromSDKJSON(object.json_payload) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       receive_timestamp: isSet(object.receive_timestamp) ? new Date(object.receive_timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

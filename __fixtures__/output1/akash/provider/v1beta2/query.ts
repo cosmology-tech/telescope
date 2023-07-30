@@ -5,21 +5,21 @@ import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -31,15 +31,15 @@ export interface QueryProviderRequestSDKType {
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
-  provider?: Provider;
+  provider: Provider;
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponseSDKType {
-  provider?: ProviderSDKType;
+  provider: ProviderSDKType;
 }
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProvidersRequest = {
@@ -95,7 +95,7 @@ export const QueryProvidersRequest = {
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProvidersResponse = {
@@ -224,7 +224,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryProviderResponse(): QueryProviderResponse {
   return {
-    provider: undefined
+    provider: Provider.fromPartial({})
   };
 }
 export const QueryProviderResponse = {

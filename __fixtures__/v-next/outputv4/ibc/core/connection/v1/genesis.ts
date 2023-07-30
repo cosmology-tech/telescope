@@ -8,21 +8,21 @@ export interface GenesisState {
   clientConnectionPaths: ConnectionPaths[];
   /** the sequence for the next generated connection identifier */
   nextConnectionSequence: bigint;
-  params?: Params;
+  params: Params;
 }
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisStateSDKType {
   connections: IdentifiedConnectionSDKType[];
   client_connection_paths: ConnectionPathsSDKType[];
   next_connection_sequence: bigint;
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
     connections: [],
     clientConnectionPaths: [],
     nextConnectionSequence: BigInt(0),
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

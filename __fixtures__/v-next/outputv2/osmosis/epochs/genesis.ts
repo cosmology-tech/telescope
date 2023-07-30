@@ -15,14 +15,14 @@ export interface EpochInfo {
    * If start_time is in the future, the epoch will not begin until the start
    * time.
    */
-  startTime?: Date;
+  startTime: Date;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
    * be greater than the chains expected block time.
    * Duration must be non-zero.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * current_epoch is the current epoch number, or in other words,
    * how many times has the timer 'ticked'.
@@ -49,7 +49,7 @@ export interface EpochInfo {
    * * The t=34 block will start the epoch for (30, 35]
    * * The **t=36** block will start the epoch for (35, 40]
    */
-  currentEpochStartTime?: Date;
+  currentEpochStartTime: Date;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
@@ -133,10 +133,10 @@ export interface EpochInfoAminoMsg {
  */
 export interface EpochInfoSDKType {
   identifier: string;
-  start_time?: Date;
-  duration?: DurationSDKType;
+  start_time: Date;
+  duration: DurationSDKType;
   current_epoch: Long;
-  current_epoch_start_time?: Date;
+  current_epoch_start_time: Date;
   epoch_counting_started: boolean;
   current_epoch_start_height: Long;
 }
@@ -291,10 +291,10 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       currentEpoch: Long.fromString(object.current_epoch),
-      currentEpochStartTime: object?.current_epoch_start_time ? Timestamp.fromAmino(object.current_epoch_start_time) : undefined,
+      currentEpochStartTime: object.current_epoch_start_time,
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: Long.fromString(object.current_epoch_start_height)
     };
@@ -302,10 +302,10 @@ export const EpochInfo = {
   toAmino(message: EpochInfo): EpochInfoAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(message.currentEpochStartTime) : undefined;
+    obj.current_epoch_start_time = message.currentEpochStartTime;
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;

@@ -54,7 +54,7 @@ export interface MsgCreateDenomResponseSDKType {
  */
 export interface MsgMint {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
@@ -62,7 +62,7 @@ export interface MsgMint {
  */
 export interface MsgMintSDKType {
   sender: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 export interface MsgMintResponse {}
 export interface MsgMintResponseSDKType {}
@@ -72,7 +72,7 @@ export interface MsgMintResponseSDKType {}
  */
 export interface MsgBurn {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -80,7 +80,7 @@ export interface MsgBurn {
  */
 export interface MsgBurnSDKType {
   sender: string;
-  amount?: CoinSDKType;
+  amount: CoinSDKType;
 }
 export interface MsgBurnResponse {}
 export interface MsgBurnResponseSDKType {}
@@ -118,7 +118,7 @@ export interface MsgChangeAdminResponseSDKType {}
  */
 export interface MsgSetDenomMetadata {
   sender: string;
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 /**
  * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
@@ -126,7 +126,7 @@ export interface MsgSetDenomMetadata {
  */
 export interface MsgSetDenomMetadataSDKType {
   sender: string;
-  metadata?: MetadataSDKType;
+  metadata: MetadataSDKType;
 }
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
@@ -596,7 +596,7 @@ export const MsgChangeAdminResponse = {
 function createBaseMsgSetDenomMetadata(): MsgSetDenomMetadata {
   return {
     sender: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const MsgSetDenomMetadata = {

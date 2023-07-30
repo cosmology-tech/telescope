@@ -13,7 +13,7 @@ export interface MsgCreateClawbackVestingAccount {
   /** to_address specifies the account to receive the funds */
   toAddress: string;
   /** start_time defines the time at which the vesting period begins */
-  startTime?: Date;
+  startTime: Date;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockupPeriods: Period[];
   /** vesting_periods defines thevesting schedule relative to the start_time */
@@ -63,7 +63,7 @@ export interface MsgCreateClawbackVestingAccountAminoMsg {
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
   to_address: string;
-  start_time?: Date;
+  start_time: Date;
   lockup_periods: PeriodSDKType[];
   vesting_periods: PeriodSDKType[];
   merge: boolean;
@@ -289,7 +289,7 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: object.from_address,
       toAddress: object.to_address,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
       merge: object.merge
@@ -299,7 +299,7 @@ export const MsgCreateClawbackVestingAccount = {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {

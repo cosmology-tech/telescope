@@ -10,7 +10,7 @@ export interface QueryParamsRequest {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
@@ -24,7 +24,7 @@ export interface QueryDenomAuthorityMetadataRequest {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataResponse {
-  authorityMetadata?: DenomAuthorityMetadata;
+  authorityMetadata: DenomAuthorityMetadata;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
@@ -75,7 +75,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -165,7 +165,7 @@ export const QueryDenomAuthorityMetadataRequest = {
 };
 function createBaseQueryDenomAuthorityMetadataResponse(): QueryDenomAuthorityMetadataResponse {
   return {
-    authorityMetadata: undefined
+    authorityMetadata: DenomAuthorityMetadata.fromPartial({})
   };
 }
 export const QueryDenomAuthorityMetadataResponse = {

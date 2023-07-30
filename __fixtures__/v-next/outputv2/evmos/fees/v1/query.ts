@@ -10,7 +10,7 @@ export const protobufPackage = "evmos.fees.v1";
  */
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryDevFeeInfosRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
@@ -33,7 +33,7 @@ export interface QueryDevFeeInfosRequestAminoMsg {
  * method.
  */
 export interface QueryDevFeeInfosRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -42,7 +42,7 @@ export interface QueryDevFeeInfosRequestSDKType {
 export interface QueryDevFeeInfosResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryDevFeeInfosResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse";
@@ -67,7 +67,7 @@ export interface QueryDevFeeInfosResponseAminoMsg {
  */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -105,7 +105,7 @@ export interface QueryDevFeeInfoRequestSDKType {
  * method.
  */
 export interface QueryDevFeeInfoResponse {
-  fee?: DevFeeInfo;
+  fee: DevFeeInfo;
 }
 export interface QueryDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse";
@@ -127,7 +127,7 @@ export interface QueryDevFeeInfoResponseAminoMsg {
  * method.
  */
 export interface QueryDevFeeInfoResponseSDKType {
-  fee?: DevFeeInfoSDKType;
+  fee: DevFeeInfoSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -148,7 +148,7 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsResponse";
@@ -170,7 +170,7 @@ export interface QueryParamsResponseAminoMsg {
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
@@ -180,7 +180,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
   deployerAddress: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
@@ -206,7 +206,7 @@ export interface QueryDevFeeInfosPerDeployerRequestAminoMsg {
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   deployer_address: string;
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -215,7 +215,7 @@ export interface QueryDevFeeInfosPerDeployerRequestSDKType {
 export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
@@ -240,11 +240,11 @@ export interface QueryDevFeeInfosPerDeployerResponseAminoMsg {
  */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDevFeeInfosRequest = {
@@ -326,7 +326,7 @@ export const QueryDevFeeInfosRequest = {
 function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
   return {
     fees: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDevFeeInfosResponse = {
@@ -513,7 +513,7 @@ export const QueryDevFeeInfoRequest = {
 };
 function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
   return {
-    fee: undefined
+    fee: DevFeeInfo.fromPartial({})
   };
 }
 export const QueryDevFeeInfoResponse = {
@@ -657,7 +657,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -739,7 +739,7 @@ export const QueryParamsResponse = {
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
   return {
     deployerAddress: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
@@ -834,7 +834,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDeployerResponse {
   return {
     fees: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDevFeeInfosPerDeployerResponse = {

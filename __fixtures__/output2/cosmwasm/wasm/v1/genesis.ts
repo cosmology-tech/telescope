@@ -7,7 +7,7 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
-  params?: Params;
+  params: Params;
   codes: Code[];
   contracts: Contract[];
   sequences: Sequence[];
@@ -25,7 +25,7 @@ export interface GenesisState_GenMsgs {
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
   codeId: Long;
-  codeInfo?: CodeInfo;
+  codeInfo: CodeInfo;
   codeBytes: Uint8Array;
   /** Pinned to wasmvm cache */
   pinned: boolean;
@@ -33,7 +33,7 @@ export interface Code {
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: string;
-  contractInfo?: ContractInfo;
+  contractInfo: ContractInfo;
   contractState: Model[];
 }
 /** Sequence key and value of an id generation counter */
@@ -43,7 +43,7 @@ export interface Sequence {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     codes: [],
     contracts: [],
     sequences: [],
@@ -210,7 +210,7 @@ export const GenesisState_GenMsgs = {
 function createBaseCode(): Code {
   return {
     codeId: Long.UZERO,
-    codeInfo: undefined,
+    codeInfo: CodeInfo.fromPartial({}),
     codeBytes: new Uint8Array(),
     pinned: false
   };
@@ -285,7 +285,7 @@ export const Code = {
 function createBaseContract(): Contract {
   return {
     contractAddress: "",
-    contractInfo: undefined,
+    contractInfo: ContractInfo.fromPartial({}),
     contractState: []
   };
 }

@@ -39,7 +39,7 @@ export interface ChildSDKType {
   accumulation: string;
 }
 export interface Leaf {
-  leaf?: Child;
+  leaf: Child;
 }
 export interface LeafProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Leaf";
@@ -53,7 +53,7 @@ export interface LeafAminoMsg {
   value: LeafAmino;
 }
 export interface LeafSDKType {
-  leaf?: ChildSDKType;
+  leaf: ChildSDKType;
 }
 function createBaseNode(): Node {
   return {
@@ -259,7 +259,7 @@ export const Child = {
 };
 function createBaseLeaf(): Leaf {
   return {
-    leaf: undefined
+    leaf: Child.fromPartial({})
   };
 }
 export const Leaf = {

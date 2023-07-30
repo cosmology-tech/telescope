@@ -117,7 +117,7 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource?: MonitoredResource;
+  resource: MonitoredResource;
   /**
    * Optional. Default labels that are added to the `labels` field of all log
    * entries in `entries`. If a log entry already has a label with the same key
@@ -172,7 +172,7 @@ export interface WriteLogEntriesRequest {
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
   log_name: string;
-  resource?: MonitoredResourceSDKType;
+  resource: MonitoredResourceSDKType;
   labels: {
     [key: string]: string;
   };
@@ -186,11 +186,11 @@ export interface WriteLogEntriesResponse {}
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
-  value?: Status;
+  value: Status;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
-  value?: StatusSDKType;
+  value: StatusSDKType;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrors {
@@ -202,13 +202,13 @@ export interface WriteLogEntriesPartialErrors {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  logEntryErrors?: {
+  logEntryErrors: {
     [key: number]: Status;
   };
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrorsSDKType {
-  log_entry_errors?: {
+  log_entry_errors: {
     [key: number]: StatusSDKType;
   };
 }
@@ -441,13 +441,13 @@ export interface TailLogEntriesRequest {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow?: Duration;
+  bufferWindow: Duration;
 }
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
-  buffer_window?: DurationSDKType;
+  buffer_window: DurationSDKType;
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponse {
@@ -619,7 +619,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     labels: {},
     entries: [],
     partialSuccess: false,
@@ -833,7 +833,7 @@ export const WriteLogEntriesResponse = {
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
     key: 0,
-    value: undefined
+    value: Status.fromPartial({})
   };
 }
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
@@ -1765,7 +1765,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromJSON(object: any): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: isSet(object.suppressedCount) ? Number(object.suppressedCount) : 0
     };
   },
@@ -1783,13 +1783,13 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: object?.suppressed_count
     };
   },
   fromSDKJSON(object: any): TailLogEntriesResponse_SuppressionInfoSDKType {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : 0
     };
   },

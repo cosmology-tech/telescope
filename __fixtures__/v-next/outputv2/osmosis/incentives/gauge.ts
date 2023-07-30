@@ -25,14 +25,14 @@ export interface Gauge {
    * distribute_to is where the gauge rewards are distributed to.
    * This is queried via lock duration or by timestamp
    */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /**
    * coins is the total amount of coins that have been in the gauge
    * Can distribute multiple coin denoms
    */
   coins: Coin[];
   /** start_time is the distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /**
    * num_epochs_paid_over is the number of total epochs distribution will be
    * completed over
@@ -103,9 +103,9 @@ export interface GaugeAminoMsg {
 export interface GaugeSDKType {
   id: Long;
   is_perpetual: boolean;
-  distribute_to?: QueryConditionSDKType;
+  distribute_to: QueryConditionSDKType;
   coins: CoinSDKType[];
-  start_time?: Date;
+  start_time: Date;
   num_epochs_paid_over: Long;
   filled_epochs: Long;
   distributed_coins: CoinSDKType[];
@@ -133,7 +133,7 @@ function createBaseGauge(): Gauge {
   return {
     id: Long.UZERO,
     isPerpetual: false,
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
     startTime: undefined,
     numEpochsPaidOver: Long.UZERO,
@@ -291,7 +291,7 @@ export const Gauge = {
       isPerpetual: object.is_perpetual,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       numEpochsPaidOver: Long.fromString(object.num_epochs_paid_over),
       filledEpochs: Long.fromString(object.filled_epochs),
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -307,7 +307,7 @@ export const Gauge = {
     } else {
       obj.coins = [];
     }
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
     if (message.distributedCoins) {

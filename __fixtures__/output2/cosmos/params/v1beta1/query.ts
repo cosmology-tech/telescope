@@ -14,7 +14,7 @@ export interface QueryParamsRequest {
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** param defines the queried parameter. */
-  param?: ParamChange;
+  param: ParamChange;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {
@@ -73,7 +73,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    param: undefined
+    param: ParamChange.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

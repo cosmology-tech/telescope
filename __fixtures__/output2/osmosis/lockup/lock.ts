@@ -63,13 +63,13 @@ export interface PeriodLock {
    * Duration is the time needed for a lock to mature after unlocking has
    * started.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * EndTime refers to the time at which the lock would mature and get deleted.
    * This value is first initialized when an unlock has started for the lock,
    * end time being block time + duration.
    */
-  endTime?: Timestamp;
+  endTime: Timestamp;
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
@@ -88,13 +88,13 @@ export interface QueryCondition {
    * duration. Duration field must not be nil when the lock query type is
    * `ByLockDuration`.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * Timestamp is used by locks started before the specified duration.
    * Timestamp field must not be nil when the lock query type is `ByLockTime`.
    * Querying locks with timestamp is currently not implemented.
    */
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 /**
  * SyntheticLock is creating virtual lockup where new denom is combination of
@@ -117,12 +117,12 @@ export interface SyntheticLock {
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
    */
-  endTime?: Timestamp;
+  endTime: Timestamp;
   /**
    * Duration is the duration for a synthetic lock to mature
    * at the point of unbonding has started.
    */
-  duration?: Duration;
+  duration: Duration;
 }
 function createBasePeriodLock(): PeriodLock {
   return {

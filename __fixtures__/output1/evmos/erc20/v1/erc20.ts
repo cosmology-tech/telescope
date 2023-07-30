@@ -77,7 +77,7 @@ export interface RegisterCoinProposal {
   /** proposal description */
   description: string;
   /** metadata of the native Cosmos coin */
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
@@ -86,7 +86,7 @@ export interface RegisterCoinProposal {
 export interface RegisterCoinProposalSDKType {
   title: string;
   description: string;
-  metadata?: MetadataSDKType;
+  metadata: MetadataSDKType;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -228,7 +228,7 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
   return {
     title: "",
     description: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const RegisterCoinProposal = {

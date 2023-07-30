@@ -161,12 +161,12 @@ export interface Proposal {
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-  finalTallyResult?: TallyResult;
-  submitTime?: Timestamp;
-  depositEndTime?: Timestamp;
+  finalTallyResult: TallyResult;
+  submitTime: Timestamp;
+  depositEndTime: Timestamp;
   totalDeposit: Coin[];
-  votingStartTime?: Timestamp;
-  votingEndTime?: Timestamp;
+  votingStartTime: Timestamp;
+  votingEndTime: Timestamp;
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
@@ -196,12 +196,12 @@ export interface DepositParams {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  maxDepositPeriod?: Duration;
+  maxDepositPeriod: Duration;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
@@ -347,7 +347,7 @@ function createBaseProposal(): Proposal {
     id: Long.UZERO,
     messages: [],
     status: 0,
-    finalTallyResult: undefined,
+    finalTallyResult: TallyResult.fromPartial({}),
     submitTime: undefined,
     depositEndTime: undefined,
     totalDeposit: [],

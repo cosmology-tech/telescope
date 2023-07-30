@@ -181,7 +181,7 @@ export interface AllocateQuotaRequest {
    */
   serviceName: string;
   /** Operation that describes the quota allocation. */
-  allocateOperation?: QuotaOperation;
+  allocateOperation: QuotaOperation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request. If unspecified or no matching version can be found, the latest
@@ -192,7 +192,7 @@ export interface AllocateQuotaRequest {
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
-  allocate_operation?: QuotaOperationSDKType;
+  allocate_operation: QuotaOperationSDKType;
   service_config_id: string;
 }
 export interface QuotaOperation_LabelsEntry {
@@ -321,19 +321,19 @@ export interface QuotaError {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status?: Status;
+  status: Status;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
   code: QuotaError_Code;
   subject: string;
   description: string;
-  status?: StatusSDKType;
+  status: StatusSDKType;
 }
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
-    allocateOperation: undefined,
+    allocateOperation: QuotaOperation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -571,7 +571,7 @@ export const QuotaOperation = {
         return acc;
       }, {}) : {},
       quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : 0
+      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : -1
     };
   },
   toJSON(message: QuotaOperation): unknown {
@@ -622,7 +622,7 @@ export const QuotaOperation = {
         return acc;
       }, {}) : {},
       quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
     };
   },
   fromSDKJSON(object: any): QuotaOperationSDKType {
@@ -637,7 +637,7 @@ export const QuotaOperation = {
         return acc;
       }, {}) : {},
       quota_metrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
-      quota_mode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+      quota_mode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
     };
   },
   toSDK(message: QuotaOperation): QuotaOperationSDKType {
@@ -780,7 +780,7 @@ function createBaseQuotaError(): QuotaError {
     code: 0,
     subject: "",
     description: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const QuotaError = {
@@ -827,7 +827,7 @@ export const QuotaError = {
   },
   fromJSON(object: any): QuotaError {
     return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       description: isSet(object.description) ? String(object.description) : "",
       status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
@@ -851,7 +851,7 @@ export const QuotaError = {
   },
   fromSDK(object: QuotaErrorSDKType): QuotaError {
     return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
       subject: object?.subject,
       description: object?.description,
       status: object.status ? Status.fromSDK(object.status) : undefined
@@ -859,7 +859,7 @@ export const QuotaError = {
   },
   fromSDKJSON(object: any): QuotaErrorSDKType {
     return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       description: isSet(object.description) ? String(object.description) : "",
       status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined

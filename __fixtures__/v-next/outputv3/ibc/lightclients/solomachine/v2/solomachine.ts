@@ -107,7 +107,7 @@ export interface ClientState {
   sequence: Long;
   /** frozen sequence of the solo machine */
   isFrozen: boolean;
-  consensusState?: ConsensusState;
+  consensusState: ConsensusState;
   /**
    * when set to true, will allow governance to update a solo machine client.
    * The client will be unfrozen if it is frozen.
@@ -145,7 +145,7 @@ export interface ClientStateAminoMsg {
 export interface ClientStateSDKType {
   sequence: Long;
   is_frozen: boolean;
-  consensus_state?: ConsensusStateSDKType;
+  consensus_state: ConsensusStateSDKType;
   allow_update_after_proposal: boolean;
 }
 /**
@@ -155,7 +155,7 @@ export interface ClientStateSDKType {
  */
 export interface ConsensusState {
   /** public key of the solo machine */
-  publicKey?: Any;
+  publicKey: Any;
   /**
    * diversifier allows the same public key to be re-used across different solo
    * machine clients (potentially on different chains) without being considered
@@ -194,7 +194,7 @@ export interface ConsensusStateAminoMsg {
  * consensus state.
  */
 export interface ConsensusStateSDKType {
-  public_key?: AnySDKType;
+  public_key: AnySDKType;
   diversifier: string;
   timestamp: Long;
 }
@@ -204,7 +204,7 @@ export interface Header {
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
-  newPublicKey?: Any;
+  newPublicKey: Any;
   newDiversifier: string;
 }
 export interface HeaderProtoMsg {
@@ -229,7 +229,7 @@ export interface HeaderSDKType {
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
-  new_public_key?: AnySDKType;
+  new_public_key: AnySDKType;
   new_diversifier: string;
 }
 /**
@@ -239,8 +239,8 @@ export interface HeaderSDKType {
 export interface Misbehaviour {
   clientId: string;
   sequence: Long;
-  signatureOne?: SignatureAndData;
-  signatureTwo?: SignatureAndData;
+  signatureOne: SignatureAndData;
+  signatureTwo: SignatureAndData;
 }
 export interface MisbehaviourProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.Misbehaviour";
@@ -267,8 +267,8 @@ export interface MisbehaviourAminoMsg {
 export interface MisbehaviourSDKType {
   client_id: string;
   sequence: Long;
-  signature_one?: SignatureAndDataSDKType;
-  signature_two?: SignatureAndDataSDKType;
+  signature_one: SignatureAndDataSDKType;
+  signature_two: SignatureAndDataSDKType;
 }
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -379,7 +379,7 @@ export interface SignBytesSDKType {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
-  newPubKey?: Any;
+  newPubKey: Any;
   /** header diversifier */
   newDiversifier: string;
 }
@@ -400,13 +400,13 @@ export interface HeaderDataAminoMsg {
 }
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
-  new_pub_key?: AnySDKType;
+  new_pub_key: AnySDKType;
   new_diversifier: string;
 }
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
-  clientState?: Any;
+  clientState: Any;
 }
 export interface ClientStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ClientStateData";
@@ -424,7 +424,7 @@ export interface ClientStateDataAminoMsg {
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataSDKType {
   path: Uint8Array;
-  client_state?: AnySDKType;
+  client_state: AnySDKType;
 }
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
@@ -432,7 +432,7 @@ export interface ClientStateDataSDKType {
  */
 export interface ConsensusStateData {
   path: Uint8Array;
-  consensusState?: Any;
+  consensusState: Any;
 }
 export interface ConsensusStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusStateData";
@@ -456,7 +456,7 @@ export interface ConsensusStateDataAminoMsg {
  */
 export interface ConsensusStateDataSDKType {
   path: Uint8Array;
-  consensus_state?: AnySDKType;
+  consensus_state: AnySDKType;
 }
 /**
  * ConnectionStateData returns the SignBytes data for connection state
@@ -464,7 +464,7 @@ export interface ConsensusStateDataSDKType {
  */
 export interface ConnectionStateData {
   path: Uint8Array;
-  connection?: ConnectionEnd;
+  connection: ConnectionEnd;
 }
 export interface ConnectionStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ConnectionStateData";
@@ -488,7 +488,7 @@ export interface ConnectionStateDataAminoMsg {
  */
 export interface ConnectionStateDataSDKType {
   path: Uint8Array;
-  connection?: ConnectionEndSDKType;
+  connection: ConnectionEndSDKType;
 }
 /**
  * ChannelStateData returns the SignBytes data for channel state
@@ -496,7 +496,7 @@ export interface ConnectionStateDataSDKType {
  */
 export interface ChannelStateData {
   path: Uint8Array;
-  channel?: Channel;
+  channel: Channel;
 }
 export interface ChannelStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ChannelStateData";
@@ -520,7 +520,7 @@ export interface ChannelStateDataAminoMsg {
  */
 export interface ChannelStateDataSDKType {
   path: Uint8Array;
-  channel?: ChannelSDKType;
+  channel: ChannelSDKType;
 }
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
@@ -651,7 +651,7 @@ function createBaseClientState(): ClientState {
   return {
     sequence: Long.UZERO,
     isFrozen: false,
-    consensusState: undefined,
+    consensusState: ConsensusState.fromPartial({}),
     allowUpdateAfterProposal: false
   };
 }
@@ -1041,8 +1041,8 @@ function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
     sequence: Long.UZERO,
-    signatureOne: undefined,
-    signatureTwo: undefined
+    signatureOne: SignatureAndData.fromPartial({}),
+    signatureTwo: SignatureAndData.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -1222,7 +1222,7 @@ export const SignatureAndData = {
   fromJSON(object: any): SignatureAndData {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
@@ -1246,7 +1246,7 @@ export const SignatureAndData = {
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
     return {
       signature: object?.signature,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data,
       timestamp: object?.timestamp
     };
@@ -1262,7 +1262,7 @@ export const SignatureAndData = {
   fromAmino(object: SignatureAndDataAmino): SignatureAndData {
     return {
       signature: object.signature,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object.data,
       timestamp: Long.fromString(object.timestamp)
     };
@@ -1463,7 +1463,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -1490,7 +1490,7 @@ export const SignBytes = {
       sequence: object?.sequence,
       timestamp: object?.timestamp,
       diversifier: object?.diversifier,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data
     };
   },
@@ -1508,7 +1508,7 @@ export const SignBytes = {
       sequence: Long.fromString(object.sequence),
       timestamp: Long.fromString(object.timestamp),
       diversifier: object.diversifier,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object.data
     };
   },
@@ -1852,7 +1852,7 @@ export const ConsensusStateData = {
 function createBaseConnectionStateData(): ConnectionStateData {
   return {
     path: new Uint8Array(),
-    connection: undefined
+    connection: ConnectionEnd.fromPartial({})
   };
 }
 export const ConnectionStateData = {
@@ -1954,7 +1954,7 @@ export const ConnectionStateData = {
 function createBaseChannelStateData(): ChannelStateData {
   return {
     path: new Uint8Array(),
-    channel: undefined
+    channel: Channel.fromPartial({})
   };
 }
 export const ChannelStateData = {

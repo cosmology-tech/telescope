@@ -275,7 +275,7 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime?: Timestamp;
+  startTime: Timestamp;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -361,7 +361,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime?: Timestamp;
+  createTime: Timestamp;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**

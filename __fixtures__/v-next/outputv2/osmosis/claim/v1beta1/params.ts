@@ -5,9 +5,9 @@ import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
-  airdropStartTime?: Date;
-  durationUntilDecay?: Duration;
-  durationOfDecay?: Duration;
+  airdropStartTime: Date;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
 }
@@ -29,9 +29,9 @@ export interface ParamsAminoMsg {
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
-  airdrop_start_time?: Date;
-  duration_until_decay?: DurationSDKType;
-  duration_of_decay?: DurationSDKType;
+  airdrop_start_time: Date;
+  duration_until_decay: DurationSDKType;
+  duration_of_decay: DurationSDKType;
   claim_denom: string;
 }
 function createBaseParams(): Params {
@@ -128,7 +128,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      airdropStartTime: object?.airdrop_start_time ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
+      airdropStartTime: object.airdrop_start_time,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
       claimDenom: object.claim_denom
@@ -136,7 +136,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(message.airdropStartTime) : undefined;
+    obj.airdrop_start_time = message.airdropStartTime;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
     obj.claim_denom = message.claimDenom;

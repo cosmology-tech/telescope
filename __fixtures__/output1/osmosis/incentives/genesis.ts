@@ -10,7 +10,7 @@ export const protobufPackage = "osmosis.incentives";
  */
 export interface GenesisState {
   /** params are all the parameters of the module */
-  params?: Params;
+  params: Params;
   /** gauges are all gauges that should exist at genesis */
   gauges: Gauge[];
   /**
@@ -29,14 +29,14 @@ export interface GenesisState {
  * initialized
  */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   gauges: GaugeSDKType[];
   lockable_durations: DurationSDKType[];
   last_gauge_id: Long;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     gauges: [],
     lockableDurations: [],
     lastGaugeId: Long.UZERO

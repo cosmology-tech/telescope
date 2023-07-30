@@ -4,7 +4,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
-  params?: Params;
+  params: Params;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.GenesisState";
@@ -20,11 +20,11 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

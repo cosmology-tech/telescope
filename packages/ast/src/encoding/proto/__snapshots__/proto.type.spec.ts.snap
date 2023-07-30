@@ -25,7 +25,7 @@ exports[`Struct 1`] = `
  */
 export interface Struct {
   /** Unordered map of dynamically typed values. */
-  fields?: {
+  fields: {
     [key: string]: Value;
   };
 }"
@@ -37,7 +37,7 @@ exports[`authz 1`] = `
  * the provide method with expiration time.
  */
 export interface authz {
-  authorization?: Any;
+  authorization: Any;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in \`authorization\`
@@ -50,8 +50,29 @@ export interface authz {
 exports[`createCreateProtoType Grant 1`] = `
 "function createBaseGrant(): Grant {
   return {
-    authorization: undefined,
+    authorization: Any.fromPartial({}),
     expiration: undefined
+  };
+}"
+`;
+
+exports[`createCreateProtoType Header 1`] = `
+"function createBaseHeader(): Header {
+  return {
+    version: Consensus.fromPartial({}),
+    chainId: "",
+    height: Long.ZERO,
+    time: new Date(),
+    lastBlockId: BlockID.fromPartial({}),
+    lastCommitHash: new Uint8Array(),
+    dataHash: new Uint8Array(),
+    validatorsHash: new Uint8Array(),
+    nextValidatorsHash: new Uint8Array(),
+    consensusHash: new Uint8Array(),
+    appHash: new Uint8Array(),
+    lastResultsHash: new Uint8Array(),
+    evidenceHash: new Uint8Array(),
+    proposerAddress: new Uint8Array()
   };
 }"
 `;
@@ -63,6 +84,15 @@ exports[`createCreateProtoType MsgJoinPool 1`] = `
     poolId: Long.UZERO,
     shareOutAmount: "",
     tokenInMaxs: []
+  };
+}"
+`;
+
+exports[`createCreateProtoType ValidatorUpdate 1`] = `
+"function createBaseValidatorUpdate(): ValidatorUpdate {
+  return {
+    pubKey: PublicKey.fromPartial({}),
+    power: Long.ZERO
   };
 }"
 `;
@@ -128,7 +158,7 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config?: Any;
+  config: Any;
 }"
 `;
 
@@ -152,7 +182,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap?: {
+  referenceMap: {
     [key: Long]: Reference;
   };
   /**
@@ -162,14 +192,14 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap?: {
+  typeMap: {
     [key: Long]: Type;
   };
   /**
    * The source info derived from input that generated the parsed \`expr\` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /**
    * The expr version indicates the major / minor version number of the \`expr\`
    * representation.
@@ -184,7 +214,7 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed \`expr\`, but
    * may have structural differences.
    */
-  expr?: Expr;
+  expr: Expr;
 }"
 `;
 
@@ -208,16 +238,16 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value?: Constant;
+  value: Constant;
 }"
 `;
 
 exports[`traversed osmosis/claim/v1beta1/params 1`] = `
 "/** Params defines the claim module's parameters. */
 export interface Params {
-  airdropStartTime?: Date;
-  durationUntilDecay?: Duration;
-  durationOfDecay?: Duration;
+  airdropStartTime: Date;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
 }"

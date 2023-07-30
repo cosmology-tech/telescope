@@ -5,15 +5,15 @@ export const protobufPackage = "ibc.lightclients.localhost.v2";
 /** ClientState defines the 09-localhost client state */
 export interface ClientState {
   /** the latest block height */
-  latestHeight?: Height;
+  latestHeight: Height;
 }
 /** ClientState defines the 09-localhost client state */
 export interface ClientStateSDKType {
-  latest_height?: HeightSDKType;
+  latest_height: HeightSDKType;
 }
 function createBaseClientState(): ClientState {
   return {
-    latestHeight: undefined
+    latestHeight: Height.fromPartial({})
   };
 }
 export const ClientState = {

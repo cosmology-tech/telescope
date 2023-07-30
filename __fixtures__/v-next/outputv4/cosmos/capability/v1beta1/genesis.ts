@@ -7,12 +7,12 @@ export interface GenesisOwners {
   /** index is the index of the capability owner. */
   index: bigint;
   /** index_owners are the owners at the given index. */
-  indexOwners?: CapabilityOwners;
+  indexOwners: CapabilityOwners;
 }
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: bigint;
-  index_owners?: CapabilityOwnersSDKType;
+  index_owners: CapabilityOwnersSDKType;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisState {
@@ -32,7 +32,7 @@ export interface GenesisStateSDKType {
 function createBaseGenesisOwners(): GenesisOwners {
   return {
     index: BigInt(0),
-    indexOwners: undefined
+    indexOwners: CapabilityOwners.fromPartial({})
   };
 }
 export const GenesisOwners = {

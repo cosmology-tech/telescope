@@ -123,7 +123,7 @@ export interface Channel {
   /** whether the channel is ordered or unordered */
   ordering: Order;
   /** counterparty channel end */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
@@ -168,7 +168,7 @@ export interface ChannelAminoMsg {
 export interface ChannelSDKType {
   state: State;
   ordering: Order;
-  counterparty?: CounterpartySDKType;
+  counterparty: CounterpartySDKType;
   connection_hops: string[];
   version: string;
 }
@@ -182,7 +182,7 @@ export interface IdentifiedChannel {
   /** whether the channel is ordered or unordered */
   ordering: Order;
   /** counterparty channel end */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
@@ -233,7 +233,7 @@ export interface IdentifiedChannelAminoMsg {
 export interface IdentifiedChannelSDKType {
   state: State;
   ordering: Order;
-  counterparty?: CounterpartySDKType;
+  counterparty: CounterpartySDKType;
   connection_hops: string[];
   version: string;
   port_id: string;
@@ -285,7 +285,7 @@ export interface Packet {
   /** actual opaque bytes transferred directly to the application module */
   data: Uint8Array;
   /** block height after which the packet times out */
-  timeoutHeight?: Height;
+  timeoutHeight: Height;
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
 }
@@ -328,7 +328,7 @@ export interface PacketSDKType {
   destination_port: string;
   destination_channel: string;
   data: Uint8Array;
-  timeout_height?: HeightSDKType;
+  timeout_height: HeightSDKType;
   timeout_timestamp: Long;
 }
 /**
@@ -434,7 +434,7 @@ function createBaseChannel(): Channel {
   return {
     state: 0,
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     connectionHops: [],
     version: ""
   };
@@ -491,8 +491,8 @@ export const Channel = {
   },
   fromJSON(object: any): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : ""
@@ -522,8 +522,8 @@ export const Channel = {
   },
   fromSDK(object: ChannelSDKType): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version
@@ -544,8 +544,8 @@ export const Channel = {
   },
   fromAmino(object: ChannelAmino): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object.version
@@ -590,7 +590,7 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
   return {
     state: 0,
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     connectionHops: [],
     version: "",
     portId: "",
@@ -661,8 +661,8 @@ export const IdentifiedChannel = {
   },
   fromJSON(object: any): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : "",
@@ -698,8 +698,8 @@ export const IdentifiedChannel = {
   },
   fromSDK(object: IdentifiedChannelSDKType): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version,
@@ -724,8 +724,8 @@ export const IdentifiedChannel = {
   },
   fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object.version,
@@ -880,7 +880,7 @@ function createBasePacket(): Packet {
     destinationPort: "",
     destinationChannel: "",
     data: new Uint8Array(),
-    timeoutHeight: undefined,
+    timeoutHeight: Height.fromPartial({}),
     timeoutTimestamp: Long.UZERO
   };
 }

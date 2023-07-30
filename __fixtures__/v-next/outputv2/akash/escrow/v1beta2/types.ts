@@ -126,15 +126,15 @@ export interface AccountIDSDKType {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id?: AccountID;
+  id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
   /** current state of this escrow account */
   state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: DecCoin;
+  balance: DecCoin;
   /** total coins spent by this account */
-  transferred?: DecCoin;
+  transferred: DecCoin;
   /** block height at which this account was last settled */
   settledAt: Long;
   /**
@@ -147,7 +147,7 @@ export interface Account {
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
-  funds?: DecCoin;
+  funds: DecCoin;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.Account";
@@ -185,24 +185,24 @@ export interface AccountAminoMsg {
 }
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
-  id?: AccountIDSDKType;
+  id: AccountIDSDKType;
   owner: string;
   state: Account_State;
-  balance?: DecCoinSDKType;
-  transferred?: DecCoinSDKType;
+  balance: DecCoinSDKType;
+  transferred: DecCoinSDKType;
   settled_at: Long;
   depositor: string;
-  funds?: DecCoinSDKType;
+  funds: DecCoinSDKType;
 }
 /** Payment stores state for a payment */
 export interface FractionalPayment {
-  accountId?: AccountID;
+  accountId: AccountID;
   paymentId: string;
   owner: string;
   state: FractionalPayment_State;
-  rate?: DecCoin;
-  balance?: DecCoin;
-  withdrawn?: Coin;
+  rate: DecCoin;
+  balance: DecCoin;
+  withdrawn: Coin;
 }
 export interface FractionalPaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
@@ -224,13 +224,13 @@ export interface FractionalPaymentAminoMsg {
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
-  account_id?: AccountIDSDKType;
+  account_id: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: FractionalPayment_State;
-  rate?: DecCoinSDKType;
-  balance?: DecCoinSDKType;
-  withdrawn?: CoinSDKType;
+  rate: DecCoinSDKType;
+  balance: DecCoinSDKType;
+  withdrawn: CoinSDKType;
 }
 function createBaseAccountID(): AccountID {
   return {
@@ -329,14 +329,14 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: DecCoin.fromPartial({}),
+    transferred: DecCoin.fromPartial({}),
     settledAt: Long.ZERO,
     depositor: "",
-    funds: undefined
+    funds: DecCoin.fromPartial({})
   };
 }
 export const Account = {
@@ -410,7 +410,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
       settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
@@ -446,7 +446,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? DecCoin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at,
@@ -470,7 +470,7 @@ export const Account = {
     return {
       id: object?.id ? AccountID.fromAmino(object.id) : undefined,
       owner: object.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
       transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
       settledAt: Long.fromString(object.settled_at),
@@ -508,12 +508,12 @@ export const Account = {
 };
 function createBaseFractionalPayment(): FractionalPayment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
+    rate: DecCoin.fromPartial({}),
+    balance: DecCoin.fromPartial({}),
     withdrawn: undefined
   };
 }
@@ -583,7 +583,7 @@ export const FractionalPayment = {
       accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
       paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? DecCoin.fromJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined
@@ -616,7 +616,7 @@ export const FractionalPayment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object.rate ? DecCoin.fromSDK(object.rate) : undefined,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
@@ -638,7 +638,7 @@ export const FractionalPayment = {
       accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
       paymentId: object.payment_id,
       owner: object.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
       balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
       withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined

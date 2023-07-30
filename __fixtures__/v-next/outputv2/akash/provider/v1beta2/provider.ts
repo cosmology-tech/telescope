@@ -30,7 +30,7 @@ export interface MsgCreateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 export interface MsgCreateProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta2.MsgCreateProvider";
@@ -52,7 +52,7 @@ export interface MsgCreateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info?: ProviderInfoSDKType;
+  info: ProviderInfoSDKType;
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
@@ -73,7 +73,7 @@ export interface MsgUpdateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 export interface MsgUpdateProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider";
@@ -95,7 +95,7 @@ export interface MsgUpdateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info?: ProviderInfoSDKType;
+  info: ProviderInfoSDKType;
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
@@ -150,7 +150,7 @@ export interface Provider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info?: ProviderInfo;
+  info: ProviderInfo;
 }
 export interface ProviderProtoMsg {
   typeUrl: "/akash.provider.v1beta2.Provider";
@@ -172,7 +172,7 @@ export interface ProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info?: ProviderInfoSDKType;
+  info: ProviderInfoSDKType;
 }
 function createBaseProviderInfo(): ProviderInfo {
   return {
@@ -274,7 +274,7 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const MsgCreateProvider = {
@@ -472,7 +472,7 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const MsgUpdateProvider = {
@@ -814,7 +814,7 @@ function createBaseProvider(): Provider {
     owner: "",
     hostUri: "",
     attributes: [],
-    info: undefined
+    info: ProviderInfo.fromPartial({})
   };
 }
 export const Provider = {

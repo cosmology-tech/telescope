@@ -8,10 +8,10 @@ import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../h
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin;
+  deposit: Coin;
   /** Depositor pays for the deposit */
   depositor: string;
 }
@@ -19,8 +19,8 @@ export interface MsgCreateDeployment {
 export interface MsgCreateDeploymentResponse {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID;
-  amount?: Coin;
+  id: DeploymentID;
+  amount: Coin;
   /** Depositor pays for the deposit */
   depositor: string;
 }
@@ -28,20 +28,20 @@ export interface MsgDepositDeployment {
 export interface MsgDepositDeploymentResponse {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   version: Uint8Array;
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array(),
     deposit: undefined,
@@ -163,7 +163,7 @@ export const MsgCreateDeploymentResponse = {
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     amount: undefined,
     depositor: ""
   };
@@ -261,7 +261,7 @@ export const MsgDepositDeploymentResponse = {
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     version: new Uint8Array()
   };
 }
@@ -349,7 +349,7 @@ export const MsgUpdateDeploymentResponse = {
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const MsgCloseDeployment = {

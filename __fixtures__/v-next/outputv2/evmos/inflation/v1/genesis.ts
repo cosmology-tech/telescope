@@ -5,7 +5,7 @@ export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** amount of past periods, based on the epochs per period param */
   period: Long;
   /** inflation epoch identifier */
@@ -38,7 +38,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   period: Long;
   epoch_identifier: string;
   epochs_per_period: Long;
@@ -49,9 +49,9 @@ export interface Params {
   /** type of coin to mint */
   mintDenom: string;
   /** variables to calculate exponential inflation */
-  exponentialCalculation?: ExponentialCalculation;
+  exponentialCalculation: ExponentialCalculation;
   /** inflation distribution of the minted denom */
-  inflationDistribution?: InflationDistribution;
+  inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
 }
@@ -77,13 +77,13 @@ export interface ParamsAminoMsg {
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
   mint_denom: string;
-  exponential_calculation?: ExponentialCalculationSDKType;
-  inflation_distribution?: InflationDistributionSDKType;
+  exponential_calculation: ExponentialCalculationSDKType;
+  inflation_distribution: InflationDistributionSDKType;
   enable_inflation: boolean;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     period: Long.UZERO,
     epochIdentifier: "",
     epochsPerPeriod: Long.ZERO,
@@ -221,8 +221,8 @@ export const GenesisState = {
 function createBaseParams(): Params {
   return {
     mintDenom: "",
-    exponentialCalculation: undefined,
-    inflationDistribution: undefined,
+    exponentialCalculation: ExponentialCalculation.fromPartial({}),
+    inflationDistribution: InflationDistribution.fromPartial({}),
     enableInflation: false
   };
 }

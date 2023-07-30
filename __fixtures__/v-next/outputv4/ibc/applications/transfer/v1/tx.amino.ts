@@ -65,8 +65,8 @@ export const AminoConverter = {
         sender,
         receiver,
         timeoutHeight: timeout_height ? {
-          revisionHeight: BigInt(timeout_height.revision_height || "0", true),
-          revisionNumber: BigInt(timeout_height.revision_number || "0", true)
+          revisionHeight: BigInt(timeout_height.revision_height || "0"),
+          revisionNumber: BigInt(timeout_height.revision_number || "0")
         } : undefined,
         timeoutTimestamp: BigInt(timeout_timestamp)
       };

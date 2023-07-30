@@ -9,11 +9,11 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
@@ -36,28 +36,28 @@ export interface QuerySigningInfoRequestSDKType {
  */
 export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
-  valSigningInfo?: ValidatorSigningInfo;
+  valSigningInfo: ValidatorSigningInfo;
 }
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
  * method
  */
 export interface QuerySigningInfoResponseSDKType {
-  val_signing_info?: ValidatorSigningInfoSDKType;
+  val_signing_info: ValidatorSigningInfoSDKType;
 }
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
  * method
  */
 export interface QuerySigningInfosRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -66,7 +66,7 @@ export interface QuerySigningInfosRequestSDKType {
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -74,7 +74,7 @@ export interface QuerySigningInfosResponse {
  */
 export interface QuerySigningInfosResponseSDKType {
   info: ValidatorSigningInfoSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -121,7 +121,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -241,7 +241,7 @@ export const QuerySigningInfoRequest = {
 };
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
   return {
-    valSigningInfo: undefined
+    valSigningInfo: ValidatorSigningInfo.fromPartial({})
   };
 }
 export const QuerySigningInfoResponse = {
@@ -301,7 +301,7 @@ export const QuerySigningInfoResponse = {
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QuerySigningInfosRequest = {
@@ -362,7 +362,7 @@ export const QuerySigningInfosRequest = {
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {
     info: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QuerySigningInfosResponse = {

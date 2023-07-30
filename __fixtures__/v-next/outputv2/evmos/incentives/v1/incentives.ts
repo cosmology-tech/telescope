@@ -15,7 +15,7 @@ export interface Incentive {
   /** number of remaining epochs */
   epochs: number;
   /** distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
 }
@@ -51,7 +51,7 @@ export interface IncentiveSDKType {
   contract: string;
   allocations: DecCoinSDKType[];
   epochs: number;
-  start_time?: Date;
+  start_time: Date;
   total_gas: Long;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
@@ -276,7 +276,7 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       totalGas: Long.fromString(object.total_gas)
     };
   },
@@ -289,7 +289,7 @@ export const Incentive = {
       obj.allocations = [];
     }
     obj.epochs = message.epochs;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },

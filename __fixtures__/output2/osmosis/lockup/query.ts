@@ -36,28 +36,28 @@ export interface AccountLockedCoinsResponse {
 }
 export interface AccountLockedPastTimeRequest {
   owner: string;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
 export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
-  timestamp?: Timestamp;
+  timestamp: Timestamp;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomResponse {
@@ -65,7 +65,7 @@ export interface AccountLockedPastTimeDenomResponse {
 }
 export interface LockedDenomRequest {
   denom: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -74,7 +74,7 @@ export interface LockedRequest {
   lockId: Long;
 }
 export interface LockedResponse {
-  lock?: PeriodLock;
+  lock: PeriodLock;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;
@@ -84,28 +84,28 @@ export interface SyntheticLockupsByLockupIDResponse {
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
@@ -113,7 +113,7 @@ export interface AccountLockedLongerDurationDenomResponse {
 }
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
   return {};
@@ -1134,7 +1134,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: undefined
+    lock: PeriodLock.fromPartial({})
   };
 }
 export const LockedResponse = {
@@ -1732,7 +1732,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

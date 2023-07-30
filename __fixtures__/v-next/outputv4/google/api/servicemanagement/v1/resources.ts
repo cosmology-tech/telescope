@@ -285,14 +285,14 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime?: Date;
+  startTime: Date;
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
-  start_time?: Date;
+  start_time: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -416,7 +416,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime?: Date;
+  createTime: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -445,7 +445,7 @@ export interface Rollout {
  */
 export interface RolloutSDKType {
   rollout_id: string;
-  create_time?: Date;
+  create_time: Date;
   created_by: string;
   status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
@@ -776,7 +776,7 @@ export const OperationMetadata_Step = {
   fromJSON(object: any): OperationMetadata_Step {
     return {
       description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toJSON(message: OperationMetadata_Step): unknown {
@@ -794,13 +794,13 @@ export const OperationMetadata_Step = {
   fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
     return {
       description: object?.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   fromSDKJSON(object: any): OperationMetadata_StepSDKType {
     return {
       description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toSDK(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
@@ -856,7 +856,7 @@ export const Diagnostic = {
   fromJSON(object: any): Diagnostic {
     return {
       location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
@@ -877,14 +877,14 @@ export const Diagnostic = {
   fromSDK(object: DiagnosticSDKType): Diagnostic {
     return {
       location: object?.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: object?.message
     };
   },
   fromSDKJSON(object: any): DiagnosticSDKType {
     return {
       location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
@@ -1024,7 +1024,7 @@ export const ConfigFile = {
     return {
       filePath: isSet(object.filePath) ? String(object.filePath) : "",
       fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
+      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : -1
     };
   },
   toJSON(message: ConfigFile): unknown {
@@ -1045,14 +1045,14 @@ export const ConfigFile = {
     return {
       filePath: object?.file_path,
       fileContents: object?.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   fromSDKJSON(object: any): ConfigFileSDKType {
     return {
       file_path: isSet(object.file_path) ? String(object.file_path) : "",
       file_contents: isSet(object.file_contents) ? bytesFromBase64(object.file_contents) : new Uint8Array(),
-      file_type: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+      file_type: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toSDK(message: ConfigFile): ConfigFileSDKType {
@@ -1267,7 +1267,7 @@ export const Rollout = {
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
       createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
       createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
       deleteServiceStrategy: isSet(object.deleteServiceStrategy) ? Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy) : undefined,
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
@@ -1300,7 +1300,7 @@ export const Rollout = {
       rolloutId: object?.rollout_id,
       createTime: object.create_time ?? undefined,
       createdBy: object?.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
       serviceName: object?.service_name
@@ -1311,7 +1311,7 @@ export const Rollout = {
       rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : "",
       create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
       created_by: isSet(object.created_by) ? String(object.created_by) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       traffic_percent_strategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDKJSON(object.traffic_percent_strategy) : undefined,
       delete_service_strategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromSDKJSON(object.delete_service_strategy) : undefined,
       service_name: isSet(object.service_name) ? String(object.service_name) : ""

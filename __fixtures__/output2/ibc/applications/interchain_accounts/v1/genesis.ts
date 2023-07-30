@@ -7,22 +7,22 @@ import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisState {
-  controllerGenesisState?: ControllerGenesisState;
-  hostGenesisState?: HostGenesisState;
+  controllerGenesisState: ControllerGenesisState;
+  hostGenesisState: HostGenesisState;
 }
 /** ControllerGenesisState defines the interchain accounts controller genesis state */
 export interface ControllerGenesisState {
   activeChannels: ActiveChannel[];
   interchainAccounts: RegisteredInterchainAccount[];
   ports: string[];
-  params?: Params1;
+  params: Params1;
 }
 /** HostGenesisState defines the interchain accounts host genesis state */
 export interface HostGenesisState {
   activeChannels: ActiveChannel[];
   interchainAccounts: RegisteredInterchainAccount[];
   port: string;
-  params?: Params2;
+  params: Params2;
 }
 /** ActiveChannel contains a connection ID, port ID and associated active channel ID */
 export interface ActiveChannel {
@@ -38,8 +38,8 @@ export interface RegisteredInterchainAccount {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    controllerGenesisState: undefined,
-    hostGenesisState: undefined
+    controllerGenesisState: ControllerGenesisState.fromPartial({}),
+    hostGenesisState: HostGenesisState.fromPartial({})
   };
 }
 export const GenesisState = {
@@ -96,7 +96,7 @@ function createBaseControllerGenesisState(): ControllerGenesisState {
     activeChannels: [],
     interchainAccounts: [],
     ports: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ControllerGenesisState = {
@@ -183,7 +183,7 @@ function createBaseHostGenesisState(): HostGenesisState {
     activeChannels: [],
     interchainAccounts: [],
     port: "",
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const HostGenesisState = {

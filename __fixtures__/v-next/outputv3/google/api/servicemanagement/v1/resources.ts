@@ -310,7 +310,7 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime?: Date;
+  startTime: Date;
 }
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
@@ -339,7 +339,7 @@ export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
-  start_time?: Date;
+  start_time: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -577,7 +577,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime?: Date;
+  createTime: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -654,7 +654,7 @@ export interface RolloutAminoMsg {
  */
 export interface RolloutSDKType {
   rollout_id: string;
-  create_time?: Date;
+  create_time: Date;
   created_by: string;
   status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
@@ -1040,7 +1040,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
       progressPercentage: object.progress_percentage,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
+      startTime: object.start_time
     };
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
@@ -1056,7 +1056,7 @@ export const OperationMetadata = {
       obj.steps = [];
     }
     obj.progress_percentage = message.progressPercentage;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     return obj;
   },
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
@@ -1115,7 +1115,7 @@ export const OperationMetadata_Step = {
   fromJSON(object: any): OperationMetadata_Step {
     return {
       description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toJSON(message: OperationMetadata_Step): unknown {
@@ -1133,7 +1133,7 @@ export const OperationMetadata_Step = {
   fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
     return {
       description: object?.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toSDK(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
@@ -1145,7 +1145,7 @@ export const OperationMetadata_Step = {
   fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
     return {
       description: object.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
@@ -1217,7 +1217,7 @@ export const Diagnostic = {
   fromJSON(object: any): Diagnostic {
     return {
       location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
@@ -1238,7 +1238,7 @@ export const Diagnostic = {
   fromSDK(object: DiagnosticSDKType): Diagnostic {
     return {
       location: object?.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: object?.message
     };
   },
@@ -1252,7 +1252,7 @@ export const Diagnostic = {
   fromAmino(object: DiagnosticAmino): Diagnostic {
     return {
       location: object.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: object.message
     };
   },
@@ -1434,7 +1434,7 @@ export const ConfigFile = {
     return {
       filePath: isSet(object.filePath) ? String(object.filePath) : "",
       fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
+      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : -1
     };
   },
   toJSON(message: ConfigFile): unknown {
@@ -1455,7 +1455,7 @@ export const ConfigFile = {
     return {
       filePath: object?.file_path,
       fileContents: object?.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toSDK(message: ConfigFile): ConfigFileSDKType {
@@ -1469,7 +1469,7 @@ export const ConfigFile = {
     return {
       filePath: object.file_path,
       fileContents: object.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toAmino(message: ConfigFile): ConfigFileAmino {
@@ -1746,7 +1746,7 @@ export const Rollout = {
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
       createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
       createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
       deleteServiceStrategy: isSet(object.deleteServiceStrategy) ? Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy) : undefined,
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
@@ -1779,7 +1779,7 @@ export const Rollout = {
       rolloutId: object?.rollout_id,
       createTime: object.create_time ?? undefined,
       createdBy: object?.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
       serviceName: object?.service_name
@@ -1799,9 +1799,9 @@ export const Rollout = {
   fromAmino(object: RolloutAmino): Rollout {
     return {
       rolloutId: object.rollout_id,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      createTime: object.create_time,
       createdBy: object.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object?.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
       serviceName: object.service_name
@@ -1810,7 +1810,7 @@ export const Rollout = {
   toAmino(message: Rollout): RolloutAmino {
     const obj: any = {};
     obj.rollout_id = message.rolloutId;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
+    obj.create_time = message.createTime;
     obj.created_by = message.createdBy;
     obj.status = message.status;
     obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;

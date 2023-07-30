@@ -121,7 +121,7 @@ export interface Channel {
   /** whether the channel is ordered or unordered */
   ordering: Order;
   /** counterparty channel end */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
@@ -140,7 +140,7 @@ export interface IdentifiedChannel {
   /** whether the channel is ordered or unordered */
   ordering: Order;
   /** counterparty channel end */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
@@ -179,7 +179,7 @@ export interface Packet {
   /** actual opaque bytes transferred directly to the application module */
   data: Uint8Array;
   /** block height after which the packet times out */
-  timeoutHeight?: Height;
+  timeoutHeight: Height;
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
 }
@@ -216,7 +216,7 @@ function createBaseChannel(): Channel {
   return {
     state: 0,
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     connectionHops: [],
     version: ""
   };
@@ -305,7 +305,7 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
   return {
     state: 0,
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     connectionHops: [],
     version: "",
     portId: "",
@@ -473,7 +473,7 @@ function createBasePacket(): Packet {
     destinationPort: "",
     destinationChannel: "",
     data: new Uint8Array(),
-    timeoutHeight: undefined,
+    timeoutHeight: Height.fromPartial({}),
     timeoutTimestamp: Long.UZERO
   };
 }

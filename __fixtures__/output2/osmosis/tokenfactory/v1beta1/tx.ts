@@ -34,7 +34,7 @@ export interface MsgCreateDenomResponse {
  */
 export interface MsgMint {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 export interface MsgMintResponse {}
 /**
@@ -43,7 +43,7 @@ export interface MsgMintResponse {}
  */
 export interface MsgBurn {
   sender: string;
-  amount?: Coin;
+  amount: Coin;
 }
 export interface MsgBurnResponse {}
 /**
@@ -66,7 +66,7 @@ export interface MsgChangeAdminResponse {}
  */
 export interface MsgSetDenomMetadata {
   sender: string;
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
@@ -450,7 +450,7 @@ export const MsgChangeAdminResponse = {
 function createBaseMsgSetDenomMetadata(): MsgSetDenomMetadata {
   return {
     sender: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const MsgSetDenomMetadata = {

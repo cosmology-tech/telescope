@@ -20,11 +20,11 @@ export interface MsgCreateGauge {
    * distribute_to show which lock the gauge should distribute to by time
    * duration or by timestamp
    */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /** coins are coin(s) to be distributed by the gauge */
   coins: Coin[];
   /** start_time is the distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /**
    * num_epochs_paid_over is the number of epochs distribution will be completed
    * over
@@ -70,9 +70,9 @@ export interface MsgCreateGaugeAminoMsg {
 export interface MsgCreateGaugeSDKType {
   is_perpetual: boolean;
   owner: string;
-  distribute_to?: QueryConditionSDKType;
+  distribute_to: QueryConditionSDKType;
   coins: CoinSDKType[];
-  start_time?: Date;
+  start_time: Date;
   num_epochs_paid_over: Long;
 }
 export interface MsgCreateGaugeResponse {}
@@ -133,7 +133,7 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
     isPerpetual: false,
     owner: "",
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
     startTime: undefined,
     numEpochsPaidOver: Long.UZERO
@@ -259,7 +259,7 @@ export const MsgCreateGauge = {
       owner: object.owner,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       numEpochsPaidOver: Long.fromString(object.num_epochs_paid_over)
     };
   },
@@ -273,7 +273,7 @@ export const MsgCreateGauge = {
     } else {
       obj.coins = [];
     }
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     return obj;
   },

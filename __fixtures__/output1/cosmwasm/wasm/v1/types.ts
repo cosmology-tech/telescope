@@ -118,13 +118,13 @@ export interface AccessConfigSDKType {
 }
 /** Params defines the set of wasm parameters. */
 export interface Params {
-  codeUploadAccess?: AccessConfig;
+  codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
 }
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
-  code_upload_access?: AccessConfigSDKType;
+  code_upload_access: AccessConfigSDKType;
   instantiate_default_permission: AccessType;
   max_wasm_code_size: Long;
 }
@@ -135,13 +135,13 @@ export interface CodeInfo {
   /** Creator address who initially stored the code */
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
-  instantiateConfig?: AccessConfig;
+  instantiateConfig: AccessConfig;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoSDKType {
   code_hash: Uint8Array;
   creator: string;
-  instantiate_config?: AccessConfigSDKType;
+  instantiate_config: AccessConfigSDKType;
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
@@ -158,13 +158,13 @@ export interface ContractInfo {
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
-  created?: AbsoluteTxPosition;
+  created: AbsoluteTxPosition;
   ibcPortId: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension?: Any;
+  extension: Any;
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
@@ -172,9 +172,9 @@ export interface ContractInfoSDKType {
   creator: string;
   admin: string;
   label: string;
-  created?: AbsoluteTxPositionSDKType;
+  created: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
-  extension?: AnySDKType;
+  extension: AnySDKType;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
@@ -182,14 +182,14 @@ export interface ContractCodeHistoryEntry {
   /** CodeID is the reference to the stored WASM code */
   codeId: Long;
   /** Updated Tx position when the operation was executed. */
-  updated?: AbsoluteTxPosition;
+  updated: AbsoluteTxPosition;
   msg: Uint8Array;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
   operation: ContractCodeHistoryOperationType;
   code_id: Long;
-  updated?: AbsoluteTxPositionSDKType;
+  updated: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
 /**
@@ -349,7 +349,7 @@ export const AccessConfig = {
 };
 function createBaseParams(): Params {
   return {
-    codeUploadAccess: undefined,
+    codeUploadAccess: AccessConfig.fromPartial({}),
     instantiateDefaultPermission: 0,
     maxWasmCodeSize: Long.UZERO
   };
@@ -430,7 +430,7 @@ function createBaseCodeInfo(): CodeInfo {
   return {
     codeHash: new Uint8Array(),
     creator: "",
-    instantiateConfig: undefined
+    instantiateConfig: AccessConfig.fromPartial({})
   };
 }
 export const CodeInfo = {
@@ -511,7 +511,7 @@ function createBaseContractInfo(): ContractInfo {
     creator: "",
     admin: "",
     label: "",
-    created: undefined,
+    created: AbsoluteTxPosition.fromPartial({}),
     ibcPortId: "",
     extension: undefined
   };
@@ -636,7 +636,7 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
     codeId: Long.UZERO,
-    updated: undefined,
+    updated: AbsoluteTxPosition.fromPartial({}),
     msg: new Uint8Array()
   };
 }

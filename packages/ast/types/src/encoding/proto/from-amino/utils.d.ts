@@ -38,12 +38,12 @@ export declare const arrayTypes: {
     string(): t.Identifier;
     bool(): t.Identifier;
     bytes(args: FromAminoJSONMethod): t.Identifier;
-    long(): t.Identifier;
-    uint64(): t.Identifier;
-    int64(): t.Identifier;
-    sint64(): t.Identifier;
-    fixed64(): t.Identifier;
-    sfixed64(): t.Identifier;
+    long(args: FromAminoJSONMethod): t.Expression;
+    uint64(args: FromAminoJSONMethod): t.Expression;
+    int64(args: FromAminoJSONMethod): t.Expression;
+    sint64(args: FromAminoJSONMethod): t.Expression;
+    fixed64(args: FromAminoJSONMethod): t.Expression;
+    sfixed64(args: FromAminoJSONMethod): t.Expression;
     number(): t.Identifier;
     uint32(): t.Identifier;
     int32(): t.Identifier;
@@ -58,6 +58,8 @@ export declare const arrayTypes: {
     type(args: FromAminoJSONMethod): t.CallExpression;
 };
 export declare const fromAminoMessages: {
+    anyType(): t.ReturnStatement[];
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement[];
     height(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement[];
     duration(context: ProtoParseContext, name: string, proto: ProtoType): (t.ReturnStatement | t.VariableDeclaration)[];
 };

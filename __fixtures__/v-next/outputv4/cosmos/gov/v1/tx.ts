@@ -39,7 +39,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content?: Any;
+  content: Any;
   /** authority must be the gov module address. */
   authority: string;
 }
@@ -48,7 +48,7 @@ export interface MsgExecLegacyContent {
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentSDKType {
-  content?: AnySDKType;
+  content: AnySDKType;
   authority: string;
 }
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
@@ -452,7 +452,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -476,7 +476,7 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata
     };
   },
@@ -484,7 +484,7 @@ export const MsgVote = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },

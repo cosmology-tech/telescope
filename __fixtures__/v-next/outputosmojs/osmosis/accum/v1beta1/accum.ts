@@ -17,13 +17,13 @@ export interface Record {
   numShares: string;
   initAccumValue: DecCoin[];
   unclaimedRewards: DecCoin[];
-  options?: Options;
+  options: Options;
 }
 export interface RecordSDKType {
   num_shares: string;
   init_accum_value: DecCoinSDKType[];
   unclaimed_rewards: DecCoinSDKType[];
-  options?: OptionsSDKType;
+  options: OptionsSDKType;
 }
 function createBaseAccumulatorContent(): AccumulatorContent {
   return {
@@ -154,7 +154,7 @@ function createBaseRecord(): Record {
     numShares: "",
     initAccumValue: [],
     unclaimedRewards: [],
-    options: undefined
+    options: Options.fromPartial({})
   };
 }
 export const Record = {

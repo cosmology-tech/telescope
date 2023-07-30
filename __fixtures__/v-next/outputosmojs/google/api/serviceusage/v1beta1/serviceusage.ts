@@ -265,7 +265,7 @@ export interface CreateAdminOverrideRequest {
    */
   parent: string;
   /** The admin override to create. */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -283,7 +283,7 @@ export interface CreateAdminOverrideRequest {
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequestSDKType {
   parent: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
   force_only: QuotaSafetyCheck[];
 }
@@ -300,7 +300,7 @@ export interface UpdateAdminOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -311,7 +311,7 @@ export interface UpdateAdminOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -323,9 +323,9 @@ export interface UpdateAdminOverrideRequest {
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestSDKType {
   name: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
-  update_mask?: FieldMaskSDKType;
+  update_mask: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteAdminOverride. */
@@ -469,7 +469,7 @@ export interface CreateConsumerOverrideRequest {
    */
   parent: string;
   /** The override to create. */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the creation of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -487,7 +487,7 @@ export interface CreateConsumerOverrideRequest {
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequestSDKType {
   parent: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
   force_only: QuotaSafetyCheck[];
 }
@@ -504,7 +504,7 @@ export interface UpdateConsumerOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override?: QuotaOverride;
+  override: QuotaOverride;
   /**
    * Whether to force the update of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
@@ -515,7 +515,7 @@ export interface UpdateConsumerOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
@@ -527,9 +527,9 @@ export interface UpdateConsumerOverrideRequest {
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestSDKType {
   name: string;
-  override?: QuotaOverrideSDKType;
+  override: QuotaOverrideSDKType;
   force: boolean;
-  update_mask?: FieldMaskSDKType;
+  update_mask: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
 }
 /** Request message for DeleteConsumerOverride. */
@@ -743,13 +743,13 @@ export interface GetServiceIdentityResponse {
    * resources. If exists is true, it contains email and unique_id. If exists is
    * false, it contains pre-constructed email and empty unique_id.
    */
-  identity?: ServiceIdentity;
+  identity: ServiceIdentity;
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponseSDKType {
-  identity?: ServiceIdentitySDKType;
+  identity: ServiceIdentitySDKType;
   state: GetServiceIdentityResponse_IdentityState;
 }
 /** Metadata for the `GetServiceIdentity` method. */
@@ -1252,7 +1252,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: isSet(object.parent) ? String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
       pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: ListConsumerQuotaMetricsRequest): unknown {
@@ -1276,7 +1276,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object?.parent,
       pageSize: object?.page_size,
       pageToken: object?.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): ListConsumerQuotaMetricsRequestSDKType {
@@ -1284,7 +1284,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: isSet(object.parent) ? String(object.parent) : "",
       page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
       page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
@@ -1416,7 +1416,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromJSON(object: any): GetConsumerQuotaMetricRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetConsumerQuotaMetricRequest): unknown {
@@ -1434,13 +1434,13 @@ export const GetConsumerQuotaMetricRequest = {
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetConsumerQuotaMetricRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
@@ -1489,7 +1489,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromJSON(object: any): GetConsumerQuotaLimitRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetConsumerQuotaLimitRequest): unknown {
@@ -1507,13 +1507,13 @@ export const GetConsumerQuotaLimitRequest = {
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetConsumerQuotaLimitRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
@@ -1526,7 +1526,7 @@ export const GetConsumerQuotaLimitRequest = {
 function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -1642,9 +1642,9 @@ export const CreateAdminOverrideRequest = {
 function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -2336,7 +2336,7 @@ export const ImportAdminOverridesMetadata = {
 function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -2452,9 +2452,9 @@ export const CreateConsumerOverrideRequest = {
 function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -3445,7 +3445,7 @@ export const GenerateServiceIdentityRequest = {
 };
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   return {
-    identity: undefined,
+    identity: ServiceIdentity.fromPartial({}),
     state: 0
   };
 }
@@ -3482,7 +3482,7 @@ export const GetServiceIdentityResponse = {
   fromJSON(object: any): GetServiceIdentityResponse {
     return {
       identity: isSet(object.identity) ? ServiceIdentity.fromJSON(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toJSON(message: GetServiceIdentityResponse): unknown {
@@ -3500,13 +3500,13 @@ export const GetServiceIdentityResponse = {
   fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
     return {
       identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   fromSDKJSON(object: any): GetServiceIdentityResponseSDKType {
     return {
       identity: isSet(object.identity) ? ServiceIdentity.fromSDKJSON(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {

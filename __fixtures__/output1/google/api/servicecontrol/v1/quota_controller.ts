@@ -181,7 +181,7 @@ export interface AllocateQuotaRequest {
    */
   serviceName: string;
   /** Operation that describes the quota allocation. */
-  allocateOperation?: QuotaOperation;
+  allocateOperation: QuotaOperation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request. If unspecified or no matching version can be found, the latest
@@ -192,7 +192,7 @@ export interface AllocateQuotaRequest {
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
-  allocate_operation?: QuotaOperationSDKType;
+  allocate_operation: QuotaOperationSDKType;
   service_config_id: string;
 }
 export interface QuotaOperation_LabelsEntry {
@@ -321,19 +321,19 @@ export interface QuotaError {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status?: Status;
+  status: Status;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
   code: QuotaError_Code;
   subject: string;
   description: string;
-  status?: StatusSDKType;
+  status: StatusSDKType;
 }
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
-    allocateOperation: undefined,
+    allocateOperation: QuotaOperation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -744,7 +744,7 @@ function createBaseQuotaError(): QuotaError {
     code: 0,
     subject: "",
     description: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const QuotaError = {

@@ -26,14 +26,14 @@ export interface ProtocolVersionSDKType {
   app: Long;
 }
 export interface NodeInfo {
-  protocolVersion?: ProtocolVersion;
+  protocolVersion: ProtocolVersion;
   nodeId: string;
   listenAddr: string;
   network: string;
   version: string;
   channels: Uint8Array;
   moniker: string;
-  other?: NodeInfoOther;
+  other: NodeInfoOther;
 }
 export interface NodeInfoProtoMsg {
   typeUrl: "/tendermint.p2p.NodeInfo";
@@ -54,14 +54,14 @@ export interface NodeInfoAminoMsg {
   value: NodeInfoAmino;
 }
 export interface NodeInfoSDKType {
-  protocol_version?: ProtocolVersionSDKType;
+  protocol_version: ProtocolVersionSDKType;
   node_id: string;
   listen_addr: string;
   network: string;
   version: string;
   channels: Uint8Array;
   moniker: string;
-  other?: NodeInfoOtherSDKType;
+  other: NodeInfoOtherSDKType;
 }
 export interface NodeInfoOther {
   txIndex: string;
@@ -86,7 +86,7 @@ export interface NodeInfoOtherSDKType {
 export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
-  lastConnected?: Date;
+  lastConnected: Date;
 }
 export interface PeerInfoProtoMsg {
   typeUrl: "/tendermint.p2p.PeerInfo";
@@ -104,12 +104,12 @@ export interface PeerInfoAminoMsg {
 export interface PeerInfoSDKType {
   id: string;
   address_info: PeerAddressInfoSDKType[];
-  last_connected?: Date;
+  last_connected: Date;
 }
 export interface PeerAddressInfo {
   address: string;
-  lastDialSuccess?: Date;
-  lastDialFailure?: Date;
+  lastDialSuccess: Date;
+  lastDialFailure: Date;
   dialFailures: number;
 }
 export interface PeerAddressInfoProtoMsg {
@@ -128,8 +128,8 @@ export interface PeerAddressInfoAminoMsg {
 }
 export interface PeerAddressInfoSDKType {
   address: string;
-  last_dial_success?: Date;
-  last_dial_failure?: Date;
+  last_dial_success: Date;
+  last_dial_failure: Date;
   dial_failures: number;
 }
 function createBaseProtocolVersion(): ProtocolVersion {
@@ -243,14 +243,14 @@ export const ProtocolVersion = {
 };
 function createBaseNodeInfo(): NodeInfo {
   return {
-    protocolVersion: undefined,
+    protocolVersion: ProtocolVersion.fromPartial({}),
     nodeId: "",
     listenAddr: "",
     network: "",
     version: "",
     channels: new Uint8Array(),
     moniker: "",
-    other: undefined
+    other: NodeInfoOther.fromPartial({})
   };
 }
 export const NodeInfo = {
@@ -606,7 +606,7 @@ export const PeerInfo = {
     return {
       id: object.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
-      lastConnected: object?.last_connected ? Timestamp.fromAmino(object.last_connected) : undefined
+      lastConnected: object.last_connected
     };
   },
   toAmino(message: PeerInfo): PeerInfoAmino {
@@ -617,7 +617,7 @@ export const PeerInfo = {
     } else {
       obj.address_info = [];
     }
-    obj.last_connected = message.lastConnected ? Timestamp.toAmino(message.lastConnected) : undefined;
+    obj.last_connected = message.lastConnected;
     return obj;
   },
   fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
@@ -730,16 +730,16 @@ export const PeerAddressInfo = {
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
     return {
       address: object.address,
-      lastDialSuccess: object?.last_dial_success ? Timestamp.fromAmino(object.last_dial_success) : undefined,
-      lastDialFailure: object?.last_dial_failure ? Timestamp.fromAmino(object.last_dial_failure) : undefined,
+      lastDialSuccess: object.last_dial_success,
+      lastDialFailure: object.last_dial_failure,
       dialFailures: object.dial_failures
     };
   },
   toAmino(message: PeerAddressInfo): PeerAddressInfoAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.last_dial_success = message.lastDialSuccess ? Timestamp.toAmino(message.lastDialSuccess) : undefined;
-    obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(message.lastDialFailure) : undefined;
+    obj.last_dial_success = message.lastDialSuccess;
+    obj.last_dial_failure = message.lastDialFailure;
     obj.dial_failures = message.dialFailures;
     return obj;
   },

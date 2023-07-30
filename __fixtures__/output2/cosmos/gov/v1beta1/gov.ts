@@ -166,14 +166,14 @@ export interface Deposit {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
-  content?: Any;
+  content: Any;
   status: ProposalStatus;
-  finalTallyResult?: TallyResult;
-  submitTime?: Timestamp;
-  depositEndTime?: Timestamp;
+  finalTallyResult: TallyResult;
+  submitTime: Timestamp;
+  depositEndTime: Timestamp;
   totalDeposit: Coin[];
-  votingStartTime?: Timestamp;
-  votingEndTime?: Timestamp;
+  votingStartTime: Timestamp;
+  votingEndTime: Timestamp;
 }
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
@@ -207,12 +207,12 @@ export interface DepositParams {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  maxDepositPeriod?: Duration;
+  maxDepositPeriod: Duration;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
@@ -413,7 +413,7 @@ function createBaseProposal(): Proposal {
     proposalId: Long.UZERO,
     content: undefined,
     status: 0,
-    finalTallyResult: undefined,
+    finalTallyResult: TallyResult.fromPartial({}),
     submitTime: undefined,
     depositEndTime: undefined,
     totalDeposit: [],

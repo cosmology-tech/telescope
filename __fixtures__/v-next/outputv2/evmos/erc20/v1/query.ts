@@ -10,7 +10,7 @@ export const protobufPackage = "evmos.erc20.v1";
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryTokenPairsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
@@ -33,7 +33,7 @@ export interface QueryTokenPairsRequestAminoMsg {
  * method.
  */
 export interface QueryTokenPairsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -42,7 +42,7 @@ export interface QueryTokenPairsRequestSDKType {
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryTokenPairsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse";
@@ -67,7 +67,7 @@ export interface QueryTokenPairsResponseAminoMsg {
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
@@ -102,7 +102,7 @@ export interface QueryTokenPairRequestSDKType {
  * method.
  */
 export interface QueryTokenPairResponse {
-  tokenPair?: TokenPair;
+  tokenPair: TokenPair;
 }
 export interface QueryTokenPairResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse";
@@ -124,7 +124,7 @@ export interface QueryTokenPairResponseAminoMsg {
  * method.
  */
 export interface QueryTokenPairResponseSDKType {
-  token_pair?: TokenPairSDKType;
+  token_pair: TokenPairSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -145,7 +145,7 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsResponse";
@@ -167,11 +167,11 @@ export interface QueryParamsResponseAminoMsg {
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryTokenPairsRequest = {
@@ -253,7 +253,7 @@ export const QueryTokenPairsRequest = {
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
   return {
     tokenPairs: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryTokenPairsResponse = {
@@ -440,7 +440,7 @@ export const QueryTokenPairRequest = {
 };
 function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
   return {
-    tokenPair: undefined
+    tokenPair: TokenPair.fromPartial({})
   };
 }
 export const QueryTokenPairResponse = {
@@ -584,7 +584,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

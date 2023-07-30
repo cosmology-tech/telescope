@@ -213,7 +213,7 @@ export interface CheckError {
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status?: Status;
+  status: Status;
 }
 /**
  * Defines the errors to be returned in
@@ -223,14 +223,14 @@ export interface CheckErrorSDKType {
   code: CheckError_Code;
   subject: string;
   detail: string;
-  status?: StatusSDKType;
+  status: StatusSDKType;
 }
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
     subject: "",
     detail: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const CheckError = {
@@ -277,7 +277,7 @@ export const CheckError = {
   },
   fromJSON(object: any): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       detail: isSet(object.detail) ? String(object.detail) : "",
       status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
@@ -301,7 +301,7 @@ export const CheckError = {
   },
   fromSDK(object: CheckErrorSDKType): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
       subject: object?.subject,
       detail: object?.detail,
       status: object.status ? Status.fromSDK(object.status) : undefined
@@ -309,7 +309,7 @@ export const CheckError = {
   },
   fromSDKJSON(object: any): CheckErrorSDKType {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       detail: isSet(object.detail) ? String(object.detail) : "",
       status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined

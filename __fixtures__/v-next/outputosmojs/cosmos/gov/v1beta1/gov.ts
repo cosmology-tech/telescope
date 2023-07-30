@@ -193,31 +193,31 @@ export interface DepositSDKType {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: bigint;
-  content?: Any;
+  content: Any;
   status: ProposalStatus;
   /**
    * final_tally_result is the final tally result of the proposal. When
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-  finalTallyResult?: TallyResult;
-  submitTime?: Date;
-  depositEndTime?: Date;
+  finalTallyResult: TallyResult;
+  submitTime: Date;
+  depositEndTime: Date;
   totalDeposit: Coin[];
-  votingStartTime?: Date;
-  votingEndTime?: Date;
+  votingStartTime: Date;
+  votingEndTime: Date;
 }
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   proposal_id: bigint;
-  content?: AnySDKType;
+  content: AnySDKType;
   status: ProposalStatus;
-  final_tally_result?: TallyResultSDKType;
-  submit_time?: Date;
-  deposit_end_time?: Date;
+  final_tally_result: TallyResultSDKType;
+  submit_time: Date;
+  deposit_end_time: Date;
   total_deposit: CoinSDKType[];
-  voting_start_time?: Date;
-  voting_end_time?: Date;
+  voting_start_time: Date;
+  voting_end_time: Date;
 }
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
@@ -269,21 +269,21 @@ export interface DepositParams {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  maxDepositPeriod?: Duration;
+  maxDepositPeriod: Duration;
 }
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
   min_deposit: CoinSDKType[];
-  max_deposit_period?: DurationSDKType;
+  max_deposit_period: DurationSDKType;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
-  voting_period?: DurationSDKType;
+  voting_period: DurationSDKType;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
@@ -344,7 +344,7 @@ export const WeightedVoteOption = {
   },
   fromJSON(object: any): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -362,13 +362,13 @@ export const WeightedVoteOption = {
   },
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: object?.weight
     };
   },
   fromSDKJSON(object: any): WeightedVoteOptionSDKType {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -551,7 +551,7 @@ function createBaseProposal(): Proposal {
     proposalId: BigInt(0),
     content: undefined,
     status: 0,
-    finalTallyResult: undefined,
+    finalTallyResult: TallyResult.fromPartial({}),
     submitTime: undefined,
     depositEndTime: undefined,
     totalDeposit: [],
@@ -635,7 +635,7 @@ export const Proposal = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       depositEndTime: isSet(object.depositEndTime) ? new Date(object.depositEndTime) : undefined,
@@ -678,7 +678,7 @@ export const Proposal = {
     return {
       proposalId: object?.proposal_id,
       content: object.content ? Any.fromSDK(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       submitTime: object.submit_time ?? undefined,
       depositEndTime: object.deposit_end_time ?? undefined,
@@ -691,7 +691,7 @@ export const Proposal = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
       deposit_end_time: isSet(object.deposit_end_time) ? new Date(object.deposit_end_time) : undefined,
@@ -871,7 +871,7 @@ export const Vote = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : []
     };
   },
@@ -899,7 +899,7 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
     };
   },
@@ -907,7 +907,7 @@ export const Vote = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
     };
   },

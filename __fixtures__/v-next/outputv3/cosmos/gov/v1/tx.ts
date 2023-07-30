@@ -15,7 +15,7 @@ export const protobufPackage = "cosmos.gov.v1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  messages: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any)[] | Any[];
+  messages: (TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any)[] | Any[];
   initialDeposit: Coin[];
   proposer: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
@@ -79,7 +79,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content?: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
+  content: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
   /** authority must be the gov module address. */
   authority: string;
 }
@@ -109,7 +109,7 @@ export interface MsgExecLegacyContentAminoMsg {
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentSDKType {
-  content?: TextProposalSDKType | RegisterIncentiveProposalSDKType | ClientUpdateProposalSDKType | UpgradeProposalSDKType | ReplacePoolIncentivesProposalSDKType | UpdatePoolIncentivesProposalSDKType | SetSuperfluidAssetsProposalSDKType | RemoveSuperfluidAssetsProposalSDKType | UpdateUnpoolWhiteListProposalSDKType | UpdateFeeTokenProposalSDKType | AnySDKType | undefined;
+  content: TextProposalSDKType | RegisterIncentiveProposalSDKType | ClientUpdateProposalSDKType | UpgradeProposalSDKType | ReplacePoolIncentivesProposalSDKType | UpdatePoolIncentivesProposalSDKType | SetSuperfluidAssetsProposalSDKType | RemoveSuperfluidAssetsProposalSDKType | UpdateUnpoolWhiteListProposalSDKType | UpdateFeeTokenProposalSDKType | AnySDKType | undefined;
   authority: string;
 }
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
@@ -722,7 +722,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -746,7 +746,7 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata
     };
   },
@@ -762,7 +762,7 @@ export const MsgVote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata
     };
   },

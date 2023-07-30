@@ -62,7 +62,7 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgCloseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
@@ -78,7 +78,7 @@ export interface MsgCloseGroupAminoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
@@ -96,7 +96,7 @@ export interface MsgCloseGroupResponseAminoMsg {
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgPauseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
@@ -112,7 +112,7 @@ export interface MsgPauseGroupAminoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
@@ -130,7 +130,7 @@ export interface MsgPauseGroupResponseAminoMsg {
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface MsgStartGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
@@ -146,7 +146,7 @@ export interface MsgStartGroupAminoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -191,7 +191,7 @@ export interface GroupIDSDKType {
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements;
+  requirements: PlacementRequirements;
   resources: Resource[];
 }
 export interface GroupSpecProtoMsg {
@@ -211,14 +211,14 @@ export interface GroupSpecAminoMsg {
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements?: PlacementRequirementsSDKType;
+  requirements: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID;
+  groupId: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec;
+  groupSpec: GroupSpec;
   createdAt: Long;
 }
 export interface GroupProtoMsg {
@@ -238,16 +238,16 @@ export interface GroupAminoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
-  group_id?: GroupIDSDKType;
+  group_id: GroupIDSDKType;
   state: Group_State;
-  group_spec?: GroupSpecSDKType;
+  group_spec: GroupSpecSDKType;
   created_at: Long;
 }
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits;
+  resources: ResourceUnits;
   count: number;
-  price?: Coin;
+  price: Coin;
 }
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Resource";
@@ -265,13 +265,13 @@ export interface ResourceAminoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
-  resources?: ResourceUnitsSDKType;
+  resources: ResourceUnitsSDKType;
   count: number;
-  price?: CoinSDKType;
+  price: CoinSDKType;
 }
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgCloseGroup = {
@@ -415,7 +415,7 @@ export const MsgCloseGroupResponse = {
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgPauseGroup = {
@@ -559,7 +559,7 @@ export const MsgPauseGroupResponse = {
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgStartGroup = {
@@ -813,7 +813,7 @@ export const GroupID = {
 function createBaseGroupSpec(): GroupSpec {
   return {
     name: "",
-    requirements: undefined,
+    requirements: PlacementRequirements.fromPartial({}),
     resources: []
   };
 }
@@ -933,9 +933,9 @@ export const GroupSpec = {
 };
 function createBaseGroup(): Group {
   return {
-    groupId: undefined,
+    groupId: GroupID.fromPartial({}),
     state: 0,
-    groupSpec: undefined,
+    groupSpec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }
@@ -985,7 +985,7 @@ export const Group = {
   fromJSON(object: any): Group {
     return {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
@@ -1009,7 +1009,7 @@ export const Group = {
   fromSDK(object: GroupSDKType): Group {
     return {
       groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
       createdAt: object?.created_at
     };
@@ -1025,7 +1025,7 @@ export const Group = {
   fromAmino(object: GroupAmino): Group {
     return {
       groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
       createdAt: Long.fromString(object.created_at)
     };
@@ -1056,7 +1056,7 @@ export const Group = {
 };
 function createBaseResource(): Resource {
   return {
-    resources: undefined,
+    resources: ResourceUnits.fromPartial({}),
     count: 0,
     price: undefined
   };

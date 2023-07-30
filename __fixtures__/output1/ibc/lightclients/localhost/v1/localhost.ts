@@ -10,7 +10,7 @@ export interface ClientState {
   /** self chain ID */
   chainId: string;
   /** self latest block height */
-  height?: Height;
+  height: Height;
 }
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -18,12 +18,12 @@ export interface ClientState {
  */
 export interface ClientStateSDKType {
   chain_id: string;
-  height?: HeightSDKType;
+  height: HeightSDKType;
 }
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
-    height: undefined
+    height: Height.fromPartial({})
   };
 }
 export const ClientState = {

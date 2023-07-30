@@ -34,9 +34,9 @@ export class Query {
   }
   /** GasMeter Retrieves a active gas meter */
   static gasMeter(request: QueryGasMeterRequest, initRequest?: fm.InitReq): Promise<QueryGasMeterResponse> {
-    return fm.fetchReq(`/evmos/incentives/v1/gas_meters/${request["contract"]}/{participant}?${fm.renderURLSearchParams({
+    return fm.fetchReq(`/evmos/incentives/v1/gas_meters/${request["contract"]}/${request["participant"]}?${fm.renderURLSearchParams({
       ...request
-    }, ["contract"])}`, {
+    }, ["contract", "participant"])}`, {
       ...initRequest,
       method: "GET"
     });
@@ -72,7 +72,7 @@ export class Query {
     });
   }
 }
-export class Querier {
+export class QueryClientImpl {
   private readonly url: string;
   constructor(url: string) {
     this.url = url;

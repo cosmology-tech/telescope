@@ -14,13 +14,13 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
-  feetoken?: FeeToken;
+  feetoken: FeeToken;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
     title: "",
     description: "",
-    feetoken: undefined
+    feetoken: FeeToken.fromPartial({})
   };
 }
 export const UpdateFeeTokenProposal = {

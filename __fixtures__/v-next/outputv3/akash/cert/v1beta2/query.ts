@@ -5,7 +5,7 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
-  certificate?: Certificate;
+  certificate: Certificate;
   serial: string;
 }
 export interface CertificateResponseProtoMsg {
@@ -23,13 +23,13 @@ export interface CertificateResponseAminoMsg {
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
-  certificate?: CertificateSDKType;
+  certificate: CertificateSDKType;
   serial: string;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
-  filter?: CertificateFilter;
-  pagination?: PageRequest;
+  filter: CertificateFilter;
+  pagination: PageRequest;
 }
 export interface QueryCertificatesRequestProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
@@ -46,13 +46,13 @@ export interface QueryCertificatesRequestAminoMsg {
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
-  filter?: CertificateFilterSDKType;
-  pagination?: PageRequestSDKType;
+  filter: CertificateFilterSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryCertificatesResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
@@ -70,11 +70,11 @@ export interface QueryCertificatesResponseAminoMsg {
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
-    certificate: undefined,
+    certificate: Certificate.fromPartial({}),
     serial: ""
   };
 }
@@ -169,8 +169,8 @@ export const CertificateResponse = {
 };
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
-    filter: undefined,
-    pagination: undefined
+    filter: CertificateFilter.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryCertificatesRequest = {
@@ -265,7 +265,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryCertificatesResponse = {

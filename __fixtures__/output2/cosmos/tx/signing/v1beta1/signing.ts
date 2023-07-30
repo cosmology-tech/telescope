@@ -96,8 +96,8 @@ export interface SignatureDescriptors {
  */
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
-  publicKey?: Any;
-  data?: SignatureDescriptor_Data;
+  publicKey: Any;
+  data: SignatureDescriptor_Data;
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to prevent
@@ -122,7 +122,7 @@ export interface SignatureDescriptor_Data_Single {
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray?: CompactBitArray;
+  bitarray: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
 }
@@ -178,7 +178,7 @@ export const SignatureDescriptors = {
 function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
     publicKey: undefined,
-    data: undefined,
+    data: Data.fromPartial({}),
     sequence: Long.UZERO
   };
 }
@@ -352,7 +352,7 @@ export const SignatureDescriptor_Data_Single = {
 };
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {
-    bitarray: undefined,
+    bitarray: CompactBitArray.fromPartial({}),
     signatures: []
   };
 }

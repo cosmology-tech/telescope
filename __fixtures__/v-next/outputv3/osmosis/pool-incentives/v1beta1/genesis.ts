@@ -6,7 +6,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   lockableDurations: Duration[];
   distrInfo?: DistrInfo;
   poolToGauges?: PoolToGauges;
@@ -29,14 +29,14 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   lockable_durations: DurationSDKType[];
   distr_info?: DistrInfoSDKType;
   pool_to_gauges?: PoolToGaugesSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     lockableDurations: [],
     distrInfo: undefined,
     poolToGauges: undefined

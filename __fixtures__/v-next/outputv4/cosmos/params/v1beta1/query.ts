@@ -17,11 +17,11 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** param defines the queried parameter. */
-  param?: ParamChange;
+  param: ParamChange;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  param?: ParamChangeSDKType;
+  param: ParamChangeSDKType;
 }
 /**
  * QuerySubspacesRequest defines a request type for querying for all registered
@@ -138,7 +138,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    param: undefined
+    param: ParamChange.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

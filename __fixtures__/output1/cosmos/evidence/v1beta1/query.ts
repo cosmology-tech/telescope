@@ -15,11 +15,11 @@ export interface QueryEvidenceRequestSDKType {
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
   /** evidence returns the requested evidence. */
-  evidence?: Any;
+  evidence: Any;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseSDKType {
-  evidence?: AnySDKType;
+  evidence: AnySDKType;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -27,14 +27,14 @@ export interface QueryEvidenceResponseSDKType {
  */
 export interface QueryAllEvidenceRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
  * method.
  */
 export interface QueryAllEvidenceRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -44,7 +44,7 @@ export interface QueryAllEvidenceResponse {
   /** evidence returns all evidences. */
   evidence: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -52,7 +52,7 @@ export interface QueryAllEvidenceResponse {
  */
 export interface QueryAllEvidenceResponseSDKType {
   evidence: AnySDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   return {
@@ -166,7 +166,7 @@ export const QueryEvidenceResponse = {
 };
 function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllEvidenceRequest = {
@@ -222,7 +222,7 @@ export const QueryAllEvidenceRequest = {
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   return {
     evidence: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllEvidenceResponse = {

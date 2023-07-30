@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** balances is an array containing the balances of all the accounts. */
   balances: Balance[];
   /**
@@ -19,7 +19,7 @@ export interface GenesisState {
 }
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   balances: BalanceSDKType[];
   supply: CoinSDKType[];
   denom_metadata: MetadataSDKType[];
@@ -44,7 +44,7 @@ export interface BalanceSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     balances: [],
     supply: [],
     denomMetadata: []

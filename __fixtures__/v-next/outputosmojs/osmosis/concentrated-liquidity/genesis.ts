@@ -17,7 +17,7 @@ export interface FullTick {
   /** tick's index. */
   tickIndex: bigint;
   /** tick's info. */
-  info?: TickInfo;
+  info: TickInfo;
 }
 /**
  * FullTick contains tick index and pool id along with other tick model
@@ -26,7 +26,7 @@ export interface FullTick {
 export interface FullTickSDKType {
   pool_id: bigint;
   tick_index: bigint;
-  info?: TickInfoSDKType;
+  info: TickInfoSDKType;
 }
 /**
  * PoolData represents a serialized pool along with its ticks
@@ -34,10 +34,10 @@ export interface FullTickSDKType {
  */
 export interface PoolData {
   /** pool struct */
-  pool?: Any;
+  pool: Any;
   /** pool's ticks */
   ticks: FullTick[];
-  feeAccumulator?: AccumObject;
+  feeAccumulator: AccumObject;
   incentivesAccumulators: AccumObject[];
   /** incentive records to be set */
   incentiveRecords: IncentiveRecord[];
@@ -47,16 +47,16 @@ export interface PoolData {
  * for genesis state.
  */
 export interface PoolDataSDKType {
-  pool?: AnySDKType;
+  pool: AnySDKType;
   ticks: FullTickSDKType[];
-  fee_accumulator?: AccumObjectSDKType;
+  fee_accumulator: AccumObjectSDKType;
   incentives_accumulators: AccumObjectSDKType[];
   incentive_records: IncentiveRecordSDKType[];
 }
 /** GenesisState defines the concentrated liquidity module's genesis state. */
 export interface GenesisState {
   /** params are all the parameters of the module */
-  params?: Params;
+  params: Params;
   /** pool data containining serialized pool struct and ticks. */
   poolData: PoolData[];
   positions: Position[];
@@ -64,7 +64,7 @@ export interface GenesisState {
 }
 /** GenesisState defines the concentrated liquidity module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   pool_data: PoolDataSDKType[];
   positions: PositionSDKType[];
   next_position_id: bigint;
@@ -72,17 +72,17 @@ export interface GenesisStateSDKType {
 export interface AccumObject {
   /** Accumulator's name (pulled from AccumulatorContent) */
   name: string;
-  accumContent?: AccumulatorContent;
+  accumContent: AccumulatorContent;
 }
 export interface AccumObjectSDKType {
   name: string;
-  accum_content?: AccumulatorContentSDKType;
+  accum_content: AccumulatorContentSDKType;
 }
 function createBaseFullTick(): FullTick {
   return {
     poolId: BigInt(0),
     tickIndex: BigInt(0),
-    info: undefined
+    info: TickInfo.fromPartial({})
   };
 }
 export const FullTick = {
@@ -168,7 +168,7 @@ function createBasePoolData(): PoolData {
   return {
     pool: undefined,
     ticks: [],
-    feeAccumulator: undefined,
+    feeAccumulator: AccumObject.fromPartial({}),
     incentivesAccumulators: [],
     incentiveRecords: []
   };
@@ -302,7 +302,7 @@ export const PoolData = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     poolData: [],
     positions: [],
     nextPositionId: BigInt(0)
@@ -418,7 +418,7 @@ export const GenesisState = {
 function createBaseAccumObject(): AccumObject {
   return {
     name: "",
-    accumContent: undefined
+    accumContent: AccumulatorContent.fromPartial({})
   };
 }
 export const AccumObject = {

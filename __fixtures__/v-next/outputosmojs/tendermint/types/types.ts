@@ -108,32 +108,32 @@ export interface PartSetHeaderSDKType {
 export interface Part {
   index: number;
   bytes: Uint8Array;
-  proof?: Proof;
+  proof: Proof;
 }
 export interface PartSDKType {
   index: number;
   bytes: Uint8Array;
-  proof?: ProofSDKType;
+  proof: ProofSDKType;
 }
 /** BlockID */
 export interface BlockID {
   hash: Uint8Array;
-  partSetHeader?: PartSetHeader;
+  partSetHeader: PartSetHeader;
 }
 /** BlockID */
 export interface BlockIDSDKType {
   hash: Uint8Array;
-  part_set_header?: PartSetHeaderSDKType;
+  part_set_header: PartSetHeaderSDKType;
 }
 /** Header defines the structure of a Tendermint block header. */
 export interface Header {
   /** basic block info */
-  version?: Consensus;
+  version: Consensus;
   chainId: string;
   height: bigint;
-  time?: Date;
+  time: Date;
   /** prev block info */
-  lastBlockId?: BlockID;
+  lastBlockId: BlockID;
   /** hashes of block data */
   lastCommitHash: Uint8Array;
   dataHash: Uint8Array;
@@ -153,11 +153,11 @@ export interface Header {
 }
 /** Header defines the structure of a Tendermint block header. */
 export interface HeaderSDKType {
-  version?: ConsensusSDKType;
+  version: ConsensusSDKType;
   chain_id: string;
   height: bigint;
-  time?: Date;
-  last_block_id?: BlockIDSDKType;
+  time: Date;
+  last_block_id: BlockIDSDKType;
   last_commit_hash: Uint8Array;
   data_hash: Uint8Array;
   validators_hash: Uint8Array;
@@ -190,8 +190,8 @@ export interface Vote {
   height: bigint;
   round: number;
   /** zero if vote is nil. */
-  blockId?: BlockID;
-  timestamp?: Date;
+  blockId: BlockID;
+  timestamp: Date;
   validatorAddress: Uint8Array;
   validatorIndex: number;
   signature: Uint8Array;
@@ -204,8 +204,8 @@ export interface VoteSDKType {
   type: SignedMsgType;
   height: bigint;
   round: number;
-  block_id?: BlockIDSDKType;
-  timestamp?: Date;
+  block_id: BlockIDSDKType;
+  timestamp: Date;
   validator_address: Uint8Array;
   validator_index: number;
   signature: Uint8Array;
@@ -214,28 +214,28 @@ export interface VoteSDKType {
 export interface Commit {
   height: bigint;
   round: number;
-  blockId?: BlockID;
+  blockId: BlockID;
   signatures: CommitSig[];
 }
 /** Commit contains the evidence that a block was committed by a set of validators. */
 export interface CommitSDKType {
   height: bigint;
   round: number;
-  block_id?: BlockIDSDKType;
+  block_id: BlockIDSDKType;
   signatures: CommitSigSDKType[];
 }
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSig {
   blockIdFlag: BlockIDFlag;
   validatorAddress: Uint8Array;
-  timestamp?: Date;
+  timestamp: Date;
   signature: Uint8Array;
 }
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSigSDKType {
   block_id_flag: BlockIDFlag;
   validator_address: Uint8Array;
-  timestamp?: Date;
+  timestamp: Date;
   signature: Uint8Array;
 }
 export interface Proposal {
@@ -243,8 +243,8 @@ export interface Proposal {
   height: bigint;
   round: number;
   polRound: number;
-  blockId?: BlockID;
-  timestamp?: Date;
+  blockId: BlockID;
+  timestamp: Date;
   signature: Uint8Array;
 }
 export interface ProposalSDKType {
@@ -252,49 +252,49 @@ export interface ProposalSDKType {
   height: bigint;
   round: number;
   pol_round: number;
-  block_id?: BlockIDSDKType;
-  timestamp?: Date;
+  block_id: BlockIDSDKType;
+  timestamp: Date;
   signature: Uint8Array;
 }
 export interface SignedHeader {
-  header?: Header;
-  commit?: Commit;
+  header: Header;
+  commit: Commit;
 }
 export interface SignedHeaderSDKType {
-  header?: HeaderSDKType;
-  commit?: CommitSDKType;
+  header: HeaderSDKType;
+  commit: CommitSDKType;
 }
 export interface LightBlock {
-  signedHeader?: SignedHeader;
-  validatorSet?: ValidatorSet;
+  signedHeader: SignedHeader;
+  validatorSet: ValidatorSet;
 }
 export interface LightBlockSDKType {
-  signed_header?: SignedHeaderSDKType;
-  validator_set?: ValidatorSetSDKType;
+  signed_header: SignedHeaderSDKType;
+  validator_set: ValidatorSetSDKType;
 }
 export interface BlockMeta {
-  blockId?: BlockID;
+  blockId: BlockID;
   blockSize: bigint;
-  header?: Header;
+  header: Header;
   numTxs: bigint;
 }
 export interface BlockMetaSDKType {
-  block_id?: BlockIDSDKType;
+  block_id: BlockIDSDKType;
   block_size: bigint;
-  header?: HeaderSDKType;
+  header: HeaderSDKType;
   num_txs: bigint;
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;
-  proof?: Proof;
+  proof: Proof;
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProofSDKType {
   root_hash: Uint8Array;
   data: Uint8Array;
-  proof?: ProofSDKType;
+  proof: ProofSDKType;
 }
 function createBasePartSetHeader(): PartSetHeader {
   return {
@@ -373,7 +373,7 @@ function createBasePart(): Part {
   return {
     index: 0,
     bytes: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const Part = {
@@ -458,7 +458,7 @@ export const Part = {
 function createBaseBlockID(): BlockID {
   return {
     hash: new Uint8Array(),
-    partSetHeader: undefined
+    partSetHeader: PartSetHeader.fromPartial({})
   };
 }
 export const BlockID = {
@@ -530,11 +530,11 @@ export const BlockID = {
 };
 function createBaseHeader(): Header {
   return {
-    version: undefined,
+    version: Consensus.fromPartial({}),
     chainId: "",
     height: BigInt(0),
     time: undefined,
-    lastBlockId: undefined,
+    lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
     dataHash: new Uint8Array(),
     validatorsHash: new Uint8Array(),
@@ -830,7 +830,7 @@ function createBaseVote(): Vote {
     type: 0,
     height: BigInt(0),
     round: 0,
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     timestamp: undefined,
     validatorAddress: new Uint8Array(),
     validatorIndex: 0,
@@ -905,7 +905,7 @@ export const Vote = {
   },
   fromJSON(object: any): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -941,7 +941,7 @@ export const Vote = {
   },
   fromSDK(object: VoteSDKType): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
@@ -953,7 +953,7 @@ export const Vote = {
   },
   fromSDKJSON(object: any): VoteSDKType {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
@@ -980,7 +980,7 @@ function createBaseCommit(): Commit {
   return {
     height: BigInt(0),
     round: 0,
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     signatures: []
   };
 }
@@ -1135,7 +1135,7 @@ export const CommitSig = {
   },
   fromJSON(object: any): CommitSig {
     return {
-      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : 0,
+      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : -1,
       validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -1159,7 +1159,7 @@ export const CommitSig = {
   },
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object?.validator_address,
       timestamp: object.timestamp ?? undefined,
       signature: object?.signature
@@ -1167,7 +1167,7 @@ export const CommitSig = {
   },
   fromSDKJSON(object: any): CommitSigSDKType {
     return {
-      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -1188,7 +1188,7 @@ function createBaseProposal(): Proposal {
     height: BigInt(0),
     round: 0,
     polRound: 0,
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     timestamp: undefined,
     signature: new Uint8Array()
   };
@@ -1255,7 +1255,7 @@ export const Proposal = {
   },
   fromJSON(object: any): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
@@ -1288,7 +1288,7 @@ export const Proposal = {
   },
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       polRound: object?.pol_round,
@@ -1299,7 +1299,7 @@ export const Proposal = {
   },
   fromSDKJSON(object: any): ProposalSDKType {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       pol_round: isSet(object.pol_round) ? Number(object.pol_round) : 0,
@@ -1322,8 +1322,8 @@ export const Proposal = {
 };
 function createBaseSignedHeader(): SignedHeader {
   return {
-    header: undefined,
-    commit: undefined
+    header: Header.fromPartial({}),
+    commit: Commit.fromPartial({})
   };
 }
 export const SignedHeader = {
@@ -1395,8 +1395,8 @@ export const SignedHeader = {
 };
 function createBaseLightBlock(): LightBlock {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({})
   };
 }
 export const LightBlock = {
@@ -1468,9 +1468,9 @@ export const LightBlock = {
 };
 function createBaseBlockMeta(): BlockMeta {
   return {
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     blockSize: BigInt(0),
-    header: undefined,
+    header: Header.fromPartial({}),
     numTxs: BigInt(0)
   };
 }
@@ -1569,7 +1569,7 @@ function createBaseTxProof(): TxProof {
   return {
     rootHash: new Uint8Array(),
     data: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const TxProof = {

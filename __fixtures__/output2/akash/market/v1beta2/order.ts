@@ -60,9 +60,9 @@ export interface OrderID {
 }
 /** Order stores orderID, state of order and other details */
 export interface Order {
-  orderId?: OrderID;
+  orderId: OrderID;
   state: Order_State;
-  spec?: GroupSpec;
+  spec: GroupSpec;
   createdAt: Long;
 }
 /** OrderFilters defines flags for order list filter */
@@ -150,9 +150,9 @@ export const OrderID = {
 };
 function createBaseOrder(): Order {
   return {
-    orderId: undefined,
+    orderId: OrderID.fromPartial({}),
     state: 0,
-    spec: undefined,
+    spec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

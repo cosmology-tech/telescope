@@ -5,7 +5,7 @@ export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
   /** module parameters */
-  params?: Params;
+  params: Params;
   /** active incentives */
   incentives: Incentive[];
   /** active Gasmeters */
@@ -13,7 +13,7 @@ export interface GenesisState {
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   incentives: IncentiveSDKType[];
   gas_meters: GasMeterSDKType[];
 }
@@ -37,7 +37,7 @@ export interface ParamsSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     incentives: [],
     gasMeters: []
   };

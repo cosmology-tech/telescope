@@ -6,11 +6,11 @@ import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryCurrentEpochRequest {
   identifier: string;
@@ -20,7 +20,7 @@ export interface QueryCurrentEpochResponse {
 }
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryEpochsInfoRequest = {
@@ -66,7 +66,7 @@ export const QueryEpochsInfoRequest = {
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   return {
     epochs: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryEpochsInfoResponse = {

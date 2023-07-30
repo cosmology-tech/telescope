@@ -106,27 +106,27 @@ export interface AccountID {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id?: AccountID;
+  id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
   /** current state of this escrow account */
   state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: Coin;
+  balance: Coin;
   /** total coins spent by this account */
-  transferred?: Coin;
+  transferred: Coin;
   /** block height at which this account was last settled */
   settledAt: Long;
 }
 /** Payment stores state for a payment */
 export interface Payment {
-  accountId?: AccountID;
+  accountId: AccountID;
   paymentId: string;
   owner: string;
   state: Payment_State;
-  rate?: Coin;
-  balance?: Coin;
-  withdrawn?: Coin;
+  rate: Coin;
+  balance: Coin;
+  withdrawn: Coin;
 }
 function createBaseAccountID(): AccountID {
   return {
@@ -185,7 +185,7 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
     balance: undefined,
@@ -280,7 +280,7 @@ export const Account = {
 };
 function createBasePayment(): Payment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,

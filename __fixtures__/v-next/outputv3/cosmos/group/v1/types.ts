@@ -229,7 +229,7 @@ export interface Member {
   /** metadata is any arbitrary metadata to attached to the member. */
   metadata: string;
   /** added_at is a timestamp specifying when a member was added. */
-  addedAt?: Date;
+  addedAt: Date;
 }
 export interface MemberProtoMsg {
   typeUrl: "/cosmos.group.v1.Member";
@@ -261,7 +261,7 @@ export interface MemberSDKType {
   address: string;
   weight: string;
   metadata: string;
-  added_at?: Date;
+  added_at: Date;
 }
 /** Members defines a repeated slice of Member objects. */
 export interface Members {
@@ -290,7 +290,7 @@ export interface ThresholdDecisionPolicy {
   /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
   threshold: string;
   /** windows defines the different windows for voting and execution. */
-  windows?: DecisionPolicyWindows;
+  windows: DecisionPolicyWindows;
 }
 export interface ThresholdDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy";
@@ -310,14 +310,14 @@ export interface ThresholdDecisionPolicyAminoMsg {
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicySDKType {
   threshold: string;
-  windows?: DecisionPolicyWindowsSDKType;
+  windows: DecisionPolicyWindowsSDKType;
 }
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicy {
   /** percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed. */
   percentage: string;
   /** windows defines the different windows for voting and execution. */
-  windows?: DecisionPolicyWindows;
+  windows: DecisionPolicyWindows;
 }
 export interface PercentageDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy";
@@ -337,7 +337,7 @@ export interface PercentageDecisionPolicyAminoMsg {
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicySDKType {
   percentage: string;
-  windows?: DecisionPolicyWindowsSDKType;
+  windows: DecisionPolicyWindowsSDKType;
 }
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindows {
@@ -345,7 +345,7 @@ export interface DecisionPolicyWindows {
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
   /**
    * min_execution_period is the minimum duration after the proposal submission
    * where members can start sending MsgExec. This means that the window for
@@ -359,7 +359,7 @@ export interface DecisionPolicyWindows {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  minExecutionPeriod?: Duration;
+  minExecutionPeriod: Duration;
 }
 export interface DecisionPolicyWindowsProtoMsg {
   typeUrl: "/cosmos.group.v1.DecisionPolicyWindows";
@@ -393,8 +393,8 @@ export interface DecisionPolicyWindowsAminoMsg {
 }
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindowsSDKType {
-  voting_period?: DurationSDKType;
-  min_execution_period?: DurationSDKType;
+  voting_period: DurationSDKType;
+  min_execution_period: DurationSDKType;
 }
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfo {
@@ -414,7 +414,7 @@ export interface GroupInfo {
   /** total_weight is the sum of the group members' weights. */
   totalWeight: string;
   /** created_at is a timestamp specifying when a group was created. */
-  createdAt?: Date;
+  createdAt: Date;
 }
 export interface GroupInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupInfo";
@@ -451,14 +451,14 @@ export interface GroupInfoSDKType {
   metadata: string;
   version: Long;
   total_weight: string;
-  created_at?: Date;
+  created_at: Date;
 }
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMember {
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** member is the member data. */
-  member?: Member;
+  member: Member;
 }
 export interface GroupMemberProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupMember";
@@ -478,7 +478,7 @@ export interface GroupMemberAminoMsg {
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberSDKType {
   group_id: Long;
-  member?: MemberSDKType;
+  member: MemberSDKType;
 }
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfo {
@@ -496,9 +496,9 @@ export interface GroupPolicyInfo {
    */
   version: Long;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
+  decisionPolicy: ThresholdDecisionPolicy | PercentageDecisionPolicy | Any | undefined;
   /** created_at is a timestamp specifying when a group policy was created. */
-  createdAt?: Date;
+  createdAt: Date;
 }
 export interface GroupPolicyInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupPolicyInfo";
@@ -538,8 +538,8 @@ export interface GroupPolicyInfoSDKType {
   admin: string;
   metadata: string;
   version: Long;
-  decision_policy?: ThresholdDecisionPolicySDKType | PercentageDecisionPolicySDKType | AnySDKType | undefined;
-  created_at?: Date;
+  decision_policy: ThresholdDecisionPolicySDKType | PercentageDecisionPolicySDKType | AnySDKType | undefined;
+  created_at: Date;
 }
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
@@ -557,7 +557,7 @@ export interface Proposal {
   /** proposers are the account addresses of the proposers. */
   proposers: string[];
   /** submit_time is a timestamp specifying when a proposal was submitted. */
-  submitTime?: Date;
+  submitTime: Date;
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
    * When group membership is changed, existing proposals from previous group versions will become invalid.
@@ -581,7 +581,7 @@ export interface Proposal {
    * via gRPC, this field is not populated until the proposal's voting period
    * has ended.
    */
-  finalTallyResult?: TallyResult;
+  finalTallyResult: TallyResult;
   /**
    * voting_period_end is the timestamp before which voting must be done.
    * Unless a successfull MsgExec is called before (to execute a proposal whose
@@ -589,7 +589,7 @@ export interface Proposal {
    * at this point, and the `final_tally_result`, as well
    * as `status` and `result` fields will be accordingly updated.
    */
-  votingPeriodEnd?: Date;
+  votingPeriodEnd: Date;
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executorResult: ProposalExecutorResult;
   /** messages is a list of Msgs that will be executed if the proposal passes. */
@@ -668,13 +668,13 @@ export interface ProposalSDKType {
   address: string;
   metadata: string;
   proposers: string[];
-  submit_time?: Date;
+  submit_time: Date;
   group_version: Long;
   group_policy_version: Long;
   status: ProposalStatus;
   result: ProposalResult;
-  final_tally_result?: TallyResultSDKType;
-  voting_period_end?: Date;
+  final_tally_result: TallyResultSDKType;
+  voting_period_end: Date;
   executor_result: ProposalExecutorResult;
   messages: AnySDKType[];
 }
@@ -726,7 +726,7 @@ export interface Vote {
   /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
   /** submit_time is the timestamp when the vote was submitted. */
-  submitTime?: Date;
+  submitTime: Date;
 }
 export interface VoteProtoMsg {
   typeUrl: "/cosmos.group.v1.Vote";
@@ -755,7 +755,7 @@ export interface VoteSDKType {
   voter: string;
   option: VoteOption;
   metadata: string;
-  submit_time?: Date;
+  submit_time: Date;
 }
 function createBaseMember(): Member {
   return {
@@ -854,7 +854,7 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: object?.added_at ? Timestamp.fromAmino(object.added_at) : undefined
+      addedAt: object.added_at
     };
   },
   toAmino(message: Member): MemberAmino {
@@ -862,7 +862,7 @@ export const Member = {
     obj.address = message.address;
     obj.weight = message.weight;
     obj.metadata = message.metadata;
-    obj.added_at = message.addedAt ? Timestamp.toAmino(message.addedAt) : undefined;
+    obj.added_at = message.addedAt;
     return obj;
   },
   fromAminoMsg(object: MemberAminoMsg): Member {
@@ -990,7 +990,7 @@ export const Members = {
 function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
   return {
     threshold: "",
-    windows: undefined
+    windows: DecisionPolicyWindows.fromPartial({})
   };
 }
 export const ThresholdDecisionPolicy = {
@@ -1092,7 +1092,7 @@ export const ThresholdDecisionPolicy = {
 function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
   return {
     percentage: "",
-    windows: undefined
+    windows: DecisionPolicyWindows.fromPartial({})
   };
 }
 export const PercentageDecisionPolicy = {
@@ -1416,7 +1416,7 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: Long.fromString(object.version),
       totalWeight: object.total_weight,
-      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
+      createdAt: object.created_at
     };
   },
   toAmino(message: GroupInfo): GroupInfoAmino {
@@ -1426,7 +1426,7 @@ export const GroupInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.total_weight = message.totalWeight;
-    obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined;
+    obj.created_at = message.createdAt;
     return obj;
   },
   fromAminoMsg(object: GroupInfoAminoMsg): GroupInfo {
@@ -1454,7 +1454,7 @@ export const GroupInfo = {
 function createBaseGroupMember(): GroupMember {
   return {
     groupId: Long.UZERO,
-    member: undefined
+    member: Member.fromPartial({})
   };
 }
 export const GroupMember = {
@@ -1689,7 +1689,7 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: Long.fromString(object.version),
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
-      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
+      createdAt: object.created_at
     };
   },
   toAmino(message: GroupPolicyInfo): GroupPolicyInfoAmino {
@@ -1700,7 +1700,7 @@ export const GroupPolicyInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
-    obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined;
+    obj.created_at = message.createdAt;
     return obj;
   },
   fromAminoMsg(object: GroupPolicyInfoAminoMsg): GroupPolicyInfo {
@@ -1736,7 +1736,7 @@ function createBaseProposal(): Proposal {
     groupPolicyVersion: Long.UZERO,
     status: 0,
     result: 0,
-    finalTallyResult: undefined,
+    finalTallyResult: TallyResult.fromPartial({}),
     votingPeriodEnd: undefined,
     executorResult: 0,
     messages: []
@@ -1849,11 +1849,11 @@ export const Proposal = {
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
       groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
       votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
-      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : 0,
+      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -1908,11 +1908,11 @@ export const Proposal = {
       submitTime: object.submit_time ?? undefined,
       groupVersion: object?.group_version,
       groupPolicyVersion: object?.group_policy_version,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       votingPeriodEnd: object.voting_period_end ?? undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1947,14 +1947,14 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined,
+      submitTime: object.submit_time,
       groupVersion: Long.fromString(object.group_version),
       groupPolicyVersion: Long.fromString(object.group_policy_version),
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: object?.voting_period_end ? Timestamp.fromAmino(object.voting_period_end) : undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      votingPeriodEnd: object.voting_period_end,
+      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },
@@ -1968,13 +1968,13 @@ export const Proposal = {
     } else {
       obj.proposers = [];
     }
-    obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined;
+    obj.submit_time = message.submitTime;
     obj.group_version = message.groupVersion ? message.groupVersion.toString() : undefined;
     obj.group_policy_version = message.groupPolicyVersion ? message.groupPolicyVersion.toString() : undefined;
     obj.status = message.status;
     obj.result = message.result;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
-    obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toAmino(message.votingPeriodEnd) : undefined;
+    obj.voting_period_end = message.votingPeriodEnd;
     obj.executor_result = message.executorResult;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
@@ -2198,7 +2198,7 @@ export const Vote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
     };
@@ -2225,7 +2225,7 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata,
       submitTime: object.submit_time ?? undefined
     };
@@ -2243,9 +2243,9 @@ export const Vote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined
+      submitTime: object.submit_time
     };
   },
   toAmino(message: Vote): VoteAmino {
@@ -2254,7 +2254,7 @@ export const Vote = {
     obj.voter = message.voter;
     obj.option = message.option;
     obj.metadata = message.metadata;
-    obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined;
+    obj.submit_time = message.submitTime;
     return obj;
   },
   fromAminoMsg(object: VoteAminoMsg): Vote {

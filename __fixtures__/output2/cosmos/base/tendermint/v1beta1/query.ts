@@ -12,31 +12,31 @@ export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 export interface GetValidatorSetByHeightRequest {
   height: Long;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
   blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequest {
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
   blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
-  pubKey?: Any;
+  pubKey: Any;
   votingPower: Long;
   proposerPriority: Long;
 }
@@ -46,15 +46,15 @@ export interface GetBlockByHeightRequest {
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
-  blockId?: BlockID;
-  block?: Block;
+  blockId: BlockID;
+  block: Block;
 }
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequest {}
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
-  blockId?: BlockID;
-  block?: Block;
+  blockId: BlockID;
+  block: Block;
 }
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequest {}
@@ -66,8 +66,8 @@ export interface GetSyncingResponse {
 export interface GetNodeInfoRequest {}
 /** GetNodeInfoResponse is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
-  defaultNodeInfo?: DefaultNodeInfo;
-  applicationVersion?: VersionInfo;
+  defaultNodeInfo: DefaultNodeInfo;
+  applicationVersion: VersionInfo;
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
@@ -93,7 +93,7 @@ export interface Module {
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
     height: Long.ZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const GetValidatorSetByHeightRequest = {
@@ -149,7 +149,7 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
   return {
     blockHeight: Long.ZERO,
     validators: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetValidatorSetByHeightResponse = {
@@ -216,7 +216,7 @@ export const GetValidatorSetByHeightResponse = {
 };
 function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const GetLatestValidatorSetRequest = {
@@ -263,7 +263,7 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
   return {
     blockHeight: Long.ZERO,
     validators: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetLatestValidatorSetResponse = {
@@ -450,8 +450,8 @@ export const GetBlockByHeightRequest = {
 };
 function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   return {
-    blockId: undefined,
-    block: undefined
+    blockId: BlockID.fromPartial({}),
+    block: Block.fromPartial({})
   };
 }
 export const GetBlockByHeightResponse = {
@@ -538,8 +538,8 @@ export const GetLatestBlockRequest = {
 };
 function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   return {
-    blockId: undefined,
-    block: undefined
+    blockId: BlockID.fromPartial({}),
+    block: Block.fromPartial({})
   };
 }
 export const GetLatestBlockResponse = {
@@ -704,8 +704,8 @@ export const GetNodeInfoRequest = {
 };
 function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   return {
-    defaultNodeInfo: undefined,
-    applicationVersion: undefined
+    defaultNodeInfo: DefaultNodeInfo.fromPartial({}),
+    applicationVersion: VersionInfo.fromPartial({})
   };
 }
 export const GetNodeInfoResponse = {

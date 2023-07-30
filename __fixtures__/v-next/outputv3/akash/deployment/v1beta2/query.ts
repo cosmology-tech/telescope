@@ -8,8 +8,8 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters?: DeploymentFilters;
-  pagination?: PageRequest;
+  filters: DeploymentFilters;
+  pagination: PageRequest;
 }
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
@@ -26,13 +26,13 @@ export interface QueryDeploymentsRequestAminoMsg {
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
-  filters?: DeploymentFiltersSDKType;
-  pagination?: PageRequestSDKType;
+  filters: DeploymentFiltersSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryDeploymentsResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
@@ -50,11 +50,11 @@ export interface QueryDeploymentsResponseAminoMsg {
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id?: DeploymentID;
+  id: DeploymentID;
 }
 export interface QueryDeploymentRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest";
@@ -70,13 +70,13 @@ export interface QueryDeploymentRequestAminoMsg {
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment?: Deployment;
+  deployment: Deployment;
   groups: Group[];
-  escrowAccount?: Account;
+  escrowAccount: Account;
 }
 export interface QueryDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse";
@@ -94,13 +94,13 @@ export interface QueryDeploymentResponseAminoMsg {
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
-  deployment?: DeploymentSDKType;
+  deployment: DeploymentSDKType;
   groups: GroupSDKType[];
-  escrow_account?: AccountSDKType;
+  escrow_account: AccountSDKType;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id?: GroupID;
+  id: GroupID;
 }
 export interface QueryGroupRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest";
@@ -116,11 +116,11 @@ export interface QueryGroupRequestAminoMsg {
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
-  id?: GroupIDSDKType;
+  id: GroupIDSDKType;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group?: Group;
+  group: Group;
 }
 export interface QueryGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse";
@@ -136,12 +136,12 @@ export interface QueryGroupResponseAminoMsg {
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
-  group?: GroupSDKType;
+  group: GroupSDKType;
 }
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: DeploymentFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDeploymentsRequest = {
@@ -236,7 +236,7 @@ export const QueryDeploymentsRequest = {
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   return {
     deployments: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDeploymentsResponse = {
@@ -342,7 +342,7 @@ export const QueryDeploymentsResponse = {
 };
 function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const QueryDeploymentRequest = {
@@ -423,9 +423,9 @@ export const QueryDeploymentRequest = {
 };
 function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
   return {
-    deployment: undefined,
+    deployment: Deployment.fromPartial({}),
     groups: [],
-    escrowAccount: undefined
+    escrowAccount: Account.fromPartial({})
   };
 }
 export const QueryDeploymentResponse = {
@@ -544,7 +544,7 @@ export const QueryDeploymentResponse = {
 };
 function createBaseQueryGroupRequest(): QueryGroupRequest {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const QueryGroupRequest = {
@@ -625,7 +625,7 @@ export const QueryGroupRequest = {
 };
 function createBaseQueryGroupResponse(): QueryGroupResponse {
   return {
-    group: undefined
+    group: Group.fromPartial({})
   };
 }
 export const QueryGroupResponse = {

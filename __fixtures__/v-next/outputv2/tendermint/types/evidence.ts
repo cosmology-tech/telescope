@@ -26,11 +26,11 @@ export interface EvidenceSDKType {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
-  voteA?: Vote;
-  voteB?: Vote;
+  voteA: Vote;
+  voteB: Vote;
   totalVotingPower: Long;
   validatorPower: Long;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface DuplicateVoteEvidenceProtoMsg {
   typeUrl: "/tendermint.types.DuplicateVoteEvidence";
@@ -50,19 +50,19 @@ export interface DuplicateVoteEvidenceAminoMsg {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
-  vote_a?: VoteSDKType;
-  vote_b?: VoteSDKType;
+  vote_a: VoteSDKType;
+  vote_b: VoteSDKType;
   total_voting_power: Long;
   validator_power: Long;
-  timestamp?: Date;
+  timestamp: Date;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
-  conflictingBlock?: LightBlock;
+  conflictingBlock: LightBlock;
   commonHeight: Long;
   byzantineValidators: Validator[];
   totalVotingPower: Long;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface LightClientAttackEvidenceProtoMsg {
   typeUrl: "/tendermint.types.LightClientAttackEvidence";
@@ -82,11 +82,11 @@ export interface LightClientAttackEvidenceAminoMsg {
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
-  conflicting_block?: LightBlockSDKType;
+  conflicting_block: LightBlockSDKType;
   common_height: Long;
   byzantine_validators: ValidatorSDKType[];
   total_voting_power: Long;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface EvidenceList {
   evidence: Evidence[];
@@ -202,8 +202,8 @@ export const Evidence = {
 };
 function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
   return {
-    voteA: undefined,
-    voteB: undefined,
+    voteA: Vote.fromPartial({}),
+    voteB: Vote.fromPartial({}),
     totalVotingPower: Long.ZERO,
     validatorPower: Long.ZERO,
     timestamp: undefined
@@ -309,7 +309,7 @@ export const DuplicateVoteEvidence = {
       voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
       totalVotingPower: Long.fromString(object.total_voting_power),
       validatorPower: Long.fromString(object.validator_power),
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
@@ -318,7 +318,7 @@ export const DuplicateVoteEvidence = {
     obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined;
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
@@ -339,7 +339,7 @@ export const DuplicateVoteEvidence = {
 };
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
   return {
-    conflictingBlock: undefined,
+    conflictingBlock: LightBlock.fromPartial({}),
     commonHeight: Long.ZERO,
     byzantineValidators: [],
     totalVotingPower: Long.ZERO,
@@ -454,7 +454,7 @@ export const LightClientAttackEvidence = {
       commonHeight: Long.fromString(object.common_height),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
       totalVotingPower: Long.fromString(object.total_voting_power),
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {
@@ -467,7 +467,7 @@ export const LightClientAttackEvidence = {
       obj.byzantine_validators = [];
     }
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {

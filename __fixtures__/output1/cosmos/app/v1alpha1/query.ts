@@ -9,11 +9,11 @@ export interface QueryConfigRequestSDKType {}
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
   /** config is the current app config. */
-  config?: Config;
+  config: Config;
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
-  config?: ConfigSDKType;
+  config: ConfigSDKType;
 }
 function createBaseQueryConfigRequest(): QueryConfigRequest {
   return {};
@@ -57,7 +57,7 @@ export const QueryConfigRequest = {
 };
 function createBaseQueryConfigResponse(): QueryConfigResponse {
   return {
-    config: undefined
+    config: Config.fromPartial({})
   };
 }
 export const QueryConfigResponse = {

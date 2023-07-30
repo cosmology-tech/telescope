@@ -104,7 +104,7 @@ const grpcGatewayPOSTServiceMethodDefinition = (
     )
 }
 
-const staticExpressionsNoUnwrappable = t.callExpression(
+const staticExpressionsNoParams = t.callExpression(
     t.memberExpression(
         t.identifier('fm'),
         t.identifier('renderURLSearchParams'),
@@ -138,7 +138,7 @@ const staticSecondFetchReqArg = t.objectExpression(
     ]
 )
 
-const getQuasisNoUnwrappable = (
+const getQuasisNoParams = (
     path: string
 ) => {
     let quasis: any[] = [];
@@ -169,30 +169,54 @@ const getQuasisNoUnwrappable = (
     return quasis
 }
 
-// get quasis (string expressions) when there is an unwrappable element (quasis.length must === 3)
-const getQuasisUnwrappable = (
-    leftPath: string,
-    rightPath: string,
+// get quasis (string expressions) when there is an Params element
+const getQuasisParams = (
+    path: string,
+    indicesLeft: number[],
+    indicesRight: number[]
 ) => {
-    let quasis: any[] = []; 
+    let quasis: any[] = [];
     
-    // add left path element to quasis (path before unwrappable element)
+    // add left path element to quasis (path before Params element)
+    const firstPath = path.slice(0, indicesLeft[0]);
     quasis.push(
         t.templateElement(
             {
-                raw: leftPath,
-                cooked: leftPath,
+                raw: firstPath,
+                cooked: firstPath,
             },
             false
         )
-    )
+    )  
+
+    // check if path end with param or quasis, get that quasis if any
+    let lastPath = '';
+    if (indicesRight[indicesRight.length -1] != path.length -1) {
+        lastPath = path.slice(indicesRight[indicesRight.length -1] + 1, path.length);
+        // console.log(lastPath);  
+    }
+
+    // get paths in between params
+    for (let i = 0; i < indicesLeft.length - 1; i++) {
+        const tempPath = path.slice(indicesRight[i] + 1, indicesLeft[i + 1]);
+        quasis.push(
+            t.templateElement(
+                {
+                    raw: tempPath,
+                    cooked: tempPath,
+                },
+                false
+            )
+        )   
+    }
+    
     
     // add remaining path (if exists) or only '?' sign
     quasis.push(
         t.templateElement(
             {
-                raw: rightPath != '' ? rightPath + '?' : '?',
-                cooked: rightPath != '' ? rightPath + '?' : '?'
+                raw: lastPath != '' ? lastPath + '?' : '?',
+                cooked: lastPath != '' ? lastPath + '?' : '?'
             },
             false
         )
@@ -212,30 +236,33 @@ const getQuasisUnwrappable = (
     return quasis
 }
 
-const getExpressionsNoUnwrappable = () => {
-    return [staticExpressionsNoUnwrappable]
+const getExpressionsNoParams = () => {
+    return [staticExpressionsNoParams]
 }
 
-// Get expressions for a path with unwrappable.
+// Get expressions for a path with Params.
 // Returning array must be of length 2.
 // example expressions: ${req["denom"]} AND ${fm.renderURLSearchParams(req, ["denom"])}
-const getExpressionsUnwrappable = (
-    path: string,
-    indexLeft: number,
-    indexRight: number
+const getExpressionsParams = (
+    paramsName: string[]
 ) => {
     let expressions: any[] = [];
+    let arrParams =[];
 
-    const unwrappable = path.slice(indexLeft + 1, indexRight)
-
-    // ${req["denom"]}
-    expressions.push(
-        t.memberExpression(
-            t.identifier('request'),
-            t.stringLiteral(unwrappable),
-            true,
+    for (let i = 0; i < paramsName.length; i++) {
+        // ${req["denom"]}
+        expressions.push(
+            t.memberExpression(
+                t.identifier('request'),
+                t.stringLiteral(paramsName[i]),
+                true,
+            )
         )
-    )
+        
+        arrParams.push(
+            t.stringLiteral(paramsName[i])
+        )
+    }
 
     // ${fm.renderURLSearchParams(req, ["denom"])}
     expressions.push(
@@ -254,9 +281,7 @@ const getExpressionsUnwrappable = (
                     ]
                 ),
                 t.arrayExpression(
-                    [
-                        t.stringLiteral(unwrappable)
-                    ]
+                        arrParams
                 )
             ]
         )
@@ -265,15 +290,15 @@ const getExpressionsUnwrappable = (
     return expressions
 }
 
-// Get fm.fetchReq arguments if there is no unwrappable element
+// Get fm.fetchReq arguments if there is no Params element
 // In this case, len of quasis must be 2 and len of expressions must be 1.
-const getFetchReqArgsNoUnwrappable = (
+const getFetchReqArgsNoParams = (
     path: string
 ) => {
     let args: any[] = [];
 
-    const quasis = getQuasisNoUnwrappable(path);
-    const expressions = getExpressionsNoUnwrappable();
+    const quasis = getQuasisNoParams(path);
+    const expressions = getExpressionsNoParams();
 
     args.push(
         t.templateLiteral(
@@ -288,22 +313,25 @@ const getFetchReqArgsNoUnwrappable = (
     return args;
 }
 
-// Get fm.fetchReq arguments if there is an unwrappable element
-// In this case, len of quasis must be 3 and len of expressions must be 2.
-const getFetchReqArgsUnwrappable = (
+// Get fm.fetchReq arguments if there is an Params element
+const getFetchReqArgsParams = (
     path: string,
-    indexLeft: number,
-    indexRight: number,
+    indicesLeft: number[],
+    indicesRight: number[],
 ) => {
     let args: any[] = [];
-
-    const leftPath = path.slice(0, indexLeft);
-    const rightPath = path.slice(indexRight + 1);
-
+    
     // first argument
-    // ex: `/cosmos/bank/v1beta1/denoms_metadata/${req["denom"]}?${fm.renderURLSearchParams(req, ["denom"])}`
-    const quasis = getQuasisUnwrappable(leftPath, rightPath);
-    const expressions = getExpressionsUnwrappable(path, indexLeft, indexRight);
+    // ex: `/cosmos/staking/v1beta1/delegators/${req["delegator_addr"]}/validators/${req["validator_addr"]}? => quasis
+    // ${fm.renderURLSearchParams(req, ["delegator_addr", "validator_addr"])}` => expressions
+    
+    let paramsName = [];
+    for (let i = 0; i < indicesLeft.length; i++) {
+        paramsName.push(path.slice(indicesLeft[i] + 1, indicesRight[i]));
+    }
+
+    const quasis = getQuasisParams(path, indicesLeft, indicesRight);
+    const expressions = getExpressionsParams(paramsName);
 
     args.push(
         t.templateLiteral(
@@ -341,36 +369,18 @@ const getFetchReqArgs = (
     
     let args: any[];
 
-    // check if getPath contains "unwrappable" elements in path
+    // check if getPath contains params
     // ex: "/cosmos/bank/v1beta1/balances/{address}" 
-    // {address} here is what I mean by "unwrappable"
+    // NOTE: {address} here is param
+    // contains params
     if (getPath!.indexOf('{') > -1) {
-        const indexLeft = getPath!.indexOf('{');
-        const indexRight = getPath!.indexOf('}');
-        args = buildFetchReqArgs(getPath!, true, indexLeft, indexRight);
+        // get all indices of '{' and '}' from path.
+        const indicesLeft = [...getPath!.matchAll(/{/g)].map(match => match.index);
+        const indicesRight = [...getPath!.matchAll(/}/g)].map(match => match.index);
+        args = getFetchReqArgsParams(getPath!, indicesLeft, indicesRight);
     } else {
-        args = buildFetchReqArgs(getPath!, false)
-    }
-
-    return args
-}
-
-const buildFetchReqArgs = (
-    path: string,
-    unwrappable: boolean,
-    indexLeft = -1,
-    indexRight = -1,
-) => {
-    let args: any[] = [];
-
-    if (unwrappable) {
-        if (indexLeft === -1 || indexRight === -1) {
-            throw new Error("indexLeft and indexRight must be provided when path has {unwrappable} element")
-        }
-
-        args = getFetchReqArgsUnwrappable(path, indexLeft, indexRight);
-    } else {
-        args = getFetchReqArgsNoUnwrappable(path);
+        // contains no params
+        args = getFetchReqArgsNoParams(getPath!);
     }
 
     return args
@@ -573,6 +583,14 @@ export const createGRPCGatewayWrapperClass = (
     service: ProtoService
 ) => {
     const serviceName = service.name;
+    let className: string;
+    if (serviceName === 'Query') {
+        // QueryClientImp for wrapper class
+        className = 'QueryClientImpl'
+    } else {
+        className = 'ServiceClientImpl'
+    }
+    
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
@@ -591,7 +609,7 @@ export const createGRPCGatewayWrapperClass = (
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
-            t.identifier('Querier'),
+            t.identifier(className),
             null,
             t.classBody(
                 [

@@ -13,7 +13,7 @@ export interface MsgSoftwareUpgrade {
   /** authority is the address of the governance account. */
   authority: string;
   /** plan is the upgrade plan. */
-  plan?: Plan;
+  plan: Plan;
 }
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
@@ -39,7 +39,7 @@ export interface MsgCancelUpgradeResponse {}
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   return {
     authority: "",
-    plan: undefined
+    plan: Plan.fromPartial({})
   };
 }
 export const MsgSoftwareUpgrade = {

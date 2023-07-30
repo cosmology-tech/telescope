@@ -170,8 +170,8 @@ export interface OsmoEquivalentMultiplierRecordSDKType {
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
-  delegationAmount?: Coin;
-  equivalentStakedAmount?: Coin;
+  delegationAmount: Coin;
+  equivalentStakedAmount: Coin;
 }
 export interface SuperfluidDelegationRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
@@ -198,8 +198,8 @@ export interface SuperfluidDelegationRecordAminoMsg {
 export interface SuperfluidDelegationRecordSDKType {
   delegator_address: string;
   validator_address: string;
-  delegation_amount?: CoinSDKType;
-  equivalent_staked_amount?: CoinSDKType;
+  delegation_amount: CoinSDKType;
+  equivalent_staked_amount: CoinSDKType;
 }
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -294,7 +294,7 @@ export const SuperfluidAsset = {
   fromJSON(object: any): SuperfluidAsset {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: SuperfluidAsset): unknown {
@@ -312,7 +312,7 @@ export const SuperfluidAsset = {
   fromSDK(object: SuperfluidAssetSDKType): SuperfluidAsset {
     return {
       denom: object?.denom,
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toSDK(message: SuperfluidAsset): SuperfluidAssetSDKType {
@@ -324,7 +324,7 @@ export const SuperfluidAsset = {
   fromAmino(object: SuperfluidAssetAmino): SuperfluidAsset {
     return {
       denom: object.denom,
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toAmino(message: SuperfluidAsset): SuperfluidAssetAmino {

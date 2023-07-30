@@ -8,8 +8,8 @@ import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
-  filters?: OrderFilters;
-  pagination?: PageRequest;
+  filters: OrderFilters;
+  pagination: PageRequest;
 }
 export interface QueryOrdersRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrdersRequest";
@@ -26,13 +26,13 @@ export interface QueryOrdersRequestAminoMsg {
 }
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequestSDKType {
-  filters?: OrderFiltersSDKType;
-  pagination?: PageRequestSDKType;
+  filters: OrderFiltersSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponse {
   orders: Order[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryOrdersResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrdersResponse";
@@ -50,11 +50,11 @@ export interface QueryOrdersResponseAminoMsg {
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseSDKType {
   orders: OrderSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
-  id?: OrderID;
+  id: OrderID;
 }
 export interface QueryOrderRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrderRequest";
@@ -70,11 +70,11 @@ export interface QueryOrderRequestAminoMsg {
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequestSDKType {
-  id?: OrderIDSDKType;
+  id: OrderIDSDKType;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponse {
-  order?: Order;
+  order: Order;
 }
 export interface QueryOrderResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrderResponse";
@@ -90,12 +90,12 @@ export interface QueryOrderResponseAminoMsg {
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseSDKType {
-  order?: OrderSDKType;
+  order: OrderSDKType;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
-  filters?: BidFilters;
-  pagination?: PageRequest;
+  filters: BidFilters;
+  pagination: PageRequest;
 }
 export interface QueryBidsRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidsRequest";
@@ -112,13 +112,13 @@ export interface QueryBidsRequestAminoMsg {
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequestSDKType {
-  filters?: BidFiltersSDKType;
-  pagination?: PageRequestSDKType;
+  filters: BidFiltersSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponse {
   bids: QueryBidResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryBidsResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidsResponse";
@@ -136,11 +136,11 @@ export interface QueryBidsResponseAminoMsg {
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseSDKType {
   bids: QueryBidResponseSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
-  id?: BidID;
+  id: BidID;
 }
 export interface QueryBidRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidRequest";
@@ -156,12 +156,12 @@ export interface QueryBidRequestAminoMsg {
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestSDKType {
-  id?: BidIDSDKType;
+  id: BidIDSDKType;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponse {
-  bid?: Bid;
-  escrowAccount?: Account;
+  bid: Bid;
+  escrowAccount: Account;
 }
 export interface QueryBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidResponse";
@@ -178,13 +178,13 @@ export interface QueryBidResponseAminoMsg {
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponseSDKType {
-  bid?: BidSDKType;
-  escrow_account?: AccountSDKType;
+  bid: BidSDKType;
+  escrow_account: AccountSDKType;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
-  filters?: LeaseFilters;
-  pagination?: PageRequest;
+  filters: LeaseFilters;
+  pagination: PageRequest;
 }
 export interface QueryLeasesRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeasesRequest";
@@ -201,13 +201,13 @@ export interface QueryLeasesRequestAminoMsg {
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestSDKType {
-  filters?: LeaseFiltersSDKType;
-  pagination?: PageRequestSDKType;
+  filters: LeaseFiltersSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryLeasesResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeasesResponse";
@@ -225,11 +225,11 @@ export interface QueryLeasesResponseAminoMsg {
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseSDKType {
   leases: QueryLeaseResponseSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
-  id?: LeaseID;
+  id: LeaseID;
 }
 export interface QueryLeaseRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeaseRequest";
@@ -245,12 +245,12 @@ export interface QueryLeaseRequestAminoMsg {
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestSDKType {
-  id?: LeaseIDSDKType;
+  id: LeaseIDSDKType;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponse {
-  lease?: Lease;
-  escrowPayment?: FractionalPayment;
+  lease: Lease;
+  escrowPayment: FractionalPayment;
 }
 export interface QueryLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeaseResponse";
@@ -267,13 +267,13 @@ export interface QueryLeaseResponseAminoMsg {
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponseSDKType {
-  lease?: LeaseSDKType;
-  escrow_payment?: FractionalPaymentSDKType;
+  lease: LeaseSDKType;
+  escrow_payment: FractionalPaymentSDKType;
 }
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: OrderFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryOrdersRequest = {
@@ -368,7 +368,7 @@ export const QueryOrdersRequest = {
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   return {
     orders: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryOrdersResponse = {
@@ -474,7 +474,7 @@ export const QueryOrdersResponse = {
 };
 function createBaseQueryOrderRequest(): QueryOrderRequest {
   return {
-    id: undefined
+    id: OrderID.fromPartial({})
   };
 }
 export const QueryOrderRequest = {
@@ -555,7 +555,7 @@ export const QueryOrderRequest = {
 };
 function createBaseQueryOrderResponse(): QueryOrderResponse {
   return {
-    order: undefined
+    order: Order.fromPartial({})
   };
 }
 export const QueryOrderResponse = {
@@ -636,8 +636,8 @@ export const QueryOrderResponse = {
 };
 function createBaseQueryBidsRequest(): QueryBidsRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: BidFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryBidsRequest = {
@@ -732,7 +732,7 @@ export const QueryBidsRequest = {
 function createBaseQueryBidsResponse(): QueryBidsResponse {
   return {
     bids: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryBidsResponse = {
@@ -838,7 +838,7 @@ export const QueryBidsResponse = {
 };
 function createBaseQueryBidRequest(): QueryBidRequest {
   return {
-    id: undefined
+    id: BidID.fromPartial({})
   };
 }
 export const QueryBidRequest = {
@@ -919,8 +919,8 @@ export const QueryBidRequest = {
 };
 function createBaseQueryBidResponse(): QueryBidResponse {
   return {
-    bid: undefined,
-    escrowAccount: undefined
+    bid: Bid.fromPartial({}),
+    escrowAccount: Account.fromPartial({})
   };
 }
 export const QueryBidResponse = {
@@ -1014,8 +1014,8 @@ export const QueryBidResponse = {
 };
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   return {
-    filters: undefined,
-    pagination: undefined
+    filters: LeaseFilters.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryLeasesRequest = {
@@ -1110,7 +1110,7 @@ export const QueryLeasesRequest = {
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   return {
     leases: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryLeasesResponse = {
@@ -1216,7 +1216,7 @@ export const QueryLeasesResponse = {
 };
 function createBaseQueryLeaseRequest(): QueryLeaseRequest {
   return {
-    id: undefined
+    id: LeaseID.fromPartial({})
   };
 }
 export const QueryLeaseRequest = {
@@ -1297,8 +1297,8 @@ export const QueryLeaseRequest = {
 };
 function createBaseQueryLeaseResponse(): QueryLeaseResponse {
   return {
-    lease: undefined,
-    escrowPayment: undefined
+    lease: Lease.fromPartial({}),
+    escrowPayment: FractionalPayment.fromPartial({})
   };
 }
 export const QueryLeaseResponse = {

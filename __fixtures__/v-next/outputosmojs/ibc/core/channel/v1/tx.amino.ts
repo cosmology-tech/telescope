@@ -259,8 +259,8 @@ export const AminoConverter = {
         counterpartyVersion: counterparty_version,
         proofInit: proof_init,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -306,8 +306,8 @@ export const AminoConverter = {
         counterpartyVersion: counterparty_version,
         proofTry: proof_try,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -345,8 +345,8 @@ export const AminoConverter = {
         channelId: channel_id,
         proofAck: proof_ack,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -409,8 +409,8 @@ export const AminoConverter = {
         channelId: channel_id,
         proofInit: proof_init,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -461,15 +461,15 @@ export const AminoConverter = {
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0"),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0")
           } : undefined,
           timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofCommitment: proof_commitment,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -523,15 +523,15 @@ export const AminoConverter = {
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0"),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0")
           } : undefined,
           timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         nextSequenceRecv: BigInt(next_sequence_recv),
         signer
@@ -589,16 +589,16 @@ export const AminoConverter = {
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0"),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0")
           } : undefined,
           timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofClose: proof_close,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         nextSequenceRecv: BigInt(next_sequence_recv),
         signer
@@ -653,16 +653,16 @@ export const AminoConverter = {
           destinationChannel: packet.destination_channel,
           data: packet.data,
           timeoutHeight: packet.timeout_height ? {
-            revisionHeight: BigInt(packet.timeout_height.revision_height || "0", true),
-            revisionNumber: BigInt(packet.timeout_height.revision_number || "0", true)
+            revisionHeight: BigInt(packet.timeout_height.revision_height || "0"),
+            revisionNumber: BigInt(packet.timeout_height.revision_number || "0")
           } : undefined,
           timeoutTimestamp: BigInt(packet.timeout_timestamp)
         },
         acknowledgement,
         proofAcked: proof_acked,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };

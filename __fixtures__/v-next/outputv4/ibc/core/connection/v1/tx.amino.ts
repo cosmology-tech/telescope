@@ -218,15 +218,15 @@ export const AminoConverter = {
           features: el0.features
         })),
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         proofInit: proof_init,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
         consensusHeight: consensus_height ? {
-          revisionHeight: BigInt(consensus_height.revision_height || "0", true),
-          revisionNumber: BigInt(consensus_height.revision_number || "0", true)
+          revisionHeight: BigInt(consensus_height.revision_height || "0"),
+          revisionNumber: BigInt(consensus_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -295,15 +295,15 @@ export const AminoConverter = {
           value: client_state.value
         },
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         proofTry: proof_try,
         proofClient: proof_client,
         proofConsensus: proof_consensus,
         consensusHeight: consensus_height ? {
-          revisionHeight: BigInt(consensus_height.revision_height || "0", true),
-          revisionNumber: BigInt(consensus_height.revision_number || "0", true)
+          revisionHeight: BigInt(consensus_height.revision_height || "0"),
+          revisionNumber: BigInt(consensus_height.revision_number || "0")
         } : undefined,
         signer
       };
@@ -337,8 +337,8 @@ export const AminoConverter = {
         connectionId: connection_id,
         proofAck: proof_ack,
         proofHeight: proof_height ? {
-          revisionHeight: BigInt(proof_height.revision_height || "0", true),
-          revisionNumber: BigInt(proof_height.revision_number || "0", true)
+          revisionHeight: BigInt(proof_height.revision_height || "0"),
+          revisionNumber: BigInt(proof_height.revision_number || "0")
         } : undefined,
         signer
       };

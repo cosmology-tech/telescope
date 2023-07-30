@@ -111,46 +111,46 @@ export interface AccountIDSDKType {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id?: AccountID;
+  id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
   /** current state of this escrow account */
   state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: Coin;
+  balance: Coin;
   /** total coins spent by this account */
-  transferred?: Coin;
+  transferred: Coin;
   /** block height at which this account was last settled */
   settledAt: bigint;
 }
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
-  id?: AccountIDSDKType;
+  id: AccountIDSDKType;
   owner: string;
   state: Account_State;
-  balance?: CoinSDKType;
-  transferred?: CoinSDKType;
+  balance: CoinSDKType;
+  transferred: CoinSDKType;
   settled_at: bigint;
 }
 /** Payment stores state for a payment */
 export interface Payment {
-  accountId?: AccountID;
+  accountId: AccountID;
   paymentId: string;
   owner: string;
   state: Payment_State;
-  rate?: Coin;
-  balance?: Coin;
-  withdrawn?: Coin;
+  rate: Coin;
+  balance: Coin;
+  withdrawn: Coin;
 }
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
-  account_id?: AccountIDSDKType;
+  account_id: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: Payment_State;
-  rate?: CoinSDKType;
-  balance?: CoinSDKType;
-  withdrawn?: CoinSDKType;
+  rate: CoinSDKType;
+  balance: CoinSDKType;
+  withdrawn: CoinSDKType;
 }
 function createBaseAccountID(): AccountID {
   return {
@@ -227,7 +227,7 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
     balance: undefined,
@@ -293,7 +293,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
       settledAt: isSet(object.settledAt) ? BigInt(object.settledAt.toString()) : BigInt(0)
@@ -323,7 +323,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? Coin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at
@@ -333,7 +333,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
       settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0)
@@ -352,7 +352,7 @@ export const Account = {
 };
 function createBasePayment(): Payment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
@@ -426,7 +426,7 @@ export const Payment = {
       accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
       paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? Coin.fromJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined
@@ -459,7 +459,7 @@ export const Payment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
       rate: object.rate ? Coin.fromSDK(object.rate) : undefined,
       balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
@@ -470,7 +470,7 @@ export const Payment = {
       account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
       payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? Coin.fromSDKJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined

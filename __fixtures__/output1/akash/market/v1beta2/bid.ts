@@ -60,17 +60,17 @@ export function bid_StateToJSON(object: Bid_State): string {
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBid {
-  order?: OrderID;
+  order: OrderID;
   provider: string;
-  price?: DecCoin;
-  deposit?: Coin;
+  price: DecCoin;
+  deposit: Coin;
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
-  order?: OrderIDSDKType;
+  order: OrderIDSDKType;
   provider: string;
-  price?: DecCoinSDKType;
-  deposit?: CoinSDKType;
+  price: DecCoinSDKType;
+  deposit: CoinSDKType;
 }
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponse {}
@@ -78,11 +78,11 @@ export interface MsgCreateBidResponse {}
 export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
-  bidId?: BidID;
+  bidId: BidID;
 }
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
-  bid_id?: BidIDSDKType;
+  bid_id: BidIDSDKType;
 }
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponse {}
@@ -112,16 +112,16 @@ export interface BidIDSDKType {
 }
 /** Bid stores BidID, state of bid and price */
 export interface Bid {
-  bidId?: BidID;
+  bidId: BidID;
   state: Bid_State;
-  price?: DecCoin;
+  price: DecCoin;
   createdAt: Long;
 }
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
-  bid_id?: BidIDSDKType;
+  bid_id: BidIDSDKType;
   state: Bid_State;
-  price?: DecCoinSDKType;
+  price: DecCoinSDKType;
   created_at: Long;
 }
 /** BidFilters defines flags for bid list filter */
@@ -144,9 +144,9 @@ export interface BidFiltersSDKType {
 }
 function createBaseMsgCreateBid(): MsgCreateBid {
   return {
-    order: undefined,
+    order: OrderID.fromPartial({}),
     provider: "",
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     deposit: undefined
   };
 }
@@ -275,7 +275,7 @@ export const MsgCreateBidResponse = {
 };
 function createBaseMsgCloseBid(): MsgCloseBid {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCloseBid = {
@@ -473,9 +473,9 @@ export const BidID = {
 };
 function createBaseBid(): Bid {
   return {
-    bidId: undefined,
+    bidId: BidID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

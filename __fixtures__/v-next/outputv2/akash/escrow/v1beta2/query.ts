@@ -9,7 +9,7 @@ export interface QueryAccountsRequest {
   xid: string;
   owner: string;
   state: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryAccountsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest";
@@ -33,12 +33,12 @@ export interface QueryAccountsRequestSDKType {
   xid: string;
   owner: string;
   state: string;
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
   accounts: Account[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsResponse";
@@ -56,7 +56,7 @@ export interface QueryAccountsResponseAminoMsg {
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
   accounts: AccountSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequest {
@@ -65,7 +65,7 @@ export interface QueryPaymentsRequest {
   id: string;
   owner: string;
   state: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPaymentsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest";
@@ -91,12 +91,12 @@ export interface QueryPaymentsRequestSDKType {
   id: string;
   owner: string;
   state: string;
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPaymentsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsResponse";
@@ -114,7 +114,7 @@ export interface QueryPaymentsResponseAminoMsg {
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {
   payments: FractionalPaymentSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
@@ -122,7 +122,7 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
     xid: "",
     owner: "",
     state: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAccountsRequest = {
@@ -256,7 +256,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAccountsResponse = {
@@ -367,7 +367,7 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
     id: "",
     owner: "",
     state: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPaymentsRequest = {
@@ -514,7 +514,7 @@ export const QueryPaymentsRequest = {
 function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
   return {
     payments: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPaymentsResponse = {

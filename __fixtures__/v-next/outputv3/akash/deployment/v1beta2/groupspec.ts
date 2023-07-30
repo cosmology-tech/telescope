@@ -6,7 +6,7 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements;
+  requirements: PlacementRequirements;
   resources: Resource[];
 }
 export interface GroupSpecProtoMsg {
@@ -26,13 +26,13 @@ export interface GroupSpecAminoMsg {
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements?: PlacementRequirementsSDKType;
+  requirements: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 function createBaseGroupSpec(): GroupSpec {
   return {
     name: "",
-    requirements: undefined,
+    requirements: PlacementRequirements.fromPartial({}),
     resources: []
   };
 }

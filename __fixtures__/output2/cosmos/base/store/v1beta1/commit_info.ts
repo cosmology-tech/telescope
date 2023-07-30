@@ -17,7 +17,7 @@ export interface CommitInfo {
  */
 export interface StoreInfo {
   name: string;
-  commitId?: CommitID;
+  commitId: CommitID;
 }
 /**
  * CommitID defines the committment information when a specific store is
@@ -89,7 +89,7 @@ export const CommitInfo = {
 function createBaseStoreInfo(): StoreInfo {
   return {
     name: "",
-    commitId: undefined
+    commitId: CommitID.fromPartial({})
   };
 }
 export const StoreInfo = {

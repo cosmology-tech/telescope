@@ -15,7 +15,7 @@ export interface MsgCreateClawbackVestingAccount {
   /** to_address specifies the account to receive the funds */
   toAddress: string;
   /** start_time defines the time at which the vesting period begins */
-  startTime?: Timestamp;
+  startTime: Timestamp;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockupPeriods: Period[];
   /** vesting_periods defines thevesting schedule relative to the start_time */

@@ -22,8 +22,6 @@ export const plugin = (
     bundler.contexts = baseProtos.map(ref => {
         const context = builder.context(ref);
 
-        if (isRefExcluded(ref, builder.options.prototypes?.excluded)) return;
-
         parse(context);
         context.buildBase();
 

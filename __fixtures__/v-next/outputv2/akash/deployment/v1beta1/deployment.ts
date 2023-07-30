@@ -49,10 +49,10 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin;
+  deposit: Coin;
 }
 export interface MsgCreateDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
@@ -71,10 +71,10 @@ export interface MsgCreateDeploymentAminoMsg {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit?: CoinSDKType;
+  deposit: CoinSDKType;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
@@ -92,8 +92,8 @@ export interface MsgCreateDeploymentResponseAminoMsg {
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID;
-  amount?: Coin;
+  id: DeploymentID;
+  amount: Coin;
 }
 export interface MsgDepositDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
@@ -110,8 +110,8 @@ export interface MsgDepositDeploymentAminoMsg {
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id?: DeploymentIDSDKType;
-  amount?: CoinSDKType;
+  id: DeploymentIDSDKType;
+  amount: CoinSDKType;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
@@ -129,7 +129,7 @@ export interface MsgDepositDeploymentResponseAminoMsg {
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
 }
@@ -149,7 +149,7 @@ export interface MsgUpdateDeploymentAminoMsg {
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface MsgUpdateDeploymentResponseAminoMsg {
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID;
+  id: DeploymentID;
 }
 export interface MsgCloseDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
@@ -185,7 +185,7 @@ export interface MsgCloseDeploymentAminoMsg {
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id?: DeploymentIDSDKType;
+  id: DeploymentIDSDKType;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
@@ -226,7 +226,7 @@ export interface DeploymentIDSDKType {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID;
+  deploymentId: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
@@ -248,7 +248,7 @@ export interface DeploymentAminoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType;
+  deployment_id: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
   created_at: Long;
@@ -281,7 +281,7 @@ export interface DeploymentFiltersSDKType {
 }
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array(),
     deposit: undefined
@@ -479,7 +479,7 @@ export const MsgCreateDeploymentResponse = {
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     amount: undefined
   };
 }
@@ -637,7 +637,7 @@ export const MsgDepositDeploymentResponse = {
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array()
   };
@@ -821,7 +821,7 @@ export const MsgUpdateDeploymentResponse = {
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const MsgCloseDeployment = {
@@ -1060,7 +1060,7 @@ export const DeploymentID = {
 };
 function createBaseDeployment(): Deployment {
   return {
-    deploymentId: undefined,
+    deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
     createdAt: Long.ZERO
@@ -1112,7 +1112,7 @@ export const Deployment = {
   fromJSON(object: any): Deployment {
     return {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
@@ -1136,7 +1136,7 @@ export const Deployment = {
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
       deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object?.version,
       createdAt: object?.created_at
     };
@@ -1152,7 +1152,7 @@ export const Deployment = {
   fromAmino(object: DeploymentAmino): Deployment {
     return {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object.version,
       createdAt: Long.fromString(object.created_at)
     };

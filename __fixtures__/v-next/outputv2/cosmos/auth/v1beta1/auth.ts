@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  */
 export interface BaseAccount {
   address: string;
-  pubKey?: Any;
+  pubKey: Any;
   accountNumber: Long;
   sequence: Long;
 }
@@ -39,13 +39,13 @@ export interface BaseAccountAminoMsg {
  */
 export interface BaseAccountSDKType {
   address: string;
-  pub_key?: AnySDKType;
+  pub_key: AnySDKType;
   account_number: Long;
   sequence: Long;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  baseAccount?: BaseAccount;
+  baseAccount: BaseAccount;
   name: string;
   permissions: string[];
 }
@@ -65,7 +65,7 @@ export interface ModuleAccountAminoMsg {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-  base_account?: BaseAccountSDKType;
+  base_account: BaseAccountSDKType;
   name: string;
   permissions: string[];
 }
@@ -233,7 +233,7 @@ export const BaseAccount = {
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
-    baseAccount: undefined,
+    baseAccount: BaseAccount.fromPartial({}),
     name: "",
     permissions: []
   };

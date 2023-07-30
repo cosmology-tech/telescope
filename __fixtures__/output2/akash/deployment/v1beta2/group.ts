@@ -61,16 +61,16 @@ export function group_StateToJSON(object: Group_State): string {
 }
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID;
+  groupId: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec;
+  groupSpec: GroupSpec;
   createdAt: Long;
 }
 function createBaseGroup(): Group {
   return {
-    groupId: undefined,
+    groupId: GroupID.fromPartial({}),
     state: 0,
-    groupSpec: undefined,
+    groupSpec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }

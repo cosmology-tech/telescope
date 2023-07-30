@@ -38,7 +38,7 @@ const options: TelescopeOptions = {
 
   interfaces: {
     enabled: true,
-    useUnionTypes: false
+    useUnionTypes: true
   },
   aminoEncoding: {
     enabled: true,

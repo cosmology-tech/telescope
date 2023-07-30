@@ -193,9 +193,9 @@ export interface LogBucket {
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-  createTime?: Date;
+  createTime: Date;
   /** Output only. The last update timestamp of the bucket. */
-  updateTime?: Date;
+  updateTime: Date;
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
@@ -229,7 +229,7 @@ export interface LogBucket {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
-  cmekSettings?: CmekSettings;
+  cmekSettings: CmekSettings;
 }
 export interface LogBucketProtoMsg {
   typeUrl: "/google.logging.v2.LogBucket";
@@ -305,13 +305,13 @@ export interface LogBucketAminoMsg {
 export interface LogBucketSDKType {
   name: string;
   description: string;
-  create_time?: Date;
-  update_time?: Date;
+  create_time: Date;
+  update_time: Date;
   retention_days: number;
   locked: boolean;
   lifecycle_state: LifecycleState;
   restricted_fields: string[];
-  cmek_settings?: CmekSettingsSDKType;
+  cmek_settings: CmekSettingsSDKType;
 }
 /** Describes a view over log entries in a bucket. */
 export interface LogView {
@@ -326,9 +326,9 @@ export interface LogView {
   /** Describes this view. */
   description: string;
   /** Output only. The creation timestamp of the view. */
-  createTime?: Date;
+  createTime: Date;
   /** Output only. The last update timestamp of the view. */
-  updateTime?: Date;
+  updateTime: Date;
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -393,8 +393,8 @@ export interface LogViewAminoMsg {
 export interface LogViewSDKType {
   name: string;
   description: string;
-  create_time?: Date;
-  update_time?: Date;
+  create_time: Date;
+  update_time: Date;
   filter: string;
 }
 /**
@@ -507,13 +507,13 @@ export interface LogSink {
    * 
    * This field may not be present for older sinks.
    */
-  createTime?: Date;
+  createTime: Date;
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  updateTime?: Date;
+  updateTime: Date;
 }
 export interface LogSinkProtoMsg {
   typeUrl: "/google.logging.v2.LogSink";
@@ -660,8 +660,8 @@ export interface LogSinkSDKType {
   writer_identity: string;
   include_children: boolean;
   bigquery_options?: BigQueryOptionsSDKType;
-  create_time?: Date;
-  update_time?: Date;
+  create_time: Date;
+  update_time: Date;
 }
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptions {
@@ -854,7 +854,7 @@ export interface CreateBucketRequest {
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
-  bucket?: LogBucket;
+  bucket: LogBucket;
 }
 export interface CreateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateBucketRequest";
@@ -893,7 +893,7 @@ export interface CreateBucketRequestAminoMsg {
 export interface CreateBucketRequestSDKType {
   parent: string;
   bucket_id: string;
-  bucket?: LogBucketSDKType;
+  bucket: LogBucketSDKType;
 }
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequest {
@@ -911,7 +911,7 @@ export interface UpdateBucketRequest {
    */
   name: string;
   /** Required. The updated bucket. */
-  bucket?: LogBucket;
+  bucket: LogBucket;
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
    * bucket field will be overwritten if, and only if, it is in the update mask.
@@ -922,7 +922,7 @@ export interface UpdateBucketRequest {
    * 
    * For example: `updateMask=retention_days`
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateBucketRequest";
@@ -964,8 +964,8 @@ export interface UpdateBucketRequestAminoMsg {
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestSDKType {
   name: string;
-  bucket?: LogBucketSDKType;
-  update_mask?: FieldMaskSDKType;
+  bucket: LogBucketSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequest {
@@ -1209,7 +1209,7 @@ export interface CreateViewRequest {
   /** Required. The id to use for this view. */
   viewId: string;
   /** Required. The new view. */
-  view?: LogView;
+  view: LogView;
 }
 export interface CreateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateViewRequest";
@@ -1240,7 +1240,7 @@ export interface CreateViewRequestAminoMsg {
 export interface CreateViewRequestSDKType {
   parent: string;
   view_id: string;
-  view?: LogViewSDKType;
+  view: LogViewSDKType;
 }
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequest {
@@ -1255,7 +1255,7 @@ export interface UpdateViewRequest {
    */
   name: string;
   /** Required. The updated view. */
-  view?: LogView;
+  view: LogView;
   /**
    * Optional. Field mask that specifies the fields in `view` that need
    * an update. A field will be overwritten if, and only if, it is
@@ -1266,7 +1266,7 @@ export interface UpdateViewRequest {
    * 
    * For example: `updateMask=filter`
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateViewRequest";
@@ -1305,8 +1305,8 @@ export interface UpdateViewRequestAminoMsg {
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestSDKType {
   name: string;
-  view?: LogViewSDKType;
-  update_mask?: FieldMaskSDKType;
+  view: LogViewSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /** The parameters to `GetView`. */
 export interface GetViewRequest {
@@ -1547,7 +1547,7 @@ export interface CreateSinkRequest {
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-  sink?: LogSink;
+  sink: LogSink;
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
    * in the new sink. If this value is omitted or set to false, and if the
@@ -1610,7 +1610,7 @@ export interface CreateSinkRequestAminoMsg {
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequestSDKType {
   parent: string;
-  sink?: LogSinkSDKType;
+  sink: LogSinkSDKType;
   unique_writer_identity: boolean;
 }
 /** The parameters to `UpdateSink`. */
@@ -1633,7 +1633,7 @@ export interface UpdateSinkRequest {
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-  sink?: LogSink;
+  sink: LogSink;
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
    * for a description of this field. When updating a sink, the effect of this
@@ -1666,7 +1666,7 @@ export interface UpdateSinkRequest {
    * 
    * For example: `updateMask=filter`
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSinkRequest";
@@ -1734,9 +1734,9 @@ export interface UpdateSinkRequestAminoMsg {
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestSDKType {
   sink_name: string;
-  sink?: LogSinkSDKType;
+  sink: LogSinkSDKType;
   unique_writer_identity: boolean;
-  update_mask?: FieldMaskSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequest {
@@ -1826,13 +1826,13 @@ export interface LogExclusion {
    * 
    * This field may not be present for older exclusions.
    */
-  createTime?: Date;
+  createTime: Date;
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  updateTime?: Date;
+  updateTime: Date;
 }
 export interface LogExclusionProtoMsg {
   typeUrl: "/google.logging.v2.LogExclusion";
@@ -1904,8 +1904,8 @@ export interface LogExclusionSDKType {
   description: string;
   filter: string;
   disabled: boolean;
-  create_time?: Date;
-  update_time?: Date;
+  create_time: Date;
+  update_time: Date;
 }
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequest {
@@ -2070,7 +2070,7 @@ export interface CreateExclusionRequest {
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
-  exclusion?: LogExclusion;
+  exclusion: LogExclusion;
 }
 export interface CreateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateExclusionRequest";
@@ -2105,7 +2105,7 @@ export interface CreateExclusionRequestAminoMsg {
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequestSDKType {
   parent: string;
-  exclusion?: LogExclusionSDKType;
+  exclusion: LogExclusionSDKType;
 }
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequest {
@@ -2126,7 +2126,7 @@ export interface UpdateExclusionRequest {
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-  exclusion?: LogExclusion;
+  exclusion: LogExclusion;
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
    * for the fields are taken from the corresponding fields in the
@@ -2136,7 +2136,7 @@ export interface UpdateExclusionRequest {
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest";
@@ -2180,8 +2180,8 @@ export interface UpdateExclusionRequestAminoMsg {
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestSDKType {
   name: string;
-  exclusion?: LogExclusionSDKType;
-  update_mask?: FieldMaskSDKType;
+  exclusion: LogExclusionSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequest {
@@ -2335,7 +2335,7 @@ export interface UpdateCmekSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  cmekSettings?: CmekSettings;
+  cmekSettings: CmekSettings;
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2345,7 +2345,7 @@ export interface UpdateCmekSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
@@ -2410,8 +2410,8 @@ export interface UpdateCmekSettingsRequestAminoMsg {
  */
 export interface UpdateCmekSettingsRequestSDKType {
   name: string;
-  cmek_settings?: CmekSettingsSDKType;
-  update_mask?: FieldMaskSDKType;
+  cmek_settings: CmekSettingsSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
@@ -2667,7 +2667,7 @@ export interface UpdateSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  settings?: Settings;
+  settings: Settings;
   /**
    * Optional. Field mask identifying which fields from `settings` should
    * be updated. A field will be overwritten if and only if it is in the update
@@ -2677,7 +2677,7 @@ export interface UpdateSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  updateMask?: FieldMask;
+  updateMask: FieldMask;
 }
 export interface UpdateSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest";
@@ -2739,8 +2739,8 @@ export interface UpdateSettingsRequestAminoMsg {
  */
 export interface UpdateSettingsRequestSDKType {
   name: string;
-  settings?: SettingsSDKType;
-  update_mask?: FieldMaskSDKType;
+  settings: SettingsSDKType;
+  update_mask: FieldMaskSDKType;
 }
 /**
  * Describes the settings associated with a project, folder, organization,
@@ -2946,15 +2946,15 @@ export interface CopyLogEntriesRequestSDKType {
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadata {
   /** The create time of an operation. */
-  startTime?: Date;
+  startTime: Date;
   /** The end time of an operation. */
-  endTime?: Date;
+  endTime: Date;
   /** State of an operation. */
   state: OperationState;
   /** Identifies whether the user has requested cancellation of the operation. */
   cancellationRequested: boolean;
   /** CopyLogEntries RPC request. */
-  request?: CopyLogEntriesRequest;
+  request: CopyLogEntriesRequest;
   /** Estimated progress of the operation (0 - 100%). */
   progress: number;
   /**
@@ -3003,11 +3003,11 @@ export interface CopyLogEntriesMetadataAminoMsg {
 }
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
-  start_time?: Date;
-  end_time?: Date;
+  start_time: Date;
+  end_time: Date;
   state: OperationState;
   cancellation_requested: boolean;
-  request?: CopyLogEntriesRequestSDKType;
+  request: CopyLogEntriesRequestSDKType;
   progress: number;
   writer_identity: string;
 }
@@ -3043,7 +3043,7 @@ function createBaseLogBucket(): LogBucket {
     locked: false,
     lifecycleState: 0,
     restrictedFields: [],
-    cmekSettings: undefined
+    cmekSettings: CmekSettings.fromPartial({})
   };
 }
 export const LogBucket = {
@@ -3127,7 +3127,7 @@ export const LogBucket = {
       updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
       retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
-      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : 0,
+      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : -1,
       restrictedFields: Array.isArray(object?.restrictedFields) ? object.restrictedFields.map((e: any) => String(e)) : [],
       cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
     };
@@ -3170,7 +3170,7 @@ export const LogBucket = {
       updateTime: object.update_time ?? undefined,
       retentionDays: object?.retention_days,
       locked: object?.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
       cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined
     };
@@ -3196,11 +3196,11 @@ export const LogBucket = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
+      createTime: object.create_time,
+      updateTime: object.update_time,
       retentionDays: object.retention_days,
       locked: object.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
       cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
     };
@@ -3209,8 +3209,8 @@ export const LogBucket = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
-    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
     obj.lifecycle_state = message.lifecycleState;
@@ -3345,8 +3345,8 @@ export const LogView = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
+      createTime: object.create_time,
+      updateTime: object.update_time,
       filter: object.filter
     };
   },
@@ -3354,8 +3354,8 @@ export const LogView = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
-    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
     obj.filter = message.filter;
     return obj;
   },
@@ -3490,7 +3490,7 @@ export const LogSink = {
       description: isSet(object.description) ? String(object.description) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
-      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : 0,
+      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : -1,
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
       includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
       bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
@@ -3542,7 +3542,7 @@ export const LogSink = {
       description: object?.description,
       disabled: object?.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
       writerIdentity: object?.writer_identity,
       includeChildren: object?.include_children,
       bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
@@ -3578,12 +3578,12 @@ export const LogSink = {
       description: object.description,
       disabled: object.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
       writerIdentity: object.writer_identity,
       includeChildren: object.include_children,
       bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined
+      createTime: object.create_time,
+      updateTime: object.update_time
     };
   },
   toAmino(message: LogSink): LogSinkAmino {
@@ -3602,8 +3602,8 @@ export const LogSink = {
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
-    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
     return obj;
   },
   fromAminoMsg(object: LogSinkAminoMsg): LogSink {
@@ -3937,7 +3937,7 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
   return {
     parent: "",
     bucketId: "",
-    bucket: undefined
+    bucket: LogBucket.fromPartial({})
   };
 }
 export const CreateBucketRequest = {
@@ -4045,8 +4045,8 @@ export const CreateBucketRequest = {
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   return {
     name: "",
-    bucket: undefined,
-    updateMask: undefined
+    bucket: LogBucket.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateBucketRequest = {
@@ -4614,7 +4614,7 @@ function createBaseCreateViewRequest(): CreateViewRequest {
   return {
     parent: "",
     viewId: "",
-    view: undefined
+    view: LogView.fromPartial({})
   };
 }
 export const CreateViewRequest = {
@@ -4722,8 +4722,8 @@ export const CreateViewRequest = {
 function createBaseUpdateViewRequest(): UpdateViewRequest {
   return {
     name: "",
-    view: undefined,
-    updateMask: undefined
+    view: LogView.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateViewRequest = {
@@ -5290,7 +5290,7 @@ export const GetSinkRequest = {
 function createBaseCreateSinkRequest(): CreateSinkRequest {
   return {
     parent: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false
   };
 }
@@ -5399,9 +5399,9 @@ export const CreateSinkRequest = {
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   return {
     sinkName: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false,
-    updateMask: undefined
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSinkRequest = {
@@ -5721,8 +5721,8 @@ export const LogExclusion = {
       description: object.description,
       filter: object.filter,
       disabled: object.disabled,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined
+      createTime: object.create_time,
+      updateTime: object.update_time
     };
   },
   toAmino(message: LogExclusion): LogExclusionAmino {
@@ -5731,8 +5731,8 @@ export const LogExclusion = {
     obj.description = message.description;
     obj.filter = message.filter;
     obj.disabled = message.disabled;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
-    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
     return obj;
   },
   fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
@@ -6051,7 +6051,7 @@ export const GetExclusionRequest = {
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   return {
     parent: "",
-    exclusion: undefined
+    exclusion: LogExclusion.fromPartial({})
   };
 }
 export const CreateExclusionRequest = {
@@ -6146,8 +6146,8 @@ export const CreateExclusionRequest = {
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   return {
     name: "",
-    exclusion: undefined,
-    updateMask: undefined
+    exclusion: LogExclusion.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateExclusionRequest = {
@@ -6417,8 +6417,8 @@ export const GetCmekSettingsRequest = {
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   return {
     name: "",
-    cmekSettings: undefined,
-    updateMask: undefined
+    cmekSettings: CmekSettings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateCmekSettingsRequest = {
@@ -6716,8 +6716,8 @@ export const GetSettingsRequest = {
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   return {
     name: "",
-    settings: undefined,
-    updateMask: undefined
+    settings: Settings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSettingsRequest = {
@@ -7074,7 +7074,7 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
     endTime: undefined,
     state: 0,
     cancellationRequested: false,
-    request: undefined,
+    request: CopyLogEntriesRequest.fromPartial({}),
     progress: 0,
     writerIdentity: ""
   };
@@ -7144,7 +7144,7 @@ export const CopyLogEntriesMetadata = {
     return {
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
       progress: isSet(object.progress) ? Number(object.progress) : 0,
@@ -7177,7 +7177,7 @@ export const CopyLogEntriesMetadata = {
     return {
       startTime: object.start_time ?? undefined,
       endTime: object.end_time ?? undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object?.cancellation_requested,
       request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
       progress: object?.progress,
@@ -7197,9 +7197,9 @@ export const CopyLogEntriesMetadata = {
   },
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
     return {
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      startTime: object.start_time,
+      endTime: object.end_time,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object.cancellation_requested,
       request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
       progress: object.progress,
@@ -7208,8 +7208,8 @@ export const CopyLogEntriesMetadata = {
   },
   toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
     const obj: any = {};
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
-    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
     obj.state = message.state;
     obj.cancellation_requested = message.cancellationRequested;
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;

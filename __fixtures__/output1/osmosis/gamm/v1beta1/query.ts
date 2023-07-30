@@ -14,28 +14,28 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool?: Any;
+  pool: Any;
 }
 export interface QueryPoolResponseSDKType {
-  pool?: AnySDKType;
+  pool: AnySDKType;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPoolsResponseSDKType {
   pools: AnySDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
@@ -104,10 +104,10 @@ export interface QueryPoolParamsRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolParamsResponse {
-  params?: Any;
+  params: Any;
 }
 export interface QueryPoolParamsResponseSDKType {
-  params?: AnySDKType;
+  params: AnySDKType;
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
@@ -132,10 +132,10 @@ export interface QueryTotalSharesRequestSDKType {
   pool_id: Long;
 }
 export interface QueryTotalSharesResponse {
-  totalShares?: Coin;
+  totalShares: Coin;
 }
 export interface QueryTotalSharesResponseSDKType {
-  total_shares?: CoinSDKType;
+  total_shares: CoinSDKType;
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequest {
@@ -178,21 +178,21 @@ export interface QuerySpotPriceRequestSDKType {
 export interface QueryPoolsWithFilterRequest {
   minLiquidity: Coin[];
   poolType: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryPoolsWithFilterRequestSDKType {
   min_liquidity: CoinSDKType[];
   pool_type: string;
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryPoolsWithFilterResponseSDKType {
   pools: AnySDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -373,7 +373,7 @@ export const QueryPoolResponse = {
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsRequest = {
@@ -429,7 +429,7 @@ export const QueryPoolsRequest = {
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsResponse = {
@@ -1557,7 +1557,7 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
   return {
     minLiquidity: [],
     poolType: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterRequest = {
@@ -1643,7 +1643,7 @@ export const QueryPoolsWithFilterRequest = {
 function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterResponse = {

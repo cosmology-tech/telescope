@@ -135,6 +135,34 @@ export const fromAmino = {
 
     height(args: FromAminoParseField) {
         TypeLong.addUtil(args.context);
+        const longType = TypeLong.getType(args.context);
+
+        let revisionHeightArgs: t.Expression[] = [
+          t.logicalExpression(
+              '||',
+              t.memberExpression(
+                  memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                  t.identifier(args.context.aminoCasingFn('revision_height'))
+              ),
+              t.stringLiteral('0')
+          )
+        ];
+
+        let revisionNumberArgs: t.Expression[] = [
+          t.logicalExpression(
+              '||',
+              t.memberExpression(
+                  memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                  t.identifier(args.context.aminoCasingFn('revision_number'))
+              ),
+              t.stringLiteral('0')
+          )
+        ];
+
+        if(longType == 'Long') {
+          revisionHeightArgs.push(t.booleanLiteral(true))
+          revisionNumberArgs.push(t.booleanLiteral(true))
+        }
 
         return t.objectProperty(
             t.identifier(args.field.name),
@@ -144,33 +172,14 @@ export const fromAmino = {
                     t.objectProperty(t.identifier('revisionHeight'),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
-                            [
-                                t.logicalExpression(
-                                    '||',
-                                    t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.aminoCasingFn('revision_height'))
-                                    ),
-                                    t.stringLiteral('0')
-                                ),
-                                t.booleanLiteral(true)
-                            ])
+                            revisionHeightArgs
+                            )
                     ),
-                    //
                     t.objectProperty(t.identifier('revisionNumber'),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
-                            [
-                                t.logicalExpression(
-                                    '||',
-                                    t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.aminoCasingFn('revision_number'))
-                                    ),
-                                    t.stringLiteral('0')
-                                ),
-                                t.booleanLiteral(true)
-                            ])
+                            revisionNumberArgs
+                            )
                     )
                 ]),
                 t.identifier('undefined')

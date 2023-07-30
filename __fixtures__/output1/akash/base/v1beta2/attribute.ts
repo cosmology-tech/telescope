@@ -36,13 +36,13 @@ export interface SignedBySDKType {
 /** PlacementRequirements */
 export interface PlacementRequirements {
   /** SignedBy list of keys that tenants expect to have signatures from */
-  signedBy?: SignedBy;
+  signedBy: SignedBy;
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
-  signed_by?: SignedBySDKType;
+  signed_by: SignedBySDKType;
   attributes: AttributeSDKType[];
 }
 function createBaseAttribute(): Attribute {
@@ -197,7 +197,7 @@ export const SignedBy = {
 };
 function createBasePlacementRequirements(): PlacementRequirements {
   return {
-    signedBy: undefined,
+    signedBy: SignedBy.fromPartial({}),
     attributes: []
   };
 }

@@ -8,13 +8,13 @@ export const protobufPackage = "ibc.applications.fee.v1";
 /** QueryIncentivizedPacketsRequest defines the request type for the IncentivizedPackets rpc */
 export interface QueryIncentivizedPacketsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
   /** block height at which to query */
   queryHeight: bigint;
 }
 /** QueryIncentivizedPacketsRequest defines the request type for the IncentivizedPackets rpc */
 export interface QueryIncentivizedPacketsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
   query_height: bigint;
 }
 /** QueryIncentivizedPacketsResponse defines the response type for the IncentivizedPackets rpc */
@@ -22,12 +22,12 @@ export interface QueryIncentivizedPacketsResponse {
   /** list of identified fees for incentivized packets */
   incentivizedPackets: IdentifiedPacketFees[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryIncentivizedPacketsResponse defines the response type for the IncentivizedPackets rpc */
 export interface QueryIncentivizedPacketsResponseSDKType {
   incentivized_packets: IdentifiedPacketFeesSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryIncentivizedPacketRequest defines the request type for the IncentivizedPacket rpc */
 export interface QueryIncentivizedPacketRequest {
@@ -41,11 +41,11 @@ export interface QueryIncentivizedPacketRequestSDKType {
 /** QueryIncentivizedPacketsResponse defines the response type for the IncentivizedPacket rpc */
 export interface QueryIncentivizedPacketResponse {
   /** the identified fees for the incentivized packet */
-  incentivizedPacket?: IdentifiedPacketFees;
+  incentivizedPacket: IdentifiedPacketFees;
 }
 /** QueryIncentivizedPacketsResponse defines the response type for the IncentivizedPacket rpc */
 export interface QueryIncentivizedPacketResponseSDKType {
-  incentivized_packet?: IdentifiedPacketFeesSDKType;
+  incentivized_packet: IdentifiedPacketFeesSDKType;
 }
 /**
  * QueryIncentivizedPacketsForChannelRequest defines the request type for querying for all incentivized packets
@@ -53,7 +53,7 @@ export interface QueryIncentivizedPacketResponseSDKType {
  */
 export interface QueryIncentivizedPacketsForChannelRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
   portId: string;
   channelId: string;
   /** Height to query at */
@@ -64,7 +64,7 @@ export interface QueryIncentivizedPacketsForChannelRequest {
  * for a specific channel
  */
 export interface QueryIncentivizedPacketsForChannelRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
   port_id: string;
   channel_id: string;
   query_height: bigint;
@@ -74,12 +74,12 @@ export interface QueryIncentivizedPacketsForChannelResponse {
   /** Map of all incentivized_packets */
   incentivizedPackets: IdentifiedPacketFees[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryIncentivizedPacketsResponse defines the response type for the incentivized packets RPC */
 export interface QueryIncentivizedPacketsForChannelResponseSDKType {
   incentivized_packets: IdentifiedPacketFeesSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryTotalRecvFeesRequest defines the request type for the TotalRecvFees rpc */
 export interface QueryTotalRecvFeesRequest {}
@@ -165,13 +165,13 @@ export interface QueryCounterpartyPayeeResponseSDKType {
 /** QueryFeeEnabledChannelsRequest defines the request type for the FeeEnabledChannels rpc */
 export interface QueryFeeEnabledChannelsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
   /** block height at which to query */
   queryHeight: bigint;
 }
 /** QueryFeeEnabledChannelsRequest defines the request type for the FeeEnabledChannels rpc */
 export interface QueryFeeEnabledChannelsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
   query_height: bigint;
 }
 /** QueryFeeEnabledChannelsResponse defines the response type for the FeeEnabledChannels rpc */
@@ -179,12 +179,12 @@ export interface QueryFeeEnabledChannelsResponse {
   /** list of fee enabled channels */
   feeEnabledChannels: FeeEnabledChannel[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryFeeEnabledChannelsResponse defines the response type for the FeeEnabledChannels rpc */
 export interface QueryFeeEnabledChannelsResponseSDKType {
   fee_enabled_channels: FeeEnabledChannelSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /** QueryFeeEnabledChannelRequest defines the request type for the FeeEnabledChannel rpc */
 export interface QueryFeeEnabledChannelRequest {
@@ -209,7 +209,7 @@ export interface QueryFeeEnabledChannelResponseSDKType {
 }
 function createBaseQueryIncentivizedPacketsRequest(): QueryIncentivizedPacketsRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     queryHeight: BigInt(0)
   };
 }
@@ -283,7 +283,7 @@ export const QueryIncentivizedPacketsRequest = {
 function createBaseQueryIncentivizedPacketsResponse(): QueryIncentivizedPacketsResponse {
   return {
     incentivizedPackets: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketsResponse = {
@@ -423,7 +423,7 @@ export const QueryIncentivizedPacketRequest = {
 };
 function createBaseQueryIncentivizedPacketResponse(): QueryIncentivizedPacketResponse {
   return {
-    incentivizedPacket: undefined
+    incentivizedPacket: IdentifiedPacketFees.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketResponse = {
@@ -483,7 +483,7 @@ export const QueryIncentivizedPacketResponse = {
 };
 function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivizedPacketsForChannelRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     portId: "",
     channelId: "",
     queryHeight: BigInt(0)
@@ -583,7 +583,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
 function createBaseQueryIncentivizedPacketsForChannelResponse(): QueryIncentivizedPacketsForChannelResponse {
   return {
     incentivizedPackets: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivizedPacketsForChannelResponse = {
@@ -1262,7 +1262,7 @@ export const QueryCounterpartyPayeeResponse = {
 };
 function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequest {
   return {
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     queryHeight: BigInt(0)
   };
 }
@@ -1336,7 +1336,7 @@ export const QueryFeeEnabledChannelsRequest = {
 function createBaseQueryFeeEnabledChannelsResponse(): QueryFeeEnabledChannelsResponse {
   return {
     feeEnabledChannels: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryFeeEnabledChannelsResponse = {

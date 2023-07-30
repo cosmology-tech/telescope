@@ -190,13 +190,14 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
                 body.push(toAminoMessages.duration(context, name, proto));
                 break;
             }
-            // case 'Timestamp':
-            // case 'google.protobuf.Timestamp':
-            //     body.push(t.returnStatement(
-            //         t.objectExpression([
-            //         ])
-            //     ))
-            //     break;
+            case 'Timestamp':
+            case 'google.protobuf.Timestamp':
+                body.push(toAminoMessages.timestamp(context, name, proto));
+                break;
+            case 'google.protobuf.Any':
+            case 'Any':
+                [].push.apply(body, toAminoMessages.anyType())
+                break;
             default:
         }
     }
@@ -217,7 +218,7 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
 
             ...fields,
 
-            // RETURN 
+            // RETURN
             t.returnStatement(t.identifier('obj'))
         ]);
     }

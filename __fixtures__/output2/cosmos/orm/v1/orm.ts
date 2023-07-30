@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
   /** primary_key defines the primary key for the table. */
-  primaryKey?: PrimaryKeyDescriptor;
+  primaryKey: PrimaryKeyDescriptor;
   /** index defines one or more secondary indexes. */
   index: SecondaryIndexDescriptor[];
   /**
@@ -92,7 +92,7 @@ export interface SingletonDescriptor {
 }
 function createBaseTableDescriptor(): TableDescriptor {
   return {
-    primaryKey: undefined,
+    primaryKey: PrimaryKeyDescriptor.fromPartial({}),
     index: [],
     id: 0
   };

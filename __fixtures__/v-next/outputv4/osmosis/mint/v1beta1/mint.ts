@@ -90,7 +90,7 @@ export interface Params {
    * denom. In other words, defines which stakeholders will receive the minted
    * denoms and how much.
    */
-  distributionProportions?: DistributionProportions;
+  distributionProportions: DistributionProportions;
   /**
    * weighted_developer_rewards_receivers is the address to receive developer
    * rewards with weights assignedt to each address. The final amount that each
@@ -111,7 +111,7 @@ export interface ParamsSDKType {
   epoch_identifier: string;
   reduction_period_in_epochs: bigint;
   reduction_factor: string;
-  distribution_proportions?: DistributionProportionsSDKType;
+  distribution_proportions: DistributionProportionsSDKType;
   weighted_developer_rewards_receivers: WeightedAddressSDKType[];
   minting_rewards_distribution_start_epoch: bigint;
 }
@@ -354,7 +354,7 @@ function createBaseParams(): Params {
     epochIdentifier: "",
     reductionPeriodInEpochs: BigInt(0),
     reductionFactor: "",
-    distributionProportions: undefined,
+    distributionProportions: DistributionProportions.fromPartial({}),
     weightedDeveloperRewardsReceivers: [],
     mintingRewardsDistributionStartEpoch: BigInt(0)
   };

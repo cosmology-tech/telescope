@@ -6,24 +6,24 @@ export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
   pruneEpochIdentifier: string;
-  recordHistoryKeepPeriod?: Duration;
+  recordHistoryKeepPeriod: Duration;
 }
 /** Params holds parameters for the twap module */
 export interface ParamsSDKType {
   prune_epoch_identifier: string;
-  record_history_keep_period?: DurationSDKType;
+  record_history_keep_period: DurationSDKType;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisState {
   /** twaps is the collection of all twap records. */
   twaps: TwapRecord[];
   /** params is the container of twap parameters. */
-  params?: Params;
+  params: Params;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {
   twaps: TwapRecordSDKType[];
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseParams(): Params {
   return {
@@ -101,7 +101,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     twaps: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

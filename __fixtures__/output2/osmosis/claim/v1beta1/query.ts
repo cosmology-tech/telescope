@@ -18,13 +18,13 @@ export interface QueryParamsRequest {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface QueryClaimRecordRequest {
   address: string;
 }
 export interface QueryClaimRecordResponse {
-  claimRecord?: ClaimRecord;
+  claimRecord: ClaimRecord;
 }
 export interface QueryClaimableForActionRequest {
   address: string;
@@ -156,7 +156,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -246,7 +246,7 @@ export const QueryClaimRecordRequest = {
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
-    claimRecord: undefined
+    claimRecord: ClaimRecord.fromPartial({})
   };
 }
 export const QueryClaimRecordResponse = {

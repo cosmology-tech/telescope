@@ -113,7 +113,7 @@ export interface MonitoredResourceMetadata {
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
    */
-  systemLabels?: Struct;
+  systemLabels: Struct;
   /** Output only. A map of user-defined metadata labels. */
   userLabels: {
     [key: string]: string;
@@ -408,7 +408,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 };
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {
-    systemLabels: undefined,
+    systemLabels: Struct.fromPartial({}),
     userLabels: {}
   };
 }

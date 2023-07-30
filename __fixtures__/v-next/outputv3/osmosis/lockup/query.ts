@@ -166,7 +166,7 @@ export interface AccountLockedCoinsResponseSDKType {
 }
 export interface AccountLockedPastTimeRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeRequest";
@@ -182,7 +182,7 @@ export interface AccountLockedPastTimeRequestAminoMsg {
 }
 export interface AccountLockedPastTimeRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
@@ -203,7 +203,7 @@ export interface AccountLockedPastTimeResponseSDKType {
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest";
@@ -219,7 +219,7 @@ export interface AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg {
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -240,7 +240,7 @@ export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
 }
 export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeRequest";
@@ -256,7 +256,7 @@ export interface AccountUnlockedBeforeTimeRequestAminoMsg {
 }
 export interface AccountUnlockedBeforeTimeRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
@@ -277,7 +277,7 @@ export interface AccountUnlockedBeforeTimeResponseSDKType {
 }
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomRequestProtoMsg {
@@ -295,7 +295,7 @@ export interface AccountLockedPastTimeDenomRequestAminoMsg {
 }
 export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomResponse {
@@ -317,7 +317,7 @@ export interface AccountLockedPastTimeDenomResponseSDKType {
 }
 export interface LockedDenomRequest {
   denom: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface LockedDenomRequestProtoMsg {
   typeUrl: "/osmosis.lockup.LockedDenomRequest";
@@ -333,7 +333,7 @@ export interface LockedDenomRequestAminoMsg {
 }
 export interface LockedDenomRequestSDKType {
   denom: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -370,7 +370,7 @@ export interface LockedRequestSDKType {
   lock_id: Long;
 }
 export interface LockedResponse {
-  lock?: PeriodLock;
+  lock: PeriodLock;
 }
 export interface LockedResponseProtoMsg {
   typeUrl: "/osmosis.lockup.LockedResponse";
@@ -384,7 +384,7 @@ export interface LockedResponseAminoMsg {
   value: LockedResponseAmino;
 }
 export interface LockedResponseSDKType {
-  lock?: PeriodLockSDKType;
+  lock: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;
@@ -422,7 +422,7 @@ export interface SyntheticLockupsByLockupIDResponseSDKType {
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationRequest";
@@ -438,7 +438,7 @@ export interface AccountLockedLongerDurationRequestAminoMsg {
 }
 export interface AccountLockedLongerDurationRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
@@ -459,7 +459,7 @@ export interface AccountLockedLongerDurationResponseSDKType {
 }
 export interface AccountLockedDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedDurationRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedDurationRequest";
@@ -475,7 +475,7 @@ export interface AccountLockedDurationRequestAminoMsg {
 }
 export interface AccountLockedDurationRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
@@ -496,7 +496,7 @@ export interface AccountLockedDurationResponseSDKType {
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest";
@@ -512,7 +512,7 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyRequestAminoMsg {
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -533,7 +533,7 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomRequestProtoMsg {
@@ -551,7 +551,7 @@ export interface AccountLockedLongerDurationDenomRequestAminoMsg {
 }
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
@@ -583,7 +583,7 @@ export interface QueryParamsRequestAminoMsg {
 }
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.lockup.QueryParamsResponse";
@@ -597,7 +597,7 @@ export interface QueryParamsResponseAminoMsg {
   value: QueryParamsResponseAmino;
 }
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
   return {};
@@ -1574,13 +1574,13 @@ export const AccountLockedPastTimeRequest = {
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: AccountLockedPastTimeRequestAminoMsg): AccountLockedPastTimeRequest {
@@ -1776,13 +1776,13 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg): AccountLockedPastTimeNotUnlockingOnlyRequest {
@@ -1978,13 +1978,13 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: AccountUnlockedBeforeTimeRequestAminoMsg): AccountUnlockedBeforeTimeRequest {
@@ -2192,14 +2192,14 @@ export const AccountLockedPastTimeDenomRequest = {
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       denom: object.denom
     };
   },
   toAmino(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.denom = message.denom;
     return obj;
   },
@@ -2605,7 +2605,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: undefined
+    lock: PeriodLock.fromPartial({})
   };
 }
 export const LockedResponse = {
@@ -3773,7 +3773,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

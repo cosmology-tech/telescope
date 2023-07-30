@@ -9,7 +9,7 @@ export const protobufPackage = "osmosis.downtimedetector.v1beta1";
  */
 export interface RecoveredSinceDowntimeOfLengthRequest {
   downtime: Downtime;
-  recovery?: Duration;
+  recovery: Duration;
 }
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -17,7 +17,7 @@ export interface RecoveredSinceDowntimeOfLengthRequest {
  */
 export interface RecoveredSinceDowntimeOfLengthRequestSDKType {
   downtime: Downtime;
-  recovery?: DurationSDKType;
+  recovery: DurationSDKType;
 }
 export interface RecoveredSinceDowntimeOfLengthResponse {
   succesfullyRecovered: boolean;
@@ -63,7 +63,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   fromJSON(object: any): RecoveredSinceDowntimeOfLengthRequest {
     return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : 0,
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
       recovery: isSet(object.recovery) ? Duration.fromJSON(object.recovery) : undefined
     };
   },
@@ -81,13 +81,13 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   fromSDK(object: RecoveredSinceDowntimeOfLengthRequestSDKType): RecoveredSinceDowntimeOfLengthRequest {
     return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : 0,
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
       recovery: object.recovery ? Duration.fromSDK(object.recovery) : undefined
     };
   },
   fromSDKJSON(object: any): RecoveredSinceDowntimeOfLengthRequestSDKType {
     return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : 0,
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
       recovery: isSet(object.recovery) ? Duration.fromSDKJSON(object.recovery) : undefined
     };
   },

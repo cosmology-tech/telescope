@@ -106,15 +106,15 @@ export interface AccountID {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id?: AccountID;
+  id: AccountID;
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
   /** current state of this escrow account */
   state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: DecCoin;
+  balance: DecCoin;
   /** total coins spent by this account */
-  transferred?: DecCoin;
+  transferred: DecCoin;
   /** block height at which this account was last settled */
   settledAt: Long;
   /**
@@ -127,17 +127,17 @@ export interface Account {
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
-  funds?: DecCoin;
+  funds: DecCoin;
 }
 /** Payment stores state for a payment */
 export interface FractionalPayment {
-  accountId?: AccountID;
+  accountId: AccountID;
   paymentId: string;
   owner: string;
   state: FractionalPayment_State;
-  rate?: DecCoin;
-  balance?: DecCoin;
-  withdrawn?: Coin;
+  rate: DecCoin;
+  balance: DecCoin;
+  withdrawn: Coin;
 }
 function createBaseAccountID(): AccountID {
   return {
@@ -196,14 +196,14 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: DecCoin.fromPartial({}),
+    transferred: DecCoin.fromPartial({}),
     settledAt: Long.ZERO,
     depositor: "",
-    funds: undefined
+    funds: DecCoin.fromPartial({})
   };
 }
 export const Account = {
@@ -311,12 +311,12 @@ export const Account = {
 };
 function createBaseFractionalPayment(): FractionalPayment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
+    rate: DecCoin.fromPartial({}),
+    balance: DecCoin.fromPartial({}),
     withdrawn: undefined
   };
 }

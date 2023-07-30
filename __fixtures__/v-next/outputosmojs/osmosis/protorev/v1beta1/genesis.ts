@@ -7,7 +7,7 @@ export const protobufPackage = "osmosis.protorev.v1beta1";
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisState {
   /** Parameters for the protorev module. */
-  params?: Params;
+  params: Params;
   /** Token pair arb routes for the protorev module (hot routes). */
   tokenPairArbRoutes: TokenPairArbRoutes[];
   /**
@@ -19,7 +19,7 @@ export interface GenesisState {
    * The pool weights that are being used to calculate the weight (compute cost)
    * of each route.
    */
-  poolWeights?: PoolWeights;
+  poolWeights: PoolWeights;
   /** The number of days since module genesis. */
   daysSinceModuleGenesis: bigint;
   /** The fees the developer account has accumulated over time. */
@@ -43,10 +43,10 @@ export interface GenesisState {
 }
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
   token_pair_arb_routes: TokenPairArbRoutesSDKType[];
   base_denoms: BaseDenomSDKType[];
-  pool_weights?: PoolWeightsSDKType;
+  pool_weights: PoolWeightsSDKType;
   days_since_module_genesis: bigint;
   developer_fees: CoinSDKType[];
   latest_block_height: bigint;
@@ -57,10 +57,10 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     tokenPairArbRoutes: [],
     baseDenoms: [],
-    poolWeights: undefined,
+    poolWeights: PoolWeights.fromPartial({}),
     daysSinceModuleGenesis: BigInt(0),
     developerFees: [],
     latestBlockHeight: BigInt(0),

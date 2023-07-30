@@ -109,7 +109,7 @@ export interface AccessConfig {
 }
 /** Params defines the set of wasm parameters. */
 export interface Params {
-  codeUploadAccess?: AccessConfig;
+  codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -119,7 +119,7 @@ export interface CodeInfo {
   /** Creator address who initially stored the code */
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
-  instantiateConfig?: AccessConfig;
+  instantiateConfig: AccessConfig;
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfo {
@@ -136,13 +136,13 @@ export interface ContractInfo {
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
-  created?: AbsoluteTxPosition;
+  created: AbsoluteTxPosition;
   ibcPortId: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension?: Any;
+  extension: Any;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
@@ -150,7 +150,7 @@ export interface ContractCodeHistoryEntry {
   /** CodeID is the reference to the stored WASM code */
   codeId: Long;
   /** Updated Tx position when the operation was executed. */
-  updated?: AbsoluteTxPosition;
+  updated: AbsoluteTxPosition;
   msg: Uint8Array;
 }
 /**
@@ -275,7 +275,7 @@ export const AccessConfig = {
 };
 function createBaseParams(): Params {
   return {
-    codeUploadAccess: undefined,
+    codeUploadAccess: AccessConfig.fromPartial({}),
     instantiateDefaultPermission: 0
   };
 }
@@ -332,7 +332,7 @@ function createBaseCodeInfo(): CodeInfo {
   return {
     codeHash: new Uint8Array(),
     creator: "",
-    instantiateConfig: undefined
+    instantiateConfig: AccessConfig.fromPartial({})
   };
 }
 export const CodeInfo = {
@@ -399,7 +399,7 @@ function createBaseContractInfo(): ContractInfo {
     creator: "",
     admin: "",
     label: "",
-    created: undefined,
+    created: AbsoluteTxPosition.fromPartial({}),
     ibcPortId: "",
     extension: undefined
   };
@@ -502,7 +502,7 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
     codeId: Long.UZERO,
-    updated: undefined,
+    updated: AbsoluteTxPosition.fromPartial({}),
     msg: new Uint8Array()
   };
 }

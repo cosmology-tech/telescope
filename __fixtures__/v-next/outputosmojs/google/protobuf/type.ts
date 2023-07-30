@@ -249,7 +249,7 @@ export interface Type {
   /** The protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -259,7 +259,7 @@ export interface TypeSDKType {
   fields: FieldSDKType[];
   oneofs: string[];
   options: OptionSDKType[];
-  source_context?: SourceContextSDKType;
+  source_context: SourceContextSDKType;
   syntax: Syntax;
 }
 /** A single field of a message type. */
@@ -313,7 +313,7 @@ export interface Enum {
   /** Protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -322,7 +322,7 @@ export interface EnumSDKType {
   name: string;
   enumvalue: EnumValueSDKType[];
   options: OptionSDKType[];
-  source_context?: SourceContextSDKType;
+  source_context: SourceContextSDKType;
   syntax: Syntax;
 }
 /** Enum value definition. */
@@ -358,7 +358,7 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value?: Any;
+  value: Any;
 }
 /**
  * A protocol buffer option, which can be attached to a message, field,
@@ -366,7 +366,7 @@ export interface Option {
  */
 export interface OptionSDKType {
   name: string;
-  value?: AnySDKType;
+  value: AnySDKType;
 }
 function createBaseType(): Type {
   return {
@@ -374,7 +374,7 @@ function createBaseType(): Type {
     fields: [],
     oneofs: [],
     options: [],
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     syntax: 0
   };
 }
@@ -439,7 +439,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
       sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toJSON(message: Type): unknown {
@@ -481,7 +481,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   fromSDKJSON(object: any): TypeSDKType {
@@ -491,7 +491,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
       source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toSDK(message: Type): TypeSDKType {
@@ -611,8 +611,8 @@ export const Field = {
   },
   fromJSON(object: any): Field {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
       number: isSet(object.number) ? Number(object.number) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
@@ -657,8 +657,8 @@ export const Field = {
   },
   fromSDK(object: FieldSDKType): Field {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
       number: object?.number,
       name: object?.name,
       typeUrl: object?.type_url,
@@ -671,8 +671,8 @@ export const Field = {
   },
   fromSDKJSON(object: any): FieldSDKType {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
       number: isSet(object.number) ? Number(object.number) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       type_url: isSet(object.type_url) ? String(object.type_url) : "",
@@ -707,7 +707,7 @@ function createBaseEnum(): Enum {
     name: "",
     enumvalue: [],
     options: [],
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     syntax: 0
   };
 }
@@ -765,7 +765,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromJSON(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
       sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toJSON(message: Enum): unknown {
@@ -800,7 +800,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   fromSDKJSON(object: any): EnumSDKType {
@@ -809,7 +809,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDKJSON(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
       source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toSDK(message: Enum): EnumSDKType {
@@ -927,7 +927,7 @@ export const EnumValue = {
 function createBaseOption(): Option {
   return {
     name: "",
-    value: undefined
+    value: Any.fromPartial({})
   };
 }
 export const Option = {

@@ -43,7 +43,7 @@ export interface ValidatorAccumulatedCommissionRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** accumulated is the accumulated commission of a validator. */
-  accumulated?: ValidatorAccumulatedCommission;
+  accumulated: ValidatorAccumulatedCommission;
 }
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
@@ -51,7 +51,7 @@ export interface ValidatorAccumulatedCommissionRecord {
  */
 export interface ValidatorAccumulatedCommissionRecordSDKType {
   validator_address: string;
-  accumulated?: ValidatorAccumulatedCommissionSDKType;
+  accumulated: ValidatorAccumulatedCommissionSDKType;
 }
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -63,7 +63,7 @@ export interface ValidatorHistoricalRewardsRecord {
   /** period defines the period the historical rewards apply to. */
   period: bigint;
   /** rewards defines the historical rewards of a validator. */
-  rewards?: ValidatorHistoricalRewards;
+  rewards: ValidatorHistoricalRewards;
 }
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -72,19 +72,19 @@ export interface ValidatorHistoricalRewardsRecord {
 export interface ValidatorHistoricalRewardsRecordSDKType {
   validator_address: string;
   period: bigint;
-  rewards?: ValidatorHistoricalRewardsSDKType;
+  rewards: ValidatorHistoricalRewardsSDKType;
 }
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** rewards defines the current rewards of a validator. */
-  rewards?: ValidatorCurrentRewards;
+  rewards: ValidatorCurrentRewards;
 }
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordSDKType {
   validator_address: string;
-  rewards?: ValidatorCurrentRewardsSDKType;
+  rewards: ValidatorCurrentRewardsSDKType;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecord {
@@ -93,13 +93,13 @@ export interface DelegatorStartingInfoRecord {
   /** validator_address is the address of the validator. */
   validatorAddress: string;
   /** starting_info defines the starting info of a delegator. */
-  startingInfo?: DelegatorStartingInfo;
+  startingInfo: DelegatorStartingInfo;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecordSDKType {
   delegator_address: string;
   validator_address: string;
-  starting_info?: DelegatorStartingInfoSDKType;
+  starting_info: DelegatorStartingInfoSDKType;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecord {
@@ -110,21 +110,21 @@ export interface ValidatorSlashEventRecord {
   /** period is the period of the slash event. */
   period: bigint;
   /** validator_slash_event describes the slash event. */
-  validatorSlashEvent?: ValidatorSlashEvent;
+  validatorSlashEvent: ValidatorSlashEvent;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecordSDKType {
   validator_address: string;
   height: bigint;
   period: bigint;
-  validator_slash_event?: ValidatorSlashEventSDKType;
+  validator_slash_event: ValidatorSlashEventSDKType;
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** fee_pool defines the fee pool at genesis. */
-  feePool?: FeePool;
+  feePool: FeePool;
   /** fee_pool defines the delegator withdraw infos at genesis. */
   delegatorWithdrawInfos: DelegatorWithdrawInfo[];
   /** fee_pool defines the previous proposer at genesis. */
@@ -144,8 +144,8 @@ export interface GenesisState {
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisStateSDKType {
-  params?: ParamsSDKType;
-  fee_pool?: FeePoolSDKType;
+  params: ParamsSDKType;
+  fee_pool: FeePoolSDKType;
   delegator_withdraw_infos: DelegatorWithdrawInfoSDKType[];
   previous_proposer: string;
   outstanding_rewards: ValidatorOutstandingRewardsRecordSDKType[];
@@ -312,7 +312,7 @@ export const ValidatorOutstandingRewardsRecord = {
 function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedCommissionRecord {
   return {
     validatorAddress: "",
-    accumulated: undefined
+    accumulated: ValidatorAccumulatedCommission.fromPartial({})
   };
 }
 export const ValidatorAccumulatedCommissionRecord = {
@@ -386,7 +386,7 @@ function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalReward
   return {
     validatorAddress: "",
     period: BigInt(0),
-    rewards: undefined
+    rewards: ValidatorHistoricalRewards.fromPartial({})
   };
 }
 export const ValidatorHistoricalRewardsRecord = {
@@ -471,7 +471,7 @@ export const ValidatorHistoricalRewardsRecord = {
 function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecord {
   return {
     validatorAddress: "",
-    rewards: undefined
+    rewards: ValidatorCurrentRewards.fromPartial({})
   };
 }
 export const ValidatorCurrentRewardsRecord = {
@@ -545,7 +545,7 @@ function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    startingInfo: undefined
+    startingInfo: DelegatorStartingInfo.fromPartial({})
   };
 }
 export const DelegatorStartingInfoRecord = {
@@ -632,7 +632,7 @@ function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
     validatorAddress: "",
     height: BigInt(0),
     period: BigInt(0),
-    validatorSlashEvent: undefined
+    validatorSlashEvent: ValidatorSlashEvent.fromPartial({})
   };
 }
 export const ValidatorSlashEventRecord = {
@@ -728,8 +728,8 @@ export const ValidatorSlashEventRecord = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
-    feePool: undefined,
+    params: Params.fromPartial({}),
+    feePool: FeePool.fromPartial({}),
     delegatorWithdrawInfos: [],
     previousProposer: "",
     outstandingRewards: [],

@@ -86,7 +86,7 @@ export interface Operation {
    */
   consumerId: string;
   /** Required. Start time of the operation. */
-  startTime?: Date;
+  startTime: Date;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -94,7 +94,7 @@ export interface Operation {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  endTime?: Date;
+  endTime: Date;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
@@ -141,8 +141,8 @@ export interface OperationSDKType {
   operation_id: string;
   operation_name: string;
   consumer_id: string;
-  start_time?: Date;
-  end_time?: Date;
+  start_time: Date;
+  end_time: Date;
   labels: {
     [key: string]: string;
   };
@@ -337,7 +337,7 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metricValueSets) ? object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e)) : [],
       logEntries: Array.isArray(object?.logEntries) ? object.logEntries.map((e: any) => LogEntry.fromJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -408,7 +408,7 @@ export const Operation = {
       }, {}) : {},
       metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDK(e)) : [],
       logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -427,7 +427,7 @@ export const Operation = {
       }, {}) : {},
       metric_value_sets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
       log_entries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },

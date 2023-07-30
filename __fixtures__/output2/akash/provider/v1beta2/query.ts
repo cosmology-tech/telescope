@@ -7,12 +7,12 @@ import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -20,11 +20,11 @@ export interface QueryProviderRequest {
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
-  provider?: Provider;
+  provider: Provider;
 }
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProvidersRequest = {
@@ -70,7 +70,7 @@ export const QueryProvidersRequest = {
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProvidersResponse = {
@@ -173,7 +173,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryProviderResponse(): QueryProviderResponse {
   return {
-    provider: undefined
+    provider: Provider.fromPartial({})
   };
 }
 export const QueryProviderResponse = {

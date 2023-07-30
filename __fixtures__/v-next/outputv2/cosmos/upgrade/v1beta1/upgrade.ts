@@ -21,7 +21,7 @@ export interface Plan {
    * If this field is not empty, an error will be thrown.
    */
   /** @deprecated */
-  time?: Date;
+  time: Date;
   /**
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
@@ -38,7 +38,7 @@ export interface Plan {
    * If this field is not empty, an error will be thrown.
    */
   /** @deprecated */
-  upgradedClientState?: Any;
+  upgradedClientState: Any;
 }
 export interface PlanProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan";
@@ -89,11 +89,11 @@ export interface PlanAminoMsg {
 export interface PlanSDKType {
   name: string;
   /** @deprecated */
-  time?: Date;
+  time: Date;
   height: Long;
   info: string;
   /** @deprecated */
-  upgraded_client_state?: AnySDKType;
+  upgraded_client_state: AnySDKType;
 }
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
@@ -105,7 +105,7 @@ export interface PlanSDKType {
 export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
-  plan?: Plan;
+  plan: Plan;
 }
 export interface SoftwareUpgradeProposalProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
@@ -137,7 +137,7 @@ export interface SoftwareUpgradeProposalAminoMsg {
 export interface SoftwareUpgradeProposalSDKType {
   title: string;
   description: string;
-  plan?: PlanSDKType;
+  plan: PlanSDKType;
 }
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
@@ -326,7 +326,7 @@ export const Plan = {
   fromAmino(object: PlanAmino): Plan {
     return {
       name: object.name,
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
+      time: object.time,
       height: Long.fromString(object.height),
       info: object.info,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
@@ -335,7 +335,7 @@ export const Plan = {
   toAmino(message: Plan): PlanAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
+    obj.time = message.time;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.info = message.info;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
@@ -367,7 +367,7 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
   return {
     title: "",
     description: "",
-    plan: undefined
+    plan: Plan.fromPartial({})
   };
 }
 export const SoftwareUpgradeProposal = {

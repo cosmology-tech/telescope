@@ -14,14 +14,14 @@ export interface ProtocolVersion {
   app: Long;
 }
 export interface DefaultNodeInfo {
-  protocolVersion?: ProtocolVersion;
+  protocolVersion: ProtocolVersion;
   defaultNodeId: string;
   listenAddr: string;
   network: string;
   version: string;
   channels: Uint8Array;
   moniker: string;
-  other?: DefaultNodeInfoOther;
+  other: DefaultNodeInfoOther;
 }
 export interface DefaultNodeInfoOther {
   txIndex: string;
@@ -159,14 +159,14 @@ export const ProtocolVersion = {
 };
 function createBaseDefaultNodeInfo(): DefaultNodeInfo {
   return {
-    protocolVersion: undefined,
+    protocolVersion: ProtocolVersion.fromPartial({}),
     defaultNodeId: "",
     listenAddr: "",
     network: "",
     version: "",
     channels: new Uint8Array(),
     moniker: "",
-    other: undefined
+    other: DefaultNodeInfoOther.fromPartial({})
   };
 }
 export const DefaultNodeInfo = {

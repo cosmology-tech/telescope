@@ -63,13 +63,13 @@ export interface PeriodLock {
    * Duration is the time needed for a lock to mature after unlocking has
    * started.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * EndTime refers to the time at which the lock would mature and get deleted.
    * This value is first initialized when an unlock has started for the lock,
    * end time being block time + duration.
    */
-  endTime?: Date;
+  endTime: Date;
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
@@ -124,8 +124,8 @@ export interface PeriodLockAminoMsg {
 export interface PeriodLockSDKType {
   ID: Long;
   owner: string;
-  duration?: DurationSDKType;
-  end_time?: Date;
+  duration: DurationSDKType;
+  end_time: Date;
   coins: CoinSDKType[];
 }
 /**
@@ -143,13 +143,13 @@ export interface QueryCondition {
    * duration. Duration field must not be nil when the lock query type is
    * `ByLockDuration`.
    */
-  duration?: Duration;
+  duration: Duration;
   /**
    * Timestamp is used by locks started before the specified duration.
    * Timestamp field must not be nil when the lock query type is `ByLockTime`.
    * Querying locks with timestamp is currently not implemented.
    */
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface QueryConditionProtoMsg {
   typeUrl: "/osmosis.lockup.QueryCondition";
@@ -190,8 +190,8 @@ export interface QueryConditionAminoMsg {
 export interface QueryConditionSDKType {
   lock_query_type: LockQueryType;
   denom: string;
-  duration?: DurationSDKType;
-  timestamp?: Date;
+  duration: DurationSDKType;
+  timestamp: Date;
 }
 /**
  * SyntheticLock is creating virtual lockup where new denom is combination of
@@ -214,12 +214,12 @@ export interface SyntheticLock {
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
    */
-  endTime?: Date;
+  endTime: Date;
   /**
    * Duration is the duration for a synthetic lock to mature
    * at the point of unbonding has started.
    */
-  duration?: Duration;
+  duration: Duration;
 }
 export interface SyntheticLockProtoMsg {
   typeUrl: "/osmosis.lockup.SyntheticLock";
@@ -266,8 +266,8 @@ export interface SyntheticLockAminoMsg {
 export interface SyntheticLockSDKType {
   underlying_lock_id: Long;
   synth_denom: string;
-  end_time?: Date;
-  duration?: DurationSDKType;
+  end_time: Date;
+  duration: DurationSDKType;
 }
 function createBasePeriodLock(): PeriodLock {
   return {
@@ -386,7 +386,7 @@ export const PeriodLock = {
       ID: Long.fromString(object.ID),
       owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
+      endTime: object.end_time,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -395,7 +395,7 @@ export const PeriodLock = {
     obj.ID = message.ID ? message.ID.toString() : undefined;
     obj.owner = message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.end_time = message.endTime;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -479,7 +479,7 @@ export const QueryCondition = {
   },
   fromJSON(object: any): QueryCondition {
     return {
-      lockQueryType: isSet(object.lockQueryType) ? lockQueryTypeFromJSON(object.lockQueryType) : 0,
+      lockQueryType: isSet(object.lockQueryType) ? lockQueryTypeFromJSON(object.lockQueryType) : -1,
       denom: isSet(object.denom) ? String(object.denom) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
@@ -503,7 +503,7 @@ export const QueryCondition = {
   },
   fromSDK(object: QueryConditionSDKType): QueryCondition {
     return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object?.denom,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       timestamp: object.timestamp ?? undefined
@@ -519,10 +519,10 @@ export const QueryCondition = {
   },
   fromAmino(object: QueryConditionAmino): QueryCondition {
     return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object.denom,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+      timestamp: object.timestamp
     };
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
@@ -530,7 +530,7 @@ export const QueryCondition = {
     obj.lock_query_type = message.lockQueryType;
     obj.denom = message.denom;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     return obj;
   },
   fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
@@ -651,7 +651,7 @@ export const SyntheticLock = {
     return {
       underlyingLockId: Long.fromString(object.underlying_lock_id),
       synthDenom: object.synth_denom,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
+      endTime: object.end_time,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
@@ -659,7 +659,7 @@ export const SyntheticLock = {
     const obj: any = {};
     obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
     obj.synth_denom = message.synthDenom;
-    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.end_time = message.endTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },

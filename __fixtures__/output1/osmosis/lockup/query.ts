@@ -60,11 +60,11 @@ export interface AccountLockedCoinsResponseSDKType {
 }
 export interface AccountLockedPastTimeRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
@@ -74,11 +74,11 @@ export interface AccountLockedPastTimeResponseSDKType {
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -88,11 +88,11 @@ export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
 }
 export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
@@ -102,12 +102,12 @@ export interface AccountUnlockedBeforeTimeResponseSDKType {
 }
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomResponse {
@@ -118,11 +118,11 @@ export interface AccountLockedPastTimeDenomResponseSDKType {
 }
 export interface LockedDenomRequest {
   denom: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface LockedDenomRequestSDKType {
   denom: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -137,10 +137,10 @@ export interface LockedRequestSDKType {
   lock_id: Long;
 }
 export interface LockedResponse {
-  lock?: PeriodLock;
+  lock: PeriodLock;
 }
 export interface LockedResponseSDKType {
-  lock?: PeriodLockSDKType;
+  lock: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;
@@ -156,11 +156,11 @@ export interface SyntheticLockupsByLockupIDResponseSDKType {
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
@@ -170,11 +170,11 @@ export interface AccountLockedLongerDurationResponseSDKType {
 }
 export interface AccountLockedDurationRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedDurationRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
@@ -184,11 +184,11 @@ export interface AccountLockedDurationResponseSDKType {
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -198,12 +198,12 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
   denom: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
@@ -215,10 +215,10 @@ export interface AccountLockedLongerDurationDenomResponseSDKType {
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
   return {};
@@ -1491,7 +1491,7 @@ export const LockedRequest = {
 };
 function createBaseLockedResponse(): LockedResponse {
   return {
-    lock: undefined
+    lock: PeriodLock.fromPartial({})
   };
 }
 export const LockedResponse = {
@@ -2236,7 +2236,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

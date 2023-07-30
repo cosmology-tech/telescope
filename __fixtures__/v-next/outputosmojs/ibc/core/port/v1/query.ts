@@ -11,7 +11,7 @@ export interface QueryAppVersionRequest {
   /** whether the channel is ordered or unordered */
   ordering: Order;
   /** counterparty channel end */
-  counterparty?: Counterparty;
+  counterparty: Counterparty;
   /** proposed version */
   proposedVersion: string;
 }
@@ -20,7 +20,7 @@ export interface QueryAppVersionRequestSDKType {
   port_id: string;
   connection_id: string;
   ordering: Order;
-  counterparty?: CounterpartySDKType;
+  counterparty: CounterpartySDKType;
   proposed_version: string;
 }
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
@@ -40,7 +40,7 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
     portId: "",
     connectionId: "",
     ordering: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     proposedVersion: ""
   };
 }
@@ -96,7 +96,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
     };
@@ -123,7 +123,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: object?.port_id,
       connectionId: object?.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };
@@ -132,7 +132,7 @@ export const QueryAppVersionRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       proposed_version: isSet(object.proposed_version) ? String(object.proposed_version) : ""
     };

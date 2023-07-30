@@ -1,9 +1,9 @@
 import { sync as glob } from 'glob';
-import { parse } from '@pyramation/protobufjs';
+import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr } from './utils';
+import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './utils';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@osmonauts/types';
@@ -16,6 +16,7 @@ import google_empty from './native/empty';
 import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
+import { ProtoResolver } from './resolver';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -144,7 +145,7 @@ export class ProtoStore {
 
                     // NOT FOUND
                     const filler = GOOGLE_PROTOS.find(([f, v]) => { return f === goog });
-                    if (!filler) return; // technically an error should be thrown 
+                    if (!filler) return; // technically an error should be thrown
 
                     // we have the filler
                     if (!neededFromGoogle.find(file => file.filename === goog)) {
@@ -165,6 +166,7 @@ export class ProtoStore {
 
     getPackages(): string[] {
         if (this.packages) return this.packages;
+
         this.packages = this.getProtos().reduce((m, ref) => {
             return [...new Set([...m, ref.proto.package])];
         }, []);
@@ -208,7 +210,25 @@ export class ProtoStore {
 
     traverseAll(): void {
         if (this._traversed) return;
+
+        let actualFiles = new Set();
+        let resolver = new ProtoResolver(this.getDeps());
+
         this.protos = this.getProtos().map((ref: ProtoRef) => {
+            if( !actualFiles.has(ref.filename) ){
+              // get included imported files
+              const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
+              const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
+
+              if(isIncluded && !isExcluded){
+                const deps = resolver.resolve(ref.filename);
+
+                for (const dep of deps) {
+                  actualFiles.add(dep);
+                }
+              }
+            }
+
             return {
                 absolute: ref.absolute,
                 filename: ref.filename,
@@ -220,6 +240,10 @@ export class ProtoStore {
 
         // process import names
         this.protos = this.protos.map((ref: ProtoRef) => {
+            if(!actualFiles.has(ref.filename)){
+              return null
+            }
+
             const traversed = ref.traversed;
             const symbs = this._symbols
                 .filter(f => f.ref === ref.filename);
@@ -237,7 +261,11 @@ export class ProtoStore {
                 ...ref,
                 traversed
             };
-        });
+        }).filter(Boolean);
+
+        //reset and recalculate pkgs and deps later
+        this.packages = null;
+        this.deps = null;
 
         this._traversed = true;
     }

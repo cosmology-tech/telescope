@@ -13,7 +13,7 @@ export const protobufPackage = "evmos.incentives.v1";
  */
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
@@ -22,7 +22,7 @@ export interface QueryIncentivesRequest {
 export interface QueryIncentivesResponse {
   incentives: Incentive[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequest {
@@ -34,7 +34,7 @@ export interface QueryIncentiveRequest {
  * method.
  */
 export interface QueryIncentiveResponse {
-  incentive?: Incentive;
+  incentive: Incentive;
 }
 /**
  * QueryGasMetersRequest is the request type for the Query/Incentives RPC
@@ -44,7 +44,7 @@ export interface QueryGasMetersRequest {
   /** contract is the hex contract address of a incentivized smart contract */
   contract: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
@@ -53,7 +53,7 @@ export interface QueryGasMetersRequest {
 export interface QueryGasMetersResponse {
   gasMeters: GasMeter[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequest {
@@ -79,7 +79,7 @@ export interface QueryGasMeterResponse {
  */
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 /**
  * QueryAllocationMetersResponse is the response type for the
@@ -88,7 +88,7 @@ export interface QueryAllocationMetersRequest {
 export interface QueryAllocationMetersResponse {
   allocationMeters: DecCoin[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
@@ -103,7 +103,7 @@ export interface QueryAllocationMeterRequest {
  * Query/AllocationMeter RPC method.
  */
 export interface QueryAllocationMeterResponse {
-  allocationMeter?: DecCoin;
+  allocationMeter: DecCoin;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -112,11 +112,11 @@ export interface QueryParamsRequest {}
  * method.
  */
 export interface QueryParamsResponse {
-  params?: Params;
+  params: Params;
 }
 function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryIncentivesRequest = {
@@ -162,7 +162,7 @@ export const QueryIncentivesRequest = {
 function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
   return {
     incentives: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryIncentivesResponse = {
@@ -265,7 +265,7 @@ export const QueryIncentiveRequest = {
 };
 function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
   return {
-    incentive: undefined
+    incentive: Incentive.fromPartial({})
   };
 }
 export const QueryIncentiveResponse = {
@@ -311,7 +311,7 @@ export const QueryIncentiveResponse = {
 function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
   return {
     contract: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryGasMetersRequest = {
@@ -366,7 +366,7 @@ export const QueryGasMetersRequest = {
 function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
   return {
     gasMeters: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryGasMetersResponse = {
@@ -524,7 +524,7 @@ export const QueryGasMeterResponse = {
 };
 function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllocationMetersRequest = {
@@ -570,7 +570,7 @@ export const QueryAllocationMetersRequest = {
 function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersResponse {
   return {
     allocationMeters: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllocationMetersResponse = {
@@ -673,7 +673,7 @@ export const QueryAllocationMeterRequest = {
 };
 function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse {
   return {
-    allocationMeter: undefined
+    allocationMeter: DecCoin.fromPartial({})
   };
 }
 export const QueryAllocationMeterResponse = {
@@ -751,7 +751,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

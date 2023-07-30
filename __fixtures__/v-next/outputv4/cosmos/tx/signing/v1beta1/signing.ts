@@ -104,8 +104,8 @@ export interface SignatureDescriptorsSDKType {
  */
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
-  publicKey?: Any;
-  data?: SignatureDescriptor_Data;
+  publicKey: Any;
+  data: SignatureDescriptor_Data;
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to prevent
@@ -120,8 +120,8 @@ export interface SignatureDescriptor {
  * clients.
  */
 export interface SignatureDescriptorSDKType {
-  public_key?: AnySDKType;
-  data?: SignatureDescriptor_DataSDKType;
+  public_key: AnySDKType;
+  data: SignatureDescriptor_DataSDKType;
   sequence: bigint;
 }
 /** Data represents signature data */
@@ -151,13 +151,13 @@ export interface SignatureDescriptor_Data_SingleSDKType {
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray?: CompactBitArray;
+  bitarray: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
-  bitarray?: CompactBitArraySDKType;
+  bitarray: CompactBitArraySDKType;
   signatures: SignatureDescriptor_DataSDKType[];
 }
 function createBaseSignatureDescriptors(): SignatureDescriptors {
@@ -231,7 +231,7 @@ export const SignatureDescriptors = {
 function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
     publicKey: undefined,
-    data: undefined,
+    data: Data.fromPartial({}),
     sequence: BigInt(0)
   };
 }
@@ -425,7 +425,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromJSON(object: any): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
@@ -443,13 +443,13 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: object?.signature
     };
   },
   fromSDKJSON(object: any): SignatureDescriptor_Data_SingleSDKType {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
@@ -462,7 +462,7 @@ export const SignatureDescriptor_Data_Single = {
 };
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {
-    bitarray: undefined,
+    bitarray: CompactBitArray.fromPartial({}),
     signatures: []
   };
 }

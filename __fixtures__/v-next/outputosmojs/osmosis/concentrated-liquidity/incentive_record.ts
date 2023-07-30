@@ -24,13 +24,13 @@ export interface IncentiveRecord {
    */
   incentiveCreatorAddr: string;
   /** incentive record body holds necessary */
-  incentiveRecordBody?: IncentiveRecordBody;
+  incentiveRecordBody: IncentiveRecordBody;
   /**
    * min_uptime is the minimum uptime required for liquidity to qualify for this
    * incentive. It should be always be one of the supported uptimes in
    * types.SupportedUptimes
    */
-  minUptime?: Duration;
+  minUptime: Duration;
 }
 /**
  * IncentiveRecord is the high-level struct we use to deal with an independent
@@ -42,8 +42,8 @@ export interface IncentiveRecordSDKType {
   pool_id: bigint;
   incentive_denom: string;
   incentive_creator_addr: string;
-  incentive_record_body?: IncentiveRecordBodySDKType;
-  min_uptime?: DurationSDKType;
+  incentive_record_body: IncentiveRecordBodySDKType;
+  min_uptime: DurationSDKType;
 }
 /**
  * IncentiveRecordBody represents the body stored in state for each individual
@@ -55,7 +55,7 @@ export interface IncentiveRecordBody {
   /** emission_rate is the incentive emission rate per second */
   emissionRate: string;
   /** start_time is the time when the incentive starts distributing */
-  startTime?: Date;
+  startTime: Date;
 }
 /**
  * IncentiveRecordBody represents the body stored in state for each individual
@@ -64,14 +64,14 @@ export interface IncentiveRecordBody {
 export interface IncentiveRecordBodySDKType {
   remaining_amount: string;
   emission_rate: string;
-  start_time?: Date;
+  start_time: Date;
 }
 function createBaseIncentiveRecord(): IncentiveRecord {
   return {
     poolId: BigInt(0),
     incentiveDenom: "",
     incentiveCreatorAddr: "",
-    incentiveRecordBody: undefined,
+    incentiveRecordBody: IncentiveRecordBody.fromPartial({}),
     minUptime: undefined
   };
 }

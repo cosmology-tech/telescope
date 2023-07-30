@@ -51,7 +51,7 @@ export function responseResultTypeToJSON(object: ResponseResultType): string {
  */
 export interface MsgChannelOpenInit {
   portId: string;
-  channel?: Channel;
+  channel: Channel;
   signer: string;
 }
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
@@ -71,10 +71,10 @@ export interface MsgChannelOpenTry {
    */
   previousChannelId: string;
   /** NOTE: the version field within the channel has been deprecated. Its value will be ignored by core IBC. */
-  channel?: Channel;
+  channel: Channel;
   counterpartyVersion: string;
   proofInit: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
@@ -89,7 +89,7 @@ export interface MsgChannelOpenAck {
   counterpartyChannelId: string;
   counterpartyVersion: string;
   proofTry: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
@@ -102,7 +102,7 @@ export interface MsgChannelOpenConfirm {
   portId: string;
   channelId: string;
   proofAck: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /**
@@ -129,7 +129,7 @@ export interface MsgChannelCloseConfirm {
   portId: string;
   channelId: string;
   proofInit: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /**
@@ -139,9 +139,9 @@ export interface MsgChannelCloseConfirm {
 export interface MsgChannelCloseConfirmResponse {}
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacket {
-  packet?: Packet;
+  packet: Packet;
   proofCommitment: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
@@ -150,9 +150,9 @@ export interface MsgRecvPacketResponse {
 }
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeout {
-  packet?: Packet;
+  packet: Packet;
   proofUnreceived: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   nextSequenceRecv: Long;
   signer: string;
 }
@@ -162,10 +162,10 @@ export interface MsgTimeoutResponse {
 }
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnClose {
-  packet?: Packet;
+  packet: Packet;
   proofUnreceived: Uint8Array;
   proofClose: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   nextSequenceRecv: Long;
   signer: string;
 }
@@ -175,10 +175,10 @@ export interface MsgTimeoutOnCloseResponse {
 }
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgement {
-  packet?: Packet;
+  packet: Packet;
   acknowledgement: Uint8Array;
   proofAcked: Uint8Array;
-  proofHeight?: Height;
+  proofHeight: Height;
   signer: string;
 }
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
@@ -188,7 +188,7 @@ export interface MsgAcknowledgementResponse {
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
   return {
     portId: "",
-    channel: undefined,
+    channel: Channel.fromPartial({}),
     signer: ""
   };
 }
@@ -299,10 +299,10 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
   return {
     portId: "",
     previousChannelId: "",
-    channel: undefined,
+    channel: Channel.fromPartial({}),
     counterpartyVersion: "",
     proofInit: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -440,7 +440,7 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
     counterpartyChannelId: "",
     counterpartyVersion: "",
     proofTry: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -576,7 +576,7 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
     portId: "",
     channelId: "",
     proofAck: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -792,7 +792,7 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
     portId: "",
     channelId: "",
     proofInit: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -907,9 +907,9 @@ export const MsgChannelCloseConfirmResponse = {
 };
 function createBaseMsgRecvPacket(): MsgRecvPacket {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofCommitment: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }
@@ -1027,9 +1027,9 @@ export const MsgRecvPacketResponse = {
 };
 function createBaseMsgTimeout(): MsgTimeout {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofUnreceived: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     nextSequenceRecv: Long.UZERO,
     signer: ""
   };
@@ -1157,10 +1157,10 @@ export const MsgTimeoutResponse = {
 };
 function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     proofUnreceived: new Uint8Array(),
     proofClose: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     nextSequenceRecv: Long.UZERO,
     signer: ""
   };
@@ -1297,10 +1297,10 @@ export const MsgTimeoutOnCloseResponse = {
 };
 function createBaseMsgAcknowledgement(): MsgAcknowledgement {
   return {
-    packet: undefined,
+    packet: Packet.fromPartial({}),
     acknowledgement: new Uint8Array(),
     proofAcked: new Uint8Array(),
-    proofHeight: undefined,
+    proofHeight: Height.fromPartial({}),
     signer: ""
   };
 }

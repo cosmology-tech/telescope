@@ -8,14 +8,14 @@ export interface ArithmeticTwapRequest {
   poolId: bigint;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
   endTime?: Date;
 }
 export interface ArithmeticTwapRequestSDKType {
   pool_id: bigint;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
   end_time?: Date;
 }
 export interface ArithmeticTwapResponse {
@@ -28,13 +28,13 @@ export interface ArithmeticTwapToNowRequest {
   poolId: bigint;
   baseAsset: string;
   quoteAsset: string;
-  startTime?: Date;
+  startTime: Date;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: bigint;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time: Date;
 }
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
@@ -45,10 +45,10 @@ export interface ArithmeticTwapToNowResponseSDKType {
 export interface ParamsRequest {}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params?: Params;
+  params: Params;
 }
 export interface ParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   return {
@@ -426,7 +426,7 @@ export const ParamsRequest = {
 };
 function createBaseParamsResponse(): ParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ParamsResponse = {

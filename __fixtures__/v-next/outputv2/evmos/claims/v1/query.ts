@@ -76,7 +76,7 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse";
@@ -93,7 +93,7 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params?: ParamsSDKType;
+  params: ParamsSDKType;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
@@ -101,7 +101,7 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 export interface QueryClaimsRecordsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
@@ -124,7 +124,7 @@ export interface QueryClaimsRecordsRequestAminoMsg {
  * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
-  pagination?: PageRequestSDKType;
+  pagination: PageRequestSDKType;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -134,7 +134,7 @@ export interface QueryClaimsRecordsResponse {
   /** claims defines all claims records */
   claims: ClaimsRecordAddress[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 export interface QueryClaimsRecordsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
@@ -160,7 +160,7 @@ export interface QueryClaimsRecordsResponseAminoMsg {
  */
 export interface QueryClaimsRecordsResponseSDKType {
   claims: ClaimsRecordAddressSDKType[];
-  pagination?: PageResponseSDKType;
+  pagination: PageResponseSDKType;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -450,7 +450,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -531,7 +531,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryClaimsRecordsRequest = {
@@ -613,7 +613,7 @@ export const QueryClaimsRecordsRequest = {
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
   return {
     claims: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryClaimsRecordsResponse = {

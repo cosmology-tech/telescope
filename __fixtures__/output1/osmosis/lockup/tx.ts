@@ -6,12 +6,12 @@ import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   coins: Coin[];
 }
 export interface MsgLockTokensSDKType {
   owner: string;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
   coins: CoinSDKType[];
 }
 export interface MsgLockTokensResponse {
@@ -60,7 +60,7 @@ export interface MsgExtendLockup {
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
    */
-  duration?: Duration;
+  duration: Duration;
 }
 /**
  * MsgExtendLockup extends the existing lockup's duration.
@@ -69,7 +69,7 @@ export interface MsgExtendLockup {
 export interface MsgExtendLockupSDKType {
   owner: string;
   ID: Long;
-  duration?: DurationSDKType;
+  duration: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
   success: boolean;

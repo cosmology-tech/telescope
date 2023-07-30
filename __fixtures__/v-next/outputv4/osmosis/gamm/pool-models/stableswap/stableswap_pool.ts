@@ -27,7 +27,7 @@ export interface PoolParamsSDKType {
 export interface Pool {
   address: string;
   id: bigint;
-  poolParams?: PoolParams;
+  poolParams: PoolParams;
   /**
    * This string specifies who will govern the pool in the future.
    * Valid forms of this are:
@@ -40,7 +40,7 @@ export interface Pool {
    */
   futurePoolGovernor: string;
   /** sum of all LP shares */
-  totalShares?: Coin;
+  totalShares: Coin;
   /** assets in the pool */
   poolLiquidity: Coin[];
   /** for calculation amognst assets with different precisions */
@@ -52,9 +52,9 @@ export interface Pool {
 export interface PoolSDKType {
   address: string;
   id: bigint;
-  pool_params?: PoolParamsSDKType;
+  pool_params: PoolParamsSDKType;
   future_pool_governor: string;
-  total_shares?: CoinSDKType;
+  total_shares: CoinSDKType;
   pool_liquidity: CoinSDKType[];
   scaling_factors: bigint[];
   scaling_factor_controller: string;
@@ -136,7 +136,7 @@ function createBasePool(): Pool {
   return {
     address: "",
     id: BigInt(0),
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
     totalShares: undefined,
     poolLiquidity: [],

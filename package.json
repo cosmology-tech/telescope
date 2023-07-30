@@ -14,7 +14,7 @@
     "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/proto-parser\"",
     "buidl:telescope": "lerna run buidl --parallel --scope \"@osmonauts/telescope\"",
     "buidl:types": "lerna run buidl --parallel --scope \"@osmonauts/types\"",
-    "bootstrap": "lerna bootstrap --use-workspaces",
+    "bootstrap": "yarn --use-workspaces",
     "lint": "lerna run lint",
     "format": "lerna run format",
     "test": "lerna run test --stream"
@@ -30,7 +30,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "29.5.0",
-    "lerna": "4.0.0",
+    "lerna": "7.0.2",
     "prettier": "2.8.7"
   },
   "workspaces": [

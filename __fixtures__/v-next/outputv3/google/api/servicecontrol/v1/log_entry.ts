@@ -37,7 +37,7 @@ export interface LogEntry {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp?: Date;
+  timestamp: Date;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
@@ -47,7 +47,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest?: HttpRequest;
+  httpRequest: HttpRequest;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
    * If this field contains a relative resource name, you can assume the name is
@@ -84,12 +84,12 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation?: LogEntryOperation;
+  operation: LogEntryOperation;
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  sourceLocation?: LogEntrySourceLocation;
+  sourceLocation: LogEntrySourceLocation;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry";
@@ -167,9 +167,9 @@ export interface LogEntryAminoMsg {
 /** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
-  timestamp?: Date;
+  timestamp: Date;
   severity: LogSeverity;
-  http_request?: HttpRequestSDKType;
+  http_request: HttpRequestSDKType;
   trace: string;
   insert_id: string;
   labels: {
@@ -178,8 +178,8 @@ export interface LogEntrySDKType {
   proto_payload?: AnySDKType;
   text_payload?: string;
   struct_payload?: StructSDKType;
-  operation?: LogEntryOperationSDKType;
-  source_location?: LogEntrySourceLocationSDKType;
+  operation: LogEntryOperationSDKType;
+  source_location: LogEntrySourceLocationSDKType;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -401,15 +401,15 @@ function createBaseLogEntry(): LogEntry {
     name: "",
     timestamp: undefined,
     severity: 0,
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     trace: "",
     insertId: "",
     labels: {},
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,
-    operation: undefined,
-    sourceLocation: undefined
+    operation: LogEntryOperation.fromPartial({}),
+    sourceLocation: LogEntrySourceLocation.fromPartial({})
   };
 }
 export const LogEntry = {
@@ -513,7 +513,7 @@ export const LogEntry = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
@@ -578,7 +578,7 @@ export const LogEntry = {
     return {
       name: object?.name,
       timestamp: object.timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
@@ -619,8 +619,8 @@ export const LogEntry = {
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      timestamp: object.timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
       insertId: object.insert_id,
@@ -640,7 +640,7 @@ export const LogEntry = {
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;

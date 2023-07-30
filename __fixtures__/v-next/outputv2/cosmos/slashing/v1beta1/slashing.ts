@@ -18,7 +18,7 @@ export interface ValidatorSigningInfo {
    */
   indexOffset: Long;
   /** Timestamp until which the validator is jailed due to liveness downtime. */
-  jailedUntil?: Date;
+  jailedUntil: Date;
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
    * once the validator commits an equivocation or for any other configured misbehiavor.
@@ -73,7 +73,7 @@ export interface ValidatorSigningInfoSDKType {
   address: string;
   start_height: Long;
   index_offset: Long;
-  jailed_until?: Date;
+  jailed_until: Date;
   tombstoned: boolean;
   missed_blocks_counter: Long;
 }
@@ -81,7 +81,7 @@ export interface ValidatorSigningInfoSDKType {
 export interface Params {
   signedBlocksWindow: Long;
   minSignedPerWindow: Uint8Array;
-  downtimeJailDuration?: Duration;
+  downtimeJailDuration: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
 }
@@ -105,7 +105,7 @@ export interface ParamsAminoMsg {
 export interface ParamsSDKType {
   signed_blocks_window: Long;
   min_signed_per_window: Uint8Array;
-  downtime_jail_duration?: DurationSDKType;
+  downtime_jail_duration: DurationSDKType;
   slash_fraction_double_sign: Uint8Array;
   slash_fraction_downtime: Uint8Array;
 }
@@ -230,7 +230,7 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: Long.fromString(object.start_height),
       indexOffset: Long.fromString(object.index_offset),
-      jailedUntil: object?.jailed_until ? Timestamp.fromAmino(object.jailed_until) : undefined,
+      jailedUntil: object.jailed_until,
       tombstoned: object.tombstoned,
       missedBlocksCounter: Long.fromString(object.missed_blocks_counter)
     };
@@ -240,7 +240,7 @@ export const ValidatorSigningInfo = {
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
     obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
-    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(message.jailedUntil) : undefined;
+    obj.jailed_until = message.jailedUntil;
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;

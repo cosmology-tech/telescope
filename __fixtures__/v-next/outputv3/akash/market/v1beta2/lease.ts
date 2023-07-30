@@ -86,9 +86,9 @@ export interface LeaseIDSDKType {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface Lease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
   state: Lease_State;
-  price?: DecCoin;
+  price: DecCoin;
   createdAt: Long;
   closedOn: Long;
 }
@@ -110,9 +110,9 @@ export interface LeaseAminoMsg {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
-  lease_id?: LeaseIDSDKType;
+  lease_id: LeaseIDSDKType;
   state: Lease_State;
-  price?: DecCoinSDKType;
+  price: DecCoinSDKType;
   created_at: Long;
   closed_on: Long;
 }
@@ -153,7 +153,7 @@ export interface LeaseFiltersSDKType {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLease {
-  bidId?: BidID;
+  bidId: BidID;
 }
 export interface MsgCreateLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateLease";
@@ -169,7 +169,7 @@ export interface MsgCreateLeaseAminoMsg {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
-  bid_id?: BidIDSDKType;
+  bid_id: BidIDSDKType;
 }
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
@@ -187,7 +187,7 @@ export interface MsgCreateLeaseResponseAminoMsg {
 export interface MsgCreateLeaseResponseSDKType {}
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
-  bidId?: LeaseID;
+  bidId: LeaseID;
 }
 export interface MsgWithdrawLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgWithdrawLease";
@@ -203,7 +203,7 @@ export interface MsgWithdrawLeaseAminoMsg {
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
-  bid_id?: LeaseIDSDKType;
+  bid_id: LeaseIDSDKType;
 }
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
@@ -221,7 +221,7 @@ export interface MsgWithdrawLeaseResponseAminoMsg {
 export interface MsgWithdrawLeaseResponseSDKType {}
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
-  leaseId?: LeaseID;
+  leaseId: LeaseID;
 }
 export interface MsgCloseLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseLease";
@@ -237,7 +237,7 @@ export interface MsgCloseLeaseAminoMsg {
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
-  lease_id?: LeaseIDSDKType;
+  lease_id: LeaseIDSDKType;
 }
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}
@@ -392,9 +392,9 @@ export const LeaseID = {
 };
 function createBaseLease(): Lease {
   return {
-    leaseId: undefined,
+    leaseId: LeaseID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: Long.ZERO,
     closedOn: Long.ZERO
   };
@@ -451,7 +451,7 @@ export const Lease = {
   fromJSON(object: any): Lease {
     return {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO,
       closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO
@@ -478,7 +478,7 @@ export const Lease = {
   fromSDK(object: LeaseSDKType): Lease {
     return {
       leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at,
       closedOn: object?.closed_on
@@ -496,7 +496,7 @@ export const Lease = {
   fromAmino(object: LeaseAmino): Lease {
     return {
       leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
       createdAt: Long.fromString(object.created_at),
       closedOn: Long.fromString(object.closed_on)
@@ -680,7 +680,7 @@ export const LeaseFilters = {
 };
 function createBaseMsgCreateLease(): MsgCreateLease {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCreateLease = {
@@ -824,7 +824,7 @@ export const MsgCreateLeaseResponse = {
 };
 function createBaseMsgWithdrawLease(): MsgWithdrawLease {
   return {
-    bidId: undefined
+    bidId: LeaseID.fromPartial({})
   };
 }
 export const MsgWithdrawLease = {
@@ -968,7 +968,7 @@ export const MsgWithdrawLeaseResponse = {
 };
 function createBaseMsgCloseLease(): MsgCloseLease {
   return {
-    leaseId: undefined
+    leaseId: LeaseID.fromPartial({})
   };
 }
 export const MsgCloseLease = {
