@@ -5,13 +5,13 @@
 </p>
 
 <p align="center" width="100%">
-  <a href="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml">
-    <img height="20" src="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml/badge.svg" />
+  <a href="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml">
+    <img height="20" src="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml/badge.svg" />
   </a>
-   <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/npm/dt/@osmonauts/telescope"></a>
-   <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
-   <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
-   <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/osmosis-labs/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/npm/dt/@cosmology/telescope"></a>
+   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
 </p>
 
 <p align="center">
@@ -95,7 +95,7 @@ Follow the instructions below to generate a new Typescript package that you can 
 First, install `telescope`:
 
 ```sh
-npm install -g @osmonauts/telescope
+npm install -g @cosmology/telescope
 ```
 
 ### Generate
@@ -188,14 +188,14 @@ Now you should have code inside of your `./src` folder, ready for publshing via 
 First add telescope to your `devDependencies`:
 
 ```sh
-yarn add --dev @osmonauts/telescope
+yarn add --dev @cosmology/telescope
 ```
 
 Install helpers and cosmjs [dependencies listed here](#dependencies)
 
 ```js
 import { join } from 'path';
-import telescope from '@osmonauts/telescope';
+import telescope from '@cosmology/telescope';
 import { sync as rimraf } from 'rimraf';
 
 const protoDirs = [join(__dirname, '/../proto')];
@@ -883,10 +883,10 @@ yarn add @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint
 
 If you use the LCD Client generation, you'll need to add
 
-* `@osmonauts/lcd`
+* `@cosmology/lcd`
 
 ```sh
-yarn add @osmonauts/lcd
+yarn add @cosmology/lcd
 ```
 
 ## Troubleshooting
@@ -911,7 +911,7 @@ This should not be an issue, but if you experience problems with syntax or are n
 
 ## Developing
 
-See our [documentation](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
+See our [documentation](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
 
 ## Sponsors
 

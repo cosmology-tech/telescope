@@ -7,9 +7,9 @@ import {
   getImportStatements
 } from '../imports';
 import { parse } from '../parse';
-import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 
-import { createPiniaStore } from '@osmonauts/ast';
+import { createPiniaStore } from '@cosmology/ast';
 
 export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
   if (!builder.options.pinia?.enabled) {

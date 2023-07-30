@@ -1,4 +1,4 @@
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField } from '@cosmology/types';
 import { pascal } from 'case';
 import { AminoParseContext, ProtoParseContext } from '../context';
 

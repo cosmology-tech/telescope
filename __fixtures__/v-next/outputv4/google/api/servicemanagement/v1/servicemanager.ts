@@ -1649,8 +1649,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: undefined,
-    oldConfig: undefined
+    newConfig: Any.fromPartial({}),
+    oldConfig: Any.fromPartial({})
   };
 }
 export const GenerateConfigReportRequest = {

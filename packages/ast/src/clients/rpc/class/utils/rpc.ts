@@ -1,5 +1,5 @@
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, cleanComment, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import * as t from '@babel/types'
 
 const ensureOneSpaceEnd = (str) => {
@@ -59,12 +59,12 @@ export const optionalBool = (
     hasParams: boolean,
     fieldNames: string[],
 ) => {
-    if (!hasParams) { 
-        return true; 
-    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) { 
+    if (!hasParams) {
+        return true;
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
         // if only argument "required" is pagination 
         // also default to empty 
-        return true; 
-    } 
+        return true;
+    }
     return false
 }

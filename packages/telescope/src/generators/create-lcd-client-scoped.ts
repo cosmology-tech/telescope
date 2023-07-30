@@ -1,9 +1,9 @@
 import * as dotty from 'dotty';
-import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@cosmology/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedLCDFactory } from '@osmonauts/ast';
-import { ALLOWED_RPC_SERVICES, ProtoRef } from '@osmonauts/types';
+import { createScopedLCDFactory } from '@cosmology/ast';
+import { ALLOWED_RPC_SERVICES, ProtoRef } from '@cosmology/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
@@ -86,8 +86,8 @@ const makeLCD = (
         // and defaults to base for each
         // if (!packages.includes(file.package)) {
         if (!isRefIncluded(createEmptyProtoRef(file.package, file.proto), {
-          packages,
-          protos
+            packages,
+            protos
         })) {
             return;
         }

@@ -158,7 +158,7 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: undefined,
+    startTime: new Date(),
     lockupPeriods: [],
     vestingPeriods: [],
     merge: false

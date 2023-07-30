@@ -1,4 +1,4 @@
-# @osmonauts/babel
+# @cosmology/babel
 
 Babel Helpers for Telescope, a TypeScript Transpiler for Cosmos Protobufs
 

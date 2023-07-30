@@ -780,7 +780,7 @@ export interface LocalizedMessageSDKType {
 }
 function createBaseRetryInfo(): RetryInfo {
   return {
-    retryDelay: undefined
+    retryDelay: Duration.fromPartial({})
   };
 }
 export const RetryInfo = {

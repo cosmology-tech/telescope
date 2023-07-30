@@ -1,7 +1,7 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake } from 'case';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 
 export enum TelescopeLogLevel {
     None = 0,
@@ -63,13 +63,13 @@ interface TelescopeOpts {
             protos?: string[];
         };
         includes?: {
-          packages?: string[];
-          protos?: string[];
+            packages?: string[];
+            protos?: string[];
         };
 
         typingsFormat?: {
-            customTypes?:{
-              useCosmosSDKDec?: boolean;
+            customTypes?: {
+                useCosmosSDKDec?: boolean;
             },
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
@@ -254,7 +254,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: false
+                useCosmosSDKDec: false
             },
             num64: 'long',
             useDeepPartial: true,

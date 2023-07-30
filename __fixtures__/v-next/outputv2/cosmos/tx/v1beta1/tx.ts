@@ -1147,7 +1147,7 @@ export const SignDoc = {
 function createBaseSignDocDirectAux(): SignDocDirectAux {
   return {
     bodyBytes: new Uint8Array(),
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     chainId: "",
     accountNumber: Long.UZERO,
     sequence: Long.UZERO,
@@ -1612,7 +1612,7 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     modeInfo: ModeInfo.fromPartial({}),
     sequence: Long.UZERO
   };

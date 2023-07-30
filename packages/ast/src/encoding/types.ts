@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
+import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@cosmology/types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -451,16 +451,16 @@ export const getDefaultTSTypeFromProtoType = (
 
         // OTHER TYPES
         case 'google.protobuf.Timestamp':
-            if(context.pluginValue('prototypes.typingsFormat.timestamp') === 'timestamp') {
+            if (context.pluginValue('prototypes.typingsFormat.timestamp') === 'timestamp') {
                 return t.callExpression(
                     t.memberExpression(
                         t.identifier('Timestamp'),
                         t.identifier('fromPartial')
                     ),
-                [t.objectExpression([])]
+                    [t.objectExpression([])]
                 )
             }
-            if(context.pluginValue('prototypes.typingsFormat.timestamp') === 'date') {
+            if (context.pluginValue('prototypes.typingsFormat.timestamp') === 'date') {
                 return t.newExpression(
                     t.identifier('Date'),
                     []
@@ -479,14 +479,14 @@ export const getDefaultTSTypeFromProtoType = (
                 return t.identifier('undefined');
             } else {
                 const temp = field.type.split(".");
-                const fieldName = temp[temp.length -1];
+                const fieldName = temp[temp.length - 1];
                 return t.callExpression(
-                            t.memberExpression(
-                                t.identifier(fieldName),
-                                t.identifier('fromPartial')
-                            ),
-                        [t.objectExpression([])]
-                    )
+                    t.memberExpression(
+                        t.identifier(fieldName),
+                        t.identifier('fromPartial')
+                    ),
+                    [t.objectExpression([])]
+                )
             }
     };
 };

@@ -1548,7 +1548,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
     resourceNames: [],
     filter: "",
-    bufferWindow: undefined
+    bufferWindow: Duration.fromPartial({})
   };
 }
 export const TailLogEntriesRequest = {

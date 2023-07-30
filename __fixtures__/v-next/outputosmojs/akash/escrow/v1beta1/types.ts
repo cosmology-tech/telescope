@@ -230,8 +230,8 @@ function createBaseAccount(): Account {
     id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: Coin.fromPartial({}),
+    transferred: Coin.fromPartial({}),
     settledAt: BigInt(0)
   };
 }
@@ -356,9 +356,9 @@ function createBasePayment(): Payment {
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
-    withdrawn: undefined
+    rate: Coin.fromPartial({}),
+    balance: Coin.fromPartial({}),
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const Payment = {

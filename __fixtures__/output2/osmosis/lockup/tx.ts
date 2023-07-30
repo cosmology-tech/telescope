@@ -61,7 +61,7 @@ export interface MsgForceUnlockResponse {
 function createBaseMsgLockTokens(): MsgLockTokens {
   return {
     owner: "",
-    duration: undefined,
+    duration: Duration.fromPartial({}),
     coins: []
   };
 }
@@ -384,7 +384,7 @@ function createBaseMsgExtendLockup(): MsgExtendLockup {
   return {
     owner: "",
     ID: Long.UZERO,
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const MsgExtendLockup = {

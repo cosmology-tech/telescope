@@ -1,4 +1,4 @@
-import { ProtoAny, ProtoRoot, ProtoType } from '@osmonauts/types';
+import { ProtoAny, ProtoRoot, ProtoType } from '@cosmology/types';
 import { GenericParseContext } from '../context';
 export declare const getTypeUrlWithPkgAndName: (pkg: string, name: string) => string;
 export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) => string;

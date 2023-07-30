@@ -1,5 +1,5 @@
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
+import { ProtoStore, traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
 import { createGrpcWebMsgInterface, createGrpcWebMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, getGrpcWebImpl } from './grpc-web.msg';
@@ -15,11 +15,11 @@ it('test gRPC-web Msg Client', () => {
 
     expectCode(createGrpcWebMsgInterface(context, service));
     expectCode(createGrpcWebMsgClass(context, service));
-    expectCode(GetDesc(context, service)); 
+    expectCode(GetDesc(context, service));
     const Desces = getMethodDesc(context, service);
     for (let i = 0; i < Desces.length; i++) {
         const element = Desces[i];
-        expectCode(element); 
+        expectCode(element);
     }
 
     expectCode(getGrpcWebImpl(context));

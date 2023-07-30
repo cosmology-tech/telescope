@@ -22,7 +22,7 @@ export interface DepositDeploymentAuthorizationSDKType {
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
-    spendLimit: undefined
+    spendLimit: Coin.fromPartial({})
   };
 }
 export const DepositDeploymentAuthorization = {

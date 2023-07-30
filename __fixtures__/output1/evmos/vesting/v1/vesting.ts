@@ -41,7 +41,7 @@ function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
   return {
     baseVestingAccount: BaseVestingAccount.fromPartial({}),
     funderAddress: "",
-    startTime: undefined,
+    startTime: new Date(),
     lockupPeriods: [],
     vestingPeriods: []
   };

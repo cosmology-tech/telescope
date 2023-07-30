@@ -1,4 +1,4 @@
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { osmosis } from "./codegen";
 
 const REST_ENDPOINT = 'https://rest.cosmos.directory/osmosis'

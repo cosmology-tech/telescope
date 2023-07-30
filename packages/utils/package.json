@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/utils",
+  "name": "@cosmology/utils",
   "version": "0.11.1",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -42,11 +42,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils"
+    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils/issues"
+    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",

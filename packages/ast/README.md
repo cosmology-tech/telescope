@@ -1,4 +1,4 @@
-# @osmonauts/ast
+# @cosmology/ast
 
 Cosmos Typescript ASTs
 ## example usage
@@ -6,7 +6,7 @@ Cosmos Typescript ASTs
 ```js
 import generate from '@babel/generator';
 import * as t from '@babel/types';
-import { recursiveNamespace } from '@osmonauts/ast';
+import { recursiveNamespace } from '@cosmology/ast';
 
 const myModule = recursiveNamespace(
     [

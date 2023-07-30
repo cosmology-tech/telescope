@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 import { objectPattern } from '.';
-import { variableSlug } from '@osmonauts/utils';
+import { variableSlug } from '@cosmology/utils';
 
 const DEFAULT_RPC_PARAM_NAME = 'rpc';
 

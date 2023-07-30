@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 import { GenericParseContext, ProtoParseContext } from './context';
 export declare const getFieldNames: (field: ProtoField) => {
     propName: string;

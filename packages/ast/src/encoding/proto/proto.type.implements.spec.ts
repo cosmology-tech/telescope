@@ -1,6 +1,6 @@
 import { createProtoType, createCreateProtoType } from './interface';
 
-import { getNestedProto } from '@osmonauts/proto-parser'
+import { getNestedProto } from '@cosmology/proto-parser'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 

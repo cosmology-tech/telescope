@@ -762,7 +762,7 @@ function createBaseMember(): Member {
     address: "",
     weight: "",
     metadata: "",
-    addedAt: undefined
+    addedAt: new Date()
   };
 }
 export const Member = {
@@ -1193,8 +1193,8 @@ export const PercentageDecisionPolicy = {
 };
 function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
   return {
-    votingPeriod: undefined,
-    minExecutionPeriod: undefined
+    votingPeriod: Duration.fromPartial({}),
+    minExecutionPeriod: Duration.fromPartial({})
   };
 }
 export const DecisionPolicyWindows = {
@@ -1300,7 +1300,7 @@ function createBaseGroupInfo(): GroupInfo {
     metadata: "",
     version: Long.UZERO,
     totalWeight: "",
-    createdAt: undefined
+    createdAt: new Date()
   };
 }
 export const GroupInfo = {
@@ -1560,8 +1560,8 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
     admin: "",
     metadata: "",
     version: Long.UZERO,
-    decisionPolicy: undefined,
-    createdAt: undefined
+    decisionPolicy: Any.fromPartial({}),
+    createdAt: new Date()
   };
 }
 export const GroupPolicyInfo = {
@@ -1731,13 +1731,13 @@ function createBaseProposal(): Proposal {
     address: "",
     metadata: "",
     proposers: [],
-    submitTime: undefined,
+    submitTime: new Date(),
     groupVersion: Long.UZERO,
     groupPolicyVersion: Long.UZERO,
     status: 0,
     result: 0,
     finalTallyResult: TallyResult.fromPartial({}),
-    votingPeriodEnd: undefined,
+    votingPeriodEnd: new Date(),
     executorResult: 0,
     messages: []
   };
@@ -2141,7 +2141,7 @@ function createBaseVote(): Vote {
     voter: "",
     option: 0,
     metadata: "",
-    submitTime: undefined
+    submitTime: new Date()
   };
 }
 export const Vote = {

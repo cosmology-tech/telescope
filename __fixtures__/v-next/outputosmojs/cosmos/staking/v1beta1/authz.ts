@@ -96,7 +96,7 @@ export interface StakeAuthorization_ValidatorsSDKType {
 }
 function createBaseStakeAuthorization(): StakeAuthorization {
   return {
-    maxTokens: undefined,
+    maxTokens: Coin.fromPartial({}),
     allowList: undefined,
     denyList: undefined,
     authorizationType: 0

@@ -24,7 +24,7 @@ export interface GenesisStateSDKType {
 function createBaseGenesisDowntimeEntry(): GenesisDowntimeEntry {
   return {
     duration: 0,
-    lastDowntime: undefined
+    lastDowntime: new Date()
   };
 }
 export const GenesisDowntimeEntry = {
@@ -97,7 +97,7 @@ export const GenesisDowntimeEntry = {
 function createBaseGenesisState(): GenesisState {
   return {
     downtimes: [],
-    lastBlockTime: undefined
+    lastBlockTime: new Date()
   };
 }
 export const GenesisState = {

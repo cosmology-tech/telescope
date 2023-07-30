@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoField, ProtoType } from '@osmonauts/types';
+import { ProtoField, ProtoType } from '@cosmology/types';
 import { arrayTypes, toAminoJSON, toAminoMessages } from './utils';
 import { pascal } from 'case';
 import { SymbolNames } from '../../types';

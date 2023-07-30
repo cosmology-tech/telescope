@@ -1,6 +1,6 @@
-import { ProtoRef, ProtoType, ServiceInfo, ALLOWED_RPC_SERVICES } from '@osmonauts/types'
-import { getObjectName } from '@osmonauts/proto-parser';
-import { getKeyTypeEntryName } from '@osmonauts/ast';
+import { ProtoRef, ProtoType, ServiceInfo, ALLOWED_RPC_SERVICES } from '@cosmology/types'
+import { getObjectName } from '@cosmology/proto-parser';
+import { getKeyTypeEntryName } from '@cosmology/ast';
 import { getRoot } from './utils';
 import { TelescopeParseContext } from './build';
 

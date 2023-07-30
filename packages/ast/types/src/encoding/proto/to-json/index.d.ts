@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoParseContext } from '../../context';
-import { ProtoField, ProtoType } from '@osmonauts/types';
+import { ProtoField, ProtoType } from '@cosmology/types';
 export interface ToJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;

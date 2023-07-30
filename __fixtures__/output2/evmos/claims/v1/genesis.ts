@@ -95,9 +95,9 @@ export const GenesisState = {
 function createBaseParams(): Params {
   return {
     enableClaims: false,
-    airdropStartTime: undefined,
-    durationUntilDecay: undefined,
-    durationOfDecay: undefined,
+    airdropStartTime: Timestamp.fromPartial({}),
+    durationUntilDecay: Duration.fromPartial({}),
+    durationOfDecay: Duration.fromPartial({}),
     claimsDenom: "",
     authorizedChannels: [],
     evmChannels: []

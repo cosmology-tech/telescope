@@ -571,7 +571,7 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     modeInfo: ModeInfo.fromPartial({}),
     sequence: Long.UZERO
   };
@@ -720,7 +720,7 @@ export const ModeInfo_Single = {
   },
   fromJSON(object: any): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
   toJSON(message: ModeInfo_Single): unknown {

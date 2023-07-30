@@ -270,7 +270,7 @@ export const AssetTypeResponse = {
   },
   fromJSON(object: any): AssetTypeResponse {
     return {
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: AssetTypeResponse): unknown {
@@ -1125,7 +1125,7 @@ function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegat
   return {
     superfluidDelegationRecords: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const SuperfluidDelegationsByDelegatorResponse = {
@@ -1584,7 +1584,7 @@ function createBaseQueryTotalDelegationByDelegatorResponse(): QueryTotalDelegati
     superfluidDelegationRecords: [],
     delegationResponse: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const QueryTotalDelegationByDelegatorResponse = {

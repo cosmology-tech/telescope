@@ -1,6 +1,6 @@
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoStore } from '@cosmology/proto-parser';
 import { TelescopeParseContext } from './build';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 import { BundlerFile, TelescopeInput } from './types';
 export declare class TelescopeBuilder {
     store: ProtoStore;

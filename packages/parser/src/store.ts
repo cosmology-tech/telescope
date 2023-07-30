@@ -2,11 +2,11 @@ import { sync as glob } from 'glob';
 import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
+import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@cosmology/types';
 import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './utils';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
-import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@osmonauts/types';
+import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
 
 import google_any from './native/any';
 import google_descriptor from './native/descriptor';
@@ -215,18 +215,18 @@ export class ProtoStore {
         let resolver = new ProtoResolver(this.getDeps());
 
         this.protos = this.getProtos().map((ref: ProtoRef) => {
-            if( !actualFiles.has(ref.filename) ){
-              // get included imported files
-              const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
-              const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
+            if (!actualFiles.has(ref.filename)) {
+                // get included imported files
+                const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
+                const isExcluded = isRefExcluded(ref, this.options.prototypes.excluded)
 
-              if(isIncluded && !isExcluded){
-                const deps = resolver.resolve(ref.filename);
+                if (isIncluded && !isExcluded) {
+                    const deps = resolver.resolve(ref.filename);
 
-                for (const dep of deps) {
-                  actualFiles.add(dep);
+                    for (const dep of deps) {
+                        actualFiles.add(dep);
+                    }
                 }
-              }
             }
 
             return {
@@ -240,8 +240,8 @@ export class ProtoStore {
 
         // process import names
         this.protos = this.protos.map((ref: ProtoRef) => {
-            if(!actualFiles.has(ref.filename)){
-              return null
+            if (!actualFiles.has(ref.filename)) {
+                return null
             }
 
             const traversed = ref.traversed;

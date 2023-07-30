@@ -870,8 +870,8 @@ export const MetricDescriptor = {
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
-    samplePeriod: undefined,
-    ingestDelay: undefined
+    samplePeriod: Duration.fromPartial({}),
+    ingestDelay: Duration.fromPartial({})
   };
 }
 export const MetricDescriptor_MetricDescriptorMetadata = {

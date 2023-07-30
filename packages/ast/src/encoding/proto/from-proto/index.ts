@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { SymbolNames } from '../../types';
 
 export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {

@@ -1,4 +1,4 @@
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { ProtoStore } from '../../src/index'
 import { traverse } from '../../src';
 import { getNested } from '../../src/utils'

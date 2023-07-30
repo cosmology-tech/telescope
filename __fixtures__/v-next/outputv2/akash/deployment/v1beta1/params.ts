@@ -24,7 +24,7 @@ export interface ParamsSDKType {
 }
 function createBaseParams(): Params {
   return {
-    deploymentMinDeposit: undefined
+    deploymentMinDeposit: Coin.fromPartial({})
   };
 }
 export const Params = {

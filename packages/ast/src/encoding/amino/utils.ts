@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { DEFAULT_AMINO_EXCEPTIONS, ProtoAny, ProtoRoot, ProtoType } from '@osmonauts/types';
+import { DEFAULT_AMINO_EXCEPTIONS, ProtoAny, ProtoRoot, ProtoType } from '@cosmology/types';
 import { kebab } from "case";
 import { GenericParseContext } from '../context';
 

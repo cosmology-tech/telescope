@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { BILLION, TypeLong, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
@@ -661,131 +661,131 @@ export const arrayTypes = {
 
 
 export const toAminoMessages = {
-    anyType(){
-      return [
-        t.variableDeclaration(
-          'const',
-          [
-              t.variableDeclarator(
-                  identifier('obj', t.tsTypeAnnotation(t.tsAnyKeyword())),
-                  t.objectExpression([])
-              )
-          ]
-        ),
-        t.expressionStatement(
-          t.assignmentExpression(
-            '=',
-            t.memberExpression(
-              t.identifier('obj'),
-              t.identifier('type')
+    anyType() {
+        return [
+            t.variableDeclaration(
+                'const',
+                [
+                    t.variableDeclarator(
+                        identifier('obj', t.tsTypeAnnotation(t.tsAnyKeyword())),
+                        t.objectExpression([])
+                    )
+                ]
             ),
-            t.memberExpression(
-              t.identifier('message'),
-              t.identifier('typeUrl')
-            )
-          )
-        ),
-        t.expressionStatement(
-          t.assignmentExpression(
-            '=',
-            t.memberExpression(
-              t.identifier('obj'),
-              t.identifier('value')
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier('type')
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('typeUrl')
+                    )
+                )
             ),
-            t.memberExpression(
-              t.identifier('message'),
-              t.identifier('value')
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier('value')
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('value')
+                    )
+                )
+            ),
+            t.returnStatement(
+                t.identifier('obj')
             )
-          )
-        ),
-        t.returnStatement(
-          t.identifier('obj')
-        )
-      ]
+        ]
     },
     timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
-      context.addUtil('fromTimestamp');
+        context.addUtil('fromTimestamp');
 
-      return t.returnStatement(
-        t.callExpression(
-          t.memberExpression(
+        return t.returnStatement(
             t.callExpression(
-              t.identifier('fromTimestamp'),
-              [t.identifier('message')]
-            ),
-            t.identifier('toString')
-          ),
-          []
+                t.memberExpression(
+                    t.callExpression(
+                        t.identifier('fromTimestamp'),
+                        [t.identifier('message')]
+                    ),
+                    t.identifier('toString')
+                ),
+                []
+            )
         )
-      )
     },
     duration(context: ProtoParseContext, name: string, proto: ProtoType) {
         const longType = TypeLong.getType(context);
 
         switch (longType) {
-          case 'BigInt':
-            return t.returnStatement(
-              t.callExpression(
-                t.memberExpression(
-                  t.parenthesizedExpression(
-                    t.binaryExpression(
-                      '+',
-                      t.binaryExpression(
-                        '*',
+            case 'BigInt':
+                return t.returnStatement(
+                    t.callExpression(
                         t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier('seconds'),
+                            t.parenthesizedExpression(
+                                t.binaryExpression(
+                                    '+',
+                                    t.binaryExpression(
+                                        '*',
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('seconds'),
+                                        ),
+                                        t.callExpression(
+                                            t.identifier('BigInt'),
+                                            [t.stringLiteral("1000000000")],
+                                        ),
+                                    ),
+                                    t.callExpression(
+                                        t.identifier('BigInt'),
+                                        [t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('nanos'),
+                                        )],
+                                    ),
+                                ),
+                            ),
+                            t.identifier('toString'),
                         ),
-                        t.callExpression(
-                          t.identifier('BigInt'),
-                          [t.stringLiteral("1000000000")],
-                        ),
-                      ),
-                      t.callExpression(
-                        t.identifier('BigInt'),
-                        [t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier('nanos'),
-                        )],
-                      ),
-                    ),
-                  ),
-                  t.identifier('toString'),
-                ),
-                [],
-              )
-            )
-          case 'Long':
-          default:
-            return t.returnStatement(
-              t.callExpression(
-                t.memberExpression(
-                  t.binaryExpression(
-                    '+',
-                    t.binaryExpression(
-                      '*',
-                      t.callExpression(
+                        [],
+                    )
+                )
+            case 'Long':
+            default:
+                return t.returnStatement(
+                    t.callExpression(
                         t.memberExpression(
-                          t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier('seconds')
-                          ),
-                          t.identifier('toInt')
+                            t.binaryExpression(
+                                '+',
+                                t.binaryExpression(
+                                    '*',
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.memberExpression(
+                                                t.identifier('message'),
+                                                t.identifier('seconds')
+                                            ),
+                                            t.identifier('toInt')
+                                        ),
+                                        []
+                                    ),
+                                    BILLION
+                                ),
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier('nanos')
+                                )
+                            ),
+                            t.identifier('toString')
                         ),
                         []
-                      ),
-                      BILLION
-                    ),
-                    t.memberExpression(
-                      t.identifier('message'),
-                      t.identifier('nanos')
                     )
-                  ),
-                  t.identifier('toString')
-                ),
-                []
-              )
-            );
+                );
         }
 
     }

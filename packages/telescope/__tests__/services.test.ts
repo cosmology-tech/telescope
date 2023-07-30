@@ -1,5 +1,5 @@
-import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
-import { defaultTelescopeOptions } from '@osmonauts/types';
+import { ProtoStore, parseProto } from '@cosmology/proto-parser';
+import { defaultTelescopeOptions } from '@cosmology/types';
 import { parse } from '../src/parse';
 import { TelescopeParseContext } from '../src/build';
 

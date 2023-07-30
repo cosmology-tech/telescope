@@ -1,9 +1,9 @@
 import generate from '@babel/generator';
-import { ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { ProtoStore, getNestedProto } from '@osmonauts/proto-parser'
+import { ProtoType, TelescopeOptions } from '@cosmology/types';
+import { ProtoStore, getNestedProto } from '@cosmology/proto-parser'
 import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
-import { defaultTelescopeOptions as teleDefaults } from '@osmonauts/types';
+import { defaultTelescopeOptions as teleDefaults } from '@cosmology/types';
 import deepmerge from 'deepmerge';
 
 export const expectCode = (ast) => {

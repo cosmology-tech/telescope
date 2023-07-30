@@ -1,13 +1,13 @@
 import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { GenericParseContext } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+import { GenericParseContext } from '@cosmology/ast';
+import { ProtoRef } from '@cosmology/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
 import * as t from '@babel/types';
-import { createEmptyProtoRef } from '@osmonauts/proto-parser';
+import { createEmptyProtoRef } from '@cosmology/proto-parser';
 
 export const commonBundlePlugin = (
   builder: TelescopeBuilder,
@@ -19,20 +19,20 @@ export const commonBundlePlugin = (
   ) => (
     | t.ExportNamedDeclaration
     | {
+      type: string;
+      importKind: string;
+      specifiers: {
         type: string;
-        importKind: string;
-        specifiers: {
+        local: {
           type: string;
-          local: {
-            type: string;
-            name: string;
-          };
-        }[];
-        source: {
-          type: string;
-          value: string;
+          name: string;
         };
-      }
+      }[];
+      source: {
+        type: string;
+        value: string;
+      };
+    }
   )[]
 ) => {
   const localname = bundleFilename;

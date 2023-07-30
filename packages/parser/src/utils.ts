@@ -1,8 +1,8 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@cosmology/protobufjs';
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@cosmology/types';
 import { ProtoStore } from './store';
-import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@osmonauts/ast';
+import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@cosmology/ast';
 import minimatch from 'minimatch';
 
 export const getNestedProto = (root: ProtoRoot) => {
@@ -148,23 +148,23 @@ export const isRefIncluded = (
  * @returns
  */
 export const isRefExcluded = (
-  ref: ProtoRef,
-  exclude?: {
-      packages?: string[];
-      protos?: string[];
-  }
+    ref: ProtoRef,
+    exclude?: {
+        packages?: string[];
+        protos?: string[];
+    }
 ) => {
-  // if no include object, no filter
-  if (!exclude) return false;
-  // if no arrays are populated, no filter
-  if (
-      !exclude.packages?.length &&
-      !exclude.protos?.length
-  ) {
-      return false;
-  }
+    // if no include object, no filter
+    if (!exclude) return false;
+    // if no arrays are populated, no filter
+    if (
+        !exclude.packages?.length &&
+        !exclude.protos?.length
+    ) {
+        return false;
+    }
 
-  return isRefIncluded(ref, exclude);
+    return isRefIncluded(ref, exclude);
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
@@ -315,25 +315,25 @@ export const instanceType = (obj: any) => {
  * @returns
  */
 export const createEmptyProtoRef = (pkg?: string, filename?: string): ProtoRef => {
-  return {
-    absolute: '',
-    filename: filename,
-    proto: {
-        package: pkg,
-        imports: null,
-        root: {},
-        importNames: null
-    },
-    traversed: {
-        package: pkg,
-        imports: null,
-        root: {},
-        importNames: null,
-        acceptsInterface: {},
-        implementsInterface: {},
-        parsedExports: {},
-        parsedImports: {},
-        symbols: null
+    return {
+        absolute: '',
+        filename: filename,
+        proto: {
+            package: pkg,
+            imports: null,
+            root: {},
+            importNames: null
+        },
+        traversed: {
+            package: pkg,
+            imports: null,
+            root: {},
+            importNames: null,
+            acceptsInterface: {},
+            implementsInterface: {},
+            parsedExports: {},
+            parsedImports: {},
+            symbols: null
+        }
     }
-}
 };

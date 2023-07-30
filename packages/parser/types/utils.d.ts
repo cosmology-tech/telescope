@@ -1,4 +1,4 @@
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@cosmology/types';
 import { ProtoStore } from './store';
 export declare const getNestedProto: (root: ProtoRoot) => any;
 export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;

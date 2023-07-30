@@ -1,4 +1,4 @@
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
 
 # creating new generators
 
@@ -32,10 +32,10 @@ Find a folder that makes sense for the new generator. Only if you really need to
 
 for example, in `packages/ast/src/clients/rpc/class/some-new-rpc-client.ts`. Make sure to include `context: GenericParseContext` as the first property of all AST functions. The `ProtoService` is only here in this example because we intend to use it as we create the AST generator.
 
-If you are not sure how to write ASTs with `@babel/types`, please see our docs on [working with ASTs](https://github.com/osmosis-labs/telescope/blob/main/docs/working-with-asts.md). You can also checkout [astexplorer.net](https://astexplorer.net) to visually browse and learn ASTs, but they are quite verbose compared to our script when you run `yarn test:ast`.
+If you are not sure how to write ASTs with `@babel/types`, please see our docs on [working with ASTs](https://github.com/cosmology-tech/telescope/blob/main/docs/working-with-asts.md). You can also checkout [astexplorer.net](https://astexplorer.net) to visually browse and learn ASTs, but they are quite verbose compared to our script when you run `yarn test:ast`.
 
 ```js
-import { ProtoService } from "@osmonauts/types";
+import { ProtoService } from "@cosmology/types";
 import { GenericParseContext } from "../../../encoding";
 import * as t from '@babel/types';
 
@@ -58,7 +58,7 @@ export const createSomeNewRpcClient = (
 };
 ```
 
-If we need to import from other packages, context.addUtil is recommended. For detail about this, please see: [Common helpers or utils](https://github.com/osmosis-labs/telescope/blob/main/docs/helpers.md)
+If we need to import from other packages, context.addUtil is recommended. For detail about this, please see: [Common helpers or utils](https://github.com/cosmology-tech/telescope/blob/main/docs/helpers.md)
 
 ## 2 add it to the index
 
@@ -74,8 +74,8 @@ export * from './some-new-rpc-client';
 in this example, `packages/ast/src/clients/rpc/class/some-new-rpc-client.test.ts`
 
 ```js
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
+import { ProtoStore, traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../test-utils';
 import { GenericParseContext } from '../../../encoding';
 import { createSomeNewRpcClient } from './some-new-rpc-client';
@@ -99,7 +99,7 @@ it('GRPC web Msg Client', () => {
 });
 ```
 
-Note: Run "yarn buidl" in ast package folder to keep it updated to other packages, by doing this, code in telescope package can invoke newly built ast functions. More detail on this, please see our docs on [Packages and workspace](https://github.com/osmosis-labs/telescope/blob/main/docs/packages.md).
+Note: Run "yarn buidl" in ast package folder to keep it updated to other packages, by doing this, code in telescope package can invoke newly built ast functions. More detail on this, please see our docs on [Packages and workspace](https://github.com/cosmology-tech/telescope/blob/main/docs/packages.md).
 ```
 cd packages/ast
 yarn buidl
@@ -124,7 +124,7 @@ interface TelescopeOpts {
     };
 ```
 
-Note: After editing the option in types package, don't forget to run "yarn buidl" inside the types package keeping other packages up-to-date with the newest changes of the option. More detail on this, please see our docs on [Packages and workspace](https://github.com/osmosis-labs/telescope/blob/main/docs/packages.md).
+Note: After editing the option in types package, don't forget to run "yarn buidl" inside the types package keeping other packages up-to-date with the newest changes of the option. More detail on this, please see our docs on [Packages and workspace](https://github.com/cosmology-tech/telescope/blob/main/docs/packages.md).
 ```
 cd packages/types
 yarn buidl
@@ -259,4 +259,4 @@ describe('bundle package registries and root file names', () => {
 })
 ```
 
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
