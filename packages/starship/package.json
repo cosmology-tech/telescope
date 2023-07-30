@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/starship-test",
+  "name": "@cosmology/starship-test",
   "private": true,
   "version": "0.93.0",
   "description": "E2E tests for telescope with Starship",
