@@ -3,7 +3,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import { setPaginationParams } from "../../../helpers";
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;

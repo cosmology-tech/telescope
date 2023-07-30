@@ -1,6 +1,6 @@
 import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { useEndpoint } from "../../../pinia-endpoint";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 import { defineStore } from "pinia";
@@ -18,7 +18,7 @@ export const usePiniaStore = defineStore('akash/cert/v1beta2/query.proto', {
     }
   },
   actions: {
-    async fetchCertificates(param : QueryCertificatesRequestSDKType) {
+    async fetchCertificates(param: QueryCertificatesRequestSDKType) {
       this.certificates = await this.lcdClient.certificates(param);
       return this.certificates;
     }

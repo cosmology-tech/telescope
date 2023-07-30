@@ -1,6 +1,6 @@
 import { Downtime, DowntimeSDKType } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { RecoveredSinceDowntimeOfLengthRequest, RecoveredSinceDowntimeOfLengthRequestSDKType, RecoveredSinceDowntimeOfLengthResponse, RecoveredSinceDowntimeOfLengthResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
