@@ -1,9 +1,9 @@
 import * as dotty from 'dotty';
-import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@cosmology/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@cosmology/ast';
+import { ProtoRef } from '@cosmology/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
@@ -89,8 +89,8 @@ const makeRPC = (
         // which defaults to including cosmos
         // and defaults to base for each
         if (!isRefIncluded(createEmptyProtoRef(file.package, file.proto), {
-          packages,
-          protos
+            packages,
+            protos
         })) {
             return;
         }
@@ -108,7 +108,7 @@ const makeRPC = (
     );
     //based on rpc type to generate client from client factory
     let rpcast;
-    
+
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
             rpcast = createScopedGrpcGatewayFactory(
@@ -116,30 +116,30 @@ const makeRPC = (
                 obj,
                 "createGrpcGateWayClient"
                 // 'QueryClientImpl' // make option later
-              );
-              break;
+            );
+            break;
         case "tendermint":
-          // TODO add addUtil to generic context
-          ctx.proto.addUtil('Rpc');
-          
-          rpcast = createScopedRpcTmFactory(
-            ctx.proto,
-            obj,
-            methodName
-            // 'QueryClientImpl' // make option later
-          );
-          break;
+            // TODO add addUtil to generic context
+            ctx.proto.addUtil('Rpc');
+
+            rpcast = createScopedRpcTmFactory(
+                ctx.proto,
+                obj,
+                methodName
+                // 'QueryClientImpl' // make option later
+            );
+            break;
         case "grpc-web":
-          rpcast = createScopedGrpcWebFactory(
-            ctx.proto,
-            obj,
-            "createGrpcWebClient"
-          );
-          break;
+            rpcast = createScopedGrpcWebFactory(
+                ctx.proto,
+                obj,
+                "createGrpcWebClient"
+            );
+            break;
         default:
-          break;
+            break;
     }
- 
+
 
     const serviceImports = getDepsFromQueries(
         ctx.queries,

@@ -1,9 +1,9 @@
 
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../../encoding';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { getRpcClassName } from '../class/tendermint';
 
 const rpcExtensionMethod = (

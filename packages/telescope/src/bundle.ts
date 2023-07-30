@@ -1,10 +1,10 @@
-import { ProtoStore, isRefExcluded, createEmptyProtoRef } from '@osmonauts/proto-parser';
-import { importNamespace } from '@osmonauts/ast';
+import { ProtoStore, isRefExcluded, createEmptyProtoRef } from '@cosmology/proto-parser';
+import { importNamespace } from '@cosmology/ast';
 import * as dotty from 'dotty';
 import { TelescopeBuilder } from './index';
 import { join, relative, dirname } from 'path';
 import { TelescopeParseContext } from './build';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 
 // TODO move to store
 export const getPackages = (store: ProtoStore) => {

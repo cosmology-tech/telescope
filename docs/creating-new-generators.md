@@ -35,7 +35,7 @@ for example, in `packages/ast/src/clients/rpc/class/some-new-rpc-client.ts`. Mak
 If you are not sure how to write ASTs with `@babel/types`, please see our docs on [working with ASTs](https://github.com/cosmology-tech/telescope/blob/main/docs/working-with-asts.md). You can also checkout [astexplorer.net](https://astexplorer.net) to visually browse and learn ASTs, but they are quite verbose compared to our script when you run `yarn test:ast`.
 
 ```js
-import { ProtoService } from "@osmonauts/types";
+import { ProtoService } from "@cosmology/types";
 import { GenericParseContext } from "../../../encoding";
 import * as t from '@babel/types';
 
@@ -74,8 +74,8 @@ export * from './some-new-rpc-client';
 in this example, `packages/ast/src/clients/rpc/class/some-new-rpc-client.test.ts`
 
 ```js
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
+import { ProtoStore, traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../test-utils';
 import { GenericParseContext } from '../../../encoding';
 import { createSomeNewRpcClient } from './some-new-rpc-client';

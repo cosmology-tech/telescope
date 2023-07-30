@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/lcd",
+  "name": "@cosmology/lcd",
   "version": "0.11.1",
   "description": "Telescope LCDClient helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",

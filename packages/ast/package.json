@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/ast",
+  "name": "@cosmology/ast",
   "version": "0.88.1",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -90,9 +90,9 @@
     "@babel/parser": "^7.21.4",
     "@babel/runtime": "^7.21.0",
     "@babel/types": "7.21.4",
-    "@osmonauts/proto-parser": "^0.45.1",
-    "@osmonauts/types": "^0.36.1",
-    "@osmonauts/utils": "^0.11.1",
+    "@cosmology/proto-parser": "^0.45.1",
+    "@cosmology/types": "^0.36.1",
+    "@cosmology/utils": "^0.11.1",
     "case": "1.6.3",
     "dotty": "0.1.2"
   }

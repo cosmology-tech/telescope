@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
 import { ProtoParseContext } from '../../context';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 export declare const fromAminoJSON: {
     scalar(args: FromAminoJSONMethod): t.ObjectProperty;
     string(args: FromAminoJSONMethod): t.ObjectProperty;

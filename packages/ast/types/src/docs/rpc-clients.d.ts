@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { ProtoRef, ProtoService, ProtoServiceMethod } from "@osmonauts/types";
-import { ProtoStore } from "@osmonauts/proto-parser";
+import { ProtoRef, ProtoService, ProtoServiceMethod } from "@cosmology/types";
+import { ProtoStore } from "@cosmology/proto-parser";
 import { ProtoParseContext } from "../encoding";
 interface DocumentRpcClient {
     service: DocumentService;
@@ -15,4 +15,4 @@ interface DocumentService {
 }
 export declare const documentRpcClients: (context: ProtoParseContext, myBase: string, store: ProtoStore) => DocumentRpcClient[];
 export declare const documentRpcClientsReadme: (context: ProtoParseContext, myBase: string, store: ProtoStore) => string;
-export {};
+export { };

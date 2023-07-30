@@ -18,11 +18,11 @@ import {
     getMethodDesc,
     grpcWebRpcInterface,
     getGrpcWebImpl,
-} from '@osmonauts/ast';
-import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
+} from '@cosmology/ast';
+import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { ProtoRoot, ProtoService } from '@osmonauts/types';
+import { ProtoRoot, ProtoService } from '@cosmology/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -77,10 +77,10 @@ export const plugin = (
         const filename = bundler.getFilename(localname);
 
         const bundlerFile = {
-          proto: c.ref.filename,
-          package: c.ref.proto.package,
-          localname,
-          filename
+            proto: c.ref.filename,
+            package: c.ref.proto.package,
+            localname,
+            filename
         };
 
         const asts = [];
@@ -162,8 +162,8 @@ export const plugin = (
                         )
 
                         const includeMobxHooks = c.proto.pluginValue('mobx.enabled') && isRefIncluded(
-                          c.ref,
-                          c.proto.pluginValue('mobx.include')
+                            c.ref,
+                            c.proto.pluginValue('mobx.include')
                         )
 
                         if (includeReactQueryHooks) {

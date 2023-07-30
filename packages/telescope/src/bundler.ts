@@ -3,7 +3,7 @@ import { resolve, join } from 'path';
 import { TelescopeParseContext } from './build';
 import { createFileBundle } from './bundle';
 import { TelescopeBuilder } from './builder';
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { Bundle, BundlerFile } from './types';
 import { writeAstToFile } from './utils/files';
 
@@ -33,15 +33,15 @@ export class Bundler {
     }
 
     addStateManagers(type: string, files: BundlerFile[]) {
-      const state = this.stateManagers[type];
+        const state = this.stateManagers[type];
 
-      if(!state){
-        this.stateManagers[type] = [];
-      }
+        if (!state) {
+            this.stateManagers[type] = [];
+        }
 
-      [].push.apply(this.stateManagers[type], files);
+        [].push.apply(this.stateManagers[type], files);
 
-      this.builder.addStateManagers(type, files);
+        this.builder.addStateManagers(type, files);
     }
 
     addLCDClients(files: BundlerFile[]) {

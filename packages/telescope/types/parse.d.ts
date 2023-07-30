@@ -1,4 +1,4 @@
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { TelescopeParseContext } from './build';
 export declare const parse: (context: TelescopeParseContext) => void;
 export declare const getParsedObjectName: (ref: ProtoRef, obj: any, scope: string[]) => string;
@@ -12,4 +12,4 @@ interface ParseRecur {
     isNested: boolean;
 }
 export declare const parseRecur: ({ context, obj, scope, isNested }: ParseRecur) => void;
-export {};
+export { };

@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/types",
+  "name": "@cosmology/types",
   "version": "0.36.1",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
-    "@osmonauts/utils": "^0.11.1",
+    "@cosmology/utils": "^0.11.1",
     "case": "1.6.3"
   }
 }

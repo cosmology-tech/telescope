@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { AminoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField } from '@cosmology/types';
 export interface ToAminoParseField {
     context: AminoParseContext;
     field: ProtoField;
@@ -16,4 +16,4 @@ interface toAminoJSON {
     proto: ProtoType;
 }
 export declare const toAminoJsonMethod: ({ context, proto }: toAminoJSON) => t.ArrowFunctionExpression;
-export {};
+export { };

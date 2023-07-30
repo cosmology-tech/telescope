@@ -1,5 +1,5 @@
-import { ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoType, TelescopeOptions } from '@cosmology/types';
+import { ProtoStore } from '@cosmology/proto-parser';
 import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
@@ -10,7 +10,7 @@ export declare const defaultTelescopeOptions: {
     classesUseArrowFunctions: boolean;
     useSDKTypes: boolean;
     includeExternalHelpers: boolean;
-    logLevel: import("@osmonauts/types").TelescopeLogLevel;
+    logLevel: import("@cosmology/types").TelescopeLogLevel;
     interfaces: {
         enabled?: boolean;
         useUnionTypes?: boolean;
@@ -93,7 +93,7 @@ export declare const defaultTelescopeOptions: {
     aminoEncoding: {
         enabled: boolean;
         casingFn?: Function;
-        exceptions?: import("@osmonauts/types").AminoExceptions;
+        exceptions?: import("@cosmology/types").AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string;
         useRecursiveV2encoding?: boolean;
     };
@@ -173,7 +173,7 @@ export declare const defaultTelescopeOptions: {
 export declare const getTestProtoStore: (options?: TelescopeOptions) => ProtoStore;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     context: AminoParseContext;
-    root: import("@osmonauts/types").TraversedProtoRoot;
+    root: import("@cosmology/types").TraversedProtoRoot;
     protos: ProtoType[];
 };
 export declare const getGenericParseContext: () => GenericParseContext;

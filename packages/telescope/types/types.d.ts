@@ -1,4 +1,4 @@
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 export interface Bundle {
     bundleVariables: {};
     bundleFile: string;

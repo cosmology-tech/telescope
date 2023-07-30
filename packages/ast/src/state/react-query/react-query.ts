@@ -1,9 +1,9 @@
 
 import * as t from '@babel/types';
 import { arrowFunctionExpression, callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature, tsTypeParameterDeclaration } from '../../utils';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../encoding';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { pascal } from 'case';
 import { createClientMap } from './weak-map';
 

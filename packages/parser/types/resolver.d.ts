@@ -1,4 +1,4 @@
-import { ProtoDep } from '@osmonauts/types';
+import { ProtoDep } from '@cosmology/types';
 export declare class ProtoResolver {
     deps: ProtoDep[];
     constructor(deps: any);

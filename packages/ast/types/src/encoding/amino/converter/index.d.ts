@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoRoot } from '@osmonauts/types';
+import { ProtoType, ProtoRoot } from '@cosmology/types';
 import { AminoParseContext } from '../../context';
 interface AminoConverterItemParams {
     root: ProtoRoot;
@@ -14,4 +14,4 @@ interface AminoConverterParams {
     protos: ProtoType[];
 }
 export declare const createAminoConverter: ({ name, root, context, protos }: AminoConverterParams) => t.ExportNamedDeclaration;
-export {};
+export { };

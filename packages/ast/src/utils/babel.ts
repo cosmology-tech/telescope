@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { makeCommentBlock } from './utils';
 
-// TODO move to @osmonauts/utils package
+// TODO move to @cosmology/utils package
 
 export const commentBlock = (value: string): t.CommentBlock => {
     return {
@@ -126,8 +126,8 @@ export const classDeclaration = (
 ): t.ClassDeclaration => {
     const obj = t.classDeclaration(id, superClass, body, decorators);
     if (superTypeParameters) {
-      obj.superTypeParameters = superTypeParameters;
-  }
+        obj.superTypeParameters = superTypeParameters;
+    }
     if (vImplements) {
         obj.implements = vImplements;
     }
@@ -219,18 +219,18 @@ export const makeCommentLineWithBlocks = (comment: string): t.CommentLine[] => {
 }
 
 export const newExpression = (
-  callee: t.Expression | t.V8IntrinsicIdentifier,
-  _arguments: (
-    | t.Expression
-    | t.SpreadElement
-    | t.JSXNamespacedName
-    | t.ArgumentPlaceholder
-  )[],
-  typeParameters?: t.TSTypeParameterInstantiation
+    callee: t.Expression | t.V8IntrinsicIdentifier,
+    _arguments: (
+        | t.Expression
+        | t.SpreadElement
+        | t.JSXNamespacedName
+        | t.ArgumentPlaceholder
+    )[],
+    typeParameters?: t.TSTypeParameterInstantiation
 ): t.NewExpression => {
-  const expr =  t.newExpression(callee, _arguments);
+    const expr = t.newExpression(callee, _arguments);
 
-  expr.typeParameters = typeParameters;
+    expr.typeParameters = typeParameters;
 
-  return expr;
+    return expr;
 };

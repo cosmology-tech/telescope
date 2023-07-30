@@ -4,8 +4,8 @@ import {
     createLCDClient,
     makeTemplateTagLegacy
 } from './lcd';
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
+import { ProtoStore, traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
 import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';

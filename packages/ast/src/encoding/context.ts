@@ -1,5 +1,5 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@osmonauts/types';
-import { ProtoStore, getObjectName, isRefExcluded } from '@osmonauts/proto-parser';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@cosmology/types';
+import { ProtoStore, getObjectName, isRefExcluded } from '@cosmology/proto-parser';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 import { getPluginValue } from '../plugins';
 import { TelescopeBaseTypes } from './types';

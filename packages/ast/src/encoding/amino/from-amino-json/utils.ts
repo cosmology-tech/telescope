@@ -8,7 +8,7 @@ import {
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 import { GenericParseContext } from '../../context';
 
 export const fromAmino = {
@@ -138,30 +138,30 @@ export const fromAmino = {
         const longType = TypeLong.getType(args.context);
 
         let revisionHeightArgs: t.Expression[] = [
-          t.logicalExpression(
-              '||',
-              t.memberExpression(
-                  memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                  t.identifier(args.context.aminoCasingFn('revision_height'))
-              ),
-              t.stringLiteral('0')
-          )
+            t.logicalExpression(
+                '||',
+                t.memberExpression(
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                    t.identifier(args.context.aminoCasingFn('revision_height'))
+                ),
+                t.stringLiteral('0')
+            )
         ];
 
         let revisionNumberArgs: t.Expression[] = [
-          t.logicalExpression(
-              '||',
-              t.memberExpression(
-                  memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                  t.identifier(args.context.aminoCasingFn('revision_number'))
-              ),
-              t.stringLiteral('0')
-          )
+            t.logicalExpression(
+                '||',
+                t.memberExpression(
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                    t.identifier(args.context.aminoCasingFn('revision_number'))
+                ),
+                t.stringLiteral('0')
+            )
         ];
 
-        if(longType == 'Long') {
-          revisionHeightArgs.push(t.booleanLiteral(true))
-          revisionNumberArgs.push(t.booleanLiteral(true))
+        if (longType == 'Long') {
+            revisionHeightArgs.push(t.booleanLiteral(true))
+            revisionNumberArgs.push(t.booleanLiteral(true))
         }
 
         return t.objectProperty(
@@ -173,13 +173,13 @@ export const fromAmino = {
                         t.callExpression(
                             TypeLong.getFromString(args.context),
                             revisionHeightArgs
-                            )
+                        )
                     ),
                     t.objectProperty(t.identifier('revisionNumber'),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
                             revisionNumberArgs
-                            )
+                        )
                     )
                 ]),
                 t.identifier('undefined')

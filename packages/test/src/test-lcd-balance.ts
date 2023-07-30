@@ -1,4 +1,4 @@
-import { LCDClient } from '@osmonauts/lcd';
+import { LCDClient } from '@cosmology/lcd';
 import { cosmos } from './codegen';
 import { createRPCQueryClient } from './codegen/cosmos/rpc.query';
 import { PageRequest } from './codegen/cosmos/base/query/v1beta1/pagination';
@@ -9,7 +9,7 @@ export const main = async () => {
   const requestClient = new LCDClient({ restEndpoint: REST_ENDPOINT });
   const bankClient = new cosmos.bank.v1beta1.LCDQueryClient({ requestClient });
   const pools = await bankClient.allBalances({
-      address: 'osmo19mywfjzj324w5ukf7ss6jak0dg9hnljfp0rfx4'
+    address: 'osmo19mywfjzj324w5ukf7ss6jak0dg9hnljfp0rfx4'
   })
   console.log(pools);
 

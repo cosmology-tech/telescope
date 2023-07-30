@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { parse, ParserPlugin } from '@babel/parser';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 import { mkdirp } from 'mkdirp';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';

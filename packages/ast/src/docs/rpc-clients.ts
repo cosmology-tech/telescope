@@ -1,9 +1,9 @@
 import { identifier, makeCommentBlock, memberExpressionOrIdentifier } from "../utils";
 import generate from '@babel/generator';
 import * as t from '@babel/types';
-import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@osmonauts/types";
-import { camel } from "@osmonauts/utils";
-import { getNestedProto, ProtoStore } from "@osmonauts/proto-parser";
+import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@cosmology/types";
+import { camel } from "@cosmology/utils";
+import { getNestedProto, ProtoStore } from "@cosmology/proto-parser";
 import { ProtoParseContext } from "../encoding";
 import { ServiceMethod } from "../registry";
 

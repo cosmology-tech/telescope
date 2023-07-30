@@ -1,13 +1,13 @@
 import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcHookFactory } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+import { createScopedRpcHookFactory } from '@cosmology/ast';
+import { ProtoRef } from '@cosmology/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
-import { createEmptyProtoRef } from '@osmonauts/proto-parser';
+import { createEmptyProtoRef } from '@cosmology/proto-parser';
 
 export const plugin = (
     builder: TelescopeBuilder
@@ -25,8 +25,8 @@ export const plugin = (
     const obj = {};
     const bundlerFiles = builder.stateManagers["reactQuery"];
 
-    if(!bundlerFiles || !bundlerFiles.length){
-      return;
+    if (!bundlerFiles || !bundlerFiles.length) {
+        return;
     }
 
     bundlerFiles.map(bundlerFile => {

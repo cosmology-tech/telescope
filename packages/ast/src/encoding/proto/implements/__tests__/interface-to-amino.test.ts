@@ -1,4 +1,4 @@
-import { InterfaceTypeUrlMap } from '@osmonauts/types';
+import { InterfaceTypeUrlMap } from '@cosmology/types';
 import { expectCode, printCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createInterfaceToAmino, createInterfaceToAminoHelper } from '../to-amino';

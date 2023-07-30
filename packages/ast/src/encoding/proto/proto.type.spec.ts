@@ -4,8 +4,8 @@ import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx
 import types from '../../../../../__fixtures__/proto-json/tendermint/abci/types.json';
 import types_tendermint from '../../../../../__fixtures__/proto-json/tendermint/types/types.json'
 
-import { traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions } from '@osmonauts/types'
+import { traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions } from '@cosmology/types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 
@@ -77,7 +77,7 @@ describe('createCreateProtoType', () => {
 describe('createCreateProtoType', () => {
     const ref = store.findProto('tendermint/types/types.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
-       
+
     it('Header', () => {
         expectCode(createCreateProtoType(
             context,

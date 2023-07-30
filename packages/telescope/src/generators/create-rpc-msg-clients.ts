@@ -1,7 +1,7 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl } from '@osmonauts/ast';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl } from '@cosmology/ast';
+import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 
@@ -45,7 +45,7 @@ export const plugin = (
         switch (c.proto.pluginValue("rpcClients.type")) {
             case 'grpc-gateway':
                 asts.push(createGRPCGatewayMsgClass(ctx.generic, proto.Msg))
-            break;
+                break;
             case 'grpc-web':
                 asts.push(createGrpcWebMsgInterface(ctx.generic, proto.Msg))
                 asts.push(createGrpcWebMsgClass(ctx.generic, proto.Msg))
@@ -57,13 +57,13 @@ export const plugin = (
                 }
                 asts.push(grpcWebRpcInterface())
                 asts.push(getGrpcWebImpl(ctx.generic))
-            break;
+                break;
             case 'tendermint':
-                default:
-                    asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
-                    asts.push(createRpcClientClass(ctx.generic, proto.Msg))
+            default:
+                asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
+                asts.push(createRpcClientClass(ctx.generic, proto.Msg))
         }
-        
+
         ////////
 
         const serviceImports = getDepsFromQueries(

@@ -1,5 +1,5 @@
 {
-  "name": "@osmonauts/babel",
+  "name": "@cosmology/babel",
   "version": "0.10.2",
   "description": "Telescope babel helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",

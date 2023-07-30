@@ -1,4 +1,4 @@
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { ProtoStore, parseProto } from '../../src/index'
 
 const store = new ProtoStore();
