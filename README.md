@@ -8,7 +8,7 @@
   <a href="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml">
     <img height="20" src="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml/badge.svg" />
   </a>
-   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/npm/dt/@cosmology/telescope"></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/npm/dt/@osmonauts/telescope"></a>
    <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
    <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
    <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
