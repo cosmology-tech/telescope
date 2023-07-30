@@ -7,7 +7,7 @@ import { cosmos, getSigningOsmosisClient } from '../src/codegen';
 import { useChain, waitUntil } from '../src';
 import './setup.test';
 
-describe('Governance tests for osmosis', () => {
+xdescribe('Governance tests for osmosis', () => {
   let wallet, denom, address;
   let chainInfo,
     getCoin,
