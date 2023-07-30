@@ -3,7 +3,7 @@
   "version": "0.88.1",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/ast#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -47,11 +47,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope"
+    "url": "https://github.com/cosmology-tech/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/issues"
+    "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",

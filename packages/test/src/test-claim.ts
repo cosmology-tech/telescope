@@ -55,7 +55,7 @@ const main = async () => {
       if (reward && reward.length) {
         const rewardWeWant = reward.find((r) => r.denom === 'uosmo');
         if (!rewardWeWant) return;
-        // https://github.com/osmosis-labs/telescope/issues/247
+        // https://github.com/cosmology-tech/telescope/issues/247
         totalClaimable = totalClaimable.add(new Dec(decodeCosmosSdkDecFromProto(rewardWeWant.amount).toString()));
         messagesToClaim.push(
           withdrawDelegatorReward({

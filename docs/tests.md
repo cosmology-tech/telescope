@@ -1,4 +1,4 @@
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
 
 # Tests
 
@@ -32,4 +32,4 @@ cd ./packages/telescope
 yarn test:watch
 ```
 
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
