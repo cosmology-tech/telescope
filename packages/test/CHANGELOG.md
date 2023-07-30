@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.102.0 (2023-07-30)
+
+
+### Reverts
+
+* Revert "chore(release): publish" ([086a55f](https://github.com/osmosis-labs/osmojs/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 ## [0.101.3](https://github.com/osmosis-labs/osmojs/compare/@cosmology/test-example@0.101.2...@cosmology/test-example@0.101.3) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/test-example

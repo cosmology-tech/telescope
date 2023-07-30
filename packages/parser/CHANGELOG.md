@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.46.0 (2023-07-30)
+
+
+### Reverts
+
+* Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+* Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 ## [0.45.1](https://github.com/osmosis-labs/telescope/compare/@cosmology/proto-parser@0.45.0...@cosmology/proto-parser@0.45.1) (2023-07-06)
 
 **Note:** Version bump only for package @cosmology/proto-parser

@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/babel",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Telescope babel helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/babel#readme",
