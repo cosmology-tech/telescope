@@ -50,17 +50,10 @@ exposer:
 
 faucet:
   resources:
-    limits:
-      cpu: "0.1"
-      memory: "100M"
-    requests:
-      cpu: "0.1"
-      memory: "100M"
+    cpu: "0.1"
+    memory: "100M"
 
 resources:
-  node:
-    cpu: "0.2"
-    memory: "200M"
   wait:
     cpu: "0.1"
     memory: "100M"
