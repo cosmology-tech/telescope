@@ -401,7 +401,6 @@ export const getDefaultTSTypeFromProtoType = (
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
-    const setDefaultEnumTo0 = context.pluginValue('prototypes.typingsFormat.setDefaultEnumTo0');
     const setDefaultOtherTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultOtherTypesToUndefined');
 
     if (isOptional) {
