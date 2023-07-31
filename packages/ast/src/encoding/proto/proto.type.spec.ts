@@ -8,6 +8,7 @@ import { traverse, getNestedProto } from '@cosmology/proto-parser'
 import { defaultTelescopeOptions } from '@cosmology/types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
+import deepmerge from 'deepmerge';
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -85,6 +86,29 @@ describe('createCreateProtoType', () => {
             getNestedProto(types_tendermint).Header
         ));
     });
+});
+
+describe('createCreateProtoType orginal logic', () => {
+  const ref = store.findProto('tendermint/types/types.proto');
+
+  const options = deepmerge(defaultTelescopeOptions, {
+    prototypes: {
+      typingsFormat:{
+        setDefaultEnumTo0: true,
+        setDefaultOtherTypesToUndefined: true,
+      }
+    }
+  });
+
+  const context = new ProtoParseContext(ref, store, options);
+
+  it('Header', () => {
+      expectCode(createCreateProtoType(
+          context,
+          'Header',
+          getNestedProto(types_tendermint).Header
+      ));
+  });
 });
 
 describe('traversed', () => {

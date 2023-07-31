@@ -65,6 +65,8 @@ interface TelescopeOpts {
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
+            setDefaultEnumTo0?: boolean;
+            setDefaultOtherTypesToUndefined?: boolean;
             updatedDuration?: boolean;
         };
     };
