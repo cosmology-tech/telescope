@@ -524,7 +524,7 @@ export const Bid = {
   fromJSON(object: any): Bid {
     return {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
@@ -548,7 +548,7 @@ export const Bid = {
   fromSDK(object: BidSDKType): Bid {
     return {
       bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at
     };

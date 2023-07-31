@@ -447,13 +447,13 @@ export const MetricDescriptor = {
       name: isSet(object.name) ? String(object.name) : "",
       type: isSet(object.type) ? String(object.type) : "",
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
-      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : -1,
-      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : -1,
+      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : 0,
+      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : 0,
       unit: isSet(object.unit) ? String(object.unit) : "",
       description: isSet(object.description) ? String(object.description) : "",
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
       metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata) : undefined,
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
       monitoredResourceTypes: Array.isArray(object?.monitoredResourceTypes) ? object.monitoredResourceTypes.map((e: any) => String(e)) : []
     };
   },
@@ -541,7 +541,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
       samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
       ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };

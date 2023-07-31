@@ -611,7 +611,7 @@ export const OperationMetadata_Step = {
   fromJSON(object: any): OperationMetadata_Step {
     return {
       description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
     };
   },
   toJSON(message: OperationMetadata_Step): unknown {
@@ -673,7 +673,7 @@ export const Diagnostic = {
   fromJSON(object: any): Diagnostic {
     return {
       location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
       message: isSet(object.message) ? String(object.message) : ""
     };
   },
@@ -798,7 +798,7 @@ export const ConfigFile = {
     return {
       filePath: isSet(object.filePath) ? String(object.filePath) : "",
       fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : -1
+      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : 0
     };
   },
   toJSON(message: ConfigFile): unknown {
@@ -986,7 +986,7 @@ export const Rollout = {
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
       deleteServiceStrategy: isSet(object.deleteServiceStrategy) ? Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy) : undefined,
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""

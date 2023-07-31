@@ -182,9 +182,9 @@ type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-    Exclude<keyof I, KeysOfUnion<P>>,
-    never
-  >;
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
 
 export interface Rpc {
   request(

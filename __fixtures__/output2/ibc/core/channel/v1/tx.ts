@@ -1011,7 +1011,7 @@ export const MsgRecvPacketResponse = {
   },
   fromJSON(object: any): MsgRecvPacketResponse {
     return {
-      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : 0
     };
   },
   toJSON(message: MsgRecvPacketResponse): unknown {
@@ -1141,7 +1141,7 @@ export const MsgTimeoutResponse = {
   },
   fromJSON(object: any): MsgTimeoutResponse {
     return {
-      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : 0
     };
   },
   toJSON(message: MsgTimeoutResponse): unknown {
@@ -1281,7 +1281,7 @@ export const MsgTimeoutOnCloseResponse = {
   },
   fromJSON(object: any): MsgTimeoutOnCloseResponse {
     return {
-      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : 0
     };
   },
   toJSON(message: MsgTimeoutOnCloseResponse): unknown {
@@ -1411,7 +1411,7 @@ export const MsgAcknowledgementResponse = {
   },
   fromJSON(object: any): MsgAcknowledgementResponse {
     return {
-      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : -1
+      result: isSet(object.result) ? responseResultTypeFromJSON(object.result) : 0
     };
   },
   toJSON(message: MsgAcknowledgementResponse): unknown {

@@ -720,7 +720,7 @@ export const ModeInfo_Single = {
   },
   fromJSON(object: any): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
     };
   },
   toJSON(message: ModeInfo_Single): unknown {

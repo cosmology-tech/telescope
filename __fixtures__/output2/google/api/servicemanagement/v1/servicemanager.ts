@@ -677,7 +677,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
       configId: isSet(object.configId) ? String(object.configId) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
     };
   },
   toJSON(message: GetServiceConfigRequest): unknown {

@@ -156,7 +156,7 @@ export const toSDK = {
       const env = args.context.pluginValue(
         'env'
       );
-      if(env == 'default'){
+      if(!env || env == 'default'){
         timestampFormat = 'timestamp';
       }
       switch (timestampFormat) {

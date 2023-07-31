@@ -201,7 +201,7 @@ export const Order = {
   fromJSON(object: any): Order {
     return {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };

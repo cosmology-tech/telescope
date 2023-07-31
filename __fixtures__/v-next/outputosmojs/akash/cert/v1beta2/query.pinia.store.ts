@@ -18,7 +18,7 @@ export const usePiniaStore = defineStore('akash/cert/v1beta2/query.proto', {
     }
   },
   actions: {
-    async fetchCertificates(param: QueryCertificatesRequestSDKType) {
+    async fetchCertificates(param : QueryCertificatesRequestSDKType) {
       this.certificates = await this.lcdClient.certificates(param);
       return this.certificates;
     }

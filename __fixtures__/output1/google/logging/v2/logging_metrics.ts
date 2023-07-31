@@ -507,7 +507,7 @@ export const LogMetric = {
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
   toJSON(message: LogMetric): unknown {
@@ -569,7 +569,7 @@ export const LogMetric = {
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
       updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
   toSDK(message: LogMetric): LogMetricSDKType {

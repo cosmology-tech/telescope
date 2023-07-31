@@ -681,7 +681,7 @@ export const Vote = {
   },
   fromJSON(object: any): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -847,7 +847,7 @@ export const CommitSig = {
   },
   fromJSON(object: any): CommitSig {
     return {
-      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : -1,
+      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : 0,
       validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -943,7 +943,7 @@ export const Proposal = {
   },
   fromJSON(object: any): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,

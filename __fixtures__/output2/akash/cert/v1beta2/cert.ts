@@ -174,7 +174,7 @@ export const Certificate = {
   },
   fromJSON(object: any): Certificate {
     return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
       cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
       pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };

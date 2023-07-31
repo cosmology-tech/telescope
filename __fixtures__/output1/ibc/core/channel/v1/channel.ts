@@ -337,8 +337,8 @@ export const Channel = {
   },
   fromJSON(object: any): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : ""
@@ -368,8 +368,8 @@ export const Channel = {
   },
   fromSDK(object: ChannelSDKType): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version
@@ -462,8 +462,8 @@ export const IdentifiedChannel = {
   },
   fromJSON(object: any): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : "",
@@ -499,8 +499,8 @@ export const IdentifiedChannel = {
   },
   fromSDK(object: IdentifiedChannelSDKType): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version,

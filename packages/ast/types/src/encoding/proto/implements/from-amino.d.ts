@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoRef, TraverseTypeUrlRef } from '@cosmology/types';
+import { TraverseTypeUrlRef } from '@cosmology/types';
 import { ProtoParseContext } from "../../context";
 export declare const getInterfaceFromAminoName: (str: string) => string;
 export declare const createInterfaceFromAmino: (context: ProtoParseContext, ref: ProtoRef, interfaceName: string) => t.ExportNamedDeclaration;

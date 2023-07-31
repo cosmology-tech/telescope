@@ -174,7 +174,7 @@ export const ConfigChange = {
       element: isSet(object.element) ? String(object.element) : "",
       oldValue: isSet(object.oldValue) ? String(object.oldValue) : "",
       newValue: isSet(object.newValue) ? String(object.newValue) : "",
-      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : -1,
+      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : 0,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromJSON(e)) : []
     };
   },

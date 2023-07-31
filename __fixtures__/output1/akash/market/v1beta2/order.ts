@@ -238,7 +238,7 @@ export const Order = {
   fromJSON(object: any): Order {
     return {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
@@ -262,7 +262,7 @@ export const Order = {
   fromSDK(object: OrderSDKType): Order {
     return {
       orderId: object.order_id ? OrderID.fromSDK(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: object.spec ? GroupSpec.fromSDK(object.spec) : undefined,
       createdAt: object?.created_at
     };

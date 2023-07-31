@@ -300,7 +300,7 @@ export const Lease = {
   fromJSON(object: any): Lease {
     return {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO,
       closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO
@@ -327,7 +327,7 @@ export const Lease = {
   fromSDK(object: LeaseSDKType): Lease {
     return {
       leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at,
       closedOn: object?.closed_on

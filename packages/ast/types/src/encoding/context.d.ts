@@ -26,20 +26,20 @@ export declare class GenericParseContext implements ParseContext {
     ref: ProtoRef;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
     pluginValue(name: any): any;
-    isExcluded(): boolean;
+    isExcluded(): any;
     addUtil(util: any): void;
     addImport(imp: ImportUsage): void;
     addImportDerivative(imp: DerivativeImport): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
-    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@cosmology/proto-parser").Lookup;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {
     aminoCasingFn: Function;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
     private setAminoCasingFn;
-    aminoCaseField(field: ProtoField): string;
+    aminoCaseField(field: ProtoField): any;
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string): string;
     lookupEnumToJson(field: ProtoField, currentProtoPath: string): string;
 }
@@ -48,4 +48,4 @@ export declare class ProtoParseContext extends GenericParseContext implements Pa
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
 }
-export { };
+export {};

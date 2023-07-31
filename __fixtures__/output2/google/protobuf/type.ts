@@ -394,7 +394,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
       sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
   toJSON(message: Type): unknown {
@@ -524,8 +524,8 @@ export const Field = {
   },
   fromJSON(object: any): Field {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
       number: isSet(object.number) ? Number(object.number) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
@@ -632,7 +632,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromJSON(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
       sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
   toJSON(message: Enum): unknown {

@@ -95,7 +95,7 @@ export const InterchainAccountPacketData = {
   },
   fromJSON(object: any): InterchainAccountPacketData {
     return {
-      type: isSet(object.type) ? typeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? typeFromJSON(object.type) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       memo: isSet(object.memo) ? String(object.memo) : ""
     };

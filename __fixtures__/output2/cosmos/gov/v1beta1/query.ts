@@ -254,7 +254,7 @@ export const QueryProposalsRequest = {
   },
   fromJSON(object: any): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposalStatus) ? proposalStatusFromJSON(object.proposalStatus) : -1,
+      proposalStatus: isSet(object.proposalStatus) ? proposalStatusFromJSON(object.proposalStatus) : 0,
       voter: isSet(object.voter) ? String(object.voter) : "",
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined

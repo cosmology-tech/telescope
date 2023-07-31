@@ -190,7 +190,7 @@ export const MonitoredResourceDescriptor = {
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
       description: isSet(object.description) ? String(object.description) : "",
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0
     };
   },
   toJSON(message: MonitoredResourceDescriptor): unknown {

@@ -1159,7 +1159,7 @@ export const ModeInfo_Single = {
   },
   fromJSON(object: any): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
     };
   },
   toJSON(message: ModeInfo_Single): unknown {
@@ -1174,7 +1174,7 @@ export const ModeInfo_Single = {
   },
   fromSDK(object: ModeInfo_SingleSDKType): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
     };
   },
   toSDK(message: ModeInfo_Single): ModeInfo_SingleSDKType {
@@ -1486,7 +1486,7 @@ export const AuxSignerData = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
@@ -1510,7 +1510,7 @@ export const AuxSignerData = {
     return {
       address: object?.address,
       signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: object?.sig
     };
   },

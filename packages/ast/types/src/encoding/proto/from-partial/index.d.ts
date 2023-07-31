@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoField } from '@cosmology/types';
 export interface FromPartialMethod {
     context: ProtoParseContext;
     field: ProtoField;

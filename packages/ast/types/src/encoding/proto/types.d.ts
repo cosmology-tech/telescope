@@ -1,4 +1,3 @@
-import { ProtoType, ProtoField } from '@cosmology/types';
 import { AminoParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
 export declare const GOOGLE_TYPES: string[];
@@ -80,10 +79,10 @@ export declare const getPackedWireNumber: (type: any) => any;
 export declare const getTagNumber: (field: ProtoField) => number;
 export declare const getEnumToJsonName: (name: any) => string;
 export declare const getEnumFromJsonName: (name: any) => string;
-export declare const getFieldsTypeName: (field: ProtoField) => string;
+export declare const getFieldsTypeName: (field: ProtoField) => any;
 export declare const getKeyTypeEntryName: (typeName: string, prop: string) => string;
 export declare const getBaseCreateTypeFuncName: (name: any) => string;
-export declare const getOneOfs: (type: ProtoType) => string[];
+export declare const getOneOfs: (type: ProtoType) => any;
 export declare const getFieldOptionality: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => boolean;
 export declare const isScalarField: (field: ProtoField) => boolean;
 export declare const isArrayField: (field: ProtoField) => boolean;

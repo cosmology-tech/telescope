@@ -314,7 +314,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
       settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
@@ -350,7 +350,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? DecCoin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at,
@@ -447,7 +447,7 @@ export const FractionalPayment = {
       accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
       paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
       rate: isSet(object.rate) ? DecCoin.fromJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined
@@ -480,7 +480,7 @@ export const FractionalPayment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
       rate: object.rate ? DecCoin.fromSDK(object.rate) : undefined,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined

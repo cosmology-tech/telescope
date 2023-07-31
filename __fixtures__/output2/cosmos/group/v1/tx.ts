@@ -1280,7 +1280,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
     };
   },
   toJSON(message: MsgSubmitProposal): unknown {
@@ -1504,9 +1504,9 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
     };
   },
   toJSON(message: MsgVote): unknown {

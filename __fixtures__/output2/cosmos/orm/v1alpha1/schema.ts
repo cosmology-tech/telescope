@@ -221,7 +221,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
       protoFileName: isSet(object.protoFileName) ? String(object.protoFileName) : "",
-      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : -1
+      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : 0
     };
   },
   toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown {

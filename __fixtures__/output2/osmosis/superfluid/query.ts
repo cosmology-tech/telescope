@@ -270,7 +270,7 @@ export const AssetTypeResponse = {
   },
   fromJSON(object: any): AssetTypeResponse {
     return {
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
     };
   },
   toJSON(message: AssetTypeResponse): unknown {

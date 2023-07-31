@@ -21,15 +21,15 @@ export const usePiniaStore = defineStore('evmos/erc20/v1/query.proto', {
     }
   },
   actions: {
-    async fetchTokenPairs(param: QueryTokenPairsRequestSDKType) {
+    async fetchTokenPairs(param : QueryTokenPairsRequestSDKType) {
       this.tokenPairs = await this.lcdClient.tokenPairs(param);
       return this.tokenPairs;
     },
-    async fetchTokenPair(param: QueryTokenPairRequestSDKType) {
+    async fetchTokenPair(param : QueryTokenPairRequestSDKType) {
       this.tokenPair = await this.lcdClient.tokenPair(param);
       return this.tokenPair;
     },
-    async fetchParams(param: QueryParamsRequestSDKType) {
+    async fetchParams(param : QueryParamsRequestSDKType) {
       this.params = await this.lcdClient.params(param);
       return this.params;
     }

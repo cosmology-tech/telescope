@@ -1,5 +1,4 @@
 import * as t from '@babel/types';
-import { ProtoService } from '@cosmology/types';
 import { GenericParseContext } from '../../encoding';
 /**
  * Create an ASTs for a function creating hooks

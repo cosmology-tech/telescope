@@ -240,7 +240,7 @@ export const Lease = {
   fromJSON(object: any): Lease {
     return {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO,
       closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO

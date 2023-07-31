@@ -944,7 +944,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: isSet(object.parent) ? String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
       pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
   toJSON(message: ListConsumerQuotaMetricsRequest): unknown {
@@ -1062,7 +1062,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromJSON(object: any): GetConsumerQuotaMetricRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
   toJSON(message: GetConsumerQuotaMetricRequest): unknown {
@@ -1117,7 +1117,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromJSON(object: any): GetConsumerQuotaLimitRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
   toJSON(message: GetConsumerQuotaLimitRequest): unknown {
@@ -2612,7 +2612,7 @@ export const GetServiceIdentityResponse = {
   fromJSON(object: any): GetServiceIdentityResponse {
     return {
       identity: isSet(object.identity) ? ServiceIdentity.fromJSON(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
     };
   },
   toJSON(message: GetServiceIdentityResponse): unknown {

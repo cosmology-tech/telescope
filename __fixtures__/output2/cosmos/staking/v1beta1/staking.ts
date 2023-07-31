@@ -639,7 +639,7 @@ export const Validator = {
       operatorAddress: isSet(object.operatorAddress) ? String(object.operatorAddress) : "",
       consensusPubkey: isSet(object.consensusPubkey) ? Any.fromJSON(object.consensusPubkey) : undefined,
       jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,

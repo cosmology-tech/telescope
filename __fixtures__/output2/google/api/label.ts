@@ -98,7 +98,7 @@ export const LabelDescriptor = {
   fromJSON(object: any): LabelDescriptor {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      valueType: isSet(object.valueType) ? labelDescriptor_ValueTypeFromJSON(object.valueType) : -1,
+      valueType: isSet(object.valueType) ? labelDescriptor_ValueTypeFromJSON(object.valueType) : 0,
       description: isSet(object.description) ? String(object.description) : ""
     };
   },

@@ -283,7 +283,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
     };
   },
   toJSON(message: MsgVote): unknown {
@@ -304,7 +304,7 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {

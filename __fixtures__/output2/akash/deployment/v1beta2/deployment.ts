@@ -169,7 +169,7 @@ export const Deployment = {
   fromJSON(object: any): Deployment {
     return {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };

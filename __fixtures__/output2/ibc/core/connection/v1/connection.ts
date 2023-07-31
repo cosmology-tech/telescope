@@ -210,7 +210,7 @@ export const ConnectionEnd = {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
     };
@@ -307,7 +307,7 @@ export const IdentifiedConnection = {
       id: isSet(object.id) ? String(object.id) : "",
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
     };

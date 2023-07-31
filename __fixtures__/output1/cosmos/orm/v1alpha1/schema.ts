@@ -247,7 +247,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
       protoFileName: isSet(object.protoFileName) ? String(object.protoFileName) : "",
-      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : -1
+      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : 0
     };
   },
   toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown {
@@ -268,7 +268,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return {
       id: object?.id,
       protoFileName: object?.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
+      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
     };
   },
   toSDK(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntrySDKType {

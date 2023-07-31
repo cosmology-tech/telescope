@@ -333,7 +333,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromJSON(object: any): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },

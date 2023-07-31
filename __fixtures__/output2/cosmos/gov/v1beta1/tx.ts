@@ -212,7 +212,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
     };
   },
   toJSON(message: MsgVote): unknown {

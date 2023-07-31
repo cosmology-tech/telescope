@@ -365,7 +365,7 @@ export const DisableServiceRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
-      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : 0
     };
   },
   toJSON(message: DisableServiceRequest): unknown {

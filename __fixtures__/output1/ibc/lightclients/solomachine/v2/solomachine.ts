@@ -789,7 +789,7 @@ export const SignatureAndData = {
   fromJSON(object: any): SignatureAndData {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
@@ -813,7 +813,7 @@ export const SignatureAndData = {
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
     return {
       signature: object?.signature,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: object?.data,
       timestamp: object?.timestamp
     };
@@ -956,7 +956,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -983,7 +983,7 @@ export const SignBytes = {
       sequence: object?.sequence,
       timestamp: object?.timestamp,
       diversifier: object?.diversifier,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: object?.data
     };
   },

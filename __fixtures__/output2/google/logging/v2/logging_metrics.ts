@@ -438,7 +438,7 @@ export const LogMetric = {
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
   toJSON(message: LogMetric): unknown {

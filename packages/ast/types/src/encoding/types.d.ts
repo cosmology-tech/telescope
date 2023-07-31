@@ -1,9 +1,8 @@
 import * as t from '@babel/types';
-import { ProtoField } from '@cosmology/types';
 import { GenericParseContext, ProtoParseContext } from './context';
 export declare const getFieldNames: (field: ProtoField) => {
-    propName: string;
-    origName: string;
+    propName: any;
+    origName: any;
 };
 export type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoMsg' | 'ProtoMsg' | 'Encoded';
 export declare const SymbolNames: {

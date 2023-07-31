@@ -575,7 +575,7 @@ export const CheckResponse_ConsumerInfo = {
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
       projectNumber: isSet(object.projectNumber) ? Long.fromValue(object.projectNumber) : Long.ZERO,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
       consumerNumber: isSet(object.consumerNumber) ? Long.fromValue(object.consumerNumber) : Long.ZERO
     };
   },
@@ -596,7 +596,7 @@ export const CheckResponse_ConsumerInfo = {
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
       projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
       consumerNumber: object?.consumer_number
     };
   },

@@ -107,6 +107,9 @@ export const fromSDK = {
             propName,
             origName
         } = getFieldNames(args.field);
+        const env = args.context.pluginValue(
+          'env'
+        );
 
         args.context.addUtil('isSet');
         const fromSDKFuncName = args.context.getFromEnum(args.field);
@@ -132,7 +135,7 @@ export const fromSDK = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(env === 'default' ? 0 : -1)
             )
         );
     },
@@ -152,7 +155,7 @@ export const fromSDK = {
       const env = args.context.pluginValue(
         'env'
       );
-      if(env == 'default'){
+      if(!env || env == 'default'){
         timestampFormat = 'timestamp';
       }
       switch (timestampFormat) {

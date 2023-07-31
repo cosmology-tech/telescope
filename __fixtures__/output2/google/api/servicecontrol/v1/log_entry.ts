@@ -294,7 +294,7 @@ export const LogEntry = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
