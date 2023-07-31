@@ -149,7 +149,7 @@ export const StakeAuthorization = {
       maxTokens: isSet(object.maxTokens) ? Coin.fromJSON(object.maxTokens) : undefined,
       allowList: isSet(object.allowList) ? StakeAuthorization_Validators.fromJSON(object.allowList) : undefined,
       denyList: isSet(object.denyList) ? StakeAuthorization_Validators.fromJSON(object.denyList) : undefined,
-      authorizationType: isSet(object.authorizationType) ? authorizationTypeFromJSON(object.authorizationType) : 0
+      authorizationType: isSet(object.authorizationType) ? authorizationTypeFromJSON(object.authorizationType) : -1
     };
   },
   toJSON(message: StakeAuthorization): unknown {
@@ -173,7 +173,7 @@ export const StakeAuthorization = {
       maxTokens: object.max_tokens ? Coin.fromSDK(object.max_tokens) : undefined,
       allowList: object.allow_list ? StakeAuthorization_Validators.fromSDK(object.allow_list) : undefined,
       denyList: object.deny_list ? StakeAuthorization_Validators.fromSDK(object.deny_list) : undefined,
-      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : 0
+      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
   toSDK(message: StakeAuthorization): StakeAuthorizationSDKType {

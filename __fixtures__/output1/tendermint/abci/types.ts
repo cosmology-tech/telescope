@@ -1557,7 +1557,7 @@ export const RequestCheckTx = {
   fromJSON(object: any): RequestCheckTx {
     return {
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
     };
   },
   toJSON(message: RequestCheckTx): unknown {
@@ -1575,7 +1575,7 @@ export const RequestCheckTx = {
   fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
     return {
       tx: object?.tx,
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
     };
   },
   toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
@@ -3418,7 +3418,7 @@ export const ResponseOfferSnapshot = {
   },
   fromJSON(object: any): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
     };
   },
   toJSON(message: ResponseOfferSnapshot): unknown {
@@ -3433,7 +3433,7 @@ export const ResponseOfferSnapshot = {
   },
   fromSDK(object: ResponseOfferSnapshotSDKType): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
     };
   },
   toSDK(message: ResponseOfferSnapshot): ResponseOfferSnapshotSDKType {
@@ -3551,7 +3551,7 @@ export const ResponseApplySnapshotChunk = {
   },
   fromJSON(object: any): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
       refetchChunks: Array.isArray(object?.refetchChunks) ? object.refetchChunks.map((e: any) => Number(e)) : [],
       rejectSenders: Array.isArray(object?.rejectSenders) ? object.rejectSenders.map((e: any) => String(e)) : []
     };
@@ -3580,7 +3580,7 @@ export const ResponseApplySnapshotChunk = {
   },
   fromSDK(object: ResponseApplySnapshotChunkSDKType): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
       refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
       rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
     };
@@ -4339,7 +4339,7 @@ export const Evidence = {
   },
   fromJSON(object: any): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
@@ -4366,7 +4366,7 @@ export const Evidence = {
   },
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
       height: object?.height,
       time: object.time ? Timestamp.fromSDK(object.time) : undefined,

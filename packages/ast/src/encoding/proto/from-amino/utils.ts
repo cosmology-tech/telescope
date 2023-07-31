@@ -300,9 +300,7 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
 
-        const env = args.context.pluginValue(
-          'env'
-        );
+        const setDefaultEnumTo0 = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumTo0');
 
         args.context.addUtil('isSet');
         const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
@@ -328,7 +326,7 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(env === 'default' ? 0 : -1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(setDefaultEnumTo0 ? 0 : -1)
             )
         );
     },

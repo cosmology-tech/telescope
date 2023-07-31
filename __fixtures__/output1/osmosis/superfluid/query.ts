@@ -401,7 +401,7 @@ export const AssetTypeResponse = {
   },
   fromJSON(object: any): AssetTypeResponse {
     return {
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: AssetTypeResponse): unknown {
@@ -416,7 +416,7 @@ export const AssetTypeResponse = {
   },
   fromSDK(object: AssetTypeResponseSDKType): AssetTypeResponse {
     return {
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toSDK(message: AssetTypeResponse): AssetTypeResponseSDKType {

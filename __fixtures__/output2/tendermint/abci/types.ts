@@ -1158,7 +1158,7 @@ export const RequestCheckTx = {
   fromJSON(object: any): RequestCheckTx {
     return {
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
     };
   },
   toJSON(message: RequestCheckTx): unknown {
@@ -2672,7 +2672,7 @@ export const ResponseOfferSnapshot = {
   },
   fromJSON(object: any): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
     };
   },
   toJSON(message: ResponseOfferSnapshot): unknown {
@@ -2785,7 +2785,7 @@ export const ResponseApplySnapshotChunk = {
   },
   fromJSON(object: any): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
       refetchChunks: Array.isArray(object?.refetchChunks) ? object.refetchChunks.map((e: any) => Number(e)) : [],
       rejectSenders: Array.isArray(object?.rejectSenders) ? object.rejectSenders.map((e: any) => String(e)) : []
     };
@@ -3425,7 +3425,7 @@ export const Evidence = {
   },
   fromJSON(object: any): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: isSet(object.validator) ? Validator.fromJSON(object.validator) : undefined,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,

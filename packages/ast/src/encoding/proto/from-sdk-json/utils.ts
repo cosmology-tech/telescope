@@ -149,9 +149,7 @@ export const fromSDKJSON = {
   enum(args: FromSDKJSONMethod) {
     const { origName } = getFieldNames(args.field);
     args.context.addUtil('isSet');
-    const env = args.context.pluginValue(
-      'env'
-    );
+    const setDefaultEnumTo0 = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumTo0');
     const fromSDKJSONFuncName = args.context.getFromEnum(args.field);
 
     return t.objectProperty(
@@ -163,7 +161,7 @@ export const fromSDKJSON = {
         t.callExpression(t.identifier(fromSDKJSONFuncName), [
           t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
-        args.isOptional ? t.identifier('undefined') : t.numericLiteral(env === 'default' ? 0 : -1)
+        args.isOptional ? t.identifier('undefined') : t.numericLiteral(setDefaultEnumTo0 ? 0 : -1)
       )
     );
   },

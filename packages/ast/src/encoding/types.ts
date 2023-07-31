@@ -401,6 +401,9 @@ export const getDefaultTSTypeFromProtoType = (
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
+    const setDefaultEnumTo0 = context.pluginValue('prototypes.typingsFormat.setDefaultEnumTo0');
+    const setDefaultOtherTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultOtherTypesToUndefined');
+
     if (isOptional) {
         return t.identifier('undefined');
     }
@@ -451,25 +454,51 @@ export const getDefaultTSTypeFromProtoType = (
 
         // OTHER TYPES
         case 'google.protobuf.Timestamp':
-            if (context.pluginValue('prototypes.typingsFormat.timestamp') === 'timestamp') {
-                return t.callExpression(
+            if(setDefaultOtherTypesToUndefined){
+              return t.identifier('undefined');
+            } else {
+              const timestampType = context.pluginValue('prototypes.typingsFormat.timestamp');
+
+              switch (timestampType) {
+                case 'timestamp':
+                  return t.callExpression(
                     t.memberExpression(
                         t.identifier('Timestamp'),
                         t.identifier('fromPartial')
                     ),
                     [t.objectExpression([])]
-                )
-            }
-            if (context.pluginValue('prototypes.typingsFormat.timestamp') === 'date') {
-                return t.newExpression(
+                  )
+                case 'date':
+                  return t.newExpression(
                     t.identifier('Date'),
                     []
-                );
-            }
-        // TODO: add cases for this later on
-        // case 'google.protobuf.Duration':
-        //     return t.identifier('undefined');
+                  );
 
+                default:
+                  return t.identifier('undefined');
+              }
+            }
+
+        // TODO: add cases for this later on
+        case 'google.protobuf.Duration':
+          if(setDefaultOtherTypesToUndefined) {
+            return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(field);
+          }
+        case 'google.protobuf.Any':
+          if(setDefaultOtherTypesToUndefined) {
+            return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(field);
+          }
+
+        case 'cosmos.base.v1beta1.Coin':
+          if(setDefaultOtherTypesToUndefined) {
+            return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(field);
+          }
 
         case 'cosmos.base.v1beta1.Coins':
             return t.arrayExpression([]);
@@ -478,15 +507,19 @@ export const getDefaultTSTypeFromProtoType = (
                 console.warn('Undefined! Can\'t get field of type:', field);
                 return t.identifier('undefined');
             } else {
-                const temp = field.type.split(".");
-                const fieldName = temp[temp.length - 1];
-                return t.callExpression(
-                    t.memberExpression(
-                        t.identifier(fieldName),
-                        t.identifier('fromPartial')
-                    ),
-                    [t.objectExpression([])]
-                )
+                return getDefaultTSTypeFromProtoTypeDefault(field)
             }
     };
 };
+
+function getDefaultTSTypeFromProtoTypeDefault(field: ProtoField) {
+  const temp = field.type.split(".");
+  const fieldName = temp[temp.length - 1];
+  return t.callExpression(
+      t.memberExpression(
+          t.identifier(fieldName),
+          t.identifier('fromPartial')
+      ),
+      [t.objectExpression([])]
+  )
+}

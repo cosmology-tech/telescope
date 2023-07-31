@@ -135,7 +135,7 @@ export const SuperfluidAsset = {
   fromJSON(object: any): SuperfluidAsset {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: SuperfluidAsset): unknown {
