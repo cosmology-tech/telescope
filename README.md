@@ -320,8 +320,8 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
-| `prototypes.typingsFormat.setDefaultEnumTo0`       |  true: enum empty value would be 0, false: -1(value for enum unrecognized)    |false|
-| `prototypes.typingsFormat.setDefaultOtherTypesToUndefined`       |  true: Timestamp,Duration,Any,Coin empty value would be undefined., false: using fromPartial to get an empty obj    |false|
+| `prototypes.typingsFormat.setDefaultEnumToUnrecognized`       |  false: enum empty value would be 0, true: -1(value for enum unrecognized)    |true|
+| `prototypes.typingsFormat.setDefaultCustomTypesToUndefined`       |  true: Timestamp,Duration,Any,Coin empty value would be undefined., false: using fromPartial to get an empty obj    |false|
 
 ### Protobuf parser
 

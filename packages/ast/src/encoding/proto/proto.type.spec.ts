@@ -94,8 +94,8 @@ describe('createCreateProtoType orginal logic', () => {
   const options = deepmerge(defaultTelescopeOptions, {
     prototypes: {
       typingsFormat:{
-        setDefaultEnumTo0: true,
-        setDefaultOtherTypesToUndefined: true,
+        setDefaultEnumToUnrecognized: false,
+        setDefaultCustomTypesToUndefined: true,
       }
     }
   });

@@ -401,7 +401,7 @@ export const getDefaultTSTypeFromProtoType = (
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
-    const setDefaultOtherTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultOtherTypesToUndefined');
+    const setDefaultCustomTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultCustomTypesToUndefined');
 
     if (isOptional) {
         return t.identifier('undefined');
@@ -453,7 +453,7 @@ export const getDefaultTSTypeFromProtoType = (
 
         // OTHER TYPES
         case 'google.protobuf.Timestamp':
-            if(setDefaultOtherTypesToUndefined){
+            if(setDefaultCustomTypesToUndefined){
               return t.identifier('undefined');
             } else {
               const timestampType = context.pluginValue('prototypes.typingsFormat.timestamp');
@@ -480,20 +480,20 @@ export const getDefaultTSTypeFromProtoType = (
 
         // TODO: add cases for this later on
         case 'google.protobuf.Duration':
-          if(setDefaultOtherTypesToUndefined) {
+          if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
             return getDefaultTSTypeFromProtoTypeDefault(field);
           }
         case 'google.protobuf.Any':
-          if(setDefaultOtherTypesToUndefined) {
+          if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
             return getDefaultTSTypeFromProtoTypeDefault(field);
           }
 
         case 'cosmos.base.v1beta1.Coin':
-          if(setDefaultOtherTypesToUndefined) {
+          if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
             return getDefaultTSTypeFromProtoTypeDefault(field);
