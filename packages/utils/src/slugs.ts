@@ -1,4 +1,4 @@
-import { camel } from '@cosmology/utils';
+import { camel } from '.';
 import { relative, dirname, extname } from 'path';
 
 export const variableSlug = (str) => {

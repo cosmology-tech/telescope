@@ -46,4 +46,4 @@ export declare class ProtoStore {
     getTypeUrlMap(ref: ProtoRef): import("@cosmology/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
-export { };
+export {};

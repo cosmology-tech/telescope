@@ -12,4 +12,4 @@ interface ParseRecur {
     isNested: boolean;
 }
 export declare const parseRecur: ({ context, obj, scope, isNested }: ParseRecur) => void;
-export { };
+export {};
