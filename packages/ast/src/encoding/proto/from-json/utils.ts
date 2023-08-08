@@ -215,6 +215,7 @@ export const fromJSON = {
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
     enum(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
         args.context.addUtil('isSet');
         const fromJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -239,7 +240,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
@@ -330,7 +331,7 @@ export const fromJSON = {
         const env = args.context.pluginValue(
             'env'
         );
-        if (env == 'default') {
+        if (!env || env == 'default') {
             timestampFormat = 'timestamp';
         }
         switch (timestampFormat) {

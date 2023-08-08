@@ -348,12 +348,12 @@ export class BinaryWriter {
         (value = value >>> 0) < 128
           ? 1
           : value < 16384
-            ? 2
-            : value < 2097152
-              ? 3
-              : value < 268435456
-                ? 4
-                : 5,
+          ? 2
+          : value < 2097152
+          ? 3
+          : value < 268435456
+          ? 4
+          : 5,
         value
       )).len;
     return this;
@@ -463,10 +463,10 @@ function pool(
 function indexOutOfRange(reader: BinaryReader, writeLength?: number) {
   return RangeError(
     "index out of range: " +
-    reader.pos +
-    " + " +
-    (writeLength || 1) +
-    " > " +
-    reader.len
+      reader.pos +
+      " + " +
+      (writeLength || 1) +
+      " > " +
+      reader.len
   );
 }

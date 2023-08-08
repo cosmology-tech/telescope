@@ -48,4 +48,4 @@ export declare class ProtoParseContext extends GenericParseContext implements Pa
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
 }
-export { };
+export {};

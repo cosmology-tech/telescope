@@ -76,6 +76,10 @@ interface TelescopeOpts {
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
             duration?: 'duration' | 'string',
+
+            setDefaultEnumToUnrecognized?: boolean;
+            setDefaultCustomTypesToUndefined?: boolean;
+
             // temporary field to avoid breaking changes
             updatedDuration?: boolean
         };
@@ -261,7 +265,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
-            updatedDuration: false
+            updatedDuration: false,
+
+            setDefaultEnumToUnrecognized: true,
         },
     },
 

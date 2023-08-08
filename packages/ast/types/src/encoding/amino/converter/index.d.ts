@@ -14,4 +14,4 @@ interface AminoConverterParams {
     protos: ProtoType[];
 }
 export declare const createAminoConverter: ({ name, root, context, protos }: AminoConverterParams) => t.ExportNamedDeclaration;
-export { };
+export {};

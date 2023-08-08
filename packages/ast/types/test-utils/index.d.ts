@@ -62,6 +62,8 @@ export declare const defaultTelescopeOptions: {
             useExact?: boolean;
             timestamp?: "date" | "timestamp";
             duration?: "string" | "duration";
+            setDefaultEnumToUnrecognized?: boolean;
+            setDefaultCustomTypesToUndefined?: boolean;
             updatedDuration?: boolean;
         };
     };
