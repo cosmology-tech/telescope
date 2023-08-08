@@ -15,4 +15,4 @@ interface DocumentService {
 }
 export declare const documentRpcClients: (context: ProtoParseContext, myBase: string, store: ProtoStore) => DocumentRpcClient[];
 export declare const documentRpcClientsReadme: (context: ProtoParseContext, myBase: string, store: ProtoStore) => string;
-export { };
+export {};

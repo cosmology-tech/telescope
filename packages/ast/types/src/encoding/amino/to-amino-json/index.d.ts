@@ -16,4 +16,4 @@ interface toAminoJSON {
     proto: ProtoType;
 }
 export declare const toAminoJsonMethod: ({ context, proto }: toAminoJSON) => t.ArrowFunctionExpression;
-export { };
+export {};

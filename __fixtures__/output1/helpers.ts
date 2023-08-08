@@ -140,7 +140,7 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
     }
     if (typeof pagination?.key !== "undefined") {
         // String to Uint8Array
-        // let uint8arr = new Uint8Array(Buffer.from(data,'base64')); 
+        // let uint8arr = new Uint8Array(Buffer.from(data,'base64'));
 
         // Uint8Array to String
         options.params['pagination.key'] = Buffer.from(pagination.key).toString('base64');

@@ -300,6 +300,8 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
 
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
+
         args.context.addUtil('isSet');
         const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -324,7 +326,7 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
