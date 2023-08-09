@@ -133,6 +133,7 @@ export declare const defaultTelescopeOptions: {
     };
     reactQuery: {
         enabled: boolean;
+        needExtraQueryKey?: boolean;
         include?: {
             patterns?: string[];
             packages?: string[];
