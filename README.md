@@ -288,6 +288,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
+| `reactQuery.needExtraQueryKey`       | if true, users can input extra react query key to some customized hooks. e.g.['rpcEndpoint', 'yourExtraKey'] | `false`  |
 | `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
 | `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
 | `reactQuery.include.patterns`    | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |

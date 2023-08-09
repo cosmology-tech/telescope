@@ -168,6 +168,7 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        needExtraQueryKey?: boolean;
         include?: {
             /**
              * @deprecated in favor of packages and protos supporting minimatch
@@ -326,7 +327,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             patterns: [],
             packages: [],
             protos: []
-        }
+        },
     },
 
     mobx: {

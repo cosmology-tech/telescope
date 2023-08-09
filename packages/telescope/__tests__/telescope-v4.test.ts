@@ -158,6 +158,7 @@ const options: TelescopeOptions = {
 
   reactQuery: {
     enabled: true,
+    needExtraQueryKey: true,
     include: {
       patterns: ['osmosis/**/gamm/**/query.proto'],
       protos: ['akash/cert/v1beta2/query.proto'],
