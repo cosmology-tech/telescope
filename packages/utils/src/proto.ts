@@ -1,5 +1,5 @@
 import { camel, variableSlug } from ".";
-import { pascal } from "case";
+import { pascal, snake } from "case";
 import minimatch from "minimatch";
 
 /**
@@ -16,7 +16,7 @@ export const makeUseHookName = (name: string) => {
 };
 
 export const makeUsePkgHookName = (packageName: string, name: string) => {
-  return variableSlug(`use_${packageName.replace(/\./g, "_")}_${name}`);
+  return variableSlug(`use_${packageName.replace(/\./g, "_")}_${snake(name)}`);
 };
 
 export const makeUseHookTypeName = (name: string) => {
@@ -64,20 +64,4 @@ export const getQueryMethodNames = (
       }
     })
     .filter(Boolean);
-};
-
-export const swapKeyValue = (input: {
-  [key: string]: string;
-}): {
-  [key: string]: string;
-} => {
-  const output: { [key: string]: string } = {};
-
-  for (const key in input) {
-    if (input.hasOwnProperty(key)) {
-      output[input[key]] = key;
-    }
-  }
-
-  return output;
 };
