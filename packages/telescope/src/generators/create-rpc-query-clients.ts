@@ -23,6 +23,8 @@ import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoRoot, ProtoService } from '@cosmology/types';
+import { getQueryMethodNames } from '@cosmology/utils';
+import { BundlerFile } from '../types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -76,7 +78,7 @@ export const plugin = (
         const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
         const filename = bundler.getFilename(localname);
 
-        const bundlerFile = {
+        const bundlerFile: BundlerFile = {
             proto: c.ref.filename,
             package: c.ref.proto.package,
             localname,
@@ -124,6 +126,10 @@ export const plugin = (
                             [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
                             [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                             asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+
+                            // get all query methods
+                            const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns)
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }
@@ -185,6 +191,10 @@ export const plugin = (
                         // TODO use the imports and make separate files
                         if (includeReactQueryHooks) {
                             asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+
+                            // get all query methods
+                            const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns)
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }

@@ -1,5 +1,5 @@
 import { aggregateImports, getImportStatements } from '../imports';
-import { join } from 'path';
+import { join, dirname, extname, basename } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcHookFactory } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
@@ -8,6 +8,9 @@ import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
 import { createEmptyProtoRef } from '@cosmology/proto-parser';
+import { camel, makeUseHookName, makeUsePkgHookName } from '@cosmology/utils';
+import { variableSlug } from '@cosmology/utils';
+import { swapKeyValue } from '@cosmology/utils';
 
 export const plugin = (
     builder: TelescopeBuilder
@@ -23,15 +26,45 @@ export const plugin = (
 
     // get mapping of packages and rpc query filenames.
     const obj = {};
+    const instantHooksMapping = {}
+    const methodSet = new Set()
     const bundlerFiles = builder.stateManagers["reactQuery"];
 
     if (!bundlerFiles || !bundlerFiles.length) {
         return;
     }
 
+    let nameMapping = builder.options.reactQuery?.instantExport?.nameMapping;
+
+    nameMapping = swapKeyValue(nameMapping ?? {});
+
     bundlerFiles.map(bundlerFile => {
         const path = `./${bundlerFile.localname.replace(/\.ts$/, '')}`;
         dotty.put(obj, bundlerFile.package, path);
+
+        // build instantHooksMapping
+        bundlerFile.instantExportedMethods?.forEach((method)=>{
+          const useHookName = makeUseHookName(camel(method));
+          const hookNameWithPkg = `${bundlerFile.package}.${useHookName}`;
+          let instantHookName = null;
+
+          if(nameMapping[hookNameWithPkg]){
+            instantHookName = nameMapping[hookNameWithPkg]
+          } else {
+            if(methodSet.has(useHookName)){
+              instantHookName = makeUsePkgHookName(bundlerFile.package, method);
+            } else {
+              instantHookName = useHookName
+            }
+          }
+
+          dotty.put(instantHooksMapping, instantHookName, {
+            useHookName,
+            importedVarName: variableSlug(path)
+          });
+
+          methodSet.add(instantHookName);
+        });
     });
 
     // create proto ref for context
@@ -49,7 +82,8 @@ export const plugin = (
     const ast = createScopedRpcHookFactory(
         pCtx.proto,
         obj,
-        'createRpcQueryHooks'
+        'createRpcQueryHooks',
+        instantHooksMapping
     )
 
     // generate imports added by context.addUtil

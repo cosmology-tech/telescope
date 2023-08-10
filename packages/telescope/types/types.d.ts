@@ -10,6 +10,7 @@ export interface BundlerFile {
     package?: string;
     localname: string;
     filename: string;
+    instantExportedMethods?: string[];
 }
 export interface ImportObj {
     type: 'import' | 'default' | 'namespace' | string;

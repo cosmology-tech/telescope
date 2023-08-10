@@ -176,6 +176,14 @@ interface TelescopeOpts {
             patterns?: string[];
             packages?: string[];
             protos?: string[];
+        },
+        instantExport?: {
+            include: {
+              patterns?: string[];
+            },
+            nameMapping?:{
+              [key: string]: string;
+            }
         }
     };
     mobx?: {
