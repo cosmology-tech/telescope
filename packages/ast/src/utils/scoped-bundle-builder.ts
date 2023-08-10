@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
-import { objectPattern } from '.';
+import { makeCommentLineWithBlocks, objectPattern, objectProperty } from '.';
 import { variableSlug } from '@cosmology/utils';
 
 const DEFAULT_RPC_PARAM_NAME = 'rpc';
@@ -11,13 +11,14 @@ export const buildInstantHooks = (
     [key: string]: {
       useHookName: string;
       importedVarName: string;
+      comment?: string;
     };
   }
 ): t.ObjectProperty[] => {
   return Object.keys(instantHooksMapping ?? []).map((hookName) => {
     const hookObj = instantHooksMapping![hookName];
 
-    return t.objectProperty(
+    return objectProperty(
       t.identifier(hookName),
       t.memberExpression(
         t.callExpression(
@@ -28,7 +29,11 @@ export const buildInstantHooks = (
           [t.identifier(DEFAULT_RPC_PARAM_NAME)]
         ),
         t.identifier(hookObj.useHookName)
-      )
+      ),
+      false,
+      false,
+      undefined,
+      makeCommentLineWithBlocks(hookObj.comment)
     );
   });
 };
@@ -118,7 +123,8 @@ export const buildExportCreators = (
   instantHooksMapping?: {
     [key: string]: {
       useHookName: string,
-      importedVarName: string
+      importedVarName: string,
+      comment?: string
     }
   }
 ) => {

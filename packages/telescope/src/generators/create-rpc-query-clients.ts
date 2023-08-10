@@ -129,7 +129,7 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns)
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key)=> proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }
@@ -194,7 +194,7 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns)
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key)=> proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }

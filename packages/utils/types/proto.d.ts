@@ -19,8 +19,3 @@ export declare const makeHookKeyName: (name: string) => any;
  * @returns Array of query method names match the given pattern.
  */
 export declare const getQueryMethodNames: (packagePath: string, methodKeys: string[], patterns?: string[]) => string[];
-export declare const swapKeyValue: (input: {
-    [key: string]: string;
-}) => {
-    [key: string]: string;
-};

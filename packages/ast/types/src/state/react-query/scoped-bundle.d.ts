@@ -41,6 +41,7 @@ export declare const createScopedRpcHookFactory: (context: GenericParseContext, 
     [key: string]: {
         useHookName: string;
         importedVarName: string;
+        comment?: string;
     };
 }) => (t.ExportNamedDeclaration | {
     type: string;

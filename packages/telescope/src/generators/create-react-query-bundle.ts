@@ -44,7 +44,9 @@ export const plugin = (
 
         // build instantHooksMapping
         bundlerFile.instantExportedMethods?.forEach((method)=>{
-          const useHookName = makeUseHookName(camel(method));
+          const methodName = method.name;
+
+          const useHookName = makeUseHookName(camel(methodName));
           const hookNameWithPkg = `${bundlerFile.package}.${useHookName}`;
           let instantHookName = null;
 
@@ -52,7 +54,7 @@ export const plugin = (
             instantHookName = nameMapping[hookNameWithPkg]
           } else {
             if(methodSet.has(useHookName)){
-              instantHookName = makeUsePkgHookName(bundlerFile.package, method);
+              instantHookName = makeUsePkgHookName(bundlerFile.package, methodName);
             } else {
               instantHookName = useHookName
             }
@@ -60,7 +62,8 @@ export const plugin = (
 
           dotty.put(instantHooksMapping, instantHookName, {
             useHookName,
-            importedVarName: variableSlug(path)
+            importedVarName: variableSlug(path),
+            comment: method.comment
           });
 
           methodSet.add(instantHookName);

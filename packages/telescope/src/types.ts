@@ -1,4 +1,4 @@
-import { TelescopeOptions } from '@cosmology/types';
+import { ProtoServiceMethod, TelescopeOptions } from '@cosmology/types';
 export interface Bundle {
     bundleVariables: {};
     bundleFile: string;
@@ -10,7 +10,7 @@ export interface BundlerFile {
     package?: string;
     localname: string;
     filename: string;
-    instantExportedMethods?: string[]
+    instantExportedMethods?: ProtoServiceMethod[]
 }
 
 export interface ImportObj {

@@ -35,14 +35,17 @@ it("createScopedRpcHookFactory", async () => {
           useBankBalance: {
             useHookName: "useBalance",
             importedVarName: "_CosmosBankV1beta1Queryrpc",
+            comment: "Get Balance for bank"
           },
           useNftBalance: {
             useHookName: "useBalance",
             importedVarName: "_CosmosNftV1beta1Queryrpc",
+            comment: "Get Balance for nft"
           },
           useAccount: {
             useHookName: "useAccount",
             importedVarName: "_CosmosAuthV1beta1Queryrpc",
+            comment: "Get Account"
           },
         }
       ) as t.Statement[]

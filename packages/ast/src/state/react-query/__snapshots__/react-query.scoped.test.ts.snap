@@ -23,9 +23,9 @@ export const createRpcFactorizzle = ({
         v1beta1: _ProtoCosmosBankV1beta1C.createRpcQueryHooks(rpc)
       }
     },
-    useBankBalance: _CosmosBankV1beta1Queryrpc.createRpcQueryHooks(rpc).useBalance,
-    useNftBalance: _CosmosNftV1beta1Queryrpc.createRpcQueryHooks(rpc).useBalance,
-    useAccount: _CosmosAuthV1beta1Queryrpc.createRpcQueryHooks(rpc).useAccount
+    /** Get Balance for bank */useBankBalance: _CosmosBankV1beta1Queryrpc.createRpcQueryHooks(rpc).useBalance,
+    /** Get Balance for nft */useNftBalance: _CosmosNftV1beta1Queryrpc.createRpcQueryHooks(rpc).useBalance,
+    /** Get Account */useAccount: _CosmosAuthV1beta1Queryrpc.createRpcQueryHooks(rpc).useAccount
   };
 };"
 `;

@@ -125,7 +125,8 @@ export const createScopedRpcHookFactory = (
   instantHooksMapping?: {
     [key: string]: {
       useHookName: string,
-      importedVarName: string
+      importedVarName: string,
+      comment?: string
     }
   }
 ) => {

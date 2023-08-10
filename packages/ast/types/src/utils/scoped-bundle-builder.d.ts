@@ -4,6 +4,7 @@ export declare const buildInstantHooks: (methodName: string, instantHooksMapping
     [key: string]: {
         useHookName: string;
         importedVarName: string;
+        comment?: string;
     };
 }) => t.ObjectProperty[];
 /**
@@ -45,6 +46,7 @@ export declare const buildExportCreators: (context: GenericParseContext, obj: ob
     [key: string]: {
         useHookName: string;
         importedVarName: string;
+        comment?: string;
     };
 }) => (t.ExportNamedDeclaration | {
     type: string;
