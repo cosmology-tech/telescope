@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/ast",
-  "version": "0.89.0",
+  "version": "0.90.0",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/ast#readme",
@@ -90,9 +90,9 @@
     "@babel/parser": "^7.21.4",
     "@babel/runtime": "^7.21.0",
     "@babel/types": "7.21.4",
-    "@cosmology/proto-parser": "^0.46.0",
-    "@cosmology/types": "^0.37.0",
-    "@cosmology/utils": "^0.12.0",
+    "@cosmology/proto-parser": "^0.47.0",
+    "@cosmology/types": "^0.38.0",
+    "@cosmology/utils": "^0.13.0",
     "case": "1.6.3",
     "dotty": "0.1.2"
   }
