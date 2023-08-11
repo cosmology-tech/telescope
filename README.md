@@ -292,6 +292,8 @@ See [RPC Clients](#rpc-clients) for more info.
 | `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
 | `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
 | `reactQuery.include.patterns`    | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+| `reactQuery.instantExport.include.patterns`    | if set, will expose instant hooks on matched patterns of packages + method(e.g. cosmos.bank.v1beta1.useBalance) using minimatch. If there're duplicated method names in multiple packages without setting `reactQuery.instantExport.nameMapping`, one duplicated name will created like: useCosmosBankV1beta1Balance           | `[]`     |
+| `reactQuery.instantExport.nameMapping`    |   map an alias to a package + method in case of better naming of duplicated method names. (e.g. useBankBalance: cosmos.bank.v1beta1.useBalance) Customized hook name is set in front of pkg+method, by doing this we can prevent duplicate alias.        | `{}`     |
 
 #### Mobx
 

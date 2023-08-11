@@ -1,5 +1,12 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
+export declare const buildInstantHooks: (methodName: string, instantHooksMapping?: {
+    [key: string]: {
+        useHookName: string;
+        importedVarName: string;
+        comment?: string;
+    };
+}) => t.ObjectProperty[];
 /**
  * Create an AST for a certain key and method.
  * eg: __fixtures__/output1/hooks.ts
@@ -19,7 +26,7 @@ export declare const buildSingleCreator: (imports: HookImport[], path: string, m
  * @param {string} methodName - hook method name of packages
  * @returns {ParseResult} created AST
  */
-export declare const buildNestedCreator: (imports: HookImport[], obj: object, methodName: string) => any;
+export declare const buildNestedCreator: (imports: HookImport[], obj: object, methodName: string) => t.ObjectExpression | t.CallExpression;
 interface HookImport {
     as: string;
     path: string;
@@ -35,7 +42,13 @@ interface HookImport {
  * @param {string} methodName - name of a certain method that creates a store or hook. eg: createRpcQueryHooks
  * @returns {ParseResult} created AST
  */
-export declare const buildExportCreators: (context: GenericParseContext, obj: object, identifier: string, utils: string[], methodName?: string) => (t.ExportNamedDeclaration | {
+export declare const buildExportCreators: (context: GenericParseContext, obj: object, identifier: string, utils: string[], methodName?: string, instantHooksMapping?: {
+    [key: string]: {
+        useHookName: string;
+        importedVarName: string;
+        comment?: string;
+    };
+}) => (t.ExportNamedDeclaration | {
     type: string;
     importKind: string;
     specifiers: {

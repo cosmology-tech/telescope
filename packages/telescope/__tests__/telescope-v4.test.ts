@@ -162,7 +162,22 @@ const options: TelescopeOptions = {
     include: {
       patterns: ['osmosis/**/gamm/**/query.proto'],
       protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.bank.v1beta1']
+      packages: ['cosmos.bank.v1beta1', 'cosmos.auth.**',  'cosmos.nft.**']
+    },
+    instantExport: {
+      include: {
+        patterns: [
+          '**.useBalance',
+          'cosmos.auth.**',
+          'osmosis.**',
+          'akash.**'
+        ]
+      },
+      nameMapping: {
+        'useAuthModuleAccounts': 'cosmos.auth.v1beta1.useModuleAccounts',
+        'useBankBalance': 'cosmos.bank.v1beta1.useBalance',
+        'useNftBalance': 'cosmos.nft.v1beta1.useBalance',
+      }
     }
   },
 

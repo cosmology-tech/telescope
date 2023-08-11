@@ -121,7 +121,14 @@ interface HookImport {
 export const createScopedRpcHookFactory = (
   context: GenericParseContext,
   obj: object,
-  identifier: string
+  identifier: string,
+  instantHooksMapping?: {
+    [key: string]: {
+      useHookName: string,
+      importedVarName: string,
+      comment?: string
+    }
+  }
 ) => {
-  return buildExportCreators(context, obj, identifier, ['ProtobufRpcClient']);
+  return buildExportCreators(context, obj, identifier, ['ProtobufRpcClient'], undefined, instantHooksMapping);
 };

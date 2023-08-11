@@ -3,21 +3,8 @@ import * as t from '@babel/types';
 import { arrowFunctionExpression, callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature, tsTypeParameterDeclaration } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../encoding';
-import { camel } from '@cosmology/utils';
-import { pascal } from 'case';
+import { camel, makeUseHookName, makeUseHookTypeName, makeHookKeyName } from '@cosmology/utils';
 import { createClientMap } from './weak-map';
-
-const makeUseHookName = (name: string) => {
-  return camel('use_' + name);
-};
-
-const makeUseHookTypeName = (name: string) => {
-  return pascal('Use_' + name + 'Query');
-};
-
-const makeHookKeyName = (name: string) => {
-  return camel(name + 'Query');
-};
 
 /**
  * Create an AST of a specific hook method
@@ -114,7 +101,7 @@ const rpcHookMethod = (
               ])
             ))
         ]),
-        null,
+        undefined,
         false,
         tsTypeParameterDeclaration([
           t.tsTypeParameter(null, t.tsTypeReference(t.identifier(responseType)), 'TData')
@@ -220,7 +207,7 @@ export const createRpcQueryHooks = (
       const name = camelRpcMethods ? camel(key) : key;
       return {
         name,
-        comment: service.methods[key].comment
+        comment: service.methods[key].comment ?? ""
       };
     });
 

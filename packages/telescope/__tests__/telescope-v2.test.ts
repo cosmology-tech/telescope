@@ -99,7 +99,7 @@ const options: TelescopeOptions = {
   },
 
   reactQuery: {
-    enabled: false,
+    enabled: true,
     include: {
       patterns: [
         'osmosis/**/gamm/**/query.proto'
@@ -110,8 +110,22 @@ const options: TelescopeOptions = {
       packages: [
         'cosmos.bank.v1beta1',
         'cosmos.gov.v1beta1',
+        'cosmos.nft.v1beta1',
         'evmos.erc20.v1'
       ]
+    },
+    instantExport: {
+      include: {
+        patterns: [
+          '**.useBalance',
+          'cosmos.auth.**',
+          'osmosis.**',
+          'akash.**'
+        ]
+      },
+      nameMapping: {
+        'useAuthModuleAccounts': 'cosmos.auth.v1beta1.useModuleAccounts',
+      }
     }
   }
 };

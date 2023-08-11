@@ -139,6 +139,14 @@ export declare const defaultTelescopeOptions: {
             packages?: string[];
             protos?: string[];
         };
+        instantExport?: {
+            include: {
+                patterns?: string[];
+            };
+            nameMapping?: {
+                [key: string]: string;
+            };
+        };
     };
     mobx: {
         enabled: boolean;
