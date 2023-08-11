@@ -63,7 +63,7 @@ export const plugin = (
           dotty.put(instantHooksMapping, instantHookName, {
             useHookName,
             importedVarName: variableSlug(path),
-            comment: method.comment
+            comment: `${bundlerFile.package}.${useHookName}\n${method.comment ?? methodName}`
           });
 
           methodSet.add(instantHookName);
