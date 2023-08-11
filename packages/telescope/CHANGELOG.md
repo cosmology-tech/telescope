@@ -3,73 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.103.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.102.1...@cosmology/telescope@0.103.0) (2023-08-11)
+## [0.103.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.103.0...@cosmology/telescope@0.103.1) (2023-08-11)
 
 **Note:** Version bump only for package @cosmology/telescope
 
+# [0.103.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.102.1...@cosmology/telescope@0.103.0) (2023-08-11)
 
-
-
+**Note:** Version bump only for package @cosmology/telescope
 
 ## [0.102.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.102.0...@cosmology/telescope@0.102.1) (2023-07-30)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 # 0.102.0 (2023-07-30)
-
 
 ### Reverts
 
-* Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
-* Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
-
-
-
-
+- Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+- Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
 
 ## [0.101.3](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.101.2...@cosmology/telescope@0.101.3) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 ## [0.101.2](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.101.1...@cosmology/telescope@0.101.2) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/telescope
-
-
-
-
 
 ## [0.101.1](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.99.12...@cosmology/telescope@0.101.1) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 # [0.101.0](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.99.12...@cosmology/telescope@0.101.0) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 # [0.100.0](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.99.12...@cosmology/telescope@0.100.0) (2023-07-29)
 
 **Note:** Version bump only for package @cosmology/telescope
-
-
-
-
 
 ## [0.99.12](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.99.10...@cosmology/telescope@0.99.12) (2023-07-14)
 
