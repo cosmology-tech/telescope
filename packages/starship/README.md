@@ -11,13 +11,13 @@ so that you dont have to.
 ```bash
 npm run e2e:deps
 ```
-This command will 
+This command will
 * check (and install) if your system has all the dependencies needed to run the e2e tests wtih Starship
 * fetch the helm charts for Starship
 
 ## 2. Connect to a kubernetes cluster
 Inorder to set up the infrastructure, for Starship, we need access to a kubernetes cluster.
-One can either perform connect to a 
+One can either perform connect to a
 * remote cluster in a managed kubernetes service
 * use kubernetes desktop to spin up a cluster
 * use kind to create a local cluster on local machine
