@@ -1,6 +1,25 @@
 import { camel, variableSlug } from ".";
 import { pascal, snake } from "case";
 import minimatch from "minimatch";
+import { ProtoRoot } from "@cosmology/types";
+import dotty from "dotty";
+
+export const getNestedProto = (root: ProtoRoot) => {
+  const nestedPath =
+    "root.nested." + root.package.split(".").join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
+
+export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
+  path = root.package.split(".").concat(path);
+  const nestedPath = "root.nested." + path.join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
+
+export const getNested = (root: ProtoRoot, path: string[]) => {
+  const nestedPath = "root.nested." + path.join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
 
 /**
  * to make a customized hook name.

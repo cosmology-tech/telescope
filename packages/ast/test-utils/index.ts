@@ -1,6 +1,7 @@
 import generate from '@babel/generator';
 import { ProtoType, TelescopeOptions } from '@cosmology/types';
-import { ProtoStore, getNestedProto } from '@cosmology/proto-parser'
+import { ProtoStore } from '@cosmology/proto-parser'
+import { getNestedProto } from '@cosmology/utils'
 import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
 import { defaultTelescopeOptions as teleDefaults } from '@cosmology/types';

@@ -3,7 +3,8 @@ import generate from '@babel/generator';
 import * as t from '@babel/types';
 import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@cosmology/types";
 import { camel } from "@cosmology/utils";
-import { getNestedProto, ProtoStore } from "@cosmology/proto-parser";
+import { ProtoStore } from "@cosmology/proto-parser";
+import { getNestedProto } from "@cosmology/utils";
 import { ProtoParseContext } from "../encoding";
 import { ServiceMethod } from "../registry";
 
@@ -126,7 +127,7 @@ export const documentRpcClientsReadme = (
         const code = generate(ast).code;
 
         return `##### \`${pkg}.${res.methodName}()\` RPC
-        
+
 ${res.method.name}
 
 \`\`\`js

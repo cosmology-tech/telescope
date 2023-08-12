@@ -1,4 +1,4 @@
-import { getNestedProto } from '@cosmology/proto-parser';
+import { getNestedProto } from '@cosmology/utils';
 import { defaultTelescopeOptions } from '@cosmology/types';
 import { expectCode, getTestProtoStore } from '../../../test-utils/'
 import { AminoParseContext, ProtoParseContext } from '../context';

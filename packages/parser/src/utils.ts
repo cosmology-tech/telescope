@@ -1,25 +1,9 @@
-import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@cosmology/protobufjs';
 import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@cosmology/types';
 import { ProtoStore } from './store';
 import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@cosmology/ast';
 import minimatch from 'minimatch';
-
-export const getNestedProto = (root: ProtoRoot) => {
-    const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
-
-export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
-    path = root.package.split('.').concat(path);
-    const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
-
-export const getNested = (root: ProtoRoot, path: string[]) => {
-    const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
+import { getNestedProto } from '.';
 
 // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
 // NOTE: sometimes you need to pass in `.Dummy` for the first call,

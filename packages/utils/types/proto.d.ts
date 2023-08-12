@@ -1,3 +1,7 @@
+import { ProtoRoot } from "@cosmology/types";
+export declare const getNestedProto: (root: ProtoRoot) => any;
+export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
+export declare const getNested: (root: ProtoRoot, path: string[]) => any;
 /**
  * to make a customized hook name.
  * e.g. snake_case -> useSnakeCase.

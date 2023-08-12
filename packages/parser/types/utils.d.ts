@@ -1,8 +1,5 @@
 import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@cosmology/types';
 import { ProtoStore } from './store';
-export declare const getNestedProto: (root: ProtoRoot) => any;
-export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
-export declare const getNested: (root: ProtoRoot, path: string[]) => any;
 export declare const lookupSymbolScopes: (name: string, relativeTo: string, list?: string[]) => any;
 export declare const createTypeUrlTypeMap: (store: ProtoStore, fromRef: ProtoRef) => InterfaceTypeUrlMap;
 /**

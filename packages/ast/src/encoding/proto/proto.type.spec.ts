@@ -4,7 +4,8 @@ import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx
 import types from '../../../../../__fixtures__/proto-json/tendermint/abci/types.json';
 import types_tendermint from '../../../../../__fixtures__/proto-json/tendermint/types/types.json'
 
-import { traverse, getNestedProto } from '@cosmology/proto-parser'
+import { traverse } from '@cosmology/proto-parser'
+import { getNestedProto } from '@cosmology/utils'
 import { defaultTelescopeOptions } from '@cosmology/types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';

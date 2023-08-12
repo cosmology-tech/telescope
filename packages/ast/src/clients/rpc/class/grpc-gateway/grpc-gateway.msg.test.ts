@@ -1,4 +1,5 @@
-import { ProtoStore, traverse, getNestedProto } from '@cosmology/proto-parser'
+import { traverse } from '@cosmology/proto-parser'
+import { getNestedProto } from '@cosmology/utils'
 import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
@@ -16,5 +17,5 @@ it('GRPC-Gateway Msg Client', () => {
 });
 
 
-// use static in interface declaration: 
+// use static in interface declaration:
 // https://stackoverflow.com/questions/13955157/how-to-define-static-property-in-typescript-interface

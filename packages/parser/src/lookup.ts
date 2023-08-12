@@ -1,6 +1,6 @@
 import { ProtoStore } from './store';
 import { ProtoRef } from '@cosmology/types';
-import { getNested, getNestedProto } from './utils';
+import { getNested, getNestedProto } from './';
 export interface Lookup {
     obj: any;
     name: string;
@@ -134,7 +134,7 @@ export const protoScopeImportLookup = (
 
     // TODO pass in the imports and this ref
     // e.g. only include packges of those files !!!!!
-    // this is currently looking at ALL protos 
+    // this is currently looking at ALL protos
     const parsed = store.parseScope(name);
     if (!parsed) {
         return;
@@ -183,7 +183,7 @@ export const protoScopeImportLookup = (
                     obj: found.obj,
                     // not sure why scope doesn't handle this
                     // so we're wrapping with underscores here
-                    // EXAMPLE: google/logging/v2/logging_metrics 
+                    // EXAMPLE: google/logging/v2/logging_metrics
                     // EXAMPLE: google/api/servicecontrol/v1/distribution
                     importedName: nameAsArray.join('_'),
                     name: nameAsArray.join('_'),
