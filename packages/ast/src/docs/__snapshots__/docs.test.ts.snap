@@ -745,7 +745,7 @@ exports[`documentRpcClientsReadme 1`] = `
 ### \`osmosis.claim.v1beta1\` RPC
 
 ##### \`osmosis.claim.v1beta1.moduleAccountBalance()\` RPC
-        
+
 ModuleAccountBalance
 
 \`\`\`js
@@ -755,7 +755,7 @@ const result = await osmosis.claim.v1beta1.moduleAccountBalance(request);
 \`\`\`
 
 ##### \`osmosis.claim.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -765,7 +765,7 @@ const result = await osmosis.claim.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.claim.v1beta1.claimRecord()\` RPC
-        
+
 ClaimRecord
 
 \`\`\`js
@@ -775,7 +775,7 @@ const result = await osmosis.claim.v1beta1.claimRecord(request);
 \`\`\`
 
 ##### \`osmosis.claim.v1beta1.claimableForAction()\` RPC
-        
+
 ClaimableForAction
 
 \`\`\`js
@@ -785,7 +785,7 @@ const result = await osmosis.claim.v1beta1.claimableForAction(request);
 \`\`\`
 
 ##### \`osmosis.claim.v1beta1.totalClaimable()\` RPC
-        
+
 TotalClaimable
 
 \`\`\`js
@@ -795,7 +795,7 @@ const result = await osmosis.claim.v1beta1.totalClaimable(request);
 \`\`\`
 
 ##### \`osmosis.epochs.v1beta1.epochInfos()\` RPC
-        
+
 EpochInfos
 
 \`\`\`js
@@ -805,7 +805,7 @@ const result = await osmosis.epochs.v1beta1.epochInfos(request);
 \`\`\`
 
 ##### \`osmosis.epochs.v1beta1.currentEpoch()\` RPC
-        
+
 CurrentEpoch
 
 \`\`\`js
@@ -815,7 +815,7 @@ const result = await osmosis.epochs.v1beta1.currentEpoch(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.pools()\` RPC
-        
+
 Pools
 
 \`\`\`js
@@ -825,7 +825,7 @@ const result = await osmosis.gamm.v1beta1.pools(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.numPools()\` RPC
-        
+
 NumPools
 
 \`\`\`js
@@ -835,7 +835,7 @@ const result = await osmosis.gamm.v1beta1.numPools(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.totalLiquidity()\` RPC
-        
+
 TotalLiquidity
 
 \`\`\`js
@@ -845,7 +845,7 @@ const result = await osmosis.gamm.v1beta1.totalLiquidity(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.poolsWithFilter()\` RPC
-        
+
 PoolsWithFilter
 
 \`\`\`js
@@ -858,7 +858,7 @@ const result = await osmosis.gamm.v1beta1.poolsWithFilter(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.pool()\` RPC
-        
+
 Pool
 
 \`\`\`js
@@ -868,7 +868,7 @@ const result = await osmosis.gamm.v1beta1.pool(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.poolType()\` RPC
-        
+
 PoolType
 
 \`\`\`js
@@ -882,7 +882,7 @@ const result = await osmosis.gamm.v1beta1.poolType(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares()\` RPC
-        
+
 CalcJoinPoolNoSwapShares
 
 \`\`\`js
@@ -895,7 +895,7 @@ const result = await osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.calcJoinPoolShares()\` RPC
-        
+
 CalcJoinPoolShares
 
 \`\`\`js
@@ -905,7 +905,7 @@ const result = await osmosis.gamm.v1beta1.calcJoinPoolShares(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares()\` RPC
-        
+
 CalcExitPoolCoinsFromShares
 
 \`\`\`js
@@ -915,7 +915,7 @@ const result = await osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.poolParams()\` RPC
-        
+
 PoolParams
 
 \`\`\`js
@@ -925,7 +925,7 @@ const result = await osmosis.gamm.v1beta1.poolParams(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.totalPoolLiquidity()\` RPC
-        
+
 TotalPoolLiquidity
 
 \`\`\`js
@@ -935,7 +935,7 @@ const result = await osmosis.gamm.v1beta1.totalPoolLiquidity(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.totalShares()\` RPC
-        
+
 TotalShares
 
 \`\`\`js
@@ -945,7 +945,7 @@ const result = await osmosis.gamm.v1beta1.totalShares(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.spotPrice()\` RPC
-        
+
 SpotPrice
 
 \`\`\`js
@@ -958,7 +958,7 @@ const result = await osmosis.gamm.v1beta1.spotPrice(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.estimateSwapExactAmountIn()\` RPC
-        
+
 EstimateSwapExactAmountIn
 
 \`\`\`js
@@ -968,7 +968,7 @@ const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountIn(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.estimateSwapExactAmountOut()\` RPC
-        
+
 EstimateSwapExactAmountOut
 
 \`\`\`js
@@ -978,7 +978,7 @@ const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountOut(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v2.spotPrice()\` RPC
-        
+
 SpotPrice
 
 \`\`\`js
@@ -991,7 +991,7 @@ const result = await osmosis.gamm.v2.spotPrice(request);
 \`\`\`
 
 ##### \`osmosis.ibcratelimit.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1004,7 +1004,7 @@ const result = await osmosis.ibcratelimit.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.incentives.moduleToDistributeCoins()\` RPC
-        
+
 ModuleToDistributeCoins
 
 \`\`\`js
@@ -1014,7 +1014,7 @@ const result = await osmosis.incentives.moduleToDistributeCoins(request);
 \`\`\`
 
 ##### \`osmosis.incentives.gaugeByID()\` RPC
-        
+
 GaugeByID
 
 \`\`\`js
@@ -1024,7 +1024,7 @@ const result = await osmosis.incentives.gaugeByID(request);
 \`\`\`
 
 ##### \`osmosis.incentives.gauges()\` RPC
-        
+
 Gauges
 
 \`\`\`js
@@ -1034,7 +1034,7 @@ const result = await osmosis.incentives.gauges(request);
 \`\`\`
 
 ##### \`osmosis.incentives.activeGauges()\` RPC
-        
+
 ActiveGauges
 
 \`\`\`js
@@ -1044,7 +1044,7 @@ const result = await osmosis.incentives.activeGauges(request);
 \`\`\`
 
 ##### \`osmosis.incentives.activeGaugesPerDenom()\` RPC
-        
+
 ActiveGaugesPerDenom
 
 \`\`\`js
@@ -1054,7 +1054,7 @@ const result = await osmosis.incentives.activeGaugesPerDenom(request);
 \`\`\`
 
 ##### \`osmosis.incentives.upcomingGauges()\` RPC
-        
+
 UpcomingGauges
 
 \`\`\`js
@@ -1064,7 +1064,7 @@ const result = await osmosis.incentives.upcomingGauges(request);
 \`\`\`
 
 ##### \`osmosis.incentives.upcomingGaugesPerDenom()\` RPC
-        
+
 UpcomingGaugesPerDenom
 
 \`\`\`js
@@ -1077,7 +1077,7 @@ const result = await osmosis.incentives.upcomingGaugesPerDenom(request);
 \`\`\`
 
 ##### \`osmosis.incentives.rewardsEst()\` RPC
-        
+
 RewardsEst
 
 \`\`\`js
@@ -1091,7 +1091,7 @@ const result = await osmosis.incentives.rewardsEst(request);
 \`\`\`
 
 ##### \`osmosis.incentives.lockableDurations()\` RPC
-        
+
 LockableDurations
 
 \`\`\`js
@@ -1104,7 +1104,7 @@ const result = await osmosis.incentives.lockableDurations(request);
 \`\`\`
 
 ##### \`osmosis.lockup.moduleBalance()\` RPC
-        
+
 ModuleBalance
 
 \`\`\`js
@@ -1114,7 +1114,7 @@ const result = await osmosis.lockup.moduleBalance(request);
 \`\`\`
 
 ##### \`osmosis.lockup.moduleLockedAmount()\` RPC
-        
+
 ModuleLockedAmount
 
 \`\`\`js
@@ -1124,7 +1124,7 @@ const result = await osmosis.lockup.moduleLockedAmount(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountUnlockableCoins()\` RPC
-        
+
 AccountUnlockableCoins
 
 \`\`\`js
@@ -1134,7 +1134,7 @@ const result = await osmosis.lockup.accountUnlockableCoins(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountUnlockingCoins()\` RPC
-        
+
 AccountUnlockingCoins
 
 \`\`\`js
@@ -1144,7 +1144,7 @@ const result = await osmosis.lockup.accountUnlockingCoins(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedCoins()\` RPC
-        
+
 AccountLockedCoins
 
 \`\`\`js
@@ -1154,7 +1154,7 @@ const result = await osmosis.lockup.accountLockedCoins(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedPastTime()\` RPC
-        
+
 AccountLockedPastTime
 
 \`\`\`js
@@ -1164,7 +1164,7 @@ const result = await osmosis.lockup.accountLockedPastTime(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedPastTimeNotUnlockingOnly()\` RPC
-        
+
 AccountLockedPastTimeNotUnlockingOnly
 
 \`\`\`js
@@ -1177,7 +1177,7 @@ const result = await osmosis.lockup.accountLockedPastTimeNotUnlockingOnly(reques
 \`\`\`
 
 ##### \`osmosis.lockup.accountUnlockedBeforeTime()\` RPC
-        
+
 AccountUnlockedBeforeTime
 
 \`\`\`js
@@ -1187,7 +1187,7 @@ const result = await osmosis.lockup.accountUnlockedBeforeTime(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedPastTimeDenom()\` RPC
-        
+
 AccountLockedPastTimeDenom
 
 \`\`\`js
@@ -1197,7 +1197,7 @@ const result = await osmosis.lockup.accountLockedPastTimeDenom(request);
 \`\`\`
 
 ##### \`osmosis.lockup.lockedDenom()\` RPC
-        
+
 LockedDenom
 
 \`\`\`js
@@ -1207,7 +1207,7 @@ const result = await osmosis.lockup.lockedDenom(request);
 \`\`\`
 
 ##### \`osmosis.lockup.lockedByID()\` RPC
-        
+
 LockedByID
 
 \`\`\`js
@@ -1217,7 +1217,7 @@ const result = await osmosis.lockup.lockedByID(request);
 \`\`\`
 
 ##### \`osmosis.lockup.syntheticLockupsByLockupID()\` RPC
-        
+
 SyntheticLockupsByLockupID
 
 \`\`\`js
@@ -1227,7 +1227,7 @@ const result = await osmosis.lockup.syntheticLockupsByLockupID(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedLongerDuration()\` RPC
-        
+
 AccountLockedLongerDuration
 
 \`\`\`js
@@ -1237,7 +1237,7 @@ const result = await osmosis.lockup.accountLockedLongerDuration(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedDuration()\` RPC
-        
+
 AccountLockedDuration
 
 \`\`\`js
@@ -1247,7 +1247,7 @@ const result = await osmosis.lockup.accountLockedDuration(request);
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedLongerDurationNotUnlockingOnly()\` RPC
-        
+
 AccountLockedLongerDurationNotUnlockingOnly
 
 \`\`\`js
@@ -1260,7 +1260,7 @@ const result = await osmosis.lockup.accountLockedLongerDurationNotUnlockingOnly(
 \`\`\`
 
 ##### \`osmosis.lockup.accountLockedLongerDurationDenom()\` RPC
-        
+
 AccountLockedLongerDurationDenom
 
 \`\`\`js
@@ -1270,7 +1270,7 @@ const result = await osmosis.lockup.accountLockedLongerDurationDenom(request);
 \`\`\`
 
 ##### \`osmosis.lockup.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1280,7 +1280,7 @@ const result = await osmosis.lockup.params(request);
 \`\`\`
 
 ##### \`osmosis.mint.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1290,7 +1290,7 @@ const result = await osmosis.mint.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.mint.v1beta1.epochProvisions()\` RPC
-        
+
 EpochProvisions
 
 \`\`\`js
@@ -1300,7 +1300,7 @@ const result = await osmosis.mint.v1beta1.epochProvisions(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.gaugeIds()\` RPC
-        
+
 GaugeIds
 
 \`\`\`js
@@ -1310,7 +1310,7 @@ const result = await osmosis.poolincentives.v1beta1.gaugeIds(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.distrInfo()\` RPC
-        
+
 DistrInfo
 
 \`\`\`js
@@ -1320,7 +1320,7 @@ const result = await osmosis.poolincentives.v1beta1.distrInfo(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1330,7 +1330,7 @@ const result = await osmosis.poolincentives.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.lockableDurations()\` RPC
-        
+
 LockableDurations
 
 \`\`\`js
@@ -1340,7 +1340,7 @@ const result = await osmosis.poolincentives.v1beta1.lockableDurations(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.incentivizedPools()\` RPC
-        
+
 IncentivizedPools
 
 \`\`\`js
@@ -1350,7 +1350,7 @@ const result = await osmosis.poolincentives.v1beta1.incentivizedPools(request);
 \`\`\`
 
 ##### \`osmosis.poolincentives.v1beta1.externalIncentiveGauges()\` RPC
-        
+
 ExternalIncentiveGauges
 
 \`\`\`js
@@ -1360,7 +1360,7 @@ const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(requ
 \`\`\`
 
 ##### \`osmosis.superfluid.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1370,7 +1370,7 @@ const result = await osmosis.superfluid.params(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.assetType()\` RPC
-        
+
 AssetType
 
 \`\`\`js
@@ -1383,7 +1383,7 @@ const result = await osmosis.superfluid.assetType(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.allAssets()\` RPC
-        
+
 AllAssets
 
 \`\`\`js
@@ -1393,7 +1393,7 @@ const result = await osmosis.superfluid.allAssets(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.assetMultiplier()\` RPC
-        
+
 AssetMultiplier
 
 \`\`\`js
@@ -1403,7 +1403,7 @@ const result = await osmosis.superfluid.assetMultiplier(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.allIntermediaryAccounts()\` RPC
-        
+
 AllIntermediaryAccounts
 
 \`\`\`js
@@ -1413,7 +1413,7 @@ const result = await osmosis.superfluid.allIntermediaryAccounts(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.connectedIntermediaryAccount()\` RPC
-        
+
 ConnectedIntermediaryAccount
 
 \`\`\`js
@@ -1423,7 +1423,7 @@ const result = await osmosis.superfluid.connectedIntermediaryAccount(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.totalDelegationByValidatorForDenom()\` RPC
-        
+
 TotalDelegationByValidatorForDenom
 
 \`\`\`js
@@ -1433,7 +1433,7 @@ const result = await osmosis.superfluid.totalDelegationByValidatorForDenom(reque
 \`\`\`
 
 ##### \`osmosis.superfluid.totalSuperfluidDelegations()\` RPC
-        
+
 TotalSuperfluidDelegations
 
 \`\`\`js
@@ -1446,7 +1446,7 @@ const result = await osmosis.superfluid.totalSuperfluidDelegations(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.superfluidDelegationAmount()\` RPC
-        
+
 SuperfluidDelegationAmount
 
 \`\`\`js
@@ -1459,7 +1459,7 @@ const result = await osmosis.superfluid.superfluidDelegationAmount(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.superfluidDelegationsByDelegator()\` RPC
-        
+
 SuperfluidDelegationsByDelegator
 
 \`\`\`js
@@ -1469,7 +1469,7 @@ const result = await osmosis.superfluid.superfluidDelegationsByDelegator(request
 \`\`\`
 
 ##### \`osmosis.superfluid.superfluidUndelegationsByDelegator()\` RPC
-        
+
 SuperfluidUndelegationsByDelegator
 
 \`\`\`js
@@ -1479,7 +1479,7 @@ const result = await osmosis.superfluid.superfluidUndelegationsByDelegator(reque
 \`\`\`
 
 ##### \`osmosis.superfluid.superfluidDelegationsByValidatorDenom()\` RPC
-        
+
 SuperfluidDelegationsByValidatorDenom
 
 \`\`\`js
@@ -1492,7 +1492,7 @@ const result = await osmosis.superfluid.superfluidDelegationsByValidatorDenom(re
 \`\`\`
 
 ##### \`osmosis.superfluid.estimateSuperfluidDelegatedAmountByValidatorDenom()\` RPC
-        
+
 EstimateSuperfluidDelegatedAmountByValidatorDenom
 
 \`\`\`js
@@ -1506,7 +1506,7 @@ const result = await osmosis.superfluid.estimateSuperfluidDelegatedAmountByValid
 \`\`\`
 
 ##### \`osmosis.superfluid.totalDelegationByDelegator()\` RPC
-        
+
 TotalDelegationByDelegator
 
 \`\`\`js
@@ -1516,7 +1516,7 @@ const result = await osmosis.superfluid.totalDelegationByDelegator(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.unpoolWhitelist()\` RPC
-        
+
 UnpoolWhitelist
 
 \`\`\`js
@@ -1526,7 +1526,7 @@ const result = await osmosis.superfluid.unpoolWhitelist(request);
 \`\`\`
 
 ##### \`osmosis.tokenfactory.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1539,7 +1539,7 @@ const result = await osmosis.tokenfactory.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.tokenfactory.v1beta1.denomAuthorityMetadata()\` RPC
-        
+
 DenomAuthorityMetadata
 
 \`\`\`js
@@ -1552,7 +1552,7 @@ const result = await osmosis.tokenfactory.v1beta1.denomAuthorityMetadata(request
 \`\`\`
 
 ##### \`osmosis.tokenfactory.v1beta1.denomsFromCreator()\` RPC
-        
+
 DenomsFromCreator
 
 \`\`\`js
@@ -1565,7 +1565,7 @@ const result = await osmosis.tokenfactory.v1beta1.denomsFromCreator(request);
 \`\`\`
 
 ##### \`osmosis.twap.v1beta1.params()\` RPC
-        
+
 Params
 
 \`\`\`js
@@ -1575,7 +1575,7 @@ const result = await osmosis.twap.v1beta1.params(request);
 \`\`\`
 
 ##### \`osmosis.twap.v1beta1.arithmeticTwap()\` RPC
-        
+
 ArithmeticTwap
 
 \`\`\`js
@@ -1585,7 +1585,7 @@ const result = await osmosis.twap.v1beta1.arithmeticTwap(request);
 \`\`\`
 
 ##### \`osmosis.twap.v1beta1.arithmeticTwapToNow()\` RPC
-        
+
 ArithmeticTwapToNow
 
 \`\`\`js
@@ -1595,7 +1595,7 @@ const result = await osmosis.twap.v1beta1.arithmeticTwapToNow(request);
 \`\`\`
 
 ##### \`osmosis.txfees.v1beta1.feeTokens()\` RPC
-        
+
 FeeTokens
 
 \`\`\`js
@@ -1609,7 +1609,7 @@ const result = await osmosis.txfees.v1beta1.feeTokens(request);
 \`\`\`
 
 ##### \`osmosis.txfees.v1beta1.denomSpotPrice()\` RPC
-        
+
 DenomSpotPrice
 
 \`\`\`js
@@ -1619,7 +1619,7 @@ const result = await osmosis.txfees.v1beta1.denomSpotPrice(request);
 \`\`\`
 
 ##### \`osmosis.txfees.v1beta1.denomPoolId()\` RPC
-        
+
 DenomPoolId
 
 \`\`\`js
@@ -1629,7 +1629,7 @@ const result = await osmosis.txfees.v1beta1.denomPoolId(request);
 \`\`\`
 
 ##### \`osmosis.txfees.v1beta1.baseDenom()\` RPC
-        
+
 BaseDenom
 
 \`\`\`js
