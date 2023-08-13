@@ -1,14 +1,9 @@
 import { ProtoStore } from './store';
 import { ProtoRef } from '@cosmology/types';
 import { getNested, getNestedProto } from './';
-export interface Lookup {
-    obj: any;
-    name: string;
-    import: string;
-    importType: string;
-    importedName: string;
-    package: string;
-}
+import { Lookup } from '@cosmology/types';
+
+export type { Lookup } from '@cosmology/types';
 
 export const recursiveLookup = (proto: any, name: string, scope: string[] = [], allowNested = true) => {
     if (!proto) return;

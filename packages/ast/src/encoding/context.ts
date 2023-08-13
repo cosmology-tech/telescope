@@ -1,37 +1,25 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@cosmology/types';
-import { ProtoStore, getObjectName, isRefExcluded } from '@cosmology/proto-parser';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@cosmology/types';
+import { IProtoStore } from '@cosmology/types';
+import { isRefExcluded, getObjectName } from '@cosmology/utils';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 import { getPluginValue } from '../plugins';
 import { TelescopeBaseTypes } from './types';
-export interface ParseContext {
-    options: TelescopeOptions;
-    imports: ImportUsage[];
-    utils: Record<string, boolean>;
-    addUtil: Function;
-}
-
-export interface ImportUsage {
-    type: 'typeImport' | 'toJSONEnum' | 'fromJSONEnum';
-    name: string;
-    import: string;
-    importedAs?: string;
-}
 
 interface DerivativeImport {
     type: TelescopeBaseTypes,
     symbol: TraversalSymbol
 }
-export class GenericParseContext implements ParseContext {
+export class GenericParseContext implements IParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[] = [];
     derivedImports: DerivativeImport[] = [];
     utils: Record<string, boolean> = {};
-    store: ProtoStore;
+    store: IProtoStore;
     ref: ProtoRef;
 
     constructor(
         ref: ProtoRef,
-        store: ProtoStore,
+        store: IProtoStore,
         options: TelescopeOptions
     ) {
         this.ref = ref;
@@ -150,13 +138,13 @@ export class GenericParseContext implements ParseContext {
 
 }
 
-export class AminoParseContext extends GenericParseContext implements ParseContext {
+export class AminoParseContext extends GenericParseContext implements IParseContext {
 
     aminoCasingFn: Function;
 
     constructor(
         ref: ProtoRef,
-        store: ProtoStore,
+        store: IProtoStore,
         options: TelescopeOptions
     ) {
         super(ref, store, options);
@@ -207,11 +195,11 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
     }
 
 }
-export class ProtoParseContext extends GenericParseContext implements ParseContext {
+export class ProtoParseContext extends GenericParseContext implements IParseContext {
 
     constructor(
         ref: ProtoRef,
-        store: ProtoStore,
+        store: IProtoStore,
         options: TelescopeOptions
     ) {
         super(ref, store, options);

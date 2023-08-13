@@ -1,30 +1,18 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@cosmology/types';
-import { ProtoStore } from '@cosmology/proto-parser';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@cosmology/types';
+import { IProtoStore } from '@cosmology/types';
 import { TelescopeBaseTypes } from './types';
-export interface ParseContext {
-    options: TelescopeOptions;
-    imports: ImportUsage[];
-    utils: Record<string, boolean>;
-    addUtil: Function;
-}
-export interface ImportUsage {
-    type: 'typeImport' | 'toJSONEnum' | 'fromJSONEnum';
-    name: string;
-    import: string;
-    importedAs?: string;
-}
 interface DerivativeImport {
     type: TelescopeBaseTypes;
     symbol: TraversalSymbol;
 }
-export declare class GenericParseContext implements ParseContext {
+export declare class GenericParseContext implements IParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[];
     derivedImports: DerivativeImport[];
     utils: Record<string, boolean>;
-    store: ProtoStore;
+    store: IProtoStore;
     ref: ProtoRef;
-    constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
+    constructor(ref: ProtoRef, store: IProtoStore, options: TelescopeOptions);
     pluginValue(name: any): any;
     isExcluded(): boolean;
     addUtil(util: any): void;
@@ -32,19 +20,19 @@ export declare class GenericParseContext implements ParseContext {
     addImportDerivative(imp: DerivativeImport): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
-    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@cosmology/proto-parser").Lookup;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@cosmology/types").Lookup;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
-export declare class AminoParseContext extends GenericParseContext implements ParseContext {
+export declare class AminoParseContext extends GenericParseContext implements IParseContext {
     aminoCasingFn: Function;
-    constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
+    constructor(ref: ProtoRef, store: IProtoStore, options: TelescopeOptions);
     private setAminoCasingFn;
     aminoCaseField(field: ProtoField): string;
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string): string;
     lookupEnumToJson(field: ProtoField, currentProtoPath: string): string;
 }
-export declare class ProtoParseContext extends GenericParseContext implements ParseContext {
-    constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
+export declare class ProtoParseContext extends GenericParseContext implements IParseContext {
+    constructor(ref: ProtoRef, store: IProtoStore, options: TelescopeOptions);
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
 }
