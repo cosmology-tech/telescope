@@ -483,20 +483,20 @@ export const getDefaultTSTypeFromProtoType = (
           if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
-            return getDefaultTSTypeFromProtoTypeDefault(field);
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
           }
         case 'google.protobuf.Any':
           if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
-            return getDefaultTSTypeFromProtoTypeDefault(field);
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
           }
 
         case 'cosmos.base.v1beta1.Coin':
           if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
           } else {
-            return getDefaultTSTypeFromProtoTypeDefault(field);
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
           }
 
         case 'cosmos.base.v1beta1.Coins':
@@ -506,19 +506,25 @@ export const getDefaultTSTypeFromProtoType = (
                 console.warn('Undefined! Can\'t get field of type:', field);
                 return t.identifier('undefined');
             } else {
-                return getDefaultTSTypeFromProtoTypeDefault(field)
+                return getDefaultTSTypeFromProtoTypeDefault(context, field)
             }
     };
 };
 
-function getDefaultTSTypeFromProtoTypeDefault(field: ProtoField) {
-  const temp = field.type.split(".");
-  const fieldName = temp[temp.length - 1];
+function getDefaultTSTypeFromProtoTypeDefault(
+  context: ProtoParseContext,
+  field: ProtoField
+) {
+  const fieldName = context.getTypeName(field);
+  const useName = fieldName.split('_').map(name => {
+    const temp = name.split(".");
+    return temp[temp.length - 1];
+  }).join('_');
   return t.callExpression(
-      t.memberExpression(
-          t.identifier(fieldName),
-          t.identifier('fromPartial')
-      ),
-      [t.objectExpression([])]
+    t.memberExpression(
+      t.identifier(useName),
+      t.identifier('fromPartial')
+    ),
+    [t.objectExpression([])]
   )
 }

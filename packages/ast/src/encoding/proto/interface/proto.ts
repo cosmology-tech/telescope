@@ -19,6 +19,7 @@ import {
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
 import { TraversalSymbol } from '@cosmology/types';
+import { getObjectName } from '@cosmology/proto-parser';
 
 const getProtoField = (
     context: ProtoParseContext,
@@ -414,10 +415,12 @@ export const createCreateProtoType = (
 
     [].push.apply(fields, Object.keys(proto.fields).map(key => {
         const isOneOf = oneOfs.includes(key);
-        const isOptional = getFieldOptionality(context, proto.fields[key], isOneOf)
+        const protoField = proto.fields[key];
+        const isOptional = getFieldOptionality(context, protoField, isOneOf);
+
         return {
             name: key,
-            ...proto.fields[key],
+            ...protoField,
             isOneOf,
             isOptional
         };

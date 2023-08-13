@@ -135,6 +135,7 @@ export const getEnumFromJsonName = (name) => {
 };
 
 export const getFieldsTypeName = (field: ProtoField) => {
+    if (!field?.scope) return field.parsedType.name;
     if (field?.scope.length <= 1) return field.parsedType.name;
     const [_pkg, ...scopes] = field.scope;
     return [...scopes, field.parsedType.name].join('_');
