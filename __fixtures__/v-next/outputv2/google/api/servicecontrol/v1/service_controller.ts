@@ -589,7 +589,7 @@ function createBaseCheckResponse(): CheckResponse {
     checkErrors: [],
     serviceConfigId: "",
     serviceRolloutId: "",
-    checkInfo: CheckInfo.fromPartial({})
+    checkInfo: CheckResponse_CheckInfo.fromPartial({})
   };
 }
 export const CheckResponse = {
@@ -735,7 +735,7 @@ export const CheckResponse = {
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   return {
     unusedArguments: [],
-    consumerInfo: ConsumerInfo.fromPartial({})
+    consumerInfo: CheckResponse_ConsumerInfo.fromPartial({})
   };
 }
 export const CheckResponse_CheckInfo = {
