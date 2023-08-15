@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
-    "@cosmology/utils": "^0.13.0",
+    "@cosmology/types": "^0.38.0",
     "dotty": "0.1.2"
   }
 }

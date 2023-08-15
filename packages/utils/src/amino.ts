@@ -1,4 +1,4 @@
-import { getPluginValue } from "@cosmology/utils";
+import { getPluginValue } from ".";
 import {
   DEFAULT_AMINO_EXCEPTIONS,
   ProtoAny,
