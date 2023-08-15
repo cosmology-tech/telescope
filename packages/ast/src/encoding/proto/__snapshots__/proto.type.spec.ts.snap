@@ -97,6 +97,27 @@ exports[`createCreateProtoType ValidatorUpdate 1`] = `
 }"
 `;
 
+exports[`createCreateProtoType orginal logic Header 1`] = `
+"function createBaseHeader(): Header {
+  return {
+    version: Consensus.fromPartial({}),
+    chainId: "",
+    height: Long.ZERO,
+    time: undefined,
+    lastBlockId: BlockID.fromPartial({}),
+    lastCommitHash: new Uint8Array(),
+    dataHash: new Uint8Array(),
+    validatorsHash: new Uint8Array(),
+    nextValidatorsHash: new Uint8Array(),
+    consensusHash: new Uint8Array(),
+    appHash: new Uint8Array(),
+    lastResultsHash: new Uint8Array(),
+    evidenceHash: new Uint8Array(),
+    proposerAddress: new Uint8Array()
+  };
+}"
+`;
+
 exports[`oneofs Value 1`] = `
 "/**
  * \`Value\` represents a dynamically typed value which can be either

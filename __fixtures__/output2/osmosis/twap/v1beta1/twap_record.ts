@@ -47,12 +47,12 @@ function createBaseTwapRecord(): TwapRecord {
     asset0Denom: "",
     asset1Denom: "",
     height: Long.ZERO,
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     p0LastSpotPrice: "",
     p1LastSpotPrice: "",
     p0ArithmeticTwapAccumulator: "",
     p1ArithmeticTwapAccumulator: "",
-    lastErrorTime: undefined
+    lastErrorTime: Timestamp.fromPartial({})
   };
 }
 export const TwapRecord = {

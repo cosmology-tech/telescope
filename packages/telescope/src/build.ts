@@ -1,5 +1,5 @@
-import { ProtoRef, TelescopeOptions } from '@osmonauts/types';
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoRef, TelescopeOptions } from '@cosmology/types';
+import { ProtoStore } from '@cosmology/proto-parser';
 import {
     AminoParseContext,
     createAminoConverter,
@@ -27,8 +27,8 @@ import {
     createInterfaceDecoder,
     createInterfaceFromAmino,
     createInterfaceToAmino,
-} from '@osmonauts/ast';
-import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
+} from '@cosmology/ast';
+import { ServiceMutation, ServiceQuery } from '@cosmology/types';
 
 export const getMutations = (mutations: ServiceMutation[]) => {
     return mutations.map((mutation: ServiceMutation) => {

@@ -703,8 +703,8 @@ function createBaseLogMetric(): LogMetric {
     valueExtractor: "",
     labelExtractors: {},
     bucketOptions: BucketOptions.fromPartial({}),
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: new Date(),
+    updateTime: new Date(),
     version: 0
   };
 }

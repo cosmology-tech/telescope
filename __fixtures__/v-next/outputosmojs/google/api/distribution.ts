@@ -877,7 +877,7 @@ export const Distribution_BucketOptions_Explicit = {
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
-    timestamp: undefined,
+    timestamp: new Date(),
     attachments: []
   };
 }

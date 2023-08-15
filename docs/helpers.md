@@ -1,4 +1,4 @@
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
 
 # Common helpers or utils
 
@@ -93,4 +93,4 @@ export const UTIL_HELPERS = [
 ];
 ```
 
-[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)

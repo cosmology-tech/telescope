@@ -1,7 +1,7 @@
 import { GenericParseContext } from '../../../../encoding';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { returnReponseType, optionalBool, processRpcComment } from '../utils/rpc';
 import { headersInit, initRequest, getInitReqProperties } from './utils';
 import * as t from '@babel/types'
@@ -36,7 +36,7 @@ const getFetchReqArgsService = (
 
     // initReqProperties (contains information for initReq parameter in fetchReq) arguments: 
     const initReqProperties = getInitReqProperties()
-    
+
     const fetchArgsInitReqObj = t.objectExpression(
         initReqProperties
     )
@@ -71,13 +71,13 @@ const grpcGatewayPOSTServiceMethodDefinition = (
             )
         ),
         optional
-    ); 
+    );
 
     // fetchArgs will be used in method body's return statement expression.
     // Contains arguments to fm.fetchReq
     // this one is different from the Msg, especially the package name
     const fetchArgs = getFetchReqArgsService(name, packageImport)
-    
+
     // method's body
     const body = t.blockStatement(
         [
@@ -96,7 +96,7 @@ const grpcGatewayPOSTServiceMethodDefinition = (
         'method',
         t.identifier(name),
         [paramRequest, initRequest], // params
-        body, 
+        body,
         returnReponseType(responseType),
         leadingComments,
         false,
@@ -154,7 +154,7 @@ const getQuasisNoParams = (
             false
         )
     )
-    
+
     // add empty tail element
     quasis.push(
         t.templateElement(
@@ -176,7 +176,7 @@ const getQuasisParams = (
     indicesRight: number[]
 ) => {
     let quasis: any[] = [];
-    
+
     // add left path element to quasis (path before Params element)
     const firstPath = path.slice(0, indicesLeft[0]);
     quasis.push(
@@ -187,12 +187,12 @@ const getQuasisParams = (
             },
             false
         )
-    )  
+    )
 
     // check if path end with param or quasis, get that quasis if any
     let lastPath = '';
-    if (indicesRight[indicesRight.length -1] != path.length -1) {
-        lastPath = path.slice(indicesRight[indicesRight.length -1] + 1, path.length);
+    if (indicesRight[indicesRight.length - 1] != path.length - 1) {
+        lastPath = path.slice(indicesRight[indicesRight.length - 1] + 1, path.length);
         // console.log(lastPath);  
     }
 
@@ -207,10 +207,10 @@ const getQuasisParams = (
                 },
                 false
             )
-        )   
+        )
     }
-    
-    
+
+
     // add remaining path (if exists) or only '?' sign
     quasis.push(
         t.templateElement(
@@ -221,7 +221,7 @@ const getQuasisParams = (
             false
         )
     )
-    
+
     // add empty tail element
     quasis.push(
         t.templateElement(
@@ -247,7 +247,7 @@ const getExpressionsParams = (
     paramsName: string[]
 ) => {
     let expressions: any[] = [];
-    let arrParams =[];
+    let arrParams = [];
 
     for (let i = 0; i < paramsName.length; i++) {
         // ${req["denom"]}
@@ -258,7 +258,7 @@ const getExpressionsParams = (
                 true,
             )
         )
-        
+
         arrParams.push(
             t.stringLiteral(paramsName[i])
         )
@@ -281,7 +281,7 @@ const getExpressionsParams = (
                     ]
                 ),
                 t.arrayExpression(
-                        arrParams
+                    arrParams
                 )
             ]
         )
@@ -320,11 +320,11 @@ const getFetchReqArgsParams = (
     indicesRight: number[],
 ) => {
     let args: any[] = [];
-    
+
     // first argument
     // ex: `/cosmos/staking/v1beta1/delegators/${req["delegator_addr"]}/validators/${req["validator_addr"]}? => quasis
     // ${fm.renderURLSearchParams(req, ["delegator_addr", "validator_addr"])}` => expressions
-    
+
     let paramsName = [];
     for (let i = 0; i < indicesLeft.length; i++) {
         paramsName.push(path.slice(indicesLeft[i] + 1, indicesRight[i]));
@@ -361,12 +361,12 @@ const getFetchReqArgs = (
 
     try {
         getPath = svc.options['(google.api.http).get']
-    } catch {} 
+    } catch { }
 
     if ((typeof getPath!) === 'undefined') {
         getPath = context.ref.proto.package + '.' + svc.name
     }
-    
+
     let args: any[];
 
     // check if getPath contains params
@@ -407,8 +407,8 @@ const grpcGatewayMethodDefinition = (
             )
         ),
         false
-    ); 
-    
+    );
+
     // fm.fetchReq(fetchArgs are here)
     const fetchArgs = getFetchReqArgs(context, svc);
 
@@ -431,7 +431,7 @@ const grpcGatewayMethodDefinition = (
         'method',
         t.identifier(name),
         [paramRequest, initRequest], // params
-        body, 
+        body,
         returnReponseType(responseType),
         leadingComments,
         false,
@@ -454,43 +454,45 @@ export const createGRPCGatewayQueryClass = (
     //case Query
     if (service.name === "Query") {
         methods = keys
-        .map(key => {
-            const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key;
-            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
-            return grpcGatewayMethodDefinition(
-                context,
-                name,
-                method,
-                leadingComments
-            )
-        })
-    } else {
-    //case Service
-        methods = keys
-        .map(key => {
-            const isGet = key.substring(0, 3) === "Get";
-            const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key;
-            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
-            if (!isGet) {
-                //POST METHOD
-                return grpcGatewayPOSTServiceMethodDefinition(
-                    name,
-                    method,
-                    context.ref.proto.package,
-                    leadingComments
-            )}
-            else {
+            .map(key => {
+                const method = service.methods[key];
+                const name = camelRpcMethods ? camel(key) : key;
+                const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
                 return grpcGatewayMethodDefinition(
                     context,
                     name,
                     method,
                     leadingComments
-            )}
-        })
+                )
+            })
+    } else {
+        //case Service
+        methods = keys
+            .map(key => {
+                const isGet = key.substring(0, 3) === "Get";
+                const method = service.methods[key];
+                const name = camelRpcMethods ? camel(key) : key;
+                const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
+                if (!isGet) {
+                    //POST METHOD
+                    return grpcGatewayPOSTServiceMethodDefinition(
+                        name,
+                        method,
+                        context.ref.proto.package,
+                        leadingComments
+                    )
+                }
+                else {
+                    return grpcGatewayMethodDefinition(
+                        context,
+                        name,
+                        method,
+                        leadingComments
+                    )
+                }
+            })
     }
-    
+
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
@@ -528,7 +530,7 @@ const grpcGatewayQuerierMethodDefinition = (
             )
         ),
         false
-    ); 
+    );
 
     // class method body (only return statement)
     const body = t.blockStatement(
@@ -554,7 +556,7 @@ const grpcGatewayQuerierMethodDefinition = (
                                     t.identifier('pathPrefix'),
                                     t.memberExpression(
                                         t.thisExpression(),
-                                        t.identifier('url') 
+                                        t.identifier('url')
                                     )
                                 )
                             ]
@@ -568,7 +570,7 @@ const grpcGatewayQuerierMethodDefinition = (
         'method',
         t.identifier(name),
         [paramRequest, headersInit], // params
-        body, 
+        body,
         returnReponseType(responseType),
         leadingComments,
         false,
@@ -590,7 +592,7 @@ export const createGRPCGatewayWrapperClass = (
     } else {
         className = 'ServiceClientImpl'
     }
-    
+
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys

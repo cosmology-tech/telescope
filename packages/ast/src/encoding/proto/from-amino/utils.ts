@@ -3,9 +3,9 @@ import { FromAminoJSONMethod } from './index';
 import { BILLION, callExpression, identifier, TypeLong } from '../../../utils';
 import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { getInterfaceFromAminoName } from '../implements';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 
 const setProp = (
     args: FromAminoJSONMethod,
@@ -300,6 +300,8 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
 
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
+
         args.context.addUtil('isSet');
         const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -324,7 +326,7 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
@@ -611,7 +613,7 @@ export const arrayTypes = {
     },
 
     long(args: FromAminoJSONMethod) {
-      return TypeLong.getFromStringArray(args.context);
+        return TypeLong.getFromStringArray(args.context);
     },
     uint64(args: FromAminoJSONMethod) {
         return arrayTypes.long(args);
@@ -705,40 +707,40 @@ export const arrayTypes = {
 
 export const fromAminoMessages = {
     anyType() {
-      return [
-        t.returnStatement(
-          t.objectExpression([
-            t.objectProperty(
-              t.identifier('typeUrl'),
-              t.memberExpression(
-                t.identifier('object'),
-                t.identifier('type')
-              )
-            ),
-            t.objectProperty(
-              t.identifier('value'),
-              t.memberExpression(
-                t.identifier('object'),
-                t.identifier('value')
-              )
+        return [
+            t.returnStatement(
+                t.objectExpression([
+                    t.objectProperty(
+                        t.identifier('typeUrl'),
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('type')
+                        )
+                    ),
+                    t.objectProperty(
+                        t.identifier('value'),
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('value')
+                        )
+                    )
+                ])
             )
-          ])
-        )
-      ]
+        ]
     },
     timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
-      context.addUtil('fromJsonTimestamp');
+        context.addUtil('fromJsonTimestamp');
 
-      return [
-        t.returnStatement(
-          t.callExpression(
-            t.identifier('fromJsonTimestamp'),
-            [
-                t.identifier('object')
-            ]
-          )
-        )
-      ]
+        return [
+            t.returnStatement(
+                t.callExpression(
+                    t.identifier('fromJsonTimestamp'),
+                    [
+                        t.identifier('object')
+                    ]
+                )
+            )
+        ]
     },
     height(context: ProtoParseContext, name: string, proto: ProtoType) {
         TypeLong.addUtil(context);
@@ -747,24 +749,24 @@ export const fromAminoMessages = {
         const casing = keepCase ? (str) => str : camel;
 
         const makeArgs = (fieldName: string) => {
-          let args: t.Expression[] = [
-            t.logicalExpression(
-                '||',
-                t.memberExpression(
-                    t.identifier('object'),
-                    t.identifier(fieldName)
+            let args: t.Expression[] = [
+                t.logicalExpression(
+                    '||',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(fieldName)
+                    ),
+                    t.stringLiteral('0')
                 ),
-                t.stringLiteral('0')
-            ),
-          ];
+            ];
 
-          const longType = TypeLong.getType(context);
+            const longType = TypeLong.getType(context);
 
-          if(longType == 'Long') {
-            args.push(t.booleanLiteral(true))
-          }
+            if (longType == 'Long') {
+                args.push(t.booleanLiteral(true))
+            }
 
-          return args;
+            return args;
         };
 
         const makeField = (fieldName: string) =>
@@ -793,86 +795,86 @@ export const fromAminoMessages = {
         const longType = TypeLong.getType(context);
 
         switch (longType) {
-          case 'BigInt':
-            return [
-              t.variableDeclaration('const', [
-                t.variableDeclarator(
-                  t.identifier('value'),
-                  t.callExpression(
-                    t.identifier('BigInt'),
-                    [t.identifier('object')]
-                  )
-                )
-              ]),
-              t.returnStatement(
-                t.objectExpression([
-                  t.objectProperty(
-                    t.identifier('seconds'),
-                    t.binaryExpression(
-                      '/',
-                      t.identifier('value'),
-                      t.callExpression(
-                        t.identifier('BigInt'),
-                        [t.stringLiteral("1000000000")]
-                      )
-                    )
-                  ),
-                  t.objectProperty(
-                    t.identifier('nanos'),
-                    t.callExpression(
-                      t.identifier('Number'),
-                      [
-                        t.binaryExpression(
-                          '%',
-                          t.identifier('value'),
-                          t.callExpression(
-                            t.identifier('BigInt'),
-                            [t.stringLiteral("1000000000")]
-                          )
+            case 'BigInt':
+                return [
+                    t.variableDeclaration('const', [
+                        t.variableDeclarator(
+                            t.identifier('value'),
+                            t.callExpression(
+                                t.identifier('BigInt'),
+                                [t.identifier('object')]
+                            )
                         )
-                      ]
+                    ]),
+                    t.returnStatement(
+                        t.objectExpression([
+                            t.objectProperty(
+                                t.identifier('seconds'),
+                                t.binaryExpression(
+                                    '/',
+                                    t.identifier('value'),
+                                    t.callExpression(
+                                        t.identifier('BigInt'),
+                                        [t.stringLiteral("1000000000")]
+                                    )
+                                )
+                            ),
+                            t.objectProperty(
+                                t.identifier('nanos'),
+                                t.callExpression(
+                                    t.identifier('Number'),
+                                    [
+                                        t.binaryExpression(
+                                            '%',
+                                            t.identifier('value'),
+                                            t.callExpression(
+                                                t.identifier('BigInt'),
+                                                [t.stringLiteral("1000000000")]
+                                            )
+                                        )
+                                    ]
+                                )
+                            )
+                        ])
                     )
-                  )
-                ])
-              )
-            ]
+                ]
 
-          case 'Long':
-          default:
-            return [
-              t.variableDeclaration('const', [
-                t.variableDeclarator(
-                  t.identifier('value'),
-                  t.callExpression(t.identifier('parseInt'), [
-                    t.identifier('object')
-                  ])
-                )
-              ]),
-              // return
-              t.returnStatement(
-                t.objectExpression([
-                  // seconds
-                  t.objectProperty(
-                    t.identifier('seconds'),
-                    t.callExpression(TypeLong.getFromNumber(context), [
-                      t.callExpression(
-                        t.memberExpression(
-                          t.identifier('Math'),
-                          t.identifier('floor')
-                        ),
-                        [t.binaryExpression('/', t.identifier('value'), BILLION)]
-                      )
-                    ])
-                  ),
+            case 'Long':
+            default:
+                return [
+                    t.variableDeclaration('const', [
+                        t.variableDeclarator(
+                            t.identifier('value'),
+                            t.callExpression(t.identifier('parseInt'), [
+                                t.identifier('object')
+                            ])
+                        )
+                    ]),
+                    // return
+                    t.returnStatement(
+                        t.objectExpression([
+                            // seconds
+                            t.objectProperty(
+                                t.identifier('seconds'),
+                                t.callExpression(TypeLong.getFromNumber(context), [
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier('Math'),
+                                            t.identifier('floor')
+                                        ),
+                                        [t.binaryExpression('/', t.identifier('value'), BILLION)]
+                                    )
+                                ])
+                            ),
 
-                  // nanos
-                  t.objectProperty(
-                    t.identifier('nanos'),
-                    t.binaryExpression('%', t.identifier('value'), BILLION)
-                  )
-                ])
-              )
-            ];
+                            // nanos
+                            t.objectProperty(
+                                t.identifier('nanos'),
+                                t.binaryExpression('%', t.identifier('value'), BILLION)
+                            )
+                        ])
+                    )
+                ];
         }
     }
 }

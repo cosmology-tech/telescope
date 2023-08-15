@@ -603,7 +603,7 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
   return {
     sender: "",
     routes: [],
-    tokenIn: undefined,
+    tokenIn: Coin.fromPartial({}),
     tokenOutMinAmount: ""
   };
 }
@@ -825,7 +825,7 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
     sender: "",
     routes: [],
     tokenInMaxAmount: "",
-    tokenOut: undefined
+    tokenOut: Coin.fromPartial({})
   };
 }
 export const MsgSwapExactAmountOut = {
@@ -978,7 +978,7 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
   return {
     sender: "",
     poolId: Long.UZERO,
-    tokenIn: undefined,
+    tokenIn: Coin.fromPartial({}),
     shareOutMinAmount: ""
   };
 }
@@ -1440,7 +1440,7 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
   return {
     sender: "",
     poolId: Long.UZERO,
-    tokenOut: undefined,
+    tokenOut: Coin.fromPartial({}),
     shareInMaxAmount: ""
   };
 }

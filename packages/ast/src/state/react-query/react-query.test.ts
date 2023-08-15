@@ -1,5 +1,5 @@
-import { traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
+import { traverse, getNestedProto } from '@cosmology/proto-parser'
+import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore } from '../../../test-utils';
 import { GenericParseContext } from '../../encoding';
 import { createRpcQueryHooks, createRpcQueryHookInterfaces } from './react-query';

@@ -338,7 +338,7 @@ function createBasePoolToGauge(): PoolToGauge {
   return {
     poolId: BigInt(0),
     gaugeId: BigInt(0),
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const PoolToGauge = {

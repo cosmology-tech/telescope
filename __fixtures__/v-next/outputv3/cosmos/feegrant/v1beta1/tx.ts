@@ -106,7 +106,7 @@ function createBaseMsgGrantAllowance(): MsgGrantAllowance {
   return {
     granter: "",
     grantee: "",
-    allowance: undefined
+    allowance: Any.fromPartial({})
   };
 }
 export const MsgGrantAllowance = {

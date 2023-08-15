@@ -321,7 +321,7 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     diversifier: "",
     timestamp: Long.UZERO
   };
@@ -389,7 +389,7 @@ function createBaseHeader(): Header {
     sequence: Long.UZERO,
     timestamp: Long.UZERO,
     signature: new Uint8Array(),
-    newPublicKey: undefined,
+    newPublicKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }
@@ -597,7 +597,7 @@ export const SignatureAndData = {
   fromJSON(object: any): SignatureAndData {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
@@ -736,7 +736,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -761,7 +761,7 @@ export const SignBytes = {
 };
 function createBaseHeaderData(): HeaderData {
   return {
-    newPubKey: undefined,
+    newPubKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }
@@ -817,7 +817,7 @@ export const HeaderData = {
 function createBaseClientStateData(): ClientStateData {
   return {
     path: new Uint8Array(),
-    clientState: undefined
+    clientState: Any.fromPartial({})
   };
 }
 export const ClientStateData = {
@@ -872,7 +872,7 @@ export const ClientStateData = {
 function createBaseConsensusStateData(): ConsensusStateData {
   return {
     path: new Uint8Array(),
-    consensusState: undefined
+    consensusState: Any.fromPartial({})
   };
 }
 export const ConsensusStateData = {

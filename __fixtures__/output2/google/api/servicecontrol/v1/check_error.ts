@@ -268,7 +268,7 @@ export const CheckError = {
   },
   fromJSON(object: any): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       detail: isSet(object.detail) ? String(object.detail) : "",
       status: isSet(object.status) ? Status.fromJSON(object.status) : undefined

@@ -654,7 +654,7 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
     admin: "",
     groupId: Long.UZERO,
     metadata: "",
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgCreateGroupPolicy = {
@@ -841,7 +841,7 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
     groupMetadata: "",
     groupPolicyMetadata: "",
     groupPolicyAsAdmin: false,
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgCreateGroupWithPolicy = {
@@ -1025,7 +1025,7 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
   return {
     admin: "",
     address: "",
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgUpdateGroupPolicyDecisionPolicy = {
@@ -1280,7 +1280,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgSubmitProposal): unknown {
@@ -1504,9 +1504,9 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgVote): unknown {

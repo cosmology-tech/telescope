@@ -7,10 +7,10 @@ import {
   classDeclaration,
   newExpression
 } from '../../utils';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
-import { isRefIncluded } from '@osmonauts/proto-parser';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
+import { isRefIncluded } from '@cosmology/proto-parser';
 import { GenericParseContext } from '../../encoding';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { pascal } from 'case';
 
 const makeQueryStoreName = (name: string) => {

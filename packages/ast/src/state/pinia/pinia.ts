@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../encoding';
 
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 
 const firstLower = (s: string) => s = s.charAt(0).toLowerCase() + s.slice(1);
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);

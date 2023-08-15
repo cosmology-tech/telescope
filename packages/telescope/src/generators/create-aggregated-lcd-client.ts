@@ -1,10 +1,10 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { getNestedProto, isRefIncluded, isRefExcluded } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded, isRefExcluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createAggregatedLCDClient } from '@osmonauts/ast';
-import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@osmonauts/types';
+import { createAggregatedLCDClient } from '@cosmology/ast';
+import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@cosmology/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
@@ -29,9 +29,9 @@ export const plugin = (
     const localname = join(dir, fname);
 
     const refs = builder.store.filterProtoWhere((ref: ProtoRef) => {
-        return isRefIncluded(ref,{
-          packages,
-          protos
+        return isRefIncluded(ref, {
+            packages,
+            protos
         }) && !isRefExcluded(ref, builder.options.prototypes?.excluded);
     });
 
@@ -64,8 +64,8 @@ export const plugin = (
     const progImports = queryContexts.reduce((m, c) => {
 
         if (!isRefIncluded(c.ref, {
-          packages,
-          protos
+            packages,
+            protos
         })) {
             return m;
         }

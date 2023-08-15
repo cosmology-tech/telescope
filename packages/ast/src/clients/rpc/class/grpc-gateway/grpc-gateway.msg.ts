@@ -1,7 +1,7 @@
 import { GenericParseContext } from '../../../../encoding';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { optionalBool, returnReponseType } from '../utils/rpc';
 import { initRequest, getInitReqProperties } from './utils';
 import { processRpcComment } from '../utils';
@@ -33,7 +33,7 @@ const getFetchReqArgs = (
 
     // initReqProperties (contains information for initReq parameter in fetchReq) arguments: 
     const initReqProperties = getInitReqProperties()
-    
+
     const fetchArgsInitReqObj = t.objectExpression(
         initReqProperties
     )
@@ -68,12 +68,12 @@ const grpcGatewayMethodDefinition = (
             )
         ),
         optional
-    ); 
+    );
 
     // fetchArgs will be used in method body's return statement expression.
     // Contains arguments to fm.fetchReq
     const fetchArgs = getFetchReqArgs(name, packageImport)
-    
+
     // method's body
     const body = t.blockStatement(
         [
@@ -92,7 +92,7 @@ const grpcGatewayMethodDefinition = (
         'method',
         t.identifier(name),
         [paramRequest, initRequest], // params
-        body, 
+        body,
         returnReponseType(responseType),
         leadingComments,
         false,
@@ -104,7 +104,7 @@ export const createGRPCGatewayMsgClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    
+
     // adds import 
     context.addUtil('fm');
 

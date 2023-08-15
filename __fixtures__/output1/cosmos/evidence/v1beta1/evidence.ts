@@ -25,7 +25,7 @@ export interface EquivocationSDKType {
 function createBaseEquivocation(): Equivocation {
   return {
     height: Long.ZERO,
-    time: undefined,
+    time: new Date(),
     power: Long.ZERO,
     consensusAddress: ""
   };

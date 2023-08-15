@@ -273,8 +273,8 @@ function createBasePeriodLock(): PeriodLock {
   return {
     ID: Long.UZERO,
     owner: "",
-    duration: undefined,
-    endTime: undefined,
+    duration: Duration.fromPartial({}),
+    endTime: new Date(),
     coins: []
   };
 }
@@ -429,8 +429,8 @@ function createBaseQueryCondition(): QueryCondition {
   return {
     lockQueryType: 0,
     denom: "",
-    duration: undefined,
-    timestamp: undefined
+    duration: Duration.fromPartial({}),
+    timestamp: new Date()
   };
 }
 export const QueryCondition = {
@@ -559,8 +559,8 @@ function createBaseSyntheticLock(): SyntheticLock {
   return {
     underlyingLockId: Long.UZERO,
     synthDenom: "",
-    endTime: undefined,
-    duration: undefined
+    endTime: new Date(),
+    duration: Duration.fromPartial({})
   };
 }
 export const SyntheticLock = {

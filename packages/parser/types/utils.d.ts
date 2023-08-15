@@ -1,4 +1,4 @@
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@cosmology/types';
 import { ProtoStore } from './store';
 export declare const getNestedProto: (root: ProtoRoot) => any;
 export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
@@ -8,7 +8,7 @@ export declare const createTypeUrlTypeMap: (store: ProtoStore, fromRef: ProtoRef
 /**
  * test if a proto ref is included by the operation.
  * @param ref a ProtoRef with proto file info and package.
- * @param exclude patterns(will be deprecated soon), packages, proto files to include
+ * @param include patterns(will be deprecated soon), packages, proto files to include
  * @returns
  */
 export declare const isRefIncluded: (ref: ProtoRef, include?: {

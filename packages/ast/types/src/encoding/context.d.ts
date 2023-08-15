@@ -1,5 +1,5 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@osmonauts/types';
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@cosmology/types';
+import { ProtoStore } from '@cosmology/proto-parser';
 import { TelescopeBaseTypes } from './types';
 export interface ParseContext {
     options: TelescopeOptions;
@@ -32,7 +32,7 @@ export declare class GenericParseContext implements ParseContext {
     addImportDerivative(imp: DerivativeImport): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
-    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@osmonauts/proto-parser").Lookup;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@cosmology/proto-parser").Lookup;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {

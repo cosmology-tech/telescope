@@ -106,7 +106,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
     order: OrderID.fromPartial({}),
     provider: "",
     price: DecCoin.fromPartial({}),
-    deposit: undefined
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateBid = {
@@ -425,7 +425,7 @@ export const Bid = {
   fromJSON(object: any): Bid {
     return {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };

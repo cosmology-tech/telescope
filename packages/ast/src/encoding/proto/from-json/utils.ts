@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 
 const getPropNames = (field: ProtoField) => {
     const messageProp = field.name;
@@ -148,10 +148,10 @@ export const fromJSON = {
                     ]
                 ),
                 TypeLong.getFromValueWithArgs(args.context,
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(objProp)
-                        )
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(objProp)
+                    )
                 ),
                 getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
@@ -215,6 +215,7 @@ export const fromJSON = {
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
     enum(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
         args.context.addUtil('isSet');
         const fromJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -239,7 +240,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(-1)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
@@ -324,60 +325,60 @@ export const fromJSON = {
     // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
     timestamp(args: FromJSONMethod) {
-      let timestampFormat = args.context.pluginValue(
-        'prototypes.typingsFormat.timestamp'
-      );
-      const env = args.context.pluginValue(
-        'env'
-      );
-      if(env == 'default'){
-        timestampFormat = 'timestamp';
-      }
-      switch (timestampFormat) {
-        case 'timestamp':
-          return fromJSON.timestampTimestamp(args);
-        case 'date':
-        default:
-          args.context.addUtil('toTimestamp');
-          return fromJSON.timestampDate(args);
-      }
+        let timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        const env = args.context.pluginValue(
+            'env'
+        );
+        if (!env || env == 'default') {
+            timestampFormat = 'timestamp';
+        }
+        switch (timestampFormat) {
+            case 'timestamp':
+                return fromJSON.timestampTimestamp(args);
+            case 'date':
+            default:
+                args.context.addUtil('toTimestamp');
+                return fromJSON.timestampDate(args);
+        }
     },
 
     timestampTimestamp(args: FromJSONMethod) {
-      const { messageProp, objProp } = getPropNames(args.field);
-      args.context.addUtil('isSet');
-      args.context.addUtil('fromJsonTimestamp');
+        const { messageProp, objProp } = getPropNames(args.field);
+        args.context.addUtil('isSet');
+        args.context.addUtil('fromJsonTimestamp');
 
-      return t.objectProperty(
-        t.identifier(messageProp),
-        t.conditionalExpression(
-          t.callExpression(t.identifier('isSet'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.callExpression(t.identifier('fromJsonTimestamp'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.identifier('undefined')
-        )
-      );
+        return t.objectProperty(
+            t.identifier(messageProp),
+            t.conditionalExpression(
+                t.callExpression(t.identifier('isSet'), [
+                    t.memberExpression(t.identifier('object'), t.identifier(objProp))
+                ]),
+                t.callExpression(t.identifier('fromJsonTimestamp'), [
+                    t.memberExpression(t.identifier('object'), t.identifier(objProp))
+                ]),
+                t.identifier('undefined')
+            )
+        );
     },
 
     timestampDate(args: FromJSONMethod) {
-      const { messageProp, objProp } = getPropNames(args.field);
-      args.context.addUtil('isSet');
+        const { messageProp, objProp } = getPropNames(args.field);
+        args.context.addUtil('isSet');
 
-      return t.objectProperty(
-        t.identifier(messageProp),
-        t.conditionalExpression(
-          t.callExpression(t.identifier('isSet'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.newExpression(t.identifier('Date'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ]),
-          t.identifier('undefined')
-        )
-      );
+        return t.objectProperty(
+            t.identifier(messageProp),
+            t.conditionalExpression(
+                t.callExpression(t.identifier('isSet'), [
+                    t.memberExpression(t.identifier('object'), t.identifier(objProp))
+                ]),
+                t.newExpression(t.identifier('Date'), [
+                    t.memberExpression(t.identifier('object'), t.identifier(objProp))
+                ]),
+                t.identifier('undefined')
+            )
+        );
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

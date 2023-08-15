@@ -57,7 +57,7 @@ function createBaseIncentive(): Incentive {
     contract: "",
     allocations: [],
     epochs: 0,
-    startTime: undefined,
+    startTime: Timestamp.fromPartial({}),
     totalGas: Long.UZERO
   };
 }

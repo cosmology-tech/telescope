@@ -3,7 +3,7 @@ import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getBaseCreateTypeFuncName } from '../types';
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField } from '@cosmology/types';
 import { baseTypes, decode } from './utils';
 import { BinaryCoder } from '../../../utils/binary-coder-expression';
 

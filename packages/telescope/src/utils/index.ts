@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
 
@@ -40,7 +40,7 @@ export const UTILS = {
   HttpEndpoint: '@cosmjs/tendermint-rpc',
   isObject: '__helpers__',
   isSet: '__helpers__',
-  LCDClient: '@osmonauts/lcd',
+  LCDClient: '@cosmology/lcd',
   Long: '__helpers__',
   OfflineSigner: '@cosmjs/proto-signing',
   omitDefault: '__helpers__',

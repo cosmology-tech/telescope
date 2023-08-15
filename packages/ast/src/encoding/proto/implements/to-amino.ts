@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
-import { slugify } from '@osmonauts/utils';
+import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@cosmology/types';
+import { slugify } from '@cosmology/utils';
 import { identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 

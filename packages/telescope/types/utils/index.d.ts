@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { ImportObj } from '../types';
 export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
 export declare const UTILS: {

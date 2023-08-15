@@ -1,6 +1,6 @@
 import { createLCDClient } from './lcd';
-import { traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { ProtoService } from '@osmonauts/types';
+import { traverse, getNestedProto } from '@cosmology/proto-parser'
+import { ProtoService } from '@cosmology/types';
 import { GenericParseContext } from '../../../encoding';
 import { getTestProtoStore, expectCode } from '../../../../test-utils';
 const store = getTestProtoStore({

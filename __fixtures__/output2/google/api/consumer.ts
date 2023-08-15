@@ -194,7 +194,7 @@ export const Property = {
   fromJSON(object: any): Property {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
       description: isSet(object.description) ? String(object.description) : ""
     };
   },

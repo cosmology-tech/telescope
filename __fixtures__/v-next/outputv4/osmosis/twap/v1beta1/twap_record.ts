@@ -67,12 +67,12 @@ function createBaseTwapRecord(): TwapRecord {
     asset0Denom: "",
     asset1Denom: "",
     height: BigInt(0),
-    time: undefined,
+    time: new Date(),
     p0LastSpotPrice: "",
     p1LastSpotPrice: "",
     p0ArithmeticTwapAccumulator: "",
     p1ArithmeticTwapAccumulator: "",
-    lastErrorTime: undefined
+    lastErrorTime: new Date()
   };
 }
 export const TwapRecord = {

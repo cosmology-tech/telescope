@@ -1,7 +1,7 @@
 import { recursiveNamespace, renderNameSafely } from './utils';
 import { createStargateClientOptions } from '../clients/stargate';
 import { getGenericParseContextWithRef, expectCode } from '../../test-utils';
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 
 it('recursiveNamespace', async () => {
     const ref: ProtoRef = {

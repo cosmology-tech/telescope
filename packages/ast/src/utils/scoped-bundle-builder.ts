@@ -1,9 +1,42 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
-import { objectPattern } from '.';
-import { variableSlug } from '@osmonauts/utils';
+import { makeCommentLineWithBlocks, objectPattern, objectProperty } from '.';
+import { variableSlug } from '@cosmology/utils';
 
 const DEFAULT_RPC_PARAM_NAME = 'rpc';
+
+export const buildInstantHooks = (
+  methodName: string,
+  instantHooksMapping?: {
+    [key: string]: {
+      useHookName: string;
+      importedVarName: string;
+      comment?: string;
+    };
+  }
+): t.ObjectProperty[] => {
+  return Object.keys(instantHooksMapping ?? []).map((hookName) => {
+    const hookObj = instantHooksMapping![hookName];
+
+    return objectProperty(
+      t.identifier(hookName),
+      t.memberExpression(
+        t.callExpression(
+          t.memberExpression(
+            t.identifier(hookObj.importedVarName),
+            t.identifier(methodName)
+          ),
+          [t.identifier(DEFAULT_RPC_PARAM_NAME)]
+        ),
+        t.identifier(hookObj.useHookName)
+      ),
+      false,
+      false,
+      undefined,
+      makeCommentLineWithBlocks(hookObj.comment)
+    );
+  });
+};
 
 /**
  * Create an AST for a certain key and method.
@@ -46,7 +79,7 @@ export const buildNestedCreator = (
   imports: HookImport[],
   obj: object,
   methodName: string
-) => {
+): t.ObjectExpression | t.CallExpression => {
   //if obj is a path, end recursion and get the mapping.
   if (typeof obj === 'string') {
     return buildSingleCreator(imports, obj, methodName);
@@ -86,7 +119,14 @@ export const buildExportCreators = (
   obj: object,
   identifier: string,
   utils: string[],
-  methodName: string = 'createRpcQueryHooks'
+  methodName: string = 'createRpcQueryHooks',
+  instantHooksMapping?: {
+    [key: string]: {
+      useHookName: string,
+      importedVarName: string,
+      comment?: string
+    }
+  }
 ) => {
   // add imports
   utils.forEach((util) => {
@@ -94,6 +134,12 @@ export const buildExportCreators = (
   });
 
   const hookImports: HookImport[] = [];
+
+  const returnedHooksExpression = buildNestedCreator(hookImports, obj, methodName) as t.ObjectExpression;
+
+  const instantHooks = buildInstantHooks(methodName, instantHooksMapping);
+
+  returnedHooksExpression.properties.push(...instantHooks);
 
   const ast = t.exportNamedDeclaration(
     t.variableDeclaration('const', [
@@ -127,7 +173,7 @@ export const buildExportCreators = (
             )
           ],
           t.blockStatement([
-            t.returnStatement(buildNestedCreator(hookImports, obj, methodName))
+            t.returnStatement(returnedHooksExpression)
           ]),
           false
         )

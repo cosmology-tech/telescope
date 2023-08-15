@@ -133,7 +133,7 @@ export interface Record_OfflineSDKType {}
 function createBaseRecord(): Record {
   return {
     name: "",
-    pubKey: undefined,
+    pubKey: Any.fromPartial({}),
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -290,7 +290,7 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: undefined,
+    privKey: Any.fromPartial({}),
     privKeyType: ""
   };
 }

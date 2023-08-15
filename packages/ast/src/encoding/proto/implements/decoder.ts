@@ -4,8 +4,8 @@ import {
   ProtoRef,
   TraverseTypeUrlRef,
   TypeUrlRef
-} from '@osmonauts/types';
-import { slugify } from '@osmonauts/utils';
+} from '@cosmology/types';
+import { slugify } from '@cosmology/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { BinaryCoder } from '../../../utils/binary-coder-expression';

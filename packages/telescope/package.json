@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/telescope",
-  "version": "0.101.1",
+  "name": "@cosmology/telescope",
+  "version": "0.103.2",
   "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/telescope#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -44,11 +44,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope"
+    "url": "https://github.com/cosmology-tech/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/issues"
+    "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
@@ -83,11 +83,11 @@
     "@babel/runtime": "^7.21.0",
     "@babel/traverse": "7.21.4",
     "@babel/types": "7.21.4",
+    "@cosmology/ast": "^0.90.0",
+    "@cosmology/proto-parser": "^0.47.0",
+    "@cosmology/types": "^0.38.0",
+    "@cosmology/utils": "^0.13.0",
     "@cosmwasm/ts-codegen": "0.34.0",
-    "@osmonauts/ast": "^0.88.1",
-    "@osmonauts/proto-parser": "^0.45.1",
-    "@osmonauts/types": "^0.36.1",
-    "@osmonauts/utils": "^0.11.1",
     "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
     "dargs": "7.0.0",

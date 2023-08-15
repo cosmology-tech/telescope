@@ -1,0 +1,45 @@
+name: Run E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout 🛎️
+        uses: actions/checkout@v2.3.1
+      - name: node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.4.0
+      - name: deps
+        run: yarn
+      - name: bootstrap
+        run: yarn bootstrap
+      - name: build
+        run: yarn build
+      - name: codegen
+        run: cd ./packages/starship && yarn run codegen
+      # Starship Infra setup
+      # - Create a local kind cluster
+      # - Creates a new namespace based on the name
+      # - Spins up the infra with the given config file
+      # - Waits till all nodes are running (timeout 30m)
+      # - Port forward all ports to localhost for next steps to connect
+      - name: infra
+        id: starship-action
+        uses: cosmology-tech/starship-action@0.2.12
+        with:
+          values: packages/starship/configs/local-config.yaml
+          port-forward: true
+          version: 0.1.34
+      - name: e2e
+        run: cd ./packages/starship && yarn run e2e:test

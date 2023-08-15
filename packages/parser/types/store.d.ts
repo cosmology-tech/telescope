@@ -1,5 +1,5 @@
-import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
-import { TraversalSymbol } from '@osmonauts/types';
+import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@cosmology/types';
+import { TraversalSymbol } from '@cosmology/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
@@ -43,7 +43,7 @@ export declare class ProtoStore {
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
     getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
-    getTypeUrlMap(ref: ProtoRef): import("@osmonauts/types").InterfaceTypeUrlMap;
+    getTypeUrlMap(ref: ProtoRef): import("@cosmology/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
 export {};

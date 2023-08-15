@@ -47,7 +47,7 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
   return {
     sender: "",
     routes: [],
-    tokenIn: undefined,
+    tokenIn: Coin.fromPartial({}),
     tokenOutMinAmount: ""
   };
 }
@@ -215,7 +215,7 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
     sender: "",
     routes: [],
     tokenInMaxAmount: "",
-    tokenOut: undefined
+    tokenOut: Coin.fromPartial({})
   };
 }
 export const MsgSwapExactAmountOut = {

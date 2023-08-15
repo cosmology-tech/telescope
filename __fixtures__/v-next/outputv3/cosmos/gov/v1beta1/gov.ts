@@ -819,14 +819,14 @@ export const Deposit = {
 function createBaseProposal(): Proposal {
   return {
     proposalId: Long.UZERO,
-    content: undefined,
+    content: Any.fromPartial({}),
     status: 0,
     finalTallyResult: TallyResult.fromPartial({}),
-    submitTime: undefined,
-    depositEndTime: undefined,
+    submitTime: new Date(),
+    depositEndTime: new Date(),
     totalDeposit: [],
-    votingStartTime: undefined,
-    votingEndTime: undefined
+    votingStartTime: new Date(),
+    votingEndTime: new Date()
   };
 }
 export const Proposal = {
@@ -1303,7 +1303,7 @@ export const Vote = {
 function createBaseDepositParams(): DepositParams {
   return {
     minDeposit: [],
-    maxDepositPeriod: undefined
+    maxDepositPeriod: Duration.fromPartial({})
   };
 }
 export const DepositParams = {
@@ -1416,7 +1416,7 @@ export const DepositParams = {
 };
 function createBaseVotingParams(): VotingParams {
   return {
-    votingPeriod: undefined
+    votingPeriod: Duration.fromPartial({})
   };
 }
 export const VotingParams = {

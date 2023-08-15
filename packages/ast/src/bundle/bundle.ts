@@ -1,6 +1,6 @@
 import { extname } from 'path';
 import * as t from '@babel/types';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 
 export const recursiveModuleBundle = (
     options: TelescopeOptions,
@@ -17,7 +17,7 @@ export const recursiveModuleBundle = (
             // see if there's recursive package inside.
             const others = Object.keys(obj[key])
                 .filter(a => a !== '__export')
-                .filter(a => !a.startsWith('_')).map(otherKey=>( {key: otherKey, value: obj[key][otherKey]} ));
+                .filter(a => !a.startsWith('_')).map(otherKey => ({ key: otherKey, value: obj[key][otherKey] }));
 
             if (others.length) {
                 // export recursive package through object properties
@@ -47,24 +47,24 @@ export const recursiveModuleBundle = (
 };
 
 export const recursiveOtherNameSpaces = (
-  objs
+    objs
 ): t.ObjectProperty[] => {
-  return objs.map(obj=>{
-    const properties: (t.SpreadElement | t.ObjectProperty | t.ObjectMethod)[] = Object.keys(obj.value)
-        .filter(a => a !== '__export')
-        .filter(a => a.startsWith('_'))
-        .map(a => t.spreadElement(t.identifier(a)));
+    return objs.map(obj => {
+        const properties: (t.SpreadElement | t.ObjectProperty | t.ObjectMethod)[] = Object.keys(obj.value)
+            .filter(a => a !== '__export')
+            .filter(a => a.startsWith('_'))
+            .map(a => t.spreadElement(t.identifier(a)));
 
-    const others = Object.keys(obj.value)
-        .filter(a => a !== '__export')
-        .filter(a => !a.startsWith('_')).map(otherKey=>( {key: otherKey, value: obj.value[otherKey]} ));
+        const others = Object.keys(obj.value)
+            .filter(a => a !== '__export')
+            .filter(a => !a.startsWith('_')).map(otherKey => ({ key: otherKey, value: obj.value[otherKey] }));
 
-    if (others.length) {
-        properties.push(...recursiveOtherNameSpaces(others))
-    }
+        if (others.length) {
+            properties.push(...recursiveOtherNameSpaces(others))
+        }
 
-    return t.objectProperty(t.identifier(obj.key), t.objectExpression(properties))
-  })
+        return t.objectProperty(t.identifier(obj.key), t.objectExpression(properties))
+    })
 };
 
 export const importNamespace = (ident: string, path: string) => t.importDeclaration(

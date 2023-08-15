@@ -1,4 +1,4 @@
-import { ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoServiceMethod } from '@cosmology/types';
 import * as t from '@babel/types';
 export declare const processRpcComment: (e: ProtoServiceMethod) => string;
 export declare const cleanType: (ResponseType: string) => string;

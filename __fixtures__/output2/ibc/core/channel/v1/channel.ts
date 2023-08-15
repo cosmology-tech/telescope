@@ -271,8 +271,8 @@ export const Channel = {
   },
   fromJSON(object: any): Channel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : ""
@@ -374,8 +374,8 @@ export const IdentifiedChannel = {
   },
   fromJSON(object: any): IdentifiedChannel {
     return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
       version: isSet(object.version) ? String(object.version) : "",

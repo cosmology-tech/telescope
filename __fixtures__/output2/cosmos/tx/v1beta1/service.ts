@@ -259,7 +259,7 @@ export const GetTxsEventRequest = {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => String(e)) : [],
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : 0
+      orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : -1
     };
   },
   toJSON(message: GetTxsEventRequest): unknown {
@@ -393,7 +393,7 @@ export const BroadcastTxRequest = {
   fromJSON(object: any): BroadcastTxRequest {
     return {
       txBytes: isSet(object.txBytes) ? bytesFromBase64(object.txBytes) : new Uint8Array(),
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toJSON(message: BroadcastTxRequest): unknown {

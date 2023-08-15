@@ -8,10 +8,10 @@ import {
     createStargateClientOptions,
     createStargateClientProtoRegistry,
     createStargateClientAminoRegistry
-} from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+} from '@cosmology/ast';
+import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
-import { variableSlug } from '@osmonauts/utils';
+import { variableSlug } from '@cosmology/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (

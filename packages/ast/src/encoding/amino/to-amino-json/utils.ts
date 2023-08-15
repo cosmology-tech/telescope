@@ -3,7 +3,7 @@ import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } fr
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {
@@ -190,34 +190,34 @@ export const toAmino = {
     },
 
     coinAmount(args: ToAminoParseField) {
-      const longType = TypeLong.getType(args.context);
+        const longType = TypeLong.getType(args.context);
 
-      switch (longType) {
-        case 'BigInt':
-          return t.memberExpression(
-            memberExpressionOrIdentifier(args.scope),
-            t.identifier('amount')
-          )
-        case 'Long':
-        default:
-          TypeLong.addUtil(args.context);
+        switch (longType) {
+            case 'BigInt':
+                return t.memberExpression(
+                    memberExpressionOrIdentifier(args.scope),
+                    t.identifier('amount')
+                )
+            case 'Long':
+            default:
+                TypeLong.addUtil(args.context);
 
-          return t.callExpression(
-            t.memberExpression(
-                t.callExpression(
-                    TypeLong.getFromValue(args.context),
-                    [
-                        t.memberExpression(
-                            memberExpressionOrIdentifier(args.scope),
-                            t.identifier('amount')
-                        )
-                    ]
-                ),
-                t.identifier('toString')
-            ),
-            []
-          )
-      }
+                return t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            TypeLong.getFromValue(args.context),
+                            [
+                                t.memberExpression(
+                                    memberExpressionOrIdentifier(args.scope),
+                                    t.identifier('amount')
+                                )
+                            ]
+                        ),
+                        t.identifier('toString')
+                    ),
+                    []
+                )
+        }
     },
 
     coin(args: ToAminoParseField) {

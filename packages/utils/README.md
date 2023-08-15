@@ -1,4 +1,4 @@
-# @osmonauts/utils
+# @cosmology/utils
 
 Utilities for Telescope, a TypeScript Transpiler for Cosmos Protobufs
 

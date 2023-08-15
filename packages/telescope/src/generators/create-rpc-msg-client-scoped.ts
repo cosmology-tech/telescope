@@ -1,9 +1,9 @@
 import * as dotty from 'dotty';
-import { createEmptyProtoRef, getNestedProto } from '@osmonauts/proto-parser';
+import { createEmptyProtoRef, getNestedProto } from '@cosmology/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcFactory, createScopedGrpcWebMsgFactory } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+import { createScopedRpcFactory, createScopedGrpcWebMsgFactory } from '@cosmology/ast';
+import { ProtoRef } from '@cosmology/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
@@ -105,9 +105,9 @@ const makeRPC = (
     let rpcast;
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
-          // TODO no working scoped clients for grpc-gateway right now
+        // TODO no working scoped clients for grpc-gateway right now
         case "tendermint":
-          // TODO add addUtil to generic context
+            // TODO add addUtil to generic context
             ctx.proto.addUtil('Rpc');
 
             rpcast = createScopedRpcFactory(
@@ -115,19 +115,19 @@ const makeRPC = (
                 methodName,
                 'MsgClientImpl' // make option later
             );
-          break;
+            break;
         case "grpc-web":
             ctx.proto.addUtil('grpc');
             ctx.proto.addUtil('NodeHttpTransport');
-            
+
             rpcast = createScopedGrpcWebMsgFactory(
                 obj,
                 methodName,
                 'MsgClientImpl' // make option later
             );
-          break;
+            break;
         default:
-          break;
+            break;
     }
 
     const serviceImports = getDepsFromQueries(

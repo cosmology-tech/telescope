@@ -398,7 +398,7 @@ export const CommissionRates = {
 function createBaseCommission(): Commission {
   return {
     commissionRates: CommissionRates.fromPartial({}),
-    updateTime: undefined
+    updateTime: Timestamp.fromPartial({})
   };
 }
 export const Commission = {
@@ -538,14 +538,14 @@ export const Description = {
 function createBaseValidator(): Validator {
   return {
     operatorAddress: "",
-    consensusPubkey: undefined,
+    consensusPubkey: Any.fromPartial({}),
     jailed: false,
     status: 0,
     tokens: "",
     delegatorShares: "",
     description: Description.fromPartial({}),
     unbondingHeight: Long.ZERO,
-    unbondingTime: undefined,
+    unbondingTime: Timestamp.fromPartial({}),
     commission: Commission.fromPartial({}),
     minSelfDelegation: ""
   };
@@ -639,7 +639,7 @@ export const Validator = {
       operatorAddress: isSet(object.operatorAddress) ? String(object.operatorAddress) : "",
       consensusPubkey: isSet(object.consensusPubkey) ? Any.fromJSON(object.consensusPubkey) : undefined,
       jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
@@ -1084,7 +1084,7 @@ export const UnbondingDelegation = {
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
     creationHeight: Long.ZERO,
-    completionTime: undefined,
+    completionTime: Timestamp.fromPartial({}),
     initialBalance: "",
     balance: ""
   };
@@ -1159,7 +1159,7 @@ export const UnbondingDelegationEntry = {
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
     creationHeight: Long.ZERO,
-    completionTime: undefined,
+    completionTime: Timestamp.fromPartial({}),
     initialBalance: "",
     sharesDst: ""
   };
@@ -1312,7 +1312,7 @@ export const Redelegation = {
 };
 function createBaseParams(): Params {
   return {
-    unbondingTime: undefined,
+    unbondingTime: Duration.fromPartial({}),
     maxValidators: 0,
     maxEntries: 0,
     historicalEntries: 0,
@@ -1398,7 +1398,7 @@ export const Params = {
 function createBaseDelegationResponse(): DelegationResponse {
   return {
     delegation: Delegation.fromPartial({}),
-    balance: undefined
+    balance: Coin.fromPartial({})
   };
 }
 export const DelegationResponse = {

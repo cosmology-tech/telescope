@@ -127,7 +127,7 @@ export interface OperationInfo {
 function createBaseOperation(): Operation {
   return {
     name: "",
-    metadata: undefined,
+    metadata: Any.fromPartial({}),
     done: false,
     error: undefined,
     response: undefined
@@ -481,7 +481,7 @@ export const DeleteOperationRequest = {
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
     name: "",
-    timeout: undefined
+    timeout: Duration.fromPartial({})
   };
 }
 export const WaitOperationRequest = {

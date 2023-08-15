@@ -1,5 +1,5 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { UserValidatorPreferencesRequest, UserValidatorPreferencesRequestSDKType, UserValidatorPreferencesResponse, UserValidatorPreferencesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
