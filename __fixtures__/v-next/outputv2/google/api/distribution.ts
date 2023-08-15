@@ -552,8 +552,8 @@ function createBaseDistribution(): Distribution {
     count: Long.ZERO,
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: Range.fromPartial({}),
-    bucketOptions: BucketOptions.fromPartial({}),
+    range: Distribution_Range.fromPartial({}),
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
     bucketCounts: [],
     exemplars: []
   };

@@ -531,13 +531,13 @@ export interface AttributeContext_ResourceSDKType {
 }
 function createBaseAttributeContext(): AttributeContext {
   return {
-    origin: Peer.fromPartial({}),
-    source: Peer.fromPartial({}),
-    destination: Peer.fromPartial({}),
-    request: Request.fromPartial({}),
-    response: Response.fromPartial({}),
-    resource: Resource.fromPartial({}),
-    api: Api.fromPartial({}),
+    origin: AttributeContext_Peer.fromPartial({}),
+    source: AttributeContext_Peer.fromPartial({}),
+    destination: AttributeContext_Peer.fromPartial({}),
+    request: AttributeContext_Request.fromPartial({}),
+    response: AttributeContext_Response.fromPartial({}),
+    resource: AttributeContext_Resource.fromPartial({}),
+    api: AttributeContext_Api.fromPartial({}),
     extensions: []
   };
 }
@@ -1169,7 +1169,7 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     size: Long.ZERO,
     protocol: "",
     reason: "",
-    auth: Auth.fromPartial({})
+    auth: AttributeContext_Auth.fromPartial({})
   };
 }
 export const AttributeContext_Request = {
