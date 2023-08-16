@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/utils",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
-    "@cosmology/types": "^0.38.0",
+    "@cosmology/types": "^0.39.0",
     "dotty": "0.1.2"
   }
 }
