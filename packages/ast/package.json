@@ -84,13 +84,13 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "@cosmology/proto-parser": "^0.47.0"
   },
   "dependencies": {
     "@babel/parser": "^7.21.4",
     "@babel/runtime": "^7.21.0",
     "@babel/types": "7.21.4",
-    "@cosmology/proto-parser": "^0.47.0",
     "@cosmology/types": "^0.38.0",
     "@cosmology/utils": "^0.13.0",
     "case": "1.6.3",

@@ -8,7 +8,7 @@ import {
   newExpression
 } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
-import { isRefIncluded } from '@cosmology/proto-parser';
+import { isRefIncluded } from '@cosmology/utils';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@cosmology/utils';
 import { pascal } from 'case';

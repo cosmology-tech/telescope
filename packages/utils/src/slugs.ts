@@ -1,5 +1,5 @@
 import { camel } from '.';
-import { relative, dirname, extname } from 'path';
+import { extname } from 'path';
 
 export const variableSlug = (str) => {
     str = String(str).toString();

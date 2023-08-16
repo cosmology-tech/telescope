@@ -82,6 +82,8 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0"
+    "@babel/runtime": "^7.21.0",
+    "@cosmology/types": "^0.38.0",
+    "dotty": "0.1.2"
   }
 }

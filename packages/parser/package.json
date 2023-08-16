@@ -72,6 +72,7 @@
     "@babel/runtime": "^7.21.0",
     "@cosmology/protobufjs": "6.11.6",
     "@cosmology/types": "^0.38.0",
+    "@cosmology/utils": "^0.13.0",
     "dotty": "0.1.2",
     "glob": "8.0.3",
     "minimatch": "5.1.0",

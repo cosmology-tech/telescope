@@ -1,6 +1,25 @@
 import { camel, variableSlug } from ".";
 import { pascal, snake } from "case";
 import minimatch from "minimatch";
+import { ProtoRef, ProtoRoot } from "@cosmology/types";
+import dotty from "dotty";
+
+export const getNestedProto = (root: ProtoRoot) => {
+  const nestedPath =
+    "root.nested." + root.package.split(".").join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
+
+export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
+  path = root.package.split(".").concat(path);
+  const nestedPath = "root.nested." + path.join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
+
+export const getNested = (root: ProtoRoot, path: string[]) => {
+  const nestedPath = "root.nested." + path.join(".nested.") + ".nested";
+  return dotty.get(root, nestedPath);
+};
 
 /**
  * to make a customized hook name.
@@ -64,4 +83,97 @@ export const getQueryMethodNames = (
       }
     })
     .filter(Boolean);
+};
+
+/**
+ * test if a proto ref is included by the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param include patterns(will be deprecated soon), packages, proto files to include
+ * @returns
+ */
+export const isRefIncluded = (
+    ref: ProtoRef,
+    include?: {
+        patterns?: string[];
+        packages?: string[];
+        protos?: string[];
+    }
+) => {
+    // if no include object, no filter
+    if (!include) return true;
+    // if no arrays are populated, no filter
+    if (
+        !include.patterns?.length &&
+        !include.packages?.length &&
+        !include.protos?.length
+    ) {
+        return true;
+    }
+
+    // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
+    if (Boolean(ref.filename) && include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
+        return true;
+    }
+
+    const pkgMatched = Boolean(ref.proto?.package) && include?.packages?.some(pkgName => {
+        if (!globPattern.test(pkgName)) {
+            return ref.proto.package === pkgName;
+        }
+        return minimatch(ref.proto.package, pkgName)
+    });
+
+    if (pkgMatched) {
+        return true;
+    }
+
+    const protoMatched = Boolean(ref.filename) && include?.protos?.some(protoName => {
+        if (!globPattern.test(protoName)) {
+            return ref.filename === protoName;
+        }
+        return minimatch(ref.filename, protoName)
+    });
+
+    if (protoMatched) {
+        return true;
+    }
+
+    return false;
+
+};
+
+/**
+ * test if a proto ref is excluded from the operation.
+ * @param ref a ProtoRef with proto file info and package.
+ * @param exclude patterns(will be deprecated soon), packages, proto files to exclude
+ * @returns
+ */
+export const isRefExcluded = (
+    ref: ProtoRef,
+    exclude?: {
+        packages?: string[];
+        protos?: string[];
+    }
+) => {
+    // if no include object, no filter
+    if (!exclude) return false;
+    // if no arrays are populated, no filter
+    if (
+        !exclude.packages?.length &&
+        !exclude.protos?.length
+    ) {
+        return false;
+    }
+
+    return isRefIncluded(ref, exclude);
+};
+
+/*
+    nested objects get a slightly different naming convention
+    e.g. SignatureDescriptor_Data or SignatureDescriptor_Data_Multi
+*/
+
+export const getObjectName = (name: string, scope: string[] = []) => {
+    if (!scope.length || scope.length === 1) return name;
+    const [_pkg, ...scopes] = scope;
+    return [...scopes, name].join('_')
 };

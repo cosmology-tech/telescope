@@ -1,7 +1,6 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
-import { snake } from 'case';
-import { camel } from '@cosmology/utils';
+import { snake, camel } from 'case';
 
 export enum TelescopeLogLevel {
     None = 0,

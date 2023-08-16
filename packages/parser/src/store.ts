@@ -3,10 +3,10 @@ import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@cosmology/types';
-import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './utils';
+import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
-import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
+import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol, IProtoStore } from '@cosmology/types';
 
 import google_any from './native/any';
 import google_descriptor from './native/descriptor';
@@ -47,7 +47,7 @@ export const parseProto = (content, options?: ParseProtoOptions) => {
     }
     return parse(content, options);
 };
-export class ProtoStore {
+export class ProtoStore implements IProtoStore {
     files: string[];
     protoDirs: string[];
     deps: ProtoDep[];

@@ -75,7 +75,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
-    "@cosmology/utils": "^0.13.0",
     "case": "1.6.3"
   }
 }

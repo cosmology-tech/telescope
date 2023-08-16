@@ -1,12 +1,12 @@
 import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@cosmology/types';
-import { TraversalSymbol } from '@cosmology/types';
+import { TraversalSymbol, IProtoStore } from '@cosmology/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
     preferTrailingComment?: boolean;
 }
 export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@cosmology/protobufjs").IParserResult;
-export declare class ProtoStore {
+export declare class ProtoStore implements IProtoStore {
     files: string[];
     protoDirs: string[];
     deps: ProtoDep[];
@@ -41,8 +41,8 @@ export declare class ProtoStore {
     getDeps(): ProtoDep[];
     getDependencies(protos: ProtoRef[]): ProtoDep[];
     traverseAll(): void;
-    get(from: ProtoRef, name: string): import("./lookup").Lookup;
-    getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
+    get(from: ProtoRef, name: string): import("@cosmology/types").Lookup;
+    getImportFromRef(ref: ProtoRef, name: string): import("@cosmology/types").Lookup;
     getTypeUrlMap(ref: ProtoRef): import("@cosmology/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
