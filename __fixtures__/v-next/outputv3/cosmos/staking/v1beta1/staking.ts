@@ -3286,5 +3286,5 @@ export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
   return encodePubkey(content.value);
 };
 export const Cosmos_cryptoPubKey_ToAmino = (content: Any) => {
-  return decodePubkey(content).value;
+  return decodePubkey(content);
 };

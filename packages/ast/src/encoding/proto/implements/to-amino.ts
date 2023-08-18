@@ -21,15 +21,12 @@ export const createInterfaceToAmino = (
         const functionName = getInterfaceToAminoName(interfaceName);
 
         return makeFunctionWrapper(functionName, t.returnStatement(
-          t.memberExpression(
             t.callExpression(
                 t.identifier('decodePubkey'),
                 [
                     t.identifier('content')
                 ]
             ),
-            t.identifier('value')
-          )
         ));
     }
 

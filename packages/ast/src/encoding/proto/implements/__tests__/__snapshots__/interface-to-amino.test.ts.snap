@@ -2,7 +2,7 @@
 
 exports[`MsgCreateValidator MsgCreateValidator 1`] = `
 "export const Cosmos_cryptoPubKey_ToAmino = (content: Any) => {
-  return decodePubkey(content).value;
+  return decodePubkey(content);
 };"
 `;
 
