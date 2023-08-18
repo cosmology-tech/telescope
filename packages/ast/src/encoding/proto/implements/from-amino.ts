@@ -53,12 +53,7 @@ export const createInterfaceFromAmino = (
         return makeFunctionWrapper(functionName, t.returnStatement(
           t.callExpression(
             t.identifier('encodePubkey'),
-            [
-                t.memberExpression(
-                    t.identifier('content'),
-                    t.identifier('value')
-                )
-            ]
+            [t.identifier('content')]
           )
         ));
     }

@@ -139,7 +139,7 @@ export const AminoConverter = {
         minSelfDelegation: min_self_delegation,
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        pubkey: encodePubkey(pubkey.value),
+        pubkey: encodePubkey(pubkey),
         value: {
           denom: value.denom,
           amount: value.amount

@@ -61,7 +61,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         minSelfDelegation: min_self_delegation,
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        pubkey: encodePubkey(pubkey.value),
+        pubkey: encodePubkey(pubkey),
         value: {
           denom: value.denom,
           amount: value.amount

@@ -346,10 +346,7 @@ export const fromAmino = {
             t.callExpression(
                 t.identifier('encodePubkey'),
                 [
-                  t.memberExpression(
-                    t.identifier('pubkey'),
-                    t.identifier('value')
-                  )
+                  t.identifier('pubkey')
                 ]
             )
         )
