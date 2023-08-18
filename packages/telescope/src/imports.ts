@@ -319,7 +319,7 @@ const addDerivativeTypesToImports = (
                     });
                     const foundAmino = context.proto.derivedImports.find(a => {
                         if (a.type !== 'Amino') return false;
-                        if (AminoTypeObject.orig === a.symbol.symbolName) {
+                        if (AminoTypeObject.orig === a.symbol.symbolName && a.symbol.ref && a.symbol.source) {
                             // UNTIL you fix the ImportObjs to have ref...
                             let rel = getRelativePath(a.symbol.ref, a.symbol.source);
                             if (rel === AminoTypeObject.path) {
