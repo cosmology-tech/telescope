@@ -19,10 +19,7 @@ exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
     min_self_delegation: string;
     delegator_address: string;
     validator_address: string;
-    pubkey: {
-      type_url: string;
-      value: Uint8Array;
-    };
+    pubkey: Pubkey;
     value: {
       denom: string;
       amount: string;

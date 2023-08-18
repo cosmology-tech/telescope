@@ -2,10 +2,7 @@
 
 exports[`MsgCreateValidator MsgCreateValidator 1`] = `
 "export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
-  return encodeBech32Pubkey({
-    type: "tendermint/PubKeySecp256k1",
-    value: toBase64(content.value)
-  }, "cosmos");
+  return encodePubkey(content.value);
 };"
 `;
 

@@ -2,8 +2,8 @@ import { Description, DescriptionSDKType, CommissionRates, CommissionRatesSDKTyp
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { AminoMsg, decodeBech32Pubkey, encodeBech32Pubkey } from "@cosmjs/amino";
-import { fromBase64, toBase64 } from "@cosmjs/encoding";
+import { AminoMsg, Pubkey } from "@cosmjs/amino";
+import { decodePubkey, encodePubkey } from "@cosmjs/proto-signing";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateSDKType } from "./tx";
 export interface MsgCreateValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";
@@ -23,10 +23,7 @@ export interface MsgCreateValidatorAminoType extends AminoMsg {
     min_self_delegation: string;
     delegator_address: string;
     validator_address: string;
-    pubkey: {
-      type_url: string;
-      value: Uint8Array;
-    };
+    pubkey: Pubkey;
     value: {
       denom: string;
       amount: string;
@@ -110,10 +107,7 @@ export const AminoConverter = {
         min_self_delegation: minSelfDelegation,
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
-        pubkey: {
-          typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-          value: fromBase64(decodeBech32Pubkey(pubkey).value)
-        },
+        pubkey: decodePubkey(pubkey)!,
         value: {
           denom: value.denom,
           amount: value.amount
@@ -145,10 +139,7 @@ export const AminoConverter = {
         minSelfDelegation: min_self_delegation,
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        pubkey: encodeBech32Pubkey({
-          type: "tendermint/PubKeySecp256k1",
-          value: toBase64(pubkey.value)
-        }, "cosmos"),
+        pubkey: encodePubkey(pubkey.value),
         value: {
           denom: value.denom,
           amount: value.amount

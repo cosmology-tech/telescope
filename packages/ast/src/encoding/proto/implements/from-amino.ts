@@ -47,39 +47,19 @@ export const createInterfaceFromAmino = (
 
     if (interfaceName === 'cosmos.crypto.PubKey') {
         // return a helper!
-        context.addUtil('toBase64');
-        context.addUtil('encodeBech32Pubkey');
+        context.addUtil('encodePubkey');
         const functionName = getInterfaceFromAminoName(interfaceName);
 
         return makeFunctionWrapper(functionName, t.returnStatement(
-            t.callExpression(
-                t.identifier('encodeBech32Pubkey'),
-                [
-                    t.objectExpression([
-                        t.objectProperty(
-                            t.identifier('type'),
-                            t.stringLiteral('tendermint/PubKeySecp256k1')
-                        ),
-                        t.objectProperty(
-                            t.identifier('value'),
-                            t.callExpression(
-                                t.identifier('toBase64'),
-                                [
-                                    t.memberExpression(
-                                        t.identifier('content'),
-                                        t.identifier('value')
-                                    )
-                                ]
-                            )
-                        )
-                    ]),
-                    // TODO how to manage this?
-                    // 1. options.prefix
-                    // 2. look into prefix and how it's used across chains
-                    // 3. maybe AminoConverter is a class and has this.prefix!
-                    t.stringLiteral('cosmos')
-                ]
-            )
+          t.callExpression(
+            t.identifier('encodePubkey'),
+            [
+                t.memberExpression(
+                    t.identifier('content'),
+                    t.identifier('value')
+                )
+            ]
+          )
         ));
     }
 

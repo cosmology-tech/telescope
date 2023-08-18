@@ -174,46 +174,33 @@ export const fromAminoJSON = {
     },
 
     pubkey(args: FromAminoJSONMethod) {
-        args.context.addUtil('toBase64');
-        args.context.addUtil('encodeBech32Pubkey');
+        args.context.addUtil('encodePubkey');
 
-        const {
-            origName
-        } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
 
         const callExpr = t.callExpression(
-            t.identifier('encodeBech32Pubkey'),
-            [
-                t.objectExpression([
-                    t.objectProperty(
-                        t.identifier('type'),
-                        t.stringLiteral('tendermint/PubKeySecp256k1')
-                    ),
-                    t.objectProperty(
-                        t.identifier('value'),
-                        t.callExpression(
-                            t.identifier('toBase64'),
-                            [
-                                t.memberExpression(
-                                    t.memberExpression(
-                                        t.identifier('object'),
-                                        t.identifier(origName)
-                                    ),
-                                    t.identifier('value')
-                                )
-                            ]
-                        )
-                    )
-                ]),
-                // TODO how to manage this?
-                // 1. options.prefix
-                // 2. look into prefix and how it's used across chains
-                // 3. maybe AminoConverter is a class and has this.prefix!
-                t.stringLiteral('cosmos')
-            ]
+          t.identifier('encodePubkey'),
+          [
+            t.memberExpression(
+              t.identifier('object'),
+              t.identifier(origName)
+            ),
+          ]
         );
 
-        return setProp(args, callExpr);
+        return t.objectProperty(
+          t.identifier(propName),
+          t.conditionalExpression(
+              t.optionalMemberExpression(
+                  t.identifier('object'),
+                  t.identifier(origName),
+                  false,
+                  true
+              ),
+              callExpr,
+              t.identifier('undefined')
+          )
+        );
     },
 
 
