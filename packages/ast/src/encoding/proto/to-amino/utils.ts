@@ -242,8 +242,7 @@ export const toAminoJSON = {
     },
 
     pubkey(args: ToAminoJSONMethod) {
-        args.context.addUtil('fromBase64');
-        args.context.addUtil('decodeBech32Pubkey');
+        args.context.addUtil('decodePubkey');
 
         const { propName, origName } = getFieldNames(args.field);
 
@@ -260,33 +259,15 @@ export const toAminoJSON = {
                         t.identifier(propName)
                     ),
                     //
-                    t.objectExpression([
-                        t.objectProperty(
-                            t.identifier('typeUrl'),
-                            t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
-                        ),
-                        t.objectProperty(
-                            t.identifier('value'),
-                            t.callExpression(
-                                t.identifier('fromBase64'),
-                                [
-                                    t.memberExpression(
-                                        t.callExpression(
-                                            t.identifier('decodeBech32Pubkey'),
-                                            [
-                                                t.memberExpression(
-                                                    t.identifier('message'),
-                                                    t.identifier(propName)
-                                                ),
-                                            ]
-                                        ),
-                                        t.identifier('value')
-                                    )
-
-                                ]
-                            )
-                        )
-                    ]),
+                    t.callExpression(
+                      t.identifier('decodePubkey'),
+                      [
+                          t.memberExpression(
+                              t.identifier('message'),
+                              t.identifier(propName)
+                          ),
+                      ]
+                    ),
                     //
                     t.identifier('undefined')
                 )

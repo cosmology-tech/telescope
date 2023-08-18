@@ -17,35 +17,16 @@ export const createInterfaceToAmino = (
 ) => {
     if (interfaceName === 'cosmos.crypto.PubKey') {
         // return a helper!
-        context.addUtil('toBase64');
-        context.addUtil('encodeBech32Pubkey');
+        context.addUtil('decodePubkey');
         const functionName = getInterfaceToAminoName(interfaceName);
 
         return makeFunctionWrapper(functionName, t.returnStatement(
-            t.objectExpression([
-                t.objectProperty(
-                    t.identifier('typeUrl'),
-                    t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
-                ),
-                t.objectProperty(
-                    t.identifier('value'),
-                    t.callExpression(
-                        t.identifier('fromBase64'),
-                        [
-                            t.memberExpression(
-                                t.callExpression(
-                                    t.identifier('decodeBech32Pubkey'),
-                                    [
-                                        t.identifier('content')
-                                    ]
-                                ),
-                                t.identifier('value')
-                            )
-
-                        ]
-                    )
-                )
-            ])
+            t.callExpression(
+                t.identifier('decodePubkey'),
+                [
+                    t.identifier('content')
+                ]
+            ),
         ));
     }
 

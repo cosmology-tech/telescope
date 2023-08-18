@@ -54,6 +54,13 @@ export const renderAminoField = ({
         case 'Duration':
         case 'google.protobuf.Duration':
             return aminoInterface.duration(args);
+
+        case 'Any':
+        case 'google.protobuf.Any':
+          switch (field.options?.['(cosmos_proto.accepts_interface)']) {
+            case 'cosmos.crypto.PubKey':
+                return aminoInterface.pubkey(args);
+          }
     }
 
     switch (field.parsedType.type) {

@@ -70,6 +70,14 @@ export const aminoInterface = {
             t.tsTypeAnnotation(t.tSNumberKeyword())
         );
     },
+    pubkey(args: RenderAminoField) {
+      args.context.addUtil('Pubkey');
+
+      return t.tsPropertySignature(
+          t.identifier(args.context.aminoCaseField(args.field)),
+          t.tsTypeAnnotation(t.tsTypeReference(t.identifier('Pubkey')))
+      );
+    },
     enumArray(args: RenderAminoField) {
         return t.tsPropertySignature(
             t.identifier(args.context.aminoCaseField(args.field)),
@@ -94,7 +102,7 @@ export const aminoInterface = {
             })
         });
 
-        // 
+        //
         return t.tsPropertySignature(
             t.identifier(context.aminoCaseField(field)),
             t.tsTypeAnnotation(
@@ -108,7 +116,7 @@ export const aminoInterface = {
         const parentField = field;
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
 
-        // TODO how to handle isOptional from parent to child... 
+        // TODO how to handle isOptional from parent to child...
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
@@ -123,7 +131,7 @@ export const aminoInterface = {
             });
         });
 
-        // 
+        //
         return t.tsPropertySignature(
             t.identifier(context.aminoCaseField(field)),
             t.tsTypeAnnotation(
@@ -135,7 +143,7 @@ export const aminoInterface = {
     },
 
     array(args: RenderAminoField) {
-        // TODO write test case 
+        // TODO write test case
 
         // return t.tsPropertySignature(
         //     t.identifier(options.aminoCasingFn(field.name)),

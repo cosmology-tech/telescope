@@ -76,7 +76,7 @@ export const buildBaseTypeScriptInterface = (
         context.body.push(createAminoType(context.proto, name, obj));
 
         // TODO optimization:
-        // maybe in future, we can only print AminoTypeType if it's needed, 
+        // maybe in future, we can only print AminoTypeType if it's needed,
         // for example, if it's used in msgs, or inside of a implements/accepts
         context.body.push(createAminoTypeType(context.proto, name, obj));
     }
