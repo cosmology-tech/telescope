@@ -50,10 +50,10 @@ const makeKeyTypeObj = (ref: ProtoRef, field: any, scope: string[]) => {
             },
             value: {
                 id: 2,
-                type: field.parsedType.name,
+                type: field.type,
                 scope: [...scoped],
                 parsedType: {
-                    name: field.type,
+                    name: field.parsedType.name,
                     type: field.parsedType.type
                 },
                 comment: undefined,
