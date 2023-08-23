@@ -52,6 +52,10 @@ interface TelescopeOpts {
             packages?: string[];
             protos?: string[];
         };
+        includes?: {
+            packages?: string[];
+            protos?: string[];
+        };
         typingsFormat?: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
@@ -61,6 +65,8 @@ interface TelescopeOpts {
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
+            setDefaultEnumToUnrecognized?: boolean;
+            setDefaultCustomTypesToUndefined?: boolean;
             updatedDuration?: boolean;
         };
     };
@@ -130,6 +136,7 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        needExtraQueryKey?: boolean;
         include?: {
             /**
              * @deprecated in favor of packages and protos supporting minimatch
@@ -137,6 +144,14 @@ interface TelescopeOpts {
             patterns?: string[];
             packages?: string[];
             protos?: string[];
+        };
+        instantExport?: {
+            include: {
+                patterns?: string[];
+            };
+            nameMapping?: {
+                [key: string]: string;
+            };
         };
     };
     mobx?: {

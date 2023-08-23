@@ -637,7 +637,7 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
 };
 function createBaseQueryGetProtoRevProfitsByDenomResponse(): QueryGetProtoRevProfitsByDenomResponse {
   return {
-    profit: undefined
+    profit: Coin.fromPartial({})
   };
 }
 export const QueryGetProtoRevProfitsByDenomResponse = {

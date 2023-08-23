@@ -123,7 +123,7 @@ export const Endpoint = {
   },
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
       sequenceNumber: object?.sequence_number
     };
   },
@@ -135,7 +135,7 @@ export const Endpoint = {
   },
   fromAmino(object: EndpointAmino): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
       sequenceNumber: object.sequence_number
     };
   },

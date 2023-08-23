@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { ProtoParseContext } from '../../context';
 import { TelescopeBaseTypes } from '../../types';
 export declare const createProtoType: (context: ProtoParseContext, name: string, proto: ProtoType, type?: TelescopeBaseTypes) => t.ExportNamedDeclaration;

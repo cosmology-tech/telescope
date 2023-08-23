@@ -15,9 +15,9 @@ export interface Params {
 }
 function createBaseParams(): Params {
   return {
-    airdropStartTime: undefined,
-    durationUntilDecay: undefined,
-    durationOfDecay: undefined,
+    airdropStartTime: Timestamp.fromPartial({}),
+    durationUntilDecay: Duration.fromPartial({}),
+    durationOfDecay: Duration.fromPartial({}),
     claimDenom: ""
   };
 }

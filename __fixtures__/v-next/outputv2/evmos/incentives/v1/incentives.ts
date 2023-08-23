@@ -165,7 +165,7 @@ function createBaseIncentive(): Incentive {
     contract: "",
     allocations: [],
     epochs: 0,
-    startTime: undefined,
+    startTime: new Date(),
     totalGas: Long.UZERO
   };
 }
@@ -276,7 +276,7 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       totalGas: Long.fromString(object.total_gas)
     };
   },
@@ -289,7 +289,7 @@ export const Incentive = {
       obj.allocations = [];
     }
     obj.epochs = message.epochs;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },

@@ -54,7 +54,7 @@ export interface MsgConvertERC20Response {}
 export interface MsgConvertERC20ResponseSDKType {}
 function createBaseMsgConvertCoin(): MsgConvertCoin {
   return {
-    coin: undefined,
+    coin: Coin.fromPartial({}),
     receiver: "",
     sender: ""
   };

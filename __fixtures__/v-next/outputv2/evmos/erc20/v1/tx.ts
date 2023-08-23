@@ -116,7 +116,7 @@ export interface MsgConvertERC20ResponseAminoMsg {
 export interface MsgConvertERC20ResponseSDKType {}
 function createBaseMsgConvertCoin(): MsgConvertCoin {
   return {
-    coin: undefined,
+    coin: Coin.fromPartial({}),
     receiver: "",
     sender: ""
   };

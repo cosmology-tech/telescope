@@ -394,9 +394,9 @@ function createBaseLogMetric(): LogMetric {
     metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: BucketOptions.fromPartial({}),
-    createTime: undefined,
-    updateTime: undefined,
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    createTime: new Date(),
+    updateTime: new Date(),
     version: 0
   };
 }
@@ -569,7 +569,7 @@ export const LogMetric = {
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
       updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toSDK(message: LogMetric): LogMetricSDKType {

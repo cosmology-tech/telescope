@@ -17,6 +17,14 @@ export declare const TypeLong: {
         bigint: t.Identifier;
         long: t.Identifier;
     };
+    fromStringArray: {
+        bigint: t.CallExpression;
+        long: t.Identifier;
+    };
+    toStringArray: {
+        bigint: t.CallExpression;
+        long: t.Identifier;
+    };
     uzeroExpressions: {
         bigint: t.CallExpression;
         long: t.MemberExpression;
@@ -40,6 +48,8 @@ export declare const TypeLong: {
     addUtil: (ctx?: GenericParseContext) => void;
     getPropType: (ctx: GenericParseContext) => string;
     getType: (ctx: GenericParseContext) => string;
+    getFromStringArray: (ctx: GenericParseContext) => t.Expression;
+    getToStringArray: (ctx: GenericParseContext) => t.Expression;
     getPropIdentifier: (ctx: GenericParseContext) => t.Identifier;
     getIdentifier: (ctx: GenericParseContext) => t.Identifier;
     getUZero: (ctx: GenericParseContext) => t.Expression;

@@ -1276,7 +1276,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object?.parent,
       pageSize: object?.page_size,
       pageToken: object?.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): ListConsumerQuotaMetricsRequestSDKType {
@@ -1284,7 +1284,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: isSet(object.parent) ? String(object.parent) : "",
       page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
       page_token: isSet(object.page_token) ? String(object.page_token) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
@@ -1434,13 +1434,13 @@ export const GetConsumerQuotaMetricRequest = {
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetConsumerQuotaMetricRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
@@ -1507,13 +1507,13 @@ export const GetConsumerQuotaLimitRequest = {
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetConsumerQuotaLimitRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
@@ -3506,13 +3506,13 @@ export const GetServiceIdentityResponse = {
   fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
     return {
       identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   fromSDKJSON(object: any): GetServiceIdentityResponseSDKType {
     return {
       identity: isSet(object.identity) ? ServiceIdentity.fromSDKJSON(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {

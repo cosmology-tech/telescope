@@ -58,7 +58,7 @@ function createBaseClass(): Class {
     description: "",
     uri: "",
     uriHash: "",
-    data: undefined
+    data: Any.fromPartial({})
   };
 }
 export const Class = {
@@ -183,7 +183,7 @@ function createBaseNFT(): NFT {
     id: "",
     uri: "",
     uriHash: "",
-    data: undefined
+    data: Any.fromPartial({})
   };
 }
 export const NFT = {

@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@osmonauts/types';
-import { BILLION } from '../../../utils';
+import { ProtoType } from '@cosmology/types';
+import { BILLION, TypeLong, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
 import { getInterfaceToAminoName } from '../implements';
@@ -238,12 +238,11 @@ export const toAminoJSON = {
     },
 
     timestamp(args: ToAminoJSONMethod) {
-        return toAminoJSON.type(args);
+        return toAminoJSON.scalar(args);
     },
 
     pubkey(args: ToAminoJSONMethod) {
-        args.context.addUtil('fromBase64');
-        args.context.addUtil('decodeBech32Pubkey');
+        args.context.addUtil('decodePubkey');
 
         const { propName, origName } = getFieldNames(args.field);
 
@@ -260,33 +259,15 @@ export const toAminoJSON = {
                         t.identifier(propName)
                     ),
                     //
-                    t.objectExpression([
-                        t.objectProperty(
-                            t.identifier('typeUrl'),
-                            t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
-                        ),
-                        t.objectProperty(
-                            t.identifier('value'),
-                            t.callExpression(
-                                t.identifier('fromBase64'),
-                                [
-                                    t.memberExpression(
-                                        t.callExpression(
-                                            t.identifier('decodeBech32Pubkey'),
-                                            [
-                                                t.memberExpression(
-                                                    t.identifier('message'),
-                                                    t.identifier(propName)
-                                                ),
-                                            ]
-                                        ),
-                                        t.identifier('value')
-                                    )
-
-                                ]
-                            )
-                        )
-                    ]),
+                    t.callExpression(
+                      t.identifier('decodePubkey'),
+                      [
+                          t.memberExpression(
+                              t.identifier('message'),
+                              t.identifier(propName)
+                          ),
+                      ]
+                    ),
                     //
                     t.identifier('undefined')
                 )
@@ -577,7 +558,7 @@ export const arrayTypes = {
         return arrayTypes.number();
     },
     long(args: ToAminoJSONMethod) {
-        return arrayTypes.scalar();
+        return TypeLong.getToStringArray(args.context);
     },
     int64(args: ToAminoJSONMethod) {
         return arrayTypes.long(args);
@@ -661,35 +642,132 @@ export const arrayTypes = {
 
 
 export const toAminoMessages = {
-    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+    anyType() {
+        return [
+            t.variableDeclaration(
+                'const',
+                [
+                    t.variableDeclarator(
+                        identifier('obj', t.tsTypeAnnotation(t.tsAnyKeyword())),
+                        t.objectExpression([])
+                    )
+                ]
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier('type')
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('typeUrl')
+                    )
+                )
+            ),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('obj'),
+                        t.identifier('value')
+                    ),
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier('value')
+                    )
+                )
+            ),
+            t.returnStatement(
+                t.identifier('obj')
+            )
+        ]
+    },
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('fromTimestamp');
+
         return t.returnStatement(
             t.callExpression(
                 t.memberExpression(
-                    t.binaryExpression(
-                        '+',
-                        t.binaryExpression(
-                            '*',
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier('seconds')
-                                    ),
-                                    t.identifier('toInt')
-                                ),
-                                []
-                            ),
-                            BILLION
-                        ),
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier('nanos')
-                        )
+                    t.callExpression(
+                        t.identifier('fromTimestamp'),
+                        [t.identifier('message')]
                     ),
                     t.identifier('toString')
                 ),
                 []
             )
         )
+    },
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        const longType = TypeLong.getType(context);
+
+        switch (longType) {
+            case 'BigInt':
+                return t.returnStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.parenthesizedExpression(
+                                t.binaryExpression(
+                                    '+',
+                                    t.binaryExpression(
+                                        '*',
+                                        t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('seconds'),
+                                        ),
+                                        t.callExpression(
+                                            t.identifier('BigInt'),
+                                            [t.stringLiteral("1000000000")],
+                                        ),
+                                    ),
+                                    t.callExpression(
+                                        t.identifier('BigInt'),
+                                        [t.memberExpression(
+                                            t.identifier('message'),
+                                            t.identifier('nanos'),
+                                        )],
+                                    ),
+                                ),
+                            ),
+                            t.identifier('toString'),
+                        ),
+                        [],
+                    )
+                )
+            case 'Long':
+            default:
+                return t.returnStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.binaryExpression(
+                                '+',
+                                t.binaryExpression(
+                                    '*',
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.memberExpression(
+                                                t.identifier('message'),
+                                                t.identifier('seconds')
+                                            ),
+                                            t.identifier('toInt')
+                                        ),
+                                        []
+                                    ),
+                                    BILLION
+                                ),
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier('nanos')
+                                )
+                            ),
+                            t.identifier('toString')
+                        ),
+                        []
+                    )
+                );
+        }
+
     }
 }

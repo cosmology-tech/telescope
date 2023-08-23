@@ -356,7 +356,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? DecCoin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at,
@@ -368,7 +368,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDKJSON(object.transferred) : undefined,
       settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0),
@@ -397,7 +397,7 @@ function createBaseFractionalPayment(): FractionalPayment {
     state: 0,
     rate: DecCoin.fromPartial({}),
     balance: DecCoin.fromPartial({}),
-    withdrawn: undefined
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const FractionalPayment = {
@@ -498,7 +498,7 @@ export const FractionalPayment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object.rate ? DecCoin.fromSDK(object.rate) : undefined,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
@@ -509,7 +509,7 @@ export const FractionalPayment = {
       account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
       payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? DecCoin.fromSDKJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromSDKJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined

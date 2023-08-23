@@ -494,7 +494,7 @@ function createBaseOperationMetadata(): OperationMetadata {
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
-    startTime: undefined
+    startTime: Timestamp.fromPartial({})
   };
 }
 export const OperationMetadata = {
@@ -913,7 +913,7 @@ export const ChangeReport = {
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
-    createTime: undefined,
+    createTime: Timestamp.fromPartial({}),
     createdBy: "",
     status: 0,
     trafficPercentStrategy: undefined,

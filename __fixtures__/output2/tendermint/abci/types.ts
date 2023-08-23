@@ -869,7 +869,7 @@ export const RequestSetOption = {
 };
 function createBaseRequestInitChain(): RequestInitChain {
   return {
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     chainId: "",
     consensusParams: ConsensusParams.fromPartial({}),
     validators: [],
@@ -3375,7 +3375,7 @@ function createBaseEvidence(): Evidence {
     type: 0,
     validator: Validator.fromPartial({}),
     height: Long.ZERO,
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     totalVotingPower: Long.ZERO
   };
 }

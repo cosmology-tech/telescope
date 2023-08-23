@@ -123,7 +123,7 @@ export const QueryAppVersionRequest = {
     return {
       portId: object?.port_id,
       connectionId: object?.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };
@@ -132,7 +132,7 @@ export const QueryAppVersionRequest = {
     return {
       port_id: isSet(object.port_id) ? String(object.port_id) : "",
       connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       proposed_version: isSet(object.proposed_version) ? String(object.proposed_version) : ""
     };

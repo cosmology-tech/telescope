@@ -56,7 +56,7 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
   return {
     fromAddress: "",
     toAddress: "",
-    startTime: undefined,
+    startTime: Timestamp.fromPartial({}),
     lockupPeriods: [],
     vestingPeriods: [],
     merge: false

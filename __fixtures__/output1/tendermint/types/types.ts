@@ -514,7 +514,7 @@ function createBaseHeader(): Header {
     version: Consensus.fromPartial({}),
     chainId: "",
     height: Long.ZERO,
-    time: undefined,
+    time: new Date(),
     lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
     dataHash: new Uint8Array(),
@@ -789,7 +789,7 @@ function createBaseVote(): Vote {
     height: Long.ZERO,
     round: 0,
     blockId: BlockID.fromPartial({}),
-    timestamp: undefined,
+    timestamp: new Date(),
     validatorAddress: new Uint8Array(),
     validatorIndex: 0,
     signature: new Uint8Array()
@@ -899,7 +899,7 @@ export const Vote = {
   },
   fromSDK(object: VoteSDKType): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
@@ -1025,7 +1025,7 @@ function createBaseCommitSig(): CommitSig {
   return {
     blockIdFlag: 0,
     validatorAddress: new Uint8Array(),
-    timestamp: undefined,
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1097,7 +1097,7 @@ export const CommitSig = {
   },
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object?.validator_address,
       timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       signature: object?.signature
@@ -1119,7 +1119,7 @@ function createBaseProposal(): Proposal {
     round: 0,
     polRound: 0,
     blockId: BlockID.fromPartial({}),
-    timestamp: undefined,
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1218,7 +1218,7 @@ export const Proposal = {
   },
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       polRound: object?.pol_round,

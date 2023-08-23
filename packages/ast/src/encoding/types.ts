@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
+import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@cosmology/types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -401,6 +401,8 @@ export const getDefaultTSTypeFromProtoType = (
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
+    const setDefaultCustomTypesToUndefined = context.pluginValue('prototypes.typingsFormat.setDefaultCustomTypesToUndefined');
+
     if (isOptional) {
         return t.identifier('undefined');
     }
@@ -451,32 +453,70 @@ export const getDefaultTSTypeFromProtoType = (
 
         // OTHER TYPES
         case 'google.protobuf.Timestamp':
-            return t.identifier('undefined');
+            if(setDefaultCustomTypesToUndefined){
+              return t.identifier('undefined');
+            } else {
+              const timestampType = context.pluginValue('prototypes.typingsFormat.timestamp');
+
+              switch (timestampType) {
+                case 'timestamp':
+                  return t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Timestamp'),
+                        t.identifier('fromPartial')
+                    ),
+                    [t.objectExpression([])]
+                  )
+                case 'date':
+                  return t.newExpression(
+                    t.identifier('Date'),
+                    []
+                  );
+
+                default:
+                  return t.identifier('undefined');
+              }
+            }
+
+        // TODO: add cases for this later on
         case 'google.protobuf.Duration':
+          if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
+          }
         case 'google.protobuf.Any':
+          if(setDefaultCustomTypesToUndefined) {
             return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
+          }
+
+        case 'cosmos.base.v1beta1.Coin':
+          if(setDefaultCustomTypesToUndefined) {
+            return t.identifier('undefined');
+          } else {
+            return getDefaultTSTypeFromProtoTypeDefault(context, field);
+          }
 
         case 'cosmos.base.v1beta1.Coins':
             return t.arrayExpression([]);
-        case 'cosmos.base.v1beta1.Coin':
-            return t.identifier('undefined');
         default:
-            // console.warn('getDefaultTSTypeFromProtoType() type not found, it\'ll probably still work but need review: ' + field.type);
-            // return t.identifier('undefined');
             if (!field.type) {
                 console.warn('Undefined! Can\'t get field of type:', field);
                 return t.identifier('undefined');
             } else {
-                const temp = field.type.split(".");
-                const fieldName = temp[temp.length -1];
-                return t.callExpression(
-                            t.memberExpression(
-                                t.identifier(fieldName),
-                                t.identifier('fromPartial')
-                            ),
-                        [t.objectExpression([])]
-                    )
+                return getDefaultTSTypeFromProtoTypeDefault(context, field)
             }
     };
 };
+
+function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: ProtoField) {
+  return t.callExpression(
+      t.memberExpression(
+          t.identifier(getProtoFieldTypeName(context, field)),
+          t.identifier('fromPartial')
+      ),
+      [t.objectExpression([])]
+  )
+}

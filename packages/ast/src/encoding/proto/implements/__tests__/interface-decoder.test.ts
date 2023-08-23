@@ -1,5 +1,5 @@
-import { getNestedProto } from '@osmonauts/proto-parser';
-import { InterfaceTypeUrlMap } from '@osmonauts/types';
+import { getNestedProto } from '@cosmology/utils';
+import { InterfaceTypeUrlMap } from '@cosmology/types';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createObjectWithMethods } from '../../../object';

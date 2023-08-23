@@ -3,9 +3,9 @@ import { FromAminoJSONMethod } from './index';
 import { BILLION, callExpression, identifier, TypeLong } from '../../../utils';
 import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { getInterfaceFromAminoName } from '../implements';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 
 const setProp = (
     args: FromAminoJSONMethod,
@@ -174,46 +174,33 @@ export const fromAminoJSON = {
     },
 
     pubkey(args: FromAminoJSONMethod) {
-        args.context.addUtil('toBase64');
-        args.context.addUtil('encodeBech32Pubkey');
+        args.context.addUtil('encodePubkey');
 
-        const {
-            origName
-        } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
 
         const callExpr = t.callExpression(
-            t.identifier('encodeBech32Pubkey'),
-            [
-                t.objectExpression([
-                    t.objectProperty(
-                        t.identifier('type'),
-                        t.stringLiteral('tendermint/PubKeySecp256k1')
-                    ),
-                    t.objectProperty(
-                        t.identifier('value'),
-                        t.callExpression(
-                            t.identifier('toBase64'),
-                            [
-                                t.memberExpression(
-                                    t.memberExpression(
-                                        t.identifier('object'),
-                                        t.identifier(origName)
-                                    ),
-                                    t.identifier('value')
-                                )
-                            ]
-                        )
-                    )
-                ]),
-                // TODO how to manage this?
-                // 1. options.prefix
-                // 2. look into prefix and how it's used across chains
-                // 3. maybe AminoConverter is a class and has this.prefix!
-                t.stringLiteral('cosmos')
-            ]
+          t.identifier('encodePubkey'),
+          [
+            t.memberExpression(
+              t.identifier('object'),
+              t.identifier(origName)
+            ),
+          ]
         );
 
-        return setProp(args, callExpr);
+        return t.objectProperty(
+          t.identifier(propName),
+          t.conditionalExpression(
+              t.optionalMemberExpression(
+                  t.identifier('object'),
+                  t.identifier(origName),
+                  false,
+                  true
+              ),
+              callExpr,
+              t.identifier('undefined')
+          )
+        );
     },
 
 
@@ -300,6 +287,8 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
 
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
+
         args.context.addUtil('isSet');
         const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -324,7 +313,7 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
@@ -338,7 +327,7 @@ export const fromAminoJSON = {
     },
 
     timestamp(args: FromAminoJSONMethod) {
-        return fromAminoJSON.type(args);
+        return fromAminoJSON.scalar(args);
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -610,23 +599,23 @@ export const arrayTypes = {
         return arrayTypes.scalar();
     },
 
-    long() {
-        return arrayTypes.scalar();
+    long(args: FromAminoJSONMethod) {
+        return TypeLong.getFromStringArray(args.context);
     },
-    uint64() {
-        return arrayTypes.scalar();
+    uint64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    int64() {
-        return arrayTypes.scalar();
+    int64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sint64() {
-        return arrayTypes.scalar();
+    sint64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    fixed64() {
-        return arrayTypes.scalar();
+    fixed64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
-    sfixed64() {
-        return arrayTypes.scalar();
+    sfixed64(args: FromAminoJSONMethod) {
+        return arrayTypes.long(args);
     },
     number() {
         return arrayTypes.scalar();
@@ -704,28 +693,75 @@ export const arrayTypes = {
 
 
 export const fromAminoMessages = {
+    anyType() {
+        return [
+            t.returnStatement(
+                t.objectExpression([
+                    t.objectProperty(
+                        t.identifier('typeUrl'),
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('type')
+                        )
+                    ),
+                    t.objectProperty(
+                        t.identifier('value'),
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier('value')
+                        )
+                    )
+                ])
+            )
+        ]
+    },
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('fromJsonTimestamp');
+
+        return [
+            t.returnStatement(
+                t.callExpression(
+                    t.identifier('fromJsonTimestamp'),
+                    [
+                        t.identifier('object')
+                    ]
+                )
+            )
+        ]
+    },
     height(context: ProtoParseContext, name: string, proto: ProtoType) {
         TypeLong.addUtil(context);
 
         const keepCase = context.options.prototypes.parser.keepCase;
         const casing = keepCase ? (str) => str : camel;
 
+        const makeArgs = (fieldName: string) => {
+            let args: t.Expression[] = [
+                t.logicalExpression(
+                    '||',
+                    t.memberExpression(
+                        t.identifier('object'),
+                        t.identifier(fieldName)
+                    ),
+                    t.stringLiteral('0')
+                ),
+            ];
+
+            const longType = TypeLong.getType(context);
+
+            if (longType == 'Long') {
+                args.push(t.booleanLiteral(true))
+            }
+
+            return args;
+        };
+
         const makeField = (fieldName: string) =>
             t.objectProperty(
                 t.identifier(casing(fieldName)),
                 t.callExpression(
                     TypeLong.getFromString(context),
-                    [
-                        t.logicalExpression(
-                            '||',
-                            t.memberExpression(
-                                t.identifier('object'),
-                                t.identifier(fieldName)
-                            ),
-                            t.stringLiteral('0')
-                        ),
-                        t.booleanLiteral(true)
-                    ]
+                    makeArgs(fieldName)
                 )
             );
 
@@ -742,56 +778,90 @@ export const fromAminoMessages = {
     },
     duration(context: ProtoParseContext, name: string, proto: ProtoType) {
         TypeLong.addUtil(context);
-        return [
-            t.variableDeclaration('const', [
-                t.variableDeclarator(
-                    t.identifier('value'),
-                    t.callExpression(
-                        t.identifier('parseInt'),
-                        [
-                            t.identifier('object')
-                        ]
-                    )
-                )
-            ]),
-            // return
-            t.returnStatement(
-                t.objectExpression([
 
-                    // seconds
-                    t.objectProperty(
-                        t.identifier('seconds'),
-                        t.callExpression(
-                            TypeLong.getFromNumber(context),
-                            [
+        const longType = TypeLong.getType(context);
+
+        switch (longType) {
+            case 'BigInt':
+                return [
+                    t.variableDeclaration('const', [
+                        t.variableDeclarator(
+                            t.identifier('value'),
+                            t.callExpression(
+                                t.identifier('BigInt'),
+                                [t.identifier('object')]
+                            )
+                        )
+                    ]),
+                    t.returnStatement(
+                        t.objectExpression([
+                            t.objectProperty(
+                                t.identifier('seconds'),
+                                t.binaryExpression(
+                                    '/',
+                                    t.identifier('value'),
+                                    t.callExpression(
+                                        t.identifier('BigInt'),
+                                        [t.stringLiteral("1000000000")]
+                                    )
+                                )
+                            ),
+                            t.objectProperty(
+                                t.identifier('nanos'),
                                 t.callExpression(
-                                    t.memberExpression(
-                                        t.identifier('Math'),
-                                        t.identifier('floor')
-                                    ),
+                                    t.identifier('Number'),
                                     [
                                         t.binaryExpression(
-                                            '/',
+                                            '%',
                                             t.identifier('value'),
-                                            BILLION
+                                            t.callExpression(
+                                                t.identifier('BigInt'),
+                                                [t.stringLiteral("1000000000")]
+                                            )
                                         )
                                     ]
                                 )
-                            ]
-                        )
-                    ),
-
-                    // nanos
-                    t.objectProperty(
-                        t.identifier('nanos'),
-                        t.binaryExpression(
-                            '%',
-                            t.identifier('value'),
-                            BILLION
-                        )
+                            )
+                        ])
                     )
-                ])
-            )
-        ];
+                ]
+
+            case 'Long':
+            default:
+                return [
+                    t.variableDeclaration('const', [
+                        t.variableDeclarator(
+                            t.identifier('value'),
+                            t.callExpression(t.identifier('parseInt'), [
+                                t.identifier('object')
+                            ])
+                        )
+                    ]),
+                    // return
+                    t.returnStatement(
+                        t.objectExpression([
+                            // seconds
+                            t.objectProperty(
+                                t.identifier('seconds'),
+                                t.callExpression(TypeLong.getFromNumber(context), [
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier('Math'),
+                                            t.identifier('floor')
+                                        ),
+                                        [t.binaryExpression('/', t.identifier('value'), BILLION)]
+                                    )
+                                ])
+                            ),
+
+                            // nanos
+                            t.objectProperty(
+                                t.identifier('nanos'),
+                                t.binaryExpression('%', t.identifier('value'), BILLION)
+                            )
+                        ])
+                    )
+                ];
+        }
     }
 }

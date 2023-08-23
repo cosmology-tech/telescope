@@ -73,10 +73,10 @@ export interface ModuleVersion {
 function createBasePlan(): Plan {
   return {
     name: "",
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     height: Long.ZERO,
     info: "",
-    upgradedClientState: undefined
+    upgradedClientState: Any.fromPartial({})
   };
 }
 export const Plan = {

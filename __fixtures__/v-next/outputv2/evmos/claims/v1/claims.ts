@@ -233,7 +233,7 @@ export const Claim = {
   },
   fromSDK(object: ClaimSDKType): Claim {
     return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
       completed: object?.completed,
       claimableAmount: object?.claimable_amount
     };
@@ -247,7 +247,7 @@ export const Claim = {
   },
   fromAmino(object: ClaimAmino): Claim {
     return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
       completed: object.completed,
       claimableAmount: object.claimable_amount
     };

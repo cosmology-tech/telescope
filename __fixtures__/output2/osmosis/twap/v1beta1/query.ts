@@ -33,7 +33,7 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
     poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined,
+    startTime: Timestamp.fromPartial({}),
     endTime: undefined
   };
 }
@@ -163,7 +163,7 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
     poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined
+    startTime: Timestamp.fromPartial({})
   };
 }
 export const ArithmeticTwapToNowRequest = {

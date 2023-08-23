@@ -156,8 +156,8 @@ export const MetricValue_LabelsEntry = {
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
-    startTime: undefined,
-    endTime: undefined,
+    startTime: new Date(),
+    endTime: new Date(),
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,

@@ -399,7 +399,7 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
-    timestamp: undefined,
+    timestamp: new Date(),
     severity: 0,
     httpRequest: HttpRequest.fromPartial({}),
     trace: "",
@@ -578,7 +578,7 @@ export const LogEntry = {
     return {
       name: object?.name,
       timestamp: object.timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
@@ -619,8 +619,8 @@ export const LogEntry = {
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      timestamp: object.timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
       insertId: object.insert_id,
@@ -640,7 +640,7 @@ export const LogEntry = {
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;

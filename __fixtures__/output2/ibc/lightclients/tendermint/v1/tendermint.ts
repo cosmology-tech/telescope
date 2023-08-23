@@ -105,9 +105,9 @@ function createBaseClientState(): ClientState {
   return {
     chainId: "",
     trustLevel: Fraction.fromPartial({}),
-    trustingPeriod: undefined,
-    unbondingPeriod: undefined,
-    maxClockDrift: undefined,
+    trustingPeriod: Duration.fromPartial({}),
+    unbondingPeriod: Duration.fromPartial({}),
+    maxClockDrift: Duration.fromPartial({}),
     frozenHeight: Height.fromPartial({}),
     latestHeight: Height.fromPartial({}),
     proofSpecs: [],
@@ -256,7 +256,7 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    timestamp: undefined,
+    timestamp: Timestamp.fromPartial({}),
     root: MerkleRoot.fromPartial({}),
     nextValidatorsHash: new Uint8Array()
   };

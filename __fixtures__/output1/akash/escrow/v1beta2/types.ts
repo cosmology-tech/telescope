@@ -350,7 +350,7 @@ export const Account = {
     return {
       id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: object.transferred ? DecCoin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at,
@@ -379,7 +379,7 @@ function createBaseFractionalPayment(): FractionalPayment {
     state: 0,
     rate: DecCoin.fromPartial({}),
     balance: DecCoin.fromPartial({}),
-    withdrawn: undefined
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const FractionalPayment = {
@@ -480,7 +480,7 @@ export const FractionalPayment = {
       accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: object.rate ? DecCoin.fromSDK(object.rate) : undefined,
       balance: object.balance ? DecCoin.fromSDK(object.balance) : undefined,
       withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined

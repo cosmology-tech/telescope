@@ -217,7 +217,7 @@ function createBasePool(): Pool {
     id: Long.UZERO,
     poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
-    totalShares: undefined,
+    totalShares: Coin.fromPartial({}),
     poolLiquidity: [],
     scalingFactors: [],
     scalingFactorController: ""

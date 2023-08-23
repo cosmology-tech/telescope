@@ -56,7 +56,7 @@ function createBasePool(): Pool {
     tickSpacing: BigInt(0),
     exponentAtPriceOne: "",
     swapFee: "",
-    lastLiquidityUpdate: undefined
+    lastLiquidityUpdate: new Date()
   };
 }
 export const Pool = {

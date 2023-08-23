@@ -829,10 +829,10 @@ export const LeafOp = {
   },
   fromSDK(object: LeafOpSDKType): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: object?.prefix
     };
   },
@@ -912,7 +912,7 @@ export const InnerOp = {
   },
   fromSDK(object: InnerOpSDKType): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: object?.prefix,
       suffix: object?.suffix
     };
@@ -1130,7 +1130,7 @@ export const InnerSpec = {
       minPrefixLength: object?.min_prefix_length,
       maxPrefixLength: object?.max_prefix_length,
       emptyChild: object?.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toSDK(message: InnerSpec): InnerSpecSDKType {

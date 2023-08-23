@@ -346,8 +346,8 @@ export const SignatureDescriptors = {
 };
 function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
-    publicKey: undefined,
-    data: Data.fromPartial({}),
+    publicKey: Any.fromPartial({}),
+    data: SignatureDescriptor_Data.fromPartial({}),
     sequence: Long.UZERO
   };
 }
@@ -620,7 +620,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: object?.signature
     };
   },
@@ -632,7 +632,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: object.signature
     };
   },

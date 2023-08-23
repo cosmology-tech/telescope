@@ -6,8 +6,8 @@ import { parse } from '../parse';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { mkdirp } from 'mkdirp';
-import { getNestedProto, isRefExcluded } from '@osmonauts/proto-parser';
-import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@osmonauts/ast';
+import { getNestedProto, isRefExcluded } from '@cosmology/proto-parser';
+import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -21,8 +21,6 @@ export const plugin = (
     // [x] write out all TS files for package
     bundler.contexts = baseProtos.map(ref => {
         const context = builder.context(ref);
-
-        if (isRefExcluded(ref, builder.options.prototypes?.excluded)) return;
 
         parse(context);
         context.buildBase();

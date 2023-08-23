@@ -32,7 +32,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    constantFee: undefined
+    constantFee: Coin.fromPartial({})
   };
 }
 export const GenesisState = {

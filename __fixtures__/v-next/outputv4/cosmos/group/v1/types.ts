@@ -487,7 +487,7 @@ function createBaseMember(): Member {
     address: "",
     weight: "",
     metadata: "",
-    addedAt: undefined
+    addedAt: new Date()
   };
 }
 export const Member = {
@@ -797,8 +797,8 @@ export const PercentageDecisionPolicy = {
 };
 function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
   return {
-    votingPeriod: undefined,
-    minExecutionPeriod: undefined
+    votingPeriod: Duration.fromPartial({}),
+    minExecutionPeriod: Duration.fromPartial({})
   };
 }
 export const DecisionPolicyWindows = {
@@ -875,7 +875,7 @@ function createBaseGroupInfo(): GroupInfo {
     metadata: "",
     version: BigInt(0),
     totalWeight: "",
-    createdAt: undefined
+    createdAt: new Date()
   };
 }
 export const GroupInfo = {
@@ -1073,8 +1073,8 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
     admin: "",
     metadata: "",
     version: BigInt(0),
-    decisionPolicy: undefined,
-    createdAt: undefined
+    decisionPolicy: Any.fromPartial({}),
+    createdAt: new Date()
   };
 }
 export const GroupPolicyInfo = {
@@ -1210,13 +1210,13 @@ function createBaseProposal(): Proposal {
     address: "",
     metadata: "",
     proposers: [],
-    submitTime: undefined,
+    submitTime: new Date(),
     groupVersion: BigInt(0),
     groupPolicyVersion: BigInt(0),
     status: 0,
     result: 0,
     finalTallyResult: TallyResult.fromPartial({}),
-    votingPeriodEnd: undefined,
+    votingPeriodEnd: new Date(),
     executorResult: 0,
     messages: []
   };
@@ -1385,11 +1385,11 @@ export const Proposal = {
       submitTime: object.submit_time ?? undefined,
       groupVersion: object?.group_version,
       groupPolicyVersion: object?.group_policy_version,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       votingPeriodEnd: object.voting_period_end ?? undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1402,11 +1402,11 @@ export const Proposal = {
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
       group_version: isSet(object.group_version) ? BigInt(object.group_version.toString()) : BigInt(0),
       group_policy_version: isSet(object.group_policy_version) ? BigInt(object.group_policy_version.toString()) : BigInt(0),
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
       voting_period_end: isSet(object.voting_period_end) ? new Date(object.voting_period_end) : undefined,
-      executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
+      executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
@@ -1541,7 +1541,7 @@ function createBaseVote(): Vote {
     voter: "",
     option: 0,
     metadata: "",
-    submitTime: undefined
+    submitTime: new Date()
   };
 }
 export const Vote = {
@@ -1623,7 +1623,7 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata,
       submitTime: object.submit_time ?? undefined
     };
@@ -1632,7 +1632,7 @@ export const Vote = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined
     };

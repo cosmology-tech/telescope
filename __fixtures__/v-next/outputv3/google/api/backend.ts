@@ -539,7 +539,7 @@ export const BackendRule = {
       deadline: object?.deadline,
       minDeadline: object?.min_deadline,
       operationDeadline: object?.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
       jwtAudience: object?.jwt_audience,
       disableAuth: object?.disable_auth,
       protocol: object?.protocol
@@ -565,7 +565,7 @@ export const BackendRule = {
       deadline: object.deadline,
       minDeadline: object.min_deadline,
       operationDeadline: object.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
       jwtAudience: object?.jwt_audience,
       disableAuth: object?.disable_auth,
       protocol: object.protocol

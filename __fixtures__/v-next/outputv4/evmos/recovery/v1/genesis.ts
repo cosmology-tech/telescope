@@ -86,7 +86,7 @@ export const GenesisState = {
 function createBaseParams(): Params {
   return {
     enableRecovery: false,
-    packetTimeoutDuration: undefined
+    packetTimeoutDuration: Duration.fromPartial({})
   };
 }
 export const Params = {

@@ -443,7 +443,7 @@ export const ConnectionEnd = {
     return {
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
@@ -465,7 +465,7 @@ export const ConnectionEnd = {
     return {
       clientId: object.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       delayPeriod: Long.fromString(object.delay_period)
     };
@@ -610,7 +610,7 @@ export const IdentifiedConnection = {
       id: object?.id,
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
@@ -634,7 +634,7 @@ export const IdentifiedConnection = {
       id: object.id,
       clientId: object.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
       delayPeriod: Long.fromString(object.delay_period)
     };

@@ -435,7 +435,7 @@ export const QueryClaimableForActionRequest = {
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
       address: object?.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {

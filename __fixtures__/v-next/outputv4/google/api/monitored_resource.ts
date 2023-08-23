@@ -284,7 +284,7 @@ export const MonitoredResourceDescriptor = {
       displayName: object?.display_name,
       description: object?.description,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
     };
   },
   fromSDKJSON(object: any): MonitoredResourceDescriptorSDKType {
@@ -294,7 +294,7 @@ export const MonitoredResourceDescriptor = {
       display_name: isSet(object.display_name) ? String(object.display_name) : "",
       description: isSet(object.description) ? String(object.description) : "",
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
-      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
+      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
     };
   },
   toSDK(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorSDKType {

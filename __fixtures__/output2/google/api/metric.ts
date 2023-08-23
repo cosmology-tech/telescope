@@ -353,7 +353,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     unit: "",
     description: "",
     displayName: "",
-    metadata: MetricDescriptorMetadata.fromPartial({}),
+    metadata: MetricDescriptor_MetricDescriptorMetadata.fromPartial({}),
     launchStage: 0,
     monitoredResourceTypes: []
   };
@@ -499,8 +499,8 @@ export const MetricDescriptor = {
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
-    samplePeriod: undefined,
-    ingestDelay: undefined
+    samplePeriod: Duration.fromPartial({}),
+    ingestDelay: Duration.fromPartial({})
   };
 }
 export const MetricDescriptor_MetricDescriptorMetadata = {

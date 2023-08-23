@@ -325,9 +325,9 @@ function createBaseLogMetric(): LogMetric {
     metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: BucketOptions.fromPartial({}),
-    createTime: undefined,
-    updateTime: undefined,
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
     version: 0
   };
 }

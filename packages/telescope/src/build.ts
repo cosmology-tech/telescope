@@ -1,5 +1,5 @@
-import { ProtoRef, TelescopeOptions } from '@osmonauts/types';
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoRef, TelescopeOptions } from '@cosmology/types';
+import { ProtoStore } from '@cosmology/proto-parser';
 import {
     AminoParseContext,
     createAminoConverter,
@@ -21,13 +21,14 @@ import {
     ProtoParseContext,
     createTypeRegistry,
     createRegistryLoader,
+
     // helper
     createHelperObject,
     createInterfaceDecoder,
     createInterfaceFromAmino,
     createInterfaceToAmino,
-} from '@osmonauts/ast';
-import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
+} from '@cosmology/ast';
+import { ServiceMutation, ServiceQuery } from '@cosmology/types';
 
 export const getMutations = (mutations: ServiceMutation[]) => {
     return mutations.map((mutation: ServiceMutation) => {
@@ -75,7 +76,7 @@ export const buildBaseTypeScriptInterface = (
         context.body.push(createAminoType(context.proto, name, obj));
 
         // TODO optimization:
-        // maybe in future, we can only print AminoTypeType if it's needed, 
+        // maybe in future, we can only print AminoTypeType if it's needed,
         // for example, if it's used in msgs, or inside of a implements/accepts
         context.body.push(createAminoTypeType(context.proto, name, obj));
     }

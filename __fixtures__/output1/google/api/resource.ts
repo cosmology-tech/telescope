@@ -462,7 +462,7 @@ export const ResourceDescriptor = {
       type: object?.type,
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
       nameField: object?.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
       plural: object?.plural,
       singular: object?.singular,
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []

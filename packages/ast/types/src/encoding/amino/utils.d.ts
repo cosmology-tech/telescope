@@ -1,9 +1,6 @@
-import { ProtoAny, ProtoRoot, ProtoType } from '@osmonauts/types';
-import { GenericParseContext } from '../context';
-export declare const getTypeUrlWithPkgAndName: (pkg: string, name: string) => string;
-export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) => string;
+import { ProtoType } from '@cosmology/types';
+export { getTypeUrlWithPkgAndName, getTypeUrl, getAminoTypeName } from '@cosmology/utils';
 export declare const arrayTypeNDim: (body: any, n: any) => any;
-export declare const getAminoTypeName: (context: GenericParseContext, root: ProtoRoot, proto: ProtoType) => any;
 export declare const protoFieldsToArray: (proto: ProtoType) => {
     type?: string;
     name: string;

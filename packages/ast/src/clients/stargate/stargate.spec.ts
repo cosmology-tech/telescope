@@ -5,7 +5,7 @@ import {
     createStargateClientAminoRegistry,
     createStargateClientProtoRegistry
 } from './stargate';
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 
 it('createStargateClient', async () => {
     const ref: ProtoRef = {

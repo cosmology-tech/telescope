@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { fromPartialMethod } from './proto/from-partial';
 import { decodeMethod } from './proto/decode';
 import { encodeMethod } from './proto/encode';

@@ -285,8 +285,8 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    delegationAmount: undefined,
-    equivalentStakedAmount: undefined
+    delegationAmount: Coin.fromPartial({}),
+    equivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const SuperfluidDelegationRecord = {

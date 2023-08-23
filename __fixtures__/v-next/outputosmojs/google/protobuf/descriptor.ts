@@ -2229,8 +2229,8 @@ export const FieldDescriptorProto = {
     return {
       name: object?.name,
       number: object?.number,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
       typeName: object?.type_name,
       extendee: object?.extendee,
       defaultValue: object?.default_value,
@@ -2243,8 +2243,8 @@ export const FieldDescriptorProto = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       number: isSet(object.number) ? Number(object.number) : 0,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
       type_name: isSet(object.type_name) ? String(object.type_name) : "",
       extendee: isSet(object.extendee) ? String(object.extendee) : "",
       default_value: isSet(object.default_value) ? String(object.default_value) : "",
@@ -3110,7 +3110,7 @@ export const FileOptions = {
       javaMultipleFiles: object?.java_multiple_files,
       javaGenerateEqualsAndHash: object?.java_generate_equals_and_hash,
       javaStringCheckUtf8: object?.java_string_check_utf8,
-      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
+      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
       goPackage: object?.go_package,
       ccGenericServices: object?.cc_generic_services,
       javaGenericServices: object?.java_generic_services,
@@ -3135,7 +3135,7 @@ export const FileOptions = {
       java_multiple_files: isSet(object.java_multiple_files) ? Boolean(object.java_multiple_files) : false,
       java_generate_equals_and_hash: isSet(object.java_generate_equals_and_hash) ? Boolean(object.java_generate_equals_and_hash) : false,
       java_string_check_utf8: isSet(object.java_string_check_utf8) ? Boolean(object.java_string_check_utf8) : false,
-      optimize_for: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
+      optimize_for: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
       go_package: isSet(object.go_package) ? String(object.go_package) : "",
       cc_generic_services: isSet(object.cc_generic_services) ? Boolean(object.cc_generic_services) : false,
       java_generic_services: isSet(object.java_generic_services) ? Boolean(object.java_generic_services) : false,
@@ -3413,9 +3413,9 @@ export const FieldOptions = {
   },
   fromSDK(object: FieldOptionsSDKType): FieldOptions {
     return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
       packed: object?.packed,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
       lazy: object?.lazy,
       deprecated: object?.deprecated,
       weak: object?.weak,
@@ -3424,9 +3424,9 @@ export const FieldOptions = {
   },
   fromSDKJSON(object: any): FieldOptionsSDKType {
     return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
       packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
       lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       weak: isSet(object.weak) ? Boolean(object.weak) : false,
@@ -3844,14 +3844,14 @@ export const MethodOptions = {
   fromSDK(object: MethodOptionsSDKType): MethodOptions {
     return {
       deprecated: object?.deprecated,
-      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
+      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
   fromSDKJSON(object: any): MethodOptionsSDKType {
     return {
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      idempotency_level: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
+      idempotency_level: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
       uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
     };
   },

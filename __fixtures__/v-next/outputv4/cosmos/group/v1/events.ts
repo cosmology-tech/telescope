@@ -566,13 +566,13 @@ export const EventExec = {
   fromSDK(object: EventExecSDKType): EventExec {
     return {
       proposalId: object?.proposal_id,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
   fromSDKJSON(object: any): EventExecSDKType {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
   toSDK(message: EventExec): EventExecSDKType {

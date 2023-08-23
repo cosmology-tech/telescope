@@ -1,4 +1,4 @@
-import { getNestedProto } from '../../src/utils';
+import { getNestedProto } from '../../src';
 import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 

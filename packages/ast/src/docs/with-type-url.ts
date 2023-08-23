@@ -1,8 +1,8 @@
 import { makeCommentBlock, memberExpressionOrIdentifier } from "../utils";
 import * as t from '@babel/types';
 import generate from '@babel/generator';
-import { ServiceMutation } from "@osmonauts/types";
-import { camel } from "@osmonauts/utils";
+import { ServiceMutation } from "@cosmology/types";
+import { camel } from "@cosmology/utils";
 
 export const documentWithTypeUrl = (
     mutations: ServiceMutation[]

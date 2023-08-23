@@ -1589,8 +1589,8 @@ function createBaseLogBucket(): LogBucket {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: new Date(),
+    updateTime: new Date(),
     retentionDays: 0,
     locked: false,
     lifecycleState: 0,
@@ -1721,7 +1721,7 @@ export const LogBucket = {
       updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
       retentionDays: object?.retention_days,
       locked: object?.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
       cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined
     };
@@ -1748,8 +1748,8 @@ function createBaseLogView(): LogView {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: new Date(),
+    updateTime: new Date(),
     filter: ""
   };
 }
@@ -1859,8 +1859,8 @@ function createBaseLogSink(): LogSink {
     writerIdentity: "",
     includeChildren: false,
     bigqueryOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: new Date(),
+    updateTime: new Date()
   };
 }
 export const LogSink = {
@@ -2013,7 +2013,7 @@ export const LogSink = {
       description: object?.description,
       disabled: object?.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
       writerIdentity: object?.writer_identity,
       includeChildren: object?.include_children,
       bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
@@ -3448,8 +3448,8 @@ function createBaseLogExclusion(): LogExclusion {
     description: "",
     filter: "",
     disabled: false,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: new Date(),
+    updateTime: new Date()
   };
 }
 export const LogExclusion = {
@@ -4498,8 +4498,8 @@ export const CopyLogEntriesRequest = {
 };
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
-    startTime: undefined,
-    endTime: undefined,
+    startTime: new Date(),
+    endTime: new Date(),
     state: 0,
     cancellationRequested: false,
     request: CopyLogEntriesRequest.fromPartial({}),
@@ -4604,7 +4604,7 @@ export const CopyLogEntriesMetadata = {
     return {
       startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object?.cancellation_requested,
       request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
       progress: object?.progress,

@@ -28,7 +28,7 @@ export interface GenesisStateSDKType {
 function createBaseParams(): Params {
   return {
     pruneEpochIdentifier: "",
-    recordHistoryKeepPeriod: undefined
+    recordHistoryKeepPeriod: Duration.fromPartial({})
   };
 }
 export const Params = {

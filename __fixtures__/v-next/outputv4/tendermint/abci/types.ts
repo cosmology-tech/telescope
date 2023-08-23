@@ -1248,7 +1248,7 @@ export const RequestSetOption = {
 };
 function createBaseRequestInitChain(): RequestInitChain {
   return {
-    time: undefined,
+    time: new Date(),
     chainId: "",
     consensusParams: ConsensusParams.fromPartial({}),
     validators: [],
@@ -1642,13 +1642,13 @@ export const RequestCheckTx = {
   fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
     return {
       tx: object?.tx,
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
     };
   },
   fromSDKJSON(object: any): RequestCheckTxSDKType {
     return {
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
     };
   },
   toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
@@ -3661,12 +3661,12 @@ export const ResponseOfferSnapshot = {
   },
   fromSDK(object: ResponseOfferSnapshotSDKType): ResponseOfferSnapshot {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
     };
   },
   fromSDKJSON(object: any): ResponseOfferSnapshotSDKType {
     return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
     };
   },
   toSDK(message: ResponseOfferSnapshot): ResponseOfferSnapshotSDKType {
@@ -3818,14 +3818,14 @@ export const ResponseApplySnapshotChunk = {
   },
   fromSDK(object: ResponseApplySnapshotChunkSDKType): ResponseApplySnapshotChunk {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
       refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
       rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): ResponseApplySnapshotChunkSDKType {
     return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
       refetch_chunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => Number(e)) : [],
       reject_senders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => String(e)) : []
     };
@@ -4589,7 +4589,7 @@ function createBaseEvidence(): Evidence {
     type: 0,
     validator: Validator.fromPartial({}),
     height: BigInt(0),
-    time: undefined,
+    time: new Date(),
     totalVotingPower: BigInt(0)
   };
 }
@@ -4670,7 +4670,7 @@ export const Evidence = {
   },
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
       height: object?.height,
       time: object.time ?? undefined,
@@ -4679,7 +4679,7 @@ export const Evidence = {
   },
   fromSDKJSON(object: any): EvidenceSDKType {
     return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       time: isSet(object.time) ? new Date(object.time) : undefined,

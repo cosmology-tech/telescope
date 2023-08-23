@@ -1,5 +1,5 @@
-import { camel } from '@osmonauts/utils';
-import { relative, dirname, extname } from 'path';
+import { camel } from '.';
+import { extname } from 'path';
 
 export const variableSlug = (str) => {
     str = String(str).toString();

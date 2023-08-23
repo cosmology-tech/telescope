@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 
 const getPropNames = (field: ProtoField) => {
     const messageProp = field.name;
@@ -245,6 +245,7 @@ export const fromJSON = {
     // NEW if (isSet(object.mode)) { obj.mode = signModeFromJSON(object.mode) }
     enum(args: FromJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
         args.context.addUtil('isSet');
         const fromJSONFuncName = args.context.getFromEnum(args.field);
 
@@ -372,29 +373,29 @@ export const fromJSON = {
     // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
     timestamp(args: FromJSONMethod) {
-      let timestampFormat = args.context.pluginValue(
-        'prototypes.typingsFormat.timestamp'
-      );
-      const env = args.context.pluginValue(
-        'env'
-      );
-      if(env == 'default'){
-        timestampFormat = 'timestamp';
-      }
-      switch (timestampFormat) {
-        case 'timestamp':
-          return fromJSON.timestampTimestamp(args);
-        case 'date':
-        default:
-          args.context.addUtil('toTimestamp');
-          return fromJSON.timestampDate(args);
-      }
+        let timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        const env = args.context.pluginValue(
+            'env'
+        );
+        if (!env || env == 'default') {
+            timestampFormat = 'timestamp';
+        }
+        switch (timestampFormat) {
+            case 'timestamp':
+                return fromJSON.timestampTimestamp(args);
+            case 'date':
+            default:
+                args.context.addUtil('toTimestamp');
+                return fromJSON.timestampDate(args);
+        }
     },
 
     timestampTimestamp(args: FromJSONMethod) {
-      const { messageProp, objProp } = getPropNames(args.field);
-      args.context.addUtil('isSet');
-      args.context.addUtil('fromJsonTimestamp');
+        const { messageProp, objProp } = getPropNames(args.field);
+        args.context.addUtil('isSet');
+        args.context.addUtil('fromJsonTimestamp');
 
         return t.ifStatement(
             t.callExpression(
@@ -428,8 +429,8 @@ export const fromJSON = {
     },
 
     timestampDate(args: FromJSONMethod) {
-      const { messageProp, objProp } = getPropNames(args.field);
-      args.context.addUtil('isSet');
+        const { messageProp, objProp } = getPropNames(args.field);
+        args.context.addUtil('isSet');
 
         return t.ifStatement(
             t.callExpression(

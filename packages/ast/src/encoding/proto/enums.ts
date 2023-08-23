@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration, makeCommentBlock, cleanComment } from '../../utils';
-import { ProtoEnum } from '@osmonauts/types';
+import { ProtoEnum } from '@cosmology/types';
 import { ProtoParseContext } from '../context';
 
 const getEnumValues = (proto: ProtoEnum) => {

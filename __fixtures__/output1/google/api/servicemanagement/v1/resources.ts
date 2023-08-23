@@ -621,7 +621,7 @@ function createBaseOperationMetadata(): OperationMetadata {
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
-    startTime: undefined
+    startTime: new Date()
   };
 }
 export const OperationMetadata = {
@@ -780,7 +780,7 @@ export const OperationMetadata_Step = {
   fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
     return {
       description: object?.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
   toSDK(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
@@ -857,7 +857,7 @@ export const Diagnostic = {
   fromSDK(object: DiagnosticSDKType): Diagnostic {
     return {
       location: object?.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
       message: object?.message
     };
   },
@@ -1012,7 +1012,7 @@ export const ConfigFile = {
     return {
       filePath: object?.file_path,
       fileContents: object?.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toSDK(message: ConfigFile): ConfigFileSDKType {
@@ -1144,7 +1144,7 @@ export const ChangeReport = {
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
-    createTime: undefined,
+    createTime: new Date(),
     createdBy: "",
     status: 0,
     trafficPercentStrategy: undefined,
@@ -1250,7 +1250,7 @@ export const Rollout = {
       rolloutId: object?.rollout_id,
       createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
       createdBy: object?.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: object.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
       serviceName: object?.service_name

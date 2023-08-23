@@ -70,10 +70,10 @@ export interface GenesisState {
 function createBaseEpochInfo(): EpochInfo {
   return {
     identifier: "",
-    startTime: undefined,
-    duration: undefined,
+    startTime: Timestamp.fromPartial({}),
+    duration: Duration.fromPartial({}),
     currentEpoch: Long.ZERO,
-    currentEpochStartTime: undefined,
+    currentEpochStartTime: Timestamp.fromPartial({}),
     epochCountingStarted: false,
     currentEpochStartHeight: Long.ZERO
   };

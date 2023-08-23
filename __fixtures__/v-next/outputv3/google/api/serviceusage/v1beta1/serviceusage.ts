@@ -2225,7 +2225,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object?.parent,
       pageSize: object?.page_size,
       pageToken: object?.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
@@ -2241,7 +2241,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object.parent,
       pageSize: object.page_size,
       pageToken: object.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
@@ -2433,7 +2433,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
@@ -2445,7 +2445,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromAmino(object: GetConsumerQuotaMetricRequestAmino): GetConsumerQuotaMetricRequest {
     return {
       name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
@@ -2528,7 +2528,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
@@ -2540,7 +2540,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromAmino(object: GetConsumerQuotaLimitRequestAmino): GetConsumerQuotaLimitRequest {
     return {
       name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
@@ -5137,7 +5137,7 @@ export const GetServiceIdentityResponse = {
   fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
     return {
       identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
@@ -5149,7 +5149,7 @@ export const GetServiceIdentityResponse = {
   fromAmino(object: GetServiceIdentityResponseAmino): GetServiceIdentityResponse {
     return {
       identity: object?.identity ? ServiceIdentity.fromAmino(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {

@@ -45,7 +45,7 @@ function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
     address: "",
     startHeight: Long.ZERO,
     indexOffset: Long.ZERO,
-    jailedUntil: undefined,
+    jailedUntil: Timestamp.fromPartial({}),
     tombstoned: false,
     missedBlocksCounter: Long.ZERO
   };
@@ -139,7 +139,7 @@ function createBaseParams(): Params {
   return {
     signedBlocksWindow: Long.ZERO,
     minSignedPerWindow: new Uint8Array(),
-    downtimeJailDuration: undefined,
+    downtimeJailDuration: Duration.fromPartial({}),
     slashFractionDoubleSign: new Uint8Array(),
     slashFractionDowntime: new Uint8Array()
   };

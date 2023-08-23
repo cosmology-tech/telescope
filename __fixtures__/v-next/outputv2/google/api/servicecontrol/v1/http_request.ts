@@ -197,7 +197,7 @@ function createBaseHttpRequest(): HttpRequest {
     remoteIp: "",
     serverIp: "",
     referer: "",
-    latency: undefined,
+    latency: Duration.fromPartial({}),
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,

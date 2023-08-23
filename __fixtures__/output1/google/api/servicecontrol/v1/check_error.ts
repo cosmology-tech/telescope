@@ -301,7 +301,7 @@ export const CheckError = {
   },
   fromSDK(object: CheckErrorSDKType): CheckError {
     return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
       subject: object?.subject,
       detail: object?.detail,
       status: object.status ? Status.fromSDK(object.status) : undefined

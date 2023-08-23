@@ -2,7 +2,7 @@ import { Bundler } from '../bundler';
 import { TelescopeBuilder } from '../builder';
 import {
     recursiveModuleBundle
-} from '@osmonauts/ast';
+} from '@cosmology/ast';
 
 export const plugin = (
     builder: TelescopeBuilder,

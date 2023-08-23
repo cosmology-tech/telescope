@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@cosmology/types';
 import { GenericParseContext } from '../../../encoding';
 import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 

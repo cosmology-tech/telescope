@@ -1012,7 +1012,7 @@ export const Group = {
   fromSDK(object: GroupSDKType): Group {
     return {
       groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
       createdAt: object?.created_at
     };
@@ -1028,7 +1028,7 @@ export const Group = {
   fromAmino(object: GroupAmino): Group {
     return {
       groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
       createdAt: Long.fromString(object.created_at)
     };
@@ -1061,7 +1061,7 @@ function createBaseResource(): Resource {
   return {
     resources: ResourceUnits.fromPartial({}),
     count: 0,
-    price: undefined
+    price: Coin.fromPartial({})
   };
 }
 export const Resource = {

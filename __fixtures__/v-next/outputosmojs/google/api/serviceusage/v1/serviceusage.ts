@@ -485,14 +485,14 @@ export const DisableServiceRequest = {
     return {
       name: object?.name,
       disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   fromSDKJSON(object: any): DisableServiceRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
-      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {

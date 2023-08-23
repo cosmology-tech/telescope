@@ -393,13 +393,13 @@ export const Any = {
   },
   fromAmino(object: AnyAmino): Any {
     return {
-      typeUrl: object.type_url,
+      typeUrl: object.type,
       value: object.value
     };
   },
   toAmino(message: Any): AnyAmino {
     const obj: any = {};
-    obj.type_url = message.typeUrl;
+    obj.type = message.typeUrl;
     obj.value = message.value;
     return obj;
   },

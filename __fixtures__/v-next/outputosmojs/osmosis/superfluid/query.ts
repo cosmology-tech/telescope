@@ -430,12 +430,12 @@ export const AssetTypeResponse = {
   },
   fromSDK(object: AssetTypeResponseSDKType): AssetTypeResponse {
     return {
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   fromSDKJSON(object: any): AssetTypeResponseSDKType {
     return {
-      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toSDK(message: AssetTypeResponse): AssetTypeResponseSDKType {
@@ -1572,7 +1572,7 @@ function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegat
   return {
     superfluidDelegationRecords: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const SuperfluidDelegationsByDelegatorResponse = {
@@ -2200,7 +2200,7 @@ function createBaseQueryTotalDelegationByDelegatorResponse(): QueryTotalDelegati
     superfluidDelegationRecords: [],
     delegationResponse: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const QueryTotalDelegationByDelegatorResponse = {

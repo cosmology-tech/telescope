@@ -237,7 +237,7 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toSDK(message: Service): ServiceSDKType {

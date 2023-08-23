@@ -1,5 +1,5 @@
 import { traverse } from '../../src';
-import { getNested } from '../../src/utils'
+import { getNested } from '../../src'
 import { getTestProtoStore } from '../../test-utils';
 
 const store = getTestProtoStore({

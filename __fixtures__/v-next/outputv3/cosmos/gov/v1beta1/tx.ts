@@ -213,7 +213,7 @@ export interface MsgDepositResponseAminoMsg {
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    content: undefined,
+    content: Any.fromPartial({}),
     initialDeposit: [],
     proposer: ""
   };
@@ -497,7 +497,7 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {
@@ -511,7 +511,7 @@ export const MsgVote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toAmino(message: MsgVote): MsgVoteAmino {

@@ -50,8 +50,29 @@ export interface authz {
 exports[`createCreateProtoType Grant 1`] = `
 "function createBaseGrant(): Grant {
   return {
-    authorization: undefined,
+    authorization: Any.fromPartial({}),
     expiration: undefined
+  };
+}"
+`;
+
+exports[`createCreateProtoType Header 1`] = `
+"function createBaseHeader(): Header {
+  return {
+    version: Consensus.fromPartial({}),
+    chainId: "",
+    height: Long.ZERO,
+    time: new Date(),
+    lastBlockId: BlockID.fromPartial({}),
+    lastCommitHash: new Uint8Array(),
+    dataHash: new Uint8Array(),
+    validatorsHash: new Uint8Array(),
+    nextValidatorsHash: new Uint8Array(),
+    consensusHash: new Uint8Array(),
+    appHash: new Uint8Array(),
+    lastResultsHash: new Uint8Array(),
+    evidenceHash: new Uint8Array(),
+    proposerAddress: new Uint8Array()
   };
 }"
 `;
@@ -72,6 +93,27 @@ exports[`createCreateProtoType ValidatorUpdate 1`] = `
   return {
     pubKey: PublicKey.fromPartial({}),
     power: Long.ZERO
+  };
+}"
+`;
+
+exports[`createCreateProtoType orginal logic Header 1`] = `
+"function createBaseHeader(): Header {
+  return {
+    version: Consensus.fromPartial({}),
+    chainId: "",
+    height: Long.ZERO,
+    time: undefined,
+    lastBlockId: BlockID.fromPartial({}),
+    lastCommitHash: new Uint8Array(),
+    dataHash: new Uint8Array(),
+    validatorsHash: new Uint8Array(),
+    nextValidatorsHash: new Uint8Array(),
+    consensusHash: new Uint8Array(),
+    appHash: new Uint8Array(),
+    lastResultsHash: new Uint8Array(),
+    evidenceHash: new Uint8Array(),
+    proposerAddress: new Uint8Array()
   };
 }"
 `;

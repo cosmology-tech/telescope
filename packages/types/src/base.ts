@@ -1,3 +1,21 @@
+import { TelescopeOptions } from "./telescope";
+
+export interface IParseContext {
+    ref: ProtoRef;
+    options: TelescopeOptions;
+    imports: ImportUsage[];
+    utils: Record<string, boolean>;
+    addUtil: Function;
+    pluginValue(name);
+}
+
+export interface ImportUsage {
+    type: 'typeImport' | 'toJSONEnum' | 'fromJSONEnum';
+    name: string;
+    import: string;
+    importedAs?: string;
+}
+
 export interface ProtoEnum {
     type?: 'Enum';
     name?: string;
@@ -191,4 +209,22 @@ export type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>
 
 export type TraversalSymbol = TraverseLocalSymbol & {
     ref: string;
+}
+
+export interface Lookup {
+    obj: any;
+    name: string;
+    import: string;
+    importType: string;
+    importedName: string;
+    package: string;
+}
+
+export interface IProtoStore {
+  requests: Record<string, ProtoServiceMethod>;
+  responses: Record<string, ProtoServiceMethod>;
+  _symbols: TraversalSymbol[];
+  findProto(filename): ProtoRef;
+  get(from: ProtoRef, name: string): Lookup;
+  getTypeUrlMap(ref: ProtoRef);
 }

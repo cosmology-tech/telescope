@@ -212,7 +212,7 @@ export const TokenPair = {
       erc20Address: object?.erc20_address,
       denom: object?.denom,
       enabled: object?.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
   toSDK(message: TokenPair): TokenPairSDKType {

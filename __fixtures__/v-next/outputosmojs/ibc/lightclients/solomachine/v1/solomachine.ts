@@ -473,7 +473,7 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     diversifier: "",
     timestamp: BigInt(0)
   };
@@ -562,7 +562,7 @@ function createBaseHeader(): Header {
     sequence: BigInt(0),
     timestamp: BigInt(0),
     signature: new Uint8Array(),
-    newPublicKey: undefined,
+    newPublicKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }
@@ -845,7 +845,7 @@ export const SignatureAndData = {
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
     return {
       signature: object?.signature,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data,
       timestamp: object?.timestamp
     };
@@ -853,7 +853,7 @@ export const SignatureAndData = {
   fromSDKJSON(object: any): SignatureAndDataSDKType {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
-      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
@@ -1029,7 +1029,7 @@ export const SignBytes = {
       sequence: object?.sequence,
       timestamp: object?.timestamp,
       diversifier: object?.diversifier,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: object?.data
     };
   },
@@ -1038,7 +1038,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0),
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : -1,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
@@ -1054,7 +1054,7 @@ export const SignBytes = {
 };
 function createBaseHeaderData(): HeaderData {
   return {
-    newPubKey: undefined,
+    newPubKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }
@@ -1128,7 +1128,7 @@ export const HeaderData = {
 function createBaseClientStateData(): ClientStateData {
   return {
     path: new Uint8Array(),
-    clientState: undefined
+    clientState: Any.fromPartial({})
   };
 }
 export const ClientStateData = {
@@ -1201,7 +1201,7 @@ export const ClientStateData = {
 function createBaseConsensusStateData(): ConsensusStateData {
   return {
     path: new Uint8Array(),
-    consensusState: undefined
+    consensusState: Any.fromPartial({})
   };
 }
 export const ConsensusStateData = {

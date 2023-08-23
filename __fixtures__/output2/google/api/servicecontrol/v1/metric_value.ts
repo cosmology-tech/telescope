@@ -114,8 +114,8 @@ export const MetricValue_LabelsEntry = {
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
-    startTime: undefined,
-    endTime: undefined,
+    startTime: Timestamp.fromPartial({}),
+    endTime: Timestamp.fromPartial({}),
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,

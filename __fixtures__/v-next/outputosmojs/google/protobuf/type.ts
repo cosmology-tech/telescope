@@ -481,7 +481,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   fromSDKJSON(object: any): TypeSDKType {
@@ -491,7 +491,7 @@ export const Type = {
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
       source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toSDK(message: Type): TypeSDKType {
@@ -657,8 +657,8 @@ export const Field = {
   },
   fromSDK(object: FieldSDKType): Field {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
       number: object?.number,
       name: object?.name,
       typeUrl: object?.type_url,
@@ -671,8 +671,8 @@ export const Field = {
   },
   fromSDKJSON(object: any): FieldSDKType {
     return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
       number: isSet(object.number) ? Number(object.number) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       type_url: isSet(object.type_url) ? String(object.type_url) : "",
@@ -800,7 +800,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   fromSDKJSON(object: any): EnumSDKType {
@@ -809,7 +809,7 @@ export const Enum = {
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDKJSON(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
       source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toSDK(message: Enum): EnumSDKType {

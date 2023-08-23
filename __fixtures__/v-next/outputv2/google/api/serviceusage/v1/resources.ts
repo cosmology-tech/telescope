@@ -340,7 +340,7 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toSDK(message: Service): ServiceSDKType {
@@ -356,7 +356,7 @@ export const Service = {
       name: object.name,
       parent: object.parent,
       config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toAmino(message: Service): ServiceAmino {

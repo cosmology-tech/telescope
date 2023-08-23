@@ -119,10 +119,10 @@ export interface ModuleVersionSDKType {
 function createBasePlan(): Plan {
   return {
     name: "",
-    time: undefined,
+    time: new Date(),
     height: Long.ZERO,
     info: "",
-    upgradedClientState: undefined
+    upgradedClientState: Any.fromPartial({})
   };
 }
 export const Plan = {

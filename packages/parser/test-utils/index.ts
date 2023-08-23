@@ -1,6 +1,6 @@
 import generate from '@babel/generator';
-import { ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { defaultTelescopeOptions as teleDefaults } from '@osmonauts/types';
+import { ProtoType, TelescopeOptions } from '@cosmology/types';
+import { defaultTelescopeOptions as teleDefaults } from '@cosmology/types';
 import deepmerge from 'deepmerge';
 import { ProtoStore } from '../src';
 

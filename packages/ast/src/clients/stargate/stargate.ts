@@ -176,9 +176,10 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
                           t.objectExpression([
                             t.objectProperty(
                               t.identifier('registry'),
-                              t.identifier('registry'),
-                              false,
-                              true
+                              t.tsAsExpression(
+                                t.identifier('registry'),
+                                t.tsAnyKeyword()
+                              )
                             ),
                             t.objectProperty(
                               t.identifier('aminoTypes'),
@@ -194,7 +195,7 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
                   ]
                 ),
 
-                // return 
+                // return
                 t.returnStatement(t.identifier('client'))
               ]
             ),
@@ -399,7 +400,7 @@ export const createStargateClientOptions = ({
                 ),
 
                 // NEW CODE
-                // return 
+                // return
                 t.returnStatement(t.objectExpression([
                   t.objectProperty(
                     t.identifier('registry'),

@@ -349,7 +349,7 @@ function createBaseCheckResponse(): CheckResponse {
     checkErrors: [],
     serviceConfigId: "",
     serviceRolloutId: "",
-    checkInfo: CheckInfo.fromPartial({})
+    checkInfo: CheckResponse_CheckInfo.fromPartial({})
   };
 }
 export const CheckResponse = {
@@ -457,7 +457,7 @@ export const CheckResponse = {
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   return {
     unusedArguments: [],
-    consumerInfo: ConsumerInfo.fromPartial({})
+    consumerInfo: CheckResponse_ConsumerInfo.fromPartial({})
   };
 }
 export const CheckResponse_CheckInfo = {
@@ -596,7 +596,7 @@ export const CheckResponse_ConsumerInfo = {
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
       projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: object?.consumer_number
     };
   },

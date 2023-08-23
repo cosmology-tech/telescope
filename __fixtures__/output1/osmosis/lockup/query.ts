@@ -785,7 +785,7 @@ export const AccountLockedCoinsResponse = {
 function createBaseAccountLockedPastTimeRequest(): AccountLockedPastTimeRequest {
   return {
     owner: "",
-    timestamp: undefined
+    timestamp: new Date()
   };
 }
 export const AccountLockedPastTimeRequest = {
@@ -915,7 +915,7 @@ export const AccountLockedPastTimeResponse = {
 function createBaseAccountLockedPastTimeNotUnlockingOnlyRequest(): AccountLockedPastTimeNotUnlockingOnlyRequest {
   return {
     owner: "",
-    timestamp: undefined
+    timestamp: new Date()
   };
 }
 export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
@@ -1045,7 +1045,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
 function createBaseAccountUnlockedBeforeTimeRequest(): AccountUnlockedBeforeTimeRequest {
   return {
     owner: "",
-    timestamp: undefined
+    timestamp: new Date()
   };
 }
 export const AccountUnlockedBeforeTimeRequest = {
@@ -1175,7 +1175,7 @@ export const AccountUnlockedBeforeTimeResponse = {
 function createBaseAccountLockedPastTimeDenomRequest(): AccountLockedPastTimeDenomRequest {
   return {
     owner: "",
-    timestamp: undefined,
+    timestamp: new Date(),
     denom: ""
   };
 }
@@ -1317,7 +1317,7 @@ export const AccountLockedPastTimeDenomResponse = {
 function createBaseLockedDenomRequest(): LockedDenomRequest {
   return {
     denom: "",
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const LockedDenomRequest = {
@@ -1667,7 +1667,7 @@ export const SyntheticLockupsByLockupIDResponse = {
 function createBaseAccountLockedLongerDurationRequest(): AccountLockedLongerDurationRequest {
   return {
     owner: "",
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const AccountLockedLongerDurationRequest = {
@@ -1797,7 +1797,7 @@ export const AccountLockedLongerDurationResponse = {
 function createBaseAccountLockedDurationRequest(): AccountLockedDurationRequest {
   return {
     owner: "",
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const AccountLockedDurationRequest = {
@@ -1927,7 +1927,7 @@ export const AccountLockedDurationResponse = {
 function createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest(): AccountLockedLongerDurationNotUnlockingOnlyRequest {
   return {
     owner: "",
-    duration: undefined
+    duration: Duration.fromPartial({})
   };
 }
 export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
@@ -2057,7 +2057,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
 function createBaseAccountLockedLongerDurationDenomRequest(): AccountLockedLongerDurationDenomRequest {
   return {
     owner: "",
-    duration: undefined,
+    duration: Duration.fromPartial({}),
     denom: ""
   };
 }

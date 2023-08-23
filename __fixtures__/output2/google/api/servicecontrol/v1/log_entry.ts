@@ -181,7 +181,7 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
-    timestamp: undefined,
+    timestamp: Timestamp.fromPartial({}),
     severity: 0,
     httpRequest: HttpRequest.fromPartial({}),
     trace: "",

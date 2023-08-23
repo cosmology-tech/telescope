@@ -231,7 +231,7 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
-    timestamp: undefined,
+    timestamp: new Date(),
     severity: 0,
     httpRequest: HttpRequest.fromPartial({}),
     trace: "",
@@ -409,7 +409,7 @@ export const LogEntry = {
     return {
       name: object?.name,
       timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,

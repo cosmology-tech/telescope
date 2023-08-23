@@ -814,7 +814,7 @@ function createBaseHeader(): Header {
     version: Consensus.fromPartial({}),
     chainId: "",
     height: Long.ZERO,
-    time: undefined,
+    time: new Date(),
     lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
     dataHash: new Uint8Array(),
@@ -1025,7 +1025,7 @@ export const Header = {
       version: object?.version ? Consensus.fromAmino(object.version) : undefined,
       chainId: object.chain_id,
       height: Long.fromString(object.height),
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
+      time: object.time,
       lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : undefined,
       lastCommitHash: object.last_commit_hash,
       dataHash: object.data_hash,
@@ -1043,7 +1043,7 @@ export const Header = {
     obj.version = message.version ? Consensus.toAmino(message.version) : undefined;
     obj.chain_id = message.chainId;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
+    obj.time = message.time;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId) : undefined;
     obj.last_commit_hash = message.lastCommitHash;
     obj.data_hash = message.dataHash;
@@ -1171,7 +1171,7 @@ function createBaseVote(): Vote {
     height: Long.ZERO,
     round: 0,
     blockId: BlockID.fromPartial({}),
-    timestamp: undefined,
+    timestamp: new Date(),
     validatorAddress: new Uint8Array(),
     validatorIndex: 0,
     signature: new Uint8Array()
@@ -1282,7 +1282,7 @@ export const Vote = {
   },
   fromSDK(object: VoteSDKType): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
@@ -1306,11 +1306,11 @@ export const Vote = {
   },
   fromAmino(object: VoteAmino): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: Long.fromString(object.height),
       round: object.round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       validatorAddress: object.validator_address,
       validatorIndex: object.validator_index,
       signature: object.signature
@@ -1322,7 +1322,7 @@ export const Vote = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.round = message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.validator_address = message.validatorAddress;
     obj.validator_index = message.validatorIndex;
     obj.signature = message.signature;
@@ -1483,7 +1483,7 @@ function createBaseCommitSig(): CommitSig {
   return {
     blockIdFlag: 0,
     validatorAddress: new Uint8Array(),
-    timestamp: undefined,
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1556,7 +1556,7 @@ export const CommitSig = {
   },
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object?.validator_address,
       timestamp: object.timestamp ?? undefined,
       signature: object?.signature
@@ -1572,9 +1572,9 @@ export const CommitSig = {
   },
   fromAmino(object: CommitSigAmino): CommitSig {
     return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object.validator_address,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       signature: object.signature
     };
   },
@@ -1582,7 +1582,7 @@ export const CommitSig = {
     const obj: any = {};
     obj.block_id_flag = message.blockIdFlag;
     obj.validator_address = message.validatorAddress;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.signature = message.signature;
     return obj;
   },
@@ -1609,7 +1609,7 @@ function createBaseProposal(): Proposal {
     round: 0,
     polRound: 0,
     blockId: BlockID.fromPartial({}),
-    timestamp: undefined,
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1709,7 +1709,7 @@ export const Proposal = {
   },
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       polRound: object?.pol_round,
@@ -1731,12 +1731,12 @@ export const Proposal = {
   },
   fromAmino(object: ProposalAmino): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: Long.fromString(object.height),
       round: object.round,
       polRound: object.pol_round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       signature: object.signature
     };
   },
@@ -1747,7 +1747,7 @@ export const Proposal = {
     obj.round = message.round;
     obj.pol_round = message.polRound;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.signature = message.signature;
     return obj;
   },

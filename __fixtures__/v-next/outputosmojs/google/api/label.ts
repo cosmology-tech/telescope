@@ -124,14 +124,14 @@ export const LabelDescriptor = {
   fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
     return {
       key: object?.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
       description: object?.description
     };
   },
   fromSDKJSON(object: any): LabelDescriptorSDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
       description: isSet(object.description) ? String(object.description) : ""
     };
   },

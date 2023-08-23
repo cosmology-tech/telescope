@@ -1,4 +1,4 @@
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 export const createEvmosLCDClient = async ({
   restEndpoint
 }: {

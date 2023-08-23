@@ -282,7 +282,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     return {
       address: object?.address,
       signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       sig: object?.sig
     };
   },
@@ -1994,7 +1994,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     return {
       name: object?.name,
       timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
@@ -2190,7 +2190,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     return {
       portId: object?.port_id,
       connectionId: object?.connection_id,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };

@@ -917,14 +917,14 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: object?.service_name,
       configId: object?.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   fromSDKJSON(object: any): GetServiceConfigRequestSDKType {
     return {
       service_name: isSet(object.service_name) ? String(object.service_name) : "",
       config_id: isSet(object.config_id) ? String(object.config_id) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
@@ -1649,8 +1649,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: undefined,
-    oldConfig: undefined
+    newConfig: Any.fromPartial({}),
+    oldConfig: Any.fromPartial({})
   };
 }
 export const GenerateConfigReportRequest = {

@@ -72,7 +72,7 @@ function createBaseIncentiveRecord(): IncentiveRecord {
     incentiveDenom: "",
     incentiveCreatorAddr: "",
     incentiveRecordBody: IncentiveRecordBody.fromPartial({}),
-    minUptime: undefined
+    minUptime: Duration.fromPartial({})
   };
 }
 export const IncentiveRecord = {
@@ -182,7 +182,7 @@ function createBaseIncentiveRecordBody(): IncentiveRecordBody {
   return {
     remainingAmount: "",
     emissionRate: "",
-    startTime: undefined
+    startTime: new Date()
   };
 }
 export const IncentiveRecordBody = {

@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { EncodeMethod } from './index';
 import { ProtoParseContext } from '../../context';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 export declare const encode: {
     string(args: EncodeMethod): t.IfStatement;
     double(args: EncodeMethod): t.IfStatement;

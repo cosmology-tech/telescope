@@ -28,7 +28,7 @@ export interface RecoveredSinceDowntimeOfLengthResponseSDKType {
 function createBaseRecoveredSinceDowntimeOfLengthRequest(): RecoveredSinceDowntimeOfLengthRequest {
   return {
     downtime: 0,
-    recovery: undefined
+    recovery: Duration.fromPartial({})
   };
 }
 export const RecoveredSinceDowntimeOfLengthRequest = {
@@ -81,13 +81,13 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   fromSDK(object: RecoveredSinceDowntimeOfLengthRequestSDKType): RecoveredSinceDowntimeOfLengthRequest {
     return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : 0,
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
       recovery: object.recovery ? Duration.fromSDK(object.recovery) : undefined
     };
   },
   fromSDKJSON(object: any): RecoveredSinceDowntimeOfLengthRequestSDKType {
     return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : 0,
+      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
       recovery: isSet(object.recovery) ? Duration.fromSDKJSON(object.recovery) : undefined
     };
   },

@@ -1205,7 +1205,7 @@ export const QueryChannelConsensusStateRequest = {
 };
 function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusStateResponse {
   return {
-    consensusState: undefined,
+    consensusState: Any.fromPartial({}),
     clientId: "",
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})

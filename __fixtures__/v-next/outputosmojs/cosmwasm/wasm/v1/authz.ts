@@ -296,8 +296,8 @@ export const ContractMigrationAuthorization = {
 function createBaseContractGrant(): ContractGrant {
   return {
     contract: "",
-    limit: undefined,
-    filter: undefined
+    limit: Any.fromPartial({}),
+    filter: Any.fromPartial({})
   };
 }
 export const ContractGrant = {

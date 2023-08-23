@@ -389,13 +389,13 @@ export interface AttributeContext_Resource {
 }
 function createBaseAttributeContext(): AttributeContext {
   return {
-    origin: Peer.fromPartial({}),
-    source: Peer.fromPartial({}),
-    destination: Peer.fromPartial({}),
-    request: Request.fromPartial({}),
-    response: Response.fromPartial({}),
-    resource: Resource.fromPartial({}),
-    api: Api.fromPartial({}),
+    origin: AttributeContext_Peer.fromPartial({}),
+    source: AttributeContext_Peer.fromPartial({}),
+    destination: AttributeContext_Peer.fromPartial({}),
+    request: AttributeContext_Request.fromPartial({}),
+    response: AttributeContext_Response.fromPartial({}),
+    resource: AttributeContext_Resource.fromPartial({}),
+    api: AttributeContext_Api.fromPartial({}),
     extensions: []
   };
 }
@@ -901,11 +901,11 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     host: "",
     scheme: "",
     query: "",
-    time: undefined,
+    time: Timestamp.fromPartial({}),
     size: Long.ZERO,
     protocol: "",
     reason: "",
-    auth: Auth.fromPartial({})
+    auth: AttributeContext_Auth.fromPartial({})
   };
 }
 export const AttributeContext_Request = {
@@ -1130,8 +1130,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
     code: Long.ZERO,
     size: Long.ZERO,
     headers: {},
-    time: undefined,
-    backendLatency: undefined
+    time: Timestamp.fromPartial({}),
+    backendLatency: Duration.fromPartial({})
   };
 }
 export const AttributeContext_Response = {
@@ -1352,9 +1352,9 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
     uid: "",
     annotations: {},
     displayName: "",
-    createTime: undefined,
-    updateTime: undefined,
-    deleteTime: undefined,
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
+    deleteTime: Timestamp.fromPartial({}),
     etag: "",
     location: ""
   };

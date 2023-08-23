@@ -166,7 +166,7 @@ export const FullTick = {
 };
 function createBasePoolData(): PoolData {
   return {
-    pool: undefined,
+    pool: Any.fromPartial({}),
     ticks: [],
     feeAccumulator: AccumObject.fromPartial({}),
     incentivesAccumulators: [],

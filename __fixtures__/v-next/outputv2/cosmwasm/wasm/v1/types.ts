@@ -423,7 +423,7 @@ export const AccessTypeParam = {
   },
   fromSDK(object: AccessTypeParamSDKType): AccessTypeParam {
     return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
   toSDK(message: AccessTypeParam): AccessTypeParamSDKType {
@@ -433,7 +433,7 @@ export const AccessTypeParam = {
   },
   fromAmino(object: AccessTypeParamAmino): AccessTypeParam {
     return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
   toAmino(message: AccessTypeParam): AccessTypeParamAmino {
@@ -521,7 +521,7 @@ export const AccessConfig = {
   },
   fromSDK(object: AccessConfigSDKType): AccessConfig {
     return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
       address: object?.address
     };
   },
@@ -533,7 +533,7 @@ export const AccessConfig = {
   },
   fromAmino(object: AccessConfigAmino): AccessConfig {
     return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
       address: object.address
     };
   },
@@ -634,7 +634,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       codeUploadAccess: object.code_upload_access ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
       maxWasmCodeSize: object?.max_wasm_code_size
     };
   },
@@ -648,7 +648,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
       maxWasmCodeSize: Long.fromString(object.max_wasm_code_size)
     };
   },
@@ -805,7 +805,7 @@ function createBaseContractInfo(): ContractInfo {
     label: "",
     created: AbsoluteTxPosition.fromPartial({}),
     ibcPortId: "",
-    extension: undefined
+    extension: Any.fromPartial({})
   };
 }
 export const ContractInfo = {
@@ -1047,7 +1047,7 @@ export const ContractCodeHistoryEntry = {
   },
   fromSDK(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
     return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
       codeId: object?.code_id,
       updated: object.updated ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
       msg: object?.msg
@@ -1063,7 +1063,7 @@ export const ContractCodeHistoryEntry = {
   },
   fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
     return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
       codeId: Long.fromString(object.code_id),
       updated: object?.updated ? AbsoluteTxPosition.fromAmino(object.updated) : undefined,
       msg: toUtf8(JSON.stringify(object.msg))

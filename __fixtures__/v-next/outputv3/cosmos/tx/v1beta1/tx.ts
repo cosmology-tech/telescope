@@ -1147,7 +1147,7 @@ export const SignDoc = {
 function createBaseSignDocDirectAux(): SignDocDirectAux {
   return {
     bodyBytes: new Uint8Array(),
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     chainId: "",
     accountNumber: Long.UZERO,
     sequence: Long.UZERO,
@@ -1612,7 +1612,7 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     modeInfo: ModeInfo.fromPartial({}),
     sequence: Long.UZERO
   };
@@ -1876,7 +1876,7 @@ export const ModeInfo_Single = {
   },
   fromSDK(object: ModeInfo_SingleSDKType): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
   toSDK(message: ModeInfo_Single): ModeInfo_SingleSDKType {
@@ -1886,7 +1886,7 @@ export const ModeInfo_Single = {
   },
   fromAmino(object: ModeInfo_SingleAmino): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
   toAmino(message: ModeInfo_Single): ModeInfo_SingleAmino {
@@ -2366,7 +2366,7 @@ export const AuxSignerData = {
     return {
       address: object?.address,
       signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       sig: object?.sig
     };
   },
@@ -2382,7 +2382,7 @@ export const AuxSignerData = {
     return {
       address: object.address,
       signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       sig: object.sig
     };
   },

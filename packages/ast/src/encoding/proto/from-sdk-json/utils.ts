@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { FromSDKJSONMethod } from './index';
 import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 import { getFieldNames } from '../../types';
 
 export const fromSDKJSON = {
@@ -149,6 +149,7 @@ export const fromSDKJSON = {
   enum(args: FromSDKJSONMethod) {
     const { origName } = getFieldNames(args.field);
     args.context.addUtil('isSet');
+    const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
     const fromSDKJSONFuncName = args.context.getFromEnum(args.field);
 
     return t.objectProperty(
@@ -160,7 +161,7 @@ export const fromSDKJSON = {
         t.callExpression(t.identifier(fromSDKJSONFuncName), [
           t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
-        args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+        args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
       )
     );
   },

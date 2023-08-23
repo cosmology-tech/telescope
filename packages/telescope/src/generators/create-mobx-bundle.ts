@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../builder';
-import { createMobxQueryFactory } from '@osmonauts/ast';
+import { createMobxQueryFactory } from '@cosmology/ast';
 import * as dotty from 'dotty';
 import { commonBundlePlugin } from '../utils';
 
@@ -15,7 +15,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   const obj = {};
   const bundlerFiles = builder.stateManagers["mobx"];
 
-  if(!bundlerFiles || !bundlerFiles.length){
+  if (!bundlerFiles || !bundlerFiles.length) {
     return;
   }
 

@@ -1,7 +1,6 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
-import { snake } from 'case';
-import { camel } from '@osmonauts/utils';
+import { snake, camel } from 'case';
 
 export enum TelescopeLogLevel {
     None = 0,
@@ -62,15 +61,24 @@ interface TelescopeOpts {
             packages?: string[];
             protos?: string[];
         };
+        includes?: {
+            packages?: string[];
+            protos?: string[];
+        };
+
         typingsFormat?: {
-            customTypes?:{
-              useCosmosSDKDec?: boolean;
+            customTypes?: {
+                useCosmosSDKDec?: boolean;
             },
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
             duration?: 'duration' | 'string',
+
+            setDefaultEnumToUnrecognized?: boolean;
+            setDefaultCustomTypesToUndefined?: boolean;
+
             // temporary field to avoid breaking changes
             updatedDuration?: boolean
         };
@@ -159,6 +167,7 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        needExtraQueryKey?: boolean;
         include?: {
             /**
              * @deprecated in favor of packages and protos supporting minimatch
@@ -166,6 +175,14 @@ interface TelescopeOpts {
             patterns?: string[];
             packages?: string[];
             protos?: string[];
+        },
+        instantExport?: {
+            include: {
+              patterns?: string[];
+            },
+            nameMapping?:{
+              [key: string]: string;
+            }
         }
     };
     mobx?: {
@@ -249,14 +266,16 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: false
+                useCosmosSDKDec: false
             },
             num64: 'long',
             useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
             duration: 'duration',
-            updatedDuration: false
+            updatedDuration: false,
+
+            setDefaultEnumToUnrecognized: true,
         },
     },
 
@@ -315,7 +334,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             patterns: [],
             packages: [],
             protos: []
-        }
+        },
     },
 
     mobx: {

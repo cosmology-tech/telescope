@@ -670,7 +670,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
       writer.uint32(8).int32(message.key);
     }
     if (message.value !== undefined) {
-      google.rpc.Status.encode(message.value, writer.uint32(18).fork()).ldelim();
+      Status.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -685,7 +685,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
           message.key = reader.int32();
           break;
         case 2:
-          message.value = google.rpc.Status.decode(reader, reader.uint32());
+          message.value = Status.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -697,19 +697,19 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const obj = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     if (isSet(object.key)) obj.key = Number(object.key);
-    if (isSet(object.value)) obj.value = google.rpc.Status.fromJSON(object.value);
+    if (isSet(object.value)) obj.value = Status.fromJSON(object.value);
     return obj;
   },
   toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Status.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
-    message.value = object.value !== undefined && object.value !== null ? google.rpc.Status.fromPartial(object.value) : google.rpc.Status.fromPartial({});
+    message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : Status.fromPartial({});
     return message;
   }
 };
@@ -1185,7 +1185,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
     resourceNames: [],
     filter: "",
-    bufferWindow: undefined
+    bufferWindow: Duration.fromPartial({})
   };
 }
 export const TailLogEntriesRequest = {

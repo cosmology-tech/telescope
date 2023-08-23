@@ -5,13 +5,13 @@
 </p>
 
 <p align="center" width="100%">
-  <a href="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml">
-    <img height="20" src="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml/badge.svg" />
+  <a href="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml">
+    <img height="20" src="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml/badge.svg" />
   </a>
-   <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/npm/dt/@osmonauts/telescope"></a>
-   <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
-   <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
-   <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/osmosis-labs/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/npm/dt/@osmonauts/telescope"></a>
+   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
 </p>
 
 <p align="center">
@@ -95,7 +95,7 @@ Follow the instructions below to generate a new Typescript package that you can 
 First, install `telescope`:
 
 ```sh
-npm install -g @osmonauts/telescope
+npm install -g @cosmology/telescope
 ```
 
 ### Generate
@@ -152,14 +152,14 @@ Now you should have code inside of your `./src` folder, ready for publshing via 
 First add telescope to your `devDependencies`:
 
 ```sh
-yarn add --dev @osmonauts/telescope
+yarn add --dev @cosmology/telescope
 ```
 
 Install helpers and cosmjs [dependencies listed here](#dependencies)
 
 ```js
 import { join } from 'path';
-import telescope from '@osmonauts/telescope';
+import telescope from '@cosmology/telescope';
 import { sync as rimraf } from 'rimraf';
 
 const protoDirs = [join(__dirname, '/../proto')];
@@ -288,9 +288,12 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
+| `reactQuery.needExtraQueryKey`       | if true, users can input extra react query key to some customized hooks. e.g.['rpcEndpoint', 'yourExtraKey'] | `false`  |
 | `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
 | `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
 | `reactQuery.include.patterns`    | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+| `reactQuery.instantExport.include.patterns`    | if set, will expose instant hooks on matched patterns of packages + method(e.g. cosmos.bank.v1beta1.useBalance) using minimatch. If there're duplicated method names in multiple packages without setting `reactQuery.instantExport.nameMapping`, one duplicated name will created like: useCosmosBankV1beta1Balance           | `[]`     |
+| `reactQuery.instantExport.nameMapping`    |   map an alias to a package + method in case of better naming of duplicated method names. (e.g. useBankBalance: cosmos.bank.v1beta1.useBalance) Customized hook name is set in front of pkg+method, by doing this we can prevent duplicate alias.        | `{}`     |
 
 #### Mobx
 
@@ -320,6 +323,8 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
+| `prototypes.typingsFormat.setDefaultEnumToUnrecognized`       |  false: enum empty value would be 0, true: -1(value for enum unrecognized)    |true|
+| `prototypes.typingsFormat.setDefaultCustomTypesToUndefined`       |  true: Timestamp,Duration,Any,Coin empty value would be undefined., false: using fromPartial to get an empty obj    |false|
 
 ### Protobuf parser
 
@@ -720,7 +725,7 @@ Below will be an example of scaffold a `grant` Proto Msg for grpc-web and grpc-g
     const signed_tx = await signClient.sign('granter_address', [msg], fee, 'telescope: grant', signerData);
     const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
 
-    const res = await client.cosmos.tx.v1beta1.broadcastTx(  
+    const res = await client.cosmos.tx.v1beta1.broadcastTx(
       {
         txBytes: txRawBytes,
         mode: BroadcastMode.BROADCAST_MODE_BLOCK
@@ -847,10 +852,10 @@ yarn add @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint
 
 If you use the LCD Client generation, you'll need to add
 
-* `@osmonauts/lcd`
+* `@cosmology/lcd`
 
 ```sh
-yarn add @osmonauts/lcd
+yarn add @cosmology/lcd
 ```
 
 ## Troubleshooting
@@ -875,7 +880,7 @@ This should not be an issue, but if you experience problems with syntax or are n
 
 ## Developing
 
-See our [documentation](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
+See our [documentation](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
 
 ## Sponsors
 

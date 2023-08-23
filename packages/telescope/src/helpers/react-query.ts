@@ -1,4 +1,7 @@
-export const reactQuery = `import { getRpcClient } from './extern'
+import { TelescopeOptions } from "@cosmology/types";
+
+export const getReactQueryHelper = (options: TelescopeOptions) => {
+  return `import { getRpcClient } from './extern'
 import {
     useQuery,
     UseQueryOptions,
@@ -15,7 +18,23 @@ export interface UseRpcClientQuery<TData> extends ReactQueryParams<ProtobufRpcCl
     rpcEndpoint: string | HttpEndpoint;
 }
 
-export interface UseRpcEndpointQuery<TData> extends ReactQueryParams<string | HttpEndpoint, TData> {
+${
+  options.reactQuery.needExtraQueryKey
+    ? `export interface UseRpcEndpointQuery<TData> extends ReactQueryParams<string | HttpEndpoint, TData> {
+    getter: () => Promise<string | HttpEndpoint>;
+    extraKey?: string
+}
+
+export const useRpcEndpoint = <TData = string | HttpEndpoint>({
+    getter,
+    options,
+    extraKey
+}: UseRpcEndpointQuery<TData>) => {
+    return useQuery<string | HttpEndpoint, Error, TData>(['rpcEndpoint', extraKey], async () => {
+        return await getter();
+    }, options);
+};`
+    : `export interface UseRpcEndpointQuery<TData> extends ReactQueryParams<string | HttpEndpoint, TData> {
     getter: () => Promise<string | HttpEndpoint>;
 }
 
@@ -26,7 +45,8 @@ export const useRpcEndpoint = <TData = string | HttpEndpoint>({
     return useQuery<string | HttpEndpoint, Error, TData>(['rpcEndpoint', getter], async () => {
         return await getter();
     }, options);
-};
+};`
+}
 
 export const useRpcClient = <TData = ProtobufRpcClient>({
     rpcEndpoint,
@@ -62,3 +82,4 @@ export const useTendermintClient = ({
     return { client }
 };
 `;
+};

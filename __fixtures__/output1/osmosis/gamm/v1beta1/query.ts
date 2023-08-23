@@ -318,7 +318,7 @@ export const QueryPoolRequest = {
 };
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
-    pool: undefined
+    pool: Any.fromPartial({})
   };
 }
 export const QueryPoolResponse = {
@@ -1044,7 +1044,7 @@ export const QueryPoolParamsRequest = {
 };
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   return {
-    params: undefined
+    params: Any.fromPartial({})
   };
 }
 export const QueryPoolParamsResponse = {
@@ -1272,7 +1272,7 @@ export const QueryTotalSharesRequest = {
 };
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   return {
-    totalShares: undefined
+    totalShares: Coin.fromPartial({})
   };
 }
 export const QueryTotalSharesResponse = {

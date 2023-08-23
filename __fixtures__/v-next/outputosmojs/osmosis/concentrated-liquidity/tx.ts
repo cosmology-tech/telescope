@@ -149,8 +149,8 @@ function createBaseMsgCreatePosition(): MsgCreatePosition {
     sender: "",
     lowerTick: BigInt(0),
     upperTick: BigInt(0),
-    tokenDesired0: undefined,
-    tokenDesired1: undefined,
+    tokenDesired0: Coin.fromPartial({}),
+    tokenDesired1: Coin.fromPartial({}),
     tokenMinAmount0: "",
     tokenMinAmount1: ""
   };
@@ -299,7 +299,7 @@ function createBaseMsgCreatePositionResponse(): MsgCreatePositionResponse {
     positionId: BigInt(0),
     amount0: "",
     amount1: "",
-    joinTime: undefined,
+    joinTime: new Date(),
     liquidityCreated: ""
   };
 }
@@ -888,8 +888,8 @@ function createBaseMsgCreateIncentive(): MsgCreateIncentive {
     incentiveDenom: "",
     incentiveAmount: "",
     emissionRate: "",
-    startTime: undefined,
-    minUptime: undefined
+    startTime: new Date(),
+    minUptime: Duration.fromPartial({})
   };
 }
 export const MsgCreateIncentive = {
@@ -1024,8 +1024,8 @@ function createBaseMsgCreateIncentiveResponse(): MsgCreateIncentiveResponse {
     incentiveDenom: "",
     incentiveAmount: "",
     emissionRate: "",
-    startTime: undefined,
-    minUptime: undefined
+    startTime: new Date(),
+    minUptime: Duration.fromPartial({})
   };
 }
 export const MsgCreateIncentiveResponse = {

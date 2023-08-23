@@ -331,7 +331,7 @@ export const GetLatestValidatorSetResponse = {
 function createBaseValidator(): Validator {
   return {
     address: "",
-    pubKey: undefined,
+    pubKey: Any.fromPartial({}),
     votingPower: Long.ZERO,
     proposerPriority: Long.ZERO
   };

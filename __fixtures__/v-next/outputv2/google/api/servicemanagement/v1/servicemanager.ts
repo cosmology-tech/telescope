@@ -1454,7 +1454,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: object?.service_name,
       configId: object?.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
@@ -1468,7 +1468,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: object.service_name,
       configId: object.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
@@ -2417,8 +2417,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: undefined,
-    oldConfig: undefined
+    newConfig: Any.fromPartial({}),
+    oldConfig: Any.fromPartial({})
   };
 }
 export const GenerateConfigReportRequest = {

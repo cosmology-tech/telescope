@@ -228,7 +228,7 @@ export const Deployment = {
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
       deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object?.version,
       createdAt: object?.created_at
     };
@@ -236,7 +236,7 @@ export const Deployment = {
   fromSDKJSON(object: any): DeploymentSDKType {
     return {
       deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };

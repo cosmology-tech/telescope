@@ -852,19 +852,19 @@ export const LeafOp = {
   },
   fromSDK(object: LeafOpSDKType): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: object?.prefix
     };
   },
   fromSDKJSON(object: any): LeafOpSDKType {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
     };
   },
@@ -944,14 +944,14 @@ export const InnerOp = {
   },
   fromSDK(object: InnerOpSDKType): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: object?.prefix,
       suffix: object?.suffix
     };
   },
   fromSDKJSON(object: any): InnerOpSDKType {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(),
       suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array()
     };
@@ -1177,7 +1177,7 @@ export const InnerSpec = {
       minPrefixLength: object?.min_prefix_length,
       maxPrefixLength: object?.max_prefix_length,
       emptyChild: object?.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   fromSDKJSON(object: any): InnerSpecSDKType {
@@ -1187,7 +1187,7 @@ export const InnerSpec = {
       min_prefix_length: isSet(object.min_prefix_length) ? Number(object.min_prefix_length) : 0,
       max_prefix_length: isSet(object.max_prefix_length) ? Number(object.max_prefix_length) : 0,
       empty_child: isSet(object.empty_child) ? bytesFromBase64(object.empty_child) : new Uint8Array(),
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toSDK(message: InnerSpec): InnerSpecSDKType {

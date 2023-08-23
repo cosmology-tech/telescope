@@ -553,7 +553,7 @@ function createBaseResource(): Resource {
   return {
     resources: ResourceUnits.fromPartial({}),
     count: 0,
-    price: undefined
+    price: Coin.fromPartial({})
   };
 }
 export const Resource = {

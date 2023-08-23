@@ -1,7 +1,7 @@
 import { GenericParseContext } from '../../../../../encoding';
-import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../../utils';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { returnReponseType } from '../../utils/rpc';
 
 import * as t from '@babel/types'
@@ -34,7 +34,7 @@ export const headersInit = identifier(
     'headers',
     t.tSTypeAnnotation(
         t.tsTypeReference(
-                t.identifier('HeadersInit')
+            t.identifier('HeadersInit')
         ),
     ),
     true,

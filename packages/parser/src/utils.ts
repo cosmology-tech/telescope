@@ -1,25 +1,9 @@
-import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@cosmology/protobufjs';
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@cosmology/types';
 import { ProtoStore } from './store';
-import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@osmonauts/ast';
-import minimatch from 'minimatch';
-
-export const getNestedProto = (root: ProtoRoot) => {
-    const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
-
-export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
-    path = root.package.split('.').concat(path);
-    const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
-
-export const getNested = (root: ProtoRoot, path: string[]) => {
-    const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
-    return dotty.get(root, nestedPath);
-};
+import { getTypeUrl, getAminoTypeNameByRef, getTypeNameFromFieldName } from '@cosmology/utils';
+import { getNestedProto } from '.';
+export { isRefExcluded, isRefIncluded, getObjectName } from '@cosmology/utils'
 
 // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
 // NOTE: sometimes you need to pass in `.Dummy` for the first call,
@@ -42,7 +26,6 @@ export const createTypeUrlTypeMap = (
     store: ProtoStore,
     fromRef: ProtoRef // ref to create HashMap for (includes proper import names)
 ): InterfaceTypeUrlMap => {
-    const ctx = new GenericParseContext(fromRef, store, store.options);
     const result = {};
     const interfaces = [];
     Object.keys(fromRef.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
@@ -63,13 +46,13 @@ export const createTypeUrlTypeMap = (
                     types: types?.map(type => {
                         const protoType: ProtoType = getNestedProto(ref.proto)[type];
                         const typeUrl = getTypeUrl(ref.proto, protoType);
-                        const aminoType = getAminoTypeName(ctx, ref.proto, protoType);
+                        const aminoType = getAminoTypeNameByRef(fromRef, store.options, ref.proto, protoType);
                         return {
                             typeUrl,
                             aminoType,
                             type,
-                            importAs: ctx.getTypeNameFromFieldName(
-                                type, ref.filename
+                            importAs: getTypeNameFromFieldName(
+                                type, ref.filename, fromRef
                             )
                         }
                     })
@@ -78,93 +61,6 @@ export const createTypeUrlTypeMap = (
         }
     });
     return result;
-};
-
-// https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
-// Optimized checking for the most common glob patterns.
-const globPattern = /\*+([^+@!?\*\[\(]*)/;
-
-
-/**
- * test if a proto ref is included by the operation.
- * @param ref a ProtoRef with proto file info and package.
- * @param include patterns(will be deprecated soon), packages, proto files to include
- * @returns
- */
-export const isRefIncluded = (
-    ref: ProtoRef,
-    include?: {
-        patterns?: string[];
-        packages?: string[];
-        protos?: string[];
-    }
-) => {
-    // if no include object, no filter
-    if (!include) return true;
-    // if no arrays are populated, no filter
-    if (
-        !include.patterns?.length &&
-        !include.packages?.length &&
-        !include.protos?.length
-    ) {
-        return true;
-    }
-
-    // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
-    if (include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
-        return true;
-    }
-
-    const pkgMatched = include?.packages?.some(pkgName => {
-        if (!globPattern.test(pkgName)) {
-            return ref.proto.package === pkgName;
-        }
-        return minimatch(ref.proto.package, pkgName)
-    });
-
-    if (pkgMatched) {
-        return true;
-    }
-
-    const protoMatched = include?.protos?.some(protoName => {
-        if (!globPattern.test(protoName)) {
-            return ref.filename === protoName;
-        }
-        return minimatch(ref.filename, protoName)
-    });
-
-    if (protoMatched) {
-        return true;
-    }
-
-    return false;
-
-};
-
-/**
- * test if a proto ref is excluded from the operation.
- * @param ref a ProtoRef with proto file info and package.
- * @param exclude patterns(will be deprecated soon), packages, proto files to exclude
- * @returns
- */
-export const isRefExcluded = (
-  ref: ProtoRef,
-  exclude?: {
-      packages?: string[];
-      protos?: string[];
-  }
-) => {
-  // if no include object, no filter
-  if (!exclude) return false;
-  // if no arrays are populated, no filter
-  if (
-      !exclude.packages?.length &&
-      !exclude.protos?.length
-  ) {
-      return false;
-  }
-
-  return isRefIncluded(ref, exclude);
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
@@ -217,17 +113,6 @@ export const getEnums = (root: ProtoRoot) => {
             ...el.toJSON({ keepComments: true })
         };
     });
-};
-
-/*
-    nested objects get a slightly different naming convention
-    e.g. SignatureDescriptor_Data or SignatureDescriptor_Data_Multi
-*/
-
-export const getObjectName = (name: string, scope: string[] = []) => {
-    if (!scope.length || scope.length === 1) return name;
-    const [_pkg, ...scopes] = scope;
-    return [...scopes, name].join('_')
 };
 
 export const SCALAR_TYPES = [
@@ -315,25 +200,25 @@ export const instanceType = (obj: any) => {
  * @returns
  */
 export const createEmptyProtoRef = (pkg?: string, filename?: string): ProtoRef => {
-  return {
-    absolute: '',
-    filename: filename,
-    proto: {
-        package: pkg,
-        imports: null,
-        root: {},
-        importNames: null
-    },
-    traversed: {
-        package: pkg,
-        imports: null,
-        root: {},
-        importNames: null,
-        acceptsInterface: {},
-        implementsInterface: {},
-        parsedExports: {},
-        parsedImports: {},
-        symbols: null
+    return {
+        absolute: '',
+        filename: filename,
+        proto: {
+            package: pkg,
+            imports: null,
+            root: {},
+            importNames: null
+        },
+        traversed: {
+            package: pkg,
+            imports: null,
+            root: {},
+            importNames: null,
+            acceptsInterface: {},
+            implementsInterface: {},
+            parsedExports: {},
+            parsedImports: {},
+            symbols: null
+        }
     }
-}
 };

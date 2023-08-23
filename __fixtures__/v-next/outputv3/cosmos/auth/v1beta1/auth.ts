@@ -104,7 +104,7 @@ export interface ParamsSDKType {
 function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
-    pubKey: undefined,
+    pubKey: Any.fromPartial({}),
     accountNumber: Long.UZERO,
     sequence: Long.UZERO
   };

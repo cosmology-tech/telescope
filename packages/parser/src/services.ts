@@ -1,4 +1,4 @@
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 
 interface ServiceOptions {
     "(google.api.http).get"?: string;

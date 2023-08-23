@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
 

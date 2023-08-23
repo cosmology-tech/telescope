@@ -147,7 +147,7 @@ function createBaseMsgCreateBid(): MsgCreateBid {
     order: OrderID.fromPartial({}),
     provider: "",
     price: DecCoin.fromPartial({}),
-    deposit: undefined
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateBid = {
@@ -578,7 +578,7 @@ export const Bid = {
   fromSDK(object: BidSDKType): Bid {
     return {
       bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at
     };
@@ -586,7 +586,7 @@ export const Bid = {
   fromSDKJSON(object: any): BidSDKType {
     return {
       bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };

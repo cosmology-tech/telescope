@@ -361,8 +361,8 @@ function createBaseLogEntry(): LogEntry {
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
-    timestamp: undefined,
-    receiveTimestamp: undefined,
+    timestamp: new Date(),
+    receiveTimestamp: new Date(),
     severity: 0,
     insertId: "",
     httpRequest: HttpRequest.fromPartial({}),
@@ -590,7 +590,7 @@ export const LogEntry = {
       jsonPayload: object.json_payload ? Struct.fromSDK(object.json_payload) : undefined,
       timestamp: object.timestamp ?? undefined,
       receiveTimestamp: object.receive_timestamp ?? undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: object?.insert_id,
       httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -616,7 +616,7 @@ export const LogEntry = {
       json_payload: isSet(object.json_payload) ? Struct.fromSDKJSON(object.json_payload) : undefined,
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       receive_timestamp: isSet(object.receive_timestamp) ? new Date(object.receive_timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

@@ -1,4 +1,4 @@
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { ProtoStore, parseProto } from '../../src/index'
 
 const store = new ProtoStore();
@@ -36,7 +36,7 @@ message MyMessage {
         store.traverseAll();
     } catch (e) {
         failed = true;
-        expect(e.message).toEqual('missing proto import gogoproto/gogo.proto')
+        expect(e.message).toEqual('Dependency Not Found gogoproto/gogo.proto')
     }
     expect(failed).toBe(true);
 });

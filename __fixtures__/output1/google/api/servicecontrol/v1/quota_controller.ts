@@ -609,7 +609,7 @@ export const QuotaOperation = {
         return acc;
       }, {}) : {},
       quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
     };
   },
   toSDK(message: QuotaOperation): QuotaOperationSDKType {
@@ -815,7 +815,7 @@ export const QuotaError = {
   },
   fromSDK(object: QuotaErrorSDKType): QuotaError {
     return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
       subject: object?.subject,
       description: object?.description,
       status: object.status ? Status.fromSDK(object.status) : undefined

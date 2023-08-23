@@ -678,7 +678,7 @@ export const QueryProposalsRequest = {
   },
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
       voter: object?.voter,
       depositor: object?.depositor,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
@@ -694,7 +694,7 @@ export const QueryProposalsRequest = {
   },
   fromAmino(object: QueryProposalsRequestAmino): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
       voter: object.voter,
       depositor: object.depositor,
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined

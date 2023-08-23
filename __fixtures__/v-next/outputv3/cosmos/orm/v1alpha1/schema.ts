@@ -355,7 +355,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return {
       id: object?.id,
       protoFileName: object?.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
+      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
     };
   },
   toSDK(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntrySDKType {
@@ -369,7 +369,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return {
       id: object.id,
       protoFileName: object.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
+      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
     };
   },
   toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
