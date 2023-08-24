@@ -169,7 +169,6 @@ telescope transpile --protoDirs ../../__fixtures__/chain1 --config .telescope.js
 }
 ```
 
-
 ### Build
 
 Finally, run `install` and `buidl` to generate the JS and types for publishing your module to npm.
@@ -324,9 +323,12 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
+| `reactQuery.needExtraQueryKey`       | if true, users can input extra react query key to some customized hooks. e.g.['rpcEndpoint', 'yourExtraKey'] | `false`  |
 | `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
 | `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
 | `reactQuery.include.patterns`    | if set, will create the hooks on matched patterns of files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
+| `reactQuery.instantExport.include.patterns`    | if set, will expose instant hooks on matched patterns of packages + method(e.g. cosmos.bank.v1beta1.useBalance) using minimatch. If there're duplicated method names in multiple packages without setting `reactQuery.instantExport.nameMapping`, one duplicated name will created like: useCosmosBankV1beta1Balance           | `[]`     |
+| `reactQuery.instantExport.nameMapping`    |   map an alias to a package + method in case of better naming of duplicated method names. (e.g. useBankBalance: cosmos.bank.v1beta1.useBalance) Customized hook name is set in front of pkg+method, by doing this we can prevent duplicate alias.        | `{}`     |
 
 #### Mobx
 
@@ -356,6 +358,8 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
+| `prototypes.typingsFormat.setDefaultEnumToUnrecognized`       |  false: enum empty value would be 0, true: -1(value for enum unrecognized)    |true|
+| `prototypes.typingsFormat.setDefaultCustomTypesToUndefined`       |  true: Timestamp,Duration,Any,Coin empty value would be undefined., false: using fromPartial to get an empty obj    |false|
 
 ### Protobuf parser
 
@@ -947,4 +951,3 @@ Thanks to these engineers, teams and projects for inspiring Telescope:
 AS DESCRIBED IN THE TELESCOPE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
 
 No developer or entity involved in creating Telescope will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the Telescope code or Telescope CLI, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
-

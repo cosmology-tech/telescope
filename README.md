@@ -134,6 +134,41 @@ telescope transpile
 
 You should now seem some `.ts` files generated in `./src`. These are the real source files used in your application.
 
+Examples:
+
+```sh
+# Telescope takes chain1 folder as input,
+# and generate files in 'gen/src' folder.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --outPath gen/src
+```
+
+```sh
+# Telescope takes chain1 folder as input,
+# and generate files in 'gen/src' folder using default telescope options.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --outPath gen/src --useDefaults
+```
+
+```sh
+# Telescope takes chain1 folder(from args) and chain2 folder(from config) as input,
+# and generate files in 'gen/src'(defined in the config file, will override outPath in args) folder using a config file.
+# Note: --config will override --useDefaults.
+telescope transpile --protoDirs ../../__fixtures__/chain1 --config .telescope.json
+```
+
+```json
+//.telescope.json
+{
+  "protoDirs": [
+    "../../fixtures/chain2"
+  ],
+  "outPath": "gen/src",
+  "options": {
+    // telescope options
+    ...
+  }
+}
+```
+
 ### Build
 
 Finally, run `install` and `buidl` to generate the JS and types for publishing your module to npm.
