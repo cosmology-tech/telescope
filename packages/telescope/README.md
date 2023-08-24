@@ -259,6 +259,13 @@ telescope({
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
 
+### Implemented Interface Options
+
+| option                                    | description                                                     | defaults   |
+| ----------------------------------------- | --------------------------------------------------------------  | ---------- |
+| `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `false`     |
+| `interfaces.useUnionTypes`                      | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
+
 ### Prototypes Options
 
 | option                                    | description                                                     | defaults   |
