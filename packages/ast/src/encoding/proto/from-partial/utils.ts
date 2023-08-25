@@ -34,39 +34,72 @@ const setNotUndefinedAndNotNull = (
     prop: string,
     value: t.Expression,
     defaultValue: t.Expression,
-): t.Statement => {
-    return t.expressionStatement(
-        t.assignmentExpression(
-            '=',
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(prop)
-            ),
-            t.conditionalExpression(
-                t.logicalExpression(
-                    '&&',
-                    t.binaryExpression(
-                        '!==',
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('undefined')
-                    ),
-                    t.binaryExpression(
-                        '!==',
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(prop)
-                        ),
-                        t.nullLiteral()
-                    )
+): t.IfStatement => {
+    // return t.expressionStatement(
+    //     t.assignmentExpression(
+    //         '=',
+    //         t.memberExpression(
+    //             t.identifier('message'),
+    //             t.identifier(prop)
+    //         ),
+    //         t.conditionalExpression(
+    //             t.logicalExpression(
+    //                 '&&',
+    //                 t.binaryExpression(
+    //                     '!==',
+    //                     t.memberExpression(
+    //                         t.identifier('object'),
+    //                         t.identifier(prop)
+    //                     ),
+    //                     t.identifier('undefined')
+    //                 ),
+    //                 t.binaryExpression(
+    //                     '!==',
+    //                     t.memberExpression(
+    //                         t.identifier('object'),
+    //                         t.identifier(prop)
+    //                     ),
+    //                     t.nullLiteral()
+    //                 )
+    //             ),
+    //             value,
+    //             defaultValue
+    //         )
+    //     )
+    // );
+
+    return t.ifStatement(
+        t.logicalExpression(
+            '&&',
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(prop)
                 ),
-                value,
-                defaultValue
+                t.identifier('undefined')
+            ),
+            t.binaryExpression(
+                '!==',
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(prop)
+                ),
+                t.nullLiteral()
             )
-        )
-    );
+        ),
+        t.blockStatement([
+            t.expressionStatement(
+                t.assignmentExpression(
+                    '=',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    ),
+                    value
+                ))
+        ])
+    )
 };
 
 export const fromPartial = {
@@ -122,7 +155,8 @@ export const fromPartial = {
     },
 
 
-    // message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
+    // OLD: message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
+    // NEW: if( object.myInt64Value !== undefined && object.myInt64Value !== null ) { message.myInt64Value = Long.fromValue(object.myInt64Value) }
     long(args: FromPartialMethod) {
         const prop = args.field.name;
 

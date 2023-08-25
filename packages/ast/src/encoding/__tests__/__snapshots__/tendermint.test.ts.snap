@@ -172,12 +172,24 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
-    message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : Fraction.fromPartial({});
-    message.trustingPeriod = object.trustingPeriod !== undefined && object.trustingPeriod !== null ? Duration.fromPartial(object.trustingPeriod) : Duration.fromPartial({});
-    message.unbondingPeriod = object.unbondingPeriod !== undefined && object.unbondingPeriod !== null ? Duration.fromPartial(object.unbondingPeriod) : Duration.fromPartial({});
-    message.maxClockDrift = object.maxClockDrift !== undefined && object.maxClockDrift !== null ? Duration.fromPartial(object.maxClockDrift) : Duration.fromPartial({});
-    message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : Height.fromPartial({});
-    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : Height.fromPartial({});
+    if (object.trustLevel !== undefined && object.trustLevel !== null) {
+      message.trustLevel = Fraction.fromPartial(object.trustLevel);
+    }
+    if (object.trustingPeriod !== undefined && object.trustingPeriod !== null) {
+      message.trustingPeriod = Duration.fromPartial(object.trustingPeriod);
+    }
+    if (object.unbondingPeriod !== undefined && object.unbondingPeriod !== null) {
+      message.unbondingPeriod = Duration.fromPartial(object.unbondingPeriod);
+    }
+    if (object.maxClockDrift !== undefined && object.maxClockDrift !== null) {
+      message.maxClockDrift = Duration.fromPartial(object.maxClockDrift);
+    }
+    if (object.frozenHeight !== undefined && object.frozenHeight !== null) {
+      message.frozenHeight = Height.fromPartial(object.frozenHeight);
+    }
+    if (object.latestHeight !== undefined && object.latestHeight !== null) {
+      message.latestHeight = Height.fromPartial(object.latestHeight);
+    }
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
     message.upgradePath = object.upgradePath?.map(e => e) || [];
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
@@ -571,12 +583,18 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
-    message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : Fraction.fromPartial({});
+    if (object.trustLevel !== undefined && object.trustLevel !== null) {
+      message.trustLevel = Fraction.fromPartial(object.trustLevel);
+    }
     message.trustingPeriod = object.trustingPeriod ?? undefined;
     message.unbondingPeriod = object.unbondingPeriod ?? undefined;
     message.maxClockDrift = object.maxClockDrift ?? undefined;
-    message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : Height.fromPartial({});
-    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : Height.fromPartial({});
+    if (object.frozenHeight !== undefined && object.frozenHeight !== null) {
+      message.frozenHeight = Height.fromPartial(object.frozenHeight);
+    }
+    if (object.latestHeight !== undefined && object.latestHeight !== null) {
+      message.latestHeight = Height.fromPartial(object.latestHeight);
+    }
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
     message.upgradePath = object.upgradePath?.map(e => e) || [];
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;

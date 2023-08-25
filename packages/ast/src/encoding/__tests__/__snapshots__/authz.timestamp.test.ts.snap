@@ -61,7 +61,9 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
-    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
+    if (object.authorization !== undefined && object.authorization !== null) {
+      message.authorization = Any.fromPartial(object.authorization);
+    }
     message.expiration = object.expiration ?? undefined;
     return message;
   },
@@ -189,8 +191,12 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
-    message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : Any.fromPartial({});
-    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : Timestamp.fromPartial({});
+    if (object.authorization !== undefined && object.authorization !== null) {
+      message.authorization = Any.fromPartial(object.authorization);
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromPartial(object.expiration);
+    }
     return message;
   },
   fromSDK(object: GrantSDKType): Grant {

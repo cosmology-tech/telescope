@@ -128,9 +128,15 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
   },
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
-    message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : Any.fromPartial({});
-    message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : SignatureDescriptor_Data.fromPartial({});
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
+    if (object.publicKey !== undefined && object.publicKey !== null) {
+      message.publicKey = Any.fromPartial(object.publicKey);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = SignatureDescriptor_Data.fromPartial(object.data);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = Long.fromValue(object.sequence);
+    }
     return message;
   },
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
@@ -273,7 +279,9 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
   fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";
-    message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
+    if (object.signDoc !== undefined && object.signDoc !== null) {
+      message.signDoc = SignDocDirectAux.fromPartial(object.signDoc);
+    }
     message.mode = object.mode ?? 0;
     message.sig = object.sig ?? new Uint8Array();
     return message;
@@ -342,8 +350,12 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
   },
   fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
-    message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : ModeInfo_Single.fromPartial({});
-    message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : ModeInfo_Multi.fromPartial({});
+    if (object.single !== undefined && object.single !== null) {
+      message.single = ModeInfo_Single.fromPartial(object.single);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = ModeInfo_Multi.fromPartial(object.multi);
+    }
     return message;
   },
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
@@ -886,7 +898,9 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
     message.typeParams = object.typeParams?.map(e => e) || [];
-    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : Type.fromPartial({});
+    if (object.resultType !== undefined && object.resultType !== null) {
+      message.resultType = Type.fromPartial(object.resultType);
+    }
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
@@ -1055,19 +1069,33 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
-    message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : Empty.fromPartial({});
+    if (object.dyn !== undefined && object.dyn !== null) {
+      message.dyn = Empty.fromPartial(object.dyn);
+    }
     message.null = object.null ?? undefined;
     message.primitive = object.primitive ?? undefined;
     message.wrapper = object.wrapper ?? undefined;
     message.wellKnown = object.wellKnown ?? undefined;
-    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : Type_ListType.fromPartial({});
-    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : Type_MapType.fromPartial({});
-    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : Type_FunctionType.fromPartial({});
+    if (object.listType !== undefined && object.listType !== null) {
+      message.listType = Type_ListType.fromPartial(object.listType);
+    }
+    if (object.mapType !== undefined && object.mapType !== null) {
+      message.mapType = Type_MapType.fromPartial(object.mapType);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = Type_FunctionType.fromPartial(object.function);
+    }
     message.messageType = object.messageType ?? undefined;
     message.typeParam = object.typeParam ?? undefined;
-    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : Type.fromPartial({});
-    message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : Empty.fromPartial({});
-    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : Type_AbstractType.fromPartial({});
+    if (object.type !== undefined && object.type !== null) {
+      message.type = Type.fromPartial(object.type);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Empty.fromPartial(object.error);
+    }
+    if (object.abstractType !== undefined && object.abstractType !== null) {
+      message.abstractType = Type_AbstractType.fromPartial(object.abstractType);
+    }
     return message;
   },
   fromSDK(object: TypeSDKType): Type {
@@ -1152,8 +1180,12 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
   },
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
-    message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : Type.fromPartial({});
-    message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : Type.fromPartial({});
+    if (object.keyType !== undefined && object.keyType !== null) {
+      message.keyType = Type.fromPartial(object.keyType);
+    }
+    if (object.valueType !== undefined && object.valueType !== null) {
+      message.valueType = Type.fromPartial(object.valueType);
+    }
     return message;
   },
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
@@ -1288,9 +1320,13 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       }
       return acc;
     }, {});
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : SourceInfo.fromPartial({});
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
     message.exprVersion = object.exprVersion ?? "";
-    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : Expr.fromPartial({});
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromPartial(object.expr);
+    }
     return message;
   },
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
@@ -1437,12 +1473,18 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? Long.fromValue(object.int64Value) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? Long.fromValue(object.uint64Value) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = Long.fromValue(object.int64Value);
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = Long.fromValue(object.uint64Value);
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : Duration.fromPartial({});
+    if (object.durationValue !== undefined && object.durationValue !== null) {
+      message.durationValue = Duration.fromPartial(object.durationValue);
+    }
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },
@@ -1520,8 +1562,12 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
   },
   fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : Value.fromPartial({});
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : Value.fromPartial({});
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: EntrySDKType): Entry {
@@ -1972,7 +2018,9 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.name = object.name ?? "";
     message.timestamp = object.timestamp ?? undefined;
     message.severity = object.severity ?? 0;
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : HttpRequest.fromPartial({});
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.trace = object.trace ?? "";
     message.insertId = object.insertId ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -1983,11 +2031,19 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       }
       return acc;
     }, {});
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : Any.fromPartial({});
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.structPayload = object.structPayload !== undefined && object.structPayload !== null ? Struct.fromPartial(object.structPayload) : Struct.fromPartial({});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : LogEntryOperation.fromPartial({});
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : LogEntrySourceLocation.fromPartial({});
+    if (object.structPayload !== undefined && object.structPayload !== null) {
+      message.structPayload = Struct.fromPartial(object.structPayload);
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -2182,7 +2238,9 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : Counterparty.fromPartial({});
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },
@@ -2339,9 +2397,15 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : GenesisState1.fromPartial({});
-    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : GenesisState2.fromPartial({});
-    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : GenesisState3.fromPartial({});
+    if (object.clientGenesis !== undefined && object.clientGenesis !== null) {
+      message.clientGenesis = GenesisState1.fromPartial(object.clientGenesis);
+    }
+    if (object.connectionGenesis !== undefined && object.connectionGenesis !== null) {
+      message.connectionGenesis = GenesisState2.fromPartial(object.connectionGenesis);
+    }
+    if (object.channelGenesis !== undefined && object.channelGenesis !== null) {
+      message.channelGenesis = GenesisState3.fromPartial(object.channelGenesis);
+    }
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -2560,7 +2624,9 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : PageResponse.fromPartial({});
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -2648,7 +2714,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromPartial(object: DeepPartial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = Long.fromValue(object.poolId);
+    }
     message.shareOutAmount = object.shareOutAmount ?? "";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -2743,7 +2811,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
-    message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : Coin.fromPartial({});
+    if (object.tokenIn !== undefined && object.tokenIn !== null) {
+      message.tokenIn = Coin.fromPartial(object.tokenIn);
+    }
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? "";
     return message;
   },
@@ -2838,7 +2908,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? "";
-    message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : Coin.fromPartial({});
+    if (object.tokenOut !== undefined && object.tokenOut !== null) {
+      message.tokenOut = Coin.fromPartial(object.tokenOut);
+    }
     return message;
   },
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
