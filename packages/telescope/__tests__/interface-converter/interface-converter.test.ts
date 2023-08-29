@@ -273,6 +273,7 @@ export interface Grant {
 export interface GrantSDKType {
   authorization:
     | IAnySDKType<GenericAuthorizationSDKType>
+    | IAnySDKType<unknown>
     | AnySDKType
     | undefined;
   expiration?: Date;
@@ -513,45 +514,79 @@ export const Grant = {
       (obj.expiration = message.expiration.toISOString());
     return obj;
   },
-  // fromPartial(object: DeepPartial<Grant>): Grant {
-  //   const message = createBaseGrant();
-  //   message.authorization =
-  //     object.authorization !== undefined && object.authorization !== null
-  //       ? Any.fromPartial(object.authorization)
-  //       : undefined;
-  //   message.expiration = object.expiration ?? undefined;
-  //   return message;
-  // },
-  // fromSDK(object: GrantSDKType): Grant {
-  //   return {
-  //     authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
-  //     expiration: object.expiration ?? undefined
-  //   };
-  // },
-  // fromSDKJSON(object: any): GrantSDKType {
-  //   return {
-  //     authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
-  //     expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
-  //   };
-  // },
-  // toSDK(message: Grant): GrantSDKType {
-  //   const obj: any = {};
-  //   message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
-  //   message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
-  //   return obj;
-  // },
-  // fromAmino(object: GrantAmino): Grant {
-  //   return {
-  //     authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
-  //     expiration: object?.expiration
-  //   };
-  // },
-  // toAmino(message: Grant): GrantAmino {
-  //   const obj: any = {};
-  //   obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
-  //   obj.expiration = message.expiration;
-  //   return obj;
-  // },
+  fromPartial(
+    object: DeepPartial<Grant>,
+    customizedFromPartialMapping?: {
+      [key: string]: (
+        object: DeepPartial<GenericAuthorization | unknown>
+      ) => GenericAuthorization | unknown;
+    }
+  ): Grant {
+    const message = createBaseGrant();
+    message.authorization =
+      object.authorization !== undefined && object.authorization !== null
+        ? Authorization_FromPartial(
+            object.authorization,
+            customizedFromPartialMapping
+          )
+        : undefined;
+    message.expiration = object.expiration ?? undefined;
+    return message;
+  },
+  fromSDK(
+    object: GrantSDKType,
+    customizedFromSDKMapping?: {
+      [key: string]: Function;
+    }
+  ): Grant {
+    return {
+      authorization: object.authorization
+        ? Authorization_FromSDK(object.authorization, customizedFromSDKMapping)
+        : undefined,
+      expiration: object.expiration ?? undefined,
+    };
+  },
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization)
+        ? Any.fromSDKJSON(object.authorization)
+        : undefined,
+      expiration: isSet(object.expiration)
+        ? new Date(object.expiration)
+        : undefined,
+    };
+  },
+  toSDK(
+    message: Grant,
+    customizedToSDKMapping?: {
+      [key: string]: Function;
+    }
+  ): GrantSDKType {
+    const obj: any = {};
+    message.authorization !== undefined &&
+      (obj.authorization = message.authorization
+        ? Authorization_ToSDK(message.authorization, customizedToSDKMapping)
+        : undefined);
+    message.expiration !== undefined &&
+      (obj.expiration = message.expiration ?? undefined);
+    return obj;
+  },
+  fromAmino(object: GrantAmino): Grant {
+    return {
+      authorization: object?.authorization
+        ? Authorization_FromAmino(object.authorization)
+        : undefined,
+      expiration: object?.expiration,
+    };
+  },
+  toAmino(message: Grant): GrantAmino {
+    const obj: any = {};
+    obj.authorization = message.authorization
+      ? Authorization_ToAmino(message.authorization as Any)
+      : undefined;
+    obj.expiration = message.expiration;
+    return obj;
+  },
 };
 
 export const Authorization_InterfaceEncoder = (
@@ -567,25 +602,25 @@ export const Authorization_InterfaceEncoder = (
       writer
     );
   } else {
-    switch (message.typeUrl) {
-      case "/cosmos.authz.v1beta1.GenericAuthorization":
-        return Any.encode(
-          {
-            typeUrl: message.typeUrl,
-            value: GenericAuthorization.encode(
-              (message as IAny<GenericAuthorization>).value
-            ).finish(),
-          },
-          writer
-        );
-      default:
-        if ((message as Any).value instanceof Uint8Array) {
-          return Any.encode(message as Any, writer);
-        } else {
+    if ((message as Any).value instanceof Uint8Array) {
+      return Any.encode(message as Any, writer);
+    } else {
+      switch (message.typeUrl) {
+        case "/cosmos.authz.v1beta1.GenericAuthorization":
+          return Any.encode(
+            {
+              typeUrl: message.typeUrl,
+              value: GenericAuthorization.encode(
+                (message as IAny<GenericAuthorization>).value
+              ).finish(),
+            },
+            writer
+          );
+        default:
           throw new Error(
             "A valid typeUrl has to be provided if encode method is undefined."
           );
-        }
+      }
     }
   }
 };
@@ -607,34 +642,159 @@ export const Authorization_InterfaceDecoder = (
   }
 };
 
-// export const Authorization_FromAmino = (content: AnyAmino) => {
-//   switch (content.type) {
-//     case "cosmos-sdk/GenericAuthorization":
-//       return Any.fromPartial({
-//         typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
-//         value: GenericAuthorization.encode(
-//           GenericAuthorization.fromPartial(
-//             GenericAuthorization.fromAmino(content.value)
-//           )
-//         ).finish(),
-//       });
-//     default:
-//       return Any.fromAmino(content);
-//   }
-// };
-// export const Authorization_ToAmino = (content: Any) => {
-//   switch (content.typeUrl) {
-//     case "/cosmos.authz.v1beta1.GenericAuthorization":
-//       return {
-//         type: "cosmos-sdk/GenericAuthorization",
-//         value: GenericAuthorization.toAmino(
-//           GenericAuthorization.decode(content.value)
-//         ),
-//       };
-//     default:
-//       return Any.toAmino(content);
-//   }
-// };
+export const Authorization_FromPartial = (
+  object: DeepPartial<
+    IAny<GenericAuthorization> | IAny<unknown> | IAnyEncodable | Any
+  >,
+  customizedFromPartialMapping?: {
+    [key: string]: (
+      object: DeepPartial<GenericAuthorization | unknown>
+    ) => GenericAuthorization | unknown;
+  }
+): IAny<GenericAuthorization> | IAny<unknown> | Any => {
+  if (object.typeUrl && object.value && object.value instanceof Uint8Array) {
+    return Any.fromPartial(object as Any);
+  } else {
+    switch (object.typeUrl) {
+      case "/cosmos.authz.v1beta1.GenericAuthorization":
+        return {
+          typeUrl: object.typeUrl,
+          value: GenericAuthorization.fromPartial(object.value ?? {}),
+        };
+      default:
+        if (
+          customizedFromPartialMapping &&
+          Object.keys(customizedFromPartialMapping).some(
+            (item) => item === object.typeUrl
+          )
+        ) {
+          const fromPartial = customizedFromPartialMapping[object.typeUrl!];
+
+          return {
+            typeUrl: object.typeUrl!,
+            value: fromPartial(object.value ?? {}),
+          };
+        }
+
+        throw new Error(
+          "Input object has to be a valid Any type mapped with fromPartial function or decoded Any type."
+        );
+    }
+  }
+};
+
+export const Authorization_FromSDK = (
+  object:
+    | AnySDKType
+    | IAnySDKType<GenericAuthorizationSDKType>
+    | IAnySDKType<unknown>,
+  customizedFromSDKMapping?: {
+    [key: string]: Function;
+  }
+): IAny<GenericAuthorization> | IAny<unknown> | Any => {
+  if (object.type_url && object.value && object.value instanceof Uint8Array) {
+    return Any.fromSDK(object as AnySDKType);
+  } else {
+    switch (object.type_url) {
+      case "/cosmos.authz.v1beta1.GenericAuthorization":
+        return {
+          typeUrl: object.type_url,
+          value: GenericAuthorization.fromSDK(
+            object.value as GenericAuthorizationSDKType
+          ),
+        };
+      default:
+        if (
+          customizedFromSDKMapping &&
+          Object.keys(customizedFromSDKMapping).some(
+            (item) => item === object.type_url
+          )
+        ) {
+          const fromSDK = customizedFromSDKMapping[object.type_url!];
+
+          return {
+            typeUrl: object.type_url!,
+            value: fromSDK(object.value),
+          };
+        }
+
+        throw new Error(
+          "Input object has to be a valid Any type mapped with fromSDK function or decoded Any type."
+        );
+    }
+  }
+};
+
+export const Authorization_ToSDK = (
+  object: IAny<GenericAuthorization> | IAny<unknown> | IAnyEncodable | Any,
+  customizedToSDKMapping?: {
+    [key: string]: Function;
+  }
+):
+  | AnySDKType
+  | IAnySDKType<GenericAuthorizationSDKType>
+  | IAnySDKType<unknown> => {
+  if (object.typeUrl && object.value && object.value instanceof Uint8Array) {
+    return Any.toSDK(object as Any);
+  } else {
+    switch (object.typeUrl) {
+      case "/cosmos.authz.v1beta1.GenericAuthorization":
+        return {
+          type_url: object.typeUrl,
+          value: GenericAuthorization.toSDK(
+            object.value as GenericAuthorization
+          ),
+        };
+      default:
+        if (
+          customizedToSDKMapping &&
+          Object.keys(customizedToSDKMapping).some(
+            (item) => item === object.typeUrl
+          )
+        ) {
+          const fromSDK = customizedToSDKMapping[object.typeUrl!];
+
+          return {
+            type_url: object.typeUrl!,
+            value: fromSDK(object.value),
+          };
+        }
+
+        throw new Error(
+          "Input object has to be a valid Any type mapped with toSDK function or decoded Any type."
+        );
+    }
+  }
+};
+
+export const Authorization_FromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/GenericAuthorization":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+        value: GenericAuthorization.encode(
+          GenericAuthorization.fromPartial(
+            GenericAuthorization.fromAmino(content.value)
+          )
+        ).finish(),
+      });
+    default:
+      return Any.fromAmino(content);
+  }
+};
+export const Authorization_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.authz.v1beta1.GenericAuthorization":
+      return {
+        type: "cosmos-sdk/GenericAuthorization",
+        value: GenericAuthorization.toAmino(
+          GenericAuthorization.decode(content.value)
+        ),
+      };
+    default:
+      return Any.toAmino(content);
+  }
+};
 
 describe("implements interface works", () => {
   it("encodes and decodes", () => {
@@ -661,7 +821,7 @@ describe("implements interface works", () => {
       if (isGenericAuthorization(message.authorization)) {
         expect(message.authorization.value.msg).toBe("pass");
       } else if (asCustomizedAuthorization(message.authorization)) {
-        expect(message.authorization.value.customizedMsg).toBe("custom pass");
+        throw new Error("should be GenericAuthorization");
       }
     }
   });
@@ -686,7 +846,7 @@ describe("implements interface works", () => {
 
     if (message.authorization) {
       if (isGenericAuthorization(message.authorization)) {
-        expect(message.authorization.value.msg).toBe("pass");
+        throw new Error("should be CustomizedAuthorization");
       } else if (asCustomizedAuthorization(message.authorization)) {
         expect(message.authorization.value.customizedMsg).toBe("custom pass");
       }
@@ -811,9 +971,7 @@ describe("implements interface works", () => {
       if (isGenericAuthorization(decodedMessage.authorization)) {
         expect(decodedMessage.authorization.value.msg).toBe("pass");
       } else if (asCustomizedAuthorization(decodedMessage.authorization)) {
-        expect(decodedMessage.authorization.value.customizedMsg).toBe(
-          "custom pass"
-        );
+        throw new Error("should be GenericAuthorization");
       }
     }
   });
@@ -840,7 +998,7 @@ describe("implements interface works", () => {
 
     if (decodedMessage.authorization) {
       if (isGenericAuthorization(decodedMessage.authorization)) {
-        expect(decodedMessage.authorization.value.msg).toBe("pass");
+        throw new Error("should be CustomizedAuthorization");
       } else if (asCustomizedAuthorization(decodedMessage.authorization)) {
         expect(decodedMessage.authorization.value.customizedMsg).toBe(
           "custom pass"
@@ -864,6 +1022,240 @@ describe("implements interface works", () => {
 
     expect((decodedMessage.authorization as Any).value).toStrictEqual(
       new Uint8Array([100, 101])
+    );
+  });
+
+  it("fromPartial for Any", () => {
+    const message = Grant.fromPartial({
+      authorization: {
+        typeUrl: "/cosmos.TestAny",
+        value: new Uint8Array([100, 101]),
+      },
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    expect((decodedMessage.authorization as Any).value).toStrictEqual(
+      new Uint8Array([100, 101])
+    );
+  });
+
+  it("fromPartial for encoded extended interface", () => {
+    const message = Grant.fromPartial({
+      authorization: {
+        typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+        value: GenericAuthorization.encode({
+          msg: "pass",
+        }).finish(),
+      },
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    if (decodedMessage.authorization) {
+      if (isGenericAuthorization(decodedMessage.authorization)) {
+        expect(decodedMessage.authorization.value.msg).toBe("pass");
+      } else if (asCustomizedAuthorization(decodedMessage.authorization)) {
+        throw new Error("should be GenericAuthorization");
+      }
+    }
+  });
+
+  it("fromPartial for customized interface", () => {
+    const message = Grant.fromPartial(
+      {
+        authorization: {
+          typeUrl: "/cosmos.authz.v1beta1.CustomizedAuthorization",
+          value: {},
+        },
+      },
+      {
+        "/cosmos.authz.v1beta1.CustomizedAuthorization":
+          CustomizedAuthorization.fromPartial,
+      }
+    );
+
+    if (message.authorization) {
+      if (isGenericAuthorization(message.authorization)) {
+        throw new Error("should be CustomizedAuthorization");
+      } else if (asCustomizedAuthorization(message.authorization)) {
+        expect(message.authorization.value.customizedMsg).toBe("");
+      }
+    }
+  });
+
+  it("fromPartial for no mapped customized interface with error", () => {
+    expect(() => {
+      return Grant.fromPartial(
+        {
+          authorization: {
+            typeUrl: "/TestAny",
+            value: {},
+          },
+        },
+        {
+          "/cosmos.authz.v1beta1.CustomizedAuthorization":
+            CustomizedAuthorization.fromPartial,
+        }
+      );
+    }).toThrowError(
+      "Input object has to be a valid Any type mapped with fromPartial function or decoded Any type."
+    );
+  });
+
+  it("fromSDK for Any", () => {
+    const message = Grant.fromSDK({
+      authorization: {
+        type_url: "/cosmos.TestAny",
+        value: new Uint8Array([100, 101]),
+      },
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    expect((decodedMessage.authorization as Any).value).toStrictEqual(
+      new Uint8Array([100, 101])
+    );
+  });
+
+  it("fromSDK for encoded extended interface", () => {
+    const message = Grant.fromSDK({
+      authorization: {
+        type_url: "/cosmos.authz.v1beta1.GenericAuthorization",
+        value: GenericAuthorization.encode({
+          msg: "pass",
+        }).finish(),
+      },
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    if (decodedMessage.authorization) {
+      if (isGenericAuthorization(decodedMessage.authorization)) {
+        expect(decodedMessage.authorization.value.msg).toBe("pass");
+      } else if (asCustomizedAuthorization(decodedMessage.authorization)) {
+        throw new Error("should be GenericAuthorization");
+      }
+    }
+  });
+
+  it("fromSDK for customized interface", () => {
+    const message = Grant.fromSDK(
+      {
+        authorization: {
+          type_url: "/cosmos.authz.v1beta1.CustomizedAuthorization",
+          value: {
+            customized_msg: "custom pass",
+          },
+        },
+      },
+      {
+        "/cosmos.authz.v1beta1.CustomizedAuthorization":
+          CustomizedAuthorization.fromSDK,
+      }
+    );
+
+    if (message.authorization) {
+      if (isGenericAuthorization(message.authorization)) {
+        throw new Error("should be CustomizedAuthorization");
+      } else if (asCustomizedAuthorization(message.authorization)) {
+        expect(message.authorization.value.customizedMsg).toBe("custom pass");
+      }
+    }
+  });
+
+  it("fromSDK for no mapped customized interface with error", () => {
+    expect(() => {
+      return Grant.fromSDK(
+        {
+          authorization: {
+            type_url: "/TestAny",
+            value: {},
+          },
+        },
+        {
+          "/cosmos.authz.v1beta1.CustomizedAuthorization":
+            CustomizedAuthorization.fromSDK,
+        }
+      );
+    }).toThrowError(
+      "Input object has to be a valid Any type mapped with fromSDK function or decoded Any type."
+    );
+  });
+
+  it("toSDK for Any", () => {
+    const message = Grant.toSDK({
+      authorization: {
+        typeUrl: "/cosmos.TestAny",
+        value: new Uint8Array([100, 101]),
+      },
+    });
+
+    expect((message.authorization as AnySDKType).value).toStrictEqual(
+      new Uint8Array([100, 101])
+    );
+  });
+
+  it("toSDK for encoded extended interface", () => {
+    const message = Grant.toSDK({
+      authorization: {
+        typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+        value: {
+          msg: "pass",
+        },
+      },
+    });
+
+    expect(
+      (message.authorization?.value as GenericAuthorizationSDKType).msg
+    ).toBe("pass");
+  });
+
+  it("toSDK for customized interface", () => {
+    const message = Grant.toSDK(
+      {
+        authorization: {
+          typeUrl: "/cosmos.authz.v1beta1.CustomizedAuthorization",
+          value: {
+            customizedMsg: "custom pass",
+          },
+        },
+      },
+      {
+        "/cosmos.authz.v1beta1.CustomizedAuthorization":
+          CustomizedAuthorization.toSDK,
+      }
+    );
+
+    expect(
+      (message.authorization?.value as CustomizedAuthorizationSDKType).customized_msg
+    ).toBe("custom pass");
+  });
+
+  it("toSDK for no mapped customized interface with error", () => {
+    expect(() => {
+      return Grant.toSDK(
+        {
+          authorization: {
+            typeUrl: "/TestAny",
+            value: {},
+          },
+        },
+        {
+          "/cosmos.authz.v1beta1.CustomizedAuthorization":
+            CustomizedAuthorization.toSDK,
+        }
+      );
+    }).toThrowError(
+      "Input object has to be a valid Any type mapped with toSDK function or decoded Any type."
     );
   });
 });
