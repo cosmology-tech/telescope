@@ -1,4 +1,4 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
@@ -6,6 +6,19 @@ export const protobufPackage = "akash.provider.v1beta1";
 export interface ProviderInfo {
   email: string;
   website: string;
+}
+export interface ProviderInfoProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.ProviderInfo";
+  value: Uint8Array;
+}
+/** ProviderInfo */
+export interface ProviderInfoAmino {
+  email: string;
+  website: string;
+}
+export interface ProviderInfoAminoMsg {
+  type: "akash/provider/provider-info";
+  value: ProviderInfoAmino;
 }
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
@@ -19,6 +32,21 @@ export interface MsgCreateProvider {
   attributes: Attribute[];
   info: ProviderInfo;
 }
+export interface MsgCreateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProvider";
+  value: Uint8Array;
+}
+/** MsgCreateProvider defines an SDK message for creating a provider */
+export interface MsgCreateProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
+}
+export interface MsgCreateProviderAminoMsg {
+  type: "akash/provider/testonly-create-provider";
+  value: MsgCreateProviderAmino;
+}
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
   owner: string;
@@ -28,6 +56,16 @@ export interface MsgCreateProviderSDKType {
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
+export interface MsgCreateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse";
+  value: Uint8Array;
+}
+/** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
+export interface MsgCreateProviderResponseAmino {}
+export interface MsgCreateProviderResponseAminoMsg {
+  type: "akash/provider/testonly-create-provider-response";
+  value: MsgCreateProviderResponseAmino;
+}
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -36,6 +74,21 @@ export interface MsgUpdateProvider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface MsgUpdateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider";
+  value: Uint8Array;
+}
+/** MsgUpdateProvider defines an SDK message for updating a provider */
+export interface MsgUpdateProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
+}
+export interface MsgUpdateProviderAminoMsg {
+  type: "akash/provider/testonly-update-provider";
+  value: MsgUpdateProviderAmino;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -46,11 +99,33 @@ export interface MsgUpdateProviderSDKType {
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
+export interface MsgUpdateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
+export interface MsgUpdateProviderResponseAmino {}
+export interface MsgUpdateProviderResponseAminoMsg {
+  type: "akash/provider/testonly-update-provider-response";
+  value: MsgUpdateProviderResponseAmino;
+}
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
   owner: string;
+}
+export interface MsgDeleteProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider";
+  value: Uint8Array;
+}
+/** MsgDeleteProvider defines an SDK message for deleting a provider */
+export interface MsgDeleteProviderAmino {
+  owner: string;
+}
+export interface MsgDeleteProviderAminoMsg {
+  type: "akash/provider/testonly-delete-provider";
+  value: MsgDeleteProviderAmino;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -58,6 +133,16 @@ export interface MsgDeleteProviderSDKType {
 }
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
+export interface MsgDeleteProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
+export interface MsgDeleteProviderResponseAmino {}
+export interface MsgDeleteProviderResponseAminoMsg {
+  type: "akash/provider/testonly-delete-provider-response";
+  value: MsgDeleteProviderResponseAmino;
+}
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
@@ -66,6 +151,21 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.Provider";
+  value: Uint8Array;
+}
+/** Provider stores owner and host details */
+export interface ProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
+}
+export interface ProviderAminoMsg {
+  type: "akash/provider/provider";
+  value: ProviderAmino;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {
@@ -145,6 +245,39 @@ export const ProviderInfo = {
     obj.email = message.email;
     obj.website = message.website;
     return obj;
+  },
+  fromAmino(object: ProviderInfoAmino): ProviderInfo {
+    return {
+      email: object.email,
+      website: object.website
+    };
+  },
+  toAmino(message: ProviderInfo): ProviderInfoAmino {
+    const obj: any = {};
+    obj.email = message.email;
+    obj.website = message.website;
+    return obj;
+  },
+  fromAminoMsg(object: ProviderInfoAminoMsg): ProviderInfo {
+    return ProviderInfo.fromAmino(object.value);
+  },
+  toAminoMsg(message: ProviderInfo): ProviderInfoAminoMsg {
+    return {
+      type: "akash/provider/provider-info",
+      value: ProviderInfo.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ProviderInfoProtoMsg): ProviderInfo {
+    return ProviderInfo.decode(message.value);
+  },
+  toProto(message: ProviderInfo): Uint8Array {
+    return ProviderInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ProviderInfo): ProviderInfoProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.ProviderInfo",
+      value: ProviderInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateProvider(): MsgCreateProvider {
@@ -252,6 +385,47 @@ export const MsgCreateProvider = {
     }
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
+    return MsgCreateProvider.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateProvider): MsgCreateProviderAminoMsg {
+    return {
+      type: "akash/provider/testonly-create-provider",
+      value: MsgCreateProvider.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateProviderProtoMsg): MsgCreateProvider {
+    return MsgCreateProvider.decode(message.value);
+  },
+  toProto(message: MsgCreateProvider): Uint8Array {
+    return MsgCreateProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateProvider): MsgCreateProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgCreateProvider",
+      value: MsgCreateProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateProviderResponse(): MsgCreateProviderResponse {
@@ -295,6 +469,34 @@ export const MsgCreateProviderResponse = {
   toSDK(_: MsgCreateProviderResponse): MsgCreateProviderResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateProviderResponseAminoMsg): MsgCreateProviderResponse {
+    return MsgCreateProviderResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateProviderResponse): MsgCreateProviderResponseAminoMsg {
+    return {
+      type: "akash/provider/testonly-create-provider-response",
+      value: MsgCreateProviderResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateProviderResponseProtoMsg): MsgCreateProviderResponse {
+    return MsgCreateProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateProviderResponse): Uint8Array {
+    return MsgCreateProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateProviderResponse): MsgCreateProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse",
+      value: MsgCreateProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateProvider(): MsgUpdateProvider {
@@ -402,6 +604,47 @@ export const MsgUpdateProvider = {
     }
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
+    return MsgUpdateProvider.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateProvider): MsgUpdateProviderAminoMsg {
+    return {
+      type: "akash/provider/testonly-update-provider",
+      value: MsgUpdateProvider.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateProviderProtoMsg): MsgUpdateProvider {
+    return MsgUpdateProvider.decode(message.value);
+  },
+  toProto(message: MsgUpdateProvider): Uint8Array {
+    return MsgUpdateProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProvider): MsgUpdateProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider",
+      value: MsgUpdateProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateProviderResponse(): MsgUpdateProviderResponse {
@@ -445,6 +688,34 @@ export const MsgUpdateProviderResponse = {
   toSDK(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProviderResponseAminoMsg): MsgUpdateProviderResponse {
+    return MsgUpdateProviderResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateProviderResponse): MsgUpdateProviderResponseAminoMsg {
+    return {
+      type: "akash/provider/testonly-update-provider-response",
+      value: MsgUpdateProviderResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateProviderResponseProtoMsg): MsgUpdateProviderResponse {
+    return MsgUpdateProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateProviderResponse): Uint8Array {
+    return MsgUpdateProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProviderResponse): MsgUpdateProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse",
+      value: MsgUpdateProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProvider(): MsgDeleteProvider {
@@ -505,6 +776,37 @@ export const MsgDeleteProvider = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+  fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
+    return {
+      owner: object.owner
+    };
+  },
+  toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderAminoMsg): MsgDeleteProvider {
+    return MsgDeleteProvider.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteProvider): MsgDeleteProviderAminoMsg {
+    return {
+      type: "akash/provider/testonly-delete-provider",
+      value: MsgDeleteProvider.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDeleteProviderProtoMsg): MsgDeleteProvider {
+    return MsgDeleteProvider.decode(message.value);
+  },
+  toProto(message: MsgDeleteProvider): Uint8Array {
+    return MsgDeleteProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProvider): MsgDeleteProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider",
+      value: MsgDeleteProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProviderResponse(): MsgDeleteProviderResponse {
@@ -548,6 +850,34 @@ export const MsgDeleteProviderResponse = {
   toSDK(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderResponseAminoMsg): MsgDeleteProviderResponse {
+    return MsgDeleteProviderResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteProviderResponse): MsgDeleteProviderResponseAminoMsg {
+    return {
+      type: "akash/provider/testonly-delete-provider-response",
+      value: MsgDeleteProviderResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDeleteProviderResponseProtoMsg): MsgDeleteProviderResponse {
+    return MsgDeleteProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteProviderResponse): Uint8Array {
+    return MsgDeleteProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProviderResponse): MsgDeleteProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse",
+      value: MsgDeleteProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseProvider(): Provider {
@@ -655,5 +985,46 @@ export const Provider = {
     }
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+  fromAmino(object: ProviderAmino): Provider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: Provider): ProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ProviderAminoMsg): Provider {
+    return Provider.fromAmino(object.value);
+  },
+  toAminoMsg(message: Provider): ProviderAminoMsg {
+    return {
+      type: "akash/provider/provider",
+      value: Provider.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ProviderProtoMsg): Provider {
+    return Provider.decode(message.value);
+  },
+  toProto(message: Provider): Uint8Array {
+    return Provider.encode(message).finish();
+  },
+  toProtoMsg(message: Provider): ProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta1.Provider",
+      value: Provider.encode(message).finish()
+    };
   }
 };

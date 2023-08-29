@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
@@ -9,6 +9,22 @@ export interface GenesisState {
    * module.
    */
   constantFee: Coin;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.crisis.v1beta1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the crisis module's genesis state. */
+export interface GenesisStateAmino {
+  /**
+   * constant_fee is the fee used to verify the invariant in the crisis
+   * module.
+   */
+  constant_fee?: CoinAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisStateSDKType {
@@ -72,5 +88,36 @@ export const GenesisState = {
     const obj: any = {};
     message.constantFee !== undefined && (obj.constant_fee = message.constantFee ? Coin.toSDK(message.constantFee) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.constant_fee = message.constantFee ? Coin.toAmino(message.constantFee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.crisis.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

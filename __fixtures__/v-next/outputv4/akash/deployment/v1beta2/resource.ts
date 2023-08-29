@@ -1,5 +1,5 @@
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -8,6 +8,20 @@ export interface Resource {
   resources: ResourceUnits;
   count: number;
   price: DecCoin;
+}
+export interface ResourceProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Resource";
+  value: Uint8Array;
+}
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources?: ResourceUnitsAmino;
+  count: number;
+  price?: DecCoinAmino;
+}
+export interface ResourceAminoMsg {
+  type: "akash/deployment/v1beta2/resource";
+  value: ResourceAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -99,5 +113,40 @@ export const Resource = {
     obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     return obj;
+  },
+  fromAmino(object: ResourceAmino): Resource {
+    return {
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: object.count,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
+    };
+  },
+  toAmino(message: Resource): ResourceAmino {
+    const obj: any = {};
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
+    obj.count = message.count;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceAminoMsg): Resource {
+    return Resource.fromAmino(object.value);
+  },
+  toAminoMsg(message: Resource): ResourceAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/resource",
+      value: Resource.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ResourceProtoMsg): Resource {
+    return Resource.decode(message.value);
+  },
+  toProto(message: Resource): Uint8Array {
+    return Resource.encode(message).finish();
+  },
+  toProtoMsg(message: Resource): ResourceProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.Resource",
+      value: Resource.encode(message).finish()
+    };
   }
 };

@@ -1,5 +1,5 @@
-import { OrderID, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -18,6 +18,7 @@ export enum Bid_State {
   UNRECOGNIZED = -1,
 }
 export const Bid_StateSDKType = Bid_State;
+export const Bid_StateAmino = Bid_State;
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:
@@ -65,6 +66,21 @@ export interface MsgCreateBid {
   price: DecCoin;
   deposit: Coin;
 }
+export interface MsgCreateBidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBid";
+  value: Uint8Array;
+}
+/** MsgCreateBid defines an SDK message for creating Bid */
+export interface MsgCreateBidAmino {
+  order?: OrderIDAmino;
+  provider: string;
+  price?: DecCoinAmino;
+  deposit?: CoinAmino;
+}
+export interface MsgCreateBidAminoMsg {
+  type: "akash/market/v1beta2/testonly-create-bid";
+  value: MsgCreateBidAmino;
+}
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
   order: OrderIDSDKType;
@@ -74,11 +90,33 @@ export interface MsgCreateBidSDKType {
 }
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponse {}
+export interface MsgCreateBidResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse";
+  value: Uint8Array;
+}
+/** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+export interface MsgCreateBidResponseAmino {}
+export interface MsgCreateBidResponseAminoMsg {
+  type: "akash/market/v1beta2/testonly-create-bid-response";
+  value: MsgCreateBidResponseAmino;
+}
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
   bidId: BidID;
+}
+export interface MsgCloseBidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBid";
+  value: Uint8Array;
+}
+/** MsgCloseBid defines an SDK message for closing bid */
+export interface MsgCloseBidAmino {
+  bid_id?: BidIDAmino;
+}
+export interface MsgCloseBidAminoMsg {
+  type: "akash/market/v1beta2/testonly-close-bid";
+  value: MsgCloseBidAmino;
 }
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
@@ -86,6 +124,16 @@ export interface MsgCloseBidSDKType {
 }
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponse {}
+export interface MsgCloseBidResponseProtoMsg {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
+  value: Uint8Array;
+}
+/** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+export interface MsgCloseBidResponseAmino {}
+export interface MsgCloseBidResponseAminoMsg {
+  type: "akash/market/v1beta2/testonly-close-bid-response";
+  value: MsgCloseBidResponseAmino;
+}
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseSDKType {}
 /**
@@ -98,6 +146,25 @@ export interface BidID {
   gseq: number;
   oseq: number;
   provider: string;
+}
+export interface BidIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.BidID";
+  value: Uint8Array;
+}
+/**
+ * BidID stores owner and all other seq numbers
+ * A successful bid becomes a Lease(ID).
+ */
+export interface BidIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+}
+export interface BidIDAminoMsg {
+  type: "akash/market/v1beta2/bid-i-d";
+  value: BidIDAmino;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -117,6 +184,21 @@ export interface Bid {
   price: DecCoin;
   createdAt: bigint;
 }
+export interface BidProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Bid";
+  value: Uint8Array;
+}
+/** Bid stores BidID, state of bid and price */
+export interface BidAmino {
+  bid_id?: BidIDAmino;
+  state: Bid_State;
+  price?: DecCoinAmino;
+  created_at: string;
+}
+export interface BidAminoMsg {
+  type: "akash/market/v1beta2/bid";
+  value: BidAmino;
+}
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id: BidIDSDKType;
@@ -132,6 +214,23 @@ export interface BidFilters {
   oseq: number;
   provider: string;
   state: string;
+}
+export interface BidFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.BidFilters";
+  value: Uint8Array;
+}
+/** BidFilters defines flags for bid list filter */
+export interface BidFiltersAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
+}
+export interface BidFiltersAminoMsg {
+  type: "akash/market/v1beta2/bid-filters";
+  value: BidFiltersAmino;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
@@ -239,6 +338,43 @@ export const MsgCreateBid = {
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCreateBidAmino): MsgCreateBid {
+    return {
+      order: object?.order ? OrderID.fromAmino(object.order) : undefined,
+      provider: object.provider,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+    };
+  },
+  toAmino(message: MsgCreateBid): MsgCreateBidAmino {
+    const obj: any = {};
+    obj.order = message.order ? OrderID.toAmino(message.order) : undefined;
+    obj.provider = message.provider;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateBidAminoMsg): MsgCreateBid {
+    return MsgCreateBid.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateBid): MsgCreateBidAminoMsg {
+    return {
+      type: "akash/market/v1beta2/testonly-create-bid",
+      value: MsgCreateBid.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateBidProtoMsg): MsgCreateBid {
+    return MsgCreateBid.decode(message.value);
+  },
+  toProto(message: MsgCreateBid): Uint8Array {
+    return MsgCreateBid.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateBid): MsgCreateBidProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCreateBid",
+      value: MsgCreateBid.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
@@ -282,6 +418,34 @@ export const MsgCreateBidResponse = {
   toSDK(_: MsgCreateBidResponse): MsgCreateBidResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCreateBidResponseAmino): MsgCreateBidResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateBidResponse): MsgCreateBidResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateBidResponseAminoMsg): MsgCreateBidResponse {
+    return MsgCreateBidResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateBidResponse): MsgCreateBidResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/testonly-create-bid-response",
+      value: MsgCreateBidResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateBidResponseProtoMsg): MsgCreateBidResponse {
+    return MsgCreateBidResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateBidResponse): Uint8Array {
+    return MsgCreateBidResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateBidResponse): MsgCreateBidResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse",
+      value: MsgCreateBidResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseBid(): MsgCloseBid {
@@ -342,6 +506,37 @@ export const MsgCloseBid = {
     const obj: any = {};
     message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCloseBidAmino): MsgCloseBid {
+    return {
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
+    };
+  },
+  toAmino(message: MsgCloseBid): MsgCloseBidAmino {
+    const obj: any = {};
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseBidAminoMsg): MsgCloseBid {
+    return MsgCloseBid.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseBid): MsgCloseBidAminoMsg {
+    return {
+      type: "akash/market/v1beta2/testonly-close-bid",
+      value: MsgCloseBid.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseBidProtoMsg): MsgCloseBid {
+    return MsgCloseBid.decode(message.value);
+  },
+  toProto(message: MsgCloseBid): Uint8Array {
+    return MsgCloseBid.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseBid): MsgCloseBidProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCloseBid",
+      value: MsgCloseBid.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
@@ -385,6 +580,34 @@ export const MsgCloseBidResponse = {
   toSDK(_: MsgCloseBidResponse): MsgCloseBidResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCloseBidResponseAmino): MsgCloseBidResponse {
+    return {};
+  },
+  toAmino(_: MsgCloseBidResponse): MsgCloseBidResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseBidResponseAminoMsg): MsgCloseBidResponse {
+    return MsgCloseBidResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseBidResponse): MsgCloseBidResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/testonly-close-bid-response",
+      value: MsgCloseBidResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseBidResponseProtoMsg): MsgCloseBidResponse {
+    return MsgCloseBidResponse.decode(message.value);
+  },
+  toProto(message: MsgCloseBidResponse): Uint8Array {
+    return MsgCloseBidResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseBidResponse): MsgCloseBidResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse",
+      value: MsgCloseBidResponse.encode(message).finish()
+    };
   }
 };
 function createBaseBidID(): BidID {
@@ -497,6 +720,45 @@ export const BidID = {
     obj.oseq = message.oseq;
     obj.provider = message.provider;
     return obj;
+  },
+  fromAmino(object: BidIDAmino): BidID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      provider: object.provider
+    };
+  },
+  toAmino(message: BidID): BidIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
+    return obj;
+  },
+  fromAminoMsg(object: BidIDAminoMsg): BidID {
+    return BidID.fromAmino(object.value);
+  },
+  toAminoMsg(message: BidID): BidIDAminoMsg {
+    return {
+      type: "akash/market/v1beta2/bid-i-d",
+      value: BidID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: BidIDProtoMsg): BidID {
+    return BidID.decode(message.value);
+  },
+  toProto(message: BidID): Uint8Array {
+    return BidID.encode(message).finish();
+  },
+  toProtoMsg(message: BidID): BidIDProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.BidID",
+      value: BidID.encode(message).finish()
+    };
   }
 };
 function createBaseBid(): Bid {
@@ -596,6 +858,43 @@ export const Bid = {
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+  fromAmino(object: BidAmino): Bid {
+    return {
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      createdAt: BigInt(object.created_at)
+    };
+  },
+  toAmino(message: Bid): BidAmino {
+    const obj: any = {};
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    obj.state = message.state;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: BidAminoMsg): Bid {
+    return Bid.fromAmino(object.value);
+  },
+  toAminoMsg(message: Bid): BidAminoMsg {
+    return {
+      type: "akash/market/v1beta2/bid",
+      value: Bid.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: BidProtoMsg): Bid {
+    return Bid.decode(message.value);
+  },
+  toProto(message: Bid): Uint8Array {
+    return Bid.encode(message).finish();
+  },
+  toProtoMsg(message: Bid): BidProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Bid",
+      value: Bid.encode(message).finish()
+    };
   }
 };
 function createBaseBidFilters(): BidFilters {
@@ -721,5 +1020,46 @@ export const BidFilters = {
     obj.provider = message.provider;
     obj.state = message.state;
     return obj;
+  },
+  fromAmino(object: BidFiltersAmino): BidFilters {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      provider: object.provider,
+      state: object.state
+    };
+  },
+  toAmino(message: BidFilters): BidFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: BidFiltersAminoMsg): BidFilters {
+    return BidFilters.fromAmino(object.value);
+  },
+  toAminoMsg(message: BidFilters): BidFiltersAminoMsg {
+    return {
+      type: "akash/market/v1beta2/bid-filters",
+      value: BidFilters.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: BidFiltersProtoMsg): BidFilters {
+    return BidFilters.decode(message.value);
+  },
+  toProto(message: BidFilters): Uint8Array {
+    return BidFilters.encode(message).finish();
+  },
+  toProtoMsg(message: BidFilters): BidFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.BidFilters",
+      value: BidFilters.encode(message).finish()
+    };
   }
 };

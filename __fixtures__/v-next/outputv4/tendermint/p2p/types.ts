@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.p2p";
@@ -6,6 +6,19 @@ export interface ProtocolVersion {
   p2p: bigint;
   block: bigint;
   app: bigint;
+}
+export interface ProtocolVersionProtoMsg {
+  typeUrl: "/tendermint.p2p.ProtocolVersion";
+  value: Uint8Array;
+}
+export interface ProtocolVersionAmino {
+  p2p: string;
+  block: string;
+  app: string;
+}
+export interface ProtocolVersionAminoMsg {
+  type: "/tendermint.p2p.ProtocolVersion";
+  value: ProtocolVersionAmino;
 }
 export interface ProtocolVersionSDKType {
   p2p: bigint;
@@ -22,6 +35,24 @@ export interface NodeInfo {
   moniker: string;
   other: NodeInfoOther;
 }
+export interface NodeInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfo";
+  value: Uint8Array;
+}
+export interface NodeInfoAmino {
+  protocol_version?: ProtocolVersionAmino;
+  node_id: string;
+  listen_addr: string;
+  network: string;
+  version: string;
+  channels: Uint8Array;
+  moniker: string;
+  other?: NodeInfoOtherAmino;
+}
+export interface NodeInfoAminoMsg {
+  type: "/tendermint.p2p.NodeInfo";
+  value: NodeInfoAmino;
+}
 export interface NodeInfoSDKType {
   protocol_version: ProtocolVersionSDKType;
   node_id: string;
@@ -36,6 +67,18 @@ export interface NodeInfoOther {
   txIndex: string;
   rpcAddress: string;
 }
+export interface NodeInfoOtherProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfoOther";
+  value: Uint8Array;
+}
+export interface NodeInfoOtherAmino {
+  tx_index: string;
+  rpc_address: string;
+}
+export interface NodeInfoOtherAminoMsg {
+  type: "/tendermint.p2p.NodeInfoOther";
+  value: NodeInfoOtherAmino;
+}
 export interface NodeInfoOtherSDKType {
   tx_index: string;
   rpc_address: string;
@@ -44,6 +87,19 @@ export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
   lastConnected: Date;
+}
+export interface PeerInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerInfo";
+  value: Uint8Array;
+}
+export interface PeerInfoAmino {
+  id: string;
+  address_info: PeerAddressInfoAmino[];
+  last_connected?: Date;
+}
+export interface PeerInfoAminoMsg {
+  type: "/tendermint.p2p.PeerInfo";
+  value: PeerInfoAmino;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -55,6 +111,20 @@ export interface PeerAddressInfo {
   lastDialSuccess: Date;
   lastDialFailure: Date;
   dialFailures: number;
+}
+export interface PeerAddressInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerAddressInfo";
+  value: Uint8Array;
+}
+export interface PeerAddressInfoAmino {
+  address: string;
+  last_dial_success?: Date;
+  last_dial_failure?: Date;
+  dial_failures: number;
+}
+export interface PeerAddressInfoAminoMsg {
+  type: "/tendermint.p2p.PeerAddressInfo";
+  value: PeerAddressInfoAmino;
 }
 export interface PeerAddressInfoSDKType {
   address: string;
@@ -146,6 +216,35 @@ export const ProtocolVersion = {
     obj.block = message.block;
     obj.app = message.app;
     return obj;
+  },
+  fromAmino(object: ProtocolVersionAmino): ProtocolVersion {
+    return {
+      p2p: BigInt(object.p2p),
+      block: BigInt(object.block),
+      app: BigInt(object.app)
+    };
+  },
+  toAmino(message: ProtocolVersion): ProtocolVersionAmino {
+    const obj: any = {};
+    obj.p2p = message.p2p ? message.p2p.toString() : undefined;
+    obj.block = message.block ? message.block.toString() : undefined;
+    obj.app = message.app ? message.app.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
+    return ProtocolVersion.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProtocolVersionProtoMsg): ProtocolVersion {
+    return ProtocolVersion.decode(message.value);
+  },
+  toProto(message: ProtocolVersion): Uint8Array {
+    return ProtocolVersion.encode(message).finish();
+  },
+  toProtoMsg(message: ProtocolVersion): ProtocolVersionProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.ProtocolVersion",
+      value: ProtocolVersion.encode(message).finish()
+    };
   }
 };
 function createBaseNodeInfo(): NodeInfo {
@@ -297,6 +396,45 @@ export const NodeInfo = {
     obj.moniker = message.moniker;
     message.other !== undefined && (obj.other = message.other ? NodeInfoOther.toSDK(message.other) : undefined);
     return obj;
+  },
+  fromAmino(object: NodeInfoAmino): NodeInfo {
+    return {
+      protocolVersion: object?.protocol_version ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
+      nodeId: object.node_id,
+      listenAddr: object.listen_addr,
+      network: object.network,
+      version: object.version,
+      channels: object.channels,
+      moniker: object.moniker,
+      other: object?.other ? NodeInfoOther.fromAmino(object.other) : undefined
+    };
+  },
+  toAmino(message: NodeInfo): NodeInfoAmino {
+    const obj: any = {};
+    obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion) : undefined;
+    obj.node_id = message.nodeId;
+    obj.listen_addr = message.listenAddr;
+    obj.network = message.network;
+    obj.version = message.version;
+    obj.channels = message.channels;
+    obj.moniker = message.moniker;
+    obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: NodeInfoAminoMsg): NodeInfo {
+    return NodeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: NodeInfoProtoMsg): NodeInfo {
+    return NodeInfo.decode(message.value);
+  },
+  toProto(message: NodeInfo): Uint8Array {
+    return NodeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: NodeInfo): NodeInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.NodeInfo",
+      value: NodeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseNodeInfoOther(): NodeInfoOther {
@@ -370,6 +508,33 @@ export const NodeInfoOther = {
     obj.tx_index = message.txIndex;
     obj.rpc_address = message.rpcAddress;
     return obj;
+  },
+  fromAmino(object: NodeInfoOtherAmino): NodeInfoOther {
+    return {
+      txIndex: object.tx_index,
+      rpcAddress: object.rpc_address
+    };
+  },
+  toAmino(message: NodeInfoOther): NodeInfoOtherAmino {
+    const obj: any = {};
+    obj.tx_index = message.txIndex;
+    obj.rpc_address = message.rpcAddress;
+    return obj;
+  },
+  fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
+    return NodeInfoOther.fromAmino(object.value);
+  },
+  fromProtoMsg(message: NodeInfoOtherProtoMsg): NodeInfoOther {
+    return NodeInfoOther.decode(message.value);
+  },
+  toProto(message: NodeInfoOther): Uint8Array {
+    return NodeInfoOther.encode(message).finish();
+  },
+  toProtoMsg(message: NodeInfoOther): NodeInfoOtherProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.NodeInfoOther",
+      value: NodeInfoOther.encode(message).finish()
+    };
   }
 };
 function createBasePeerInfo(): PeerInfo {
@@ -464,6 +629,39 @@ export const PeerInfo = {
     }
     message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ?? undefined);
     return obj;
+  },
+  fromAmino(object: PeerInfoAmino): PeerInfo {
+    return {
+      id: object.id,
+      addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
+      lastConnected: object.last_connected
+    };
+  },
+  toAmino(message: PeerInfo): PeerInfoAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    if (message.addressInfo) {
+      obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toAmino(e) : undefined);
+    } else {
+      obj.address_info = [];
+    }
+    obj.last_connected = message.lastConnected;
+    return obj;
+  },
+  fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
+    return PeerInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PeerInfoProtoMsg): PeerInfo {
+    return PeerInfo.decode(message.value);
+  },
+  toProto(message: PeerInfo): Uint8Array {
+    return PeerInfo.encode(message).finish();
+  },
+  toProtoMsg(message: PeerInfo): PeerInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.PeerInfo",
+      value: PeerInfo.encode(message).finish()
+    };
   }
 };
 function createBasePeerAddressInfo(): PeerAddressInfo {
@@ -563,5 +761,36 @@ export const PeerAddressInfo = {
     message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ?? undefined);
     obj.dial_failures = message.dialFailures;
     return obj;
+  },
+  fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
+    return {
+      address: object.address,
+      lastDialSuccess: object.last_dial_success,
+      lastDialFailure: object.last_dial_failure,
+      dialFailures: object.dial_failures
+    };
+  },
+  toAmino(message: PeerAddressInfo): PeerAddressInfoAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.last_dial_success = message.lastDialSuccess;
+    obj.last_dial_failure = message.lastDialFailure;
+    obj.dial_failures = message.dialFailures;
+    return obj;
+  },
+  fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {
+    return PeerAddressInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PeerAddressInfoProtoMsg): PeerAddressInfo {
+    return PeerAddressInfo.decode(message.value);
+  },
+  toProto(message: PeerAddressInfo): Uint8Array {
+    return PeerAddressInfo.encode(message).finish();
+  },
+  toProtoMsg(message: PeerAddressInfo): PeerAddressInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.PeerAddressInfo",
+      value: PeerAddressInfo.encode(message).finish()
+    };
   }
 };

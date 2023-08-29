@@ -1,4 +1,4 @@
-import { Duration, DurationSDKType } from "../protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
@@ -20,6 +20,33 @@ export const protobufPackage = "google.rpc";
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay: Duration;
+}
+export interface RetryInfoProtoMsg {
+  typeUrl: "/google.rpc.RetryInfo";
+  value: Uint8Array;
+}
+/**
+ * Describes when the clients can retry a failed request. Clients could ignore
+ * the recommendation here or retry when this information is missing from error
+ * responses.
+ * 
+ * It's always recommended that clients should use exponential backoff when
+ * retrying.
+ * 
+ * Clients should wait until `retry_delay` amount of time has passed since
+ * receiving the error response before retrying.  If retrying requests also
+ * fail, clients should use an exponential backoff scheme to gradually increase
+ * the delay between retries based on `retry_delay`, until either a maximum
+ * number of retries have been reached or a maximum retry delay cap has been
+ * reached.
+ */
+export interface RetryInfoAmino {
+  /** Clients should wait at least this long between retrying the same request. */
+  retry_delay?: DurationAmino;
+}
+export interface RetryInfoAminoMsg {
+  type: "/google.rpc.RetryInfo";
+  value: RetryInfoAmino;
 }
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -46,6 +73,21 @@ export interface DebugInfo {
   /** Additional debugging information provided by the server. */
   detail: string;
 }
+export interface DebugInfoProtoMsg {
+  typeUrl: "/google.rpc.DebugInfo";
+  value: Uint8Array;
+}
+/** Describes additional debugging info. */
+export interface DebugInfoAmino {
+  /** The stack trace entries indicating where the error occurred. */
+  stack_entries: string[];
+  /** Additional debugging information provided by the server. */
+  detail: string;
+}
+export interface DebugInfoAminoMsg {
+  type: "/google.rpc.DebugInfo";
+  value: DebugInfoAmino;
+}
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
   stack_entries: string[];
@@ -67,6 +109,31 @@ export interface DebugInfoSDKType {
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
+}
+export interface QuotaFailureProtoMsg {
+  typeUrl: "/google.rpc.QuotaFailure";
+  value: Uint8Array;
+}
+/**
+ * Describes how a quota check failed.
+ * 
+ * For example if a daily limit was exceeded for the calling project,
+ * a service could respond with a QuotaFailure detail containing the project
+ * id and the description of the quota limit that was exceeded.  If the
+ * calling project hasn't enabled the service in the developer console, then
+ * a service could respond with the project id and set `service_disabled`
+ * to true.
+ * 
+ * Also see RetryInfo and Help types for other details about handling a
+ * quota failure.
+ */
+export interface QuotaFailureAmino {
+  /** Describes all quota violations. */
+  violations: QuotaFailure_ViolationAmino[];
+}
+export interface QuotaFailureAminoMsg {
+  type: "/google.rpc.QuotaFailure";
+  value: QuotaFailureAmino;
 }
 /**
  * Describes how a quota check failed.
@@ -106,6 +173,36 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
+export interface QuotaFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
+/**
+ * A message type used to describe a single quota violation.  For example, a
+ * daily quota or a custom quota that was exceeded.
+ */
+export interface QuotaFailure_ViolationAmino {
+  /**
+   * The subject on which the quota check failed.
+   * For example, "clientip:<ip address of client>" or "project:<Google
+   * developer project id>".
+   */
+  subject: string;
+  /**
+   * A description of how the quota check failed. Clients can use this
+   * description to find more about the quota configuration in the service's
+   * public documentation, or find the relevant quota limit to adjust through
+   * developer console.
+   * 
+   * For example: "Service disabled" or "Daily Limit for read operations
+   * exceeded".
+   */
+  description: string;
+}
+export interface QuotaFailure_ViolationAminoMsg {
+  type: "/google.rpc.Violation";
+  value: QuotaFailure_ViolationAmino;
+}
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -117,6 +214,18 @@ export interface QuotaFailure_ViolationSDKType {
 export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
+}
+export interface ErrorInfo_MetadataEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
+export interface ErrorInfo_MetadataEntryAmino {
+  key: string;
+  value: string;
+}
+export interface ErrorInfo_MetadataEntryAminoMsg {
+  type: string;
+  value: ErrorInfo_MetadataEntryAmino;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -179,6 +288,71 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
+export interface ErrorInfoProtoMsg {
+  typeUrl: "/google.rpc.ErrorInfo";
+  value: Uint8Array;
+}
+/**
+ * Describes the cause of the error with structured details.
+ * 
+ * Example of an error when contacting the "pubsub.googleapis.com" API when it
+ * is not enabled:
+ * 
+ *     { "reason": "API_DISABLED"
+ *       "domain": "googleapis.com"
+ *       "metadata": {
+ *         "resource": "projects/123",
+ *         "service": "pubsub.googleapis.com"
+ *       }
+ *     }
+ * 
+ * This response indicates that the pubsub.googleapis.com API is not enabled.
+ * 
+ * Example of an error that is returned when attempting to create a Spanner
+ * instance in a region that is out of stock:
+ * 
+ *     { "reason": "STOCKOUT"
+ *       "domain": "spanner.googleapis.com",
+ *       "metadata": {
+ *         "availableRegions": "us-central1,us-east2"
+ *       }
+ *     }
+ */
+export interface ErrorInfoAmino {
+  /**
+   * The reason of the error. This is a constant value that identifies the
+   * proximate cause of the error. Error reasons are unique within a particular
+   * domain of errors. This should be at most 63 characters and match
+   * /[A-Z0-9_]+/.
+   */
+  reason: string;
+  /**
+   * The logical grouping to which the "reason" belongs. The error domain
+   * is typically the registered service name of the tool or product that
+   * generates the error. Example: "pubsub.googleapis.com". If the error is
+   * generated by some common infrastructure, the error domain must be a
+   * globally unique value that identifies the infrastructure. For Google API
+   * infrastructure, the error domain is "googleapis.com".
+   */
+  domain: string;
+  /**
+   * Additional structured details about this error.
+   * 
+   * Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
+   * length. When identifying the current value of an exceeded limit, the units
+   * should be contained in the key, not the value.  For example, rather than
+   * {"instanceLimit": "100/request"}, should be returned as,
+   * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
+   * instances that can be created in a single (batch) request.
+   */
+  metadata: {
+    [key: string]: string;
+  };
+}
+export interface ErrorInfoAminoMsg {
+  type: "/google.rpc.ErrorInfo";
+  value: ErrorInfoAmino;
+}
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -223,6 +397,25 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
+export interface PreconditionFailureProtoMsg {
+  typeUrl: "/google.rpc.PreconditionFailure";
+  value: Uint8Array;
+}
+/**
+ * Describes what preconditions have failed.
+ * 
+ * For example, if an RPC failed because it required the Terms of Service to be
+ * acknowledged, it could list the terms of service violation in the
+ * PreconditionFailure message.
+ */
+export interface PreconditionFailureAmino {
+  /** Describes all precondition violations. */
+  violations: PreconditionFailure_ViolationAmino[];
+}
+export interface PreconditionFailureAminoMsg {
+  type: "/google.rpc.PreconditionFailure";
+  value: PreconditionFailureAmino;
+}
 /**
  * Describes what preconditions have failed.
  * 
@@ -255,6 +448,36 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
+export interface PreconditionFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
+/** A message type used to describe a single precondition failure. */
+export interface PreconditionFailure_ViolationAmino {
+  /**
+   * The type of PreconditionFailure. We recommend using a service-specific
+   * enum type to define the supported precondition violation subjects. For
+   * example, "TOS" for "Terms of Service violation".
+   */
+  type: string;
+  /**
+   * The subject, relative to the type, that failed.
+   * For example, "google.com/cloud" relative to the "TOS" type would indicate
+   * which terms of service is being referenced.
+   */
+  subject: string;
+  /**
+   * A description of how the precondition failed. Developers can use this
+   * description to understand how to fix the failure.
+   * 
+   * For example: "Terms of service not accepted".
+   */
+  description: string;
+}
+export interface PreconditionFailure_ViolationAminoMsg {
+  type: "/google.rpc.Violation";
+  value: PreconditionFailure_ViolationAmino;
+}
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
@@ -268,6 +491,22 @@ export interface PreconditionFailure_ViolationSDKType {
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
+}
+export interface BadRequestProtoMsg {
+  typeUrl: "/google.rpc.BadRequest";
+  value: Uint8Array;
+}
+/**
+ * Describes violations in a client request. This error type focuses on the
+ * syntactic aspects of the request.
+ */
+export interface BadRequestAmino {
+  /** Describes all violations in a client request. */
+  field_violations: BadRequest_FieldViolationAmino[];
+}
+export interface BadRequestAminoMsg {
+  type: "/google.rpc.BadRequest";
+  value: BadRequestAmino;
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -286,6 +525,25 @@ export interface BadRequest_FieldViolation {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
+}
+export interface BadRequest_FieldViolationProtoMsg {
+  typeUrl: "/google.rpc.FieldViolation";
+  value: Uint8Array;
+}
+/** A message type used to describe a single bad request field. */
+export interface BadRequest_FieldViolationAmino {
+  /**
+   * A path leading to a field in the request body. The value will be a
+   * sequence of dot-separated identifiers that identify a protocol buffer
+   * field. E.g., "field_violations.field" would identify this field.
+   */
+  field: string;
+  /** A description of why the request element is bad. */
+  description: string;
+}
+export interface BadRequest_FieldViolationAminoMsg {
+  type: "/google.rpc.FieldViolation";
+  value: BadRequest_FieldViolationAmino;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -307,6 +565,30 @@ export interface RequestInfo {
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
+}
+export interface RequestInfoProtoMsg {
+  typeUrl: "/google.rpc.RequestInfo";
+  value: Uint8Array;
+}
+/**
+ * Contains metadata about the request that clients can attach when filing a bug
+ * or providing other forms of feedback.
+ */
+export interface RequestInfoAmino {
+  /**
+   * An opaque string that should only be interpreted by the service generating
+   * it. For example, it can be used to identify requests in the service's logs.
+   */
+  request_id: string;
+  /**
+   * Any data that was used to serve this request. For example, an encrypted
+   * stack trace that can be sent back to the service provider for debugging.
+   */
+  serving_data: string;
+}
+export interface RequestInfoAminoMsg {
+  type: "/google.rpc.RequestInfo";
+  value: RequestInfoAmino;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -343,6 +625,41 @@ export interface ResourceInfo {
    */
   description: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.rpc.ResourceInfo";
+  value: Uint8Array;
+}
+/** Describes the resource that is being accessed. */
+export interface ResourceInfoAmino {
+  /**
+   * A name for the type of resource being accessed, e.g. "sql table",
+   * "cloud storage bucket", "file", "Google calendar"; or the type URL
+   * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
+   */
+  resource_type: string;
+  /**
+   * The name of the resource being accessed.  For example, a shared calendar
+   * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
+   * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+   */
+  resource_name: string;
+  /**
+   * The owner of the resource (optional).
+   * For example, "user:<owner email>" or "project:<Google developer project
+   * id>".
+   */
+  owner: string;
+  /**
+   * Describes what error is encountered when accessing this resource.
+   * For example, updating a cloud project may require the `writer` permission
+   * on the developer console project.
+   */
+  description: string;
+}
+export interface ResourceInfoAminoMsg {
+  type: "/google.rpc.ResourceInfo";
+  value: ResourceInfoAmino;
+}
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
   resource_type: string;
@@ -361,6 +678,25 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
+export interface HelpProtoMsg {
+  typeUrl: "/google.rpc.Help";
+  value: Uint8Array;
+}
+/**
+ * Provides links to documentation or for performing an out of band action.
+ * 
+ * For example, if a quota check failed with an error indicating the calling
+ * project hasn't enabled the accessed service, this can contain a URL pointing
+ * directly to the right place in the developer console to flip the bit.
+ */
+export interface HelpAmino {
+  /** URL(s) pointing to additional information on handling the current error. */
+  links: Help_LinkAmino[];
+}
+export interface HelpAminoMsg {
+  type: "/google.rpc.Help";
+  value: HelpAmino;
+}
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -377,6 +713,21 @@ export interface Help_Link {
   description: string;
   /** The URL of the link. */
   url: string;
+}
+export interface Help_LinkProtoMsg {
+  typeUrl: "/google.rpc.Link";
+  value: Uint8Array;
+}
+/** Describes a URL link. */
+export interface Help_LinkAmino {
+  /** Describes what the link offers. */
+  description: string;
+  /** The URL of the link. */
+  url: string;
+}
+export interface Help_LinkAminoMsg {
+  type: "/google.rpc.Link";
+  value: Help_LinkAmino;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -396,6 +747,28 @@ export interface LocalizedMessage {
   locale: string;
   /** The localized error message in the above locale. */
   message: string;
+}
+export interface LocalizedMessageProtoMsg {
+  typeUrl: "/google.rpc.LocalizedMessage";
+  value: Uint8Array;
+}
+/**
+ * Provides a localized error message that is safe to return to the user
+ * which can be attached to an RPC error.
+ */
+export interface LocalizedMessageAmino {
+  /**
+   * The locale used following the specification defined at
+   * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+   * Examples are: "en-US", "fr-CH", "es-MX"
+   */
+  locale: string;
+  /** The localized error message in the above locale. */
+  message: string;
+}
+export interface LocalizedMessageAminoMsg {
+  type: "/google.rpc.LocalizedMessage";
+  value: LocalizedMessageAmino;
 }
 /**
  * Provides a localized error message that is safe to return to the user
@@ -463,6 +836,31 @@ export const RetryInfo = {
     const obj: any = {};
     message.retryDelay !== undefined && (obj.retry_delay = message.retryDelay ? Duration.toSDK(message.retryDelay) : undefined);
     return obj;
+  },
+  fromAmino(object: RetryInfoAmino): RetryInfo {
+    return {
+      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
+    };
+  },
+  toAmino(message: RetryInfo): RetryInfoAmino {
+    const obj: any = {};
+    obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
+    return RetryInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
+    return RetryInfo.decode(message.value);
+  },
+  toProto(message: RetryInfo): Uint8Array {
+    return RetryInfo.encode(message).finish();
+  },
+  toProtoMsg(message: RetryInfo): RetryInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RetryInfo",
+      value: RetryInfo.encode(message).finish()
+    };
   }
 };
 function createBaseDebugInfo(): DebugInfo {
@@ -544,6 +942,37 @@ export const DebugInfo = {
     }
     obj.detail = message.detail;
     return obj;
+  },
+  fromAmino(object: DebugInfoAmino): DebugInfo {
+    return {
+      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
+      detail: object.detail
+    };
+  },
+  toAmino(message: DebugInfo): DebugInfoAmino {
+    const obj: any = {};
+    if (message.stackEntries) {
+      obj.stack_entries = message.stackEntries.map(e => e);
+    } else {
+      obj.stack_entries = [];
+    }
+    obj.detail = message.detail;
+    return obj;
+  },
+  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
+    return DebugInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
+    return DebugInfo.decode(message.value);
+  },
+  toProto(message: DebugInfo): Uint8Array {
+    return DebugInfo.encode(message).finish();
+  },
+  toProtoMsg(message: DebugInfo): DebugInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.DebugInfo",
+      value: DebugInfo.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaFailure(): QuotaFailure {
@@ -612,6 +1041,35 @@ export const QuotaFailure = {
       obj.violations = [];
     }
     return obj;
+  },
+  fromAmino(object: QuotaFailureAmino): QuotaFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QuotaFailure): QuotaFailureAmino {
+    const obj: any = {};
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
+    return QuotaFailure.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
+    return QuotaFailure.decode(message.value);
+  },
+  toProto(message: QuotaFailure): Uint8Array {
+    return QuotaFailure.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaFailure): QuotaFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.QuotaFailure",
+      value: QuotaFailure.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
@@ -685,6 +1143,33 @@ export const QuotaFailure_Violation = {
     obj.subject = message.subject;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
+    return {
+      subject: object.subject,
+      description: object.description
+    };
+  },
+  toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
+    const obj: any = {};
+    obj.subject = message.subject;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.decode(message.value);
+  },
+  toProto(message: QuotaFailure_Violation): Uint8Array {
+    return QuotaFailure_Violation.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaFailure_Violation): QuotaFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: QuotaFailure_Violation.encode(message).finish()
+    };
   }
 };
 function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
@@ -758,6 +1243,27 @@ export const ErrorInfo_MetadataEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.decode(message.value);
+  },
+  toProto(message: ErrorInfo_MetadataEntry): Uint8Array {
+    return ErrorInfo_MetadataEntry.encode(message).finish();
   }
 };
 function createBaseErrorInfo(): ErrorInfo {
@@ -882,6 +1388,45 @@ export const ErrorInfo = {
       });
     }
     return obj;
+  },
+  fromAmino(object: ErrorInfoAmino): ErrorInfo {
+    return {
+      reason: object.reason,
+      domain: object.domain,
+      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: ErrorInfo): ErrorInfoAmino {
+    const obj: any = {};
+    obj.reason = message.reason;
+    obj.domain = message.domain;
+    obj.metadata = {};
+    if (message.metadata) {
+      Object.entries(message.metadata).forEach(([k, v]) => {
+        obj.metadata[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
+    return ErrorInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
+    return ErrorInfo.decode(message.value);
+  },
+  toProto(message: ErrorInfo): Uint8Array {
+    return ErrorInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ErrorInfo): ErrorInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ErrorInfo",
+      value: ErrorInfo.encode(message).finish()
+    };
   }
 };
 function createBasePreconditionFailure(): PreconditionFailure {
@@ -950,6 +1495,35 @@ export const PreconditionFailure = {
       obj.violations = [];
     }
     return obj;
+  },
+  fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
+    const obj: any = {};
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
+    return PreconditionFailure.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
+    return PreconditionFailure.decode(message.value);
+  },
+  toProto(message: PreconditionFailure): Uint8Array {
+    return PreconditionFailure.encode(message).finish();
+  },
+  toProtoMsg(message: PreconditionFailure): PreconditionFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.PreconditionFailure",
+      value: PreconditionFailure.encode(message).finish()
+    };
   }
 };
 function createBasePreconditionFailure_Violation(): PreconditionFailure_Violation {
@@ -1036,6 +1610,35 @@ export const PreconditionFailure_Violation = {
     obj.subject = message.subject;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
+    return {
+      type: object.type,
+      subject: object.subject,
+      description: object.description
+    };
+  },
+  toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.subject = message.subject;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.decode(message.value);
+  },
+  toProto(message: PreconditionFailure_Violation): Uint8Array {
+    return PreconditionFailure_Violation.encode(message).finish();
+  },
+  toProtoMsg(message: PreconditionFailure_Violation): PreconditionFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: PreconditionFailure_Violation.encode(message).finish()
+    };
   }
 };
 function createBaseBadRequest(): BadRequest {
@@ -1104,6 +1707,35 @@ export const BadRequest = {
       obj.field_violations = [];
     }
     return obj;
+  },
+  fromAmino(object: BadRequestAmino): BadRequest {
+    return {
+      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: BadRequest): BadRequestAmino {
+    const obj: any = {};
+    if (message.fieldViolations) {
+      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
+    } else {
+      obj.field_violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
+    return BadRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
+    return BadRequest.decode(message.value);
+  },
+  toProto(message: BadRequest): Uint8Array {
+    return BadRequest.encode(message).finish();
+  },
+  toProtoMsg(message: BadRequest): BadRequestProtoMsg {
+    return {
+      typeUrl: "/google.rpc.BadRequest",
+      value: BadRequest.encode(message).finish()
+    };
   }
 };
 function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
@@ -1177,6 +1809,33 @@ export const BadRequest_FieldViolation = {
     obj.field = message.field;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
+    return {
+      field: object.field,
+      description: object.description
+    };
+  },
+  toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
+    const obj: any = {};
+    obj.field = message.field;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.decode(message.value);
+  },
+  toProto(message: BadRequest_FieldViolation): Uint8Array {
+    return BadRequest_FieldViolation.encode(message).finish();
+  },
+  toProtoMsg(message: BadRequest_FieldViolation): BadRequest_FieldViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.FieldViolation",
+      value: BadRequest_FieldViolation.encode(message).finish()
+    };
   }
 };
 function createBaseRequestInfo(): RequestInfo {
@@ -1250,6 +1909,33 @@ export const RequestInfo = {
     obj.request_id = message.requestId;
     obj.serving_data = message.servingData;
     return obj;
+  },
+  fromAmino(object: RequestInfoAmino): RequestInfo {
+    return {
+      requestId: object.request_id,
+      servingData: object.serving_data
+    };
+  },
+  toAmino(message: RequestInfo): RequestInfoAmino {
+    const obj: any = {};
+    obj.request_id = message.requestId;
+    obj.serving_data = message.servingData;
+    return obj;
+  },
+  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
+    return RequestInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
+    return RequestInfo.decode(message.value);
+  },
+  toProto(message: RequestInfo): Uint8Array {
+    return RequestInfo.encode(message).finish();
+  },
+  toProtoMsg(message: RequestInfo): RequestInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RequestInfo",
+      value: RequestInfo.encode(message).finish()
+    };
   }
 };
 function createBaseResourceInfo(): ResourceInfo {
@@ -1349,6 +2035,37 @@ export const ResourceInfo = {
     obj.owner = message.owner;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: ResourceInfoAmino): ResourceInfo {
+    return {
+      resourceType: object.resource_type,
+      resourceName: object.resource_name,
+      owner: object.owner,
+      description: object.description
+    };
+  },
+  toAmino(message: ResourceInfo): ResourceInfoAmino {
+    const obj: any = {};
+    obj.resource_type = message.resourceType;
+    obj.resource_name = message.resourceName;
+    obj.owner = message.owner;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseHelp(): Help {
@@ -1417,6 +2134,35 @@ export const Help = {
       obj.links = [];
     }
     return obj;
+  },
+  fromAmino(object: HelpAmino): Help {
+    return {
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Help): HelpAmino {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
+    } else {
+      obj.links = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: HelpAminoMsg): Help {
+    return Help.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HelpProtoMsg): Help {
+    return Help.decode(message.value);
+  },
+  toProto(message: Help): Uint8Array {
+    return Help.encode(message).finish();
+  },
+  toProtoMsg(message: Help): HelpProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Help",
+      value: Help.encode(message).finish()
+    };
   }
 };
 function createBaseHelp_Link(): Help_Link {
@@ -1490,6 +2236,33 @@ export const Help_Link = {
     obj.description = message.description;
     obj.url = message.url;
     return obj;
+  },
+  fromAmino(object: Help_LinkAmino): Help_Link {
+    return {
+      description: object.description,
+      url: object.url
+    };
+  },
+  toAmino(message: Help_Link): Help_LinkAmino {
+    const obj: any = {};
+    obj.description = message.description;
+    obj.url = message.url;
+    return obj;
+  },
+  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
+    return Help_Link.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
+    return Help_Link.decode(message.value);
+  },
+  toProto(message: Help_Link): Uint8Array {
+    return Help_Link.encode(message).finish();
+  },
+  toProtoMsg(message: Help_Link): Help_LinkProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Link",
+      value: Help_Link.encode(message).finish()
+    };
   }
 };
 function createBaseLocalizedMessage(): LocalizedMessage {
@@ -1563,5 +2336,32 @@ export const LocalizedMessage = {
     obj.locale = message.locale;
     obj.message = message.message;
     return obj;
+  },
+  fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
+    return {
+      locale: object.locale,
+      message: object.message
+    };
+  },
+  toAmino(message: LocalizedMessage): LocalizedMessageAmino {
+    const obj: any = {};
+    obj.locale = message.locale;
+    obj.message = message.message;
+    return obj;
+  },
+  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
+    return LocalizedMessage.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
+    return LocalizedMessage.decode(message.value);
+  },
+  toProto(message: LocalizedMessage): Uint8Array {
+    return LocalizedMessage.encode(message).finish();
+  },
+  toProtoMsg(message: LocalizedMessage): LocalizedMessageProtoMsg {
+    return {
+      typeUrl: "/google.rpc.LocalizedMessage",
+      value: LocalizedMessage.encode(message).finish()
+    };
   }
 };

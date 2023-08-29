@@ -1,5 +1,5 @@
-import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
-import { Status, StatusSDKType } from "../../../rpc/status";
+import { AttributeContext, AttributeContextAmino, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
@@ -26,6 +26,38 @@ export interface CheckRequest {
   resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
+}
+export interface CheckRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
+  value: Uint8Array;
+}
+/** Request message for the Check method. */
+export interface CheckRequestAmino {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name: string;
+  /**
+   * Specifies the version of the service configuration that should be used to
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
+   */
+  service_config_id: string;
+  /** Describes attributes about the operation being executed by the service. */
+  attributes?: AttributeContextAmino;
+  /** Describes the resources and the policies applied to each resource. */
+  resources: ResourceInfoAmino[];
+  /** Optional. Contains a comma-separated list of flags. */
+  flags: string;
+}
+export interface CheckRequestAminoMsg {
+  type: "/google.api.servicecontrol.v2.CheckRequest";
+  value: CheckRequestAmino;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -64,6 +96,43 @@ export interface ResourceInfo {
    */
   location: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: Uint8Array;
+}
+/** Describes a resource referenced in the request. */
+export interface ResourceInfoAmino {
+  /** The name of the resource referenced in the request. */
+  name: string;
+  /** The resource type in the format of "{service}/{kind}". */
+  type: string;
+  /**
+   * The resource permission needed for this request.
+   * The format must be "{service}/{plural}.{verb}".
+   */
+  permission: string;
+  /**
+   * Optional. The identifier of the container of this resource. For Google
+   * Cloud APIs, the resource container must be one of the following formats:
+   *     - `projects/<project-id or project-number>`
+   *     - `folders/<folder-id>`
+   *     - `organizations/<organization-id>`
+   * For the policy enforcement on the container level (VPCSC and Location
+   * Policy check), this field takes precedence on the container extracted from
+   * name when presents.
+   */
+  container: string;
+  /**
+   * Optional. The location of the resource. The value must be a valid zone,
+   * region or multiregion. For example: "europe-west4" or
+   * "northamerica-northeast1-a"
+   */
+  location: string;
+}
+export interface ResourceInfoAminoMsg {
+  type: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: ResourceInfoAmino;
+}
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
   name: string;
@@ -75,6 +144,18 @@ export interface ResourceInfoSDKType {
 export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
+}
+export interface CheckResponse_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
+export interface CheckResponse_HeadersEntryAmino {
+  key: string;
+  value: string;
+}
+export interface CheckResponse_HeadersEntryAminoMsg {
+  type: string;
+  value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -92,6 +173,27 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
+  value: Uint8Array;
+}
+/** Response message for the Check method. */
+export interface CheckResponseAmino {
+  /**
+   * Operation is allowed when this field is not set. Any non-'OK' status
+   * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
+   * would contain additional details about the denial.
+   */
+  status?: StatusAmino;
+  /** Returns a set of request contexts generated from the `CheckRequest`. */
+  headers: {
+    [key: string]: string;
+  };
+}
+export interface CheckResponseAminoMsg {
+  type: "/google.api.servicecontrol.v2.CheckResponse";
+  value: CheckResponseAmino;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -124,6 +226,38 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
+export interface ReportRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
+  value: Uint8Array;
+}
+/** Request message for the Report method. */
+export interface ReportRequestAmino {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name: string;
+  /**
+   * Specifies the version of the service configuration that should be used to
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
+   */
+  service_config_id: string;
+  /**
+   * Describes the list of operations to be reported. Each operation is
+   * represented as an AttributeContext, and contains all attributes around an
+   * API access.
+   */
+  operations: AttributeContextAmino[];
+}
+export interface ReportRequestAminoMsg {
+  type: "/google.api.servicecontrol.v2.ReportRequest";
+  value: ReportRequestAmino;
+}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -135,6 +269,19 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReportResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
+  value: Uint8Array;
+}
+/**
+ * Response message for the Report method.
+ * If the request contains any invalid data, the server returns an RPC error.
+ */
+export interface ReportResponseAmino {}
+export interface ReportResponseAminoMsg {
+  type: "/google.api.servicecontrol.v2.ReportResponse";
+  value: ReportResponseAmino;
+}
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
@@ -258,6 +405,43 @@ export const CheckRequest = {
     }
     obj.flags = message.flags;
     return obj;
+  },
+  fromAmino(object: CheckRequestAmino): CheckRequest {
+    return {
+      serviceName: object.service_name,
+      serviceConfigId: object.service_config_id,
+      attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
+      flags: object.flags
+    };
+  },
+  toAmino(message: CheckRequest): CheckRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
+    obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined;
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    obj.flags = message.flags;
+    return obj;
+  },
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 };
 function createBaseResourceInfo(): ResourceInfo {
@@ -370,6 +554,39 @@ export const ResourceInfo = {
     obj.container = message.container;
     obj.location = message.location;
     return obj;
+  },
+  fromAmino(object: ResourceInfoAmino): ResourceInfo {
+    return {
+      name: object.name,
+      type: object.type,
+      permission: object.permission,
+      container: object.container,
+      location: object.location
+    };
+  },
+  toAmino(message: ResourceInfo): ResourceInfoAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.permission = message.permission;
+    obj.container = message.container;
+    obj.location = message.location;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
@@ -443,6 +660,27 @@ export const CheckResponse_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.decode(message.value);
+  },
+  toProto(message: CheckResponse_HeadersEntry): Uint8Array {
+    return CheckResponse_HeadersEntry.encode(message).finish();
   }
 };
 function createBaseCheckResponse(): CheckResponse {
@@ -554,6 +792,43 @@ export const CheckResponse = {
       });
     }
     return obj;
+  },
+  fromAmino(object: CheckResponseAmino): CheckResponse {
+    return {
+      status: object?.status ? Status.fromAmino(object.status) : undefined,
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: CheckResponse): CheckResponseAmino {
+    const obj: any = {};
+    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.headers = {};
+    if (message.headers) {
+      Object.entries(message.headers).forEach(([k, v]) => {
+        obj.headers[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 };
 function createBaseReportRequest(): ReportRequest {
@@ -648,6 +923,39 @@ export const ReportRequest = {
       obj.operations = [];
     }
     return obj;
+  },
+  fromAmino(object: ReportRequestAmino): ReportRequest {
+    return {
+      serviceName: object.service_name,
+      serviceConfigId: object.service_config_id,
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ReportRequest): ReportRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
+    return ReportRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
+    return ReportRequest.decode(message.value);
+  },
+  toProto(message: ReportRequest): Uint8Array {
+    return ReportRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ReportRequest): ReportRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+      value: ReportRequest.encode(message).finish()
+    };
   }
 };
 function createBaseReportResponse(): ReportResponse {
@@ -691,5 +999,27 @@ export const ReportResponse = {
   toSDK(_: ReportResponse): ReportResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: ReportResponseAmino): ReportResponse {
+    return {};
+  },
+  toAmino(_: ReportResponse): ReportResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
+    return ReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
+    return ReportResponse.decode(message.value);
+  },
+  toProto(message: ReportResponse): Uint8Array {
+    return ReportResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ReportResponse): ReportResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+      value: ReportResponse.encode(message).finish()
+    };
   }
 };

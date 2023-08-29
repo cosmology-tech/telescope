@@ -1,5 +1,5 @@
-import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "./resource";
-import { Endpoint, EndpointSDKType } from "./endpoint";
+import { CPU, CPUAmino, CPUSDKType, Memory, MemoryAmino, MemorySDKType, Storage, StorageAmino, StorageSDKType } from "./resource";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
@@ -12,6 +12,24 @@ export interface ResourceUnits {
   memory?: Memory;
   storage: Storage[];
   endpoints: Endpoint[];
+}
+export interface ResourceUnitsProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceUnits";
+  value: Uint8Array;
+}
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
+export interface ResourceUnitsAmino {
+  cpu?: CPUAmino;
+  memory?: MemoryAmino;
+  storage: StorageAmino[];
+  endpoints: EndpointAmino[];
+}
+export interface ResourceUnitsAminoMsg {
+  type: "akash/base/v1beta2/resource-units";
+  value: ResourceUnitsAmino;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -136,5 +154,50 @@ export const ResourceUnits = {
       obj.endpoints = [];
     }
     return obj;
+  },
+  fromAmino(object: ResourceUnitsAmino): ResourceUnits {
+    return {
+      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
+      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
+      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+    const obj: any = {};
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
+    if (message.storage) {
+      obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
+    } else {
+      obj.storage = [];
+    }
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
+    return ResourceUnits.fromAmino(object.value);
+  },
+  toAminoMsg(message: ResourceUnits): ResourceUnitsAminoMsg {
+    return {
+      type: "akash/base/v1beta2/resource-units",
+      value: ResourceUnits.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
+    return ResourceUnits.decode(message.value);
+  },
+  toProto(message: ResourceUnits): Uint8Array {
+    return ResourceUnits.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceUnits): ResourceUnitsProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.ResourceUnits",
+      value: ResourceUnits.encode(message).finish()
+    };
   }
 };

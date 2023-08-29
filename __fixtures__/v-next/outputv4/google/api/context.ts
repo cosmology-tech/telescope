@@ -47,6 +47,60 @@ export interface Context {
    */
   rules: ContextRule[];
 }
+export interface ContextProtoMsg {
+  typeUrl: "/google.api.Context";
+  value: Uint8Array;
+}
+/**
+ * `Context` defines which contexts an API requests.
+ * 
+ * Example:
+ * 
+ *     context:
+ *       rules:
+ *       - selector: "*"
+ *         requested:
+ *         - google.rpc.context.ProjectContext
+ *         - google.rpc.context.OriginContext
+ * 
+ * The above specifies that all methods in the API request
+ * `google.rpc.context.ProjectContext` and
+ * `google.rpc.context.OriginContext`.
+ * 
+ * Available context types are defined in package
+ * `google.rpc.context`.
+ * 
+ * This also provides mechanism to allowlist any protobuf message extension that
+ * can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+ * “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+ * specific protobuf types that can appear in grpc metadata as follows in your
+ * yaml file:
+ * 
+ * Example:
+ * 
+ *     context:
+ *       rules:
+ *        - selector: "google.example.library.v1.LibraryService.CreateBook"
+ *          allowed_request_extensions:
+ *          - google.foo.v1.NewExtension
+ *          allowed_response_extensions:
+ *          - google.foo.v1.NewExtension
+ * 
+ * You can also specify extension ID instead of fully qualified extension name
+ * here.
+ */
+export interface ContextAmino {
+  /**
+   * A list of RPC context rules that apply to individual API methods.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: ContextRuleAmino[];
+}
+export interface ContextAminoMsg {
+  type: "/google.api.Context";
+  value: ContextAmino;
+}
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -113,6 +167,40 @@ export interface ContextRule {
    * side channel from backend to client.
    */
   allowedResponseExtensions: string[];
+}
+export interface ContextRuleProtoMsg {
+  typeUrl: "/google.api.ContextRule";
+  value: Uint8Array;
+}
+/**
+ * A context rule provides information about the context for an individual API
+ * element.
+ */
+export interface ContextRuleAmino {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+  /** A list of full type names of requested contexts. */
+  requested: string[];
+  /** A list of full type names of provided contexts. */
+  provided: string[];
+  /**
+   * A list of full type names or extension IDs of extensions allowed in grpc
+   * side channel from client to backend.
+   */
+  allowed_request_extensions: string[];
+  /**
+   * A list of full type names or extension IDs of extensions allowed in grpc
+   * side channel from backend to client.
+   */
+  allowed_response_extensions: string[];
+}
+export interface ContextRuleAminoMsg {
+  type: "/google.api.ContextRule";
+  value: ContextRuleAmino;
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -191,6 +279,35 @@ export const Context = {
       obj.rules = [];
     }
     return obj;
+  },
+  fromAmino(object: ContextAmino): Context {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Context): ContextAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ContextAminoMsg): Context {
+    return Context.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ContextProtoMsg): Context {
+    return Context.decode(message.value);
+  },
+  toProto(message: Context): Uint8Array {
+    return Context.encode(message).finish();
+  },
+  toProtoMsg(message: Context): ContextProtoMsg {
+    return {
+      typeUrl: "/google.api.Context",
+      value: Context.encode(message).finish()
+    };
   }
 };
 function createBaseContextRule(): ContextRule {
@@ -335,5 +452,54 @@ export const ContextRule = {
       obj.allowed_response_extensions = [];
     }
     return obj;
+  },
+  fromAmino(object: ContextRuleAmino): ContextRule {
+    return {
+      selector: object.selector,
+      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
+      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
+      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
+      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: ContextRule): ContextRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    if (message.requested) {
+      obj.requested = message.requested.map(e => e);
+    } else {
+      obj.requested = [];
+    }
+    if (message.provided) {
+      obj.provided = message.provided.map(e => e);
+    } else {
+      obj.provided = [];
+    }
+    if (message.allowedRequestExtensions) {
+      obj.allowed_request_extensions = message.allowedRequestExtensions.map(e => e);
+    } else {
+      obj.allowed_request_extensions = [];
+    }
+    if (message.allowedResponseExtensions) {
+      obj.allowed_response_extensions = message.allowedResponseExtensions.map(e => e);
+    } else {
+      obj.allowed_response_extensions = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ContextRuleAminoMsg): ContextRule {
+    return ContextRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ContextRuleProtoMsg): ContextRule {
+    return ContextRule.decode(message.value);
+  },
+  toProto(message: ContextRule): Uint8Array {
+    return ContextRule.encode(message).finish();
+  },
+  toProtoMsg(message: ContextRule): ContextRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.ContextRule",
+      value: ContextRule.encode(message).finish()
+    };
   }
 };

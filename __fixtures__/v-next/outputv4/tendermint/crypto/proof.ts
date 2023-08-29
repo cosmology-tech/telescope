@@ -7,6 +7,20 @@ export interface Proof {
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
+export interface ProofProtoMsg {
+  typeUrl: "/tendermint.crypto.Proof";
+  value: Uint8Array;
+}
+export interface ProofAmino {
+  total: string;
+  index: string;
+  leaf_hash: Uint8Array;
+  aunts: Uint8Array[];
+}
+export interface ProofAminoMsg {
+  type: "/tendermint.crypto.Proof";
+  value: ProofAmino;
+}
 export interface ProofSDKType {
   total: bigint;
   index: bigint;
@@ -19,6 +33,20 @@ export interface ValueOp {
   /** To encode in ProofOp.Data */
   proof: Proof;
 }
+export interface ValueOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ValueOp";
+  value: Uint8Array;
+}
+export interface ValueOpAmino {
+  /** Encoded in ProofOp.Key. */
+  key: Uint8Array;
+  /** To encode in ProofOp.Data */
+  proof?: ProofAmino;
+}
+export interface ValueOpAminoMsg {
+  type: "/tendermint.crypto.ValueOp";
+  value: ValueOpAmino;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof: ProofSDKType;
@@ -27,6 +55,19 @@ export interface DominoOp {
   key: string;
   input: string;
   output: string;
+}
+export interface DominoOpProtoMsg {
+  typeUrl: "/tendermint.crypto.DominoOp";
+  value: Uint8Array;
+}
+export interface DominoOpAmino {
+  key: string;
+  input: string;
+  output: string;
+}
+export interface DominoOpAminoMsg {
+  type: "/tendermint.crypto.DominoOp";
+  value: DominoOpAmino;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -43,6 +84,24 @@ export interface ProofOp {
   key: Uint8Array;
   data: Uint8Array;
 }
+export interface ProofOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOp";
+  value: Uint8Array;
+}
+/**
+ * ProofOp defines an operation used for calculating Merkle root
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
+ */
+export interface ProofOpAmino {
+  type: string;
+  key: Uint8Array;
+  data: Uint8Array;
+}
+export interface ProofOpAminoMsg {
+  type: "/tendermint.crypto.ProofOp";
+  value: ProofOpAmino;
+}
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
@@ -56,6 +115,18 @@ export interface ProofOpSDKType {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOps {
   ops: ProofOp[];
+}
+export interface ProofOpsProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOps";
+  value: Uint8Array;
+}
+/** ProofOps is Merkle proof defined by the list of ProofOps */
+export interface ProofOpsAmino {
+  ops: ProofOpAmino[];
+}
+export interface ProofOpsAminoMsg {
+  type: "/tendermint.crypto.ProofOps";
+  value: ProofOpsAmino;
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsSDKType {
@@ -166,6 +237,41 @@ export const Proof = {
       obj.aunts = [];
     }
     return obj;
+  },
+  fromAmino(object: ProofAmino): Proof {
+    return {
+      total: BigInt(object.total),
+      index: BigInt(object.index),
+      leafHash: object.leaf_hash,
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Proof): ProofAmino {
+    const obj: any = {};
+    obj.total = message.total ? message.total.toString() : undefined;
+    obj.index = message.index ? message.index.toString() : undefined;
+    obj.leaf_hash = message.leafHash;
+    if (message.aunts) {
+      obj.aunts = message.aunts.map(e => e);
+    } else {
+      obj.aunts = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProofAminoMsg): Proof {
+    return Proof.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProofProtoMsg): Proof {
+    return Proof.decode(message.value);
+  },
+  toProto(message: Proof): Uint8Array {
+    return Proof.encode(message).finish();
+  },
+  toProtoMsg(message: Proof): ProofProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.Proof",
+      value: Proof.encode(message).finish()
+    };
   }
 };
 function createBaseValueOp(): ValueOp {
@@ -239,6 +345,33 @@ export const ValueOp = {
     obj.key = message.key;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
     return obj;
+  },
+  fromAmino(object: ValueOpAmino): ValueOp {
+    return {
+      key: object.key,
+      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+  toAmino(message: ValueOp): ValueOpAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValueOpAminoMsg): ValueOp {
+    return ValueOp.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ValueOpProtoMsg): ValueOp {
+    return ValueOp.decode(message.value);
+  },
+  toProto(message: ValueOp): Uint8Array {
+    return ValueOp.encode(message).finish();
+  },
+  toProtoMsg(message: ValueOp): ValueOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ValueOp",
+      value: ValueOp.encode(message).finish()
+    };
   }
 };
 function createBaseDominoOp(): DominoOp {
@@ -325,6 +458,35 @@ export const DominoOp = {
     obj.input = message.input;
     obj.output = message.output;
     return obj;
+  },
+  fromAmino(object: DominoOpAmino): DominoOp {
+    return {
+      key: object.key,
+      input: object.input,
+      output: object.output
+    };
+  },
+  toAmino(message: DominoOp): DominoOpAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.input = message.input;
+    obj.output = message.output;
+    return obj;
+  },
+  fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
+    return DominoOp.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DominoOpProtoMsg): DominoOp {
+    return DominoOp.decode(message.value);
+  },
+  toProto(message: DominoOp): Uint8Array {
+    return DominoOp.encode(message).finish();
+  },
+  toProtoMsg(message: DominoOp): DominoOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.DominoOp",
+      value: DominoOp.encode(message).finish()
+    };
   }
 };
 function createBaseProofOp(): ProofOp {
@@ -411,6 +573,35 @@ export const ProofOp = {
     obj.key = message.key;
     obj.data = message.data;
     return obj;
+  },
+  fromAmino(object: ProofOpAmino): ProofOp {
+    return {
+      type: object.type,
+      key: object.key,
+      data: object.data
+    };
+  },
+  toAmino(message: ProofOp): ProofOpAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.key = message.key;
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
+    return ProofOp.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProofOpProtoMsg): ProofOp {
+    return ProofOp.decode(message.value);
+  },
+  toProto(message: ProofOp): Uint8Array {
+    return ProofOp.encode(message).finish();
+  },
+  toProtoMsg(message: ProofOp): ProofOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ProofOp",
+      value: ProofOp.encode(message).finish()
+    };
   }
 };
 function createBaseProofOps(): ProofOps {
@@ -479,5 +670,34 @@ export const ProofOps = {
       obj.ops = [];
     }
     return obj;
+  },
+  fromAmino(object: ProofOpsAmino): ProofOps {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ProofOps): ProofOpsAmino {
+    const obj: any = {};
+    if (message.ops) {
+      obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
+    } else {
+      obj.ops = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProofOpsAminoMsg): ProofOps {
+    return ProofOps.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProofOpsProtoMsg): ProofOps {
+    return ProofOps.decode(message.value);
+  },
+  toProto(message: ProofOps): Uint8Array {
+    return ProofOps.encode(message).finish();
+  },
+  toProtoMsg(message: ProofOps): ProofOpsProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ProofOps",
+      value: ProofOps.encode(message).finish()
+    };
   }
 };

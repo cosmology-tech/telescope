@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
@@ -11,6 +11,23 @@ export interface EpochInfo {
   currentEpochStartTime: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: bigint;
+}
+export interface EpochInfoProtoMsg {
+  typeUrl: "/evmos.epochs.v1.EpochInfo";
+  value: Uint8Array;
+}
+export interface EpochInfoAmino {
+  identifier: string;
+  start_time?: Date;
+  duration?: DurationAmino;
+  current_epoch: string;
+  current_epoch_start_time?: Date;
+  epoch_counting_started: boolean;
+  current_epoch_start_height: string;
+}
+export interface EpochInfoAminoMsg {
+  type: "/evmos.epochs.v1.EpochInfo";
+  value: EpochInfoAmino;
 }
 export interface EpochInfoSDKType {
   identifier: string;
@@ -24,6 +41,18 @@ export interface EpochInfoSDKType {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.epochs.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the epochs module's genesis state. */
+export interface GenesisStateAmino {
+  epochs: EpochInfoAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.epochs.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {
@@ -165,6 +194,43 @@ export const EpochInfo = {
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight;
     return obj;
+  },
+  fromAmino(object: EpochInfoAmino): EpochInfo {
+    return {
+      identifier: object.identifier,
+      startTime: object.start_time,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      currentEpoch: BigInt(object.current_epoch),
+      currentEpochStartTime: object.current_epoch_start_time,
+      epochCountingStarted: object.epoch_counting_started,
+      currentEpochStartHeight: BigInt(object.current_epoch_start_height)
+    };
+  },
+  toAmino(message: EpochInfo): EpochInfoAmino {
+    const obj: any = {};
+    obj.identifier = message.identifier;
+    obj.start_time = message.startTime;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    obj.current_epoch_start_time = message.currentEpochStartTime;
+    obj.epoch_counting_started = message.epochCountingStarted;
+    obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {
+    return EpochInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
+    return EpochInfo.decode(message.value);
+  },
+  toProto(message: EpochInfo): Uint8Array {
+    return EpochInfo.encode(message).finish();
+  },
+  toProtoMsg(message: EpochInfo): EpochInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.epochs.v1.EpochInfo",
+      value: EpochInfo.encode(message).finish()
+    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -233,5 +299,34 @@ export const GenesisState = {
       obj.epochs = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.epochs.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

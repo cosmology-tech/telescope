@@ -1,10 +1,22 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit: Coin | undefined;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  deployment_min_deposit?: CoinAmino | undefined;
+}
+export interface ParamsAminoMsg {
+  type: "akash/deployment/params";
+  value: ParamsAmino;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -68,5 +80,36 @@ export const Params = {
     const obj: any = {};
     message.deploymentMinDeposit !== undefined && (obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toSDK(message.deploymentMinDeposit) : undefined);
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : undefined
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "akash/deployment/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

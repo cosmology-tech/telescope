@@ -1,7 +1,8 @@
-import { AccessConfig, AccessConfigSDKType } from "./types";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCode {
@@ -15,6 +16,26 @@ export interface MsgStoreCode {
    */
   instantiatePermission: AccessConfig;
 }
+export interface MsgStoreCodeProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode";
+  value: Uint8Array;
+}
+/** MsgStoreCode submit Wasm code to the system */
+export interface MsgStoreCodeAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** WASMByteCode can be raw or gzip compressed */
+  wasm_byte_code: string;
+  /**
+   * InstantiatePermission access control to apply on contract creation,
+   * optional
+   */
+  instantiate_permission?: AccessConfigAmino;
+}
+export interface MsgStoreCodeAminoMsg {
+  type: "wasm/MsgStoreCode";
+  value: MsgStoreCodeAmino;
+}
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeSDKType {
   sender: string;
@@ -25,6 +46,19 @@ export interface MsgStoreCodeSDKType {
 export interface MsgStoreCodeResponse {
   /** CodeID is the reference to the stored WASM code */
   codeId: bigint;
+}
+export interface MsgStoreCodeResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgStoreCodeResponse";
+  value: Uint8Array;
+}
+/** MsgStoreCodeResponse returns store result data. */
+export interface MsgStoreCodeResponseAmino {
+  /** CodeID is the reference to the stored WASM code */
+  code_id: string;
+}
+export interface MsgStoreCodeResponseAminoMsg {
+  type: "wasm/MsgStoreCodeResponse";
+  value: MsgStoreCodeResponseAmino;
 }
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponseSDKType {
@@ -48,6 +82,32 @@ export interface MsgInstantiateContract {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
+export interface MsgInstantiateContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContract";
+  value: Uint8Array;
+}
+/**
+ * MsgInstantiateContract create a new smart contract instance for the given
+ * code id.
+ */
+export interface MsgInstantiateContractAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+  /** CodeID is the reference to the stored WASM code */
+  code_id: string;
+  /** Label is optional metadata to be stored with a contract instance. */
+  label: string;
+  /** Msg json encoded message to be passed to the contract on instantiation */
+  msg: Uint8Array;
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: CoinAmino[];
+}
+export interface MsgInstantiateContractAminoMsg {
+  type: "wasm/MsgInstantiateContract";
+  value: MsgInstantiateContractAmino;
+}
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
  * code id.
@@ -67,6 +127,21 @@ export interface MsgInstantiateContractResponse {
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
+export interface MsgInstantiateContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContractResponse";
+  value: Uint8Array;
+}
+/** MsgInstantiateContractResponse return instantiation result data */
+export interface MsgInstantiateContractResponseAmino {
+  /** Address is the bech32 address of the new contract instance. */
+  address: string;
+  /** Data contains base64-encoded bytes to returned from the contract */
+  data: Uint8Array;
+}
+export interface MsgInstantiateContractResponseAminoMsg {
+  type: "wasm/MsgInstantiateContractResponse";
+  value: MsgInstantiateContractResponseAmino;
+}
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponseSDKType {
   address: string;
@@ -83,6 +158,25 @@ export interface MsgExecuteContract {
   /** Funds coins that are transferred to the contract on execution */
   funds: Coin[];
 }
+export interface MsgExecuteContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract";
+  value: Uint8Array;
+}
+/** MsgExecuteContract submits the given message data to a smart contract */
+export interface MsgExecuteContractAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** Contract is the address of the smart contract */
+  contract: string;
+  /** Msg json encoded message to be passed to the contract */
+  msg: Uint8Array;
+  /** Funds coins that are transferred to the contract on execution */
+  funds: CoinAmino[];
+}
+export interface MsgExecuteContractAminoMsg {
+  type: "wasm/MsgExecuteContract";
+  value: MsgExecuteContractAmino;
+}
 /** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContractSDKType {
   sender: string;
@@ -94,6 +188,19 @@ export interface MsgExecuteContractSDKType {
 export interface MsgExecuteContractResponse {
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
+}
+export interface MsgExecuteContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContractResponse";
+  value: Uint8Array;
+}
+/** MsgExecuteContractResponse returns execution result data. */
+export interface MsgExecuteContractResponseAmino {
+  /** Data contains base64-encoded bytes to returned from the contract */
+  data: Uint8Array;
+}
+export interface MsgExecuteContractResponseAminoMsg {
+  type: "wasm/MsgExecuteContractResponse";
+  value: MsgExecuteContractResponseAmino;
 }
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseSDKType {
@@ -110,6 +217,25 @@ export interface MsgMigrateContract {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
+export interface MsgMigrateContractProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContract";
+  value: Uint8Array;
+}
+/** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
+export interface MsgMigrateContractAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** Contract is the address of the smart contract */
+  contract: string;
+  /** CodeID references the new WASM code */
+  code_id: string;
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg: Uint8Array;
+}
+export interface MsgMigrateContractAminoMsg {
+  type: "wasm/MsgMigrateContract";
+  value: MsgMigrateContractAmino;
+}
 /** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContractSDKType {
   sender: string;
@@ -125,6 +251,22 @@ export interface MsgMigrateContractResponse {
    */
   data: Uint8Array;
 }
+export interface MsgMigrateContractResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContractResponse";
+  value: Uint8Array;
+}
+/** MsgMigrateContractResponse returns contract migration result data. */
+export interface MsgMigrateContractResponseAmino {
+  /**
+   * Data contains same raw bytes returned as data from the wasm contract.
+   * (May be empty)
+   */
+  data: Uint8Array;
+}
+export interface MsgMigrateContractResponseAminoMsg {
+  type: "wasm/MsgMigrateContractResponse";
+  value: MsgMigrateContractResponseAmino;
+}
 /** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponseSDKType {
   data: Uint8Array;
@@ -138,6 +280,23 @@ export interface MsgUpdateAdmin {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface MsgUpdateAdminProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdmin";
+  value: Uint8Array;
+}
+/** MsgUpdateAdmin sets a new admin for a smart contract */
+export interface MsgUpdateAdminAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** NewAdmin address to be set */
+  new_admin: string;
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+export interface MsgUpdateAdminAminoMsg {
+  type: "wasm/MsgUpdateAdmin";
+  value: MsgUpdateAdminAmino;
+}
 /** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdminSDKType {
   sender: string;
@@ -146,6 +305,16 @@ export interface MsgUpdateAdminSDKType {
 }
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponse {}
+export interface MsgUpdateAdminResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdminResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateAdminResponse returns empty data */
+export interface MsgUpdateAdminResponseAmino {}
+export interface MsgUpdateAdminResponseAminoMsg {
+  type: "wasm/MsgUpdateAdminResponse";
+  value: MsgUpdateAdminResponseAmino;
+}
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseSDKType {}
 /** MsgClearAdmin removes any admin stored for a smart contract */
@@ -155,6 +324,21 @@ export interface MsgClearAdmin {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface MsgClearAdminProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgClearAdmin";
+  value: Uint8Array;
+}
+/** MsgClearAdmin removes any admin stored for a smart contract */
+export interface MsgClearAdminAmino {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+export interface MsgClearAdminAminoMsg {
+  type: "wasm/MsgClearAdmin";
+  value: MsgClearAdminAmino;
+}
 /** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdminSDKType {
   sender: string;
@@ -162,6 +346,16 @@ export interface MsgClearAdminSDKType {
 }
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponse {}
+export interface MsgClearAdminResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgClearAdminResponse";
+  value: Uint8Array;
+}
+/** MsgClearAdminResponse returns empty data */
+export interface MsgClearAdminResponseAmino {}
+export interface MsgClearAdminResponseAminoMsg {
+  type: "wasm/MsgClearAdminResponse";
+  value: MsgClearAdminResponseAmino;
+}
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponseSDKType {}
 function createBaseMsgStoreCode(): MsgStoreCode {
@@ -248,6 +442,41 @@ export const MsgStoreCode = {
     obj.wasm_byte_code = message.wasmByteCode;
     message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
+    return {
+      sender: object.sender,
+      wasmByteCode: fromBase64(object.wasm_byte_code),
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
+    };
+  },
+  toAmino(message: MsgStoreCode): MsgStoreCodeAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgStoreCodeAminoMsg): MsgStoreCode {
+    return MsgStoreCode.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgStoreCode): MsgStoreCodeAminoMsg {
+    return {
+      type: "wasm/MsgStoreCode",
+      value: MsgStoreCode.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgStoreCodeProtoMsg): MsgStoreCode {
+    return MsgStoreCode.decode(message.value);
+  },
+  toProto(message: MsgStoreCode): Uint8Array {
+    return MsgStoreCode.encode(message).finish();
+  },
+  toProtoMsg(message: MsgStoreCode): MsgStoreCodeProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode",
+      value: MsgStoreCode.encode(message).finish()
+    };
   }
 };
 function createBaseMsgStoreCodeResponse(): MsgStoreCodeResponse {
@@ -308,6 +537,37 @@ export const MsgStoreCodeResponse = {
     const obj: any = {};
     obj.code_id = message.codeId;
     return obj;
+  },
+  fromAmino(object: MsgStoreCodeResponseAmino): MsgStoreCodeResponse {
+    return {
+      codeId: BigInt(object.code_id)
+    };
+  },
+  toAmino(message: MsgStoreCodeResponse): MsgStoreCodeResponseAmino {
+    const obj: any = {};
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgStoreCodeResponseAminoMsg): MsgStoreCodeResponse {
+    return MsgStoreCodeResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgStoreCodeResponse): MsgStoreCodeResponseAminoMsg {
+    return {
+      type: "wasm/MsgStoreCodeResponse",
+      value: MsgStoreCodeResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgStoreCodeResponseProtoMsg): MsgStoreCodeResponse {
+    return MsgStoreCodeResponse.decode(message.value);
+  },
+  toProto(message: MsgStoreCodeResponse): Uint8Array {
+    return MsgStoreCodeResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgStoreCodeResponse): MsgStoreCodeResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgStoreCodeResponse",
+      value: MsgStoreCodeResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgInstantiateContract(): MsgInstantiateContract {
@@ -441,6 +701,51 @@ export const MsgInstantiateContract = {
       obj.funds = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgInstantiateContractAmino): MsgInstantiateContract {
+    return {
+      sender: object.sender,
+      admin: object.admin,
+      codeId: BigInt(object.code_id),
+      label: object.label,
+      msg: toUtf8(JSON.stringify(object.msg)),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgInstantiateContract): MsgInstantiateContractAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.admin = message.admin;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.label = message.label;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgInstantiateContractAminoMsg): MsgInstantiateContract {
+    return MsgInstantiateContract.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgInstantiateContract): MsgInstantiateContractAminoMsg {
+    return {
+      type: "wasm/MsgInstantiateContract",
+      value: MsgInstantiateContract.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgInstantiateContractProtoMsg): MsgInstantiateContract {
+    return MsgInstantiateContract.decode(message.value);
+  },
+  toProto(message: MsgInstantiateContract): Uint8Array {
+    return MsgInstantiateContract.encode(message).finish();
+  },
+  toProtoMsg(message: MsgInstantiateContract): MsgInstantiateContractProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContract",
+      value: MsgInstantiateContract.encode(message).finish()
+    };
   }
 };
 function createBaseMsgInstantiateContractResponse(): MsgInstantiateContractResponse {
@@ -514,6 +819,39 @@ export const MsgInstantiateContractResponse = {
     obj.address = message.address;
     obj.data = message.data;
     return obj;
+  },
+  fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
+    return {
+      address: object.address,
+      data: object.data
+    };
+  },
+  toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: MsgInstantiateContractResponseAminoMsg): MsgInstantiateContractResponse {
+    return MsgInstantiateContractResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAminoMsg {
+    return {
+      type: "wasm/MsgInstantiateContractResponse",
+      value: MsgInstantiateContractResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgInstantiateContractResponseProtoMsg): MsgInstantiateContractResponse {
+    return MsgInstantiateContractResponse.decode(message.value);
+  },
+  toProto(message: MsgInstantiateContractResponse): Uint8Array {
+    return MsgInstantiateContractResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgInstantiateContractResponse",
+      value: MsgInstantiateContractResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgExecuteContract(): MsgExecuteContract {
@@ -621,6 +959,47 @@ export const MsgExecuteContract = {
       obj.funds = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgExecuteContractAmino): MsgExecuteContract {
+    return {
+      sender: object.sender,
+      contract: object.contract,
+      msg: toUtf8(JSON.stringify(object.msg)),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgExecuteContractAminoMsg): MsgExecuteContract {
+    return MsgExecuteContract.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgExecuteContract): MsgExecuteContractAminoMsg {
+    return {
+      type: "wasm/MsgExecuteContract",
+      value: MsgExecuteContract.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgExecuteContractProtoMsg): MsgExecuteContract {
+    return MsgExecuteContract.decode(message.value);
+  },
+  toProto(message: MsgExecuteContract): Uint8Array {
+    return MsgExecuteContract.encode(message).finish();
+  },
+  toProtoMsg(message: MsgExecuteContract): MsgExecuteContractProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.encode(message).finish()
+    };
   }
 };
 function createBaseMsgExecuteContractResponse(): MsgExecuteContractResponse {
@@ -681,6 +1060,37 @@ export const MsgExecuteContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+  fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
+    return {
+      data: object.data
+    };
+  },
+  toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseAmino {
+    const obj: any = {};
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: MsgExecuteContractResponseAminoMsg): MsgExecuteContractResponse {
+    return MsgExecuteContractResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgExecuteContractResponse): MsgExecuteContractResponseAminoMsg {
+    return {
+      type: "wasm/MsgExecuteContractResponse",
+      value: MsgExecuteContractResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgExecuteContractResponseProtoMsg): MsgExecuteContractResponse {
+    return MsgExecuteContractResponse.decode(message.value);
+  },
+  toProto(message: MsgExecuteContractResponse): Uint8Array {
+    return MsgExecuteContractResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgExecuteContractResponse): MsgExecuteContractResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContractResponse",
+      value: MsgExecuteContractResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgMigrateContract(): MsgMigrateContract {
@@ -780,6 +1190,43 @@ export const MsgMigrateContract = {
     obj.code_id = message.codeId;
     obj.msg = message.msg;
     return obj;
+  },
+  fromAmino(object: MsgMigrateContractAmino): MsgMigrateContract {
+    return {
+      sender: object.sender,
+      contract: object.contract,
+      codeId: BigInt(object.code_id),
+      msg: toUtf8(JSON.stringify(object.msg))
+    };
+  },
+  toAmino(message: MsgMigrateContract): MsgMigrateContractAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMigrateContractAminoMsg): MsgMigrateContract {
+    return MsgMigrateContract.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMigrateContract): MsgMigrateContractAminoMsg {
+    return {
+      type: "wasm/MsgMigrateContract",
+      value: MsgMigrateContract.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgMigrateContractProtoMsg): MsgMigrateContract {
+    return MsgMigrateContract.decode(message.value);
+  },
+  toProto(message: MsgMigrateContract): Uint8Array {
+    return MsgMigrateContract.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMigrateContract): MsgMigrateContractProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContract",
+      value: MsgMigrateContract.encode(message).finish()
+    };
   }
 };
 function createBaseMsgMigrateContractResponse(): MsgMigrateContractResponse {
@@ -840,6 +1287,37 @@ export const MsgMigrateContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+  fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
+    return {
+      data: object.data
+    };
+  },
+  toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseAmino {
+    const obj: any = {};
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMigrateContractResponseAminoMsg): MsgMigrateContractResponse {
+    return MsgMigrateContractResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMigrateContractResponse): MsgMigrateContractResponseAminoMsg {
+    return {
+      type: "wasm/MsgMigrateContractResponse",
+      value: MsgMigrateContractResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgMigrateContractResponseProtoMsg): MsgMigrateContractResponse {
+    return MsgMigrateContractResponse.decode(message.value);
+  },
+  toProto(message: MsgMigrateContractResponse): Uint8Array {
+    return MsgMigrateContractResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMigrateContractResponse): MsgMigrateContractResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgMigrateContractResponse",
+      value: MsgMigrateContractResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateAdmin(): MsgUpdateAdmin {
@@ -926,6 +1404,41 @@ export const MsgUpdateAdmin = {
     obj.new_admin = message.newAdmin;
     obj.contract = message.contract;
     return obj;
+  },
+  fromAmino(object: MsgUpdateAdminAmino): MsgUpdateAdmin {
+    return {
+      sender: object.sender,
+      newAdmin: object.new_admin,
+      contract: object.contract
+    };
+  },
+  toAmino(message: MsgUpdateAdmin): MsgUpdateAdminAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.new_admin = message.newAdmin;
+    obj.contract = message.contract;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateAdminAminoMsg): MsgUpdateAdmin {
+    return MsgUpdateAdmin.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateAdmin): MsgUpdateAdminAminoMsg {
+    return {
+      type: "wasm/MsgUpdateAdmin",
+      value: MsgUpdateAdmin.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateAdminProtoMsg): MsgUpdateAdmin {
+    return MsgUpdateAdmin.decode(message.value);
+  },
+  toProto(message: MsgUpdateAdmin): Uint8Array {
+    return MsgUpdateAdmin.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateAdmin): MsgUpdateAdminProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdmin",
+      value: MsgUpdateAdmin.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateAdminResponse(): MsgUpdateAdminResponse {
@@ -969,6 +1482,34 @@ export const MsgUpdateAdminResponse = {
   toSDK(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgUpdateAdminResponseAmino): MsgUpdateAdminResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateAdminResponseAminoMsg): MsgUpdateAdminResponse {
+    return MsgUpdateAdminResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateAdminResponse): MsgUpdateAdminResponseAminoMsg {
+    return {
+      type: "wasm/MsgUpdateAdminResponse",
+      value: MsgUpdateAdminResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateAdminResponseProtoMsg): MsgUpdateAdminResponse {
+    return MsgUpdateAdminResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateAdminResponse): Uint8Array {
+    return MsgUpdateAdminResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateAdminResponse): MsgUpdateAdminResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgUpdateAdminResponse",
+      value: MsgUpdateAdminResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgClearAdmin(): MsgClearAdmin {
@@ -1042,6 +1583,39 @@ export const MsgClearAdmin = {
     obj.sender = message.sender;
     obj.contract = message.contract;
     return obj;
+  },
+  fromAmino(object: MsgClearAdminAmino): MsgClearAdmin {
+    return {
+      sender: object.sender,
+      contract: object.contract
+    };
+  },
+  toAmino(message: MsgClearAdmin): MsgClearAdminAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    return obj;
+  },
+  fromAminoMsg(object: MsgClearAdminAminoMsg): MsgClearAdmin {
+    return MsgClearAdmin.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgClearAdmin): MsgClearAdminAminoMsg {
+    return {
+      type: "wasm/MsgClearAdmin",
+      value: MsgClearAdmin.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgClearAdminProtoMsg): MsgClearAdmin {
+    return MsgClearAdmin.decode(message.value);
+  },
+  toProto(message: MsgClearAdmin): Uint8Array {
+    return MsgClearAdmin.encode(message).finish();
+  },
+  toProtoMsg(message: MsgClearAdmin): MsgClearAdminProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgClearAdmin",
+      value: MsgClearAdmin.encode(message).finish()
+    };
   }
 };
 function createBaseMsgClearAdminResponse(): MsgClearAdminResponse {
@@ -1085,5 +1659,33 @@ export const MsgClearAdminResponse = {
   toSDK(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgClearAdminResponseAmino): MsgClearAdminResponse {
+    return {};
+  },
+  toAmino(_: MsgClearAdminResponse): MsgClearAdminResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgClearAdminResponseAminoMsg): MsgClearAdminResponse {
+    return MsgClearAdminResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgClearAdminResponse): MsgClearAdminResponseAminoMsg {
+    return {
+      type: "wasm/MsgClearAdminResponse",
+      value: MsgClearAdminResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgClearAdminResponseProtoMsg): MsgClearAdminResponse {
+    return MsgClearAdminResponse.decode(message.value);
+  },
+  toProto(message: MsgClearAdminResponse): Uint8Array {
+    return MsgClearAdminResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgClearAdminResponse): MsgClearAdminResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgClearAdminResponse",
+      value: MsgClearAdminResponse.encode(message).finish()
+    };
   }
 };

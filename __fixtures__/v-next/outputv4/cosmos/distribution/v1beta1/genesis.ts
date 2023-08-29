@@ -1,5 +1,5 @@
-import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
-import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventSDKType, Params, ParamsSDKType, FeePool, FeePoolSDKType } from "./distribution";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../base/v1beta1/coin";
+import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionAmino, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsAmino, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsAmino, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoAmino, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventAmino, ValidatorSlashEventSDKType, Params, ParamsAmino, ParamsSDKType, FeePool, FeePoolAmino, FeePoolSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
@@ -13,6 +13,25 @@ export interface DelegatorWithdrawInfo {
   delegatorAddress: string;
   /** withdraw_address is the address to withdraw the delegation rewards to. */
   withdrawAddress: string;
+}
+export interface DelegatorWithdrawInfoProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorWithdrawInfo";
+  value: Uint8Array;
+}
+/**
+ * DelegatorWithdrawInfo is the address for where distributions rewards are
+ * withdrawn to by default this struct is only used at genesis to feed in
+ * default withdraw addresses.
+ */
+export interface DelegatorWithdrawInfoAmino {
+  /** delegator_address is the address of the delegator. */
+  delegator_address: string;
+  /** withdraw_address is the address to withdraw the delegation rewards to. */
+  withdraw_address: string;
+}
+export interface DelegatorWithdrawInfoAminoMsg {
+  type: "cosmos-sdk/DelegatorWithdrawInfo";
+  value: DelegatorWithdrawInfoAmino;
 }
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -30,6 +49,21 @@ export interface ValidatorOutstandingRewardsRecord {
   /** outstanding_rewards represents the oustanding rewards of a validator. */
   outstandingRewards: DecCoin[];
 }
+export interface ValidatorOutstandingRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord";
+  value: Uint8Array;
+}
+/** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
+export interface ValidatorOutstandingRewardsRecordAmino {
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** outstanding_rewards represents the oustanding rewards of a validator. */
+  outstanding_rewards: DecCoinAmino[];
+}
+export interface ValidatorOutstandingRewardsRecordAminoMsg {
+  type: "cosmos-sdk/ValidatorOutstandingRewardsRecord";
+  value: ValidatorOutstandingRewardsRecordAmino;
+}
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
 export interface ValidatorOutstandingRewardsRecordSDKType {
   validator_address: string;
@@ -44,6 +78,24 @@ export interface ValidatorAccumulatedCommissionRecord {
   validatorAddress: string;
   /** accumulated is the accumulated commission of a validator. */
   accumulated: ValidatorAccumulatedCommission;
+}
+export interface ValidatorAccumulatedCommissionRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord";
+  value: Uint8Array;
+}
+/**
+ * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
+ * json.
+ */
+export interface ValidatorAccumulatedCommissionRecordAmino {
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** accumulated is the accumulated commission of a validator. */
+  accumulated?: ValidatorAccumulatedCommissionAmino;
+}
+export interface ValidatorAccumulatedCommissionRecordAminoMsg {
+  type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord";
+  value: ValidatorAccumulatedCommissionRecordAmino;
 }
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
@@ -65,6 +117,26 @@ export interface ValidatorHistoricalRewardsRecord {
   /** rewards defines the historical rewards of a validator. */
   rewards: ValidatorHistoricalRewards;
 }
+export interface ValidatorHistoricalRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord";
+  value: Uint8Array;
+}
+/**
+ * ValidatorHistoricalRewardsRecord is used for import / export via genesis
+ * json.
+ */
+export interface ValidatorHistoricalRewardsRecordAmino {
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** period defines the period the historical rewards apply to. */
+  period: string;
+  /** rewards defines the historical rewards of a validator. */
+  rewards?: ValidatorHistoricalRewardsAmino;
+}
+export interface ValidatorHistoricalRewardsRecordAminoMsg {
+  type: "cosmos-sdk/ValidatorHistoricalRewardsRecord";
+  value: ValidatorHistoricalRewardsRecordAmino;
+}
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
  * json.
@@ -81,6 +153,21 @@ export interface ValidatorCurrentRewardsRecord {
   /** rewards defines the current rewards of a validator. */
   rewards: ValidatorCurrentRewards;
 }
+export interface ValidatorCurrentRewardsRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord";
+  value: Uint8Array;
+}
+/** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
+export interface ValidatorCurrentRewardsRecordAmino {
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** rewards defines the current rewards of a validator. */
+  rewards?: ValidatorCurrentRewardsAmino;
+}
+export interface ValidatorCurrentRewardsRecordAminoMsg {
+  type: "cosmos-sdk/ValidatorCurrentRewardsRecord";
+  value: ValidatorCurrentRewardsRecordAmino;
+}
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordSDKType {
   validator_address: string;
@@ -94,6 +181,23 @@ export interface DelegatorStartingInfoRecord {
   validatorAddress: string;
   /** starting_info defines the starting info of a delegator. */
   startingInfo: DelegatorStartingInfo;
+}
+export interface DelegatorStartingInfoRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord";
+  value: Uint8Array;
+}
+/** DelegatorStartingInfoRecord used for import / export via genesis json. */
+export interface DelegatorStartingInfoRecordAmino {
+  /** delegator_address is the address of the delegator. */
+  delegator_address: string;
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** starting_info defines the starting info of a delegator. */
+  starting_info?: DelegatorStartingInfoAmino;
+}
+export interface DelegatorStartingInfoRecordAminoMsg {
+  type: "cosmos-sdk/DelegatorStartingInfoRecord";
+  value: DelegatorStartingInfoRecordAmino;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecordSDKType {
@@ -111,6 +215,25 @@ export interface ValidatorSlashEventRecord {
   period: bigint;
   /** validator_slash_event describes the slash event. */
   validatorSlashEvent: ValidatorSlashEvent;
+}
+export interface ValidatorSlashEventRecordProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord";
+  value: Uint8Array;
+}
+/** ValidatorSlashEventRecord is used for import / export via genesis json. */
+export interface ValidatorSlashEventRecordAmino {
+  /** validator_address is the address of the validator. */
+  validator_address: string;
+  /** height defines the block height at which the slash event occured. */
+  height: string;
+  /** period is the period of the slash event. */
+  period: string;
+  /** validator_slash_event describes the slash event. */
+  validator_slash_event?: ValidatorSlashEventAmino;
+}
+export interface ValidatorSlashEventRecordAminoMsg {
+  type: "cosmos-sdk/ValidatorSlashEventRecord";
+  value: ValidatorSlashEventRecordAmino;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecordSDKType {
@@ -141,6 +264,37 @@ export interface GenesisState {
   delegatorStartingInfos: DelegatorStartingInfoRecord[];
   /** fee_pool defines the validator slash events at genesis. */
   validatorSlashEvents: ValidatorSlashEventRecord[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.distribution.v1beta1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the distribution module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+  /** fee_pool defines the fee pool at genesis. */
+  fee_pool?: FeePoolAmino;
+  /** fee_pool defines the delegator withdraw infos at genesis. */
+  delegator_withdraw_infos: DelegatorWithdrawInfoAmino[];
+  /** fee_pool defines the previous proposer at genesis. */
+  previous_proposer: string;
+  /** fee_pool defines the outstanding rewards of all validators at genesis. */
+  outstanding_rewards: ValidatorOutstandingRewardsRecordAmino[];
+  /** fee_pool defines the accumulated commisions of all validators at genesis. */
+  validator_accumulated_commissions: ValidatorAccumulatedCommissionRecordAmino[];
+  /** fee_pool defines the historical rewards of all validators at genesis. */
+  validator_historical_rewards: ValidatorHistoricalRewardsRecordAmino[];
+  /** fee_pool defines the current rewards of all validators at genesis. */
+  validator_current_rewards: ValidatorCurrentRewardsRecordAmino[];
+  /** fee_pool defines the delegator starting infos at genesis. */
+  delegator_starting_infos: DelegatorStartingInfoRecordAmino[];
+  /** fee_pool defines the validator slash events at genesis. */
+  validator_slash_events: ValidatorSlashEventRecordAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisStateSDKType {
@@ -226,6 +380,39 @@ export const DelegatorWithdrawInfo = {
     obj.delegator_address = message.delegatorAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
+  },
+  fromAmino(object: DelegatorWithdrawInfoAmino): DelegatorWithdrawInfo {
+    return {
+      delegatorAddress: object.delegator_address,
+      withdrawAddress: object.withdraw_address
+    };
+  },
+  toAmino(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAmino {
+    const obj: any = {};
+    obj.delegator_address = message.delegatorAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    return obj;
+  },
+  fromAminoMsg(object: DelegatorWithdrawInfoAminoMsg): DelegatorWithdrawInfo {
+    return DelegatorWithdrawInfo.fromAmino(object.value);
+  },
+  toAminoMsg(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/DelegatorWithdrawInfo",
+      value: DelegatorWithdrawInfo.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg): DelegatorWithdrawInfo {
+    return DelegatorWithdrawInfo.decode(message.value);
+  },
+  toProto(message: DelegatorWithdrawInfo): Uint8Array {
+    return DelegatorWithdrawInfo.encode(message).finish();
+  },
+  toProtoMsg(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.DelegatorWithdrawInfo",
+      value: DelegatorWithdrawInfo.encode(message).finish()
+    };
   }
 };
 function createBaseValidatorOutstandingRewardsRecord(): ValidatorOutstandingRewardsRecord {
@@ -307,6 +494,43 @@ export const ValidatorOutstandingRewardsRecord = {
       obj.outstanding_rewards = [];
     }
     return obj;
+  },
+  fromAmino(object: ValidatorOutstandingRewardsRecordAmino): ValidatorOutstandingRewardsRecord {
+    return {
+      validatorAddress: object.validator_address,
+      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+    if (message.outstandingRewards) {
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.outstanding_rewards = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ValidatorOutstandingRewardsRecordAminoMsg): ValidatorOutstandingRewardsRecord {
+    return ValidatorOutstandingRewardsRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorOutstandingRewardsRecord",
+      value: ValidatorOutstandingRewardsRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg): ValidatorOutstandingRewardsRecord {
+    return ValidatorOutstandingRewardsRecord.decode(message.value);
+  },
+  toProto(message: ValidatorOutstandingRewardsRecord): Uint8Array {
+    return ValidatorOutstandingRewardsRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord",
+      value: ValidatorOutstandingRewardsRecord.encode(message).finish()
+    };
   }
 };
 function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedCommissionRecord {
@@ -380,6 +604,39 @@ export const ValidatorAccumulatedCommissionRecord = {
     obj.validator_address = message.validatorAddress;
     message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toSDK(message.accumulated) : undefined);
     return obj;
+  },
+  fromAmino(object: ValidatorAccumulatedCommissionRecordAmino): ValidatorAccumulatedCommissionRecord {
+    return {
+      validatorAddress: object.validator_address,
+      accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
+    };
+  },
+  toAmino(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValidatorAccumulatedCommissionRecordAminoMsg): ValidatorAccumulatedCommissionRecord {
+    return ValidatorAccumulatedCommissionRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord",
+      value: ValidatorAccumulatedCommissionRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg): ValidatorAccumulatedCommissionRecord {
+    return ValidatorAccumulatedCommissionRecord.decode(message.value);
+  },
+  toProto(message: ValidatorAccumulatedCommissionRecord): Uint8Array {
+    return ValidatorAccumulatedCommissionRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord",
+      value: ValidatorAccumulatedCommissionRecord.encode(message).finish()
+    };
   }
 };
 function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalRewardsRecord {
@@ -466,6 +723,41 @@ export const ValidatorHistoricalRewardsRecord = {
     obj.period = message.period;
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toSDK(message.rewards) : undefined);
     return obj;
+  },
+  fromAmino(object: ValidatorHistoricalRewardsRecordAmino): ValidatorHistoricalRewardsRecord {
+    return {
+      validatorAddress: object.validator_address,
+      period: BigInt(object.period),
+      rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
+    };
+  },
+  toAmino(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValidatorHistoricalRewardsRecordAminoMsg): ValidatorHistoricalRewardsRecord {
+    return ValidatorHistoricalRewardsRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorHistoricalRewardsRecord",
+      value: ValidatorHistoricalRewardsRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg): ValidatorHistoricalRewardsRecord {
+    return ValidatorHistoricalRewardsRecord.decode(message.value);
+  },
+  toProto(message: ValidatorHistoricalRewardsRecord): Uint8Array {
+    return ValidatorHistoricalRewardsRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord",
+      value: ValidatorHistoricalRewardsRecord.encode(message).finish()
+    };
   }
 };
 function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecord {
@@ -539,6 +831,39 @@ export const ValidatorCurrentRewardsRecord = {
     obj.validator_address = message.validatorAddress;
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toSDK(message.rewards) : undefined);
     return obj;
+  },
+  fromAmino(object: ValidatorCurrentRewardsRecordAmino): ValidatorCurrentRewardsRecord {
+    return {
+      validatorAddress: object.validator_address,
+      rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
+    };
+  },
+  toAmino(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValidatorCurrentRewardsRecordAminoMsg): ValidatorCurrentRewardsRecord {
+    return ValidatorCurrentRewardsRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorCurrentRewardsRecord",
+      value: ValidatorCurrentRewardsRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg): ValidatorCurrentRewardsRecord {
+    return ValidatorCurrentRewardsRecord.decode(message.value);
+  },
+  toProto(message: ValidatorCurrentRewardsRecord): Uint8Array {
+    return ValidatorCurrentRewardsRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord",
+      value: ValidatorCurrentRewardsRecord.encode(message).finish()
+    };
   }
 };
 function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
@@ -625,6 +950,41 @@ export const DelegatorStartingInfoRecord = {
     obj.validator_address = message.validatorAddress;
     message.startingInfo !== undefined && (obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toSDK(message.startingInfo) : undefined);
     return obj;
+  },
+  fromAmino(object: DelegatorStartingInfoRecordAmino): DelegatorStartingInfoRecord {
+    return {
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address,
+      startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
+    };
+  },
+  toAmino(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAmino {
+    const obj: any = {};
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DelegatorStartingInfoRecordAminoMsg): DelegatorStartingInfoRecord {
+    return DelegatorStartingInfoRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/DelegatorStartingInfoRecord",
+      value: DelegatorStartingInfoRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg): DelegatorStartingInfoRecord {
+    return DelegatorStartingInfoRecord.decode(message.value);
+  },
+  toProto(message: DelegatorStartingInfoRecord): Uint8Array {
+    return DelegatorStartingInfoRecord.encode(message).finish();
+  },
+  toProtoMsg(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord",
+      value: DelegatorStartingInfoRecord.encode(message).finish()
+    };
   }
 };
 function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
@@ -724,6 +1084,43 @@ export const ValidatorSlashEventRecord = {
     obj.period = message.period;
     message.validatorSlashEvent !== undefined && (obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toSDK(message.validatorSlashEvent) : undefined);
     return obj;
+  },
+  fromAmino(object: ValidatorSlashEventRecordAmino): ValidatorSlashEventRecord {
+    return {
+      validatorAddress: object.validator_address,
+      height: BigInt(object.height),
+      period: BigInt(object.period),
+      validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
+    };
+  },
+  toAmino(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValidatorSlashEventRecordAminoMsg): ValidatorSlashEventRecord {
+    return ValidatorSlashEventRecord.fromAmino(object.value);
+  },
+  toAminoMsg(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorSlashEventRecord",
+      value: ValidatorSlashEventRecord.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg): ValidatorSlashEventRecord {
+    return ValidatorSlashEventRecord.decode(message.value);
+  },
+  toProto(message: ValidatorSlashEventRecord): Uint8Array {
+    return ValidatorSlashEventRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord",
+      value: ValidatorSlashEventRecord.encode(message).finish()
+    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -957,5 +1354,82 @@ export const GenesisState = {
       obj.validator_slash_events = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      feePool: object?.fee_pool ? FeePool.fromAmino(object.fee_pool) : undefined,
+      delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromAmino(e)) : [],
+      previousProposer: object.previous_proposer,
+      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromAmino(e)) : [],
+      validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromAmino(e)) : [],
+      validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromAmino(e)) : [],
+      validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromAmino(e)) : [],
+      delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromAmino(e)) : [],
+      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool) : undefined;
+    if (message.delegatorWithdrawInfos) {
+      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e) : undefined);
+    } else {
+      obj.delegator_withdraw_infos = [];
+    }
+    obj.previous_proposer = message.previousProposer;
+    if (message.outstandingRewards) {
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e) : undefined);
+    } else {
+      obj.outstanding_rewards = [];
+    }
+    if (message.validatorAccumulatedCommissions) {
+      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e) : undefined);
+    } else {
+      obj.validator_accumulated_commissions = [];
+    }
+    if (message.validatorHistoricalRewards) {
+      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e) : undefined);
+    } else {
+      obj.validator_historical_rewards = [];
+    }
+    if (message.validatorCurrentRewards) {
+      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e) : undefined);
+    } else {
+      obj.validator_current_rewards = [];
+    }
+    if (message.delegatorStartingInfos) {
+      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e) : undefined);
+    } else {
+      obj.delegator_starting_infos = [];
+    }
+    if (message.validatorSlashEvents) {
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e) : undefined);
+    } else {
+      obj.validator_slash_events = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.distribution.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

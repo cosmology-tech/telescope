@@ -1,15 +1,38 @@
-import { Config, ConfigSDKType } from "./config";
+import { Config, ConfigAmino, ConfigSDKType } from "./config";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
+export interface QueryConfigRequestProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
+  value: Uint8Array;
+}
+/** QueryConfigRequest is the Query/Config request type. */
+export interface QueryConfigRequestAmino {}
+export interface QueryConfigRequestAminoMsg {
+  type: "cosmos-sdk/QueryConfigRequest";
+  value: QueryConfigRequestAmino;
+}
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestSDKType {}
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
   /** config is the current app config. */
   config: Config;
+}
+export interface QueryConfigResponseProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
+  value: Uint8Array;
+}
+/** QueryConfigRequest is the Query/Config response type. */
+export interface QueryConfigResponseAmino {
+  /** config is the current app config. */
+  config?: ConfigAmino;
+}
+export interface QueryConfigResponseAminoMsg {
+  type: "cosmos-sdk/QueryConfigResponse";
+  value: QueryConfigResponseAmino;
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
@@ -56,6 +79,34 @@ export const QueryConfigRequest = {
   toSDK(_: QueryConfigRequest): QueryConfigRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
+    return {};
+  },
+  toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigRequestAminoMsg): QueryConfigRequest {
+    return QueryConfigRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigRequest): QueryConfigRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigRequest",
+      value: QueryConfigRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
+    return QueryConfigRequest.decode(message.value);
+  },
+  toProto(message: QueryConfigRequest): Uint8Array {
+    return QueryConfigRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConfigRequest): QueryConfigRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest",
+      value: QueryConfigRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConfigResponse(): QueryConfigResponse {
@@ -116,5 +167,36 @@ export const QueryConfigResponse = {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? Config.toSDK(message.config) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
+    return {
+      config: object?.config ? Config.fromAmino(object.config) : undefined
+    };
+  },
+  toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
+    const obj: any = {};
+    obj.config = message.config ? Config.toAmino(message.config) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigResponseAminoMsg): QueryConfigResponse {
+    return QueryConfigResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigResponse): QueryConfigResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigResponse",
+      value: QueryConfigResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
+    return QueryConfigResponse.decode(message.value);
+  },
+  toProto(message: QueryConfigResponse): Uint8Array {
+    return QueryConfigResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConfigResponse): QueryConfigResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse",
+      value: QueryConfigResponse.encode(message).finish()
+    };
   }
 };

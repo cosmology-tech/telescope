@@ -1,5 +1,5 @@
-import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
-import { Height, HeightSDKType } from "../../client/v1/client";
+import { Channel, ChannelAmino, ChannelSDKType, Packet, PacketAmino, PacketSDKType } from "./channel";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
@@ -12,6 +12,23 @@ export interface MsgChannelOpenInit {
   channel: Channel;
   signer: string;
 }
+export interface MsgChannelOpenInitProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
+ * is called by a relayer on Chain A.
+ */
+export interface MsgChannelOpenInitAmino {
+  port_id: string;
+  channel?: ChannelAmino;
+  signer: string;
+}
+export interface MsgChannelOpenInitAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenInit";
+  value: MsgChannelOpenInitAmino;
+}
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
  * is called by a relayer on Chain A.
@@ -23,6 +40,16 @@ export interface MsgChannelOpenInitSDKType {
 }
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponse {}
+export interface MsgChannelOpenInitResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse";
+  value: Uint8Array;
+}
+/** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
+export interface MsgChannelOpenInitResponseAmino {}
+export interface MsgChannelOpenInitResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenInitResponse";
+  value: MsgChannelOpenInitResponseAmino;
+}
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseSDKType {}
 /**
@@ -42,6 +69,31 @@ export interface MsgChannelOpenTry {
   proofHeight: Height;
   signer: string;
 }
+export interface MsgChannelOpenTryProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
+ * on Chain B.
+ */
+export interface MsgChannelOpenTryAmino {
+  port_id: string;
+  /**
+   * in the case of crossing hello's, when both chains call OpenInit, we need
+   * the channel identifier of the previous channel in state INIT
+   */
+  previous_channel_id: string;
+  channel?: ChannelAmino;
+  counterparty_version: string;
+  proof_init: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgChannelOpenTryAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenTry";
+  value: MsgChannelOpenTryAmino;
+}
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
  * on Chain B.
@@ -57,6 +109,16 @@ export interface MsgChannelOpenTrySDKType {
 }
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponse {}
+export interface MsgChannelOpenTryResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse";
+  value: Uint8Array;
+}
+/** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
+export interface MsgChannelOpenTryResponseAmino {}
+export interface MsgChannelOpenTryResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenTryResponse";
+  value: MsgChannelOpenTryResponseAmino;
+}
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseSDKType {}
 /**
@@ -71,6 +133,27 @@ export interface MsgChannelOpenAck {
   proofTry: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelOpenAckProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
+ * the change of channel state to TRYOPEN on Chain B.
+ */
+export interface MsgChannelOpenAckAmino {
+  port_id: string;
+  channel_id: string;
+  counterparty_channel_id: string;
+  counterparty_version: string;
+  proof_try: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgChannelOpenAckAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenAck";
+  value: MsgChannelOpenAckAmino;
 }
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
@@ -87,6 +170,16 @@ export interface MsgChannelOpenAckSDKType {
 }
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponse {}
+export interface MsgChannelOpenAckResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse";
+  value: Uint8Array;
+}
+/** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
+export interface MsgChannelOpenAckResponseAmino {}
+export interface MsgChannelOpenAckResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenAckResponse";
+  value: MsgChannelOpenAckResponseAmino;
+}
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseSDKType {}
 /**
@@ -99,6 +192,25 @@ export interface MsgChannelOpenConfirm {
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelOpenConfirmProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
+ * acknowledge the change of channel state to OPEN on Chain A.
+ */
+export interface MsgChannelOpenConfirmAmino {
+  port_id: string;
+  channel_id: string;
+  proof_ack: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgChannelOpenConfirmAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenConfirm";
+  value: MsgChannelOpenConfirmAmino;
 }
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -116,6 +228,19 @@ export interface MsgChannelOpenConfirmSDKType {
  * type.
  */
 export interface MsgChannelOpenConfirmResponse {}
+export interface MsgChannelOpenConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
+ * type.
+ */
+export interface MsgChannelOpenConfirmResponseAmino {}
+export interface MsgChannelOpenConfirmResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelOpenConfirmResponse";
+  value: MsgChannelOpenConfirmResponseAmino;
+}
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
  * type.
@@ -130,6 +255,23 @@ export interface MsgChannelCloseInit {
   channelId: string;
   signer: string;
 }
+export interface MsgChannelCloseInitProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
+ * to close a channel with Chain B.
+ */
+export interface MsgChannelCloseInitAmino {
+  port_id: string;
+  channel_id: string;
+  signer: string;
+}
+export interface MsgChannelCloseInitAminoMsg {
+  type: "cosmos-sdk/MsgChannelCloseInit";
+  value: MsgChannelCloseInitAmino;
+}
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
  * to close a channel with Chain B.
@@ -141,6 +283,16 @@ export interface MsgChannelCloseInitSDKType {
 }
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponse {}
+export interface MsgChannelCloseInitResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse";
+  value: Uint8Array;
+}
+/** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
+export interface MsgChannelCloseInitResponseAmino {}
+export interface MsgChannelCloseInitResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelCloseInitResponse";
+  value: MsgChannelCloseInitResponseAmino;
+}
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseSDKType {}
 /**
@@ -153,6 +305,25 @@ export interface MsgChannelCloseConfirm {
   proofInit: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgChannelCloseConfirmProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
+ * to acknowledge the change of channel state to CLOSED on Chain A.
+ */
+export interface MsgChannelCloseConfirmAmino {
+  port_id: string;
+  channel_id: string;
+  proof_init: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgChannelCloseConfirmAminoMsg {
+  type: "cosmos-sdk/MsgChannelCloseConfirm";
+  value: MsgChannelCloseConfirmAmino;
 }
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
@@ -170,6 +341,19 @@ export interface MsgChannelCloseConfirmSDKType {
  * type.
  */
 export interface MsgChannelCloseConfirmResponse {}
+export interface MsgChannelCloseConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
+ * type.
+ */
+export interface MsgChannelCloseConfirmResponseAmino {}
+export interface MsgChannelCloseConfirmResponseAminoMsg {
+  type: "cosmos-sdk/MsgChannelCloseConfirmResponse";
+  value: MsgChannelCloseConfirmResponseAmino;
+}
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
  * type.
@@ -182,6 +366,21 @@ export interface MsgRecvPacket {
   proofHeight: Height;
   signer: string;
 }
+export interface MsgRecvPacketProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacket";
+  value: Uint8Array;
+}
+/** MsgRecvPacket receives incoming IBC packet */
+export interface MsgRecvPacketAmino {
+  packet?: PacketAmino;
+  proof_commitment: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgRecvPacketAminoMsg {
+  type: "cosmos-sdk/MsgRecvPacket";
+  value: MsgRecvPacketAmino;
+}
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketSDKType {
   packet: PacketSDKType;
@@ -191,6 +390,16 @@ export interface MsgRecvPacketSDKType {
 }
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponse {}
+export interface MsgRecvPacketResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse";
+  value: Uint8Array;
+}
+/** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
+export interface MsgRecvPacketResponseAmino {}
+export interface MsgRecvPacketResponseAminoMsg {
+  type: "cosmos-sdk/MsgRecvPacketResponse";
+  value: MsgRecvPacketResponseAmino;
+}
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseSDKType {}
 /** MsgTimeout receives timed-out packet */
@@ -200,6 +409,22 @@ export interface MsgTimeout {
   proofHeight: Height;
   nextSequenceRecv: bigint;
   signer: string;
+}
+export interface MsgTimeoutProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeout";
+  value: Uint8Array;
+}
+/** MsgTimeout receives timed-out packet */
+export interface MsgTimeoutAmino {
+  packet?: PacketAmino;
+  proof_unreceived: Uint8Array;
+  proof_height?: HeightAmino;
+  next_sequence_recv: string;
+  signer: string;
+}
+export interface MsgTimeoutAminoMsg {
+  type: "cosmos-sdk/MsgTimeout";
+  value: MsgTimeoutAmino;
 }
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutSDKType {
@@ -211,6 +436,16 @@ export interface MsgTimeoutSDKType {
 }
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponse {}
+export interface MsgTimeoutResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse";
+  value: Uint8Array;
+}
+/** MsgTimeoutResponse defines the Msg/Timeout response type. */
+export interface MsgTimeoutResponseAmino {}
+export interface MsgTimeoutResponseAminoMsg {
+  type: "cosmos-sdk/MsgTimeoutResponse";
+  value: MsgTimeoutResponseAmino;
+}
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseSDKType {}
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
@@ -221,6 +456,23 @@ export interface MsgTimeoutOnClose {
   proofHeight: Height;
   nextSequenceRecv: bigint;
   signer: string;
+}
+export interface MsgTimeoutOnCloseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose";
+  value: Uint8Array;
+}
+/** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
+export interface MsgTimeoutOnCloseAmino {
+  packet?: PacketAmino;
+  proof_unreceived: Uint8Array;
+  proof_close: Uint8Array;
+  proof_height?: HeightAmino;
+  next_sequence_recv: string;
+  signer: string;
+}
+export interface MsgTimeoutOnCloseAminoMsg {
+  type: "cosmos-sdk/MsgTimeoutOnClose";
+  value: MsgTimeoutOnCloseAmino;
 }
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseSDKType {
@@ -233,6 +485,16 @@ export interface MsgTimeoutOnCloseSDKType {
 }
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponse {}
+export interface MsgTimeoutOnCloseResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse";
+  value: Uint8Array;
+}
+/** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
+export interface MsgTimeoutOnCloseResponseAmino {}
+export interface MsgTimeoutOnCloseResponseAminoMsg {
+  type: "cosmos-sdk/MsgTimeoutOnCloseResponse";
+  value: MsgTimeoutOnCloseResponseAmino;
+}
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseSDKType {}
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
@@ -242,6 +504,22 @@ export interface MsgAcknowledgement {
   proofAcked: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgAcknowledgementProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement";
+  value: Uint8Array;
+}
+/** MsgAcknowledgement receives incoming IBC acknowledgement */
+export interface MsgAcknowledgementAmino {
+  packet?: PacketAmino;
+  acknowledgement: Uint8Array;
+  proof_acked: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgAcknowledgementAminoMsg {
+  type: "cosmos-sdk/MsgAcknowledgement";
+  value: MsgAcknowledgementAmino;
 }
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementSDKType {
@@ -253,6 +531,16 @@ export interface MsgAcknowledgementSDKType {
 }
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
+export interface MsgAcknowledgementResponseProtoMsg {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse";
+  value: Uint8Array;
+}
+/** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
+export interface MsgAcknowledgementResponseAmino {}
+export interface MsgAcknowledgementResponseAminoMsg {
+  type: "cosmos-sdk/MsgAcknowledgementResponse";
+  value: MsgAcknowledgementResponseAmino;
+}
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponseSDKType {}
 function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
@@ -339,6 +627,41 @@ export const MsgChannelOpenInit = {
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelOpenInitAmino): MsgChannelOpenInit {
+    return {
+      portId: object.port_id,
+      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelOpenInit): MsgChannelOpenInitAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenInitAminoMsg): MsgChannelOpenInit {
+    return MsgChannelOpenInit.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenInit): MsgChannelOpenInitAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenInit",
+      value: MsgChannelOpenInit.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenInitProtoMsg): MsgChannelOpenInit {
+    return MsgChannelOpenInit.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenInit): Uint8Array {
+    return MsgChannelOpenInit.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenInit): MsgChannelOpenInitProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit",
+      value: MsgChannelOpenInit.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
@@ -382,6 +705,34 @@ export const MsgChannelOpenInitResponse = {
   toSDK(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelOpenInitResponseAmino): MsgChannelOpenInitResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenInitResponseAminoMsg): MsgChannelOpenInitResponse {
+    return MsgChannelOpenInitResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenInitResponse",
+      value: MsgChannelOpenInitResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenInitResponseProtoMsg): MsgChannelOpenInitResponse {
+    return MsgChannelOpenInitResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenInitResponse): Uint8Array {
+    return MsgChannelOpenInitResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse",
+      value: MsgChannelOpenInitResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
@@ -520,6 +871,49 @@ export const MsgChannelOpenTry = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelOpenTryAmino): MsgChannelOpenTry {
+    return {
+      portId: object.port_id,
+      previousChannelId: object.previous_channel_id,
+      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
+      counterpartyVersion: object.counterparty_version,
+      proofInit: object.proof_init,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelOpenTry): MsgChannelOpenTryAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.previous_channel_id = message.previousChannelId;
+    obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
+    obj.counterparty_version = message.counterpartyVersion;
+    obj.proof_init = message.proofInit;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenTryAminoMsg): MsgChannelOpenTry {
+    return MsgChannelOpenTry.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenTry): MsgChannelOpenTryAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenTry",
+      value: MsgChannelOpenTry.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenTryProtoMsg): MsgChannelOpenTry {
+    return MsgChannelOpenTry.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenTry): Uint8Array {
+    return MsgChannelOpenTry.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenTry): MsgChannelOpenTryProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry",
+      value: MsgChannelOpenTry.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
@@ -563,6 +957,34 @@ export const MsgChannelOpenTryResponse = {
   toSDK(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelOpenTryResponseAmino): MsgChannelOpenTryResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenTryResponseAminoMsg): MsgChannelOpenTryResponse {
+    return MsgChannelOpenTryResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenTryResponse",
+      value: MsgChannelOpenTryResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenTryResponseProtoMsg): MsgChannelOpenTryResponse {
+    return MsgChannelOpenTryResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenTryResponse): Uint8Array {
+    return MsgChannelOpenTryResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse",
+      value: MsgChannelOpenTryResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
@@ -701,6 +1123,49 @@ export const MsgChannelOpenAck = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelOpenAckAmino): MsgChannelOpenAck {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id,
+      counterpartyChannelId: object.counterparty_channel_id,
+      counterpartyVersion: object.counterparty_version,
+      proofTry: object.proof_try,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelOpenAck): MsgChannelOpenAckAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.counterparty_channel_id = message.counterpartyChannelId;
+    obj.counterparty_version = message.counterpartyVersion;
+    obj.proof_try = message.proofTry;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenAckAminoMsg): MsgChannelOpenAck {
+    return MsgChannelOpenAck.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenAck): MsgChannelOpenAckAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenAck",
+      value: MsgChannelOpenAck.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenAckProtoMsg): MsgChannelOpenAck {
+    return MsgChannelOpenAck.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenAck): Uint8Array {
+    return MsgChannelOpenAck.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenAck): MsgChannelOpenAckProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck",
+      value: MsgChannelOpenAck.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
@@ -744,6 +1209,34 @@ export const MsgChannelOpenAckResponse = {
   toSDK(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelOpenAckResponseAmino): MsgChannelOpenAckResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenAckResponseAminoMsg): MsgChannelOpenAckResponse {
+    return MsgChannelOpenAckResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenAckResponse",
+      value: MsgChannelOpenAckResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenAckResponseProtoMsg): MsgChannelOpenAckResponse {
+    return MsgChannelOpenAckResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenAckResponse): Uint8Array {
+    return MsgChannelOpenAckResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse",
+      value: MsgChannelOpenAckResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
@@ -856,6 +1349,45 @@ export const MsgChannelOpenConfirm = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelOpenConfirmAmino): MsgChannelOpenConfirm {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id,
+      proofAck: object.proof_ack,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.proof_ack = message.proofAck;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenConfirmAminoMsg): MsgChannelOpenConfirm {
+    return MsgChannelOpenConfirm.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenConfirm",
+      value: MsgChannelOpenConfirm.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenConfirmProtoMsg): MsgChannelOpenConfirm {
+    return MsgChannelOpenConfirm.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenConfirm): Uint8Array {
+    return MsgChannelOpenConfirm.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm",
+      value: MsgChannelOpenConfirm.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmResponse {
@@ -899,6 +1431,34 @@ export const MsgChannelOpenConfirmResponse = {
   toSDK(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelOpenConfirmResponseAmino): MsgChannelOpenConfirmResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelOpenConfirmResponseAminoMsg): MsgChannelOpenConfirmResponse {
+    return MsgChannelOpenConfirmResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelOpenConfirmResponse",
+      value: MsgChannelOpenConfirmResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelOpenConfirmResponseProtoMsg): MsgChannelOpenConfirmResponse {
+    return MsgChannelOpenConfirmResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelOpenConfirmResponse): Uint8Array {
+    return MsgChannelOpenConfirmResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse",
+      value: MsgChannelOpenConfirmResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
@@ -985,6 +1545,41 @@ export const MsgChannelCloseInit = {
     obj.channel_id = message.channelId;
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelCloseInitAmino): MsgChannelCloseInit {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelCloseInit): MsgChannelCloseInitAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelCloseInitAminoMsg): MsgChannelCloseInit {
+    return MsgChannelCloseInit.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelCloseInit): MsgChannelCloseInitAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelCloseInit",
+      value: MsgChannelCloseInit.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelCloseInitProtoMsg): MsgChannelCloseInit {
+    return MsgChannelCloseInit.decode(message.value);
+  },
+  toProto(message: MsgChannelCloseInit): Uint8Array {
+    return MsgChannelCloseInit.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelCloseInit): MsgChannelCloseInitProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit",
+      value: MsgChannelCloseInit.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
@@ -1028,6 +1623,34 @@ export const MsgChannelCloseInitResponse = {
   toSDK(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelCloseInitResponseAmino): MsgChannelCloseInitResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelCloseInitResponseAminoMsg): MsgChannelCloseInitResponse {
+    return MsgChannelCloseInitResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelCloseInitResponse",
+      value: MsgChannelCloseInitResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelCloseInitResponseProtoMsg): MsgChannelCloseInitResponse {
+    return MsgChannelCloseInitResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelCloseInitResponse): Uint8Array {
+    return MsgChannelCloseInitResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse",
+      value: MsgChannelCloseInitResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
@@ -1140,6 +1763,45 @@ export const MsgChannelCloseConfirm = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgChannelCloseConfirmAmino): MsgChannelCloseConfirm {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id,
+      proofInit: object.proof_init,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.proof_init = message.proofInit;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelCloseConfirmAminoMsg): MsgChannelCloseConfirm {
+    return MsgChannelCloseConfirm.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelCloseConfirm",
+      value: MsgChannelCloseConfirm.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelCloseConfirmProtoMsg): MsgChannelCloseConfirm {
+    return MsgChannelCloseConfirm.decode(message.value);
+  },
+  toProto(message: MsgChannelCloseConfirm): Uint8Array {
+    return MsgChannelCloseConfirm.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm",
+      value: MsgChannelCloseConfirm.encode(message).finish()
+    };
   }
 };
 function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmResponse {
@@ -1183,6 +1845,34 @@ export const MsgChannelCloseConfirmResponse = {
   toSDK(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgChannelCloseConfirmResponseAmino): MsgChannelCloseConfirmResponse {
+    return {};
+  },
+  toAmino(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgChannelCloseConfirmResponseAminoMsg): MsgChannelCloseConfirmResponse {
+    return MsgChannelCloseConfirmResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgChannelCloseConfirmResponse",
+      value: MsgChannelCloseConfirmResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgChannelCloseConfirmResponseProtoMsg): MsgChannelCloseConfirmResponse {
+    return MsgChannelCloseConfirmResponse.decode(message.value);
+  },
+  toProto(message: MsgChannelCloseConfirmResponse): Uint8Array {
+    return MsgChannelCloseConfirmResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse",
+      value: MsgChannelCloseConfirmResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgRecvPacket(): MsgRecvPacket {
@@ -1282,6 +1972,43 @@ export const MsgRecvPacket = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgRecvPacketAmino): MsgRecvPacket {
+    return {
+      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      proofCommitment: object.proof_commitment,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgRecvPacket): MsgRecvPacketAmino {
+    const obj: any = {};
+    obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
+    obj.proof_commitment = message.proofCommitment;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRecvPacketAminoMsg): MsgRecvPacket {
+    return MsgRecvPacket.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRecvPacket): MsgRecvPacketAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRecvPacket",
+      value: MsgRecvPacket.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgRecvPacketProtoMsg): MsgRecvPacket {
+    return MsgRecvPacket.decode(message.value);
+  },
+  toProto(message: MsgRecvPacket): Uint8Array {
+    return MsgRecvPacket.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRecvPacket): MsgRecvPacketProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgRecvPacket",
+      value: MsgRecvPacket.encode(message).finish()
+    };
   }
 };
 function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
@@ -1325,6 +2052,34 @@ export const MsgRecvPacketResponse = {
   toSDK(_: MsgRecvPacketResponse): MsgRecvPacketResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgRecvPacketResponseAmino): MsgRecvPacketResponse {
+    return {};
+  },
+  toAmino(_: MsgRecvPacketResponse): MsgRecvPacketResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgRecvPacketResponseAminoMsg): MsgRecvPacketResponse {
+    return MsgRecvPacketResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRecvPacketResponse): MsgRecvPacketResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRecvPacketResponse",
+      value: MsgRecvPacketResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgRecvPacketResponseProtoMsg): MsgRecvPacketResponse {
+    return MsgRecvPacketResponse.decode(message.value);
+  },
+  toProto(message: MsgRecvPacketResponse): Uint8Array {
+    return MsgRecvPacketResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRecvPacketResponse): MsgRecvPacketResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse",
+      value: MsgRecvPacketResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgTimeout(): MsgTimeout {
@@ -1437,6 +2192,45 @@ export const MsgTimeout = {
     obj.next_sequence_recv = message.nextSequenceRecv;
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgTimeoutAmino): MsgTimeout {
+    return {
+      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      proofUnreceived: object.proof_unreceived,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      nextSequenceRecv: BigInt(object.next_sequence_recv),
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgTimeout): MsgTimeoutAmino {
+    const obj: any = {};
+    obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
+    obj.proof_unreceived = message.proofUnreceived;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgTimeoutAminoMsg): MsgTimeout {
+    return MsgTimeout.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgTimeout): MsgTimeoutAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTimeout",
+      value: MsgTimeout.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgTimeoutProtoMsg): MsgTimeout {
+    return MsgTimeout.decode(message.value);
+  },
+  toProto(message: MsgTimeout): Uint8Array {
+    return MsgTimeout.encode(message).finish();
+  },
+  toProtoMsg(message: MsgTimeout): MsgTimeoutProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgTimeout",
+      value: MsgTimeout.encode(message).finish()
+    };
   }
 };
 function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
@@ -1480,6 +2274,34 @@ export const MsgTimeoutResponse = {
   toSDK(_: MsgTimeoutResponse): MsgTimeoutResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgTimeoutResponseAmino): MsgTimeoutResponse {
+    return {};
+  },
+  toAmino(_: MsgTimeoutResponse): MsgTimeoutResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgTimeoutResponseAminoMsg): MsgTimeoutResponse {
+    return MsgTimeoutResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgTimeoutResponse): MsgTimeoutResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTimeoutResponse",
+      value: MsgTimeoutResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgTimeoutResponseProtoMsg): MsgTimeoutResponse {
+    return MsgTimeoutResponse.decode(message.value);
+  },
+  toProto(message: MsgTimeoutResponse): Uint8Array {
+    return MsgTimeoutResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgTimeoutResponse): MsgTimeoutResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse",
+      value: MsgTimeoutResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
@@ -1605,6 +2427,47 @@ export const MsgTimeoutOnClose = {
     obj.next_sequence_recv = message.nextSequenceRecv;
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgTimeoutOnCloseAmino): MsgTimeoutOnClose {
+    return {
+      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      proofUnreceived: object.proof_unreceived,
+      proofClose: object.proof_close,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      nextSequenceRecv: BigInt(object.next_sequence_recv),
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgTimeoutOnClose): MsgTimeoutOnCloseAmino {
+    const obj: any = {};
+    obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
+    obj.proof_unreceived = message.proofUnreceived;
+    obj.proof_close = message.proofClose;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgTimeoutOnCloseAminoMsg): MsgTimeoutOnClose {
+    return MsgTimeoutOnClose.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgTimeoutOnClose): MsgTimeoutOnCloseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTimeoutOnClose",
+      value: MsgTimeoutOnClose.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgTimeoutOnCloseProtoMsg): MsgTimeoutOnClose {
+    return MsgTimeoutOnClose.decode(message.value);
+  },
+  toProto(message: MsgTimeoutOnClose): Uint8Array {
+    return MsgTimeoutOnClose.encode(message).finish();
+  },
+  toProtoMsg(message: MsgTimeoutOnClose): MsgTimeoutOnCloseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose",
+      value: MsgTimeoutOnClose.encode(message).finish()
+    };
   }
 };
 function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
@@ -1648,6 +2511,34 @@ export const MsgTimeoutOnCloseResponse = {
   toSDK(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgTimeoutOnCloseResponseAmino): MsgTimeoutOnCloseResponse {
+    return {};
+  },
+  toAmino(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgTimeoutOnCloseResponseAminoMsg): MsgTimeoutOnCloseResponse {
+    return MsgTimeoutOnCloseResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTimeoutOnCloseResponse",
+      value: MsgTimeoutOnCloseResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgTimeoutOnCloseResponseProtoMsg): MsgTimeoutOnCloseResponse {
+    return MsgTimeoutOnCloseResponse.decode(message.value);
+  },
+  toProto(message: MsgTimeoutOnCloseResponse): Uint8Array {
+    return MsgTimeoutOnCloseResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse",
+      value: MsgTimeoutOnCloseResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgAcknowledgement(): MsgAcknowledgement {
@@ -1760,6 +2651,45 @@ export const MsgAcknowledgement = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgAcknowledgementAmino): MsgAcknowledgement {
+    return {
+      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      acknowledgement: object.acknowledgement,
+      proofAcked: object.proof_acked,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgAcknowledgement): MsgAcknowledgementAmino {
+    const obj: any = {};
+    obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
+    obj.acknowledgement = message.acknowledgement;
+    obj.proof_acked = message.proofAcked;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAcknowledgementAminoMsg): MsgAcknowledgement {
+    return MsgAcknowledgement.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgAcknowledgement): MsgAcknowledgementAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgAcknowledgement",
+      value: MsgAcknowledgement.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgAcknowledgementProtoMsg): MsgAcknowledgement {
+    return MsgAcknowledgement.decode(message.value);
+  },
+  toProto(message: MsgAcknowledgement): Uint8Array {
+    return MsgAcknowledgement.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAcknowledgement): MsgAcknowledgementProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement",
+      value: MsgAcknowledgement.encode(message).finish()
+    };
   }
 };
 function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
@@ -1803,5 +2733,33 @@ export const MsgAcknowledgementResponse = {
   toSDK(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgAcknowledgementResponseAmino): MsgAcknowledgementResponse {
+    return {};
+  },
+  toAmino(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgAcknowledgementResponseAminoMsg): MsgAcknowledgementResponse {
+    return MsgAcknowledgementResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgAcknowledgementResponse): MsgAcknowledgementResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgAcknowledgementResponse",
+      value: MsgAcknowledgementResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgAcknowledgementResponseProtoMsg): MsgAcknowledgementResponse {
+    return MsgAcknowledgementResponse.decode(message.value);
+  },
+  toProto(message: MsgAcknowledgementResponse): Uint8Array {
+    return MsgAcknowledgementResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAcknowledgementResponse): MsgAcknowledgementResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse",
+      value: MsgAcknowledgementResponse.encode(message).finish()
+    };
   }
 };

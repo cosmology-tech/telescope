@@ -1,4 +1,4 @@
-import { Height, HeightSDKType } from "../../../core/client/v1/client";
+import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
@@ -11,6 +11,24 @@ export interface ClientState {
   chainId: string;
   /** self latest block height */
   height: Height;
+}
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
+  value: Uint8Array;
+}
+/**
+ * ClientState defines a loopback (localhost) client. It requires (read-only)
+ * access to keys outside the client prefix.
+ */
+export interface ClientStateAmino {
+  /** self chain ID */
+  chain_id: string;
+  /** self latest block height */
+  height?: HeightAmino;
+}
+export interface ClientStateAminoMsg {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
 }
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -91,5 +109,38 @@ export const ClientState = {
     obj.chain_id = message.chainId;
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     return obj;
+  },
+  fromAmino(object: ClientStateAmino): ClientState {
+    return {
+      chainId: object.chain_id,
+      height: object?.height ? Height.fromAmino(object.height) : undefined
+    };
+  },
+  toAmino(message: ClientState): ClientStateAmino {
+    const obj: any = {};
+    obj.chain_id = message.chainId;
+    obj.height = message.height ? Height.toAmino(message.height) : {};
+    return obj;
+  },
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
+  },
+  toProto(message: ClientState): Uint8Array {
+    return ClientState.encode(message).finish();
+  },
+  toProtoMsg(message: ClientState): ClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
+      value: ClientState.encode(message).finish()
+    };
   }
 };

@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -6,6 +6,19 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Params";
+  value: Uint8Array;
+}
+/** Params is the params for the x/market module */
+export interface ParamsAmino {
+  bid_min_deposit?: CoinAmino;
+  order_max_bids: number;
+}
+export interface ParamsAminoMsg {
+  type: "akash/market/v1beta2/params";
+  value: ParamsAmino;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
@@ -83,5 +96,38 @@ export const Params = {
     message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toSDK(message.bidMinDeposit) : undefined);
     obj.order_max_bids = message.orderMaxBids;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      orderMaxBids: object.order_max_bids
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
+    obj.order_max_bids = message.orderMaxBids;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "akash/market/v1beta2/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

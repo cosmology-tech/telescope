@@ -1,4 +1,4 @@
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -13,6 +13,7 @@ export enum Owner {
   UNRECOGNIZED = -1,
 }
 export const OwnerSDKType = Owner;
+export const OwnerAmino = Owner;
 export function ownerFromJSON(object: any): Owner {
   switch (object) {
     case 0:
@@ -57,6 +58,28 @@ export interface TokenPair {
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contractOwner: Owner;
 }
+export interface TokenPairProtoMsg {
+  typeUrl: "/evmos.erc20.v1.TokenPair";
+  value: Uint8Array;
+}
+/**
+ * TokenPair defines an instance that records a pairing consisting of a native
+ *  Cosmos Coin and an ERC20 token address.
+ */
+export interface TokenPairAmino {
+  /** address of ERC20 contract token */
+  erc20_address: string;
+  /** cosmos base denomination to be mapped to */
+  denom: string;
+  /** shows token mapping enable status */
+  enabled: boolean;
+  /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
+  contract_owner: Owner;
+}
+export interface TokenPairAminoMsg {
+  type: "/evmos.erc20.v1.TokenPair";
+  value: TokenPairAmino;
+}
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
  *  Cosmos Coin and an ERC20 token address.
@@ -79,6 +102,26 @@ export interface RegisterCoinProposal {
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
 }
+export interface RegisterCoinProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: Uint8Array;
+}
+/**
+ * RegisterCoinProposal is a gov Content type to register a token pair for a
+ * native Cosmos coin.
+ */
+export interface RegisterCoinProposalAmino {
+  /** title of the proposal */
+  title: string;
+  /** proposal description */
+  description: string;
+  /** metadata of the native Cosmos coin */
+  metadata?: MetadataAmino;
+}
+export interface RegisterCoinProposalAminoMsg {
+  type: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: RegisterCoinProposalAmino;
+}
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
  * native Cosmos coin.
@@ -99,6 +142,26 @@ export interface RegisterERC20Proposal {
   description: string;
   /** contract address of ERC20 token */
   erc20address: string;
+}
+export interface RegisterERC20ProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: Uint8Array;
+}
+/**
+ * RegisterERC20Proposal is a gov Content type to register a token pair for an
+ * ERC20 token
+ */
+export interface RegisterERC20ProposalAmino {
+  /** title of the proposal */
+  title: string;
+  /** proposal description */
+  description: string;
+  /** contract address of ERC20 token */
+  erc20address: string;
+}
+export interface RegisterERC20ProposalAminoMsg {
+  type: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: RegisterERC20ProposalAmino;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -123,6 +186,29 @@ export interface ToggleTokenConversionProposal {
    * Cosmos base denomination
    */
   token: string;
+}
+export interface ToggleTokenConversionProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: Uint8Array;
+}
+/**
+ * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
+ * of a token pair.
+ */
+export interface ToggleTokenConversionProposalAmino {
+  /** title of the proposal */
+  title: string;
+  /** proposal description */
+  description: string;
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token: string;
+}
+export interface ToggleTokenConversionProposalAminoMsg {
+  type: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: ToggleTokenConversionProposalAmino;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
@@ -230,6 +316,37 @@ export const TokenPair = {
     obj.enabled = message.enabled;
     message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
     return obj;
+  },
+  fromAmino(object: TokenPairAmino): TokenPair {
+    return {
+      erc20Address: object.erc20_address,
+      denom: object.denom,
+      enabled: object.enabled,
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
+    };
+  },
+  toAmino(message: TokenPair): TokenPairAmino {
+    const obj: any = {};
+    obj.erc20_address = message.erc20Address;
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    obj.contract_owner = message.contractOwner;
+    return obj;
+  },
+  fromAminoMsg(object: TokenPairAminoMsg): TokenPair {
+    return TokenPair.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TokenPairProtoMsg): TokenPair {
+    return TokenPair.decode(message.value);
+  },
+  toProto(message: TokenPair): Uint8Array {
+    return TokenPair.encode(message).finish();
+  },
+  toProtoMsg(message: TokenPair): TokenPairProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.TokenPair",
+      value: TokenPair.encode(message).finish()
+    };
   }
 };
 function createBaseRegisterCoinProposal(): RegisterCoinProposal {
@@ -316,6 +433,35 @@ export const RegisterCoinProposal = {
     obj.description = message.description;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
+  },
+  fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+    };
+  },
+  toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RegisterCoinProposalAminoMsg): RegisterCoinProposal {
+    return RegisterCoinProposal.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RegisterCoinProposalProtoMsg): RegisterCoinProposal {
+    return RegisterCoinProposal.decode(message.value);
+  },
+  toProto(message: RegisterCoinProposal): Uint8Array {
+    return RegisterCoinProposal.encode(message).finish();
+  },
+  toProtoMsg(message: RegisterCoinProposal): RegisterCoinProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
+      value: RegisterCoinProposal.encode(message).finish()
+    };
   }
 };
 function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
@@ -402,6 +548,35 @@ export const RegisterERC20Proposal = {
     obj.description = message.description;
     obj.erc20address = message.erc20address;
     return obj;
+  },
+  fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
+    return {
+      title: object.title,
+      description: object.description,
+      erc20address: object.erc20address
+    };
+  },
+  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.erc20address = message.erc20address;
+    return obj;
+  },
+  fromAminoMsg(object: RegisterERC20ProposalAminoMsg): RegisterERC20Proposal {
+    return RegisterERC20Proposal.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RegisterERC20ProposalProtoMsg): RegisterERC20Proposal {
+    return RegisterERC20Proposal.decode(message.value);
+  },
+  toProto(message: RegisterERC20Proposal): Uint8Array {
+    return RegisterERC20Proposal.encode(message).finish();
+  },
+  toProtoMsg(message: RegisterERC20Proposal): RegisterERC20ProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
+      value: RegisterERC20Proposal.encode(message).finish()
+    };
   }
 };
 function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposal {
@@ -488,5 +663,34 @@ export const ToggleTokenConversionProposal = {
     obj.description = message.description;
     obj.token = message.token;
     return obj;
+  },
+  fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      token: object.token
+    };
+  },
+  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.token = message.token;
+    return obj;
+  },
+  fromAminoMsg(object: ToggleTokenConversionProposalAminoMsg): ToggleTokenConversionProposal {
+    return ToggleTokenConversionProposal.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg): ToggleTokenConversionProposal {
+    return ToggleTokenConversionProposal.decode(message.value);
+  },
+  toProto(message: ToggleTokenConversionProposal): Uint8Array {
+    return ToggleTokenConversionProposal.encode(message).finish();
+  },
+  toProtoMsg(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
+      value: ToggleTokenConversionProposal.encode(message).finish()
+    };
   }
 };

@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
@@ -11,6 +11,24 @@ export interface Equivocation {
   time: Date;
   power: bigint;
   consensusAddress: string;
+}
+export interface EquivocationProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.Equivocation";
+  value: Uint8Array;
+}
+/**
+ * Equivocation implements the Evidence interface and defines evidence of double
+ * signing misbehavior.
+ */
+export interface EquivocationAmino {
+  height: string;
+  time?: Date;
+  power: string;
+  consensus_address: string;
+}
+export interface EquivocationAminoMsg {
+  type: "cosmos-sdk/Equivocation";
+  value: EquivocationAmino;
 }
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -119,5 +137,42 @@ export const Equivocation = {
     obj.power = message.power;
     obj.consensus_address = message.consensusAddress;
     return obj;
+  },
+  fromAmino(object: EquivocationAmino): Equivocation {
+    return {
+      height: BigInt(object.height),
+      time: object.time,
+      power: BigInt(object.power),
+      consensusAddress: object.consensus_address
+    };
+  },
+  toAmino(message: Equivocation): EquivocationAmino {
+    const obj: any = {};
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.time = message.time;
+    obj.power = message.power ? message.power.toString() : undefined;
+    obj.consensus_address = message.consensusAddress;
+    return obj;
+  },
+  fromAminoMsg(object: EquivocationAminoMsg): Equivocation {
+    return Equivocation.fromAmino(object.value);
+  },
+  toAminoMsg(message: Equivocation): EquivocationAminoMsg {
+    return {
+      type: "cosmos-sdk/Equivocation",
+      value: Equivocation.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
+    return Equivocation.decode(message.value);
+  },
+  toProto(message: Equivocation): Uint8Array {
+    return Equivocation.encode(message).finish();
+  },
+  toProtoMsg(message: Equivocation): EquivocationProtoMsg {
+    return {
+      typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
+      value: Equivocation.encode(message).finish()
+    };
   }
 };

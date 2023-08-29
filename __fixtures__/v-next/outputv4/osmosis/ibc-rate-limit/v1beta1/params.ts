@@ -5,6 +5,18 @@ export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 export interface Params {
   contractAddress: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the ibc-rate-limit module. */
+export interface ParamsAmino {
+  contract_address: string;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/ibcratelimit/params";
+  value: ParamsAmino;
+}
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
   contract_address: string;
@@ -67,5 +79,36 @@ export const Params = {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      contractAddress: object.contract_address
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/ibcratelimit/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.ibcratelimit.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

@@ -1,10 +1,22 @@
-import { AuditedAttributes, AuditedAttributesSDKType } from "./audit";
+import { AuditedAttributes, AuditedAttributesAmino, AuditedAttributesSDKType } from "./audit";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisState {
   attributes: AuditedAttributes[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the basic genesis state used by audit module */
+export interface GenesisStateAmino {
+  attributes: AuditedAttributesAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "akash/audit/v1beta2/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisStateSDKType {
@@ -76,5 +88,40 @@ export const GenesisState = {
       obj.attributes = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

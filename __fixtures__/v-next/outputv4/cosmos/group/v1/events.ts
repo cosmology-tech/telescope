@@ -7,6 +7,19 @@ export interface EventCreateGroup {
   /** group_id is the unique ID of the group. */
   groupId: bigint;
 }
+export interface EventCreateGroupProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventCreateGroup";
+  value: Uint8Array;
+}
+/** EventCreateGroup is an event emitted when a group is created. */
+export interface EventCreateGroupAmino {
+  /** group_id is the unique ID of the group. */
+  group_id: string;
+}
+export interface EventCreateGroupAminoMsg {
+  type: "cosmos-sdk/EventCreateGroup";
+  value: EventCreateGroupAmino;
+}
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupSDKType {
   group_id: bigint;
@@ -15,6 +28,19 @@ export interface EventCreateGroupSDKType {
 export interface EventUpdateGroup {
   /** group_id is the unique ID of the group. */
   groupId: bigint;
+}
+export interface EventUpdateGroupProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventUpdateGroup";
+  value: Uint8Array;
+}
+/** EventUpdateGroup is an event emitted when a group is updated. */
+export interface EventUpdateGroupAmino {
+  /** group_id is the unique ID of the group. */
+  group_id: string;
+}
+export interface EventUpdateGroupAminoMsg {
+  type: "cosmos-sdk/EventUpdateGroup";
+  value: EventUpdateGroupAmino;
 }
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupSDKType {
@@ -25,6 +51,19 @@ export interface EventCreateGroupPolicy {
   /** address is the account address of the group policy. */
   address: string;
 }
+export interface EventCreateGroupPolicyProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy";
+  value: Uint8Array;
+}
+/** EventCreateGroupPolicy is an event emitted when a group policy is created. */
+export interface EventCreateGroupPolicyAmino {
+  /** address is the account address of the group policy. */
+  address: string;
+}
+export interface EventCreateGroupPolicyAminoMsg {
+  type: "cosmos-sdk/EventCreateGroupPolicy";
+  value: EventCreateGroupPolicyAmino;
+}
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicySDKType {
   address: string;
@@ -33,6 +72,19 @@ export interface EventCreateGroupPolicySDKType {
 export interface EventUpdateGroupPolicy {
   /** address is the account address of the group policy. */
   address: string;
+}
+export interface EventUpdateGroupPolicyProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy";
+  value: Uint8Array;
+}
+/** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
+export interface EventUpdateGroupPolicyAmino {
+  /** address is the account address of the group policy. */
+  address: string;
+}
+export interface EventUpdateGroupPolicyAminoMsg {
+  type: "cosmos-sdk/EventUpdateGroupPolicy";
+  value: EventUpdateGroupPolicyAmino;
 }
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicySDKType {
@@ -43,6 +95,19 @@ export interface EventSubmitProposal {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: bigint;
 }
+export interface EventSubmitProposalProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventSubmitProposal";
+  value: Uint8Array;
+}
+/** EventSubmitProposal is an event emitted when a proposal is created. */
+export interface EventSubmitProposalAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id: string;
+}
+export interface EventSubmitProposalAminoMsg {
+  type: "cosmos-sdk/EventSubmitProposal";
+  value: EventSubmitProposalAmino;
+}
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalSDKType {
   proposal_id: bigint;
@@ -52,6 +117,19 @@ export interface EventWithdrawProposal {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: bigint;
 }
+export interface EventWithdrawProposalProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventWithdrawProposal";
+  value: Uint8Array;
+}
+/** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
+export interface EventWithdrawProposalAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id: string;
+}
+export interface EventWithdrawProposalAminoMsg {
+  type: "cosmos-sdk/EventWithdrawProposal";
+  value: EventWithdrawProposalAmino;
+}
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalSDKType {
   proposal_id: bigint;
@@ -60,6 +138,19 @@ export interface EventWithdrawProposalSDKType {
 export interface EventVote {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: bigint;
+}
+export interface EventVoteProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventVote";
+  value: Uint8Array;
+}
+/** EventVote is an event emitted when a voter votes on a proposal. */
+export interface EventVoteAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id: string;
+}
+export interface EventVoteAminoMsg {
+  type: "cosmos-sdk/EventVote";
+  value: EventVoteAmino;
 }
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteSDKType {
@@ -72,6 +163,21 @@ export interface EventExec {
   /** result is the proposal execution result. */
   result: ProposalExecutorResult;
 }
+export interface EventExecProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventExec";
+  value: Uint8Array;
+}
+/** EventExec is an event emitted when a proposal is executed. */
+export interface EventExecAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id: string;
+  /** result is the proposal execution result. */
+  result: ProposalExecutorResult;
+}
+export interface EventExecAminoMsg {
+  type: "cosmos-sdk/EventExec";
+  value: EventExecAmino;
+}
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecSDKType {
   proposal_id: bigint;
@@ -83,6 +189,21 @@ export interface EventLeaveGroup {
   groupId: bigint;
   /** address is the account address of the group member. */
   address: string;
+}
+export interface EventLeaveGroupProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventLeaveGroup";
+  value: Uint8Array;
+}
+/** EventLeaveGroup is an event emitted when group member leaves the group. */
+export interface EventLeaveGroupAmino {
+  /** group_id is the unique ID of the group. */
+  group_id: string;
+  /** address is the account address of the group member. */
+  address: string;
+}
+export interface EventLeaveGroupAminoMsg {
+  type: "cosmos-sdk/EventLeaveGroup";
+  value: EventLeaveGroupAmino;
 }
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupSDKType {
@@ -147,6 +268,37 @@ export const EventCreateGroup = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+  fromAmino(object: EventCreateGroupAmino): EventCreateGroup {
+    return {
+      groupId: BigInt(object.group_id)
+    };
+  },
+  toAmino(message: EventCreateGroup): EventCreateGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventCreateGroupAminoMsg): EventCreateGroup {
+    return EventCreateGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventCreateGroup): EventCreateGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventCreateGroup",
+      value: EventCreateGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventCreateGroupProtoMsg): EventCreateGroup {
+    return EventCreateGroup.decode(message.value);
+  },
+  toProto(message: EventCreateGroup): Uint8Array {
+    return EventCreateGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventCreateGroup): EventCreateGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventCreateGroup",
+      value: EventCreateGroup.encode(message).finish()
+    };
   }
 };
 function createBaseEventUpdateGroup(): EventUpdateGroup {
@@ -207,6 +359,37 @@ export const EventUpdateGroup = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+  fromAmino(object: EventUpdateGroupAmino): EventUpdateGroup {
+    return {
+      groupId: BigInt(object.group_id)
+    };
+  },
+  toAmino(message: EventUpdateGroup): EventUpdateGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateGroupAminoMsg): EventUpdateGroup {
+    return EventUpdateGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventUpdateGroup): EventUpdateGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventUpdateGroup",
+      value: EventUpdateGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventUpdateGroupProtoMsg): EventUpdateGroup {
+    return EventUpdateGroup.decode(message.value);
+  },
+  toProto(message: EventUpdateGroup): Uint8Array {
+    return EventUpdateGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateGroup): EventUpdateGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventUpdateGroup",
+      value: EventUpdateGroup.encode(message).finish()
+    };
   }
 };
 function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
@@ -267,6 +450,37 @@ export const EventCreateGroupPolicy = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventCreateGroupPolicyAmino): EventCreateGroupPolicy {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: EventCreateGroupPolicy): EventCreateGroupPolicyAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventCreateGroupPolicyAminoMsg): EventCreateGroupPolicy {
+    return EventCreateGroupPolicy.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventCreateGroupPolicy): EventCreateGroupPolicyAminoMsg {
+    return {
+      type: "cosmos-sdk/EventCreateGroupPolicy",
+      value: EventCreateGroupPolicy.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventCreateGroupPolicyProtoMsg): EventCreateGroupPolicy {
+    return EventCreateGroupPolicy.decode(message.value);
+  },
+  toProto(message: EventCreateGroupPolicy): Uint8Array {
+    return EventCreateGroupPolicy.encode(message).finish();
+  },
+  toProtoMsg(message: EventCreateGroupPolicy): EventCreateGroupPolicyProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy",
+      value: EventCreateGroupPolicy.encode(message).finish()
+    };
   }
 };
 function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
@@ -327,6 +541,37 @@ export const EventUpdateGroupPolicy = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventUpdateGroupPolicyAmino): EventUpdateGroupPolicy {
+    return {
+      address: object.address
+    };
+  },
+  toAmino(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateGroupPolicyAminoMsg): EventUpdateGroupPolicy {
+    return EventUpdateGroupPolicy.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAminoMsg {
+    return {
+      type: "cosmos-sdk/EventUpdateGroupPolicy",
+      value: EventUpdateGroupPolicy.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventUpdateGroupPolicyProtoMsg): EventUpdateGroupPolicy {
+    return EventUpdateGroupPolicy.decode(message.value);
+  },
+  toProto(message: EventUpdateGroupPolicy): Uint8Array {
+    return EventUpdateGroupPolicy.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy",
+      value: EventUpdateGroupPolicy.encode(message).finish()
+    };
   }
 };
 function createBaseEventSubmitProposal(): EventSubmitProposal {
@@ -387,6 +632,37 @@ export const EventSubmitProposal = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventSubmitProposalAmino): EventSubmitProposal {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventSubmitProposal): EventSubmitProposalAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventSubmitProposalAminoMsg): EventSubmitProposal {
+    return EventSubmitProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventSubmitProposal): EventSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/EventSubmitProposal",
+      value: EventSubmitProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventSubmitProposalProtoMsg): EventSubmitProposal {
+    return EventSubmitProposal.decode(message.value);
+  },
+  toProto(message: EventSubmitProposal): Uint8Array {
+    return EventSubmitProposal.encode(message).finish();
+  },
+  toProtoMsg(message: EventSubmitProposal): EventSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventSubmitProposal",
+      value: EventSubmitProposal.encode(message).finish()
+    };
   }
 };
 function createBaseEventWithdrawProposal(): EventWithdrawProposal {
@@ -447,6 +723,37 @@ export const EventWithdrawProposal = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventWithdrawProposalAmino): EventWithdrawProposal {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventWithdrawProposal): EventWithdrawProposalAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventWithdrawProposalAminoMsg): EventWithdrawProposal {
+    return EventWithdrawProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventWithdrawProposal): EventWithdrawProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/EventWithdrawProposal",
+      value: EventWithdrawProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventWithdrawProposalProtoMsg): EventWithdrawProposal {
+    return EventWithdrawProposal.decode(message.value);
+  },
+  toProto(message: EventWithdrawProposal): Uint8Array {
+    return EventWithdrawProposal.encode(message).finish();
+  },
+  toProtoMsg(message: EventWithdrawProposal): EventWithdrawProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventWithdrawProposal",
+      value: EventWithdrawProposal.encode(message).finish()
+    };
   }
 };
 function createBaseEventVote(): EventVote {
@@ -507,6 +814,37 @@ export const EventVote = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+  fromAmino(object: EventVoteAmino): EventVote {
+    return {
+      proposalId: BigInt(object.proposal_id)
+    };
+  },
+  toAmino(message: EventVote): EventVoteAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventVoteAminoMsg): EventVote {
+    return EventVote.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventVote): EventVoteAminoMsg {
+    return {
+      type: "cosmos-sdk/EventVote",
+      value: EventVote.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventVoteProtoMsg): EventVote {
+    return EventVote.decode(message.value);
+  },
+  toProto(message: EventVote): Uint8Array {
+    return EventVote.encode(message).finish();
+  },
+  toProtoMsg(message: EventVote): EventVoteProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventVote",
+      value: EventVote.encode(message).finish()
+    };
   }
 };
 function createBaseEventExec(): EventExec {
@@ -580,6 +918,39 @@ export const EventExec = {
     obj.proposal_id = message.proposalId;
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
+  },
+  fromAmino(object: EventExecAmino): EventExec {
+    return {
+      proposalId: BigInt(object.proposal_id),
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
+    };
+  },
+  toAmino(message: EventExec): EventExecAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.result = message.result;
+    return obj;
+  },
+  fromAminoMsg(object: EventExecAminoMsg): EventExec {
+    return EventExec.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventExec): EventExecAminoMsg {
+    return {
+      type: "cosmos-sdk/EventExec",
+      value: EventExec.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventExecProtoMsg): EventExec {
+    return EventExec.decode(message.value);
+  },
+  toProto(message: EventExec): Uint8Array {
+    return EventExec.encode(message).finish();
+  },
+  toProtoMsg(message: EventExec): EventExecProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventExec",
+      value: EventExec.encode(message).finish()
+    };
   }
 };
 function createBaseEventLeaveGroup(): EventLeaveGroup {
@@ -653,5 +1024,38 @@ export const EventLeaveGroup = {
     obj.group_id = message.groupId;
     obj.address = message.address;
     return obj;
+  },
+  fromAmino(object: EventLeaveGroupAmino): EventLeaveGroup {
+    return {
+      groupId: BigInt(object.group_id),
+      address: object.address
+    };
+  },
+  toAmino(message: EventLeaveGroup): EventLeaveGroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.address = message.address;
+    return obj;
+  },
+  fromAminoMsg(object: EventLeaveGroupAminoMsg): EventLeaveGroup {
+    return EventLeaveGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventLeaveGroup): EventLeaveGroupAminoMsg {
+    return {
+      type: "cosmos-sdk/EventLeaveGroup",
+      value: EventLeaveGroup.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventLeaveGroupProtoMsg): EventLeaveGroup {
+    return EventLeaveGroup.decode(message.value);
+  },
+  toProto(message: EventLeaveGroup): Uint8Array {
+    return EventLeaveGroup.encode(message).finish();
+  },
+  toProtoMsg(message: EventLeaveGroup): EventLeaveGroupProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventLeaveGroup",
+      value: EventLeaveGroup.encode(message).finish()
+    };
   }
 };

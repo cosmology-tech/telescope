@@ -1,15 +1,27 @@
-import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnySDKType } from "../../protobuf/any";
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType } from "../../api/monitored_resource";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
-import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
+import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
+}
+export interface LogEntry_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
+export interface LogEntry_LabelsEntryAmino {
+  key: string;
+  value: string;
+}
+export interface LogEntry_LabelsEntryAminoMsg {
+  type: string;
+  value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
@@ -163,6 +175,162 @@ export interface LogEntry {
    */
   split: LogSplit;
 }
+export interface LogEntryProtoMsg {
+  typeUrl: "/google.logging.v2.LogEntry";
+  value: Uint8Array;
+}
+/** An individual entry in a log. */
+export interface LogEntryAmino {
+  /**
+   * Required. The resource name of the log to which this log entry belongs:
+   * 
+   *     "projects/[PROJECT_ID]/logs/[LOG_ID]"
+   *     "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+   *     "folders/[FOLDER_ID]/logs/[LOG_ID]"
+   * 
+   * A project number may be used in place of PROJECT_ID. The project number is
+   * translated to its corresponding PROJECT_ID internally and the `log_name`
+   * field will contain PROJECT_ID in queries and exports.
+   * 
+   * `[LOG_ID]` must be URL-encoded within `log_name`. Example:
+   * `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+   * 
+   * `[LOG_ID]` must be less than 512 characters long and can only include the
+   * following characters: upper and lower case alphanumeric characters,
+   * forward-slash, underscore, hyphen, and period.
+   * 
+   * For backward compatibility, if `log_name` begins with a forward-slash, such
+   * as `/projects/...`, then the log entry is ingested as usual, but the
+   * forward-slash is removed. Listing the log entry will not show the leading
+   * slash and filtering for a log name with a leading slash will never return
+   * any results.
+   */
+  log_name: string;
+  /**
+   * Required. The monitored resource that produced this log entry.
+   * 
+   * Example: a log entry that reports a database error would be associated with
+   * the monitored resource designating the particular database that reported
+   * the error.
+   */
+  resource?: MonitoredResourceAmino;
+  /**
+   * The log entry payload, represented as a protocol buffer. Some Google
+   * Cloud Platform services use this field for their log entry payloads.
+   * 
+   * The following protocol buffer types are supported; user-defined types
+   * are not supported:
+   * 
+   *   "type.googleapis.com/google.cloud.audit.AuditLog"
+   *   "type.googleapis.com/google.appengine.logging.v1.RequestLog"
+   */
+  proto_payload?: AnyAmino;
+  /** The log entry payload, represented as a Unicode string (UTF-8). */
+  text_payload?: string;
+  /**
+   * The log entry payload, represented as a structure that is
+   * expressed as a JSON object.
+   */
+  json_payload?: StructAmino;
+  /**
+   * Optional. The time the event described by the log entry occurred. This time is used
+   * to compute the log entry's age and to enforce the logs retention period.
+   * If this field is omitted in a new log entry, then Logging assigns it the
+   * current time. Timestamps have nanosecond accuracy, but trailing zeros in
+   * the fractional seconds might be omitted when the timestamp is displayed.
+   * 
+   * Incoming log entries must have timestamps that don't exceed the
+   * [logs retention
+   * period](https://cloud.google.com/logging/quotas#logs_retention_periods) in
+   * the past, and that don't exceed 24 hours in the future. Log entries outside
+   * those time boundaries aren't ingested by Logging.
+   */
+  timestamp?: Date;
+  /** Output only. The time the log entry was received by Logging. */
+  receive_timestamp?: Date;
+  /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
+  severity: LogSeverity;
+  /**
+   * Optional. A unique identifier for the log entry. If you provide a value, then
+   * Logging considers other log entries in the same project, with the same
+   * `timestamp`, and with the same `insert_id` to be duplicates which are
+   * removed in a single query result. However, there are no guarantees of
+   * de-duplication in the export of logs.
+   * 
+   * If the `insert_id` is omitted when writing a log entry, the Logging API
+   * assigns its own unique identifier in this field.
+   * 
+   * In queries, the `insert_id` is also used to order log entries that have
+   * the same `log_name` and `timestamp` values.
+   */
+  insert_id: string;
+  /**
+   * Optional. Information about the HTTP request associated with this log entry, if
+   * applicable.
+   */
+  http_request?: HttpRequestAmino;
+  /**
+   * Optional. A map of key, value pairs that provides additional information about the
+   * log entry. The labels can be user-defined or system-defined.
+   * 
+   * User-defined labels are arbitrary key, value pairs that you can use to
+   * classify logs.
+   * 
+   * System-defined labels are defined by GCP services for platform logs.
+   * They have two components - a service namespace component and the
+   * attribute name. For example: `compute.googleapis.com/resource_name`.
+   * 
+   * Cloud Logging truncates label keys that exceed 512 B and label
+   * values that exceed 64 KB upon their associated log entry being
+   * written. The truncation is indicated by an ellipsis at the
+   * end of the character string.
+   */
+  labels: {
+    [key: string]: string;
+  };
+  /**
+   * Optional. Information about an operation associated with the log entry, if
+   * applicable.
+   */
+  operation?: LogEntryOperationAmino;
+  /**
+   * Optional. Resource name of the trace associated with the log entry, if any. If it
+   * contains a relative resource name, the name is assumed to be relative to
+   * `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   */
+  trace: string;
+  /**
+   * Optional. The span ID within the trace associated with the log entry.
+   * 
+   * For Trace spans, this is the same format that the Trace API v2 uses: a
+   * 16-character hexadecimal encoding of an 8-byte array, such as
+   * `000000000000004a`.
+   */
+  span_id: string;
+  /**
+   * Optional. The sampling decision of the trace associated with the log entry.
+   * 
+   * True means that the trace resource name in the `trace` field was sampled
+   * for storage in a trace backend. False means that the trace was not sampled
+   * for storage when this log entry was written, or the sampling decision was
+   * unknown at the time. A non-sampled `trace` value is still useful as a
+   * request correlation identifier. The default is False.
+   */
+  trace_sampled: boolean;
+  /** Optional. Source code location information associated with the log entry, if any. */
+  source_location?: LogEntrySourceLocationAmino;
+  /**
+   * Optional. Information indicating this LogEntry is part of a sequence of multiple log
+   * entries split from a single LogEntry.
+   */
+  split?: LogSplitAmino;
+}
+export interface LogEntryAminoMsg {
+  type: "/google.logging.v2.LogEntry";
+  value: LogEntryAmino;
+}
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
   log_name: string;
@@ -206,6 +374,35 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
+export interface LogEntryOperationProtoMsg {
+  typeUrl: "/google.logging.v2.LogEntryOperation";
+  value: Uint8Array;
+}
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperationAmino {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the same
+   * identifier are assumed to be part of the same operation.
+   */
+  id: string;
+  /**
+   * Optional. An arbitrary producer identifier. The combination of `id` and
+   * `producer` must be globally unique. Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+export interface LogEntryOperationAminoMsg {
+  type: "/google.logging.v2.LogEntryOperation";
+  value: LogEntryOperationAmino;
+}
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -241,6 +438,39 @@ export interface LogEntrySourceLocation {
    */
   function: string;
 }
+export interface LogEntrySourceLocationProtoMsg {
+  typeUrl: "/google.logging.v2.LogEntrySourceLocation";
+  value: Uint8Array;
+}
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocationAmino {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: string;
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+export interface LogEntrySourceLocationAminoMsg {
+  type: "/google.logging.v2.LogEntrySourceLocation";
+  value: LogEntrySourceLocationAmino;
+}
 /**
  * Additional information about the source code location that produced the log
  * entry.
@@ -270,6 +500,35 @@ export interface LogSplit {
   index: number;
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
+}
+export interface LogSplitProtoMsg {
+  typeUrl: "/google.logging.v2.LogSplit";
+  value: Uint8Array;
+}
+/**
+ * Additional information used to correlate multiple log entries. Used when a
+ * single LogEntry would exceed the Google Cloud Logging size limit and is
+ * split across multiple log entries.
+ */
+export interface LogSplitAmino {
+  /**
+   * A globally unique identifier for all log entries in a sequence of split log
+   * entries. All log entries with the same |LogSplit.uid| are assumed to be
+   * part of the same sequence of split log entries.
+   */
+  uid: string;
+  /**
+   * The index of this LogEntry in the sequence of split log entries. Log
+   * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
+   * entries.
+   */
+  index: number;
+  /** The total number of log entries that the original LogEntry was split into. */
+  total_splits: number;
+}
+export interface LogSplitAminoMsg {
+  type: "/google.logging.v2.LogSplit";
+  value: LogSplitAmino;
 }
 /**
  * Additional information used to correlate multiple log entries. Used when a
@@ -352,6 +611,27 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.decode(message.value);
+  },
+  toProto(message: LogEntry_LabelsEntry): Uint8Array {
+    return LogEntry_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseLogEntry(): LogEntry {
@@ -658,6 +938,73 @@ export const LogEntry = {
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     message.split !== undefined && (obj.split = message.split ? LogSplit.toSDK(message.split) : undefined);
     return obj;
+  },
+  fromAmino(object: LogEntryAmino): LogEntry {
+    return {
+      logName: object.log_name,
+      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
+      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
+      textPayload: object?.text_payload,
+      jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
+      timestamp: object.timestamp,
+      receiveTimestamp: object.receive_timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      insertId: object.insert_id,
+      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
+      trace: object.trace,
+      spanId: object.span_id,
+      traceSampled: object.trace_sampled,
+      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined,
+      split: object?.split ? LogSplit.fromAmino(object.split) : undefined
+    };
+  },
+  toAmino(message: LogEntry): LogEntryAmino {
+    const obj: any = {};
+    obj.log_name = message.logName;
+    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.text_payload = message.textPayload;
+    obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
+    obj.timestamp = message.timestamp;
+    obj.receive_timestamp = message.receiveTimestamp;
+    obj.severity = message.severity;
+    obj.insert_id = message.insertId;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
+    obj.trace = message.trace;
+    obj.span_id = message.spanId;
+    obj.trace_sampled = message.traceSampled;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
+    obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
+    return LogEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
+    return LogEntry.decode(message.value);
+  },
+  toProto(message: LogEntry): Uint8Array {
+    return LogEntry.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntry",
+      value: LogEntry.encode(message).finish()
+    };
   }
 };
 function createBaseLogEntryOperation(): LogEntryOperation {
@@ -757,6 +1104,37 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
+  },
+  fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
+    return {
+      id: object.id,
+      producer: object.producer,
+      first: object.first,
+      last: object.last
+    };
+  },
+  toAmino(message: LogEntryOperation): LogEntryOperationAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
+    return LogEntryOperation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
+    return LogEntryOperation.decode(message.value);
+  },
+  toProto(message: LogEntryOperation): Uint8Array {
+    return LogEntryOperation.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntryOperation): LogEntryOperationProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntryOperation",
+      value: LogEntryOperation.encode(message).finish()
+    };
   }
 };
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
@@ -843,6 +1221,35 @@ export const LogEntrySourceLocation = {
     obj.line = message.line;
     obj.function = message.function;
     return obj;
+  },
+  fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
+    return {
+      file: object.file,
+      line: BigInt(object.line),
+      function: object.function
+    };
+  },
+  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
+    const obj: any = {};
+    obj.file = message.file;
+    obj.line = message.line ? message.line.toString() : undefined;
+    obj.function = message.function;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.decode(message.value);
+  },
+  toProto(message: LogEntrySourceLocation): Uint8Array {
+    return LogEntrySourceLocation.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntrySourceLocation): LogEntrySourceLocationProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntrySourceLocation",
+      value: LogEntrySourceLocation.encode(message).finish()
+    };
   }
 };
 function createBaseLogSplit(): LogSplit {
@@ -929,5 +1336,34 @@ export const LogSplit = {
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
+  },
+  fromAmino(object: LogSplitAmino): LogSplit {
+    return {
+      uid: object.uid,
+      index: object.index,
+      totalSplits: object.total_splits
+    };
+  },
+  toAmino(message: LogSplit): LogSplitAmino {
+    const obj: any = {};
+    obj.uid = message.uid;
+    obj.index = message.index;
+    obj.total_splits = message.totalSplits;
+    return obj;
+  },
+  fromAminoMsg(object: LogSplitAminoMsg): LogSplit {
+    return LogSplit.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogSplitProtoMsg): LogSplit {
+    return LogSplit.decode(message.value);
+  },
+  toProto(message: LogSplit): Uint8Array {
+    return LogSplit.encode(message).finish();
+  },
+  toProtoMsg(message: LogSplit): LogSplitProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogSplit",
+      value: LogSplit.encode(message).finish()
+    };
   }
 };

@@ -1,5 +1,5 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Plan, PlanAmino, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -12,6 +12,24 @@ export interface IdentifiedClientState {
   clientId: string;
   /** client state */
   clientState: Any;
+}
+export interface IdentifiedClientStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
+  value: Uint8Array;
+}
+/**
+ * IdentifiedClientState defines a client state with an additional client
+ * identifier field.
+ */
+export interface IdentifiedClientStateAmino {
+  /** client identifier */
+  client_id: string;
+  /** client state */
+  client_state?: AnyAmino;
+}
+export interface IdentifiedClientStateAminoMsg {
+  type: "cosmos-sdk/IdentifiedClientState";
+  value: IdentifiedClientStateAmino;
 }
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -31,6 +49,24 @@ export interface ConsensusStateWithHeight {
   /** consensus state */
   consensusState: Any;
 }
+export interface ConsensusStateWithHeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
+  value: Uint8Array;
+}
+/**
+ * ConsensusStateWithHeight defines a consensus state with an additional height
+ * field.
+ */
+export interface ConsensusStateWithHeightAmino {
+  /** consensus state height */
+  height?: HeightAmino;
+  /** consensus state */
+  consensus_state?: AnyAmino;
+}
+export interface ConsensusStateWithHeightAminoMsg {
+  type: "cosmos-sdk/ConsensusStateWithHeight";
+  value: ConsensusStateWithHeightAmino;
+}
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
  * field.
@@ -48,6 +84,24 @@ export interface ClientConsensusStates {
   clientId: string;
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+export interface ClientConsensusStatesProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientConsensusStates";
+  value: Uint8Array;
+}
+/**
+ * ClientConsensusStates defines all the stored consensus states for a given
+ * client.
+ */
+export interface ClientConsensusStatesAmino {
+  /** client identifier */
+  client_id: string;
+  /** consensus states and their heights associated with the client */
+  consensus_states: ConsensusStateWithHeightAmino[];
+}
+export interface ClientConsensusStatesAminoMsg {
+  type: "cosmos-sdk/ClientConsensusStates";
+  value: ClientConsensusStatesAmino;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -75,6 +129,33 @@ export interface ClientUpdateProposal {
    * client
    */
   substituteClientId: string;
+}
+export interface ClientUpdateProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientUpdateProposal";
+  value: Uint8Array;
+}
+/**
+ * ClientUpdateProposal is a governance proposal. If it passes, the substitute
+ * client's latest consensus state is copied over to the subject client. The proposal
+ * handler may fail if the subject and the substitute do not match in client and
+ * chain parameters (with exception to latest height, frozen height, and chain-id).
+ */
+export interface ClientUpdateProposalAmino {
+  /** the title of the update proposal */
+  title: string;
+  /** the description of the proposal */
+  description: string;
+  /** the client identifier for the client to be updated if the proposal passes */
+  subject_client_id: string;
+  /**
+   * the substitute client identifier for the client standing in for the subject
+   * client
+   */
+  substitute_client_id: string;
+}
+export interface ClientUpdateProposalAminoMsg {
+  type: "cosmos-sdk/ClientUpdateProposal";
+  value: ClientUpdateProposalAmino;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -106,6 +187,32 @@ export interface UpgradeProposal {
    */
   upgradedClientState: Any;
 }
+export interface UpgradeProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.UpgradeProposal";
+  value: Uint8Array;
+}
+/**
+ * UpgradeProposal is a gov Content type for initiating an IBC breaking
+ * upgrade.
+ */
+export interface UpgradeProposalAmino {
+  title: string;
+  description: string;
+  plan?: PlanAmino;
+  /**
+   * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
+   * This will make the chain commit to the correct upgraded (self) client state
+   * before the upgrade occurs, so that connecting chains can verify that the
+   * new upgraded client is valid by verifying a proof on the previous version
+   * of the chain. This will allow IBC connections to persist smoothly across
+   * planned chain upgrades
+   */
+  upgraded_client_state?: AnyAmino;
+}
+export interface UpgradeProposalAminoMsg {
+  type: "cosmos-sdk/UpgradeProposal";
+  value: UpgradeProposalAmino;
+}
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
@@ -134,6 +241,32 @@ export interface Height {
   /** the height within the given revision */
   revisionHeight: bigint;
 }
+export interface HeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Height";
+  value: Uint8Array;
+}
+/**
+ * Height is a monotonically increasing data type
+ * that can be compared against another Height for the purposes of updating and
+ * freezing clients
+ * 
+ * Normally the RevisionHeight is incremented at each height while keeping
+ * RevisionNumber the same. However some consensus algorithms may choose to
+ * reset the height in certain conditions e.g. hard forks, state-machine
+ * breaking changes In these cases, the RevisionNumber is incremented so that
+ * height continues to be monitonically increasing even as the RevisionHeight
+ * gets reset
+ */
+export interface HeightAmino {
+  /** the revision that the client is currently on */
+  revision_number: string;
+  /** the height within the given revision */
+  revision_height: string;
+}
+export interface HeightAminoMsg {
+  type: "cosmos-sdk/Height";
+  value: HeightAmino;
+}
 /**
  * Height is a monotonically increasing data type
  * that can be compared against another Height for the purposes of updating and
@@ -154,6 +287,19 @@ export interface HeightSDKType {
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Params";
+  value: Uint8Array;
+}
+/** Params defines the set of IBC light client parameters. */
+export interface ParamsAmino {
+  /** allowed_clients defines the list of allowed client state types. */
+  allowed_clients: string[];
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {
@@ -230,6 +376,39 @@ export const IdentifiedClientState = {
     obj.client_id = message.clientId;
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     return obj;
+  },
+  fromAmino(object: IdentifiedClientStateAmino): IdentifiedClientState {
+    return {
+      clientId: object.client_id,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
+    };
+  },
+  toAmino(message: IdentifiedClientState): IdentifiedClientStateAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IdentifiedClientStateAminoMsg): IdentifiedClientState {
+    return IdentifiedClientState.fromAmino(object.value);
+  },
+  toAminoMsg(message: IdentifiedClientState): IdentifiedClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/IdentifiedClientState",
+      value: IdentifiedClientState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: IdentifiedClientStateProtoMsg): IdentifiedClientState {
+    return IdentifiedClientState.decode(message.value);
+  },
+  toProto(message: IdentifiedClientState): Uint8Array {
+    return IdentifiedClientState.encode(message).finish();
+  },
+  toProtoMsg(message: IdentifiedClientState): IdentifiedClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.IdentifiedClientState",
+      value: IdentifiedClientState.encode(message).finish()
+    };
   }
 };
 function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
@@ -303,6 +482,39 @@ export const ConsensusStateWithHeight = {
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
     return obj;
+  },
+  fromAmino(object: ConsensusStateWithHeightAmino): ConsensusStateWithHeight {
+    return {
+      height: object?.height ? Height.fromAmino(object.height) : undefined,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
+    };
+  },
+  toAmino(message: ConsensusStateWithHeight): ConsensusStateWithHeightAmino {
+    const obj: any = {};
+    obj.height = message.height ? Height.toAmino(message.height) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ConsensusStateWithHeightAminoMsg): ConsensusStateWithHeight {
+    return ConsensusStateWithHeight.fromAmino(object.value);
+  },
+  toAminoMsg(message: ConsensusStateWithHeight): ConsensusStateWithHeightAminoMsg {
+    return {
+      type: "cosmos-sdk/ConsensusStateWithHeight",
+      value: ConsensusStateWithHeight.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ConsensusStateWithHeightProtoMsg): ConsensusStateWithHeight {
+    return ConsensusStateWithHeight.decode(message.value);
+  },
+  toProto(message: ConsensusStateWithHeight): Uint8Array {
+    return ConsensusStateWithHeight.encode(message).finish();
+  },
+  toProtoMsg(message: ConsensusStateWithHeight): ConsensusStateWithHeightProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight",
+      value: ConsensusStateWithHeight.encode(message).finish()
+    };
   }
 };
 function createBaseClientConsensusStates(): ClientConsensusStates {
@@ -384,6 +596,43 @@ export const ClientConsensusStates = {
       obj.consensus_states = [];
     }
     return obj;
+  },
+  fromAmino(object: ClientConsensusStatesAmino): ClientConsensusStates {
+    return {
+      clientId: object.client_id,
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ClientConsensusStates): ClientConsensusStatesAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ClientConsensusStatesAminoMsg): ClientConsensusStates {
+    return ClientConsensusStates.fromAmino(object.value);
+  },
+  toAminoMsg(message: ClientConsensusStates): ClientConsensusStatesAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientConsensusStates",
+      value: ClientConsensusStates.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ClientConsensusStatesProtoMsg): ClientConsensusStates {
+    return ClientConsensusStates.decode(message.value);
+  },
+  toProto(message: ClientConsensusStates): Uint8Array {
+    return ClientConsensusStates.encode(message).finish();
+  },
+  toProtoMsg(message: ClientConsensusStates): ClientConsensusStatesProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.ClientConsensusStates",
+      value: ClientConsensusStates.encode(message).finish()
+    };
   }
 };
 function createBaseClientUpdateProposal(): ClientUpdateProposal {
@@ -483,6 +732,43 @@ export const ClientUpdateProposal = {
     obj.subject_client_id = message.subjectClientId;
     obj.substitute_client_id = message.substituteClientId;
     return obj;
+  },
+  fromAmino(object: ClientUpdateProposalAmino): ClientUpdateProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      subjectClientId: object.subject_client_id,
+      substituteClientId: object.substitute_client_id
+    };
+  },
+  toAmino(message: ClientUpdateProposal): ClientUpdateProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.subject_client_id = message.subjectClientId;
+    obj.substitute_client_id = message.substituteClientId;
+    return obj;
+  },
+  fromAminoMsg(object: ClientUpdateProposalAminoMsg): ClientUpdateProposal {
+    return ClientUpdateProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: ClientUpdateProposal): ClientUpdateProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientUpdateProposal",
+      value: ClientUpdateProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ClientUpdateProposalProtoMsg): ClientUpdateProposal {
+    return ClientUpdateProposal.decode(message.value);
+  },
+  toProto(message: ClientUpdateProposal): Uint8Array {
+    return ClientUpdateProposal.encode(message).finish();
+  },
+  toProtoMsg(message: ClientUpdateProposal): ClientUpdateProposalProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
+      value: ClientUpdateProposal.encode(message).finish()
+    };
   }
 };
 function createBaseUpgradeProposal(): UpgradeProposal {
@@ -582,6 +868,43 @@ export const UpgradeProposal = {
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
     return obj;
+  },
+  fromAmino(object: UpgradeProposalAmino): UpgradeProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined,
+      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
+    };
+  },
+  toAmino(message: UpgradeProposal): UpgradeProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
+    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpgradeProposalAminoMsg): UpgradeProposal {
+    return UpgradeProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UpgradeProposal): UpgradeProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/UpgradeProposal",
+      value: UpgradeProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UpgradeProposalProtoMsg): UpgradeProposal {
+    return UpgradeProposal.decode(message.value);
+  },
+  toProto(message: UpgradeProposal): Uint8Array {
+    return UpgradeProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UpgradeProposal): UpgradeProposalProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.UpgradeProposal",
+      value: UpgradeProposal.encode(message).finish()
+    };
   }
 };
 function createBaseHeight(): Height {
@@ -655,6 +978,39 @@ export const Height = {
     obj.revision_number = message.revisionNumber;
     obj.revision_height = message.revisionHeight;
     return obj;
+  },
+  fromAmino(object: HeightAmino): Height {
+    return {
+      revisionNumber: BigInt(object.revision_number || "0"),
+      revisionHeight: BigInt(object.revision_height || "0")
+    };
+  },
+  toAmino(message: Height): HeightAmino {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: HeightAminoMsg): Height {
+    return Height.fromAmino(object.value);
+  },
+  toAminoMsg(message: Height): HeightAminoMsg {
+    return {
+      type: "cosmos-sdk/Height",
+      value: Height.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: HeightProtoMsg): Height {
+    return Height.decode(message.value);
+  },
+  toProto(message: Height): Uint8Array {
+    return Height.encode(message).finish();
+  },
+  toProtoMsg(message: Height): HeightProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.Height",
+      value: Height.encode(message).finish()
+    };
   }
 };
 function createBaseParams(): Params {
@@ -723,5 +1079,40 @@ export const Params = {
       obj.allowed_clients = [];
     }
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.allowedClients) {
+      obj.allowed_clients = message.allowedClients.map(e => e);
+    } else {
+      obj.allowed_clients = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

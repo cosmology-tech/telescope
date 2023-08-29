@@ -21,6 +21,34 @@ export interface MsgIBCSend {
    */
   data: Uint8Array;
 }
+export interface MsgIBCSendProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend";
+  value: Uint8Array;
+}
+/** MsgIBCSend */
+export interface MsgIBCSendAmino {
+  /** the channel by which the packet will be sent */
+  channel: string;
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height: string;
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: string;
+  /**
+   * Data is the payload to transfer. We must not make assumption what format or
+   * content is in here.
+   */
+  data: Uint8Array;
+}
+export interface MsgIBCSendAminoMsg {
+  type: "wasm/MsgIBCSend";
+  value: MsgIBCSendAmino;
+}
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
   channel: string;
@@ -31,6 +59,18 @@ export interface MsgIBCSendSDKType {
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannel {
   channel: string;
+}
+export interface MsgIBCCloseChannelProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel";
+  value: Uint8Array;
+}
+/** MsgIBCCloseChannel port and channel need to be owned by the contract */
+export interface MsgIBCCloseChannelAmino {
+  channel: string;
+}
+export interface MsgIBCCloseChannelAminoMsg {
+  type: "wasm/MsgIBCCloseChannel";
+  value: MsgIBCCloseChannelAmino;
 }
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelSDKType {
@@ -133,6 +173,43 @@ export const MsgIBCSend = {
     obj.timeout_timestamp = message.timeoutTimestamp;
     obj.data = message.data;
     return obj;
+  },
+  fromAmino(object: MsgIBCSendAmino): MsgIBCSend {
+    return {
+      channel: object.channel,
+      timeoutHeight: BigInt(object.timeout_height),
+      timeoutTimestamp: BigInt(object.timeout_timestamp),
+      data: object.data
+    };
+  },
+  toAmino(message: MsgIBCSend): MsgIBCSendAmino {
+    const obj: any = {};
+    obj.channel = message.channel;
+    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {
+    return MsgIBCSend.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgIBCSend): MsgIBCSendAminoMsg {
+    return {
+      type: "wasm/MsgIBCSend",
+      value: MsgIBCSend.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgIBCSendProtoMsg): MsgIBCSend {
+    return MsgIBCSend.decode(message.value);
+  },
+  toProto(message: MsgIBCSend): Uint8Array {
+    return MsgIBCSend.encode(message).finish();
+  },
+  toProtoMsg(message: MsgIBCSend): MsgIBCSendProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend",
+      value: MsgIBCSend.encode(message).finish()
+    };
   }
 };
 function createBaseMsgIBCCloseChannel(): MsgIBCCloseChannel {
@@ -193,5 +270,36 @@ export const MsgIBCCloseChannel = {
     const obj: any = {};
     obj.channel = message.channel;
     return obj;
+  },
+  fromAmino(object: MsgIBCCloseChannelAmino): MsgIBCCloseChannel {
+    return {
+      channel: object.channel
+    };
+  },
+  toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelAmino {
+    const obj: any = {};
+    obj.channel = message.channel;
+    return obj;
+  },
+  fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelAminoMsg {
+    return {
+      type: "wasm/MsgIBCCloseChannel",
+      value: MsgIBCCloseChannel.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.decode(message.value);
+  },
+  toProto(message: MsgIBCCloseChannel): Uint8Array {
+    return MsgIBCCloseChannel.encode(message).finish();
+  },
+  toProtoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel",
+      value: MsgIBCCloseChannel.encode(message).finish()
+    };
   }
 };

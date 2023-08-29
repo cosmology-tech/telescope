@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -6,6 +6,19 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the bank module. */
+export interface ParamsAmino {
+  send_enabled: SendEnabledAmino[];
+  default_send_enabled: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
@@ -20,6 +33,22 @@ export interface SendEnabled {
   denom: string;
   enabled: boolean;
 }
+export interface SendEnabledProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
+  value: Uint8Array;
+}
+/**
+ * SendEnabled maps coin denom to a send_enabled status (whether a denom is
+ * sendable).
+ */
+export interface SendEnabledAmino {
+  denom: string;
+  enabled: boolean;
+}
+export interface SendEnabledAminoMsg {
+  type: "cosmos-sdk/SendEnabled";
+  value: SendEnabledAmino;
+}
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
@@ -33,6 +62,19 @@ export interface Input {
   address: string;
   coins: Coin[];
 }
+export interface InputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Input";
+  value: Uint8Array;
+}
+/** Input models transaction input. */
+export interface InputAmino {
+  address: string;
+  coins: CoinAmino[];
+}
+export interface InputAminoMsg {
+  type: "cosmos-sdk/Input";
+  value: InputAmino;
+}
 /** Input models transaction input. */
 export interface InputSDKType {
   address: string;
@@ -42,6 +84,19 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+export interface OutputProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Output";
+  value: Uint8Array;
+}
+/** Output models transaction outputs. */
+export interface OutputAmino {
+  address: string;
+  coins: CoinAmino[];
+}
+export interface OutputAminoMsg {
+  type: "cosmos-sdk/Output";
+  value: OutputAmino;
 }
 /** Output models transaction outputs. */
 export interface OutputSDKType {
@@ -56,6 +111,23 @@ export interface OutputSDKType {
 /** @deprecated */
 export interface Supply {
   total: Coin[];
+}
+export interface SupplyProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Supply";
+  value: Uint8Array;
+}
+/**
+ * Supply represents a struct that passively keeps track of the total supply
+ * amounts in the network.
+ * This message is deprecated now that supply is indexed by denom.
+ */
+/** @deprecated */
+export interface SupplyAmino {
+  total: CoinAmino[];
+}
+export interface SupplyAminoMsg {
+  type: "cosmos-sdk/Supply";
+  value: SupplyAmino;
 }
 /**
  * Supply represents a struct that passively keeps track of the total supply
@@ -83,6 +155,32 @@ export interface DenomUnit {
   exponent: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
+  value: Uint8Array;
+}
+/**
+ * DenomUnit represents a struct that describes a given
+ * denomination unit of the basic token.
+ */
+export interface DenomUnitAmino {
+  /** denom represents the string name of the given denom unit (e.g uatom). */
+  denom: string;
+  /**
+   * exponent represents power of 10 exponent that one must
+   * raise the base_denom to in order to equal the given DenomUnit's denom
+   * 1 denom = 10^exponent base_denom
+   * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
+   * exponent = 6, thus: 1 atom = 10^6 uatom).
+   */
+  exponent: number;
+  /** aliases is a list of string aliases for the given denom */
+  aliases: string[];
+}
+export interface DenomUnitAminoMsg {
+  type: "cosmos-sdk/DenomUnit";
+  value: DenomUnitAmino;
 }
 /**
  * DenomUnit represents a struct that describes a given
@@ -134,6 +232,56 @@ export interface Metadata {
    * Since: cosmos-sdk 0.46
    */
   uriHash: string;
+}
+export interface MetadataProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata";
+  value: Uint8Array;
+}
+/**
+ * Metadata represents a struct that describes
+ * a basic token.
+ */
+export interface MetadataAmino {
+  description: string;
+  /** denom_units represents the list of DenomUnit's for a given coin */
+  denom_units: DenomUnitAmino[];
+  /** base represents the base denom (should be the DenomUnit with exponent = 0). */
+  base: string;
+  /**
+   * display indicates the suggested denom that should be
+   * displayed in clients.
+   */
+  display: string;
+  /**
+   * name defines the name of the token (eg: Cosmos Atom)
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  name: string;
+  /**
+   * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
+   * be the same as the display.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  symbol: string;
+  /**
+   * URI to a document (on or off-chain) that contains additional information. Optional.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  uri: string;
+  /**
+   * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
+   * the document didn't change. Optional.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  uri_hash: string;
+}
+export interface MetadataAminoMsg {
+  type: "cosmos-sdk/Metadata";
+  value: MetadataAmino;
 }
 /**
  * Metadata represents a struct that describes
@@ -228,6 +376,43 @@ export const Params = {
     }
     obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
+      defaultSendEnabled: object.default_send_enabled
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.sendEnabled) {
+      obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e) : undefined);
+    } else {
+      obj.send_enabled = [];
+    }
+    obj.default_send_enabled = message.defaultSendEnabled;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };
 function createBaseSendEnabled(): SendEnabled {
@@ -301,6 +486,39 @@ export const SendEnabled = {
     obj.denom = message.denom;
     obj.enabled = message.enabled;
     return obj;
+  },
+  fromAmino(object: SendEnabledAmino): SendEnabled {
+    return {
+      denom: object.denom,
+      enabled: object.enabled
+    };
+  },
+  toAmino(message: SendEnabled): SendEnabledAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    return obj;
+  },
+  fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
+    return SendEnabled.fromAmino(object.value);
+  },
+  toAminoMsg(message: SendEnabled): SendEnabledAminoMsg {
+    return {
+      type: "cosmos-sdk/SendEnabled",
+      value: SendEnabled.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SendEnabledProtoMsg): SendEnabled {
+    return SendEnabled.decode(message.value);
+  },
+  toProto(message: SendEnabled): Uint8Array {
+    return SendEnabled.encode(message).finish();
+  },
+  toProtoMsg(message: SendEnabled): SendEnabledProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.SendEnabled",
+      value: SendEnabled.encode(message).finish()
+    };
   }
 };
 function createBaseInput(): Input {
@@ -382,6 +600,43 @@ export const Input = {
       obj.coins = [];
     }
     return obj;
+  },
+  fromAmino(object: InputAmino): Input {
+    return {
+      address: object.address,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Input): InputAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: InputAminoMsg): Input {
+    return Input.fromAmino(object.value);
+  },
+  toAminoMsg(message: Input): InputAminoMsg {
+    return {
+      type: "cosmos-sdk/Input",
+      value: Input.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: InputProtoMsg): Input {
+    return Input.decode(message.value);
+  },
+  toProto(message: Input): Uint8Array {
+    return Input.encode(message).finish();
+  },
+  toProtoMsg(message: Input): InputProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Input",
+      value: Input.encode(message).finish()
+    };
   }
 };
 function createBaseOutput(): Output {
@@ -463,6 +718,43 @@ export const Output = {
       obj.coins = [];
     }
     return obj;
+  },
+  fromAmino(object: OutputAmino): Output {
+    return {
+      address: object.address,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Output): OutputAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OutputAminoMsg): Output {
+    return Output.fromAmino(object.value);
+  },
+  toAminoMsg(message: Output): OutputAminoMsg {
+    return {
+      type: "cosmos-sdk/Output",
+      value: Output.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OutputProtoMsg): Output {
+    return Output.decode(message.value);
+  },
+  toProto(message: Output): Uint8Array {
+    return Output.encode(message).finish();
+  },
+  toProtoMsg(message: Output): OutputProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Output",
+      value: Output.encode(message).finish()
+    };
   }
 };
 function createBaseSupply(): Supply {
@@ -531,6 +823,41 @@ export const Supply = {
       obj.total = [];
     }
     return obj;
+  },
+  fromAmino(object: SupplyAmino): Supply {
+    return {
+      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Supply): SupplyAmino {
+    const obj: any = {};
+    if (message.total) {
+      obj.total = message.total.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.total = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SupplyAminoMsg): Supply {
+    return Supply.fromAmino(object.value);
+  },
+  toAminoMsg(message: Supply): SupplyAminoMsg {
+    return {
+      type: "cosmos-sdk/Supply",
+      value: Supply.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SupplyProtoMsg): Supply {
+    return Supply.decode(message.value);
+  },
+  toProto(message: Supply): Uint8Array {
+    return Supply.encode(message).finish();
+  },
+  toProtoMsg(message: Supply): SupplyProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Supply",
+      value: Supply.encode(message).finish()
+    };
   }
 };
 function createBaseDenomUnit(): DenomUnit {
@@ -625,6 +952,45 @@ export const DenomUnit = {
       obj.aliases = [];
     }
     return obj;
+  },
+  fromAmino(object: DenomUnitAmino): DenomUnit {
+    return {
+      denom: object.denom,
+      exponent: object.exponent,
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: DenomUnit): DenomUnitAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.exponent = message.exponent;
+    if (message.aliases) {
+      obj.aliases = message.aliases.map(e => e);
+    } else {
+      obj.aliases = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: DenomUnitAminoMsg): DenomUnit {
+    return DenomUnit.fromAmino(object.value);
+  },
+  toAminoMsg(message: DenomUnit): DenomUnitAminoMsg {
+    return {
+      type: "cosmos-sdk/DenomUnit",
+      value: DenomUnit.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DenomUnitProtoMsg): DenomUnit {
+    return DenomUnit.decode(message.value);
+  },
+  toProto(message: DenomUnit): Uint8Array {
+    return DenomUnit.encode(message).finish();
+  },
+  toProtoMsg(message: DenomUnit): DenomUnitProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.DenomUnit",
+      value: DenomUnit.encode(message).finish()
+    };
   }
 };
 function createBaseMetadata(): Metadata {
@@ -784,5 +1150,54 @@ export const Metadata = {
     obj.uri = message.uri;
     obj.uri_hash = message.uriHash;
     return obj;
+  },
+  fromAmino(object: MetadataAmino): Metadata {
+    return {
+      description: object.description,
+      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
+      base: object.base,
+      display: object.display,
+      name: object.name,
+      symbol: object.symbol,
+      uri: object.uri,
+      uriHash: object.uri_hash
+    };
+  },
+  toAmino(message: Metadata): MetadataAmino {
+    const obj: any = {};
+    obj.description = message.description;
+    if (message.denomUnits) {
+      obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
+    } else {
+      obj.denom_units = [];
+    }
+    obj.base = message.base;
+    obj.display = message.display;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    return obj;
+  },
+  fromAminoMsg(object: MetadataAminoMsg): Metadata {
+    return Metadata.fromAmino(object.value);
+  },
+  toAminoMsg(message: Metadata): MetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/Metadata",
+      value: Metadata.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MetadataProtoMsg): Metadata {
+    return Metadata.decode(message.value);
+  },
+  toProto(message: Metadata): Uint8Array {
+    return Metadata.encode(message).finish();
+  },
+  toProtoMsg(message: Metadata): MetadataProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Metadata",
+      value: Metadata.encode(message).finish()
+    };
   }
 };

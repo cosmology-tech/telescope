@@ -1,6 +1,6 @@
-import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightSDKType } from "../../client/v1/client";
+import { Counterparty, CounterpartyAmino, CounterpartySDKType, Version, VersionAmino, VersionSDKType } from "./connection";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
@@ -14,6 +14,25 @@ export interface MsgConnectionOpenInit {
   version: Version;
   delayPeriod: bigint;
   signer: string;
+}
+export interface MsgConnectionOpenInitProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
+ * initialize a connection with Chain B.
+ */
+export interface MsgConnectionOpenInitAmino {
+  client_id: string;
+  counterparty?: CounterpartyAmino;
+  version?: VersionAmino;
+  delay_period: string;
+  signer: string;
+}
+export interface MsgConnectionOpenInitAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenInit";
+  value: MsgConnectionOpenInitAmino;
 }
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -31,6 +50,19 @@ export interface MsgConnectionOpenInitSDKType {
  * type.
  */
 export interface MsgConnectionOpenInitResponse {}
+export interface MsgConnectionOpenInitResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
+ * type.
+ */
+export interface MsgConnectionOpenInitResponseAmino {}
+export interface MsgConnectionOpenInitResponseAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenInitResponse";
+  value: MsgConnectionOpenInitResponseAmino;
+}
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
  * type.
@@ -64,6 +96,42 @@ export interface MsgConnectionOpenTry {
   consensusHeight: Height;
   signer: string;
 }
+export interface MsgConnectionOpenTryProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
+ * connection on Chain B.
+ */
+export interface MsgConnectionOpenTryAmino {
+  client_id: string;
+  /**
+   * in the case of crossing hello's, when both chains call OpenInit, we need
+   * the connection identifier of the previous connection in state INIT
+   */
+  previous_connection_id: string;
+  client_state?: AnyAmino;
+  counterparty?: CounterpartyAmino;
+  delay_period: string;
+  counterparty_versions: VersionAmino[];
+  proof_height?: HeightAmino;
+  /**
+   * proof of the initialization the connection on Chain A: `UNITIALIZED ->
+   * INIT`
+   */
+  proof_init: Uint8Array;
+  /** proof of client state included in message */
+  proof_client: Uint8Array;
+  /** proof of client consensus state */
+  proof_consensus: Uint8Array;
+  consensus_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgConnectionOpenTryAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenTry";
+  value: MsgConnectionOpenTryAmino;
+}
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
  * connection on Chain B.
@@ -84,6 +152,16 @@ export interface MsgConnectionOpenTrySDKType {
 }
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponse {}
+export interface MsgConnectionOpenTryResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse";
+  value: Uint8Array;
+}
+/** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
+export interface MsgConnectionOpenTryResponseAmino {}
+export interface MsgConnectionOpenTryResponseAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenTryResponse";
+  value: MsgConnectionOpenTryResponseAmino;
+}
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseSDKType {}
 /**
@@ -108,6 +186,36 @@ export interface MsgConnectionOpenAck {
   consensusHeight: Height;
   signer: string;
 }
+export interface MsgConnectionOpenAckProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
+ * acknowledge the change of connection state to TRYOPEN on Chain B.
+ */
+export interface MsgConnectionOpenAckAmino {
+  connection_id: string;
+  counterparty_connection_id: string;
+  version?: VersionAmino;
+  client_state?: AnyAmino;
+  proof_height?: HeightAmino;
+  /**
+   * proof of the initialization the connection on Chain B: `UNITIALIZED ->
+   * TRYOPEN`
+   */
+  proof_try: Uint8Array;
+  /** proof of client state included in message */
+  proof_client: Uint8Array;
+  /** proof of client consensus state */
+  proof_consensus: Uint8Array;
+  consensus_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgConnectionOpenAckAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenAck";
+  value: MsgConnectionOpenAckAmino;
+}
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
  * acknowledge the change of connection state to TRYOPEN on Chain B.
@@ -126,6 +234,16 @@ export interface MsgConnectionOpenAckSDKType {
 }
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponse {}
+export interface MsgConnectionOpenAckResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse";
+  value: Uint8Array;
+}
+/** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
+export interface MsgConnectionOpenAckResponseAmino {}
+export interface MsgConnectionOpenAckResponseAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenAckResponse";
+  value: MsgConnectionOpenAckResponseAmino;
+}
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseSDKType {}
 /**
@@ -138,6 +256,25 @@ export interface MsgConnectionOpenConfirm {
   proofAck: Uint8Array;
   proofHeight: Height;
   signer: string;
+}
+export interface MsgConnectionOpenConfirmProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
+ * acknowledge the change of connection state to OPEN on Chain A.
+ */
+export interface MsgConnectionOpenConfirmAmino {
+  connection_id: string;
+  /** proof for the change of the connection state on Chain A: `INIT -> OPEN` */
+  proof_ack: Uint8Array;
+  proof_height?: HeightAmino;
+  signer: string;
+}
+export interface MsgConnectionOpenConfirmAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenConfirm";
+  value: MsgConnectionOpenConfirmAmino;
 }
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -154,6 +291,19 @@ export interface MsgConnectionOpenConfirmSDKType {
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponse {}
+export interface MsgConnectionOpenConfirmResponseProtoMsg {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
+ * response type.
+ */
+export interface MsgConnectionOpenConfirmResponseAmino {}
+export interface MsgConnectionOpenConfirmResponseAminoMsg {
+  type: "cosmos-sdk/MsgConnectionOpenConfirmResponse";
+  value: MsgConnectionOpenConfirmResponseAmino;
+}
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
  * response type.
@@ -269,6 +419,45 @@ export const MsgConnectionOpenInit = {
     obj.delay_period = message.delayPeriod;
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgConnectionOpenInitAmino): MsgConnectionOpenInit {
+    return {
+      clientId: object.client_id,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      version: object?.version ? Version.fromAmino(object.version) : undefined,
+      delayPeriod: BigInt(object.delay_period),
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgConnectionOpenInit): MsgConnectionOpenInitAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.version = message.version ? Version.toAmino(message.version) : undefined;
+    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenInitAminoMsg): MsgConnectionOpenInit {
+    return MsgConnectionOpenInit.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenInit): MsgConnectionOpenInitAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenInit",
+      value: MsgConnectionOpenInit.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenInitProtoMsg): MsgConnectionOpenInit {
+    return MsgConnectionOpenInit.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenInit): Uint8Array {
+    return MsgConnectionOpenInit.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenInit): MsgConnectionOpenInitProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+      value: MsgConnectionOpenInit.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenInitResponse(): MsgConnectionOpenInitResponse {
@@ -312,6 +501,34 @@ export const MsgConnectionOpenInitResponse = {
   toSDK(_: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgConnectionOpenInitResponseAmino): MsgConnectionOpenInitResponse {
+    return {};
+  },
+  toAmino(_: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenInitResponseAminoMsg): MsgConnectionOpenInitResponse {
+    return MsgConnectionOpenInitResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenInitResponse",
+      value: MsgConnectionOpenInitResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenInitResponseProtoMsg): MsgConnectionOpenInitResponse {
+    return MsgConnectionOpenInitResponse.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenInitResponse): Uint8Array {
+    return MsgConnectionOpenInitResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse",
+      value: MsgConnectionOpenInitResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
@@ -523,6 +740,63 @@ export const MsgConnectionOpenTry = {
     message.consensusHeight !== undefined && (obj.consensus_height = message.consensusHeight ? Height.toSDK(message.consensusHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgConnectionOpenTryAmino): MsgConnectionOpenTry {
+    return {
+      clientId: object.client_id,
+      previousConnectionId: object.previous_connection_id,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      delayPeriod: BigInt(object.delay_period),
+      counterpartyVersions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromAmino(e)) : [],
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofInit: object.proof_init,
+      proofClient: object.proof_client,
+      proofConsensus: object.proof_consensus,
+      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgConnectionOpenTry): MsgConnectionOpenTryAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.previous_connection_id = message.previousConnectionId;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
+    if (message.counterpartyVersions) {
+      obj.counterparty_versions = message.counterpartyVersions.map(e => e ? Version.toAmino(e) : undefined);
+    } else {
+      obj.counterparty_versions = [];
+    }
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_init = message.proofInit;
+    obj.proof_client = message.proofClient;
+    obj.proof_consensus = message.proofConsensus;
+    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenTryAminoMsg): MsgConnectionOpenTry {
+    return MsgConnectionOpenTry.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenTry): MsgConnectionOpenTryAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenTry",
+      value: MsgConnectionOpenTry.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenTryProtoMsg): MsgConnectionOpenTry {
+    return MsgConnectionOpenTry.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenTry): Uint8Array {
+    return MsgConnectionOpenTry.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenTry): MsgConnectionOpenTryProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+      value: MsgConnectionOpenTry.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse {
@@ -566,6 +840,34 @@ export const MsgConnectionOpenTryResponse = {
   toSDK(_: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgConnectionOpenTryResponseAmino): MsgConnectionOpenTryResponse {
+    return {};
+  },
+  toAmino(_: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenTryResponseAminoMsg): MsgConnectionOpenTryResponse {
+    return MsgConnectionOpenTryResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenTryResponse",
+      value: MsgConnectionOpenTryResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenTryResponseProtoMsg): MsgConnectionOpenTryResponse {
+    return MsgConnectionOpenTryResponse.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenTryResponse): Uint8Array {
+    return MsgConnectionOpenTryResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse",
+      value: MsgConnectionOpenTryResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
@@ -743,6 +1045,55 @@ export const MsgConnectionOpenAck = {
     message.consensusHeight !== undefined && (obj.consensus_height = message.consensusHeight ? Height.toSDK(message.consensusHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgConnectionOpenAckAmino): MsgConnectionOpenAck {
+    return {
+      connectionId: object.connection_id,
+      counterpartyConnectionId: object.counterparty_connection_id,
+      version: object?.version ? Version.fromAmino(object.version) : undefined,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofTry: object.proof_try,
+      proofClient: object.proof_client,
+      proofConsensus: object.proof_consensus,
+      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgConnectionOpenAck): MsgConnectionOpenAckAmino {
+    const obj: any = {};
+    obj.connection_id = message.connectionId;
+    obj.counterparty_connection_id = message.counterpartyConnectionId;
+    obj.version = message.version ? Version.toAmino(message.version) : undefined;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_try = message.proofTry;
+    obj.proof_client = message.proofClient;
+    obj.proof_consensus = message.proofConsensus;
+    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenAckAminoMsg): MsgConnectionOpenAck {
+    return MsgConnectionOpenAck.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenAck): MsgConnectionOpenAckAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenAck",
+      value: MsgConnectionOpenAck.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenAckProtoMsg): MsgConnectionOpenAck {
+    return MsgConnectionOpenAck.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenAck): Uint8Array {
+    return MsgConnectionOpenAck.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenAck): MsgConnectionOpenAckProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+      value: MsgConnectionOpenAck.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenAckResponse(): MsgConnectionOpenAckResponse {
@@ -786,6 +1137,34 @@ export const MsgConnectionOpenAckResponse = {
   toSDK(_: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgConnectionOpenAckResponseAmino): MsgConnectionOpenAckResponse {
+    return {};
+  },
+  toAmino(_: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenAckResponseAminoMsg): MsgConnectionOpenAckResponse {
+    return MsgConnectionOpenAckResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenAckResponse",
+      value: MsgConnectionOpenAckResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenAckResponseProtoMsg): MsgConnectionOpenAckResponse {
+    return MsgConnectionOpenAckResponse.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenAckResponse): Uint8Array {
+    return MsgConnectionOpenAckResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse",
+      value: MsgConnectionOpenAckResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenConfirm(): MsgConnectionOpenConfirm {
@@ -885,6 +1264,43 @@ export const MsgConnectionOpenConfirm = {
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+  fromAmino(object: MsgConnectionOpenConfirmAmino): MsgConnectionOpenConfirm {
+    return {
+      connectionId: object.connection_id,
+      proofAck: object.proof_ack,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAmino {
+    const obj: any = {};
+    obj.connection_id = message.connectionId;
+    obj.proof_ack = message.proofAck;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenConfirmAminoMsg): MsgConnectionOpenConfirm {
+    return MsgConnectionOpenConfirm.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenConfirm",
+      value: MsgConnectionOpenConfirm.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenConfirmProtoMsg): MsgConnectionOpenConfirm {
+    return MsgConnectionOpenConfirm.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenConfirm): Uint8Array {
+    return MsgConnectionOpenConfirm.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+      value: MsgConnectionOpenConfirm.encode(message).finish()
+    };
   }
 };
 function createBaseMsgConnectionOpenConfirmResponse(): MsgConnectionOpenConfirmResponse {
@@ -928,5 +1344,33 @@ export const MsgConnectionOpenConfirmResponse = {
   toSDK(_: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgConnectionOpenConfirmResponseAmino): MsgConnectionOpenConfirmResponse {
+    return {};
+  },
+  toAmino(_: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgConnectionOpenConfirmResponseAminoMsg): MsgConnectionOpenConfirmResponse {
+    return MsgConnectionOpenConfirmResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgConnectionOpenConfirmResponse",
+      value: MsgConnectionOpenConfirmResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgConnectionOpenConfirmResponseProtoMsg): MsgConnectionOpenConfirmResponse {
+    return MsgConnectionOpenConfirmResponse.decode(message.value);
+  },
+  toProto(message: MsgConnectionOpenConfirmResponse): Uint8Array {
+    return MsgConnectionOpenConfirmResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse",
+      value: MsgConnectionOpenConfirmResponse.encode(message).finish()
+    };
   }
 };

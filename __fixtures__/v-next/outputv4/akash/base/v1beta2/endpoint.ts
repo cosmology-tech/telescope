@@ -12,6 +12,7 @@ export enum Endpoint_Kind {
   UNRECOGNIZED = -1,
 }
 export const Endpoint_KindSDKType = Endpoint_Kind;
+export const Endpoint_KindAmino = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -46,6 +47,19 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
+}
+export interface EndpointProtoMsg {
+  typeUrl: "/akash.base.v1beta2.Endpoint";
+  value: Uint8Array;
+}
+/** Endpoint describes a publicly accessible IP service */
+export interface EndpointAmino {
+  kind: Endpoint_Kind;
+  sequence_number: number;
+}
+export interface EndpointAminoMsg {
+  type: "akash/base/v1beta2/endpoint";
+  value: EndpointAmino;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
@@ -123,5 +137,38 @@ export const Endpoint = {
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     obj.sequence_number = message.sequenceNumber;
     return obj;
+  },
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequenceNumber: object.sequence_number
+    };
+  },
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    obj.sequence_number = message.sequenceNumber;
+    return obj;
+  },
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+  toAminoMsg(message: Endpoint): EndpointAminoMsg {
+    return {
+      type: "akash/base/v1beta2/endpoint",
+      value: Endpoint.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 };

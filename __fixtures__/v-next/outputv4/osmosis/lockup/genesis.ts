@@ -1,4 +1,4 @@
-import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
@@ -7,6 +7,20 @@ export interface GenesisState {
   lastLockId: bigint;
   locks: PeriodLock[];
   syntheticLocks: SyntheticLock[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.lockup.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the lockup module's genesis state. */
+export interface GenesisStateAmino {
+  last_lock_id: string;
+  locks: PeriodLockAmino[];
+  synthetic_locks: SyntheticLockAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/lockup/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateSDKType {
@@ -114,5 +128,48 @@ export const GenesisState = {
       obj.synthetic_locks = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      lastLockId: BigInt(object.last_lock_id),
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : [],
+      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.last_lock_id = message.lastLockId ? message.lastLockId.toString() : undefined;
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    if (message.syntheticLocks) {
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
+    } else {
+      obj.synthetic_locks = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/lockup/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

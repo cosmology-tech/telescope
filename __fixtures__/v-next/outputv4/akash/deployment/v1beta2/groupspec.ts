@@ -1,5 +1,5 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceSDKType } from "./resource";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
+import { Resource, ResourceAmino, ResourceSDKType } from "./resource";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -8,6 +8,20 @@ export interface GroupSpec {
   name: string;
   requirements: PlacementRequirements;
   resources: Resource[];
+}
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupSpec";
+  value: Uint8Array;
+}
+/** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements?: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
+}
+export interface GroupSpecAminoMsg {
+  type: "akash/deployment/v1beta2/group-spec";
+  value: GroupSpecAmino;
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -107,5 +121,44 @@ export const GroupSpec = {
       obj.resources = [];
     }
     return obj;
+  },
+  fromAmino(object: GroupSpecAmino): GroupSpec {
+    return {
+      name: object.name,
+      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GroupSpec): GroupSpecAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
+    return GroupSpec.fromAmino(object.value);
+  },
+  toAminoMsg(message: GroupSpec): GroupSpecAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/group-spec",
+      value: GroupSpec.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
+    return GroupSpec.decode(message.value);
+  },
+  toProto(message: GroupSpec): Uint8Array {
+    return GroupSpec.encode(message).finish();
+  },
+  toProtoMsg(message: GroupSpec): GroupSpecProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupSpec",
+      value: GroupSpec.encode(message).finish()
+    };
   }
 };

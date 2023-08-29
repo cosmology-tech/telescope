@@ -1,10 +1,22 @@
-import { Provider, ProviderSDKType } from "./provider";
+import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisState {
   providers: Provider[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the basic genesis state used by provider module */
+export interface GenesisStateAmino {
+  providers: ProviderAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "akash/provider/v1beta2/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateSDKType {
@@ -76,5 +88,40 @@ export const GenesisState = {
       obj.providers = [];
     }
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

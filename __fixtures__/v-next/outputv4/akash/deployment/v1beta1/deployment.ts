@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -16,6 +16,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -53,6 +54,21 @@ export interface MsgCreateDeployment {
   version: Uint8Array;
   deposit: Coin | undefined;
 }
+export interface MsgCreateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
+  value: Uint8Array;
+}
+/** MsgCreateDeployment defines an SDK message for creating deployment */
+export interface MsgCreateDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: Uint8Array;
+  deposit?: CoinAmino | undefined;
+}
+export interface MsgCreateDeploymentAminoMsg {
+  type: "akash/deployment/testonly-create-deployment";
+  value: MsgCreateDeploymentAmino;
+}
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
@@ -62,12 +78,35 @@ export interface MsgCreateDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
+export interface MsgCreateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
+  value: Uint8Array;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgCreateDeploymentResponseAmino {}
+export interface MsgCreateDeploymentResponseAminoMsg {
+  type: "akash/deployment/testonly-create-deployment-response";
+  value: MsgCreateDeploymentResponseAmino;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
   id: DeploymentID | undefined;
   amount: Coin | undefined;
+}
+export interface MsgDepositDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
+  value: Uint8Array;
+}
+/** MsgDepositDeployment deposits more funds into the deposit account */
+export interface MsgDepositDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  amount?: CoinAmino | undefined;
+}
+export interface MsgDepositDeploymentAminoMsg {
+  type: "akash/deployment/testonly-deposit-deployment";
+  value: MsgDepositDeploymentAmino;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -76,6 +115,16 @@ export interface MsgDepositDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
+export interface MsgDepositDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
+  value: Uint8Array;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgDepositDeploymentResponseAmino {}
+export interface MsgDepositDeploymentResponseAminoMsg {
+  type: "akash/deployment/testonly-deposit-deployment-response";
+  value: MsgDepositDeploymentResponseAmino;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
@@ -83,6 +132,20 @@ export interface MsgUpdateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
+}
+export interface MsgUpdateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment";
+  value: Uint8Array;
+}
+/** MsgUpdateDeployment defines an SDK message for updating deployment */
+export interface MsgUpdateDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: Uint8Array;
+}
+export interface MsgUpdateDeploymentAminoMsg {
+  type: "akash/deployment/testonly-update-deployment";
+  value: MsgUpdateDeploymentAmino;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -92,11 +155,33 @@ export interface MsgUpdateDeploymentSDKType {
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
+export interface MsgUpdateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
+export interface MsgUpdateDeploymentResponseAmino {}
+export interface MsgUpdateDeploymentResponseAminoMsg {
+  type: "akash/deployment/testonly-update-deployment-response";
+  value: MsgUpdateDeploymentResponseAmino;
+}
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id: DeploymentID | undefined;
+}
+export interface MsgCloseDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
+  value: Uint8Array;
+}
+/** MsgCloseDeployment defines an SDK message for closing deployment */
+export interface MsgCloseDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+}
+export interface MsgCloseDeploymentAminoMsg {
+  type: "akash/deployment/testonly-close-deployment";
+  value: MsgCloseDeploymentAmino;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -104,12 +189,35 @@ export interface MsgCloseDeploymentSDKType {
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
+export interface MsgCloseDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
+  value: Uint8Array;
+}
+/** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
+export interface MsgCloseDeploymentResponseAmino {}
+export interface MsgCloseDeploymentResponseAminoMsg {
+  type: "akash/deployment/testonly-close-deployment-response";
+  value: MsgCloseDeploymentResponseAmino;
+}
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
   dseq: bigint;
+}
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID";
+  value: Uint8Array;
+}
+/** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
+}
+export interface DeploymentIDAminoMsg {
+  type: "akash/deployment/deployment-i-d";
+  value: DeploymentIDAmino;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -123,6 +231,21 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: bigint;
 }
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Deployment";
+  value: Uint8Array;
+}
+/** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id?: DeploymentIDAmino | undefined;
+  state: Deployment_State;
+  version: Uint8Array;
+  created_at: string;
+}
+export interface DeploymentAminoMsg {
+  type: "akash/deployment/deployment";
+  value: DeploymentAmino;
+}
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
@@ -135,6 +258,20 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
+  value: Uint8Array;
+}
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
+  state: string;
+}
+export interface DeploymentFiltersAminoMsg {
+  type: "akash/deployment/deployment-filters";
+  value: DeploymentFiltersAmino;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -247,6 +384,47 @@ export const MsgCreateDeployment = {
     obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version,
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+    };
+  },
+  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    obj.version = message.version;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateDeployment): MsgCreateDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-create-deployment",
+      value: MsgCreateDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.decode(message.value);
+  },
+  toProto(message: MsgCreateDeployment): Uint8Array {
+    return MsgCreateDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateDeployment): MsgCreateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
+      value: MsgCreateDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
@@ -290,6 +468,34 @@ export const MsgCreateDeploymentResponse = {
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateDeploymentResponseAminoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-create-deployment-response",
+      value: MsgCreateDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateDeploymentResponse): Uint8Array {
+    return MsgCreateDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
+      value: MsgCreateDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
@@ -363,6 +569,39 @@ export const MsgDepositDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+    };
+  },
+  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDepositDeployment): MsgDepositDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-deposit-deployment",
+      value: MsgDepositDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.decode(message.value);
+  },
+  toProto(message: MsgDepositDeployment): Uint8Array {
+    return MsgDepositDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDepositDeployment): MsgDepositDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
+      value: MsgDepositDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse {
@@ -406,6 +645,34 @@ export const MsgDepositDeploymentResponse = {
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDepositDeploymentResponseAminoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-deposit-deployment-response",
+      value: MsgDepositDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgDepositDeploymentResponse): Uint8Array {
+    return MsgDepositDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
+      value: MsgDepositDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
@@ -500,6 +767,45 @@ export const MsgUpdateDeployment = {
     }
     obj.version = message.version;
     return obj;
+  },
+  fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version
+    };
+  },
+  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-update-deployment",
+      value: MsgUpdateDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.decode(message.value);
+  },
+  toProto(message: MsgUpdateDeployment): Uint8Array {
+    return MsgUpdateDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
+      value: MsgUpdateDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
@@ -543,6 +849,34 @@ export const MsgUpdateDeploymentResponse = {
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDeploymentResponseAminoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-update-deployment-response",
+      value: MsgUpdateDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateDeploymentResponse): Uint8Array {
+    return MsgUpdateDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
+      value: MsgUpdateDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
@@ -603,6 +937,37 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseDeployment): MsgCloseDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/testonly-close-deployment",
+      value: MsgCloseDeployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.decode(message.value);
+  },
+  toProto(message: MsgCloseDeployment): Uint8Array {
+    return MsgCloseDeployment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseDeployment): MsgCloseDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
+      value: MsgCloseDeployment.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
@@ -646,6 +1011,34 @@ export const MsgCloseDeploymentResponse = {
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
+    return {};
+  },
+  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCloseDeploymentResponseAminoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/testonly-close-deployment-response",
+      value: MsgCloseDeploymentResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.decode(message.value);
+  },
+  toProto(message: MsgCloseDeploymentResponse): Uint8Array {
+    return MsgCloseDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
+      value: MsgCloseDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseDeploymentID(): DeploymentID {
@@ -719,6 +1112,39 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq;
     return obj;
+  },
+  fromAmino(object: DeploymentIDAmino): DeploymentID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq)
+    };
+  },
+  toAmino(message: DeploymentID): DeploymentIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
+    return DeploymentID.fromAmino(object.value);
+  },
+  toAminoMsg(message: DeploymentID): DeploymentIDAminoMsg {
+    return {
+      type: "akash/deployment/deployment-i-d",
+      value: DeploymentID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
+    return DeploymentID.decode(message.value);
+  },
+  toProto(message: DeploymentID): Uint8Array {
+    return DeploymentID.encode(message).finish();
+  },
+  toProtoMsg(message: DeploymentID): DeploymentIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentID",
+      value: DeploymentID.encode(message).finish()
+    };
   }
 };
 function createBaseDeployment(): Deployment {
@@ -818,6 +1244,43 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt;
     return obj;
+  },
+  fromAmino(object: DeploymentAmino): Deployment {
+    return {
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      version: object.version,
+      createdAt: BigInt(object.created_at)
+    };
+  },
+  toAmino(message: Deployment): DeploymentAmino {
+    const obj: any = {};
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
+    obj.state = message.state;
+    obj.version = message.version;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
+    return Deployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: Deployment): DeploymentAminoMsg {
+    return {
+      type: "akash/deployment/deployment",
+      value: Deployment.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentProtoMsg): Deployment {
+    return Deployment.decode(message.value);
+  },
+  toProto(message: Deployment): Uint8Array {
+    return Deployment.encode(message).finish();
+  },
+  toProtoMsg(message: Deployment): DeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Deployment",
+      value: Deployment.encode(message).finish()
+    };
   }
 };
 function createBaseDeploymentFilters(): DeploymentFilters {
@@ -904,6 +1367,41 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq;
     obj.state = message.state;
     return obj;
+  },
+  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      state: object.state
+    };
+  },
+  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
+    return DeploymentFilters.fromAmino(object.value);
+  },
+  toAminoMsg(message: DeploymentFilters): DeploymentFiltersAminoMsg {
+    return {
+      type: "akash/deployment/deployment-filters",
+      value: DeploymentFilters.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
+    return DeploymentFilters.decode(message.value);
+  },
+  toProto(message: DeploymentFilters): Uint8Array {
+    return DeploymentFilters.encode(message).finish();
+  },
+  toProtoMsg(message: DeploymentFilters): DeploymentFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
+      value: DeploymentFilters.encode(message).finish()
+    };
   }
 };
 /** Msg defines the deployment Msg service. */

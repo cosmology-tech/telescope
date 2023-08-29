@@ -1,5 +1,5 @@
-import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../protobuf/field_mask";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
@@ -14,6 +14,7 @@ export enum LogSink_VersionFormat {
   UNRECOGNIZED = -1,
 }
 export const LogSink_VersionFormatSDKType = LogSink_VersionFormat;
+export const LogSink_VersionFormatAmino = LogSink_VersionFormat;
 export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
     case 0:
@@ -61,6 +62,7 @@ export enum LifecycleState {
   UNRECOGNIZED = -1,
 }
 export const LifecycleStateSDKType = LifecycleState;
+export const LifecycleStateAmino = LifecycleState;
 export function lifecycleStateFromJSON(object: any): LifecycleState {
   switch (object) {
     case 0:
@@ -116,6 +118,7 @@ export enum OperationState {
   UNRECOGNIZED = -1,
 }
 export const OperationStateSDKType = OperationState;
+export const OperationStateAmino = OperationState;
 export function operationStateFromJSON(object: any): OperationState {
   switch (object) {
     case 0:
@@ -228,6 +231,76 @@ export interface LogBucket {
    */
   cmekSettings: CmekSettings;
 }
+export interface LogBucketProtoMsg {
+  typeUrl: "/google.logging.v2.LogBucket";
+  value: Uint8Array;
+}
+/** Describes a repository in which log entries are stored. */
+export interface LogBucketAmino {
+  /**
+   * Output only. The resource name of the bucket.
+   * 
+   * For example:
+   * 
+   *   `projects/my-project/locations/global/buckets/my-bucket`
+   * 
+   * For a list of supported locations, see [Supported
+   * Regions](https://cloud.google.com/logging/docs/region-support)
+   * 
+   * For the location of `global` it is unspecified where log entries are
+   * actually stored.
+   * 
+   * After a bucket has been created, the location cannot be changed.
+   */
+  name: string;
+  /** Describes this bucket. */
+  description: string;
+  /**
+   * Output only. The creation timestamp of the bucket. This is not set for any of the
+   * default buckets.
+   */
+  create_time?: Date;
+  /** Output only. The last update timestamp of the bucket. */
+  update_time?: Date;
+  /**
+   * Logs will be retained by default for this amount of time, after which they
+   * will automatically be deleted. The minimum retention period is 1 day. If
+   * this value is set to zero at bucket creation time, the default time of 30
+   * days will be used.
+   */
+  retention_days: number;
+  /**
+   * Whether the bucket is locked.
+   * 
+   * The retention period on a locked bucket cannot be changed. Locked buckets
+   * may only be deleted if they are empty.
+   */
+  locked: boolean;
+  /** Output only. The bucket lifecycle state. */
+  lifecycle_state: LifecycleState;
+  /**
+   * Log entry field paths that are denied access in this bucket.
+   * 
+   * The following fields and their children are eligible: `textPayload`,
+   * `jsonPayload`, `protoPayload`, `httpRequest`, `labels`, `sourceLocation`.
+   * 
+   * Restricting a repeated field will restrict all values. Adding a parent will
+   * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
+   */
+  restricted_fields: string[];
+  /**
+   * The CMEK settings of the log bucket. If present, new log entries written to
+   * this log bucket are encrypted using the CMEK key provided in this
+   * configuration. If a log bucket has CMEK settings, the CMEK settings cannot
+   * be disabled later by updating the log bucket. Changing the KMS key is
+   * allowed.
+   */
+  cmek_settings?: CmekSettingsAmino;
+}
+export interface LogBucketAminoMsg {
+  type: "/google.logging.v2.LogBucket";
+  value: LogBucketAmino;
+}
 /** Describes a repository in which log entries are stored. */
 export interface LogBucketSDKType {
   name: string;
@@ -273,6 +346,48 @@ export interface LogView {
    *                                AND LOG_ID("stdout")
    */
   filter: string;
+}
+export interface LogViewProtoMsg {
+  typeUrl: "/google.logging.v2.LogView";
+  value: Uint8Array;
+}
+/** Describes a view over log entries in a bucket. */
+export interface LogViewAmino {
+  /**
+   * The resource name of the view.
+   * 
+   * For example:
+   * 
+   *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
+   */
+  name: string;
+  /** Describes this view. */
+  description: string;
+  /** Output only. The creation timestamp of the view. */
+  create_time?: Date;
+  /** Output only. The last update timestamp of the view. */
+  update_time?: Date;
+  /**
+   * Filter that restricts which log entries in a bucket are visible in this
+   * view.
+   * 
+   * Filters are restricted to be a logical AND of ==/!= of any of the
+   * following:
+   * 
+   *   - originating project/folder/organization/billing account.
+   *   - resource type
+   *   - log id
+   * 
+   * For example:
+   * 
+   *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
+   *                                AND LOG_ID("stdout")
+   */
+  filter: string;
+}
+export interface LogViewAminoMsg {
+  type: "/google.logging.v2.LogView";
+  value: LogViewAmino;
 }
 /** Describes a view over log entries in a bucket. */
 export interface LogViewSDKType {
@@ -400,6 +515,132 @@ export interface LogSink {
    */
   updateTime: Date;
 }
+export interface LogSinkProtoMsg {
+  typeUrl: "/google.logging.v2.LogSink";
+  value: Uint8Array;
+}
+/**
+ * Describes a sink used to export log entries to one of the following
+ * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
+ * Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log
+ * entries are exported. The sink must be created within a project,
+ * organization, billing account, or folder.
+ */
+export interface LogSinkAmino {
+  /**
+   * Required. The client-assigned sink identifier, unique within the project.
+   * 
+   * For example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited
+   * to 100 characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
+   */
+  name: string;
+  /**
+   * Required. The export destination:
+   * 
+   *     "storage.googleapis.com/[GCS_BUCKET]"
+   *     "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
+   *     "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
+   * 
+   * The sink's `writer_identity`, set when the sink is created, must have
+   * permission to write to the destination or else the log entries are not
+   * exported. For more information, see
+   * [Exporting Logs with
+   * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+   */
+  destination: string;
+  /**
+   * Optional. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
+   * only exported log entries are those that are in the resource owning the
+   * sink and that match the filter.
+   * 
+   * For example:
+   * 
+   *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
+   */
+  filter: string;
+  /**
+   * Optional. A description of this sink.
+   * 
+   * The maximum length of the description is 8000 characters.
+   */
+  description: string;
+  /**
+   * Optional. If set to true, then this sink is disabled and it does not export any log
+   * entries.
+   */
+  disabled: boolean;
+  /**
+   * Optional. Log entries that match any of these exclusion filters will not be exported.
+   * 
+   * If a log entry is matched by both `filter` and one of `exclusion_filters`
+   * it will not be exported.
+   */
+  exclusions: LogExclusionAmino[];
+  /** Deprecated. This field is unused. */
+  /** @deprecated */
+  output_version_format: LogSink_VersionFormat;
+  /**
+   * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
+   * Logging writes the exported log entries to the sink's destination. This
+   * field is set by
+   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
+   * 
+   * Until you grant this identity write-access to the destination, log entry
+   * exports from this sink will fail. For more information, see [Granting
+   * Access for a
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Consult the destination service's documentation to determine the
+   * appropriate IAM roles to assign to the identity.
+   * 
+   * Sinks that have a destination that is a log bucket in the same project as
+   * the sink do not have a writer_identity and no additional permissions are
+   * required.
+   */
+  writer_identity: string;
+  /**
+   * Optional. This field applies only to sinks owned by organizations and folders. If the
+   * field is false, the default, only the logs owned by the sink's parent
+   * resource are available for export. If the field is true, then log entries
+   * from all the projects, folders, and billing accounts contained in the
+   * sink's parent resource are also available for export. Whether a particular
+   * log entry from the children is exported depends on the sink's filter
+   * expression.
+   * 
+   * For example, if this field is true, then the filter
+   * `resource.type=gce_instance` would export all Compute Engine VM instance
+   * log entries from all projects in the sink's parent.
+   * 
+   * To only export entries from certain child projects, filter on the project
+   * part of the log name:
+   * 
+   *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
+   *   resource.type=gce_instance
+   */
+  include_children: boolean;
+  /** Optional. Options that affect sinks exporting data to BigQuery. */
+  bigquery_options?: BigQueryOptionsAmino;
+  /**
+   * Output only. The creation timestamp of the sink.
+   * 
+   * This field may not be present for older sinks.
+   */
+  create_time?: Date;
+  /**
+   * Output only. The last update timestamp of the sink.
+   * 
+   * This field may not be present for older sinks.
+   */
+  update_time?: Date;
+}
+export interface LogSinkAminoMsg {
+  type: "/google.logging.v2.LogSink";
+  value: LogSinkAmino;
+}
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -446,6 +687,38 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
+export interface BigQueryOptionsProtoMsg {
+  typeUrl: "/google.logging.v2.BigQueryOptions";
+  value: Uint8Array;
+}
+/** Options that change functionality of a sink exporting data to BigQuery. */
+export interface BigQueryOptionsAmino {
+  /**
+   * Optional. Whether to use [BigQuery's partition
+   * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By
+   * default, Cloud Logging creates dated tables based on the log entries'
+   * timestamps, e.g. syslog_20170523. With partitioned tables the date suffix
+   * is no longer present and [special query
+   * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables)
+   * has to be used instead. In both cases, tables are sharded based on UTC
+   * timezone.
+   */
+  use_partitioned_tables: boolean;
+  /**
+   * Output only. True if new timestamp column based partitioning is in use, false if legacy
+   * ingestion-time partitioning is in use.
+   * 
+   * All new sinks will have this field set true and will use timestamp column
+   * based partitioning. If use_partitioned_tables is false, this value has no
+   * meaning and will be false. Legacy sinks using partitioned tables will have
+   * this field set to false.
+   */
+  uses_timestamp_column_partitioning: boolean;
+}
+export interface BigQueryOptionsAminoMsg {
+  type: "/google.logging.v2.BigQueryOptions";
+  value: BigQueryOptionsAmino;
+}
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptionsSDKType {
   use_partitioned_tables: boolean;
@@ -480,6 +753,43 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
+export interface ListBucketsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListBucketsRequest";
+  value: Uint8Array;
+}
+/** The parameters to `ListBuckets`. */
+export interface ListBucketsRequestAmino {
+  /**
+   * Required. The parent resource whose buckets are to be listed:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   * 
+   * Note: The locations portion of the resource must be specified, but
+   * supplying the character `-` in place of [LOCATION_ID] will return all
+   * buckets.
+   */
+  parent: string;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the preceding call
+   * to this method. `pageToken` must be the value of `nextPageToken` from the
+   * previous response. The values of other method parameters should be
+   * identical to those in the previous call.
+   */
+  page_token: string;
+  /**
+   * Optional. The maximum number of results to return from this request. Non-positive
+   * values are ignored. The presence of `nextPageToken` in the response
+   * indicates that more results might be available.
+   */
+  page_size: number;
+}
+export interface ListBucketsRequestAminoMsg {
+  type: "/google.logging.v2.ListBucketsRequest";
+  value: ListBucketsRequestAmino;
+}
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequestSDKType {
   parent: string;
@@ -496,6 +806,25 @@ export interface ListBucketsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListBucketsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListBucketsResponse";
+  value: Uint8Array;
+}
+/** The response from ListBuckets. */
+export interface ListBucketsResponseAmino {
+  /** A list of buckets. */
+  buckets: LogBucketAmino[];
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+export interface ListBucketsResponseAminoMsg {
+  type: "/google.logging.v2.ListBucketsResponse";
+  value: ListBucketsResponseAmino;
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponseSDKType {
@@ -526,6 +855,39 @@ export interface CreateBucketRequest {
    * ignored.
    */
   bucket: LogBucket;
+}
+export interface CreateBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateBucketRequest";
+  value: Uint8Array;
+}
+/** The parameters to `CreateBucket`. */
+export interface CreateBucketRequestAmino {
+  /**
+   * Required. The resource in which to create the log bucket:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global"`
+   */
+  parent: string;
+  /**
+   * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
+   * to 100 characters and can include only letters, digits, underscores,
+   * hyphens, and periods.
+   */
+  bucket_id: string;
+  /**
+   * Required. The new bucket. The region specified in the new bucket must be compliant
+   * with any Location Restriction Org Policy. The name field in the bucket is
+   * ignored.
+   */
+  bucket?: LogBucketAmino;
+}
+export interface CreateBucketRequestAminoMsg {
+  type: "/google.logging.v2.CreateBucketRequest";
+  value: CreateBucketRequestAmino;
 }
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequestSDKType {
@@ -562,6 +924,43 @@ export interface UpdateBucketRequest {
    */
   updateMask: FieldMask;
 }
+export interface UpdateBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateBucketRequest";
+  value: Uint8Array;
+}
+/** The parameters to `UpdateBucket`. */
+export interface UpdateBucketRequestAmino {
+  /**
+   * Required. The full resource name of the bucket to update.
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+  /** Required. The updated bucket. */
+  bucket?: LogBucketAmino;
+  /**
+   * Required. Field mask that specifies the fields in `bucket` that need an update. A
+   * bucket field will be overwritten if, and only if, it is in the update mask.
+   * `name` and output only fields cannot be updated.
+   * 
+   * For a detailed `FieldMask` definition, see:
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=retention_days`
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateBucketRequestAminoMsg {
+  type: "/google.logging.v2.UpdateBucketRequest";
+  value: UpdateBucketRequestAmino;
+}
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestSDKType {
   name: string;
@@ -584,6 +983,30 @@ export interface GetBucketRequest {
    */
   name: string;
 }
+export interface GetBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetBucketRequest";
+  value: Uint8Array;
+}
+/** The parameters to `GetBucket`. */
+export interface GetBucketRequestAmino {
+  /**
+   * Required. The resource name of the bucket:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+}
+export interface GetBucketRequestAminoMsg {
+  type: "/google.logging.v2.GetBucketRequest";
+  value: GetBucketRequestAmino;
+}
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequestSDKType {
   name: string;
@@ -604,6 +1027,30 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
+export interface DeleteBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteBucketRequest";
+  value: Uint8Array;
+}
+/** The parameters to `DeleteBucket`. */
+export interface DeleteBucketRequestAmino {
+  /**
+   * Required. The full resource name of the bucket to delete.
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+}
+export interface DeleteBucketRequestAminoMsg {
+  type: "/google.logging.v2.DeleteBucketRequest";
+  value: DeleteBucketRequestAmino;
+}
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequestSDKType {
   name: string;
@@ -623,6 +1070,30 @@ export interface UndeleteBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
+}
+export interface UndeleteBucketRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UndeleteBucketRequest";
+  value: Uint8Array;
+}
+/** The parameters to `UndeleteBucket`. */
+export interface UndeleteBucketRequestAmino {
+  /**
+   * Required. The full resource name of the bucket to undelete.
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   *     "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+}
+export interface UndeleteBucketRequestAminoMsg {
+  type: "/google.logging.v2.UndeleteBucketRequest";
+  value: UndeleteBucketRequestAmino;
 }
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequestSDKType {
@@ -651,6 +1122,37 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
+export interface ListViewsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListViewsRequest";
+  value: Uint8Array;
+}
+/** The parameters to `ListViews`. */
+export interface ListViewsRequestAmino {
+  /**
+   * Required. The bucket whose views are to be listed:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   */
+  parent: string;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the preceding call
+   * to this method. `pageToken` must be the value of `nextPageToken` from the
+   * previous response. The values of other method parameters should be
+   * identical to those in the previous call.
+   */
+  page_token: string;
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * 
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size: number;
+}
+export interface ListViewsRequestAminoMsg {
+  type: "/google.logging.v2.ListViewsRequest";
+  value: ListViewsRequestAmino;
+}
 /** The parameters to `ListViews`. */
 export interface ListViewsRequestSDKType {
   parent: string;
@@ -667,6 +1169,25 @@ export interface ListViewsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListViewsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListViewsResponse";
+  value: Uint8Array;
+}
+/** The response from ListViews. */
+export interface ListViewsResponseAmino {
+  /** A list of views. */
+  views: LogViewAmino[];
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+export interface ListViewsResponseAminoMsg {
+  type: "/google.logging.v2.ListViewsResponse";
+  value: ListViewsResponseAmino;
 }
 /** The response from ListViews. */
 export interface ListViewsResponseSDKType {
@@ -689,6 +1210,31 @@ export interface CreateViewRequest {
   viewId: string;
   /** Required. The new view. */
   view: LogView;
+}
+export interface CreateViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateViewRequest";
+  value: Uint8Array;
+}
+/** The parameters to `CreateView`. */
+export interface CreateViewRequestAmino {
+  /**
+   * Required. The bucket in which to create the view
+   * 
+   *     `"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"`
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  parent: string;
+  /** Required. The id to use for this view. */
+  view_id: string;
+  /** Required. The new view. */
+  view?: LogViewAmino;
+}
+export interface CreateViewRequestAminoMsg {
+  type: "/google.logging.v2.CreateViewRequest";
+  value: CreateViewRequestAmino;
 }
 /** The parameters to `CreateView`. */
 export interface CreateViewRequestSDKType {
@@ -722,6 +1268,40 @@ export interface UpdateViewRequest {
    */
   updateMask: FieldMask;
 }
+export interface UpdateViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateViewRequest";
+  value: Uint8Array;
+}
+/** The parameters to `UpdateView`. */
+export interface UpdateViewRequestAmino {
+  /**
+   * Required. The full resource name of the view to update
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name: string;
+  /** Required. The updated view. */
+  view?: LogViewAmino;
+  /**
+   * Optional. Field mask that specifies the fields in `view` that need
+   * an update. A field will be overwritten if, and only if, it is
+   * in the update mask. `name` and output only fields cannot be updated.
+   * 
+   * For a detailed `FieldMask` definition, see
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=filter`
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateViewRequestAminoMsg {
+  type: "/google.logging.v2.UpdateViewRequest";
+  value: UpdateViewRequestAmino;
+}
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestSDKType {
   name: string;
@@ -741,6 +1321,27 @@ export interface GetViewRequest {
    */
   name: string;
 }
+export interface GetViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetViewRequest";
+  value: Uint8Array;
+}
+/** The parameters to `GetView`. */
+export interface GetViewRequestAmino {
+  /**
+   * Required. The resource name of the policy:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name: string;
+}
+export interface GetViewRequestAminoMsg {
+  type: "/google.logging.v2.GetViewRequest";
+  value: GetViewRequestAmino;
+}
 /** The parameters to `GetView`. */
 export interface GetViewRequestSDKType {
   name: string;
@@ -757,6 +1358,27 @@ export interface DeleteViewRequest {
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
+}
+export interface DeleteViewRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteViewRequest";
+  value: Uint8Array;
+}
+/** The parameters to `DeleteView`. */
+export interface DeleteViewRequestAmino {
+  /**
+   * Required. The full resource name of the view to delete:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name: string;
+}
+export interface DeleteViewRequestAminoMsg {
+  type: "/google.logging.v2.DeleteViewRequest";
+  value: DeleteViewRequestAmino;
 }
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequestSDKType {
@@ -787,6 +1409,39 @@ export interface ListSinksRequest {
    */
   pageSize: number;
 }
+export interface ListSinksRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListSinksRequest";
+  value: Uint8Array;
+}
+/** The parameters to `ListSinks`. */
+export interface ListSinksRequestAmino {
+  /**
+   * Required. The parent resource whose sinks are to be listed:
+   * 
+   *     "projects/[PROJECT_ID]"
+   *     "organizations/[ORGANIZATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
+   *     "folders/[FOLDER_ID]"
+   */
+  parent: string;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token: string;
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size: number;
+}
+export interface ListSinksRequestAminoMsg {
+  type: "/google.logging.v2.ListSinksRequest";
+  value: ListSinksRequestAmino;
+}
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequestSDKType {
   parent: string;
@@ -803,6 +1458,25 @@ export interface ListSinksResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListSinksResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListSinksResponse";
+  value: Uint8Array;
+}
+/** Result returned from `ListSinks`. */
+export interface ListSinksResponseAmino {
+  /** A list of sinks. */
+  sinks: LogSinkAmino[];
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+export interface ListSinksResponseAminoMsg {
+  type: "/google.logging.v2.ListSinksResponse";
+  value: ListSinksResponseAmino;
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseSDKType {
@@ -824,6 +1498,30 @@ export interface GetSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+export interface GetSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetSinkRequest";
+  value: Uint8Array;
+}
+/** The parameters to `GetSink`. */
+export interface GetSinkRequestAmino {
+  /**
+   * Required. The resource name of the sink:
+   * 
+   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name: string;
+}
+export interface GetSinkRequestAminoMsg {
+  type: "/google.logging.v2.GetSinkRequest";
+  value: GetSinkRequestAmino;
 }
 /** The parameters to `GetSink`. */
 export interface GetSinkRequestSDKType {
@@ -864,6 +1562,50 @@ export interface CreateSinkRequest {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   uniqueWriterIdentity: boolean;
+}
+export interface CreateSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateSinkRequest";
+  value: Uint8Array;
+}
+/** The parameters to `CreateSink`. */
+export interface CreateSinkRequestAmino {
+  /**
+   * Required. The resource in which to create the sink:
+   * 
+   *     "projects/[PROJECT_ID]"
+   *     "organizations/[ORGANIZATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
+   *     "folders/[FOLDER_ID]"
+   * 
+   * For examples:
+   * 
+   *   `"projects/my-project"`
+   *   `"organizations/123456789"`
+   */
+  parent: string;
+  /**
+   * Required. The new sink, whose `name` parameter is a sink identifier that
+   * is not already in use.
+   */
+  sink?: LogSinkAmino;
+  /**
+   * Optional. Determines the kind of IAM identity returned as `writer_identity`
+   * in the new sink. If this value is omitted or set to false, and if the
+   * sink's parent is a project, then the value returned as `writer_identity` is
+   * the same group or service account used by Cloud Logging before the addition
+   * of writer identities to this API. The sink's destination must be in the
+   * same project as the sink itself.
+   * 
+   * If this field is set to true, or if the sink is owned by a non-project
+   * resource such as an organization, then the value of `writer_identity` will
+   * be a unique service account used only for exports from the new sink. For
+   * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
+   */
+  unique_writer_identity: boolean;
+}
+export interface CreateSinkRequestAminoMsg {
+  type: "/google.logging.v2.CreateSinkRequest";
+  value: CreateSinkRequestAmino;
 }
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequestSDKType {
@@ -926,6 +1668,69 @@ export interface UpdateSinkRequest {
    */
   updateMask: FieldMask;
 }
+export interface UpdateSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateSinkRequest";
+  value: Uint8Array;
+}
+/** The parameters to `UpdateSink`. */
+export interface UpdateSinkRequestAmino {
+  /**
+   * Required. The full resource name of the sink to update, including the parent
+   * resource and the sink identifier:
+   * 
+   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name: string;
+  /**
+   * Required. The updated sink, whose name is the same identifier that appears as part
+   * of `sink_name`.
+   */
+  sink?: LogSinkAmino;
+  /**
+   * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
+   * for a description of this field. When updating a sink, the effect of this
+   * field on the value of `writer_identity` in the updated sink depends on both
+   * the old and new values of this field:
+   * 
+   * +   If the old and new values of this field are both false or both true,
+   *     then there is no change to the sink's `writer_identity`.
+   * +   If the old value is false and the new value is true, then
+   *     `writer_identity` is changed to a unique service account.
+   * +   It is an error if the old value is true and the new value is
+   *     set to false or defaulted to false.
+   */
+  unique_writer_identity: boolean;
+  /**
+   * Optional. Field mask that specifies the fields in `sink` that need
+   * an update. A sink field will be overwritten if, and only if, it is
+   * in the update mask. `name` and output only fields cannot be updated.
+   * 
+   * An empty `updateMask` is temporarily treated as using the following mask
+   * for backwards compatibility purposes:
+   * 
+   *   `destination,filter,includeChildren`
+   * 
+   * At some point in the future, behavior will be removed and specifying an
+   * empty `updateMask` will be an error.
+   * 
+   * For a detailed `FieldMask` definition, see
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=filter`
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateSinkRequestAminoMsg {
+  type: "/google.logging.v2.UpdateSinkRequest";
+  value: UpdateSinkRequestAmino;
+}
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestSDKType {
   sink_name: string;
@@ -949,6 +1754,31 @@ export interface DeleteSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+export interface DeleteSinkRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteSinkRequest";
+  value: Uint8Array;
+}
+/** The parameters to `DeleteSink`. */
+export interface DeleteSinkRequestAmino {
+  /**
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
+   * 
+   *     "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   *     "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   *     "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name: string;
+}
+export interface DeleteSinkRequestAminoMsg {
+  type: "/google.logging.v2.DeleteSinkRequest";
+  value: DeleteSinkRequestAmino;
 }
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequestSDKType {
@@ -1004,6 +1834,64 @@ export interface LogExclusion {
    */
   updateTime: Date;
 }
+export interface LogExclusionProtoMsg {
+  typeUrl: "/google.logging.v2.LogExclusion";
+  value: Uint8Array;
+}
+/**
+ * Specifies a set of log entries that are filtered out by a sink. If
+ * your Google Cloud resource receives a large volume of log entries, you can
+ * use exclusions to reduce your chargeable logs. Note that exclusions on
+ * organization-level and folder-level sinks don't apply to child resources.
+ * Note also that you cannot modify the _Required sink or exclude logs from it.
+ */
+export interface LogExclusionAmino {
+  /**
+   * Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
+   * Identifiers are limited to 100 characters and can include only letters,
+   * digits, underscores, hyphens, and periods. First character has to be
+   * alphanumeric.
+   */
+  name: string;
+  /** Optional. A description of this exclusion. */
+  description: string;
+  /**
+   * Required. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
+   * matches the log entries to be excluded. By using the [sample
+   * function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
+   * you can exclude less than 100% of the matching log entries.
+   * 
+   * For example, the following query matches 99% of low-severity log entries
+   * from Google Cloud Storage buckets:
+   * 
+   *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
+   */
+  filter: string;
+  /**
+   * Optional. If set to True, then this exclusion is disabled and it does not
+   * exclude any log entries. You can [update an
+   * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
+   * value of this field.
+   */
+  disabled: boolean;
+  /**
+   * Output only. The creation timestamp of the exclusion.
+   * 
+   * This field may not be present for older exclusions.
+   */
+  create_time?: Date;
+  /**
+   * Output only. The last update timestamp of the exclusion.
+   * 
+   * This field may not be present for older exclusions.
+   */
+  update_time?: Date;
+}
+export interface LogExclusionAminoMsg {
+  type: "/google.logging.v2.LogExclusion";
+  value: LogExclusionAmino;
+}
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -1044,6 +1932,39 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
+export interface ListExclusionsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.ListExclusionsRequest";
+  value: Uint8Array;
+}
+/** The parameters to `ListExclusions`. */
+export interface ListExclusionsRequestAmino {
+  /**
+   * Required. The parent resource whose exclusions are to be listed.
+   * 
+   *     "projects/[PROJECT_ID]"
+   *     "organizations/[ORGANIZATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
+   *     "folders/[FOLDER_ID]"
+   */
+  parent: string;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token: string;
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size: number;
+}
+export interface ListExclusionsRequestAminoMsg {
+  type: "/google.logging.v2.ListExclusionsRequest";
+  value: ListExclusionsRequestAmino;
+}
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequestSDKType {
   parent: string;
@@ -1060,6 +1981,25 @@ export interface ListExclusionsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+export interface ListExclusionsResponseProtoMsg {
+  typeUrl: "/google.logging.v2.ListExclusionsResponse";
+  value: Uint8Array;
+}
+/** Result returned from `ListExclusions`. */
+export interface ListExclusionsResponseAmino {
+  /** A list of exclusions. */
+  exclusions: LogExclusionAmino[];
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+export interface ListExclusionsResponseAminoMsg {
+  type: "/google.logging.v2.ListExclusionsResponse";
+  value: ListExclusionsResponseAmino;
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseSDKType {
@@ -1081,6 +2021,30 @@ export interface GetExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+}
+export interface GetExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetExclusionRequest";
+  value: Uint8Array;
+}
+/** The parameters to `GetExclusion`. */
+export interface GetExclusionRequestAmino {
+  /**
+   * Required. The resource name of an existing exclusion:
+   * 
+   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name: string;
+}
+export interface GetExclusionRequestAminoMsg {
+  type: "/google.logging.v2.GetExclusionRequest";
+  value: GetExclusionRequestAmino;
 }
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequestSDKType {
@@ -1107,6 +2071,36 @@ export interface CreateExclusionRequest {
    * that is not already used in the parent resource.
    */
   exclusion: LogExclusion;
+}
+export interface CreateExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CreateExclusionRequest";
+  value: Uint8Array;
+}
+/** The parameters to `CreateExclusion`. */
+export interface CreateExclusionRequestAmino {
+  /**
+   * Required. The parent resource in which to create the exclusion:
+   * 
+   *     "projects/[PROJECT_ID]"
+   *     "organizations/[ORGANIZATION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]"
+   *     "folders/[FOLDER_ID]"
+   * 
+   * For examples:
+   * 
+   *   `"projects/my-logging-project"`
+   *   `"organizations/123456789"`
+   */
+  parent: string;
+  /**
+   * Required. The new exclusion, whose `name` parameter is an exclusion name
+   * that is not already used in the parent resource.
+   */
+  exclusion?: LogExclusionAmino;
+}
+export interface CreateExclusionRequestAminoMsg {
+  type: "/google.logging.v2.CreateExclusionRequest";
+  value: CreateExclusionRequestAmino;
 }
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequestSDKType {
@@ -1144,6 +2138,45 @@ export interface UpdateExclusionRequest {
    */
   updateMask: FieldMask;
 }
+export interface UpdateExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateExclusionRequest";
+  value: Uint8Array;
+}
+/** The parameters to `UpdateExclusion`. */
+export interface UpdateExclusionRequestAmino {
+  /**
+   * Required. The resource name of the exclusion to update:
+   * 
+   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name: string;
+  /**
+   * Required. New values for the existing exclusion. Only the fields specified in
+   * `update_mask` are relevant.
+   */
+  exclusion?: LogExclusionAmino;
+  /**
+   * Required. A non-empty list of fields to change in the existing exclusion. New values
+   * for the fields are taken from the corresponding fields in the
+   * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
+   * `update_mask` are not changed and are ignored in the request.
+   * 
+   * For example, to change the filter and description of an exclusion,
+   * specify an `update_mask` of `"filter,description"`.
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateExclusionRequestAminoMsg {
+  type: "/google.logging.v2.UpdateExclusionRequest";
+  value: UpdateExclusionRequestAmino;
+}
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestSDKType {
   name: string;
@@ -1165,6 +2198,30 @@ export interface DeleteExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+}
+export interface DeleteExclusionRequestProtoMsg {
+  typeUrl: "/google.logging.v2.DeleteExclusionRequest";
+  value: Uint8Array;
+}
+/** The parameters to `DeleteExclusion`. */
+export interface DeleteExclusionRequestAmino {
+  /**
+   * Required. The resource name of an existing exclusion to delete:
+   * 
+   *     "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   *     "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name: string;
+}
+export interface DeleteExclusionRequestAminoMsg {
+  type: "/google.logging.v2.DeleteExclusionRequest";
+  value: DeleteExclusionRequestAmino;
 }
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequestSDKType {
@@ -1197,6 +2254,42 @@ export interface GetCmekSettingsRequest {
    * organization.
    */
   name: string;
+}
+export interface GetCmekSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
+  value: Uint8Array;
+}
+/**
+ * The parameters to
+ * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface GetCmekSettingsRequestAmino {
+  /**
+   * Required. The resource for which to retrieve CMEK settings.
+   * 
+   *     "projects/[PROJECT_ID]/cmekSettings"
+   *     "organizations/[ORGANIZATION_ID]/cmekSettings"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   *     "folders/[FOLDER_ID]/cmekSettings"
+   * 
+   * For example:
+   * 
+   *   `"organizations/12345/cmekSettings"`
+   * 
+   * Note: CMEK for the Log Router can be configured for Google Cloud projects,
+   * folders, organizations and billing accounts. Once configured for an
+   * organization, it applies to all projects and folders in the Google Cloud
+   * organization.
+   */
+  name: string;
+}
+export interface GetCmekSettingsRequestAminoMsg {
+  type: "/google.logging.v2.GetCmekSettingsRequest";
+  value: GetCmekSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -1253,6 +2346,59 @@ export interface UpdateCmekSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask: FieldMask;
+}
+export interface UpdateCmekSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
+  value: Uint8Array;
+}
+/**
+ * The parameters to
+ * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface UpdateCmekSettingsRequestAmino {
+  /**
+   * Required. The resource name for the CMEK settings to update.
+   * 
+   *     "projects/[PROJECT_ID]/cmekSettings"
+   *     "organizations/[ORGANIZATION_ID]/cmekSettings"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   *     "folders/[FOLDER_ID]/cmekSettings"
+   * 
+   * For example:
+   * 
+   *   `"organizations/12345/cmekSettings"`
+   * 
+   * Note: CMEK for the Log Router can currently only be configured for Google
+   * Cloud organizations. Once configured, it applies to all projects and
+   * folders in the Google Cloud organization.
+   */
+  name: string;
+  /**
+   * Required. The CMEK settings to update.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  cmek_settings?: CmekSettingsAmino;
+  /**
+   * Optional. Field mask identifying which fields from `cmek_settings` should
+   * be updated. A field will be overwritten if and only if it is in the update
+   * mask. Output only fields cannot be updated.
+   * 
+   * See [FieldMask][google.protobuf.FieldMask] for more information.
+   * 
+   * For example: `"updateMask=kmsKeyName"`
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateCmekSettingsRequestAminoMsg {
+  type: "/google.logging.v2.UpdateCmekSettingsRequest";
+  value: UpdateCmekSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -1329,6 +2475,76 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
+export interface CmekSettingsProtoMsg {
+  typeUrl: "/google.logging.v2.CmekSettings";
+  value: Uint8Array;
+}
+/**
+ * Describes the customer-managed encryption key (CMEK) settings associated with
+ * a project, folder, organization, billing account, or flexible resource.
+ * 
+ * Note: CMEK for the Log Router can currently only be configured for Google
+ * Cloud organizations. Once configured, it applies to all projects and folders
+ * in the Google Cloud organization.
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface CmekSettingsAmino {
+  /** Output only. The resource name of the CMEK settings. */
+  name: string;
+  /**
+   * The resource name for the configured Cloud KMS key.
+   * 
+   * KMS key name format:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
+   * To enable CMEK for the Log Router, set this field to a valid
+   * `kms_key_name` for which the associated service account has the required
+   * cloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.
+   * 
+   * The Cloud KMS key used by the Log Router can be updated by changing the
+   * `kms_key_name` to a new valid key name or disabled by setting the key name
+   * to an empty string. Encryption operations that are in progress will be
+   * completed with the key that was in use when they started. Decryption
+   * operations will be completed using the key that was used at the time of
+   * encryption unless access to that key has been revoked.
+   * 
+   * To disable CMEK for the Log Router, set this field to an empty string.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_key_name: string;
+  /**
+   * Output only. The service account that will be used by the Log Router to access your
+   * Cloud KMS key.
+   * 
+   * Before enabling CMEK for Log Router, you must first assign the
+   * cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
+   * the Log Router will use to access your Cloud KMS key. Use
+   * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
+   * obtain the service account ID.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  service_account_id: string;
+}
+export interface CmekSettingsAminoMsg {
+  type: "/google.logging.v2.CmekSettings";
+  value: CmekSettingsAmino;
+}
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -1373,6 +2589,42 @@ export interface GetSettingsRequest {
    * applies to all projects and folders in the Google Cloud organization.
    */
   name: string;
+}
+export interface GetSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.GetSettingsRequest";
+  value: Uint8Array;
+}
+/**
+ * The parameters to
+ * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface GetSettingsRequestAmino {
+  /**
+   * Required. The resource for which to retrieve settings.
+   * 
+   *     "projects/[PROJECT_ID]/settings"
+   *     "organizations/[ORGANIZATION_ID]/settings"
+   *     "billingAccounts/[BILLING_ACCOUNT_ID]/settings"
+   *     "folders/[FOLDER_ID]/settings"
+   * 
+   * For example:
+   * 
+   *   `"organizations/12345/settings"`
+   * 
+   * Note: Settings for the Log Router can be get for Google Cloud projects,
+   * folders, organizations and billing accounts. Currently it can only be
+   * configured for organizations. Once configured for an organization, it
+   * applies to all projects and folders in the Google Cloud organization.
+   */
+  name: string;
+}
+export interface GetSettingsRequestAminoMsg {
+  type: "/google.logging.v2.GetSettingsRequest";
+  value: GetSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -1426,6 +2678,56 @@ export interface UpdateSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask: FieldMask;
+}
+export interface UpdateSettingsRequestProtoMsg {
+  typeUrl: "/google.logging.v2.UpdateSettingsRequest";
+  value: Uint8Array;
+}
+/**
+ * The parameters to
+ * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface UpdateSettingsRequestAmino {
+  /**
+   * Required. The resource name for the settings to update.
+   * 
+   *     "organizations/[ORGANIZATION_ID]/settings"
+   * 
+   * For example:
+   * 
+   *   `"organizations/12345/settings"`
+   * 
+   * Note: Settings for the Log Router can currently only be configured for
+   * Google Cloud organizations. Once configured, it applies to all projects and
+   * folders in the Google Cloud organization.
+   */
+  name: string;
+  /**
+   * Required. The settings to update.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  settings?: SettingsAmino;
+  /**
+   * Optional. Field mask identifying which fields from `settings` should
+   * be updated. A field will be overwritten if and only if it is in the update
+   * mask. Output only fields cannot be updated.
+   * 
+   * See [FieldMask][google.protobuf.FieldMask] for more information.
+   * 
+   * For example: `"updateMask=kmsKeyName"`
+   */
+  update_mask?: FieldMaskAmino;
+}
+export interface UpdateSettingsRequestAminoMsg {
+  type: "/google.logging.v2.UpdateSettingsRequest";
+  value: UpdateSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -1506,6 +2808,80 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
+export interface SettingsProtoMsg {
+  typeUrl: "/google.logging.v2.Settings";
+  value: Uint8Array;
+}
+/**
+ * Describes the settings associated with a project, folder, organization,
+ * billing account, or flexible resource.
+ */
+export interface SettingsAmino {
+  /** Output only. The resource name of the settings. */
+  name: string;
+  /**
+   * Optional. The resource name for the configured Cloud KMS key.
+   * 
+   * KMS key name format:
+   * 
+   *     "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
+   * To enable CMEK for the Log Router, set this field to a valid
+   * `kms_key_name` for which the associated service account has the required
+   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key.
+   * 
+   * The Cloud KMS key used by the Log Router can be updated by changing the
+   * `kms_key_name` to a new valid key name. Encryption operations that are in
+   * progress will be completed with the key that was in use when they started.
+   * Decryption operations will be completed using the key that was used at the
+   * time of encryption unless access to that key has been revoked.
+   * 
+   * To disable CMEK for the Log Router, set this field to an empty string.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_key_name: string;
+  /**
+   * Output only. The service account that will be used by the Log Router to access your
+   * Cloud KMS key.
+   * 
+   * Before enabling CMEK for Log Router, you must first assign the role
+   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
+   * the Log Router will use to access your Cloud KMS key. Use
+   * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings] to
+   * obtain the service account ID.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_service_account_id: string;
+  /**
+   * Optional. The Cloud region that will be used for _Default and _Required log buckets
+   * for newly created projects and folders. For example `europe-west1`.
+   * This setting does not affect the location of custom log buckets.
+   */
+  storage_location: string;
+  /**
+   * Optional. If set to true, the _Default sink in newly created projects and folders
+   * will created in a disabled state. This can be used to automatically disable
+   * log ingestion if there is already an aggregated sink configured in the
+   * hierarchy. The _Default sink can be re-enabled manually if needed.
+   */
+  disable_default_sink: boolean;
+}
+export interface SettingsAminoMsg {
+  type: "/google.logging.v2.Settings";
+  value: SettingsAmino;
+}
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
@@ -1534,6 +2910,32 @@ export interface CopyLogEntriesRequest {
   filter: string;
   /** Required. Destination to which to copy log entries. */
   destination: string;
+}
+export interface CopyLogEntriesRequestProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
+  value: Uint8Array;
+}
+/** The parameters to CopyLogEntries. */
+export interface CopyLogEntriesRequestAmino {
+  /**
+   * Required. Log bucket from which to copy log entries.
+   * 
+   * For example:
+   * 
+   *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
+   */
+  name: string;
+  /**
+   * Optional. A filter specifying which log entries to copy. The filter must be no more
+   * than 20k characters. An empty filter matches all log entries.
+   */
+  filter: string;
+  /** Required. Destination to which to copy log entries. */
+  destination: string;
+}
+export interface CopyLogEntriesRequestAminoMsg {
+  type: "/google.logging.v2.CopyLogEntriesRequest";
+  value: CopyLogEntriesRequestAmino;
 }
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequestSDKType {
@@ -1566,6 +2968,39 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
+export interface CopyLogEntriesMetadataProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
+  value: Uint8Array;
+}
+/** Metadata for CopyLogEntries long running operations. */
+export interface CopyLogEntriesMetadataAmino {
+  /** The create time of an operation. */
+  start_time?: Date;
+  /** The end time of an operation. */
+  end_time?: Date;
+  /** State of an operation. */
+  state: OperationState;
+  /** Identifies whether the user has requested cancellation of the operation. */
+  cancellation_requested: boolean;
+  /** CopyLogEntries RPC request. */
+  request?: CopyLogEntriesRequestAmino;
+  /** Estimated progress of the operation (0 - 100%). */
+  progress: number;
+  /**
+   * The IAM identity of a service account that must be granted access to the
+   * destination.
+   * 
+   * If the service account is not granted permission to the destination within
+   * an hour, the operation will be cancelled.
+   * 
+   * For example: `"serviceAccount:foo@bar.com"`
+   */
+  writer_identity: string;
+}
+export interface CopyLogEntriesMetadataAminoMsg {
+  type: "/google.logging.v2.CopyLogEntriesMetadata";
+  value: CopyLogEntriesMetadataAmino;
+}
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
   start_time: Date;
@@ -1580,6 +3015,19 @@ export interface CopyLogEntriesMetadataSDKType {
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: bigint;
+}
+export interface CopyLogEntriesResponseProtoMsg {
+  typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
+  value: Uint8Array;
+}
+/** Response type for CopyLogEntries long running operations. */
+export interface CopyLogEntriesResponseAmino {
+  /** Number of log entries copied. */
+  log_entries_copied_count: string;
+}
+export interface CopyLogEntriesResponseAminoMsg {
+  type: "/google.logging.v2.CopyLogEntriesResponse";
+  value: CopyLogEntriesResponseAmino;
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {
@@ -1755,6 +3203,51 @@ export const LogBucket = {
     }
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     return obj;
+  },
+  fromAmino(object: LogBucketAmino): LogBucket {
+    return {
+      name: object.name,
+      description: object.description,
+      createTime: object.create_time,
+      updateTime: object.update_time,
+      retentionDays: object.retention_days,
+      locked: object.locked,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
+      restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
+      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
+    };
+  },
+  toAmino(message: LogBucket): LogBucketAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
+    obj.retention_days = message.retentionDays;
+    obj.locked = message.locked;
+    obj.lifecycle_state = message.lifecycleState;
+    if (message.restrictedFields) {
+      obj.restricted_fields = message.restrictedFields.map(e => e);
+    } else {
+      obj.restricted_fields = [];
+    }
+    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LogBucketAminoMsg): LogBucket {
+    return LogBucket.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogBucketProtoMsg): LogBucket {
+    return LogBucket.decode(message.value);
+  },
+  toProto(message: LogBucket): Uint8Array {
+    return LogBucket.encode(message).finish();
+  },
+  toProtoMsg(message: LogBucket): LogBucketProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogBucket",
+      value: LogBucket.encode(message).finish()
+    };
   }
 };
 function createBaseLogView(): LogView {
@@ -1867,6 +3360,39 @@ export const LogView = {
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     obj.filter = message.filter;
     return obj;
+  },
+  fromAmino(object: LogViewAmino): LogView {
+    return {
+      name: object.name,
+      description: object.description,
+      createTime: object.create_time,
+      updateTime: object.update_time,
+      filter: object.filter
+    };
+  },
+  toAmino(message: LogView): LogViewAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
+    obj.filter = message.filter;
+    return obj;
+  },
+  fromAminoMsg(object: LogViewAminoMsg): LogView {
+    return LogView.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogViewProtoMsg): LogView {
+    return LogView.decode(message.value);
+  },
+  toProto(message: LogView): Uint8Array {
+    return LogView.encode(message).finish();
+  },
+  toProtoMsg(message: LogView): LogViewProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogView",
+      value: LogView.encode(message).finish()
+    };
   }
 };
 function createBaseLogSink(): LogSink {
@@ -2078,6 +3604,57 @@ export const LogSink = {
     message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
+  },
+  fromAmino(object: LogSinkAmino): LogSink {
+    return {
+      name: object.name,
+      destination: object.destination,
+      filter: object.filter,
+      description: object.description,
+      disabled: object.disabled,
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
+      writerIdentity: object.writer_identity,
+      includeChildren: object.include_children,
+      bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
+      createTime: object.create_time,
+      updateTime: object.update_time
+    };
+  },
+  toAmino(message: LogSink): LogSinkAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.destination = message.destination;
+    obj.filter = message.filter;
+    obj.description = message.description;
+    obj.disabled = message.disabled;
+    if (message.exclusions) {
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
+    } else {
+      obj.exclusions = [];
+    }
+    obj.output_version_format = message.outputVersionFormat;
+    obj.writer_identity = message.writerIdentity;
+    obj.include_children = message.includeChildren;
+    obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
+    return obj;
+  },
+  fromAminoMsg(object: LogSinkAminoMsg): LogSink {
+    return LogSink.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogSinkProtoMsg): LogSink {
+    return LogSink.decode(message.value);
+  },
+  toProto(message: LogSink): Uint8Array {
+    return LogSink.encode(message).finish();
+  },
+  toProtoMsg(message: LogSink): LogSinkProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogSink",
+      value: LogSink.encode(message).finish()
+    };
   }
 };
 function createBaseBigQueryOptions(): BigQueryOptions {
@@ -2151,6 +3728,33 @@ export const BigQueryOptions = {
     obj.use_partitioned_tables = message.usePartitionedTables;
     obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
     return obj;
+  },
+  fromAmino(object: BigQueryOptionsAmino): BigQueryOptions {
+    return {
+      usePartitionedTables: object.use_partitioned_tables,
+      usesTimestampColumnPartitioning: object.uses_timestamp_column_partitioning
+    };
+  },
+  toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
+    const obj: any = {};
+    obj.use_partitioned_tables = message.usePartitionedTables;
+    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
+    return obj;
+  },
+  fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
+    return BigQueryOptions.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BigQueryOptionsProtoMsg): BigQueryOptions {
+    return BigQueryOptions.decode(message.value);
+  },
+  toProto(message: BigQueryOptions): Uint8Array {
+    return BigQueryOptions.encode(message).finish();
+  },
+  toProtoMsg(message: BigQueryOptions): BigQueryOptionsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.BigQueryOptions",
+      value: BigQueryOptions.encode(message).finish()
+    };
   }
 };
 function createBaseListBucketsRequest(): ListBucketsRequest {
@@ -2237,6 +3841,35 @@ export const ListBucketsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+  fromAmino(object: ListBucketsRequestAmino): ListBucketsRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
+    return ListBucketsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListBucketsRequestProtoMsg): ListBucketsRequest {
+    return ListBucketsRequest.decode(message.value);
+  },
+  toProto(message: ListBucketsRequest): Uint8Array {
+    return ListBucketsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListBucketsRequest): ListBucketsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListBucketsRequest",
+      value: ListBucketsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListBucketsResponse(): ListBucketsResponse {
@@ -2318,6 +3951,37 @@ export const ListBucketsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListBucketsResponseAmino): ListBucketsResponse {
+    return {
+      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListBucketsResponse): ListBucketsResponseAmino {
+    const obj: any = {};
+    if (message.buckets) {
+      obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e) : undefined);
+    } else {
+      obj.buckets = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
+    return ListBucketsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListBucketsResponseProtoMsg): ListBucketsResponse {
+    return ListBucketsResponse.decode(message.value);
+  },
+  toProto(message: ListBucketsResponse): Uint8Array {
+    return ListBucketsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListBucketsResponse): ListBucketsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListBucketsResponse",
+      value: ListBucketsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseCreateBucketRequest(): CreateBucketRequest {
@@ -2404,6 +4068,35 @@ export const CreateBucketRequest = {
     obj.bucket_id = message.bucketId;
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     return obj;
+  },
+  fromAmino(object: CreateBucketRequestAmino): CreateBucketRequest {
+    return {
+      parent: object.parent,
+      bucketId: object.bucket_id,
+      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined
+    };
+  },
+  toAmino(message: CreateBucketRequest): CreateBucketRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.bucket_id = message.bucketId;
+    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateBucketRequestAminoMsg): CreateBucketRequest {
+    return CreateBucketRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CreateBucketRequestProtoMsg): CreateBucketRequest {
+    return CreateBucketRequest.decode(message.value);
+  },
+  toProto(message: CreateBucketRequest): Uint8Array {
+    return CreateBucketRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CreateBucketRequest): CreateBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateBucketRequest",
+      value: CreateBucketRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
@@ -2490,6 +4183,35 @@ export const UpdateBucketRequest = {
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateBucketRequestAmino): UpdateBucketRequest {
+    return {
+      name: object.name,
+      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateBucketRequest): UpdateBucketRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateBucketRequestAminoMsg): UpdateBucketRequest {
+    return UpdateBucketRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateBucketRequestProtoMsg): UpdateBucketRequest {
+    return UpdateBucketRequest.decode(message.value);
+  },
+  toProto(message: UpdateBucketRequest): Uint8Array {
+    return UpdateBucketRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateBucketRequest): UpdateBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateBucketRequest",
+      value: UpdateBucketRequest.encode(message).finish()
+    };
   }
 };
 function createBaseGetBucketRequest(): GetBucketRequest {
@@ -2550,6 +4272,31 @@ export const GetBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: GetBucketRequestAmino): GetBucketRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: GetBucketRequest): GetBucketRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
+    return GetBucketRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetBucketRequestProtoMsg): GetBucketRequest {
+    return GetBucketRequest.decode(message.value);
+  },
+  toProto(message: GetBucketRequest): Uint8Array {
+    return GetBucketRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetBucketRequest): GetBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetBucketRequest",
+      value: GetBucketRequest.encode(message).finish()
+    };
   }
 };
 function createBaseDeleteBucketRequest(): DeleteBucketRequest {
@@ -2610,6 +4357,31 @@ export const DeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: DeleteBucketRequestAmino): DeleteBucketRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
+    return DeleteBucketRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteBucketRequestProtoMsg): DeleteBucketRequest {
+    return DeleteBucketRequest.decode(message.value);
+  },
+  toProto(message: DeleteBucketRequest): Uint8Array {
+    return DeleteBucketRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteBucketRequest): DeleteBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteBucketRequest",
+      value: DeleteBucketRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
@@ -2670,6 +4442,31 @@ export const UndeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: UndeleteBucketRequestAmino): UndeleteBucketRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
+    return UndeleteBucketRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UndeleteBucketRequestProtoMsg): UndeleteBucketRequest {
+    return UndeleteBucketRequest.decode(message.value);
+  },
+  toProto(message: UndeleteBucketRequest): Uint8Array {
+    return UndeleteBucketRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UndeleteBucketRequest): UndeleteBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UndeleteBucketRequest",
+      value: UndeleteBucketRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListViewsRequest(): ListViewsRequest {
@@ -2756,6 +4553,35 @@ export const ListViewsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+  fromAmino(object: ListViewsRequestAmino): ListViewsRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListViewsRequest): ListViewsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
+    return ListViewsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListViewsRequestProtoMsg): ListViewsRequest {
+    return ListViewsRequest.decode(message.value);
+  },
+  toProto(message: ListViewsRequest): Uint8Array {
+    return ListViewsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListViewsRequest): ListViewsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListViewsRequest",
+      value: ListViewsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListViewsResponse(): ListViewsResponse {
@@ -2837,6 +4663,37 @@ export const ListViewsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListViewsResponseAmino): ListViewsResponse {
+    return {
+      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListViewsResponse): ListViewsResponseAmino {
+    const obj: any = {};
+    if (message.views) {
+      obj.views = message.views.map(e => e ? LogView.toAmino(e) : undefined);
+    } else {
+      obj.views = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
+    return ListViewsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListViewsResponseProtoMsg): ListViewsResponse {
+    return ListViewsResponse.decode(message.value);
+  },
+  toProto(message: ListViewsResponse): Uint8Array {
+    return ListViewsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListViewsResponse): ListViewsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListViewsResponse",
+      value: ListViewsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseCreateViewRequest(): CreateViewRequest {
@@ -2923,6 +4780,35 @@ export const CreateViewRequest = {
     obj.view_id = message.viewId;
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     return obj;
+  },
+  fromAmino(object: CreateViewRequestAmino): CreateViewRequest {
+    return {
+      parent: object.parent,
+      viewId: object.view_id,
+      view: object?.view ? LogView.fromAmino(object.view) : undefined
+    };
+  },
+  toAmino(message: CreateViewRequest): CreateViewRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.view_id = message.viewId;
+    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateViewRequestAminoMsg): CreateViewRequest {
+    return CreateViewRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CreateViewRequestProtoMsg): CreateViewRequest {
+    return CreateViewRequest.decode(message.value);
+  },
+  toProto(message: CreateViewRequest): Uint8Array {
+    return CreateViewRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CreateViewRequest): CreateViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateViewRequest",
+      value: CreateViewRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateViewRequest(): UpdateViewRequest {
@@ -3009,6 +4895,35 @@ export const UpdateViewRequest = {
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateViewRequestAmino): UpdateViewRequest {
+    return {
+      name: object.name,
+      view: object?.view ? LogView.fromAmino(object.view) : undefined,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateViewRequest): UpdateViewRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateViewRequestAminoMsg): UpdateViewRequest {
+    return UpdateViewRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateViewRequestProtoMsg): UpdateViewRequest {
+    return UpdateViewRequest.decode(message.value);
+  },
+  toProto(message: UpdateViewRequest): Uint8Array {
+    return UpdateViewRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateViewRequest): UpdateViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateViewRequest",
+      value: UpdateViewRequest.encode(message).finish()
+    };
   }
 };
 function createBaseGetViewRequest(): GetViewRequest {
@@ -3069,6 +4984,31 @@ export const GetViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: GetViewRequestAmino): GetViewRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: GetViewRequest): GetViewRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
+    return GetViewRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetViewRequestProtoMsg): GetViewRequest {
+    return GetViewRequest.decode(message.value);
+  },
+  toProto(message: GetViewRequest): Uint8Array {
+    return GetViewRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetViewRequest): GetViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetViewRequest",
+      value: GetViewRequest.encode(message).finish()
+    };
   }
 };
 function createBaseDeleteViewRequest(): DeleteViewRequest {
@@ -3129,6 +5069,31 @@ export const DeleteViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: DeleteViewRequestAmino): DeleteViewRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
+    return DeleteViewRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteViewRequestProtoMsg): DeleteViewRequest {
+    return DeleteViewRequest.decode(message.value);
+  },
+  toProto(message: DeleteViewRequest): Uint8Array {
+    return DeleteViewRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteViewRequest): DeleteViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteViewRequest",
+      value: DeleteViewRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListSinksRequest(): ListSinksRequest {
@@ -3215,6 +5180,35 @@ export const ListSinksRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+  fromAmino(object: ListSinksRequestAmino): ListSinksRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListSinksRequest): ListSinksRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
+    return ListSinksRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListSinksRequestProtoMsg): ListSinksRequest {
+    return ListSinksRequest.decode(message.value);
+  },
+  toProto(message: ListSinksRequest): Uint8Array {
+    return ListSinksRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListSinksRequest): ListSinksRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListSinksRequest",
+      value: ListSinksRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListSinksResponse(): ListSinksResponse {
@@ -3296,6 +5290,37 @@ export const ListSinksResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListSinksResponseAmino): ListSinksResponse {
+    return {
+      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListSinksResponse): ListSinksResponseAmino {
+    const obj: any = {};
+    if (message.sinks) {
+      obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e) : undefined);
+    } else {
+      obj.sinks = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
+    return ListSinksResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListSinksResponseProtoMsg): ListSinksResponse {
+    return ListSinksResponse.decode(message.value);
+  },
+  toProto(message: ListSinksResponse): Uint8Array {
+    return ListSinksResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListSinksResponse): ListSinksResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListSinksResponse",
+      value: ListSinksResponse.encode(message).finish()
+    };
   }
 };
 function createBaseGetSinkRequest(): GetSinkRequest {
@@ -3356,6 +5381,31 @@ export const GetSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+  fromAmino(object: GetSinkRequestAmino): GetSinkRequest {
+    return {
+      sinkName: object.sink_name
+    };
+  },
+  toAmino(message: GetSinkRequest): GetSinkRequestAmino {
+    const obj: any = {};
+    obj.sink_name = message.sinkName;
+    return obj;
+  },
+  fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
+    return GetSinkRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetSinkRequestProtoMsg): GetSinkRequest {
+    return GetSinkRequest.decode(message.value);
+  },
+  toProto(message: GetSinkRequest): Uint8Array {
+    return GetSinkRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetSinkRequest): GetSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetSinkRequest",
+      value: GetSinkRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCreateSinkRequest(): CreateSinkRequest {
@@ -3442,6 +5492,35 @@ export const CreateSinkRequest = {
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
+  },
+  fromAmino(object: CreateSinkRequestAmino): CreateSinkRequest {
+    return {
+      parent: object.parent,
+      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
+      uniqueWriterIdentity: object.unique_writer_identity
+    };
+  },
+  toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
+    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    return obj;
+  },
+  fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
+    return CreateSinkRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CreateSinkRequestProtoMsg): CreateSinkRequest {
+    return CreateSinkRequest.decode(message.value);
+  },
+  toProto(message: CreateSinkRequest): Uint8Array {
+    return CreateSinkRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CreateSinkRequest): CreateSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateSinkRequest",
+      value: CreateSinkRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
@@ -3541,6 +5620,37 @@ export const UpdateSinkRequest = {
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateSinkRequestAmino): UpdateSinkRequest {
+    return {
+      sinkName: object.sink_name,
+      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
+      uniqueWriterIdentity: object.unique_writer_identity,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateSinkRequest): UpdateSinkRequestAmino {
+    const obj: any = {};
+    obj.sink_name = message.sinkName;
+    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
+    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateSinkRequestAminoMsg): UpdateSinkRequest {
+    return UpdateSinkRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateSinkRequestProtoMsg): UpdateSinkRequest {
+    return UpdateSinkRequest.decode(message.value);
+  },
+  toProto(message: UpdateSinkRequest): Uint8Array {
+    return UpdateSinkRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateSinkRequest): UpdateSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateSinkRequest",
+      value: UpdateSinkRequest.encode(message).finish()
+    };
   }
 };
 function createBaseDeleteSinkRequest(): DeleteSinkRequest {
@@ -3601,6 +5711,31 @@ export const DeleteSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+  fromAmino(object: DeleteSinkRequestAmino): DeleteSinkRequest {
+    return {
+      sinkName: object.sink_name
+    };
+  },
+  toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
+    const obj: any = {};
+    obj.sink_name = message.sinkName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
+    return DeleteSinkRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteSinkRequestProtoMsg): DeleteSinkRequest {
+    return DeleteSinkRequest.decode(message.value);
+  },
+  toProto(message: DeleteSinkRequest): Uint8Array {
+    return DeleteSinkRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteSinkRequest): DeleteSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteSinkRequest",
+      value: DeleteSinkRequest.encode(message).finish()
+    };
   }
 };
 function createBaseLogExclusion(): LogExclusion {
@@ -3726,6 +5861,41 @@ export const LogExclusion = {
     message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
+  },
+  fromAmino(object: LogExclusionAmino): LogExclusion {
+    return {
+      name: object.name,
+      description: object.description,
+      filter: object.filter,
+      disabled: object.disabled,
+      createTime: object.create_time,
+      updateTime: object.update_time
+    };
+  },
+  toAmino(message: LogExclusion): LogExclusionAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.filter = message.filter;
+    obj.disabled = message.disabled;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
+    return obj;
+  },
+  fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
+    return LogExclusion.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
+    return LogExclusion.decode(message.value);
+  },
+  toProto(message: LogExclusion): Uint8Array {
+    return LogExclusion.encode(message).finish();
+  },
+  toProtoMsg(message: LogExclusion): LogExclusionProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogExclusion",
+      value: LogExclusion.encode(message).finish()
+    };
   }
 };
 function createBaseListExclusionsRequest(): ListExclusionsRequest {
@@ -3812,6 +5982,35 @@ export const ListExclusionsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+  fromAmino(object: ListExclusionsRequestAmino): ListExclusionsRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
+    return ListExclusionsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListExclusionsRequestProtoMsg): ListExclusionsRequest {
+    return ListExclusionsRequest.decode(message.value);
+  },
+  toProto(message: ListExclusionsRequest): Uint8Array {
+    return ListExclusionsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListExclusionsRequest): ListExclusionsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListExclusionsRequest",
+      value: ListExclusionsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListExclusionsResponse(): ListExclusionsResponse {
@@ -3893,6 +6092,37 @@ export const ListExclusionsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+  fromAmino(object: ListExclusionsResponseAmino): ListExclusionsResponse {
+    return {
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListExclusionsResponse): ListExclusionsResponseAmino {
+    const obj: any = {};
+    if (message.exclusions) {
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
+    } else {
+      obj.exclusions = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
+    return ListExclusionsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListExclusionsResponseProtoMsg): ListExclusionsResponse {
+    return ListExclusionsResponse.decode(message.value);
+  },
+  toProto(message: ListExclusionsResponse): Uint8Array {
+    return ListExclusionsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListExclusionsResponse): ListExclusionsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListExclusionsResponse",
+      value: ListExclusionsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseGetExclusionRequest(): GetExclusionRequest {
@@ -3953,6 +6183,31 @@ export const GetExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: GetExclusionRequestAmino): GetExclusionRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
+    return GetExclusionRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetExclusionRequestProtoMsg): GetExclusionRequest {
+    return GetExclusionRequest.decode(message.value);
+  },
+  toProto(message: GetExclusionRequest): Uint8Array {
+    return GetExclusionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetExclusionRequest): GetExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetExclusionRequest",
+      value: GetExclusionRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
@@ -4026,6 +6281,33 @@ export const CreateExclusionRequest = {
     obj.parent = message.parent;
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     return obj;
+  },
+  fromAmino(object: CreateExclusionRequestAmino): CreateExclusionRequest {
+    return {
+      parent: object.parent,
+      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined
+    };
+  },
+  toAmino(message: CreateExclusionRequest): CreateExclusionRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateExclusionRequestAminoMsg): CreateExclusionRequest {
+    return CreateExclusionRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CreateExclusionRequestProtoMsg): CreateExclusionRequest {
+    return CreateExclusionRequest.decode(message.value);
+  },
+  toProto(message: CreateExclusionRequest): Uint8Array {
+    return CreateExclusionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CreateExclusionRequest): CreateExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateExclusionRequest",
+      value: CreateExclusionRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
@@ -4112,6 +6394,35 @@ export const UpdateExclusionRequest = {
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateExclusionRequestAmino): UpdateExclusionRequest {
+    return {
+      name: object.name,
+      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateExclusionRequestAminoMsg): UpdateExclusionRequest {
+    return UpdateExclusionRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateExclusionRequestProtoMsg): UpdateExclusionRequest {
+    return UpdateExclusionRequest.decode(message.value);
+  },
+  toProto(message: UpdateExclusionRequest): Uint8Array {
+    return UpdateExclusionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateExclusionRequest): UpdateExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateExclusionRequest",
+      value: UpdateExclusionRequest.encode(message).finish()
+    };
   }
 };
 function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
@@ -4172,6 +6483,31 @@ export const DeleteExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: DeleteExclusionRequestAmino): DeleteExclusionRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
+    return DeleteExclusionRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteExclusionRequestProtoMsg): DeleteExclusionRequest {
+    return DeleteExclusionRequest.decode(message.value);
+  },
+  toProto(message: DeleteExclusionRequest): Uint8Array {
+    return DeleteExclusionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteExclusionRequest): DeleteExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteExclusionRequest",
+      value: DeleteExclusionRequest.encode(message).finish()
+    };
   }
 };
 function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
@@ -4232,6 +6568,31 @@ export const GetCmekSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: GetCmekSettingsRequestAmino): GetCmekSettingsRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
+    return GetCmekSettingsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetCmekSettingsRequestProtoMsg): GetCmekSettingsRequest {
+    return GetCmekSettingsRequest.decode(message.value);
+  },
+  toProto(message: GetCmekSettingsRequest): Uint8Array {
+    return GetCmekSettingsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetCmekSettingsRequest): GetCmekSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
+      value: GetCmekSettingsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
@@ -4318,6 +6679,35 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateCmekSettingsRequestAmino): UpdateCmekSettingsRequest {
+    return {
+      name: object.name,
+      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateCmekSettingsRequestAminoMsg): UpdateCmekSettingsRequest {
+    return UpdateCmekSettingsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg): UpdateCmekSettingsRequest {
+    return UpdateCmekSettingsRequest.decode(message.value);
+  },
+  toProto(message: UpdateCmekSettingsRequest): Uint8Array {
+    return UpdateCmekSettingsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
+      value: UpdateCmekSettingsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCmekSettings(): CmekSettings {
@@ -4404,6 +6794,35 @@ export const CmekSettings = {
     obj.kms_key_name = message.kmsKeyName;
     obj.service_account_id = message.serviceAccountId;
     return obj;
+  },
+  fromAmino(object: CmekSettingsAmino): CmekSettings {
+    return {
+      name: object.name,
+      kmsKeyName: object.kms_key_name,
+      serviceAccountId: object.service_account_id
+    };
+  },
+  toAmino(message: CmekSettings): CmekSettingsAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.kms_key_name = message.kmsKeyName;
+    obj.service_account_id = message.serviceAccountId;
+    return obj;
+  },
+  fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
+    return CmekSettings.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CmekSettingsProtoMsg): CmekSettings {
+    return CmekSettings.decode(message.value);
+  },
+  toProto(message: CmekSettings): Uint8Array {
+    return CmekSettings.encode(message).finish();
+  },
+  toProtoMsg(message: CmekSettings): CmekSettingsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CmekSettings",
+      value: CmekSettings.encode(message).finish()
+    };
   }
 };
 function createBaseGetSettingsRequest(): GetSettingsRequest {
@@ -4464,6 +6883,31 @@ export const GetSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: GetSettingsRequestAmino): GetSettingsRequest {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
+    return GetSettingsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GetSettingsRequestProtoMsg): GetSettingsRequest {
+    return GetSettingsRequest.decode(message.value);
+  },
+  toProto(message: GetSettingsRequest): Uint8Array {
+    return GetSettingsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: GetSettingsRequest): GetSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetSettingsRequest",
+      value: GetSettingsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
@@ -4550,6 +6994,35 @@ export const UpdateSettingsRequest = {
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+  fromAmino(object: UpdateSettingsRequestAmino): UpdateSettingsRequest {
+    return {
+      name: object.name,
+      settings: object?.settings ? Settings.fromAmino(object.settings) : undefined,
+      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
+    };
+  },
+  toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateSettingsRequestAminoMsg): UpdateSettingsRequest {
+    return UpdateSettingsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UpdateSettingsRequestProtoMsg): UpdateSettingsRequest {
+    return UpdateSettingsRequest.decode(message.value);
+  },
+  toProto(message: UpdateSettingsRequest): Uint8Array {
+    return UpdateSettingsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateSettingsRequest): UpdateSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateSettingsRequest",
+      value: UpdateSettingsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseSettings(): Settings {
@@ -4662,6 +7135,39 @@ export const Settings = {
     obj.storage_location = message.storageLocation;
     obj.disable_default_sink = message.disableDefaultSink;
     return obj;
+  },
+  fromAmino(object: SettingsAmino): Settings {
+    return {
+      name: object.name,
+      kmsKeyName: object.kms_key_name,
+      kmsServiceAccountId: object.kms_service_account_id,
+      storageLocation: object.storage_location,
+      disableDefaultSink: object.disable_default_sink
+    };
+  },
+  toAmino(message: Settings): SettingsAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.kms_key_name = message.kmsKeyName;
+    obj.kms_service_account_id = message.kmsServiceAccountId;
+    obj.storage_location = message.storageLocation;
+    obj.disable_default_sink = message.disableDefaultSink;
+    return obj;
+  },
+  fromAminoMsg(object: SettingsAminoMsg): Settings {
+    return Settings.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SettingsProtoMsg): Settings {
+    return Settings.decode(message.value);
+  },
+  toProto(message: Settings): Uint8Array {
+    return Settings.encode(message).finish();
+  },
+  toProtoMsg(message: Settings): SettingsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.Settings",
+      value: Settings.encode(message).finish()
+    };
   }
 };
 function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
@@ -4748,6 +7254,35 @@ export const CopyLogEntriesRequest = {
     obj.filter = message.filter;
     obj.destination = message.destination;
     return obj;
+  },
+  fromAmino(object: CopyLogEntriesRequestAmino): CopyLogEntriesRequest {
+    return {
+      name: object.name,
+      filter: object.filter,
+      destination: object.destination
+    };
+  },
+  toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.filter = message.filter;
+    obj.destination = message.destination;
+    return obj;
+  },
+  fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
+    return CopyLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CopyLogEntriesRequestProtoMsg): CopyLogEntriesRequest {
+    return CopyLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: CopyLogEntriesRequest): Uint8Array {
+    return CopyLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CopyLogEntriesRequest): CopyLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
+      value: CopyLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
@@ -4886,6 +7421,43 @@ export const CopyLogEntriesMetadata = {
     obj.progress = message.progress;
     obj.writer_identity = message.writerIdentity;
     return obj;
+  },
+  fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
+    return {
+      startTime: object.start_time,
+      endTime: object.end_time,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
+      cancellationRequested: object.cancellation_requested,
+      request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
+      progress: object.progress,
+      writerIdentity: object.writer_identity
+    };
+  },
+  toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
+    const obj: any = {};
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
+    obj.state = message.state;
+    obj.cancellation_requested = message.cancellationRequested;
+    obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
+    obj.progress = message.progress;
+    obj.writer_identity = message.writerIdentity;
+    return obj;
+  },
+  fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
+    return CopyLogEntriesMetadata.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg): CopyLogEntriesMetadata {
+    return CopyLogEntriesMetadata.decode(message.value);
+  },
+  toProto(message: CopyLogEntriesMetadata): Uint8Array {
+    return CopyLogEntriesMetadata.encode(message).finish();
+  },
+  toProtoMsg(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
+      value: CopyLogEntriesMetadata.encode(message).finish()
+    };
   }
 };
 function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
@@ -4946,5 +7518,30 @@ export const CopyLogEntriesResponse = {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount;
     return obj;
+  },
+  fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {
+    return {
+      logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
+    };
+  },
+  toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {
+    const obj: any = {};
+    obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {
+    return CopyLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CopyLogEntriesResponseProtoMsg): CopyLogEntriesResponse {
+    return CopyLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: CopyLogEntriesResponse): Uint8Array {
+    return CopyLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: CopyLogEntriesResponse): CopyLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
+      value: CopyLogEntriesResponse.encode(message).finish()
+    };
   }
 };

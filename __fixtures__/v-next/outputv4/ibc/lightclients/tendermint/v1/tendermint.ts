@@ -1,10 +1,10 @@
-import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
-import { Height, HeightSDKType } from "../../../core/client/v1/client";
-import { ProofSpec, ProofSpecSDKType } from "../../../../confio/proofs";
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { MerkleRoot, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
-import { SignedHeader, SignedHeaderSDKType } from "../../../../tendermint/types/types";
-import { ValidatorSet, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
+import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
+import { ProofSpec, ProofSpecAmino, ProofSpecSDKType } from "../../../../confio/proofs";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
+import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
+import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
@@ -51,6 +51,57 @@ export interface ClientState {
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
+  value: Uint8Array;
+}
+/**
+ * ClientState from Tendermint tracks the current validator set, latest height,
+ * and a possible frozen height.
+ */
+export interface ClientStateAmino {
+  chain_id: string;
+  trust_level?: FractionAmino;
+  /**
+   * duration of the period since the LastestTimestamp during which the
+   * submitted headers are valid for upgrade
+   */
+  trusting_period?: DurationAmino;
+  /** duration of the staking unbonding period */
+  unbonding_period?: DurationAmino;
+  /** defines how much new (untrusted) header's Time can drift into the future. */
+  max_clock_drift?: DurationAmino;
+  /** Block height when the client was frozen due to a misbehaviour */
+  frozen_height?: HeightAmino;
+  /** Latest height the client was updated to */
+  latest_height?: HeightAmino;
+  /** Proof specifications used in verifying counterparty state */
+  proof_specs: ProofSpecAmino[];
+  /**
+   * Path at which next upgraded client will be committed.
+   * Each element corresponds to the key for a single CommitmentProof in the
+   * chained proof. NOTE: ClientState must stored under
+   * `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
+   * under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
+   * the default upgrade module, upgrade_path should be []string{"upgrade",
+   * "upgradedIBCState"}`
+   */
+  upgrade_path: string[];
+  /**
+   * This flag, when set to true, will allow governance to recover a client
+   * which has expired
+   */
+  allow_update_after_expiry: boolean;
+  /**
+   * This flag, when set to true, will allow governance to unfreeze a client
+   * whose chain has experienced a misbehaviour event
+   */
+  allow_update_after_misbehaviour: boolean;
+}
+export interface ClientStateAminoMsg {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
+}
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -79,6 +130,25 @@ export interface ConsensusState {
   root: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
+export interface ConsensusStateProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
+  value: Uint8Array;
+}
+/** ConsensusState defines the consensus state from Tendermint. */
+export interface ConsensusStateAmino {
+  /**
+   * timestamp that corresponds to the block height in which the ConsensusState
+   * was stored.
+   */
+  timestamp?: Date;
+  /** commitment root (i.e app hash) */
+  root?: MerkleRootAmino;
+  next_validators_hash: Uint8Array;
+}
+export interface ConsensusStateAminoMsg {
+  type: "cosmos-sdk/ConsensusState";
+  value: ConsensusStateAmino;
+}
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
   timestamp: Date;
@@ -93,6 +163,23 @@ export interface Misbehaviour {
   clientId: string;
   header1: Header;
   header2: Header;
+}
+export interface MisbehaviourProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
+  value: Uint8Array;
+}
+/**
+ * Misbehaviour is a wrapper over two conflicting Headers
+ * that implements Misbehaviour interface expected by ICS-02
+ */
+export interface MisbehaviourAmino {
+  client_id: string;
+  header_1?: HeaderAmino;
+  header_2?: HeaderAmino;
+}
+export interface MisbehaviourAminoMsg {
+  type: "cosmos-sdk/Misbehaviour";
+  value: MisbehaviourAmino;
 }
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
@@ -123,6 +210,34 @@ export interface Header {
   trustedHeight: Height;
   trustedValidators: ValidatorSet;
 }
+export interface HeaderProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Header";
+  value: Uint8Array;
+}
+/**
+ * Header defines the Tendermint client consensus Header.
+ * It encapsulates all the information necessary to update from a trusted
+ * Tendermint ConsensusState. The inclusion of TrustedHeight and
+ * TrustedValidators allows this update to process correctly, so long as the
+ * ConsensusState for the TrustedHeight exists, this removes race conditions
+ * among relayers The SignedHeader and ValidatorSet are the new untrusted update
+ * fields for the client. The TrustedHeight is the height of a stored
+ * ConsensusState on the client that will be used to verify the new untrusted
+ * header. The Trusted ConsensusState must be within the unbonding period of
+ * current time in order to correctly verify, and the TrustedValidators must
+ * hash to TrustedConsensusState.NextValidatorsHash since that is the last
+ * trusted validator set at the TrustedHeight.
+ */
+export interface HeaderAmino {
+  signed_header?: SignedHeaderAmino;
+  validator_set?: ValidatorSetAmino;
+  trusted_height?: HeightAmino;
+  trusted_validators?: ValidatorSetAmino;
+}
+export interface HeaderAminoMsg {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
+}
 /**
  * Header defines the Tendermint client consensus Header.
  * It encapsulates all the information necessary to update from a trusted
@@ -150,6 +265,22 @@ export interface HeaderSDKType {
 export interface Fraction {
   numerator: bigint;
   denominator: bigint;
+}
+export interface FractionProtoMsg {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
+  value: Uint8Array;
+}
+/**
+ * Fraction defines the protobuf message type for tmmath.Fraction that only
+ * supports positive values.
+ */
+export interface FractionAmino {
+  numerator: string;
+  denominator: string;
+}
+export interface FractionAminoMsg {
+  type: "cosmos-sdk/Fraction";
+  value: FractionAmino;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
@@ -363,6 +494,65 @@ export const ClientState = {
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
+  },
+  fromAmino(object: ClientStateAmino): ClientState {
+    return {
+      chainId: object.chain_id,
+      trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : undefined,
+      trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : undefined,
+      unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : undefined,
+      maxClockDrift: object?.max_clock_drift ? Duration.fromAmino(object.max_clock_drift) : undefined,
+      frozenHeight: object?.frozen_height ? Height.fromAmino(object.frozen_height) : undefined,
+      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : undefined,
+      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromAmino(e)) : [],
+      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
+      allowUpdateAfterExpiry: object.allow_update_after_expiry,
+      allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
+    };
+  },
+  toAmino(message: ClientState): ClientStateAmino {
+    const obj: any = {};
+    obj.chain_id = message.chainId;
+    obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
+    obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
+    obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
+    obj.max_clock_drift = message.maxClockDrift ? Duration.toAmino(message.maxClockDrift) : undefined;
+    obj.frozen_height = message.frozenHeight ? Height.toAmino(message.frozenHeight) : {};
+    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight) : {};
+    if (message.proofSpecs) {
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e) : undefined);
+    } else {
+      obj.proof_specs = [];
+    }
+    if (message.upgradePath) {
+      obj.upgrade_path = message.upgradePath.map(e => e);
+    } else {
+      obj.upgrade_path = [];
+    }
+    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
+    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
+    return obj;
+  },
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
+  },
+  toProto(message: ClientState): Uint8Array {
+    return ClientState.encode(message).finish();
+  },
+  toProtoMsg(message: ClientState): ClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.ClientState",
+      value: ClientState.encode(message).finish()
+    };
   }
 };
 function createBaseConsensusState(): ConsensusState {
@@ -449,6 +639,41 @@ export const ConsensusState = {
     message.root !== undefined && (obj.root = message.root ? MerkleRoot.toSDK(message.root) : undefined);
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
+  },
+  fromAmino(object: ConsensusStateAmino): ConsensusState {
+    return {
+      timestamp: object.timestamp,
+      root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
+      nextValidatorsHash: object.next_validators_hash
+    };
+  },
+  toAmino(message: ConsensusState): ConsensusStateAmino {
+    const obj: any = {};
+    obj.timestamp = message.timestamp;
+    obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
+    obj.next_validators_hash = message.nextValidatorsHash;
+    return obj;
+  },
+  fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
+    return ConsensusState.fromAmino(object.value);
+  },
+  toAminoMsg(message: ConsensusState): ConsensusStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ConsensusState",
+      value: ConsensusState.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ConsensusStateProtoMsg): ConsensusState {
+    return ConsensusState.decode(message.value);
+  },
+  toProto(message: ConsensusState): Uint8Array {
+    return ConsensusState.encode(message).finish();
+  },
+  toProtoMsg(message: ConsensusState): ConsensusStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState",
+      value: ConsensusState.encode(message).finish()
+    };
   }
 };
 function createBaseMisbehaviour(): Misbehaviour {
@@ -535,6 +760,41 @@ export const Misbehaviour = {
     message.header1 !== undefined && (obj.header_1 = message.header1 ? Header.toSDK(message.header1) : undefined);
     message.header2 !== undefined && (obj.header_2 = message.header2 ? Header.toSDK(message.header2) : undefined);
     return obj;
+  },
+  fromAmino(object: MisbehaviourAmino): Misbehaviour {
+    return {
+      clientId: object.client_id,
+      header1: object?.header_1 ? Header.fromAmino(object.header_1) : undefined,
+      header2: object?.header_2 ? Header.fromAmino(object.header_2) : undefined
+    };
+  },
+  toAmino(message: Misbehaviour): MisbehaviourAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.header_1 = message.header1 ? Header.toAmino(message.header1) : undefined;
+    obj.header_2 = message.header2 ? Header.toAmino(message.header2) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
+    return Misbehaviour.fromAmino(object.value);
+  },
+  toAminoMsg(message: Misbehaviour): MisbehaviourAminoMsg {
+    return {
+      type: "cosmos-sdk/Misbehaviour",
+      value: Misbehaviour.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MisbehaviourProtoMsg): Misbehaviour {
+    return Misbehaviour.decode(message.value);
+  },
+  toProto(message: Misbehaviour): Uint8Array {
+    return Misbehaviour.encode(message).finish();
+  },
+  toProtoMsg(message: Misbehaviour): MisbehaviourProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour",
+      value: Misbehaviour.encode(message).finish()
+    };
   }
 };
 function createBaseHeader(): Header {
@@ -634,6 +894,43 @@ export const Header = {
     message.trustedHeight !== undefined && (obj.trusted_height = message.trustedHeight ? Height.toSDK(message.trustedHeight) : undefined);
     message.trustedValidators !== undefined && (obj.trusted_validators = message.trustedValidators ? ValidatorSet.toSDK(message.trustedValidators) : undefined);
     return obj;
+  },
+  fromAmino(object: HeaderAmino): Header {
+    return {
+      signedHeader: object?.signed_header ? SignedHeader.fromAmino(object.signed_header) : undefined,
+      validatorSet: object?.validator_set ? ValidatorSet.fromAmino(object.validator_set) : undefined,
+      trustedHeight: object?.trusted_height ? Height.fromAmino(object.trusted_height) : undefined,
+      trustedValidators: object?.trusted_validators ? ValidatorSet.fromAmino(object.trusted_validators) : undefined
+    };
+  },
+  toAmino(message: Header): HeaderAmino {
+    const obj: any = {};
+    obj.signed_header = message.signedHeader ? SignedHeader.toAmino(message.signedHeader) : undefined;
+    obj.validator_set = message.validatorSet ? ValidatorSet.toAmino(message.validatorSet) : undefined;
+    obj.trusted_height = message.trustedHeight ? Height.toAmino(message.trustedHeight) : {};
+    obj.trusted_validators = message.trustedValidators ? ValidatorSet.toAmino(message.trustedValidators) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: HeaderAminoMsg): Header {
+    return Header.fromAmino(object.value);
+  },
+  toAminoMsg(message: Header): HeaderAminoMsg {
+    return {
+      type: "cosmos-sdk/Header",
+      value: Header.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: HeaderProtoMsg): Header {
+    return Header.decode(message.value);
+  },
+  toProto(message: Header): Uint8Array {
+    return Header.encode(message).finish();
+  },
+  toProtoMsg(message: Header): HeaderProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Header",
+      value: Header.encode(message).finish()
+    };
   }
 };
 function createBaseFraction(): Fraction {
@@ -707,5 +1004,38 @@ export const Fraction = {
     obj.numerator = message.numerator;
     obj.denominator = message.denominator;
     return obj;
+  },
+  fromAmino(object: FractionAmino): Fraction {
+    return {
+      numerator: BigInt(object.numerator),
+      denominator: BigInt(object.denominator)
+    };
+  },
+  toAmino(message: Fraction): FractionAmino {
+    const obj: any = {};
+    obj.numerator = message.numerator ? message.numerator.toString() : undefined;
+    obj.denominator = message.denominator ? message.denominator.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: FractionAminoMsg): Fraction {
+    return Fraction.fromAmino(object.value);
+  },
+  toAminoMsg(message: Fraction): FractionAminoMsg {
+    return {
+      type: "cosmos-sdk/Fraction",
+      value: Fraction.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: FractionProtoMsg): Fraction {
+    return Fraction.decode(message.value);
+  },
+  toProto(message: Fraction): Uint8Array {
+    return Fraction.encode(message).finish();
+  },
+  toProtoMsg(message: Fraction): FractionProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Fraction",
+      value: Fraction.encode(message).finish()
+    };
   }
 };

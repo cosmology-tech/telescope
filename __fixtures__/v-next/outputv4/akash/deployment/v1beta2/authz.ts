@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -12,6 +12,25 @@ export interface DepositDeploymentAuthorization {
    * the purpose of deployment.
    */
   spendLimit: Coin;
+}
+export interface DepositDeploymentAuthorizationProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
+  value: Uint8Array;
+}
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit?: CoinAmino;
+}
+export interface DepositDeploymentAuthorizationAminoMsg {
+  type: "akash/deployment/v1beta2/deposit-deployment-authorization";
+  value: DepositDeploymentAuthorizationAmino;
 }
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -78,5 +97,36 @@ export const DepositDeploymentAuthorization = {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);
     return obj;
+  },
+  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
+    return {
+      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
+    };
+  },
+  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+    const obj: any = {};
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.fromAmino(object.value);
+  },
+  toAminoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/deposit-deployment-authorization",
+      value: DepositDeploymentAuthorization.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.decode(message.value);
+  },
+  toProto(message: DepositDeploymentAuthorization): Uint8Array {
+    return DepositDeploymentAuthorization.encode(message).finish();
+  },
+  toProtoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
+      value: DepositDeploymentAuthorization.encode(message).finish()
+    };
   }
 };

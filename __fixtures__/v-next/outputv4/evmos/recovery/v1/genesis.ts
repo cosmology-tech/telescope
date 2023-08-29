@@ -1,4 +1,4 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
@@ -6,6 +6,19 @@ export const protobufPackage = "evmos.recovery.v1";
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.recovery.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the recovery module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.recovery.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
@@ -17,6 +30,21 @@ export interface Params {
   enableRecovery: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration: Duration;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.recovery.v1.Params";
+  value: Uint8Array;
+}
+/** Params holds parameters for the recovery module */
+export interface ParamsAmino {
+  /** enable recovery IBC middleware */
+  enable_recovery: boolean;
+  /** duration added to timeout timestamp for balances recovered via IBC packets */
+  packet_timeout_duration?: DurationAmino;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.recovery.v1.Params";
+  value: ParamsAmino;
 }
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
@@ -81,6 +109,31 @@ export const GenesisState = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.recovery.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };
 function createBaseParams(): Params {
@@ -154,5 +207,32 @@ export const Params = {
     obj.enable_recovery = message.enableRecovery;
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableRecovery: object.enable_recovery,
+      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_recovery = message.enableRecovery;
+    obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.recovery.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

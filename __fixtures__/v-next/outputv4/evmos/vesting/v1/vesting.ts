@@ -1,5 +1,5 @@
-import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BaseVestingAccount, BaseVestingAccountAmino, BaseVestingAccountSDKType, Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
@@ -23,6 +23,35 @@ export interface ClawbackVestingAccount {
   lockupPeriods: Period[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
+}
+export interface ClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
+  value: Uint8Array;
+}
+/**
+ * ClawbackVestingAccount implements the VestingAccount interface. It provides
+ * an account that can hold contributions subject to "lockup" (like a
+ * PeriodicVestingAccount), or vesting which is subject to clawback
+ * of unvested tokens, or a combination (tokens vest, but are still locked).
+ */
+export interface ClawbackVestingAccountAmino {
+  /**
+   * base_vesting_account implements the VestingAccount interface. It contains
+   * all the necessary fields needed for any vesting account implementation
+   */
+  base_vesting_account?: BaseVestingAccountAmino;
+  /** funder_address specifies the account which can perform clawback */
+  funder_address: string;
+  /** start_time defines the time at which the vesting period begins */
+  start_time?: Date;
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods: PeriodAmino[];
+  /** vesting_periods defines the vesting schedule relative to the start_time */
+  vesting_periods: PeriodAmino[];
+}
+export interface ClawbackVestingAccountAminoMsg {
+  type: "/evmos.vesting.v1.ClawbackVestingAccount";
+  value: ClawbackVestingAccountAmino;
 }
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -163,5 +192,46 @@ export const ClawbackVestingAccount = {
       obj.vesting_periods = [];
     }
     return obj;
+  },
+  fromAmino(object: ClawbackVestingAccountAmino): ClawbackVestingAccount {
+    return {
+      baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
+      funderAddress: object.funder_address,
+      startTime: object.start_time,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
+    const obj: any = {};
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.funder_address = message.funderAddress;
+    obj.start_time = message.startTime;
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
+    return ClawbackVestingAccount.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
+    return ClawbackVestingAccount.decode(message.value);
+  },
+  toProto(message: ClawbackVestingAccount): Uint8Array {
+    return ClawbackVestingAccount.encode(message).finish();
+  },
+  toProtoMsg(message: ClawbackVestingAccount): ClawbackVestingAccountProtoMsg {
+    return {
+      typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount",
+      value: ClawbackVestingAccount.encode(message).finish()
+    };
   }
 };

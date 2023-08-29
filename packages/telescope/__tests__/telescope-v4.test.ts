@@ -34,8 +34,8 @@ const options: TelescopeOptions = {
   },
 
   interfaces: {
-    enabled: false,
-    useUnionTypes: false
+    enabled: true,
+    useUnionTypes: true
   },
 
   prototypes: {
@@ -51,7 +51,11 @@ const options: TelescopeOptions = {
       fromPartial: true,
       toSDK: true,
       fromSDKJSON: true,
-      fromSDK: true
+      fromSDK: true,
+      toAmino:true,
+      fromAmino:true,
+      toProto:true,
+      fromProto:true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
@@ -220,7 +224,7 @@ const options: TelescopeOptions = {
         }
       }
     },
-    useRecursiveV2encoding: false
+    useRecursiveV2encoding: true
   },
   packages: {
     akash: {
