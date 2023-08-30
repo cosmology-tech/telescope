@@ -33,6 +33,12 @@
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "jest": {
+    "preset": "ts-jest",
+    "testEnvironment":"node",
+    "transform": {
+      "^.+\\.ts?$":"ts-jest"
+    },
+    "transformIgnorePatterns": ["<rootDir>/node_modules/"],
     "testPathIgnorePatterns": [
       "main/",
       "module/",
