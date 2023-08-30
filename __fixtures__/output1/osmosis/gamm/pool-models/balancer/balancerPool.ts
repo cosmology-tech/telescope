@@ -3,7 +3,6 @@ import { Duration, DurationSDKType } from "../../../../google/protobuf/duration"
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -261,10 +260,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
+      writer.uint32(10).string(message.swapFee);
     }
     if (message.exitFee !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
+      writer.uint32(18).string(message.exitFee);
     }
     if (message.smoothWeightChangeParams !== undefined) {
       SmoothWeightChangeParams.encode(message.smoothWeightChangeParams, writer.uint32(26).fork()).ldelim();
@@ -279,10 +278,10 @@ export const PoolParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.swapFee = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.swapFee = reader.string();
           break;
         case 2:
-          message.exitFee = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.exitFee = reader.string();
           break;
         case 3:
           message.smoothWeightChangeParams = SmoothWeightChangeParams.decode(reader, reader.uint32());

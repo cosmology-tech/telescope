@@ -11,7 +11,6 @@ import { SetSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposal, UpdateUnpo
 import { UpdateFeeTokenProposal } from "../../../osmosis/txfees/v1beta1/gov";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -248,7 +247,7 @@ export const WeightedVoteOption = {
       writer.uint32(8).int32(message.option);
     }
     if (message.weight !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
+      writer.uint32(18).string(message.weight);
     }
     return writer;
   },
@@ -263,7 +262,7 @@ export const WeightedVoteOption = {
           message.option = (reader.int32() as any);
           break;
         case 2:
-          message.weight = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.weight = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

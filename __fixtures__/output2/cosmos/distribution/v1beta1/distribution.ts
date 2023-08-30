@@ -3,7 +3,6 @@
 import { DecCoin, Coin } from "../../base/v1beta1/coin";
 import { Long, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /** Params defines the set of params for the distribution module. */
 export interface Params {
@@ -126,13 +125,13 @@ function createBaseParams(): Params {
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.communityTax !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.communityTax, 18).atomics);
+      writer.uint32(10).string(message.communityTax);
     }
     if (message.baseProposerReward !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.baseProposerReward, 18).atomics);
+      writer.uint32(18).string(message.baseProposerReward);
     }
     if (message.bonusProposerReward !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.bonusProposerReward, 18).atomics);
+      writer.uint32(26).string(message.bonusProposerReward);
     }
     if (message.withdrawAddrEnabled === true) {
       writer.uint32(32).bool(message.withdrawAddrEnabled);
@@ -147,13 +146,13 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.communityTax = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.communityTax = reader.string();
           break;
         case 2:
-          message.baseProposerReward = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.baseProposerReward = reader.string();
           break;
         case 3:
-          message.bonusProposerReward = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.bonusProposerReward = reader.string();
           break;
         case 4:
           message.withdrawAddrEnabled = reader.bool();
@@ -418,7 +417,7 @@ export const ValidatorSlashEvent = {
       writer.uint32(8).uint64(message.validatorPeriod);
     }
     if (message.fraction !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.fraction, 18).atomics);
+      writer.uint32(18).string(message.fraction);
     }
     return writer;
   },
@@ -433,7 +432,7 @@ export const ValidatorSlashEvent = {
           message.validatorPeriod = (reader.uint64() as Long);
           break;
         case 2:
-          message.fraction = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.fraction = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -652,7 +651,7 @@ export const DelegatorStartingInfo = {
       writer.uint32(8).uint64(message.previousPeriod);
     }
     if (message.stake !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.stake, 18).atomics);
+      writer.uint32(18).string(message.stake);
     }
     if (!message.height.isZero()) {
       writer.uint32(24).uint64(message.height);
@@ -670,7 +669,7 @@ export const DelegatorStartingInfo = {
           message.previousPeriod = (reader.uint64() as Long);
           break;
         case 2:
-          message.stake = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.stake = reader.string();
           break;
         case 3:
           message.height = (reader.uint64() as Long);

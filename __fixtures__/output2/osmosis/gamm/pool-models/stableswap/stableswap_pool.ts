@@ -3,7 +3,6 @@
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Long, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -50,10 +49,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
+      writer.uint32(10).string(message.swapFee);
     }
     if (message.exitFee !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
+      writer.uint32(18).string(message.exitFee);
     }
     return writer;
   },
@@ -65,10 +64,10 @@ export const PoolParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.swapFee = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.swapFee = reader.string();
           break;
         case 2:
-          message.exitFee = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.exitFee = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

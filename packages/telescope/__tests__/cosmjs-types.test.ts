@@ -56,6 +56,9 @@ const options: TelescopeOptions = {
             fromProto: false,
         },
         typingsFormat: {
+            customTypes: {
+              useCosmosSDKDec: false
+            },
             num64: 'long',
             timestamp: 'timestamp',
             duration: 'duration'

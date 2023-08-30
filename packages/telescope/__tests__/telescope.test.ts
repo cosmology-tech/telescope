@@ -75,6 +75,9 @@ const options: TelescopeOptions = {
       ]
     },
     typingsFormat: {
+      customTypes: {
+        useCosmosSDKDec: false
+      },
       num64: 'long',
       useDeepPartial: true,
       useExact: false,

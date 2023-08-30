@@ -1,7 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 import { isSet } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
@@ -22,7 +21,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minimumRiskFactor !== "") {
-      writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
+      writer.uint32(10).string(message.minimumRiskFactor);
     }
     return writer;
   },
@@ -34,7 +33,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minimumRiskFactor = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.minimumRiskFactor = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

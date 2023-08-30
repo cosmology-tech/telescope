@@ -3,7 +3,6 @@
 import { DevFeeInfo } from "./fees";
 import { Long, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -108,16 +107,16 @@ export const Params = {
       writer.uint32(8).bool(message.enableFees);
     }
     if (message.developerShares !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.developerShares, 18).atomics);
+      writer.uint32(18).string(message.developerShares);
     }
     if (message.validatorShares !== "") {
-      writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
+      writer.uint32(26).string(message.validatorShares);
     }
     if (!message.addrDerivationCostCreate.isZero()) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
     if (message.minGasPrice !== "") {
-      writer.uint32(42).string(Decimal.fromUserInput(message.minGasPrice, 18).atomics);
+      writer.uint32(42).string(message.minGasPrice);
     }
     return writer;
   },
@@ -132,16 +131,16 @@ export const Params = {
           message.enableFees = reader.bool();
           break;
         case 2:
-          message.developerShares = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.developerShares = reader.string();
           break;
         case 3:
-          message.validatorShares = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.validatorShares = reader.string();
           break;
         case 4:
           message.addrDerivationCostCreate = (reader.uint64() as Long);
           break;
         case 5:
-          message.minGasPrice = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.minGasPrice = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

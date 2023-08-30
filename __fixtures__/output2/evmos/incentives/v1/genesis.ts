@@ -3,7 +3,6 @@
 import { Incentive, GasMeter } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../helpers";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -112,13 +111,13 @@ export const Params = {
       writer.uint32(8).bool(message.enableIncentives);
     }
     if (message.allocationLimit !== "") {
-      writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
+      writer.uint32(18).string(message.allocationLimit);
     }
     if (message.incentivesEpochIdentifier !== "") {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
     if (message.rewardScaler !== "") {
-      writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
+      writer.uint32(34).string(message.rewardScaler);
     }
     return writer;
   },
@@ -133,13 +132,13 @@ export const Params = {
           message.enableIncentives = reader.bool();
           break;
         case 2:
-          message.allocationLimit = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.allocationLimit = reader.string();
           break;
         case 3:
           message.incentivesEpochIdentifier = reader.string();
           break;
         case 4:
-          message.rewardScaler = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.rewardScaler = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

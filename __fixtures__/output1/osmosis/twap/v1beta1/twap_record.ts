@@ -1,7 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -93,16 +92,16 @@ export const TwapRecord = {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
     }
     if (message.p0LastSpotPrice !== "") {
-      writer.uint32(50).string(Decimal.fromUserInput(message.p0LastSpotPrice, 18).atomics);
+      writer.uint32(50).string(message.p0LastSpotPrice);
     }
     if (message.p1LastSpotPrice !== "") {
-      writer.uint32(58).string(Decimal.fromUserInput(message.p1LastSpotPrice, 18).atomics);
+      writer.uint32(58).string(message.p1LastSpotPrice);
     }
     if (message.p0ArithmeticTwapAccumulator !== "") {
-      writer.uint32(66).string(Decimal.fromUserInput(message.p0ArithmeticTwapAccumulator, 18).atomics);
+      writer.uint32(66).string(message.p0ArithmeticTwapAccumulator);
     }
     if (message.p1ArithmeticTwapAccumulator !== "") {
-      writer.uint32(74).string(Decimal.fromUserInput(message.p1ArithmeticTwapAccumulator, 18).atomics);
+      writer.uint32(74).string(message.p1ArithmeticTwapAccumulator);
     }
     if (message.lastErrorTime !== undefined) {
       Timestamp.encode(toTimestamp(message.lastErrorTime), writer.uint32(90).fork()).ldelim();
@@ -132,16 +131,16 @@ export const TwapRecord = {
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.p0LastSpotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.p0LastSpotPrice = reader.string();
           break;
         case 7:
-          message.p1LastSpotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.p1LastSpotPrice = reader.string();
           break;
         case 8:
-          message.p0ArithmeticTwapAccumulator = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.p0ArithmeticTwapAccumulator = reader.string();
           break;
         case 9:
-          message.p1ArithmeticTwapAccumulator = Decimal.fromAtomics(reader.string(), 18).toString();
+          message.p1ArithmeticTwapAccumulator = reader.string();
           break;
         case 11:
           message.lastErrorTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
