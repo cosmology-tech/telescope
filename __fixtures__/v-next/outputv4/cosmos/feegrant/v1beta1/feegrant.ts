@@ -94,7 +94,7 @@ export interface GrantSDKType {
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
-    expiration: undefined
+    expiration: new Date()
   };
 }
 export const BasicAllowance = {
@@ -174,11 +174,11 @@ export const BasicAllowance = {
 };
 function createBasePeriodicAllowance(): PeriodicAllowance {
   return {
-    basic: undefined,
-    period: undefined,
+    basic: BasicAllowance.fromPartial({}),
+    period: Duration.fromPartial({}),
     periodSpendLimit: [],
     periodCanSpend: [],
-    periodReset: undefined
+    periodReset: new Date()
   };
 }
 export const PeriodicAllowance = {
@@ -302,7 +302,7 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    allowance: undefined,
+    allowance: Any.fromPartial({}),
     allowedMessages: []
   };
 }
@@ -385,7 +385,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: undefined
+    allowance: Any.fromPartial({})
   };
 }
 export const Grant = {

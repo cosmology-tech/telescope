@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
+import { ProtoType, ProtoField, TelescopeLogLevel } from '@cosmology/types';
 import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 
@@ -18,7 +18,7 @@ import {
     getTSType
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
-import { TraversalSymbol } from '@osmonauts/types';
+import { TraversalSymbol } from '@cosmology/types';
 
 const getProtoField = (
     context: ProtoParseContext,

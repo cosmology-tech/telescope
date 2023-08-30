@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { ImportObj } from '../types';
 export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
 export declare const UTILS: {
@@ -15,6 +15,7 @@ export declare const UTILS: {
     BrowserHeaders: string;
     Decimal: string;
     createProtobufRpcClient: string;
+    Pubkey: string;
     decodeBech32Pubkey: string;
     DeepPartial: string;
     defaultRegistryTypes: string;
@@ -25,6 +26,8 @@ export declare const UTILS: {
         path: string;
         name: string;
     };
+    encodePubkey: string;
+    decodePubkey: string;
     fromBase64: string;
     fromBech32: string;
     fromDuration: string;

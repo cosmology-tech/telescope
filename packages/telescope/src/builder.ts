@@ -1,6 +1,6 @@
-import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoStore } from '@cosmology/proto-parser';
 import { TelescopeParseContext } from './build';
-import { TelescopeOptions, defaultTelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions, defaultTelescopeOptions } from '@cosmology/types';
 import { bundlePackages } from './bundle';
 import { BundlerFile, TelescopeInput } from './types';
 import { Bundler } from './bundler';
@@ -81,7 +81,7 @@ export class TelescopeBuilder {
   addStateManagers(type: string, files: BundlerFile[]) {
     const state = this.stateManagers[type];
 
-    if(!state){
+    if (!state) {
       this.stateManagers[type] = [];
     }
 

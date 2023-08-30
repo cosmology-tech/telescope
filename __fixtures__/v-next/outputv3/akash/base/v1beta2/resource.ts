@@ -77,7 +77,7 @@ export interface StorageSDKType {
 }
 function createBaseCPU(): CPU {
   return {
-    units: undefined,
+    units: ResourceValue.fromPartial({}),
     attributes: []
   };
 }
@@ -184,7 +184,7 @@ export const CPU = {
 };
 function createBaseMemory(): Memory {
   return {
-    quantity: undefined,
+    quantity: ResourceValue.fromPartial({}),
     attributes: []
   };
 }
@@ -292,7 +292,7 @@ export const Memory = {
 function createBaseStorage(): Storage {
   return {
     name: "",
-    quantity: undefined,
+    quantity: ResourceValue.fromPartial({}),
     attributes: []
   };
 }

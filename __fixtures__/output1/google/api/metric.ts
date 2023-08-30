@@ -392,7 +392,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
     unit: "",
     description: "",
     displayName: "",
-    metadata: undefined,
+    metadata: MetricDescriptor_MetricDescriptorMetadata.fromPartial({}),
     launchStage: 0,
     monitoredResourceTypes: []
   };
@@ -486,13 +486,13 @@ export const MetricDescriptor = {
       name: isSet(object.name) ? String(object.name) : "",
       type: isSet(object.type) ? String(object.type) : "",
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
-      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : 0,
-      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : 0,
+      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : -1,
+      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : -1,
       unit: isSet(object.unit) ? String(object.unit) : "",
       description: isSet(object.description) ? String(object.description) : "",
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
       metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata) : undefined,
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
       monitoredResourceTypes: Array.isArray(object?.monitoredResourceTypes) ? object.monitoredResourceTypes.map((e: any) => String(e)) : []
     };
   },
@@ -539,13 +539,13 @@ export const MetricDescriptor = {
       name: object?.name,
       type: object?.type,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : 0,
-      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
+      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
       unit: object?.unit,
       description: object?.description,
       displayName: object?.display_name,
       metadata: object.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromSDK(object.metadata) : undefined,
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
       monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
     };
   },
@@ -576,8 +576,8 @@ export const MetricDescriptor = {
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
   return {
     launchStage: 0,
-    samplePeriod: undefined,
-    ingestDelay: undefined
+    samplePeriod: Duration.fromPartial({}),
+    ingestDelay: Duration.fromPartial({})
   };
 }
 export const MetricDescriptor_MetricDescriptorMetadata = {
@@ -618,7 +618,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
-      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
       samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
       ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };
@@ -639,7 +639,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   fromSDK(object: MetricDescriptor_MetricDescriptorMetadataSDKType): MetricDescriptor_MetricDescriptorMetadata {
     return {
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
       samplePeriod: object.sample_period ? Duration.fromSDK(object.sample_period) : undefined,
       ingestDelay: object.ingest_delay ? Duration.fromSDK(object.ingest_delay) : undefined
     };

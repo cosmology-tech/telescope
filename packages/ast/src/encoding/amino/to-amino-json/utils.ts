@@ -3,7 +3,7 @@ import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } fr
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {
@@ -190,34 +190,34 @@ export const toAmino = {
     },
 
     coinAmount(args: ToAminoParseField) {
-      const longType = TypeLong.getType(args.context);
+        const longType = TypeLong.getType(args.context);
 
-      switch (longType) {
-        case 'BigInt':
-          return t.memberExpression(
-            memberExpressionOrIdentifier(args.scope),
-            t.identifier('amount')
-          )
-        case 'Long':
-        default:
-          TypeLong.addUtil(args.context);
+        switch (longType) {
+            case 'BigInt':
+                return t.memberExpression(
+                    memberExpressionOrIdentifier(args.scope),
+                    t.identifier('amount')
+                )
+            case 'Long':
+            default:
+                TypeLong.addUtil(args.context);
 
-          return t.callExpression(
-            t.memberExpression(
-                t.callExpression(
-                    TypeLong.getFromValue(args.context),
-                    [
-                        t.memberExpression(
-                            memberExpressionOrIdentifier(args.scope),
-                            t.identifier('amount')
-                        )
-                    ]
-                ),
-                t.identifier('toString')
-            ),
-            []
-          )
-      }
+                return t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            TypeLong.getFromValue(args.context),
+                            [
+                                t.memberExpression(
+                                    memberExpressionOrIdentifier(args.scope),
+                                    t.identifier('amount')
+                                )
+                            ]
+                        ),
+                        t.identifier('toString')
+                    ),
+                    []
+                )
+        }
     },
 
     coin(args: ToAminoParseField) {
@@ -348,35 +348,18 @@ export const toAmino = {
     },
 
     pubkey(args: ToAminoParseField) {
-        args.context.addUtil('fromBase64');
-        args.context.addUtil('decodeBech32Pubkey');
+        args.context.addUtil('decodePubkey');
 
         return t.objectProperty(
             t.identifier(args.field.name),
-            t.objectExpression([
-                t.objectProperty(
-                    t.identifier('typeUrl'),
-                    t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
-                ),
-                t.objectProperty(
-                    t.identifier('value'),
-                    t.callExpression(
-                        t.identifier('fromBase64'),
-                        [
-                            t.memberExpression(
-                                t.callExpression(
-                                    t.identifier('decodeBech32Pubkey'),
-                                    [
-                                        t.identifier(args.field.name)
-                                    ]
-                                ),
-                                t.identifier('value')
-                            )
-
-                        ]
-                    )
-                )
-            ])
+            t.tsNonNullExpression(
+              t.callExpression(
+                t.identifier('decodePubkey'),
+                [
+                    t.identifier(args.field.name)
+                ]
+              )
+            ),
         )
 
     }

@@ -123,7 +123,7 @@ export interface PeriodicAllowanceSDKType {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
   /** allowance can be any of basic and periodic fee allowance. */
-  allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
+  allowance: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
@@ -157,7 +157,7 @@ export interface Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
+  allowance: BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any | undefined;
 }
 export interface GrantProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.Grant";
@@ -188,7 +188,7 @@ export interface GrantSDKType {
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
-    expiration: undefined
+    expiration: new Date()
   };
 }
 export const BasicAllowance = {
@@ -264,7 +264,7 @@ export const BasicAllowance = {
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+      expiration: object.expiration
     };
   },
   toAmino(message: BasicAllowance): BasicAllowanceAmino {
@@ -274,7 +274,7 @@ export const BasicAllowance = {
     } else {
       obj.spend_limit = [];
     }
-    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.expiration = message.expiration;
     return obj;
   },
   fromAminoMsg(object: BasicAllowanceAminoMsg): BasicAllowance {
@@ -301,11 +301,11 @@ export const BasicAllowance = {
 };
 function createBasePeriodicAllowance(): PeriodicAllowance {
   return {
-    basic: undefined,
-    period: undefined,
+    basic: BasicAllowance.fromPartial({}),
+    period: Duration.fromPartial({}),
     periodSpendLimit: [],
     periodCanSpend: [],
-    periodReset: undefined
+    periodReset: new Date()
   };
 }
 export const PeriodicAllowance = {
@@ -425,7 +425,7 @@ export const PeriodicAllowance = {
       period: object?.period ? Duration.fromAmino(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: object?.period_reset ? Timestamp.fromAmino(object.period_reset) : undefined
+      periodReset: object.period_reset
     };
   },
   toAmino(message: PeriodicAllowance): PeriodicAllowanceAmino {
@@ -442,7 +442,7 @@ export const PeriodicAllowance = {
     } else {
       obj.period_can_spend = [];
     }
-    obj.period_reset = message.periodReset ? Timestamp.toAmino(message.periodReset) : undefined;
+    obj.period_reset = message.periodReset;
     return obj;
   },
   fromAminoMsg(object: PeriodicAllowanceAminoMsg): PeriodicAllowance {
@@ -469,7 +469,7 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    allowance: undefined,
+    allowance: Any.fromPartial({}),
     allowedMessages: []
   };
 }
@@ -585,7 +585,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: undefined
+    allowance: Any.fromPartial({})
   };
 }
 export const Grant = {

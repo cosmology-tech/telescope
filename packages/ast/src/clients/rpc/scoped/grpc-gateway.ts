@@ -32,6 +32,7 @@ export const grpcGatewayClientScaffold = (): t.Statement[] => {
 
 const grpcGatewayNewAwaitImport = (
     path: string,
+    className: string
 ) => {
     return t.newExpression(
         t.memberExpression(
@@ -45,7 +46,7 @@ const grpcGatewayNewAwaitImport = (
                     ]
                 )
             ),
-            t.identifier('Querier'),
+            t.identifier(className),
             false
         ),
         [
@@ -64,21 +65,21 @@ const grpcGatewayNestedImportObject = (
         const serviceType = (obj as string).split(".").pop();
         switch (serviceType) {
             case "Query":
-                className = 'Query'
+                className = 'QueryClientImpl'
             //   console.log("This is a Query RPC.");          
               break;
             case "Service":
-              className = 'Service';
+              className = 'ServiceClientImpl';
             //   console.log("This is a Service RPC.");
               break;
             case "msg":
-                className = 'Msg';
+                className = 'MsgClientImpl';
             //   console.log("This is a Message RPC.");
               break;
             default:
               console.log("grpc service error!! This should not happend. Undefined service type");
           }
-        return grpcGatewayNewAwaitImport(obj);
+        return grpcGatewayNewAwaitImport(obj, className);
     }
 
     const keys = Object.keys(obj);

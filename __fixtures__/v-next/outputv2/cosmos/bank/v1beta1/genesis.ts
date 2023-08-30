@@ -84,7 +84,7 @@ export interface BalanceSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     balances: [],
     supply: [],
     denomMetadata: []

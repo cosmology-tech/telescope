@@ -248,7 +248,7 @@ export interface Sg721Interface extends Sg721ReadOnlyInterface {
   }: {
     recipient: string;
     tokenId: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   sendNft: ({
     contract,
     msg,
@@ -257,7 +257,7 @@ export interface Sg721Interface extends Sg721ReadOnlyInterface {
     contract: string;
     msg: Binary;
     tokenId: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   approve: ({
     expires,
     spender,
@@ -266,26 +266,26 @@ export interface Sg721Interface extends Sg721ReadOnlyInterface {
     expires?: Expiration;
     spender: string;
     tokenId: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   revoke: ({
     spender,
     tokenId
   }: {
     spender: string;
     tokenId: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   approveAll: ({
     expires,
     operator
   }: {
     expires?: Expiration;
     operator: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   revokeAll: ({
     operator
   }: {
     operator: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   mint: ({
     extension,
     owner,
@@ -296,12 +296,12 @@ export interface Sg721Interface extends Sg721ReadOnlyInterface {
     owner: string;
     tokenId: string;
     tokenUri?: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
   burn: ({
     tokenId
   }: {
     tokenId: string;
-  }, fee?: number | StdFee | "auto", memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+  }, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
 }
 export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
   client: SigningCosmWasmClient;
@@ -329,13 +329,13 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
   }: {
     recipient: string;
     tokenId: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       transfer_nft: {
         recipient,
         token_id: tokenId
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   sendNft = async ({
     contract,
@@ -345,14 +345,14 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
     contract: string;
     msg: Binary;
     tokenId: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       send_nft: {
         contract,
         msg,
         token_id: tokenId
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   approve = async ({
     expires,
@@ -362,14 +362,14 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
     expires?: Expiration;
     spender: string;
     tokenId: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       approve: {
         expires,
         spender,
         token_id: tokenId
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   revoke = async ({
     spender,
@@ -377,13 +377,13 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
   }: {
     spender: string;
     tokenId: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       revoke: {
         spender,
         token_id: tokenId
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   approveAll = async ({
     expires,
@@ -391,24 +391,24 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
   }: {
     expires?: Expiration;
     operator: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       approve_all: {
         expires,
         operator
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   revokeAll = async ({
     operator
   }: {
     operator: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       revoke_all: {
         operator
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   mint = async ({
     extension,
@@ -420,7 +420,7 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
     owner: string;
     tokenId: string;
     tokenUri?: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       mint: {
         extension,
@@ -428,17 +428,17 @@ export class Sg721Client extends Sg721QueryClient implements Sg721Interface {
         token_id: tokenId,
         token_uri: tokenUri
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
   burn = async ({
     tokenId
   }: {
     tokenId: string;
-  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: Coin[]): Promise<ExecuteResult> => {
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       burn: {
         token_id: tokenId
       }
-    }, fee, memo, funds);
+    }, fee, memo, _funds);
   };
 }

@@ -103,10 +103,10 @@ export interface BidFilters {
 }
 function createBaseMsgCreateBid(): MsgCreateBid {
   return {
-    order: undefined,
+    order: OrderID.fromPartial({}),
     provider: "",
-    price: undefined,
-    deposit: undefined
+    price: DecCoin.fromPartial({}),
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateBid = {
@@ -211,7 +211,7 @@ export const MsgCreateBidResponse = {
 };
 function createBaseMsgCloseBid(): MsgCloseBid {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCloseBid = {
@@ -374,9 +374,9 @@ export const BidID = {
 };
 function createBaseBid(): Bid {
   return {
-    bidId: undefined,
+    bidId: BidID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: Long.ZERO
   };
 }
@@ -425,7 +425,7 @@ export const Bid = {
   fromJSON(object: any): Bid {
     return {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };

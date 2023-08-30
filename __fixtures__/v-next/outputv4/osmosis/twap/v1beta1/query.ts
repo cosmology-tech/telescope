@@ -55,7 +55,7 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
     poolId: BigInt(0),
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined,
+    startTime: new Date(),
     endTime: undefined
   };
 }
@@ -227,7 +227,7 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
     poolId: BigInt(0),
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined
+    startTime: new Date()
   };
 }
 export const ArithmeticTwapToNowRequest = {
@@ -426,7 +426,7 @@ export const ParamsRequest = {
 };
 function createBaseParamsResponse(): ParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ParamsResponse = {

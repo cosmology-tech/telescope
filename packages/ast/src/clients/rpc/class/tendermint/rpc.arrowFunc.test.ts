@@ -1,5 +1,6 @@
-import { traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { ProtoService } from '@osmonauts/types';
+import { traverse } from '@cosmology/proto-parser'
+import { getNestedProto } from '@cosmology/utils'
+import { ProtoService } from '@cosmology/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
 import { createRpcInterface, createRpcClientClass, createRpcClientInterface } from './rpc';

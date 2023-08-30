@@ -98,8 +98,8 @@ export interface Pool {
 }
 function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   return {
-    startTime: undefined,
-    duration: undefined,
+    startTime: Timestamp.fromPartial({}),
+    duration: Duration.fromPartial({}),
     initialPoolWeights: [],
     targetPoolWeights: []
   };
@@ -246,7 +246,7 @@ export const PoolParams = {
 };
 function createBasePoolAsset(): PoolAsset {
   return {
-    token: undefined,
+    token: Coin.fromPartial({}),
     weight: ""
   };
 }
@@ -303,9 +303,9 @@ function createBasePool(): Pool {
   return {
     address: "",
     id: Long.UZERO,
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     futurePoolGovernor: "",
-    totalShares: undefined,
+    totalShares: Coin.fromPartial({}),
     poolAssets: [],
     totalWeight: ""
   };

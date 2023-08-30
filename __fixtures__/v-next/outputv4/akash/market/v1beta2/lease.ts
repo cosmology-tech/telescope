@@ -251,9 +251,9 @@ export const LeaseID = {
 };
 function createBaseLease(): Lease {
   return {
-    leaseId: undefined,
+    leaseId: LeaseID.fromPartial({}),
     state: 0,
-    price: undefined,
+    price: DecCoin.fromPartial({}),
     createdAt: BigInt(0),
     closedOn: BigInt(0)
   };
@@ -309,7 +309,7 @@ export const Lease = {
   fromJSON(object: any): Lease {
     return {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
       createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0),
       closedOn: isSet(object.closedOn) ? BigInt(object.closedOn.toString()) : BigInt(0)
@@ -336,7 +336,7 @@ export const Lease = {
   fromSDK(object: LeaseSDKType): Lease {
     return {
       leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at,
       closedOn: object?.closed_on
@@ -345,7 +345,7 @@ export const Lease = {
   fromSDKJSON(object: any): LeaseSDKType {
     return {
       lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0),
       closed_on: isSet(object.closed_on) ? BigInt(object.closed_on.toString()) : BigInt(0)
@@ -488,7 +488,7 @@ export const LeaseFilters = {
 };
 function createBaseMsgCreateLease(): MsgCreateLease {
   return {
-    bidId: undefined
+    bidId: BidID.fromPartial({})
   };
 }
 export const MsgCreateLease = {
@@ -591,7 +591,7 @@ export const MsgCreateLeaseResponse = {
 };
 function createBaseMsgWithdrawLease(): MsgWithdrawLease {
   return {
-    bidId: undefined
+    bidId: LeaseID.fromPartial({})
   };
 }
 export const MsgWithdrawLease = {
@@ -694,7 +694,7 @@ export const MsgWithdrawLeaseResponse = {
 };
 function createBaseMsgCloseLease(): MsgCloseLease {
   return {
-    leaseId: undefined
+    leaseId: LeaseID.fromPartial({})
   };
 }
 export const MsgCloseLease = {

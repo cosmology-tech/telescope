@@ -1,5 +1,5 @@
 import { Params, ParamsSDKType } from "./genesis";
-import { LCDClient } from "@osmonauts/lcd";
+import { LCDClient } from "@cosmology/lcd";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;

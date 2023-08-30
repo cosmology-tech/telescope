@@ -185,7 +185,7 @@ export const QueryPoolRequest = {
 };
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
-    pool: undefined
+    pool: Any.fromPartial({})
   };
 }
 export const QueryPoolResponse = {
@@ -230,7 +230,7 @@ export const QueryPoolResponse = {
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsRequest = {
@@ -276,7 +276,7 @@ export const QueryPoolsRequest = {
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsResponse = {
@@ -769,7 +769,7 @@ export const QueryPoolParamsRequest = {
 };
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   return {
-    params: undefined
+    params: Any.fromPartial({})
   };
 }
 export const QueryPoolParamsResponse = {
@@ -953,7 +953,7 @@ export const QueryTotalSharesRequest = {
 };
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   return {
-    totalShares: undefined
+    totalShares: Coin.fromPartial({})
   };
 }
 export const QueryTotalSharesResponse = {
@@ -1183,7 +1183,7 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
   return {
     minLiquidity: [],
     poolType: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterRequest = {
@@ -1251,7 +1251,7 @@ export const QueryPoolsWithFilterRequest = {
 function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterResponse = {

@@ -32,7 +32,7 @@ export interface Params {
 function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
-    pubKey: undefined,
+    pubKey: Any.fromPartial({}),
     accountNumber: Long.UZERO,
     sequence: Long.UZERO
   };
@@ -106,7 +106,7 @@ export const BaseAccount = {
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
-    baseAccount: undefined,
+    baseAccount: BaseAccount.fromPartial({}),
     name: "",
     permissions: []
   };

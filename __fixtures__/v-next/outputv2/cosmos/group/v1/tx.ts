@@ -253,7 +253,7 @@ export interface MsgCreateGroupPolicy {
   /** metadata is any arbitrary metadata attached to the group policy. */
   metadata: string;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
+  decisionPolicy: ThresholdDecisionPolicy | PercentageDecisionPolicy | Any | undefined;
 }
 export interface MsgCreateGroupPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy";
@@ -351,7 +351,7 @@ export interface MsgCreateGroupWithPolicy {
   /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
   groupPolicyAsAdmin: boolean;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
+  decisionPolicy: ThresholdDecisionPolicy | PercentageDecisionPolicy | Any | undefined;
 }
 export interface MsgCreateGroupWithPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy";
@@ -436,7 +436,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   /** address is the account address of group policy. */
   address: string;
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
+  decisionPolicy: ThresholdDecisionPolicy | PercentageDecisionPolicy | Any | undefined;
 }
 export interface MsgUpdateGroupPolicyDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy";
@@ -1578,7 +1578,7 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
     admin: "",
     groupId: Long.UZERO,
     metadata: "",
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgCreateGroupPolicy = {
@@ -1914,7 +1914,7 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
     groupMetadata: "",
     groupPolicyMetadata: "",
     groupPolicyAsAdmin: false,
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgCreateGroupWithPolicy = {
@@ -2253,7 +2253,7 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
   return {
     admin: "",
     address: "",
-    decisionPolicy: undefined
+    decisionPolicy: Any.fromPartial({})
   };
 }
 export const MsgUpdateGroupPolicyDecisionPolicy = {
@@ -2686,7 +2686,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgSubmitProposal): unknown {
@@ -2721,7 +2721,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
       metadata: object?.metadata,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
@@ -2747,7 +2747,7 @@ export const MsgSubmitProposal = {
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
       metadata: object.metadata,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
@@ -3112,9 +3112,9 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toJSON(message: MsgVote): unknown {
@@ -3139,9 +3139,9 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object?.metadata,
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {
@@ -3157,9 +3157,9 @@ export const MsgVote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
   toAmino(message: MsgVote): MsgVoteAmino {

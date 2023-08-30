@@ -32,7 +32,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool: (Pool1 & Pool2 & Any) | undefined;
+  pool: Pool1 | Pool2 | Any | undefined;
 }
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
@@ -74,7 +74,7 @@ export interface QueryPoolsRequestSDKType {
   pagination: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -465,7 +465,7 @@ export interface QueryPoolsWithFilterRequestSDKType {
   pagination: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -737,7 +737,7 @@ export const QueryPoolRequest = {
 };
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
-    pool: undefined
+    pool: Any.fromPartial({})
   };
 }
 export const QueryPoolResponse = {
@@ -825,7 +825,7 @@ export const QueryPoolResponse = {
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsRequest = {
@@ -914,7 +914,7 @@ export const QueryPoolsRequest = {
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsResponse = {
@@ -1879,7 +1879,7 @@ export const QueryPoolParamsRequest = {
 };
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   return {
-    params: undefined
+    params: Any.fromPartial({})
   };
 }
 export const QueryPoolParamsResponse = {
@@ -2243,7 +2243,7 @@ export const QueryTotalSharesRequest = {
 };
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   return {
-    totalShares: undefined
+    totalShares: Coin.fromPartial({})
   };
 }
 export const QueryTotalSharesResponse = {
@@ -2677,7 +2677,7 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
   return {
     minLiquidity: [],
     poolType: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterRequest = {
@@ -2804,7 +2804,7 @@ export const QueryPoolsWithFilterRequest = {
 function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsWithFilterResponse = {

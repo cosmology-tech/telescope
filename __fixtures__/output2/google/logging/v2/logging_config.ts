@@ -1302,13 +1302,13 @@ function createBaseLogBucket(): LogBucket {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
     retentionDays: 0,
     locked: false,
     lifecycleState: 0,
     restrictedFields: [],
-    cmekSettings: undefined
+    cmekSettings: CmekSettings.fromPartial({})
   };
 }
 export const LogBucket = {
@@ -1391,7 +1391,7 @@ export const LogBucket = {
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
       retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
-      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : 0,
+      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : -1,
       restrictedFields: Array.isArray(object?.restrictedFields) ? object.restrictedFields.map((e: any) => String(e)) : [],
       cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
     };
@@ -1431,8 +1431,8 @@ function createBaseLogView(): LogView {
   return {
     name: "",
     description: "",
-    createTime: undefined,
-    updateTime: undefined,
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
     filter: ""
   };
 }
@@ -1524,8 +1524,8 @@ function createBaseLogSink(): LogSink {
     writerIdentity: "",
     includeChildren: false,
     bigqueryOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({})
   };
 }
 export const LogSink = {
@@ -1626,7 +1626,7 @@ export const LogSink = {
       description: isSet(object.description) ? String(object.description) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
-      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : 0,
+      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : -1,
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
       includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
       bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
@@ -1854,7 +1854,7 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
   return {
     parent: "",
     bucketId: "",
-    bucket: undefined
+    bucket: LogBucket.fromPartial({})
   };
 }
 export const CreateBucketRequest = {
@@ -1918,8 +1918,8 @@ export const CreateBucketRequest = {
 function createBaseUpdateBucketRequest(): UpdateBucketRequest {
   return {
     name: "",
-    bucket: undefined,
-    updateMask: undefined
+    bucket: LogBucket.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateBucketRequest = {
@@ -2243,7 +2243,7 @@ function createBaseCreateViewRequest(): CreateViewRequest {
   return {
     parent: "",
     viewId: "",
-    view: undefined
+    view: LogView.fromPartial({})
   };
 }
 export const CreateViewRequest = {
@@ -2307,8 +2307,8 @@ export const CreateViewRequest = {
 function createBaseUpdateViewRequest(): UpdateViewRequest {
   return {
     name: "",
-    view: undefined,
-    updateMask: undefined
+    view: LogView.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateViewRequest = {
@@ -2631,7 +2631,7 @@ export const GetSinkRequest = {
 function createBaseCreateSinkRequest(): CreateSinkRequest {
   return {
     parent: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false
   };
 }
@@ -2696,9 +2696,9 @@ export const CreateSinkRequest = {
 function createBaseUpdateSinkRequest(): UpdateSinkRequest {
   return {
     sinkName: "",
-    sink: undefined,
+    sink: LogSink.fromPartial({}),
     uniqueWriterIdentity: false,
-    updateMask: undefined
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSinkRequest = {
@@ -2819,8 +2819,8 @@ function createBaseLogExclusion(): LogExclusion {
     description: "",
     filter: "",
     disabled: false,
-    createTime: undefined,
-    updateTime: undefined
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({})
   };
 }
 export const LogExclusion = {
@@ -3080,7 +3080,7 @@ export const GetExclusionRequest = {
 function createBaseCreateExclusionRequest(): CreateExclusionRequest {
   return {
     parent: "",
-    exclusion: undefined
+    exclusion: LogExclusion.fromPartial({})
   };
 }
 export const CreateExclusionRequest = {
@@ -3135,8 +3135,8 @@ export const CreateExclusionRequest = {
 function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
   return {
     name: "",
-    exclusion: undefined,
-    updateMask: undefined
+    exclusion: LogExclusion.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateExclusionRequest = {
@@ -3290,8 +3290,8 @@ export const GetCmekSettingsRequest = {
 function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
   return {
     name: "",
-    cmekSettings: undefined,
-    updateMask: undefined
+    cmekSettings: CmekSettings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateCmekSettingsRequest = {
@@ -3465,8 +3465,8 @@ export const GetSettingsRequest = {
 function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
   return {
     name: "",
-    settings: undefined,
-    updateMask: undefined
+    settings: Settings.fromPartial({}),
+    updateMask: FieldMask.fromPartial({})
   };
 }
 export const UpdateSettingsRequest = {
@@ -3679,11 +3679,11 @@ export const CopyLogEntriesRequest = {
 };
 function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
   return {
-    startTime: undefined,
-    endTime: undefined,
+    startTime: Timestamp.fromPartial({}),
+    endTime: Timestamp.fromPartial({}),
     state: 0,
     cancellationRequested: false,
-    request: undefined,
+    request: CopyLogEntriesRequest.fromPartial({}),
     progress: 0,
     writerIdentity: ""
   };
@@ -3752,7 +3752,7 @@ export const CopyLogEntriesMetadata = {
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
       progress: isSet(object.progress) ? Number(object.progress) : 0,

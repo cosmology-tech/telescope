@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
 
@@ -21,12 +21,15 @@ export const UTILS = {
   BrowserHeaders: 'browser-headers',
   Decimal: '@cosmjs/math',
   createProtobufRpcClient: '@cosmjs/stargate',
+  Pubkey: '@cosmjs/amino',
   decodeBech32Pubkey: '@cosmjs/amino',
   DeepPartial: '__helpers__',
   defaultRegistryTypes: '@cosmjs/stargate',
   encodeBech32Pubkey: '@cosmjs/amino',
   Exact: '__helpers__',
   fm: { type: 'namespace', path: '__grpc-gateway__', name: 'fm' },
+  encodePubkey: '@cosmjs/proto-signing',
+  decodePubkey: '@cosmjs/proto-signing',
   fromBase64: '@cosmjs/encoding',
   fromBech32: '@cosmjs/encoding',
   fromDuration: '__helpers__',
@@ -40,7 +43,7 @@ export const UTILS = {
   HttpEndpoint: '@cosmjs/tendermint-rpc',
   isObject: '__helpers__',
   isSet: '__helpers__',
-  LCDClient: '@osmonauts/lcd',
+  LCDClient: '@cosmology/lcd',
   Long: '__helpers__',
   OfflineSigner: '@cosmjs/proto-signing',
   omitDefault: '__helpers__',

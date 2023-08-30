@@ -133,7 +133,7 @@ export const Claim = {
   },
   fromJSON(object: any): Claim {
     return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
       completed: isSet(object.completed) ? Boolean(object.completed) : false,
       claimableAmount: isSet(object.claimableAmount) ? String(object.claimableAmount) : ""
     };

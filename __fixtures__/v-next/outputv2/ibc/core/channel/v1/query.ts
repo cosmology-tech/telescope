@@ -1131,9 +1131,9 @@ export const QueryChannelRequest = {
 };
 function createBaseQueryChannelResponse(): QueryChannelResponse {
   return {
-    channel: undefined,
+    channel: Channel.fromPartial({}),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryChannelResponse = {
@@ -1247,7 +1247,7 @@ export const QueryChannelResponse = {
 };
 function createBaseQueryChannelsRequest(): QueryChannelsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryChannelsRequest = {
@@ -1336,8 +1336,8 @@ export const QueryChannelsRequest = {
 function createBaseQueryChannelsResponse(): QueryChannelsResponse {
   return {
     channels: [],
-    pagination: undefined,
-    height: undefined
+    pagination: PageResponse.fromPartial({}),
+    height: Height.fromPartial({})
   };
 }
 export const QueryChannelsResponse = {
@@ -1464,7 +1464,7 @@ export const QueryChannelsResponse = {
 function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequest {
   return {
     connection: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryConnectionChannelsRequest = {
@@ -1566,8 +1566,8 @@ export const QueryConnectionChannelsRequest = {
 function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsResponse {
   return {
     channels: [],
-    pagination: undefined,
-    height: undefined
+    pagination: PageResponse.fromPartial({}),
+    height: Height.fromPartial({})
   };
 }
 export const QueryConnectionChannelsResponse = {
@@ -1795,9 +1795,9 @@ export const QueryChannelClientStateRequest = {
 };
 function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateResponse {
   return {
-    identifiedClientState: undefined,
+    identifiedClientState: IdentifiedClientState.fromPartial({}),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryChannelClientStateResponse = {
@@ -2041,10 +2041,10 @@ export const QueryChannelConsensusStateRequest = {
 };
 function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusStateResponse {
   return {
-    consensusState: undefined,
+    consensusState: Any.fromPartial({}),
     clientId: "",
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryChannelConsensusStateResponse = {
@@ -2289,7 +2289,7 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
   return {
     commitment: new Uint8Array(),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryPacketCommitmentResponse = {
@@ -2405,7 +2405,7 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
   return {
     portId: "",
     channelId: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPacketCommitmentsRequest = {
@@ -2520,8 +2520,8 @@ export const QueryPacketCommitmentsRequest = {
 function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsResponse {
   return {
     commitments: [],
-    pagination: undefined,
-    height: undefined
+    pagination: PageResponse.fromPartial({}),
+    height: Height.fromPartial({})
   };
 }
 export const QueryPacketCommitmentsResponse = {
@@ -2765,7 +2765,7 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
   return {
     received: false,
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryPacketReceiptResponse = {
@@ -2997,7 +2997,7 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
   return {
     acknowledgement: new Uint8Array(),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryPacketAcknowledgementResponse = {
@@ -3113,7 +3113,7 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
   return {
     portId: "",
     channelId: "",
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     packetCommitmentSequences: []
   };
 }
@@ -3263,8 +3263,8 @@ export const QueryPacketAcknowledgementsRequest = {
 function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledgementsResponse {
   return {
     acknowledgements: [],
-    pagination: undefined,
-    height: undefined
+    pagination: PageResponse.fromPartial({}),
+    height: Height.fromPartial({})
   };
 }
 export const QueryPacketAcknowledgementsResponse = {
@@ -3528,7 +3528,7 @@ export const QueryUnreceivedPacketsRequest = {
 function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsResponse {
   return {
     sequences: [],
-    height: undefined
+    height: Height.fromPartial({})
   };
 }
 export const QueryUnreceivedPacketsResponse = {
@@ -3788,7 +3788,7 @@ export const QueryUnreceivedAcksRequest = {
 function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
   return {
     sequences: [],
-    height: undefined
+    height: Height.fromPartial({})
   };
 }
 export const QueryUnreceivedAcksResponse = {
@@ -4014,7 +4014,7 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
   return {
     nextSequenceReceive: Long.UZERO,
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryNextSequenceReceiveResponse = {

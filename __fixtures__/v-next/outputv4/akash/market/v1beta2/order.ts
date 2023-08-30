@@ -195,9 +195,9 @@ export const OrderID = {
 };
 function createBaseOrder(): Order {
   return {
-    orderId: undefined,
+    orderId: OrderID.fromPartial({}),
     state: 0,
-    spec: undefined,
+    spec: GroupSpec.fromPartial({}),
     createdAt: BigInt(0)
   };
 }
@@ -246,7 +246,7 @@ export const Order = {
   fromJSON(object: any): Order {
     return {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
       createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
@@ -270,7 +270,7 @@ export const Order = {
   fromSDK(object: OrderSDKType): Order {
     return {
       orderId: object.order_id ? OrderID.fromSDK(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: object.spec ? GroupSpec.fromSDK(object.spec) : undefined,
       createdAt: object?.created_at
     };
@@ -278,7 +278,7 @@ export const Order = {
   fromSDKJSON(object: any): OrderSDKType {
     return {
       order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };

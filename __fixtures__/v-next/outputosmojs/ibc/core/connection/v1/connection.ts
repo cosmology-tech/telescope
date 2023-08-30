@@ -205,7 +205,7 @@ function createBaseConnectionEnd(): ConnectionEnd {
     clientId: "",
     versions: [],
     state: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     delayPeriod: BigInt(0)
   };
 }
@@ -261,7 +261,7 @@ export const ConnectionEnd = {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0)
     };
@@ -292,7 +292,7 @@ export const ConnectionEnd = {
     return {
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
@@ -301,7 +301,7 @@ export const ConnectionEnd = {
     return {
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0)
     };
@@ -326,7 +326,7 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
     clientId: "",
     versions: [],
     state: 0,
-    counterparty: undefined,
+    counterparty: Counterparty.fromPartial({}),
     delayPeriod: BigInt(0)
   };
 }
@@ -389,7 +389,7 @@ export const IdentifiedConnection = {
       id: isSet(object.id) ? String(object.id) : "",
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       delayPeriod: isSet(object.delayPeriod) ? BigInt(object.delayPeriod.toString()) : BigInt(0)
     };
@@ -423,7 +423,7 @@ export const IdentifiedConnection = {
       id: object?.id,
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
@@ -433,7 +433,7 @@ export const IdentifiedConnection = {
       id: isSet(object.id) ? String(object.id) : "",
       client_id: isSet(object.client_id) ? String(object.client_id) : "",
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
       delay_period: isSet(object.delay_period) ? BigInt(object.delay_period.toString()) : BigInt(0)
     };
@@ -457,7 +457,7 @@ function createBaseCounterparty(): Counterparty {
   return {
     clientId: "",
     connectionId: "",
-    prefix: undefined
+    prefix: MerklePrefix.fromPartial({})
   };
 }
 export const Counterparty = {

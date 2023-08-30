@@ -62,14 +62,38 @@ export enum WireType {
 }
 
 // Reader
+export interface IBinaryReader {
+  buf: Uint8Array;
+  pos: number;
+  type: number;
+  len: number;
+  tag(): [number, WireType, number];
+  skip(length?: number): this;
+  skipType(wireType: number): this;
+  uint32(): number;
+  int32(): number;
+  sint32(): number;
+  fixed32(): number;
+  sfixed32(): number;
+  int64(): bigint;
+  uint64(): bigint;
+  sint64(): bigint;
+  fixed64(): bigint;
+  sfixed64(): bigint;
+  float(): number;
+  double(): number;
+  bool(): boolean;
+  bytes(): Uint8Array;
+  string(): string;
+}
 
-export class BinaryReader {
+export class BinaryReader implements IBinaryReader {
   buf: Uint8Array;
   pos: number;
   type: number;
   len: number;
 
-  protected assertBounds(): void {
+  assertBounds(): void {
     if (this.pos > this.len) throw new RangeError("premature EOF");
   }
 
@@ -183,11 +207,11 @@ export class BinaryReader {
     return BigInt(int64ToString(lo, hi));
   }
 
-  float() {
+  float(): number {
     throw new Error("float not supported");
   }
 
-  double() {
+  double(): number {
     throw new Error("double not supported");
   }
 
@@ -211,35 +235,73 @@ export class BinaryReader {
 }
 
 // Writer
-
-type OpVal = string | number | object | Uint8Array;
-
-class Op {
-  fn?: (val: OpVal, buf: Uint8Array | number[], pos: number) => void;
+export interface IBinaryWriter {
   len: number;
-  val: OpVal;
-  next?: Op;
+  head: IOp;
+  tail: IOp;
+  states: State | null;
+  finish(): Uint8Array;
+  fork(): IBinaryWriter;
+  reset(): IBinaryWriter;
+  ldelim(): IBinaryWriter;
+  tag(fieldNo: number, type: WireType): IBinaryWriter;
+  uint32(value: number): IBinaryWriter;
+  int32(value: number): IBinaryWriter;
+  sint32(value: number): IBinaryWriter;
+  int64(value: string | number | bigint): IBinaryWriter;
+  uint64: (value: string | number | bigint) => IBinaryWriter;
+  sint64(value: string | number | bigint): IBinaryWriter;
+  fixed64(value: string | number | bigint): IBinaryWriter;
+  sfixed64: (value: string | number | bigint) => IBinaryWriter;
+  bool(value: boolean): IBinaryWriter;
+  fixed32(value: number): IBinaryWriter;
+  sfixed32: (value: number) => IBinaryWriter;
+  float(value: number): IBinaryWriter;
+  double(value: number): IBinaryWriter;
+  bytes(value: Uint8Array): IBinaryWriter;
+  string(value: string): IBinaryWriter;
+}
+
+interface IOp {
+  len: number;
+  next?: IOp;
+  proceed(buf: Uint8Array | number[], pos: number): void;
+}
+
+class Op<T> implements IOp {
+  fn?: ((val: T, buf: Uint8Array | number[], pos: number) => void) | null;
+  len: number;
+  val: T;
+  next?: IOp;
 
   constructor(
-    fn: (
-      val: OpVal,
-      buf: Uint8Array | number[],
-      pos: number
-    ) => void | undefined,
+    fn:
+      | ((
+          val: T,
+          buf: Uint8Array | number[],
+          pos: number
+        ) => void | undefined | null)
+      | null,
     len: number,
-    val: OpVal
+    val: T
   ) {
     this.fn = fn;
     this.len = len;
     this.val = val;
   }
+
+  proceed(buf: Uint8Array | number[], pos: number) {
+    if (this.fn) {
+      this.fn(this.val, buf, pos);
+    }
+  }
 }
 
 class State {
-  head: Op;
-  tail: Op;
+  head: IOp;
+  tail: IOp;
   len: number;
-  next: State;
+  next: State | null;
 
   constructor(writer: BinaryWriter) {
     this.head = writer.head;
@@ -249,11 +311,11 @@ class State {
   }
 }
 
-export class BinaryWriter {
+export class BinaryWriter implements IBinaryWriter {
   len = 0;
-  head: Op;
-  tail: Op;
-  states: State;
+  head: IOp;
+  tail: IOp;
+  states: State | null;
 
   constructor() {
     this.head = new Op(null, 0, 0);
@@ -276,10 +338,10 @@ export class BinaryWriter {
     }
   }
 
-  private _push(
-    fn: (val: OpVal, buf: Uint8Array | number[], pos: number) => void,
+  private _push<T>(
+    fn: (val: T, buf: Uint8Array | number[], pos: number) => void,
     len: number,
-    val: OpVal
+    val: T
   ) {
     this.tail = this.tail.next = new Op(fn, len, val);
     this.len += len;
@@ -291,7 +353,7 @@ export class BinaryWriter {
       pos = 0;
     const buf = BinaryWriter.alloc(this.len);
     while (head) {
-      head.fn(head.val, buf, pos);
+      head.proceed(buf, pos);
       pos += head.len;
       head = head.next;
     }
@@ -438,7 +500,7 @@ function pool(
 ): (size: number) => Uint8Array {
   const SIZE = size || 8192;
   const MAX = SIZE >>> 1;
-  let slab = null;
+  let slab: Uint8Array | null = null;
   let offset = SIZE;
   return function pool_alloc(size): Uint8Array {
     if (size < 1 || size > MAX) return alloc(size);

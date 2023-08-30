@@ -39,9 +39,9 @@ export interface ClawbackVestingAccountSDKType {
 }
 function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
   return {
-    baseVestingAccount: undefined,
+    baseVestingAccount: BaseVestingAccount.fromPartial({}),
     funderAddress: "",
-    startTime: undefined,
+    startTime: new Date(),
     lockupPeriods: [],
     vestingPeriods: []
   };

@@ -162,12 +162,12 @@ export interface FractionSDKType {
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
-    trustLevel: undefined,
-    trustingPeriod: undefined,
-    unbondingPeriod: undefined,
-    maxClockDrift: undefined,
-    frozenHeight: undefined,
-    latestHeight: undefined,
+    trustLevel: Fraction.fromPartial({}),
+    trustingPeriod: Duration.fromPartial({}),
+    unbondingPeriod: Duration.fromPartial({}),
+    maxClockDrift: Duration.fromPartial({}),
+    frozenHeight: Height.fromPartial({}),
+    latestHeight: Height.fromPartial({}),
     proofSpecs: [],
     upgradePath: [],
     allowUpdateAfterExpiry: false,
@@ -367,8 +367,8 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    timestamp: undefined,
-    root: undefined,
+    timestamp: new Date(),
+    root: MerkleRoot.fromPartial({}),
     nextValidatorsHash: new Uint8Array()
   };
 }
@@ -454,8 +454,8 @@ export const ConsensusState = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
-    header1: undefined,
-    header2: undefined
+    header1: Header.fromPartial({}),
+    header2: Header.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -518,8 +518,8 @@ export const Misbehaviour = {
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
       clientId: object?.client_id,
-      header_1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
-      header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
+      header1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
+      header2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
     };
   },
   fromSDKJSON(object: any): MisbehaviourSDKType {
@@ -532,17 +532,17 @@ export const Misbehaviour = {
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
-    message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
-    message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
+    message.header1 !== undefined && (obj.header_1 = message.header1 ? Header.toSDK(message.header1) : undefined);
+    message.header2 !== undefined && (obj.header_2 = message.header2 ? Header.toSDK(message.header2) : undefined);
     return obj;
   }
 };
 function createBaseHeader(): Header {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined,
-    trustedHeight: undefined,
-    trustedValidators: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({}),
+    trustedHeight: Height.fromPartial({}),
+    trustedValidators: ValidatorSet.fromPartial({})
   };
 }
 export const Header = {

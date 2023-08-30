@@ -170,7 +170,7 @@ function createBaseApi(): Api {
     methods: [],
     options: [],
     version: "",
-    sourceContext: undefined,
+    sourceContext: SourceContext.fromPartial({}),
     mixins: [],
     syntax: 0
   };
@@ -243,7 +243,7 @@ export const Api = {
       version: isSet(object.version) ? String(object.version) : "",
       sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toJSON(message: Api): unknown {
@@ -360,7 +360,7 @@ export const Method = {
       responseTypeUrl: isSet(object.responseTypeUrl) ? String(object.responseTypeUrl) : "",
       responseStreaming: isSet(object.responseStreaming) ? Boolean(object.responseStreaming) : false,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
   toJSON(message: Method): unknown {

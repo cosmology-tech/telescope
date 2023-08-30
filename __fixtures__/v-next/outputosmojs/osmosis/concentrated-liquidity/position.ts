@@ -47,7 +47,7 @@ function createBasePosition(): Position {
     poolId: BigInt(0),
     lowerTick: BigInt(0),
     upperTick: BigInt(0),
-    joinTime: undefined,
+    joinTime: new Date(),
     liquidity: ""
   };
 }
@@ -180,9 +180,9 @@ export const Position = {
 };
 function createBasePositionWithUnderlyingAssetBreakdown(): PositionWithUnderlyingAssetBreakdown {
   return {
-    position: undefined,
-    asset0: undefined,
-    asset1: undefined
+    position: Position.fromPartial({}),
+    asset0: Coin.fromPartial({}),
+    asset1: Coin.fromPartial({})
   };
 }
 export const PositionWithUnderlyingAssetBreakdown = {

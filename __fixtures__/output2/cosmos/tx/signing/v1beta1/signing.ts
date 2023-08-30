@@ -177,8 +177,8 @@ export const SignatureDescriptors = {
 };
 function createBaseSignatureDescriptor(): SignatureDescriptor {
   return {
-    publicKey: undefined,
-    data: undefined,
+    publicKey: Any.fromPartial({}),
+    data: SignatureDescriptor_Data.fromPartial({}),
     sequence: Long.UZERO
   };
 }
@@ -333,7 +333,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   fromJSON(object: any): SignatureDescriptor_Data_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
@@ -352,7 +352,7 @@ export const SignatureDescriptor_Data_Single = {
 };
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
   return {
-    bitarray: undefined,
+    bitarray: CompactBitArray.fromPartial({}),
     signatures: []
   };
 }

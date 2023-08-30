@@ -18,7 +18,7 @@ export interface Params {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {
@@ -64,7 +64,7 @@ export const GenesisState = {
 function createBaseParams(): Params {
   return {
     enableRecovery: false,
-    packetTimeoutDuration: undefined
+    packetTimeoutDuration: Duration.fromPartial({})
   };
 }
 export const Params = {

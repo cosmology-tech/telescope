@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
-import { slugify } from '@osmonauts/utils';
+import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@cosmology/types';
+import { slugify } from '@cosmology/utils';
 import { identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
@@ -17,35 +17,16 @@ export const createInterfaceToAmino = (
 ) => {
     if (interfaceName === 'cosmos.crypto.PubKey') {
         // return a helper!
-        context.addUtil('toBase64');
-        context.addUtil('encodeBech32Pubkey');
+        context.addUtil('decodePubkey');
         const functionName = getInterfaceToAminoName(interfaceName);
 
         return makeFunctionWrapper(functionName, t.returnStatement(
-            t.objectExpression([
-                t.objectProperty(
-                    t.identifier('typeUrl'),
-                    t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
-                ),
-                t.objectProperty(
-                    t.identifier('value'),
-                    t.callExpression(
-                        t.identifier('fromBase64'),
-                        [
-                            t.memberExpression(
-                                t.callExpression(
-                                    t.identifier('decodeBech32Pubkey'),
-                                    [
-                                        t.identifier('content')
-                                    ]
-                                ),
-                                t.identifier('value')
-                            )
-
-                        ]
-                    )
-                )
-            ])
+            t.callExpression(
+                t.identifier('decodePubkey'),
+                [
+                    t.identifier('content')
+                ]
+            ),
         ));
     }
 
@@ -96,11 +77,6 @@ export const createInterfaceToAminoHelper = (
 
     // MARKED AS NOT DRY
     const allTypes: TypeUrlRef[] = typeRefs?.reduce((m, typeRef) => {
-        // check excludes
-        const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
-        const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
-        const excluded = packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
-        if (excluded) return m;
         return [...m, ...typeRef.types];
     }, []) ?? [];
 

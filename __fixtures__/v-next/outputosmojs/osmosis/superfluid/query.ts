@@ -265,7 +265,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -414,7 +414,7 @@ export const AssetTypeResponse = {
   },
   fromJSON(object: any): AssetTypeResponse {
     return {
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: AssetTypeResponse): unknown {
@@ -429,12 +429,12 @@ export const AssetTypeResponse = {
   },
   fromSDK(object: AssetTypeResponseSDKType): AssetTypeResponse {
     return {
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   fromSDKJSON(object: any): AssetTypeResponseSDKType {
     return {
-      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toSDK(message: AssetTypeResponse): AssetTypeResponseSDKType {
@@ -616,7 +616,7 @@ export const AssetMultiplierRequest = {
 };
 function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
   return {
-    osmoEquivalentMultiplier: undefined
+    osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord.fromPartial({})
   };
 }
 export const AssetMultiplierResponse = {
@@ -775,7 +775,7 @@ export const SuperfluidIntermediaryAccountInfo = {
 };
 function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const AllIntermediaryAccountsRequest = {
@@ -836,7 +836,7 @@ export const AllIntermediaryAccountsRequest = {
 function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsResponse {
   return {
     accounts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const AllIntermediaryAccountsResponse = {
@@ -976,7 +976,7 @@ export const ConnectedIntermediaryAccountRequest = {
 };
 function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediaryAccountResponse {
   return {
-    account: undefined
+    account: SuperfluidIntermediaryAccountInfo.fromPartial({})
   };
 }
 export const ConnectedIntermediaryAccountResponse = {
@@ -1569,7 +1569,7 @@ function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegat
   return {
     superfluidDelegationRecords: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const SuperfluidDelegationsByDelegatorResponse = {
@@ -2197,7 +2197,7 @@ function createBaseQueryTotalDelegationByDelegatorResponse(): QueryTotalDelegati
     superfluidDelegationRecords: [],
     delegationResponse: [],
     totalDelegatedCoins: [],
-    totalEquivalentStakedAmount: undefined
+    totalEquivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const QueryTotalDelegationByDelegatorResponse = {

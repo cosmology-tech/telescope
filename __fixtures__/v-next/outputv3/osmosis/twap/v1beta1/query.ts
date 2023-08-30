@@ -125,7 +125,7 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
     poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined,
+    startTime: new Date(),
     endTime: undefined
   };
 }
@@ -229,8 +229,8 @@ export const ArithmeticTwapRequest = {
       poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined
+      startTime: object.start_time,
+      endTime: object?.end_time
     };
   },
   toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
@@ -238,8 +238,8 @@ export const ArithmeticTwapRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
-    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
@@ -357,7 +357,7 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
     poolId: Long.UZERO,
     baseAsset: "",
     quoteAsset: "",
-    startTime: undefined
+    startTime: new Date()
   };
 }
 export const ArithmeticTwapToNowRequest = {
@@ -449,7 +449,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: Long.fromString(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
+      startTime: object.start_time
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
@@ -457,7 +457,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
@@ -642,7 +642,7 @@ export const ParamsRequest = {
 };
 function createBaseParamsResponse(): ParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ParamsResponse = {

@@ -39,7 +39,7 @@ export interface Record_Offline {}
 function createBaseRecord(): Record {
   return {
     name: "",
-    pubKey: undefined,
+    pubKey: Any.fromPartial({}),
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -133,7 +133,7 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: undefined,
+    privKey: Any.fromPartial({}),
     privKeyType: ""
   };
 }
@@ -188,7 +188,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: undefined
+    path: BIP44Params.fromPartial({})
   };
 }
 export const Record_Ledger = {

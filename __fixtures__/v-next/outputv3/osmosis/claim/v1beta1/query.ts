@@ -423,7 +423,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -599,7 +599,7 @@ export const QueryClaimRecordRequest = {
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
-    claimRecord: undefined
+    claimRecord: ClaimRecord.fromPartial({})
   };
 }
 export const QueryClaimRecordResponse = {
@@ -726,7 +726,7 @@ export const QueryClaimableForActionRequest = {
   fromJSON(object: any): QueryClaimableForActionRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toJSON(message: QueryClaimableForActionRequest): unknown {
@@ -744,7 +744,7 @@ export const QueryClaimableForActionRequest = {
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
       address: object?.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
@@ -756,7 +756,7 @@ export const QueryClaimableForActionRequest = {
   fromAmino(object: QueryClaimableForActionRequestAmino): QueryClaimableForActionRequest {
     return {
       address: object.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
   toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {

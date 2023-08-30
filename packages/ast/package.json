@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/ast",
-  "version": "0.83.0",
+  "name": "@cosmology/ast",
+  "version": "0.92.0",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/ast#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -47,11 +47,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope"
+    "url": "https://github.com/cosmology-tech/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/issues"
+    "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
@@ -66,6 +66,7 @@
     "@babel/preset-env": "7.21.4",
     "@babel/preset-typescript": "^7.21.4",
     "@babel/traverse": "7.21.4",
+    "@cosmology/proto-parser": "^0.48.0",
     "@types/jest": "^29.5.0",
     "ast-stringify": "0.1.0",
     "babel-core": "7.0.0-bridge.0",
@@ -84,15 +85,14 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "typescript": "5.0.4"
   },
   "dependencies": {
     "@babel/parser": "^7.21.4",
     "@babel/runtime": "^7.21.0",
     "@babel/types": "7.21.4",
-    "@osmonauts/proto-parser": "^0.43.0",
-    "@osmonauts/types": "^0.35.0",
-    "@osmonauts/utils": "^0.11.1",
+    "@cosmology/types": "^0.39.0",
+    "@cosmology/utils": "^0.14.0",
     "case": "1.6.3",
     "dotty": "0.1.2"
   }

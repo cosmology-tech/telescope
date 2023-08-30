@@ -266,7 +266,7 @@ export const QueryEpochMintProvisionRequest = {
 };
 function createBaseQueryEpochMintProvisionResponse(): QueryEpochMintProvisionResponse {
   return {
-    epochMintProvision: undefined
+    epochMintProvision: DecCoin.fromPartial({})
   };
 }
 export const QueryEpochMintProvisionResponse = {
@@ -456,7 +456,7 @@ export const QueryCirculatingSupplyRequest = {
 };
 function createBaseQueryCirculatingSupplyResponse(): QueryCirculatingSupplyResponse {
   return {
-    circulatingSupply: undefined
+    circulatingSupply: DecCoin.fromPartial({})
   };
 }
 export const QueryCirculatingSupplyResponse = {
@@ -646,7 +646,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

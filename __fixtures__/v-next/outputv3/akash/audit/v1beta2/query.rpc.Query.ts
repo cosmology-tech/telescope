@@ -35,9 +35,9 @@ export class Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
   static providerAuditorAttributes(request: QueryProviderAuditorRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
-    return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/${request["auditor"]}/{owner}?${fm.renderURLSearchParams({
+    return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/${request["auditor"]}/${request["owner"]}?${fm.renderURLSearchParams({
       ...request
-    }, ["auditor"])}`, {
+    }, ["auditor", "owner"])}`, {
       ...initRequest,
       method: "GET"
     });
@@ -56,7 +56,7 @@ export class Query {
     });
   }
 }
-export class Querier {
+export class QueryClientImpl {
   private readonly url: string;
   constructor(url: string) {
     this.url = url;

@@ -1078,7 +1078,7 @@ function createBaseService(): Service {
   return {
     name: "",
     parent: "",
-    config: undefined,
+    config: ServiceConfig.fromPartial({}),
     state: 0
   };
 }
@@ -1130,7 +1130,7 @@ export const Service = {
       name: isSet(object.name) ? String(object.name) : "",
       parent: isSet(object.parent) ? String(object.parent) : "",
       config: isSet(object.config) ? ServiceConfig.fromJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toJSON(message: Service): unknown {
@@ -1154,7 +1154,7 @@ export const Service = {
       name: object?.name,
       parent: object?.parent,
       config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toSDK(message: Service): ServiceSDKType {
@@ -1170,7 +1170,7 @@ export const Service = {
       name: object.name,
       parent: object.parent,
       config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
   toAmino(message: Service): ServiceAmino {
@@ -1202,13 +1202,13 @@ function createBaseServiceConfig(): ServiceConfig {
     name: "",
     title: "",
     apis: [],
-    documentation: undefined,
-    quota: undefined,
-    authentication: undefined,
-    usage: undefined,
+    documentation: Documentation.fromPartial({}),
+    quota: Quota.fromPartial({}),
+    authentication: Authentication.fromPartial({}),
+    usage: Usage.fromPartial({}),
     endpoints: [],
     monitoredResources: [],
-    monitoring: undefined
+    monitoring: Monitoring.fromPartial({})
   };
 }
 export const ServiceConfig = {
@@ -1963,9 +1963,9 @@ function createBaseQuotaBucket(): QuotaBucket {
   return {
     effectiveLimit: Long.ZERO,
     defaultLimit: Long.ZERO,
-    producerOverride: undefined,
-    consumerOverride: undefined,
-    adminOverride: undefined,
+    producerOverride: QuotaOverride.fromPartial({}),
+    consumerOverride: QuotaOverride.fromPartial({}),
+    adminOverride: QuotaOverride.fromPartial({}),
     dimensions: {}
   };
 }

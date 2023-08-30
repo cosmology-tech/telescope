@@ -338,7 +338,7 @@ export const QueryPositionByIdRequest = {
 };
 function createBaseQueryPositionByIdResponse(): QueryPositionByIdResponse {
   return {
-    position: undefined
+    position: PositionWithUnderlyingAssetBreakdown.fromPartial({})
   };
 }
 export const QueryPositionByIdResponse = {
@@ -398,7 +398,7 @@ export const QueryPositionByIdResponse = {
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPoolsRequest = {
@@ -459,7 +459,7 @@ export const QueryPoolsRequest = {
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
     pools: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPoolsResponse = {
@@ -582,7 +582,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

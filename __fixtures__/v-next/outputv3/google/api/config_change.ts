@@ -263,7 +263,7 @@ export const ConfigChange = {
       element: isSet(object.element) ? String(object.element) : "",
       oldValue: isSet(object.oldValue) ? String(object.oldValue) : "",
       newValue: isSet(object.newValue) ? String(object.newValue) : "",
-      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : 0,
+      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromJSON(e)) : []
     };
   },
@@ -294,7 +294,7 @@ export const ConfigChange = {
       element: object?.element,
       oldValue: object?.old_value,
       newValue: object?.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDK(e)) : []
     };
   },
@@ -316,7 +316,7 @@ export const ConfigChange = {
       element: object.element,
       oldValue: object.old_value,
       newValue: object.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
     };
   },

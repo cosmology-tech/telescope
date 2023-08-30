@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../src/builder';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
 import { getTestProtoStore } from '../test-utils';
@@ -38,7 +38,7 @@ const options: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
-        useUnionTypes: false
+        useUnionTypes: true
     },
     aminoEncoding: {
         enabled: true,

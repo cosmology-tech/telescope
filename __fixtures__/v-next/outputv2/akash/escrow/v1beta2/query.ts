@@ -122,7 +122,7 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
     xid: "",
     owner: "",
     state: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAccountsRequest = {
@@ -256,7 +256,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAccountsResponse = {
@@ -367,7 +367,7 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
     id: "",
     owner: "",
     state: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryPaymentsRequest = {
@@ -514,7 +514,7 @@ export const QueryPaymentsRequest = {
 function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
   return {
     payments: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryPaymentsResponse = {

@@ -2301,8 +2301,8 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
     enumType: [],
     service: [],
     extension: [],
-    options: undefined,
-    sourceCodeInfo: undefined,
+    options: FileOptions.fromPartial({}),
+    sourceCodeInfo: SourceCodeInfo.fromPartial({}),
     syntax: ""
   };
 }
@@ -2636,7 +2636,7 @@ function createBaseDescriptorProto(): DescriptorProto {
     enumType: [],
     extensionRange: [],
     oneofDecl: [],
-    options: undefined,
+    options: MessageOptions.fromPartial({}),
     reservedRange: [],
     reservedName: []
   };
@@ -2934,7 +2934,7 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
   return {
     start: 0,
     end: 0,
-    options: undefined
+    options: ExtensionRangeOptions.fromPartial({})
   };
 }
 export const DescriptorProto_ExtensionRange = {
@@ -3238,7 +3238,7 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
     defaultValue: "",
     oneofIndex: 0,
     jsonName: "",
-    options: undefined
+    options: FieldOptions.fromPartial({})
   };
 }
 export const FieldDescriptorProto = {
@@ -3324,8 +3324,8 @@ export const FieldDescriptorProto = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       number: isSet(object.number) ? Number(object.number) : 0,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
       typeName: isSet(object.typeName) ? String(object.typeName) : "",
       extendee: isSet(object.extendee) ? String(object.extendee) : "",
       defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : "",
@@ -3366,8 +3366,8 @@ export const FieldDescriptorProto = {
     return {
       name: object?.name,
       number: object?.number,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
       typeName: object?.type_name,
       extendee: object?.extendee,
       defaultValue: object?.default_value,
@@ -3394,8 +3394,8 @@ export const FieldDescriptorProto = {
     return {
       name: object.name,
       number: object.number,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
       typeName: object.type_name,
       extendee: object.extendee,
       defaultValue: object.default_value,
@@ -3437,7 +3437,7 @@ export const FieldDescriptorProto = {
 function createBaseOneofDescriptorProto(): OneofDescriptorProto {
   return {
     name: "",
-    options: undefined
+    options: OneofOptions.fromPartial({})
   };
 }
 export const OneofDescriptorProto = {
@@ -3533,7 +3533,7 @@ function createBaseEnumDescriptorProto(): EnumDescriptorProto {
   return {
     name: "",
     value: [],
-    options: undefined,
+    options: EnumOptions.fromPartial({}),
     reservedRange: [],
     reservedName: []
   };
@@ -3801,7 +3801,7 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
   return {
     name: "",
     number: 0,
-    options: undefined
+    options: EnumValueOptions.fromPartial({})
   };
 }
 export const EnumValueDescriptorProto = {
@@ -3910,7 +3910,7 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
   return {
     name: "",
     method: [],
-    options: undefined
+    options: ServiceOptions.fromPartial({})
   };
 }
 export const ServiceDescriptorProto = {
@@ -4032,7 +4032,7 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
     name: "",
     inputType: "",
     outputType: "",
-    options: undefined,
+    options: MethodOptions.fromPartial({}),
     clientStreaming: false,
     serverStreaming: false
   };
@@ -4355,7 +4355,7 @@ export const FileOptions = {
       javaMultipleFiles: isSet(object.javaMultipleFiles) ? Boolean(object.javaMultipleFiles) : false,
       javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash) ? Boolean(object.javaGenerateEqualsAndHash) : false,
       javaStringCheckUtf8: isSet(object.javaStringCheckUtf8) ? Boolean(object.javaStringCheckUtf8) : false,
-      optimizeFor: isSet(object.optimizeFor) ? fileOptions_OptimizeModeFromJSON(object.optimizeFor) : 0,
+      optimizeFor: isSet(object.optimizeFor) ? fileOptions_OptimizeModeFromJSON(object.optimizeFor) : -1,
       goPackage: isSet(object.goPackage) ? String(object.goPackage) : "",
       ccGenericServices: isSet(object.ccGenericServices) ? Boolean(object.ccGenericServices) : false,
       javaGenericServices: isSet(object.javaGenericServices) ? Boolean(object.javaGenericServices) : false,
@@ -4434,7 +4434,7 @@ export const FileOptions = {
       javaMultipleFiles: object?.java_multiple_files,
       javaGenerateEqualsAndHash: object?.java_generate_equals_and_hash,
       javaStringCheckUtf8: object?.java_string_check_utf8,
-      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
+      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
       goPackage: object?.go_package,
       ccGenericServices: object?.cc_generic_services,
       javaGenericServices: object?.java_generic_services,
@@ -4488,7 +4488,7 @@ export const FileOptions = {
       javaMultipleFiles: object.java_multiple_files,
       javaGenerateEqualsAndHash: object.java_generate_equals_and_hash,
       javaStringCheckUtf8: object.java_string_check_utf8,
-      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
+      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
       goPackage: object.go_package,
       ccGenericServices: object.cc_generic_services,
       javaGenericServices: object.java_generic_services,
@@ -4774,9 +4774,9 @@ export const FieldOptions = {
   },
   fromJSON(object: any): FieldOptions {
     return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
       packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
       lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       weak: isSet(object.weak) ? Boolean(object.weak) : false,
@@ -4811,9 +4811,9 @@ export const FieldOptions = {
   },
   fromSDK(object: FieldOptionsSDKType): FieldOptions {
     return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
       packed: object?.packed,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
       lazy: object?.lazy,
       deprecated: object?.deprecated,
       weak: object?.weak,
@@ -4837,9 +4837,9 @@ export const FieldOptions = {
   },
   fromAmino(object: FieldOptionsAmino): FieldOptions {
     return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
       packed: object.packed,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
       lazy: object.lazy,
       deprecated: object.deprecated,
       weak: object.weak,
@@ -5352,7 +5352,7 @@ export const MethodOptions = {
   fromJSON(object: any): MethodOptions {
     return {
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      idempotencyLevel: isSet(object.idempotencyLevel) ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel) : 0,
+      idempotencyLevel: isSet(object.idempotencyLevel) ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel) : -1,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption) ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e)) : []
     };
   },
@@ -5377,7 +5377,7 @@ export const MethodOptions = {
   fromSDK(object: MethodOptionsSDKType): MethodOptions {
     return {
       deprecated: object?.deprecated,
-      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
+      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -5395,7 +5395,7 @@ export const MethodOptions = {
   fromAmino(object: MethodOptionsAmino): MethodOptions {
     return {
       deprecated: object.deprecated,
-      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
+      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
     };
   },

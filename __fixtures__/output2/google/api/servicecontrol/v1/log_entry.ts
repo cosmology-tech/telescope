@@ -181,17 +181,17 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     name: "",
-    timestamp: undefined,
+    timestamp: Timestamp.fromPartial({}),
     severity: 0,
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     trace: "",
     insertId: "",
     labels: {},
     protoPayload: undefined,
     textPayload: undefined,
     structPayload: undefined,
-    operation: undefined,
-    sourceLocation: undefined
+    operation: LogEntryOperation.fromPartial({}),
+    sourceLocation: LogEntrySourceLocation.fromPartial({})
   };
 }
 export const LogEntry = {
@@ -294,7 +294,7 @@ export const LogEntry = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
       insertId: isSet(object.insertId) ? String(object.insertId) : "",

@@ -196,14 +196,14 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: DecCoin.fromPartial({}),
+    transferred: DecCoin.fromPartial({}),
     settledAt: Long.ZERO,
     depositor: "",
-    funds: undefined
+    funds: DecCoin.fromPartial({})
   };
 }
 export const Account = {
@@ -276,7 +276,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
       settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
@@ -311,13 +311,13 @@ export const Account = {
 };
 function createBaseFractionalPayment(): FractionalPayment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
-    withdrawn: undefined
+    rate: DecCoin.fromPartial({}),
+    balance: DecCoin.fromPartial({}),
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const FractionalPayment = {
@@ -385,7 +385,7 @@ export const FractionalPayment = {
       accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
       paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? DecCoin.fromJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined

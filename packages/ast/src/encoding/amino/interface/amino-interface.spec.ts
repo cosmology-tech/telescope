@@ -1,7 +1,7 @@
 import { makeAminoTypeInterface } from './index';
-import { ProtoStore } from '@osmonauts/proto-parser'
+import { ProtoStore } from '@cosmology/proto-parser'
 import { snake } from 'case';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { prepareContext, expectCode, printCode, getTestProtoStore } from '../../../../test-utils';
 const store = getTestProtoStore();
 

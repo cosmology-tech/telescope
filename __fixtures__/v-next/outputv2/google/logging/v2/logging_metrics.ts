@@ -699,12 +699,12 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: undefined,
+    metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined,
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    createTime: new Date(),
+    updateTime: new Date(),
     version: 0
   };
 }
@@ -816,7 +816,7 @@ export const LogMetric = {
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toJSON(message: LogMetric): unknown {
@@ -878,7 +878,7 @@ export const LogMetric = {
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       createTime: object.create_time ?? undefined,
       updateTime: object.update_time ?? undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toSDK(message: LogMetric): LogMetricSDKType {
@@ -916,9 +916,9 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      createTime: object.create_time,
+      updateTime: object.update_time,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toAmino(message: LogMetric): LogMetricAmino {
@@ -936,8 +936,8 @@ export const LogMetric = {
       });
     }
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
-    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.create_time = message.createTime;
+    obj.update_time = message.updateTime;
     obj.version = message.version;
     return obj;
   },
@@ -1257,7 +1257,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const CreateLogMetricRequest = {
@@ -1352,7 +1352,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const UpdateLogMetricRequest = {

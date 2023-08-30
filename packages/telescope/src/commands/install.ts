@@ -44,6 +44,7 @@ export default async (argv) => {
             message:
                 'which packages do you want to support?',
             choices: [
+                'amino',
                 'akash',
                 // 'axelar',
                 'bcna',

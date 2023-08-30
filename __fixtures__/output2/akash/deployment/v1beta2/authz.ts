@@ -17,7 +17,7 @@ export interface DepositDeploymentAuthorization {
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
-    spendLimit: undefined
+    spendLimit: Coin.fromPartial({})
   };
 }
 export const DepositDeploymentAuthorization = {

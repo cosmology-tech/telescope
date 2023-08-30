@@ -38,7 +38,7 @@ export interface ParamsSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     incentives: [],
     gasMeters: []
   };

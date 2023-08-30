@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package google.api.expr.v1alpha1;
+
+message ExprValue {
+  // The ids of the expressions with unknown values.
+  repeated IdRef exprs = 1;
+}
+
+message IdRef {
+  // The expression id.
+  int32 id = 1;
+}

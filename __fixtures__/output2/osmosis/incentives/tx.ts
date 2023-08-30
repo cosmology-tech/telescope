@@ -48,9 +48,9 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
     isPerpetual: false,
     owner: "",
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
-    startTime: undefined,
+    startTime: Timestamp.fromPartial({}),
     numEpochsPaidOver: Long.UZERO
   };
 }

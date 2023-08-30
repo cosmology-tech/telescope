@@ -322,12 +322,12 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: undefined,
+    metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined,
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    createTime: Timestamp.fromPartial({}),
+    updateTime: Timestamp.fromPartial({}),
     version: 0
   };
 }
@@ -438,7 +438,7 @@ export const LogMetric = {
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toJSON(message: LogMetric): unknown {
@@ -656,7 +656,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const CreateLogMetricRequest = {
@@ -711,7 +711,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const UpdateLogMetricRequest = {

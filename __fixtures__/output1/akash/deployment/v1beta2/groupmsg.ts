@@ -40,7 +40,7 @@ export interface MsgStartGroupResponse {}
 export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgCloseGroup = {
@@ -135,7 +135,7 @@ export const MsgCloseGroupResponse = {
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgPauseGroup = {
@@ -230,7 +230,7 @@ export const MsgPauseGroupResponse = {
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
-    id: undefined
+    id: GroupID.fromPartial({})
   };
 }
 export const MsgStartGroup = {

@@ -2201,7 +2201,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: isSet(object.parent) ? String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
       pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: ListConsumerQuotaMetricsRequest): unknown {
@@ -2225,7 +2225,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object?.parent,
       pageSize: object?.page_size,
       pageToken: object?.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
@@ -2241,7 +2241,7 @@ export const ListConsumerQuotaMetricsRequest = {
       parent: object.parent,
       pageSize: object.page_size,
       pageToken: object.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
@@ -2415,7 +2415,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromJSON(object: any): GetConsumerQuotaMetricRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetConsumerQuotaMetricRequest): unknown {
@@ -2433,7 +2433,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
@@ -2445,7 +2445,7 @@ export const GetConsumerQuotaMetricRequest = {
   fromAmino(object: GetConsumerQuotaMetricRequestAmino): GetConsumerQuotaMetricRequest {
     return {
       name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
@@ -2510,7 +2510,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromJSON(object: any): GetConsumerQuotaLimitRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetConsumerQuotaLimitRequest): unknown {
@@ -2528,7 +2528,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
@@ -2540,7 +2540,7 @@ export const GetConsumerQuotaLimitRequest = {
   fromAmino(object: GetConsumerQuotaLimitRequestAmino): GetConsumerQuotaLimitRequest {
     return {
       name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
   toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
@@ -2568,7 +2568,7 @@ export const GetConsumerQuotaLimitRequest = {
 function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -2712,9 +2712,9 @@ export const CreateAdminOverrideRequest = {
 function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -3609,7 +3609,7 @@ export const ImportAdminOverridesMetadata = {
 function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideRequest {
   return {
     parent: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
     forceOnly: []
   };
@@ -3753,9 +3753,9 @@ export const CreateConsumerOverrideRequest = {
 function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideRequest {
   return {
     name: "",
-    override: undefined,
+    override: QuotaOverride.fromPartial({}),
     force: false,
-    updateMask: undefined,
+    updateMask: FieldMask.fromPartial({}),
     forceOnly: []
   };
 }
@@ -5075,7 +5075,7 @@ export const GenerateServiceIdentityRequest = {
 };
 function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
   return {
-    identity: undefined,
+    identity: ServiceIdentity.fromPartial({}),
     state: 0
   };
 }
@@ -5113,7 +5113,7 @@ export const GetServiceIdentityResponse = {
   fromJSON(object: any): GetServiceIdentityResponse {
     return {
       identity: isSet(object.identity) ? ServiceIdentity.fromJSON(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toJSON(message: GetServiceIdentityResponse): unknown {
@@ -5131,7 +5131,7 @@ export const GetServiceIdentityResponse = {
   fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
     return {
       identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
@@ -5143,7 +5143,7 @@ export const GetServiceIdentityResponse = {
   fromAmino(object: GetServiceIdentityResponseAmino): GetServiceIdentityResponse {
     return {
       identity: object?.identity ? ServiceIdentity.fromAmino(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
   toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {

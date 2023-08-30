@@ -703,12 +703,12 @@ export interface QueryMethodDescriptorSDKType {
 }
 function createBaseAppDescriptor(): AppDescriptor {
   return {
-    authn: undefined,
-    chain: undefined,
-    codec: undefined,
-    configuration: undefined,
-    queryServices: undefined,
-    tx: undefined
+    authn: AuthnDescriptor.fromPartial({}),
+    chain: ChainDescriptor.fromPartial({}),
+    codec: CodecDescriptor.fromPartial({}),
+    configuration: ConfigurationDescriptor.fromPartial({}),
+    queryServices: QueryServicesDescriptor.fromPartial({}),
+    tx: TxDescriptor.fromPartial({})
   };
 }
 export const AppDescriptor = {
@@ -1981,7 +1981,7 @@ export const GetAuthnDescriptorRequest = {
 };
 function createBaseGetAuthnDescriptorResponse(): GetAuthnDescriptorResponse {
   return {
-    authn: undefined
+    authn: AuthnDescriptor.fromPartial({})
   };
 }
 export const GetAuthnDescriptorResponse = {
@@ -2139,7 +2139,7 @@ export const GetChainDescriptorRequest = {
 };
 function createBaseGetChainDescriptorResponse(): GetChainDescriptorResponse {
   return {
-    chain: undefined
+    chain: ChainDescriptor.fromPartial({})
   };
 }
 export const GetChainDescriptorResponse = {
@@ -2297,7 +2297,7 @@ export const GetCodecDescriptorRequest = {
 };
 function createBaseGetCodecDescriptorResponse(): GetCodecDescriptorResponse {
   return {
-    codec: undefined
+    codec: CodecDescriptor.fromPartial({})
   };
 }
 export const GetCodecDescriptorResponse = {
@@ -2455,7 +2455,7 @@ export const GetConfigurationDescriptorRequest = {
 };
 function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescriptorResponse {
   return {
-    config: undefined
+    config: ConfigurationDescriptor.fromPartial({})
   };
 }
 export const GetConfigurationDescriptorResponse = {
@@ -2613,7 +2613,7 @@ export const GetQueryServicesDescriptorRequest = {
 };
 function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescriptorResponse {
   return {
-    queries: undefined
+    queries: QueryServicesDescriptor.fromPartial({})
   };
 }
 export const GetQueryServicesDescriptorResponse = {
@@ -2771,7 +2771,7 @@ export const GetTxDescriptorRequest = {
 };
 function createBaseGetTxDescriptorResponse(): GetTxDescriptorResponse {
   return {
-    tx: undefined
+    tx: TxDescriptor.fromPartial({})
   };
 }
 export const GetTxDescriptorResponse = {

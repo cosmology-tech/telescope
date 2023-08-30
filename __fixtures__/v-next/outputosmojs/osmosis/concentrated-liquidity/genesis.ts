@@ -82,7 +82,7 @@ function createBaseFullTick(): FullTick {
   return {
     poolId: BigInt(0),
     tickIndex: BigInt(0),
-    info: undefined
+    info: TickInfo.fromPartial({})
   };
 }
 export const FullTick = {
@@ -166,9 +166,9 @@ export const FullTick = {
 };
 function createBasePoolData(): PoolData {
   return {
-    pool: undefined,
+    pool: Any.fromPartial({}),
     ticks: [],
-    feeAccumulator: undefined,
+    feeAccumulator: AccumObject.fromPartial({}),
     incentivesAccumulators: [],
     incentiveRecords: []
   };
@@ -302,7 +302,7 @@ export const PoolData = {
 };
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     poolData: [],
     positions: [],
     nextPositionId: BigInt(0)
@@ -418,7 +418,7 @@ export const GenesisState = {
 function createBaseAccumObject(): AccumObject {
   return {
     name: "",
-    accumContent: undefined
+    accumContent: AccumulatorContent.fromPartial({})
   };
 }
 export const AccumObject = {

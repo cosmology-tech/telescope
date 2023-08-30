@@ -261,7 +261,7 @@ function createBasePart(): Part {
   return {
     index: 0,
     bytes: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const Part = {
@@ -325,7 +325,7 @@ export const Part = {
 function createBaseBlockID(): BlockID {
   return {
     hash: new Uint8Array(),
-    partSetHeader: undefined
+    partSetHeader: PartSetHeader.fromPartial({})
   };
 }
 export const BlockID = {
@@ -379,11 +379,11 @@ export const BlockID = {
 };
 function createBaseHeader(): Header {
   return {
-    version: undefined,
+    version: Consensus.fromPartial({}),
     chainId: "",
     height: Long.ZERO,
-    time: undefined,
-    lastBlockId: undefined,
+    time: Timestamp.fromPartial({}),
+    lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
     dataHash: new Uint8Array(),
     validatorsHash: new Uint8Array(),
@@ -606,8 +606,8 @@ function createBaseVote(): Vote {
     type: 0,
     height: Long.ZERO,
     round: 0,
-    blockId: undefined,
-    timestamp: undefined,
+    blockId: BlockID.fromPartial({}),
+    timestamp: Timestamp.fromPartial({}),
     validatorAddress: new Uint8Array(),
     validatorIndex: 0,
     signature: new Uint8Array()
@@ -681,7 +681,7 @@ export const Vote = {
   },
   fromJSON(object: any): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -720,7 +720,7 @@ function createBaseCommit(): Commit {
   return {
     height: Long.ZERO,
     round: 0,
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     signatures: []
   };
 }
@@ -799,7 +799,7 @@ function createBaseCommitSig(): CommitSig {
   return {
     blockIdFlag: 0,
     validatorAddress: new Uint8Array(),
-    timestamp: undefined,
+    timestamp: Timestamp.fromPartial({}),
     signature: new Uint8Array()
   };
 }
@@ -847,7 +847,7 @@ export const CommitSig = {
   },
   fromJSON(object: any): CommitSig {
     return {
-      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : 0,
+      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : -1,
       validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -876,8 +876,8 @@ function createBaseProposal(): Proposal {
     height: Long.ZERO,
     round: 0,
     polRound: 0,
-    blockId: undefined,
-    timestamp: undefined,
+    blockId: BlockID.fromPartial({}),
+    timestamp: Timestamp.fromPartial({}),
     signature: new Uint8Array()
   };
 }
@@ -943,7 +943,7 @@ export const Proposal = {
   },
   fromJSON(object: any): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
@@ -977,8 +977,8 @@ export const Proposal = {
 };
 function createBaseSignedHeader(): SignedHeader {
   return {
-    header: undefined,
-    commit: undefined
+    header: Header.fromPartial({}),
+    commit: Commit.fromPartial({})
   };
 }
 export const SignedHeader = {
@@ -1032,8 +1032,8 @@ export const SignedHeader = {
 };
 function createBaseLightBlock(): LightBlock {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({})
   };
 }
 export const LightBlock = {
@@ -1087,9 +1087,9 @@ export const LightBlock = {
 };
 function createBaseBlockMeta(): BlockMeta {
   return {
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     blockSize: Long.ZERO,
-    header: undefined,
+    header: Header.fromPartial({}),
     numTxs: Long.ZERO
   };
 }
@@ -1164,7 +1164,7 @@ function createBaseTxProof(): TxProof {
   return {
     rootHash: new Uint8Array(),
     data: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const TxProof = {

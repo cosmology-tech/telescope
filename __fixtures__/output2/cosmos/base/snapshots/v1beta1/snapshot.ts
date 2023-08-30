@@ -51,7 +51,7 @@ function createBaseSnapshot(): Snapshot {
     format: 0,
     chunks: 0,
     hash: new Uint8Array(),
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const Snapshot = {

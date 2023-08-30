@@ -202,8 +202,8 @@ export interface Fee {
 }
 function createBaseTx(): Tx {
   return {
-    body: undefined,
-    authInfo: undefined,
+    body: TxBody.fromPartial({}),
+    authInfo: AuthInfo.fromPartial({}),
     signatures: []
   };
 }
@@ -513,7 +513,7 @@ export const TxBody = {
 function createBaseAuthInfo(): AuthInfo {
   return {
     signerInfos: [],
-    fee: undefined
+    fee: Fee.fromPartial({})
   };
 }
 export const AuthInfo = {
@@ -571,8 +571,8 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: undefined,
-    modeInfo: undefined,
+    publicKey: Any.fromPartial({}),
+    modeInfo: ModeInfo.fromPartial({}),
     sequence: Long.UZERO
   };
 }
@@ -720,7 +720,7 @@ export const ModeInfo_Single = {
   },
   fromJSON(object: any): ModeInfo_Single {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
   toJSON(message: ModeInfo_Single): unknown {
@@ -736,7 +736,7 @@ export const ModeInfo_Single = {
 };
 function createBaseModeInfo_Multi(): ModeInfo_Multi {
   return {
-    bitarray: undefined,
+    bitarray: CompactBitArray.fromPartial({}),
     modeInfos: []
   };
 }

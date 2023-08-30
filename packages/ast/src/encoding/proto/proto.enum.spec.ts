@@ -4,8 +4,8 @@ import {
     createProtoEnumToJSON
 } from './enums';
 import struct from '../../../../../__fixtures__/proto-json/google/protobuf/struct.json'
-import { getNestedProto } from '@osmonauts/proto-parser';
-import { ProtoParseContext } from '@osmonauts/ast';
+import { getNestedProto } from '@cosmology/utils';
+import { ProtoParseContext } from '@cosmology/ast';
 import { expectCode, getTestProtoStore, defaultTelescopeOptions } from '../../../test-utils';
 
 const store = getTestProtoStore();

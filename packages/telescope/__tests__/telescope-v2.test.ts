@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../src/builder';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
 import { getTestProtoStore } from '../test-utils';
@@ -38,7 +38,7 @@ const options: TelescopeOptions = {
 
   interfaces: {
     enabled: true,
-    useUnionTypes: false
+    useUnionTypes: true
   },
   aminoEncoding: {
     enabled: true,
@@ -99,7 +99,7 @@ const options: TelescopeOptions = {
   },
 
   reactQuery: {
-    enabled: false,
+    enabled: true,
     include: {
       patterns: [
         'osmosis/**/gamm/**/query.proto'
@@ -110,8 +110,22 @@ const options: TelescopeOptions = {
       packages: [
         'cosmos.bank.v1beta1',
         'cosmos.gov.v1beta1',
+        'cosmos.nft.v1beta1',
         'evmos.erc20.v1'
       ]
+    },
+    instantExport: {
+      include: {
+        patterns: [
+          '**.useBalance',
+          'cosmos.auth.**',
+          'osmosis.**',
+          'akash.**'
+        ]
+      },
+      nameMapping: {
+        'useAuthModuleAccounts': 'cosmos.auth.v1beta1.useModuleAccounts',
+      }
     }
   }
 };

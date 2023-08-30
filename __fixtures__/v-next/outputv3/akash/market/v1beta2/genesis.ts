@@ -34,7 +34,7 @@ function createBaseGenesisState(): GenesisState {
   return {
     orders: [],
     leases: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

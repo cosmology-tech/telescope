@@ -110,7 +110,7 @@ export const QueryConfigRequest = {
 };
 function createBaseQueryConfigResponse(): QueryConfigResponse {
   return {
-    config: undefined
+    config: Config.fromPartial({})
   };
 }
 export const QueryConfigResponse = {

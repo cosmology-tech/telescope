@@ -8,13 +8,13 @@
   "scripts": {
     "build": "lerna run prepare --parallel",
     "buidl": "lerna run buidl --parallel",
-    "ast:fixture": "lerna run test:ast --parallel --scope \"@osmonauts/ast\"",
+    "ast:fixture": "lerna run test:ast --parallel --scope \"@cosmology/ast\"",
     "buidl:clean": "lerna run buidl:clean",
-    "buidl:ast": "lerna run buidl --parallel --scope \"@osmonauts/ast\"",
-    "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/proto-parser\"",
-    "buidl:telescope": "lerna run buidl --parallel --scope \"@osmonauts/telescope\"",
-    "buidl:types": "lerna run buidl --parallel --scope \"@osmonauts/types\"",
-    "bootstrap": "lerna bootstrap --use-workspaces",
+    "buidl:ast": "lerna run buidl --parallel --scope \"@cosmology/ast\"",
+    "buidl:parser": "lerna run buidl --parallel --scope \"@cosmology/proto-parser\"",
+    "buidl:telescope": "lerna run buidl --parallel --scope \"@cosmology/telescope\"",
+    "buidl:types": "lerna run buidl --parallel --scope \"@cosmology/types\"",
+    "bootstrap": "yarn --use-workspaces",
     "lint": "lerna run lint",
     "format": "lerna run format",
     "test": "lerna run test --stream"
@@ -30,7 +30,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "29.5.0",
-    "lerna": "4.0.0",
+    "lerna": "7.0.2",
     "prettier": "2.8.7"
   },
   "workspaces": [
@@ -38,7 +38,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope"
+    "url": "https://github.com/cosmology-tech/telescope"
   },
   "dependencies": {
     "@jest/transform": "29.5.0"

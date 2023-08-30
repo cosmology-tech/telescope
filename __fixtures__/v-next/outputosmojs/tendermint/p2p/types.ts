@@ -150,14 +150,14 @@ export const ProtocolVersion = {
 };
 function createBaseNodeInfo(): NodeInfo {
   return {
-    protocolVersion: undefined,
+    protocolVersion: ProtocolVersion.fromPartial({}),
     nodeId: "",
     listenAddr: "",
     network: "",
     version: "",
     channels: new Uint8Array(),
     moniker: "",
-    other: undefined
+    other: NodeInfoOther.fromPartial({})
   };
 }
 export const NodeInfo = {
@@ -376,7 +376,7 @@ function createBasePeerInfo(): PeerInfo {
   return {
     id: "",
     addressInfo: [],
-    lastConnected: undefined
+    lastConnected: new Date()
   };
 }
 export const PeerInfo = {
@@ -469,8 +469,8 @@ export const PeerInfo = {
 function createBasePeerAddressInfo(): PeerAddressInfo {
   return {
     address: "",
-    lastDialSuccess: undefined,
-    lastDialFailure: undefined,
+    lastDialSuccess: new Date(),
+    lastDialFailure: new Date(),
     dialFailures: 0
   };
 }

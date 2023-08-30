@@ -322,9 +322,9 @@ export const QueryClientStateRequest = {
 };
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   return {
-    clientState: undefined,
+    clientState: Any.fromPartial({}),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryClientStateResponse = {
@@ -401,7 +401,7 @@ export const QueryClientStateResponse = {
 };
 function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryClientStatesRequest = {
@@ -457,7 +457,7 @@ export const QueryClientStatesRequest = {
 function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
   return {
     clientStates: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryClientStatesResponse = {
@@ -622,9 +622,9 @@ export const QueryConsensusStateRequest = {
 };
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   return {
-    consensusState: undefined,
+    consensusState: Any.fromPartial({}),
     proof: new Uint8Array(),
-    proofHeight: undefined
+    proofHeight: Height.fromPartial({})
   };
 }
 export const QueryConsensusStateResponse = {
@@ -702,7 +702,7 @@ export const QueryConsensusStateResponse = {
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
   return {
     clientId: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryConsensusStatesRequest = {
@@ -769,7 +769,7 @@ export const QueryConsensusStatesRequest = {
 function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse {
   return {
     consensusStates: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryConsensusStatesResponse = {
@@ -993,7 +993,7 @@ export const QueryClientParamsRequest = {
 };
 function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryClientParamsResponse = {
@@ -1088,7 +1088,7 @@ export const QueryUpgradedClientStateRequest = {
 };
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
   return {
-    upgradedClientState: undefined
+    upgradedClientState: Any.fromPartial({})
   };
 }
 export const QueryUpgradedClientStateResponse = {
@@ -1183,7 +1183,7 @@ export const QueryUpgradedConsensusStateRequest = {
 };
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return {
-    upgradedConsensusState: undefined
+    upgradedConsensusState: Any.fromPartial({})
   };
 }
 export const QueryUpgradedConsensusStateResponse = {

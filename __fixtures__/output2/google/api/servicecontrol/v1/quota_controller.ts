@@ -298,7 +298,7 @@ export interface QuotaError {
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
-    allocateOperation: undefined,
+    allocateOperation: QuotaOperation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -497,7 +497,7 @@ export const QuotaOperation = {
         return acc;
       }, {}) : {},
       quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : 0
+      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : -1
     };
   },
   toJSON(message: QuotaOperation): unknown {
@@ -625,7 +625,7 @@ function createBaseQuotaError(): QuotaError {
     code: 0,
     subject: "",
     description: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const QuotaError = {
@@ -672,7 +672,7 @@ export const QuotaError = {
   },
   fromJSON(object: any): QuotaError {
     return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
       subject: isSet(object.subject) ? String(object.subject) : "",
       description: isSet(object.description) ? String(object.description) : "",
       status: isSet(object.status) ? Status.fromJSON(object.status) : undefined

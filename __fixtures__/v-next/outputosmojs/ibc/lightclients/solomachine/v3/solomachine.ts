@@ -153,7 +153,7 @@ function createBaseClientState(): ClientState {
   return {
     sequence: BigInt(0),
     isFrozen: false,
-    consensusState: undefined
+    consensusState: ConsensusState.fromPartial({})
   };
 }
 export const ClientState = {
@@ -237,7 +237,7 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    publicKey: undefined,
+    publicKey: Any.fromPartial({}),
     diversifier: "",
     timestamp: BigInt(0)
   };
@@ -325,7 +325,7 @@ function createBaseHeader(): Header {
   return {
     timestamp: BigInt(0),
     signature: new Uint8Array(),
-    newPublicKey: undefined,
+    newPublicKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }
@@ -423,8 +423,8 @@ export const Header = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     sequence: BigInt(0),
-    signatureOne: undefined,
-    signatureTwo: undefined
+    signatureOne: SignatureAndData.fromPartial({}),
+    signatureTwo: SignatureAndData.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -792,7 +792,7 @@ export const SignBytes = {
 };
 function createBaseHeaderData(): HeaderData {
   return {
-    newPubKey: undefined,
+    newPubKey: Any.fromPartial({}),
     newDiversifier: ""
   };
 }

@@ -412,7 +412,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -635,7 +635,7 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
 };
 function createBaseQueryGetProtoRevProfitsByDenomResponse(): QueryGetProtoRevProfitsByDenomResponse {
   return {
-    profit: undefined
+    profit: Coin.fromPartial({})
   };
 }
 export const QueryGetProtoRevProfitsByDenomResponse = {
@@ -883,7 +883,7 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
 };
 function createBaseQueryGetProtoRevStatisticsByRouteResponse(): QueryGetProtoRevStatisticsByRouteResponse {
   return {
-    statistics: undefined
+    statistics: RouteStatistics.fromPartial({})
   };
 }
 export const QueryGetProtoRevStatisticsByRouteResponse = {
@@ -1414,7 +1414,7 @@ export const QueryGetProtoRevPoolWeightsRequest = {
 };
 function createBaseQueryGetProtoRevPoolWeightsResponse(): QueryGetProtoRevPoolWeightsResponse {
   return {
-    poolWeights: undefined
+    poolWeights: PoolWeights.fromPartial({})
   };
 }
 export const QueryGetProtoRevPoolWeightsResponse = {

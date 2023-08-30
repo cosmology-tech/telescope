@@ -150,9 +150,9 @@ export const OrderID = {
 };
 function createBaseOrder(): Order {
   return {
-    orderId: undefined,
+    orderId: OrderID.fromPartial({}),
     state: 0,
-    spec: undefined,
+    spec: GroupSpec.fromPartial({}),
     createdAt: Long.ZERO
   };
 }
@@ -201,7 +201,7 @@ export const Order = {
   fromJSON(object: any): Order {
     return {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };

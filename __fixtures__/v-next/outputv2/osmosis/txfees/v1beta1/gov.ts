@@ -50,7 +50,7 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
     title: "",
     description: "",
-    feetoken: undefined
+    feetoken: FeeToken.fromPartial({})
   };
 }
 export const UpdateFeeTokenProposal = {

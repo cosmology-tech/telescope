@@ -447,7 +447,7 @@ export interface PoolSDKType {
 }
 function createBaseHistoricalInfo(): HistoricalInfo {
   return {
-    header: undefined,
+    header: Header.fromPartial({}),
     valset: []
   };
 }
@@ -601,8 +601,8 @@ export const CommissionRates = {
 };
 function createBaseCommission(): Commission {
   return {
-    commissionRates: undefined,
-    updateTime: undefined
+    commissionRates: CommissionRates.fromPartial({}),
+    updateTime: new Date()
   };
 }
 export const Commission = {
@@ -772,15 +772,15 @@ export const Description = {
 function createBaseValidator(): Validator {
   return {
     operatorAddress: "",
-    consensusPubkey: undefined,
+    consensusPubkey: Any.fromPartial({}),
     jailed: false,
     status: 0,
     tokens: "",
     delegatorShares: "",
-    description: undefined,
+    description: Description.fromPartial({}),
     unbondingHeight: Long.ZERO,
-    unbondingTime: undefined,
-    commission: undefined,
+    unbondingTime: new Date(),
+    commission: Commission.fromPartial({}),
     minSelfDelegation: ""
   };
 }
@@ -873,7 +873,7 @@ export const Validator = {
       operatorAddress: isSet(object.operatorAddress) ? String(object.operatorAddress) : "",
       consensusPubkey: isSet(object.consensusPubkey) ? Any.fromJSON(object.consensusPubkey) : undefined,
       jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
@@ -918,7 +918,7 @@ export const Validator = {
       operatorAddress: object?.operator_address,
       consensusPubkey: object.consensus_pubkey ? Any.fromSDK(object.consensus_pubkey) : undefined,
       jailed: object?.jailed,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: object?.tokens,
       delegatorShares: object?.delegator_shares,
       description: object.description ? Description.fromSDK(object.description) : undefined,
@@ -1448,7 +1448,7 @@ export const UnbondingDelegation = {
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
     creationHeight: Long.ZERO,
-    completionTime: undefined,
+    completionTime: new Date(),
     initialBalance: "",
     balance: ""
   };
@@ -1539,7 +1539,7 @@ export const UnbondingDelegationEntry = {
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
     creationHeight: Long.ZERO,
-    completionTime: undefined,
+    completionTime: new Date(),
     initialBalance: "",
     sharesDst: ""
   };
@@ -1728,7 +1728,7 @@ export const Redelegation = {
 };
 function createBaseParams(): Params {
   return {
-    unbondingTime: undefined,
+    unbondingTime: Duration.fromPartial({}),
     maxValidators: 0,
     maxEntries: 0,
     historicalEntries: 0,
@@ -1843,8 +1843,8 @@ export const Params = {
 };
 function createBaseDelegationResponse(): DelegationResponse {
   return {
-    delegation: undefined,
-    balance: undefined
+    delegation: Delegation.fromPartial({}),
+    balance: Coin.fromPartial({})
   };
 }
 export const DelegationResponse = {
@@ -1910,7 +1910,7 @@ export const DelegationResponse = {
 };
 function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
   return {
-    redelegationEntry: undefined,
+    redelegationEntry: RedelegationEntry.fromPartial({}),
     balance: ""
   };
 }
@@ -1977,7 +1977,7 @@ export const RedelegationEntryResponse = {
 };
 function createBaseRedelegationResponse(): RedelegationResponse {
   return {
-    redelegation: undefined,
+    redelegation: Redelegation.fromPartial({}),
     entries: []
   };
 }

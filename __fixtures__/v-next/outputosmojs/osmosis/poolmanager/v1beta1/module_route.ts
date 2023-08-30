@@ -117,7 +117,7 @@ export const ModuleRoute = {
   },
   fromJSON(object: any): ModuleRoute {
     return {
-      poolType: isSet(object.poolType) ? poolTypeFromJSON(object.poolType) : 0,
+      poolType: isSet(object.poolType) ? poolTypeFromJSON(object.poolType) : -1,
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : undefined
     };
   },
@@ -135,13 +135,13 @@ export const ModuleRoute = {
   },
   fromSDK(object: ModuleRouteSDKType): ModuleRoute {
     return {
-      poolType: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : 0,
+      poolType: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : -1,
       poolId: object?.pool_id
     };
   },
   fromSDKJSON(object: any): ModuleRouteSDKType {
     return {
-      pool_type: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : 0,
+      pool_type: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : -1,
       pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : undefined
     };
   },

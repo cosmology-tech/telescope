@@ -3,7 +3,7 @@ import { ProtoParseContext } from '../encoding';
 import { documentWithTypeUrl, documentWithTypeUrlReadme } from './with-type-url';
 import { documentRpcClients, documentRpcClientsReadme } from './rpc-clients';
 import * as t from '@babel/types';
-import { ServiceMutation } from '@osmonauts/types';
+import { ServiceMutation } from '@cosmology/types';
 import { readme } from './base-readme';
 
 const store = getTestProtoStore();
@@ -33,7 +33,7 @@ it('documentRpcClients', () => {
     const myBase = 'osmosis';
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
-    const asts = documentRpcClients(context, myBase, store).reduce((m, obj) => {
+    const asts = documentRpcClients(context, store.getServices(myBase)).reduce((m, obj) => {
         return [...m, ...obj.asts];
     }, [])
     expectCode(t.program(asts))
@@ -43,7 +43,7 @@ it('documentRpcClientsReadme', () => {
     const myBase = 'osmosis';
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
-    const text = documentRpcClientsReadme(context, myBase, store);
+    const text = documentRpcClientsReadme(context, store.getServices(myBase));
     expect(text).toMatchSnapshot();
 });
 

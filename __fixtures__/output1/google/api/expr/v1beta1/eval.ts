@@ -225,7 +225,7 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: undefined,
+    expr: IdRef.fromPartial({}),
     value: 0
   };
 }

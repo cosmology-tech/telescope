@@ -45,7 +45,7 @@ export interface QueryAccountsRequestSDKType {
  */
 export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
-  accounts: (BaseAccount & Any)[] | Any[];
+  accounts: (BaseAccount | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -141,7 +141,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
-  account: (BaseAccount & Any) | undefined;
+  account: BaseAccount | Any | undefined;
 }
 export interface QueryAccountResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
@@ -179,7 +179,7 @@ export interface QueryParamsRequestAminoMsg {
 export interface QueryParamsRequestSDKType {}
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
-  accounts: (ModuleAccount & Any)[] | Any[];
+  accounts: (ModuleAccount | Any)[] | Any[];
 }
 export interface QueryModuleAccountsResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse";
@@ -316,7 +316,7 @@ export interface AddressStringToBytesResponseSDKType {
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAccountsRequest = {
@@ -405,7 +405,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAccountsResponse = {
@@ -676,7 +676,7 @@ export const QueryModuleAccountsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -764,7 +764,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryAccountResponse(): QueryAccountResponse {
   return {
-    account: undefined
+    account: Any.fromPartial({})
   };
 }
 export const QueryAccountResponse = {

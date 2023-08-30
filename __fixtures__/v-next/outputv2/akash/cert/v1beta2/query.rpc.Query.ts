@@ -2,6 +2,9 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { BrowserHeaders } from "browser-headers";
+import { ReactQueryParams } from "../../../react-query";
+import { ProtobufRpcClient } from "@cosmjs/stargate";
+import { useQuery } from "@tanstack/react-query";
 import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
 /** Query defines the gRPC querier service */
 export interface Query {
@@ -90,3 +93,31 @@ export class GrpcWebImpl {
     });
   }
 }
+export interface UseCertificatesQuery<TData> extends ReactQueryParams<QueryCertificatesResponse, TData> {
+  request: QueryCertificatesRequest;
+}
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+  const queryService = new QueryClientImpl(rpc);
+  _queryClients.set(rpc, queryService);
+  return queryService;
+};
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+  const useCertificates = <TData = QueryCertificatesResponse,>({
+    request,
+    options
+  }: UseCertificatesQuery<TData>) => {
+    return useQuery<QueryCertificatesResponse, Error, TData>(["certificatesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.certificates(request);
+    }, options);
+  };
+  return {
+    /** Certificates queries certificates */useCertificates
+  };
+};

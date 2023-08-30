@@ -121,7 +121,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -241,7 +241,7 @@ export const QuerySigningInfoRequest = {
 };
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
   return {
-    valSigningInfo: undefined
+    valSigningInfo: ValidatorSigningInfo.fromPartial({})
   };
 }
 export const QuerySigningInfoResponse = {
@@ -301,7 +301,7 @@ export const QuerySigningInfoResponse = {
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QuerySigningInfosRequest = {
@@ -362,7 +362,7 @@ export const QuerySigningInfosRequest = {
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {
     info: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QuerySigningInfosResponse = {

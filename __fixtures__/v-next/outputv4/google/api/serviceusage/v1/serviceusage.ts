@@ -359,7 +359,7 @@ export const EnableServiceRequest = {
 };
 function createBaseEnableServiceResponse(): EnableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const EnableServiceResponse = {
@@ -464,7 +464,7 @@ export const DisableServiceRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
-      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : 0
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
     };
   },
   toJSON(message: DisableServiceRequest): unknown {
@@ -485,14 +485,14 @@ export const DisableServiceRequest = {
     return {
       name: object?.name,
       disableDependentServices: object?.disable_dependent_services,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   fromSDKJSON(object: any): DisableServiceRequestSDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
-      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
     };
   },
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
@@ -505,7 +505,7 @@ export const DisableServiceRequest = {
 };
 function createBaseDisableServiceResponse(): DisableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const DisableServiceResponse = {

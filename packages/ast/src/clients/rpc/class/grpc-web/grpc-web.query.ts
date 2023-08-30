@@ -1,7 +1,7 @@
 import { GenericParseContext } from "../../../../encoding";
-import { ProtoService, ProtoServiceMethod } from "@osmonauts/types";
+import { ProtoService, ProtoServiceMethod } from "@cosmology/types";
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { processRpcComment, returnReponseType } from '../utils/rpc';
 import { metadata, bindThis, makeComment, getRpcClassName } from './utils'
 import * as t from '@babel/types'
@@ -81,7 +81,7 @@ export const createGrpcWebQueryInterface = (
     const methods = keys
         .map((key) => {
             const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key; 
+            const name = camelRpcMethods ? camel(key) : key;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
             return gRPCWebMethodDefinition(
@@ -242,7 +242,7 @@ const GrpcWebClassMethod = (
                 ),
                 [
                     //No Desc field so we need to modify it
-                    t.identifier(serviceName + capitalizeFirstLetter(name) +  'Desc'),
+                    t.identifier(serviceName + capitalizeFirstLetter(name) + 'Desc'),
                     t.callExpression(
                         t.memberExpression(
                             t.identifier(requestType),

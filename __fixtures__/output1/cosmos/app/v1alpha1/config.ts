@@ -119,7 +119,7 @@ export const Config = {
 function createBaseModuleConfig(): ModuleConfig {
   return {
     name: "",
-    config: undefined
+    config: Any.fromPartial({})
   };
 }
 export const ModuleConfig = {

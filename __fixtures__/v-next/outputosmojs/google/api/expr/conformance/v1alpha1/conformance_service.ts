@@ -301,7 +301,7 @@ export const ParseRequest = {
 };
 function createBaseParseResponse(): ParseResponse {
   return {
-    parsedExpr: undefined,
+    parsedExpr: ParsedExpr.fromPartial({}),
     issues: []
   };
 }
@@ -382,7 +382,7 @@ export const ParseResponse = {
 };
 function createBaseCheckRequest(): CheckRequest {
   return {
-    parsedExpr: undefined,
+    parsedExpr: ParsedExpr.fromPartial({}),
     typeEnv: [],
     container: "",
     noStdEnv: false
@@ -489,7 +489,7 @@ export const CheckRequest = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    checkedExpr: undefined,
+    checkedExpr: CheckedExpr.fromPartial({}),
     issues: []
   };
 }
@@ -571,7 +571,7 @@ export const CheckResponse = {
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
-    value: undefined
+    value: ExprValue.fromPartial({})
   };
 }
 export const EvalRequest_BindingsEntry = {
@@ -580,7 +580,7 @@ export const EvalRequest_BindingsEntry = {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      google.api.expr.v1alpha1.ExprValue.encode(message.value, writer.uint32(18).fork()).ldelim();
+      ExprValue.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -595,7 +595,7 @@ export const EvalRequest_BindingsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = google.api.expr.v1alpha1.ExprValue.decode(reader, reader.uint32());
+          message.value = ExprValue.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -607,37 +607,37 @@ export const EvalRequest_BindingsEntry = {
   fromJSON(object: any): EvalRequest_BindingsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromJSON(object.value) : undefined
+      value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
     };
   },
   toJSON(message: EvalRequest_BindingsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
     return {
       key: object?.key,
-      value: object.value ? google.api.expr.v1alpha1.ExprValue.fromSDK(object.value) : undefined
+      value: object.value ? ExprValue.fromSDK(object.value) : undefined
     };
   },
   fromSDKJSON(object: any): EvalRequest_BindingsEntrySDKType {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromSDKJSON(object.value) : undefined
+      value: isSet(object.value) ? ExprValue.fromSDKJSON(object.value) : undefined
     };
   },
   toSDK(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
-    message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toSDK(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? ExprValue.toSDK(message.value) : undefined);
     return obj;
   }
 };
@@ -780,7 +780,7 @@ export const EvalRequest = {
 };
 function createBaseEvalResponse(): EvalResponse {
   return {
-    result: undefined,
+    result: ExprValue.fromPartial({}),
     issues: []
   };
 }
@@ -862,7 +862,7 @@ export const EvalResponse = {
 function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
-    position: undefined,
+    position: SourcePosition.fromPartial({}),
     id: BigInt(0)
   };
 }
@@ -904,7 +904,7 @@ export const IssueDetails = {
   },
   fromJSON(object: any): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
       id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
@@ -925,14 +925,14 @@ export const IssueDetails = {
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: object.position ? SourcePosition.fromSDK(object.position) : undefined,
       id: object?.id
     };
   },
   fromSDKJSON(object: any): IssueDetailsSDKType {
     return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
       position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
       id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };

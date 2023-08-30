@@ -71,7 +71,7 @@ export const Endpoint = {
   },
   fromJSON(object: any): Endpoint {
     return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
     };
   },
   toJSON(message: Endpoint): unknown {

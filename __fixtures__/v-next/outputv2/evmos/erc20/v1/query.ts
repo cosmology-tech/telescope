@@ -171,7 +171,7 @@ export interface QueryParamsResponseSDKType {
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryTokenPairsRequest = {
@@ -253,7 +253,7 @@ export const QueryTokenPairsRequest = {
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
   return {
     tokenPairs: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryTokenPairsResponse = {
@@ -440,7 +440,7 @@ export const QueryTokenPairRequest = {
 };
 function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
   return {
-    tokenPair: undefined
+    tokenPair: TokenPair.fromPartial({})
   };
 }
 export const QueryTokenPairResponse = {
@@ -584,7 +584,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const QueryParamsResponse = {

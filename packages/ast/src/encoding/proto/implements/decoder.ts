@@ -4,8 +4,8 @@ import {
   ProtoRef,
   TraverseTypeUrlRef,
   TypeUrlRef
-} from '@osmonauts/types';
-import { slugify } from '@osmonauts/utils';
+} from '@cosmology/types';
+import { slugify } from '@cosmology/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { BinaryCoder } from '../../../utils/binary-coder-expression';
@@ -51,13 +51,6 @@ export const createInterfaceDecoderHelper = (
   // MARKED AS NOT DRY
   const allTypes: TypeUrlRef[] =
     typeRefs?.reduce((m, typeRef) => {
-      // check excludes
-      const packages =
-        context.pluginValue('prototypes.excluded.packages') ?? [];
-      const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
-      const excluded =
-        packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
-      if (excluded) return m;
       return [...m, ...typeRef.types];
     }, []) ?? [];
 

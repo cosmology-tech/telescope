@@ -1,4 +1,4 @@
-# @osmonauts/lcd
+# @cosmology/lcd
 
 LCDClient Helpers for Telescope, a TypeScript Transpiler for Cosmos Protobufs
 

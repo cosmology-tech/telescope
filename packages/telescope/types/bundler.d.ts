@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { TelescopeParseContext } from './build';
 import { TelescopeBuilder } from './builder';
-import { ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@cosmology/types';
 import { Bundle, BundlerFile } from './types';
 export declare class Bundler {
     builder: TelescopeBuilder;

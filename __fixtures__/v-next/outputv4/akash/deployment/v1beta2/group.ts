@@ -74,9 +74,9 @@ export interface GroupSDKType {
 }
 function createBaseGroup(): Group {
   return {
-    groupId: undefined,
+    groupId: GroupID.fromPartial({}),
     state: 0,
-    groupSpec: undefined,
+    groupSpec: GroupSpec.fromPartial({}),
     createdAt: BigInt(0)
   };
 }
@@ -125,7 +125,7 @@ export const Group = {
   fromJSON(object: any): Group {
     return {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
       createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
@@ -149,7 +149,7 @@ export const Group = {
   fromSDK(object: GroupSDKType): Group {
     return {
       groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
       createdAt: object?.created_at
     };
@@ -157,7 +157,7 @@ export const Group = {
   fromSDKJSON(object: any): GroupSDKType {
     return {
       group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
       group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
       created_at: isSet(object.created_at) ? BigInt(object.created_at.toString()) : BigInt(0)
     };

@@ -37,7 +37,13 @@ interface HookImport {
  * @param {string} identifier - name of function creating hooks. eg: createRpcQueryHooks
  * @returns {ParseResult} created AST
  */
-export declare const createScopedRpcHookFactory: (context: GenericParseContext, obj: object, identifier: string) => (t.ExportNamedDeclaration | {
+export declare const createScopedRpcHookFactory: (context: GenericParseContext, obj: object, identifier: string, instantHooksMapping?: {
+    [key: string]: {
+        useHookName: string;
+        importedVarName: string;
+        comment?: string;
+    };
+}) => (t.ExportNamedDeclaration | {
     type: string;
     importKind: string;
     specifiers: {

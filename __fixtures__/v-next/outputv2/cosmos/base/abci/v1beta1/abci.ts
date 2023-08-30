@@ -484,7 +484,7 @@ function createBaseTxResponse(): TxResponse {
     info: "",
     gasWanted: Long.ZERO,
     gasUsed: Long.ZERO,
-    tx: undefined,
+    tx: Any.fromPartial({}),
     timestamp: "",
     events: []
   };
@@ -1354,8 +1354,8 @@ export const Result = {
 };
 function createBaseSimulationResponse(): SimulationResponse {
   return {
-    gasInfo: undefined,
-    result: undefined
+    gasInfo: GasInfo.fromPartial({}),
+    result: Result.fromPartial({})
   };
 }
 export const SimulationResponse = {

@@ -31,7 +31,7 @@ export interface MsgStableSwapAdjustScalingFactorsResponse {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {
     sender: "",
-    poolParams: undefined,
+    poolParams: PoolParams.fromPartial({}),
     initialPoolLiquidity: [],
     scalingFactors: [],
     futurePoolGovernor: "",

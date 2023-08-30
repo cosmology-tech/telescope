@@ -1,12 +1,12 @@
-import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
-import { TraversalSymbol } from '@osmonauts/types';
+import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@cosmology/types';
+import { TraversalSymbol, IProtoStore } from '@cosmology/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
     preferTrailingComment?: boolean;
 }
-export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@pyramation/protobufjs").IParserResult;
-export declare class ProtoStore {
+export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@cosmology/protobufjs").IParserResult;
+export declare class ProtoStore implements IProtoStore {
     files: string[];
     protoDirs: string[];
     deps: ProtoDep[];
@@ -30,7 +30,7 @@ export declare class ProtoStore {
     }[]): {
         absolute: string;
         filename: string;
-        proto: import("@pyramation/protobufjs").IParserResult;
+        proto: import("@cosmology/protobufjs").IParserResult;
     }[];
     getProtos(): ProtoRef[];
     getPackages(): string[];
@@ -41,9 +41,9 @@ export declare class ProtoStore {
     getDeps(): ProtoDep[];
     getDependencies(protos: ProtoRef[]): ProtoDep[];
     traverseAll(): void;
-    get(from: ProtoRef, name: string): import("./lookup").Lookup;
-    getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
-    getTypeUrlMap(ref: ProtoRef): import("@osmonauts/types").InterfaceTypeUrlMap;
+    get(from: ProtoRef, name: string): import("@cosmology/types").Lookup;
+    getImportFromRef(ref: ProtoRef, name: string): import("@cosmology/types").Lookup;
+    getTypeUrlMap(ref: ProtoRef): import("@cosmology/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
 export {};

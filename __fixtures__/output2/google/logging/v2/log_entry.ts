@@ -286,22 +286,22 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
-    timestamp: undefined,
-    receiveTimestamp: undefined,
+    timestamp: Timestamp.fromPartial({}),
+    receiveTimestamp: Timestamp.fromPartial({}),
     severity: 0,
     insertId: "",
-    httpRequest: undefined,
+    httpRequest: HttpRequest.fromPartial({}),
     labels: {},
-    operation: undefined,
+    operation: LogEntryOperation.fromPartial({}),
     trace: "",
     spanId: "",
     traceSampled: false,
-    sourceLocation: undefined,
-    split: undefined
+    sourceLocation: LogEntrySourceLocation.fromPartial({}),
+    split: LogSplit.fromPartial({})
   };
 }
 export const LogEntry = {
@@ -439,7 +439,7 @@ export const LogEntry = {
       jsonPayload: isSet(object.jsonPayload) ? Struct.fromJSON(object.jsonPayload) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       receiveTimestamp: isSet(object.receiveTimestamp) ? fromJsonTimestamp(object.receiveTimestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

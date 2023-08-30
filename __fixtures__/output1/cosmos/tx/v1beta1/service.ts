@@ -298,7 +298,7 @@ export interface GetBlockWithTxsResponseSDKType {
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
   return {
     events: [],
-    pagination: undefined,
+    pagination: PageRequest.fromPartial({}),
     orderBy: 0
   };
 }
@@ -342,7 +342,7 @@ export const GetTxsEventRequest = {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => String(e)) : [],
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : 0
+      orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : -1
     };
   },
   toJSON(message: GetTxsEventRequest): unknown {
@@ -367,7 +367,7 @@ export const GetTxsEventRequest = {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined,
-      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : 0
+      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
   toSDK(message: GetTxsEventRequest): GetTxsEventRequestSDKType {
@@ -386,7 +386,7 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
   return {
     txs: [],
     txResponses: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetTxsEventResponse = {
@@ -516,7 +516,7 @@ export const BroadcastTxRequest = {
   fromJSON(object: any): BroadcastTxRequest {
     return {
       txBytes: isSet(object.txBytes) ? bytesFromBase64(object.txBytes) : new Uint8Array(),
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toJSON(message: BroadcastTxRequest): unknown {
@@ -534,7 +534,7 @@ export const BroadcastTxRequest = {
   fromSDK(object: BroadcastTxRequestSDKType): BroadcastTxRequest {
     return {
       txBytes: object?.tx_bytes,
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toSDK(message: BroadcastTxRequest): BroadcastTxRequestSDKType {
@@ -546,7 +546,7 @@ export const BroadcastTxRequest = {
 };
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
   return {
-    txResponse: undefined
+    txResponse: TxResponse.fromPartial({})
   };
 }
 export const BroadcastTxResponse = {
@@ -601,7 +601,7 @@ export const BroadcastTxResponse = {
 };
 function createBaseSimulateRequest(): SimulateRequest {
   return {
-    tx: undefined,
+    tx: Tx.fromPartial({}),
     txBytes: new Uint8Array()
   };
 }
@@ -668,8 +668,8 @@ export const SimulateRequest = {
 };
 function createBaseSimulateResponse(): SimulateResponse {
   return {
-    gasInfo: undefined,
-    result: undefined
+    gasInfo: GasInfo.fromPartial({}),
+    result: Result.fromPartial({})
   };
 }
 export const SimulateResponse = {
@@ -790,8 +790,8 @@ export const GetTxRequest = {
 };
 function createBaseGetTxResponse(): GetTxResponse {
   return {
-    tx: undefined,
-    txResponse: undefined
+    tx: Tx.fromPartial({}),
+    txResponse: TxResponse.fromPartial({})
   };
 }
 export const GetTxResponse = {
@@ -858,7 +858,7 @@ export const GetTxResponse = {
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
   return {
     height: Long.ZERO,
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const GetBlockWithTxsRequest = {
@@ -925,9 +925,9 @@ export const GetBlockWithTxsRequest = {
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return {
     txs: [],
-    blockId: undefined,
-    block: undefined,
-    pagination: undefined
+    blockId: BlockID.fromPartial({}),
+    block: Block.fromPartial({}),
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const GetBlockWithTxsResponse = {

@@ -1,14 +1,9 @@
 import { ProtoStore } from './store';
-import { ProtoRef } from '@osmonauts/types';
-import { getNested, getNestedProto } from './utils';
-export interface Lookup {
-    obj: any;
-    name: string;
-    import: string;
-    importType: string;
-    importedName: string;
-    package: string;
-}
+import { ProtoRef } from '@cosmology/types';
+import { getNested, getNestedProto } from './';
+import { Lookup } from '@cosmology/types';
+
+export type { Lookup } from '@cosmology/types';
 
 export const recursiveLookup = (proto: any, name: string, scope: string[] = [], allowNested = true) => {
     if (!proto) return;
@@ -134,7 +129,7 @@ export const protoScopeImportLookup = (
 
     // TODO pass in the imports and this ref
     // e.g. only include packges of those files !!!!!
-    // this is currently looking at ALL protos 
+    // this is currently looking at ALL protos
     const parsed = store.parseScope(name);
     if (!parsed) {
         return;
@@ -183,7 +178,7 @@ export const protoScopeImportLookup = (
                     obj: found.obj,
                     // not sure why scope doesn't handle this
                     // so we're wrapping with underscores here
-                    // EXAMPLE: google/logging/v2/logging_metrics 
+                    // EXAMPLE: google/logging/v2/logging_metrics
                     // EXAMPLE: google/api/servicecontrol/v1/distribution
                     importedName: nameAsArray.join('_'),
                     name: nameAsArray.join('_'),

@@ -866,7 +866,7 @@ function createBaseQueryNFTsRequest(): QueryNFTsRequest {
   return {
     classId: "",
     owner: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryNFTsRequest = {
@@ -981,7 +981,7 @@ export const QueryNFTsRequest = {
 function createBaseQueryNFTsResponse(): QueryNFTsResponse {
   return {
     nfts: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryNFTsResponse = {
@@ -1196,7 +1196,7 @@ export const QueryNFTRequest = {
 };
 function createBaseQueryNFTResponse(): QueryNFTResponse {
   return {
-    nft: undefined
+    nft: NFT.fromPartial({})
   };
 }
 export const QueryNFTResponse = {
@@ -1372,7 +1372,7 @@ export const QueryClassRequest = {
 };
 function createBaseQueryClassResponse(): QueryClassResponse {
   return {
-    class: undefined
+    class: Class.fromPartial({})
   };
 }
 export const QueryClassResponse = {
@@ -1460,7 +1460,7 @@ export const QueryClassResponse = {
 };
 function createBaseQueryClassesRequest(): QueryClassesRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryClassesRequest = {
@@ -1549,7 +1549,7 @@ export const QueryClassesRequest = {
 function createBaseQueryClassesResponse(): QueryClassesResponse {
   return {
     classes: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryClassesResponse = {

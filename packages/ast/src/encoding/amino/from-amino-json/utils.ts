@@ -8,7 +8,7 @@ import {
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField } from '@cosmology/types';
 import { GenericParseContext } from '../../context';
 
 export const fromAmino = {
@@ -135,6 +135,34 @@ export const fromAmino = {
 
     height(args: FromAminoParseField) {
         TypeLong.addUtil(args.context);
+        const longType = TypeLong.getType(args.context);
+
+        let revisionHeightArgs: t.Expression[] = [
+            t.logicalExpression(
+                '||',
+                t.memberExpression(
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                    t.identifier(args.context.aminoCasingFn('revision_height'))
+                ),
+                t.stringLiteral('0')
+            )
+        ];
+
+        let revisionNumberArgs: t.Expression[] = [
+            t.logicalExpression(
+                '||',
+                t.memberExpression(
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                    t.identifier(args.context.aminoCasingFn('revision_number'))
+                ),
+                t.stringLiteral('0')
+            )
+        ];
+
+        if (longType == 'Long') {
+            revisionHeightArgs.push(t.booleanLiteral(true))
+            revisionNumberArgs.push(t.booleanLiteral(true))
+        }
 
         return t.objectProperty(
             t.identifier(args.field.name),
@@ -144,33 +172,14 @@ export const fromAmino = {
                     t.objectProperty(t.identifier('revisionHeight'),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
-                            [
-                                t.logicalExpression(
-                                    '||',
-                                    t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.aminoCasingFn('revision_height'))
-                                    ),
-                                    t.stringLiteral('0')
-                                ),
-                                t.booleanLiteral(true)
-                            ])
+                            revisionHeightArgs
+                        )
                     ),
-                    //
                     t.objectProperty(t.identifier('revisionNumber'),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
-                            [
-                                t.logicalExpression(
-                                    '||',
-                                    t.memberExpression(
-                                        memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.aminoCasingFn('revision_number'))
-                                    ),
-                                    t.stringLiteral('0')
-                                ),
-                                t.booleanLiteral(true)
-                            ])
+                            revisionNumberArgs
+                        )
                     )
                 ]),
                 t.identifier('undefined')
@@ -330,37 +339,14 @@ export const fromAmino = {
     },
 
     pubkey(args: FromAminoParseField) {
-        args.context.addUtil('toBase64');
-        args.context.addUtil('encodeBech32Pubkey');
+        args.context.addUtil('encodePubkey');
 
         return t.objectProperty(
             t.identifier(args.field.name),
             t.callExpression(
-                t.identifier('encodeBech32Pubkey'),
+                t.identifier('encodePubkey'),
                 [
-                    t.objectExpression([
-                        t.objectProperty(
-                            t.identifier('type'),
-                            t.stringLiteral('tendermint/PubKeySecp256k1')
-                        ),
-                        t.objectProperty(
-                            t.identifier('value'),
-                            t.callExpression(
-                                t.identifier('toBase64'),
-                                [
-                                    t.memberExpression(
-                                        t.identifier('pubkey'),
-                                        t.identifier('value')
-                                    )
-                                ]
-                            )
-                        )
-                    ]),
-                    // TODO how to manage this?
-                    // 1. options.prefix
-                    // 2. look into prefix and how it's used across chains
-                    // 3. maybe AminoConverter is a class and has this.prefix!
-                    t.stringLiteral('cosmos')
+                  t.identifier('pubkey')
                 ]
             )
         )

@@ -478,7 +478,7 @@ function createBaseExistenceProof(): ExistenceProof {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    leaf: undefined,
+    leaf: LeafOp.fromPartial({}),
     path: []
   };
 }
@@ -576,8 +576,8 @@ export const ExistenceProof = {
 function createBaseNonExistenceProof(): NonExistenceProof {
   return {
     key: new Uint8Array(),
-    left: undefined,
-    right: undefined
+    left: ExistenceProof.fromPartial({}),
+    right: ExistenceProof.fromPartial({})
   };
 }
 export const NonExistenceProof = {
@@ -802,10 +802,10 @@ export const LeafOp = {
   },
   fromJSON(object: any): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehashKey) ? hashOpFromJSON(object.prehashKey) : 0,
-      prehashValue: isSet(object.prehashValue) ? hashOpFromJSON(object.prehashValue) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehashKey) ? hashOpFromJSON(object.prehashKey) : -1,
+      prehashValue: isSet(object.prehashValue) ? hashOpFromJSON(object.prehashValue) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
     };
   },
@@ -829,10 +829,10 @@ export const LeafOp = {
   },
   fromSDK(object: LeafOpSDKType): LeafOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
+      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : -1,
+      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : -1,
+      length: isSet(object.length) ? lengthOpFromJSON(object.length) : -1,
       prefix: object?.prefix
     };
   },
@@ -891,7 +891,7 @@ export const InnerOp = {
   },
   fromJSON(object: any): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(),
       suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array()
     };
@@ -912,7 +912,7 @@ export const InnerOp = {
   },
   fromSDK(object: InnerOpSDKType): InnerOp {
     return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1,
       prefix: object?.prefix,
       suffix: object?.suffix
     };
@@ -927,8 +927,8 @@ export const InnerOp = {
 };
 function createBaseProofSpec(): ProofSpec {
   return {
-    leafSpec: undefined,
-    innerSpec: undefined,
+    leafSpec: LeafOp.fromPartial({}),
+    innerSpec: InnerSpec.fromPartial({}),
     maxDepth: 0,
     minDepth: 0
   };
@@ -1096,7 +1096,7 @@ export const InnerSpec = {
       minPrefixLength: isSet(object.minPrefixLength) ? Number(object.minPrefixLength) : 0,
       maxPrefixLength: isSet(object.maxPrefixLength) ? Number(object.maxPrefixLength) : 0,
       emptyChild: isSet(object.emptyChild) ? bytesFromBase64(object.emptyChild) : new Uint8Array(),
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toJSON(message: InnerSpec): unknown {
@@ -1130,7 +1130,7 @@ export const InnerSpec = {
       minPrefixLength: object?.min_prefix_length,
       maxPrefixLength: object?.max_prefix_length,
       emptyChild: object?.empty_child,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
+      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : -1
     };
   },
   toSDK(message: InnerSpec): InnerSpecSDKType {
@@ -1432,7 +1432,7 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
   return {
     key: new Uint8Array(),
     value: new Uint8Array(),
-    leaf: undefined,
+    leaf: LeafOp.fromPartial({}),
     path: []
   };
 }
@@ -1539,8 +1539,8 @@ export const CompressedExistenceProof = {
 function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
   return {
     key: new Uint8Array(),
-    left: undefined,
-    right: undefined
+    left: CompressedExistenceProof.fromPartial({}),
+    right: CompressedExistenceProof.fromPartial({})
   };
 }
 export const CompressedNonExistenceProof = {

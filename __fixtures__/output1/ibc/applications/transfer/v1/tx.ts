@@ -52,10 +52,10 @@ function createBaseMsgTransfer(): MsgTransfer {
   return {
     sourcePort: "",
     sourceChannel: "",
-    token: undefined,
+    token: Coin.fromPartial({}),
     sender: "",
     receiver: "",
-    timeoutHeight: undefined,
+    timeoutHeight: Height.fromPartial({}),
     timeoutTimestamp: Long.UZERO
   };
 }

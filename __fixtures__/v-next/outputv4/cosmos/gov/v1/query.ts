@@ -251,7 +251,7 @@ export const QueryProposalRequest = {
 };
 function createBaseQueryProposalResponse(): QueryProposalResponse {
   return {
-    proposal: undefined
+    proposal: Proposal.fromPartial({})
   };
 }
 export const QueryProposalResponse = {
@@ -314,7 +314,7 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
     proposalStatus: 0,
     voter: "",
     depositor: "",
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryProposalsRequest = {
@@ -361,7 +361,7 @@ export const QueryProposalsRequest = {
   },
   fromJSON(object: any): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposalStatus) ? proposalStatusFromJSON(object.proposalStatus) : 0,
+      proposalStatus: isSet(object.proposalStatus) ? proposalStatusFromJSON(object.proposalStatus) : -1,
       voter: isSet(object.voter) ? String(object.voter) : "",
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
@@ -385,7 +385,7 @@ export const QueryProposalsRequest = {
   },
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
     return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
       voter: object?.voter,
       depositor: object?.depositor,
       pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
@@ -393,7 +393,7 @@ export const QueryProposalsRequest = {
   },
   fromSDKJSON(object: any): QueryProposalsRequestSDKType {
     return {
-      proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
       voter: isSet(object.voter) ? String(object.voter) : "",
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
@@ -411,7 +411,7 @@ export const QueryProposalsRequest = {
 function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   return {
     proposals: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryProposalsResponse = {
@@ -564,7 +564,7 @@ export const QueryVoteRequest = {
 };
 function createBaseQueryVoteResponse(): QueryVoteResponse {
   return {
-    vote: undefined
+    vote: Vote.fromPartial({})
   };
 }
 export const QueryVoteResponse = {
@@ -625,7 +625,7 @@ export const QueryVoteResponse = {
 function createBaseQueryVotesRequest(): QueryVotesRequest {
   return {
     proposalId: BigInt(0),
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryVotesRequest = {
@@ -698,7 +698,7 @@ export const QueryVotesRequest = {
 function createBaseQueryVotesResponse(): QueryVotesResponse {
   return {
     votes: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryVotesResponse = {
@@ -838,9 +838,9 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    votingParams: undefined,
-    depositParams: undefined,
-    tallyParams: undefined
+    votingParams: VotingParams.fromPartial({}),
+    depositParams: DepositParams.fromPartial({}),
+    tallyParams: TallyParams.fromPartial({})
   };
 }
 export const QueryParamsResponse = {
@@ -997,7 +997,7 @@ export const QueryDepositRequest = {
 };
 function createBaseQueryDepositResponse(): QueryDepositResponse {
   return {
-    deposit: undefined
+    deposit: Deposit.fromPartial({})
   };
 }
 export const QueryDepositResponse = {
@@ -1058,7 +1058,7 @@ export const QueryDepositResponse = {
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return {
     proposalId: BigInt(0),
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryDepositsRequest = {
@@ -1131,7 +1131,7 @@ export const QueryDepositsRequest = {
 function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   return {
     deposits: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryDepositsResponse = {
@@ -1271,7 +1271,7 @@ export const QueryTallyResultRequest = {
 };
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return {
-    tally: undefined
+    tally: TallyResult.fromPartial({})
   };
 }
 export const QueryTallyResultResponse = {

@@ -477,7 +477,7 @@ export interface ReportResponse_ReportErrorSDKType {
 function createBaseCheckRequest(): CheckRequest {
   return {
     serviceName: "",
-    operation: undefined,
+    operation: Operation.fromPartial({}),
     serviceConfigId: ""
   };
 }
@@ -589,7 +589,7 @@ function createBaseCheckResponse(): CheckResponse {
     checkErrors: [],
     serviceConfigId: "",
     serviceRolloutId: "",
-    checkInfo: undefined
+    checkInfo: CheckResponse_CheckInfo.fromPartial({})
   };
 }
 export const CheckResponse = {
@@ -735,7 +735,7 @@ export const CheckResponse = {
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   return {
     unusedArguments: [],
-    consumerInfo: undefined
+    consumerInfo: CheckResponse_ConsumerInfo.fromPartial({})
   };
 }
 export const CheckResponse_CheckInfo = {
@@ -886,7 +886,7 @@ export const CheckResponse_ConsumerInfo = {
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
       projectNumber: isSet(object.projectNumber) ? Long.fromValue(object.projectNumber) : Long.ZERO,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: isSet(object.consumerNumber) ? Long.fromValue(object.consumerNumber) : Long.ZERO
     };
   },
@@ -907,7 +907,7 @@ export const CheckResponse_ConsumerInfo = {
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
       projectNumber: object?.project_number,
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: object?.consumer_number
     };
   },
@@ -921,7 +921,7 @@ export const CheckResponse_ConsumerInfo = {
   fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
     return {
       projectNumber: Long.fromString(object.project_number),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
       consumerNumber: Long.fromString(object.consumer_number)
     };
   },
@@ -1193,7 +1193,7 @@ export const ReportResponse = {
 function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
   return {
     operationId: "",
-    status: undefined
+    status: Status.fromPartial({})
   };
 }
 export const ReportResponse_ReportError = {

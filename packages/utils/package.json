@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/utils",
-  "version": "0.11.1",
+  "name": "@cosmology/utils",
+  "version": "0.14.0",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -28,7 +28,10 @@
     "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
-    "format": "eslint . --fix"
+    "format": "eslint . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -42,11 +45,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils"
+    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils/issues"
+    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
@@ -79,6 +82,8 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0"
+    "@babel/runtime": "^7.21.0",
+    "@cosmology/types": "^0.39.0",
+    "dotty": "0.1.2"
   }
 }

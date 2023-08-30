@@ -391,12 +391,12 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: undefined,
+    metricDescriptor: MetricDescriptor.fromPartial({}),
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: undefined,
-    createTime: undefined,
-    updateTime: undefined,
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    createTime: new Date(),
+    updateTime: new Date(),
     version: 0
   };
 }
@@ -507,7 +507,7 @@ export const LogMetric = {
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
       createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toJSON(message: LogMetric): unknown {
@@ -569,7 +569,7 @@ export const LogMetric = {
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
       updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toSDK(message: LogMetric): LogMetricSDKType {
@@ -805,7 +805,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const CreateLogMetricRequest = {
@@ -872,7 +872,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: undefined
+    metric: LogMetric.fromPartial({})
   };
 }
 export const UpdateLogMetricRequest = {

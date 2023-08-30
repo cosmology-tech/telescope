@@ -74,7 +74,7 @@ export interface QueryCertificatesResponseSDKType {
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
-    certificate: undefined,
+    certificate: Certificate.fromPartial({}),
     serial: ""
   };
 }
@@ -169,8 +169,8 @@ export const CertificateResponse = {
 };
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
-    filter: undefined,
-    pagination: undefined
+    filter: CertificateFilter.fromPartial({}),
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryCertificatesRequest = {
@@ -265,7 +265,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryCertificatesResponse = {

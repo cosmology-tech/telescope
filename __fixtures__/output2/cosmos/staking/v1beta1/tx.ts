@@ -74,13 +74,13 @@ export interface MsgUndelegateResponse {
 }
 function createBaseMsgCreateValidator(): MsgCreateValidator {
   return {
-    description: undefined,
-    commission: undefined,
+    description: Description.fromPartial({}),
+    commission: CommissionRates.fromPartial({}),
     minSelfDelegation: "",
     delegatorAddress: "",
     validatorAddress: "",
-    pubkey: undefined,
-    value: undefined
+    pubkey: Any.fromPartial({}),
+    value: Coin.fromPartial({})
   };
 }
 export const MsgCreateValidator = {
@@ -212,7 +212,7 @@ export const MsgCreateValidatorResponse = {
 };
 function createBaseMsgEditValidator(): MsgEditValidator {
   return {
-    description: undefined,
+    description: Description.fromPartial({}),
     validatorAddress: "",
     commissionRate: "",
     minSelfDelegation: ""
@@ -322,7 +322,7 @@ function createBaseMsgDelegate(): MsgDelegate {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgDelegate = {
@@ -421,7 +421,7 @@ function createBaseMsgBeginRedelegate(): MsgBeginRedelegate {
     delegatorAddress: "",
     validatorSrcAddress: "",
     validatorDstAddress: "",
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgBeginRedelegate = {
@@ -493,7 +493,7 @@ export const MsgBeginRedelegate = {
 };
 function createBaseMsgBeginRedelegateResponse(): MsgBeginRedelegateResponse {
   return {
-    completionTime: undefined
+    completionTime: Timestamp.fromPartial({})
   };
 }
 export const MsgBeginRedelegateResponse = {
@@ -540,7 +540,7 @@ function createBaseMsgUndelegate(): MsgUndelegate {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgUndelegate = {
@@ -603,7 +603,7 @@ export const MsgUndelegate = {
 };
 function createBaseMsgUndelegateResponse(): MsgUndelegateResponse {
   return {
-    completionTime: undefined
+    completionTime: Timestamp.fromPartial({})
   };
 }
 export const MsgUndelegateResponse = {

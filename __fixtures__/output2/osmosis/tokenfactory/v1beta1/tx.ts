@@ -176,7 +176,7 @@ export const MsgCreateDenomResponse = {
 function createBaseMsgMint(): MsgMint {
   return {
     sender: "",
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgMint = {
@@ -264,7 +264,7 @@ export const MsgMintResponse = {
 function createBaseMsgBurn(): MsgBurn {
   return {
     sender: "",
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgBurn = {
@@ -450,7 +450,7 @@ export const MsgChangeAdminResponse = {
 function createBaseMsgSetDenomMetadata(): MsgSetDenomMetadata {
   return {
     sender: "",
-    metadata: undefined
+    metadata: Metadata.fromPartial({})
   };
 }
 export const MsgSetDenomMetadata = {

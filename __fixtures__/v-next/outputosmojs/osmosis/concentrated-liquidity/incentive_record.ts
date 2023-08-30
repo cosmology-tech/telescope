@@ -71,8 +71,8 @@ function createBaseIncentiveRecord(): IncentiveRecord {
     poolId: BigInt(0),
     incentiveDenom: "",
     incentiveCreatorAddr: "",
-    incentiveRecordBody: undefined,
-    minUptime: undefined
+    incentiveRecordBody: IncentiveRecordBody.fromPartial({}),
+    minUptime: Duration.fromPartial({})
   };
 }
 export const IncentiveRecord = {
@@ -182,7 +182,7 @@ function createBaseIncentiveRecordBody(): IncentiveRecordBody {
   return {
     remainingAmount: "",
     emissionRate: "",
-    startTime: undefined
+    startTime: new Date()
   };
 }
 export const IncentiveRecordBody = {

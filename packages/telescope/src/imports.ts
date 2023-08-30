@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { GenericParseContext, SymbolNames, TelescopeBaseTypes, importStmt } from '@osmonauts/ast';
-import { ServiceMutation } from '@osmonauts/types';
+import { GenericParseContext, SymbolNames, TelescopeBaseTypes, importStmt } from '@cosmology/ast';
+import { ServiceMutation } from '@cosmology/types';
 
 import { DerivedImportObj, ImportHash, ImportObj } from './types';
 import { UTILS, getRelativePath, UTIL_HELPERS } from './utils';
@@ -319,7 +319,7 @@ const addDerivativeTypesToImports = (
                     });
                     const foundAmino = context.proto.derivedImports.find(a => {
                         if (a.type !== 'Amino') return false;
-                        if (AminoTypeObject.orig === a.symbol.symbolName) {
+                        if (AminoTypeObject.orig === a.symbol.symbolName && a.symbol.ref && a.symbol.source) {
                             // UNTIL you fix the ImportObjs to have ref...
                             let rel = getRelativePath(a.symbol.ref, a.symbol.source);
                             if (rel === AminoTypeObject.path) {

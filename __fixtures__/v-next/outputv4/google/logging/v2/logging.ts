@@ -619,7 +619,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
     logName: "",
-    resource: undefined,
+    resource: MonitoredResource.fromPartial({}),
     labels: {},
     entries: [],
     partialSuccess: false,
@@ -833,7 +833,7 @@ export const WriteLogEntriesResponse = {
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
     key: 0,
-    value: undefined
+    value: Status.fromPartial({})
   };
 }
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
@@ -842,7 +842,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
       writer.uint32(8).int32(message.key);
     }
     if (message.value !== undefined) {
-      google.rpc.Status.encode(message.value, writer.uint32(18).fork()).ldelim();
+      Status.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -857,7 +857,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
           message.key = reader.int32();
           break;
         case 2:
-          message.value = google.rpc.Status.decode(reader, reader.uint32());
+          message.value = Status.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -869,37 +869,37 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   fromJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? google.rpc.Status.fromJSON(object.value) : undefined
+      value: isSet(object.value) ? Status.fromJSON(object.value) : undefined
     };
   },
   toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Status.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
-    message.value = object.value !== undefined && object.value !== null ? google.rpc.Status.fromPartial(object.value) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
       key: object?.key,
-      value: object.value ? google.rpc.Status.fromSDK(object.value) : undefined
+      value: object.value ? Status.fromSDK(object.value) : undefined
     };
   },
   fromSDKJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
     return {
       key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? google.rpc.Status.fromSDKJSON(object.value) : undefined
+      value: isSet(object.value) ? Status.fromSDKJSON(object.value) : undefined
     };
   },
   toSDK(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
     const obj: any = {};
     obj.key = message.key;
-    message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toSDK(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Status.toSDK(message.value) : undefined);
     return obj;
   }
 };
@@ -1548,7 +1548,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
     resourceNames: [],
     filter: "",
-    bufferWindow: undefined
+    bufferWindow: Duration.fromPartial({})
   };
 }
 export const TailLogEntriesRequest = {
@@ -1765,7 +1765,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromJSON(object: any): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: isSet(object.suppressedCount) ? Number(object.suppressedCount) : 0
     };
   },
@@ -1783,13 +1783,13 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressedCount: object?.suppressed_count
     };
   },
   fromSDKJSON(object: any): TailLogEntriesResponse_SuppressionInfoSDKType {
     return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
       suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : 0
     };
   },

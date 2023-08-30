@@ -1,4 +1,4 @@
-import { ProtoDep } from '@osmonauts/types';
+import { ProtoDep } from '@cosmology/types';
 
 function depResolve(deps: ProtoDep[], protofile: string, resolved: string[], unresolved: string[]) {
     unresolved.push(protofile);

@@ -107,6 +107,7 @@ export const fromSDK = {
             propName,
             origName
         } = getFieldNames(args.field);
+        const setDefaultEnumToUnrecognized = args.context.pluginValue('prototypes.typingsFormat.setDefaultEnumToUnrecognized');
 
         args.context.addUtil('isSet');
         const fromSDKFuncName = args.context.getFromEnum(args.field);
@@ -132,7 +133,7 @@ export const fromSDK = {
                         )
                     ]
                 ),
-                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(!setDefaultEnumToUnrecognized ? 0 : -1)
             )
         );
     },
@@ -152,7 +153,7 @@ export const fromSDK = {
       const env = args.context.pluginValue(
         'env'
       );
-      if(env == 'default'){
+      if(!env || env == 'default'){
         timestampFormat = 'timestamp';
       }
       switch (timestampFormat) {

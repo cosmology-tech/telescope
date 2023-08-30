@@ -294,7 +294,7 @@ export const SuperfluidAsset = {
   fromJSON(object: any): SuperfluidAsset {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : 0
+      assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
   toJSON(message: SuperfluidAsset): unknown {
@@ -312,7 +312,7 @@ export const SuperfluidAsset = {
   fromSDK(object: SuperfluidAssetSDKType): SuperfluidAsset {
     return {
       denom: object?.denom,
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toSDK(message: SuperfluidAsset): SuperfluidAssetSDKType {
@@ -324,7 +324,7 @@ export const SuperfluidAsset = {
   fromAmino(object: SuperfluidAssetAmino): SuperfluidAsset {
     return {
       denom: object.denom,
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
   toAmino(message: SuperfluidAsset): SuperfluidAssetAmino {
@@ -591,8 +591,8 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    delegationAmount: undefined,
-    equivalentStakedAmount: undefined
+    delegationAmount: Coin.fromPartial({}),
+    equivalentStakedAmount: Coin.fromPartial({})
   };
 }
 export const SuperfluidDelegationRecord = {

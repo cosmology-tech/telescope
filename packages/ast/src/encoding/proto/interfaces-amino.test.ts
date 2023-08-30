@@ -1,5 +1,5 @@
-import { getNestedProto } from '@osmonauts/proto-parser';
-import { ProtoParseContext } from '@osmonauts/ast';
+import { getNestedProto } from '@cosmology/utils';
+import { ProtoParseContext } from '@cosmology/ast';
 import { expectCode, getTestProtoStore } from '../../../test-utils';
 import { createObjectWithMethods } from '../object';
 

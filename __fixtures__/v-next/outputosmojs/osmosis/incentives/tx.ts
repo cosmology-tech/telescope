@@ -63,9 +63,9 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
     isPerpetual: false,
     owner: "",
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
-    startTime: undefined,
+    startTime: new Date(),
     numEpochsPaidOver: BigInt(0)
   };
 }

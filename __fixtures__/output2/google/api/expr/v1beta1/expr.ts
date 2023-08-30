@@ -231,8 +231,8 @@ export interface Literal {
 }
 function createBaseParsedExpr(): ParsedExpr {
   return {
-    expr: undefined,
-    sourceInfo: undefined,
+    expr: Expr.fromPartial({}),
+    sourceInfo: SourceInfo.fromPartial({}),
     syntaxVersion: ""
   };
 }
@@ -456,7 +456,7 @@ export const Expr_Ident = {
 };
 function createBaseExpr_Select(): Expr_Select {
   return {
-    operand: undefined,
+    operand: Expr.fromPartial({}),
     field: "",
     testOnly: false
   };
@@ -521,7 +521,7 @@ export const Expr_Select = {
 };
 function createBaseExpr_Call(): Expr_Call {
   return {
-    target: undefined,
+    target: Expr.fromPartial({}),
     function: "",
     args: []
   };
@@ -701,7 +701,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
     id: 0,
     fieldKey: undefined,
     mapKey: undefined,
-    value: undefined
+    value: Expr.fromPartial({})
   };
 }
 export const Expr_CreateStruct_Entry = {
@@ -774,12 +774,12 @@ export const Expr_CreateStruct_Entry = {
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
     iterVar: "",
-    iterRange: undefined,
+    iterRange: Expr.fromPartial({}),
     accuVar: "",
-    accuInit: undefined,
-    loopCondition: undefined,
-    loopStep: undefined,
-    result: undefined
+    accuInit: Expr.fromPartial({}),
+    loopCondition: Expr.fromPartial({}),
+    loopStep: Expr.fromPartial({}),
+    result: Expr.fromPartial({})
   };
 }
 export const Expr_Comprehension = {

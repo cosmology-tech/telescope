@@ -133,9 +133,9 @@ function createBaseGauge(): Gauge {
   return {
     id: Long.UZERO,
     isPerpetual: false,
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
-    startTime: undefined,
+    startTime: new Date(),
     numEpochsPaidOver: Long.UZERO,
     filledEpochs: Long.UZERO,
     distributedCoins: []
@@ -291,7 +291,7 @@ export const Gauge = {
       isPerpetual: object.is_perpetual,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      startTime: object.start_time,
       numEpochsPaidOver: Long.fromString(object.num_epochs_paid_over),
       filledEpochs: Long.fromString(object.filled_epochs),
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -307,7 +307,7 @@ export const Gauge = {
     } else {
       obj.coins = [];
     }
-    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.start_time = message.startTime;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
     if (message.distributedCoins) {

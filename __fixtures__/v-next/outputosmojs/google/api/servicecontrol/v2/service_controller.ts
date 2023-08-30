@@ -144,7 +144,7 @@ function createBaseCheckRequest(): CheckRequest {
   return {
     serviceName: "",
     serviceConfigId: "",
-    attributes: undefined,
+    attributes: AttributeContext.fromPartial({}),
     resources: [],
     flags: ""
   };
@@ -447,7 +447,7 @@ export const CheckResponse_HeadersEntry = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    status: undefined,
+    status: Status.fromPartial({}),
     headers: {}
   };
 }

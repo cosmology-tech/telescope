@@ -344,7 +344,7 @@ export const WeightedVoteOption = {
   },
   fromJSON(object: any): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -362,13 +362,13 @@ export const WeightedVoteOption = {
   },
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: object?.weight
     };
   },
   fromSDKJSON(object: any): WeightedVoteOptionSDKType {
     return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
@@ -549,14 +549,14 @@ export const Deposit = {
 function createBaseProposal(): Proposal {
   return {
     proposalId: BigInt(0),
-    content: undefined,
+    content: Any.fromPartial({}),
     status: 0,
-    finalTallyResult: undefined,
-    submitTime: undefined,
-    depositEndTime: undefined,
+    finalTallyResult: TallyResult.fromPartial({}),
+    submitTime: new Date(),
+    depositEndTime: new Date(),
     totalDeposit: [],
-    votingStartTime: undefined,
-    votingEndTime: undefined
+    votingStartTime: new Date(),
+    votingEndTime: new Date()
   };
 }
 export const Proposal = {
@@ -635,7 +635,7 @@ export const Proposal = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
       submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       depositEndTime: isSet(object.depositEndTime) ? new Date(object.depositEndTime) : undefined,
@@ -678,7 +678,7 @@ export const Proposal = {
     return {
       proposalId: object?.proposal_id,
       content: object.content ? Any.fromSDK(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
       submitTime: object.submit_time ?? undefined,
       depositEndTime: object.deposit_end_time ?? undefined,
@@ -691,7 +691,7 @@ export const Proposal = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
       submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
       deposit_end_time: isSet(object.deposit_end_time) ? new Date(object.deposit_end_time) : undefined,
@@ -871,7 +871,7 @@ export const Vote = {
     return {
       proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : []
     };
   },
@@ -899,7 +899,7 @@ export const Vote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
     };
   },
@@ -907,7 +907,7 @@ export const Vote = {
     return {
       proposal_id: isSet(object.proposal_id) ? BigInt(object.proposal_id.toString()) : BigInt(0),
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
     };
   },
@@ -927,7 +927,7 @@ export const Vote = {
 function createBaseDepositParams(): DepositParams {
   return {
     minDeposit: [],
-    maxDepositPeriod: undefined
+    maxDepositPeriod: Duration.fromPartial({})
   };
 }
 export const DepositParams = {
@@ -1007,7 +1007,7 @@ export const DepositParams = {
 };
 function createBaseVotingParams(): VotingParams {
   return {
-    votingPeriod: undefined
+    votingPeriod: Duration.fromPartial({})
   };
 }
 export const VotingParams = {

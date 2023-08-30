@@ -185,11 +185,11 @@ export const AccountID = {
 };
 function createBaseAccount(): Account {
   return {
-    id: undefined,
+    id: AccountID.fromPartial({}),
     owner: "",
     state: 0,
-    balance: undefined,
-    transferred: undefined,
+    balance: Coin.fromPartial({}),
+    transferred: Coin.fromPartial({}),
     settledAt: Long.ZERO
   };
 }
@@ -251,7 +251,7 @@ export const Account = {
     return {
       id: isSet(object.id) ? AccountID.fromJSON(object.id) : undefined,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromJSON(object.transferred) : undefined,
       settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO
@@ -280,13 +280,13 @@ export const Account = {
 };
 function createBasePayment(): Payment {
   return {
-    accountId: undefined,
+    accountId: AccountID.fromPartial({}),
     paymentId: "",
     owner: "",
     state: 0,
-    rate: undefined,
-    balance: undefined,
-    withdrawn: undefined
+    rate: Coin.fromPartial({}),
+    balance: Coin.fromPartial({}),
+    withdrawn: Coin.fromPartial({})
   };
 }
 export const Payment = {
@@ -354,7 +354,7 @@ export const Payment = {
       accountId: isSet(object.accountId) ? AccountID.fromJSON(object.accountId) : undefined,
       paymentId: isSet(object.paymentId) ? String(object.paymentId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
       rate: isSet(object.rate) ? Coin.fromJSON(object.rate) : undefined,
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined

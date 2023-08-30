@@ -16,8 +16,8 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    minter: undefined,
-    params: undefined
+    minter: Minter.fromPartial({}),
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

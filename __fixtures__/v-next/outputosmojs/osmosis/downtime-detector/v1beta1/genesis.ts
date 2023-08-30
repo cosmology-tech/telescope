@@ -24,7 +24,7 @@ export interface GenesisStateSDKType {
 function createBaseGenesisDowntimeEntry(): GenesisDowntimeEntry {
   return {
     duration: 0,
-    lastDowntime: undefined
+    lastDowntime: new Date()
   };
 }
 export const GenesisDowntimeEntry = {
@@ -59,7 +59,7 @@ export const GenesisDowntimeEntry = {
   },
   fromJSON(object: any): GenesisDowntimeEntry {
     return {
-      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : 0,
+      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
       lastDowntime: isSet(object.lastDowntime) ? new Date(object.lastDowntime) : undefined
     };
   },
@@ -77,13 +77,13 @@ export const GenesisDowntimeEntry = {
   },
   fromSDK(object: GenesisDowntimeEntrySDKType): GenesisDowntimeEntry {
     return {
-      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : 0,
+      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
       lastDowntime: object.last_downtime ?? undefined
     };
   },
   fromSDKJSON(object: any): GenesisDowntimeEntrySDKType {
     return {
-      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : 0,
+      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
       last_downtime: isSet(object.last_downtime) ? new Date(object.last_downtime) : undefined
     };
   },
@@ -97,7 +97,7 @@ export const GenesisDowntimeEntry = {
 function createBaseGenesisState(): GenesisState {
   return {
     downtimes: [],
-    lastBlockTime: undefined
+    lastBlockTime: new Date()
   };
 }
 export const GenesisState = {

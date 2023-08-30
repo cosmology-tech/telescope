@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../src/builder';
-import { TelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions } from '@cosmology/types';
 import {
   bundleBaseRegistries,
   bundleRegistries,
@@ -158,10 +158,26 @@ const options: TelescopeOptions = {
 
   reactQuery: {
     enabled: true,
+    needExtraQueryKey: true,
     include: {
       patterns: ['osmosis/**/gamm/**/query.proto'],
       protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.bank.v1beta1']
+      packages: ['cosmos.bank.v1beta1', 'cosmos.auth.**',  'cosmos.nft.**']
+    },
+    instantExport: {
+      include: {
+        patterns: [
+          '**.useBalance',
+          'cosmos.auth.**',
+          'osmosis.**',
+          'akash.**'
+        ]
+      },
+      nameMapping: {
+        'useAuthModuleAccounts': 'cosmos.auth.v1beta1.useModuleAccounts',
+        'useBankBalance': 'cosmos.bank.v1beta1.useBalance',
+        'useNftBalance': 'cosmos.nft.v1beta1.useBalance',
+      }
     }
   },
 

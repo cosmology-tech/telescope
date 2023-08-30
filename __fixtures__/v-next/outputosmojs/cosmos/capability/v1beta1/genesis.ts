@@ -32,7 +32,7 @@ export interface GenesisStateSDKType {
 function createBaseGenesisOwners(): GenesisOwners {
   return {
     index: BigInt(0),
-    indexOwners: undefined
+    indexOwners: CapabilityOwners.fromPartial({})
   };
 }
 export const GenesisOwners = {

@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/proto-parser",
-  "version": "0.43.0",
+  "name": "@cosmology/proto-parser",
+  "version": "0.48.0",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/parser#readme",
+  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/parser#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "typings": "types/index.d.ts",
@@ -33,11 +33,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope"
+    "url": "https://github.com/cosmology-tech/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/issues"
+    "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
@@ -70,8 +70,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
-    "@osmonauts/types": "^0.35.0",
-    "@pyramation/protobufjs": "6.11.5",
+    "@cosmology/protobufjs": "6.11.6",
+    "@cosmology/types": "^0.39.0",
+    "@cosmology/utils": "^0.14.0",
     "dotty": "0.1.2",
     "glob": "8.0.3",
     "minimatch": "5.1.0",

@@ -72,9 +72,9 @@ function createBaseGauge(): Gauge {
   return {
     id: BigInt(0),
     isPerpetual: false,
-    distributeTo: undefined,
+    distributeTo: QueryCondition.fromPartial({}),
     coins: [],
-    startTime: undefined,
+    startTime: new Date(),
     numEpochsPaidOver: BigInt(0),
     filledEpochs: BigInt(0),
     distributedCoins: []

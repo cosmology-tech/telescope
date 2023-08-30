@@ -43,7 +43,7 @@ export interface ParamsSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     period: BigInt(0),
     epochIdentifier: "",
     epochsPerPeriod: BigInt(0),
@@ -156,8 +156,8 @@ export const GenesisState = {
 function createBaseParams(): Params {
   return {
     mintDenom: "",
-    exponentialCalculation: undefined,
-    inflationDistribution: undefined,
+    exponentialCalculation: ExponentialCalculation.fromPartial({}),
+    inflationDistribution: InflationDistribution.fromPartial({}),
     enableInflation: false
   };
 }

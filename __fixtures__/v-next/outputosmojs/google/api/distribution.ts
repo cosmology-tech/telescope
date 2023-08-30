@@ -308,8 +308,8 @@ function createBaseDistribution(): Distribution {
     count: BigInt(0),
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: undefined,
-    bucketOptions: undefined,
+    range: Distribution_Range.fromPartial({}),
+    bucketOptions: Distribution_BucketOptions.fromPartial({}),
     bucketCounts: [],
     exemplars: []
   };
@@ -877,7 +877,7 @@ export const Distribution_BucketOptions_Explicit = {
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
-    timestamp: undefined,
+    timestamp: new Date(),
     attachments: []
   };
 }

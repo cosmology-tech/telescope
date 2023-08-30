@@ -275,7 +275,7 @@ export const EnableServiceRequest = {
 };
 function createBaseEnableServiceResponse(): EnableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const EnableServiceResponse = {
@@ -365,7 +365,7 @@ export const DisableServiceRequest = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
-      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : 0
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
     };
   },
   toJSON(message: DisableServiceRequest): unknown {
@@ -385,7 +385,7 @@ export const DisableServiceRequest = {
 };
 function createBaseDisableServiceResponse(): DisableServiceResponse {
   return {
-    service: undefined
+    service: Service.fromPartial({})
   };
 }
 export const DisableServiceResponse = {

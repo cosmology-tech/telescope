@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@osmonauts/types';
+import { ProtoType } from '@cosmology/types';
 import { ProtoParseContext } from '../../context';
 import { ToAminoJSONMethod } from './index';
 export declare const toAminoJSON: {
@@ -45,12 +45,12 @@ export declare const arrayTypes: {
     sint32(): t.Identifier;
     fixed32(): t.Identifier;
     sfixed32(): t.Identifier;
-    long(args: ToAminoJSONMethod): t.Identifier;
-    int64(args: ToAminoJSONMethod): t.Identifier;
-    uint64(args: ToAminoJSONMethod): t.Identifier;
-    sint64(args: ToAminoJSONMethod): t.Identifier;
-    fixed64(args: ToAminoJSONMethod): t.Identifier;
-    sfixed64(args: ToAminoJSONMethod): t.Identifier;
+    long(args: ToAminoJSONMethod): t.Expression;
+    int64(args: ToAminoJSONMethod): t.Expression;
+    uint64(args: ToAminoJSONMethod): t.Expression;
+    sint64(args: ToAminoJSONMethod): t.Expression;
+    fixed64(args: ToAminoJSONMethod): t.Expression;
+    sfixed64(args: ToAminoJSONMethod): t.Expression;
     bytes(args: ToAminoJSONMethod): t.Identifier;
     enum(args: ToAminoJSONMethod): t.CallExpression;
     anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
@@ -58,5 +58,7 @@ export declare const arrayTypes: {
     type(args: ToAminoJSONMethod): t.ConditionalExpression;
 };
 export declare const toAminoMessages: {
+    anyType(): (t.ExpressionStatement | t.ReturnStatement | t.VariableDeclaration)[];
+    timestamp(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement;
     duration(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement;
 };

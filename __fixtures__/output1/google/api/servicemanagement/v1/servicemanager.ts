@@ -592,7 +592,7 @@ export const GetServiceRequest = {
 };
 function createBaseCreateServiceRequest(): CreateServiceRequest {
   return {
-    service: undefined
+    service: ManagedService.fromPartial({})
   };
 }
 export const CreateServiceRequest = {
@@ -757,7 +757,7 @@ export const UndeleteServiceRequest = {
 };
 function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
   return {
-    service: undefined
+    service: ManagedService.fromPartial({})
   };
 }
 export const UndeleteServiceResponse = {
@@ -857,7 +857,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
       configId: isSet(object.configId) ? String(object.configId) : "",
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toJSON(message: GetServiceConfigRequest): unknown {
@@ -878,7 +878,7 @@ export const GetServiceConfigRequest = {
     return {
       serviceName: object?.service_name,
       configId: object?.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
   toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
@@ -1046,7 +1046,7 @@ export const ListServiceConfigsResponse = {
 function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
   return {
     serviceName: "",
-    serviceConfig: undefined
+    serviceConfig: Service.fromPartial({})
   };
 }
 export const CreateServiceConfigRequest = {
@@ -1113,7 +1113,7 @@ export const CreateServiceConfigRequest = {
 function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
   return {
     serviceName: "",
-    configSource: undefined,
+    configSource: ConfigSource.fromPartial({}),
     validateOnly: false
   };
 }
@@ -1191,7 +1191,7 @@ export const SubmitConfigSourceRequest = {
 };
 function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
   return {
-    serviceConfig: undefined
+    serviceConfig: Service.fromPartial({})
   };
 }
 export const SubmitConfigSourceResponse = {
@@ -1247,7 +1247,7 @@ export const SubmitConfigSourceResponse = {
 function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
   return {
     serviceName: "",
-    rollout: undefined
+    rollout: Rollout.fromPartial({})
   };
 }
 export const CreateServiceRolloutRequest = {
@@ -1546,8 +1546,8 @@ export const GetServiceRolloutRequest = {
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
-    newConfig: undefined,
-    oldConfig: undefined
+    newConfig: Any.fromPartial({}),
+    oldConfig: Any.fromPartial({})
   };
 }
 export const GenerateConfigReportRequest = {

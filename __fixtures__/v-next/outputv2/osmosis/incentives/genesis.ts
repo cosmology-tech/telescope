@@ -64,7 +64,7 @@ export interface GenesisStateSDKType {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    params: Params.fromPartial({}),
     gauges: [],
     lockableDurations: [],
     lastGaugeId: Long.UZERO

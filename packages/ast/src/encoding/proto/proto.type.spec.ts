@@ -1,11 +1,15 @@
 import { createProtoType, createCreateProtoType } from './interface';
 import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
 import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
+import types from '../../../../../__fixtures__/proto-json/tendermint/abci/types.json';
+import types_tendermint from '../../../../../__fixtures__/proto-json/tendermint/types/types.json'
 
-import { traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { defaultTelescopeOptions } from '@osmonauts/types'
+import { traverse } from '@cosmology/proto-parser'
+import { getNestedProto } from '@cosmology/utils'
+import { defaultTelescopeOptions } from '@cosmology/types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
+import deepmerge from 'deepmerge';
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -57,6 +61,55 @@ describe('createCreateProtoType', () => {
             getNestedProto(gamm).MsgJoinPool
         ));
     });
+});
+//create type for pubKey
+describe('createCreateProtoType', () => {
+    const ref = store.findProto('tendermint/abci/types.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+
+    it('ValidatorUpdate', () => {
+        expectCode(createCreateProtoType(
+            context,
+            'ValidatorUpdate',
+            getNestedProto(types).ValidatorUpdate
+        ));
+    });
+});
+//create type for Tendermint block header
+describe('createCreateProtoType', () => {
+    const ref = store.findProto('tendermint/types/types.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+
+    it('Header', () => {
+        expectCode(createCreateProtoType(
+            context,
+            'Header',
+            getNestedProto(types_tendermint).Header
+        ));
+    });
+});
+
+describe('createCreateProtoType orginal logic', () => {
+  const ref = store.findProto('tendermint/types/types.proto');
+
+  const options = deepmerge(defaultTelescopeOptions, {
+    prototypes: {
+      typingsFormat:{
+        setDefaultEnumToUnrecognized: false,
+        setDefaultCustomTypesToUndefined: true,
+      }
+    }
+  });
+
+  const context = new ProtoParseContext(ref, store, options);
+
+  it('Header', () => {
+      expectCode(createCreateProtoType(
+          context,
+          'Header',
+          getNestedProto(types_tendermint).Header
+      ));
+  });
 });
 
 describe('traversed', () => {

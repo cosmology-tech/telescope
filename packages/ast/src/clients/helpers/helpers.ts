@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { identifier } from '../../utils';
 import { Mutation } from '../../types';
-import { camel } from '@osmonauts/utils';
+import { camel } from '@cosmology/utils';
 import { GenericParseContext } from '../../encoding';
 
 export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) => {

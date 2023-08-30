@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField } from '@cosmology/types';
 import { pascal } from 'case';
 import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { BILLION, identifier, objectMethod } from '../../../utils';
@@ -57,15 +57,15 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
                 case 'sfixed32':
                     return fromAminoJSON.array(args, arrayTypes.sfixed32());
                 case 'int64':
-                    return fromAminoJSON.array(args, arrayTypes.int64());
+                    return fromAminoJSON.array(args, arrayTypes.int64(args));
                 case 'sint64':
-                    return fromAminoJSON.array(args, arrayTypes.sint64());
+                    return fromAminoJSON.array(args, arrayTypes.sint64(args));
                 case 'uint64':
-                    return fromAminoJSON.array(args, arrayTypes.uint64());
+                    return fromAminoJSON.array(args, arrayTypes.uint64(args));
                 case 'fixed64':
-                    return fromAminoJSON.array(args, arrayTypes.fixed64());
+                    return fromAminoJSON.array(args, arrayTypes.fixed64(args));
                 case 'sfixed64':
-                    return fromAminoJSON.array(args, arrayTypes.sfixed64());
+                    return fromAminoJSON.array(args, arrayTypes.sfixed64(args));
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -194,13 +194,15 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
                 }
                 break;
             }
-            // case 'Timestamp':
-            // case 'google.protobuf.Timestamp':
-            //     body.push(t.returnStatement(
-            //         t.objectExpression([
-            //         ])
-            //     ))
-            //     break;
+            case 'Timestamp':
+            case 'google.protobuf.Timestamp':
+                [].push.apply(body, fromAminoMessages.timestamp(context, name, proto));
+                break;
+            case 'google.protobuf.Any':
+            case 'Any':
+                [].push.apply(body, fromAminoMessages.anyType());
+                break;
+
             default:
         }
     }

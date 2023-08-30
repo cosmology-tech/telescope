@@ -116,7 +116,7 @@ export const QueryEvidenceRequest = {
 };
 function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
   return {
-    evidence: undefined
+    evidence: Any.fromPartial({})
   };
 }
 export const QueryEvidenceResponse = {
@@ -176,7 +176,7 @@ export const QueryEvidenceResponse = {
 };
 function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
   return {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   };
 }
 export const QueryAllEvidenceRequest = {
@@ -237,7 +237,7 @@ export const QueryAllEvidenceRequest = {
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   return {
     evidence: [],
-    pagination: undefined
+    pagination: PageResponse.fromPartial({})
   };
 }
 export const QueryAllEvidenceResponse = {

@@ -186,7 +186,7 @@ export const ParamsRequest = {
 };
 function createBaseParamsResponse(): ParamsResponse {
   return {
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const ParamsResponse = {
@@ -889,7 +889,7 @@ export const PoolRequest = {
 };
 function createBasePoolResponse(): PoolResponse {
   return {
-    pool: undefined
+    pool: Any.fromPartial({})
   };
 }
 export const PoolResponse = {

@@ -373,7 +373,7 @@ function createBasePart(): Part {
   return {
     index: 0,
     bytes: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const Part = {
@@ -458,7 +458,7 @@ export const Part = {
 function createBaseBlockID(): BlockID {
   return {
     hash: new Uint8Array(),
-    partSetHeader: undefined
+    partSetHeader: PartSetHeader.fromPartial({})
   };
 }
 export const BlockID = {
@@ -530,11 +530,11 @@ export const BlockID = {
 };
 function createBaseHeader(): Header {
   return {
-    version: undefined,
+    version: Consensus.fromPartial({}),
     chainId: "",
     height: BigInt(0),
-    time: undefined,
-    lastBlockId: undefined,
+    time: new Date(),
+    lastBlockId: BlockID.fromPartial({}),
     lastCommitHash: new Uint8Array(),
     dataHash: new Uint8Array(),
     validatorsHash: new Uint8Array(),
@@ -830,8 +830,8 @@ function createBaseVote(): Vote {
     type: 0,
     height: BigInt(0),
     round: 0,
-    blockId: undefined,
-    timestamp: undefined,
+    blockId: BlockID.fromPartial({}),
+    timestamp: new Date(),
     validatorAddress: new Uint8Array(),
     validatorIndex: 0,
     signature: new Uint8Array()
@@ -905,7 +905,7 @@ export const Vote = {
   },
   fromJSON(object: any): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -941,7 +941,7 @@ export const Vote = {
   },
   fromSDK(object: VoteSDKType): Vote {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
@@ -953,7 +953,7 @@ export const Vote = {
   },
   fromSDKJSON(object: any): VoteSDKType {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
@@ -980,7 +980,7 @@ function createBaseCommit(): Commit {
   return {
     height: BigInt(0),
     round: 0,
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     signatures: []
   };
 }
@@ -1087,7 +1087,7 @@ function createBaseCommitSig(): CommitSig {
   return {
     blockIdFlag: 0,
     validatorAddress: new Uint8Array(),
-    timestamp: undefined,
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1135,7 +1135,7 @@ export const CommitSig = {
   },
   fromJSON(object: any): CommitSig {
     return {
-      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : 0,
+      blockIdFlag: isSet(object.blockIdFlag) ? blockIDFlagFromJSON(object.blockIdFlag) : -1,
       validatorAddress: isSet(object.validatorAddress) ? bytesFromBase64(object.validatorAddress) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -1159,7 +1159,7 @@ export const CommitSig = {
   },
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object?.validator_address,
       timestamp: object.timestamp ?? undefined,
       signature: object?.signature
@@ -1167,7 +1167,7 @@ export const CommitSig = {
   },
   fromSDKJSON(object: any): CommitSigSDKType {
     return {
-      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
@@ -1188,8 +1188,8 @@ function createBaseProposal(): Proposal {
     height: BigInt(0),
     round: 0,
     polRound: 0,
-    blockId: undefined,
-    timestamp: undefined,
+    blockId: BlockID.fromPartial({}),
+    timestamp: new Date(),
     signature: new Uint8Array()
   };
 }
@@ -1255,7 +1255,7 @@ export const Proposal = {
   },
   fromJSON(object: any): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
@@ -1288,7 +1288,7 @@ export const Proposal = {
   },
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: object?.height,
       round: object?.round,
       polRound: object?.pol_round,
@@ -1299,7 +1299,7 @@ export const Proposal = {
   },
   fromSDKJSON(object: any): ProposalSDKType {
     return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       round: isSet(object.round) ? Number(object.round) : 0,
       pol_round: isSet(object.pol_round) ? Number(object.pol_round) : 0,
@@ -1322,8 +1322,8 @@ export const Proposal = {
 };
 function createBaseSignedHeader(): SignedHeader {
   return {
-    header: undefined,
-    commit: undefined
+    header: Header.fromPartial({}),
+    commit: Commit.fromPartial({})
   };
 }
 export const SignedHeader = {
@@ -1395,8 +1395,8 @@ export const SignedHeader = {
 };
 function createBaseLightBlock(): LightBlock {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({})
   };
 }
 export const LightBlock = {
@@ -1468,9 +1468,9 @@ export const LightBlock = {
 };
 function createBaseBlockMeta(): BlockMeta {
   return {
-    blockId: undefined,
+    blockId: BlockID.fromPartial({}),
     blockSize: BigInt(0),
-    header: undefined,
+    header: Header.fromPartial({}),
     numTxs: BigInt(0)
   };
 }
@@ -1569,7 +1569,7 @@ function createBaseTxProof(): TxProof {
   return {
     rootHash: new Uint8Array(),
     data: new Uint8Array(),
-    proof: undefined
+    proof: Proof.fromPartial({})
   };
 }
 export const TxProof = {

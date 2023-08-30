@@ -20,7 +20,7 @@ export interface GenesisState {
 function createBaseParams(): Params {
   return {
     pruneEpochIdentifier: "",
-    recordHistoryKeepPeriod: undefined
+    recordHistoryKeepPeriod: Duration.fromPartial({})
   };
 }
 export const Params = {
@@ -75,7 +75,7 @@ export const Params = {
 function createBaseGenesisState(): GenesisState {
   return {
     twaps: [],
-    params: undefined
+    params: Params.fromPartial({})
   };
 }
 export const GenesisState = {

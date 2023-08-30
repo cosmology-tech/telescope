@@ -17,8 +17,8 @@ export interface GenesisState {
 }
 function createBaseGenesisState(): GenesisState {
   return {
-    moduleAccountBalance: undefined,
-    params: undefined,
+    moduleAccountBalance: Coin.fromPartial({}),
+    params: Params.fromPartial({}),
     claimRecords: []
   };
 }

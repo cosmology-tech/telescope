@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../builder';
-import { GenericParseContext } from '@osmonauts/ast';
+import { GenericParseContext } from '@cosmology/ast';
 import * as t from '@babel/types';
 export declare const commonBundlePlugin: (builder: TelescopeBuilder, bundleFilename: string, packageMappings: object, astFn: (context: GenericParseContext, obj: object) => (t.ExportNamedDeclaration | {
     type: string;

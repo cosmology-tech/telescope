@@ -14,7 +14,7 @@ export const protobufPackage = "cosmos.gov.v1beta1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  content: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
+  content: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
   initialDeposit: Coin[];
   proposer: string;
 }
@@ -213,7 +213,7 @@ export interface MsgDepositResponseAminoMsg {
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    content: undefined,
+    content: Any.fromPartial({}),
     initialDeposit: [],
     proposer: ""
   };
@@ -476,7 +476,7 @@ export const MsgVote = {
     return {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toJSON(message: MsgVote): unknown {
@@ -497,7 +497,7 @@ export const MsgVote = {
     return {
       proposalId: object?.proposal_id,
       voter: object?.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toSDK(message: MsgVote): MsgVoteSDKType {
@@ -511,7 +511,7 @@ export const MsgVote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
   toAmino(message: MsgVote): MsgVoteAmino {

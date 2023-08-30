@@ -293,12 +293,12 @@ export interface FractionSDKType {
 function createBaseClientState(): ClientState {
   return {
     chainId: "",
-    trustLevel: undefined,
-    trustingPeriod: undefined,
-    unbondingPeriod: undefined,
-    maxClockDrift: undefined,
-    frozenHeight: undefined,
-    latestHeight: undefined,
+    trustLevel: Fraction.fromPartial({}),
+    trustingPeriod: Duration.fromPartial({}),
+    unbondingPeriod: Duration.fromPartial({}),
+    maxClockDrift: Duration.fromPartial({}),
+    frozenHeight: Height.fromPartial({}),
+    latestHeight: Height.fromPartial({}),
     proofSpecs: [],
     upgradePath: [],
     allowUpdateAfterExpiry: false,
@@ -544,8 +544,8 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    timestamp: undefined,
-    root: undefined,
+    timestamp: new Date(),
+    root: MerkleRoot.fromPartial({}),
     nextValidatorsHash: new Uint8Array()
   };
 }
@@ -624,14 +624,14 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      timestamp: object.timestamp,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
       nextValidatorsHash: object.next_validators_hash
     };
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
-    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.timestamp = message.timestamp;
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
@@ -661,8 +661,8 @@ export const ConsensusState = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
-    header1: undefined,
-    header2: undefined
+    header1: Header.fromPartial({}),
+    header2: Header.fromPartial({})
   };
 }
 export const Misbehaviour = {
@@ -727,29 +727,29 @@ export const Misbehaviour = {
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
       clientId: object?.client_id,
-      header_1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
-      header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
+      header1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
+      header2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
     };
   },
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
     obj.client_id = message.clientId;
-    message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
-    message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
+    message.header1 !== undefined && (obj.header_1 = message.header1 ? Header.toSDK(message.header1) : undefined);
+    message.header2 !== undefined && (obj.header_2 = message.header2 ? Header.toSDK(message.header2) : undefined);
     return obj;
   },
   fromAmino(object: MisbehaviourAmino): Misbehaviour {
     return {
       clientId: object.client_id,
-      header_1: object?.header_1 ? Header.fromAmino(object.header_1) : undefined,
-      header_2: object?.header_2 ? Header.fromAmino(object.header_2) : undefined
+      header1: object?.header_1 ? Header.fromAmino(object.header_1) : undefined,
+      header2: object?.header_2 ? Header.fromAmino(object.header_2) : undefined
     };
   },
   toAmino(message: Misbehaviour): MisbehaviourAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
-    obj.header_1 = message.header_1 ? Header.toAmino(message.header_1) : undefined;
-    obj.header_2 = message.header_2 ? Header.toAmino(message.header_2) : undefined;
+    obj.header_1 = message.header1 ? Header.toAmino(message.header1) : undefined;
+    obj.header_2 = message.header2 ? Header.toAmino(message.header2) : undefined;
     return obj;
   },
   fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
@@ -776,10 +776,10 @@ export const Misbehaviour = {
 };
 function createBaseHeader(): Header {
   return {
-    signedHeader: undefined,
-    validatorSet: undefined,
-    trustedHeight: undefined,
-    trustedValidators: undefined
+    signedHeader: SignedHeader.fromPartial({}),
+    validatorSet: ValidatorSet.fromPartial({}),
+    trustedHeight: Height.fromPartial({}),
+    trustedValidators: ValidatorSet.fromPartial({})
   };
 }
 export const Header = {

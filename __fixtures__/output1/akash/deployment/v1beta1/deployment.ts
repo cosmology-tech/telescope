@@ -144,10 +144,10 @@ export interface DeploymentFiltersSDKType {
 }
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array(),
-    deposit: undefined
+    deposit: Coin.fromPartial({})
   };
 }
 export const MsgCreateDeployment = {
@@ -283,8 +283,8 @@ export const MsgCreateDeploymentResponse = {
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
-    id: undefined,
-    amount: undefined
+    id: DeploymentID.fromPartial({}),
+    amount: Coin.fromPartial({})
   };
 }
 export const MsgDepositDeployment = {
@@ -390,7 +390,7 @@ export const MsgDepositDeploymentResponse = {
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
-    id: undefined,
+    id: DeploymentID.fromPartial({}),
     groups: [],
     version: new Uint8Array()
   };
@@ -517,7 +517,7 @@ export const MsgUpdateDeploymentResponse = {
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   return {
-    id: undefined
+    id: DeploymentID.fromPartial({})
   };
 }
 export const MsgCloseDeployment = {
@@ -679,7 +679,7 @@ export const DeploymentID = {
 };
 function createBaseDeployment(): Deployment {
   return {
-    deploymentId: undefined,
+    deploymentId: DeploymentID.fromPartial({}),
     state: 0,
     version: new Uint8Array(),
     createdAt: Long.ZERO
@@ -730,7 +730,7 @@ export const Deployment = {
   fromJSON(object: any): Deployment {
     return {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
@@ -754,7 +754,7 @@ export const Deployment = {
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
       deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object?.version,
       createdAt: object?.created_at
     };

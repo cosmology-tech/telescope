@@ -1,11 +1,10 @@
 import { identifier, makeCommentBlock, memberExpressionOrIdentifier } from "../utils";
 import generate from '@babel/generator';
 import * as t from '@babel/types';
-import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@osmonauts/types";
-import { camel } from "@osmonauts/utils";
-import { getNestedProto, ProtoStore } from "@osmonauts/proto-parser";
+import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@cosmology/types";
+import { camel } from "@cosmology/utils";
+import { getNestedProto } from "@cosmology/utils";
 import { ProtoParseContext } from "../encoding";
-import { ServiceMethod } from "../registry";
 
 interface DocumentRpcClient {
     service: DocumentService;
@@ -71,11 +70,9 @@ interface DocumentService {
 }
 export const documentRpcClients = (
     context: ProtoParseContext,
-    myBase: string,
-    store: ProtoStore
+    services: Record<string, ProtoRef[]>,
 ): DocumentRpcClient[] => {
-    const svcs = store.getServices(myBase);
-    const services = Object.entries(svcs).reduce((m, [pkg, refs]) => {
+    const svcs = Object.entries(services).reduce((m, [pkg, refs]) => {
         const res = refs.reduce((m2, ref) => {
             const proto = getNestedProto(ref.proto)
             // TODO generic service types...
@@ -95,7 +92,7 @@ export const documentRpcClients = (
     }, [])
 
     //////
-    return services.reduce((m, svc: DocumentService) => {
+    return svcs.reduce((m, svc: DocumentService) => {
         return [...m, ...documentRpcClient(context, svc)];
     }, []);
 };
@@ -108,11 +105,10 @@ const replaceChars = (str: string) => {
 
 export const documentRpcClientsReadme = (
     context: ProtoParseContext,
-    myBase: string,
-    store: ProtoStore
+    services: Record<string, ProtoRef[]>,
 ) => {
 
-    const results = documentRpcClients(context, myBase, store);
+    const results = documentRpcClients(context, services);
 
     const toc = results.map(res => {
         const pkg = res.service.ref.proto.package
@@ -126,7 +122,7 @@ export const documentRpcClientsReadme = (
         const code = generate(ast).code;
 
         return `##### \`${pkg}.${res.methodName}()\` RPC
-        
+
 ${res.method.name}
 
 \`\`\`js
