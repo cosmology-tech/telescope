@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { isSet, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
@@ -15,6 +15,7 @@ function createBaseMsgUnjail(): MsgUnjail {
   };
 }
 export const MsgUnjail = {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
   encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -48,16 +49,48 @@ export const MsgUnjail = {
     message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
+  fromPartial(object: Partial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+  fromAmino(object: MsgUnjailAmino): MsgUnjail {
+    return {
+      validatorAddr: object.validator_addr
+    };
+  },
+  toAmino(message: MsgUnjail): MsgUnjailAmino {
+    const obj: any = {};
+    obj.validator_addr = message.validatorAddr;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUnjailAminoMsg): MsgUnjail {
+    return MsgUnjail.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUnjail): MsgUnjailAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUnjail",
+      value: MsgUnjail.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUnjailProtoMsg): MsgUnjail {
+    return MsgUnjail.decode(message.value);
+  },
+  toProto(message: MsgUnjail): Uint8Array {
+    return MsgUnjail.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUnjail): MsgUnjailProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
+      value: MsgUnjail.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUnjailResponse(): MsgUnjailResponse {
   return {};
 }
 export const MsgUnjailResponse = {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse",
   encode(_: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -82,9 +115,37 @@ export const MsgUnjailResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
+  fromPartial(_: Partial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
+  },
+  fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
+    return {};
+  },
+  toAmino(_: MsgUnjailResponse): MsgUnjailResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUnjailResponseAminoMsg): MsgUnjailResponse {
+    return MsgUnjailResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUnjailResponse): MsgUnjailResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUnjailResponse",
+      value: MsgUnjailResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgUnjailResponseProtoMsg): MsgUnjailResponse {
+    return MsgUnjailResponse.decode(message.value);
+  },
+  toProto(message: MsgUnjailResponse): Uint8Array {
+    return MsgUnjailResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUnjailResponse): MsgUnjailResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse",
+      value: MsgUnjailResponse.encode(message).finish()
+    };
   }
 };
 /** Msg defines the slashing Msg service. */

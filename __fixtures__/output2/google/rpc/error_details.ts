@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Duration } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -263,6 +263,7 @@ function createBaseRetryInfo(): RetryInfo {
   };
 }
 export const RetryInfo = {
+  typeUrl: "/google.rpc.RetryInfo",
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
       Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
@@ -296,10 +297,35 @@ export const RetryInfo = {
     message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
+  fromPartial(object: Partial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
     message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
+  },
+  fromAmino(object: RetryInfoAmino): RetryInfo {
+    return {
+      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
+    };
+  },
+  toAmino(message: RetryInfo): RetryInfoAmino {
+    const obj: any = {};
+    obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
+    return RetryInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
+    return RetryInfo.decode(message.value);
+  },
+  toProto(message: RetryInfo): Uint8Array {
+    return RetryInfo.encode(message).finish();
+  },
+  toProtoMsg(message: RetryInfo): RetryInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RetryInfo",
+      value: RetryInfo.encode(message).finish()
+    };
   }
 };
 function createBaseDebugInfo(): DebugInfo {
@@ -309,6 +335,7 @@ function createBaseDebugInfo(): DebugInfo {
   };
 }
 export const DebugInfo = {
+  typeUrl: "/google.rpc.DebugInfo",
   encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
@@ -354,11 +381,42 @@ export const DebugInfo = {
     message.detail !== undefined && (obj.detail = message.detail);
     return obj;
   },
-  fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
+  fromPartial(object: Partial<DebugInfo>): DebugInfo {
     const message = createBaseDebugInfo();
     message.stackEntries = object.stackEntries?.map(e => e) || [];
     message.detail = object.detail ?? "";
     return message;
+  },
+  fromAmino(object: DebugInfoAmino): DebugInfo {
+    return {
+      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
+      detail: object.detail
+    };
+  },
+  toAmino(message: DebugInfo): DebugInfoAmino {
+    const obj: any = {};
+    if (message.stackEntries) {
+      obj.stack_entries = message.stackEntries.map(e => e);
+    } else {
+      obj.stack_entries = [];
+    }
+    obj.detail = message.detail;
+    return obj;
+  },
+  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
+    return DebugInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
+    return DebugInfo.decode(message.value);
+  },
+  toProto(message: DebugInfo): Uint8Array {
+    return DebugInfo.encode(message).finish();
+  },
+  toProtoMsg(message: DebugInfo): DebugInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.DebugInfo",
+      value: DebugInfo.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaFailure(): QuotaFailure {
@@ -367,6 +425,7 @@ function createBaseQuotaFailure(): QuotaFailure {
   };
 }
 export const QuotaFailure = {
+  typeUrl: "/google.rpc.QuotaFailure",
   encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -404,10 +463,39 @@ export const QuotaFailure = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<QuotaFailure>): QuotaFailure {
+  fromPartial(object: Partial<QuotaFailure>): QuotaFailure {
     const message = createBaseQuotaFailure();
     message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: QuotaFailureAmino): QuotaFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QuotaFailure): QuotaFailureAmino {
+    const obj: any = {};
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
+    return QuotaFailure.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
+    return QuotaFailure.decode(message.value);
+  },
+  toProto(message: QuotaFailure): Uint8Array {
+    return QuotaFailure.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaFailure): QuotaFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.QuotaFailure",
+      value: QuotaFailure.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
@@ -417,6 +505,7 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
   };
 }
 export const QuotaFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
   encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
@@ -458,11 +547,38 @@ export const QuotaFailure_Violation = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
+  fromPartial(object: Partial<QuotaFailure_Violation>): QuotaFailure_Violation {
     const message = createBaseQuotaFailure_Violation();
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
+    return {
+      subject: object.subject,
+      description: object.description
+    };
+  },
+  toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
+    const obj: any = {};
+    obj.subject = message.subject;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.decode(message.value);
+  },
+  toProto(message: QuotaFailure_Violation): Uint8Array {
+    return QuotaFailure_Violation.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaFailure_Violation): QuotaFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: QuotaFailure_Violation.encode(message).finish()
+    };
   }
 };
 function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
@@ -513,11 +629,32 @@ export const ErrorInfo_MetadataEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: DeepPartial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
+  fromPartial(object: Partial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
     const message = createBaseErrorInfo_MetadataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.decode(message.value);
+  },
+  toProto(message: ErrorInfo_MetadataEntry): Uint8Array {
+    return ErrorInfo_MetadataEntry.encode(message).finish();
   }
 };
 function createBaseErrorInfo(): ErrorInfo {
@@ -528,6 +665,7 @@ function createBaseErrorInfo(): ErrorInfo {
   };
 }
 export const ErrorInfo = {
+  typeUrl: "/google.rpc.ErrorInfo",
   encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
@@ -593,7 +731,7 @@ export const ErrorInfo = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
+  fromPartial(object: Partial<ErrorInfo>): ErrorInfo {
     const message = createBaseErrorInfo();
     message.reason = object.reason ?? "";
     message.domain = object.domain ?? "";
@@ -606,6 +744,45 @@ export const ErrorInfo = {
       return acc;
     }, {});
     return message;
+  },
+  fromAmino(object: ErrorInfoAmino): ErrorInfo {
+    return {
+      reason: object.reason,
+      domain: object.domain,
+      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: ErrorInfo): ErrorInfoAmino {
+    const obj: any = {};
+    obj.reason = message.reason;
+    obj.domain = message.domain;
+    obj.metadata = {};
+    if (message.metadata) {
+      Object.entries(message.metadata).forEach(([k, v]) => {
+        obj.metadata[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
+    return ErrorInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
+    return ErrorInfo.decode(message.value);
+  },
+  toProto(message: ErrorInfo): Uint8Array {
+    return ErrorInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ErrorInfo): ErrorInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ErrorInfo",
+      value: ErrorInfo.encode(message).finish()
+    };
   }
 };
 function createBasePreconditionFailure(): PreconditionFailure {
@@ -614,6 +791,7 @@ function createBasePreconditionFailure(): PreconditionFailure {
   };
 }
 export const PreconditionFailure = {
+  typeUrl: "/google.rpc.PreconditionFailure",
   encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -651,10 +829,39 @@ export const PreconditionFailure = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
+  fromPartial(object: Partial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
+    const obj: any = {};
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
+    return PreconditionFailure.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
+    return PreconditionFailure.decode(message.value);
+  },
+  toProto(message: PreconditionFailure): Uint8Array {
+    return PreconditionFailure.encode(message).finish();
+  },
+  toProtoMsg(message: PreconditionFailure): PreconditionFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.PreconditionFailure",
+      value: PreconditionFailure.encode(message).finish()
+    };
   }
 };
 function createBasePreconditionFailure_Violation(): PreconditionFailure_Violation {
@@ -665,6 +872,7 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
   };
 }
 export const PreconditionFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
   encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -714,12 +922,41 @@ export const PreconditionFailure_Violation = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
+  fromPartial(object: Partial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
     const message = createBasePreconditionFailure_Violation();
     message.type = object.type ?? "";
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
+    return {
+      type: object.type,
+      subject: object.subject,
+      description: object.description
+    };
+  },
+  toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.subject = message.subject;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.decode(message.value);
+  },
+  toProto(message: PreconditionFailure_Violation): Uint8Array {
+    return PreconditionFailure_Violation.encode(message).finish();
+  },
+  toProtoMsg(message: PreconditionFailure_Violation): PreconditionFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: PreconditionFailure_Violation.encode(message).finish()
+    };
   }
 };
 function createBaseBadRequest(): BadRequest {
@@ -728,6 +965,7 @@ function createBaseBadRequest(): BadRequest {
   };
 }
 export const BadRequest = {
+  typeUrl: "/google.rpc.BadRequest",
   encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -765,10 +1003,39 @@ export const BadRequest = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<BadRequest>): BadRequest {
+  fromPartial(object: Partial<BadRequest>): BadRequest {
     const message = createBaseBadRequest();
     message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: BadRequestAmino): BadRequest {
+    return {
+      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: BadRequest): BadRequestAmino {
+    const obj: any = {};
+    if (message.fieldViolations) {
+      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
+    } else {
+      obj.field_violations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
+    return BadRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
+    return BadRequest.decode(message.value);
+  },
+  toProto(message: BadRequest): Uint8Array {
+    return BadRequest.encode(message).finish();
+  },
+  toProtoMsg(message: BadRequest): BadRequestProtoMsg {
+    return {
+      typeUrl: "/google.rpc.BadRequest",
+      value: BadRequest.encode(message).finish()
+    };
   }
 };
 function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
@@ -778,6 +1045,7 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
   };
 }
 export const BadRequest_FieldViolation = {
+  typeUrl: "/google.rpc.FieldViolation",
   encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
@@ -819,11 +1087,38 @@ export const BadRequest_FieldViolation = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
+  fromPartial(object: Partial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
     const message = createBaseBadRequest_FieldViolation();
     message.field = object.field ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
+    return {
+      field: object.field,
+      description: object.description
+    };
+  },
+  toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
+    const obj: any = {};
+    obj.field = message.field;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.decode(message.value);
+  },
+  toProto(message: BadRequest_FieldViolation): Uint8Array {
+    return BadRequest_FieldViolation.encode(message).finish();
+  },
+  toProtoMsg(message: BadRequest_FieldViolation): BadRequest_FieldViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.FieldViolation",
+      value: BadRequest_FieldViolation.encode(message).finish()
+    };
   }
 };
 function createBaseRequestInfo(): RequestInfo {
@@ -833,6 +1128,7 @@ function createBaseRequestInfo(): RequestInfo {
   };
 }
 export const RequestInfo = {
+  typeUrl: "/google.rpc.RequestInfo",
   encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
@@ -874,11 +1170,38 @@ export const RequestInfo = {
     message.servingData !== undefined && (obj.servingData = message.servingData);
     return obj;
   },
-  fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
+  fromPartial(object: Partial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.requestId = object.requestId ?? "";
     message.servingData = object.servingData ?? "";
     return message;
+  },
+  fromAmino(object: RequestInfoAmino): RequestInfo {
+    return {
+      requestId: object.request_id,
+      servingData: object.serving_data
+    };
+  },
+  toAmino(message: RequestInfo): RequestInfoAmino {
+    const obj: any = {};
+    obj.request_id = message.requestId;
+    obj.serving_data = message.servingData;
+    return obj;
+  },
+  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
+    return RequestInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
+    return RequestInfo.decode(message.value);
+  },
+  toProto(message: RequestInfo): Uint8Array {
+    return RequestInfo.encode(message).finish();
+  },
+  toProtoMsg(message: RequestInfo): RequestInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RequestInfo",
+      value: RequestInfo.encode(message).finish()
+    };
   }
 };
 function createBaseResourceInfo(): ResourceInfo {
@@ -890,6 +1213,7 @@ function createBaseResourceInfo(): ResourceInfo {
   };
 }
 export const ResourceInfo = {
+  typeUrl: "/google.rpc.ResourceInfo",
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
@@ -947,13 +1271,44 @@ export const ResourceInfo = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
+  fromPartial(object: Partial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.resourceType = object.resourceType ?? "";
     message.resourceName = object.resourceName ?? "";
     message.owner = object.owner ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: ResourceInfoAmino): ResourceInfo {
+    return {
+      resourceType: object.resource_type,
+      resourceName: object.resource_name,
+      owner: object.owner,
+      description: object.description
+    };
+  },
+  toAmino(message: ResourceInfo): ResourceInfoAmino {
+    const obj: any = {};
+    obj.resource_type = message.resourceType;
+    obj.resource_name = message.resourceName;
+    obj.owner = message.owner;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseHelp(): Help {
@@ -962,6 +1317,7 @@ function createBaseHelp(): Help {
   };
 }
 export const Help = {
+  typeUrl: "/google.rpc.Help",
   encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -999,10 +1355,39 @@ export const Help = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Help>): Help {
+  fromPartial(object: Partial<Help>): Help {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: HelpAmino): Help {
+    return {
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Help): HelpAmino {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
+    } else {
+      obj.links = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: HelpAminoMsg): Help {
+    return Help.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HelpProtoMsg): Help {
+    return Help.decode(message.value);
+  },
+  toProto(message: Help): Uint8Array {
+    return Help.encode(message).finish();
+  },
+  toProtoMsg(message: Help): HelpProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Help",
+      value: Help.encode(message).finish()
+    };
   }
 };
 function createBaseHelp_Link(): Help_Link {
@@ -1012,6 +1397,7 @@ function createBaseHelp_Link(): Help_Link {
   };
 }
 export const Help_Link = {
+  typeUrl: "/google.rpc.Link",
   encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
@@ -1053,11 +1439,38 @@ export const Help_Link = {
     message.url !== undefined && (obj.url = message.url);
     return obj;
   },
-  fromPartial(object: DeepPartial<Help_Link>): Help_Link {
+  fromPartial(object: Partial<Help_Link>): Help_Link {
     const message = createBaseHelp_Link();
     message.description = object.description ?? "";
     message.url = object.url ?? "";
     return message;
+  },
+  fromAmino(object: Help_LinkAmino): Help_Link {
+    return {
+      description: object.description,
+      url: object.url
+    };
+  },
+  toAmino(message: Help_Link): Help_LinkAmino {
+    const obj: any = {};
+    obj.description = message.description;
+    obj.url = message.url;
+    return obj;
+  },
+  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
+    return Help_Link.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
+    return Help_Link.decode(message.value);
+  },
+  toProto(message: Help_Link): Uint8Array {
+    return Help_Link.encode(message).finish();
+  },
+  toProtoMsg(message: Help_Link): Help_LinkProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Link",
+      value: Help_Link.encode(message).finish()
+    };
   }
 };
 function createBaseLocalizedMessage(): LocalizedMessage {
@@ -1067,6 +1480,7 @@ function createBaseLocalizedMessage(): LocalizedMessage {
   };
 }
 export const LocalizedMessage = {
+  typeUrl: "/google.rpc.LocalizedMessage",
   encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
@@ -1108,10 +1522,37 @@ export const LocalizedMessage = {
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
-  fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {
+  fromPartial(object: Partial<LocalizedMessage>): LocalizedMessage {
     const message = createBaseLocalizedMessage();
     message.locale = object.locale ?? "";
     message.message = object.message ?? "";
     return message;
+  },
+  fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
+    return {
+      locale: object.locale,
+      message: object.message
+    };
+  },
+  toAmino(message: LocalizedMessage): LocalizedMessageAmino {
+    const obj: any = {};
+    obj.locale = message.locale;
+    obj.message = message.message;
+    return obj;
+  },
+  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
+    return LocalizedMessage.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
+    return LocalizedMessage.decode(message.value);
+  },
+  toProto(message: LocalizedMessage): Uint8Array {
+    return LocalizedMessage.encode(message).finish();
+  },
+  toProtoMsg(message: LocalizedMessage): LocalizedMessageProtoMsg {
+    return {
+      typeUrl: "/google.rpc.LocalizedMessage",
+      value: LocalizedMessage.encode(message).finish()
+    };
   }
 };

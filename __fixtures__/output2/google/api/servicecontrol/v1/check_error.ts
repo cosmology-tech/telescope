@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -225,6 +225,7 @@ function createBaseCheckError(): CheckError {
   };
 }
 export const CheckError = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckError",
   encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
@@ -282,12 +283,43 @@ export const CheckError = {
     message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<CheckError>): CheckError {
+  fromPartial(object: Partial<CheckError>): CheckError {
     const message = createBaseCheckError();
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+  fromAmino(object: CheckErrorAmino): CheckError {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
+      subject: object.subject,
+      detail: object.detail,
+      status: object?.status ? Status.fromAmino(object.status) : undefined
+    };
+  },
+  toAmino(message: CheckError): CheckErrorAmino {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.subject = message.subject;
+    obj.detail = message.detail;
+    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
+    return CheckError.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
+    return CheckError.decode(message.value);
+  },
+  toProto(message: CheckError): Uint8Array {
+    return CheckError.encode(message).finish();
+  },
+  toProtoMsg(message: CheckError): CheckErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckError",
+      value: CheckError.encode(message).finish()
+    };
   }
 };

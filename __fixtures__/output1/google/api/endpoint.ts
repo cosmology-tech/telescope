@@ -85,6 +85,7 @@ function createBaseEndpoint(): Endpoint {
   };
 }
 export const Endpoint = {
+  typeUrl: "/google.api.Endpoint",
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -173,5 +174,40 @@ export const Endpoint = {
     obj.target = message.target;
     obj.allow_cors = message.allowCors;
     return obj;
+  },
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      name: object.name,
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
+      target: object.target,
+      allowCors: object.allow_cors
+    };
+  },
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.aliases) {
+      obj.aliases = message.aliases.map(e => e);
+    } else {
+      obj.aliases = [];
+    }
+    obj.target = message.target;
+    obj.allow_cors = message.allowCors;
+    return obj;
+  },
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/google.api.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 };

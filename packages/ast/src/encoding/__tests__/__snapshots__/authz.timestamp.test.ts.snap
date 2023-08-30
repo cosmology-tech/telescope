@@ -81,13 +81,13 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+      expiration: object?.expiration
     };
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined;
-    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.expiration = message.expiration;
     return obj;
   },
   fromAminoMsg(object: GrantAminoMsg): Grant {
@@ -243,13 +243,13 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+      expiration: object?.expiration
     };
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined;
-    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.expiration = message.expiration;
     return obj;
   },
   fromAminoMsg(object: GrantAminoMsg): Grant {

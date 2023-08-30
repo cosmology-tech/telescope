@@ -277,6 +277,7 @@ function createBaseEvalRequest(): EvalRequest {
   };
 }
 export const EvalRequest = {
+  typeUrl: "/misc.EvalRequest",
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {
       EvalRequest_BindingsEntry.encode({

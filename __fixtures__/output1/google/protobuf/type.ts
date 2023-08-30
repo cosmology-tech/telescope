@@ -379,6 +379,7 @@ function createBaseType(): Type {
   };
 }
 export const Type = {
+  typeUrl: "/google.protobuf.Type",
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -505,6 +506,53 @@ export const Type = {
     message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
+  },
+  fromAmino(object: TypeAmino): Type {
+    return {
+      name: object.name,
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromAmino(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Type): TypeAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: TypeAminoMsg): Type {
+    return Type.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TypeProtoMsg): Type {
+    return Type.decode(message.value);
+  },
+  toProto(message: Type): Uint8Array {
+    return Type.encode(message).finish();
+  },
+  toProtoMsg(message: Type): TypeProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Type",
+      value: Type.encode(message).finish()
+    };
   }
 };
 function createBaseField(): Field {
@@ -522,6 +570,7 @@ function createBaseField(): Field {
   };
 }
 export const Field = {
+  typeUrl: "/google.protobuf.Field",
   encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -676,6 +725,53 @@ export const Field = {
     obj.json_name = message.jsonName;
     obj.default_value = message.defaultValue;
     return obj;
+  },
+  fromAmino(object: FieldAmino): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      number: object.number,
+      name: object.name,
+      typeUrl: object.type_url,
+      oneofIndex: object.oneof_index,
+      packed: object.packed,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      jsonName: object.json_name,
+      defaultValue: object.default_value
+    };
+  },
+  toAmino(message: Field): FieldAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    obj.cardinality = message.cardinality;
+    obj.number = message.number;
+    obj.name = message.name;
+    obj.type_url = message.typeUrl;
+    obj.oneof_index = message.oneofIndex;
+    obj.packed = message.packed;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.json_name = message.jsonName;
+    obj.default_value = message.defaultValue;
+    return obj;
+  },
+  fromAminoMsg(object: FieldAminoMsg): Field {
+    return Field.fromAmino(object.value);
+  },
+  fromProtoMsg(message: FieldProtoMsg): Field {
+    return Field.decode(message.value);
+  },
+  toProto(message: Field): Uint8Array {
+    return Field.encode(message).finish();
+  },
+  toProtoMsg(message: Field): FieldProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Field",
+      value: Field.encode(message).finish()
+    };
   }
 };
 function createBaseEnum(): Enum {
@@ -688,6 +784,7 @@ function createBaseEnum(): Enum {
   };
 }
 export const Enum = {
+  typeUrl: "/google.protobuf.Enum",
   encode(message: Enum, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -795,6 +892,47 @@ export const Enum = {
     message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
     message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
     return obj;
+  },
+  fromAmino(object: EnumAmino): Enum {
+    return {
+      name: object.name,
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromAmino(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Enum): EnumAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: EnumAminoMsg): Enum {
+    return Enum.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EnumProtoMsg): Enum {
+    return Enum.decode(message.value);
+  },
+  toProto(message: Enum): Uint8Array {
+    return Enum.encode(message).finish();
+  },
+  toProtoMsg(message: Enum): EnumProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Enum",
+      value: Enum.encode(message).finish()
+    };
   }
 };
 function createBaseEnumValue(): EnumValue {
@@ -805,6 +943,7 @@ function createBaseEnumValue(): EnumValue {
   };
 }
 export const EnumValue = {
+  typeUrl: "/google.protobuf.EnumValue",
   encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -882,6 +1021,39 @@ export const EnumValue = {
       obj.options = [];
     }
     return obj;
+  },
+  fromAmino(object: EnumValueAmino): EnumValue {
+    return {
+      name: object.name,
+      number: object.number,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: EnumValue): EnumValueAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
+    return EnumValue.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
+    return EnumValue.decode(message.value);
+  },
+  toProto(message: EnumValue): Uint8Array {
+    return EnumValue.encode(message).finish();
+  },
+  toProtoMsg(message: EnumValue): EnumValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.EnumValue",
+      value: EnumValue.encode(message).finish()
+    };
   }
 };
 function createBaseOption(): Option {
@@ -891,6 +1063,7 @@ function createBaseOption(): Option {
   };
 }
 export const Option = {
+  typeUrl: "/google.protobuf.Option",
   encode(message: Option, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -949,5 +1122,32 @@ export const Option = {
     obj.name = message.name;
     message.value !== undefined && (obj.value = message.value ? Any.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: OptionAmino): Option {
+    return {
+      name: object.name,
+      value: object?.value ? Any.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Option): OptionAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.value = message.value ? Any.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: OptionAminoMsg): Option {
+    return Option.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OptionProtoMsg): Option {
+    return Option.decode(message.value);
+  },
+  toProto(message: Option): Uint8Array {
+    return Option.encode(message).finish();
+  },
+  toProtoMsg(message: Option): OptionProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Option",
+      value: Option.encode(message).finish()
+    };
   }
 };

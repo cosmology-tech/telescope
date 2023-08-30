@@ -272,6 +272,7 @@ function createBaseCheckRequest(): CheckRequest {
   };
 }
 export const CheckRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -341,6 +342,35 @@ export const CheckRequest = {
     message.operation !== undefined && (obj.operation = message.operation ? Operation.toSDK(message.operation) : undefined);
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+  fromAmino(object: CheckRequestAmino): CheckRequest {
+    return {
+      serviceName: object.service_name,
+      operation: object?.operation ? Operation.fromAmino(object.operation) : undefined,
+      serviceConfigId: object.service_config_id
+    };
+  },
+  toAmino(message: CheckRequest): CheckRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
+    obj.service_config_id = message.serviceConfigId;
+    return obj;
+  },
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCheckResponse(): CheckResponse {
@@ -353,6 +383,7 @@ function createBaseCheckResponse(): CheckResponse {
   };
 }
 export const CheckResponse = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -452,6 +483,43 @@ export const CheckResponse = {
     obj.service_rollout_id = message.serviceRolloutId;
     message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toSDK(message.checkInfo) : undefined);
     return obj;
+  },
+  fromAmino(object: CheckResponseAmino): CheckResponse {
+    return {
+      operationId: object.operation_id,
+      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromAmino(e)) : [],
+      serviceConfigId: object.service_config_id,
+      serviceRolloutId: object.service_rollout_id,
+      checkInfo: object?.check_info ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
+    };
+  },
+  toAmino(message: CheckResponse): CheckResponseAmino {
+    const obj: any = {};
+    obj.operation_id = message.operationId;
+    if (message.checkErrors) {
+      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e) : undefined);
+    } else {
+      obj.check_errors = [];
+    }
+    obj.service_config_id = message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId;
+    obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 };
 function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
@@ -461,6 +529,7 @@ function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
   };
 }
 export const CheckResponse_CheckInfo = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo",
   encode(message: CheckResponse_CheckInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unusedArguments) {
       writer.uint32(10).string(v!);
@@ -527,6 +596,37 @@ export const CheckResponse_CheckInfo = {
     }
     message.consumerInfo !== undefined && (obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toSDK(message.consumerInfo) : undefined);
     return obj;
+  },
+  fromAmino(object: CheckResponse_CheckInfoAmino): CheckResponse_CheckInfo {
+    return {
+      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
+      consumerInfo: object?.consumer_info ? CheckResponse_ConsumerInfo.fromAmino(object.consumer_info) : undefined
+    };
+  },
+  toAmino(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoAmino {
+    const obj: any = {};
+    if (message.unusedArguments) {
+      obj.unused_arguments = message.unusedArguments.map(e => e);
+    } else {
+      obj.unused_arguments = [];
+    }
+    obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponse_CheckInfoAminoMsg): CheckResponse_CheckInfo {
+    return CheckResponse_CheckInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg): CheckResponse_CheckInfo {
+    return CheckResponse_CheckInfo.decode(message.value);
+  },
+  toProto(message: CheckResponse_CheckInfo): Uint8Array {
+    return CheckResponse_CheckInfo.encode(message).finish();
+  },
+  toProtoMsg(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckInfo",
+      value: CheckResponse_CheckInfo.encode(message).finish()
+    };
   }
 };
 function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
@@ -537,6 +637,7 @@ function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
   };
 }
 export const CheckResponse_ConsumerInfo = {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
   encode(message: CheckResponse_ConsumerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.projectNumber.isZero()) {
       writer.uint32(8).int64(message.projectNumber);
@@ -606,6 +707,35 @@ export const CheckResponse_ConsumerInfo = {
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
     obj.consumer_number = message.consumerNumber;
     return obj;
+  },
+  fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
+    return {
+      projectNumber: Long.fromString(object.project_number),
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
+      consumerNumber: Long.fromString(object.consumer_number)
+    };
+  },
+  toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
+    const obj: any = {};
+    obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
+    obj.type = message.type;
+    obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {
+    return CheckResponse_ConsumerInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg): CheckResponse_ConsumerInfo {
+    return CheckResponse_ConsumerInfo.decode(message.value);
+  },
+  toProto(message: CheckResponse_ConsumerInfo): Uint8Array {
+    return CheckResponse_ConsumerInfo.encode(message).finish();
+  },
+  toProtoMsg(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
+      value: CheckResponse_ConsumerInfo.encode(message).finish()
+    };
   }
 };
 function createBaseReportRequest(): ReportRequest {
@@ -616,6 +746,7 @@ function createBaseReportRequest(): ReportRequest {
   };
 }
 export const ReportRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
   encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -693,6 +824,39 @@ export const ReportRequest = {
     }
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+  fromAmino(object: ReportRequestAmino): ReportRequest {
+    return {
+      serviceName: object.service_name,
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
+      serviceConfigId: object.service_config_id
+    };
+  },
+  toAmino(message: ReportRequest): ReportRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+    obj.service_config_id = message.serviceConfigId;
+    return obj;
+  },
+  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
+    return ReportRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
+    return ReportRequest.decode(message.value);
+  },
+  toProto(message: ReportRequest): Uint8Array {
+    return ReportRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ReportRequest): ReportRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
+      value: ReportRequest.encode(message).finish()
+    };
   }
 };
 function createBaseReportResponse(): ReportResponse {
@@ -703,6 +867,7 @@ function createBaseReportResponse(): ReportResponse {
   };
 }
 export const ReportResponse = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse",
   encode(message: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.reportErrors) {
       ReportResponse_ReportError.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -780,6 +945,39 @@ export const ReportResponse = {
     obj.service_config_id = message.serviceConfigId;
     obj.service_rollout_id = message.serviceRolloutId;
     return obj;
+  },
+  fromAmino(object: ReportResponseAmino): ReportResponse {
+    return {
+      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
+      serviceConfigId: object.service_config_id,
+      serviceRolloutId: object.service_rollout_id
+    };
+  },
+  toAmino(message: ReportResponse): ReportResponseAmino {
+    const obj: any = {};
+    if (message.reportErrors) {
+      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e) : undefined);
+    } else {
+      obj.report_errors = [];
+    }
+    obj.service_config_id = message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId;
+    return obj;
+  },
+  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
+    return ReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
+    return ReportResponse.decode(message.value);
+  },
+  toProto(message: ReportResponse): Uint8Array {
+    return ReportResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ReportResponse): ReportResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportResponse",
+      value: ReportResponse.encode(message).finish()
+    };
   }
 };
 function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
@@ -789,6 +987,7 @@ function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
   };
 }
 export const ReportResponse_ReportError = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError",
   encode(message: ReportResponse_ReportError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -847,5 +1046,32 @@ export const ReportResponse_ReportError = {
     obj.operation_id = message.operationId;
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
     return obj;
+  },
+  fromAmino(object: ReportResponse_ReportErrorAmino): ReportResponse_ReportError {
+    return {
+      operationId: object.operation_id,
+      status: object?.status ? Status.fromAmino(object.status) : undefined
+    };
+  },
+  toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorAmino {
+    const obj: any = {};
+    obj.operation_id = message.operationId;
+    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ReportResponse_ReportErrorAminoMsg): ReportResponse_ReportError {
+    return ReportResponse_ReportError.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg): ReportResponse_ReportError {
+    return ReportResponse_ReportError.decode(message.value);
+  },
+  toProto(message: ReportResponse_ReportError): Uint8Array {
+    return ReportResponse_ReportError.encode(message).finish();
+  },
+  toProtoMsg(message: ReportResponse_ReportError): ReportResponse_ReportErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportError",
+      value: ReportResponse_ReportError.encode(message).finish()
+    };
   }
 };

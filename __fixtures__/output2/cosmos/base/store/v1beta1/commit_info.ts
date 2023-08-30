@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
@@ -34,6 +34,7 @@ function createBaseCommitInfo(): CommitInfo {
   };
 }
 export const CommitInfo = {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
   encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
@@ -79,11 +80,48 @@ export const CommitInfo = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
+  fromPartial(object: Partial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: CommitInfoAmino): CommitInfo {
+    return {
+      version: Long.fromString(object.version),
+      storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CommitInfo): CommitInfoAmino {
+    const obj: any = {};
+    obj.version = message.version ? message.version.toString() : undefined;
+    if (message.storeInfos) {
+      obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e) : undefined);
+    } else {
+      obj.store_infos = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CommitInfoAminoMsg): CommitInfo {
+    return CommitInfo.fromAmino(object.value);
+  },
+  toAminoMsg(message: CommitInfo): CommitInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/CommitInfo",
+      value: CommitInfo.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CommitInfoProtoMsg): CommitInfo {
+    return CommitInfo.decode(message.value);
+  },
+  toProto(message: CommitInfo): Uint8Array {
+    return CommitInfo.encode(message).finish();
+  },
+  toProtoMsg(message: CommitInfo): CommitInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
+      value: CommitInfo.encode(message).finish()
+    };
   }
 };
 function createBaseStoreInfo(): StoreInfo {
@@ -93,6 +131,7 @@ function createBaseStoreInfo(): StoreInfo {
   };
 }
 export const StoreInfo = {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
   encode(message: StoreInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -134,11 +173,44 @@ export const StoreInfo = {
     message.commitId !== undefined && (obj.commitId = message.commitId ? CommitID.toJSON(message.commitId) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
+  fromPartial(object: Partial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
     message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : undefined;
     return message;
+  },
+  fromAmino(object: StoreInfoAmino): StoreInfo {
+    return {
+      name: object.name,
+      commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : undefined
+    };
+  },
+  toAmino(message: StoreInfo): StoreInfoAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: StoreInfoAminoMsg): StoreInfo {
+    return StoreInfo.fromAmino(object.value);
+  },
+  toAminoMsg(message: StoreInfo): StoreInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/StoreInfo",
+      value: StoreInfo.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: StoreInfoProtoMsg): StoreInfo {
+    return StoreInfo.decode(message.value);
+  },
+  toProto(message: StoreInfo): Uint8Array {
+    return StoreInfo.encode(message).finish();
+  },
+  toProtoMsg(message: StoreInfo): StoreInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
+      value: StoreInfo.encode(message).finish()
+    };
   }
 };
 function createBaseCommitID(): CommitID {
@@ -148,6 +220,7 @@ function createBaseCommitID(): CommitID {
   };
 }
 export const CommitID = {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitID",
   encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.version.isZero()) {
       writer.uint32(8).int64(message.version);
@@ -189,10 +262,43 @@ export const CommitID = {
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
-  fromPartial(object: DeepPartial<CommitID>): CommitID {
+  fromPartial(object: Partial<CommitID>): CommitID {
     const message = createBaseCommitID();
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: CommitIDAmino): CommitID {
+    return {
+      version: Long.fromString(object.version),
+      hash: object.hash
+    };
+  },
+  toAmino(message: CommitID): CommitIDAmino {
+    const obj: any = {};
+    obj.version = message.version ? message.version.toString() : undefined;
+    obj.hash = message.hash;
+    return obj;
+  },
+  fromAminoMsg(object: CommitIDAminoMsg): CommitID {
+    return CommitID.fromAmino(object.value);
+  },
+  toAminoMsg(message: CommitID): CommitIDAminoMsg {
+    return {
+      type: "cosmos-sdk/CommitID",
+      value: CommitID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CommitIDProtoMsg): CommitID {
+    return CommitID.decode(message.value);
+  },
+  toProto(message: CommitID): Uint8Array {
+    return CommitID.encode(message).finish();
+  },
+  toProtoMsg(message: CommitID): CommitIDProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.CommitID",
+      value: CommitID.encode(message).finish()
+    };
   }
 };

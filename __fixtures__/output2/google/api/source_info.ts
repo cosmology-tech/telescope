@@ -2,7 +2,6 @@
 /* eslint-disable */
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
@@ -15,6 +14,7 @@ function createBaseSourceInfo(): SourceInfo {
   };
 }
 export const SourceInfo = {
+  typeUrl: "/google.api.SourceInfo",
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sourceFiles) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -52,9 +52,38 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
+  fromPartial(object: Partial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 };

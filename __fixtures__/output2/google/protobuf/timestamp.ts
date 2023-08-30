@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, DeepPartial } from "../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 /**
@@ -109,6 +109,7 @@ function createBaseTimestamp(): Timestamp {
   };
 }
 export const Timestamp = {
+  typeUrl: "/google.protobuf.Timestamp",
   encode(message: Timestamp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.seconds.isZero()) {
       writer.uint32(8).int64(message.seconds);
@@ -150,10 +151,31 @@ export const Timestamp = {
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
-  fromPartial(object: DeepPartial<Timestamp>): Timestamp {
+  fromPartial(object: Partial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
     message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
     message.nanos = object.nanos ?? 0;
     return message;
+  },
+  fromAmino(object: TimestampAmino): Timestamp {
+    return fromJsonTimestamp(object);
+  },
+  toAmino(message: Timestamp): TimestampAmino {
+    return fromTimestamp(message).toString();
+  },
+  fromAminoMsg(object: TimestampAminoMsg): Timestamp {
+    return Timestamp.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TimestampProtoMsg): Timestamp {
+    return Timestamp.decode(message.value);
+  },
+  toProto(message: Timestamp): Uint8Array {
+    return Timestamp.encode(message).finish();
+  },
+  toProtoMsg(message: Timestamp): TimestampProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Timestamp",
+      value: Timestamp.encode(message).finish()
+    };
   }
 };

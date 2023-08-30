@@ -5,7 +5,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { GroupID, Group } from "./group";
 import { Account } from "../../escrow/v1beta1/types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { isSet, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
@@ -42,6 +42,7 @@ function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   };
 }
 export const QueryDeploymentsRequest = {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest",
   encode(message: QueryDeploymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       DeploymentFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -83,11 +84,38 @@ export const QueryDeploymentsRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
+  fromPartial(object: Partial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
     message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
+    return {
+      filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestAmino {
+    const obj: any = {};
+    obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDeploymentsRequestAminoMsg): QueryDeploymentsRequest {
+    return QueryDeploymentsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg): QueryDeploymentsRequest {
+    return QueryDeploymentsRequest.decode(message.value);
+  },
+  toProto(message: QueryDeploymentsRequest): Uint8Array {
+    return QueryDeploymentsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDeploymentsRequest): QueryDeploymentsRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest",
+      value: QueryDeploymentsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
@@ -97,6 +125,7 @@ function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   };
 }
 export const QueryDeploymentsResponse = {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsResponse",
   encode(message: QueryDeploymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deployments) {
       QueryDeploymentResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -142,11 +171,42 @@ export const QueryDeploymentsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
+  fromPartial(object: Partial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseAmino {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDeploymentsResponseAminoMsg): QueryDeploymentsResponse {
+    return QueryDeploymentsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
+    return QueryDeploymentsResponse.decode(message.value);
+  },
+  toProto(message: QueryDeploymentsResponse): Uint8Array {
+    return QueryDeploymentsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDeploymentsResponse): QueryDeploymentsResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsResponse",
+      value: QueryDeploymentsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
@@ -155,6 +215,7 @@ function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
   };
 }
 export const QueryDeploymentRequest = {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest",
   encode(message: QueryDeploymentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -188,10 +249,35 @@ export const QueryDeploymentRequest = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
+  fromPartial(object: Partial<QueryDeploymentRequest>): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
+  },
+  fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+  toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDeploymentRequestAminoMsg): QueryDeploymentRequest {
+    return QueryDeploymentRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryDeploymentRequestProtoMsg): QueryDeploymentRequest {
+    return QueryDeploymentRequest.decode(message.value);
+  },
+  toProto(message: QueryDeploymentRequest): Uint8Array {
+    return QueryDeploymentRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDeploymentRequest): QueryDeploymentRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest",
+      value: QueryDeploymentRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
@@ -202,6 +288,7 @@ function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
   };
 }
 export const QueryDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentResponse",
   encode(message: QueryDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -255,12 +342,45 @@ export const QueryDeploymentResponse = {
     message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
+  fromPartial(object: Partial<QueryDeploymentResponse>): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
+  },
+  fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
+    return {
+      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
+      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
+    };
+  },
+  toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
+    const obj: any = {};
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDeploymentResponseAminoMsg): QueryDeploymentResponse {
+    return QueryDeploymentResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
+    return QueryDeploymentResponse.decode(message.value);
+  },
+  toProto(message: QueryDeploymentResponse): Uint8Array {
+    return QueryDeploymentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDeploymentResponse): QueryDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryDeploymentResponse",
+      value: QueryDeploymentResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGroupRequest(): QueryGroupRequest {
@@ -269,6 +389,7 @@ function createBaseQueryGroupRequest(): QueryGroupRequest {
   };
 }
 export const QueryGroupRequest = {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupRequest",
   encode(message: QueryGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -302,10 +423,35 @@ export const QueryGroupRequest = {
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
+  fromPartial(object: Partial<QueryGroupRequest>): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+  fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+  toAmino(message: QueryGroupRequest): QueryGroupRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGroupRequestAminoMsg): QueryGroupRequest {
+    return QueryGroupRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
+    return QueryGroupRequest.decode(message.value);
+  },
+  toProto(message: QueryGroupRequest): Uint8Array {
+    return QueryGroupRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGroupRequest): QueryGroupRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryGroupRequest",
+      value: QueryGroupRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGroupResponse(): QueryGroupResponse {
@@ -314,6 +460,7 @@ function createBaseQueryGroupResponse(): QueryGroupResponse {
   };
 }
 export const QueryGroupResponse = {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse",
   encode(message: QueryGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();
@@ -347,10 +494,35 @@ export const QueryGroupResponse = {
     message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {
+  fromPartial(object: Partial<QueryGroupResponse>): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
     message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
     return message;
+  },
+  fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
+    return {
+      group: object?.group ? Group.fromAmino(object.group) : undefined
+    };
+  },
+  toAmino(message: QueryGroupResponse): QueryGroupResponseAmino {
+    const obj: any = {};
+    obj.group = message.group ? Group.toAmino(message.group) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGroupResponseAminoMsg): QueryGroupResponse {
+    return QueryGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGroupResponseProtoMsg): QueryGroupResponse {
+    return QueryGroupResponse.decode(message.value);
+  },
+  toProto(message: QueryGroupResponse): Uint8Array {
+    return QueryGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGroupResponse): QueryGroupResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse",
+      value: QueryGroupResponse.encode(message).finish()
+    };
   }
 };
 /** Query defines the gRPC querier service */

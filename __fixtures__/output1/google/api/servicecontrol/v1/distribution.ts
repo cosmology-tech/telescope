@@ -173,6 +173,7 @@ function createBaseDistribution(): Distribution {
   };
 }
 export const Distribution = {
+  typeUrl: "/google.api.servicecontrol.v1.Distribution",
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
@@ -344,6 +345,57 @@ export const Distribution = {
       obj.exemplars = [];
     }
     return obj;
+  },
+  fromAmino(object: DistributionAmino): Distribution {
+    return {
+      count: Long.fromString(object.count),
+      mean: object.mean,
+      minimum: object.minimum,
+      maximum: object.maximum,
+      sumOfSquaredDeviation: object.sum_of_squared_deviation,
+      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
+      linearBuckets: object?.linear_buckets ? Distribution_LinearBuckets.fromAmino(object.linear_buckets) : undefined,
+      exponentialBuckets: object?.exponential_buckets ? Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets) : undefined,
+      explicitBuckets: object?.explicit_buckets ? Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Distribution): DistributionAmino {
+    const obj: any = {};
+    obj.count = message.count ? message.count.toString() : undefined;
+    obj.mean = message.mean;
+    obj.minimum = message.minimum;
+    obj.maximum = message.maximum;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    if (message.bucketCounts) {
+      obj.bucket_counts = message.bucketCounts.map(e => e);
+    } else {
+      obj.bucket_counts = [];
+    }
+    obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toAmino(message.linearBuckets) : undefined;
+    obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toAmino(message.exponentialBuckets) : undefined;
+    obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toAmino(message.explicitBuckets) : undefined;
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: DistributionAminoMsg): Distribution {
+    return Distribution.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DistributionProtoMsg): Distribution {
+    return Distribution.decode(message.value);
+  },
+  toProto(message: Distribution): Uint8Array {
+    return Distribution.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution): DistributionProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.Distribution",
+      value: Distribution.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
@@ -354,6 +406,7 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
   };
 }
 export const Distribution_LinearBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
   encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -423,6 +476,35 @@ export const Distribution_LinearBuckets = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
+  },
+  fromAmino(object: Distribution_LinearBucketsAmino): Distribution_LinearBuckets {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      width: object.width,
+      offset: object.offset
+    };
+  },
+  toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
+    return Distribution_LinearBuckets.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_LinearBucketsProtoMsg): Distribution_LinearBuckets {
+    return Distribution_LinearBuckets.decode(message.value);
+  },
+  toProto(message: Distribution_LinearBuckets): Uint8Array {
+    return Distribution_LinearBuckets.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_LinearBuckets): Distribution_LinearBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
+      value: Distribution_LinearBuckets.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
@@ -433,6 +515,7 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
   };
 }
 export const Distribution_ExponentialBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
   encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -502,6 +585,35 @@ export const Distribution_ExponentialBuckets = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+  fromAmino(object: Distribution_ExponentialBucketsAmino): Distribution_ExponentialBuckets {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      growthFactor: object.growth_factor,
+      scale: object.scale
+    };
+  },
+  toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
+    return Distribution_ExponentialBuckets.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg): Distribution_ExponentialBuckets {
+    return Distribution_ExponentialBuckets.decode(message.value);
+  },
+  toProto(message: Distribution_ExponentialBuckets): Uint8Array {
+    return Distribution_ExponentialBuckets.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
+      value: Distribution_ExponentialBuckets.encode(message).finish()
+    };
   }
 };
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
@@ -510,6 +622,7 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
   };
 }
 export const Distribution_ExplicitBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
   encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.bounds) {
@@ -574,5 +687,34 @@ export const Distribution_ExplicitBuckets = {
       obj.bounds = [];
     }
     return obj;
+  },
+  fromAmino(object: Distribution_ExplicitBucketsAmino): Distribution_ExplicitBuckets {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsAmino {
+    const obj: any = {};
+    if (message.bounds) {
+      obj.bounds = message.bounds.map(e => e);
+    } else {
+      obj.bounds = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Distribution_ExplicitBucketsAminoMsg): Distribution_ExplicitBuckets {
+    return Distribution_ExplicitBuckets.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg): Distribution_ExplicitBuckets {
+    return Distribution_ExplicitBuckets.decode(message.value);
+  },
+  toProto(message: Distribution_ExplicitBuckets): Uint8Array {
+    return Distribution_ExplicitBuckets.encode(message).finish();
+  },
+  toProtoMsg(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
+      value: Distribution_ExplicitBuckets.encode(message).finish()
+    };
   }
 };

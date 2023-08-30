@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
@@ -135,6 +135,7 @@ function createBaseAccountID(): AccountID {
   };
 }
 export const AccountID = {
+  typeUrl: "/akash.escrow.v1beta1.AccountID",
   encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -176,11 +177,38 @@ export const AccountID = {
     message.xid !== undefined && (obj.xid = message.xid);
     return obj;
   },
-  fromPartial(object: DeepPartial<AccountID>): AccountID {
+  fromPartial(object: Partial<AccountID>): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
+  },
+  fromAmino(object: AccountIDAmino): AccountID {
+    return {
+      scope: object.scope,
+      xid: object.xid
+    };
+  },
+  toAmino(message: AccountID): AccountIDAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    return obj;
+  },
+  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
+    return AccountID.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AccountIDProtoMsg): AccountID {
+    return AccountID.decode(message.value);
+  },
+  toProto(message: AccountID): Uint8Array {
+    return AccountID.encode(message).finish();
+  },
+  toProtoMsg(message: AccountID): AccountIDProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.AccountID",
+      value: AccountID.encode(message).finish()
+    };
   }
 };
 function createBaseAccount(): Account {
@@ -194,6 +222,7 @@ function createBaseAccount(): Account {
   };
 }
 export const Account = {
+  typeUrl: "/akash.escrow.v1beta1.Account",
   encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -267,7 +296,7 @@ export const Account = {
     message.settledAt !== undefined && (obj.settledAt = (message.settledAt || Long.ZERO).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<Account>): Account {
+  fromPartial(object: Partial<Account>): Account {
     const message = createBaseAccount();
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
@@ -276,6 +305,41 @@ export const Account = {
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
     return message;
+  },
+  fromAmino(object: AccountAmino): Account {
+    return {
+      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      owner: object.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
+      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : undefined,
+      settledAt: Long.fromString(object.settled_at)
+    };
+  },
+  toAmino(message: Account): AccountAmino {
+    const obj: any = {};
+    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: AccountAminoMsg): Account {
+    return Account.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AccountProtoMsg): Account {
+    return Account.decode(message.value);
+  },
+  toProto(message: Account): Uint8Array {
+    return Account.encode(message).finish();
+  },
+  toProtoMsg(message: Account): AccountProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.Account",
+      value: Account.encode(message).finish()
+    };
   }
 };
 function createBasePayment(): Payment {
@@ -290,6 +354,7 @@ function createBasePayment(): Payment {
   };
 }
 export const Payment = {
+  typeUrl: "/akash.escrow.v1beta1.Payment",
   encode(message: Payment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
@@ -371,7 +436,7 @@ export const Payment = {
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toJSON(message.withdrawn) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<Payment>): Payment {
+  fromPartial(object: Partial<Payment>): Payment {
     const message = createBasePayment();
     message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";
@@ -381,5 +446,42 @@ export const Payment = {
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
+  },
+  fromAmino(object: PaymentAmino): Payment {
+    return {
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      paymentId: object.payment_id,
+      owner: object.owner,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
+      rate: object?.rate ? Coin.fromAmino(object.rate) : undefined,
+      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+    };
+  },
+  toAmino(message: Payment): PaymentAmino {
+    const obj: any = {};
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PaymentAminoMsg): Payment {
+    return Payment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PaymentProtoMsg): Payment {
+    return Payment.decode(message.value);
+  },
+  toProto(message: Payment): Uint8Array {
+    return Payment.encode(message).finish();
+  },
+  toProtoMsg(message: Payment): PaymentProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.Payment",
+      value: Payment.encode(message).finish()
+    };
   }
 };

@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
@@ -30,15 +31,16 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
+  typeUrl: "/akash.inflation.v1beta2.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationDecayFactor !== "") {
-      writer.uint32(10).string(message.inflationDecayFactor);
+      writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
     }
     if (message.initialInflation !== "") {
-      writer.uint32(18).string(message.initialInflation);
+      writer.uint32(18).string(Decimal.fromUserInput(message.initialInflation, 18).atomics);
     }
     if (message.variance !== "") {
-      writer.uint32(26).string(message.variance);
+      writer.uint32(26).string(Decimal.fromUserInput(message.variance, 18).atomics);
     }
     return writer;
   },
@@ -50,13 +52,13 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.inflationDecayFactor = reader.string();
+          message.inflationDecayFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 2:
-          message.initialInflation = reader.string();
+          message.initialInflation = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
-          message.variance = reader.string();
+          message.variance = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -99,5 +101,40 @@ export const Params = {
     obj.initial_inflation = message.initialInflation;
     obj.variance = message.variance;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      inflationDecayFactor: object.inflation_decay_factor,
+      initialInflation: object.initial_inflation,
+      variance: object.variance
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.inflation_decay_factor = message.inflationDecayFactor;
+    obj.initial_inflation = message.initialInflation;
+    obj.variance = message.variance;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "akash/inflation/v1beta2/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.inflation.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

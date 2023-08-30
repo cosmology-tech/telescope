@@ -3,7 +3,7 @@
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
 import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../../helpers";
+import { Long, isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.client.v1";
 /**
@@ -155,6 +155,7 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
   };
 }
 export const QueryClientStateRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
   encode(message: QueryClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -188,10 +189,41 @@ export const QueryClientStateRequest = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
+  fromPartial(object: Partial<QueryClientStateRequest>): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+  fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
+    return {
+      clientId: object.client_id
+    };
+  },
+  toAmino(message: QueryClientStateRequest): QueryClientStateRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStateRequestAminoMsg): QueryClientStateRequest {
+    return QueryClientStateRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStateRequest): QueryClientStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStateRequest",
+      value: QueryClientStateRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStateRequestProtoMsg): QueryClientStateRequest {
+    return QueryClientStateRequest.decode(message.value);
+  },
+  toProto(message: QueryClientStateRequest): Uint8Array {
+    return QueryClientStateRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStateRequest): QueryClientStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
+      value: QueryClientStateRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
@@ -202,6 +234,7 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   };
 }
 export const QueryClientStateResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
   encode(message: QueryClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -251,12 +284,47 @@ export const QueryClientStateResponse = {
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
+  fromPartial(object: Partial<QueryClientStateResponse>): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+  fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
+    return {
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      proof: object.proof,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+  toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
+    const obj: any = {};
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.proof = message.proof;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStateResponseAminoMsg): QueryClientStateResponse {
+    return QueryClientStateResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStateResponse): QueryClientStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStateResponse",
+      value: QueryClientStateResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStateResponseProtoMsg): QueryClientStateResponse {
+    return QueryClientStateResponse.decode(message.value);
+  },
+  toProto(message: QueryClientStateResponse): Uint8Array {
+    return QueryClientStateResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStateResponse): QueryClientStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
+      value: QueryClientStateResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
@@ -265,6 +333,7 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
   };
 }
 export const QueryClientStatesRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
   encode(message: QueryClientStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -298,10 +367,41 @@ export const QueryClientStatesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStatesRequest>): QueryClientStatesRequest {
+  fromPartial(object: Partial<QueryClientStatesRequest>): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryClientStatesRequestAmino): QueryClientStatesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryClientStatesRequest): QueryClientStatesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStatesRequestAminoMsg): QueryClientStatesRequest {
+    return QueryClientStatesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStatesRequest): QueryClientStatesRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStatesRequest",
+      value: QueryClientStatesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStatesRequestProtoMsg): QueryClientStatesRequest {
+    return QueryClientStatesRequest.decode(message.value);
+  },
+  toProto(message: QueryClientStatesRequest): Uint8Array {
+    return QueryClientStatesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStatesRequest): QueryClientStatesRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
+      value: QueryClientStatesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
@@ -311,6 +411,7 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
   };
 }
 export const QueryClientStatesResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
   encode(message: QueryClientStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -356,11 +457,48 @@ export const QueryClientStatesResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
+  fromPartial(object: Partial<QueryClientStatesResponse>): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
     message.clientStates = object.clientStates?.map(e => IdentifiedClientState.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryClientStatesResponseAmino): QueryClientStatesResponse {
+    return {
+      clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryClientStatesResponse): QueryClientStatesResponseAmino {
+    const obj: any = {};
+    if (message.clientStates) {
+      obj.client_states = message.clientStates.map(e => e ? IdentifiedClientState.toAmino(e) : undefined);
+    } else {
+      obj.client_states = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStatesResponseAminoMsg): QueryClientStatesResponse {
+    return QueryClientStatesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStatesResponse): QueryClientStatesResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStatesResponse",
+      value: QueryClientStatesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStatesResponseProtoMsg): QueryClientStatesResponse {
+    return QueryClientStatesResponse.decode(message.value);
+  },
+  toProto(message: QueryClientStatesResponse): Uint8Array {
+    return QueryClientStatesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStatesResponse): QueryClientStatesResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
+      value: QueryClientStatesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
@@ -372,6 +510,7 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
   };
 }
 export const QueryConsensusStateRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
   encode(message: QueryConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -429,13 +568,50 @@ export const QueryConsensusStateRequest = {
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
+  fromPartial(object: Partial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     message.latestHeight = object.latestHeight ?? false;
     return message;
+  },
+  fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
+    return {
+      clientId: object.client_id,
+      revisionNumber: Long.fromString(object.revision_number),
+      revisionHeight: Long.fromString(object.revision_height),
+      latestHeight: object.latest_height
+    };
+  },
+  toAmino(message: QueryConsensusStateRequest): QueryConsensusStateRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.latest_height = message.latestHeight;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConsensusStateRequestAminoMsg): QueryConsensusStateRequest {
+    return QueryConsensusStateRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConsensusStateRequest): QueryConsensusStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStateRequest",
+      value: QueryConsensusStateRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConsensusStateRequestProtoMsg): QueryConsensusStateRequest {
+    return QueryConsensusStateRequest.decode(message.value);
+  },
+  toProto(message: QueryConsensusStateRequest): Uint8Array {
+    return QueryConsensusStateRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConsensusStateRequest): QueryConsensusStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
+      value: QueryConsensusStateRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
@@ -446,6 +622,7 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   };
 }
 export const QueryConsensusStateResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
   encode(message: QueryConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -495,12 +672,47 @@ export const QueryConsensusStateResponse = {
     message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
+  fromPartial(object: Partial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+  fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
+    return {
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      proof: object.proof,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+  toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
+    const obj: any = {};
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.proof = message.proof;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryConsensusStateResponseAminoMsg): QueryConsensusStateResponse {
+    return QueryConsensusStateResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConsensusStateResponse): QueryConsensusStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStateResponse",
+      value: QueryConsensusStateResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConsensusStateResponseProtoMsg): QueryConsensusStateResponse {
+    return QueryConsensusStateResponse.decode(message.value);
+  },
+  toProto(message: QueryConsensusStateResponse): Uint8Array {
+    return QueryConsensusStateResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConsensusStateResponse): QueryConsensusStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
+      value: QueryConsensusStateResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
@@ -510,6 +722,7 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
   };
 }
 export const QueryConsensusStatesRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
   encode(message: QueryConsensusStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -551,11 +764,44 @@ export const QueryConsensusStatesRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
+  fromPartial(object: Partial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
     message.clientId = object.clientId ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
+    return {
+      clientId: object.client_id,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConsensusStatesRequestAminoMsg): QueryConsensusStatesRequest {
+    return QueryConsensusStatesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStatesRequest",
+      value: QueryConsensusStatesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConsensusStatesRequestProtoMsg): QueryConsensusStatesRequest {
+    return QueryConsensusStatesRequest.decode(message.value);
+  },
+  toProto(message: QueryConsensusStatesRequest): Uint8Array {
+    return QueryConsensusStatesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
+      value: QueryConsensusStatesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse {
@@ -565,6 +811,7 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
   };
 }
 export const QueryConsensusStatesResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
   encode(message: QueryConsensusStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -610,11 +857,48 @@ export const QueryConsensusStatesResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
+  fromPartial(object: Partial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+  fromAmino(object: QueryConsensusStatesResponseAmino): QueryConsensusStatesResponse {
+    return {
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseAmino {
+    const obj: any = {};
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConsensusStatesResponseAminoMsg): QueryConsensusStatesResponse {
+    return QueryConsensusStatesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStatesResponse",
+      value: QueryConsensusStatesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConsensusStatesResponseProtoMsg): QueryConsensusStatesResponse {
+    return QueryConsensusStatesResponse.decode(message.value);
+  },
+  toProto(message: QueryConsensusStatesResponse): Uint8Array {
+    return QueryConsensusStatesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
+      value: QueryConsensusStatesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
@@ -623,6 +907,7 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
   };
 }
 export const QueryClientStatusRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
   encode(message: QueryClientStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -656,10 +941,41 @@ export const QueryClientStatusRequest = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
+  fromPartial(object: Partial<QueryClientStatusRequest>): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+  fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
+    return {
+      clientId: object.client_id
+    };
+  },
+  toAmino(message: QueryClientStatusRequest): QueryClientStatusRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStatusRequestAminoMsg): QueryClientStatusRequest {
+    return QueryClientStatusRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStatusRequest): QueryClientStatusRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStatusRequest",
+      value: QueryClientStatusRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStatusRequestProtoMsg): QueryClientStatusRequest {
+    return QueryClientStatusRequest.decode(message.value);
+  },
+  toProto(message: QueryClientStatusRequest): Uint8Array {
+    return QueryClientStatusRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStatusRequest): QueryClientStatusRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
+      value: QueryClientStatusRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
@@ -668,6 +984,7 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
   };
 }
 export const QueryClientStatusResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
   encode(message: QueryClientStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
@@ -701,16 +1018,48 @@ export const QueryClientStatusResponse = {
     message.status !== undefined && (obj.status = message.status);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientStatusResponse>): QueryClientStatusResponse {
+  fromPartial(object: Partial<QueryClientStatusResponse>): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
     message.status = object.status ?? "";
     return message;
+  },
+  fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
+    return {
+      status: object.status
+    };
+  },
+  toAmino(message: QueryClientStatusResponse): QueryClientStatusResponseAmino {
+    const obj: any = {};
+    obj.status = message.status;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientStatusResponseAminoMsg): QueryClientStatusResponse {
+    return QueryClientStatusResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientStatusResponse): QueryClientStatusResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientStatusResponse",
+      value: QueryClientStatusResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientStatusResponseProtoMsg): QueryClientStatusResponse {
+    return QueryClientStatusResponse.decode(message.value);
+  },
+  toProto(message: QueryClientStatusResponse): Uint8Array {
+    return QueryClientStatusResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientStatusResponse): QueryClientStatusResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
+      value: QueryClientStatusResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
   return {};
 }
 export const QueryClientParamsRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
   encode(_: QueryClientParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -735,9 +1084,37 @@ export const QueryClientParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<QueryClientParamsRequest>): QueryClientParamsRequest {
+  fromPartial(_: Partial<QueryClientParamsRequest>): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
+  },
+  fromAmino(_: QueryClientParamsRequestAmino): QueryClientParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryClientParamsRequest): QueryClientParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientParamsRequestAminoMsg): QueryClientParamsRequest {
+    return QueryClientParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientParamsRequest): QueryClientParamsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientParamsRequest",
+      value: QueryClientParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientParamsRequestProtoMsg): QueryClientParamsRequest {
+    return QueryClientParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryClientParamsRequest): Uint8Array {
+    return QueryClientParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientParamsRequest): QueryClientParamsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
+      value: QueryClientParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
@@ -746,6 +1123,7 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
   };
 }
 export const QueryClientParamsResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
   encode(message: QueryClientParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -779,16 +1157,48 @@ export const QueryClientParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryClientParamsResponse>): QueryClientParamsResponse {
+  fromPartial(object: Partial<QueryClientParamsResponse>): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+  fromAmino(object: QueryClientParamsResponseAmino): QueryClientParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryClientParamsResponse): QueryClientParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryClientParamsResponseAminoMsg): QueryClientParamsResponse {
+    return QueryClientParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryClientParamsResponse): QueryClientParamsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientParamsResponse",
+      value: QueryClientParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryClientParamsResponseProtoMsg): QueryClientParamsResponse {
+    return QueryClientParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryClientParamsResponse): Uint8Array {
+    return QueryClientParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryClientParamsResponse): QueryClientParamsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
+      value: QueryClientParamsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRequest {
   return {};
 }
 export const QueryUpgradedClientStateRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
   encode(_: QueryUpgradedClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -813,9 +1223,37 @@ export const QueryUpgradedClientStateRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
+  fromPartial(_: Partial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
+  },
+  fromAmino(_: QueryUpgradedClientStateRequestAmino): QueryUpgradedClientStateRequest {
+    return {};
+  },
+  toAmino(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryUpgradedClientStateRequestAminoMsg): QueryUpgradedClientStateRequest {
+    return QueryUpgradedClientStateRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUpgradedClientStateRequest",
+      value: QueryUpgradedClientStateRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryUpgradedClientStateRequestProtoMsg): QueryUpgradedClientStateRequest {
+    return QueryUpgradedClientStateRequest.decode(message.value);
+  },
+  toProto(message: QueryUpgradedClientStateRequest): Uint8Array {
+    return QueryUpgradedClientStateRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
+      value: QueryUpgradedClientStateRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
@@ -824,6 +1262,7 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
   };
 }
 export const QueryUpgradedClientStateResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
   encode(message: QueryUpgradedClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedClientState !== undefined) {
       Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
@@ -857,16 +1296,48 @@ export const QueryUpgradedClientStateResponse = {
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
+  fromPartial(object: Partial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+  fromAmino(object: QueryUpgradedClientStateResponseAmino): QueryUpgradedClientStateResponse {
+    return {
+      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
+    };
+  },
+  toAmino(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseAmino {
+    const obj: any = {};
+    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryUpgradedClientStateResponseAminoMsg): QueryUpgradedClientStateResponse {
+    return QueryUpgradedClientStateResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUpgradedClientStateResponse",
+      value: QueryUpgradedClientStateResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryUpgradedClientStateResponseProtoMsg): QueryUpgradedClientStateResponse {
+    return QueryUpgradedClientStateResponse.decode(message.value);
+  },
+  toProto(message: QueryUpgradedClientStateResponse): Uint8Array {
+    return QueryUpgradedClientStateResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
+      value: QueryUpgradedClientStateResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {};
 }
 export const QueryUpgradedConsensusStateRequest = {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
   encode(_: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -891,9 +1362,37 @@ export const QueryUpgradedConsensusStateRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
+  fromPartial(_: Partial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
+  },
+  fromAmino(_: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
+    return {};
+  },
+  toAmino(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryUpgradedConsensusStateRequestAminoMsg): QueryUpgradedConsensusStateRequest {
+    return QueryUpgradedConsensusStateRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
+      value: QueryUpgradedConsensusStateRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg): QueryUpgradedConsensusStateRequest {
+    return QueryUpgradedConsensusStateRequest.decode(message.value);
+  },
+  toProto(message: QueryUpgradedConsensusStateRequest): Uint8Array {
+    return QueryUpgradedConsensusStateRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
+      value: QueryUpgradedConsensusStateRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
@@ -902,6 +1401,7 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
   };
 }
 export const QueryUpgradedConsensusStateResponse = {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
   encode(message: QueryUpgradedConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
@@ -935,10 +1435,41 @@ export const QueryUpgradedConsensusStateResponse = {
     message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = message.upgradedConsensusState ? Any.toJSON(message.upgradedConsensusState) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
+  fromPartial(object: Partial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null ? Any.fromPartial(object.upgradedConsensusState) : undefined;
     return message;
+  },
+  fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
+    return {
+      upgradedConsensusState: object?.upgraded_consensus_state ? Any.fromAmino(object.upgraded_consensus_state) : undefined
+    };
+  },
+  toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
+    const obj: any = {};
+    obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toAmino(message.upgradedConsensusState) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {
+    return QueryUpgradedConsensusStateResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
+      value: QueryUpgradedConsensusStateResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg): QueryUpgradedConsensusStateResponse {
+    return QueryUpgradedConsensusStateResponse.decode(message.value);
+  },
+  toProto(message: QueryUpgradedConsensusStateResponse): Uint8Array {
+    return QueryUpgradedConsensusStateResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
+      value: QueryUpgradedConsensusStateResponse.encode(message).finish()
+    };
   }
 };
 /** Query provides defines the gRPC querier service */

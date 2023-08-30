@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -20,6 +20,7 @@ function createBaseSourceContext(): SourceContext {
   };
 }
 export const SourceContext = {
+  typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fileName !== "") {
       writer.uint32(10).string(message.fileName);
@@ -53,9 +54,34 @@ export const SourceContext = {
     message.fileName !== undefined && (obj.fileName = message.fileName);
     return obj;
   },
-  fromPartial(object: DeepPartial<SourceContext>): SourceContext {
+  fromPartial(object: Partial<SourceContext>): SourceContext {
     const message = createBaseSourceContext();
     message.fileName = object.fileName ?? "";
     return message;
+  },
+  fromAmino(object: SourceContextAmino): SourceContext {
+    return {
+      fileName: object.file_name
+    };
+  },
+  toAmino(message: SourceContext): SourceContextAmino {
+    const obj: any = {};
+    obj.file_name = message.fileName;
+    return obj;
+  },
+  fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
+    return SourceContext.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
+    return SourceContext.decode(message.value);
+  },
+  toProto(message: SourceContext): Uint8Array {
+    return SourceContext.encode(message).finish();
+  },
+  toProtoMsg(message: SourceContext): SourceContextProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.SourceContext",
+      value: SourceContext.encode(message).finish()
+    };
   }
 };

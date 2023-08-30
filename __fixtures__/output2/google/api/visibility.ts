@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -71,6 +71,7 @@ function createBaseVisibility(): Visibility {
   };
 }
 export const Visibility = {
+  typeUrl: "/google.api.Visibility",
   encode(message: Visibility, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       VisibilityRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -108,10 +109,39 @@ export const Visibility = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Visibility>): Visibility {
+  fromPartial(object: Partial<Visibility>): Visibility {
     const message = createBaseVisibility();
     message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: VisibilityAmino): Visibility {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Visibility): VisibilityAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
+    return Visibility.fromAmino(object.value);
+  },
+  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
+    return Visibility.decode(message.value);
+  },
+  toProto(message: Visibility): Uint8Array {
+    return Visibility.encode(message).finish();
+  },
+  toProtoMsg(message: Visibility): VisibilityProtoMsg {
+    return {
+      typeUrl: "/google.api.Visibility",
+      value: Visibility.encode(message).finish()
+    };
   }
 };
 function createBaseVisibilityRule(): VisibilityRule {
@@ -121,6 +151,7 @@ function createBaseVisibilityRule(): VisibilityRule {
   };
 }
 export const VisibilityRule = {
+  typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -162,10 +193,37 @@ export const VisibilityRule = {
     message.restriction !== undefined && (obj.restriction = message.restriction);
     return obj;
   },
-  fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
+  fromPartial(object: Partial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
     message.selector = object.selector ?? "";
     message.restriction = object.restriction ?? "";
     return message;
+  },
+  fromAmino(object: VisibilityRuleAmino): VisibilityRule {
+    return {
+      selector: object.selector,
+      restriction: object.restriction
+    };
+  },
+  toAmino(message: VisibilityRule): VisibilityRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.restriction = message.restriction;
+    return obj;
+  },
+  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
+    return VisibilityRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
+    return VisibilityRule.decode(message.value);
+  },
+  toProto(message: VisibilityRule): Uint8Array {
+    return VisibilityRule.encode(message).finish();
+  },
+  toProtoMsg(message: VisibilityRule): VisibilityRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.VisibilityRule",
+      value: VisibilityRule.encode(message).finish()
+    };
   }
 };

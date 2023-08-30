@@ -621,6 +621,7 @@ function createBaseService(): Service {
   };
 }
 export const Service = {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service",
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -701,6 +702,37 @@ export const Service = {
     message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     return obj;
+  },
+  fromAmino(object: ServiceAmino): Service {
+    return {
+      name: object.name,
+      parent: object.parent,
+      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+    };
+  },
+  toAmino(message: Service): ServiceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.parent = message.parent;
+    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
+  },
+  toProto(message: Service): Uint8Array {
+    return Service.encode(message).finish();
+  },
+  toProtoMsg(message: Service): ServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.Service",
+      value: Service.encode(message).finish()
+    };
   }
 };
 function createBaseServiceConfig(): ServiceConfig {
@@ -718,6 +750,7 @@ function createBaseServiceConfig(): ServiceConfig {
   };
 }
 export const ServiceConfig = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
   encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -888,6 +921,61 @@ export const ServiceConfig = {
     }
     message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
     return obj;
+  },
+  fromAmino(object: ServiceConfigAmino): ServiceConfig {
+    return {
+      name: object.name,
+      title: object.title,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
+      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
+      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
+      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
+    };
+  },
+  toAmino(message: ServiceConfig): ServiceConfigAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.title = message.title;
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
+    return ServiceConfig.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
+    return ServiceConfig.decode(message.value);
+  },
+  toProto(message: ServiceConfig): Uint8Array {
+    return ServiceConfig.encode(message).finish();
+  },
+  toProtoMsg(message: ServiceConfig): ServiceConfigProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
+      value: ServiceConfig.encode(message).finish()
+    };
   }
 };
 function createBaseOperationMetadata(): OperationMetadata {
@@ -896,6 +984,7 @@ function createBaseOperationMetadata(): OperationMetadata {
   };
 }
 export const OperationMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -951,6 +1040,35 @@ export const OperationMetadata = {
       obj.resource_names = [];
     }
     return obj;
+  },
+  fromAmino(object: OperationMetadataAmino): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: OperationMetadata): OperationMetadataAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
+    return OperationMetadata.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
+  },
+  toProto(message: OperationMetadata): Uint8Array {
+    return OperationMetadata.encode(message).finish();
+  },
+  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
+      value: OperationMetadata.encode(message).finish()
+    };
   }
 };
 function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
@@ -964,6 +1082,7 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
   };
 }
 export const ConsumerQuotaMetric = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
   encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1082,6 +1201,49 @@ export const ConsumerQuotaMetric = {
     }
     obj.unit = message.unit;
     return obj;
+  },
+  fromAmino(object: ConsumerQuotaMetricAmino): ConsumerQuotaMetric {
+    return {
+      name: object.name,
+      metric: object.metric,
+      displayName: object.display_name,
+      consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
+      descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
+      unit: object.unit
+    };
+  },
+  toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.display_name = message.displayName;
+    if (message.consumerQuotaLimits) {
+      obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
+    } else {
+      obj.consumer_quota_limits = [];
+    }
+    if (message.descendantConsumerQuotaLimits) {
+      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
+    } else {
+      obj.descendant_consumer_quota_limits = [];
+    }
+    obj.unit = message.unit;
+    return obj;
+  },
+  fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
+    return ConsumerQuotaMetric.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ConsumerQuotaMetricProtoMsg): ConsumerQuotaMetric {
+    return ConsumerQuotaMetric.decode(message.value);
+  },
+  toProto(message: ConsumerQuotaMetric): Uint8Array {
+    return ConsumerQuotaMetric.encode(message).finish();
+  },
+  toProtoMsg(message: ConsumerQuotaMetric): ConsumerQuotaMetricProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
+      value: ConsumerQuotaMetric.encode(message).finish()
+    };
   }
 };
 function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
@@ -1095,6 +1257,7 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
   };
 }
 export const ConsumerQuotaLimit = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
   encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1205,6 +1368,45 @@ export const ConsumerQuotaLimit = {
       obj.quota_buckets = [];
     }
     return obj;
+  },
+  fromAmino(object: ConsumerQuotaLimitAmino): ConsumerQuotaLimit {
+    return {
+      name: object.name,
+      metric: object.metric,
+      unit: object.unit,
+      isPrecise: object.is_precise,
+      allowsAdminOverrides: object.allows_admin_overrides,
+      quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ConsumerQuotaLimit): ConsumerQuotaLimitAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.is_precise = message.isPrecise;
+    obj.allows_admin_overrides = message.allowsAdminOverrides;
+    if (message.quotaBuckets) {
+      obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toAmino(e) : undefined);
+    } else {
+      obj.quota_buckets = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ConsumerQuotaLimitAminoMsg): ConsumerQuotaLimit {
+    return ConsumerQuotaLimit.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ConsumerQuotaLimitProtoMsg): ConsumerQuotaLimit {
+    return ConsumerQuotaLimit.decode(message.value);
+  },
+  toProto(message: ConsumerQuotaLimit): Uint8Array {
+    return ConsumerQuotaLimit.encode(message).finish();
+  },
+  toProtoMsg(message: ConsumerQuotaLimit): ConsumerQuotaLimitProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
+      value: ConsumerQuotaLimit.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaBucket_DimensionsEntry(): QuotaBucket_DimensionsEntry {
@@ -1272,6 +1474,27 @@ export const QuotaBucket_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: QuotaBucket_DimensionsEntryAmino): QuotaBucket_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
+    return QuotaBucket_DimensionsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaBucket_DimensionsEntryProtoMsg): QuotaBucket_DimensionsEntry {
+    return QuotaBucket_DimensionsEntry.decode(message.value);
+  },
+  toProto(message: QuotaBucket_DimensionsEntry): Uint8Array {
+    return QuotaBucket_DimensionsEntry.encode(message).finish();
   }
 };
 function createBaseQuotaBucket(): QuotaBucket {
@@ -1285,6 +1508,7 @@ function createBaseQuotaBucket(): QuotaBucket {
   };
 }
 export const QuotaBucket = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
   encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.effectiveLimit.isZero()) {
       writer.uint32(8).int64(message.effectiveLimit);
@@ -1420,6 +1644,51 @@ export const QuotaBucket = {
       });
     }
     return obj;
+  },
+  fromAmino(object: QuotaBucketAmino): QuotaBucket {
+    return {
+      effectiveLimit: Long.fromString(object.effective_limit),
+      defaultLimit: Long.fromString(object.default_limit),
+      producerOverride: object?.producer_override ? QuotaOverride.fromAmino(object.producer_override) : undefined,
+      consumerOverride: object?.consumer_override ? QuotaOverride.fromAmino(object.consumer_override) : undefined,
+      adminOverride: object?.admin_override ? QuotaOverride.fromAmino(object.admin_override) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: QuotaBucket): QuotaBucketAmino {
+    const obj: any = {};
+    obj.effective_limit = message.effectiveLimit ? message.effectiveLimit.toString() : undefined;
+    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
+    obj.producer_override = message.producerOverride ? QuotaOverride.toAmino(message.producerOverride) : undefined;
+    obj.consumer_override = message.consumerOverride ? QuotaOverride.toAmino(message.consumerOverride) : undefined;
+    obj.admin_override = message.adminOverride ? QuotaOverride.toAmino(message.adminOverride) : undefined;
+    obj.dimensions = {};
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QuotaBucketAminoMsg): QuotaBucket {
+    return QuotaBucket.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaBucketProtoMsg): QuotaBucket {
+    return QuotaBucket.decode(message.value);
+  },
+  toProto(message: QuotaBucket): Uint8Array {
+    return QuotaBucket.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaBucket): QuotaBucketProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
+      value: QuotaBucket.encode(message).finish()
+    };
   }
 };
 function createBaseQuotaOverride_DimensionsEntry(): QuotaOverride_DimensionsEntry {
@@ -1487,6 +1756,27 @@ export const QuotaOverride_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: QuotaOverride_DimensionsEntryAmino): QuotaOverride_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
+    return QuotaOverride_DimensionsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaOverride_DimensionsEntryProtoMsg): QuotaOverride_DimensionsEntry {
+    return QuotaOverride_DimensionsEntry.decode(message.value);
+  },
+  toProto(message: QuotaOverride_DimensionsEntry): Uint8Array {
+    return QuotaOverride_DimensionsEntry.encode(message).finish();
   }
 };
 function createBaseQuotaOverride(): QuotaOverride {
@@ -1500,6 +1790,7 @@ function createBaseQuotaOverride(): QuotaOverride {
   };
 }
 export const QuotaOverride = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
   encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1635,6 +1926,51 @@ export const QuotaOverride = {
     obj.unit = message.unit;
     obj.admin_override_ancestor = message.adminOverrideAncestor;
     return obj;
+  },
+  fromAmino(object: QuotaOverrideAmino): QuotaOverride {
+    return {
+      name: object.name,
+      overrideValue: Long.fromString(object.override_value),
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: object.metric,
+      unit: object.unit,
+      adminOverrideAncestor: object.admin_override_ancestor
+    };
+  },
+  toAmino(message: QuotaOverride): QuotaOverrideAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.override_value = message.overrideValue ? message.overrideValue.toString() : undefined;
+    obj.dimensions = {};
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.admin_override_ancestor = message.adminOverrideAncestor;
+    return obj;
+  },
+  fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
+    return QuotaOverride.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuotaOverrideProtoMsg): QuotaOverride {
+    return QuotaOverride.decode(message.value);
+  },
+  toProto(message: QuotaOverride): Uint8Array {
+    return QuotaOverride.encode(message).finish();
+  },
+  toProtoMsg(message: QuotaOverride): QuotaOverrideProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
+      value: QuotaOverride.encode(message).finish()
+    };
   }
 };
 function createBaseOverrideInlineSource(): OverrideInlineSource {
@@ -1643,6 +1979,7 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
   };
 }
 export const OverrideInlineSource = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
   encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1698,6 +2035,35 @@ export const OverrideInlineSource = {
       obj.overrides = [];
     }
     return obj;
+  },
+  fromAmino(object: OverrideInlineSourceAmino): OverrideInlineSource {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: OverrideInlineSource): OverrideInlineSourceAmino {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OverrideInlineSourceAminoMsg): OverrideInlineSource {
+    return OverrideInlineSource.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OverrideInlineSourceProtoMsg): OverrideInlineSource {
+    return OverrideInlineSource.decode(message.value);
+  },
+  toProto(message: OverrideInlineSource): Uint8Array {
+    return OverrideInlineSource.encode(message).finish();
+  },
+  toProtoMsg(message: OverrideInlineSource): OverrideInlineSourceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
+      value: OverrideInlineSource.encode(message).finish()
+    };
   }
 };
 function createBaseAdminQuotaPolicy_DimensionsEntry(): AdminQuotaPolicy_DimensionsEntry {
@@ -1765,6 +2131,27 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: AdminQuotaPolicy_DimensionsEntryAmino): AdminQuotaPolicy_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
+    return AdminQuotaPolicy_DimensionsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AdminQuotaPolicy_DimensionsEntryProtoMsg): AdminQuotaPolicy_DimensionsEntry {
+    return AdminQuotaPolicy_DimensionsEntry.decode(message.value);
+  },
+  toProto(message: AdminQuotaPolicy_DimensionsEntry): Uint8Array {
+    return AdminQuotaPolicy_DimensionsEntry.encode(message).finish();
   }
 };
 function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
@@ -1778,6 +2165,7 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
   };
 }
 export const AdminQuotaPolicy = {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
   encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1913,6 +2301,51 @@ export const AdminQuotaPolicy = {
     obj.unit = message.unit;
     obj.container = message.container;
     return obj;
+  },
+  fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
+    return {
+      name: object.name,
+      policyValue: Long.fromString(object.policy_value),
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: object.metric,
+      unit: object.unit,
+      container: object.container
+    };
+  },
+  toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.policy_value = message.policyValue ? message.policyValue.toString() : undefined;
+    obj.dimensions = {};
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.container = message.container;
+    return obj;
+  },
+  fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
+    return AdminQuotaPolicy.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AdminQuotaPolicyProtoMsg): AdminQuotaPolicy {
+    return AdminQuotaPolicy.decode(message.value);
+  },
+  toProto(message: AdminQuotaPolicy): Uint8Array {
+    return AdminQuotaPolicy.encode(message).finish();
+  },
+  toProtoMsg(message: AdminQuotaPolicy): AdminQuotaPolicyProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
+      value: AdminQuotaPolicy.encode(message).finish()
+    };
   }
 };
 function createBaseServiceIdentity(): ServiceIdentity {
@@ -1922,6 +2355,7 @@ function createBaseServiceIdentity(): ServiceIdentity {
   };
 }
 export const ServiceIdentity = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
   encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
@@ -1980,5 +2414,32 @@ export const ServiceIdentity = {
     obj.email = message.email;
     obj.unique_id = message.uniqueId;
     return obj;
+  },
+  fromAmino(object: ServiceIdentityAmino): ServiceIdentity {
+    return {
+      email: object.email,
+      uniqueId: object.unique_id
+    };
+  },
+  toAmino(message: ServiceIdentity): ServiceIdentityAmino {
+    const obj: any = {};
+    obj.email = message.email;
+    obj.unique_id = message.uniqueId;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {
+    return ServiceIdentity.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ServiceIdentityProtoMsg): ServiceIdentity {
+    return ServiceIdentity.decode(message.value);
+  },
+  toProto(message: ServiceIdentity): Uint8Array {
+    return ServiceIdentity.encode(message).finish();
+  },
+  toProtoMsg(message: ServiceIdentity): ServiceIdentityProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
+      value: ServiceIdentity.encode(message).finish()
+    };
   }
 };

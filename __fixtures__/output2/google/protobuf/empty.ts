@@ -1,7 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
@@ -19,6 +18,7 @@ function createBaseEmpty(): Empty {
   return {};
 }
 export const Empty = {
+  typeUrl: "/google.protobuf.Empty",
   encode(_: Empty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -43,8 +43,30 @@ export const Empty = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<Empty>): Empty {
+  fromPartial(_: Partial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
+  },
+  fromAmino(_: EmptyAmino): Empty {
+    return {};
+  },
+  toAmino(_: Empty): EmptyAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: EmptyAminoMsg): Empty {
+    return Empty.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EmptyProtoMsg): Empty {
+    return Empty.decode(message.value);
+  },
+  toProto(message: Empty): Uint8Array {
+    return Empty.encode(message).finish();
+  },
+  toProtoMsg(message: Empty): EmptyProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Empty",
+      value: Empty.encode(message).finish()
+    };
   }
 };

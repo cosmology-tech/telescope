@@ -192,6 +192,27 @@ export const Struct_FieldsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? Value.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
+    return Struct_FieldsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
+    return Struct_FieldsEntry.decode(message.value);
+  },
+  toProto(message: Struct_FieldsEntry): Uint8Array {
+    return Struct_FieldsEntry.encode(message).finish();
   }
 };
 function createBaseStruct(): Struct {
@@ -200,6 +221,7 @@ function createBaseStruct(): Struct {
   };
 }
 export const Struct = {
+  typeUrl: "/google.protobuf.Struct",
   encode(message: Struct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
       Struct_FieldsEntry.encode({
@@ -280,6 +302,41 @@ export const Struct = {
       });
     }
     return obj;
+  },
+  fromAmino(object: StructAmino): Struct {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: Struct): StructAmino {
+    const obj: any = {};
+    obj.fields = {};
+    if (message.fields) {
+      Object.entries(message.fields).forEach(([k, v]) => {
+        obj.fields[k] = Value.toAmino(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: StructAminoMsg): Struct {
+    return Struct.fromAmino(object.value);
+  },
+  fromProtoMsg(message: StructProtoMsg): Struct {
+    return Struct.decode(message.value);
+  },
+  toProto(message: Struct): Uint8Array {
+    return Struct.encode(message).finish();
+  },
+  toProtoMsg(message: Struct): StructProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Struct",
+      value: Struct.encode(message).finish()
+    };
   }
 };
 function createBaseValue(): Value {
@@ -293,6 +350,7 @@ function createBaseValue(): Value {
   };
 }
 export const Value = {
+  typeUrl: "/google.protobuf.Value",
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -395,6 +453,41 @@ export const Value = {
     message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toSDK(message.structValue) : undefined);
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     return obj;
+  },
+  fromAmino(object: ValueAmino): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      numberValue: object?.number_value,
+      stringValue: object?.string_value,
+      boolValue: object?.bool_value,
+      structValue: object?.struct_value ? Struct.fromAmino(object.struct_value) : undefined,
+      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
+    };
+  },
+  toAmino(message: Value): ValueAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
+    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValueAminoMsg): Value {
+    return Value.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ValueProtoMsg): Value {
+    return Value.decode(message.value);
+  },
+  toProto(message: Value): Uint8Array {
+    return Value.encode(message).finish();
+  },
+  toProtoMsg(message: Value): ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Value",
+      value: Value.encode(message).finish()
+    };
   }
 };
 function createBaseListValue(): ListValue {
@@ -403,6 +496,7 @@ function createBaseListValue(): ListValue {
   };
 }
 export const ListValue = {
+  typeUrl: "/google.protobuf.ListValue",
   encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -458,5 +552,34 @@ export const ListValue = {
       obj.values = [];
     }
     return obj;
+  },
+  fromAmino(object: ListValueAmino): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ListValue): ListValueAmino {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListValueAminoMsg): ListValue {
+    return ListValue.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListValueProtoMsg): ListValue {
+    return ListValue.decode(message.value);
+  },
+  toProto(message: ListValue): Uint8Array {
+    return ListValue.encode(message).finish();
+  },
+  toProtoMsg(message: ListValue): ListValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.ListValue",
+      value: ListValue.encode(message).finish()
+    };
   }
 };

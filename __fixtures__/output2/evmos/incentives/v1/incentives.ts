@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
 /**
@@ -32,6 +32,7 @@ export interface GasMeter {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
+  $typeUrl?: string;
   /** title of the proposal */
   title: string;
   /** proposal description */
@@ -62,6 +63,7 @@ function createBaseIncentive(): Incentive {
   };
 }
 export const Incentive = {
+  typeUrl: "/evmos.incentives.v1.Incentive",
   encode(message: Incentive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -131,7 +133,7 @@ export const Incentive = {
     message.totalGas !== undefined && (obj.totalGas = (message.totalGas || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<Incentive>): Incentive {
+  fromPartial(object: Partial<Incentive>): Incentive {
     const message = createBaseIncentive();
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
@@ -139,6 +141,43 @@ export const Incentive = {
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
     return message;
+  },
+  fromAmino(object: IncentiveAmino): Incentive {
+    return {
+      contract: object.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
+      epochs: object.epochs,
+      startTime: object.start_time,
+      totalGas: Long.fromString(object.total_gas)
+    };
+  },
+  toAmino(message: Incentive): IncentiveAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    obj.epochs = message.epochs;
+    obj.start_time = message.startTime;
+    obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IncentiveAminoMsg): Incentive {
+    return Incentive.fromAmino(object.value);
+  },
+  fromProtoMsg(message: IncentiveProtoMsg): Incentive {
+    return Incentive.decode(message.value);
+  },
+  toProto(message: Incentive): Uint8Array {
+    return Incentive.encode(message).finish();
+  },
+  toProtoMsg(message: Incentive): IncentiveProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.Incentive",
+      value: Incentive.encode(message).finish()
+    };
   }
 };
 function createBaseGasMeter(): GasMeter {
@@ -149,6 +188,7 @@ function createBaseGasMeter(): GasMeter {
   };
 }
 export const GasMeter = {
+  typeUrl: "/evmos.incentives.v1.GasMeter",
   encode(message: GasMeter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -198,16 +238,46 @@ export const GasMeter = {
     message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<GasMeter>): GasMeter {
+  fromPartial(object: Partial<GasMeter>): GasMeter {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
     message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? Long.fromValue(object.cumulativeGas) : Long.UZERO;
     return message;
+  },
+  fromAmino(object: GasMeterAmino): GasMeter {
+    return {
+      contract: object.contract,
+      participant: object.participant,
+      cumulativeGas: Long.fromString(object.cumulative_gas)
+    };
+  },
+  toAmino(message: GasMeter): GasMeterAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GasMeterAminoMsg): GasMeter {
+    return GasMeter.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GasMeterProtoMsg): GasMeter {
+    return GasMeter.decode(message.value);
+  },
+  toProto(message: GasMeter): Uint8Array {
+    return GasMeter.encode(message).finish();
+  },
+  toProtoMsg(message: GasMeter): GasMeterProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.GasMeter",
+      value: GasMeter.encode(message).finish()
+    };
   }
 };
 function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   return {
+    $typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
     title: "",
     description: "",
     contract: "",
@@ -216,6 +286,7 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   };
 }
 export const RegisterIncentiveProposal = {
+  typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
   encode(message: RegisterIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -285,7 +356,7 @@ export const RegisterIncentiveProposal = {
     message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
     return obj;
   },
-  fromPartial(object: DeepPartial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
+  fromPartial(object: Partial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
     const message = createBaseRegisterIncentiveProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -293,6 +364,43 @@ export const RegisterIncentiveProposal = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     return message;
+  },
+  fromAmino(object: RegisterIncentiveProposalAmino): RegisterIncentiveProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
+      epochs: object.epochs
+    };
+  },
+  toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    obj.epochs = message.epochs;
+    return obj;
+  },
+  fromAminoMsg(object: RegisterIncentiveProposalAminoMsg): RegisterIncentiveProposal {
+    return RegisterIncentiveProposal.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RegisterIncentiveProposalProtoMsg): RegisterIncentiveProposal {
+    return RegisterIncentiveProposal.decode(message.value);
+  },
+  toProto(message: RegisterIncentiveProposal): Uint8Array {
+    return RegisterIncentiveProposal.encode(message).finish();
+  },
+  toProtoMsg(message: RegisterIncentiveProposal): RegisterIncentiveProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
+      value: RegisterIncentiveProposal.encode(message).finish()
+    };
   }
 };
 function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
@@ -303,6 +411,7 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
   };
 }
 export const CancelIncentiveProposal = {
+  typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
   encode(message: CancelIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -352,11 +461,40 @@ export const CancelIncentiveProposal = {
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
-  fromPartial(object: DeepPartial<CancelIncentiveProposal>): CancelIncentiveProposal {
+  fromPartial(object: Partial<CancelIncentiveProposal>): CancelIncentiveProposal {
     const message = createBaseCancelIncentiveProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+  fromAmino(object: CancelIncentiveProposalAmino): CancelIncentiveProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract
+    };
+  },
+  toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    return obj;
+  },
+  fromAminoMsg(object: CancelIncentiveProposalAminoMsg): CancelIncentiveProposal {
+    return CancelIncentiveProposal.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CancelIncentiveProposalProtoMsg): CancelIncentiveProposal {
+    return CancelIncentiveProposal.decode(message.value);
+  },
+  toProto(message: CancelIncentiveProposal): Uint8Array {
+    return CancelIncentiveProposal.encode(message).finish();
+  },
+  toProtoMsg(message: CancelIncentiveProposal): CancelIncentiveProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
+      value: CancelIncentiveProposal.encode(message).finish()
+    };
   }
 };

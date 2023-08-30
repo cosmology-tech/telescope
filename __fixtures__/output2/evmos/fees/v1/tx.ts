@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
+import { Long, isSet, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
@@ -61,6 +61,7 @@ function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
   };
 }
 export const MsgRegisterDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
   encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -131,19 +132,55 @@ export const MsgRegisterDevFeeInfo = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+  fromPartial(object: Partial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address,
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e);
+    } else {
+      obj.nonces = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgRegisterDevFeeInfo): Uint8Array {
+    return MsgRegisterDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+      value: MsgRegisterDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgRegisterDevFeeInfoResponse(): MsgRegisterDevFeeInfoResponse {
   return {};
 }
 export const MsgRegisterDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
   encode(_: MsgRegisterDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -168,9 +205,31 @@ export const MsgRegisterDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
+  fromPartial(_: Partial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgRegisterDevFeeInfoResponse): Uint8Array {
+    return MsgRegisterDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
+      value: MsgRegisterDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
@@ -180,6 +239,7 @@ function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
   };
 }
 export const MsgCancelDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
   encode(message: MsgCancelDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -221,17 +281,45 @@ export const MsgCancelDevFeeInfo = {
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
+  fromPartial(object: Partial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
     const message = createBaseMsgCancelDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     return message;
+  },
+  fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address
+    };
+  },
+  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgCancelDevFeeInfo): Uint8Array {
+    return MsgCancelDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
+      value: MsgCancelDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCancelDevFeeInfoResponse(): MsgCancelDevFeeInfoResponse {
   return {};
 }
 export const MsgCancelDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
   encode(_: MsgCancelDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -256,9 +344,31 @@ export const MsgCancelDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
+  fromPartial(_: Partial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgCancelDevFeeInfoResponse): Uint8Array {
+    return MsgCancelDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
+      value: MsgCancelDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
@@ -269,6 +379,7 @@ function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
   };
 }
 export const MsgUpdateDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
   encode(message: MsgUpdateDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -318,18 +429,48 @@ export const MsgUpdateDevFeeInfo = {
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
+  fromPartial(object: Partial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
     const message = createBaseMsgUpdateDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+  fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address
+    };
+  },
+  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgUpdateDevFeeInfo): Uint8Array {
+    return MsgUpdateDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
+      value: MsgUpdateDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDevFeeInfoResponse(): MsgUpdateDevFeeInfoResponse {
   return {};
 }
 export const MsgUpdateDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
   encode(_: MsgUpdateDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -354,9 +495,31 @@ export const MsgUpdateDevFeeInfoResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
+  fromPartial(_: Partial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateDevFeeInfoResponse): Uint8Array {
+    return MsgUpdateDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
+      value: MsgUpdateDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };
 /** Msg defines the fees Msg service. */

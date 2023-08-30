@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -9,7 +9,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  */
 export interface FeeToken {
   denom: string;
-  poolID: Long;
+  poolID: bigint;
 }
 export interface FeeTokenProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken";
@@ -37,28 +37,28 @@ export interface FeeTokenAminoMsg {
  */
 export interface FeeTokenSDKType {
   denom: string;
-  poolID: Long;
+  poolID: bigint;
 }
 function createBaseFeeToken(): FeeToken {
   return {
     denom: "",
-    poolID: Long.UZERO
+    poolID: BigInt(0)
   };
 }
 export const FeeToken = {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
   aminoType: "osmosis/txfees/fee-token",
-  encode(message: FeeToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
-    if (!message.poolID.isZero()) {
+    if (message.poolID !== BigInt(0)) {
       writer.uint32(16).uint64(message.poolID);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): FeeToken {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): FeeToken {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeToken();
     while (reader.pos < end) {
@@ -68,7 +68,7 @@ export const FeeToken = {
           message.denom = reader.string();
           break;
         case 2:
-          message.poolID = (reader.uint64() as Long);
+          message.poolID = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -80,19 +80,19 @@ export const FeeToken = {
   fromJSON(object: any): FeeToken {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
     };
   },
   toJSON(message: FeeToken): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
+    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: FeeTokenSDKType): FeeToken {
@@ -110,7 +110,7 @@ export const FeeToken = {
   fromAmino(object: FeeTokenAmino): FeeToken {
     return {
       denom: object.denom,
-      poolID: Long.fromString(object.poolID)
+      poolID: BigInt(object.poolID)
     };
   },
   toAmino(message: FeeToken): FeeTokenAmino {

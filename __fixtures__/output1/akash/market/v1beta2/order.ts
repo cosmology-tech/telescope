@@ -103,6 +103,7 @@ function createBaseOrderID(): OrderID {
   };
 }
 export const OrderID = {
+  typeUrl: "/akash.market.v1beta2.OrderID",
   encode(message: OrderID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -183,6 +184,43 @@ export const OrderID = {
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
+  },
+  fromAmino(object: OrderIDAmino): OrderID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq
+    };
+  },
+  toAmino(message: OrderID): OrderIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    return obj;
+  },
+  fromAminoMsg(object: OrderIDAminoMsg): OrderID {
+    return OrderID.fromAmino(object.value);
+  },
+  toAminoMsg(message: OrderID): OrderIDAminoMsg {
+    return {
+      type: "akash/market/v1beta2/order-i-d",
+      value: OrderID.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OrderIDProtoMsg): OrderID {
+    return OrderID.decode(message.value);
+  },
+  toProto(message: OrderID): Uint8Array {
+    return OrderID.encode(message).finish();
+  },
+  toProtoMsg(message: OrderID): OrderIDProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.OrderID",
+      value: OrderID.encode(message).finish()
+    };
   }
 };
 function createBaseOrder(): Order {
@@ -194,6 +232,7 @@ function createBaseOrder(): Order {
   };
 }
 export const Order = {
+  typeUrl: "/akash.market.v1beta2.Order",
   encode(message: Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
@@ -274,6 +313,43 @@ export const Order = {
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+  fromAmino(object: OrderAmino): Order {
+    return {
+      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+  toAmino(message: Order): OrderAmino {
+    const obj: any = {};
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
+    obj.state = message.state;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: OrderAminoMsg): Order {
+    return Order.fromAmino(object.value);
+  },
+  toAminoMsg(message: Order): OrderAminoMsg {
+    return {
+      type: "akash/market/v1beta2/order",
+      value: Order.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OrderProtoMsg): Order {
+    return Order.decode(message.value);
+  },
+  toProto(message: Order): Uint8Array {
+    return Order.encode(message).finish();
+  },
+  toProtoMsg(message: Order): OrderProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Order",
+      value: Order.encode(message).finish()
+    };
   }
 };
 function createBaseOrderFilters(): OrderFilters {
@@ -286,6 +362,7 @@ function createBaseOrderFilters(): OrderFilters {
   };
 }
 export const OrderFilters = {
+  typeUrl: "/akash.market.v1beta2.OrderFilters",
   encode(message: OrderFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -377,5 +454,44 @@ export const OrderFilters = {
     obj.oseq = message.oseq;
     obj.state = message.state;
     return obj;
+  },
+  fromAmino(object: OrderFiltersAmino): OrderFilters {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      state: object.state
+    };
+  },
+  toAmino(message: OrderFilters): OrderFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {
+    return OrderFilters.fromAmino(object.value);
+  },
+  toAminoMsg(message: OrderFilters): OrderFiltersAminoMsg {
+    return {
+      type: "akash/market/v1beta2/order-filters",
+      value: OrderFilters.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
+    return OrderFilters.decode(message.value);
+  },
+  toProto(message: OrderFilters): Uint8Array {
+    return OrderFilters.encode(message).finish();
+  },
+  toProtoMsg(message: OrderFilters): OrderFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.OrderFilters",
+      value: OrderFilters.encode(message).finish()
+    };
   }
 };

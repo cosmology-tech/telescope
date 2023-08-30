@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -55,6 +55,7 @@ function createBaseEndpoint(): Endpoint {
   };
 }
 export const Endpoint = {
+  typeUrl: "/akash.base.v1beta2.Endpoint",
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -96,10 +97,37 @@ export const Endpoint = {
     message.sequenceNumber !== undefined && (obj.sequenceNumber = Math.round(message.sequenceNumber));
     return obj;
   },
-  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
+  fromPartial(object: Partial<Endpoint>): Endpoint {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     message.sequenceNumber = object.sequenceNumber ?? 0;
     return message;
+  },
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequenceNumber: object.sequence_number
+    };
+  },
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    obj.sequence_number = message.sequenceNumber;
+    return obj;
+  },
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 };

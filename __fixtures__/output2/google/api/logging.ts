@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
@@ -75,6 +75,7 @@ function createBaseLogging(): Logging {
   };
 }
 export const Logging = {
+  typeUrl: "/google.api.Logging",
   encode(message: Logging, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.producerDestinations) {
       Logging_LoggingDestination.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -124,11 +125,46 @@ export const Logging = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Logging>): Logging {
+  fromPartial(object: Partial<Logging>): Logging {
     const message = createBaseLogging();
     message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: LoggingAmino): Logging {
+    return {
+      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Logging): LoggingAmino {
+    const obj: any = {};
+    if (message.producerDestinations) {
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+    } else {
+      obj.producer_destinations = [];
+    }
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: LoggingAminoMsg): Logging {
+    return Logging.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LoggingProtoMsg): Logging {
+    return Logging.decode(message.value);
+  },
+  toProto(message: Logging): Uint8Array {
+    return Logging.encode(message).finish();
+  },
+  toProtoMsg(message: Logging): LoggingProtoMsg {
+    return {
+      typeUrl: "/google.api.Logging",
+      value: Logging.encode(message).finish()
+    };
   }
 };
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
@@ -138,6 +174,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
   };
 }
 export const Logging_LoggingDestination = {
+  typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(26).string(message.monitoredResource);
@@ -183,10 +220,41 @@ export const Logging_LoggingDestination = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
+  fromPartial(object: Partial<Logging_LoggingDestination>): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.logs = object.logs?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
+    return {
+      monitoredResource: object.monitored_resource,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource;
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e);
+    } else {
+      obj.logs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
+    return Logging_LoggingDestination.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
+    return Logging_LoggingDestination.decode(message.value);
+  },
+  toProto(message: Logging_LoggingDestination): Uint8Array {
+    return Logging_LoggingDestination.encode(message).finish();
+  },
+  toProtoMsg(message: Logging_LoggingDestination): Logging_LoggingDestinationProtoMsg {
+    return {
+      typeUrl: "/google.api.LoggingDestination",
+      value: Logging_LoggingDestination.encode(message).finish()
+    };
   }
 };

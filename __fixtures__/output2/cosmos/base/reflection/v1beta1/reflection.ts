@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Rpc } from "../../../../helpers";
+import { isSet, Rpc } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
@@ -29,6 +29,7 @@ function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
 }
 export const ListAllInterfacesRequest = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest",
   encode(_: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -53,9 +54,37 @@ export const ListAllInterfacesRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
+  fromPartial(_: Partial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
+  },
+  fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
+    return {};
+  },
+  toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ListAllInterfacesRequestAminoMsg): ListAllInterfacesRequest {
+    return ListAllInterfacesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ListAllInterfacesRequest): ListAllInterfacesRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/ListAllInterfacesRequest",
+      value: ListAllInterfacesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ListAllInterfacesRequestProtoMsg): ListAllInterfacesRequest {
+    return ListAllInterfacesRequest.decode(message.value);
+  },
+  toProto(message: ListAllInterfacesRequest): Uint8Array {
+    return ListAllInterfacesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListAllInterfacesRequest): ListAllInterfacesRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest",
+      value: ListAllInterfacesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
@@ -64,6 +93,7 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
   };
 }
 export const ListAllInterfacesResponse = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse",
   encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
@@ -101,10 +131,45 @@ export const ListAllInterfacesResponse = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
+  fromPartial(object: Partial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
+    return {
+      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
+    const obj: any = {};
+    if (message.interfaceNames) {
+      obj.interface_names = message.interfaceNames.map(e => e);
+    } else {
+      obj.interface_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListAllInterfacesResponseAminoMsg): ListAllInterfacesResponse {
+    return ListAllInterfacesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ListAllInterfacesResponse): ListAllInterfacesResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/ListAllInterfacesResponse",
+      value: ListAllInterfacesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ListAllInterfacesResponseProtoMsg): ListAllInterfacesResponse {
+    return ListAllInterfacesResponse.decode(message.value);
+  },
+  toProto(message: ListAllInterfacesResponse): Uint8Array {
+    return ListAllInterfacesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListAllInterfacesResponse): ListAllInterfacesResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse",
+      value: ListAllInterfacesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseListImplementationsRequest(): ListImplementationsRequest {
@@ -113,6 +178,7 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
   };
 }
 export const ListImplementationsRequest = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
   encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
@@ -146,10 +212,41 @@ export const ListImplementationsRequest = {
     message.interfaceName !== undefined && (obj.interfaceName = message.interfaceName);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
+  fromPartial(object: Partial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
+  },
+  fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
+    return {
+      interfaceName: object.interface_name
+    };
+  },
+  toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
+    const obj: any = {};
+    obj.interface_name = message.interfaceName;
+    return obj;
+  },
+  fromAminoMsg(object: ListImplementationsRequestAminoMsg): ListImplementationsRequest {
+    return ListImplementationsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ListImplementationsRequest): ListImplementationsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/ListImplementationsRequest",
+      value: ListImplementationsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ListImplementationsRequestProtoMsg): ListImplementationsRequest {
+    return ListImplementationsRequest.decode(message.value);
+  },
+  toProto(message: ListImplementationsRequest): Uint8Array {
+    return ListImplementationsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListImplementationsRequest): ListImplementationsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
+      value: ListImplementationsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListImplementationsResponse(): ListImplementationsResponse {
@@ -158,6 +255,7 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
   };
 }
 export const ListImplementationsResponse = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse",
   encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);
@@ -195,10 +293,45 @@ export const ListImplementationsResponse = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
+  fromPartial(object: Partial<ListImplementationsResponse>): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
+    return {
+      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
+    const obj: any = {};
+    if (message.implementationMessageNames) {
+      obj.implementation_message_names = message.implementationMessageNames.map(e => e);
+    } else {
+      obj.implementation_message_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListImplementationsResponseAminoMsg): ListImplementationsResponse {
+    return ListImplementationsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ListImplementationsResponse): ListImplementationsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/ListImplementationsResponse",
+      value: ListImplementationsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ListImplementationsResponseProtoMsg): ListImplementationsResponse {
+    return ListImplementationsResponse.decode(message.value);
+  },
+  toProto(message: ListImplementationsResponse): Uint8Array {
+    return ListImplementationsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListImplementationsResponse): ListImplementationsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse",
+      value: ListImplementationsResponse.encode(message).finish()
+    };
   }
 };
 /** ReflectionService defines a service for interface reflection. */

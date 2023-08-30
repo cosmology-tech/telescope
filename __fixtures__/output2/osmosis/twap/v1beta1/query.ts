@@ -2,8 +2,9 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Params } from "./genesis";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
   poolId: Long;
@@ -38,6 +39,7 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   };
 }
 export const ArithmeticTwapRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
   encode(message: ArithmeticTwapRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -103,7 +105,7 @@ export const ArithmeticTwapRequest = {
     message.endTime !== undefined && (obj.endTime = fromTimestamp(message.endTime).toISOString());
     return obj;
   },
-  fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
+  fromPartial(object: Partial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.baseAsset = object.baseAsset ?? "";
@@ -111,6 +113,45 @@ export const ArithmeticTwapRequest = {
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Timestamp.fromPartial(object.endTime) : undefined;
     return message;
+  },
+  fromAmino(object: ArithmeticTwapRequestAmino): ArithmeticTwapRequest {
+    return {
+      poolId: Long.fromString(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object.start_time,
+      endTime: object?.end_time
+    };
+  },
+  toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
+    return ArithmeticTwapRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-request",
+      value: ArithmeticTwapRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg): ArithmeticTwapRequest {
+    return ArithmeticTwapRequest.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapRequest): Uint8Array {
+    return ArithmeticTwapRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
+      value: ArithmeticTwapRequest.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
@@ -119,9 +160,10 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
   };
 }
 export const ArithmeticTwapResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
   encode(message: ArithmeticTwapResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(message.arithmeticTwap);
+      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
     return writer;
   },
@@ -133,7 +175,7 @@ export const ArithmeticTwapResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = reader.string();
+          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -152,10 +194,41 @@ export const ArithmeticTwapResponse = {
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
   },
-  fromPartial(object: DeepPartial<ArithmeticTwapResponse>): ArithmeticTwapResponse {
+  fromPartial(object: Partial<ArithmeticTwapResponse>): ArithmeticTwapResponse {
     const message = createBaseArithmeticTwapResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
+  },
+  fromAmino(object: ArithmeticTwapResponseAmino): ArithmeticTwapResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+  toAmino(message: ArithmeticTwapResponse): ArithmeticTwapResponseAmino {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapResponseAminoMsg): ArithmeticTwapResponse {
+    return ArithmeticTwapResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-response",
+      value: ArithmeticTwapResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg): ArithmeticTwapResponse {
+    return ArithmeticTwapResponse.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapResponse): Uint8Array {
+    return ArithmeticTwapResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
+      value: ArithmeticTwapResponse.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
@@ -167,6 +240,7 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
   };
 }
 export const ArithmeticTwapToNowRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
   encode(message: ArithmeticTwapToNowRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -224,13 +298,50 @@ export const ArithmeticTwapToNowRequest = {
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
     return obj;
   },
-  fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
+  fromPartial(object: Partial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
     const message = createBaseArithmeticTwapToNowRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.baseAsset = object.baseAsset ?? "";
     message.quoteAsset = object.quoteAsset ?? "";
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     return message;
+  },
+  fromAmino(object: ArithmeticTwapToNowRequestAmino): ArithmeticTwapToNowRequest {
+    return {
+      poolId: Long.fromString(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object.start_time
+    };
+  },
+  toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
+    return ArithmeticTwapToNowRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-to-now-request",
+      value: ArithmeticTwapToNowRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg): ArithmeticTwapToNowRequest {
+    return ArithmeticTwapToNowRequest.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapToNowRequest): Uint8Array {
+    return ArithmeticTwapToNowRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
+      value: ArithmeticTwapToNowRequest.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
@@ -239,9 +350,10 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
   };
 }
 export const ArithmeticTwapToNowResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
   encode(message: ArithmeticTwapToNowResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
-      writer.uint32(10).string(message.arithmeticTwap);
+      writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
     return writer;
   },
@@ -253,7 +365,7 @@ export const ArithmeticTwapToNowResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.arithmeticTwap = reader.string();
+          message.arithmeticTwap = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -272,16 +384,48 @@ export const ArithmeticTwapToNowResponse = {
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
   },
-  fromPartial(object: DeepPartial<ArithmeticTwapToNowResponse>): ArithmeticTwapToNowResponse {
+  fromPartial(object: Partial<ArithmeticTwapToNowResponse>): ArithmeticTwapToNowResponse {
     const message = createBaseArithmeticTwapToNowResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
     return message;
+  },
+  fromAmino(object: ArithmeticTwapToNowResponseAmino): ArithmeticTwapToNowResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+  toAmino(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAmino {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapToNowResponseAminoMsg): ArithmeticTwapToNowResponse {
+    return ArithmeticTwapToNowResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-to-now-response",
+      value: ArithmeticTwapToNowResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg): ArithmeticTwapToNowResponse {
+    return ArithmeticTwapToNowResponse.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapToNowResponse): Uint8Array {
+    return ArithmeticTwapToNowResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
+      value: ArithmeticTwapToNowResponse.encode(message).finish()
+    };
   }
 };
 function createBaseParamsRequest(): ParamsRequest {
   return {};
 }
 export const ParamsRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
   encode(_: ParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -306,9 +450,37 @@ export const ParamsRequest = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<ParamsRequest>): ParamsRequest {
+  fromPartial(_: Partial<ParamsRequest>): ParamsRequest {
     const message = createBaseParamsRequest();
     return message;
+  },
+  fromAmino(_: ParamsRequestAmino): ParamsRequest {
+    return {};
+  },
+  toAmino(_: ParamsRequest): ParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ParamsRequestAminoMsg): ParamsRequest {
+    return ParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ParamsRequest): ParamsRequestAminoMsg {
+    return {
+      type: "osmosis/twap/params-request",
+      value: ParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsRequestProtoMsg): ParamsRequest {
+    return ParamsRequest.decode(message.value);
+  },
+  toProto(message: ParamsRequest): Uint8Array {
+    return ParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ParamsRequest): ParamsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
+      value: ParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseParamsResponse(): ParamsResponse {
@@ -317,6 +489,7 @@ function createBaseParamsResponse(): ParamsResponse {
   };
 }
 export const ParamsResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
   encode(message: ParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -350,10 +523,41 @@ export const ParamsResponse = {
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {
+  fromPartial(object: Partial<ParamsResponse>): ParamsResponse {
     const message = createBaseParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+  fromAmino(object: ParamsResponseAmino): ParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: ParamsResponse): ParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsResponseAminoMsg): ParamsResponse {
+    return ParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ParamsResponse): ParamsResponseAminoMsg {
+    return {
+      type: "osmosis/twap/params-response",
+      value: ParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsResponseProtoMsg): ParamsResponse {
+    return ParamsResponse.decode(message.value);
+  },
+  toProto(message: ParamsResponse): Uint8Array {
+    return ParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ParamsResponse): ParamsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
+      value: ParamsResponse.encode(message).finish()
+    };
   }
 };
 export interface Query {

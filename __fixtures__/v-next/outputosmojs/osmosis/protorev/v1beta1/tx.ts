@@ -141,6 +141,7 @@ function createBaseMsgSetHotRoutes(): MsgSetHotRoutes {
   };
 }
 export const MsgSetHotRoutes = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutes",
   encode(message: MsgSetHotRoutes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -213,12 +214,50 @@ export const MsgSetHotRoutes = {
       obj.hot_routes = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgSetHotRoutesAmino): MsgSetHotRoutes {
+    return {
+      admin: object.admin,
+      hotRoutes: Array.isArray(object?.hot_routes) ? object.hot_routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgSetHotRoutes): MsgSetHotRoutesAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    if (message.hotRoutes) {
+      obj.hot_routes = message.hotRoutes.map(e => e ? TokenPairArbRoutes.toAmino(e) : undefined);
+    } else {
+      obj.hot_routes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetHotRoutesAminoMsg): MsgSetHotRoutes {
+    return MsgSetHotRoutes.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetHotRoutes): MsgSetHotRoutesAminoMsg {
+    return {
+      type: "osmosis/MsgSetHotRoutes",
+      value: MsgSetHotRoutes.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetHotRoutesProtoMsg): MsgSetHotRoutes {
+    return MsgSetHotRoutes.decode(message.value);
+  },
+  toProto(message: MsgSetHotRoutes): Uint8Array {
+    return MsgSetHotRoutes.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetHotRoutes): MsgSetHotRoutesProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutes",
+      value: MsgSetHotRoutes.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetHotRoutesResponse(): MsgSetHotRoutesResponse {
   return {};
 }
 export const MsgSetHotRoutesResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutesResponse",
   encode(_: MsgSetHotRoutesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -256,6 +295,34 @@ export const MsgSetHotRoutesResponse = {
   toSDK(_: MsgSetHotRoutesResponse): MsgSetHotRoutesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetHotRoutesResponseAmino): MsgSetHotRoutesResponse {
+    return {};
+  },
+  toAmino(_: MsgSetHotRoutesResponse): MsgSetHotRoutesResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetHotRoutesResponseAminoMsg): MsgSetHotRoutesResponse {
+    return MsgSetHotRoutesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetHotRoutesResponse): MsgSetHotRoutesResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-hot-routes-response",
+      value: MsgSetHotRoutesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetHotRoutesResponseProtoMsg): MsgSetHotRoutesResponse {
+    return MsgSetHotRoutesResponse.decode(message.value);
+  },
+  toProto(message: MsgSetHotRoutesResponse): Uint8Array {
+    return MsgSetHotRoutesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetHotRoutesResponse): MsgSetHotRoutesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetHotRoutesResponse",
+      value: MsgSetHotRoutesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetDeveloperAccount(): MsgSetDeveloperAccount {
@@ -265,6 +332,7 @@ function createBaseMsgSetDeveloperAccount(): MsgSetDeveloperAccount {
   };
 }
 export const MsgSetDeveloperAccount = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccount",
   encode(message: MsgSetDeveloperAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -329,12 +397,46 @@ export const MsgSetDeveloperAccount = {
     obj.admin = message.admin;
     obj.developer_account = message.developerAccount;
     return obj;
+  },
+  fromAmino(object: MsgSetDeveloperAccountAmino): MsgSetDeveloperAccount {
+    return {
+      admin: object.admin,
+      developerAccount: object.developer_account
+    };
+  },
+  toAmino(message: MsgSetDeveloperAccount): MsgSetDeveloperAccountAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.developer_account = message.developerAccount;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetDeveloperAccountAminoMsg): MsgSetDeveloperAccount {
+    return MsgSetDeveloperAccount.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetDeveloperAccount): MsgSetDeveloperAccountAminoMsg {
+    return {
+      type: "osmosis/MsgSetDeveloperAccount",
+      value: MsgSetDeveloperAccount.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetDeveloperAccountProtoMsg): MsgSetDeveloperAccount {
+    return MsgSetDeveloperAccount.decode(message.value);
+  },
+  toProto(message: MsgSetDeveloperAccount): Uint8Array {
+    return MsgSetDeveloperAccount.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetDeveloperAccount): MsgSetDeveloperAccountProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccount",
+      value: MsgSetDeveloperAccount.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetDeveloperAccountResponse(): MsgSetDeveloperAccountResponse {
   return {};
 }
 export const MsgSetDeveloperAccountResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccountResponse",
   encode(_: MsgSetDeveloperAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -372,6 +474,34 @@ export const MsgSetDeveloperAccountResponse = {
   toSDK(_: MsgSetDeveloperAccountResponse): MsgSetDeveloperAccountResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetDeveloperAccountResponseAmino): MsgSetDeveloperAccountResponse {
+    return {};
+  },
+  toAmino(_: MsgSetDeveloperAccountResponse): MsgSetDeveloperAccountResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetDeveloperAccountResponseAminoMsg): MsgSetDeveloperAccountResponse {
+    return MsgSetDeveloperAccountResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetDeveloperAccountResponse): MsgSetDeveloperAccountResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-developer-account-response",
+      value: MsgSetDeveloperAccountResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetDeveloperAccountResponseProtoMsg): MsgSetDeveloperAccountResponse {
+    return MsgSetDeveloperAccountResponse.decode(message.value);
+  },
+  toProto(message: MsgSetDeveloperAccountResponse): Uint8Array {
+    return MsgSetDeveloperAccountResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetDeveloperAccountResponse): MsgSetDeveloperAccountResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetDeveloperAccountResponse",
+      value: MsgSetDeveloperAccountResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetPoolWeights(): MsgSetPoolWeights {
@@ -381,6 +511,7 @@ function createBaseMsgSetPoolWeights(): MsgSetPoolWeights {
   };
 }
 export const MsgSetPoolWeights = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeights",
   encode(message: MsgSetPoolWeights, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -445,12 +576,46 @@ export const MsgSetPoolWeights = {
     obj.admin = message.admin;
     message.poolWeights !== undefined && (obj.pool_weights = message.poolWeights ? PoolWeights.toSDK(message.poolWeights) : undefined);
     return obj;
+  },
+  fromAmino(object: MsgSetPoolWeightsAmino): MsgSetPoolWeights {
+    return {
+      admin: object.admin,
+      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined
+    };
+  },
+  toAmino(message: MsgSetPoolWeights): MsgSetPoolWeightsAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetPoolWeightsAminoMsg): MsgSetPoolWeights {
+    return MsgSetPoolWeights.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetPoolWeights): MsgSetPoolWeightsAminoMsg {
+    return {
+      type: "osmosis/protorev/set-pool-weights",
+      value: MsgSetPoolWeights.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetPoolWeightsProtoMsg): MsgSetPoolWeights {
+    return MsgSetPoolWeights.decode(message.value);
+  },
+  toProto(message: MsgSetPoolWeights): Uint8Array {
+    return MsgSetPoolWeights.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetPoolWeights): MsgSetPoolWeightsProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeights",
+      value: MsgSetPoolWeights.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetPoolWeightsResponse(): MsgSetPoolWeightsResponse {
   return {};
 }
 export const MsgSetPoolWeightsResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeightsResponse",
   encode(_: MsgSetPoolWeightsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -488,6 +653,34 @@ export const MsgSetPoolWeightsResponse = {
   toSDK(_: MsgSetPoolWeightsResponse): MsgSetPoolWeightsResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetPoolWeightsResponseAmino): MsgSetPoolWeightsResponse {
+    return {};
+  },
+  toAmino(_: MsgSetPoolWeightsResponse): MsgSetPoolWeightsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetPoolWeightsResponseAminoMsg): MsgSetPoolWeightsResponse {
+    return MsgSetPoolWeightsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetPoolWeightsResponse): MsgSetPoolWeightsResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-pool-weights-response",
+      value: MsgSetPoolWeightsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetPoolWeightsResponseProtoMsg): MsgSetPoolWeightsResponse {
+    return MsgSetPoolWeightsResponse.decode(message.value);
+  },
+  toProto(message: MsgSetPoolWeightsResponse): Uint8Array {
+    return MsgSetPoolWeightsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetPoolWeightsResponse): MsgSetPoolWeightsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetPoolWeightsResponse",
+      value: MsgSetPoolWeightsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetMaxPoolPointsPerTx(): MsgSetMaxPoolPointsPerTx {
@@ -497,6 +690,7 @@ function createBaseMsgSetMaxPoolPointsPerTx(): MsgSetMaxPoolPointsPerTx {
   };
 }
 export const MsgSetMaxPoolPointsPerTx = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTx",
   encode(message: MsgSetMaxPoolPointsPerTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -561,12 +755,46 @@ export const MsgSetMaxPoolPointsPerTx = {
     obj.admin = message.admin;
     obj.max_pool_points_per_tx = message.maxPoolPointsPerTx;
     return obj;
+  },
+  fromAmino(object: MsgSetMaxPoolPointsPerTxAmino): MsgSetMaxPoolPointsPerTx {
+    return {
+      admin: object.admin,
+      maxPoolPointsPerTx: BigInt(object.max_pool_points_per_tx)
+    };
+  },
+  toAmino(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetMaxPoolPointsPerTxAminoMsg): MsgSetMaxPoolPointsPerTx {
+    return MsgSetMaxPoolPointsPerTx.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAminoMsg {
+    return {
+      type: "osmosis/protorev/set-max-pool-points-per-tx",
+      value: MsgSetMaxPoolPointsPerTx.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetMaxPoolPointsPerTxProtoMsg): MsgSetMaxPoolPointsPerTx {
+    return MsgSetMaxPoolPointsPerTx.decode(message.value);
+  },
+  toProto(message: MsgSetMaxPoolPointsPerTx): Uint8Array {
+    return MsgSetMaxPoolPointsPerTx.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTx",
+      value: MsgSetMaxPoolPointsPerTx.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetMaxPoolPointsPerTxResponse(): MsgSetMaxPoolPointsPerTxResponse {
   return {};
 }
 export const MsgSetMaxPoolPointsPerTxResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTxResponse",
   encode(_: MsgSetMaxPoolPointsPerTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -604,6 +832,34 @@ export const MsgSetMaxPoolPointsPerTxResponse = {
   toSDK(_: MsgSetMaxPoolPointsPerTxResponse): MsgSetMaxPoolPointsPerTxResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetMaxPoolPointsPerTxResponseAmino): MsgSetMaxPoolPointsPerTxResponse {
+    return {};
+  },
+  toAmino(_: MsgSetMaxPoolPointsPerTxResponse): MsgSetMaxPoolPointsPerTxResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetMaxPoolPointsPerTxResponseAminoMsg): MsgSetMaxPoolPointsPerTxResponse {
+    return MsgSetMaxPoolPointsPerTxResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetMaxPoolPointsPerTxResponse): MsgSetMaxPoolPointsPerTxResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-max-pool-points-per-tx-response",
+      value: MsgSetMaxPoolPointsPerTxResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetMaxPoolPointsPerTxResponseProtoMsg): MsgSetMaxPoolPointsPerTxResponse {
+    return MsgSetMaxPoolPointsPerTxResponse.decode(message.value);
+  },
+  toProto(message: MsgSetMaxPoolPointsPerTxResponse): Uint8Array {
+    return MsgSetMaxPoolPointsPerTxResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetMaxPoolPointsPerTxResponse): MsgSetMaxPoolPointsPerTxResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerTxResponse",
+      value: MsgSetMaxPoolPointsPerTxResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetMaxPoolPointsPerBlock(): MsgSetMaxPoolPointsPerBlock {
@@ -613,6 +869,7 @@ function createBaseMsgSetMaxPoolPointsPerBlock(): MsgSetMaxPoolPointsPerBlock {
   };
 }
 export const MsgSetMaxPoolPointsPerBlock = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlock",
   encode(message: MsgSetMaxPoolPointsPerBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -677,12 +934,46 @@ export const MsgSetMaxPoolPointsPerBlock = {
     obj.admin = message.admin;
     obj.max_pool_points_per_block = message.maxPoolPointsPerBlock;
     return obj;
+  },
+  fromAmino(object: MsgSetMaxPoolPointsPerBlockAmino): MsgSetMaxPoolPointsPerBlock {
+    return {
+      admin: object.admin,
+      maxPoolPointsPerBlock: BigInt(object.max_pool_points_per_block)
+    };
+  },
+  toAmino(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetMaxPoolPointsPerBlockAminoMsg): MsgSetMaxPoolPointsPerBlock {
+    return MsgSetMaxPoolPointsPerBlock.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAminoMsg {
+    return {
+      type: "osmosis/protorev/set-max-pool-points-per-block",
+      value: MsgSetMaxPoolPointsPerBlock.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetMaxPoolPointsPerBlockProtoMsg): MsgSetMaxPoolPointsPerBlock {
+    return MsgSetMaxPoolPointsPerBlock.decode(message.value);
+  },
+  toProto(message: MsgSetMaxPoolPointsPerBlock): Uint8Array {
+    return MsgSetMaxPoolPointsPerBlock.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlock",
+      value: MsgSetMaxPoolPointsPerBlock.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetMaxPoolPointsPerBlockResponse(): MsgSetMaxPoolPointsPerBlockResponse {
   return {};
 }
 export const MsgSetMaxPoolPointsPerBlockResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlockResponse",
   encode(_: MsgSetMaxPoolPointsPerBlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -720,6 +1011,34 @@ export const MsgSetMaxPoolPointsPerBlockResponse = {
   toSDK(_: MsgSetMaxPoolPointsPerBlockResponse): MsgSetMaxPoolPointsPerBlockResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetMaxPoolPointsPerBlockResponseAmino): MsgSetMaxPoolPointsPerBlockResponse {
+    return {};
+  },
+  toAmino(_: MsgSetMaxPoolPointsPerBlockResponse): MsgSetMaxPoolPointsPerBlockResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetMaxPoolPointsPerBlockResponseAminoMsg): MsgSetMaxPoolPointsPerBlockResponse {
+    return MsgSetMaxPoolPointsPerBlockResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetMaxPoolPointsPerBlockResponse): MsgSetMaxPoolPointsPerBlockResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-max-pool-points-per-block-response",
+      value: MsgSetMaxPoolPointsPerBlockResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetMaxPoolPointsPerBlockResponseProtoMsg): MsgSetMaxPoolPointsPerBlockResponse {
+    return MsgSetMaxPoolPointsPerBlockResponse.decode(message.value);
+  },
+  toProto(message: MsgSetMaxPoolPointsPerBlockResponse): Uint8Array {
+    return MsgSetMaxPoolPointsPerBlockResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetMaxPoolPointsPerBlockResponse): MsgSetMaxPoolPointsPerBlockResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetMaxPoolPointsPerBlockResponse",
+      value: MsgSetMaxPoolPointsPerBlockResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetBaseDenoms(): MsgSetBaseDenoms {
@@ -729,6 +1048,7 @@ function createBaseMsgSetBaseDenoms(): MsgSetBaseDenoms {
   };
 }
 export const MsgSetBaseDenoms = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenoms",
   encode(message: MsgSetBaseDenoms, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -801,12 +1121,50 @@ export const MsgSetBaseDenoms = {
       obj.base_denoms = [];
     }
     return obj;
+  },
+  fromAmino(object: MsgSetBaseDenomsAmino): MsgSetBaseDenoms {
+    return {
+      admin: object.admin,
+      baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgSetBaseDenoms): MsgSetBaseDenomsAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    if (message.baseDenoms) {
+      obj.base_denoms = message.baseDenoms.map(e => e ? BaseDenom.toAmino(e) : undefined);
+    } else {
+      obj.base_denoms = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetBaseDenomsAminoMsg): MsgSetBaseDenoms {
+    return MsgSetBaseDenoms.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetBaseDenoms): MsgSetBaseDenomsAminoMsg {
+    return {
+      type: "osmosis/protorev/set-base-denoms",
+      value: MsgSetBaseDenoms.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetBaseDenomsProtoMsg): MsgSetBaseDenoms {
+    return MsgSetBaseDenoms.decode(message.value);
+  },
+  toProto(message: MsgSetBaseDenoms): Uint8Array {
+    return MsgSetBaseDenoms.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetBaseDenoms): MsgSetBaseDenomsProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenoms",
+      value: MsgSetBaseDenoms.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSetBaseDenomsResponse(): MsgSetBaseDenomsResponse {
   return {};
 }
 export const MsgSetBaseDenomsResponse = {
+  typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenomsResponse",
   encode(_: MsgSetBaseDenomsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -844,5 +1202,33 @@ export const MsgSetBaseDenomsResponse = {
   toSDK(_: MsgSetBaseDenomsResponse): MsgSetBaseDenomsResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: MsgSetBaseDenomsResponseAmino): MsgSetBaseDenomsResponse {
+    return {};
+  },
+  toAmino(_: MsgSetBaseDenomsResponse): MsgSetBaseDenomsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetBaseDenomsResponseAminoMsg): MsgSetBaseDenomsResponse {
+    return MsgSetBaseDenomsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetBaseDenomsResponse): MsgSetBaseDenomsResponseAminoMsg {
+    return {
+      type: "osmosis/protorev/set-base-denoms-response",
+      value: MsgSetBaseDenomsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgSetBaseDenomsResponseProtoMsg): MsgSetBaseDenomsResponse {
+    return MsgSetBaseDenomsResponse.decode(message.value);
+  },
+  toProto(message: MsgSetBaseDenomsResponse): Uint8Array {
+    return MsgSetBaseDenomsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetBaseDenomsResponse): MsgSetBaseDenomsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.MsgSetBaseDenomsResponse",
+      value: MsgSetBaseDenomsResponse.encode(message).finish()
+    };
   }
 };

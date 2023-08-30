@@ -5,7 +5,7 @@ import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../../../lo
 import { HttpRequest } from "./http_request";
 import { Any } from "../../../protobuf/any";
 import { Struct } from "../../../protobuf/struct";
-import { Long, isSet, DeepPartial, fromJsonTimestamp, isObject, fromTimestamp } from "../../../../helpers";
+import { Long, isSet, fromJsonTimestamp, isObject, fromTimestamp } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
@@ -171,11 +171,32 @@ export const LogEntry_LabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: DeepPartial<LogEntry_LabelsEntry>): LogEntry_LabelsEntry {
+  fromPartial(object: Partial<LogEntry_LabelsEntry>): LogEntry_LabelsEntry {
     const message = createBaseLogEntry_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.decode(message.value);
+  },
+  toProto(message: LogEntry_LabelsEntry): Uint8Array {
+    return LogEntry_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseLogEntry(): LogEntry {
@@ -195,6 +216,7 @@ function createBaseLogEntry(): LogEntry {
   };
 }
 export const LogEntry = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry",
   encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
@@ -332,7 +354,7 @@ export const LogEntry = {
     message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation ? LogEntrySourceLocation.toJSON(message.sourceLocation) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<LogEntry>): LogEntry {
+  fromPartial(object: Partial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.name = object.name ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
@@ -354,6 +376,63 @@ export const LogEntry = {
     message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
     return message;
+  },
+  fromAmino(object: LogEntryAmino): LogEntry {
+    return {
+      name: object.name,
+      timestamp: object.timestamp,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
+      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
+      trace: object.trace,
+      insertId: object.insert_id,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
+      textPayload: object?.text_payload,
+      structPayload: object?.struct_payload ? Struct.fromAmino(object.struct_payload) : undefined,
+      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
+      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
+    };
+  },
+  toAmino(message: LogEntry): LogEntryAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.timestamp = message.timestamp;
+    obj.severity = message.severity;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.trace = message.trace;
+    obj.insert_id = message.insertId;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.text_payload = message.textPayload;
+    obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
+    return LogEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
+    return LogEntry.decode(message.value);
+  },
+  toProto(message: LogEntry): Uint8Array {
+    return LogEntry.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+      value: LogEntry.encode(message).finish()
+    };
   }
 };
 function createBaseLogEntryOperation(): LogEntryOperation {
@@ -365,6 +444,7 @@ function createBaseLogEntryOperation(): LogEntryOperation {
   };
 }
 export const LogEntryOperation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
   encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -422,13 +502,44 @@ export const LogEntryOperation = {
     message.last !== undefined && (obj.last = message.last);
     return obj;
   },
-  fromPartial(object: DeepPartial<LogEntryOperation>): LogEntryOperation {
+  fromPartial(object: Partial<LogEntryOperation>): LogEntryOperation {
     const message = createBaseLogEntryOperation();
     message.id = object.id ?? "";
     message.producer = object.producer ?? "";
     message.first = object.first ?? false;
     message.last = object.last ?? false;
     return message;
+  },
+  fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
+    return {
+      id: object.id,
+      producer: object.producer,
+      first: object.first,
+      last: object.last
+    };
+  },
+  toAmino(message: LogEntryOperation): LogEntryOperationAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
+    return LogEntryOperation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
+    return LogEntryOperation.decode(message.value);
+  },
+  toProto(message: LogEntryOperation): Uint8Array {
+    return LogEntryOperation.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntryOperation): LogEntryOperationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
+      value: LogEntryOperation.encode(message).finish()
+    };
   }
 };
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
@@ -439,6 +550,7 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   };
 }
 export const LogEntrySourceLocation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
@@ -488,11 +600,40 @@ export const LogEntrySourceLocation = {
     message.function !== undefined && (obj.function = message.function);
     return obj;
   },
-  fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
+  fromPartial(object: Partial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
     message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
     message.function = object.function ?? "";
     return message;
+  },
+  fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
+    return {
+      file: object.file,
+      line: Long.fromString(object.line),
+      function: object.function
+    };
+  },
+  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
+    const obj: any = {};
+    obj.file = message.file;
+    obj.line = message.line ? message.line.toString() : undefined;
+    obj.function = message.function;
+    return obj;
+  },
+  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.decode(message.value);
+  },
+  toProto(message: LogEntrySourceLocation): Uint8Array {
+    return LogEntrySourceLocation.encode(message).finish();
+  },
+  toProtoMsg(message: LogEntrySourceLocation): LogEntrySourceLocationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
+      value: LogEntrySourceLocation.encode(message).finish()
+    };
   }
 };

@@ -4,7 +4,7 @@ import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_st
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -359,6 +359,7 @@ function createBaseMetricDescriptor(): MetricDescriptor {
   };
 }
 export const MetricDescriptor = {
+  typeUrl: "/google.api.MetricDescriptor",
   encode(message: MetricDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -480,7 +481,7 @@ export const MetricDescriptor = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<MetricDescriptor>): MetricDescriptor {
+  fromPartial(object: Partial<MetricDescriptor>): MetricDescriptor {
     const message = createBaseMetricDescriptor();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -494,6 +495,59 @@ export const MetricDescriptor = {
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: MetricDescriptorAmino): MetricDescriptor {
+    return {
+      name: object.name,
+      type: object.type,
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
+      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
+      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
+      unit: object.unit,
+      description: object.description,
+      displayName: object.display_name,
+      metadata: object?.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata) : undefined,
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
+      monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: MetricDescriptor): MetricDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.type = message.type;
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+    obj.metric_kind = message.metricKind;
+    obj.value_type = message.valueType;
+    obj.unit = message.unit;
+    obj.description = message.description;
+    obj.display_name = message.displayName;
+    obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata) : undefined;
+    obj.launch_stage = message.launchStage;
+    if (message.monitoredResourceTypes) {
+      obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
+    } else {
+      obj.monitored_resource_types = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricDescriptorAminoMsg): MetricDescriptor {
+    return MetricDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricDescriptorProtoMsg): MetricDescriptor {
+    return MetricDescriptor.decode(message.value);
+  },
+  toProto(message: MetricDescriptor): Uint8Array {
+    return MetricDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: MetricDescriptor): MetricDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptor",
+      value: MetricDescriptor.encode(message).finish()
+    };
   }
 };
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
@@ -504,6 +558,7 @@ function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor
   };
 }
 export const MetricDescriptor_MetricDescriptorMetadata = {
+  typeUrl: "/google.api.MetricDescriptorMetadata",
   encode(message: MetricDescriptor_MetricDescriptorMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.launchStage !== 0) {
       writer.uint32(8).int32(message.launchStage);
@@ -553,12 +608,41 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
+  fromPartial(object: Partial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
     message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : undefined;
     message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
+  },
+  fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
+    return {
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
+      samplePeriod: object?.sample_period ? Duration.fromAmino(object.sample_period) : undefined,
+      ingestDelay: object?.ingest_delay ? Duration.fromAmino(object.ingest_delay) : undefined
+    };
+  },
+  toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
+    const obj: any = {};
+    obj.launch_stage = message.launchStage;
+    obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
+    obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MetricDescriptor_MetricDescriptorMetadataAminoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricDescriptor_MetricDescriptorMetadataProtoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.decode(message.value);
+  },
+  toProto(message: MetricDescriptor_MetricDescriptorMetadata): Uint8Array {
+    return MetricDescriptor_MetricDescriptorMetadata.encode(message).finish();
+  },
+  toProtoMsg(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptorMetadata",
+      value: MetricDescriptor_MetricDescriptorMetadata.encode(message).finish()
+    };
   }
 };
 function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
@@ -609,11 +693,32 @@ export const Metric_LabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: DeepPartial<Metric_LabelsEntry>): Metric_LabelsEntry {
+  fromPartial(object: Partial<Metric_LabelsEntry>): Metric_LabelsEntry {
     const message = createBaseMetric_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: Metric_LabelsEntryAmino): Metric_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Metric_LabelsEntryProtoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.decode(message.value);
+  },
+  toProto(message: Metric_LabelsEntry): Uint8Array {
+    return Metric_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseMetric(): Metric {
@@ -623,6 +728,7 @@ function createBaseMetric(): Metric {
   };
 }
 export const Metric = {
+  typeUrl: "/google.api.Metric",
   encode(message: Metric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(26).string(message.type);
@@ -680,7 +786,7 @@ export const Metric = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Metric>): Metric {
+  fromPartial(object: Partial<Metric>): Metric {
     const message = createBaseMetric();
     message.type = object.type ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -692,5 +798,42 @@ export const Metric = {
       return acc;
     }, {});
     return message;
+  },
+  fromAmino(object: MetricAmino): Metric {
+    return {
+      type: object.type,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: Metric): MetricAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricAminoMsg): Metric {
+    return Metric.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricProtoMsg): Metric {
+    return Metric.decode(message.value);
+  },
+  toProto(message: Metric): Uint8Array {
+    return Metric.encode(message).finish();
+  },
+  toProtoMsg(message: Metric): MetricProtoMsg {
+    return {
+      typeUrl: "/google.api.Metric",
+      value: Metric.encode(message).finish()
+    };
   }
 };

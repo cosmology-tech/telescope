@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -12,18 +12,21 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposal {
+  $typeUrl?: string;
   title: string;
   description: string;
   feetoken: FeeToken;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
+    $typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
     title: "",
     description: "",
     feetoken: FeeToken.fromPartial({})
   };
 }
 export const UpdateFeeTokenProposal = {
+  typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
   encode(message: UpdateFeeTokenProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -73,11 +76,46 @@ export const UpdateFeeTokenProposal = {
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
+  fromPartial(object: Partial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : undefined;
     return message;
+  },
+  fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
+    };
+  },
+  toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateFeeTokenProposalAminoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAminoMsg {
+    return {
+      type: "osmosis/txfees/update-fee-token-proposal",
+      value: UpdateFeeTokenProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.decode(message.value);
+  },
+  toProto(message: UpdateFeeTokenProposal): Uint8Array {
+    return UpdateFeeTokenProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
+      value: UpdateFeeTokenProposal.encode(message).finish()
+    };
   }
 };

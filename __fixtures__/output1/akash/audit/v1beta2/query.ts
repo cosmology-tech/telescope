@@ -68,6 +68,7 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   };
 }
 export const QueryProvidersResponse = {
+  typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
   encode(message: QueryProvidersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -134,6 +135,43 @@ export const QueryProvidersResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
+    return QueryProvidersResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProvidersResponse): QueryProvidersResponseAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-providers-response",
+      value: QueryProvidersResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
+    return QueryProvidersResponse.decode(message.value);
+  },
+  toProto(message: QueryProvidersResponse): Uint8Array {
+    return QueryProvidersResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProvidersResponse): QueryProvidersResponseProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
+      value: QueryProvidersResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryProviderRequest(): QueryProviderRequest {
@@ -143,6 +181,7 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
   };
 }
 export const QueryProviderRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
   encode(message: QueryProviderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
@@ -201,6 +240,39 @@ export const QueryProviderRequest = {
     obj.auditor = message.auditor;
     obj.owner = message.owner;
     return obj;
+  },
+  fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
+    return {
+      auditor: object.auditor,
+      owner: object.owner
+    };
+  },
+  toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
+    return QueryProviderRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderRequest): QueryProviderRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-request",
+      value: QueryProviderRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
+    return QueryProviderRequest.decode(message.value);
+  },
+  toProto(message: QueryProviderRequest): Uint8Array {
+    return QueryProviderRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProviderRequest): QueryProviderRequestProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
+      value: QueryProviderRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttributesRequest {
@@ -209,6 +281,7 @@ function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttrib
   };
 }
 export const QueryAllProvidersAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
   encode(message: QueryAllProvidersAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -256,6 +329,37 @@ export const QueryAllProvidersAttributesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAllProvidersAttributesRequestAminoMsg): QueryAllProvidersAttributesRequest {
+    return QueryAllProvidersAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-all-providers-attributes-request",
+      value: QueryAllProvidersAttributesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAllProvidersAttributesRequestProtoMsg): QueryAllProvidersAttributesRequest {
+    return QueryAllProvidersAttributesRequest.decode(message.value);
+  },
+  toProto(message: QueryAllProvidersAttributesRequest): Uint8Array {
+    return QueryAllProvidersAttributesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
+      value: QueryAllProvidersAttributesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequest {
@@ -265,6 +369,7 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
   };
 }
 export const QueryProviderAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
   encode(message: QueryProviderAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -323,6 +428,39 @@ export const QueryProviderAttributesRequest = {
     obj.owner = message.owner;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
+    return {
+      owner: object.owner,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProviderAttributesRequestAminoMsg): QueryProviderAttributesRequest {
+    return QueryProviderAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-attributes-request",
+      value: QueryProviderAttributesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryProviderAttributesRequestProtoMsg): QueryProviderAttributesRequest {
+    return QueryProviderAttributesRequest.decode(message.value);
+  },
+  toProto(message: QueryProviderAttributesRequest): Uint8Array {
+    return QueryProviderAttributesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
+      value: QueryProviderAttributesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
@@ -332,6 +470,7 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
   };
 }
 export const QueryProviderAuditorRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
   encode(message: QueryProviderAuditorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
@@ -390,6 +529,39 @@ export const QueryProviderAuditorRequest = {
     obj.auditor = message.auditor;
     obj.owner = message.owner;
     return obj;
+  },
+  fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
+    return {
+      auditor: object.auditor,
+      owner: object.owner
+    };
+  },
+  toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProviderAuditorRequestAminoMsg): QueryProviderAuditorRequest {
+    return QueryProviderAuditorRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-auditor-request",
+      value: QueryProviderAuditorRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryProviderAuditorRequestProtoMsg): QueryProviderAuditorRequest {
+    return QueryProviderAuditorRequest.decode(message.value);
+  },
+  toProto(message: QueryProviderAuditorRequest): Uint8Array {
+    return QueryProviderAuditorRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
+      value: QueryProviderAuditorRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesRequest {
@@ -399,6 +571,7 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
   };
 }
 export const QueryAuditorAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
   encode(message: QueryAuditorAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
@@ -457,5 +630,38 @@ export const QueryAuditorAttributesRequest = {
     obj.auditor = message.auditor;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
+    return {
+      auditor: object.auditor,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAuditorAttributesRequestAminoMsg): QueryAuditorAttributesRequest {
+    return QueryAuditorAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-auditor-attributes-request",
+      value: QueryAuditorAttributesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryAuditorAttributesRequestProtoMsg): QueryAuditorAttributesRequest {
+    return QueryAuditorAttributesRequest.decode(message.value);
+  },
+  toProto(message: QueryAuditorAttributesRequest): Uint8Array {
+    return QueryAuditorAttributesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
+      value: QueryAuditorAttributesRequest.encode(message).finish()
+    };
   }
 };

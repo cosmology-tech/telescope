@@ -60,6 +60,7 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
   };
 }
 export const ArithmeticTwapRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
   encode(message: ArithmeticTwapRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -160,6 +161,45 @@ export const ArithmeticTwapRequest = {
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     return obj;
+  },
+  fromAmino(object: ArithmeticTwapRequestAmino): ArithmeticTwapRequest {
+    return {
+      poolId: BigInt(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object.start_time,
+      endTime: object?.end_time
+    };
+  },
+  toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime;
+    obj.end_time = message.endTime;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
+    return ArithmeticTwapRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-request",
+      value: ArithmeticTwapRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg): ArithmeticTwapRequest {
+    return ArithmeticTwapRequest.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapRequest): Uint8Array {
+    return ArithmeticTwapRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
+      value: ArithmeticTwapRequest.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
@@ -168,6 +208,7 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
   };
 }
 export const ArithmeticTwapResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
   encode(message: ArithmeticTwapResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.arithmeticTwap !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
@@ -220,6 +261,37 @@ export const ArithmeticTwapResponse = {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
+  },
+  fromAmino(object: ArithmeticTwapResponseAmino): ArithmeticTwapResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+  toAmino(message: ArithmeticTwapResponse): ArithmeticTwapResponseAmino {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapResponseAminoMsg): ArithmeticTwapResponse {
+    return ArithmeticTwapResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-response",
+      value: ArithmeticTwapResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg): ArithmeticTwapResponse {
+    return ArithmeticTwapResponse.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapResponse): Uint8Array {
+    return ArithmeticTwapResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
+      value: ArithmeticTwapResponse.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
@@ -231,6 +303,7 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
   };
 }
 export const ArithmeticTwapToNowRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
   encode(message: ArithmeticTwapToNowRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
@@ -319,6 +392,43 @@ export const ArithmeticTwapToNowRequest = {
     obj.quote_asset = message.quoteAsset;
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     return obj;
+  },
+  fromAmino(object: ArithmeticTwapToNowRequestAmino): ArithmeticTwapToNowRequest {
+    return {
+      poolId: BigInt(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object.start_time
+    };
+  },
+  toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
+    return ArithmeticTwapToNowRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-to-now-request",
+      value: ArithmeticTwapToNowRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg): ArithmeticTwapToNowRequest {
+    return ArithmeticTwapToNowRequest.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapToNowRequest): Uint8Array {
+    return ArithmeticTwapToNowRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
+      value: ArithmeticTwapToNowRequest.encode(message).finish()
+    };
   }
 };
 function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
@@ -327,6 +437,7 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
   };
 }
 export const ArithmeticTwapToNowResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
   encode(message: ArithmeticTwapToNowResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.arithmeticTwap !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
@@ -379,12 +490,44 @@ export const ArithmeticTwapToNowResponse = {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
+  },
+  fromAmino(object: ArithmeticTwapToNowResponseAmino): ArithmeticTwapToNowResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+  toAmino(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAmino {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
+  },
+  fromAminoMsg(object: ArithmeticTwapToNowResponseAminoMsg): ArithmeticTwapToNowResponse {
+    return ArithmeticTwapToNowResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAminoMsg {
+    return {
+      type: "osmosis/twap/arithmetic-twap-to-now-response",
+      value: ArithmeticTwapToNowResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg): ArithmeticTwapToNowResponse {
+    return ArithmeticTwapToNowResponse.decode(message.value);
+  },
+  toProto(message: ArithmeticTwapToNowResponse): Uint8Array {
+    return ArithmeticTwapToNowResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
+      value: ArithmeticTwapToNowResponse.encode(message).finish()
+    };
   }
 };
 function createBaseParamsRequest(): ParamsRequest {
   return {};
 }
 export const ParamsRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
   encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -422,6 +565,34 @@ export const ParamsRequest = {
   toSDK(_: ParamsRequest): ParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: ParamsRequestAmino): ParamsRequest {
+    return {};
+  },
+  toAmino(_: ParamsRequest): ParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ParamsRequestAminoMsg): ParamsRequest {
+    return ParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: ParamsRequest): ParamsRequestAminoMsg {
+    return {
+      type: "osmosis/twap/params-request",
+      value: ParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsRequestProtoMsg): ParamsRequest {
+    return ParamsRequest.decode(message.value);
+  },
+  toProto(message: ParamsRequest): Uint8Array {
+    return ParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ParamsRequest): ParamsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
+      value: ParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseParamsResponse(): ParamsResponse {
@@ -430,6 +601,7 @@ function createBaseParamsResponse(): ParamsResponse {
   };
 }
 export const ParamsResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
   encode(message: ParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -482,5 +654,36 @@ export const ParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: ParamsResponseAmino): ParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: ParamsResponse): ParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsResponseAminoMsg): ParamsResponse {
+    return ParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: ParamsResponse): ParamsResponseAminoMsg {
+    return {
+      type: "osmosis/twap/params-response",
+      value: ParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsResponseProtoMsg): ParamsResponse {
+    return ParamsResponse.decode(message.value);
+  },
+  toProto(message: ParamsResponse): Uint8Array {
+    return ParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ParamsResponse): ParamsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
+      value: ParamsResponse.encode(message).finish()
+    };
   }
 };

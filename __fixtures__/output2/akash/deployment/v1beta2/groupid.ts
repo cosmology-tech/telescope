@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -17,6 +17,7 @@ function createBaseGroupID(): GroupID {
   };
 }
 export const GroupID = {
+  typeUrl: "/akash.deployment.v1beta2.GroupID",
   encode(message: GroupID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -66,11 +67,40 @@ export const GroupID = {
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
-  fromPartial(object: DeepPartial<GroupID>): GroupID {
+  fromPartial(object: Partial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     return message;
+  },
+  fromAmino(object: GroupIDAmino): GroupID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq
+    };
+  },
+  toAmino(message: GroupID): GroupIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    return obj;
+  },
+  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
+    return GroupID.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
+    return GroupID.decode(message.value);
+  },
+  toProto(message: GroupID): Uint8Array {
+    return GroupID.encode(message).finish();
+  },
+  toProtoMsg(message: GroupID): GroupIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupID",
+      value: GroupID.encode(message).finish()
+    };
   }
 };

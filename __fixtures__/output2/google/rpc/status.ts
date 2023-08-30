@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -36,6 +36,7 @@ function createBaseStatus(): Status {
   };
 }
 export const Status = {
+  typeUrl: "/google.rpc.Status",
   encode(message: Status, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
@@ -89,11 +90,44 @@ export const Status = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Status>): Status {
+  fromPartial(object: Partial<Status>): Status {
     const message = createBaseStatus();
     message.code = object.code ?? 0;
     message.message = object.message ?? "";
     message.details = object.details?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: StatusAmino): Status {
+    return {
+      code: object.code,
+      message: object.message,
+      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Status): StatusAmino {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.message = message.message;
+    if (message.details) {
+      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.details = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: StatusAminoMsg): Status {
+    return Status.fromAmino(object.value);
+  },
+  fromProtoMsg(message: StatusProtoMsg): Status {
+    return Status.decode(message.value);
+  },
+  toProto(message: Status): Uint8Array {
+    return Status.encode(message).finish();
+  },
+  toProtoMsg(message: Status): StatusProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Status",
+      value: Status.encode(message).finish()
+    };
   }
 };

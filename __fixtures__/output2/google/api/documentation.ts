@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -163,6 +163,7 @@ function createBaseDocumentation(): Documentation {
   };
 }
 export const Documentation = {
+  typeUrl: "/google.api.Documentation",
   encode(message: Documentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.summary !== "") {
       writer.uint32(10).string(message.summary);
@@ -244,7 +245,7 @@ export const Documentation = {
     message.overview !== undefined && (obj.overview = message.overview);
     return obj;
   },
-  fromPartial(object: DeepPartial<Documentation>): Documentation {
+  fromPartial(object: Partial<Documentation>): Documentation {
     const message = createBaseDocumentation();
     message.summary = object.summary ?? "";
     message.pages = object.pages?.map(e => Page.fromPartial(e)) || [];
@@ -253,6 +254,49 @@ export const Documentation = {
     message.serviceRootUrl = object.serviceRootUrl ?? "";
     message.overview = object.overview ?? "";
     return message;
+  },
+  fromAmino(object: DocumentationAmino): Documentation {
+    return {
+      summary: object.summary,
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
+      documentationRootUrl: object.documentation_root_url,
+      serviceRootUrl: object.service_root_url,
+      overview: object.overview
+    };
+  },
+  toAmino(message: Documentation): DocumentationAmino {
+    const obj: any = {};
+    obj.summary = message.summary;
+    if (message.pages) {
+      obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
+    } else {
+      obj.pages = [];
+    }
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    obj.documentation_root_url = message.documentationRootUrl;
+    obj.service_root_url = message.serviceRootUrl;
+    obj.overview = message.overview;
+    return obj;
+  },
+  fromAminoMsg(object: DocumentationAminoMsg): Documentation {
+    return Documentation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DocumentationProtoMsg): Documentation {
+    return Documentation.decode(message.value);
+  },
+  toProto(message: Documentation): Uint8Array {
+    return Documentation.encode(message).finish();
+  },
+  toProtoMsg(message: Documentation): DocumentationProtoMsg {
+    return {
+      typeUrl: "/google.api.Documentation",
+      value: Documentation.encode(message).finish()
+    };
   }
 };
 function createBaseDocumentationRule(): DocumentationRule {
@@ -263,6 +307,7 @@ function createBaseDocumentationRule(): DocumentationRule {
   };
 }
 export const DocumentationRule = {
+  typeUrl: "/google.api.DocumentationRule",
   encode(message: DocumentationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -312,12 +357,41 @@ export const DocumentationRule = {
     message.deprecationDescription !== undefined && (obj.deprecationDescription = message.deprecationDescription);
     return obj;
   },
-  fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
+  fromPartial(object: Partial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
     message.selector = object.selector ?? "";
     message.description = object.description ?? "";
     message.deprecationDescription = object.deprecationDescription ?? "";
     return message;
+  },
+  fromAmino(object: DocumentationRuleAmino): DocumentationRule {
+    return {
+      selector: object.selector,
+      description: object.description,
+      deprecationDescription: object.deprecation_description
+    };
+  },
+  toAmino(message: DocumentationRule): DocumentationRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.description = message.description;
+    obj.deprecation_description = message.deprecationDescription;
+    return obj;
+  },
+  fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
+    return DocumentationRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
+    return DocumentationRule.decode(message.value);
+  },
+  toProto(message: DocumentationRule): Uint8Array {
+    return DocumentationRule.encode(message).finish();
+  },
+  toProtoMsg(message: DocumentationRule): DocumentationRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.DocumentationRule",
+      value: DocumentationRule.encode(message).finish()
+    };
   }
 };
 function createBasePage(): Page {
@@ -328,6 +402,7 @@ function createBasePage(): Page {
   };
 }
 export const Page = {
+  typeUrl: "/google.api.Page",
   encode(message: Page, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -381,11 +456,44 @@ export const Page = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Page>): Page {
+  fromPartial(object: Partial<Page>): Page {
     const message = createBasePage();
     message.name = object.name ?? "";
     message.content = object.content ?? "";
     message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: PageAmino): Page {
+    return {
+      name: object.name,
+      content: object.content,
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Page): PageAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.content = message.content;
+    if (message.subpages) {
+      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
+    } else {
+      obj.subpages = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PageAminoMsg): Page {
+    return Page.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PageProtoMsg): Page {
+    return Page.decode(message.value);
+  },
+  toProto(message: Page): Uint8Array {
+    return Page.encode(message).finish();
+  },
+  toProtoMsg(message: Page): PageProtoMsg {
+    return {
+      typeUrl: "/google.api.Page",
+      value: Page.encode(message).finish()
+    };
   }
 };

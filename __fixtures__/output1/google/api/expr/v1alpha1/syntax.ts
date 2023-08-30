@@ -487,6 +487,7 @@ function createBaseParsedExpr(): ParsedExpr {
   };
 }
 export const ParsedExpr = {
+  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
   encode(message: ParsedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
@@ -545,6 +546,33 @@ export const ParsedExpr = {
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     return obj;
+  },
+  fromAmino(object: ParsedExprAmino): ParsedExpr {
+    return {
+      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined,
+      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined
+    };
+  },
+  toAmino(message: ParsedExpr): ParsedExprAmino {
+    const obj: any = {};
+    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
+    return ParsedExpr.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
+    return ParsedExpr.decode(message.value);
+  },
+  toProto(message: ParsedExpr): Uint8Array {
+    return ParsedExpr.encode(message).finish();
+  },
+  toProtoMsg(message: ParsedExpr): ParsedExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
+      value: ParsedExpr.encode(message).finish()
+    };
   }
 };
 function createBaseExpr(): Expr {
@@ -560,6 +588,7 @@ function createBaseExpr(): Expr {
   };
 }
 export const Expr = {
+  typeUrl: "/google.api.expr.v1alpha1.Expr",
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(16).int64(message.id);
@@ -684,6 +713,45 @@ export const Expr = {
     message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toSDK(message.structExpr) : undefined);
     message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
     return obj;
+  },
+  fromAmino(object: ExprAmino): Expr {
+    return {
+      id: Long.fromString(object.id),
+      constExpr: object?.const_expr ? Constant.fromAmino(object.const_expr) : undefined,
+      identExpr: object?.ident_expr ? Expr_Ident.fromAmino(object.ident_expr) : undefined,
+      selectExpr: object?.select_expr ? Expr_Select.fromAmino(object.select_expr) : undefined,
+      callExpr: object?.call_expr ? Expr_Call.fromAmino(object.call_expr) : undefined,
+      listExpr: object?.list_expr ? Expr_CreateList.fromAmino(object.list_expr) : undefined,
+      structExpr: object?.struct_expr ? Expr_CreateStruct.fromAmino(object.struct_expr) : undefined,
+      comprehensionExpr: object?.comprehension_expr ? Expr_Comprehension.fromAmino(object.comprehension_expr) : undefined
+    };
+  },
+  toAmino(message: Expr): ExprAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.const_expr = message.constExpr ? Constant.toAmino(message.constExpr) : undefined;
+    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
+    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
+    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr) : undefined;
+    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr) : undefined;
+    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined;
+    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ExprAminoMsg): Expr {
+    return Expr.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ExprProtoMsg): Expr {
+    return Expr.decode(message.value);
+  },
+  toProto(message: Expr): Uint8Array {
+    return Expr.encode(message).finish();
+  },
+  toProtoMsg(message: Expr): ExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Expr",
+      value: Expr.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_Ident(): Expr_Ident {
@@ -692,6 +760,7 @@ function createBaseExpr_Ident(): Expr_Ident {
   };
 }
 export const Expr_Ident = {
+  typeUrl: "/google.api.expr.v1alpha1.Ident",
   encode(message: Expr_Ident, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -739,6 +808,31 @@ export const Expr_Ident = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+  fromAmino(object: Expr_IdentAmino): Expr_Ident {
+    return {
+      name: object.name
+    };
+  },
+  toAmino(message: Expr_Ident): Expr_IdentAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
+    return Expr_Ident.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
+    return Expr_Ident.decode(message.value);
+  },
+  toProto(message: Expr_Ident): Uint8Array {
+    return Expr_Ident.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_Ident): Expr_IdentProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Ident",
+      value: Expr_Ident.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_Select(): Expr_Select {
@@ -749,6 +843,7 @@ function createBaseExpr_Select(): Expr_Select {
   };
 }
 export const Expr_Select = {
+  typeUrl: "/google.api.expr.v1alpha1.Select",
   encode(message: Expr_Select, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
@@ -818,6 +913,35 @@ export const Expr_Select = {
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
+  },
+  fromAmino(object: Expr_SelectAmino): Expr_Select {
+    return {
+      operand: object?.operand ? Expr.fromAmino(object.operand) : undefined,
+      field: object.field,
+      testOnly: object.test_only
+    };
+  },
+  toAmino(message: Expr_Select): Expr_SelectAmino {
+    const obj: any = {};
+    obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
+    obj.field = message.field;
+    obj.test_only = message.testOnly;
+    return obj;
+  },
+  fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
+    return Expr_Select.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
+    return Expr_Select.decode(message.value);
+  },
+  toProto(message: Expr_Select): Uint8Array {
+    return Expr_Select.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_Select): Expr_SelectProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Select",
+      value: Expr_Select.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_Call(): Expr_Call {
@@ -828,6 +952,7 @@ function createBaseExpr_Call(): Expr_Call {
   };
 }
 export const Expr_Call = {
+  typeUrl: "/google.api.expr.v1alpha1.Call",
   encode(message: Expr_Call, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
@@ -905,6 +1030,39 @@ export const Expr_Call = {
       obj.args = [];
     }
     return obj;
+  },
+  fromAmino(object: Expr_CallAmino): Expr_Call {
+    return {
+      target: object?.target ? Expr.fromAmino(object.target) : undefined,
+      function: object.function,
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Expr_Call): Expr_CallAmino {
+    const obj: any = {};
+    obj.target = message.target ? Expr.toAmino(message.target) : undefined;
+    obj.function = message.function;
+    if (message.args) {
+      obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
+    } else {
+      obj.args = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
+    return Expr_Call.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
+    return Expr_Call.decode(message.value);
+  },
+  toProto(message: Expr_Call): Uint8Array {
+    return Expr_Call.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_Call): Expr_CallProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Call",
+      value: Expr_Call.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_CreateList(): Expr_CreateList {
@@ -913,6 +1071,7 @@ function createBaseExpr_CreateList(): Expr_CreateList {
   };
 }
 export const Expr_CreateList = {
+  typeUrl: "/google.api.expr.v1alpha1.CreateList",
   encode(message: Expr_CreateList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -968,6 +1127,35 @@ export const Expr_CreateList = {
       obj.elements = [];
     }
     return obj;
+  },
+  fromAmino(object: Expr_CreateListAmino): Expr_CreateList {
+    return {
+      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Expr_CreateList): Expr_CreateListAmino {
+    const obj: any = {};
+    if (message.elements) {
+      obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
+    } else {
+      obj.elements = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
+    return Expr_CreateList.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
+    return Expr_CreateList.decode(message.value);
+  },
+  toProto(message: Expr_CreateList): Uint8Array {
+    return Expr_CreateList.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_CreateList): Expr_CreateListProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CreateList",
+      value: Expr_CreateList.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
@@ -977,6 +1165,7 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
   };
 }
 export const Expr_CreateStruct = {
+  typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
   encode(message: Expr_CreateStruct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
@@ -1043,6 +1232,37 @@ export const Expr_CreateStruct = {
       obj.entries = [];
     }
     return obj;
+  },
+  fromAmino(object: Expr_CreateStructAmino): Expr_CreateStruct {
+    return {
+      messageName: object.message_name,
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
+    const obj: any = {};
+    obj.message_name = message.messageName;
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
+    return Expr_CreateStruct.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
+    return Expr_CreateStruct.decode(message.value);
+  },
+  toProto(message: Expr_CreateStruct): Uint8Array {
+    return Expr_CreateStruct.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_CreateStruct): Expr_CreateStructProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
+      value: Expr_CreateStruct.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
@@ -1054,6 +1274,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   };
 }
 export const Expr_CreateStruct_Entry = {
+  typeUrl: "/google.api.expr.v1alpha1.Entry",
   encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
@@ -1134,6 +1355,37 @@ export const Expr_CreateStruct_Entry = {
     message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: Expr_CreateStruct_EntryAmino): Expr_CreateStruct_Entry {
+    return {
+      id: Long.fromString(object.id),
+      fieldKey: object?.field_key,
+      mapKey: object?.map_key ? Expr.fromAmino(object.map_key) : undefined,
+      value: object?.value ? Expr.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.field_key = message.fieldKey;
+    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.decode(message.value);
+  },
+  toProto(message: Expr_CreateStruct_Entry): Uint8Array {
+    return Expr_CreateStruct_Entry.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Entry",
+      value: Expr_CreateStruct_Entry.encode(message).finish()
+    };
   }
 };
 function createBaseExpr_Comprehension(): Expr_Comprehension {
@@ -1148,6 +1400,7 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
   };
 }
 export const Expr_Comprehension = {
+  typeUrl: "/google.api.expr.v1alpha1.Comprehension",
   encode(message: Expr_Comprehension, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
@@ -1261,6 +1514,43 @@ export const Expr_Comprehension = {
     message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
     message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
     return obj;
+  },
+  fromAmino(object: Expr_ComprehensionAmino): Expr_Comprehension {
+    return {
+      iterVar: object.iter_var,
+      iterRange: object?.iter_range ? Expr.fromAmino(object.iter_range) : undefined,
+      accuVar: object.accu_var,
+      accuInit: object?.accu_init ? Expr.fromAmino(object.accu_init) : undefined,
+      loopCondition: object?.loop_condition ? Expr.fromAmino(object.loop_condition) : undefined,
+      loopStep: object?.loop_step ? Expr.fromAmino(object.loop_step) : undefined,
+      result: object?.result ? Expr.fromAmino(object.result) : undefined
+    };
+  },
+  toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
+    const obj: any = {};
+    obj.iter_var = message.iterVar;
+    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
+    obj.accu_var = message.accuVar;
+    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
+    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
+    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
+    obj.result = message.result ? Expr.toAmino(message.result) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
+    return Expr_Comprehension.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
+    return Expr_Comprehension.decode(message.value);
+  },
+  toProto(message: Expr_Comprehension): Uint8Array {
+    return Expr_Comprehension.encode(message).finish();
+  },
+  toProtoMsg(message: Expr_Comprehension): Expr_ComprehensionProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Comprehension",
+      value: Expr_Comprehension.encode(message).finish()
+    };
   }
 };
 function createBaseConstant(): Constant {
@@ -1277,6 +1567,7 @@ function createBaseConstant(): Constant {
   };
 }
 export const Constant = {
+  typeUrl: "/google.api.expr.v1alpha1.Constant",
   encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -1412,6 +1703,47 @@ export const Constant = {
     message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
     return obj;
+  },
+  fromAmino(object: ConstantAmino): Constant {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value ? Long.fromString(object.int64_value) : undefined,
+      uint64Value: object?.uint64_value ? Long.fromString(object.uint64_value) : undefined,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
+      durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
+      timestampValue: object?.timestamp_value
+    };
+  },
+  toAmino(message: Constant): ConstantAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
+    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
+    obj.timestamp_value = message.timestampValue;
+    return obj;
+  },
+  fromAminoMsg(object: ConstantAminoMsg): Constant {
+    return Constant.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ConstantProtoMsg): Constant {
+    return Constant.decode(message.value);
+  },
+  toProto(message: Constant): Uint8Array {
+    return Constant.encode(message).finish();
+  },
+  toProtoMsg(message: Constant): ConstantProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Constant",
+      value: Constant.encode(message).finish()
+    };
   }
 };
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
@@ -1479,6 +1811,27 @@ export const SourceInfo_PositionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+  fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
+    return {
+      key: Long.fromString(object.key),
+      value: object.value
+    };
+  },
+  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key ? message.key.toString() : undefined;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.decode(message.value);
+  },
+  toProto(message: SourceInfo_PositionsEntry): Uint8Array {
+    return SourceInfo_PositionsEntry.encode(message).finish();
   }
 };
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
@@ -1546,6 +1899,27 @@ export const SourceInfo_MacroCallsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+  fromAmino(object: SourceInfo_MacroCallsEntryAmino): SourceInfo_MacroCallsEntry {
+    return {
+      key: Long.fromString(object.key),
+      value: object?.value ? Expr.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: SourceInfo_MacroCallsEntry): SourceInfo_MacroCallsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key ? message.key.toString() : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfo_MacroCallsEntryAminoMsg): SourceInfo_MacroCallsEntry {
+    return SourceInfo_MacroCallsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfo_MacroCallsEntryProtoMsg): SourceInfo_MacroCallsEntry {
+    return SourceInfo_MacroCallsEntry.decode(message.value);
+  },
+  toProto(message: SourceInfo_MacroCallsEntry): Uint8Array {
+    return SourceInfo_MacroCallsEntry.encode(message).finish();
   }
 };
 function createBaseSourceInfo(): SourceInfo {
@@ -1558,6 +1932,7 @@ function createBaseSourceInfo(): SourceInfo {
   };
 }
 export const SourceInfo = {
+  typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syntaxVersion !== "") {
       writer.uint32(10).string(message.syntaxVersion);
@@ -1732,6 +2107,63 @@ export const SourceInfo = {
       });
     }
     return obj;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      syntaxVersion: object.syntax_version,
+      location: object.location,
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: Long]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {},
+      macroCalls: isObject(object.macro_calls) ? Object.entries(object.macro_calls).reduce<{
+        [key: Long]: Expr;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Expr.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    obj.syntax_version = message.syntaxVersion;
+    obj.location = message.location;
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+    obj.positions = {};
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+    obj.macro_calls = {};
+    if (message.macroCalls) {
+      Object.entries(message.macroCalls).forEach(([k, v]) => {
+        obj.macro_calls[k] = Expr.toAmino(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseSourcePosition(): SourcePosition {
@@ -1743,6 +2175,7 @@ function createBaseSourcePosition(): SourcePosition {
   };
 }
 export const SourcePosition = {
+  typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
   encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
@@ -1823,5 +2256,36 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
+  },
+  fromAmino(object: SourcePositionAmino): SourcePosition {
+    return {
+      location: object.location,
+      offset: object.offset,
+      line: object.line,
+      column: object.column
+    };
+  },
+  toAmino(message: SourcePosition): SourcePositionAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    obj.offset = message.offset;
+    obj.line = message.line;
+    obj.column = message.column;
+    return obj;
+  },
+  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
+    return SourcePosition.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
+    return SourcePosition.decode(message.value);
+  },
+  toProto(message: SourcePosition): Uint8Array {
+    return SourcePosition.encode(message).finish();
+  },
+  toProtoMsg(message: SourcePosition): SourcePositionProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
+      value: SourcePosition.encode(message).finish()
+    };
   }
 };

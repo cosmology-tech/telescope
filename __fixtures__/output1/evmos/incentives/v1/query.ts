@@ -210,6 +210,7 @@ function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
   };
 }
 export const QueryIncentivesRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest",
   encode(message: QueryIncentivesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -257,6 +258,31 @@ export const QueryIncentivesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryIncentivesRequestAmino): QueryIncentivesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryIncentivesRequest): QueryIncentivesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentivesRequestAminoMsg): QueryIncentivesRequest {
+    return QueryIncentivesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryIncentivesRequestProtoMsg): QueryIncentivesRequest {
+    return QueryIncentivesRequest.decode(message.value);
+  },
+  toProto(message: QueryIncentivesRequest): Uint8Array {
+    return QueryIncentivesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentivesRequest): QueryIncentivesRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest",
+      value: QueryIncentivesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
@@ -266,6 +292,7 @@ function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
   };
 }
 export const QueryIncentivesResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse",
   encode(message: QueryIncentivesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentives) {
       Incentive.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -332,6 +359,37 @@ export const QueryIncentivesResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryIncentivesResponseAmino): QueryIncentivesResponse {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryIncentivesResponse): QueryIncentivesResponseAmino {
+    const obj: any = {};
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentivesResponseAminoMsg): QueryIncentivesResponse {
+    return QueryIncentivesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryIncentivesResponseProtoMsg): QueryIncentivesResponse {
+    return QueryIncentivesResponse.decode(message.value);
+  },
+  toProto(message: QueryIncentivesResponse): Uint8Array {
+    return QueryIncentivesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentivesResponse): QueryIncentivesResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse",
+      value: QueryIncentivesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
@@ -340,6 +398,7 @@ function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
   };
 }
 export const QueryIncentiveRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
   encode(message: QueryIncentiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -387,6 +446,31 @@ export const QueryIncentiveRequest = {
     const obj: any = {};
     obj.contract = message.contract;
     return obj;
+  },
+  fromAmino(object: QueryIncentiveRequestAmino): QueryIncentiveRequest {
+    return {
+      contract: object.contract
+    };
+  },
+  toAmino(message: QueryIncentiveRequest): QueryIncentiveRequestAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
+    return QueryIncentiveRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryIncentiveRequestProtoMsg): QueryIncentiveRequest {
+    return QueryIncentiveRequest.decode(message.value);
+  },
+  toProto(message: QueryIncentiveRequest): Uint8Array {
+    return QueryIncentiveRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentiveRequest): QueryIncentiveRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
+      value: QueryIncentiveRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
@@ -395,6 +479,7 @@ function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
   };
 }
 export const QueryIncentiveResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse",
   encode(message: QueryIncentiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.incentive !== undefined) {
       Incentive.encode(message.incentive, writer.uint32(10).fork()).ldelim();
@@ -442,6 +527,31 @@ export const QueryIncentiveResponse = {
     const obj: any = {};
     message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toSDK(message.incentive) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
+    return {
+      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : undefined
+    };
+  },
+  toAmino(message: QueryIncentiveResponse): QueryIncentiveResponseAmino {
+    const obj: any = {};
+    obj.incentive = message.incentive ? Incentive.toAmino(message.incentive) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentiveResponseAminoMsg): QueryIncentiveResponse {
+    return QueryIncentiveResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryIncentiveResponseProtoMsg): QueryIncentiveResponse {
+    return QueryIncentiveResponse.decode(message.value);
+  },
+  toProto(message: QueryIncentiveResponse): Uint8Array {
+    return QueryIncentiveResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentiveResponse): QueryIncentiveResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse",
+      value: QueryIncentiveResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
@@ -451,6 +561,7 @@ function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
   };
 }
 export const QueryGasMetersRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
   encode(message: QueryGasMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -509,6 +620,33 @@ export const QueryGasMetersRequest = {
     obj.contract = message.contract;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGasMetersRequestAmino): QueryGasMetersRequest {
+    return {
+      contract: object.contract,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGasMetersRequest): QueryGasMetersRequestAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGasMetersRequestAminoMsg): QueryGasMetersRequest {
+    return QueryGasMetersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGasMetersRequestProtoMsg): QueryGasMetersRequest {
+    return QueryGasMetersRequest.decode(message.value);
+  },
+  toProto(message: QueryGasMetersRequest): Uint8Array {
+    return QueryGasMetersRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGasMetersRequest): QueryGasMetersRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
+      value: QueryGasMetersRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
@@ -518,6 +656,7 @@ function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
   };
 }
 export const QueryGasMetersResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse",
   encode(message: QueryGasMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.gasMeters) {
       GasMeter.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -584,6 +723,37 @@ export const QueryGasMetersResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryGasMetersResponseAmino): QueryGasMetersResponse {
+    return {
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryGasMetersResponse): QueryGasMetersResponseAmino {
+    const obj: any = {};
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGasMetersResponseAminoMsg): QueryGasMetersResponse {
+    return QueryGasMetersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGasMetersResponseProtoMsg): QueryGasMetersResponse {
+    return QueryGasMetersResponse.decode(message.value);
+  },
+  toProto(message: QueryGasMetersResponse): Uint8Array {
+    return QueryGasMetersResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGasMetersResponse): QueryGasMetersResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse",
+      value: QueryGasMetersResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
@@ -593,6 +763,7 @@ function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
   };
 }
 export const QueryGasMeterRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
   encode(message: QueryGasMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -651,6 +822,33 @@ export const QueryGasMeterRequest = {
     obj.contract = message.contract;
     obj.participant = message.participant;
     return obj;
+  },
+  fromAmino(object: QueryGasMeterRequestAmino): QueryGasMeterRequest {
+    return {
+      contract: object.contract,
+      participant: object.participant
+    };
+  },
+  toAmino(message: QueryGasMeterRequest): QueryGasMeterRequestAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
+    return QueryGasMeterRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGasMeterRequestProtoMsg): QueryGasMeterRequest {
+    return QueryGasMeterRequest.decode(message.value);
+  },
+  toProto(message: QueryGasMeterRequest): Uint8Array {
+    return QueryGasMeterRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGasMeterRequest): QueryGasMeterRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
+      value: QueryGasMeterRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
@@ -659,6 +857,7 @@ function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
   };
 }
 export const QueryGasMeterResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
   encode(message: QueryGasMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gasMeter.isZero()) {
       writer.uint32(8).uint64(message.gasMeter);
@@ -706,6 +905,31 @@ export const QueryGasMeterResponse = {
     const obj: any = {};
     obj.gas_meter = message.gasMeter;
     return obj;
+  },
+  fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
+    return {
+      gasMeter: Long.fromString(object.gas_meter)
+    };
+  },
+  toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
+    const obj: any = {};
+    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
+    return QueryGasMeterResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryGasMeterResponseProtoMsg): QueryGasMeterResponse {
+    return QueryGasMeterResponse.decode(message.value);
+  },
+  toProto(message: QueryGasMeterResponse): Uint8Array {
+    return QueryGasMeterResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGasMeterResponse): QueryGasMeterResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
+      value: QueryGasMeterResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest {
@@ -714,6 +938,7 @@ function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest 
   };
 }
 export const QueryAllocationMetersRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest",
   encode(message: QueryAllocationMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -761,6 +986,31 @@ export const QueryAllocationMetersRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAllocationMetersRequestAmino): QueryAllocationMetersRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAllocationMetersRequestAminoMsg): QueryAllocationMetersRequest {
+    return QueryAllocationMetersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg): QueryAllocationMetersRequest {
+    return QueryAllocationMetersRequest.decode(message.value);
+  },
+  toProto(message: QueryAllocationMetersRequest): Uint8Array {
+    return QueryAllocationMetersRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest",
+      value: QueryAllocationMetersRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersResponse {
@@ -770,6 +1020,7 @@ function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersRespons
   };
 }
 export const QueryAllocationMetersResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse",
   encode(message: QueryAllocationMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allocationMeters) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -836,6 +1087,37 @@ export const QueryAllocationMetersResponse = {
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAllocationMetersResponseAmino): QueryAllocationMetersResponse {
+    return {
+      allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseAmino {
+    const obj: any = {};
+    if (message.allocationMeters) {
+      obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocation_meters = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAllocationMetersResponseAminoMsg): QueryAllocationMetersResponse {
+    return QueryAllocationMetersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg): QueryAllocationMetersResponse {
+    return QueryAllocationMetersResponse.decode(message.value);
+  },
+  toProto(message: QueryAllocationMetersResponse): Uint8Array {
+    return QueryAllocationMetersResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse",
+      value: QueryAllocationMetersResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
@@ -844,6 +1126,7 @@ function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
   };
 }
 export const QueryAllocationMeterRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
   encode(message: QueryAllocationMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -891,6 +1174,31 @@ export const QueryAllocationMeterRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+  fromAmino(object: QueryAllocationMeterRequestAmino): QueryAllocationMeterRequest {
+    return {
+      denom: object.denom
+    };
+  },
+  toAmino(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {
+    return QueryAllocationMeterRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg): QueryAllocationMeterRequest {
+    return QueryAllocationMeterRequest.decode(message.value);
+  },
+  toProto(message: QueryAllocationMeterRequest): Uint8Array {
+    return QueryAllocationMeterRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
+      value: QueryAllocationMeterRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse {
@@ -899,6 +1207,7 @@ function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse 
   };
 }
 export const QueryAllocationMeterResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse",
   encode(message: QueryAllocationMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allocationMeter !== undefined) {
       DecCoin.encode(message.allocationMeter, writer.uint32(10).fork()).ldelim();
@@ -946,12 +1255,38 @@ export const QueryAllocationMeterResponse = {
     const obj: any = {};
     message.allocationMeter !== undefined && (obj.allocation_meter = message.allocationMeter ? DecCoin.toSDK(message.allocationMeter) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
+    return {
+      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
+    };
+  },
+  toAmino(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseAmino {
+    const obj: any = {};
+    obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAllocationMeterResponseAminoMsg): QueryAllocationMeterResponse {
+    return QueryAllocationMeterResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg): QueryAllocationMeterResponse {
+    return QueryAllocationMeterResponse.decode(message.value);
+  },
+  toProto(message: QueryAllocationMeterResponse): Uint8Array {
+    return QueryAllocationMeterResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse",
+      value: QueryAllocationMeterResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -986,6 +1321,28 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -994,6 +1351,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1041,5 +1399,30 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };

@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
@@ -23,6 +23,7 @@ function createBaseEquivocation(): Equivocation {
   };
 }
 export const Equivocation = {
+  typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
   encode(message: Equivocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
@@ -80,12 +81,49 @@ export const Equivocation = {
     message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
-  fromPartial(object: DeepPartial<Equivocation>): Equivocation {
+  fromPartial(object: Partial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.time = object.time !== undefined && object.time !== null ? Timestamp.fromPartial(object.time) : undefined;
     message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
+  },
+  fromAmino(object: EquivocationAmino): Equivocation {
+    return {
+      height: Long.fromString(object.height),
+      time: object.time,
+      power: Long.fromString(object.power),
+      consensusAddress: object.consensus_address
+    };
+  },
+  toAmino(message: Equivocation): EquivocationAmino {
+    const obj: any = {};
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.time = message.time;
+    obj.power = message.power ? message.power.toString() : undefined;
+    obj.consensus_address = message.consensusAddress;
+    return obj;
+  },
+  fromAminoMsg(object: EquivocationAminoMsg): Equivocation {
+    return Equivocation.fromAmino(object.value);
+  },
+  toAminoMsg(message: Equivocation): EquivocationAminoMsg {
+    return {
+      type: "cosmos-sdk/Equivocation",
+      value: Equivocation.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
+    return Equivocation.decode(message.value);
+  },
+  toProto(message: Equivocation): Uint8Array {
+    return Equivocation.encode(message).finish();
+  },
+  toProtoMsg(message: Equivocation): EquivocationProtoMsg {
+    return {
+      typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
+      value: Equivocation.encode(message).finish()
+    };
   }
 };

@@ -59,6 +59,7 @@ function createBaseEndpoint(): Endpoint {
   };
 }
 export const Endpoint = {
+  typeUrl: "/akash.base.v1beta2.Endpoint",
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -117,5 +118,38 @@ export const Endpoint = {
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     obj.sequence_number = message.sequenceNumber;
     return obj;
+  },
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequenceNumber: object.sequence_number
+    };
+  },
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    obj.sequence_number = message.sequenceNumber;
+    return obj;
+  },
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+  toAminoMsg(message: Endpoint): EndpointAminoMsg {
+    return {
+      type: "akash/base/v1beta2/endpoint",
+      value: Endpoint.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 };

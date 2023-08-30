@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { Long, isSet, DeepPartial } from "../../../helpers";
+import { Long, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
@@ -31,6 +31,7 @@ function createBaseCapability(): Capability {
   };
 }
 export const Capability = {
+  typeUrl: "/cosmos.capability.v1beta1.Capability",
   encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).uint64(message.index);
@@ -64,10 +65,41 @@ export const Capability = {
     message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     return obj;
   },
-  fromPartial(object: DeepPartial<Capability>): Capability {
+  fromPartial(object: Partial<Capability>): Capability {
     const message = createBaseCapability();
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
     return message;
+  },
+  fromAmino(object: CapabilityAmino): Capability {
+    return {
+      index: Long.fromString(object.index)
+    };
+  },
+  toAmino(message: Capability): CapabilityAmino {
+    const obj: any = {};
+    obj.index = message.index ? message.index.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CapabilityAminoMsg): Capability {
+    return Capability.fromAmino(object.value);
+  },
+  toAminoMsg(message: Capability): CapabilityAminoMsg {
+    return {
+      type: "cosmos-sdk/Capability",
+      value: Capability.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CapabilityProtoMsg): Capability {
+    return Capability.decode(message.value);
+  },
+  toProto(message: Capability): Uint8Array {
+    return Capability.encode(message).finish();
+  },
+  toProtoMsg(message: Capability): CapabilityProtoMsg {
+    return {
+      typeUrl: "/cosmos.capability.v1beta1.Capability",
+      value: Capability.encode(message).finish()
+    };
   }
 };
 function createBaseOwner(): Owner {
@@ -77,6 +109,7 @@ function createBaseOwner(): Owner {
   };
 }
 export const Owner = {
+  typeUrl: "/cosmos.capability.v1beta1.Owner",
   encode(message: Owner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
@@ -118,11 +151,44 @@ export const Owner = {
     message.name !== undefined && (obj.name = message.name);
     return obj;
   },
-  fromPartial(object: DeepPartial<Owner>): Owner {
+  fromPartial(object: Partial<Owner>): Owner {
     const message = createBaseOwner();
     message.module = object.module ?? "";
     message.name = object.name ?? "";
     return message;
+  },
+  fromAmino(object: OwnerAmino): Owner {
+    return {
+      module: object.module,
+      name: object.name
+    };
+  },
+  toAmino(message: Owner): OwnerAmino {
+    const obj: any = {};
+    obj.module = message.module;
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: OwnerAminoMsg): Owner {
+    return Owner.fromAmino(object.value);
+  },
+  toAminoMsg(message: Owner): OwnerAminoMsg {
+    return {
+      type: "cosmos-sdk/Owner",
+      value: Owner.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: OwnerProtoMsg): Owner {
+    return Owner.decode(message.value);
+  },
+  toProto(message: Owner): Uint8Array {
+    return Owner.encode(message).finish();
+  },
+  toProtoMsg(message: Owner): OwnerProtoMsg {
+    return {
+      typeUrl: "/cosmos.capability.v1beta1.Owner",
+      value: Owner.encode(message).finish()
+    };
   }
 };
 function createBaseCapabilityOwners(): CapabilityOwners {
@@ -131,6 +197,7 @@ function createBaseCapabilityOwners(): CapabilityOwners {
   };
 }
 export const CapabilityOwners = {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners",
   encode(message: CapabilityOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -168,9 +235,44 @@ export const CapabilityOwners = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<CapabilityOwners>): CapabilityOwners {
+  fromPartial(object: Partial<CapabilityOwners>): CapabilityOwners {
     const message = createBaseCapabilityOwners();
     message.owners = object.owners?.map(e => Owner.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
+    } else {
+      obj.owners = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
+    return CapabilityOwners.fromAmino(object.value);
+  },
+  toAminoMsg(message: CapabilityOwners): CapabilityOwnersAminoMsg {
+    return {
+      type: "cosmos-sdk/CapabilityOwners",
+      value: CapabilityOwners.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
+    return CapabilityOwners.decode(message.value);
+  },
+  toProto(message: CapabilityOwners): Uint8Array {
+    return CapabilityOwners.encode(message).finish();
+  },
+  toProtoMsg(message: CapabilityOwners): CapabilityOwnersProtoMsg {
+    return {
+      typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners",
+      value: CapabilityOwners.encode(message).finish()
+    };
   }
 };

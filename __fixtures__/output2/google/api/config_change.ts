@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -122,6 +122,7 @@ function createBaseConfigChange(): ConfigChange {
   };
 }
 export const ConfigChange = {
+  typeUrl: "/google.api.ConfigChange",
   encode(message: ConfigChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.element !== "") {
       writer.uint32(10).string(message.element);
@@ -191,7 +192,7 @@ export const ConfigChange = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ConfigChange>): ConfigChange {
+  fromPartial(object: Partial<ConfigChange>): ConfigChange {
     const message = createBaseConfigChange();
     message.element = object.element ?? "";
     message.oldValue = object.oldValue ?? "";
@@ -199,6 +200,43 @@ export const ConfigChange = {
     message.changeType = object.changeType ?? 0;
     message.advices = object.advices?.map(e => Advice.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ConfigChangeAmino): ConfigChange {
+    return {
+      element: object.element,
+      oldValue: object.old_value,
+      newValue: object.new_value,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
+      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ConfigChange): ConfigChangeAmino {
+    const obj: any = {};
+    obj.element = message.element;
+    obj.old_value = message.oldValue;
+    obj.new_value = message.newValue;
+    obj.change_type = message.changeType;
+    if (message.advices) {
+      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
+    } else {
+      obj.advices = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ConfigChangeAminoMsg): ConfigChange {
+    return ConfigChange.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ConfigChangeProtoMsg): ConfigChange {
+    return ConfigChange.decode(message.value);
+  },
+  toProto(message: ConfigChange): Uint8Array {
+    return ConfigChange.encode(message).finish();
+  },
+  toProtoMsg(message: ConfigChange): ConfigChangeProtoMsg {
+    return {
+      typeUrl: "/google.api.ConfigChange",
+      value: ConfigChange.encode(message).finish()
+    };
   }
 };
 function createBaseAdvice(): Advice {
@@ -207,6 +245,7 @@ function createBaseAdvice(): Advice {
   };
 }
 export const Advice = {
+  typeUrl: "/google.api.Advice",
   encode(message: Advice, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
@@ -240,9 +279,34 @@ export const Advice = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<Advice>): Advice {
+  fromPartial(object: Partial<Advice>): Advice {
     const message = createBaseAdvice();
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: AdviceAmino): Advice {
+    return {
+      description: object.description
+    };
+  },
+  toAmino(message: Advice): AdviceAmino {
+    const obj: any = {};
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: AdviceAminoMsg): Advice {
+    return Advice.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AdviceProtoMsg): Advice {
+    return Advice.decode(message.value);
+  },
+  toProto(message: Advice): Uint8Array {
+    return Advice.encode(message).finish();
+  },
+  toProtoMsg(message: Advice): AdviceProtoMsg {
+    return {
+      typeUrl: "/google.api.Advice",
+      value: Advice.encode(message).finish()
+    };
   }
 };

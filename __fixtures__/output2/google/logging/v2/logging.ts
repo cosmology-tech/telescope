@@ -5,7 +5,7 @@ import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "../../../helpers";
+import { isSet, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -408,6 +408,7 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
   };
 }
 export const DeleteLogRequest = {
+  typeUrl: "/google.logging.v2.DeleteLogRequest",
   encode(message: DeleteLogRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -441,10 +442,35 @@ export const DeleteLogRequest = {
     message.logName !== undefined && (obj.logName = message.logName);
     return obj;
   },
-  fromPartial(object: DeepPartial<DeleteLogRequest>): DeleteLogRequest {
+  fromPartial(object: Partial<DeleteLogRequest>): DeleteLogRequest {
     const message = createBaseDeleteLogRequest();
     message.logName = object.logName ?? "";
     return message;
+  },
+  fromAmino(object: DeleteLogRequestAmino): DeleteLogRequest {
+    return {
+      logName: object.log_name
+    };
+  },
+  toAmino(message: DeleteLogRequest): DeleteLogRequestAmino {
+    const obj: any = {};
+    obj.log_name = message.logName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteLogRequestAminoMsg): DeleteLogRequest {
+    return DeleteLogRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DeleteLogRequestProtoMsg): DeleteLogRequest {
+    return DeleteLogRequest.decode(message.value);
+  },
+  toProto(message: DeleteLogRequest): Uint8Array {
+    return DeleteLogRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DeleteLogRequest): DeleteLogRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteLogRequest",
+      value: DeleteLogRequest.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_LabelsEntry {
@@ -495,11 +521,32 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: DeepPartial<WriteLogEntriesRequest_LabelsEntry>): WriteLogEntriesRequest_LabelsEntry {
+  fromPartial(object: Partial<WriteLogEntriesRequest_LabelsEntry>): WriteLogEntriesRequest_LabelsEntry {
     const message = createBaseWriteLogEntriesRequest_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: WriteLogEntriesRequest_LabelsEntryAmino): WriteLogEntriesRequest_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesRequest_LabelsEntryAminoMsg): WriteLogEntriesRequest_LabelsEntry {
+    return WriteLogEntriesRequest_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg): WriteLogEntriesRequest_LabelsEntry {
+    return WriteLogEntriesRequest_LabelsEntry.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesRequest_LabelsEntry): Uint8Array {
+    return WriteLogEntriesRequest_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
@@ -513,6 +560,7 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   };
 }
 export const WriteLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
   encode(message: WriteLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -606,7 +654,7 @@ export const WriteLogEntriesRequest = {
     message.dryRun !== undefined && (obj.dryRun = message.dryRun);
     return obj;
   },
-  fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
+  fromPartial(object: Partial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
     const message = createBaseWriteLogEntriesRequest();
     message.logName = object.logName ?? "";
     message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
@@ -622,12 +670,62 @@ export const WriteLogEntriesRequest = {
     message.partialSuccess = object.partialSuccess ?? false;
     message.dryRun = object.dryRun ?? false;
     return message;
+  },
+  fromAmino(object: WriteLogEntriesRequestAmino): WriteLogEntriesRequest {
+    return {
+      logName: object.log_name,
+      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      partialSuccess: object.partial_success,
+      dryRun: object.dry_run
+    };
+  },
+  toAmino(message: WriteLogEntriesRequest): WriteLogEntriesRequestAmino {
+    const obj: any = {};
+    obj.log_name = message.logName;
+    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    obj.partial_success = message.partialSuccess;
+    obj.dry_run = message.dryRun;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesRequestAminoMsg): WriteLogEntriesRequest {
+    return WriteLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesRequestProtoMsg): WriteLogEntriesRequest {
+    return WriteLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesRequest): Uint8Array {
+    return WriteLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesRequest): WriteLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
+      value: WriteLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
   return {};
 }
 export const WriteLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
   encode(_: WriteLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -652,9 +750,31 @@ export const WriteLogEntriesResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<WriteLogEntriesResponse>): WriteLogEntriesResponse {
+  fromPartial(_: Partial<WriteLogEntriesResponse>): WriteLogEntriesResponse {
     const message = createBaseWriteLogEntriesResponse();
     return message;
+  },
+  fromAmino(_: WriteLogEntriesResponseAmino): WriteLogEntriesResponse {
+    return {};
+  },
+  toAmino(_: WriteLogEntriesResponse): WriteLogEntriesResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesResponseAminoMsg): WriteLogEntriesResponse {
+    return WriteLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesResponseProtoMsg): WriteLogEntriesResponse {
+    return WriteLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesResponse): Uint8Array {
+    return WriteLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesResponse): WriteLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
+      value: WriteLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -705,11 +825,32 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     message.value !== undefined && (obj.value = message.value ? Status.toJSON(message.value) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+  fromPartial(object: Partial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
     message.value = object.value !== undefined && object.value !== null ? Status.fromPartial(object.value) : undefined;
     return message;
+  },
+  fromAmino(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? Status.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? Status.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): Uint8Array {
+    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode(message).finish();
   }
 };
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
@@ -718,6 +859,7 @@ function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors 
   };
 }
 export const WriteLogEntriesPartialErrors = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
   encode(message: WriteLogEntriesPartialErrors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
       WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
@@ -767,7 +909,7 @@ export const WriteLogEntriesPartialErrors = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors>): WriteLogEntriesPartialErrors {
+  fromPartial(object: Partial<WriteLogEntriesPartialErrors>): WriteLogEntriesPartialErrors {
     const message = createBaseWriteLogEntriesPartialErrors();
     message.logEntryErrors = Object.entries(object.logEntryErrors ?? {}).reduce<{
       [key: number]: Status;
@@ -778,6 +920,41 @@ export const WriteLogEntriesPartialErrors = {
       return acc;
     }, {});
     return message;
+  },
+  fromAmino(object: WriteLogEntriesPartialErrorsAmino): WriteLogEntriesPartialErrors {
+    return {
+      logEntryErrors: isObject(object.log_entry_errors) ? Object.entries(object.log_entry_errors).reduce<{
+        [key: number]: Status;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Status.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: WriteLogEntriesPartialErrors): WriteLogEntriesPartialErrorsAmino {
+    const obj: any = {};
+    obj.log_entry_errors = {};
+    if (message.logEntryErrors) {
+      Object.entries(message.logEntryErrors).forEach(([k, v]) => {
+        obj.log_entry_errors[k] = Status.toAmino(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: WriteLogEntriesPartialErrorsAminoMsg): WriteLogEntriesPartialErrors {
+    return WriteLogEntriesPartialErrors.fromAmino(object.value);
+  },
+  fromProtoMsg(message: WriteLogEntriesPartialErrorsProtoMsg): WriteLogEntriesPartialErrors {
+    return WriteLogEntriesPartialErrors.decode(message.value);
+  },
+  toProto(message: WriteLogEntriesPartialErrors): Uint8Array {
+    return WriteLogEntriesPartialErrors.encode(message).finish();
+  },
+  toProtoMsg(message: WriteLogEntriesPartialErrors): WriteLogEntriesPartialErrorsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
+      value: WriteLogEntriesPartialErrors.encode(message).finish()
+    };
   }
 };
 function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
@@ -790,6 +967,7 @@ function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
   };
 }
 export const ListLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.ListLogEntriesRequest",
   encode(message: ListLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
@@ -859,7 +1037,7 @@ export const ListLogEntriesRequest = {
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListLogEntriesRequest>): ListLogEntriesRequest {
+  fromPartial(object: Partial<ListLogEntriesRequest>): ListLogEntriesRequest {
     const message = createBaseListLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
@@ -867,6 +1045,43 @@ export const ListLogEntriesRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+  fromAmino(object: ListLogEntriesRequestAmino): ListLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: object.filter,
+      orderBy: object.order_by,
+      pageSize: object.page_size,
+      pageToken: object.page_token
+    };
+  },
+  toAmino(message: ListLogEntriesRequest): ListLogEntriesRequestAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    obj.filter = message.filter;
+    obj.order_by = message.orderBy;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogEntriesRequestAminoMsg): ListLogEntriesRequest {
+    return ListLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogEntriesRequestProtoMsg): ListLogEntriesRequest {
+    return ListLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: ListLogEntriesRequest): Uint8Array {
+    return ListLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogEntriesRequest): ListLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogEntriesRequest",
+      value: ListLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
@@ -876,6 +1091,7 @@ function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
   };
 }
 export const ListLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.ListLogEntriesResponse",
   encode(message: ListLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -921,11 +1137,42 @@ export const ListLogEntriesResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListLogEntriesResponse>): ListLogEntriesResponse {
+  fromPartial(object: Partial<ListLogEntriesResponse>): ListLogEntriesResponse {
     const message = createBaseListLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromAmino(object: ListLogEntriesResponseAmino): ListLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogEntriesResponse): ListLogEntriesResponseAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogEntriesResponseAminoMsg): ListLogEntriesResponse {
+    return ListLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogEntriesResponseProtoMsg): ListLogEntriesResponse {
+    return ListLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: ListLogEntriesResponse): Uint8Array {
+    return ListLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogEntriesResponse): ListLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogEntriesResponse",
+      value: ListLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResourceDescriptorsRequest {
@@ -935,6 +1182,7 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
   };
 }
 export const ListMonitoredResourceDescriptorsRequest = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pageSize !== 0) {
       writer.uint32(8).int32(message.pageSize);
@@ -976,11 +1224,38 @@ export const ListMonitoredResourceDescriptorsRequest = {
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsRequest>): ListMonitoredResourceDescriptorsRequest {
+  fromPartial(object: Partial<ListMonitoredResourceDescriptorsRequest>): ListMonitoredResourceDescriptorsRequest {
     const message = createBaseListMonitoredResourceDescriptorsRequest();
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+  fromAmino(object: ListMonitoredResourceDescriptorsRequestAmino): ListMonitoredResourceDescriptorsRequest {
+    return {
+      pageSize: object.page_size,
+      pageToken: object.page_token
+    };
+  },
+  toAmino(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestAmino {
+    const obj: any = {};
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListMonitoredResourceDescriptorsRequestAminoMsg): ListMonitoredResourceDescriptorsRequest {
+    return ListMonitoredResourceDescriptorsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg): ListMonitoredResourceDescriptorsRequest {
+    return ListMonitoredResourceDescriptorsRequest.decode(message.value);
+  },
+  toProto(message: ListMonitoredResourceDescriptorsRequest): Uint8Array {
+    return ListMonitoredResourceDescriptorsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
+      value: ListMonitoredResourceDescriptorsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredResourceDescriptorsResponse {
@@ -990,6 +1265,7 @@ function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredReso
   };
 }
 export const ListMonitoredResourceDescriptorsResponse = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
   encode(message: ListMonitoredResourceDescriptorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1035,11 +1311,42 @@ export const ListMonitoredResourceDescriptorsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsResponse>): ListMonitoredResourceDescriptorsResponse {
+  fromPartial(object: Partial<ListMonitoredResourceDescriptorsResponse>): ListMonitoredResourceDescriptorsResponse {
     const message = createBaseListMonitoredResourceDescriptorsResponse();
     message.resourceDescriptors = object.resourceDescriptors?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromAmino(object: ListMonitoredResourceDescriptorsResponseAmino): ListMonitoredResourceDescriptorsResponse {
+    return {
+      resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseAmino {
+    const obj: any = {};
+    if (message.resourceDescriptors) {
+      obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.resource_descriptors = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListMonitoredResourceDescriptorsResponseAminoMsg): ListMonitoredResourceDescriptorsResponse {
+    return ListMonitoredResourceDescriptorsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg): ListMonitoredResourceDescriptorsResponse {
+    return ListMonitoredResourceDescriptorsResponse.decode(message.value);
+  },
+  toProto(message: ListMonitoredResourceDescriptorsResponse): Uint8Array {
+    return ListMonitoredResourceDescriptorsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
+      value: ListMonitoredResourceDescriptorsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseListLogsRequest(): ListLogsRequest {
@@ -1051,6 +1358,7 @@ function createBaseListLogsRequest(): ListLogsRequest {
   };
 }
 export const ListLogsRequest = {
+  typeUrl: "/google.logging.v2.ListLogsRequest",
   encode(message: ListLogsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1112,13 +1420,48 @@ export const ListLogsRequest = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ListLogsRequest>): ListLogsRequest {
+  fromPartial(object: Partial<ListLogsRequest>): ListLogsRequest {
     const message = createBaseListLogsRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ListLogsRequestAmino): ListLogsRequest {
+    return {
+      parent: object.parent,
+      pageSize: object.page_size,
+      pageToken: object.page_token,
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: ListLogsRequest): ListLogsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListLogsRequestAminoMsg): ListLogsRequest {
+    return ListLogsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogsRequestProtoMsg): ListLogsRequest {
+    return ListLogsRequest.decode(message.value);
+  },
+  toProto(message: ListLogsRequest): Uint8Array {
+    return ListLogsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogsRequest): ListLogsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogsRequest",
+      value: ListLogsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseListLogsResponse(): ListLogsResponse {
@@ -1128,6 +1471,7 @@ function createBaseListLogsResponse(): ListLogsResponse {
   };
 }
 export const ListLogsResponse = {
+  typeUrl: "/google.logging.v2.ListLogsResponse",
   encode(message: ListLogsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
@@ -1173,11 +1517,42 @@ export const ListLogsResponse = {
     message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
-  fromPartial(object: DeepPartial<ListLogsResponse>): ListLogsResponse {
+  fromPartial(object: Partial<ListLogsResponse>): ListLogsResponse {
     const message = createBaseListLogsResponse();
     message.logNames = object.logNames?.map(e => e) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromAmino(object: ListLogsResponseAmino): ListLogsResponse {
+    return {
+      logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogsResponse): ListLogsResponseAmino {
+    const obj: any = {};
+    if (message.logNames) {
+      obj.log_names = message.logNames.map(e => e);
+    } else {
+      obj.log_names = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogsResponseAminoMsg): ListLogsResponse {
+    return ListLogsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ListLogsResponseProtoMsg): ListLogsResponse {
+    return ListLogsResponse.decode(message.value);
+  },
+  toProto(message: ListLogsResponse): Uint8Array {
+    return ListLogsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ListLogsResponse): ListLogsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogsResponse",
+      value: ListLogsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
@@ -1188,6 +1563,7 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   };
 }
 export const TailLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.TailLogEntriesRequest",
   encode(message: TailLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -1241,12 +1617,45 @@ export const TailLogEntriesRequest = {
     message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow ? Duration.toJSON(message.bufferWindow) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<TailLogEntriesRequest>): TailLogEntriesRequest {
+  fromPartial(object: Partial<TailLogEntriesRequest>): TailLogEntriesRequest {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
     message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : undefined;
     return message;
+  },
+  fromAmino(object: TailLogEntriesRequestAmino): TailLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: object.filter,
+      bufferWindow: object?.buffer_window ? Duration.fromAmino(object.buffer_window) : undefined
+    };
+  },
+  toAmino(message: TailLogEntriesRequest): TailLogEntriesRequestAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    obj.filter = message.filter;
+    obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesRequestAminoMsg): TailLogEntriesRequest {
+    return TailLogEntriesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesRequestProtoMsg): TailLogEntriesRequest {
+    return TailLogEntriesRequest.decode(message.value);
+  },
+  toProto(message: TailLogEntriesRequest): Uint8Array {
+    return TailLogEntriesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesRequest): TailLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.TailLogEntriesRequest",
+      value: TailLogEntriesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
@@ -1256,6 +1665,7 @@ function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
   };
 }
 export const TailLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.TailLogEntriesResponse",
   encode(message: TailLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1305,11 +1715,46 @@ export const TailLogEntriesResponse = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<TailLogEntriesResponse>): TailLogEntriesResponse {
+  fromPartial(object: Partial<TailLogEntriesResponse>): TailLogEntriesResponse {
     const message = createBaseTailLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
     message.suppressionInfo = object.suppressionInfo?.map(e => TailLogEntriesResponse_SuppressionInfo.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: TailLogEntriesResponseAmino): TailLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      suppressionInfo: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: TailLogEntriesResponse): TailLogEntriesResponseAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    if (message.suppressionInfo) {
+      obj.suppression_info = message.suppressionInfo.map(e => e ? TailLogEntriesResponse_SuppressionInfo.toAmino(e) : undefined);
+    } else {
+      obj.suppression_info = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesResponseAminoMsg): TailLogEntriesResponse {
+    return TailLogEntriesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesResponseProtoMsg): TailLogEntriesResponse {
+    return TailLogEntriesResponse.decode(message.value);
+  },
+  toProto(message: TailLogEntriesResponse): Uint8Array {
+    return TailLogEntriesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesResponse): TailLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.TailLogEntriesResponse",
+      value: TailLogEntriesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesResponse_SuppressionInfo {
@@ -1319,6 +1764,7 @@ function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesRespo
   };
 }
 export const TailLogEntriesResponse_SuppressionInfo = {
+  typeUrl: "/google.logging.v2.SuppressionInfo",
   encode(message: TailLogEntriesResponse_SuppressionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);
@@ -1360,10 +1806,37 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     message.suppressedCount !== undefined && (obj.suppressedCount = Math.round(message.suppressedCount));
     return obj;
   },
-  fromPartial(object: DeepPartial<TailLogEntriesResponse_SuppressionInfo>): TailLogEntriesResponse_SuppressionInfo {
+  fromPartial(object: Partial<TailLogEntriesResponse_SuppressionInfo>): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
     message.reason = object.reason ?? 0;
     message.suppressedCount = object.suppressedCount ?? 0;
     return message;
+  },
+  fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {
+    return {
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
+      suppressedCount: object.suppressed_count
+    };
+  },
+  toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoAmino {
+    const obj: any = {};
+    obj.reason = message.reason;
+    obj.suppressed_count = message.suppressedCount;
+    return obj;
+  },
+  fromAminoMsg(object: TailLogEntriesResponse_SuppressionInfoAminoMsg): TailLogEntriesResponse_SuppressionInfo {
+    return TailLogEntriesResponse_SuppressionInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg): TailLogEntriesResponse_SuppressionInfo {
+    return TailLogEntriesResponse_SuppressionInfo.decode(message.value);
+  },
+  toProto(message: TailLogEntriesResponse_SuppressionInfo): Uint8Array {
+    return TailLogEntriesResponse_SuppressionInfo.encode(message).finish();
+  },
+  toProtoMsg(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.SuppressionInfo",
+      value: TailLogEntriesResponse_SuppressionInfo.encode(message).finish()
+    };
   }
 };

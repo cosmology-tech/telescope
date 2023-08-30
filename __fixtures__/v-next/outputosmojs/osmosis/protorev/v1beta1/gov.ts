@@ -47,6 +47,7 @@ function createBaseSetProtoRevEnabledProposal(): SetProtoRevEnabledProposal {
   };
 }
 export const SetProtoRevEnabledProposal = {
+  typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevEnabledProposal",
   encode(message: SetProtoRevEnabledProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -123,6 +124,41 @@ export const SetProtoRevEnabledProposal = {
     obj.description = message.description;
     obj.enabled = message.enabled;
     return obj;
+  },
+  fromAmino(object: SetProtoRevEnabledProposalAmino): SetProtoRevEnabledProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      enabled: object.enabled
+    };
+  },
+  toAmino(message: SetProtoRevEnabledProposal): SetProtoRevEnabledProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.enabled = message.enabled;
+    return obj;
+  },
+  fromAminoMsg(object: SetProtoRevEnabledProposalAminoMsg): SetProtoRevEnabledProposal {
+    return SetProtoRevEnabledProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: SetProtoRevEnabledProposal): SetProtoRevEnabledProposalAminoMsg {
+    return {
+      type: "osmosis/protorev/set-proto-rev-enabled-proposal",
+      value: SetProtoRevEnabledProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SetProtoRevEnabledProposalProtoMsg): SetProtoRevEnabledProposal {
+    return SetProtoRevEnabledProposal.decode(message.value);
+  },
+  toProto(message: SetProtoRevEnabledProposal): Uint8Array {
+    return SetProtoRevEnabledProposal.encode(message).finish();
+  },
+  toProtoMsg(message: SetProtoRevEnabledProposal): SetProtoRevEnabledProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevEnabledProposal",
+      value: SetProtoRevEnabledProposal.encode(message).finish()
+    };
   }
 };
 function createBaseSetProtoRevAdminAccountProposal(): SetProtoRevAdminAccountProposal {
@@ -133,6 +169,7 @@ function createBaseSetProtoRevAdminAccountProposal(): SetProtoRevAdminAccountPro
   };
 }
 export const SetProtoRevAdminAccountProposal = {
+  typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevAdminAccountProposal",
   encode(message: SetProtoRevAdminAccountProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -209,5 +246,40 @@ export const SetProtoRevAdminAccountProposal = {
     obj.description = message.description;
     obj.account = message.account;
     return obj;
+  },
+  fromAmino(object: SetProtoRevAdminAccountProposalAmino): SetProtoRevAdminAccountProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      account: object.account
+    };
+  },
+  toAmino(message: SetProtoRevAdminAccountProposal): SetProtoRevAdminAccountProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.account = message.account;
+    return obj;
+  },
+  fromAminoMsg(object: SetProtoRevAdminAccountProposalAminoMsg): SetProtoRevAdminAccountProposal {
+    return SetProtoRevAdminAccountProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: SetProtoRevAdminAccountProposal): SetProtoRevAdminAccountProposalAminoMsg {
+    return {
+      type: "osmosis/protorev/set-proto-rev-admin-account-proposal",
+      value: SetProtoRevAdminAccountProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SetProtoRevAdminAccountProposalProtoMsg): SetProtoRevAdminAccountProposal {
+    return SetProtoRevAdminAccountProposal.decode(message.value);
+  },
+  toProto(message: SetProtoRevAdminAccountProposal): Uint8Array {
+    return SetProtoRevAdminAccountProposal.encode(message).finish();
+  },
+  toProtoMsg(message: SetProtoRevAdminAccountProposal): SetProtoRevAdminAccountProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.protorev.v1beta1.SetProtoRevAdminAccountProposal",
+      value: SetProtoRevAdminAccountProposal.encode(message).finish()
+    };
   }
 };

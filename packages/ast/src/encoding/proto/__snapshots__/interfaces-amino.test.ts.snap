@@ -63,14 +63,14 @@ exports[`Duration 1`] = `
     return obj;
   },
   fromAmino(object: DurationAmino): Duration {
-    const value = parseInt(object);
+    const value = BigInt(object);
     return {
-      seconds: BigInt(Math.floor(value / 1_000_000_000)),
-      nanos: value % 1_000_000_000
+      seconds: value / BigInt("1000000000"),
+      nanos: Number(value % BigInt("1000000000"))
     };
   },
   toAmino(message: Duration): DurationAmino {
-    return (message.seconds.toInt() * 1_000_000_000 + message.nanos).toString();
+    return (message.seconds * BigInt("1000000000") + BigInt(message.nanos)).toString();
   },
   fromAminoMsg(object: DurationAminoMsg): Duration {
     return Duration.fromAmino(object.value);
@@ -154,8 +154,8 @@ exports[`Height 1`] = `
   },
   fromAmino(object: HeightAmino): Height {
     return {
-      revisionNumber: BigInt(object.revision_number || "0", true),
-      revisionHeight: BigInt(object.revision_height || "0", true)
+      revisionNumber: BigInt(object.revision_number || "0"),
+      revisionHeight: BigInt(object.revision_height || "0")
     };
   },
   toAmino(message: Height): HeightAmino {

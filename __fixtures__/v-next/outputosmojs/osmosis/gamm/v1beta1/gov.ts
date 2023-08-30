@@ -58,6 +58,7 @@ function createBaseReplaceMigrationRecordsProposal(): ReplaceMigrationRecordsPro
   };
 }
 export const ReplaceMigrationRecordsProposal = {
+  typeUrl: "/osmosis.gamm.v1beta1.ReplaceMigrationRecordsProposal",
   encode(message: ReplaceMigrationRecordsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -122,6 +123,39 @@ export const ReplaceMigrationRecordsProposal = {
     obj.title = message.title;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: ReplaceMigrationRecordsProposalAmino): ReplaceMigrationRecordsProposal {
+    return {
+      title: object.title,
+      description: object.description
+    };
+  },
+  toAmino(message: ReplaceMigrationRecordsProposal): ReplaceMigrationRecordsProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: ReplaceMigrationRecordsProposalAminoMsg): ReplaceMigrationRecordsProposal {
+    return ReplaceMigrationRecordsProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: ReplaceMigrationRecordsProposal): ReplaceMigrationRecordsProposalAminoMsg {
+    return {
+      type: "osmosis/gamm/replace-migration-records-proposal",
+      value: ReplaceMigrationRecordsProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ReplaceMigrationRecordsProposalProtoMsg): ReplaceMigrationRecordsProposal {
+    return ReplaceMigrationRecordsProposal.decode(message.value);
+  },
+  toProto(message: ReplaceMigrationRecordsProposal): Uint8Array {
+    return ReplaceMigrationRecordsProposal.encode(message).finish();
+  },
+  toProtoMsg(message: ReplaceMigrationRecordsProposal): ReplaceMigrationRecordsProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.ReplaceMigrationRecordsProposal",
+      value: ReplaceMigrationRecordsProposal.encode(message).finish()
+    };
   }
 };
 function createBaseUpdateMigrationRecordsProposal(): UpdateMigrationRecordsProposal {
@@ -131,6 +165,7 @@ function createBaseUpdateMigrationRecordsProposal(): UpdateMigrationRecordsPropo
   };
 }
 export const UpdateMigrationRecordsProposal = {
+  typeUrl: "/osmosis.gamm.v1beta1.UpdateMigrationRecordsProposal",
   encode(message: UpdateMigrationRecordsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -195,5 +230,38 @@ export const UpdateMigrationRecordsProposal = {
     obj.title = message.title;
     obj.description = message.description;
     return obj;
+  },
+  fromAmino(object: UpdateMigrationRecordsProposalAmino): UpdateMigrationRecordsProposal {
+    return {
+      title: object.title,
+      description: object.description
+    };
+  },
+  toAmino(message: UpdateMigrationRecordsProposal): UpdateMigrationRecordsProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateMigrationRecordsProposalAminoMsg): UpdateMigrationRecordsProposal {
+    return UpdateMigrationRecordsProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UpdateMigrationRecordsProposal): UpdateMigrationRecordsProposalAminoMsg {
+    return {
+      type: "osmosis/gamm/update-migration-records-proposal",
+      value: UpdateMigrationRecordsProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UpdateMigrationRecordsProposalProtoMsg): UpdateMigrationRecordsProposal {
+    return UpdateMigrationRecordsProposal.decode(message.value);
+  },
+  toProto(message: UpdateMigrationRecordsProposal): Uint8Array {
+    return UpdateMigrationRecordsProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UpdateMigrationRecordsProposal): UpdateMigrationRecordsProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.UpdateMigrationRecordsProposal",
+      value: UpdateMigrationRecordsProposal.encode(message).finish()
+    };
   }
 };

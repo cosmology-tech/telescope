@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -91,6 +91,7 @@ function createBaseSystemParameters(): SystemParameters {
   };
 }
 export const SystemParameters = {
+  typeUrl: "/google.api.SystemParameters",
   encode(message: SystemParameters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       SystemParameterRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -128,10 +129,39 @@ export const SystemParameters = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<SystemParameters>): SystemParameters {
+  fromPartial(object: Partial<SystemParameters>): SystemParameters {
     const message = createBaseSystemParameters();
     message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: SystemParametersAmino): SystemParameters {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SystemParameters): SystemParametersAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
+    return SystemParameters.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
+    return SystemParameters.decode(message.value);
+  },
+  toProto(message: SystemParameters): Uint8Array {
+    return SystemParameters.encode(message).finish();
+  },
+  toProtoMsg(message: SystemParameters): SystemParametersProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameters",
+      value: SystemParameters.encode(message).finish()
+    };
   }
 };
 function createBaseSystemParameterRule(): SystemParameterRule {
@@ -141,6 +171,7 @@ function createBaseSystemParameterRule(): SystemParameterRule {
   };
 }
 export const SystemParameterRule = {
+  typeUrl: "/google.api.SystemParameterRule",
   encode(message: SystemParameterRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -186,11 +217,42 @@ export const SystemParameterRule = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
+  fromPartial(object: Partial<SystemParameterRule>): SystemParameterRule {
     const message = createBaseSystemParameterRule();
     message.selector = object.selector ?? "";
     message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
+    return {
+      selector: object.selector,
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    if (message.parameters) {
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
+    } else {
+      obj.parameters = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
+    return SystemParameterRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
+    return SystemParameterRule.decode(message.value);
+  },
+  toProto(message: SystemParameterRule): Uint8Array {
+    return SystemParameterRule.encode(message).finish();
+  },
+  toProtoMsg(message: SystemParameterRule): SystemParameterRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameterRule",
+      value: SystemParameterRule.encode(message).finish()
+    };
   }
 };
 function createBaseSystemParameter(): SystemParameter {
@@ -201,6 +263,7 @@ function createBaseSystemParameter(): SystemParameter {
   };
 }
 export const SystemParameter = {
+  typeUrl: "/google.api.SystemParameter",
   encode(message: SystemParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -250,11 +313,40 @@ export const SystemParameter = {
     message.urlQueryParameter !== undefined && (obj.urlQueryParameter = message.urlQueryParameter);
     return obj;
   },
-  fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {
+  fromPartial(object: Partial<SystemParameter>): SystemParameter {
     const message = createBaseSystemParameter();
     message.name = object.name ?? "";
     message.httpHeader = object.httpHeader ?? "";
     message.urlQueryParameter = object.urlQueryParameter ?? "";
     return message;
+  },
+  fromAmino(object: SystemParameterAmino): SystemParameter {
+    return {
+      name: object.name,
+      httpHeader: object.http_header,
+      urlQueryParameter: object.url_query_parameter
+    };
+  },
+  toAmino(message: SystemParameter): SystemParameterAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.http_header = message.httpHeader;
+    obj.url_query_parameter = message.urlQueryParameter;
+    return obj;
+  },
+  fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
+    return SystemParameter.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
+    return SystemParameter.decode(message.value);
+  },
+  toProto(message: SystemParameter): Uint8Array {
+    return SystemParameter.encode(message).finish();
+  },
+  toProtoMsg(message: SystemParameter): SystemParameterProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameter",
+      value: SystemParameter.encode(message).finish()
+    };
   }
 };

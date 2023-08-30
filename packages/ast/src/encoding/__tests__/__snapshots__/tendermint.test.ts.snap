@@ -424,12 +424,12 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           nanos: parseInt(max_clock_drift) % 1_000_000_000
         },
         frozenHeight: frozen_height ? {
-          revisionHeight: BigInt(frozen_height.revision_height || "0", true),
-          revisionNumber: BigInt(frozen_height.revision_number || "0", true)
+          revisionHeight: BigInt(frozen_height.revision_height || "0"),
+          revisionNumber: BigInt(frozen_height.revision_number || "0")
         } : undefined,
         latestHeight: latest_height ? {
-          revisionHeight: BigInt(latest_height.revision_height || "0", true),
-          revisionNumber: BigInt(latest_height.revision_number || "0", true)
+          revisionHeight: BigInt(latest_height.revision_height || "0"),
+          revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
         proofSpecs: proof_specs.map(el0 => ({
           leafSpec: {
@@ -874,12 +874,12 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
           nanos: parseInt(max_clock_drift) % 1_000_000_000
         },
         frozenHeight: frozen_height ? {
-          revisionHeight: BigInt(frozen_height.revision_height || "0", true),
-          revisionNumber: BigInt(frozen_height.revision_number || "0", true)
+          revisionHeight: BigInt(frozen_height.revision_height || "0"),
+          revisionNumber: BigInt(frozen_height.revision_number || "0")
         } : undefined,
         latestHeight: latest_height ? {
-          revisionHeight: BigInt(latest_height.revision_height || "0", true),
-          revisionNumber: BigInt(latest_height.revision_number || "0", true)
+          revisionHeight: BigInt(latest_height.revision_height || "0"),
+          revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
         proofSpecs: proof_specs.map(el0 => ({
           leafSpec: {

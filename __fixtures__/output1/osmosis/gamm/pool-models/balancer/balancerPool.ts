@@ -3,6 +3,7 @@ import { Duration, DurationSDKType } from "../../../../google/protobuf/duration"
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -152,6 +153,7 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
   };
 }
 export const SmoothWeightChangeParams = {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
   encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
@@ -248,6 +250,51 @@ export const SmoothWeightChangeParams = {
       obj.target_pool_weights = [];
     }
     return obj;
+  },
+  fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
+    return {
+      startTime: object.start_time,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
+      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAmino {
+    const obj: any = {};
+    obj.start_time = message.startTime;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    if (message.initialPoolWeights) {
+      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.initial_pool_weights = [];
+    }
+    if (message.targetPoolWeights) {
+      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.target_pool_weights = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
+    return SmoothWeightChangeParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/smooth-weight-change-params",
+      value: SmoothWeightChangeParams.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
+    return SmoothWeightChangeParams.decode(message.value);
+  },
+  toProto(message: SmoothWeightChangeParams): Uint8Array {
+    return SmoothWeightChangeParams.encode(message).finish();
+  },
+  toProtoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
+      value: SmoothWeightChangeParams.encode(message).finish()
+    };
   }
 };
 function createBasePoolParams(): PoolParams {
@@ -258,12 +305,13 @@ function createBasePoolParams(): PoolParams {
   };
 }
 export const PoolParams = {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
-      writer.uint32(10).string(message.swapFee);
+      writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
     if (message.exitFee !== "") {
-      writer.uint32(18).string(message.exitFee);
+      writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
     }
     if (message.smoothWeightChangeParams !== undefined) {
       SmoothWeightChangeParams.encode(message.smoothWeightChangeParams, writer.uint32(26).fork()).ldelim();
@@ -278,10 +326,10 @@ export const PoolParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.swapFee = reader.string();
+          message.swapFee = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 2:
-          message.exitFee = reader.string();
+          message.exitFee = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
           message.smoothWeightChangeParams = SmoothWeightChangeParams.decode(reader, reader.uint32());
@@ -327,6 +375,41 @@ export const PoolParams = {
     obj.exit_fee = message.exitFee;
     message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
     return obj;
+  },
+  fromAmino(object: PoolParamsAmino): PoolParams {
+    return {
+      swapFee: object.swap_fee,
+      exitFee: object.exit_fee,
+      smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
+    };
+  },
+  toAmino(message: PoolParams): PoolParamsAmino {
+    const obj: any = {};
+    obj.swap_fee = message.swapFee;
+    obj.exit_fee = message.exitFee;
+    obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
+    return PoolParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-params",
+      value: PoolParams.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
+    return PoolParams.decode(message.value);
+  },
+  toProto(message: PoolParams): Uint8Array {
+    return PoolParams.encode(message).finish();
+  },
+  toProtoMsg(message: PoolParams): PoolParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
+      value: PoolParams.encode(message).finish()
+    };
   }
 };
 function createBasePoolAsset(): PoolAsset {
@@ -336,6 +419,7 @@ function createBasePoolAsset(): PoolAsset {
   };
 }
 export const PoolAsset = {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
   encode(message: PoolAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
@@ -394,6 +478,39 @@ export const PoolAsset = {
     message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
     obj.weight = message.weight;
     return obj;
+  },
+  fromAmino(object: PoolAssetAmino): PoolAsset {
+    return {
+      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      weight: object.weight
+    };
+  },
+  toAmino(message: PoolAsset): PoolAssetAmino {
+    const obj: any = {};
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
+    obj.weight = message.weight;
+    return obj;
+  },
+  fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
+    return PoolAsset.fromAmino(object.value);
+  },
+  toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-asset",
+      value: PoolAsset.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
+    return PoolAsset.decode(message.value);
+  },
+  toProto(message: PoolAsset): Uint8Array {
+    return PoolAsset.encode(message).finish();
+  },
+  toProtoMsg(message: PoolAsset): PoolAssetProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
+      value: PoolAsset.encode(message).finish()
+    };
   }
 };
 function createBasePool(): Pool {
@@ -408,6 +525,7 @@ function createBasePool(): Pool {
   };
 }
 export const Pool = {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool",
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -529,5 +647,52 @@ export const Pool = {
     }
     obj.total_weight = message.totalWeight;
     return obj;
+  },
+  fromAmino(object: PoolAmino): Pool {
+    return {
+      address: object.address,
+      id: Long.fromString(object.id),
+      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
+      futurePoolGovernor: object.future_pool_governor,
+      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
+      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
+      totalWeight: object.total_weight
+    };
+  },
+  toAmino(message: Pool): PoolAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+    obj.future_pool_governor = message.futurePoolGovernor;
+    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
+    if (message.poolAssets) {
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.pool_assets = [];
+    }
+    obj.total_weight = message.totalWeight;
+    return obj;
+  },
+  fromAminoMsg(object: PoolAminoMsg): Pool {
+    return Pool.fromAmino(object.value);
+  },
+  toAminoMsg(message: Pool): PoolAminoMsg {
+    return {
+      type: "osmosis/gamm/pool",
+      value: Pool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PoolProtoMsg): Pool {
+    return Pool.decode(message.value);
+  },
+  toProto(message: Pool): Uint8Array {
+    return Pool.encode(message).finish();
+  },
+  toProtoMsg(message: Pool): PoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.Pool",
+      value: Pool.encode(message).finish()
+    };
   }
 };

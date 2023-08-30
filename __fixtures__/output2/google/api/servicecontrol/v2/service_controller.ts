@@ -3,7 +3,7 @@
 import { AttributeContext } from "../../../rpc/context/attribute_context";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { isSet, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -114,6 +114,7 @@ function createBaseCheckRequest(): CheckRequest {
   };
 }
 export const CheckRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -183,7 +184,7 @@ export const CheckRequest = {
     message.flags !== undefined && (obj.flags = message.flags);
     return obj;
   },
-  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
+  fromPartial(object: Partial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
@@ -191,6 +192,43 @@ export const CheckRequest = {
     message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
     message.flags = object.flags ?? "";
     return message;
+  },
+  fromAmino(object: CheckRequestAmino): CheckRequest {
+    return {
+      serviceName: object.service_name,
+      serviceConfigId: object.service_config_id,
+      attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
+      flags: object.flags
+    };
+  },
+  toAmino(message: CheckRequest): CheckRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
+    obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined;
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    obj.flags = message.flags;
+    return obj;
+  },
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 };
 function createBaseResourceInfo(): ResourceInfo {
@@ -203,6 +241,7 @@ function createBaseResourceInfo(): ResourceInfo {
   };
 }
 export const ResourceInfo = {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -268,7 +307,7 @@ export const ResourceInfo = {
     message.location !== undefined && (obj.location = message.location);
     return obj;
   },
-  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
+  fromPartial(object: Partial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -276,6 +315,39 @@ export const ResourceInfo = {
     message.container = object.container ?? "";
     message.location = object.location ?? "";
     return message;
+  },
+  fromAmino(object: ResourceInfoAmino): ResourceInfo {
+    return {
+      name: object.name,
+      type: object.type,
+      permission: object.permission,
+      container: object.container,
+      location: object.location
+    };
+  },
+  toAmino(message: ResourceInfo): ResourceInfoAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.permission = message.permission;
+    obj.container = message.container;
+    obj.location = message.location;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 };
 function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
@@ -326,11 +398,32 @@ export const CheckResponse_HeadersEntry = {
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
-  fromPartial(object: DeepPartial<CheckResponse_HeadersEntry>): CheckResponse_HeadersEntry {
+  fromPartial(object: Partial<CheckResponse_HeadersEntry>): CheckResponse_HeadersEntry {
     const message = createBaseCheckResponse_HeadersEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.decode(message.value);
+  },
+  toProto(message: CheckResponse_HeadersEntry): Uint8Array {
+    return CheckResponse_HeadersEntry.encode(message).finish();
   }
 };
 function createBaseCheckResponse(): CheckResponse {
@@ -340,6 +433,7 @@ function createBaseCheckResponse(): CheckResponse {
   };
 }
 export const CheckResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== undefined) {
       Status.encode(message.status, writer.uint32(10).fork()).ldelim();
@@ -397,7 +491,7 @@ export const CheckResponse = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
+  fromPartial(object: Partial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     message.headers = Object.entries(object.headers ?? {}).reduce<{
@@ -409,6 +503,43 @@ export const CheckResponse = {
       return acc;
     }, {});
     return message;
+  },
+  fromAmino(object: CheckResponseAmino): CheckResponse {
+    return {
+      status: object?.status ? Status.fromAmino(object.status) : undefined,
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: CheckResponse): CheckResponseAmino {
+    const obj: any = {};
+    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.headers = {};
+    if (message.headers) {
+      Object.entries(message.headers).forEach(([k, v]) => {
+        obj.headers[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 };
 function createBaseReportRequest(): ReportRequest {
@@ -419,6 +550,7 @@ function createBaseReportRequest(): ReportRequest {
   };
 }
 export const ReportRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
   encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -472,18 +604,52 @@ export const ReportRequest = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
+  fromPartial(object: Partial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.operations = object.operations?.map(e => AttributeContext.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ReportRequestAmino): ReportRequest {
+    return {
+      serviceName: object.service_name,
+      serviceConfigId: object.service_config_id,
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ReportRequest): ReportRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
+    return ReportRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
+    return ReportRequest.decode(message.value);
+  },
+  toProto(message: ReportRequest): Uint8Array {
+    return ReportRequest.encode(message).finish();
+  },
+  toProtoMsg(message: ReportRequest): ReportRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+      value: ReportRequest.encode(message).finish()
+    };
   }
 };
 function createBaseReportResponse(): ReportResponse {
   return {};
 }
 export const ReportResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
   encode(_: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -508,8 +674,30 @@ export const ReportResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<ReportResponse>): ReportResponse {
+  fromPartial(_: Partial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     return message;
+  },
+  fromAmino(_: ReportResponseAmino): ReportResponse {
+    return {};
+  },
+  toAmino(_: ReportResponse): ReportResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
+    return ReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
+    return ReportResponse.decode(message.value);
+  },
+  toProto(message: ReportResponse): Uint8Array {
+    return ReportResponse.encode(message).finish();
+  },
+  toProtoMsg(message: ReportResponse): ReportResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+      value: ReportResponse.encode(message).finish()
+    };
   }
 };

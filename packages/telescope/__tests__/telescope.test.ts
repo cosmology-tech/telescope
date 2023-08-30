@@ -70,6 +70,7 @@ const options: TelescopeOptions = {
       ]
     },
     typingsFormat: {
+      num64: 'long',
       useDeepPartial: true,
       useExact: false,
       timestamp: 'date',

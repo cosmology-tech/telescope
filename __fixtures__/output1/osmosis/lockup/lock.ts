@@ -170,6 +170,7 @@ function createBasePeriodLock(): PeriodLock {
   };
 }
 export const PeriodLock = {
+  typeUrl: "/osmosis.lockup.PeriodLock",
   encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
@@ -269,6 +270,49 @@ export const PeriodLock = {
       obj.coins = [];
     }
     return obj;
+  },
+  fromAmino(object: PeriodLockAmino): PeriodLock {
+    return {
+      ID: Long.fromString(object.ID),
+      owner: object.owner,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      endTime: object.end_time,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: PeriodLock): PeriodLockAmino {
+    const obj: any = {};
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = message.owner;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.end_time = message.endTime;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PeriodLockAminoMsg): PeriodLock {
+    return PeriodLock.fromAmino(object.value);
+  },
+  toAminoMsg(message: PeriodLock): PeriodLockAminoMsg {
+    return {
+      type: "osmosis/lockup/period-lock",
+      value: PeriodLock.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: PeriodLockProtoMsg): PeriodLock {
+    return PeriodLock.decode(message.value);
+  },
+  toProto(message: PeriodLock): Uint8Array {
+    return PeriodLock.encode(message).finish();
+  },
+  toProtoMsg(message: PeriodLock): PeriodLockProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.PeriodLock",
+      value: PeriodLock.encode(message).finish()
+    };
   }
 };
 function createBaseQueryCondition(): QueryCondition {
@@ -280,6 +324,7 @@ function createBaseQueryCondition(): QueryCondition {
   };
 }
 export const QueryCondition = {
+  typeUrl: "/osmosis.lockup.QueryCondition",
   encode(message: QueryCondition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
@@ -360,6 +405,43 @@ export const QueryCondition = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
+  },
+  fromAmino(object: QueryConditionAmino): QueryCondition {
+    return {
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
+      denom: object.denom,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      timestamp: object.timestamp
+    };
+  },
+  toAmino(message: QueryCondition): QueryConditionAmino {
+    const obj: any = {};
+    obj.lock_query_type = message.lockQueryType;
+    obj.denom = message.denom;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.timestamp = message.timestamp;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
+    return QueryCondition.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryCondition): QueryConditionAminoMsg {
+    return {
+      type: "osmosis/lockup/query-condition",
+      value: QueryCondition.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryConditionProtoMsg): QueryCondition {
+    return QueryCondition.decode(message.value);
+  },
+  toProto(message: QueryCondition): Uint8Array {
+    return QueryCondition.encode(message).finish();
+  },
+  toProtoMsg(message: QueryCondition): QueryConditionProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.QueryCondition",
+      value: QueryCondition.encode(message).finish()
+    };
   }
 };
 function createBaseSyntheticLock(): SyntheticLock {
@@ -371,6 +453,7 @@ function createBaseSyntheticLock(): SyntheticLock {
   };
 }
 export const SyntheticLock = {
+  typeUrl: "/osmosis.lockup.SyntheticLock",
   encode(message: SyntheticLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.underlyingLockId.isZero()) {
       writer.uint32(8).uint64(message.underlyingLockId);
@@ -451,5 +534,42 @@ export const SyntheticLock = {
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+  fromAmino(object: SyntheticLockAmino): SyntheticLock {
+    return {
+      underlyingLockId: Long.fromString(object.underlying_lock_id),
+      synthDenom: object.synth_denom,
+      endTime: object.end_time,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+    };
+  },
+  toAmino(message: SyntheticLock): SyntheticLockAmino {
+    const obj: any = {};
+    obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
+    obj.synth_denom = message.synthDenom;
+    obj.end_time = message.endTime;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SyntheticLockAminoMsg): SyntheticLock {
+    return SyntheticLock.fromAmino(object.value);
+  },
+  toAminoMsg(message: SyntheticLock): SyntheticLockAminoMsg {
+    return {
+      type: "osmosis/lockup/synthetic-lock",
+      value: SyntheticLock.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SyntheticLockProtoMsg): SyntheticLock {
+    return SyntheticLock.decode(message.value);
+  },
+  toProto(message: SyntheticLock): Uint8Array {
+    return SyntheticLock.encode(message).finish();
+  },
+  toProtoMsg(message: SyntheticLock): SyntheticLockProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.SyntheticLock",
+      value: SyntheticLock.encode(message).finish()
+    };
   }
 };

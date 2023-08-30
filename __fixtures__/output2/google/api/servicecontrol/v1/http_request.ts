@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Duration } from "../../../protobuf/duration";
-import { Long, isSet, DeepPartial } from "../../../../helpers";
+import { Long, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
@@ -101,6 +101,7 @@ function createBaseHttpRequest(): HttpRequest {
   };
 }
 export const HttpRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
   encode(message: HttpRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestMethod !== "") {
       writer.uint32(10).string(message.requestMethod);
@@ -246,7 +247,7 @@ export const HttpRequest = {
     message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
-  fromPartial(object: DeepPartial<HttpRequest>): HttpRequest {
+  fromPartial(object: Partial<HttpRequest>): HttpRequest {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
@@ -264,5 +265,58 @@ export const HttpRequest = {
     message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     return message;
+  },
+  fromAmino(object: HttpRequestAmino): HttpRequest {
+    return {
+      requestMethod: object.request_method,
+      requestUrl: object.request_url,
+      requestSize: Long.fromString(object.request_size),
+      status: object.status,
+      responseSize: Long.fromString(object.response_size),
+      userAgent: object.user_agent,
+      remoteIp: object.remote_ip,
+      serverIp: object.server_ip,
+      referer: object.referer,
+      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
+      cacheLookup: object.cache_lookup,
+      cacheHit: object.cache_hit,
+      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
+      cacheFillBytes: Long.fromString(object.cache_fill_bytes),
+      protocol: object.protocol
+    };
+  },
+  toAmino(message: HttpRequest): HttpRequestAmino {
+    const obj: any = {};
+    obj.request_method = message.requestMethod;
+    obj.request_url = message.requestUrl;
+    obj.request_size = message.requestSize ? message.requestSize.toString() : undefined;
+    obj.status = message.status;
+    obj.response_size = message.responseSize ? message.responseSize.toString() : undefined;
+    obj.user_agent = message.userAgent;
+    obj.remote_ip = message.remoteIp;
+    obj.server_ip = message.serverIp;
+    obj.referer = message.referer;
+    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
+    obj.cache_lookup = message.cacheLookup;
+    obj.cache_hit = message.cacheHit;
+    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
+    obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
+    obj.protocol = message.protocol;
+    return obj;
+  },
+  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
+    return HttpRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
+    return HttpRequest.decode(message.value);
+  },
+  toProto(message: HttpRequest): Uint8Array {
+    return HttpRequest.encode(message).finish();
+  },
+  toProtoMsg(message: HttpRequest): HttpRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
+      value: HttpRequest.encode(message).finish()
+    };
   }
 };

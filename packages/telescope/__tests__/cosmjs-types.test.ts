@@ -51,6 +51,7 @@ const options: TelescopeOptions = {
             toJSON: true
         },
         typingsFormat: {
+            num64: 'long',
             timestamp: 'timestamp',
             duration: 'duration'
         }

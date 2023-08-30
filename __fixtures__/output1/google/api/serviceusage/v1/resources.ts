@@ -167,6 +167,7 @@ function createBaseService(): Service {
   };
 }
 export const Service = {
+  typeUrl: "/google.api.serviceusage.v1.Service",
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -247,6 +248,37 @@ export const Service = {
     message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     return obj;
+  },
+  fromAmino(object: ServiceAmino): Service {
+    return {
+      name: object.name,
+      parent: object.parent,
+      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1
+    };
+  },
+  toAmino(message: Service): ServiceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.parent = message.parent;
+    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
+  },
+  toProto(message: Service): Uint8Array {
+    return Service.encode(message).finish();
+  },
+  toProtoMsg(message: Service): ServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.Service",
+      value: Service.encode(message).finish()
+    };
   }
 };
 function createBaseServiceConfig(): ServiceConfig {
@@ -264,6 +296,7 @@ function createBaseServiceConfig(): ServiceConfig {
   };
 }
 export const ServiceConfig = {
+  typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
   encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -434,6 +467,61 @@ export const ServiceConfig = {
     }
     message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
     return obj;
+  },
+  fromAmino(object: ServiceConfigAmino): ServiceConfig {
+    return {
+      name: object.name,
+      title: object.title,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
+      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
+      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
+      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
+    };
+  },
+  toAmino(message: ServiceConfig): ServiceConfigAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.title = message.title;
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
+    return ServiceConfig.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
+    return ServiceConfig.decode(message.value);
+  },
+  toProto(message: ServiceConfig): Uint8Array {
+    return ServiceConfig.encode(message).finish();
+  },
+  toProtoMsg(message: ServiceConfig): ServiceConfigProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
+      value: ServiceConfig.encode(message).finish()
+    };
   }
 };
 function createBaseOperationMetadata(): OperationMetadata {
@@ -442,6 +530,7 @@ function createBaseOperationMetadata(): OperationMetadata {
   };
 }
 export const OperationMetadata = {
+  typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -497,5 +586,34 @@ export const OperationMetadata = {
       obj.resource_names = [];
     }
     return obj;
+  },
+  fromAmino(object: OperationMetadataAmino): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: OperationMetadata): OperationMetadataAmino {
+    const obj: any = {};
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
+    return OperationMetadata.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
+  },
+  toProto(message: OperationMetadata): Uint8Array {
+    return OperationMetadata.encode(message).finish();
+  },
+  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
+      value: OperationMetadata.encode(message).finish()
+    };
   }
 };

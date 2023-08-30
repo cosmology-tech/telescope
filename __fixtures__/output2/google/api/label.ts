@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -60,6 +60,7 @@ function createBaseLabelDescriptor(): LabelDescriptor {
   };
 }
 export const LabelDescriptor = {
+  typeUrl: "/google.api.LabelDescriptor",
   encode(message: LabelDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -109,11 +110,40 @@ export const LabelDescriptor = {
     message.description !== undefined && (obj.description = message.description);
     return obj;
   },
-  fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
+  fromPartial(object: Partial<LabelDescriptor>): LabelDescriptor {
     const message = createBaseLabelDescriptor();
     message.key = object.key ?? "";
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
+    return {
+      key: object.key,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
+      description: object.description
+    };
+  },
+  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value_type = message.valueType;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
+    return LabelDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
+    return LabelDescriptor.decode(message.value);
+  },
+  toProto(message: LabelDescriptor): Uint8Array {
+    return LabelDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: LabelDescriptor): LabelDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.LabelDescriptor",
+      value: LabelDescriptor.encode(message).finish()
+    };
   }
 };

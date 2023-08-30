@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDAmino, BidIDSDKType } from "./bid";
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
@@ -55,7 +55,7 @@ export function lease_StateToJSON(object: Lease_State): string {
 /** LeaseID stores bid details of lease */
 export interface LeaseID {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -79,7 +79,7 @@ export interface LeaseIDAminoMsg {
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -89,8 +89,8 @@ export interface Lease {
   leaseId: LeaseID;
   state: Lease_State;
   price: DecCoin;
-  createdAt: Long;
-  closedOn: Long;
+  createdAt: bigint;
+  closedOn: bigint;
 }
 export interface LeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.Lease";
@@ -113,13 +113,13 @@ export interface LeaseSDKType {
   lease_id: LeaseIDSDKType;
   state: Lease_State;
   price: DecCoinSDKType;
-  created_at: Long;
-  closed_on: Long;
+  created_at: bigint;
+  closed_on: bigint;
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFilters {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -145,7 +145,7 @@ export interface LeaseFiltersAminoMsg {
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {
   owner: string;
-  dseq: Long;
+  dseq: bigint;
   gseq: number;
   oseq: number;
   provider: string;
@@ -256,7 +256,7 @@ export interface MsgCloseLeaseResponseSDKType {}
 function createBaseLeaseID(): LeaseID {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: ""
@@ -264,11 +264,11 @@ function createBaseLeaseID(): LeaseID {
 }
 export const LeaseID = {
   typeUrl: "/akash.market.v1beta2.LeaseID",
-  encode(message: LeaseID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LeaseID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -282,8 +282,8 @@ export const LeaseID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LeaseID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LeaseID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseID();
     while (reader.pos < end) {
@@ -293,7 +293,7 @@ export const LeaseID = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -314,7 +314,7 @@ export const LeaseID = {
   fromJSON(object: any): LeaseID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -323,7 +323,7 @@ export const LeaseID = {
   toJSON(message: LeaseID): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -332,7 +332,7 @@ export const LeaseID = {
   fromPartial(object: DeepPartial<LeaseID>): LeaseID {
     const message = createBaseLeaseID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -359,7 +359,7 @@ export const LeaseID = {
   fromAmino(object: LeaseIDAmino): LeaseID {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq,
       provider: object.provider
@@ -395,13 +395,13 @@ function createBaseLease(): Lease {
     leaseId: LeaseID.fromPartial({}),
     state: 0,
     price: DecCoin.fromPartial({}),
-    createdAt: Long.ZERO,
-    closedOn: Long.ZERO
+    createdAt: BigInt(0),
+    closedOn: BigInt(0)
   };
 }
 export const Lease = {
   typeUrl: "/akash.market.v1beta2.Lease",
-  encode(message: Lease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: Lease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
     }
@@ -411,16 +411,16 @@ export const Lease = {
     if (message.price !== undefined) {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
-    if (!message.createdAt.isZero()) {
+    if (message.createdAt !== BigInt(0)) {
       writer.uint32(32).int64(message.createdAt);
     }
-    if (!message.closedOn.isZero()) {
+    if (message.closedOn !== BigInt(0)) {
       writer.uint32(40).int64(message.closedOn);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Lease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Lease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLease();
     while (reader.pos < end) {
@@ -436,10 +436,10 @@ export const Lease = {
           message.price = DecCoin.decode(reader, reader.uint32());
           break;
         case 4:
-          message.createdAt = (reader.int64() as Long);
+          message.createdAt = reader.int64();
           break;
         case 5:
-          message.closedOn = (reader.int64() as Long);
+          message.closedOn = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -453,8 +453,8 @@ export const Lease = {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO,
-      closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0),
+      closedOn: isSet(object.closedOn) ? BigInt(object.closedOn.toString()) : BigInt(0)
     };
   },
   toJSON(message: Lease): unknown {
@@ -462,8 +462,8 @@ export const Lease = {
     message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
     message.state !== undefined && (obj.state = lease_StateToJSON(message.state));
     message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || Long.ZERO).toString());
-    message.closedOn !== undefined && (obj.closedOn = (message.closedOn || Long.ZERO).toString());
+    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
+    message.closedOn !== undefined && (obj.closedOn = (message.closedOn || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Lease>): Lease {
@@ -471,8 +471,8 @@ export const Lease = {
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     message.state = object.state ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
-    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
-    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
+    message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? BigInt(object.createdAt.toString()) : BigInt(0);
+    message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? BigInt(object.closedOn.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: LeaseSDKType): Lease {
@@ -498,8 +498,8 @@ export const Lease = {
       leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      createdAt: Long.fromString(object.created_at),
-      closedOn: Long.fromString(object.closed_on)
+      createdAt: BigInt(object.created_at),
+      closedOn: BigInt(object.closed_on)
     };
   },
   toAmino(message: Lease): LeaseAmino {
@@ -530,7 +530,7 @@ export const Lease = {
 function createBaseLeaseFilters(): LeaseFilters {
   return {
     owner: "",
-    dseq: Long.UZERO,
+    dseq: BigInt(0),
     gseq: 0,
     oseq: 0,
     provider: "",
@@ -539,11 +539,11 @@ function createBaseLeaseFilters(): LeaseFilters {
 }
 export const LeaseFilters = {
   typeUrl: "/akash.market.v1beta2.LeaseFilters",
-  encode(message: LeaseFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: LeaseFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (!message.dseq.isZero()) {
+    if (message.dseq !== BigInt(0)) {
       writer.uint32(16).uint64(message.dseq);
     }
     if (message.gseq !== 0) {
@@ -560,8 +560,8 @@ export const LeaseFilters = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): LeaseFilters {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): LeaseFilters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseFilters();
     while (reader.pos < end) {
@@ -571,7 +571,7 @@ export const LeaseFilters = {
           message.owner = reader.string();
           break;
         case 2:
-          message.dseq = (reader.uint64() as Long);
+          message.dseq = reader.uint64();
           break;
         case 3:
           message.gseq = reader.uint32();
@@ -595,7 +595,7 @@ export const LeaseFilters = {
   fromJSON(object: any): LeaseFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",
@@ -605,7 +605,7 @@ export const LeaseFilters = {
   toJSON(message: LeaseFilters): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
     message.provider !== undefined && (obj.provider = message.provider);
@@ -615,7 +615,7 @@ export const LeaseFilters = {
   fromPartial(object: DeepPartial<LeaseFilters>): LeaseFilters {
     const message = createBaseLeaseFilters();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
+    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
@@ -645,7 +645,7 @@ export const LeaseFilters = {
   fromAmino(object: LeaseFiltersAmino): LeaseFilters {
     return {
       owner: object.owner,
-      dseq: Long.fromString(object.dseq),
+      dseq: BigInt(object.dseq),
       gseq: object.gseq,
       oseq: object.oseq,
       provider: object.provider,
@@ -685,14 +685,14 @@ function createBaseMsgCreateLease(): MsgCreateLease {
 }
 export const MsgCreateLease = {
   typeUrl: "/akash.market.v1beta2.MsgCreateLease",
-  encode(message: MsgCreateLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLease();
     while (reader.pos < end) {
@@ -764,11 +764,11 @@ function createBaseMsgCreateLeaseResponse(): MsgCreateLeaseResponse {
 }
 export const MsgCreateLeaseResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse",
-  encode(_: MsgCreateLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCreateLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLeaseResponse();
     while (reader.pos < end) {
@@ -829,14 +829,14 @@ function createBaseMsgWithdrawLease(): MsgWithdrawLease {
 }
 export const MsgWithdrawLease = {
   typeUrl: "/akash.market.v1beta2.MsgWithdrawLease",
-  encode(message: MsgWithdrawLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgWithdrawLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       LeaseID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLease();
     while (reader.pos < end) {
@@ -908,11 +908,11 @@ function createBaseMsgWithdrawLeaseResponse(): MsgWithdrawLeaseResponse {
 }
 export const MsgWithdrawLeaseResponse = {
   typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse",
-  encode(_: MsgWithdrawLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgWithdrawLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLeaseResponse();
     while (reader.pos < end) {
@@ -973,14 +973,14 @@ function createBaseMsgCloseLease(): MsgCloseLease {
 }
 export const MsgCloseLease = {
   typeUrl: "/akash.market.v1beta2.MsgCloseLease",
-  encode(message: MsgCloseLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCloseLease, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLease {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLease {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLease();
     while (reader.pos < end) {
@@ -1052,11 +1052,11 @@ function createBaseMsgCloseLeaseResponse(): MsgCloseLeaseResponse {
 }
 export const MsgCloseLeaseResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse",
-  encode(_: MsgCloseLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCloseLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLeaseResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLeaseResponse();
     while (reader.pos < end) {

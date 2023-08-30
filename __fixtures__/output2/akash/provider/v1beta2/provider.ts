@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Attribute } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { isSet, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** ProviderInfo */
 export interface ProviderInfo {
@@ -47,6 +47,7 @@ function createBaseProviderInfo(): ProviderInfo {
   };
 }
 export const ProviderInfo = {
+  typeUrl: "/akash.provider.v1beta2.ProviderInfo",
   encode(message: ProviderInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
@@ -88,11 +89,38 @@ export const ProviderInfo = {
     message.website !== undefined && (obj.website = message.website);
     return obj;
   },
-  fromPartial(object: DeepPartial<ProviderInfo>): ProviderInfo {
+  fromPartial(object: Partial<ProviderInfo>): ProviderInfo {
     const message = createBaseProviderInfo();
     message.email = object.email ?? "";
     message.website = object.website ?? "";
     return message;
+  },
+  fromAmino(object: ProviderInfoAmino): ProviderInfo {
+    return {
+      email: object.email,
+      website: object.website
+    };
+  },
+  toAmino(message: ProviderInfo): ProviderInfoAmino {
+    const obj: any = {};
+    obj.email = message.email;
+    obj.website = message.website;
+    return obj;
+  },
+  fromAminoMsg(object: ProviderInfoAminoMsg): ProviderInfo {
+    return ProviderInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProviderInfoProtoMsg): ProviderInfo {
+    return ProviderInfo.decode(message.value);
+  },
+  toProto(message: ProviderInfo): Uint8Array {
+    return ProviderInfo.encode(message).finish();
+  },
+  toProtoMsg(message: ProviderInfo): ProviderInfoProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.ProviderInfo",
+      value: ProviderInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateProvider(): MsgCreateProvider {
@@ -104,6 +132,7 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
   };
 }
 export const MsgCreateProvider = {
+  typeUrl: "/akash.provider.v1beta2.MsgCreateProvider",
   encode(message: MsgCreateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -165,19 +194,55 @@ export const MsgCreateProvider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgCreateProvider>): MsgCreateProvider {
+  fromPartial(object: Partial<MsgCreateProvider>): MsgCreateProvider {
     const message = createBaseMsgCreateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+  fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
+    return MsgCreateProvider.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateProviderProtoMsg): MsgCreateProvider {
+    return MsgCreateProvider.decode(message.value);
+  },
+  toProto(message: MsgCreateProvider): Uint8Array {
+    return MsgCreateProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateProvider): MsgCreateProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgCreateProvider",
+      value: MsgCreateProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateProviderResponse(): MsgCreateProviderResponse {
   return {};
 }
 export const MsgCreateProviderResponse = {
+  typeUrl: "/akash.provider.v1beta2.MsgCreateProviderResponse",
   encode(_: MsgCreateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -202,9 +267,31 @@ export const MsgCreateProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
+  fromPartial(_: Partial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
+  },
+  fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateProviderResponseAminoMsg): MsgCreateProviderResponse {
+    return MsgCreateProviderResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateProviderResponseProtoMsg): MsgCreateProviderResponse {
+    return MsgCreateProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateProviderResponse): Uint8Array {
+    return MsgCreateProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateProviderResponse): MsgCreateProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgCreateProviderResponse",
+      value: MsgCreateProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateProvider(): MsgUpdateProvider {
@@ -216,6 +303,7 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
   };
 }
 export const MsgUpdateProvider = {
+  typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
   encode(message: MsgUpdateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -277,19 +365,55 @@ export const MsgUpdateProvider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgUpdateProvider>): MsgUpdateProvider {
+  fromPartial(object: Partial<MsgUpdateProvider>): MsgUpdateProvider {
     const message = createBaseMsgUpdateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+  fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
+    return MsgUpdateProvider.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProviderProtoMsg): MsgUpdateProvider {
+    return MsgUpdateProvider.decode(message.value);
+  },
+  toProto(message: MsgUpdateProvider): Uint8Array {
+    return MsgUpdateProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProvider): MsgUpdateProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
+      value: MsgUpdateProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateProviderResponse(): MsgUpdateProviderResponse {
   return {};
 }
 export const MsgUpdateProviderResponse = {
+  typeUrl: "/akash.provider.v1beta2.MsgUpdateProviderResponse",
   encode(_: MsgUpdateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -314,9 +438,31 @@ export const MsgUpdateProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
+  fromPartial(_: Partial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
+  },
+  fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProviderResponseAminoMsg): MsgUpdateProviderResponse {
+    return MsgUpdateProviderResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProviderResponseProtoMsg): MsgUpdateProviderResponse {
+    return MsgUpdateProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateProviderResponse): Uint8Array {
+    return MsgUpdateProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProviderResponse): MsgUpdateProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgUpdateProviderResponse",
+      value: MsgUpdateProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProvider(): MsgDeleteProvider {
@@ -325,6 +471,7 @@ function createBaseMsgDeleteProvider(): MsgDeleteProvider {
   };
 }
 export const MsgDeleteProvider = {
+  typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
   encode(message: MsgDeleteProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -358,16 +505,42 @@ export const MsgDeleteProvider = {
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
-  fromPartial(object: DeepPartial<MsgDeleteProvider>): MsgDeleteProvider {
+  fromPartial(object: Partial<MsgDeleteProvider>): MsgDeleteProvider {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
+    return {
+      owner: object.owner
+    };
+  },
+  toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderAminoMsg): MsgDeleteProvider {
+    return MsgDeleteProvider.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteProviderProtoMsg): MsgDeleteProvider {
+    return MsgDeleteProvider.decode(message.value);
+  },
+  toProto(message: MsgDeleteProvider): Uint8Array {
+    return MsgDeleteProvider.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProvider): MsgDeleteProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
+      value: MsgDeleteProvider.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProviderResponse(): MsgDeleteProviderResponse {
   return {};
 }
 export const MsgDeleteProviderResponse = {
+  typeUrl: "/akash.provider.v1beta2.MsgDeleteProviderResponse",
   encode(_: MsgDeleteProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -392,9 +565,31 @@ export const MsgDeleteProviderResponse = {
     const obj: any = {};
     return obj;
   },
-  fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
+  fromPartial(_: Partial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderResponseAminoMsg): MsgDeleteProviderResponse {
+    return MsgDeleteProviderResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteProviderResponseProtoMsg): MsgDeleteProviderResponse {
+    return MsgDeleteProviderResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteProviderResponse): Uint8Array {
+    return MsgDeleteProviderResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProviderResponse): MsgDeleteProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.MsgDeleteProviderResponse",
+      value: MsgDeleteProviderResponse.encode(message).finish()
+    };
   }
 };
 function createBaseProvider(): Provider {
@@ -406,6 +601,7 @@ function createBaseProvider(): Provider {
   };
 }
 export const Provider = {
+  typeUrl: "/akash.provider.v1beta2.Provider",
   encode(message: Provider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -467,13 +663,48 @@ export const Provider = {
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<Provider>): Provider {
+  fromPartial(object: Partial<Provider>): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+  fromAmino(object: ProviderAmino): Provider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+  toAmino(message: Provider): ProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ProviderAminoMsg): Provider {
+    return Provider.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProviderProtoMsg): Provider {
+    return Provider.decode(message.value);
+  },
+  toProto(message: Provider): Uint8Array {
+    return Provider.encode(message).finish();
+  },
+  toProtoMsg(message: Provider): ProviderProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.Provider",
+      value: Provider.encode(message).finish()
+    };
   }
 };
 /** Msg defines the provider Msg service */

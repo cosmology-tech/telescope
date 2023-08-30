@@ -1,5 +1,5 @@
-import { Long, isSet, DeepPartial } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
@@ -17,7 +17,7 @@ export interface MsgRegisterDevFeeInfo {
    * the nonce that determines the contract's address - it can be an EOA nonce
    * or a factory contract nonce
    */
-  nonces: Long[];
+  nonces: bigint[];
 }
 export interface MsgRegisterDevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
@@ -50,7 +50,7 @@ export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
   withdraw_address: string;
-  nonces: Long[];
+  nonces: bigint[];
 }
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -190,7 +190,7 @@ function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
 }
 export const MsgRegisterDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
-  encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgRegisterDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -207,8 +207,8 @@ export const MsgRegisterDevFeeInfo = {
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfo();
     while (reader.pos < end) {
@@ -227,10 +227,10 @@ export const MsgRegisterDevFeeInfo = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.nonces.push((reader.uint64() as Long));
+              message.nonces.push(reader.uint64());
             }
           } else {
-            message.nonces.push((reader.uint64() as Long));
+            message.nonces.push(reader.uint64());
           }
           break;
         default:
@@ -245,7 +245,7 @@ export const MsgRegisterDevFeeInfo = {
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
       deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
   toJSON(message: MsgRegisterDevFeeInfo): unknown {
@@ -254,7 +254,7 @@ export const MsgRegisterDevFeeInfo = {
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
+      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
     } else {
       obj.nonces = [];
     }
@@ -265,7 +265,7 @@ export const MsgRegisterDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
-    message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
+    message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
     return message;
   },
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
@@ -293,7 +293,7 @@ export const MsgRegisterDevFeeInfo = {
       contractAddress: object.contract_address,
       deployerAddress: object.deployer_address,
       withdrawAddress: object.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
     };
   },
   toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
@@ -302,7 +302,7 @@ export const MsgRegisterDevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
     if (message.nonces) {
-      obj.nonces = message.nonces.map(e => e);
+      obj.nonces = message.nonces.map(e => e.toString());
     } else {
       obj.nonces = [];
     }
@@ -329,11 +329,11 @@ function createBaseMsgRegisterDevFeeInfoResponse(): MsgRegisterDevFeeInfoRespons
 }
 export const MsgRegisterDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
-  encode(_: MsgRegisterDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgRegisterDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     while (reader.pos < end) {
@@ -395,7 +395,7 @@ function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
 }
 export const MsgCancelDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
-  encode(message: MsgCancelDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCancelDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -404,8 +404,8 @@ export const MsgCancelDevFeeInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelDevFeeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDevFeeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDevFeeInfo();
     while (reader.pos < end) {
@@ -487,11 +487,11 @@ function createBaseMsgCancelDevFeeInfoResponse(): MsgCancelDevFeeInfoResponse {
 }
 export const MsgCancelDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
-  encode(_: MsgCancelDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgCancelDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelDevFeeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDevFeeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDevFeeInfoResponse();
     while (reader.pos < end) {
@@ -554,7 +554,7 @@ function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
 }
 export const MsgUpdateDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
-  encode(message: MsgUpdateDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgUpdateDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
     }
@@ -566,8 +566,8 @@ export const MsgUpdateDevFeeInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDevFeeInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDevFeeInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDevFeeInfo();
     while (reader.pos < end) {
@@ -659,11 +659,11 @@ function createBaseMsgUpdateDevFeeInfoResponse(): MsgUpdateDevFeeInfoResponse {
 }
 export const MsgUpdateDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
-  encode(_: MsgUpdateDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: MsgUpdateDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDevFeeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDevFeeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     while (reader.pos < end) {

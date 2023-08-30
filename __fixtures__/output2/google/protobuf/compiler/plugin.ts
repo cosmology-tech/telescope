@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { FileDescriptorProto } from "../descriptor";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -128,6 +128,7 @@ function createBaseVersion(): Version {
   };
 }
 export const Version = {
+  typeUrl: "/google.protobuf.compiler.Version",
   encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.major !== 0) {
       writer.uint32(8).int32(message.major);
@@ -185,13 +186,44 @@ export const Version = {
     message.suffix !== undefined && (obj.suffix = message.suffix);
     return obj;
   },
-  fromPartial(object: DeepPartial<Version>): Version {
+  fromPartial(object: Partial<Version>): Version {
     const message = createBaseVersion();
     message.major = object.major ?? 0;
     message.minor = object.minor ?? 0;
     message.patch = object.patch ?? 0;
     message.suffix = object.suffix ?? "";
     return message;
+  },
+  fromAmino(object: VersionAmino): Version {
+    return {
+      major: object.major,
+      minor: object.minor,
+      patch: object.patch,
+      suffix: object.suffix
+    };
+  },
+  toAmino(message: Version): VersionAmino {
+    const obj: any = {};
+    obj.major = message.major;
+    obj.minor = message.minor;
+    obj.patch = message.patch;
+    obj.suffix = message.suffix;
+    return obj;
+  },
+  fromAminoMsg(object: VersionAminoMsg): Version {
+    return Version.fromAmino(object.value);
+  },
+  fromProtoMsg(message: VersionProtoMsg): Version {
+    return Version.decode(message.value);
+  },
+  toProto(message: Version): Uint8Array {
+    return Version.encode(message).finish();
+  },
+  toProtoMsg(message: Version): VersionProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.compiler.Version",
+      value: Version.encode(message).finish()
+    };
   }
 };
 function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
@@ -203,6 +235,7 @@ function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
   };
 }
 export const CodeGeneratorRequest = {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest",
   encode(message: CodeGeneratorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fileToGenerate) {
       writer.uint32(10).string(v!);
@@ -268,13 +301,52 @@ export const CodeGeneratorRequest = {
     message.compilerVersion !== undefined && (obj.compilerVersion = message.compilerVersion ? Version.toJSON(message.compilerVersion) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<CodeGeneratorRequest>): CodeGeneratorRequest {
+  fromPartial(object: Partial<CodeGeneratorRequest>): CodeGeneratorRequest {
     const message = createBaseCodeGeneratorRequest();
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
     message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : undefined;
     return message;
+  },
+  fromAmino(object: CodeGeneratorRequestAmino): CodeGeneratorRequest {
+    return {
+      fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
+      parameter: object.parameter,
+      protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromAmino(e)) : [],
+      compilerVersion: object?.compiler_version ? Version.fromAmino(object.compiler_version) : undefined
+    };
+  },
+  toAmino(message: CodeGeneratorRequest): CodeGeneratorRequestAmino {
+    const obj: any = {};
+    if (message.fileToGenerate) {
+      obj.file_to_generate = message.fileToGenerate.map(e => e);
+    } else {
+      obj.file_to_generate = [];
+    }
+    obj.parameter = message.parameter;
+    if (message.protoFile) {
+      obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.proto_file = [];
+    }
+    obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CodeGeneratorRequestAminoMsg): CodeGeneratorRequest {
+    return CodeGeneratorRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CodeGeneratorRequestProtoMsg): CodeGeneratorRequest {
+    return CodeGeneratorRequest.decode(message.value);
+  },
+  toProto(message: CodeGeneratorRequest): Uint8Array {
+    return CodeGeneratorRequest.encode(message).finish();
+  },
+  toProtoMsg(message: CodeGeneratorRequest): CodeGeneratorRequestProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest",
+      value: CodeGeneratorRequest.encode(message).finish()
+    };
   }
 };
 function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
@@ -284,6 +356,7 @@ function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
   };
 }
 export const CodeGeneratorResponse = {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
   encode(message: CodeGeneratorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
@@ -329,11 +402,42 @@ export const CodeGeneratorResponse = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<CodeGeneratorResponse>): CodeGeneratorResponse {
+  fromPartial(object: Partial<CodeGeneratorResponse>): CodeGeneratorResponse {
     const message = createBaseCodeGeneratorResponse();
     message.error = object.error ?? "";
     message.file = object.file?.map(e => CodeGeneratorResponse_File.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: CodeGeneratorResponseAmino): CodeGeneratorResponse {
+    return {
+      error: object.error,
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CodeGeneratorResponse): CodeGeneratorResponseAmino {
+    const obj: any = {};
+    obj.error = message.error;
+    if (message.file) {
+      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e) : undefined);
+    } else {
+      obj.file = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CodeGeneratorResponseAminoMsg): CodeGeneratorResponse {
+    return CodeGeneratorResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CodeGeneratorResponseProtoMsg): CodeGeneratorResponse {
+    return CodeGeneratorResponse.decode(message.value);
+  },
+  toProto(message: CodeGeneratorResponse): Uint8Array {
+    return CodeGeneratorResponse.encode(message).finish();
+  },
+  toProtoMsg(message: CodeGeneratorResponse): CodeGeneratorResponseProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
+      value: CodeGeneratorResponse.encode(message).finish()
+    };
   }
 };
 function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
@@ -344,6 +448,7 @@ function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
   };
 }
 export const CodeGeneratorResponse_File = {
+  typeUrl: "/google.protobuf.compiler.File",
   encode(message: CodeGeneratorResponse_File, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -393,11 +498,40 @@ export const CodeGeneratorResponse_File = {
     message.content !== undefined && (obj.content = message.content);
     return obj;
   },
-  fromPartial(object: DeepPartial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {
+  fromPartial(object: Partial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {
     const message = createBaseCodeGeneratorResponse_File();
     message.name = object.name ?? "";
     message.insertionPoint = object.insertionPoint ?? "";
     message.content = object.content ?? "";
     return message;
+  },
+  fromAmino(object: CodeGeneratorResponse_FileAmino): CodeGeneratorResponse_File {
+    return {
+      name: object.name,
+      insertionPoint: object.insertion_point,
+      content: object.content
+    };
+  },
+  toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.insertion_point = message.insertionPoint;
+    obj.content = message.content;
+    return obj;
+  },
+  fromAminoMsg(object: CodeGeneratorResponse_FileAminoMsg): CodeGeneratorResponse_File {
+    return CodeGeneratorResponse_File.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg): CodeGeneratorResponse_File {
+    return CodeGeneratorResponse_File.decode(message.value);
+  },
+  toProto(message: CodeGeneratorResponse_File): Uint8Array {
+    return CodeGeneratorResponse_File.encode(message).finish();
+  },
+  toProtoMsg(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.compiler.File",
+      value: CodeGeneratorResponse_File.encode(message).finish()
+    };
   }
 };

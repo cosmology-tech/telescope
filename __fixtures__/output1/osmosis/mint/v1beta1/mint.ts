@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -120,9 +121,10 @@ function createBaseMinter(): Minter {
   };
 }
 export const Minter = {
+  typeUrl: "/osmosis.mint.v1beta1.Minter",
   encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochProvisions !== "") {
-      writer.uint32(10).string(message.epochProvisions);
+      writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
     }
     return writer;
   },
@@ -134,7 +136,7 @@ export const Minter = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epochProvisions = reader.string();
+          message.epochProvisions = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -167,6 +169,37 @@ export const Minter = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
+  },
+  fromAmino(object: MinterAmino): Minter {
+    return {
+      epochProvisions: object.epoch_provisions
+    };
+  },
+  toAmino(message: Minter): MinterAmino {
+    const obj: any = {};
+    obj.epoch_provisions = message.epochProvisions;
+    return obj;
+  },
+  fromAminoMsg(object: MinterAminoMsg): Minter {
+    return Minter.fromAmino(object.value);
+  },
+  toAminoMsg(message: Minter): MinterAminoMsg {
+    return {
+      type: "osmosis/mint/minter",
+      value: Minter.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MinterProtoMsg): Minter {
+    return Minter.decode(message.value);
+  },
+  toProto(message: Minter): Uint8Array {
+    return Minter.encode(message).finish();
+  },
+  toProtoMsg(message: Minter): MinterProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.Minter",
+      value: Minter.encode(message).finish()
+    };
   }
 };
 function createBaseWeightedAddress(): WeightedAddress {
@@ -176,12 +209,13 @@ function createBaseWeightedAddress(): WeightedAddress {
   };
 }
 export const WeightedAddress = {
+  typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.weight !== "") {
-      writer.uint32(18).string(message.weight);
+      writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
     }
     return writer;
   },
@@ -196,7 +230,7 @@ export const WeightedAddress = {
           message.address = reader.string();
           break;
         case 2:
-          message.weight = reader.string();
+          message.weight = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -234,6 +268,39 @@ export const WeightedAddress = {
     obj.address = message.address;
     obj.weight = message.weight;
     return obj;
+  },
+  fromAmino(object: WeightedAddressAmino): WeightedAddress {
+    return {
+      address: object.address,
+      weight: object.weight
+    };
+  },
+  toAmino(message: WeightedAddress): WeightedAddressAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.weight = message.weight;
+    return obj;
+  },
+  fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
+    return WeightedAddress.fromAmino(object.value);
+  },
+  toAminoMsg(message: WeightedAddress): WeightedAddressAminoMsg {
+    return {
+      type: "osmosis/mint/weighted-address",
+      value: WeightedAddress.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
+    return WeightedAddress.decode(message.value);
+  },
+  toProto(message: WeightedAddress): Uint8Array {
+    return WeightedAddress.encode(message).finish();
+  },
+  toProtoMsg(message: WeightedAddress): WeightedAddressProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
+      value: WeightedAddress.encode(message).finish()
+    };
   }
 };
 function createBaseDistributionProportions(): DistributionProportions {
@@ -245,18 +312,19 @@ function createBaseDistributionProportions(): DistributionProportions {
   };
 }
 export const DistributionProportions = {
+  typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
   encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.staking !== "") {
-      writer.uint32(10).string(message.staking);
+      writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
     }
     if (message.poolIncentives !== "") {
-      writer.uint32(18).string(message.poolIncentives);
+      writer.uint32(18).string(Decimal.fromUserInput(message.poolIncentives, 18).atomics);
     }
     if (message.developerRewards !== "") {
-      writer.uint32(26).string(message.developerRewards);
+      writer.uint32(26).string(Decimal.fromUserInput(message.developerRewards, 18).atomics);
     }
     if (message.communityPool !== "") {
-      writer.uint32(34).string(message.communityPool);
+      writer.uint32(34).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
     return writer;
   },
@@ -268,16 +336,16 @@ export const DistributionProportions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.staking = reader.string();
+          message.staking = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 2:
-          message.poolIncentives = reader.string();
+          message.poolIncentives = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
-          message.developerRewards = reader.string();
+          message.developerRewards = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 4:
-          message.communityPool = reader.string();
+          message.communityPool = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -325,6 +393,43 @@ export const DistributionProportions = {
     obj.developer_rewards = message.developerRewards;
     obj.community_pool = message.communityPool;
     return obj;
+  },
+  fromAmino(object: DistributionProportionsAmino): DistributionProportions {
+    return {
+      staking: object.staking,
+      poolIncentives: object.pool_incentives,
+      developerRewards: object.developer_rewards,
+      communityPool: object.community_pool
+    };
+  },
+  toAmino(message: DistributionProportions): DistributionProportionsAmino {
+    const obj: any = {};
+    obj.staking = message.staking;
+    obj.pool_incentives = message.poolIncentives;
+    obj.developer_rewards = message.developerRewards;
+    obj.community_pool = message.communityPool;
+    return obj;
+  },
+  fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
+    return DistributionProportions.fromAmino(object.value);
+  },
+  toAminoMsg(message: DistributionProportions): DistributionProportionsAminoMsg {
+    return {
+      type: "osmosis/mint/distribution-proportions",
+      value: DistributionProportions.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
+    return DistributionProportions.decode(message.value);
+  },
+  toProto(message: DistributionProportions): Uint8Array {
+    return DistributionProportions.encode(message).finish();
+  },
+  toProtoMsg(message: DistributionProportions): DistributionProportionsProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
+      value: DistributionProportions.encode(message).finish()
+    };
   }
 };
 function createBaseParams(): Params {
@@ -340,12 +445,13 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
+  typeUrl: "/osmosis.mint.v1beta1.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.genesisEpochProvisions !== "") {
-      writer.uint32(18).string(message.genesisEpochProvisions);
+      writer.uint32(18).string(Decimal.fromUserInput(message.genesisEpochProvisions, 18).atomics);
     }
     if (message.epochIdentifier !== "") {
       writer.uint32(26).string(message.epochIdentifier);
@@ -354,7 +460,7 @@ export const Params = {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
     if (message.reductionFactor !== "") {
-      writer.uint32(42).string(message.reductionFactor);
+      writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
     }
     if (message.distributionProportions !== undefined) {
       DistributionProportions.encode(message.distributionProportions, writer.uint32(50).fork()).ldelim();
@@ -378,7 +484,7 @@ export const Params = {
           message.mintDenom = reader.string();
           break;
         case 2:
-          message.genesisEpochProvisions = reader.string();
+          message.genesisEpochProvisions = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
           message.epochIdentifier = reader.string();
@@ -387,7 +493,7 @@ export const Params = {
           message.reductionPeriodInEpochs = (reader.int64() as Long);
           break;
         case 5:
-          message.reductionFactor = reader.string();
+          message.reductionFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 6:
           message.distributionProportions = DistributionProportions.decode(reader, reader.uint32());
@@ -472,5 +578,54 @@ export const Params = {
     }
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch;
     return obj;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      mintDenom: object.mint_denom,
+      genesisEpochProvisions: object.genesis_epoch_provisions,
+      epochIdentifier: object.epoch_identifier,
+      reductionPeriodInEpochs: Long.fromString(object.reduction_period_in_epochs),
+      reductionFactor: object.reduction_factor,
+      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
+      weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
+      mintingRewardsDistributionStartEpoch: Long.fromString(object.minting_rewards_distribution_start_epoch)
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.mint_denom = message.mintDenom;
+    obj.genesis_epoch_provisions = message.genesisEpochProvisions;
+    obj.epoch_identifier = message.epochIdentifier;
+    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
+    obj.reduction_factor = message.reductionFactor;
+    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
+    if (message.weightedDeveloperRewardsReceivers) {
+      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
+    } else {
+      obj.weighted_developer_rewards_receivers = [];
+    }
+    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/mint/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

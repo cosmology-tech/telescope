@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "../../../helpers";
+import { isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -44,6 +44,7 @@ function createBaseConfig(): Config {
   };
 }
 export const Config = {
+  typeUrl: "/cosmos.app.v1alpha1.Config",
   encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -81,10 +82,45 @@ export const Config = {
     }
     return obj;
   },
-  fromPartial(object: DeepPartial<Config>): Config {
+  fromPartial(object: Partial<Config>): Config {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ConfigAmino): Config {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Config): ConfigAmino {
+    const obj: any = {};
+    if (message.modules) {
+      obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e) : undefined);
+    } else {
+      obj.modules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ConfigAminoMsg): Config {
+    return Config.fromAmino(object.value);
+  },
+  toAminoMsg(message: Config): ConfigAminoMsg {
+    return {
+      type: "cosmos-sdk/Config",
+      value: Config.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ConfigProtoMsg): Config {
+    return Config.decode(message.value);
+  },
+  toProto(message: Config): Uint8Array {
+    return Config.encode(message).finish();
+  },
+  toProtoMsg(message: Config): ConfigProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.Config",
+      value: Config.encode(message).finish()
+    };
   }
 };
 function createBaseModuleConfig(): ModuleConfig {
@@ -94,6 +130,7 @@ function createBaseModuleConfig(): ModuleConfig {
   };
 }
 export const ModuleConfig = {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
   encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -135,10 +172,43 @@ export const ModuleConfig = {
     message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);
     return obj;
   },
-  fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
+  fromPartial(object: Partial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
     message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
     return message;
+  },
+  fromAmino(object: ModuleConfigAmino): ModuleConfig {
+    return {
+      name: object.name,
+      config: object?.config ? Any.fromAmino(object.config) : undefined
+    };
+  },
+  toAmino(message: ModuleConfig): ModuleConfigAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.config = message.config ? Any.toAmino(message.config) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
+    return ModuleConfig.fromAmino(object.value);
+  },
+  toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg {
+    return {
+      type: "cosmos-sdk/ModuleConfig",
+      value: ModuleConfig.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig {
+    return ModuleConfig.decode(message.value);
+  },
+  toProto(message: ModuleConfig): Uint8Array {
+    return ModuleConfig.encode(message).finish();
+  },
+  toProtoMsg(message: ModuleConfig): ModuleConfigProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
+      value: ModuleConfig.encode(message).finish()
+    };
   }
 };
