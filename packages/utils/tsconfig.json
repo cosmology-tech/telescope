@@ -3,13 +3,23 @@
     "esModuleInterop": true,
     "declaration": true,
     "declarationDir": "./types",
-    "emitDeclarationOnly": true,
     "isolatedModules": true,
-    "allowJs": true
+    "allowJs": true,
+
+    "baseUrl": ".",
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "emitDeclarationOnly": false,
+    "target": "es2022",
+    "lib": ["es2022", "DOM"],
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
   "exclude": [
     "node_modules",
+    "__tests__",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "src/__fixtures__/**/*"
