@@ -26,7 +26,6 @@ function createBaseDevFeeInfo(): DevFeeInfo {
   };
 }
 export const DevFeeInfo = {
-  typeUrl: "/evmos.fees.v1.DevFeeInfo",
   encode(message: DevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -82,34 +81,5 @@ export const DevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
-  },
-  fromAmino(object: DevFeeInfoAmino): DevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
-  },
-  toAmino(message: DevFeeInfo): DevFeeInfoAmino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
-    return obj;
-  },
-  fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
-    return DevFeeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DevFeeInfoProtoMsg): DevFeeInfo {
-    return DevFeeInfo.decode(message.value);
-  },
-  toProto(message: DevFeeInfo): Uint8Array {
-    return DevFeeInfo.encode(message).finish();
-  },
-  toProtoMsg(message: DevFeeInfo): DevFeeInfoProtoMsg {
-    return {
-      typeUrl: "/evmos.fees.v1.DevFeeInfo",
-      value: DevFeeInfo.encode(message).finish()
-    };
   }
 };

@@ -76,7 +76,6 @@ function createBaseQueryPeriodRequest(): QueryPeriodRequest {
   return {};
 }
 export const QueryPeriodRequest = {
-  typeUrl: "/evmos.inflation.v1.QueryPeriodRequest",
   encode(_: QueryPeriodRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -104,28 +103,6 @@ export const QueryPeriodRequest = {
   fromPartial(_: Partial<QueryPeriodRequest>): QueryPeriodRequest {
     const message = createBaseQueryPeriodRequest();
     return message;
-  },
-  fromAmino(_: QueryPeriodRequestAmino): QueryPeriodRequest {
-    return {};
-  },
-  toAmino(_: QueryPeriodRequest): QueryPeriodRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryPeriodRequestAminoMsg): QueryPeriodRequest {
-    return QueryPeriodRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryPeriodRequestProtoMsg): QueryPeriodRequest {
-    return QueryPeriodRequest.decode(message.value);
-  },
-  toProto(message: QueryPeriodRequest): Uint8Array {
-    return QueryPeriodRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPeriodRequest): QueryPeriodRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryPeriodRequest",
-      value: QueryPeriodRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryPeriodResponse(): QueryPeriodResponse {
@@ -134,7 +111,6 @@ function createBaseQueryPeriodResponse(): QueryPeriodResponse {
   };
 }
 export const QueryPeriodResponse = {
-  typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
   encode(message: QueryPeriodResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.period.isZero()) {
       writer.uint32(8).uint64(message.period);
@@ -172,38 +148,12 @@ export const QueryPeriodResponse = {
     const message = createBaseQueryPeriodResponse();
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
-  },
-  fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
-    return {
-      period: Long.fromString(object.period)
-    };
-  },
-  toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
-    const obj: any = {};
-    obj.period = message.period ? message.period.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryPeriodResponseAminoMsg): QueryPeriodResponse {
-    return QueryPeriodResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryPeriodResponseProtoMsg): QueryPeriodResponse {
-    return QueryPeriodResponse.decode(message.value);
-  },
-  toProto(message: QueryPeriodResponse): Uint8Array {
-    return QueryPeriodResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryPeriodResponse): QueryPeriodResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
-      value: QueryPeriodResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEpochMintProvisionRequest(): QueryEpochMintProvisionRequest {
   return {};
 }
 export const QueryEpochMintProvisionRequest = {
-  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest",
   encode(_: QueryEpochMintProvisionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -231,28 +181,6 @@ export const QueryEpochMintProvisionRequest = {
   fromPartial(_: Partial<QueryEpochMintProvisionRequest>): QueryEpochMintProvisionRequest {
     const message = createBaseQueryEpochMintProvisionRequest();
     return message;
-  },
-  fromAmino(_: QueryEpochMintProvisionRequestAmino): QueryEpochMintProvisionRequest {
-    return {};
-  },
-  toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochMintProvisionRequestAminoMsg): QueryEpochMintProvisionRequest {
-    return QueryEpochMintProvisionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryEpochMintProvisionRequestProtoMsg): QueryEpochMintProvisionRequest {
-    return QueryEpochMintProvisionRequest.decode(message.value);
-  },
-  toProto(message: QueryEpochMintProvisionRequest): Uint8Array {
-    return QueryEpochMintProvisionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest",
-      value: QueryEpochMintProvisionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEpochMintProvisionResponse(): QueryEpochMintProvisionResponse {
@@ -261,7 +189,6 @@ function createBaseQueryEpochMintProvisionResponse(): QueryEpochMintProvisionRes
   };
 }
 export const QueryEpochMintProvisionResponse = {
-  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse",
   encode(message: QueryEpochMintProvisionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochMintProvision !== undefined) {
       DecCoin.encode(message.epochMintProvision, writer.uint32(10).fork()).ldelim();
@@ -299,38 +226,12 @@ export const QueryEpochMintProvisionResponse = {
     const message = createBaseQueryEpochMintProvisionResponse();
     message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
-  },
-  fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
-    };
-  },
-  toAmino(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseAmino {
-    const obj: any = {};
-    obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochMintProvisionResponseAminoMsg): QueryEpochMintProvisionResponse {
-    return QueryEpochMintProvisionResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryEpochMintProvisionResponseProtoMsg): QueryEpochMintProvisionResponse {
-    return QueryEpochMintProvisionResponse.decode(message.value);
-  },
-  toProto(message: QueryEpochMintProvisionResponse): Uint8Array {
-    return QueryEpochMintProvisionResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse",
-      value: QueryEpochMintProvisionResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySkippedEpochsRequest(): QuerySkippedEpochsRequest {
   return {};
 }
 export const QuerySkippedEpochsRequest = {
-  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest",
   encode(_: QuerySkippedEpochsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -358,28 +259,6 @@ export const QuerySkippedEpochsRequest = {
   fromPartial(_: Partial<QuerySkippedEpochsRequest>): QuerySkippedEpochsRequest {
     const message = createBaseQuerySkippedEpochsRequest();
     return message;
-  },
-  fromAmino(_: QuerySkippedEpochsRequestAmino): QuerySkippedEpochsRequest {
-    return {};
-  },
-  toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QuerySkippedEpochsRequestAminoMsg): QuerySkippedEpochsRequest {
-    return QuerySkippedEpochsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuerySkippedEpochsRequestProtoMsg): QuerySkippedEpochsRequest {
-    return QuerySkippedEpochsRequest.decode(message.value);
-  },
-  toProto(message: QuerySkippedEpochsRequest): Uint8Array {
-    return QuerySkippedEpochsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest",
-      value: QuerySkippedEpochsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
@@ -388,7 +267,6 @@ function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
   };
 }
 export const QuerySkippedEpochsResponse = {
-  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
   encode(message: QuerySkippedEpochsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.skippedEpochs.isZero()) {
       writer.uint32(8).uint64(message.skippedEpochs);
@@ -426,38 +304,12 @@ export const QuerySkippedEpochsResponse = {
     const message = createBaseQuerySkippedEpochsResponse();
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
-  },
-  fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: Long.fromString(object.skipped_epochs)
-    };
-  },
-  toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
-    const obj: any = {};
-    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySkippedEpochsResponseAminoMsg): QuerySkippedEpochsResponse {
-    return QuerySkippedEpochsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuerySkippedEpochsResponseProtoMsg): QuerySkippedEpochsResponse {
-    return QuerySkippedEpochsResponse.decode(message.value);
-  },
-  toProto(message: QuerySkippedEpochsResponse): Uint8Array {
-    return QuerySkippedEpochsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
-      value: QuerySkippedEpochsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCirculatingSupplyRequest(): QueryCirculatingSupplyRequest {
   return {};
 }
 export const QueryCirculatingSupplyRequest = {
-  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest",
   encode(_: QueryCirculatingSupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -485,28 +337,6 @@ export const QueryCirculatingSupplyRequest = {
   fromPartial(_: Partial<QueryCirculatingSupplyRequest>): QueryCirculatingSupplyRequest {
     const message = createBaseQueryCirculatingSupplyRequest();
     return message;
-  },
-  fromAmino(_: QueryCirculatingSupplyRequestAmino): QueryCirculatingSupplyRequest {
-    return {};
-  },
-  toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryCirculatingSupplyRequestAminoMsg): QueryCirculatingSupplyRequest {
-    return QueryCirculatingSupplyRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryCirculatingSupplyRequestProtoMsg): QueryCirculatingSupplyRequest {
-    return QueryCirculatingSupplyRequest.decode(message.value);
-  },
-  toProto(message: QueryCirculatingSupplyRequest): Uint8Array {
-    return QueryCirculatingSupplyRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest",
-      value: QueryCirculatingSupplyRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCirculatingSupplyResponse(): QueryCirculatingSupplyResponse {
@@ -515,7 +345,6 @@ function createBaseQueryCirculatingSupplyResponse(): QueryCirculatingSupplyRespo
   };
 }
 export const QueryCirculatingSupplyResponse = {
-  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse",
   encode(message: QueryCirculatingSupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.circulatingSupply !== undefined) {
       DecCoin.encode(message.circulatingSupply, writer.uint32(10).fork()).ldelim();
@@ -553,38 +382,12 @@ export const QueryCirculatingSupplyResponse = {
     const message = createBaseQueryCirculatingSupplyResponse();
     message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
-  },
-  fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : undefined
-    };
-  },
-  toAmino(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseAmino {
-    const obj: any = {};
-    obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCirculatingSupplyResponseAminoMsg): QueryCirculatingSupplyResponse {
-    return QueryCirculatingSupplyResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryCirculatingSupplyResponseProtoMsg): QueryCirculatingSupplyResponse {
-    return QueryCirculatingSupplyResponse.decode(message.value);
-  },
-  toProto(message: QueryCirculatingSupplyResponse): Uint8Array {
-    return QueryCirculatingSupplyResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse",
-      value: QueryCirculatingSupplyResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryInflationRateRequest(): QueryInflationRateRequest {
   return {};
 }
 export const QueryInflationRateRequest = {
-  typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest",
   encode(_: QueryInflationRateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -612,28 +415,6 @@ export const QueryInflationRateRequest = {
   fromPartial(_: Partial<QueryInflationRateRequest>): QueryInflationRateRequest {
     const message = createBaseQueryInflationRateRequest();
     return message;
-  },
-  fromAmino(_: QueryInflationRateRequestAmino): QueryInflationRateRequest {
-    return {};
-  },
-  toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryInflationRateRequestAminoMsg): QueryInflationRateRequest {
-    return QueryInflationRateRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryInflationRateRequestProtoMsg): QueryInflationRateRequest {
-    return QueryInflationRateRequest.decode(message.value);
-  },
-  toProto(message: QueryInflationRateRequest): Uint8Array {
-    return QueryInflationRateRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryInflationRateRequest): QueryInflationRateRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest",
-      value: QueryInflationRateRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
@@ -642,7 +423,6 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
   };
 }
 export const QueryInflationRateResponse = {
-  typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
   encode(message: QueryInflationRateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationRate !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationRate, 18).atomics);
@@ -680,38 +460,12 @@ export const QueryInflationRateResponse = {
     const message = createBaseQueryInflationRateResponse();
     message.inflationRate = object.inflationRate ?? "";
     return message;
-  },
-  fromAmino(object: QueryInflationRateResponseAmino): QueryInflationRateResponse {
-    return {
-      inflationRate: object.inflation_rate
-    };
-  },
-  toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseAmino {
-    const obj: any = {};
-    obj.inflation_rate = message.inflationRate;
-    return obj;
-  },
-  fromAminoMsg(object: QueryInflationRateResponseAminoMsg): QueryInflationRateResponse {
-    return QueryInflationRateResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryInflationRateResponseProtoMsg): QueryInflationRateResponse {
-    return QueryInflationRateResponse.decode(message.value);
-  },
-  toProto(message: QueryInflationRateResponse): Uint8Array {
-    return QueryInflationRateResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryInflationRateResponse): QueryInflationRateResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
-      value: QueryInflationRateResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  typeUrl: "/evmos.inflation.v1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -739,28 +493,6 @@ export const QueryParamsRequest = {
   fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
-  },
-  toProto(message: QueryParamsRequest): Uint8Array {
-    return QueryParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryParamsRequest",
-      value: QueryParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -769,7 +501,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  typeUrl: "/evmos.inflation.v1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -807,31 +538,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
-  },
-  toProto(message: QueryParamsResponse): Uint8Array {
-    return QueryParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.QueryParamsResponse",
-      value: QueryParamsResponse.encode(message).finish()
-    };
   }
 };
 /** Query provides defines the gRPC querier service. */

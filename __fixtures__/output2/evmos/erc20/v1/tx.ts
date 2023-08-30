@@ -42,7 +42,6 @@ function createBaseMsgConvertCoin(): MsgConvertCoin {
   };
 }
 export const MsgConvertCoin = {
-  typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
   encode(message: MsgConvertCoin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.coin !== undefined) {
       Coin.encode(message.coin, writer.uint32(10).fork()).ldelim();
@@ -98,42 +97,12 @@ export const MsgConvertCoin = {
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;
-  },
-  fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
-    return {
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
-      receiver: object.receiver,
-      sender: object.sender
-    };
-  },
-  toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
-    const obj: any = {};
-    obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
-    return MsgConvertCoin.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgConvertCoinProtoMsg): MsgConvertCoin {
-    return MsgConvertCoin.decode(message.value);
-  },
-  toProto(message: MsgConvertCoin): Uint8Array {
-    return MsgConvertCoin.encode(message).finish();
-  },
-  toProtoMsg(message: MsgConvertCoin): MsgConvertCoinProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
-      value: MsgConvertCoin.encode(message).finish()
-    };
   }
 };
 function createBaseMsgConvertCoinResponse(): MsgConvertCoinResponse {
   return {};
 }
 export const MsgConvertCoinResponse = {
-  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse",
   encode(_: MsgConvertCoinResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -161,28 +130,6 @@ export const MsgConvertCoinResponse = {
   fromPartial(_: Partial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
     const message = createBaseMsgConvertCoinResponse();
     return message;
-  },
-  fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
-    return {};
-  },
-  toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertCoinResponseAminoMsg): MsgConvertCoinResponse {
-    return MsgConvertCoinResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgConvertCoinResponseProtoMsg): MsgConvertCoinResponse {
-    return MsgConvertCoinResponse.decode(message.value);
-  },
-  toProto(message: MsgConvertCoinResponse): Uint8Array {
-    return MsgConvertCoinResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgConvertCoinResponse): MsgConvertCoinResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse",
-      value: MsgConvertCoinResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgConvertERC20(): MsgConvertERC20 {
@@ -194,7 +141,6 @@ function createBaseMsgConvertERC20(): MsgConvertERC20 {
   };
 }
 export const MsgConvertERC20 = {
-  typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
   encode(message: MsgConvertERC20, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -259,44 +205,12 @@ export const MsgConvertERC20 = {
     message.receiver = object.receiver ?? "";
     message.sender = object.sender ?? "";
     return message;
-  },
-  fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
-    return {
-      contractAddress: object.contract_address,
-      amount: object.amount,
-      receiver: object.receiver,
-      sender: object.sender
-    };
-  },
-  toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
-    const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {
-    return MsgConvertERC20.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgConvertERC20ProtoMsg): MsgConvertERC20 {
-    return MsgConvertERC20.decode(message.value);
-  },
-  toProto(message: MsgConvertERC20): Uint8Array {
-    return MsgConvertERC20.encode(message).finish();
-  },
-  toProtoMsg(message: MsgConvertERC20): MsgConvertERC20ProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
-      value: MsgConvertERC20.encode(message).finish()
-    };
   }
 };
 function createBaseMsgConvertERC20Response(): MsgConvertERC20Response {
   return {};
 }
 export const MsgConvertERC20Response = {
-  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response",
   encode(_: MsgConvertERC20Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -324,28 +238,6 @@ export const MsgConvertERC20Response = {
   fromPartial(_: Partial<MsgConvertERC20Response>): MsgConvertERC20Response {
     const message = createBaseMsgConvertERC20Response();
     return message;
-  },
-  fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
-    return {};
-  },
-  toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgConvertERC20ResponseAminoMsg): MsgConvertERC20Response {
-    return MsgConvertERC20Response.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg): MsgConvertERC20Response {
-    return MsgConvertERC20Response.decode(message.value);
-  },
-  toProto(message: MsgConvertERC20Response): Uint8Array {
-    return MsgConvertERC20Response.encode(message).finish();
-  },
-  toProtoMsg(message: MsgConvertERC20Response): MsgConvertERC20ResponseProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response",
-      value: MsgConvertERC20Response.encode(message).finish()
-    };
   }
 };
 /** Msg defines the erc20 Msg service. */

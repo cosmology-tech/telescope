@@ -160,7 +160,6 @@ function createBaseDoubleValue(): DoubleValue {
   };
 }
 export const DoubleValue = {
-  typeUrl: "/google.protobuf.DoubleValue",
   encode(message: DoubleValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
@@ -208,31 +207,6 @@ export const DoubleValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: DoubleValueAmino): DoubleValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: DoubleValue): DoubleValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
-    return DoubleValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
-    return DoubleValue.decode(message.value);
-  },
-  toProto(message: DoubleValue): Uint8Array {
-    return DoubleValue.encode(message).finish();
-  },
-  toProtoMsg(message: DoubleValue): DoubleValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.DoubleValue",
-      value: DoubleValue.encode(message).finish()
-    };
   }
 };
 function createBaseFloatValue(): FloatValue {
@@ -241,7 +215,6 @@ function createBaseFloatValue(): FloatValue {
   };
 }
 export const FloatValue = {
-  typeUrl: "/google.protobuf.FloatValue",
   encode(message: FloatValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(13).float(message.value);
@@ -289,31 +262,6 @@ export const FloatValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: FloatValueAmino): FloatValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: FloatValue): FloatValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
-    return FloatValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
-    return FloatValue.decode(message.value);
-  },
-  toProto(message: FloatValue): Uint8Array {
-    return FloatValue.encode(message).finish();
-  },
-  toProtoMsg(message: FloatValue): FloatValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.FloatValue",
-      value: FloatValue.encode(message).finish()
-    };
   }
 };
 function createBaseInt64Value(): Int64Value {
@@ -322,7 +270,6 @@ function createBaseInt64Value(): Int64Value {
   };
 }
 export const Int64Value = {
-  typeUrl: "/google.protobuf.Int64Value",
   encode(message: Int64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.value.isZero()) {
       writer.uint32(8).int64(message.value);
@@ -370,31 +317,6 @@ export const Int64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: Int64ValueAmino): Int64Value {
-    return {
-      value: Long.fromString(object.value)
-    };
-  },
-  toAmino(message: Int64Value): Int64ValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
-    return Int64Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
-    return Int64Value.decode(message.value);
-  },
-  toProto(message: Int64Value): Uint8Array {
-    return Int64Value.encode(message).finish();
-  },
-  toProtoMsg(message: Int64Value): Int64ValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Int64Value",
-      value: Int64Value.encode(message).finish()
-    };
   }
 };
 function createBaseUInt64Value(): UInt64Value {
@@ -403,7 +325,6 @@ function createBaseUInt64Value(): UInt64Value {
   };
 }
 export const UInt64Value = {
-  typeUrl: "/google.protobuf.UInt64Value",
   encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.value.isZero()) {
       writer.uint32(8).uint64(message.value);
@@ -451,31 +372,6 @@ export const UInt64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: UInt64ValueAmino): UInt64Value {
-    return {
-      value: Long.fromString(object.value)
-    };
-  },
-  toAmino(message: UInt64Value): UInt64ValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
-    return UInt64Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
-    return UInt64Value.decode(message.value);
-  },
-  toProto(message: UInt64Value): Uint8Array {
-    return UInt64Value.encode(message).finish();
-  },
-  toProtoMsg(message: UInt64Value): UInt64ValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.UInt64Value",
-      value: UInt64Value.encode(message).finish()
-    };
   }
 };
 function createBaseInt32Value(): Int32Value {
@@ -484,7 +380,6 @@ function createBaseInt32Value(): Int32Value {
   };
 }
 export const Int32Value = {
-  typeUrl: "/google.protobuf.Int32Value",
   encode(message: Int32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
@@ -532,31 +427,6 @@ export const Int32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: Int32ValueAmino): Int32Value {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: Int32Value): Int32ValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
-    return Int32Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
-    return Int32Value.decode(message.value);
-  },
-  toProto(message: Int32Value): Uint8Array {
-    return Int32Value.encode(message).finish();
-  },
-  toProtoMsg(message: Int32Value): Int32ValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Int32Value",
-      value: Int32Value.encode(message).finish()
-    };
   }
 };
 function createBaseUInt32Value(): UInt32Value {
@@ -565,7 +435,6 @@ function createBaseUInt32Value(): UInt32Value {
   };
 }
 export const UInt32Value = {
-  typeUrl: "/google.protobuf.UInt32Value",
   encode(message: UInt32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).uint32(message.value);
@@ -613,31 +482,6 @@ export const UInt32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: UInt32ValueAmino): UInt32Value {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: UInt32Value): UInt32ValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
-    return UInt32Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
-    return UInt32Value.decode(message.value);
-  },
-  toProto(message: UInt32Value): Uint8Array {
-    return UInt32Value.encode(message).finish();
-  },
-  toProtoMsg(message: UInt32Value): UInt32ValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.UInt32Value",
-      value: UInt32Value.encode(message).finish()
-    };
   }
 };
 function createBaseBoolValue(): BoolValue {
@@ -646,7 +490,6 @@ function createBaseBoolValue(): BoolValue {
   };
 }
 export const BoolValue = {
-  typeUrl: "/google.protobuf.BoolValue",
   encode(message: BoolValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value === true) {
       writer.uint32(8).bool(message.value);
@@ -694,31 +537,6 @@ export const BoolValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: BoolValueAmino): BoolValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: BoolValue): BoolValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
-    return BoolValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
-    return BoolValue.decode(message.value);
-  },
-  toProto(message: BoolValue): Uint8Array {
-    return BoolValue.encode(message).finish();
-  },
-  toProtoMsg(message: BoolValue): BoolValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.BoolValue",
-      value: BoolValue.encode(message).finish()
-    };
   }
 };
 function createBaseStringValue(): StringValue {
@@ -727,7 +545,6 @@ function createBaseStringValue(): StringValue {
   };
 }
 export const StringValue = {
-  typeUrl: "/google.protobuf.StringValue",
   encode(message: StringValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
@@ -775,31 +592,6 @@ export const StringValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: StringValueAmino): StringValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: StringValue): StringValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: StringValueAminoMsg): StringValue {
-    return StringValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: StringValueProtoMsg): StringValue {
-    return StringValue.decode(message.value);
-  },
-  toProto(message: StringValue): Uint8Array {
-    return StringValue.encode(message).finish();
-  },
-  toProtoMsg(message: StringValue): StringValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.StringValue",
-      value: StringValue.encode(message).finish()
-    };
   }
 };
 function createBaseBytesValue(): BytesValue {
@@ -808,7 +600,6 @@ function createBaseBytesValue(): BytesValue {
   };
 }
 export const BytesValue = {
-  typeUrl: "/google.protobuf.BytesValue",
   encode(message: BytesValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value.length !== 0) {
       writer.uint32(10).bytes(message.value);
@@ -856,30 +647,5 @@ export const BytesValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: BytesValueAmino): BytesValue {
-    return {
-      value: object.value
-    };
-  },
-  toAmino(message: BytesValue): BytesValueAmino {
-    const obj: any = {};
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
-    return BytesValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
-    return BytesValue.decode(message.value);
-  },
-  toProto(message: BytesValue): Uint8Array {
-    return BytesValue.encode(message).finish();
-  },
-  toProtoMsg(message: BytesValue): BytesValueProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.BytesValue",
-      value: BytesValue.encode(message).finish()
-    };
   }
 };

@@ -34,7 +34,6 @@ function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   };
 }
 export const MsgSubmitEvidence = {
-  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
   encode(message: MsgSubmitEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.submitter !== "") {
       writer.uint32(10).string(message.submitter);
@@ -93,39 +92,6 @@ export const MsgSubmitEvidence = {
     obj.submitter = message.submitter;
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
     return obj;
-  },
-  fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
-    return {
-      submitter: object.submitter,
-      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
-    };
-  },
-  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
-    const obj: any = {};
-    obj.submitter = message.submitter;
-    obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitEvidenceAminoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidence",
-      value: MsgSubmitEvidence.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.decode(message.value);
-  },
-  toProto(message: MsgSubmitEvidence): Uint8Array {
-    return MsgSubmitEvidence.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
-      value: MsgSubmitEvidence.encode(message).finish()
-    };
   }
 };
 function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
@@ -134,7 +100,6 @@ function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
   };
 }
 export const MsgSubmitEvidenceResponse = {
-  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse",
   encode(message: MsgSubmitEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(34).bytes(message.hash);
@@ -182,36 +147,5 @@ export const MsgSubmitEvidenceResponse = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
-  },
-  fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
-    return {
-      hash: object.hash
-    };
-  },
-  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
-    const obj: any = {};
-    obj.hash = message.hash;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidenceResponse",
-      value: MsgSubmitEvidenceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.decode(message.value);
-  },
-  toProto(message: MsgSubmitEvidenceResponse): Uint8Array {
-    return MsgSubmitEvidenceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse",
-      value: MsgSubmitEvidenceResponse.encode(message).finish()
-    };
   }
 };

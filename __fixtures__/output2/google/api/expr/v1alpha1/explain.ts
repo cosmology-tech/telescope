@@ -40,7 +40,6 @@ function createBaseExplain(): Explain {
   };
 }
 export const Explain = {
-  typeUrl: "/google.api.expr.v1alpha1.Explain",
   encode(message: Explain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -95,41 +94,6 @@ export const Explain = {
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ExplainAmino): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Explain): ExplainAmino {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.exprSteps) {
-      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
-    } else {
-      obj.expr_steps = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ExplainAminoMsg): Explain {
-    return Explain.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExplainProtoMsg): Explain {
-    return Explain.decode(message.value);
-  },
-  toProto(message: Explain): Uint8Array {
-    return Explain.encode(message).finish();
-  },
-  toProtoMsg(message: Explain): ExplainProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.Explain",
-      value: Explain.encode(message).finish()
-    };
   }
 };
 function createBaseExplain_ExprStep(): Explain_ExprStep {
@@ -139,7 +103,6 @@ function createBaseExplain_ExprStep(): Explain_ExprStep {
   };
 }
 export const Explain_ExprStep = {
-  typeUrl: "/google.api.expr.v1alpha1.ExprStep",
   encode(message: Explain_ExprStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
@@ -186,32 +149,5 @@ export const Explain_ExprStep = {
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.valueIndex = object.valueIndex ?? 0;
     return message;
-  },
-  fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
-    return {
-      id: Long.fromString(object.id),
-      valueIndex: object.value_index
-    };
-  },
-  toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
-    const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.value_index = message.valueIndex;
-    return obj;
-  },
-  fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {
-    return Explain_ExprStep.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
-    return Explain_ExprStep.decode(message.value);
-  },
-  toProto(message: Explain_ExprStep): Uint8Array {
-    return Explain_ExprStep.encode(message).finish();
-  },
-  toProtoMsg(message: Explain_ExprStep): Explain_ExprStepProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.ExprStep",
-      value: Explain_ExprStep.encode(message).finish()
-    };
   }
 };

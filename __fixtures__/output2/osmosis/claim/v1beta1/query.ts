@@ -43,7 +43,6 @@ function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalance
   return {};
 }
 export const QueryModuleAccountBalanceRequest = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
   encode(_: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -71,34 +70,6 @@ export const QueryModuleAccountBalanceRequest = {
   fromPartial(_: Partial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
-  },
-  fromAmino(_: QueryModuleAccountBalanceRequestAmino): QueryModuleAccountBalanceRequest {
-    return {};
-  },
-  toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryModuleAccountBalanceRequestAminoMsg): QueryModuleAccountBalanceRequest {
-    return QueryModuleAccountBalanceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAminoMsg {
-    return {
-      type: "osmosis/claim/query-module-account-balance-request",
-      value: QueryModuleAccountBalanceRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg): QueryModuleAccountBalanceRequest {
-    return QueryModuleAccountBalanceRequest.decode(message.value);
-  },
-  toProto(message: QueryModuleAccountBalanceRequest): Uint8Array {
-    return QueryModuleAccountBalanceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
-      value: QueryModuleAccountBalanceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanceResponse {
@@ -107,7 +78,6 @@ function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanc
   };
 }
 export const QueryModuleAccountBalanceResponse = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
   encode(message: QueryModuleAccountBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.moduleAccountBalance) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -149,48 +119,12 @@ export const QueryModuleAccountBalanceResponse = {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: QueryModuleAccountBalanceResponseAmino): QueryModuleAccountBalanceResponse {
-    return {
-      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAmino {
-    const obj: any = {};
-    if (message.moduleAccountBalance) {
-      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.moduleAccountBalance = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryModuleAccountBalanceResponseAminoMsg): QueryModuleAccountBalanceResponse {
-    return QueryModuleAccountBalanceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAminoMsg {
-    return {
-      type: "osmosis/claim/query-module-account-balance-response",
-      value: QueryModuleAccountBalanceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg): QueryModuleAccountBalanceResponse {
-    return QueryModuleAccountBalanceResponse.decode(message.value);
-  },
-  toProto(message: QueryModuleAccountBalanceResponse): Uint8Array {
-    return QueryModuleAccountBalanceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
-      value: QueryModuleAccountBalanceResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -218,34 +152,6 @@ export const QueryParamsRequest = {
   fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "osmosis/claim/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
-  },
-  toProto(message: QueryParamsRequest): Uint8Array {
-    return QueryParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
-      value: QueryParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -254,7 +160,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -292,37 +197,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "osmosis/claim/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
-  },
-  toProto(message: QueryParamsResponse): Uint8Array {
-    return QueryParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
-      value: QueryParamsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
@@ -331,7 +205,6 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
   };
 }
 export const QueryClaimRecordRequest = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
   encode(message: QueryClaimRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -369,37 +242,6 @@ export const QueryClaimRecordRequest = {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
-  },
-  fromAmino(object: QueryClaimRecordRequestAmino): QueryClaimRecordRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimRecordRequestAminoMsg): QueryClaimRecordRequest {
-    return QueryClaimRecordRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClaimRecordRequest): QueryClaimRecordRequestAminoMsg {
-    return {
-      type: "osmosis/claim/query-claim-record-request",
-      value: QueryClaimRecordRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg): QueryClaimRecordRequest {
-    return QueryClaimRecordRequest.decode(message.value);
-  },
-  toProto(message: QueryClaimRecordRequest): Uint8Array {
-    return QueryClaimRecordRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryClaimRecordRequest): QueryClaimRecordRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
-      value: QueryClaimRecordRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
@@ -408,7 +250,6 @@ function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   };
 }
 export const QueryClaimRecordResponse = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
   encode(message: QueryClaimRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.claimRecord !== undefined) {
       ClaimRecord.encode(message.claimRecord, writer.uint32(10).fork()).ldelim();
@@ -446,37 +287,6 @@ export const QueryClaimRecordResponse = {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
-  },
-  fromAmino(object: QueryClaimRecordResponseAmino): QueryClaimRecordResponse {
-    return {
-      claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : undefined
-    };
-  },
-  toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseAmino {
-    const obj: any = {};
-    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimRecordResponseAminoMsg): QueryClaimRecordResponse {
-    return QueryClaimRecordResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClaimRecordResponse): QueryClaimRecordResponseAminoMsg {
-    return {
-      type: "osmosis/claim/query-claim-record-response",
-      value: QueryClaimRecordResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg): QueryClaimRecordResponse {
-    return QueryClaimRecordResponse.decode(message.value);
-  },
-  toProto(message: QueryClaimRecordResponse): Uint8Array {
-    return QueryClaimRecordResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryClaimRecordResponse): QueryClaimRecordResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
-      value: QueryClaimRecordResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
@@ -486,7 +296,6 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
   };
 }
 export const QueryClaimableForActionRequest = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
   encode(message: QueryClaimableForActionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -533,39 +342,6 @@ export const QueryClaimableForActionRequest = {
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
     return message;
-  },
-  fromAmino(object: QueryClaimableForActionRequestAmino): QueryClaimableForActionRequest {
-    return {
-      address: object.address,
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1
-    };
-  },
-  toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.action = message.action;
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimableForActionRequestAminoMsg): QueryClaimableForActionRequest {
-    return QueryClaimableForActionRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAminoMsg {
-    return {
-      type: "osmosis/claim/query-claimable-for-action-request",
-      value: QueryClaimableForActionRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg): QueryClaimableForActionRequest {
-    return QueryClaimableForActionRequest.decode(message.value);
-  },
-  toProto(message: QueryClaimableForActionRequest): Uint8Array {
-    return QueryClaimableForActionRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
-      value: QueryClaimableForActionRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionResponse {
@@ -574,7 +350,6 @@ function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionRes
   };
 }
 export const QueryClaimableForActionResponse = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
   encode(message: QueryClaimableForActionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -616,41 +391,6 @@ export const QueryClaimableForActionResponse = {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: QueryClaimableForActionResponseAmino): QueryClaimableForActionResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAmino {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryClaimableForActionResponseAminoMsg): QueryClaimableForActionResponse {
-    return QueryClaimableForActionResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAminoMsg {
-    return {
-      type: "osmosis/claim/query-claimable-for-action-response",
-      value: QueryClaimableForActionResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg): QueryClaimableForActionResponse {
-    return QueryClaimableForActionResponse.decode(message.value);
-  },
-  toProto(message: QueryClaimableForActionResponse): Uint8Array {
-    return QueryClaimableForActionResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
-      value: QueryClaimableForActionResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
@@ -659,7 +399,6 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
   };
 }
 export const QueryTotalClaimableRequest = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
   encode(message: QueryTotalClaimableRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -697,37 +436,6 @@ export const QueryTotalClaimableRequest = {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
-  },
-  fromAmino(object: QueryTotalClaimableRequestAmino): QueryTotalClaimableRequest {
-    return {
-      address: object.address
-    };
-  },
-  toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalClaimableRequestAminoMsg): QueryTotalClaimableRequest {
-    return QueryTotalClaimableRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAminoMsg {
-    return {
-      type: "osmosis/claim/query-total-claimable-request",
-      value: QueryTotalClaimableRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg): QueryTotalClaimableRequest {
-    return QueryTotalClaimableRequest.decode(message.value);
-  },
-  toProto(message: QueryTotalClaimableRequest): Uint8Array {
-    return QueryTotalClaimableRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
-      value: QueryTotalClaimableRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
@@ -736,7 +444,6 @@ function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
   };
 }
 export const QueryTotalClaimableResponse = {
-  typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
   encode(message: QueryTotalClaimableResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -778,41 +485,6 @@ export const QueryTotalClaimableResponse = {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: QueryTotalClaimableResponseAmino): QueryTotalClaimableResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAmino {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryTotalClaimableResponseAminoMsg): QueryTotalClaimableResponse {
-    return QueryTotalClaimableResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAminoMsg {
-    return {
-      type: "osmosis/claim/query-total-claimable-response",
-      value: QueryTotalClaimableResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg): QueryTotalClaimableResponse {
-    return QueryTotalClaimableResponse.decode(message.value);
-  },
-  toProto(message: QueryTotalClaimableResponse): Uint8Array {
-    return QueryTotalClaimableResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
-      value: QueryTotalClaimableResponse.encode(message).finish()
-    };
   }
 };
 /** Query defines the gRPC querier service. */

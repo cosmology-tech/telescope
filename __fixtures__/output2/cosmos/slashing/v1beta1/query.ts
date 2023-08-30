@@ -47,7 +47,6 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  typeUrl: "/cosmos.slashing.v1beta1.QueryParamsRequest",
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -75,34 +74,6 @@ export const QueryParamsRequest = {
   fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
-  },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
-  },
-  toProto(message: QueryParamsRequest): Uint8Array {
-    return QueryParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QueryParamsRequest",
-      value: QueryParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -111,7 +82,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  typeUrl: "/cosmos.slashing.v1beta1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -149,37 +119,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
-  },
-  toProto(message: QueryParamsResponse): Uint8Array {
-    return QueryParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QueryParamsResponse",
-      value: QueryParamsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
@@ -188,7 +127,6 @@ function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
   };
 }
 export const QuerySigningInfoRequest = {
-  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoRequest",
   encode(message: QuerySigningInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consAddress !== "") {
       writer.uint32(10).string(message.consAddress);
@@ -226,37 +164,6 @@ export const QuerySigningInfoRequest = {
     const message = createBaseQuerySigningInfoRequest();
     message.consAddress = object.consAddress ?? "";
     return message;
-  },
-  fromAmino(object: QuerySigningInfoRequestAmino): QuerySigningInfoRequest {
-    return {
-      consAddress: object.cons_address
-    };
-  },
-  toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestAmino {
-    const obj: any = {};
-    obj.cons_address = message.consAddress;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfoRequestAminoMsg): QuerySigningInfoRequest {
-    return QuerySigningInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoRequest): QuerySigningInfoRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoRequest",
-      value: QuerySigningInfoRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfoRequestProtoMsg): QuerySigningInfoRequest {
-    return QuerySigningInfoRequest.decode(message.value);
-  },
-  toProto(message: QuerySigningInfoRequest): Uint8Array {
-    return QuerySigningInfoRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySigningInfoRequest): QuerySigningInfoRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoRequest",
-      value: QuerySigningInfoRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
@@ -265,7 +172,6 @@ function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
   };
 }
 export const QuerySigningInfoResponse = {
-  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoResponse",
   encode(message: QuerySigningInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.valSigningInfo !== undefined) {
       ValidatorSigningInfo.encode(message.valSigningInfo, writer.uint32(10).fork()).ldelim();
@@ -303,37 +209,6 @@ export const QuerySigningInfoResponse = {
     const message = createBaseQuerySigningInfoResponse();
     message.valSigningInfo = object.valSigningInfo !== undefined && object.valSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.valSigningInfo) : undefined;
     return message;
-  },
-  fromAmino(object: QuerySigningInfoResponseAmino): QuerySigningInfoResponse {
-    return {
-      valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
-    };
-  },
-  toAmino(message: QuerySigningInfoResponse): QuerySigningInfoResponseAmino {
-    const obj: any = {};
-    obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfoResponseAminoMsg): QuerySigningInfoResponse {
-    return QuerySigningInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoResponse): QuerySigningInfoResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoResponse",
-      value: QuerySigningInfoResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfoResponseProtoMsg): QuerySigningInfoResponse {
-    return QuerySigningInfoResponse.decode(message.value);
-  },
-  toProto(message: QuerySigningInfoResponse): Uint8Array {
-    return QuerySigningInfoResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySigningInfoResponse): QuerySigningInfoResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfoResponse",
-      value: QuerySigningInfoResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
@@ -342,7 +217,6 @@ function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   };
 }
 export const QuerySigningInfosRequest = {
-  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosRequest",
   encode(message: QuerySigningInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -380,37 +254,6 @@ export const QuerySigningInfosRequest = {
     const message = createBaseQuerySigningInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QuerySigningInfosRequestAmino): QuerySigningInfosRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QuerySigningInfosRequest): QuerySigningInfosRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfosRequestAminoMsg): QuerySigningInfosRequest {
-    return QuerySigningInfosRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosRequest): QuerySigningInfosRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosRequest",
-      value: QuerySigningInfosRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfosRequestProtoMsg): QuerySigningInfosRequest {
-    return QuerySigningInfosRequest.decode(message.value);
-  },
-  toProto(message: QuerySigningInfosRequest): Uint8Array {
-    return QuerySigningInfosRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySigningInfosRequest): QuerySigningInfosRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosRequest",
-      value: QuerySigningInfosRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
@@ -420,7 +263,6 @@ function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   };
 }
 export const QuerySigningInfosResponse = {
-  typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosResponse",
   encode(message: QuerySigningInfosResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.info) {
       ValidatorSigningInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -471,43 +313,6 @@ export const QuerySigningInfosResponse = {
     message.info = object.info?.map(e => ValidatorSigningInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QuerySigningInfosResponseAmino): QuerySigningInfosResponse {
-    return {
-      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QuerySigningInfosResponse): QuerySigningInfosResponseAmino {
-    const obj: any = {};
-    if (message.info) {
-      obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e) : undefined);
-    } else {
-      obj.info = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfosResponseAminoMsg): QuerySigningInfosResponse {
-    return QuerySigningInfosResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosResponse): QuerySigningInfosResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosResponse",
-      value: QuerySigningInfosResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfosResponseProtoMsg): QuerySigningInfosResponse {
-    return QuerySigningInfosResponse.decode(message.value);
-  },
-  toProto(message: QuerySigningInfosResponse): Uint8Array {
-    return QuerySigningInfosResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QuerySigningInfosResponse): QuerySigningInfosResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosResponse",
-      value: QuerySigningInfosResponse.encode(message).finish()
-    };
   }
 };
 /** Query provides defines the gRPC querier service */

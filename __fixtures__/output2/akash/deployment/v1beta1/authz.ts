@@ -23,7 +23,6 @@ function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorizat
   };
 }
 export const DepositDeploymentAuthorization = {
-  typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
   encode(message: DepositDeploymentAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.spendLimit !== undefined) {
       Coin.encode(message.spendLimit, writer.uint32(10).fork()).ldelim();
@@ -61,30 +60,5 @@ export const DepositDeploymentAuthorization = {
     const message = createBaseDepositDeploymentAuthorization();
     message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : undefined;
     return message;
-  },
-  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
-    };
-  },
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
-    const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.decode(message.value);
-  },
-  toProto(message: DepositDeploymentAuthorization): Uint8Array {
-    return DepositDeploymentAuthorization.encode(message).finish();
-  },
-  toProtoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-      value: DepositDeploymentAuthorization.encode(message).finish()
-    };
   }
 };

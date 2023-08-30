@@ -88,7 +88,6 @@ function createBaseMinter(): Minter {
   };
 }
 export const Minter = {
-  typeUrl: "/osmosis.mint.v1beta1.Minter",
   encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochProvisions !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
@@ -126,37 +125,6 @@ export const Minter = {
     const message = createBaseMinter();
     message.epochProvisions = object.epochProvisions ?? "";
     return message;
-  },
-  fromAmino(object: MinterAmino): Minter {
-    return {
-      epochProvisions: object.epoch_provisions
-    };
-  },
-  toAmino(message: Minter): MinterAmino {
-    const obj: any = {};
-    obj.epoch_provisions = message.epochProvisions;
-    return obj;
-  },
-  fromAminoMsg(object: MinterAminoMsg): Minter {
-    return Minter.fromAmino(object.value);
-  },
-  toAminoMsg(message: Minter): MinterAminoMsg {
-    return {
-      type: "osmosis/mint/minter",
-      value: Minter.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MinterProtoMsg): Minter {
-    return Minter.decode(message.value);
-  },
-  toProto(message: Minter): Uint8Array {
-    return Minter.encode(message).finish();
-  },
-  toProtoMsg(message: Minter): MinterProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.Minter",
-      value: Minter.encode(message).finish()
-    };
   }
 };
 function createBaseWeightedAddress(): WeightedAddress {
@@ -166,7 +134,6 @@ function createBaseWeightedAddress(): WeightedAddress {
   };
 }
 export const WeightedAddress = {
-  typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -213,39 +180,6 @@ export const WeightedAddress = {
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
     return message;
-  },
-  fromAmino(object: WeightedAddressAmino): WeightedAddress {
-    return {
-      address: object.address,
-      weight: object.weight
-    };
-  },
-  toAmino(message: WeightedAddress): WeightedAddressAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.weight = message.weight;
-    return obj;
-  },
-  fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
-    return WeightedAddress.fromAmino(object.value);
-  },
-  toAminoMsg(message: WeightedAddress): WeightedAddressAminoMsg {
-    return {
-      type: "osmosis/mint/weighted-address",
-      value: WeightedAddress.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
-    return WeightedAddress.decode(message.value);
-  },
-  toProto(message: WeightedAddress): Uint8Array {
-    return WeightedAddress.encode(message).finish();
-  },
-  toProtoMsg(message: WeightedAddress): WeightedAddressProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
-      value: WeightedAddress.encode(message).finish()
-    };
   }
 };
 function createBaseDistributionProportions(): DistributionProportions {
@@ -257,7 +191,6 @@ function createBaseDistributionProportions(): DistributionProportions {
   };
 }
 export const DistributionProportions = {
-  typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
   encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.staking !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
@@ -322,43 +255,6 @@ export const DistributionProportions = {
     message.developerRewards = object.developerRewards ?? "";
     message.communityPool = object.communityPool ?? "";
     return message;
-  },
-  fromAmino(object: DistributionProportionsAmino): DistributionProportions {
-    return {
-      staking: object.staking,
-      poolIncentives: object.pool_incentives,
-      developerRewards: object.developer_rewards,
-      communityPool: object.community_pool
-    };
-  },
-  toAmino(message: DistributionProportions): DistributionProportionsAmino {
-    const obj: any = {};
-    obj.staking = message.staking;
-    obj.pool_incentives = message.poolIncentives;
-    obj.developer_rewards = message.developerRewards;
-    obj.community_pool = message.communityPool;
-    return obj;
-  },
-  fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
-    return DistributionProportions.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistributionProportions): DistributionProportionsAminoMsg {
-    return {
-      type: "osmosis/mint/distribution-proportions",
-      value: DistributionProportions.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
-    return DistributionProportions.decode(message.value);
-  },
-  toProto(message: DistributionProportions): Uint8Array {
-    return DistributionProportions.encode(message).finish();
-  },
-  toProtoMsg(message: DistributionProportions): DistributionProportionsProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
-      value: DistributionProportions.encode(message).finish()
-    };
   }
 };
 function createBaseParams(): Params {
@@ -374,7 +270,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/osmosis.mint.v1beta1.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
@@ -479,54 +374,5 @@ export const Params = {
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
     message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO;
     return message;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      genesisEpochProvisions: object.genesis_epoch_provisions,
-      epochIdentifier: object.epoch_identifier,
-      reductionPeriodInEpochs: Long.fromString(object.reduction_period_in_epochs),
-      reductionFactor: object.reduction_factor,
-      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
-      weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
-      mintingRewardsDistributionStartEpoch: Long.fromString(object.minting_rewards_distribution_start_epoch)
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.mint_denom = message.mintDenom;
-    obj.genesis_epoch_provisions = message.genesisEpochProvisions;
-    obj.epoch_identifier = message.epochIdentifier;
-    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
-    obj.reduction_factor = message.reductionFactor;
-    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
-    if (message.weightedDeveloperRewardsReceivers) {
-      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
-    } else {
-      obj.weighted_developer_rewards_receivers = [];
-    }
-    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/mint/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/osmosis.mint.v1beta1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

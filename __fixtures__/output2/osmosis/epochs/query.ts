@@ -18,7 +18,6 @@ function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {};
 }
 export const QueryEpochsInfoRequest = {
-  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest",
   encode(_: QueryEpochsInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -46,34 +45,6 @@ export const QueryEpochsInfoRequest = {
   fromPartial(_: Partial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
     return message;
-  },
-  fromAmino(_: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
-    return {};
-  },
-  toAmino(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochsInfoRequestAminoMsg): QueryEpochsInfoRequest {
-    return QueryEpochsInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestAminoMsg {
-    return {
-      type: "osmosis/epochs/query-epochs-info-request",
-      value: QueryEpochsInfoRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg): QueryEpochsInfoRequest {
-    return QueryEpochsInfoRequest.decode(message.value);
-  },
-  toProto(message: QueryEpochsInfoRequest): Uint8Array {
-    return QueryEpochsInfoRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest",
-      value: QueryEpochsInfoRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
@@ -82,7 +53,6 @@ function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   };
 }
 export const QueryEpochsInfoResponse = {
-  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse",
   encode(message: QueryEpochsInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -124,41 +94,6 @@ export const QueryEpochsInfoResponse = {
     const message = createBaseQueryEpochsInfoResponse();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
-    const obj: any = {};
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: QueryEpochsInfoResponseAminoMsg): QueryEpochsInfoResponse {
-    return QueryEpochsInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAminoMsg {
-    return {
-      type: "osmosis/epochs/query-epochs-info-response",
-      value: QueryEpochsInfoResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg): QueryEpochsInfoResponse {
-    return QueryEpochsInfoResponse.decode(message.value);
-  },
-  toProto(message: QueryEpochsInfoResponse): Uint8Array {
-    return QueryEpochsInfoResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse",
-      value: QueryEpochsInfoResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
@@ -167,7 +102,6 @@ function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
   };
 }
 export const QueryCurrentEpochRequest = {
-  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
   encode(message: QueryCurrentEpochRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
@@ -205,37 +139,6 @@ export const QueryCurrentEpochRequest = {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
-  },
-  fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
-    return {
-      identifier: object.identifier
-    };
-  },
-  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
-    const obj: any = {};
-    obj.identifier = message.identifier;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
-    return QueryCurrentEpochRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAminoMsg {
-    return {
-      type: "osmosis/epochs/query-current-epoch-request",
-      value: QueryCurrentEpochRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg): QueryCurrentEpochRequest {
-    return QueryCurrentEpochRequest.decode(message.value);
-  },
-  toProto(message: QueryCurrentEpochRequest): Uint8Array {
-    return QueryCurrentEpochRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestProtoMsg {
-    return {
-      typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
-      value: QueryCurrentEpochRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
@@ -244,7 +147,6 @@ function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   };
 }
 export const QueryCurrentEpochResponse = {
-  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
   encode(message: QueryCurrentEpochResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.currentEpoch.isZero()) {
       writer.uint32(8).int64(message.currentEpoch);
@@ -282,37 +184,6 @@ export const QueryCurrentEpochResponse = {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;
-  },
-  fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
-    return {
-      currentEpoch: Long.fromString(object.current_epoch)
-    };
-  },
-  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
-    const obj: any = {};
-    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {
-    return QueryCurrentEpochResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAminoMsg {
-    return {
-      type: "osmosis/epochs/query-current-epoch-response",
-      value: QueryCurrentEpochResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg): QueryCurrentEpochResponse {
-    return QueryCurrentEpochResponse.decode(message.value);
-  },
-  toProto(message: QueryCurrentEpochResponse): Uint8Array {
-    return QueryCurrentEpochResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseProtoMsg {
-    return {
-      typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
-      value: QueryCurrentEpochResponse.encode(message).finish()
-    };
   }
 };
 /** Query defines the gRPC querier service. */

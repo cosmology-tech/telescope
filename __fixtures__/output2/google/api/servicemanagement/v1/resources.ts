@@ -441,7 +441,6 @@ function createBaseManagedService(): ManagedService {
   };
 }
 export const ManagedService = {
-  typeUrl: "/google.api.servicemanagement.v1.ManagedService",
   encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
@@ -488,33 +487,6 @@ export const ManagedService = {
     message.serviceName = object.serviceName ?? "";
     message.producerProjectId = object.producerProjectId ?? "";
     return message;
-  },
-  fromAmino(object: ManagedServiceAmino): ManagedService {
-    return {
-      serviceName: object.service_name,
-      producerProjectId: object.producer_project_id
-    };
-  },
-  toAmino(message: ManagedService): ManagedServiceAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.producer_project_id = message.producerProjectId;
-    return obj;
-  },
-  fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
-    return ManagedService.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ManagedServiceProtoMsg): ManagedService {
-    return ManagedService.decode(message.value);
-  },
-  toProto(message: ManagedService): Uint8Array {
-    return ManagedService.encode(message).finish();
-  },
-  toProtoMsg(message: ManagedService): ManagedServiceProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ManagedService",
-      value: ManagedService.encode(message).finish()
-    };
   }
 };
 function createBaseOperationMetadata(): OperationMetadata {
@@ -526,7 +498,6 @@ function createBaseOperationMetadata(): OperationMetadata {
   };
 }
 export const OperationMetadata = {
-  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata",
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -599,45 +570,6 @@ export const OperationMetadata = {
     message.progressPercentage = object.progressPercentage ?? 0;
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     return message;
-  },
-  fromAmino(object: OperationMetadataAmino): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
-      progressPercentage: object.progress_percentage,
-      startTime: object.start_time
-    };
-  },
-  toAmino(message: OperationMetadata): OperationMetadataAmino {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-    if (message.steps) {
-      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toAmino(e) : undefined);
-    } else {
-      obj.steps = [];
-    }
-    obj.progress_percentage = message.progressPercentage;
-    obj.start_time = message.startTime;
-    return obj;
-  },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
-    return OperationMetadata.decode(message.value);
-  },
-  toProto(message: OperationMetadata): Uint8Array {
-    return OperationMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.OperationMetadata",
-      value: OperationMetadata.encode(message).finish()
-    };
   }
 };
 function createBaseOperationMetadata_Step(): OperationMetadata_Step {
@@ -647,7 +579,6 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
   };
 }
 export const OperationMetadata_Step = {
-  typeUrl: "/google.api.servicemanagement.v1.Step",
   encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
@@ -694,33 +625,6 @@ export const OperationMetadata_Step = {
     message.description = object.description ?? "";
     message.status = object.status ?? 0;
     return message;
-  },
-  fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
-    return {
-      description: object.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
-    };
-  },
-  toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
-    const obj: any = {};
-    obj.description = message.description;
-    obj.status = message.status;
-    return obj;
-  },
-  fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
-    return OperationMetadata_Step.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OperationMetadata_StepProtoMsg): OperationMetadata_Step {
-    return OperationMetadata_Step.decode(message.value);
-  },
-  toProto(message: OperationMetadata_Step): Uint8Array {
-    return OperationMetadata_Step.encode(message).finish();
-  },
-  toProtoMsg(message: OperationMetadata_Step): OperationMetadata_StepProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.Step",
-      value: OperationMetadata_Step.encode(message).finish()
-    };
   }
 };
 function createBaseDiagnostic(): Diagnostic {
@@ -731,7 +635,6 @@ function createBaseDiagnostic(): Diagnostic {
   };
 }
 export const Diagnostic = {
-  typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
   encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
@@ -787,35 +690,6 @@ export const Diagnostic = {
     message.kind = object.kind ?? 0;
     message.message = object.message ?? "";
     return message;
-  },
-  fromAmino(object: DiagnosticAmino): Diagnostic {
-    return {
-      location: object.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
-      message: object.message
-    };
-  },
-  toAmino(message: Diagnostic): DiagnosticAmino {
-    const obj: any = {};
-    obj.location = message.location;
-    obj.kind = message.kind;
-    obj.message = message.message;
-    return obj;
-  },
-  fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
-    return Diagnostic.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DiagnosticProtoMsg): Diagnostic {
-    return Diagnostic.decode(message.value);
-  },
-  toProto(message: Diagnostic): Uint8Array {
-    return Diagnostic.encode(message).finish();
-  },
-  toProtoMsg(message: Diagnostic): DiagnosticProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
-      value: Diagnostic.encode(message).finish()
-    };
   }
 };
 function createBaseConfigSource(): ConfigSource {
@@ -825,7 +699,6 @@ function createBaseConfigSource(): ConfigSource {
   };
 }
 export const ConfigSource = {
-  typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
   encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(42).string(message.id);
@@ -876,37 +749,6 @@ export const ConfigSource = {
     message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ConfigSourceAmino): ConfigSource {
-    return {
-      id: object.id,
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ConfigSource): ConfigSourceAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    if (message.files) {
-      obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ConfigSourceAminoMsg): ConfigSource {
-    return ConfigSource.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConfigSourceProtoMsg): ConfigSource {
-    return ConfigSource.decode(message.value);
-  },
-  toProto(message: ConfigSource): Uint8Array {
-    return ConfigSource.encode(message).finish();
-  },
-  toProtoMsg(message: ConfigSource): ConfigSourceProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
-      value: ConfigSource.encode(message).finish()
-    };
   }
 };
 function createBaseConfigFile(): ConfigFile {
@@ -917,7 +759,6 @@ function createBaseConfigFile(): ConfigFile {
   };
 }
 export const ConfigFile = {
-  typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
   encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
@@ -973,35 +814,6 @@ export const ConfigFile = {
     message.fileContents = object.fileContents ?? new Uint8Array();
     message.fileType = object.fileType ?? 0;
     return message;
-  },
-  fromAmino(object: ConfigFileAmino): ConfigFile {
-    return {
-      filePath: object.file_path,
-      fileContents: object.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
-    };
-  },
-  toAmino(message: ConfigFile): ConfigFileAmino {
-    const obj: any = {};
-    obj.file_path = message.filePath;
-    obj.file_contents = message.fileContents;
-    obj.file_type = message.fileType;
-    return obj;
-  },
-  fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
-    return ConfigFile.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConfigFileProtoMsg): ConfigFile {
-    return ConfigFile.decode(message.value);
-  },
-  toProto(message: ConfigFile): Uint8Array {
-    return ConfigFile.encode(message).finish();
-  },
-  toProtoMsg(message: ConfigFile): ConfigFileProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
-      value: ConfigFile.encode(message).finish()
-    };
   }
 };
 function createBaseConfigRef(): ConfigRef {
@@ -1010,7 +822,6 @@ function createBaseConfigRef(): ConfigRef {
   };
 }
 export const ConfigRef = {
-  typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
   encode(message: ConfigRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1048,31 +859,6 @@ export const ConfigRef = {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
     return message;
-  },
-  fromAmino(object: ConfigRefAmino): ConfigRef {
-    return {
-      name: object.name
-    };
-  },
-  toAmino(message: ConfigRef): ConfigRefAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    return obj;
-  },
-  fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
-    return ConfigRef.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConfigRefProtoMsg): ConfigRef {
-    return ConfigRef.decode(message.value);
-  },
-  toProto(message: ConfigRef): Uint8Array {
-    return ConfigRef.encode(message).finish();
-  },
-  toProtoMsg(message: ConfigRef): ConfigRefProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
-      value: ConfigRef.encode(message).finish()
-    };
   }
 };
 function createBaseChangeReport(): ChangeReport {
@@ -1081,7 +867,6 @@ function createBaseChangeReport(): ChangeReport {
   };
 }
 export const ChangeReport = {
-  typeUrl: "/google.api.servicemanagement.v1.ChangeReport",
   encode(message: ChangeReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.configChanges) {
       ConfigChange.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1123,35 +908,6 @@ export const ChangeReport = {
     const message = createBaseChangeReport();
     message.configChanges = object.configChanges?.map(e => ConfigChange.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ChangeReportAmino): ChangeReport {
-    return {
-      configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ChangeReport): ChangeReportAmino {
-    const obj: any = {};
-    if (message.configChanges) {
-      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toAmino(e) : undefined);
-    } else {
-      obj.config_changes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ChangeReportAminoMsg): ChangeReport {
-    return ChangeReport.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ChangeReportProtoMsg): ChangeReport {
-    return ChangeReport.decode(message.value);
-  },
-  toProto(message: ChangeReport): Uint8Array {
-    return ChangeReport.encode(message).finish();
-  },
-  toProtoMsg(message: ChangeReport): ChangeReportProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ChangeReport",
-      value: ChangeReport.encode(message).finish()
-    };
   }
 };
 function createBaseRollout(): Rollout {
@@ -1166,7 +922,6 @@ function createBaseRollout(): Rollout {
   };
 }
 export const Rollout = {
-  typeUrl: "/google.api.servicemanagement.v1.Rollout",
   encode(message: Rollout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
@@ -1258,43 +1013,6 @@ export const Rollout = {
     message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";
     return message;
-  },
-  fromAmino(object: RolloutAmino): Rollout {
-    return {
-      rolloutId: object.rollout_id,
-      createTime: object.create_time,
-      createdBy: object.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
-      trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
-      deleteServiceStrategy: object?.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: Rollout): RolloutAmino {
-    const obj: any = {};
-    obj.rollout_id = message.rolloutId;
-    obj.create_time = message.createTime;
-    obj.created_by = message.createdBy;
-    obj.status = message.status;
-    obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
-    obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: RolloutAminoMsg): Rollout {
-    return Rollout.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RolloutProtoMsg): Rollout {
-    return Rollout.decode(message.value);
-  },
-  toProto(message: Rollout): Uint8Array {
-    return Rollout.encode(message).finish();
-  },
-  toProtoMsg(message: Rollout): RolloutProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.Rollout",
-      value: Rollout.encode(message).finish()
-    };
   }
 };
 function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_TrafficPercentStrategy_PercentagesEntry {
@@ -1350,27 +1068,6 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
     return message;
-  },
-  fromAmino(object: Rollout_TrafficPercentStrategy_PercentagesEntryAmino): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return Rollout_TrafficPercentStrategy_PercentagesEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return Rollout_TrafficPercentStrategy_PercentagesEntry.decode(message.value);
-  },
-  toProto(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Uint8Array {
-    return Rollout_TrafficPercentStrategy_PercentagesEntry.encode(message).finish();
   }
 };
 function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrategy {
@@ -1379,7 +1076,6 @@ function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrat
   };
 }
 export const Rollout_TrafficPercentStrategy = {
-  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy",
   encode(message: Rollout_TrafficPercentStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
       Rollout_TrafficPercentStrategy_PercentagesEntry.encode({
@@ -1440,48 +1136,12 @@ export const Rollout_TrafficPercentStrategy = {
       return acc;
     }, {});
     return message;
-  },
-  fromAmino(object: Rollout_TrafficPercentStrategyAmino): Rollout_TrafficPercentStrategy {
-    return {
-      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
-        [key: string]: double;
-      }>((acc, [key, value]) => {
-        acc[key] = double.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyAmino {
-    const obj: any = {};
-    obj.percentages = {};
-    if (message.percentages) {
-      Object.entries(message.percentages).forEach(([k, v]) => {
-        obj.percentages[k] = double.toAmino(v);
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Rollout_TrafficPercentStrategyAminoMsg): Rollout_TrafficPercentStrategy {
-    return Rollout_TrafficPercentStrategy.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Rollout_TrafficPercentStrategyProtoMsg): Rollout_TrafficPercentStrategy {
-    return Rollout_TrafficPercentStrategy.decode(message.value);
-  },
-  toProto(message: Rollout_TrafficPercentStrategy): Uint8Array {
-    return Rollout_TrafficPercentStrategy.encode(message).finish();
-  },
-  toProtoMsg(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy",
-      value: Rollout_TrafficPercentStrategy.encode(message).finish()
-    };
   }
 };
 function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrategy {
   return {};
 }
 export const Rollout_DeleteServiceStrategy = {
-  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy",
   encode(_: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1509,27 +1169,5 @@ export const Rollout_DeleteServiceStrategy = {
   fromPartial(_: Partial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
-  },
-  fromAmino(_: Rollout_DeleteServiceStrategyAmino): Rollout_DeleteServiceStrategy {
-    return {};
-  },
-  toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: Rollout_DeleteServiceStrategyAminoMsg): Rollout_DeleteServiceStrategy {
-    return Rollout_DeleteServiceStrategy.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Rollout_DeleteServiceStrategyProtoMsg): Rollout_DeleteServiceStrategy {
-    return Rollout_DeleteServiceStrategy.decode(message.value);
-  },
-  toProto(message: Rollout_DeleteServiceStrategy): Uint8Array {
-    return Rollout_DeleteServiceStrategy.encode(message).finish();
-  },
-  toProtoMsg(message: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy",
-      value: Rollout_DeleteServiceStrategy.encode(message).finish()
-    };
   }
 };

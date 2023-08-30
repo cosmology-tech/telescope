@@ -18,7 +18,6 @@ function createBaseInterchainAccount(): InterchainAccount {
   };
 }
 export const InterchainAccount = {
-  typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccount",
   encode(message: InterchainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
@@ -65,38 +64,5 @@ export const InterchainAccount = {
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.accountOwner = object.accountOwner ?? "";
     return message;
-  },
-  fromAmino(object: InterchainAccountAmino): InterchainAccount {
-    return {
-      baseAccount: object?.base_account ? BaseAccount.fromAmino(object.base_account) : undefined,
-      accountOwner: object.account_owner
-    };
-  },
-  toAmino(message: InterchainAccount): InterchainAccountAmino {
-    const obj: any = {};
-    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.account_owner = message.accountOwner;
-    return obj;
-  },
-  fromAminoMsg(object: InterchainAccountAminoMsg): InterchainAccount {
-    return InterchainAccount.fromAmino(object.value);
-  },
-  toAminoMsg(message: InterchainAccount): InterchainAccountAminoMsg {
-    return {
-      type: "cosmos-sdk/InterchainAccount",
-      value: InterchainAccount.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: InterchainAccountProtoMsg): InterchainAccount {
-    return InterchainAccount.decode(message.value);
-  },
-  toProto(message: InterchainAccount): Uint8Array {
-    return InterchainAccount.encode(message).finish();
-  },
-  toProtoMsg(message: InterchainAccount): InterchainAccountProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccount",
-      value: InterchainAccount.encode(message).finish()
-    };
   }
 };

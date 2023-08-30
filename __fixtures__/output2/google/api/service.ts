@@ -175,7 +175,6 @@ function createBaseService(): Service {
   };
 }
 export const Service = {
-  typeUrl: "/google.api.Service",
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -457,107 +456,6 @@ export const Service = {
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : undefined;
     return message;
-  },
-  fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      title: object.title,
-      producerProjectId: object.producer_project_id,
-      id: object.id,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
-      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      backend: object?.backend ? Backend.fromAmino(object.backend) : undefined,
-      http: object?.http ? Http.fromAmino(object.http) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      context: object?.context ? Context.fromAmino(object.context) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      control: object?.control ? Control.fromAmino(object.control) : undefined,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromAmino(e)) : [],
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      billing: object?.billing ? Billing.fromAmino(object.billing) : undefined,
-      logging: object?.logging ? Logging.fromAmino(object.logging) : undefined,
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined,
-      systemParameters: object?.system_parameters ? SystemParameters.fromAmino(object.system_parameters) : undefined,
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
-    };
-  },
-  toAmino(message: Service): ServiceAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    obj.producer_project_id = message.producerProjectId;
-    obj.id = message.id;
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    if (message.types) {
-      obj.types = message.types.map(e => e ? Type.toAmino(e) : undefined);
-    } else {
-      obj.types = [];
-    }
-    if (message.enums) {
-      obj.enums = message.enums.map(e => e ? Enum.toAmino(e) : undefined);
-    } else {
-      obj.enums = [];
-    }
-    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
-    obj.backend = message.backend ? Backend.toAmino(message.backend) : undefined;
-    obj.http = message.http ? Http.toAmino(message.http) : undefined;
-    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
-    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
-    obj.context = message.context ? Context.toAmino(message.context) : undefined;
-    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    obj.control = message.control ? Control.toAmino(message.control) : undefined;
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.logs = [];
-    }
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.monitored_resources = [];
-    }
-    obj.billing = message.billing ? Billing.toAmino(message.billing) : undefined;
-    obj.logging = message.logging ? Logging.toAmino(message.logging) : undefined;
-    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
-    obj.system_parameters = message.systemParameters ? SystemParameters.toAmino(message.systemParameters) : undefined;
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ServiceProtoMsg): Service {
-    return Service.decode(message.value);
-  },
-  toProto(message: Service): Uint8Array {
-    return Service.encode(message).finish();
-  },
-  toProtoMsg(message: Service): ServiceProtoMsg {
-    return {
-      typeUrl: "/google.api.Service",
-      value: Service.encode(message).finish()
-    };
   }
 };
 /** `Service` is the root object of Google service configuration schema. It

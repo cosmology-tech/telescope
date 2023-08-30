@@ -48,7 +48,6 @@ function createBaseLogDescriptor(): LogDescriptor {
   };
 }
 export const LogDescriptor = {
-  typeUrl: "/google.api.LogDescriptor",
   encode(message: LogDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -117,40 +116,5 @@ export const LogDescriptor = {
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
     return message;
-  },
-  fromAmino(object: LogDescriptorAmino): LogDescriptor {
-    return {
-      name: object.name,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      description: object.description,
-      displayName: object.display_name
-    };
-  },
-  toAmino(message: LogDescriptor): LogDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    obj.description = message.description;
-    obj.display_name = message.displayName;
-    return obj;
-  },
-  fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {
-    return LogDescriptor.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogDescriptorProtoMsg): LogDescriptor {
-    return LogDescriptor.decode(message.value);
-  },
-  toProto(message: LogDescriptor): Uint8Array {
-    return LogDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: LogDescriptor): LogDescriptorProtoMsg {
-    return {
-      typeUrl: "/google.api.LogDescriptor",
-      value: LogDescriptor.encode(message).finish()
-    };
   }
 };

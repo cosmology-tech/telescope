@@ -23,7 +23,6 @@ function createBaseGenesisDeployment(): GenesisDeployment {
   };
 }
 export const GenesisDeployment = {
-  typeUrl: "/akash.deployment.v1beta1.GenesisDeployment",
   encode(message: GenesisDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -74,37 +73,6 @@ export const GenesisDeployment = {
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
-    const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
-    return GenesisDeployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
-    return GenesisDeployment.decode(message.value);
-  },
-  toProto(message: GenesisDeployment): Uint8Array {
-    return GenesisDeployment.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisDeployment): GenesisDeploymentProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta1.GenesisDeployment",
-      value: GenesisDeployment.encode(message).finish()
-    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -114,7 +82,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/akash.deployment.v1beta1.GenesisState",
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deployments) {
       GenesisDeployment.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -165,36 +132,5 @@ export const GenesisState = {
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };

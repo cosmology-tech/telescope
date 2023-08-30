@@ -19,7 +19,6 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
   };
 }
 export const MsgVerifyInvariant = {
-  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
   encode(message: MsgVerifyInvariant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -75,48 +74,12 @@ export const MsgVerifyInvariant = {
     message.invariantModuleName = object.invariantModuleName ?? "";
     message.invariantRoute = object.invariantRoute ?? "";
     return message;
-  },
-  fromAmino(object: MsgVerifyInvariantAmino): MsgVerifyInvariant {
-    return {
-      sender: object.sender,
-      invariantModuleName: object.invariant_module_name,
-      invariantRoute: object.invariant_route
-    };
-  },
-  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
-    const obj: any = {};
-    obj.sender = message.sender;
-    obj.invariant_module_name = message.invariantModuleName;
-    obj.invariant_route = message.invariantRoute;
-    return obj;
-  },
-  fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {
-    return MsgVerifyInvariant.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVerifyInvariant",
-      value: MsgVerifyInvariant.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
-    return MsgVerifyInvariant.decode(message.value);
-  },
-  toProto(message: MsgVerifyInvariant): Uint8Array {
-    return MsgVerifyInvariant.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantProtoMsg {
-    return {
-      typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
-      value: MsgVerifyInvariant.encode(message).finish()
-    };
   }
 };
 function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
   return {};
 }
 export const MsgVerifyInvariantResponse = {
-  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
   encode(_: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -144,34 +107,6 @@ export const MsgVerifyInvariantResponse = {
   fromPartial(_: Partial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
-  },
-  fromAmino(_: MsgVerifyInvariantResponseAmino): MsgVerifyInvariantResponse {
-    return {};
-  },
-  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgVerifyInvariantResponseAminoMsg): MsgVerifyInvariantResponse {
-    return MsgVerifyInvariantResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgVerifyInvariantResponse",
-      value: MsgVerifyInvariantResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
-    return MsgVerifyInvariantResponse.decode(message.value);
-  },
-  toProto(message: MsgVerifyInvariantResponse): Uint8Array {
-    return MsgVerifyInvariantResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
-      value: MsgVerifyInvariantResponse.encode(message).finish()
-    };
   }
 };
 /** Msg defines the bank Msg service. */

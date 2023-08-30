@@ -17,7 +17,6 @@ function createBaseModule(): Module {
   return {};
 }
 export const Module = {
-  typeUrl: "/cosmos.orm.module.v1alpha1.Module",
   encode(_: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -52,33 +51,5 @@ export const Module = {
   toSDK(_: Module): ModuleSDKType {
     const obj: any = {};
     return obj;
-  },
-  fromAmino(_: ModuleAmino): Module {
-    return {};
-  },
-  toAmino(_: Module): ModuleAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: ModuleAminoMsg): Module {
-    return Module.fromAmino(object.value);
-  },
-  toAminoMsg(message: Module): ModuleAminoMsg {
-    return {
-      type: "cosmos-sdk/Module",
-      value: Module.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleProtoMsg): Module {
-    return Module.decode(message.value);
-  },
-  toProto(message: Module): Uint8Array {
-    return Module.encode(message).finish();
-  },
-  toProtoMsg(message: Module): ModuleProtoMsg {
-    return {
-      typeUrl: "/cosmos.orm.module.v1alpha1.Module",
-      value: Module.encode(message).finish()
-    };
   }
 };

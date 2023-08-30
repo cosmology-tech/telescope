@@ -13,7 +13,6 @@ function createBaseResourceValue(): ResourceValue {
   };
 }
 export const ResourceValue = {
-  typeUrl: "/akash.base.v1beta2.ResourceValue",
   encode(message: ResourceValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.val.length !== 0) {
       writer.uint32(10).bytes(message.val);
@@ -51,30 +50,5 @@ export const ResourceValue = {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
-  },
-  fromAmino(object: ResourceValueAmino): ResourceValue {
-    return {
-      val: object.val
-    };
-  },
-  toAmino(message: ResourceValue): ResourceValueAmino {
-    const obj: any = {};
-    obj.val = message.val;
-    return obj;
-  },
-  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
-    return ResourceValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
-    return ResourceValue.decode(message.value);
-  },
-  toProto(message: ResourceValue): Uint8Array {
-    return ResourceValue.encode(message).finish();
-  },
-  toProtoMsg(message: ResourceValue): ResourceValueProtoMsg {
-    return {
-      typeUrl: "/akash.base.v1beta2.ResourceValue",
-      value: ResourceValue.encode(message).finish()
-    };
   }
 };

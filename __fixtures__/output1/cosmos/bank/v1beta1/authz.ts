@@ -26,7 +26,6 @@ function createBaseSendAuthorization(): SendAuthorization {
   };
 }
 export const SendAuthorization = {
-  typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
   encode(message: SendAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -82,40 +81,5 @@ export const SendAuthorization = {
       obj.spend_limit = [];
     }
     return obj;
-  },
-  fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: SendAuthorization): SendAuthorizationAmino {
-    const obj: any = {};
-    if (message.spendLimit) {
-      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.spend_limit = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
-    return SendAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/SendAuthorization",
-      value: SendAuthorization.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
-    return SendAuthorization.decode(message.value);
-  },
-  toProto(message: SendAuthorization): Uint8Array {
-    return SendAuthorization.encode(message).finish();
-  },
-  toProtoMsg(message: SendAuthorization): SendAuthorizationProtoMsg {
-    return {
-      typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
-      value: SendAuthorization.encode(message).finish()
-    };
   }
 };

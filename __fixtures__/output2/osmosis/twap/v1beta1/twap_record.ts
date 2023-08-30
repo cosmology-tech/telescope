@@ -57,7 +57,6 @@ function createBaseTwapRecord(): TwapRecord {
   };
 }
 export const TwapRecord = {
-  typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
   encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -176,54 +175,5 @@ export const TwapRecord = {
     message.p1ArithmeticTwapAccumulator = object.p1ArithmeticTwapAccumulator ?? "";
     message.lastErrorTime = object.lastErrorTime !== undefined && object.lastErrorTime !== null ? Timestamp.fromPartial(object.lastErrorTime) : undefined;
     return message;
-  },
-  fromAmino(object: TwapRecordAmino): TwapRecord {
-    return {
-      poolId: Long.fromString(object.pool_id),
-      asset0Denom: object.asset0_denom,
-      asset1Denom: object.asset1_denom,
-      height: Long.fromString(object.height),
-      time: object.time,
-      p0LastSpotPrice: object.p0_last_spot_price,
-      p1LastSpotPrice: object.p1_last_spot_price,
-      p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
-      p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object.last_error_time
-    };
-  },
-  toAmino(message: TwapRecord): TwapRecordAmino {
-    const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.asset0_denom = message.asset0Denom;
-    obj.asset1_denom = message.asset1Denom;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time;
-    obj.p0_last_spot_price = message.p0LastSpotPrice;
-    obj.p1_last_spot_price = message.p1LastSpotPrice;
-    obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator;
-    obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
-    obj.last_error_time = message.lastErrorTime;
-    return obj;
-  },
-  fromAminoMsg(object: TwapRecordAminoMsg): TwapRecord {
-    return TwapRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: TwapRecord): TwapRecordAminoMsg {
-    return {
-      type: "osmosis/twap/twap-record",
-      value: TwapRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: TwapRecordProtoMsg): TwapRecord {
-    return TwapRecord.decode(message.value);
-  },
-  toProto(message: TwapRecord): Uint8Array {
-    return TwapRecord.encode(message).finish();
-  },
-  toProtoMsg(message: TwapRecord): TwapRecordProtoMsg {
-    return {
-      typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
-      value: TwapRecord.encode(message).finish()
-    };
   }
 };

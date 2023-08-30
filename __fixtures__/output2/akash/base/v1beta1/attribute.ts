@@ -34,7 +34,6 @@ function createBaseAttribute(): Attribute {
   };
 }
 export const Attribute = {
-  typeUrl: "/akash.base.v1beta1.Attribute",
   encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -81,33 +80,6 @@ export const Attribute = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
-  },
-  fromAmino(object: AttributeAmino): Attribute {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: Attribute): AttributeAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AttributeAminoMsg): Attribute {
-    return Attribute.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeProtoMsg): Attribute {
-    return Attribute.decode(message.value);
-  },
-  toProto(message: Attribute): Uint8Array {
-    return Attribute.encode(message).finish();
-  },
-  toProtoMsg(message: Attribute): AttributeProtoMsg {
-    return {
-      typeUrl: "/akash.base.v1beta1.Attribute",
-      value: Attribute.encode(message).finish()
-    };
   }
 };
 function createBaseSignedBy(): SignedBy {
@@ -117,7 +89,6 @@ function createBaseSignedBy(): SignedBy {
   };
 }
 export const SignedBy = {
-  typeUrl: "/akash.base.v1beta1.SignedBy",
   encode(message: SignedBy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allOf) {
       writer.uint32(10).string(v!);
@@ -172,41 +143,6 @@ export const SignedBy = {
     message.allOf = object.allOf?.map(e => e) || [];
     message.anyOf = object.anyOf?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: SignedByAmino): SignedBy {
-    return {
-      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
-      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: SignedBy): SignedByAmino {
-    const obj: any = {};
-    if (message.allOf) {
-      obj.all_of = message.allOf.map(e => e);
-    } else {
-      obj.all_of = [];
-    }
-    if (message.anyOf) {
-      obj.any_of = message.anyOf.map(e => e);
-    } else {
-      obj.any_of = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: SignedByAminoMsg): SignedBy {
-    return SignedBy.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SignedByProtoMsg): SignedBy {
-    return SignedBy.decode(message.value);
-  },
-  toProto(message: SignedBy): Uint8Array {
-    return SignedBy.encode(message).finish();
-  },
-  toProtoMsg(message: SignedBy): SignedByProtoMsg {
-    return {
-      typeUrl: "/akash.base.v1beta1.SignedBy",
-      value: SignedBy.encode(message).finish()
-    };
   }
 };
 function createBasePlacementRequirements(): PlacementRequirements {
@@ -216,7 +152,6 @@ function createBasePlacementRequirements(): PlacementRequirements {
   };
 }
 export const PlacementRequirements = {
-  typeUrl: "/akash.base.v1beta1.PlacementRequirements",
   encode(message: PlacementRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedBy !== undefined) {
       SignedBy.encode(message.signedBy, writer.uint32(10).fork()).ldelim();
@@ -267,36 +202,5 @@ export const PlacementRequirements = {
     message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
-    return {
-      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
-    const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : undefined;
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
-    return PlacementRequirements.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PlacementRequirementsProtoMsg): PlacementRequirements {
-    return PlacementRequirements.decode(message.value);
-  },
-  toProto(message: PlacementRequirements): Uint8Array {
-    return PlacementRequirements.encode(message).finish();
-  },
-  toProtoMsg(message: PlacementRequirements): PlacementRequirementsProtoMsg {
-    return {
-      typeUrl: "/akash.base.v1beta1.PlacementRequirements",
-      value: PlacementRequirements.encode(message).finish()
-    };
   }
 };

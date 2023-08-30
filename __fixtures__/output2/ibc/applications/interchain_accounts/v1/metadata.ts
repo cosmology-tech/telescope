@@ -35,7 +35,6 @@ function createBaseMetadata(): Metadata {
   };
 }
 export const Metadata = {
-  typeUrl: "/ibc.applications.interchain_accounts.v1.Metadata",
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
@@ -118,46 +117,5 @@ export const Metadata = {
     message.encoding = object.encoding ?? "";
     message.txType = object.txType ?? "";
     return message;
-  },
-  fromAmino(object: MetadataAmino): Metadata {
-    return {
-      version: object.version,
-      controllerConnectionId: object.controller_connection_id,
-      hostConnectionId: object.host_connection_id,
-      address: object.address,
-      encoding: object.encoding,
-      txType: object.tx_type
-    };
-  },
-  toAmino(message: Metadata): MetadataAmino {
-    const obj: any = {};
-    obj.version = message.version;
-    obj.controller_connection_id = message.controllerConnectionId;
-    obj.host_connection_id = message.hostConnectionId;
-    obj.address = message.address;
-    obj.encoding = message.encoding;
-    obj.tx_type = message.txType;
-    return obj;
-  },
-  fromAminoMsg(object: MetadataAminoMsg): Metadata {
-    return Metadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: Metadata): MetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/Metadata",
-      value: Metadata.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MetadataProtoMsg): Metadata {
-    return Metadata.decode(message.value);
-  },
-  toProto(message: Metadata): Uint8Array {
-    return Metadata.encode(message).finish();
-  },
-  toProtoMsg(message: Metadata): MetadataProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.interchain_accounts.v1.Metadata",
-      value: Metadata.encode(message).finish()
-    };
   }
 };

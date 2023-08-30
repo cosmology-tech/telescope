@@ -213,7 +213,6 @@ function createBaseFieldMask(): FieldMask {
   };
 }
 export const FieldMask = {
-  typeUrl: "/google.protobuf.FieldMask",
   encode(message: FieldMask, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.paths) {
       writer.uint32(10).string(v!);
@@ -255,34 +254,5 @@ export const FieldMask = {
     const message = createBaseFieldMask();
     message.paths = object.paths?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: FieldMaskAmino): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: FieldMask): FieldMaskAmino {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
-    return FieldMask.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
-    return FieldMask.decode(message.value);
-  },
-  toProto(message: FieldMask): Uint8Array {
-    return FieldMask.encode(message).finish();
-  },
-  toProtoMsg(message: FieldMask): FieldMaskProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.FieldMask",
-      value: FieldMask.encode(message).finish()
-    };
   }
 };

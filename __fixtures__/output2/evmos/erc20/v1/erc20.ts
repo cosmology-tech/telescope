@@ -106,7 +106,6 @@ function createBaseTokenPair(): TokenPair {
   };
 }
 export const TokenPair = {
-  typeUrl: "/evmos.erc20.v1.TokenPair",
   encode(message: TokenPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.erc20Address !== "") {
       writer.uint32(10).string(message.erc20Address);
@@ -171,37 +170,6 @@ export const TokenPair = {
     message.enabled = object.enabled ?? false;
     message.contractOwner = object.contractOwner ?? 0;
     return message;
-  },
-  fromAmino(object: TokenPairAmino): TokenPair {
-    return {
-      erc20Address: object.erc20_address,
-      denom: object.denom,
-      enabled: object.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
-    };
-  },
-  toAmino(message: TokenPair): TokenPairAmino {
-    const obj: any = {};
-    obj.erc20_address = message.erc20Address;
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
-    obj.contract_owner = message.contractOwner;
-    return obj;
-  },
-  fromAminoMsg(object: TokenPairAminoMsg): TokenPair {
-    return TokenPair.fromAmino(object.value);
-  },
-  fromProtoMsg(message: TokenPairProtoMsg): TokenPair {
-    return TokenPair.decode(message.value);
-  },
-  toProto(message: TokenPair): Uint8Array {
-    return TokenPair.encode(message).finish();
-  },
-  toProtoMsg(message: TokenPair): TokenPairProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.TokenPair",
-      value: TokenPair.encode(message).finish()
-    };
   }
 };
 function createBaseRegisterCoinProposal(): RegisterCoinProposal {
@@ -212,7 +180,6 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
   };
 }
 export const RegisterCoinProposal = {
-  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
   encode(message: RegisterCoinProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -268,35 +235,6 @@ export const RegisterCoinProposal = {
     message.description = object.description ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
-  },
-  fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
-  },
-  toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: RegisterCoinProposalAminoMsg): RegisterCoinProposal {
-    return RegisterCoinProposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RegisterCoinProposalProtoMsg): RegisterCoinProposal {
-    return RegisterCoinProposal.decode(message.value);
-  },
-  toProto(message: RegisterCoinProposal): Uint8Array {
-    return RegisterCoinProposal.encode(message).finish();
-  },
-  toProtoMsg(message: RegisterCoinProposal): RegisterCoinProposalProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
-      value: RegisterCoinProposal.encode(message).finish()
-    };
   }
 };
 function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
@@ -307,7 +245,6 @@ function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
   };
 }
 export const RegisterERC20Proposal = {
-  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
   encode(message: RegisterERC20Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -363,35 +300,6 @@ export const RegisterERC20Proposal = {
     message.description = object.description ?? "";
     message.erc20address = object.erc20address ?? "";
     return message;
-  },
-  fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
-    return {
-      title: object.title,
-      description: object.description,
-      erc20address: object.erc20address
-    };
-  },
-  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.erc20address = message.erc20address;
-    return obj;
-  },
-  fromAminoMsg(object: RegisterERC20ProposalAminoMsg): RegisterERC20Proposal {
-    return RegisterERC20Proposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RegisterERC20ProposalProtoMsg): RegisterERC20Proposal {
-    return RegisterERC20Proposal.decode(message.value);
-  },
-  toProto(message: RegisterERC20Proposal): Uint8Array {
-    return RegisterERC20Proposal.encode(message).finish();
-  },
-  toProtoMsg(message: RegisterERC20Proposal): RegisterERC20ProposalProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
-      value: RegisterERC20Proposal.encode(message).finish()
-    };
   }
 };
 function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposal {
@@ -402,7 +310,6 @@ function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposa
   };
 }
 export const ToggleTokenConversionProposal = {
-  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
   encode(message: ToggleTokenConversionProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -458,34 +365,5 @@ export const ToggleTokenConversionProposal = {
     message.description = object.description ?? "";
     message.token = object.token ?? "";
     return message;
-  },
-  fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      token: object.token
-    };
-  },
-  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.token = message.token;
-    return obj;
-  },
-  fromAminoMsg(object: ToggleTokenConversionProposalAminoMsg): ToggleTokenConversionProposal {
-    return ToggleTokenConversionProposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg): ToggleTokenConversionProposal {
-    return ToggleTokenConversionProposal.decode(message.value);
-  },
-  toProto(message: ToggleTokenConversionProposal): Uint8Array {
-    return ToggleTokenConversionProposal.encode(message).finish();
-  },
-  toProtoMsg(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalProtoMsg {
-    return {
-      typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
-      value: ToggleTokenConversionProposal.encode(message).finish()
-    };
   }
 };

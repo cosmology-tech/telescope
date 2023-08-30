@@ -66,7 +66,6 @@ function createBaseClaimRecord(): ClaimRecord {
   };
 }
 export const ClaimRecord = {
-  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
   encode(message: ClaimRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -139,48 +138,5 @@ export const ClaimRecord = {
     message.initialClaimableAmount = object.initialClaimableAmount?.map(e => Coin.fromPartial(e)) || [];
     message.actionCompleted = object.actionCompleted?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: ClaimRecordAmino): ClaimRecord {
-    return {
-      address: object.address,
-      initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromAmino(e)) : [],
-      actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: ClaimRecord): ClaimRecordAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    if (message.initialClaimableAmount) {
-      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_claimable_amount = [];
-    }
-    if (message.actionCompleted) {
-      obj.action_completed = message.actionCompleted.map(e => e);
-    } else {
-      obj.action_completed = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClaimRecordAminoMsg): ClaimRecord {
-    return ClaimRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClaimRecord): ClaimRecordAminoMsg {
-    return {
-      type: "osmosis/claim/claim-record",
-      value: ClaimRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ClaimRecordProtoMsg): ClaimRecord {
-    return ClaimRecord.decode(message.value);
-  },
-  toProto(message: ClaimRecord): Uint8Array {
-    return ClaimRecord.encode(message).finish();
-  },
-  toProtoMsg(message: ClaimRecord): ClaimRecordProtoMsg {
-    return {
-      typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
-      value: ClaimRecord.encode(message).finish()
-    };
   }
 };

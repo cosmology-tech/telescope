@@ -57,7 +57,6 @@ function createBaseInflationDistribution(): InflationDistribution {
   };
 }
 export const InflationDistribution = {
-  typeUrl: "/evmos.inflation.v1.InflationDistribution",
   encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.stakingRewards !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
@@ -113,35 +112,6 @@ export const InflationDistribution = {
     message.usageIncentives = object.usageIncentives ?? "";
     message.communityPool = object.communityPool ?? "";
     return message;
-  },
-  fromAmino(object: InflationDistributionAmino): InflationDistribution {
-    return {
-      stakingRewards: object.staking_rewards,
-      usageIncentives: object.usage_incentives,
-      communityPool: object.community_pool
-    };
-  },
-  toAmino(message: InflationDistribution): InflationDistributionAmino {
-    const obj: any = {};
-    obj.staking_rewards = message.stakingRewards;
-    obj.usage_incentives = message.usageIncentives;
-    obj.community_pool = message.communityPool;
-    return obj;
-  },
-  fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
-    return InflationDistribution.fromAmino(object.value);
-  },
-  fromProtoMsg(message: InflationDistributionProtoMsg): InflationDistribution {
-    return InflationDistribution.decode(message.value);
-  },
-  toProto(message: InflationDistribution): Uint8Array {
-    return InflationDistribution.encode(message).finish();
-  },
-  toProtoMsg(message: InflationDistribution): InflationDistributionProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.InflationDistribution",
-      value: InflationDistribution.encode(message).finish()
-    };
   }
 };
 function createBaseExponentialCalculation(): ExponentialCalculation {
@@ -154,7 +124,6 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
   };
 }
 export const ExponentialCalculation = {
-  typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
   encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.a !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
@@ -228,38 +197,5 @@ export const ExponentialCalculation = {
     message.bondingTarget = object.bondingTarget ?? "";
     message.maxVariance = object.maxVariance ?? "";
     return message;
-  },
-  fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
-    return {
-      a: object.a,
-      r: object.r,
-      c: object.c,
-      bondingTarget: object.bonding_target,
-      maxVariance: object.max_variance
-    };
-  },
-  toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
-    const obj: any = {};
-    obj.a = message.a;
-    obj.r = message.r;
-    obj.c = message.c;
-    obj.bonding_target = message.bondingTarget;
-    obj.max_variance = message.maxVariance;
-    return obj;
-  },
-  fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {
-    return ExponentialCalculation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExponentialCalculationProtoMsg): ExponentialCalculation {
-    return ExponentialCalculation.decode(message.value);
-  },
-  toProto(message: ExponentialCalculation): Uint8Array {
-    return ExponentialCalculation.encode(message).finish();
-  },
-  toProtoMsg(message: ExponentialCalculation): ExponentialCalculationProtoMsg {
-    return {
-      typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
-      value: ExponentialCalculation.encode(message).finish()
-    };
   }
 };

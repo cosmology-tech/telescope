@@ -138,7 +138,6 @@ function createBaseEvalState(): EvalState {
   };
 }
 export const EvalState = {
-  typeUrl: "/google.api.expr.v1alpha1.EvalState",
   encode(message: EvalState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       ExprValue.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -213,41 +212,6 @@ export const EvalState = {
       obj.results = [];
     }
     return obj;
-  },
-  fromAmino(object: EvalStateAmino): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: EvalState): EvalStateAmino {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toAmino(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: EvalStateAminoMsg): EvalState {
-    return EvalState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalStateProtoMsg): EvalState {
-    return EvalState.decode(message.value);
-  },
-  toProto(message: EvalState): Uint8Array {
-    return EvalState.encode(message).finish();
-  },
-  toProtoMsg(message: EvalState): EvalStateProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.EvalState",
-      value: EvalState.encode(message).finish()
-    };
   }
 };
 function createBaseEvalState_Result(): EvalState_Result {
@@ -257,7 +221,6 @@ function createBaseEvalState_Result(): EvalState_Result {
   };
 }
 export const EvalState_Result = {
-  typeUrl: "/google.api.expr.v1alpha1.Result",
   encode(message: EvalState_Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.expr.isZero()) {
       writer.uint32(8).int64(message.expr);
@@ -316,33 +279,6 @@ export const EvalState_Result = {
     obj.expr = message.expr;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: EvalState_ResultAmino): EvalState_Result {
-    return {
-      expr: Long.fromString(object.expr),
-      value: Long.fromString(object.value)
-    };
-  },
-  toAmino(message: EvalState_Result): EvalState_ResultAmino {
-    const obj: any = {};
-    obj.expr = message.expr ? message.expr.toString() : undefined;
-    obj.value = message.value ? message.value.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
-    return EvalState_Result.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalState_ResultProtoMsg): EvalState_Result {
-    return EvalState_Result.decode(message.value);
-  },
-  toProto(message: EvalState_Result): Uint8Array {
-    return EvalState_Result.encode(message).finish();
-  },
-  toProtoMsg(message: EvalState_Result): EvalState_ResultProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.Result",
-      value: EvalState_Result.encode(message).finish()
-    };
   }
 };
 function createBaseExprValue(): ExprValue {
@@ -353,7 +289,6 @@ function createBaseExprValue(): ExprValue {
   };
 }
 export const ExprValue = {
-  typeUrl: "/google.api.expr.v1alpha1.ExprValue",
   encode(message: ExprValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -423,35 +358,6 @@ export const ExprValue = {
     message.error !== undefined && (obj.error = message.error ? ErrorSet.toSDK(message.error) : undefined);
     message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toSDK(message.unknown) : undefined);
     return obj;
-  },
-  fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      value: object?.value ? Value.fromAmino(object.value) : undefined,
-      error: object?.error ? ErrorSet.fromAmino(object.error) : undefined,
-      unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
-    };
-  },
-  toAmino(message: ExprValue): ExprValueAmino {
-    const obj: any = {};
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
-    obj.error = message.error ? ErrorSet.toAmino(message.error) : undefined;
-    obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ExprValueAminoMsg): ExprValue {
-    return ExprValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExprValueProtoMsg): ExprValue {
-    return ExprValue.decode(message.value);
-  },
-  toProto(message: ExprValue): Uint8Array {
-    return ExprValue.encode(message).finish();
-  },
-  toProtoMsg(message: ExprValue): ExprValueProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.ExprValue",
-      value: ExprValue.encode(message).finish()
-    };
   }
 };
 function createBaseErrorSet(): ErrorSet {
@@ -460,7 +366,6 @@ function createBaseErrorSet(): ErrorSet {
   };
 }
 export const ErrorSet = {
-  typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
   encode(message: ErrorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.errors) {
       Status.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -516,35 +421,6 @@ export const ErrorSet = {
       obj.errors = [];
     }
     return obj;
-  },
-  fromAmino(object: ErrorSetAmino): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ErrorSet): ErrorSetAmino {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toAmino(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ErrorSetAminoMsg): ErrorSet {
-    return ErrorSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ErrorSetProtoMsg): ErrorSet {
-    return ErrorSet.decode(message.value);
-  },
-  toProto(message: ErrorSet): Uint8Array {
-    return ErrorSet.encode(message).finish();
-  },
-  toProtoMsg(message: ErrorSet): ErrorSetProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
-      value: ErrorSet.encode(message).finish()
-    };
   }
 };
 function createBaseUnknownSet(): UnknownSet {
@@ -553,7 +429,6 @@ function createBaseUnknownSet(): UnknownSet {
   };
 }
 export const UnknownSet = {
-  typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
   encode(message: UnknownSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.exprs) {
@@ -618,34 +493,5 @@ export const UnknownSet = {
       obj.exprs = [];
     }
     return obj;
-  },
-  fromAmino(object: UnknownSetAmino): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: UnknownSet): UnknownSetAmino {
-    const obj: any = {};
-    if (message.exprs) {
-      obj.exprs = message.exprs.map(e => e);
-    } else {
-      obj.exprs = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UnknownSetAminoMsg): UnknownSet {
-    return UnknownSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UnknownSetProtoMsg): UnknownSet {
-    return UnknownSet.decode(message.value);
-  },
-  toProto(message: UnknownSet): Uint8Array {
-    return UnknownSet.encode(message).finish();
-  },
-  toProtoMsg(message: UnknownSet): UnknownSetProtoMsg {
-    return {
-      typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
-      value: UnknownSet.encode(message).finish()
-    };
   }
 };

@@ -31,7 +31,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/akash.inflation.v1beta2.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationDecayFactor !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
@@ -101,40 +100,5 @@ export const Params = {
     obj.initial_inflation = message.initialInflation;
     obj.variance = message.variance;
     return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      inflationDecayFactor: object.inflation_decay_factor,
-      initialInflation: object.initial_inflation,
-      variance: object.variance
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "akash/inflation/v1beta2/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/akash.inflation.v1beta2.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

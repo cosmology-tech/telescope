@@ -149,7 +149,6 @@ function createBaseDuration(): Duration {
   };
 }
 export const Duration = {
-  typeUrl: "/google.protobuf.Duration",
   encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.seconds.isZero()) {
       writer.uint32(8).int64(message.seconds);
@@ -208,30 +207,5 @@ export const Duration = {
     obj.seconds = message.seconds;
     obj.nanos = message.nanos;
     return obj;
-  },
-  fromAmino(object: DurationAmino): Duration {
-    const value = parseInt(object);
-    return {
-      seconds: Long.fromNumber(Math.floor(value / 1_000_000_000)),
-      nanos: value % 1_000_000_000
-    };
-  },
-  toAmino(message: Duration): DurationAmino {
-    return (message.seconds.toInt() * 1_000_000_000 + message.nanos).toString();
-  },
-  fromAminoMsg(object: DurationAminoMsg): Duration {
-    return Duration.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DurationProtoMsg): Duration {
-    return Duration.decode(message.value);
-  },
-  toProto(message: Duration): Uint8Array {
-    return Duration.encode(message).finish();
-  },
-  toProtoMsg(message: Duration): DurationProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Duration",
-      value: Duration.encode(message).finish()
-    };
   }
 };

@@ -36,7 +36,6 @@ function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
   };
 }
 export const ClawbackVestingAccount = {
-  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount",
   encode(message: ClawbackVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
@@ -118,46 +117,5 @@ export const ClawbackVestingAccount = {
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ClawbackVestingAccountAmino): ClawbackVestingAccount {
-    return {
-      baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      funderAddress: object.funder_address,
-      startTime: object.start_time,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
-    const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.funder_address = message.funderAddress;
-    obj.start_time = message.startTime;
-    if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.lockup_periods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
-    return ClawbackVestingAccount.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
-    return ClawbackVestingAccount.decode(message.value);
-  },
-  toProto(message: ClawbackVestingAccount): Uint8Array {
-    return ClawbackVestingAccount.encode(message).finish();
-  },
-  toProtoMsg(message: ClawbackVestingAccount): ClawbackVestingAccountProtoMsg {
-    return {
-      typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount",
-      value: ClawbackVestingAccount.encode(message).finish()
-    };
   }
 };

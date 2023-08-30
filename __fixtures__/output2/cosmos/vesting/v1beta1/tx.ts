@@ -27,7 +27,6 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
   };
 }
 export const MsgCreateVestingAccount = {
-  typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount",
   encode(message: MsgCreateVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -105,56 +104,12 @@ export const MsgCreateVestingAccount = {
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     message.delayed = object.delayed ?? false;
     return message;
-  },
-  fromAmino(object: MsgCreateVestingAccountAmino): MsgCreateVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      endTime: Long.fromString(object.end_time),
-      delayed: object.delayed
-    };
-  },
-  toAmino(message: MsgCreateVestingAccount): MsgCreateVestingAccountAmino {
-    const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    obj.end_time = message.endTime ? message.endTime.toString() : undefined;
-    obj.delayed = message.delayed;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateVestingAccountAminoMsg): MsgCreateVestingAccount {
-    return MsgCreateVestingAccount.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateVestingAccount): MsgCreateVestingAccountAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCreateVestingAccount",
-      value: MsgCreateVestingAccount.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateVestingAccountProtoMsg): MsgCreateVestingAccount {
-    return MsgCreateVestingAccount.decode(message.value);
-  },
-  toProto(message: MsgCreateVestingAccount): Uint8Array {
-    return MsgCreateVestingAccount.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCreateVestingAccount): MsgCreateVestingAccountProtoMsg {
-    return {
-      typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount",
-      value: MsgCreateVestingAccount.encode(message).finish()
-    };
   }
 };
 function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
   return {};
 }
 export const MsgCreateVestingAccountResponse = {
-  typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse",
   encode(_: MsgCreateVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -182,34 +137,6 @@ export const MsgCreateVestingAccountResponse = {
   fromPartial(_: Partial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
-  },
-  fromAmino(_: MsgCreateVestingAccountResponseAmino): MsgCreateVestingAccountResponse {
-    return {};
-  },
-  toAmino(_: MsgCreateVestingAccountResponse): MsgCreateVestingAccountResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCreateVestingAccountResponseAminoMsg): MsgCreateVestingAccountResponse {
-    return MsgCreateVestingAccountResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateVestingAccountResponse): MsgCreateVestingAccountResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCreateVestingAccountResponse",
-      value: MsgCreateVestingAccountResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateVestingAccountResponseProtoMsg): MsgCreateVestingAccountResponse {
-    return MsgCreateVestingAccountResponse.decode(message.value);
-  },
-  toProto(message: MsgCreateVestingAccountResponse): Uint8Array {
-    return MsgCreateVestingAccountResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCreateVestingAccountResponse): MsgCreateVestingAccountResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse",
-      value: MsgCreateVestingAccountResponse.encode(message).finish()
-    };
   }
 };
 /** Msg defines the bank Msg service. */

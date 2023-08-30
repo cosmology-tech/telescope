@@ -28,7 +28,6 @@ function createBaseMsgCloseGroup(): MsgCloseGroup {
   };
 }
 export const MsgCloseGroup = {
-  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup",
   encode(message: MsgCloseGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -66,38 +65,12 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
-    const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
-    return MsgCloseGroup.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCloseGroupProtoMsg): MsgCloseGroup {
-    return MsgCloseGroup.decode(message.value);
-  },
-  toProto(message: MsgCloseGroup): Uint8Array {
-    return MsgCloseGroup.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCloseGroup): MsgCloseGroupProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup",
-      value: MsgCloseGroup.encode(message).finish()
-    };
   }
 };
 function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
   return {};
 }
 export const MsgCloseGroupResponse = {
-  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse",
   encode(_: MsgCloseGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -125,28 +98,6 @@ export const MsgCloseGroupResponse = {
   fromPartial(_: Partial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
-  },
-  fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
-    return {};
-  },
-  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCloseGroupResponseAminoMsg): MsgCloseGroupResponse {
-    return MsgCloseGroupResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCloseGroupResponseProtoMsg): MsgCloseGroupResponse {
-    return MsgCloseGroupResponse.decode(message.value);
-  },
-  toProto(message: MsgCloseGroupResponse): Uint8Array {
-    return MsgCloseGroupResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCloseGroupResponse): MsgCloseGroupResponseProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse",
-      value: MsgCloseGroupResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
@@ -155,7 +106,6 @@ function createBaseMsgPauseGroup(): MsgPauseGroup {
   };
 }
 export const MsgPauseGroup = {
-  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup",
   encode(message: MsgPauseGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -193,38 +143,12 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
-    const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
-    return MsgPauseGroup.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgPauseGroupProtoMsg): MsgPauseGroup {
-    return MsgPauseGroup.decode(message.value);
-  },
-  toProto(message: MsgPauseGroup): Uint8Array {
-    return MsgPauseGroup.encode(message).finish();
-  },
-  toProtoMsg(message: MsgPauseGroup): MsgPauseGroupProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup",
-      value: MsgPauseGroup.encode(message).finish()
-    };
   }
 };
 function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
   return {};
 }
 export const MsgPauseGroupResponse = {
-  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse",
   encode(_: MsgPauseGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -252,28 +176,6 @@ export const MsgPauseGroupResponse = {
   fromPartial(_: Partial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
-  },
-  fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
-    return {};
-  },
-  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgPauseGroupResponseAminoMsg): MsgPauseGroupResponse {
-    return MsgPauseGroupResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgPauseGroupResponseProtoMsg): MsgPauseGroupResponse {
-    return MsgPauseGroupResponse.decode(message.value);
-  },
-  toProto(message: MsgPauseGroupResponse): Uint8Array {
-    return MsgPauseGroupResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgPauseGroupResponse): MsgPauseGroupResponseProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse",
-      value: MsgPauseGroupResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
@@ -282,7 +184,6 @@ function createBaseMsgStartGroup(): MsgStartGroup {
   };
 }
 export const MsgStartGroup = {
-  typeUrl: "/akash.deployment.v1beta2.MsgStartGroup",
   encode(message: MsgStartGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -320,38 +221,12 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: MsgStartGroup): MsgStartGroupAmino {
-    const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
-    return MsgStartGroup.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgStartGroupProtoMsg): MsgStartGroup {
-    return MsgStartGroup.decode(message.value);
-  },
-  toProto(message: MsgStartGroup): Uint8Array {
-    return MsgStartGroup.encode(message).finish();
-  },
-  toProtoMsg(message: MsgStartGroup): MsgStartGroupProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgStartGroup",
-      value: MsgStartGroup.encode(message).finish()
-    };
   }
 };
 function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
   return {};
 }
 export const MsgStartGroupResponse = {
-  typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse",
   encode(_: MsgStartGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -379,27 +254,5 @@ export const MsgStartGroupResponse = {
   fromPartial(_: Partial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
-  },
-  fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
-    return {};
-  },
-  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgStartGroupResponseAminoMsg): MsgStartGroupResponse {
-    return MsgStartGroupResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgStartGroupResponseProtoMsg): MsgStartGroupResponse {
-    return MsgStartGroupResponse.decode(message.value);
-  },
-  toProto(message: MsgStartGroupResponse): Uint8Array {
-    return MsgStartGroupResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgStartGroupResponse): MsgStartGroupResponseProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse",
-      value: MsgStartGroupResponse.encode(message).finish()
-    };
   }
 };

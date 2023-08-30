@@ -280,7 +280,6 @@ function createBaseListServicesRequest(): ListServicesRequest {
   };
 }
 export const ListServicesRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.producerProjectId !== "") {
       writer.uint32(10).string(message.producerProjectId);
@@ -345,37 +344,6 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.consumerId = object.consumerId ?? "";
     return message;
-  },
-  fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
-    return {
-      producerProjectId: object.producer_project_id,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      consumerId: object.consumer_id
-    };
-  },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
-    const obj: any = {};
-    obj.producer_project_id = message.producerProjectId;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.consumer_id = message.consumerId;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
-    return ListServicesRequest.decode(message.value);
-  },
-  toProto(message: ListServicesRequest): Uint8Array {
-    return ListServicesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListServicesRequest): ListServicesRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
-      value: ListServicesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServicesResponse(): ListServicesResponse {
@@ -385,7 +353,6 @@ function createBaseListServicesResponse(): ListServicesResponse {
   };
 }
 export const ListServicesResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse",
   encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -436,37 +403,6 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
-  },
-  fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
-    return ListServicesResponse.decode(message.value);
-  },
-  toProto(message: ListServicesResponse): Uint8Array {
-    return ListServicesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListServicesResponse): ListServicesResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse",
-      value: ListServicesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceRequest(): GetServiceRequest {
@@ -475,7 +411,6 @@ function createBaseGetServiceRequest(): GetServiceRequest {
   };
 }
 export const GetServiceRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -513,31 +448,6 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
-  },
-  fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
-    return GetServiceRequest.decode(message.value);
-  },
-  toProto(message: GetServiceRequest): Uint8Array {
-    return GetServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceRequest): GetServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
-      value: GetServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseCreateServiceRequest(): CreateServiceRequest {
@@ -546,7 +456,6 @@ function createBaseCreateServiceRequest(): CreateServiceRequest {
   };
 }
 export const CreateServiceRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest",
   encode(message: CreateServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -584,31 +493,6 @@ export const CreateServiceRequest = {
     const message = createBaseCreateServiceRequest();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
-  },
-  fromAmino(object: CreateServiceRequestAmino): CreateServiceRequest {
-    return {
-      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: CreateServiceRequest): CreateServiceRequestAmino {
-    const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceRequestAminoMsg): CreateServiceRequest {
-    return CreateServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateServiceRequestProtoMsg): CreateServiceRequest {
-    return CreateServiceRequest.decode(message.value);
-  },
-  toProto(message: CreateServiceRequest): Uint8Array {
-    return CreateServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateServiceRequest): CreateServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest",
-      value: CreateServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseDeleteServiceRequest(): DeleteServiceRequest {
@@ -617,7 +501,6 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
   };
 }
 export const DeleteServiceRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
   encode(message: DeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -655,31 +538,6 @@ export const DeleteServiceRequest = {
     const message = createBaseDeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
-  },
-  fromAmino(object: DeleteServiceRequestAmino): DeleteServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: DeleteServiceRequest): DeleteServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: DeleteServiceRequestAminoMsg): DeleteServiceRequest {
-    return DeleteServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteServiceRequestProtoMsg): DeleteServiceRequest {
-    return DeleteServiceRequest.decode(message.value);
-  },
-  toProto(message: DeleteServiceRequest): Uint8Array {
-    return DeleteServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: DeleteServiceRequest): DeleteServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
-      value: DeleteServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
@@ -688,7 +546,6 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
   };
 }
 export const UndeleteServiceRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
   encode(message: UndeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -726,31 +583,6 @@ export const UndeleteServiceRequest = {
     const message = createBaseUndeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
-  },
-  fromAmino(object: UndeleteServiceRequestAmino): UndeleteServiceRequest {
-    return {
-      serviceName: object.service_name
-    };
-  },
-  toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceRequestAminoMsg): UndeleteServiceRequest {
-    return UndeleteServiceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UndeleteServiceRequestProtoMsg): UndeleteServiceRequest {
-    return UndeleteServiceRequest.decode(message.value);
-  },
-  toProto(message: UndeleteServiceRequest): Uint8Array {
-    return UndeleteServiceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: UndeleteServiceRequest): UndeleteServiceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
-      value: UndeleteServiceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
@@ -759,7 +591,6 @@ function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
   };
 }
 export const UndeleteServiceResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse",
   encode(message: UndeleteServiceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -797,31 +628,6 @@ export const UndeleteServiceResponse = {
     const message = createBaseUndeleteServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
-  },
-  fromAmino(object: UndeleteServiceResponseAmino): UndeleteServiceResponse {
-    return {
-      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
-    };
-  },
-  toAmino(message: UndeleteServiceResponse): UndeleteServiceResponseAmino {
-    const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceResponseAminoMsg): UndeleteServiceResponse {
-    return UndeleteServiceResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UndeleteServiceResponseProtoMsg): UndeleteServiceResponse {
-    return UndeleteServiceResponse.decode(message.value);
-  },
-  toProto(message: UndeleteServiceResponse): Uint8Array {
-    return UndeleteServiceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: UndeleteServiceResponse): UndeleteServiceResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse",
-      value: UndeleteServiceResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
@@ -832,7 +638,6 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
   };
 }
 export const GetServiceConfigRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
   encode(message: GetServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -888,35 +693,6 @@ export const GetServiceConfigRequest = {
     message.configId = object.configId ?? "";
     message.view = object.view ?? 0;
     return message;
-  },
-  fromAmino(object: GetServiceConfigRequestAmino): GetServiceConfigRequest {
-    return {
-      serviceName: object.service_name,
-      configId: object.config_id,
-      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
-    };
-  },
-  toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_id = message.configId;
-    obj.view = message.view;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceConfigRequestAminoMsg): GetServiceConfigRequest {
-    return GetServiceConfigRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceConfigRequestProtoMsg): GetServiceConfigRequest {
-    return GetServiceConfigRequest.decode(message.value);
-  },
-  toProto(message: GetServiceConfigRequest): Uint8Array {
-    return GetServiceConfigRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceConfigRequest): GetServiceConfigRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
-      value: GetServiceConfigRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
@@ -927,7 +703,6 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
   };
 }
 export const ListServiceConfigsRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
   encode(message: ListServiceConfigsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -983,35 +758,6 @@ export const ListServiceConfigsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
-  },
-  fromAmino(object: ListServiceConfigsRequestAmino): ListServiceConfigsRequest {
-    return {
-      serviceName: object.service_name,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
-  },
-  toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceConfigsRequestAminoMsg): ListServiceConfigsRequest {
-    return ListServiceConfigsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServiceConfigsRequestProtoMsg): ListServiceConfigsRequest {
-    return ListServiceConfigsRequest.decode(message.value);
-  },
-  toProto(message: ListServiceConfigsRequest): Uint8Array {
-    return ListServiceConfigsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListServiceConfigsRequest): ListServiceConfigsRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
-      value: ListServiceConfigsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
@@ -1021,7 +767,6 @@ function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
   };
 }
 export const ListServiceConfigsResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse",
   encode(message: ListServiceConfigsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1072,37 +817,6 @@ export const ListServiceConfigsResponse = {
     message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
-  },
-  fromAmino(object: ListServiceConfigsResponseAmino): ListServiceConfigsResponse {
-    return {
-      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServiceConfigsResponse): ListServiceConfigsResponseAmino {
-    const obj: any = {};
-    if (message.serviceConfigs) {
-      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.service_configs = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceConfigsResponseAminoMsg): ListServiceConfigsResponse {
-    return ListServiceConfigsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServiceConfigsResponseProtoMsg): ListServiceConfigsResponse {
-    return ListServiceConfigsResponse.decode(message.value);
-  },
-  toProto(message: ListServiceConfigsResponse): Uint8Array {
-    return ListServiceConfigsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListServiceConfigsResponse): ListServiceConfigsResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse",
-      value: ListServiceConfigsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
@@ -1112,7 +826,6 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
   };
 }
 export const CreateServiceConfigRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
   encode(message: CreateServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1159,33 +872,6 @@ export const CreateServiceConfigRequest = {
     message.serviceName = object.serviceName ?? "";
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
-  },
-  fromAmino(object: CreateServiceConfigRequestAmino): CreateServiceConfigRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
-    };
-  },
-  toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceConfigRequestAminoMsg): CreateServiceConfigRequest {
-    return CreateServiceConfigRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateServiceConfigRequestProtoMsg): CreateServiceConfigRequest {
-    return CreateServiceConfigRequest.decode(message.value);
-  },
-  toProto(message: CreateServiceConfigRequest): Uint8Array {
-    return CreateServiceConfigRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateServiceConfigRequest): CreateServiceConfigRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
-      value: CreateServiceConfigRequest.encode(message).finish()
-    };
   }
 };
 function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
@@ -1196,7 +882,6 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
   };
 }
 export const SubmitConfigSourceRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
   encode(message: SubmitConfigSourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1252,35 +937,6 @@ export const SubmitConfigSourceRequest = {
     message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
-  },
-  fromAmino(object: SubmitConfigSourceRequestAmino): SubmitConfigSourceRequest {
-    return {
-      serviceName: object.service_name,
-      configSource: object?.config_source ? ConfigSource.fromAmino(object.config_source) : undefined,
-      validateOnly: object.validate_only
-    };
-  },
-  toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined;
-    obj.validate_only = message.validateOnly;
-    return obj;
-  },
-  fromAminoMsg(object: SubmitConfigSourceRequestAminoMsg): SubmitConfigSourceRequest {
-    return SubmitConfigSourceRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg): SubmitConfigSourceRequest {
-    return SubmitConfigSourceRequest.decode(message.value);
-  },
-  toProto(message: SubmitConfigSourceRequest): Uint8Array {
-    return SubmitConfigSourceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
-      value: SubmitConfigSourceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
@@ -1289,7 +945,6 @@ function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
   };
 }
 export const SubmitConfigSourceResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse",
   encode(message: SubmitConfigSourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceConfig !== undefined) {
       Service.encode(message.serviceConfig, writer.uint32(10).fork()).ldelim();
@@ -1327,31 +982,6 @@ export const SubmitConfigSourceResponse = {
     const message = createBaseSubmitConfigSourceResponse();
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
-  },
-  fromAmino(object: SubmitConfigSourceResponseAmino): SubmitConfigSourceResponse {
-    return {
-      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
-    };
-  },
-  toAmino(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseAmino {
-    const obj: any = {};
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SubmitConfigSourceResponseAminoMsg): SubmitConfigSourceResponse {
-    return SubmitConfigSourceResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg): SubmitConfigSourceResponse {
-    return SubmitConfigSourceResponse.decode(message.value);
-  },
-  toProto(message: SubmitConfigSourceResponse): Uint8Array {
-    return SubmitConfigSourceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse",
-      value: SubmitConfigSourceResponse.encode(message).finish()
-    };
   }
 };
 function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
@@ -1361,7 +991,6 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
   };
 }
 export const CreateServiceRolloutRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
   encode(message: CreateServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1408,33 +1037,6 @@ export const CreateServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
-  },
-  fromAmino(object: CreateServiceRolloutRequestAmino): CreateServiceRolloutRequest {
-    return {
-      serviceName: object.service_name,
-      rollout: object?.rollout ? Rollout.fromAmino(object.rollout) : undefined
-    };
-  },
-  toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: CreateServiceRolloutRequestAminoMsg): CreateServiceRolloutRequest {
-    return CreateServiceRolloutRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg): CreateServiceRolloutRequest {
-    return CreateServiceRolloutRequest.decode(message.value);
-  },
-  toProto(message: CreateServiceRolloutRequest): Uint8Array {
-    return CreateServiceRolloutRequest.encode(message).finish();
-  },
-  toProtoMsg(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
-      value: CreateServiceRolloutRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
@@ -1446,7 +1048,6 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
   };
 }
 export const ListServiceRolloutsRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
   encode(message: ListServiceRolloutsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1511,37 +1112,6 @@ export const ListServiceRolloutsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.filter = object.filter ?? "";
     return message;
-  },
-  fromAmino(object: ListServiceRolloutsRequestAmino): ListServiceRolloutsRequest {
-    return {
-      serviceName: object.service_name,
-      pageToken: object.page_token,
-      pageSize: object.page_size,
-      filter: object.filter
-    };
-  },
-  toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    obj.filter = message.filter;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceRolloutsRequestAminoMsg): ListServiceRolloutsRequest {
-    return ListServiceRolloutsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg): ListServiceRolloutsRequest {
-    return ListServiceRolloutsRequest.decode(message.value);
-  },
-  toProto(message: ListServiceRolloutsRequest): Uint8Array {
-    return ListServiceRolloutsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
-      value: ListServiceRolloutsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
@@ -1551,7 +1121,6 @@ function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
   };
 }
 export const ListServiceRolloutsResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse",
   encode(message: ListServiceRolloutsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1602,37 +1171,6 @@ export const ListServiceRolloutsResponse = {
     message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
-  },
-  fromAmino(object: ListServiceRolloutsResponseAmino): ListServiceRolloutsResponse {
-    return {
-      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
-  },
-  toAmino(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseAmino {
-    const obj: any = {};
-    if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
-    } else {
-      obj.rollouts = [];
-    }
-    obj.next_page_token = message.nextPageToken;
-    return obj;
-  },
-  fromAminoMsg(object: ListServiceRolloutsResponseAminoMsg): ListServiceRolloutsResponse {
-    return ListServiceRolloutsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg): ListServiceRolloutsResponse {
-    return ListServiceRolloutsResponse.decode(message.value);
-  },
-  toProto(message: ListServiceRolloutsResponse): Uint8Array {
-    return ListServiceRolloutsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse",
-      value: ListServiceRolloutsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
@@ -1642,7 +1180,6 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
   };
 }
 export const GetServiceRolloutRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
   encode(message: GetServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1689,33 +1226,6 @@ export const GetServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rolloutId = object.rolloutId ?? "";
     return message;
-  },
-  fromAmino(object: GetServiceRolloutRequestAmino): GetServiceRolloutRequest {
-    return {
-      serviceName: object.service_name,
-      rolloutId: object.rollout_id
-    };
-  },
-  toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout_id = message.rolloutId;
-    return obj;
-  },
-  fromAminoMsg(object: GetServiceRolloutRequestAminoMsg): GetServiceRolloutRequest {
-    return GetServiceRolloutRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetServiceRolloutRequestProtoMsg): GetServiceRolloutRequest {
-    return GetServiceRolloutRequest.decode(message.value);
-  },
-  toProto(message: GetServiceRolloutRequest): Uint8Array {
-    return GetServiceRolloutRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GetServiceRolloutRequest): GetServiceRolloutRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
-      value: GetServiceRolloutRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
@@ -1725,7 +1235,6 @@ function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   };
 }
 export const GenerateConfigReportRequest = {
-  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest",
   encode(message: GenerateConfigReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.newConfig !== undefined) {
       Any.encode(message.newConfig, writer.uint32(10).fork()).ldelim();
@@ -1772,33 +1281,6 @@ export const GenerateConfigReportRequest = {
     message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
     message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
-  },
-  fromAmino(object: GenerateConfigReportRequestAmino): GenerateConfigReportRequest {
-    return {
-      newConfig: object?.new_config ? Any.fromAmino(object.new_config) : undefined,
-      oldConfig: object?.old_config ? Any.fromAmino(object.old_config) : undefined
-    };
-  },
-  toAmino(message: GenerateConfigReportRequest): GenerateConfigReportRequestAmino {
-    const obj: any = {};
-    obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined;
-    obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportRequestAminoMsg): GenerateConfigReportRequest {
-    return GenerateConfigReportRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenerateConfigReportRequestProtoMsg): GenerateConfigReportRequest {
-    return GenerateConfigReportRequest.decode(message.value);
-  },
-  toProto(message: GenerateConfigReportRequest): Uint8Array {
-    return GenerateConfigReportRequest.encode(message).finish();
-  },
-  toProtoMsg(message: GenerateConfigReportRequest): GenerateConfigReportRequestProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest",
-      value: GenerateConfigReportRequest.encode(message).finish()
-    };
   }
 };
 function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse {
@@ -1810,7 +1292,6 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
   };
 }
 export const GenerateConfigReportResponse = {
-  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
   encode(message: GenerateConfigReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1883,44 +1364,5 @@ export const GenerateConfigReportResponse = {
     message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
     message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: GenerateConfigReportResponseAmino): GenerateConfigReportResponse {
-    return {
-      serviceName: object.service_name,
-      id: object.id,
-      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromAmino(e)) : [],
-      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseAmino {
-    const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.id = message.id;
-    if (message.changeReports) {
-      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
-    } else {
-      obj.change_reports = [];
-    }
-    if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
-    } else {
-      obj.diagnostics = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportResponseAminoMsg): GenerateConfigReportResponse {
-    return GenerateConfigReportResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenerateConfigReportResponseProtoMsg): GenerateConfigReportResponse {
-    return GenerateConfigReportResponse.decode(message.value);
-  },
-  toProto(message: GenerateConfigReportResponse): Uint8Array {
-    return GenerateConfigReportResponse.encode(message).finish();
-  },
-  toProtoMsg(message: GenerateConfigReportResponse): GenerateConfigReportResponseProtoMsg {
-    return {
-      typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
-      value: GenerateConfigReportResponse.encode(message).finish()
-    };
   }
 };

@@ -96,7 +96,6 @@ function createBaseClaim(): Claim {
   };
 }
 export const Claim = {
-  typeUrl: "/evmos.claims.v1.Claim",
   encode(message: Claim, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
@@ -152,35 +151,6 @@ export const Claim = {
     message.completed = object.completed ?? false;
     message.claimableAmount = object.claimableAmount ?? "";
     return message;
-  },
-  fromAmino(object: ClaimAmino): Claim {
-    return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
-      completed: object.completed,
-      claimableAmount: object.claimable_amount
-    };
-  },
-  toAmino(message: Claim): ClaimAmino {
-    const obj: any = {};
-    obj.action = message.action;
-    obj.completed = message.completed;
-    obj.claimable_amount = message.claimableAmount;
-    return obj;
-  },
-  fromAminoMsg(object: ClaimAminoMsg): Claim {
-    return Claim.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ClaimProtoMsg): Claim {
-    return Claim.decode(message.value);
-  },
-  toProto(message: Claim): Uint8Array {
-    return Claim.encode(message).finish();
-  },
-  toProtoMsg(message: Claim): ClaimProtoMsg {
-    return {
-      typeUrl: "/evmos.claims.v1.Claim",
-      value: Claim.encode(message).finish()
-    };
   }
 };
 function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
@@ -191,7 +161,6 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
   };
 }
 export const ClaimsRecordAddress = {
-  typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
   encode(message: ClaimsRecordAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -260,39 +229,6 @@ export const ClaimsRecordAddress = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
-    return {
-      address: object.address,
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.initial_claimable_amount = message.initialClaimableAmount;
-    if (message.actionsCompleted) {
-      obj.actions_completed = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actions_completed = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClaimsRecordAddressAminoMsg): ClaimsRecordAddress {
-    return ClaimsRecordAddress.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ClaimsRecordAddressProtoMsg): ClaimsRecordAddress {
-    return ClaimsRecordAddress.decode(message.value);
-  },
-  toProto(message: ClaimsRecordAddress): Uint8Array {
-    return ClaimsRecordAddress.encode(message).finish();
-  },
-  toProtoMsg(message: ClaimsRecordAddress): ClaimsRecordAddressProtoMsg {
-    return {
-      typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
-      value: ClaimsRecordAddress.encode(message).finish()
-    };
   }
 };
 function createBaseClaimsRecord(): ClaimsRecord {
@@ -302,7 +238,6 @@ function createBaseClaimsRecord(): ClaimsRecord {
   };
 }
 export const ClaimsRecord = {
-  typeUrl: "/evmos.claims.v1.ClaimsRecord",
   encode(message: ClaimsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
@@ -362,36 +297,5 @@ export const ClaimsRecord = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
-    return {
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: ClaimsRecord): ClaimsRecordAmino {
-    const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
-    if (message.actionsCompleted) {
-      obj.actions_completed = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actions_completed = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ClaimsRecordAminoMsg): ClaimsRecord {
-    return ClaimsRecord.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ClaimsRecordProtoMsg): ClaimsRecord {
-    return ClaimsRecord.decode(message.value);
-  },
-  toProto(message: ClaimsRecord): Uint8Array {
-    return ClaimsRecord.encode(message).finish();
-  },
-  toProtoMsg(message: ClaimsRecord): ClaimsRecordProtoMsg {
-    return {
-      typeUrl: "/evmos.claims.v1.ClaimsRecord",
-      value: ClaimsRecord.encode(message).finish()
-    };
   }
 };

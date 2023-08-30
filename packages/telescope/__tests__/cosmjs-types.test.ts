@@ -22,6 +22,7 @@ const options: TelescopeOptions = {
     },
     prototypes: {
         includePackageVar: true,
+        addTypeUrlToObjects: false,
         excluded: {
             protos: [
                 'cosmos/authz/v1beta1/event.proto',
@@ -48,7 +49,11 @@ const options: TelescopeOptions = {
         },
         methods: {
             fromJSON: true,
-            toJSON: true
+            toJSON: true,
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
         },
         typingsFormat: {
             num64: 'long',

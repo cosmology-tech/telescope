@@ -24,7 +24,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/osmosis.twap.v1beta1.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pruneEpochIdentifier !== "") {
       writer.uint32(10).string(message.pruneEpochIdentifier);
@@ -71,39 +70,6 @@ export const Params = {
     message.pruneEpochIdentifier = object.pruneEpochIdentifier ?? "";
     message.recordHistoryKeepPeriod = object.recordHistoryKeepPeriod !== undefined && object.recordHistoryKeepPeriod !== null ? Duration.fromPartial(object.recordHistoryKeepPeriod) : undefined;
     return message;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      pruneEpochIdentifier: object.prune_epoch_identifier,
-      recordHistoryKeepPeriod: object?.record_history_keep_period ? Duration.fromAmino(object.record_history_keep_period) : undefined
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.prune_epoch_identifier = message.pruneEpochIdentifier;
-    obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/twap/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/osmosis.twap.v1beta1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -113,7 +79,6 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  typeUrl: "/osmosis.twap.v1beta1.GenesisState",
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.twaps) {
       TwapRecord.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -164,42 +129,5 @@ export const GenesisState = {
     message.twaps = object.twaps?.map(e => TwapRecord.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-  fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
-  },
-  toAmino(message: GenesisState): GenesisStateAmino {
-    const obj: any = {};
-    if (message.twaps) {
-      obj.twaps = message.twaps.map(e => e ? TwapRecord.toAmino(e) : undefined);
-    } else {
-      obj.twaps = [];
-    }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/twap/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
-  },
-  toProto(message: GenesisState): Uint8Array {
-    return GenesisState.encode(message).finish();
-  },
-  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
-    return {
-      typeUrl: "/osmosis.twap.v1beta1.GenesisState",
-      value: GenesisState.encode(message).finish()
-    };
   }
 };

@@ -325,7 +325,6 @@ function createBaseAuthentication(): Authentication {
   };
 }
 export const Authentication = {
-  typeUrl: "/google.api.Authentication",
   encode(message: Authentication, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -400,41 +399,6 @@ export const Authentication = {
       obj.providers = [];
     }
     return obj;
-  },
-  fromAmino(object: AuthenticationAmino): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromAmino(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Authentication): AuthenticationAmino {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthenticationAminoMsg): Authentication {
-    return Authentication.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthenticationProtoMsg): Authentication {
-    return Authentication.decode(message.value);
-  },
-  toProto(message: Authentication): Uint8Array {
-    return Authentication.encode(message).finish();
-  },
-  toProtoMsg(message: Authentication): AuthenticationProtoMsg {
-    return {
-      typeUrl: "/google.api.Authentication",
-      value: Authentication.encode(message).finish()
-    };
   }
 };
 function createBaseAuthenticationRule(): AuthenticationRule {
@@ -446,7 +410,6 @@ function createBaseAuthenticationRule(): AuthenticationRule {
   };
 }
 export const AuthenticationRule = {
-  typeUrl: "/google.api.AuthenticationRule",
   encode(message: AuthenticationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -535,41 +498,6 @@ export const AuthenticationRule = {
       obj.requirements = [];
     }
     return obj;
-  },
-  fromAmino(object: AuthenticationRuleAmino): AuthenticationRule {
-    return {
-      selector: object.selector,
-      oauth: object?.oauth ? OAuthRequirements.fromAmino(object.oauth) : undefined,
-      allowWithoutCredential: object.allow_without_credential,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
-    const obj: any = {};
-    obj.selector = message.selector;
-    obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth) : undefined;
-    obj.allow_without_credential = message.allowWithoutCredential;
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e) : undefined);
-    } else {
-      obj.requirements = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthenticationRuleAminoMsg): AuthenticationRule {
-    return AuthenticationRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthenticationRuleProtoMsg): AuthenticationRule {
-    return AuthenticationRule.decode(message.value);
-  },
-  toProto(message: AuthenticationRule): Uint8Array {
-    return AuthenticationRule.encode(message).finish();
-  },
-  toProtoMsg(message: AuthenticationRule): AuthenticationRuleProtoMsg {
-    return {
-      typeUrl: "/google.api.AuthenticationRule",
-      value: AuthenticationRule.encode(message).finish()
-    };
   }
 };
 function createBaseJwtLocation(): JwtLocation {
@@ -580,7 +508,6 @@ function createBaseJwtLocation(): JwtLocation {
   };
 }
 export const JwtLocation = {
-  typeUrl: "/google.api.JwtLocation",
   encode(message: JwtLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
@@ -650,35 +577,6 @@ export const JwtLocation = {
     obj.query = message.query;
     obj.value_prefix = message.valuePrefix;
     return obj;
-  },
-  fromAmino(object: JwtLocationAmino): JwtLocation {
-    return {
-      header: object?.header,
-      query: object?.query,
-      valuePrefix: object.value_prefix
-    };
-  },
-  toAmino(message: JwtLocation): JwtLocationAmino {
-    const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
-    return obj;
-  },
-  fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
-    return JwtLocation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: JwtLocationProtoMsg): JwtLocation {
-    return JwtLocation.decode(message.value);
-  },
-  toProto(message: JwtLocation): Uint8Array {
-    return JwtLocation.encode(message).finish();
-  },
-  toProtoMsg(message: JwtLocation): JwtLocationProtoMsg {
-    return {
-      typeUrl: "/google.api.JwtLocation",
-      value: JwtLocation.encode(message).finish()
-    };
   }
 };
 function createBaseAuthProvider(): AuthProvider {
@@ -692,7 +590,6 @@ function createBaseAuthProvider(): AuthProvider {
   };
 }
 export const AuthProvider = {
-  typeUrl: "/google.api.AuthProvider",
   encode(message: AuthProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -803,45 +700,6 @@ export const AuthProvider = {
       obj.jwt_locations = [];
     }
     return obj;
-  },
-  fromAmino(object: AuthProviderAmino): AuthProvider {
-    return {
-      id: object.id,
-      issuer: object.issuer,
-      jwksUri: object.jwks_uri,
-      audiences: object.audiences,
-      authorizationUrl: object.authorization_url,
-      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: AuthProvider): AuthProviderAmino {
-    const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
-    if (message.jwtLocations) {
-      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e) : undefined);
-    } else {
-      obj.jwt_locations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: AuthProviderAminoMsg): AuthProvider {
-    return AuthProvider.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthProviderProtoMsg): AuthProvider {
-    return AuthProvider.decode(message.value);
-  },
-  toProto(message: AuthProvider): Uint8Array {
-    return AuthProvider.encode(message).finish();
-  },
-  toProtoMsg(message: AuthProvider): AuthProviderProtoMsg {
-    return {
-      typeUrl: "/google.api.AuthProvider",
-      value: AuthProvider.encode(message).finish()
-    };
   }
 };
 function createBaseOAuthRequirements(): OAuthRequirements {
@@ -850,7 +708,6 @@ function createBaseOAuthRequirements(): OAuthRequirements {
   };
 }
 export const OAuthRequirements = {
-  typeUrl: "/google.api.OAuthRequirements",
   encode(message: OAuthRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
@@ -898,31 +755,6 @@ export const OAuthRequirements = {
     const obj: any = {};
     obj.canonical_scopes = message.canonicalScopes;
     return obj;
-  },
-  fromAmino(object: OAuthRequirementsAmino): OAuthRequirements {
-    return {
-      canonicalScopes: object.canonical_scopes
-    };
-  },
-  toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
-    const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
-    return obj;
-  },
-  fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
-    return OAuthRequirements.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OAuthRequirementsProtoMsg): OAuthRequirements {
-    return OAuthRequirements.decode(message.value);
-  },
-  toProto(message: OAuthRequirements): Uint8Array {
-    return OAuthRequirements.encode(message).finish();
-  },
-  toProtoMsg(message: OAuthRequirements): OAuthRequirementsProtoMsg {
-    return {
-      typeUrl: "/google.api.OAuthRequirements",
-      value: OAuthRequirements.encode(message).finish()
-    };
   }
 };
 function createBaseAuthRequirement(): AuthRequirement {
@@ -932,7 +764,6 @@ function createBaseAuthRequirement(): AuthRequirement {
   };
 }
 export const AuthRequirement = {
-  typeUrl: "/google.api.AuthRequirement",
   encode(message: AuthRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);
@@ -991,32 +822,5 @@ export const AuthRequirement = {
     obj.provider_id = message.providerId;
     obj.audiences = message.audiences;
     return obj;
-  },
-  fromAmino(object: AuthRequirementAmino): AuthRequirement {
-    return {
-      providerId: object.provider_id,
-      audiences: object.audiences
-    };
-  },
-  toAmino(message: AuthRequirement): AuthRequirementAmino {
-    const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
-    return obj;
-  },
-  fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {
-    return AuthRequirement.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthRequirementProtoMsg): AuthRequirement {
-    return AuthRequirement.decode(message.value);
-  },
-  toProto(message: AuthRequirement): Uint8Array {
-    return AuthRequirement.encode(message).finish();
-  },
-  toProtoMsg(message: AuthRequirement): AuthRequirementProtoMsg {
-    return {
-      typeUrl: "/google.api.AuthRequirement",
-      value: AuthRequirement.encode(message).finish()
-    };
   }
 };

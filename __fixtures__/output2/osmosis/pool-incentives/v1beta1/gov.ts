@@ -43,7 +43,6 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
   };
 }
 export const ReplacePoolIncentivesProposal = {
-  typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
   encode(message: ReplacePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -103,45 +102,6 @@ export const ReplacePoolIncentivesProposal = {
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-      value: ReplacePoolIncentivesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.decode(message.value);
-  },
-  toProto(message: ReplacePoolIncentivesProposal): Uint8Array {
-    return ReplacePoolIncentivesProposal.encode(message).finish();
-  },
-  toProtoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalProtoMsg {
-    return {
-      typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
-      value: ReplacePoolIncentivesProposal.encode(message).finish()
-    };
   }
 };
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
@@ -153,7 +113,6 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
   };
 }
 export const UpdatePoolIncentivesProposal = {
-  typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
   encode(message: UpdatePoolIncentivesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -213,44 +172,5 @@ export const UpdatePoolIncentivesProposal = {
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
-    const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/update-pool-incentives-proposal",
-      value: UpdatePoolIncentivesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.decode(message.value);
-  },
-  toProto(message: UpdatePoolIncentivesProposal): Uint8Array {
-    return UpdatePoolIncentivesProposal.encode(message).finish();
-  },
-  toProtoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalProtoMsg {
-    return {
-      typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
-      value: UpdatePoolIncentivesProposal.encode(message).finish()
-    };
   }
 };

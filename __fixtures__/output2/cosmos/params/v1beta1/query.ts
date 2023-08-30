@@ -23,7 +23,6 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   };
 }
 export const QueryParamsRequest = {
-  typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest",
   encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
@@ -70,39 +69,6 @@ export const QueryParamsRequest = {
     message.subspace = object.subspace ?? "";
     message.key = object.key ?? "";
     return message;
-  },
-  fromAmino(object: QueryParamsRequestAmino): QueryParamsRequest {
-    return {
-      subspace: object.subspace,
-      key: object.key
-    };
-  },
-  toAmino(message: QueryParamsRequest): QueryParamsRequestAmino {
-    const obj: any = {};
-    obj.subspace = message.subspace;
-    obj.key = message.key;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
-  },
-  toProto(message: QueryParamsRequest): Uint8Array {
-    return QueryParamsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest",
-      value: QueryParamsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -111,7 +77,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.param !== undefined) {
       ParamChange.encode(message.param, writer.uint32(10).fork()).ldelim();
@@ -149,37 +114,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
     return message;
-  },
-  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      param: object?.param ? ParamChange.fromAmino(object.param) : undefined
-    };
-  },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
-    const obj: any = {};
-    obj.param = message.param ? ParamChange.toAmino(message.param) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
-  },
-  toProto(message: QueryParamsResponse): Uint8Array {
-    return QueryParamsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse",
-      value: QueryParamsResponse.encode(message).finish()
-    };
   }
 };
 /** Query defines the gRPC querier service. */

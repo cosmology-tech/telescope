@@ -68,7 +68,6 @@ function createBaseDeploymentID(): DeploymentID {
   };
 }
 export const DeploymentID = {
-  typeUrl: "/akash.deployment.v1beta2.DeploymentID",
   encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -115,33 +114,6 @@ export const DeploymentID = {
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     return message;
-  },
-  fromAmino(object: DeploymentIDAmino): DeploymentID {
-    return {
-      owner: object.owner,
-      dseq: Long.fromString(object.dseq)
-    };
-  },
-  toAmino(message: DeploymentID): DeploymentIDAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
-    return DeploymentID.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
-    return DeploymentID.decode(message.value);
-  },
-  toProto(message: DeploymentID): Uint8Array {
-    return DeploymentID.encode(message).finish();
-  },
-  toProtoMsg(message: DeploymentID): DeploymentIDProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.DeploymentID",
-      value: DeploymentID.encode(message).finish()
-    };
   }
 };
 function createBaseDeployment(): Deployment {
@@ -153,7 +125,6 @@ function createBaseDeployment(): Deployment {
   };
 }
 export const Deployment = {
-  typeUrl: "/akash.deployment.v1beta2.Deployment",
   encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
@@ -218,37 +189,6 @@ export const Deployment = {
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
-  },
-  fromAmino(object: DeploymentAmino): Deployment {
-    return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: Long.fromString(object.created_at)
-    };
-  },
-  toAmino(message: Deployment): DeploymentAmino {
-    const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = message.state;
-    obj.version = message.version;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
-    return Deployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeploymentProtoMsg): Deployment {
-    return Deployment.decode(message.value);
-  },
-  toProto(message: Deployment): Uint8Array {
-    return Deployment.encode(message).finish();
-  },
-  toProtoMsg(message: Deployment): DeploymentProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.Deployment",
-      value: Deployment.encode(message).finish()
-    };
   }
 };
 function createBaseDeploymentFilters(): DeploymentFilters {
@@ -259,7 +199,6 @@ function createBaseDeploymentFilters(): DeploymentFilters {
   };
 }
 export const DeploymentFilters = {
-  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
   encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -315,34 +254,5 @@ export const DeploymentFilters = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.state = object.state ?? "";
     return message;
-  },
-  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
-    return {
-      owner: object.owner,
-      dseq: Long.fromString(object.dseq),
-      state: object.state
-    };
-  },
-  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
-    const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.state = message.state;
-    return obj;
-  },
-  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
-    return DeploymentFilters.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
-    return DeploymentFilters.decode(message.value);
-  },
-  toProto(message: DeploymentFilters): Uint8Array {
-    return DeploymentFilters.encode(message).finish();
-  },
-  toProtoMsg(message: DeploymentFilters): DeploymentFiltersProtoMsg {
-    return {
-      typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
-      value: DeploymentFilters.encode(message).finish()
-    };
   }
 };

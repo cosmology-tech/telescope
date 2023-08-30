@@ -40,7 +40,6 @@ function createBaseValidatorSet(): ValidatorSet {
   };
 }
 export const ValidatorSet = {
-  typeUrl: "/tendermint.types.ValidatorSet",
   encode(message: ValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -118,39 +117,6 @@ export const ValidatorSet = {
     message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toSDK(message.proposer) : undefined);
     obj.total_voting_power = message.totalVotingPower;
     return obj;
-  },
-  fromAmino(object: ValidatorSetAmino): ValidatorSet {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      proposer: object?.proposer ? Validator.fromAmino(object.proposer) : undefined,
-      totalVotingPower: Long.fromString(object.total_voting_power)
-    };
-  },
-  toAmino(message: ValidatorSet): ValidatorSetAmino {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
-    return ValidatorSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ValidatorSetProtoMsg): ValidatorSet {
-    return ValidatorSet.decode(message.value);
-  },
-  toProto(message: ValidatorSet): Uint8Array {
-    return ValidatorSet.encode(message).finish();
-  },
-  toProtoMsg(message: ValidatorSet): ValidatorSetProtoMsg {
-    return {
-      typeUrl: "/tendermint.types.ValidatorSet",
-      value: ValidatorSet.encode(message).finish()
-    };
   }
 };
 function createBaseValidator(): Validator {
@@ -162,7 +128,6 @@ function createBaseValidator(): Validator {
   };
 }
 export const Validator = {
-  typeUrl: "/tendermint.types.Validator",
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
@@ -243,37 +208,6 @@ export const Validator = {
     obj.voting_power = message.votingPower;
     obj.proposer_priority = message.proposerPriority;
     return obj;
-  },
-  fromAmino(object: ValidatorAmino): Validator {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: Long.fromString(object.voting_power),
-      proposerPriority: Long.fromString(object.proposer_priority)
-    };
-  },
-  toAmino(message: Validator): ValidatorAmino {
-    const obj: any = {};
-    obj.address = message.address;
-    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: ValidatorAminoMsg): Validator {
-    return Validator.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ValidatorProtoMsg): Validator {
-    return Validator.decode(message.value);
-  },
-  toProto(message: Validator): Uint8Array {
-    return Validator.encode(message).finish();
-  },
-  toProtoMsg(message: Validator): ValidatorProtoMsg {
-    return {
-      typeUrl: "/tendermint.types.Validator",
-      value: Validator.encode(message).finish()
-    };
   }
 };
 function createBaseSimpleValidator(): SimpleValidator {
@@ -283,7 +217,6 @@ function createBaseSimpleValidator(): SimpleValidator {
   };
 }
 export const SimpleValidator = {
-  typeUrl: "/tendermint.types.SimpleValidator",
   encode(message: SimpleValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -342,32 +275,5 @@ export const SimpleValidator = {
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
     obj.voting_power = message.votingPower;
     return obj;
-  },
-  fromAmino(object: SimpleValidatorAmino): SimpleValidator {
-    return {
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: Long.fromString(object.voting_power)
-    };
-  },
-  toAmino(message: SimpleValidator): SimpleValidatorAmino {
-    const obj: any = {};
-    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {
-    return SimpleValidator.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SimpleValidatorProtoMsg): SimpleValidator {
-    return SimpleValidator.decode(message.value);
-  },
-  toProto(message: SimpleValidator): Uint8Array {
-    return SimpleValidator.encode(message).finish();
-  },
-  toProtoMsg(message: SimpleValidator): SimpleValidatorProtoMsg {
-    return {
-      typeUrl: "/tendermint.types.SimpleValidator",
-      value: SimpleValidator.encode(message).finish()
-    };
   }
 };

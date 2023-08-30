@@ -39,7 +39,6 @@ function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   };
 }
 export const QueryEvidenceRequest = {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest",
   encode(message: QueryEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidenceHash.length !== 0) {
       writer.uint32(10).bytes(message.evidenceHash);
@@ -77,37 +76,6 @@ export const QueryEvidenceRequest = {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     return message;
-  },
-  fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
-    return {
-      evidenceHash: object.evidence_hash
-    };
-  },
-  toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
-    const obj: any = {};
-    obj.evidence_hash = message.evidenceHash;
-    return obj;
-  },
-  fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {
-    return QueryEvidenceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEvidenceRequest): QueryEvidenceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryEvidenceRequest",
-      value: QueryEvidenceRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEvidenceRequestProtoMsg): QueryEvidenceRequest {
-    return QueryEvidenceRequest.decode(message.value);
-  },
-  toProto(message: QueryEvidenceRequest): Uint8Array {
-    return QueryEvidenceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEvidenceRequest): QueryEvidenceRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest",
-      value: QueryEvidenceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
@@ -116,7 +84,6 @@ function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
   };
 }
 export const QueryEvidenceResponse = {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse",
   encode(message: QueryEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidence !== undefined) {
       Any.encode(message.evidence, writer.uint32(10).fork()).ldelim();
@@ -154,37 +121,6 @@ export const QueryEvidenceResponse = {
     const message = createBaseQueryEvidenceResponse();
     message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
-  },
-  fromAmino(object: QueryEvidenceResponseAmino): QueryEvidenceResponse {
-    return {
-      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
-    };
-  },
-  toAmino(message: QueryEvidenceResponse): QueryEvidenceResponseAmino {
-    const obj: any = {};
-    obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryEvidenceResponseAminoMsg): QueryEvidenceResponse {
-    return QueryEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryEvidenceResponse): QueryEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryEvidenceResponse",
-      value: QueryEvidenceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryEvidenceResponseProtoMsg): QueryEvidenceResponse {
-    return QueryEvidenceResponse.decode(message.value);
-  },
-  toProto(message: QueryEvidenceResponse): Uint8Array {
-    return QueryEvidenceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryEvidenceResponse): QueryEvidenceResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse",
-      value: QueryEvidenceResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
@@ -193,7 +129,6 @@ function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
   };
 }
 export const QueryAllEvidenceRequest = {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest",
   encode(message: QueryAllEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -231,37 +166,6 @@ export const QueryAllEvidenceRequest = {
     const message = createBaseQueryAllEvidenceRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryAllEvidenceRequestAmino): QueryAllEvidenceRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAmino {
-    const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAllEvidenceRequestAminoMsg): QueryAllEvidenceRequest {
-    return QueryAllEvidenceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllEvidenceRequest",
-      value: QueryAllEvidenceRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAllEvidenceRequestProtoMsg): QueryAllEvidenceRequest {
-    return QueryAllEvidenceRequest.decode(message.value);
-  },
-  toProto(message: QueryAllEvidenceRequest): Uint8Array {
-    return QueryAllEvidenceRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest",
-      value: QueryAllEvidenceRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
@@ -271,7 +175,6 @@ function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
   };
 }
 export const QueryAllEvidenceResponse = {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse",
   encode(message: QueryAllEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.evidence) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -322,43 +225,6 @@ export const QueryAllEvidenceResponse = {
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryAllEvidenceResponseAmino): QueryAllEvidenceResponse {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAmino {
-    const obj: any = {};
-    if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.evidence = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryAllEvidenceResponseAminoMsg): QueryAllEvidenceResponse {
-    return QueryAllEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAllEvidenceResponse",
-      value: QueryAllEvidenceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAllEvidenceResponseProtoMsg): QueryAllEvidenceResponse {
-    return QueryAllEvidenceResponse.decode(message.value);
-  },
-  toProto(message: QueryAllEvidenceResponse): Uint8Array {
-    return QueryAllEvidenceResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse",
-      value: QueryAllEvidenceResponse.encode(message).finish()
-    };
   }
 };
 /** Query defines the gRPC querier service. */

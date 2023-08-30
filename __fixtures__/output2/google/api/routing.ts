@@ -443,7 +443,6 @@ function createBaseRoutingRule(): RoutingRule {
   };
 }
 export const RoutingRule = {
-  typeUrl: "/google.api.RoutingRule",
   encode(message: RoutingRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.routingParameters) {
       RoutingParameter.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -485,35 +484,6 @@ export const RoutingRule = {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: RoutingRuleAmino): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: RoutingRule): RoutingRuleAmino {
-    const obj: any = {};
-    if (message.routingParameters) {
-      obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e) : undefined);
-    } else {
-      obj.routing_parameters = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
-    return RoutingRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RoutingRuleProtoMsg): RoutingRule {
-    return RoutingRule.decode(message.value);
-  },
-  toProto(message: RoutingRule): Uint8Array {
-    return RoutingRule.encode(message).finish();
-  },
-  toProtoMsg(message: RoutingRule): RoutingRuleProtoMsg {
-    return {
-      typeUrl: "/google.api.RoutingRule",
-      value: RoutingRule.encode(message).finish()
-    };
   }
 };
 function createBaseRoutingParameter(): RoutingParameter {
@@ -523,7 +493,6 @@ function createBaseRoutingParameter(): RoutingParameter {
   };
 }
 export const RoutingParameter = {
-  typeUrl: "/google.api.RoutingParameter",
   encode(message: RoutingParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
@@ -570,32 +539,5 @@ export const RoutingParameter = {
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";
     return message;
-  },
-  fromAmino(object: RoutingParameterAmino): RoutingParameter {
-    return {
-      field: object.field,
-      pathTemplate: object.path_template
-    };
-  },
-  toAmino(message: RoutingParameter): RoutingParameterAmino {
-    const obj: any = {};
-    obj.field = message.field;
-    obj.path_template = message.pathTemplate;
-    return obj;
-  },
-  fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
-    return RoutingParameter.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RoutingParameterProtoMsg): RoutingParameter {
-    return RoutingParameter.decode(message.value);
-  },
-  toProto(message: RoutingParameter): Uint8Array {
-    return RoutingParameter.encode(message).finish();
-  },
-  toProtoMsg(message: RoutingParameter): RoutingParameterProtoMsg {
-    return {
-      typeUrl: "/google.api.RoutingParameter",
-      value: RoutingParameter.encode(message).finish()
-    };
   }
 };

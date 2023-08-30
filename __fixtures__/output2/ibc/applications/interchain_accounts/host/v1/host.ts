@@ -20,7 +20,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/ibc.applications.interchain_accounts.host.v1.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hostEnabled === true) {
       writer.uint32(8).bool(message.hostEnabled);
@@ -71,42 +70,5 @@ export const Params = {
     message.hostEnabled = object.hostEnabled ?? false;
     message.allowMessages = object.allowMessages?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      hostEnabled: object.host_enabled,
-      allowMessages: Array.isArray(object?.allow_messages) ? object.allow_messages.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.host_enabled = message.hostEnabled;
-    if (message.allowMessages) {
-      obj.allow_messages = message.allowMessages.map(e => e);
-    } else {
-      obj.allow_messages = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.interchain_accounts.host.v1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

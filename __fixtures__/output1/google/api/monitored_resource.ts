@@ -190,7 +190,6 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
   };
 }
 export const MonitoredResourceDescriptor = {
-  typeUrl: "/google.api.MonitoredResourceDescriptor",
   encode(message: MonitoredResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
@@ -301,45 +300,6 @@ export const MonitoredResourceDescriptor = {
     }
     message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
     return obj;
-  },
-  fromAmino(object: MonitoredResourceDescriptorAmino): MonitoredResourceDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      displayName: object.display_name,
-      description: object.description,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
-  },
-  toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.display_name = message.displayName;
-    obj.description = message.description;
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    obj.launch_stage = message.launchStage;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
-    return MonitoredResourceDescriptor.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg): MonitoredResourceDescriptor {
-    return MonitoredResourceDescriptor.decode(message.value);
-  },
-  toProto(message: MonitoredResourceDescriptor): Uint8Array {
-    return MonitoredResourceDescriptor.encode(message).finish();
-  },
-  toProtoMsg(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorProtoMsg {
-    return {
-      typeUrl: "/google.api.MonitoredResourceDescriptor",
-      value: MonitoredResourceDescriptor.encode(message).finish()
-    };
   }
 };
 function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
@@ -407,27 +367,6 @@ export const MonitoredResource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: MonitoredResource_LabelsEntryAmino): MonitoredResource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
-    return MonitoredResource_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg): MonitoredResource_LabelsEntry {
-    return MonitoredResource_LabelsEntry.decode(message.value);
-  },
-  toProto(message: MonitoredResource_LabelsEntry): Uint8Array {
-    return MonitoredResource_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseMonitoredResource(): MonitoredResource {
@@ -437,7 +376,6 @@ function createBaseMonitoredResource(): MonitoredResource {
   };
 }
 export const MonitoredResource = {
-  typeUrl: "/google.api.MonitoredResource",
   encode(message: MonitoredResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -529,43 +467,6 @@ export const MonitoredResource = {
       });
     }
     return obj;
-  },
-  fromAmino(object: MonitoredResourceAmino): MonitoredResource {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: MonitoredResource): MonitoredResourceAmino {
-    const obj: any = {};
-    obj.type = message.type;
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceAminoMsg): MonitoredResource {
-    return MonitoredResource.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoredResourceProtoMsg): MonitoredResource {
-    return MonitoredResource.decode(message.value);
-  },
-  toProto(message: MonitoredResource): Uint8Array {
-    return MonitoredResource.encode(message).finish();
-  },
-  toProtoMsg(message: MonitoredResource): MonitoredResourceProtoMsg {
-    return {
-      typeUrl: "/google.api.MonitoredResource",
-      value: MonitoredResource.encode(message).finish()
-    };
   }
 };
 function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourceMetadata_UserLabelsEntry {
@@ -633,27 +534,6 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: MonitoredResourceMetadata_UserLabelsEntryAmino): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
-    return MonitoredResourceMetadata_UserLabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg): MonitoredResourceMetadata_UserLabelsEntry {
-    return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value);
-  },
-  toProto(message: MonitoredResourceMetadata_UserLabelsEntry): Uint8Array {
-    return MonitoredResourceMetadata_UserLabelsEntry.encode(message).finish();
   }
 };
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
@@ -663,7 +543,6 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   };
 }
 export const MonitoredResourceMetadata = {
-  typeUrl: "/google.api.MonitoredResourceMetadata",
   encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
@@ -755,42 +634,5 @@ export const MonitoredResourceMetadata = {
       });
     }
     return obj;
-  },
-  fromAmino(object: MonitoredResourceMetadataAmino): MonitoredResourceMetadata {
-    return {
-      systemLabels: object?.system_labels ? Struct.fromAmino(object.system_labels) : undefined,
-      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-  toAmino(message: MonitoredResourceMetadata): MonitoredResourceMetadataAmino {
-    const obj: any = {};
-    obj.system_labels = message.systemLabels ? Struct.toAmino(message.systemLabels) : undefined;
-    obj.user_labels = {};
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.user_labels[k] = v;
-      });
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoredResourceMetadataAminoMsg): MonitoredResourceMetadata {
-    return MonitoredResourceMetadata.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoredResourceMetadataProtoMsg): MonitoredResourceMetadata {
-    return MonitoredResourceMetadata.decode(message.value);
-  },
-  toProto(message: MonitoredResourceMetadata): Uint8Array {
-    return MonitoredResourceMetadata.encode(message).finish();
-  },
-  toProtoMsg(message: MonitoredResourceMetadata): MonitoredResourceMetadataProtoMsg {
-    return {
-      typeUrl: "/google.api.MonitoredResourceMetadata",
-      value: MonitoredResourceMetadata.encode(message).finish()
-    };
   }
 };

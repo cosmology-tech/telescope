@@ -20,7 +20,6 @@ function createBaseFeeToken(): FeeToken {
   };
 }
 export const FeeToken = {
-  typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
   encode(message: FeeToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -67,38 +66,5 @@ export const FeeToken = {
     message.denom = object.denom ?? "";
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
-  },
-  fromAmino(object: FeeTokenAmino): FeeToken {
-    return {
-      denom: object.denom,
-      poolID: Long.fromString(object.poolID)
-    };
-  },
-  toAmino(message: FeeToken): FeeTokenAmino {
-    const obj: any = {};
-    obj.denom = message.denom;
-    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
-    return FeeToken.fromAmino(object.value);
-  },
-  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
-    return {
-      type: "osmosis/txfees/fee-token",
-      value: FeeToken.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
-    return FeeToken.decode(message.value);
-  },
-  toProto(message: FeeToken): Uint8Array {
-    return FeeToken.encode(message).finish();
-  },
-  toProtoMsg(message: FeeToken): FeeTokenProtoMsg {
-    return {
-      typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
-      value: FeeToken.encode(message).finish()
-    };
   }
 };

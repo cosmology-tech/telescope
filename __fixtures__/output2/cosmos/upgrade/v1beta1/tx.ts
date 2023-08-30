@@ -43,7 +43,6 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   };
 }
 export const MsgSoftwareUpgrade = {
-  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
   encode(message: MsgSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -90,46 +89,12 @@ export const MsgSoftwareUpgrade = {
     message.authority = object.authority ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
-  },
-  fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
-    return {
-      authority: object.authority,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-  toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAmino {
-    const obj: any = {};
-    obj.authority = message.authority;
-    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MsgSoftwareUpgradeAminoMsg): MsgSoftwareUpgrade {
-    return MsgSoftwareUpgrade.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSoftwareUpgrade",
-      value: MsgSoftwareUpgrade.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg): MsgSoftwareUpgrade {
-    return MsgSoftwareUpgrade.decode(message.value);
-  },
-  toProto(message: MsgSoftwareUpgrade): Uint8Array {
-    return MsgSoftwareUpgrade.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeProtoMsg {
-    return {
-      typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-      value: MsgSoftwareUpgrade.encode(message).finish()
-    };
   }
 };
 function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
   return {};
 }
 export const MsgSoftwareUpgradeResponse = {
-  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
   encode(_: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -157,34 +122,6 @@ export const MsgSoftwareUpgradeResponse = {
   fromPartial(_: Partial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
-  },
-  fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
-    return {};
-  },
-  toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgSoftwareUpgradeResponseAminoMsg): MsgSoftwareUpgradeResponse {
-    return MsgSoftwareUpgradeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSoftwareUpgradeResponse",
-      value: MsgSoftwareUpgradeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg): MsgSoftwareUpgradeResponse {
-    return MsgSoftwareUpgradeResponse.decode(message.value);
-  },
-  toProto(message: MsgSoftwareUpgradeResponse): Uint8Array {
-    return MsgSoftwareUpgradeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
-      value: MsgSoftwareUpgradeResponse.encode(message).finish()
-    };
   }
 };
 function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
@@ -193,7 +130,6 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
   };
 }
 export const MsgCancelUpgrade = {
-  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
   encode(message: MsgCancelUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -231,44 +167,12 @@ export const MsgCancelUpgrade = {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
-  },
-  fromAmino(object: MsgCancelUpgradeAmino): MsgCancelUpgrade {
-    return {
-      authority: object.authority
-    };
-  },
-  toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeAmino {
-    const obj: any = {};
-    obj.authority = message.authority;
-    return obj;
-  },
-  fromAminoMsg(object: MsgCancelUpgradeAminoMsg): MsgCancelUpgrade {
-    return MsgCancelUpgrade.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCancelUpgrade): MsgCancelUpgradeAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCancelUpgrade",
-      value: MsgCancelUpgrade.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCancelUpgradeProtoMsg): MsgCancelUpgrade {
-    return MsgCancelUpgrade.decode(message.value);
-  },
-  toProto(message: MsgCancelUpgrade): Uint8Array {
-    return MsgCancelUpgrade.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCancelUpgrade): MsgCancelUpgradeProtoMsg {
-    return {
-      typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
-      value: MsgCancelUpgrade.encode(message).finish()
-    };
   }
 };
 function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
   return {};
 }
 export const MsgCancelUpgradeResponse = {
-  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse",
   encode(_: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -296,34 +200,6 @@ export const MsgCancelUpgradeResponse = {
   fromPartial(_: Partial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
-  },
-  fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {
-    return {};
-  },
-  toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAmino {
-    const obj: any = {};
-    return obj;
-  },
-  fromAminoMsg(object: MsgCancelUpgradeResponseAminoMsg): MsgCancelUpgradeResponse {
-    return MsgCancelUpgradeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCancelUpgradeResponse",
-      value: MsgCancelUpgradeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg): MsgCancelUpgradeResponse {
-    return MsgCancelUpgradeResponse.decode(message.value);
-  },
-  toProto(message: MsgCancelUpgradeResponse): Uint8Array {
-    return MsgCancelUpgradeResponse.encode(message).finish();
-  },
-  toProtoMsg(message: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseProtoMsg {
-    return {
-      typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse",
-      value: MsgCancelUpgradeResponse.encode(message).finish()
-    };
   }
 };
 /** Msg defines the upgrade Msg service. */

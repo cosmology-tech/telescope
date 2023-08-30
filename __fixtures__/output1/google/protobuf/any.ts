@@ -211,7 +211,6 @@ function createBaseAny(): Any {
   };
 }
 export const Any = {
-  typeUrl: "/google.protobuf.Any",
   encode(message: Any, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.typeUrl !== "") {
       writer.uint32(10).string(message.typeUrl);
@@ -270,32 +269,5 @@ export const Any = {
     obj.type_url = message.typeUrl;
     obj.value = message.value;
     return obj;
-  },
-  fromAmino(object: AnyAmino): Any {
-    return {
-      typeUrl: object.type,
-      value: object.value
-    };
-  },
-  toAmino(message: Any): AnyAmino {
-    const obj: any = {};
-    obj.type = message.typeUrl;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: AnyAminoMsg): Any {
-    return Any.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AnyProtoMsg): Any {
-    return Any.decode(message.value);
-  },
-  toProto(message: Any): Uint8Array {
-    return Any.encode(message).finish();
-  },
-  toProtoMsg(message: Any): AnyProtoMsg {
-    return {
-      typeUrl: "/google.protobuf.Any",
-      value: Any.encode(message).finish()
-    };
   }
 };

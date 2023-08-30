@@ -100,7 +100,6 @@ function createBaseMonitoring(): Monitoring {
   };
 }
 export const Monitoring = {
-  typeUrl: "/google.api.Monitoring",
   encode(message: Monitoring, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.producerDestinations) {
       Monitoring_MonitoringDestination.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -155,41 +154,6 @@ export const Monitoring = {
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Monitoring): MonitoringAmino {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MonitoringAminoMsg): Monitoring {
-    return Monitoring.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoringProtoMsg): Monitoring {
-    return Monitoring.decode(message.value);
-  },
-  toProto(message: Monitoring): Uint8Array {
-    return Monitoring.encode(message).finish();
-  },
-  toProtoMsg(message: Monitoring): MonitoringProtoMsg {
-    return {
-      typeUrl: "/google.api.Monitoring",
-      value: Monitoring.encode(message).finish()
-    };
   }
 };
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
@@ -199,7 +163,6 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
   };
 }
 export const Monitoring_MonitoringDestination = {
-  typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
@@ -250,36 +213,5 @@ export const Monitoring_MonitoringDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationAmino {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Monitoring_MonitoringDestinationAminoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.decode(message.value);
-  },
-  toProto(message: Monitoring_MonitoringDestination): Uint8Array {
-    return Monitoring_MonitoringDestination.encode(message).finish();
-  },
-  toProtoMsg(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationProtoMsg {
-    return {
-      typeUrl: "/google.api.MonitoringDestination",
-      value: Monitoring_MonitoringDestination.encode(message).finish()
-    };
   }
 };

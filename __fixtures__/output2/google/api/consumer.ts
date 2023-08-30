@@ -105,7 +105,6 @@ function createBaseProjectProperties(): ProjectProperties {
   };
 }
 export const ProjectProperties = {
-  typeUrl: "/google.api.ProjectProperties",
   encode(message: ProjectProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.properties) {
       Property.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -147,35 +146,6 @@ export const ProjectProperties = {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
-    const obj: any = {};
-    if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
-    } else {
-      obj.properties = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
-    return ProjectProperties.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
-    return ProjectProperties.decode(message.value);
-  },
-  toProto(message: ProjectProperties): Uint8Array {
-    return ProjectProperties.encode(message).finish();
-  },
-  toProtoMsg(message: ProjectProperties): ProjectPropertiesProtoMsg {
-    return {
-      typeUrl: "/google.api.ProjectProperties",
-      value: ProjectProperties.encode(message).finish()
-    };
   }
 };
 function createBaseProperty(): Property {
@@ -186,7 +156,6 @@ function createBaseProperty(): Property {
   };
 }
 export const Property = {
-  typeUrl: "/google.api.Property",
   encode(message: Property, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -242,34 +211,5 @@ export const Property = {
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
     return message;
-  },
-  fromAmino(object: PropertyAmino): Property {
-    return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
-    };
-  },
-  toAmino(message: Property): PropertyAmino {
-    const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.description = message.description;
-    return obj;
-  },
-  fromAminoMsg(object: PropertyAminoMsg): Property {
-    return Property.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PropertyProtoMsg): Property {
-    return Property.decode(message.value);
-  },
-  toProto(message: Property): Uint8Array {
-    return Property.encode(message).finish();
-  },
-  toProtoMsg(message: Property): PropertyProtoMsg {
-    return {
-      typeUrl: "/google.api.Property",
-      value: Property.encode(message).finish()
-    };
   }
 };

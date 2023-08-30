@@ -68,7 +68,6 @@ function createBaseBilling(): Billing {
   };
 }
 export const Billing = {
-  typeUrl: "/google.api.Billing",
   encode(message: Billing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consumerDestinations) {
       Billing_BillingDestination.encode(v!, writer.uint32(66).fork()).ldelim();
@@ -110,35 +109,6 @@ export const Billing = {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: BillingAmino): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: Billing): BillingAmino {
-    const obj: any = {};
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: BillingAminoMsg): Billing {
-    return Billing.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BillingProtoMsg): Billing {
-    return Billing.decode(message.value);
-  },
-  toProto(message: Billing): Uint8Array {
-    return Billing.encode(message).finish();
-  },
-  toProtoMsg(message: Billing): BillingProtoMsg {
-    return {
-      typeUrl: "/google.api.Billing",
-      value: Billing.encode(message).finish()
-    };
   }
 };
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
@@ -148,7 +118,6 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
   };
 }
 export const Billing_BillingDestination = {
-  typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
@@ -199,36 +168,5 @@ export const Billing_BillingDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
-  },
-  fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
-  },
-  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
-    const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
-    return Billing_BillingDestination.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
-    return Billing_BillingDestination.decode(message.value);
-  },
-  toProto(message: Billing_BillingDestination): Uint8Array {
-    return Billing_BillingDestination.encode(message).finish();
-  },
-  toProtoMsg(message: Billing_BillingDestination): Billing_BillingDestinationProtoMsg {
-    return {
-      typeUrl: "/google.api.BillingDestination",
-      value: Billing_BillingDestination.encode(message).finish()
-    };
   }
 };

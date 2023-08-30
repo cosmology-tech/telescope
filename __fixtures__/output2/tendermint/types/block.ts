@@ -20,7 +20,6 @@ function createBaseBlock(): Block {
   };
 }
 export const Block = {
-  typeUrl: "/tendermint.types.Block",
   encode(message: Block, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -85,36 +84,5 @@ export const Block = {
     message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
     message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
-  },
-  fromAmino(object: BlockAmino): Block {
-    return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      data: object?.data ? Data.fromAmino(object.data) : undefined,
-      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : undefined,
-      lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
-    };
-  },
-  toAmino(message: Block): BlockAmino {
-    const obj: any = {};
-    obj.header = message.header ? Header.toAmino(message.header) : undefined;
-    obj.data = message.data ? Data.toAmino(message.data) : undefined;
-    obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined;
-    obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: BlockAminoMsg): Block {
-    return Block.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BlockProtoMsg): Block {
-    return Block.decode(message.value);
-  },
-  toProto(message: Block): Uint8Array {
-    return Block.encode(message).finish();
-  },
-  toProtoMsg(message: Block): BlockProtoMsg {
-    return {
-      typeUrl: "/tendermint.types.Block",
-      value: Block.encode(message).finish()
-    };
   }
 };

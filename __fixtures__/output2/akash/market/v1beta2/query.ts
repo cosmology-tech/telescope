@@ -71,7 +71,6 @@ function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   };
 }
 export const QueryOrdersRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
   encode(message: QueryOrdersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       OrderFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -118,33 +117,6 @@ export const QueryOrdersRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
-    return {
-      filters: object?.filters ? OrderFilters.fromAmino(object.filters) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryOrdersRequest): QueryOrdersRequestAmino {
-    const obj: any = {};
-    obj.filters = message.filters ? OrderFilters.toAmino(message.filters) : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryOrdersRequestAminoMsg): QueryOrdersRequest {
-    return QueryOrdersRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryOrdersRequestProtoMsg): QueryOrdersRequest {
-    return QueryOrdersRequest.decode(message.value);
-  },
-  toProto(message: QueryOrdersRequest): Uint8Array {
-    return QueryOrdersRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryOrdersRequest): QueryOrdersRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
-      value: QueryOrdersRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
@@ -154,7 +126,6 @@ function createBaseQueryOrdersResponse(): QueryOrdersResponse {
   };
 }
 export const QueryOrdersResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
   encode(message: QueryOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.orders) {
       Order.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -205,37 +176,6 @@ export const QueryOrdersResponse = {
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryOrdersResponseAmino): QueryOrdersResponse {
-    return {
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryOrdersResponse): QueryOrdersResponseAmino {
-    const obj: any = {};
-    if (message.orders) {
-      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
-    } else {
-      obj.orders = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryOrdersResponseAminoMsg): QueryOrdersResponse {
-    return QueryOrdersResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryOrdersResponseProtoMsg): QueryOrdersResponse {
-    return QueryOrdersResponse.decode(message.value);
-  },
-  toProto(message: QueryOrdersResponse): Uint8Array {
-    return QueryOrdersResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryOrdersResponse): QueryOrdersResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
-      value: QueryOrdersResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryOrderRequest(): QueryOrderRequest {
@@ -244,7 +184,6 @@ function createBaseQueryOrderRequest(): QueryOrderRequest {
   };
 }
 export const QueryOrderRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
   encode(message: QueryOrderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       OrderID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -282,31 +221,6 @@ export const QueryOrderRequest = {
     const message = createBaseQueryOrderRequest();
     message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
-    return {
-      id: object?.id ? OrderID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: QueryOrderRequest): QueryOrderRequestAmino {
-    const obj: any = {};
-    obj.id = message.id ? OrderID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryOrderRequestAminoMsg): QueryOrderRequest {
-    return QueryOrderRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryOrderRequestProtoMsg): QueryOrderRequest {
-    return QueryOrderRequest.decode(message.value);
-  },
-  toProto(message: QueryOrderRequest): Uint8Array {
-    return QueryOrderRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryOrderRequest): QueryOrderRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
-      value: QueryOrderRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryOrderResponse(): QueryOrderResponse {
@@ -315,7 +229,6 @@ function createBaseQueryOrderResponse(): QueryOrderResponse {
   };
 }
 export const QueryOrderResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
   encode(message: QueryOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.order !== undefined) {
       Order.encode(message.order, writer.uint32(10).fork()).ldelim();
@@ -353,31 +266,6 @@ export const QueryOrderResponse = {
     const message = createBaseQueryOrderResponse();
     message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
     return message;
-  },
-  fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
-    return {
-      order: object?.order ? Order.fromAmino(object.order) : undefined
-    };
-  },
-  toAmino(message: QueryOrderResponse): QueryOrderResponseAmino {
-    const obj: any = {};
-    obj.order = message.order ? Order.toAmino(message.order) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryOrderResponseAminoMsg): QueryOrderResponse {
-    return QueryOrderResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryOrderResponseProtoMsg): QueryOrderResponse {
-    return QueryOrderResponse.decode(message.value);
-  },
-  toProto(message: QueryOrderResponse): Uint8Array {
-    return QueryOrderResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryOrderResponse): QueryOrderResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
-      value: QueryOrderResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryBidsRequest(): QueryBidsRequest {
@@ -387,7 +275,6 @@ function createBaseQueryBidsRequest(): QueryBidsRequest {
   };
 }
 export const QueryBidsRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
   encode(message: QueryBidsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       BidFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -434,33 +321,6 @@ export const QueryBidsRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
-    return {
-      filters: object?.filters ? BidFilters.fromAmino(object.filters) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryBidsRequest): QueryBidsRequestAmino {
-    const obj: any = {};
-    obj.filters = message.filters ? BidFilters.toAmino(message.filters) : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryBidsRequestAminoMsg): QueryBidsRequest {
-    return QueryBidsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryBidsRequestProtoMsg): QueryBidsRequest {
-    return QueryBidsRequest.decode(message.value);
-  },
-  toProto(message: QueryBidsRequest): Uint8Array {
-    return QueryBidsRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryBidsRequest): QueryBidsRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
-      value: QueryBidsRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryBidsResponse(): QueryBidsResponse {
@@ -470,7 +330,6 @@ function createBaseQueryBidsResponse(): QueryBidsResponse {
   };
 }
 export const QueryBidsResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
   encode(message: QueryBidsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.bids) {
       QueryBidResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -521,37 +380,6 @@ export const QueryBidsResponse = {
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryBidsResponseAmino): QueryBidsResponse {
-    return {
-      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryBidsResponse): QueryBidsResponseAmino {
-    const obj: any = {};
-    if (message.bids) {
-      obj.bids = message.bids.map(e => e ? QueryBidResponse.toAmino(e) : undefined);
-    } else {
-      obj.bids = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryBidsResponseAminoMsg): QueryBidsResponse {
-    return QueryBidsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryBidsResponseProtoMsg): QueryBidsResponse {
-    return QueryBidsResponse.decode(message.value);
-  },
-  toProto(message: QueryBidsResponse): Uint8Array {
-    return QueryBidsResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryBidsResponse): QueryBidsResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
-      value: QueryBidsResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryBidRequest(): QueryBidRequest {
@@ -560,7 +388,6 @@ function createBaseQueryBidRequest(): QueryBidRequest {
   };
 }
 export const QueryBidRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryBidRequest",
   encode(message: QueryBidRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       BidID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -598,31 +425,6 @@ export const QueryBidRequest = {
     const message = createBaseQueryBidRequest();
     message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
-    return {
-      id: object?.id ? BidID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: QueryBidRequest): QueryBidRequestAmino {
-    const obj: any = {};
-    obj.id = message.id ? BidID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryBidRequestAminoMsg): QueryBidRequest {
-    return QueryBidRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryBidRequestProtoMsg): QueryBidRequest {
-    return QueryBidRequest.decode(message.value);
-  },
-  toProto(message: QueryBidRequest): Uint8Array {
-    return QueryBidRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryBidRequest): QueryBidRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryBidRequest",
-      value: QueryBidRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryBidResponse(): QueryBidResponse {
@@ -632,7 +434,6 @@ function createBaseQueryBidResponse(): QueryBidResponse {
   };
 }
 export const QueryBidResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryBidResponse",
   encode(message: QueryBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bid !== undefined) {
       Bid.encode(message.bid, writer.uint32(10).fork()).ldelim();
@@ -679,33 +480,6 @@ export const QueryBidResponse = {
     message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
-  },
-  fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
-    return {
-      bid: object?.bid ? Bid.fromAmino(object.bid) : undefined,
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
-    };
-  },
-  toAmino(message: QueryBidResponse): QueryBidResponseAmino {
-    const obj: any = {};
-    obj.bid = message.bid ? Bid.toAmino(message.bid) : undefined;
-    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryBidResponseAminoMsg): QueryBidResponse {
-    return QueryBidResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryBidResponseProtoMsg): QueryBidResponse {
-    return QueryBidResponse.decode(message.value);
-  },
-  toProto(message: QueryBidResponse): Uint8Array {
-    return QueryBidResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryBidResponse): QueryBidResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryBidResponse",
-      value: QueryBidResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
@@ -715,7 +489,6 @@ function createBaseQueryLeasesRequest(): QueryLeasesRequest {
   };
 }
 export const QueryLeasesRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
   encode(message: QueryLeasesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       LeaseFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -762,33 +535,6 @@ export const QueryLeasesRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
-    return {
-      filters: object?.filters ? LeaseFilters.fromAmino(object.filters) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryLeasesRequest): QueryLeasesRequestAmino {
-    const obj: any = {};
-    obj.filters = message.filters ? LeaseFilters.toAmino(message.filters) : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryLeasesRequestAminoMsg): QueryLeasesRequest {
-    return QueryLeasesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryLeasesRequestProtoMsg): QueryLeasesRequest {
-    return QueryLeasesRequest.decode(message.value);
-  },
-  toProto(message: QueryLeasesRequest): Uint8Array {
-    return QueryLeasesRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryLeasesRequest): QueryLeasesRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
-      value: QueryLeasesRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
@@ -798,7 +544,6 @@ function createBaseQueryLeasesResponse(): QueryLeasesResponse {
   };
 }
 export const QueryLeasesResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
   encode(message: QueryLeasesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.leases) {
       QueryLeaseResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -849,37 +594,6 @@ export const QueryLeasesResponse = {
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-  fromAmino(object: QueryLeasesResponseAmino): QueryLeasesResponse {
-    return {
-      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-  toAmino(message: QueryLeasesResponse): QueryLeasesResponseAmino {
-    const obj: any = {};
-    if (message.leases) {
-      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toAmino(e) : undefined);
-    } else {
-      obj.leases = [];
-    }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryLeasesResponseAminoMsg): QueryLeasesResponse {
-    return QueryLeasesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryLeasesResponseProtoMsg): QueryLeasesResponse {
-    return QueryLeasesResponse.decode(message.value);
-  },
-  toProto(message: QueryLeasesResponse): Uint8Array {
-    return QueryLeasesResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryLeasesResponse): QueryLeasesResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
-      value: QueryLeasesResponse.encode(message).finish()
-    };
   }
 };
 function createBaseQueryLeaseRequest(): QueryLeaseRequest {
@@ -888,7 +602,6 @@ function createBaseQueryLeaseRequest(): QueryLeaseRequest {
   };
 }
 export const QueryLeaseRequest = {
-  typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
   encode(message: QueryLeaseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       LeaseID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -926,31 +639,6 @@ export const QueryLeaseRequest = {
     const message = createBaseQueryLeaseRequest();
     message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
     return message;
-  },
-  fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
-    return {
-      id: object?.id ? LeaseID.fromAmino(object.id) : undefined
-    };
-  },
-  toAmino(message: QueryLeaseRequest): QueryLeaseRequestAmino {
-    const obj: any = {};
-    obj.id = message.id ? LeaseID.toAmino(message.id) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryLeaseRequestAminoMsg): QueryLeaseRequest {
-    return QueryLeaseRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryLeaseRequestProtoMsg): QueryLeaseRequest {
-    return QueryLeaseRequest.decode(message.value);
-  },
-  toProto(message: QueryLeaseRequest): Uint8Array {
-    return QueryLeaseRequest.encode(message).finish();
-  },
-  toProtoMsg(message: QueryLeaseRequest): QueryLeaseRequestProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
-      value: QueryLeaseRequest.encode(message).finish()
-    };
   }
 };
 function createBaseQueryLeaseResponse(): QueryLeaseResponse {
@@ -960,7 +648,6 @@ function createBaseQueryLeaseResponse(): QueryLeaseResponse {
   };
 }
 export const QueryLeaseResponse = {
-  typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
   encode(message: QueryLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lease !== undefined) {
       Lease.encode(message.lease, writer.uint32(10).fork()).ldelim();
@@ -1007,33 +694,6 @@ export const QueryLeaseResponse = {
     message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
     message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
     return message;
-  },
-  fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {
-    return {
-      lease: object?.lease ? Lease.fromAmino(object.lease) : undefined,
-      escrowPayment: object?.escrow_payment ? FractionalPayment.fromAmino(object.escrow_payment) : undefined
-    };
-  },
-  toAmino(message: QueryLeaseResponse): QueryLeaseResponseAmino {
-    const obj: any = {};
-    obj.lease = message.lease ? Lease.toAmino(message.lease) : undefined;
-    obj.escrow_payment = message.escrowPayment ? FractionalPayment.toAmino(message.escrowPayment) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: QueryLeaseResponseAminoMsg): QueryLeaseResponse {
-    return QueryLeaseResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryLeaseResponseProtoMsg): QueryLeaseResponse {
-    return QueryLeaseResponse.decode(message.value);
-  },
-  toProto(message: QueryLeaseResponse): Uint8Array {
-    return QueryLeaseResponse.encode(message).finish();
-  },
-  toProtoMsg(message: QueryLeaseResponse): QueryLeaseResponseProtoMsg {
-    return {
-      typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
-      value: QueryLeaseResponse.encode(message).finish()
-    };
   }
 };
 /** Query defines the gRPC querier service */

@@ -20,7 +20,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/osmosis.superfluid.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minimumRiskFactor !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
@@ -58,36 +57,5 @@ export const Params = {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      minimumRiskFactor: object.minimum_risk_factor
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.minimum_risk_factor = message.minimumRiskFactor;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/osmosis.superfluid.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };

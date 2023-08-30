@@ -109,27 +109,6 @@ export const MetricValue_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
-  },
-  fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
-  },
-  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
-    const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
-    return obj;
-  },
-  fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.decode(message.value);
-  },
-  toProto(message: MetricValue_LabelsEntry): Uint8Array {
-    return MetricValue_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseMetricValue(): MetricValue {
@@ -145,7 +124,6 @@ function createBaseMetricValue(): MetricValue {
   };
 }
 export const MetricValue = {
-  typeUrl: "/google.api.servicecontrol.v1.MetricValue",
   encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
@@ -269,55 +247,6 @@ export const MetricValue = {
     message.stringValue = object.stringValue ?? undefined;
     message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
     return message;
-  },
-  fromAmino(object: MetricValueAmino): MetricValue {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      startTime: object.start_time,
-      endTime: object.end_time,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? Long.fromString(object.int64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
-    };
-  },
-  toAmino(message: MetricValue): MetricValueAmino {
-    const obj: any = {};
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
-    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
-    return obj;
-  },
-  fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
-    return MetricValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
-    return MetricValue.decode(message.value);
-  },
-  toProto(message: MetricValue): Uint8Array {
-    return MetricValue.encode(message).finish();
-  },
-  toProtoMsg(message: MetricValue): MetricValueProtoMsg {
-    return {
-      typeUrl: "/google.api.servicecontrol.v1.MetricValue",
-      value: MetricValue.encode(message).finish()
-    };
   }
 };
 function createBaseMetricValueSet(): MetricValueSet {
@@ -327,7 +256,6 @@ function createBaseMetricValueSet(): MetricValueSet {
   };
 }
 export const MetricValueSet = {
-  typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -378,36 +306,5 @@ export const MetricValueSet = {
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
-  },
-  fromAmino(object: MetricValueSetAmino): MetricValueSet {
-    return {
-      metricName: object.metric_name,
-      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
-    };
-  },
-  toAmino(message: MetricValueSet): MetricValueSetAmino {
-    const obj: any = {};
-    obj.metric_name = message.metricName;
-    if (message.metricValues) {
-      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
-    } else {
-      obj.metric_values = [];
-    }
-    return obj;
-  },
-  fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
-    return MetricValueSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
-    return MetricValueSet.decode(message.value);
-  },
-  toProto(message: MetricValueSet): Uint8Array {
-    return MetricValueSet.encode(message).finish();
-  },
-  toProtoMsg(message: MetricValueSet): MetricValueSetProtoMsg {
-    return {
-      typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
-      value: MetricValueSet.encode(message).finish()
-    };
   }
 };

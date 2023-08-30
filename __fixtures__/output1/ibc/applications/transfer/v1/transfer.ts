@@ -57,7 +57,6 @@ function createBaseDenomTrace(): DenomTrace {
   };
 }
 export const DenomTrace = {
-  typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
   encode(message: DenomTrace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
@@ -116,39 +115,6 @@ export const DenomTrace = {
     obj.path = message.path;
     obj.base_denom = message.baseDenom;
     return obj;
-  },
-  fromAmino(object: DenomTraceAmino): DenomTrace {
-    return {
-      path: object.path,
-      baseDenom: object.base_denom
-    };
-  },
-  toAmino(message: DenomTrace): DenomTraceAmino {
-    const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
-    return obj;
-  },
-  fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
-    return DenomTrace.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomTrace): DenomTraceAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomTrace",
-      value: DenomTrace.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DenomTraceProtoMsg): DenomTrace {
-    return DenomTrace.decode(message.value);
-  },
-  toProto(message: DenomTrace): Uint8Array {
-    return DenomTrace.encode(message).finish();
-  },
-  toProtoMsg(message: DenomTrace): DenomTraceProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
-      value: DenomTrace.encode(message).finish()
-    };
   }
 };
 function createBaseParams(): Params {
@@ -158,7 +124,6 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  typeUrl: "/ibc.applications.transfer.v1.Params",
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sendEnabled === true) {
       writer.uint32(8).bool(message.sendEnabled);
@@ -217,38 +182,5 @@ export const Params = {
     obj.send_enabled = message.sendEnabled;
     obj.receive_enabled = message.receiveEnabled;
     return obj;
-  },
-  fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: object.send_enabled,
-      receiveEnabled: object.receive_enabled
-    };
-  },
-  toAmino(message: Params): ParamsAmino {
-    const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
-    return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
-  },
-  toProto(message: Params): Uint8Array {
-    return Params.encode(message).finish();
-  },
-  toProtoMsg(message: Params): ParamsProtoMsg {
-    return {
-      typeUrl: "/ibc.applications.transfer.v1.Params",
-      value: Params.encode(message).finish()
-    };
   }
 };
