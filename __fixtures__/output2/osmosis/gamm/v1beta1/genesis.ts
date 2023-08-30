@@ -2,8 +2,6 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
-import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { Long, DeepPartial, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
@@ -13,7 +11,7 @@ export interface Params {
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisState {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: Any[];
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: Long;
   params: Params;
@@ -134,17 +132,5 @@ export const GenesisState = {
     message.nextPoolNumber = object.nextPoolNumber !== undefined && object.nextPoolNumber !== null ? Long.fromValue(object.nextPoolNumber) : Long.UZERO;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  }
-};
-export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 | Any => {
-  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-  const data = Any.decode(reader, reader.uint32());
-  switch (data.typeUrl) {
-    case "/osmosis.gamm.v1beta1.Pool":
-      return Pool1.decode(data.value);
-    case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
-      return Pool2.decode(data.value);
-    default:
-      return data;
   }
 };

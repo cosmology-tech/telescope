@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
-import { Params, BaseAccount } from "./auth";
+import { Params } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -22,7 +22,7 @@ export interface QueryAccountsRequest {
  */
 export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
-  accounts: (BaseAccount & Any)[] | Any[];
+  accounts: Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -34,7 +34,7 @@ export interface QueryAccountRequest {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
-  account: (BaseAccount & Any) | undefined;
+  account: Any;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -313,16 +313,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  }
-};
-export const AccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): BaseAccount | Any => {
-  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-  const data = Any.decode(reader, reader.uint32());
-  switch (data.typeUrl) {
-    case "/cosmos.auth.v1beta1.BaseAccount":
-      return BaseAccount.decode(data.value);
-    default:
-      return data;
   }
 };
 /** Query defines the gRPC querier service. */

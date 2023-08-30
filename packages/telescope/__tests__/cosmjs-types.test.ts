@@ -20,6 +20,10 @@ const options: TelescopeOptions = {
     bundle: {
         enabled: false
     },
+    interfaces: {
+      enabled: false,
+      useUnionTypes: false
+    },
     prototypes: {
         includePackageVar: true,
         addTypeUrlToObjects: false,

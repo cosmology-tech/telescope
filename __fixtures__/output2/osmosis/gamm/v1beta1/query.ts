@@ -4,8 +4,6 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountOutRoute } from "./tx";
 import { Any } from "../../../google/protobuf/any";
-import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
@@ -14,7 +12,7 @@ export interface QueryPoolRequest {
   poolId: Long;
 }
 export interface QueryPoolResponse {
-  pool: (Pool1 & Pool2 & Any) | undefined;
+  pool: Any;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
@@ -22,7 +20,7 @@ export interface QueryPoolsRequest {
   pagination: PageRequest;
 }
 export interface QueryPoolsResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -101,7 +99,7 @@ export interface QueryPoolsWithFilterRequest {
   pagination: PageRequest;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools: (Pool1 & Pool2 & Any)[] | Any[];
+  pools: Any[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse;
 }
@@ -1682,18 +1680,6 @@ export const QueryTotalLiquidityResponse = {
     const message = createBaseQueryTotalLiquidityResponse();
     message.liquidity = object.liquidity?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  }
-};
-export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 | Any => {
-  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-  const data = Any.decode(reader, reader.uint32());
-  switch (data.typeUrl) {
-    case "/osmosis.gamm.v1beta1.Pool":
-      return Pool1.decode(data.value);
-    case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
-      return Pool2.decode(data.value);
-    default:
-      return data;
   }
 };
 export interface Query {
