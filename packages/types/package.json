@@ -16,9 +16,8 @@
     "main"
   ],
   "scripts": {
-    "build": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
-    "buidl": "npm run build && npm run build:ts",
-    "build:ts": "tsc --project ./tsconfig.json",
+    "build": "yarn tsc -p tsconfig.json --outDir main --module commonjs",
+    "buidl": "npm run build",
     "buidl:clean": "npm run clean && npm run buidl",
     "clean": "rimraf ./types",
     "prepare": "npm run build",
@@ -44,23 +43,6 @@
     "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
-    "@babel/cli": "7.21.0",
-    "@babel/core": "7.21.4",
-    "@babel/eslint-parser": "^7.21.3",
-    "@babel/generator": "7.21.4",
-    "@babel/node": "^7.20.7",
-    "@babel/parser": "^7.21.4",
-    "@babel/plugin-proposal-class-properties": "7.18.6",
-    "@babel/plugin-proposal-export-default-from": "7.18.10",
-    "@babel/plugin-proposal-object-rest-spread": "7.20.7",
-    "@babel/plugin-transform-runtime": "7.21.4",
-    "@babel/preset-env": "7.21.4",
-    "@babel/preset-typescript": "^7.21.4",
-    "@babel/traverse": "7.21.4",
-    "@types/jest": "^29.5.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "29.5.0",
-    "babel-watch": "^7.7.2",
     "cross-env": "^7.0.2",
     "eslint": "8.38.0",
     "eslint-config-prettier": "^8.8.0",
@@ -74,7 +56,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
     "case": "1.6.3"
   }
 }
